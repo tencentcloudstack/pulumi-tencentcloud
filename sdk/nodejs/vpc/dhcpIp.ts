@@ -7,19 +7,6 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a vpc dhcpIp
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const dhcpIp = new tencentcloud.Vpc.DhcpIp("dhcp_ip", {
- *     dhcpIpName: "terraform-test",
- *     subnetId: "subnet-h7av55g8",
- *     vpcId: "vpc-1yg5ua6l",
- * });
- * ```
- *
  * ## Import
  *
  * vpc dhcp_ip can be imported using the id, e.g.

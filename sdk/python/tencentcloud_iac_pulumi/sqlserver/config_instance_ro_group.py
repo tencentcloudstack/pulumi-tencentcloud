@@ -332,32 +332,12 @@ class ConfigInstanceRoGroup(pulumi.CustomResource):
         """
         Provides a resource to create a sqlserver config_instance_ro_group
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config_instance_ro_group = tencentcloud.sqlserver.ConfigInstanceRoGroup("configInstanceRoGroup",
-            auto_weight=0,
-            instance_id="mssql-ds1xhnt9",
-            is_offline_delay=1,
-            min_read_only_in_group=1,
-            read_only_group_id="mssqlrg-cbya44fb",
-            read_only_group_name="keep-ro-group-customize",
-            read_only_max_delay_time=10,
-            weight_pairs=[tencentcloud.sqlserver.ConfigInstanceRoGroupWeightPairArgs(
-                read_only_instance_id="mssqlro-o6dv2ugx",
-                read_only_weight=50,
-            )])
-        ```
-
         ## Import
 
         sqlserver config_instance_ro_group can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup config_instance_ro_group config_instance_ro_group_id
+         $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
         ```
 
         :param str resource_name: The name of the resource.
@@ -381,32 +361,12 @@ class ConfigInstanceRoGroup(pulumi.CustomResource):
         """
         Provides a resource to create a sqlserver config_instance_ro_group
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config_instance_ro_group = tencentcloud.sqlserver.ConfigInstanceRoGroup("configInstanceRoGroup",
-            auto_weight=0,
-            instance_id="mssql-ds1xhnt9",
-            is_offline_delay=1,
-            min_read_only_in_group=1,
-            read_only_group_id="mssqlrg-cbya44fb",
-            read_only_group_name="keep-ro-group-customize",
-            read_only_max_delay_time=10,
-            weight_pairs=[tencentcloud.sqlserver.ConfigInstanceRoGroupWeightPairArgs(
-                read_only_instance_id="mssqlro-o6dv2ugx",
-                read_only_weight=50,
-            )])
-        ```
-
         ## Import
 
         sqlserver config_instance_ro_group can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup config_instance_ro_group config_instance_ro_group_id
+         $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
         ```
 
         :param str resource_name: The name of the resource.

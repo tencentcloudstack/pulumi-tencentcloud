@@ -54,13 +54,14 @@ import (
 // 			return err
 // 		}
 // 		_, err = Dcx.NewInstance(ctx, "staticMain", &Dcx.InstanceArgs{
-// 			Bandwidth:   pulumi.Int(900),
-// 			DcId:        pulumi.String(dcId),
-// 			DcgId:       pulumi.String(dcgId),
-// 			NetworkType: pulumi.String("VPC"),
-// 			RouteType:   pulumi.String("STATIC"),
-// 			Vlan:        pulumi.Int(301),
-// 			VpcId:       pulumi.String(vpcId),
+// 			Bandwidth:      pulumi.Int(900),
+// 			DcId:           pulumi.String(dcId),
+// 			DcgId:          pulumi.String(dcgId),
+// 			DcOwnerAccount: pulumi.String("xxxxxxxx"),
+// 			NetworkType:    pulumi.String("VPC"),
+// 			RouteType:      pulumi.String("STATIC"),
+// 			Vlan:           pulumi.Int(301),
+// 			VpcId:          pulumi.String(vpcId),
 // 			RouteFilterPrefixes: pulumi.StringArray{
 // 				pulumi.String("10.10.10.101/32"),
 // 			},
@@ -89,6 +90,8 @@ type Instance struct {
 	CustomerAddress pulumi.StringOutput `pulumi:"customerAddress"`
 	// ID of the DC to be queried, application deployment offline.
 	DcId pulumi.StringOutput `pulumi:"dcId"`
+	// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+	DcOwnerAccount pulumi.StringOutput `pulumi:"dcOwnerAccount"`
 	// ID of the DC Gateway. Currently only new in the console.
 	DcgId pulumi.StringOutput `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
@@ -106,7 +109,7 @@ type Instance struct {
 	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan pulumi.IntPtrOutput `pulumi:"vlan"`
 	// ID of the VPC or BMVPC.
-	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -121,9 +124,6 @@ func NewInstance(ctx *pulumi.Context,
 	}
 	if args.DcgId == nil {
 		return nil, errors.New("invalid value for required argument 'DcgId'")
-	}
-	if args.VpcId == nil {
-		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Instance
@@ -160,6 +160,8 @@ type instanceState struct {
 	CustomerAddress *string `pulumi:"customerAddress"`
 	// ID of the DC to be queried, application deployment offline.
 	DcId *string `pulumi:"dcId"`
+	// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+	DcOwnerAccount *string `pulumi:"dcOwnerAccount"`
 	// ID of the DC Gateway. Currently only new in the console.
 	DcgId *string `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
@@ -193,6 +195,8 @@ type InstanceState struct {
 	CustomerAddress pulumi.StringPtrInput
 	// ID of the DC to be queried, application deployment offline.
 	DcId pulumi.StringPtrInput
+	// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+	DcOwnerAccount pulumi.StringPtrInput
 	// ID of the DC Gateway. Currently only new in the console.
 	DcgId pulumi.StringPtrInput
 	// Name of the dedicated tunnel.
@@ -228,6 +232,8 @@ type instanceArgs struct {
 	CustomerAddress *string `pulumi:"customerAddress"`
 	// ID of the DC to be queried, application deployment offline.
 	DcId string `pulumi:"dcId"`
+	// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+	DcOwnerAccount *string `pulumi:"dcOwnerAccount"`
 	// ID of the DC Gateway. Currently only new in the console.
 	DcgId string `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
@@ -243,7 +249,7 @@ type instanceArgs struct {
 	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan *int `pulumi:"vlan"`
 	// ID of the VPC or BMVPC.
-	VpcId string `pulumi:"vpcId"`
+	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -258,6 +264,8 @@ type InstanceArgs struct {
 	CustomerAddress pulumi.StringPtrInput
 	// ID of the DC to be queried, application deployment offline.
 	DcId pulumi.StringInput
+	// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+	DcOwnerAccount pulumi.StringPtrInput
 	// ID of the DC Gateway. Currently only new in the console.
 	DcgId pulumi.StringInput
 	// Name of the dedicated tunnel.
@@ -273,7 +281,7 @@ type InstanceArgs struct {
 	// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
 	Vlan pulumi.IntPtrInput
 	// ID of the VPC or BMVPC.
-	VpcId pulumi.StringInput
+	VpcId pulumi.StringPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -393,6 +401,11 @@ func (o InstanceOutput) DcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DcId }).(pulumi.StringOutput)
 }
 
+// Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+func (o InstanceOutput) DcOwnerAccount() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DcOwnerAccount }).(pulumi.StringOutput)
+}
+
 // ID of the DC Gateway. Currently only new in the console.
 func (o InstanceOutput) DcgId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DcgId }).(pulumi.StringOutput)
@@ -434,8 +447,8 @@ func (o InstanceOutput) Vlan() pulumi.IntPtrOutput {
 }
 
 // ID of the VPC or BMVPC.
-func (o InstanceOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+func (o InstanceOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.VpcId }).(pulumi.StringPtrOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

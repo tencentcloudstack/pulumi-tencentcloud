@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a clb replaceCertForLbs
 //
 // ## Example Usage
+// ### Replace Server Cert By Cert ID
 //
 // ```go
 // package main
@@ -28,10 +29,75 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Clb.NewReplaceCertForLbs(ctx, "replaceCertForLbs", &Clb.ReplaceCertForLbsArgs{
 // 			Certificate: &clb.ReplaceCertForLbsCertificateArgs{
-// 				CertCaContent: pulumi.String("XXXXX"),
-// 				CertCaName:    pulumi.String("test"),
+// 				CertId: pulumi.String("6vcK02GC"),
 // 			},
 // 			OldCertificateId: pulumi.String("zjUMifFK"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Replace Server Cert By Cert Content
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		foo, err := Ssl.GetCertificates(ctx, &ssl.GetCertificatesArgs{
+// 			Name: pulumi.StringRef("keep-ssl-ca"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Clb.NewReplaceCertForLbs(ctx, "replaceCertForLbs", &Clb.ReplaceCertForLbsArgs{
+// 			OldCertificateId: pulumi.String(foo.Certificates[0].Id),
+// 			Certificate: &clb.ReplaceCertForLbsCertificateArgs{
+// 				CertName:    pulumi.String("tf-test-cert"),
+// 				CertContent: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "-----BEGIN CERTIFICATE-----\n", "xxxxxxxxxxxxxxxxxxxxxxxxxxx\n", "-----END CERTIFICATE-----\n", "EOT,\n", "    certKey     = <<-EOT\n", "-----BEGIN RSA PRIVATE KEY-----\n", "xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n", "-----END RSA PRIVATE KEY-----\n")),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Replace Client Cert By Cert Content
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewReplaceCertForLbs(ctx, "replaceCertForLbs", &Clb.ReplaceCertForLbsArgs{
+// 			OldCertificateId: pulumi.String("zjUMifFK"),
+// 			Certificate: &clb.ReplaceCertForLbsCertificateArgs{
+// 				CertCaName:    pulumi.String("tf-test-cert"),
+// 				CertCaContent: pulumi.String(fmt.Sprintf("%v%v%v", "-----BEGIN CERTIFICATE-----\n", "xxxxxxxxContentxxxxxxxxxxxxxx\n", "-----END CERTIFICATE-----\n")),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err

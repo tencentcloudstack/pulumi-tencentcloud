@@ -11,12 +11,51 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const renewDbInstanceOperation = new tencentcloud.Mysql.RenewDbInstanceOperation("renew_db_instance_operation", {
- *     instanceId: "cdb-c1nl9rpv",
- *     modifyPayType: "PREPAID",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "PREPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 1,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     firstSlaveZone: zones.then(zones => zones.zones?[1]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * const exampleRollbackRangeTime = tencentcloud.Mysql.getRollbackRangeTimeOutput({
+ *     instanceIds: [exampleInstance.id],
+ * });
+ * const exampleRenewDbInstanceOperation = new tencentcloud.mysql.RenewDbInstanceOperation("exampleRenewDbInstanceOperation", {
+ *     instanceId: exampleInstance.id,
  *     timeSpan: 1,
+ *     modifyPayType: "PREPAID",
  * });
  * ```
  */

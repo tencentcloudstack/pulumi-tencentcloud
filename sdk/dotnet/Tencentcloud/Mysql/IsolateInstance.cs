@@ -10,22 +10,98 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
 {
+    /// <summary>
+    /// Provides a resource to create a mysql isolate_instance
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "mysql test",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///         });
+    ///         var exampleIsolateInstance = new Tencentcloud.Mysql.IsolateInstance("exampleIsolateInstance", new Tencentcloud.Mysql.IsolateInstanceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             Operate = "recover",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/isolateInstance:IsolateInstance")]
     public partial class IsolateInstance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        /// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        /// value of the field InstanceId in the output parameter.
+        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
+        /// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        /// </summary>
+        [Output("operate")]
+        public Output<string> Operate { get; private set; } = null!;
+
+        /// <summary>
         /// Instance status.
         /// </summary>
         [Output("status")]
-        public Output<string> Status { get; private set; } = null!;
+        public Output<int> Status { get; private set; } = null!;
 
 
         /// <summary>
@@ -75,12 +151,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     public sealed class IsolateInstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        /// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        /// value of the field InstanceId in the output parameter.
+        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
+
+        /// <summary>
+        /// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        /// </summary>
+        [Input("operate", required: true)]
+        public Input<string> Operate { get; set; } = null!;
 
         public IsolateInstanceArgs()
         {
@@ -90,18 +170,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     public sealed class IsolateInstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-        /// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-        /// value of the field InstanceId in the output parameter.
+        /// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
+        /// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+        /// </summary>
+        [Input("operate")]
+        public Input<string>? Operate { get; set; }
+
+        /// <summary>
         /// Instance status.
         /// </summary>
         [Input("status")]
-        public Input<string>? Status { get; set; }
+        public Input<int>? Status { get; set; }
 
         public IsolateInstanceState()
         {

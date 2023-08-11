@@ -5,29 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a teo dnsSec
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const dnsSec = new tencentcloud.Teo.DnsSec("dns_sec", {
- *     status: "enabled",
- *     zoneId: "zone-297z8rf93cfw",
- * });
- * ```
- *
- * ## Import
- *
- * teo dns_sec can be imported using the zone_id, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Teo/dnsSec:DnsSec dns_sec zone-297z8rf93cfw
- * ```
- */
 export class DnsSec extends pulumi.CustomResource {
     /**
      * Get an existing DnsSec resource's state with the given name, ID, and optional extra

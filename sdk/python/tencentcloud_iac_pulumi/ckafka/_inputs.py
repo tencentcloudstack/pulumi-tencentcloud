@@ -128,6 +128,8 @@ __all__ = [
     'InstanceConfigArgs',
     'InstanceDynamicRetentionConfigArgs',
     'InstanceTagArgs',
+    'RouteBrokerVipListArgs',
+    'RouteVipListArgs',
     'GetInstancesFilterArgs',
 ]
 
@@ -13603,6 +13605,84 @@ class InstanceTagArgs:
     @value.setter
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class RouteBrokerVipListArgs:
+    def __init__(__self__, *,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vport: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] vip: Virtual IP.
+        :param pulumi.Input[str] vport: Virtual port.
+        """
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vport(self) -> Optional[pulumi.Input[str]]:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
+
+    @vport.setter
+    def vport(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vport", value)
+
+
+@pulumi.input_type
+class RouteVipListArgs:
+    def __init__(__self__, *,
+                 vip: Optional[pulumi.Input[str]] = None,
+                 vport: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] vip: Virtual IP.
+        :param pulumi.Input[str] vport: Virtual port.
+        """
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
+    @pulumi.getter
+    def vport(self) -> Optional[pulumi.Input[str]]:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
+
+    @vport.setter
+    def vport(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vport", value)
 
 
 @pulumi.input_type

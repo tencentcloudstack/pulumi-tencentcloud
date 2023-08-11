@@ -25,10 +25,16 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewLocalGateway(ctx, "localGateway", &Vpc.LocalGatewayArgs{
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewLocalGateway(ctx, "example", &Vpc.LocalGatewayArgs{
+// 			LocalGatewayName: pulumi.String("tf-example"),
+// 			VpcId:            vpc.ID(),
 // 			CdcId:            pulumi.String("cluster-j9gyu1iy"),
-// 			LocalGatewayName: pulumi.String("local-gw-test"),
-// 			VpcId:            pulumi.String("vpc-lh4nqig9"),
 // 		})
 // 		if err != nil {
 // 			return err

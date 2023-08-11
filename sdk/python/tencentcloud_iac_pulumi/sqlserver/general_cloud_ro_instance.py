@@ -709,26 +709,63 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleGeneralCloudInstance",
+            zone=zones.zones[4].name,
             memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_HSSD",
+            instance_charge_type="POSTPAID",
+            project_id=0,
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            db_version="2008R2",
+            security_group_lists=[security_group.id],
+            weeklies=[
+                1,
+                2,
+                3,
+                5,
+                6,
+                7,
+            ],
+            start_time="00:00",
+            span=6,
+            resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+                tag_key="test",
+                tag_value="test",
+            )],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time")
+        example_general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("exampleGeneralCloudRoInstance",
+            instance_id=example_general_cloud_instance.id,
+            zone=zones.zones[4].name,
             read_only_group_type=1,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            instance_charge_type="POSTPAID",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            security_group_lists=[security_group.id],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
         ### If read_only_group_type value is 2 - Ship after creating a read-only group, all instances are under this read-only group:
 
@@ -736,28 +773,28 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
-            memory=4,
+        example = tencentcloud.sqlserver.GeneralCloudRoInstance("example",
+            instance_id=tencentcloud_sqlserver_general_cloud_instance["example"]["id"],
+            zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
+            read_only_group_type=2,
+            read_only_group_name="test-ro-group",
             read_only_group_is_offline_delay=1,
             read_only_group_max_delay_time=10,
             read_only_group_min_in_group=1,
-            read_only_group_name="test-ro-group",
-            read_only_group_type=2,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            instance_charge_type="POSTPAID",
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            security_group_lists=[tencentcloud_security_group["security_group"]["id"]],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
         ### If read_only_group_type value is 3 - All instances shipped are in the existing Some read-only groups below:
 
@@ -765,25 +802,25 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
-            memory=4,
-            read_only_group_id="mssqlrg-clboghrj",
+        example = tencentcloud.sqlserver.GeneralCloudRoInstance("example",
+            instance_id=tencentcloud_sqlserver_general_cloud_instance["example"]["id"],
+            zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
             read_only_group_type=3,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            read_only_group_id="mssqlrg-clboghrj",
+            instance_charge_type="POSTPAID",
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            security_group_lists=[tencentcloud_security_group["security_group"]["id"]],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
 
         :param str resource_name: The name of the resource.
@@ -823,26 +860,63 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleGeneralCloudInstance",
+            zone=zones.zones[4].name,
             memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_HSSD",
+            instance_charge_type="POSTPAID",
+            project_id=0,
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            db_version="2008R2",
+            security_group_lists=[security_group.id],
+            weeklies=[
+                1,
+                2,
+                3,
+                5,
+                6,
+                7,
+            ],
+            start_time="00:00",
+            span=6,
+            resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
+                tag_key="test",
+                tag_value="test",
+            )],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time")
+        example_general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("exampleGeneralCloudRoInstance",
+            instance_id=example_general_cloud_instance.id,
+            zone=zones.zones[4].name,
             read_only_group_type=1,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            instance_charge_type="POSTPAID",
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
+            security_group_lists=[security_group.id],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
         ### If read_only_group_type value is 2 - Ship after creating a read-only group, all instances are under this read-only group:
 
@@ -850,28 +924,28 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
-            memory=4,
+        example = tencentcloud.sqlserver.GeneralCloudRoInstance("example",
+            instance_id=tencentcloud_sqlserver_general_cloud_instance["example"]["id"],
+            zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
+            read_only_group_type=2,
+            read_only_group_name="test-ro-group",
             read_only_group_is_offline_delay=1,
             read_only_group_max_delay_time=10,
             read_only_group_min_in_group=1,
-            read_only_group_name="test-ro-group",
-            read_only_group_type=2,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            instance_charge_type="POSTPAID",
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            security_group_lists=[tencentcloud_security_group["security_group"]["id"]],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
         ### If read_only_group_type value is 3 - All instances shipped are in the existing Some read-only groups below:
 
@@ -879,25 +953,25 @@ class GeneralCloudRoInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_ro_instance = tencentcloud.sqlserver.GeneralCloudRoInstance("generalCloudRoInstance",
-            collation="Chinese_PRC_CI_AS",
-            cpu=2,
-            instance_charge_type="POSTPAID",
-            instance_id="mssql-gyg9xycl",
-            machine_type="CLOUD_BSSD",
-            memory=4,
-            read_only_group_id="mssqlrg-clboghrj",
+        example = tencentcloud.sqlserver.GeneralCloudRoInstance("example",
+            instance_id=tencentcloud_sqlserver_general_cloud_instance["example"]["id"],
+            zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
             read_only_group_type=3,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_BSSD",
+            read_only_group_id="mssqlrg-clboghrj",
+            instance_charge_type="POSTPAID",
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            security_group_lists=[tencentcloud_security_group["security_group"]["id"]],
+            collation="Chinese_PRC_CI_AS",
+            time_zone="China Standard Time",
             resource_tags={
                 "test-key1": "test-value1",
                 "test-key2": "test-value2",
-            },
-            security_group_lists=["sg-7kpsbxdb"],
-            storage=100,
-            subnet_id="subnet-dwj7ipnc",
-            time_zone="China Standard Time",
-            vpc_id="vpc-4owdpnwr",
-            zone="ap-guangzhou-6")
+            })
         ```
 
         :param str resource_name: The name of the resource.

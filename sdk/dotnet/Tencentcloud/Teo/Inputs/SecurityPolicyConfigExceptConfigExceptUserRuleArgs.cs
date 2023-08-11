@@ -13,48 +13,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigExceptConfigExceptUserRuleArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `skip`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         [Input("exceptUserRuleConditions")]
         private InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs>? _exceptUserRuleConditions;
-
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs> ExceptUserRuleConditions
         {
             get => _exceptUserRuleConditions ?? (_exceptUserRuleConditions = new InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs>());
             set => _exceptUserRuleConditions = value;
         }
 
-        /// <summary>
-        /// Scope of the rule in effect.
-        /// </summary>
         [Input("exceptUserRuleScope")]
         public Input<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs>? ExceptUserRuleScope { get; set; }
 
         [Input("ruleId")]
         public Input<int>? RuleId { get; set; }
 
-        /// <summary>
-        /// Rule name.
-        /// </summary>
         [Input("ruleName")]
         public Input<string>? RuleName { get; set; }
 
-        /// <summary>
-        /// Priority of the rule. Valid value range: 0-100.
-        /// </summary>
         [Input("rulePriority")]
         public Input<int>? RulePriority { get; set; }
 
-        /// <summary>
-        /// Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-        /// </summary>
         [Input("ruleStatus")]
         public Input<string>? RuleStatus { get; set; }
 

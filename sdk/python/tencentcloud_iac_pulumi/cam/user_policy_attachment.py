@@ -207,11 +207,40 @@ class UserPolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.UserPolicyAttachment("foo",
-            user_id=tencentcloud_cam_user["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_user_basic = config.get("camUserBasic")
+        if cam_user_basic is None:
+            cam_user_basic = "keep-cam-user"
+        policy_basic = tencentcloud.cam.Policy("policyBasic",
+            document=json.dumps({
+                "version": "2.0",
+                "statement": [
+                    {
+                        "action": ["cos:*"],
+                        "resource": ["*"],
+                        "effect": "allow",
+                    },
+                    {
+                        "effect": "allow",
+                        "action": [
+                            "monitor:*",
+                            "cam:ListUsersForGroup",
+                            "cam:ListGroups",
+                            "cam:GetGroup",
+                        ],
+                        "resource": ["*"],
+                    },
+                ],
+            }),
+            description="tf_test")
+        users = tencentcloud.Cam.get_users(name=cam_user_basic)
+        user_policy_attachment_basic = tencentcloud.cam.UserPolicyAttachment("userPolicyAttachmentBasic",
+            user_name=users.user_lists[0].user_id,
+            policy_id=policy_basic.id)
         ```
 
         ## Import
@@ -241,11 +270,40 @@ class UserPolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.UserPolicyAttachment("foo",
-            user_id=tencentcloud_cam_user["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_user_basic = config.get("camUserBasic")
+        if cam_user_basic is None:
+            cam_user_basic = "keep-cam-user"
+        policy_basic = tencentcloud.cam.Policy("policyBasic",
+            document=json.dumps({
+                "version": "2.0",
+                "statement": [
+                    {
+                        "action": ["cos:*"],
+                        "resource": ["*"],
+                        "effect": "allow",
+                    },
+                    {
+                        "effect": "allow",
+                        "action": [
+                            "monitor:*",
+                            "cam:ListUsersForGroup",
+                            "cam:ListGroups",
+                            "cam:GetGroup",
+                        ],
+                        "resource": ["*"],
+                    },
+                ],
+            }),
+            description="tf_test")
+        users = tencentcloud.Cam.get_users(name=cam_user_basic)
+        user_policy_attachment_basic = tencentcloud.cam.UserPolicyAttachment("userPolicyAttachmentBasic",
+            user_name=users.user_lists[0].user_id,
+            policy_id=policy_basic.id)
         ```
 
         ## Import

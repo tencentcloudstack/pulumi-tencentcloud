@@ -447,24 +447,25 @@ class Instance(pulumi.CustomResource):
         Use this resource to create tcr instance.
 
         ## Example Usage
+        ### Create a basic tcr instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="basic",
             tags={
-                "test": "tf",
+                "createdBy": "terraform",
             })
         ```
-        ### Using public network access whitelist
+        ### Create instance with the public network access whitelist.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="basic",
             open_public_operation=True,
             security_policies=[
@@ -476,7 +477,7 @@ class Instance(pulumi.CustomResource):
                 ),
             ])
         ```
-        ### Create with Replications
+        ### Create instance with Replications.
 
         ```python
         import pulumi
@@ -505,7 +506,7 @@ class Instance(pulumi.CustomResource):
                 "ap-taipei": 39,
                 "ap-jakarta": 72,
             }
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="premium",
             replications=[
                 tencentcloud.tcr.InstanceReplicationArgs(
@@ -522,7 +523,7 @@ class Instance(pulumi.CustomResource):
         tcr instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+         $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -548,24 +549,25 @@ class Instance(pulumi.CustomResource):
         Use this resource to create tcr instance.
 
         ## Example Usage
+        ### Create a basic tcr instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="basic",
             tags={
-                "test": "tf",
+                "createdBy": "terraform",
             })
         ```
-        ### Using public network access whitelist
+        ### Create instance with the public network access whitelist.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="basic",
             open_public_operation=True,
             security_policies=[
@@ -577,7 +579,7 @@ class Instance(pulumi.CustomResource):
                 ),
             ])
         ```
-        ### Create with Replications
+        ### Create instance with Replications.
 
         ```python
         import pulumi
@@ -606,7 +608,7 @@ class Instance(pulumi.CustomResource):
                 "ap-taipei": 39,
                 "ap-jakarta": 72,
             }
-        foo = tencentcloud.tcr.Instance("foo",
+        example = tencentcloud.tcr.Instance("example",
             instance_type="premium",
             replications=[
                 tencentcloud.tcr.InstanceReplicationArgs(
@@ -623,7 +625,7 @@ class Instance(pulumi.CustomResource):
         tcr instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+         $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
         ```
 
         :param str resource_name: The name of the resource.

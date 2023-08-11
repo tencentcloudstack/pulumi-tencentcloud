@@ -11,23 +11,46 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+    /// Use this resource to attach tcr instance with the vpc and subnet network.
     /// 
     /// ## Example Usage
+    /// ### Attach a tcr instance with vpc resource
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = @var.Availability_zone,
+    ///         }));
+    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
+    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
+    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
+    ///         {
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var tcrId = example.Id;
+    ///         var sg = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
+    ///         {
+    ///             Name = "default",
+    ///         }));
     ///         var foo = new Tencentcloud.Tcr.VpcAttachment("foo", new Tencentcloud.Tcr.VpcAttachmentArgs
     ///         {
-    ///             InstanceId = "cls-satg5125",
-    ///             SubnetId = "subnet-1uwh63so",
-    ///             VpcId = "vpc-asg3sfa3",
+    ///             InstanceId = tcrId,
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
     ///         });
     ///     }
     /// 
@@ -39,7 +62,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr vpc attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+    ///  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/vpcAttachment:VpcAttachment")]

@@ -343,18 +343,28 @@ class Cluster(pulumi.CustomResource):
         > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
 
         ## Example Usage
+        ### Create a new tcaplus cluster instance
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
-            cluster_name="tf_tcaplus_cluster_test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example = tencentcloud.tcaplus.Cluster("example",
             idl_type="PROTO",
-            old_password_expire_last=3600,
-            password="1qaA2k1wgvfa3ZZZ",
-            subnet_id="subnet-akwgvfa3",
-            vpc_id="vpc-7k6gzox6")
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
+            old_password_expire_last=3600)
         ```
 
         ## Import
@@ -362,7 +372,7 @@ class Cluster(pulumi.CustomResource):
         tcaplus cluster can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -386,18 +396,28 @@ class Cluster(pulumi.CustomResource):
         > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
 
         ## Example Usage
+        ### Create a new tcaplus cluster instance
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
-            cluster_name="tf_tcaplus_cluster_test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example = tencentcloud.tcaplus.Cluster("example",
             idl_type="PROTO",
-            old_password_expire_last=3600,
-            password="1qaA2k1wgvfa3ZZZ",
-            subnet_id="subnet-akwgvfa3",
-            vpc_id="vpc-7k6gzox6")
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
+            old_password_expire_last=3600)
         ```
 
         ## Import
@@ -405,7 +425,7 @@ class Cluster(pulumi.CustomResource):
         tcaplus cluster can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
         ```
 
         :param str resource_name: The name of the resource.

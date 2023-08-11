@@ -12066,6 +12066,29 @@ export namespace Ckafka {
          */
         value: string;
     }
+
+    export interface RouteBrokerVipList {
+        /**
+         * Virtual IP.
+         */
+        vip: string;
+        /**
+         * Virtual port.
+         */
+        vport: string;
+    }
+
+    export interface RouteVipList {
+        /**
+         * Virtual IP.
+         */
+        vip: string;
+        /**
+         * Virtual port.
+         */
+        vport: string;
+    }
+
 }
 
 export namespace Clb {
@@ -13911,6 +13934,39 @@ export namespace Clb {
     }
 }
 
+export namespace Clickhouse {
+    export interface InstanceCommonSpec {
+        /**
+         * Node count. NOTE: Only support value 3.
+         */
+        count: number;
+        /**
+         * Disk size.
+         */
+        diskSize: number;
+        /**
+         * Spec name.
+         */
+        specName: string;
+    }
+
+    export interface InstanceDataSpec {
+        /**
+         * Data spec count.
+         */
+        count: number;
+        /**
+         * Disk size.
+         */
+        diskSize: number;
+        /**
+         * Spec name.
+         */
+        specName: string;
+    }
+
+}
+
 export namespace Cls {
     export interface AlarmAlarmTarget {
         /**
@@ -14548,6 +14604,17 @@ export namespace Cls {
         value: string;
     }
 
+    export interface DataTransformDstResource {
+        /**
+         * alias.
+         */
+        alias: string;
+        /**
+         * dst topic id.
+         */
+        topicId: string;
+    }
+
     export interface GetMachineGroupConfigsConfig {
         /**
          * scrape config id.
@@ -14889,6 +14956,84 @@ export namespace Cls {
         type: string;
     }
 
+    export interface KafkaRechargeLogRechargeRule {
+        /**
+         * default time from.
+         */
+        defaultTimeSrc?: number;
+        /**
+         * user default time.
+         */
+        defaultTimeSwitch: boolean;
+        /**
+         * encoding format.
+         */
+        encodingFormat: number;
+        /**
+         * log key list.
+         */
+        keys: string[];
+        /**
+         * log regex.
+         */
+        logRegex?: string;
+        /**
+         * metadata.
+         */
+        metadatas: string[];
+        /**
+         * recharge type.
+         */
+        rechargeType: string;
+        /**
+         * time format.
+         */
+        timeFormat?: string;
+        /**
+         * time key.
+         */
+        timeKey?: string;
+        /**
+         * time regex.
+         */
+        timeRegex?: string;
+        /**
+         * time zone.
+         */
+        timeZone?: string;
+        /**
+         * parse failed log key.
+         */
+        unMatchLogKey?: string;
+        /**
+         * is push parse failed log.
+         */
+        unMatchLogSwitch?: boolean;
+        /**
+         * parse failed log time from.
+         */
+        unMatchLogTimeSrc?: number;
+    }
+
+    export interface KafkaRechargeProtocol {
+        /**
+         * encryption type.
+         */
+        mechanism?: string;
+        /**
+         * user password.
+         */
+        password?: string;
+        /**
+         * protocol type.
+         */
+        protocol?: string;
+        /**
+         * username.
+         */
+        userName?: string;
+    }
+
     export interface MachineGroupMachineGroupType {
         /**
          * Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
@@ -14898,6 +15043,25 @@ export namespace Cls {
          * Machine description list.
          */
         values: string[];
+    }
+
+    export interface ScheduledSqlDstResource {
+        /**
+         * topic type.
+         */
+        bizType?: number;
+        /**
+         * metric name.
+         */
+        metricName?: string;
+        /**
+         * topic region.
+         */
+        region?: string;
+        /**
+         * dst topic id.
+         */
+        topicId: string;
     }
 
 }
@@ -18243,6 +18407,11 @@ export namespace Cynosdb {
          * Proxy node availability zone.
          */
         proxyNodeZone?: string;
+    }
+
+    export interface ProxyRoInstance {
+        instanceId?: string;
+        weight?: number;
     }
 
     export interface RollBackClusterRollbackDatabase {
@@ -24438,6 +24607,281 @@ export namespace Dts {
          * tag value.
          */
         tagValue?: string;
+    }
+}
+
+export namespace Eb {
+    export interface EventTargetTargetDescription {
+        /**
+         * Ckafka parameters.
+         */
+        ckafkaTargetParams?: outputs.Eb.EventTargetTargetDescriptionCkafkaTargetParams;
+        /**
+         * ElasticSearch parameters.
+         */
+        esTargetParams?: outputs.Eb.EventTargetTargetDescriptionEsTargetParams;
+        /**
+         * QCS resource six-stage format, more references [resource six-stage format](https://cloud.tencent.com/document/product/598/10606).
+         */
+        resourceDescription: string;
+        /**
+         * cloud function parameters.
+         */
+        scfParams?: outputs.Eb.EventTargetTargetDescriptionScfParams;
+    }
+
+    export interface EventTargetTargetDescriptionCkafkaTargetParams {
+        /**
+         * retry strategy.
+         */
+        retryPolicy: outputs.Eb.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy;
+        /**
+         * The ckafka topic to deliver to.
+         */
+        topicName: string;
+    }
+
+    export interface EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy {
+        /**
+         * Maximum number of retries.
+         */
+        maxRetryAttempts: number;
+        /**
+         * Retry Interval Unit: Seconds.
+         */
+        retryInterval: number;
+    }
+
+    export interface EventTargetTargetDescriptionEsTargetParams {
+        /**
+         * index prefix.
+         */
+        indexPrefix: string;
+        /**
+         * DTS index configuration.
+         */
+        indexSuffixMode: string;
+        /**
+         * es template type.
+         */
+        indexTemplateType?: string;
+        /**
+         * network connection type.
+         */
+        netMode: string;
+        /**
+         * DTS event configuration.
+         */
+        outputMode: string;
+        /**
+         * es log rotation granularity.
+         */
+        rotationInterval: string;
+    }
+
+    export interface EventTargetTargetDescriptionScfParams {
+        /**
+         * Maximum number of events for batch delivery.
+         */
+        batchEventCount?: number;
+        /**
+         * Maximum waiting time for bulk delivery.
+         */
+        batchTimeout?: number;
+        /**
+         * Enable batch delivery.
+         */
+        enableBatchDelivery?: boolean;
+    }
+
+    export interface EventTransformTransformation {
+        /**
+         * Describe how to filter data.
+         */
+        etlFilter?: outputs.Eb.EventTransformTransformationEtlFilter;
+        /**
+         * Describe how to extract data.
+         */
+        extraction?: outputs.Eb.EventTransformTransformationExtraction;
+        /**
+         * Describe how to convert data.
+         */
+        transform?: outputs.Eb.EventTransformTransformationTransform;
+    }
+
+    export interface EventTransformTransformationEtlFilter {
+        /**
+         * Grammatical Rules are consistent.
+         */
+        filter: string;
+    }
+
+    export interface EventTransformTransformationExtraction {
+        /**
+         * JsonPath, if not specified, the default value $.
+         */
+        extractionInputPath: string;
+        /**
+         * Value: `TEXT`, `JSON`.
+         */
+        format: string;
+        /**
+         * Only Text needs to be passed.
+         */
+        textParams?: outputs.Eb.EventTransformTransformationExtractionTextParams;
+    }
+
+    export interface EventTransformTransformationExtractionTextParams {
+        /**
+         * Fill in the regular expression: length 128.
+         */
+        regex?: string;
+        /**
+         * `Comma`, `|`, `tab`, `space`, `newline`, `%`, `#`, the limit length is 1.
+         */
+        separator?: string;
+    }
+
+    export interface EventTransformTransformationTransform {
+        /**
+         * Describe how the data is transformed.
+         */
+        outputStructs: outputs.Eb.EventTransformTransformationTransformOutputStruct[];
+    }
+
+    export interface EventTransformTransformationTransformOutputStruct {
+        /**
+         * Corresponding to the key in the output json.
+         */
+        key: string;
+        /**
+         * You can fill in the json-path and also support constants or built-in keyword date types.
+         */
+        value: string;
+        /**
+         * The data type of value, optional values: `STRING`, `NUMBER`, `BOOLEAN`, `NULL`, `SYS_VARIABLE`, `JSONPATH`.
+         */
+        valueType: string;
+    }
+
+    export interface GetBusEventBus {
+        /**
+         * create time.
+         */
+        addTime: string;
+        /**
+         * Connector basic information, note: this field may return null, indicating that no valid value can be obtained.
+         */
+        connectionBriefs: outputs.Eb.GetBusEventBusConnectionBrief[];
+        /**
+         * Event set description, unlimited character type, description within 200 characters.
+         */
+        description: string;
+        /**
+         * event bus Id.
+         */
+        eventBusId: string;
+        /**
+         * Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.
+         */
+        eventBusName: string;
+        /**
+         * update time.
+         */
+        modTime: string;
+        /**
+         * Billing mode, note: this field may return null, indicating that no valid value can be obtained.
+         */
+        payMode: string;
+        /**
+         * Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+         */
+        targetBriefs: outputs.Eb.GetBusEventBusTargetBrief[];
+        /**
+         * event bus type.
+         */
+        type: string;
+    }
+
+    export interface GetBusEventBusConnectionBrief {
+        /**
+         * Connector status, note: this field may return null, indicating that no valid value can be obtained.
+         */
+        status: string;
+        /**
+         * event bus type.
+         */
+        type: string;
+    }
+
+    export interface GetBusEventBusTargetBrief {
+        /**
+         * Target ID.
+         */
+        targetId: string;
+        /**
+         * event bus type.
+         */
+        type: string;
+    }
+
+    export interface GetBusFilter {
+        /**
+         * The name of the filter key.
+         */
+        name: string;
+        /**
+         * One or more filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetSearchFilter {
+        filters?: outputs.Eb.GetSearchFilterFilter[];
+        key?: string;
+        operator?: string;
+        type?: string;
+        value?: string;
+    }
+
+    export interface GetSearchFilterFilter {
+        key: string;
+        operator: string;
+        value: string;
+    }
+
+    export interface GetSearchResult {
+        message: string;
+        region: string;
+        ruleIds: string;
+        source: string;
+        status: string;
+        subject: string;
+        timestamp: string;
+        type: string;
+    }
+
+    export interface PutEventsEventList {
+        /**
+         * Event data, the content is controlled by the system that created the event, the current datacontenttype only supports application/json;charset=utf-8, so this field is a json string.
+         */
+        data: string;
+        /**
+         * Event source information, new product reporting must comply with EB specifications.
+         */
+        source: string;
+        /**
+         * Detailed description of the event source, customizable, optional. The cloud service defaults to the standard qcs resource representation syntax: qcs::dts:ap-guangzhou:appid/uin:xxx.
+         */
+        subject: string;
+        /**
+         * The timestamp in milliseconds when the event occurred,time.Now().UnixNano()/1e6.
+         */
+        time?: number;
+        /**
+         * Event type, customizable, optional. The cloud service writes COS:Created:PostObject by default, use: to separate the type field.
+         */
+        type: string;
     }
 }
 
@@ -31233,7 +31677,7 @@ export namespace Monitor {
         /**
          * Template description.
          */
-        describe?: string;
+        describe: string;
         /**
          * Whether the system-supplied default template is used for outgoing references.
          */
@@ -31249,19 +31693,19 @@ export namespace Monitor {
         /**
          * Effective when Level is a cluster, A list of PodMonitors rules in the template.
          */
-        podMonitors?: outputs.Monitor.TmpTkeTemplateTemplatePodMonitor[];
+        podMonitors: outputs.Monitor.TmpTkeTemplateTemplatePodMonitor[];
         /**
          * Effective when Level is a cluster, A list of RawJobs rules in the template.
          */
-        rawJobs?: outputs.Monitor.TmpTkeTemplateTemplateRawJob[];
+        rawJobs: outputs.Monitor.TmpTkeTemplateTemplateRawJob[];
         /**
          * Effective when Level is instance, A list of aggregation rules in the template.
          */
-        recordRules?: outputs.Monitor.TmpTkeTemplateTemplateRecordRule[];
+        recordRules: outputs.Monitor.TmpTkeTemplateTemplateRecordRule[];
         /**
          * Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
          */
-        serviceMonitors?: outputs.Monitor.TmpTkeTemplateTemplateServiceMonitor[];
+        serviceMonitors: outputs.Monitor.TmpTkeTemplateTemplateServiceMonitor[];
         /**
          * The ID of the template, which is used for the outgoing reference.
          */
@@ -33507,6 +33951,10 @@ export namespace Mysql {
          */
         projectId: number;
         /**
+         * read-only instance group.
+         */
+        roGroups: outputs.Mysql.GetInstanceInstanceListRoGroup[];
+        /**
          * ID list of read-only type associated with the current instance.
          */
         roInstanceIds: string[];
@@ -33534,6 +33982,17 @@ export namespace Mysql {
          * Information of available zone.
          */
         zone: string;
+    }
+
+    export interface GetInstanceInstanceListRoGroup {
+        /**
+         * Group ID, such as `cdbrg-pz7vg37p`.
+         */
+        groupId: string;
+        /**
+         * ID list of read-only type associated with the current instance.
+         */
+        instanceIds: string[];
     }
 
     export interface GetInstanceParamRecordItem {
@@ -33923,7 +34382,18 @@ export namespace Mysql {
     }
 
     export interface GetZoneConfigListSell {
+        /**
+         * Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
+         */
         cdbType: string;
+        /**
+         * Number of CPU cores.
+         */
+        cpu: number;
+        /**
+         * Application Scenario Description.
+         */
+        info: string;
         /**
          * Maximum disk size (in GB).
          */
@@ -34106,6 +34576,7 @@ export namespace Mysql {
          */
         tableName: string;
     }
+
 }
 
 export namespace Nat {
@@ -37583,28 +38054,6 @@ export namespace Security {
         tags: {[key: string]: any};
     }
 
-    export interface GroupRuleAddressTemplate {
-        /**
-         * Address template group ID, conflicts with `templateId`.
-         */
-        groupId?: string;
-        /**
-         * Address template ID, conflicts with `groupId`.
-         */
-        templateId?: string;
-    }
-
-    export interface GroupRuleProtocolTemplate {
-        /**
-         * Address template group ID, conflicts with `templateId`.
-         */
-        groupId?: string;
-        /**
-         * Address template ID, conflicts with `groupId`.
-         */
-        templateId?: string;
-    }
-
     export interface GroupRuleSetEgress {
         /**
          * Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
@@ -37630,14 +38079,15 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: string;
+        policyIndex: number;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
-        port?: string;
+        port: string;
         /**
          * Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
          */
-        protocol?: string;
+        protocol: string;
         /**
          * Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
          */
@@ -37677,14 +38127,15 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: string;
+        policyIndex: number;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
-        port?: string;
+        port: string;
         /**
          * Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
          */
-        protocol?: string;
+        protocol: string;
         /**
          * Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
          */
@@ -38520,6 +38971,10 @@ export namespace Sqlserver {
          * Publish the database.
          */
         publishDatabase: string;
+        /**
+         * Subscribe the database.
+         */
+        subscribeDatabase: string;
     }
 
     export interface RestoreInstanceEncryption {
@@ -38613,6 +39068,10 @@ export namespace Ssl {
          */
         domain: string;
         /**
+         * DV certification information.
+         */
+        dvAuths: outputs.Ssl.GetCertificatesCertificateDvAuth[];
+        /**
          * Ending time of the SSL certificate.
          */
         endTime: string;
@@ -38628,6 +39087,10 @@ export namespace Ssl {
          * Name of the SSL certificate to be queried.
          */
         name: string;
+        /**
+         * Order ID returned.
+         */
+        orderId: string;
         /**
          * Certificate authority.
          */
@@ -38648,6 +39111,21 @@ export namespace Ssl {
          * Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
          */
         type: string;
+    }
+
+    export interface GetCertificatesCertificateDvAuth {
+        /**
+         * DV authentication key.
+         */
+        dvAuthKey: string;
+        /**
+         * DV authentication value.
+         */
+        dvAuthValue: string;
+        /**
+         * DV authentication type.
+         */
+        dvAuthVerifyType: string;
     }
 
     export interface PayCertificateDvAuth {
@@ -38815,6 +39293,29 @@ export namespace Ssm {
          * Status of secret.
          */
         status: string;
+    }
+
+    export interface ProductSecretPrivilegesList {
+        /**
+         * This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
+         */
+        columnName?: string;
+        /**
+         * This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+         */
+        database?: string;
+        /**
+         * Permission name. Valid values: `GlobalPrivileges`, `DatabasePrivileges`, `TablePrivileges`, `ColumnPrivileges`. When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter; When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters; When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+         */
+        privilegeName: string;
+        /**
+         * Permission list. For the `Mysql` service, optional permission values are: 1. Valid values of `GlobalPrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, PROCESS, DROP,REFERENCES,INDEX,ALTER,SHOW DATABASES,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 2. Valid values of `DatabasePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 3. Valid values of `TablePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW, TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 4. Valid values of `ColumnPrivileges`: SELECT,INSERT,UPDATE,REFERENCES.Note: if this parameter is not passed in, it means to clear the permission.
+         */
+        privileges: string[];
+        /**
+         * This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+         */
+        tableName?: string;
     }
 
 }
@@ -41454,6 +41955,17 @@ export namespace Tdmq {
         topicType: string;
     }
 
+    export interface NamespaceRetentionPolicy {
+        /**
+         * the size of message to retain.
+         */
+        sizeInMb: number;
+        /**
+         * the time of message to retain.
+         */
+        timeInMinutes: number;
+    }
+
     export interface RocketmqClusterVpc {
         /**
          * Subnet ID.
@@ -41465,6 +41977,16 @@ export namespace Tdmq {
         vpcId: string;
     }
 
+    export interface RocketmqVipInstanceVpcInfo {
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
+    }
 }
 
 export namespace Tem {
@@ -41894,284 +42416,98 @@ export namespace Teo {
     }
 
     export interface DdosPolicyDdosRule {
-        /**
-         * DDoS ACL rule configuration.
-         */
         acl: outputs.Teo.DdosPolicyDdosRuleAcl;
-        /**
-         * DDoS black-white list.
-         */
         allowBlock: outputs.Teo.DdosPolicyDdosRuleAllowBlock;
-        /**
-         * DDoS protocol and connection protection.
-         */
         antiPly: outputs.Teo.DdosPolicyDdosRuleAntiPly;
-        /**
-         * DDoS Protection by Geo Info.
-         */
         geoIp: outputs.Teo.DdosPolicyDdosRuleGeoIp;
-        /**
-         * DDoS feature filtering configuration.
-         */
         packetFilter: outputs.Teo.DdosPolicyDdosRulePacketFilter;
-        /**
-         * DDoS access origin site speed limit configuration.
-         */
         speedLimit: outputs.Teo.DdosPolicyDdosRuleSpeedLimit;
-        /**
-         * DDoS protection level.
-         */
         statusInfo: outputs.Teo.DdosPolicyDdosRuleStatusInfo;
-        /**
-         * DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface DdosPolicyDdosRuleAcl {
-        /**
-         * DDoS ACL rule configuration detail.
-         */
         acls?: outputs.Teo.DdosPolicyDdosRuleAclAcl[];
-        /**
-         * - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface DdosPolicyDdosRuleAclAcl {
-        /**
-         * Action to take. Valid values: `drop`, `transmit`, `forward`.
-         */
         action?: string;
-        /**
-         * End of the dest port range. Valid value range: 0-65535.
-         */
         dportEnd?: number;
-        /**
-         * Start of the dest port range. Valid value range: 0-65535.
-         */
         dportStart?: number;
-        /**
-         * Valid values: `tcp`, `udp`, `all`.
-         */
         protocol?: string;
-        /**
-         * End of the source port range. Valid value range: 0-65535.
-         */
         sportEnd?: number;
-        /**
-         * Start of the source port range. Valid value range: 0-65535.
-         */
         sportStart?: number;
     }
 
     export interface DdosPolicyDdosRuleAllowBlock {
-        /**
-         * DDoS black-white list detail.
-         */
         allowBlockIps: outputs.Teo.DdosPolicyDdosRuleAllowBlockAllowBlockIp[];
-        /**
-         * - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-        /**
-         * Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-         */
         ip?: string;
-        /**
-         * Valid values: `block`, `allow`.
-         */
         type: string;
         updateTime: number;
     }
 
     export interface DdosPolicyDdosRuleAntiPly {
-        /**
-         * Abnormal connections threshold. Valid value range: 0-4294967295.
-         */
         abnormalConnectNum: number;
-        /**
-         * Abnormal syn packet number threshold. Valid value range: 0-65535.
-         */
         abnormalSynNum: number;
-        /**
-         * Abnormal syn packet ratio threshold. Valid value range: 0-100.
-         */
         abnormalSynRatio: number;
-        /**
-         * Connection timeout detection per second. Valid value range: 0-65535.
-         */
         connectTimeout: number;
-        /**
-         * Limitation of connections to dest port. Valid value range: 0-4294967295.
-         */
         destinationConnectLimit: number;
-        /**
-         * Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-         */
         destinationCreateLimit: number;
-        /**
-         * Block ICMP protocol. Valid values: `on`, `off`.
-         */
         dropIcmp: string;
-        /**
-         * Block other protocols. Valid values: `on`, `off`.
-         */
         dropOther: string;
-        /**
-         * Block TCP protocol. Valid values: `on`, `off`.
-         */
         dropTcp: string;
-        /**
-         * Block UDP protocol. Valid values: `on`, `off`.
-         */
         dropUdp: string;
-        /**
-         * Empty connection protection switch. Valid values: `on`, `off`.
-         */
         emptyConnectProtect: string;
-        /**
-         * Limitation of connections to origin site. Valid value range: 0-4294967295.
-         */
         sourceConnectLimit: number;
-        /**
-         * Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-         */
         sourceCreateLimit: number;
-        /**
-         * UDP shard protection switch. Valid values: `on`, `off`.
-         */
         udpShard: string;
     }
 
     export interface DdosPolicyDdosRuleGeoIp {
-        /**
-         * Region ID. See details in data source `securityPolicyRegions`.
-         */
         regionIds: number[];
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface DdosPolicyDdosRulePacketFilter {
-        /**
-         * DDoS feature filtering configuration detail.
-         */
         packetFilters: outputs.Teo.DdosPolicyDdosRulePacketFilterPacketFilter[];
-        /**
-         * - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface DdosPolicyDdosRulePacketFilterPacketFilter {
-        /**
-         * Action to take. Valid values: `drop`, `transmit`, `dropBlock`, `forward`.
-         */
         action?: string;
-        /**
-         * Packet character depth to check of feature 1. Valid value range: 1-1500.
-         */
         depth?: number;
-        /**
-         * Packet character depth to check of feature 2. Valid value range: 1-1500.
-         */
         depth2?: number;
-        /**
-         * End of the dest port range. Valid value range: 0-65535.
-         */
         dportEnd?: number;
-        /**
-         * Start of the dest port range. Valid value range: 0-65535.
-         */
         dportStart?: number;
-        /**
-         * Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-         */
         isNot?: number;
-        /**
-         * Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-         */
         isNot2?: number;
-        /**
-         * Packet layer for matching begin of feature 1. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-         */
         matchBegin?: string;
-        /**
-         * Packet layer for matching begin of feature 2. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-         */
         matchBegin2?: string;
-        /**
-         * Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-         */
         matchLogic?: string;
-        /**
-         * Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-         */
         matchType?: string;
-        /**
-         * Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-         */
         matchType2?: string;
-        /**
-         * Offset of feature 1. Valid value range: 1-1500.
-         */
         offset?: number;
-        /**
-         * Offset of feature 2. Valid value range: 1-1500.
-         */
         offset2?: number;
-        /**
-         * Max packet size. Valid value range: 0-1500.
-         */
         packetMax?: number;
-        /**
-         * Min packet size. Valid value range: 0-1500.
-         */
         packetMin?: number;
-        /**
-         * Valid value: `tcp`, `udp`, `icmp`, `all`.
-         */
         protocol?: string;
-        /**
-         * End of the source port range. Valid value range: 0-65535.
-         */
         sportEnd?: number;
-        /**
-         * Start of the source port range. Valid value range: 0-65535.
-         */
         sportStart?: number;
-        /**
-         * Regex expression or string to match.
-         */
         str?: string;
-        /**
-         * Regex expression or string to match.
-         */
         str2?: string;
     }
 
     export interface DdosPolicyDdosRuleSpeedLimit {
-        /**
-         * Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-         */
         fluxLimit?: string;
-        /**
-         * Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-         */
         packageLimit?: string;
     }
 
     export interface DdosPolicyDdosRuleStatusInfo {
-        /**
-         * Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-         */
         plyLevel: string;
     }
 
@@ -42188,44 +42524,17 @@ export namespace Teo {
     }
 
     export interface GetBotManagedRulesRule {
-        /**
-         * Description of the rule.
-         */
         description: string;
-        /**
-         * Rule ID.
-         */
         ruleId: number;
-        /**
-         * Type of the rule.
-         */
         ruleTypeName: string;
-        /**
-         * Status of the rule.
-         */
         status: string;
     }
 
     export interface GetBotPortraitRulesRule {
-        /**
-         * Classification of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         classificationId: number;
-        /**
-         * Description of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         description: string;
-        /**
-         * Rule ID.
-         */
         ruleId: number;
-        /**
-         * Type of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         ruleTypeName: string;
-        /**
-         * Status of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         status: string;
     }
 
@@ -42345,59 +42654,23 @@ export namespace Teo {
     }
 
     export interface GetSecurityPolicyRegionsGeoIp {
-        /**
-         * Name of the continent.
-         */
         continent: string;
-        /**
-         * Name of the country.
-         */
         country: string;
-        /**
-         * Province of the region. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         province: string;
-        /**
-         * Region ID.
-         */
         regionId: number;
     }
 
     export interface GetWafRuleGroupsWafRuleGroup {
-        /**
-         * Description of rule type in this group.
-         */
         ruleTypeDesc: string;
-        /**
-         * Type id of rules in this group.
-         */
         ruleTypeId: number;
-        /**
-         * Type name of rules in this group.
-         */
         ruleTypeName: string;
-        /**
-         * Rules detail.
-         */
         rules: outputs.Teo.GetWafRuleGroupsWafRuleGroupRule[];
     }
 
     export interface GetWafRuleGroupsWafRuleGroupRule {
-        /**
-         * Description of the rule.
-         */
         description: string;
-        /**
-         * WAF managed rule id.
-         */
         ruleId: number;
-        /**
-         * System default level of the rule.
-         */
         ruleLevelDesc: string;
-        /**
-         * Tags of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         ruleTags: string[];
     }
 
@@ -42437,75 +42710,27 @@ export namespace Teo {
     }
 
     export interface GetZoneDdosPolicyDomain {
-        /**
-         * Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         accelerateType: string;
-        /**
-         * Subdomain.
-         */
         host: string;
-        /**
-         * Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         securityType: string;
-        /**
-         * Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         status: string;
     }
 
     export interface GetZoneDdosPolicyShieldArea {
-        /**
-         * DDoS layer 7 application.
-         */
         applications: outputs.Teo.GetZoneDdosPolicyShieldAreaApplication[];
-        /**
-         * When `Type` is `domain`, this field is `ZoneId`. When `Type` is `application`, this field is `ProxyId`. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         entity: string;
-        /**
-         * When `Type` is `domain`, this field is `ZoneName`. When `Type` is `application`, this field is `ProxyName`. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         entityName: string;
-        /**
-         * Policy ID.
-         */
         policyId: number;
-        /**
-         * TCP forwarding rule number of layer 4 application.
-         */
         tcpNum: number;
-        /**
-         * Valid values: `domain`, `application`.
-         */
         type: string;
-        /**
-         * UDP forwarding rule number of layer 4 application.
-         */
         udpNum: number;
-        /**
-         * Site ID.
-         */
         zoneId: string;
     }
 
     export interface GetZoneDdosPolicyShieldAreaApplication {
-        /**
-         * Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         accelerateType: string;
-        /**
-         * Subdomain.
-         */
         host: string;
-        /**
-         * Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         securityType: string;
-        /**
-         * Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         status: string;
     }
 
@@ -42835,564 +43060,213 @@ export namespace Teo {
     }
 
     export interface SecurityPolicyConfig {
-        /**
-         * ACL configuration.
-         */
         aclConfig: outputs.Teo.SecurityPolicyConfigAclConfig;
-        /**
-         * Bot Configuration.
-         */
         botConfig: outputs.Teo.SecurityPolicyConfigBotConfig;
-        /**
-         * Custom drop page configuration.
-         */
         dropPageConfig: outputs.Teo.SecurityPolicyConfigDropPageConfig;
-        /**
-         * Exception rule configuration.
-         */
         exceptConfig: outputs.Teo.SecurityPolicyConfigExceptConfig;
-        /**
-         * Basic access control.
-         */
         ipTableConfig: outputs.Teo.SecurityPolicyConfigIpTableConfig;
-        /**
-         * RateLimit Configuration.
-         */
         rateLimitConfig: outputs.Teo.SecurityPolicyConfigRateLimitConfig;
-        /**
-         * Main switch of 7-layer security.
-         */
         switchConfig: outputs.Teo.SecurityPolicyConfigSwitchConfig;
-        /**
-         * WAF (Web Application Firewall) Configuration.
-         */
         wafConfig: outputs.Teo.SecurityPolicyConfigWafConfig;
     }
 
     export interface SecurityPolicyConfigAclConfig {
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
-        /**
-         * Custom configuration.
-         */
         userRules: outputs.Teo.SecurityPolicyConfigAclConfigUserRule[];
     }
 
     export interface SecurityPolicyConfigAclConfigUserRule {
-        /**
-         * Valid values: `monitor`, `drop`.
-         */
         action: string;
-        /**
-         * Conditions of the rule.
-         */
         conditions: outputs.Teo.SecurityPolicyConfigAclConfigUserRuleCondition[];
-        /**
-         * Name of the custom response page.
-         */
         name: string;
-        /**
-         * ID of the custom response page.
-         */
         pageId?: number;
-        /**
-         * Punish time, Valid value range: 0-2 days.
-         */
         punishTime?: number;
-        /**
-         * Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-         */
         punishTimeUnit?: string;
-        /**
-         * Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-         */
         redirectUrl?: string;
-        /**
-         * Response code to use when redirecting.
-         */
         responseCode?: number;
         ruleId: number;
-        /**
-         * Rule Name.
-         */
         ruleName: string;
-        /**
-         * Priority of the rule. Valid value range: 1-100.
-         */
         rulePriority: number;
-        /**
-         * Status of the rule. Valid values: `on`, `off`, `hour`.
-         */
         ruleStatus: string;
         updateTime: string;
     }
 
     export interface SecurityPolicyConfigAclConfigUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent: string;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom: string;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam: string;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator: string;
     }
 
     export interface SecurityPolicyConfigBotConfig {
-        /**
-         * Bot intelligent rule configuration.
-         */
         intelligenceRule: outputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRule;
-        /**
-         * Preset rules.
-         */
         managedRule: outputs.Teo.SecurityPolicyConfigBotConfigManagedRule;
-        /**
-         * Portrait rule.
-         */
         portraitRule: outputs.Teo.SecurityPolicyConfigBotConfigPortraitRule;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface SecurityPolicyConfigBotConfigIntelligenceRule {
-        /**
-         * Configuration detail.
-         */
         items?: outputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRuleItem[];
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: string;
     }
 
     export interface SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-        /**
-         * Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-         */
         action?: string;
-        /**
-         * Bot label, valid values: `evilBot`, `suspectBot`, `goodBot`, `normal`.
-         */
         label?: string;
     }
 
     export interface SecurityPolicyConfigBotConfigManagedRule {
-        /**
-         * Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-         */
         action?: string;
-        /**
-         * Rules to enable when action is `alg`. See details in data source `botManagedRules`.
-         */
         algManagedIds?: number[];
-        /**
-         * Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
-         */
         capManagedIds?: number[];
-        /**
-         * Rules to enable when action is `drop`. See details in data source `botManagedRules`.
-         */
         dropManagedIds?: number[];
-        /**
-         * Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
-         */
         monManagedIds?: number[];
-        /**
-         * Name of the custom response page.
-         */
         name?: string;
-        /**
-         * ID of the custom response page.
-         */
         pageId?: number;
-        /**
-         * Punish time.
-         */
         punishTime?: number;
-        /**
-         * Time unit of the punish time.
-         */
         punishTimeUnit?: string;
-        /**
-         * Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-         */
         redirectUrl?: string;
-        /**
-         * Response code to use when redirecting.
-         */
         responseCode?: number;
         ruleId: number;
-        /**
-         * Rules to enable when action is `trans`. See details in data source `botManagedRules`.
-         */
         transManagedIds?: number[];
     }
 
     export interface SecurityPolicyConfigBotConfigPortraitRule {
-        /**
-         * Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
-         */
         algManagedIds?: number[];
-        /**
-         * Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
-         */
         capManagedIds?: number[];
-        /**
-         * Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
-         */
         dropManagedIds?: number[];
-        /**
-         * Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
-         */
         monManagedIds?: number[];
         ruleId: number;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: string;
     }
 
     export interface SecurityPolicyConfigDropPageConfig {
-        /**
-         * Custom error page of ACL rules.
-         */
         aclDropPageDetail: outputs.Teo.SecurityPolicyConfigDropPageConfigAclDropPageDetail;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
-        /**
-         * Custom error page of WAF rules.
-         */
         wafDropPageDetail: outputs.Teo.SecurityPolicyConfigDropPageConfigWafDropPageDetail;
     }
 
     export interface SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-        /**
-         * File name or URL.
-         */
         name: string;
-        /**
-         * ID of the custom error page. when set to 0, use system default error page.
-         */
         pageId: number;
-        /**
-         * HTTP status code to use. Valid range: 100-600.
-         */
         statusCode: number;
-        /**
-         * Type of the custom error page. Valid values: `file`, `url`.
-         */
         type: string;
     }
 
     export interface SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-        /**
-         * File name or URL.
-         */
         name: string;
-        /**
-         * ID of the custom error page. when set to 0, use system default error page.
-         */
         pageId: number;
-        /**
-         * HTTP status code to use. Valid range: 100-600.
-         */
         statusCode: number;
-        /**
-         * Type of the custom error page. Valid values: `file`, `url`.
-         */
         type: string;
     }
 
     export interface SecurityPolicyConfigExceptConfig {
-        /**
-         * Exception rules.
-         */
         exceptUserRules: outputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRule[];
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRule {
-        /**
-         * Action to take. Valid values: `skip`.
-         */
         action: string;
-        /**
-         * Conditions of the rule.
-         */
         exceptUserRuleConditions: outputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition[];
-        /**
-         * Scope of the rule in effect.
-         */
         exceptUserRuleScope: outputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope;
         ruleId: number;
-        /**
-         * Rule name.
-         */
         ruleName: string;
-        /**
-         * Priority of the rule. Valid value range: 0-100.
-         */
         rulePriority: number;
-        /**
-         * Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-         */
         ruleStatus: string;
         updateTime: string;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent: string;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom: string;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam: string;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator: string;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-        /**
-         * Modules in which the rule take effect. Valid values: `waf`.
-         */
         modules: string[];
     }
 
     export interface SecurityPolicyConfigIpTableConfig {
-        /**
-         * Rules list.
-         */
         rules: outputs.Teo.SecurityPolicyConfigIpTableConfigRule[];
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
     export interface SecurityPolicyConfigIpTableConfigRule {
-        /**
-         * Actions to take. Valid values: `drop`, `trans`, `monitor`.
-         */
         action?: string;
-        /**
-         * Matching content.
-         */
         matchContent?: string;
-        /**
-         * Matching type. Valid values: `ip`, `area`.
-         */
         matchFrom?: string;
         ruleId: number;
         updateTime: string;
     }
 
     export interface SecurityPolicyConfigRateLimitConfig {
-        /**
-         * Intelligent client filter.
-         */
         intelligence?: outputs.Teo.SecurityPolicyConfigRateLimitConfigIntelligence;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: string;
-        /**
-         * Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         template: outputs.Teo.SecurityPolicyConfigRateLimitConfigTemplate;
-        /**
-         * Custom configuration.
-         */
         userRules: outputs.Teo.SecurityPolicyConfigRateLimitConfigUserRule[];
     }
 
     export interface SecurityPolicyConfigRateLimitConfigIntelligence {
-        /**
-         * Action to take. Valid values: `monitor`, `alg`.
-         */
         action?: string;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: string;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigTemplate {
-        /**
-         * Detail of the template.
-         */
         detail: outputs.Teo.SecurityPolicyConfigRateLimitConfigTemplateDetail;
-        /**
-         * Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         mode: string;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigTemplateDetail {
-        /**
-         * Action to take.
-         */
         action: string;
-        /**
-         * Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         id: number;
-        /**
-         * Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         mode: string;
-        /**
-         * Period.
-         */
         period: number;
-        /**
-         * Punish time.
-         */
         punishTime: number;
-        /**
-         * Threshold.
-         */
         threshold: number;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigUserRule {
-        /**
-         * Valid values: `monitor`, `drop`.
-         */
         action: string;
-        /**
-         * Conditions of the rule.
-         */
         conditions: outputs.Teo.SecurityPolicyConfigRateLimitConfigUserRuleCondition[];
-        /**
-         * Filter words.
-         */
         freqFields?: string[];
-        /**
-         * Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-         */
         period: number;
-        /**
-         * Punish time, Valid value range: 0-2 days.
-         */
         punishTime: number;
-        /**
-         * Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-         */
         punishTimeUnit: string;
         ruleId: number;
-        /**
-         * Rule Name.
-         */
         ruleName: string;
-        /**
-         * Priority of the rule. Valid value range: 1-100.
-         */
         rulePriority: number;
-        /**
-         * Status of the rule. Valid values: `on`, `off`, `hour`.
-         */
         ruleStatus: string;
-        /**
-         * Threshold of the rate limit. Valid value range: 0-4294967294.
-         */
         threshold: number;
         updateTime: string;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent: string;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom: string;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam: string;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator: string;
     }
 
     export interface SecurityPolicyConfigSwitchConfig {
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         webSwitch?: string;
     }
 
     export interface SecurityPolicyConfigWafConfig {
-        /**
-         * AI based rules configuration.
-         */
         aiRule: outputs.Teo.SecurityPolicyConfigWafConfigAiRule;
-        /**
-         * Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-         */
         level: string;
-        /**
-         * Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-         */
         mode: string;
-        /**
-         * Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         switch: string;
-        /**
-         * WAF Rules Configuration.
-         */
         wafRules: outputs.Teo.SecurityPolicyConfigWafConfigWafRules;
     }
 
     export interface SecurityPolicyConfigWafConfigAiRule {
-        /**
-         * Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
-         */
         mode: string;
     }
 
     export interface SecurityPolicyConfigWafConfigWafRules {
-        /**
-         * Block mode rules list. See details in data source `wafManagedRules`.
-         */
         blockRuleIds: number[];
-        /**
-         * Observe rules list. See details in data source `wafManagedRules`.
-         */
         observeRuleIds: number[];
-        /**
-         * Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-         */
         switch: string;
     }
 
@@ -43718,6 +43592,263 @@ export namespace Teo {
 }
 
 export namespace Tse {
+    export interface CngwCanaryRuleCanaryRule {
+        /**
+         * service weight configuration.
+         */
+        balancedServiceLists?: outputs.Tse.CngwCanaryRuleCanaryRuleBalancedServiceList[];
+        /**
+         * parameter matching condition list.
+         */
+        conditionLists?: outputs.Tse.CngwCanaryRuleCanaryRuleConditionList[];
+        /**
+         * the status of canary rule.
+         */
+        enabled: boolean;
+        /**
+         * priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+         */
+        priority: number;
+        /**
+         * service ID.
+         */
+        serviceId?: string;
+        /**
+         * service name.
+         */
+        serviceName?: string;
+    }
+
+    export interface CngwCanaryRuleCanaryRuleBalancedServiceList {
+        /**
+         * percent, 10 is 10%, valid values:0 to 100.
+         */
+        percent?: number;
+        /**
+         * service ID, required when used as an input parameter.
+         */
+        serviceId?: string;
+        /**
+         * service name, meaningless when used as an input parameter.
+         */
+        serviceName?: string;
+        upstreamName: string;
+    }
+
+    export interface CngwCanaryRuleCanaryRuleConditionList {
+        /**
+         * delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+         */
+        delimiter?: string;
+        /**
+         * global configuration ID.
+         */
+        globalConfigId?: string;
+        /**
+         * global configuration name.
+         */
+        globalConfigName?: string;
+        /**
+         * parameter name.
+         */
+        key?: string;
+        /**
+         * operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+         */
+        operator?: string;
+        /**
+         * type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+         */
+        type: string;
+        /**
+         * parameter value.
+         */
+        value?: string;
+    }
+
+    export interface CngwRouteHeader {
+        key?: string;
+        value?: string;
+    }
+
+    export interface CngwRouteRateLimitLimitDetail {
+        enabled: boolean;
+        externalRedis?: outputs.Tse.CngwRouteRateLimitLimitDetailExternalRedis;
+        header?: string;
+        hideClientHeaders: boolean;
+        isDelay: boolean;
+        limitBy: string;
+        lineUpTime?: number;
+        path?: string;
+        policy?: string;
+        qpsThresholds: outputs.Tse.CngwRouteRateLimitLimitDetailQpsThreshold[];
+        rateLimitResponse?: outputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponse;
+        rateLimitResponseUrl?: string;
+        responseType: string;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailExternalRedis {
+        redisHost: string;
+        redisPassword: string;
+        redisPort: number;
+        redisTimeout: number;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailQpsThreshold {
+        max: number;
+        unit: string;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailRateLimitResponse {
+        body?: string;
+        headers?: outputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponseHeader[];
+        httpStatus?: number;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+        key?: string;
+        value?: string;
+    }
+
+    export interface CngwServiceRateLimitLimitDetail {
+        enabled: boolean;
+        externalRedis?: outputs.Tse.CngwServiceRateLimitLimitDetailExternalRedis;
+        header?: string;
+        hideClientHeaders: boolean;
+        isDelay: boolean;
+        limitBy: string;
+        lineUpTime?: number;
+        path?: string;
+        policy?: string;
+        qpsThresholds: outputs.Tse.CngwServiceRateLimitLimitDetailQpsThreshold[];
+        rateLimitResponse?: outputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponse;
+        rateLimitResponseUrl?: string;
+        responseType: string;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailExternalRedis {
+        redisHost: string;
+        redisPassword: string;
+        redisPort: number;
+        redisTimeout: number;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailQpsThreshold {
+        max: number;
+        unit: string;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailRateLimitResponse {
+        body?: string;
+        headers?: outputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponseHeader[];
+        httpStatus?: number;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+        key?: string;
+        value?: string;
+    }
+
+    export interface CngwServiceUpstreamInfo {
+        /**
+         * load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+         */
+        algorithm?: string;
+        /**
+         * auto scaling group port of cvm.
+         */
+        autoScalingCvmPort?: number;
+        /**
+         * auto scaling group ID of cvm.
+         */
+        autoScalingGroupId?: string;
+        /**
+         * hook status in auto scaling group of cvm.
+         */
+        autoScalingHookStatus?: string;
+        /**
+         * tat cmd status in auto scaling group of cvm.
+         */
+        autoScalingTatCmdStatus?: string;
+        /**
+         * an IP address or domain name.
+         */
+        host: string;
+        /**
+         * namespace.
+         */
+        namespace?: string;
+        /**
+         * backend service port.valid values: `1` to `65535`.
+         */
+        port?: number;
+        /**
+         * exact source service type.
+         */
+        realSourceType?: string;
+        /**
+         * scf lambda name.
+         */
+        scfLambdaName?: string;
+        /**
+         * scf lambda version.
+         */
+        scfLambdaQualifier?: string;
+        /**
+         * scf lambda namespace.
+         */
+        scfNamespace?: string;
+        /**
+         * scf lambda type.
+         */
+        scfType?: string;
+        /**
+         * the name of the service in registry or kubernetes.
+         */
+        serviceName?: string;
+        /**
+         * slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+         */
+        slowStart?: number;
+        /**
+         * service source ID.
+         */
+        sourceId?: string;
+        /**
+         * the name of source service.
+         */
+        sourceName?: string;
+        /**
+         * source service type.
+         */
+        sourceType?: string;
+        /**
+         * provided when service type is IPList.
+         */
+        targets?: outputs.Tse.CngwServiceUpstreamInfoTarget[];
+    }
+
+    export interface CngwServiceUpstreamInfoTarget {
+        createdTime: string;
+        health: string;
+        /**
+         * host.
+         */
+        host: string;
+        /**
+         * port.
+         */
+        port: number;
+        /**
+         * source of target.
+         */
+        source?: string;
+        /**
+         * weight.
+         */
+        weight: number;
+    }
+
     export interface GetAccessAddressEnvAddressInfo {
         /**
          * config public network ip.
@@ -43752,6 +43883,94 @@ export namespace Tse {
         intranetAddress: string;
     }
 
+    export interface GetGatewayCanaryRulesResult {
+        /**
+         * canary rule list.
+         */
+        canaryRuleLists: outputs.Tse.GetGatewayCanaryRulesResultCanaryRuleList[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetGatewayCanaryRulesResultCanaryRuleList {
+        /**
+         * service weight configuration.
+         */
+        balancedServiceLists: outputs.Tse.GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList[];
+        /**
+         * parameter matching condition list.
+         */
+        conditionLists: outputs.Tse.GetGatewayCanaryRulesResultCanaryRuleListConditionList[];
+        /**
+         * the status of canary rule.
+         */
+        enabled: boolean;
+        /**
+         * priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+         */
+        priority: number;
+        /**
+         * service ID.
+         */
+        serviceId: string;
+        /**
+         * service name.
+         */
+        serviceName: string;
+    }
+
+    export interface GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList {
+        /**
+         * percent, 10 is 10%, valid values: 0 to 100.
+         */
+        percent: number;
+        /**
+         * service ID.
+         */
+        serviceId: string;
+        /**
+         * service name.
+         */
+        serviceName: string;
+        /**
+         * upstream name.
+         */
+        upstreamName: string;
+    }
+
+    export interface GetGatewayCanaryRulesResultCanaryRuleListConditionList {
+        /**
+         * delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+         */
+        delimiter: string;
+        /**
+         * global configuration ID.
+         */
+        globalConfigId: string;
+        /**
+         * global configuration name.
+         */
+        globalConfigName: string;
+        /**
+         * parameter name.
+         */
+        key: string;
+        /**
+         * operator.Reference value:`le`, `eq`, `lt`, `ne`, `ge`, `gt`, `regex`, `exists`, `in`, `not in`,  `prefix`, `exact`, `regex`.
+         */
+        operator: string;
+        /**
+         * type.Reference value:- path- method- query- header- cookie- body- system.
+         */
+        type: string;
+        /**
+         * parameter value.
+         */
+        value: string;
+    }
+
     export interface GetGatewayNodesNodeList {
         /**
          * gateway group ID.
@@ -43781,6 +44000,193 @@ export namespace Tse {
          * Zone idNote: This field may return null, indicating that a valid value is not available.
          */
         zoneId: string;
+    }
+
+    export interface GetGatewayRoutesResult {
+        routeLists: outputs.Tse.GetGatewayRoutesResultRouteList[];
+        totalCount: number;
+    }
+
+    export interface GetGatewayRoutesResultRouteList {
+        createdTime: string;
+        destinationPorts: number[];
+        forceHttps: boolean;
+        headers: outputs.Tse.GetGatewayRoutesResultRouteListHeader[];
+        hosts: string[];
+        httpsRedirectStatusCode: number;
+        id: string;
+        methods: string[];
+        name: string;
+        paths: string[];
+        preserveHost: boolean;
+        protocols: string[];
+        serviceId: string;
+        serviceName: string;
+        stripPath: boolean;
+    }
+
+    export interface GetGatewayRoutesResultRouteListHeader {
+        key: string;
+        value: string;
+    }
+
+    export interface GetGatewayServicesFilter {
+        /**
+         * filter name.
+         */
+        key?: string;
+        /**
+         * filter value.
+         */
+        value?: string;
+    }
+
+    export interface GetGatewayServicesResult {
+        /**
+         * service list.
+         */
+        serviceLists: outputs.Tse.GetGatewayServicesResultServiceList[];
+        /**
+         * total count.
+         */
+        totalCount: number;
+    }
+
+    export interface GetGatewayServicesResultServiceList {
+        /**
+         * created time.
+         */
+        createdTime: string;
+        /**
+         * editable status.
+         */
+        editable: boolean;
+        /**
+         * service ID.
+         */
+        id: string;
+        /**
+         * service name.
+         */
+        name: string;
+        /**
+         * tag list.
+         */
+        tags: string[];
+        /**
+         * upstream information.
+         */
+        upstreamInfos: outputs.Tse.GetGatewayServicesResultServiceListUpstreamInfo[];
+        /**
+         * service type.
+         */
+        upstreamType: string;
+    }
+
+    export interface GetGatewayServicesResultServiceListUpstreamInfo {
+        /**
+         * load balance algorithm,default:round-robin,least-connections and consistenHashing also support.
+         */
+        algorithm: string;
+        /**
+         * auto scaling group port of cvm.
+         */
+        autoScalingCvmPort: number;
+        /**
+         * auto scaling group ID of cvm.
+         */
+        autoScalingGroupId: string;
+        /**
+         * hook status in auto scaling group of cvm.
+         */
+        autoScalingHookStatus: string;
+        /**
+         * tat cmd status in auto scaling group of cvm.
+         */
+        autoScalingTatCmdStatus: string;
+        /**
+         * Host.
+         */
+        host: string;
+        /**
+         * namespace.
+         */
+        namespace: string;
+        /**
+         * port.
+         */
+        port: number;
+        /**
+         * exact source service type.
+         */
+        realSourceType: string;
+        /**
+         * scf lambda name.
+         */
+        scfLambdaName: string;
+        /**
+         * scf lambda version.
+         */
+        scfLambdaQualifier: string;
+        /**
+         * scf lambda namespace.
+         */
+        scfNamespace: string;
+        /**
+         * scf lambda type.
+         */
+        scfType: string;
+        /**
+         * the name of the service in registry or kubernetes.
+         */
+        serviceName: string;
+        /**
+         * slow start time, unit:second,when it&#39;s enabled, weight of the node is increased from 1 to the target value gradually.
+         */
+        slowStart: number;
+        /**
+         * service source ID.
+         */
+        sourceId: string;
+        /**
+         * the name of source service.
+         */
+        sourceName: string;
+        /**
+         * source service type.
+         */
+        sourceType: string;
+        /**
+         * provided when service type is IPList.
+         */
+        targets: outputs.Tse.GetGatewayServicesResultServiceListUpstreamInfoTarget[];
+    }
+
+    export interface GetGatewayServicesResultServiceListUpstreamInfoTarget {
+        /**
+         * created time.
+         */
+        createdTime: string;
+        /**
+         * health.
+         */
+        health: string;
+        /**
+         * Host.
+         */
+        host: string;
+        /**
+         * port.
+         */
+        port: number;
+        /**
+         * source of target.
+         */
+        source: string;
+        /**
+         * weight.
+         */
+        weight: number;
     }
 
     export interface GetNacosReplicasReplica {
@@ -43892,6 +44298,7 @@ export namespace Tse {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tsf {

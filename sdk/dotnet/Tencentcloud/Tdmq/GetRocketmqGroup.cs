@@ -14,12 +14,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     {
         /// <summary>
         /// Use this data source to query detailed information of tdmqRocketmq group
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         {
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+        ///         {
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleRocketmqGroup = Tencentcloud.Tdmq.GetRocketmqGroup.Invoke(new Tencentcloud.Tdmq.GetRocketmqGroupInvokeArgs
+        ///         {
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceId = exampleRocketmqNamespace.NamespaceName,
+        ///             FilterGroup = exampleTdmq / rocketmqGroupRocketmqGroup.GroupName,
+        ///         });
+        ///         var exampleTdmq_rocketmqGroupRocketmqGroup = new Tencentcloud.Tdmq.RocketmqGroup("exampleTdmq/rocketmqGroupRocketmqGroup", new Tencentcloud.Tdmq.RocketmqGroupArgs
+        ///         {
+        ///             GroupName = "tf_example",
+        ///             Namespace = exampleRocketmqNamespace.NamespaceName,
+        ///             ReadEnable = true,
+        ///             BroadcastEnable = true,
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             Remark = "remark.",
+        ///         });
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Task<GetRocketmqGroupResult> InvokeAsync(GetRocketmqGroupArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqGroupResult>("tencentcloud:Tdmq/getRocketmqGroup:getRocketmqGroup", args ?? new GetRocketmqGroupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmqRocketmq group
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+        ///         {
+        ///             ClusterName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+        ///         {
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceName = "tf_example",
+        ///             Remark = "remark.",
+        ///         });
+        ///         var exampleRocketmqGroup = Tencentcloud.Tdmq.GetRocketmqGroup.Invoke(new Tencentcloud.Tdmq.GetRocketmqGroupInvokeArgs
+        ///         {
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             NamespaceId = exampleRocketmqNamespace.NamespaceName,
+        ///             FilterGroup = exampleTdmq / rocketmqGroupRocketmqGroup.GroupName,
+        ///         });
+        ///         var exampleTdmq_rocketmqGroupRocketmqGroup = new Tencentcloud.Tdmq.RocketmqGroup("exampleTdmq/rocketmqGroupRocketmqGroup", new Tencentcloud.Tdmq.RocketmqGroupArgs
+        ///         {
+        ///             GroupName = "tf_example",
+        ///             Namespace = exampleRocketmqNamespace.NamespaceName,
+        ///             ReadEnable = true,
+        ///             BroadcastEnable = true,
+        ///             ClusterId = exampleRocketmqCluster.ClusterId,
+        ///             Remark = "remark.",
+        ///         });
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Output<GetRocketmqGroupResult> Invoke(GetRocketmqGroupInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetRocketmqGroupResult>("tencentcloud:Tdmq/getRocketmqGroup:getRocketmqGroup", args ?? new GetRocketmqGroupInvokeArgs(), options.WithDefaults());

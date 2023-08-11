@@ -129,6 +129,8 @@ __all__ = [
     'InstanceConfig',
     'InstanceDynamicRetentionConfig',
     'InstanceTag',
+    'RouteBrokerVipList',
+    'RouteVipList',
     'GetAclsAclListResult',
     'GetConnectResourceResultResult',
     'GetConnectResourceResultConnectResourceListResult',
@@ -13220,6 +13222,68 @@ class InstanceTag(dict):
         Tag value.
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class RouteBrokerVipList(dict):
+    def __init__(__self__, *,
+                 vip: Optional[str] = None,
+                 vport: Optional[str] = None):
+        """
+        :param str vip: Virtual IP.
+        :param str vport: Virtual port.
+        """
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[str]:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> Optional[str]:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class RouteVipList(dict):
+    def __init__(__self__, *,
+                 vip: Optional[str] = None,
+                 vport: Optional[str] = None):
+        """
+        :param str vip: Virtual IP.
+        :param str vport: Virtual port.
+        """
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
+        if vport is not None:
+            pulumi.set(__self__, "vport", vport)
+
+    @property
+    @pulumi.getter
+    def vip(self) -> Optional[str]:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @property
+    @pulumi.getter
+    def vport(self) -> Optional[str]:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
 
 
 @pulumi.output_type

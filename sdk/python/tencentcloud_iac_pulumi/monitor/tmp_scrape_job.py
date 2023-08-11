@@ -138,9 +138,28 @@ class TmpScrapeJob(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_scrape_job = tencentcloud.monitor.TmpScrapeJob("tmpScrapeJob",
-            instance_id="prom-dko9d0nu",
-            agent_id="agent-6a7g40k2",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", instance_id=foo_tmp_instance.id)
+        foo_tmp_scrape_job = tencentcloud.monitor.TmpScrapeJob("fooTmpScrapeJob",
+            instance_id=foo_tmp_instance.id,
+            agent_id=foo_tmp_cvm_agent.agent_id,
             config=\"\"\"job_name: demo-config
         honor_timestamps: true
         metrics_path: /metrics
@@ -177,9 +196,28 @@ class TmpScrapeJob(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_scrape_job = tencentcloud.monitor.TmpScrapeJob("tmpScrapeJob",
-            instance_id="prom-dko9d0nu",
-            agent_id="agent-6a7g40k2",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", instance_id=foo_tmp_instance.id)
+        foo_tmp_scrape_job = tencentcloud.monitor.TmpScrapeJob("fooTmpScrapeJob",
+            instance_id=foo_tmp_instance.id,
+            agent_id=foo_tmp_cvm_agent.agent_id,
             config=\"\"\"job_name: demo-config
         honor_timestamps: true
         metrics_path: /metrics

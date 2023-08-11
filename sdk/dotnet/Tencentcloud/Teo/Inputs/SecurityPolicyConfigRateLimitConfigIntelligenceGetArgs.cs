@@ -13,15 +13,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigRateLimitConfigIntelligenceGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `monitor`, `alg`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

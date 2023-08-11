@@ -5,21 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Use this data source to query detailed information of teo botPortraitRules
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const botPortraitRules = pulumi.output(tencentcloud.Teo.getBotPortraitRules({
- *     entity: "",
- *     zoneId: "",
- * }));
- * ```
- */
 export function getBotPortraitRules(args: GetBotPortraitRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetBotPortraitRulesResult> {
     if (!opts) {
         opts = {}
@@ -37,17 +22,8 @@ export function getBotPortraitRules(args: GetBotPortraitRulesArgs, opts?: pulumi
  * A collection of arguments for invoking getBotPortraitRules.
  */
 export interface GetBotPortraitRulesArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: string;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: string;
-    /**
-     * Site ID.
-     */
     zoneId: string;
 }
 
@@ -61,9 +37,6 @@ export interface GetBotPortraitRulesResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
-    /**
-     * Portrait rules list.
-     */
     readonly rules: outputs.Teo.GetBotPortraitRulesRule[];
     readonly zoneId: string;
 }
@@ -76,16 +49,7 @@ export function getBotPortraitRulesOutput(args: GetBotPortraitRulesOutputArgs, o
  * A collection of arguments for invoking getBotPortraitRules.
  */
 export interface GetBotPortraitRulesOutputArgs {
-    /**
-     * Subdomain or application name.
-     */
     entity: pulumi.Input<string>;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: pulumi.Input<string>;
-    /**
-     * Site ID.
-     */
     zoneId: pulumi.Input<string>;
 }

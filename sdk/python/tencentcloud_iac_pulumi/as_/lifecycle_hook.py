@@ -330,20 +330,77 @@ class LifecycleHook(pulumi.CustomResource):
         Provides a resource for an AS (Auto scaling) lifecycle hook.
 
         ## Example Usage
+        ### Create a basic LifecycleHook
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_lifecycle_hook = tencentcloud.as_.LifecycleHook("exampleLifecycleHook",
+            scaling_group_id=example_scaling_group.id,
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            notification_metadata="tf test")
+        ```
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        lifecycle_hook = tencentcloud.as_.LifecycleHook("lifecycleHook",
-            default_result="CONTINUE",
-            heartbeat_timeout=500,
+        example = tencentcloud.as_.LifecycleHook("example",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
             lifecycle_hook_name="tf-as-lifecycle-hook",
             lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
             notification_metadata="tf test",
-            notification_queue_name="lifcyclehook",
             notification_target_type="CMQ_QUEUE",
-            scaling_group_id="sg-12af45")
+            notification_queue_name="lifcyclehook")
+        ```
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.LifecycleHook("example",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            notification_metadata="tf test",
+            notification_target_type="CMQ_TOPIC",
+            notification_topic_name="lifcyclehook")
         ```
 
         :param str resource_name: The name of the resource.
@@ -368,20 +425,77 @@ class LifecycleHook(pulumi.CustomResource):
         Provides a resource for an AS (Auto scaling) lifecycle hook.
 
         ## Example Usage
+        ### Create a basic LifecycleHook
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="as")
+        image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            os_name="TencentOS Server 3.2 (Final)")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name)
+        example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+            configuration_name="tf-example",
+            image_id=image.images[0].image_id,
+            instance_types=[
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4",
+            ],
+            instance_name_settings=tencentcloud.as..ScalingConfigInstanceNameSettingsArgs(
+                instance_name="test-ins-name",
+            ))
+        example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+            scaling_group_name="tf-example",
+            configuration_id=example_scaling_config.id,
+            max_size=1,
+            min_size=0,
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id])
+        example_lifecycle_hook = tencentcloud.as_.LifecycleHook("exampleLifecycleHook",
+            scaling_group_id=example_scaling_group.id,
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            notification_metadata="tf test")
+        ```
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        lifecycle_hook = tencentcloud.as_.LifecycleHook("lifecycleHook",
-            default_result="CONTINUE",
-            heartbeat_timeout=500,
+        example = tencentcloud.as_.LifecycleHook("example",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
             lifecycle_hook_name="tf-as-lifecycle-hook",
             lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
             notification_metadata="tf test",
-            notification_queue_name="lifcyclehook",
             notification_target_type="CMQ_QUEUE",
-            scaling_group_id="sg-12af45")
+            notification_queue_name="lifcyclehook")
+        ```
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.LifecycleHook("example",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            lifecycle_hook_name="tf-as-lifecycle-hook",
+            lifecycle_transition="INSTANCE_LAUNCHING",
+            default_result="CONTINUE",
+            heartbeat_timeout=500,
+            notification_metadata="tf test",
+            notification_target_type="CMQ_TOPIC",
+            notification_topic_name="lifcyclehook")
         ```
 
         :param str resource_name: The name of the resource.

@@ -14,25 +14,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigWafConfig
     {
-        /// <summary>
-        /// AI based rules configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigWafConfigAiRule? AiRule;
-        /// <summary>
-        /// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-        /// </summary>
         public readonly string Level;
-        /// <summary>
-        /// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-        /// </summary>
         public readonly string Mode;
-        /// <summary>
-        /// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string Switch;
-        /// <summary>
-        /// WAF Rules Configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigWafConfigWafRules WafRules;
 
         [OutputConstructor]

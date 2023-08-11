@@ -222,6 +222,7 @@ class _ProxyState:
                  proxy_count: Optional[pulumi.Input[int]] = None,
                  proxy_group_id: Optional[pulumi.Input[str]] = None,
                  proxy_zones: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyProxyZoneArgs']]]] = None,
+                 ro_instances: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyRoInstanceArgs']]]] = None,
                  security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  unique_subnet_id: Optional[pulumi.Input[str]] = None,
                  unique_vpc_id: Optional[pulumi.Input[str]] = None):
@@ -237,6 +238,7 @@ class _ProxyState:
         :param pulumi.Input[int] proxy_count: Number of database proxy group nodes. If it is set at the same time as the `proxy_zones` field, the `proxy_zones` parameter shall prevail.
         :param pulumi.Input[str] proxy_group_id: Proxy Group Id.
         :param pulumi.Input[Sequence[pulumi.Input['ProxyProxyZoneArgs']]] proxy_zones: Database node information.
+        :param pulumi.Input[Sequence[pulumi.Input['ProxyRoInstanceArgs']]] ro_instances: Read only instance list.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security Group ID Array.
         :param pulumi.Input[str] unique_subnet_id: The private network subnet ID is consistent with the cluster subnet ID by default.
         :param pulumi.Input[str] unique_vpc_id: Private network ID, which is consistent with the cluster private network ID by default.
@@ -261,6 +263,8 @@ class _ProxyState:
             pulumi.set(__self__, "proxy_group_id", proxy_group_id)
         if proxy_zones is not None:
             pulumi.set(__self__, "proxy_zones", proxy_zones)
+        if ro_instances is not None:
+            pulumi.set(__self__, "ro_instances", ro_instances)
         if security_group_ids is not None:
             pulumi.set(__self__, "security_group_ids", security_group_ids)
         if unique_subnet_id is not None:
@@ -387,6 +391,18 @@ class _ProxyState:
     @proxy_zones.setter
     def proxy_zones(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyProxyZoneArgs']]]]):
         pulumi.set(self, "proxy_zones", value)
+
+    @property
+    @pulumi.getter(name="roInstances")
+    def ro_instances(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProxyRoInstanceArgs']]]]:
+        """
+        Read only instance list.
+        """
+        return pulumi.get(self, "ro_instances")
+
+    @ro_instances.setter
+    def ro_instances(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyRoInstanceArgs']]]]):
+        pulumi.set(self, "ro_instances", value)
 
     @property
     @pulumi.getter(name="securityGroupIds")
@@ -576,6 +592,7 @@ class Proxy(pulumi.CustomResource):
             __props__.__dict__["unique_subnet_id"] = unique_subnet_id
             __props__.__dict__["unique_vpc_id"] = unique_vpc_id
             __props__.__dict__["proxy_group_id"] = None
+            __props__.__dict__["ro_instances"] = None
         super(Proxy, __self__).__init__(
             'tencentcloud:Cynosdb/proxy:Proxy',
             resource_name,
@@ -596,6 +613,7 @@ class Proxy(pulumi.CustomResource):
             proxy_count: Optional[pulumi.Input[int]] = None,
             proxy_group_id: Optional[pulumi.Input[str]] = None,
             proxy_zones: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyProxyZoneArgs']]]]] = None,
+            ro_instances: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyRoInstanceArgs']]]]] = None,
             security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             unique_subnet_id: Optional[pulumi.Input[str]] = None,
             unique_vpc_id: Optional[pulumi.Input[str]] = None) -> 'Proxy':
@@ -616,6 +634,7 @@ class Proxy(pulumi.CustomResource):
         :param pulumi.Input[int] proxy_count: Number of database proxy group nodes. If it is set at the same time as the `proxy_zones` field, the `proxy_zones` parameter shall prevail.
         :param pulumi.Input[str] proxy_group_id: Proxy Group Id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyProxyZoneArgs']]]] proxy_zones: Database node information.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyRoInstanceArgs']]]] ro_instances: Read only instance list.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security Group ID Array.
         :param pulumi.Input[str] unique_subnet_id: The private network subnet ID is consistent with the cluster subnet ID by default.
         :param pulumi.Input[str] unique_vpc_id: Private network ID, which is consistent with the cluster private network ID by default.
@@ -634,6 +653,7 @@ class Proxy(pulumi.CustomResource):
         __props__.__dict__["proxy_count"] = proxy_count
         __props__.__dict__["proxy_group_id"] = proxy_group_id
         __props__.__dict__["proxy_zones"] = proxy_zones
+        __props__.__dict__["ro_instances"] = ro_instances
         __props__.__dict__["security_group_ids"] = security_group_ids
         __props__.__dict__["unique_subnet_id"] = unique_subnet_id
         __props__.__dict__["unique_vpc_id"] = unique_vpc_id
@@ -718,6 +738,14 @@ class Proxy(pulumi.CustomResource):
         Database node information.
         """
         return pulumi.get(self, "proxy_zones")
+
+    @property
+    @pulumi.getter(name="roInstances")
+    def ro_instances(self) -> pulumi.Output[Sequence['outputs.ProxyRoInstance']]:
+        """
+        Read only instance list.
+        """
+        return pulumi.get(self, "ro_instances")
 
     @property
     @pulumi.getter(name="securityGroupIds")

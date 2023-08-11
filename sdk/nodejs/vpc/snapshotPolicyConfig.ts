@@ -11,11 +11,37 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const snapshotPolicyConfig = new tencentcloud.Vpc.SnapshotPolicyConfig("snapshot_policy_config", {
+ * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
+ *     bucket: "tf-example-1308919341",
+ *     acl: "private",
+ * });
+ * const exampleSnapshotPolicy = new tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy", {
+ *     snapshotPolicyName: "tf-example",
+ *     backupType: "time",
+ *     cosBucket: exampleBucket.bucket,
+ *     cosRegion: "ap-guangzhou",
+ *     createNewCos: false,
+ *     keepTime: 2,
+ *     backupPolicies: [
+ *         {
+ *             backupDay: "monday",
+ *             backupTime: "00:00:00",
+ *         },
+ *         {
+ *             backupDay: "tuesday",
+ *             backupTime: "01:00:00",
+ *         },
+ *         {
+ *             backupDay: "wednesday",
+ *             backupTime: "02:00:00",
+ *         },
+ *     ],
+ * });
+ * const config = new tencentcloud.vpc.SnapshotPolicyConfig("config", {
+ *     snapshotPolicyId: exampleSnapshotPolicy.id,
  *     enable: false,
- *     snapshotPolicyId: "sspolicy-1t6cobbv",
  * });
  * ```
  *

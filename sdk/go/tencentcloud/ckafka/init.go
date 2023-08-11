@@ -39,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Ckafka/renewInstance:RenewInstance":
 		r = &RenewInstance{}
+	case "tencentcloud:Ckafka/route:Route":
+		r = &Route{}
 	case "tencentcloud:Ckafka/topic:Topic":
 		r = &Topic{}
 	case "tencentcloud:Ckafka/user:User":
@@ -99,6 +101,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ckafka/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ckafka/route",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

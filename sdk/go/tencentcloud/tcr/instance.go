@@ -14,6 +14,7 @@ import (
 // Use this resource to create tcr instance.
 //
 // ## Example Usage
+// ### Create a basic tcr instance.
 //
 // ```go
 // package main
@@ -25,10 +26,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
 // 			InstanceType: pulumi.String("basic"),
 // 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
 // 		})
 // 		if err != nil {
@@ -38,7 +39,7 @@ import (
 // 	})
 // }
 // ```
-// ### Using public network access whitelist
+// ### Create instance with the public network access whitelist.
 //
 // ```go
 // package main
@@ -51,7 +52,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
 // 			InstanceType:        pulumi.String("basic"),
 // 			OpenPublicOperation: pulumi.Bool(true),
 // 			SecurityPolicies: tcr.InstanceSecurityPolicyArray{
@@ -70,7 +71,7 @@ import (
 // 	})
 // }
 // ```
-// ### Create with Replications
+// ### Create instance with Replications.
 //
 // ```go
 // package main
@@ -108,7 +109,7 @@ import (
 // 		if param := cfg.GetBool("tcrRegionMap"); param != nil {
 // 			tcrRegionMap = param
 // 		}
-// 		_, err := Tcr.NewInstance(ctx, "foo", &Tcr.InstanceArgs{
+// 		_, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
 // 			InstanceType: pulumi.String("premium"),
 // 			Replications: tcr.InstanceReplicationArray{
 // 				&tcr.InstanceReplicationArgs{
@@ -132,7 +133,7 @@ import (
 // tcr instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+//  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState

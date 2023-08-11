@@ -13,34 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
     /// <summary>
     /// Provide a resource to create a VPC subnet.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             VpcId = foo.Id,
-    ///             CidrBlock = "10.0.20.0/28",
-    ///             IsMulticast = false,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// Vpc subnet instance can be imported, e.g.

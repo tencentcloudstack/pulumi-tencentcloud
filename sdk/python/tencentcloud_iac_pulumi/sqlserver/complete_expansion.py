@@ -68,12 +68,75 @@ class CompleteExpansion(pulumi.CustomResource):
         Provides a resource to create a sqlserver complete_expansion
 
         ## Example Usage
+        ### First, Create a basic SQL instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[security_group.id],
+            project_id=0,
+            memory=2,
+            storage=20,
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="01:00",
+            maintenance_time_span=3,
+            tags={
+                "createBy": "tfExample",
+            })
+        ```
+        ### Expand the current instance, storage: 20->40, wait_switch = 1
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        complete_expansion = tencentcloud.sqlserver.CompleteExpansion("completeExpansion", instance_id="mssql-qelbzgwf")
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            security_groups=[tencentcloud_security_group["security_group"]["id"]],
+            project_id=0,
+            memory=2,
+            storage=40,
+            wait_switch=1,
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="01:00",
+            maintenance_time_span=3,
+            tags={
+                "createBy": "tfExample",
+            })
+        ```
+        ### Complete the expansion task immediately
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.sqlserver.CompleteExpansion("example", instance_id=tencentcloud_sqlserver_instance["example"]["id"])
         ```
 
         :param str resource_name: The name of the resource.
@@ -90,12 +153,75 @@ class CompleteExpansion(pulumi.CustomResource):
         Provides a resource to create a sqlserver complete_expansion
 
         ## Example Usage
+        ### First, Create a basic SQL instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[security_group.id],
+            project_id=0,
+            memory=2,
+            storage=20,
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="01:00",
+            maintenance_time_span=3,
+            tags={
+                "createBy": "tfExample",
+            })
+        ```
+        ### Expand the current instance, storage: 20->40, wait_switch = 1
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        complete_expansion = tencentcloud.sqlserver.CompleteExpansion("completeExpansion", instance_id="mssql-qelbzgwf")
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=data["tencentcloud_availability_zones_by_product"]["zones"]["zones"][4]["name"],
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            subnet_id=tencentcloud_subnet["subnet"]["id"],
+            security_groups=[tencentcloud_security_group["security_group"]["id"]],
+            project_id=0,
+            memory=2,
+            storage=40,
+            wait_switch=1,
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="01:00",
+            maintenance_time_span=3,
+            tags={
+                "createBy": "tfExample",
+            })
+        ```
+        ### Complete the expansion task immediately
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.sqlserver.CompleteExpansion("example", instance_id=tencentcloud_sqlserver_instance["example"]["id"])
         ```
 
         :param str resource_name: The name of the resource.

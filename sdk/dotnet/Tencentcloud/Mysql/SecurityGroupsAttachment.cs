@@ -17,16 +17,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var securityGroupsAttachment = new Tencentcloud.Mysql.SecurityGroupsAttachment("securityGroupsAttachment", new Tencentcloud.Mysql.SecurityGroupsAttachmentArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             InstanceId = "cdb-fitq5t9h",
-    ///             SecurityGroupId = "sg-baxfiao5",
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "mysql test",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///         });
+    ///         var exampleSecurityGroupsAttachment = new Tencentcloud.Mysql.SecurityGroupsAttachment("exampleSecurityGroupsAttachment", new Tencentcloud.Mysql.SecurityGroupsAttachmentArgs
+    ///         {
+    ///             SecurityGroupId = securityGroup.Id,
+    ///             InstanceId = exampleInstance.Id,
     ///         });
     ///     }
     /// 

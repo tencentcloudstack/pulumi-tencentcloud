@@ -105,9 +105,33 @@ class SnapshotPolicyConfig(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy_config = tencentcloud.vpc.SnapshotPolicyConfig("snapshotPolicyConfig",
-            enable=False,
-            snapshot_policy_id="sspolicy-1t6cobbv")
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        config = tencentcloud.vpc.SnapshotPolicyConfig("config",
+            snapshot_policy_id=example_snapshot_policy.id,
+            enable=False)
         ```
 
         ## Import
@@ -138,9 +162,33 @@ class SnapshotPolicyConfig(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy_config = tencentcloud.vpc.SnapshotPolicyConfig("snapshotPolicyConfig",
-            enable=False,
-            snapshot_policy_id="sspolicy-1t6cobbv")
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
+                ),
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        config = tencentcloud.vpc.SnapshotPolicyConfig("config",
+            snapshot_policy_id=example_snapshot_policy.id,
+            enable=False)
         ```
 
         ## Import

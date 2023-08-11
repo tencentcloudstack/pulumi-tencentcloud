@@ -23,18 +23,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test recket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var @namespace = new Tencentcloud.Tdmq.RocketmqNamespace("namespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
     ///         {
-    ///             ClusterId = cluster.ClusterId,
-    ///             NamespaceName = "test_namespace",
-    ///             Ttl = 65000,
-    ///             RetentionTime = 65000,
-    ///             Remark = "test namespace",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             NamespaceName = "tf_example_namespace",
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 
@@ -77,16 +75,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// Retention time of persisted messages in milliseconds.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
         /// </summary>
         [Output("retentionTime")]
-        public Output<int> RetentionTime { get; private set; } = null!;
+        public Output<int?> RetentionTime { get; private set; } = null!;
 
         /// <summary>
-        /// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         /// </summary>
         [Output("ttl")]
-        public Output<int> Ttl { get; private set; } = null!;
+        public Output<int?> Ttl { get; private set; } = null!;
 
         /// <summary>
         /// VPC access point address.
@@ -160,16 +158,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// Retention time of persisted messages in milliseconds.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
         /// </summary>
-        [Input("retentionTime", required: true)]
-        public Input<int> RetentionTime { get; set; } = null!;
+        [Input("retentionTime")]
+        public Input<int>? RetentionTime { get; set; }
 
         /// <summary>
-        /// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         /// </summary>
-        [Input("ttl", required: true)]
-        public Input<int> Ttl { get; set; } = null!;
+        [Input("ttl")]
+        public Input<int>? Ttl { get; set; }
 
         public RocketmqNamespaceArgs()
         {
@@ -203,13 +201,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// Retention time of persisted messages in milliseconds.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
         /// </summary>
         [Input("retentionTime")]
         public Input<int>? RetentionTime { get; set; }
 
         /// <summary>
-        /// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        /// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         /// </summary>
         [Input("ttl")]
         public Input<int>? Ttl { get; set; }

@@ -297,6 +297,8 @@ type Instance struct {
 	ClbName pulumi.StringOutput `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips pulumi.StringArrayOutput `pulumi:"clbVips"`
+	// Whether to enable delete protection.
+	DeleteProtect pulumi.BoolPtrOutput `pulumi:"deleteProtect"`
 	// Domain name of the CLB instance.
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// If create dynamic vip CLB instance, `true` or `false`.
@@ -385,6 +387,8 @@ type instanceState struct {
 	ClbName *string `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips []string `pulumi:"clbVips"`
+	// Whether to enable delete protection.
+	DeleteProtect *bool `pulumi:"deleteProtect"`
 	// Domain name of the CLB instance.
 	Domain *string `pulumi:"domain"`
 	// If create dynamic vip CLB instance, `true` or `false`.
@@ -438,6 +442,8 @@ type InstanceState struct {
 	ClbName pulumi.StringPtrInput
 	// The virtual service address table of the CLB.
 	ClbVips pulumi.StringArrayInput
+	// Whether to enable delete protection.
+	DeleteProtect pulumi.BoolPtrInput
 	// Domain name of the CLB instance.
 	Domain pulumi.StringPtrInput
 	// If create dynamic vip CLB instance, `true` or `false`.
@@ -493,6 +499,8 @@ type instanceArgs struct {
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ClbName string `pulumi:"clbName"`
+	// Whether to enable delete protection.
+	DeleteProtect *bool `pulumi:"deleteProtect"`
 	// If create dynamic vip CLB instance, `true` or `false`.
 	DynamicVip *bool `pulumi:"dynamicVip"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -541,6 +549,8 @@ type InstanceArgs struct {
 	BandwidthPackageId pulumi.StringPtrInput
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ClbName pulumi.StringInput
+	// Whether to enable delete protection.
+	DeleteProtect pulumi.BoolPtrInput
 	// If create dynamic vip CLB instance, `true` or `false`.
 	DynamicVip pulumi.BoolPtrInput
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -686,6 +696,11 @@ func (o InstanceOutput) ClbName() pulumi.StringOutput {
 // The virtual service address table of the CLB.
 func (o InstanceOutput) ClbVips() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.ClbVips }).(pulumi.StringArrayOutput)
+}
+
+// Whether to enable delete protection.
+func (o InstanceOutput) DeleteProtect() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DeleteProtect }).(pulumi.BoolPtrOutput)
 }
 
 // Domain name of the CLB instance.

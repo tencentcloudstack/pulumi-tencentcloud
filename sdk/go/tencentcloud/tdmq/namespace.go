@@ -19,24 +19,32 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("example"),
-// 			Remark:      pulumi.String("this is description."),
+// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewNamespace(ctx, "bar", &Tdmq.NamespaceArgs{
-// 			ClusterId:   foo.ID(),
-// 			EnvironName: pulumi.String("example"),
+// 		_, err = Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+// 			EnvironName: pulumi.String("tf_example"),
 // 			MsgTtl:      pulumi.Int(300),
-// 			Remark:      pulumi.String("this is description."),
+// 			ClusterId:   exampleInstance.ID(),
+// 			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
+// 				TimeInMinutes: pulumi.Int(60),
+// 				SizeInMb:      pulumi.Int(10),
+// 			},
+// 			Remark: pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -65,7 +73,7 @@ type Namespace struct {
 	// Description of the namespace.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-	RetentionPolicy pulumi.MapOutput `pulumi:"retentionPolicy"`
+	RetentionPolicy NamespaceRetentionPolicyOutput `pulumi:"retentionPolicy"`
 }
 
 // NewNamespace registers a new resource with the given unique name, arguments, and options.
@@ -116,7 +124,7 @@ type namespaceState struct {
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-	RetentionPolicy map[string]interface{} `pulumi:"retentionPolicy"`
+	RetentionPolicy *NamespaceRetentionPolicy `pulumi:"retentionPolicy"`
 }
 
 type NamespaceState struct {
@@ -129,7 +137,7 @@ type NamespaceState struct {
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-	RetentionPolicy pulumi.MapInput
+	RetentionPolicy NamespaceRetentionPolicyPtrInput
 }
 
 func (NamespaceState) ElementType() reflect.Type {
@@ -146,7 +154,7 @@ type namespaceArgs struct {
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-	RetentionPolicy map[string]interface{} `pulumi:"retentionPolicy"`
+	RetentionPolicy *NamespaceRetentionPolicy `pulumi:"retentionPolicy"`
 }
 
 // The set of arguments for constructing a Namespace resource.
@@ -160,7 +168,7 @@ type NamespaceArgs struct {
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-	RetentionPolicy pulumi.MapInput
+	RetentionPolicy NamespaceRetentionPolicyPtrInput
 }
 
 func (NamespaceArgs) ElementType() reflect.Type {
@@ -271,8 +279,8 @@ func (o NamespaceOutput) Remark() pulumi.StringPtrOutput {
 }
 
 // The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
-func (o NamespaceOutput) RetentionPolicy() pulumi.MapOutput {
-	return o.ApplyT(func(v *Namespace) pulumi.MapOutput { return v.RetentionPolicy }).(pulumi.MapOutput)
+func (o NamespaceOutput) RetentionPolicy() NamespaceRetentionPolicyOutput {
+	return o.ApplyT(func(v *Namespace) NamespaceRetentionPolicyOutput { return v.RetentionPolicy }).(NamespaceRetentionPolicyOutput)
 }
 
 type NamespaceArrayOutput struct{ *pulumi.OutputState }

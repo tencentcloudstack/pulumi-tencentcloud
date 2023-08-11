@@ -100,14 +100,15 @@ class FlowLogConfig(pulumi.CustomResource):
         Provides a resource to create a vpc flow_log_config
 
         ## Example Usage
+        ### If enable FlowLogs
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        flow_log_config = tencentcloud.vpc.FlowLogConfig("flowLogConfig",
-            enable=False,
-            flow_log_id="fl-geg2keoj")
+        config = tencentcloud.vpc.FlowLogConfig("config",
+            flow_log_id=tencentcloud_vpc_flow_log["example"]["id"],
+            enable=True)
         ```
 
         ## Import
@@ -133,14 +134,15 @@ class FlowLogConfig(pulumi.CustomResource):
         Provides a resource to create a vpc flow_log_config
 
         ## Example Usage
+        ### If enable FlowLogs
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        flow_log_config = tencentcloud.vpc.FlowLogConfig("flowLogConfig",
-            enable=False,
-            flow_log_id="fl-geg2keoj")
+        config = tencentcloud.vpc.FlowLogConfig("config",
+            flow_log_id=tencentcloud_vpc_flow_log["example"]["id"],
+            enable=True)
         ```
 
         ## Import

@@ -1123,6 +1123,8 @@ func (o MigrationTargetPtrOutput) UserName() pulumi.StringPtrOutput {
 type PublishSubscribeDatabaseTuple struct {
 	// Publish the database.
 	PublishDatabase string `pulumi:"publishDatabase"`
+	// Subscribe the database.
+	SubscribeDatabase string `pulumi:"subscribeDatabase"`
 }
 
 // PublishSubscribeDatabaseTupleInput is an input type that accepts PublishSubscribeDatabaseTupleArgs and PublishSubscribeDatabaseTupleOutput values.
@@ -1139,6 +1141,8 @@ type PublishSubscribeDatabaseTupleInput interface {
 type PublishSubscribeDatabaseTupleArgs struct {
 	// Publish the database.
 	PublishDatabase pulumi.StringInput `pulumi:"publishDatabase"`
+	// Subscribe the database.
+	SubscribeDatabase pulumi.StringInput `pulumi:"subscribeDatabase"`
 }
 
 func (PublishSubscribeDatabaseTupleArgs) ElementType() reflect.Type {
@@ -1195,6 +1199,11 @@ func (o PublishSubscribeDatabaseTupleOutput) ToPublishSubscribeDatabaseTupleOutp
 // Publish the database.
 func (o PublishSubscribeDatabaseTupleOutput) PublishDatabase() pulumi.StringOutput {
 	return o.ApplyT(func(v PublishSubscribeDatabaseTuple) string { return v.PublishDatabase }).(pulumi.StringOutput)
+}
+
+// Subscribe the database.
+func (o PublishSubscribeDatabaseTupleOutput) SubscribeDatabase() pulumi.StringOutput {
+	return o.ApplyT(func(v PublishSubscribeDatabaseTuple) string { return v.SubscribeDatabase }).(pulumi.StringOutput)
 }
 
 type PublishSubscribeDatabaseTupleArrayOutput struct{ *pulumi.OutputState }

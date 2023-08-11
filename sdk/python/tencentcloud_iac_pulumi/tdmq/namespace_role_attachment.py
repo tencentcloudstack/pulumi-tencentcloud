@@ -185,33 +185,33 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
-            partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
-        bar_role = tencentcloud.tdmq.Role("barRole",
-            cluster_id=foo.id,
-            remark="this is description world",
-            role_name="example")
-        bar_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
+        example_role = tencentcloud.tdmq.Role("exampleRole",
+            role_name="tf_example",
+            cluster_id=example_instance.id,
+            remark="remark.")
+        example_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("exampleNamespaceRoleAttachment",
+            environ_id=example_namespace.environ_name,
+            role_name=example_role.role_name,
             permissions=[
                 "produce",
                 "consume",
             ],
-            role_name=bar_role.role_name)
+            cluster_id=example_instance.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -236,33 +236,33 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
-            partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
-        bar_role = tencentcloud.tdmq.Role("barRole",
-            cluster_id=foo.id,
-            remark="this is description world",
-            role_name="example")
-        bar_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
+        example_role = tencentcloud.tdmq.Role("exampleRole",
+            role_name="tf_example",
+            cluster_id=example_instance.id,
+            remark="remark.")
+        example_namespace_role_attachment = tencentcloud.tdmq.NamespaceRoleAttachment("exampleNamespaceRoleAttachment",
+            environ_id=example_namespace.environ_name,
+            role_name=example_role.role_name,
             permissions=[
                 "produce",
                 "consume",
             ],
-            role_name=bar_role.role_name)
+            cluster_id=example_instance.id)
         ```
 
         :param str resource_name: The name of the resource.

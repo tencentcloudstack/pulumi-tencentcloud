@@ -4,35 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a teo loadBalancing
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const loadBalancing = new tencentcloud.Teo.LoadBalancing("load_balancing", {
- *     //  backup_origin_group_id = "origin-a499ca4b-3721-11ed-b9c1-5254005a52aa"
- *     host: "www.toutiao2.com",
- *     originGroupId: "origin-4f8a30b2-3720-11ed-b66b-525400dceb86",
- *     status: "online",
- *     tags: [{}],
- *     ttl: 600,
- *     type: "proxied",
- *     zoneId: "zone-297z8rf93cfw",
- * });
- * ```
- *
- * ## Import
- *
- * teo load_balancing can be imported using the zone_id#loadBalancing_id, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Teo/loadBalancing:LoadBalancing load_balancing zone-297z8rf93cfw#lb-2a93c649-3719-11ed-b9c1-5254005a52aa
- * ```
- */
 export class LoadBalancing extends pulumi.CustomResource {
     /**
      * Get an existing LoadBalancing resource's state with the given name, ID, and optional extra
@@ -90,7 +61,7 @@ export class LoadBalancing extends pulumi.CustomResource {
      */
     public readonly ttl!: pulumi.Output<number>;
     /**
-     * Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+     * Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
      */
     public readonly type!: pulumi.Output<string>;
     /**
@@ -188,7 +159,7 @@ export interface LoadBalancingState {
      */
     ttl?: pulumi.Input<number>;
     /**
-     * Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+     * Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
      */
     type?: pulumi.Input<string>;
     /**
@@ -226,7 +197,7 @@ export interface LoadBalancingArgs {
      */
     ttl?: pulumi.Input<number>;
     /**
-     * Proxy mode.- `dnsOnly`: Only DNS.- `proxied`: Enable proxy.
+     * Proxy mode.- `dns_only`: Only DNS.- `proxied`: Enable proxy.
      */
     type: pulumi.Input<string>;
     /**

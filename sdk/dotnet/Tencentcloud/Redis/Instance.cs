@@ -18,6 +18,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// &gt; **NOTE:** Both adding and removing replications in one change is supported but not recommend.
     /// 
     /// ## Example Usage
+    /// ### Create a base version of redis
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -28,8 +29,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// {
     ///     public MyStack()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync());
-    ///         var redisInstanceTest2 = new Tencentcloud.Redis.Instance("redisInstanceTest2", new Tencentcloud.Redis.InstanceArgs
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
     ///         {
     ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
     ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
@@ -38,6 +52,146 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
     ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
     ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Buy a month of prepaid instances
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = fooGroup.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
+    ///                 "DROP#8.8.8.8#80,90#UDP",
+    ///                 "DROP#0.0.0.0/0#80-90#TCP",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
+    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 fooGroup.Id,
+    ///             },
+    ///             ChargeType = "PREPAID",
+    ///             PrepaidPeriod = 1,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a multi-AZ instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///             Region = "ap-guangzhou",
+    ///         }));
+    ///         var config = new Config();
+    ///         var replicaZoneIds = config.GetObject&lt;dynamic&gt;("replicaZoneIds") ?? 
+    ///         {
+    ///             100004,
+    ///             100006,
+    ///         };
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = fooGroup.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
+    ///                 "DROP#8.8.8.8#80,90#UDP",
+    ///                 "DROP#0.0.0.0/0#80-90#TCP",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
+    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
+    ///             Password = "test12345789",
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = 2,
+    ///             ReplicaZoneIds = replicaZoneIds,
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 fooGroup.Id,
+    ///             },
     ///         });
     ///     }
     /// 
@@ -158,7 +312,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int?> Recycle { get; private set; } = null!;
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         /// </summary>
         [Output("redisReplicasNum")]
         public Output<int?> RedisReplicasNum { get; private set; } = null!;
@@ -361,7 +515,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? Recycle { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }
@@ -554,7 +708,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? Recycle { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }

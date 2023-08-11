@@ -23,12 +23,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// {
     ///     public MyStack()
     ///     {
-    ///         var increBackupMigration = new Tencentcloud.Sqlserver.IncreBackupMigration("increBackupMigration", new Tencentcloud.Sqlserver.IncreBackupMigrationArgs
+    ///         var example = new Tencentcloud.Sqlserver.IncreBackupMigration("example", new Tencentcloud.Sqlserver.IncreBackupMigrationArgs
     ///         {
     ///             BackupFiles = {},
     ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
     ///             InstanceId = "mssql-4gmc5805",
-    ///             IsRecovery = "NO",
+    ///             IsRecovery = "YES",
     ///         });
     ///     }
     /// 

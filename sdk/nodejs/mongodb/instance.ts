@@ -16,15 +16,15 @@ import * as utilities from "../utilities";
  *
  * const mongodb = new tencentcloud.Mongodb.Instance("mongodb", {
  *     availableZone: "ap-guangzhou-2",
- *     engineVersion: "MONGO_3_WT",
+ *     engineVersion: "MONGO_36_WT",
  *     instanceName: "mongodb",
- *     machineType: "GIO",
+ *     machineType: "HIO10G",
  *     memory: 4,
  *     password: "password1234",
  *     projectId: 0,
- *     subnetId: "subnet-lk0svi3p",
+ *     subnetId: "subnet-xxxxxx",
  *     volume: 100,
- *     vpcId: "vpc-mz3efvbw",
+ *     vpcId: "vpc-xxxxxx",
  * });
  * ```
  *
@@ -69,6 +69,14 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    public readonly availabilityZoneLists!: pulumi.Output<string[]>;
+    /**
      * The available zone of the Mongodb.
      */
     public readonly availableZone!: pulumi.Output<string>;
@@ -85,6 +93,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly engineVersion!: pulumi.Output<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    public readonly hiddenZone!: pulumi.Output<string>;
+    /**
      * Name of the Mongodb instance.
      */
     public readonly instanceName!: pulumi.Output<string>;
@@ -96,6 +108,10 @@ export class Instance extends pulumi.CustomResource {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     public readonly memory!: pulumi.Output<number>;
+    /**
+     * The number of nodes in each replica set. Default value: 3.
+     */
+    public readonly nodeNum!: pulumi.Output<number>;
     /**
      * Password of this Mongodb account.
      */
@@ -159,13 +175,16 @@ export class Instance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
+            resourceInputs["availabilityZoneLists"] = state ? state.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = state ? state.availableZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["engineVersion"] = state ? state.engineVersion : undefined;
+            resourceInputs["hiddenZone"] = state ? state.hiddenZone : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["machineType"] = state ? state.machineType : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
+            resourceInputs["nodeNum"] = state ? state.nodeNum : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
@@ -199,12 +218,15 @@ export class Instance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'volume'");
             }
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
+            resourceInputs["availabilityZoneLists"] = args ? args.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = args ? args.availableZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
+            resourceInputs["hiddenZone"] = args ? args.hiddenZone : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["machineType"] = args ? args.machineType : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
+            resourceInputs["nodeNum"] = args ? args.nodeNum : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -233,6 +255,14 @@ export interface InstanceState {
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The available zone of the Mongodb.
      */
     availableZone?: pulumi.Input<string>;
@@ -249,6 +279,10 @@ export interface InstanceState {
      */
     engineVersion?: pulumi.Input<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    hiddenZone?: pulumi.Input<string>;
+    /**
      * Name of the Mongodb instance.
      */
     instanceName?: pulumi.Input<string>;
@@ -260,6 +294,10 @@ export interface InstanceState {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     memory?: pulumi.Input<number>;
+    /**
+     * The number of nodes in each replica set. Default value: 3.
+     */
+    nodeNum?: pulumi.Input<number>;
     /**
      * Password of this Mongodb account.
      */
@@ -319,6 +357,14 @@ export interface InstanceArgs {
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
+     * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+     * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+     * - Version 4.2 and above are not supported.
+     * - Read-only disaster recovery instances are not supported.
+     * - Basic network cannot be selected.
+     */
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The available zone of the Mongodb.
      */
     availableZone: pulumi.Input<string>;
@@ -331,6 +377,10 @@ export interface InstanceArgs {
      */
     engineVersion: pulumi.Input<string>;
     /**
+     * The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+     */
+    hiddenZone?: pulumi.Input<string>;
+    /**
      * Name of the Mongodb instance.
      */
     instanceName: pulumi.Input<string>;
@@ -342,6 +392,10 @@ export interface InstanceArgs {
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     memory: pulumi.Input<number>;
+    /**
+     * The number of nodes in each replica set. Default value: 3.
+     */
+    nodeNum?: pulumi.Input<number>;
     /**
      * Password of this Mongodb account.
      */

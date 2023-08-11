@@ -49,6 +49,7 @@ func GetBackups(ctx *pulumi.Context, args *GetBackupsArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getBackups.
 type GetBackupsArgs struct {
+	BackupName *string `pulumi:"backupName"`
 	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
 	EndTime string `pulumi:"endTime"`
 	// Instance ID.
@@ -61,6 +62,7 @@ type GetBackupsArgs struct {
 
 // A collection of values returned by getBackups.
 type GetBackupsResult struct {
+	BackupName *string `pulumi:"backupName"`
 	// End time of the backup.
 	EndTime string `pulumi:"endTime"`
 	// The provider-assigned unique ID for this managed resource.
@@ -89,6 +91,7 @@ func GetBackupsOutput(ctx *pulumi.Context, args GetBackupsOutputArgs, opts ...pu
 
 // A collection of arguments for invoking getBackups.
 type GetBackupsOutputArgs struct {
+	BackupName pulumi.StringPtrInput `pulumi:"backupName"`
 	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
 	// Instance ID.
@@ -116,6 +119,10 @@ func (o GetBackupsResultOutput) ToGetBackupsResultOutput() GetBackupsResultOutpu
 
 func (o GetBackupsResultOutput) ToGetBackupsResultOutputWithContext(ctx context.Context) GetBackupsResultOutput {
 	return o
+}
+
+func (o GetBackupsResultOutput) BackupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBackupsResult) *string { return v.BackupName }).(pulumi.StringPtrOutput)
 }
 
 // End time of the backup.

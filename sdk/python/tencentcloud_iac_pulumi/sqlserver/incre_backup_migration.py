@@ -187,11 +187,11 @@ class IncreBackupMigration(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        incre_backup_migration = tencentcloud.sqlserver.IncreBackupMigration("increBackupMigration",
+        example = tencentcloud.sqlserver.IncreBackupMigration("example",
             backup_files=[],
             backup_migration_id="mssql-backup-migration-9tj0sxnz",
             instance_id="mssql-4gmc5805",
-            is_recovery="NO")
+            is_recovery="YES")
         ```
 
         ## Import
@@ -224,11 +224,11 @@ class IncreBackupMigration(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        incre_backup_migration = tencentcloud.sqlserver.IncreBackupMigration("increBackupMigration",
+        example = tencentcloud.sqlserver.IncreBackupMigration("example",
             backup_files=[],
             backup_migration_id="mssql-backup-migration-9tj0sxnz",
             instance_id="mssql-4gmc5805",
-            is_recovery="NO")
+            is_recovery="YES")
         ```
 
         ## Import

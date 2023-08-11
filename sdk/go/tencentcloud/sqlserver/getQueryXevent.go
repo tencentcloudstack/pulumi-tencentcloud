@@ -26,10 +26,10 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Sqlserver.GetQueryXevent(ctx, &sqlserver.GetQueryXeventArgs{
-// 			EndTime:    "2023-07-01 00:00:00",
+// 			EndTime:    "2023-08-10 00:00:00",
 // 			EventType:  "blocked",
 // 			InstanceId: "mssql-gyg9xycl",
-// 			StartTime:  "2023-06-27 00:00:00",
+// 			StartTime:  "2023-08-01 00:00:00",
 // 		}, nil)
 // 		if err != nil {
 // 			return err

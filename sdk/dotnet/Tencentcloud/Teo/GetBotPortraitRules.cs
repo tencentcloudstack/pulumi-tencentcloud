@@ -12,63 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     public static class GetBotPortraitRules
     {
-        /// <summary>
-        /// Use this data source to query detailed information of teo botPortraitRules
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var botPortraitRules = Output.Create(Tencentcloud.Teo.GetBotPortraitRules.InvokeAsync(new Tencentcloud.Teo.GetBotPortraitRulesArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetBotPortraitRulesResult> InvokeAsync(GetBotPortraitRulesArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetBotPortraitRulesResult>("tencentcloud:Teo/getBotPortraitRules:getBotPortraitRules", args ?? new GetBotPortraitRulesArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of teo botPortraitRules
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var botPortraitRules = Output.Create(Tencentcloud.Teo.GetBotPortraitRules.InvokeAsync(new Tencentcloud.Teo.GetBotPortraitRulesArgs
-        ///         {
-        ///             Entity = "",
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetBotPortraitRulesResult> Invoke(GetBotPortraitRulesInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetBotPortraitRulesResult>("tencentcloud:Teo/getBotPortraitRules:getBotPortraitRules", args ?? new GetBotPortraitRulesInvokeArgs(), options.WithDefaults());
     }
@@ -76,21 +22,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetBotPortraitRulesArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public string Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public string ZoneId { get; set; } = null!;
 
@@ -101,21 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetBotPortraitRulesInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Subdomain or application name.
-        /// </summary>
         [Input("entity", required: true)]
         public Input<string> Entity { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
 
@@ -134,9 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
-        /// <summary>
-        /// Portrait rules list.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetBotPortraitRulesRuleResult> Rules;
         public readonly string ZoneId;
 

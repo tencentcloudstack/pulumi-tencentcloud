@@ -16,6 +16,7 @@ import (
 // > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 //
 // ## Example Usage
+// ### only support type 2. 2=TrustAsia TLS RSA CA.
 //
 // ```go
 // package main
@@ -27,13 +28,13 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewFreeCertificate(ctx, "foo", &Ssl.FreeCertificateArgs{
-// 			Alias:           pulumi.String("my_free_cert"),
-// 			ContactEmail:    pulumi.String("foo@example.com"),
-// 			ContactPhone:    pulumi.String("12345678901"),
+// 		_, err := Ssl.NewFreeCertificate(ctx, "example", &Ssl.FreeCertificateArgs{
+// 			Alias:           pulumi.String("example_free_cert"),
+// 			ContactEmail:    pulumi.String("test@example.com"),
+// 			ContactPhone:    pulumi.String("18352458901"),
 // 			CsrEncryptAlgo:  pulumi.String("RSA"),
 // 			CsrKeyParameter: pulumi.String("2048"),
-// 			CsrKeyPassword:  pulumi.String("xxxxxxxx"),
+// 			CsrKeyPassword:  pulumi.String("csr_pwd"),
 // 			Domain:          pulumi.String("example.com"),
 // 			DvAuthMethod:    pulumi.String("DNS_AUTO"),
 // 			PackageType:     pulumi.String("2"),

@@ -14,14 +14,52 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const generalBackup = new tencentcloud.sqlserver.GeneralBackup("generalBackup", {
- *     strategy: 0,
- *     instanceId: "mssql-qelbzgwf",
- *     backupName: "create_sqlserver_backup_name",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
  * });
- * const backupByFlowId = tencentcloud.Sqlserver.getBackupByFlowIdOutput({
- *     instanceId: generalBackup.instanceId,
- *     flowId: generalBackup.flowId,
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleGeneralBackup = new tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup", {
+ *     instanceId: exampleDb.id,
+ *     backupName: "tf_example_backup",
+ *     strategy: 0,
+ * });
+ * const exampleBackupByFlowId = tencentcloud.Sqlserver.getBackupByFlowIdOutput({
+ *     instanceId: exampleGeneralBackup.instanceId,
+ *     flowId: exampleGeneralBackup.flowId,
  * });
  * ```
  */

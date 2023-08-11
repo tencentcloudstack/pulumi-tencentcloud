@@ -13,9 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class DdosPolicyDdosRuleStatusInfoArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-        /// </summary>
         [Input("plyLevel", required: true)]
         public Input<string> PlyLevel { get; set; } = null!;
 

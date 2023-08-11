@@ -292,23 +292,6 @@ class Instance(pulumi.CustomResource):
         """
         Provides a resource to create a NAT forwarding.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        foo = tencentcloud.dnat.Instance("foo",
-            description="test",
-            elastic_ip="139.199.232.238",
-            elastic_port="80",
-            nat_id="nat-2515tdg",
-            private_ip="10.0.0.1",
-            private_port="22",
-            protocol="tcp",
-            vpc_id="vpc-asg3sfa3")
-        ```
-
         ## Import
 
         NAT forwarding can be imported using the id, e.g.
@@ -336,23 +319,6 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a NAT forwarding.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        foo = tencentcloud.dnat.Instance("foo",
-            description="test",
-            elastic_ip="139.199.232.238",
-            elastic_port="80",
-            nat_id="nat-2515tdg",
-            private_ip="10.0.0.1",
-            private_port="22",
-            protocol="tcp",
-            vpc_id="vpc-asg3sfa3")
-        ```
 
         ## Import
 

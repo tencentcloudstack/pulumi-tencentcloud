@@ -7,24 +7,6 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a NAT forwarding.
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = new tencentcloud.Dnat.Instance("foo", {
- *     description: "test",
- *     elasticIp: "139.199.232.238",
- *     elasticPort: "80",
- *     natId: "nat-2515tdg",
- *     privateIp: "10.0.0.1",
- *     privatePort: "22",
- *     protocol: "tcp",
- *     vpcId: "vpc-asg3sfa3",
- * });
- * ```
- *
  * ## Import
  *
  * NAT forwarding can be imported using the id, e.g.

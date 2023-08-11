@@ -123,7 +123,7 @@ class Group(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.Group("foo", remark="test")
+        foo = tencentcloud.cam.Group("foo", remark="tf_group_remark")
         ```
 
         ## Import
@@ -154,7 +154,7 @@ class Group(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.Group("foo", remark="test")
+        foo = tencentcloud.cam.Group("foo", remark="tf_group_remark")
         ```
 
         ## Import

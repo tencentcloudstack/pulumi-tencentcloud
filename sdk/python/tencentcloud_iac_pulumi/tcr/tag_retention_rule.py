@@ -212,16 +212,23 @@ class TagRetentionRule(pulumi.CustomResource):
                  retention_rule: Optional[pulumi.Input[pulumi.InputType['TagRetentionRuleRetentionRuleArgs']]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr tag_retention_rule
+        Provides a resource to create a tcr tag retention rule.
 
         ## Example Usage
+        ### Create a tcr tag retention rule instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=local["tcr_id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -230,8 +237,8 @@ class TagRetentionRule(pulumi.CustomResource):
                 cve_id="cve-xxxxx",
             )])
         my_rule = tencentcloud.tcr.TagRetentionRule("myRule",
-            registry_id=local["tcr_id"],
-            namespace_name=my_ns.name,
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             retention_rule=tencentcloud.tcr.TagRetentionRuleRetentionRuleArgs(
                 key="nDaysSinceLastPush",
                 value=2,
@@ -255,16 +262,23 @@ class TagRetentionRule(pulumi.CustomResource):
                  args: TagRetentionRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr tag_retention_rule
+        Provides a resource to create a tcr tag retention rule.
 
         ## Example Usage
+        ### Create a tcr tag retention rule instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=local["tcr_id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -273,8 +287,8 @@ class TagRetentionRule(pulumi.CustomResource):
                 cve_id="cve-xxxxx",
             )])
         my_rule = tencentcloud.tcr.TagRetentionRule("myRule",
-            registry_id=local["tcr_id"],
-            namespace_name=my_ns.name,
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             retention_rule=tencentcloud.tcr.TagRetentionRuleRetentionRuleArgs(
                 key="nDaysSinceLastPush",
                 value=2,

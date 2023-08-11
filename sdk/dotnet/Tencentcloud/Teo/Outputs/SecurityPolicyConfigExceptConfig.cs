@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigExceptConfig
     {
-        /// <summary>
-        /// Exception rules.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigExceptConfigExceptUserRule> ExceptUserRules;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

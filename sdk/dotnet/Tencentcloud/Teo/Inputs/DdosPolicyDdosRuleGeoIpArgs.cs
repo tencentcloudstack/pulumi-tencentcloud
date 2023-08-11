@@ -15,19 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("regionIds")]
         private InputList<int>? _regionIds;
-
-        /// <summary>
-        /// Region ID. See details in data source `security_policy_regions`.
-        /// </summary>
         public InputList<int> RegionIds
         {
             get => _regionIds ?? (_regionIds = new InputList<int>());
             set => _regionIds = value;
         }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var rollbackTime = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
         ///         {
         ///             Dbs = 
         ///             {
@@ -60,7 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var rollbackTime = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
         ///         {
         ///             Dbs = 
         ///             {

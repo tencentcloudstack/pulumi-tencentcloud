@@ -13,30 +13,28 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cluster = new tencentcloud.tdmq.RocketmqCluster("cluster", {
- *     clusterName: "test_rocketmq",
- *     remark: "test recket mq",
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
  * });
- * const role = new tencentcloud.tdmq.RocketmqRole("role", {
- *     roleName: "test_rocketmq_role",
- *     remark: "test rocketmq role",
- *     clusterId: cluster.clusterId,
+ * const exampleRocketmqRole = new tencentcloud.tdmq.RocketmqRole("exampleRocketmqRole", {
+ *     roleName: "tf_example_role",
+ *     remark: "remark.",
+ *     clusterId: exampleRocketmqCluster.clusterId,
  * });
- * const namespace = new tencentcloud.tdmq.RocketmqNamespace("namespace", {
- *     clusterId: cluster.clusterId,
- *     namespaceName: "test_namespace",
- *     ttl: 65000,
- *     retentionTime: 65000,
- *     remark: "test namespace",
+ * const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceName: "tf_example_namespace",
+ *     remark: "remark.",
  * });
- * const environmentRole = new tencentcloud.tdmq.RocketmqEnvironmentRole("environmentRole", {
- *     environmentName: namespace.namespaceName,
- *     roleName: role.roleName,
+ * const exampleRocketmqEnvironmentRole = new tencentcloud.tdmq.RocketmqEnvironmentRole("exampleRocketmqEnvironmentRole", {
+ *     environmentName: exampleRocketmqNamespace.namespaceName,
+ *     roleName: exampleRocketmqRole.roleName,
  *     permissions: [
  *         "produce",
  *         "consume",
  *     ],
- *     clusterId: cluster.clusterId,
+ *     clusterId: exampleRocketmqCluster.clusterId,
  * });
  * ```
  *

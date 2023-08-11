@@ -11,9 +11,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr tagRetentionRule
+// Provides a resource to create a tcr tag retention rule.
 //
 // ## Example Usage
+// ### Create a tcr tag retention rule instance
 //
 // ```go
 // package main
@@ -26,8 +27,18 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myNs, err := Tcr.NewNamespace(ctx, "myNs", &Tcr.NamespaceArgs{
-// 			InstanceId:   pulumi.Any(local.Tcr_id),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
 // 			IsPublic:     pulumi.Bool(true),
 // 			IsAutoScan:   pulumi.Bool(true),
 // 			IsPreventVul: pulumi.Bool(true),
@@ -42,8 +53,8 @@ import (
 // 			return err
 // 		}
 // 		_, err = Tcr.NewTagRetentionRule(ctx, "myRule", &Tcr.TagRetentionRuleArgs{
-// 			RegistryId:    pulumi.Any(local.Tcr_id),
-// 			NamespaceName: myNs.Name,
+// 			RegistryId:    exampleInstance.ID(),
+// 			NamespaceName: exampleNamespace.Name,
 // 			RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
 // 				Key:   pulumi.String("nDaysSinceLastPush"),
 // 				Value: pulumi.Int(2),

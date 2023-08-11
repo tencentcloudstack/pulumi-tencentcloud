@@ -421,32 +421,44 @@ class Table(pulumi.CustomResource):
         Use this resource to create TcaplusDB table.
 
         ## Example Usage
+        ### Create a tcaplus database table
+
+        The tcaplus database table should be pre-defined in the idl file.
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
             idl_type="PROTO",
-            cluster_name="tf_tcaplus_cluster_test",
-            vpc_id="vpc-7k6gzox6",
-            subnet_id="subnet-akwgvfa3",
-            password="1qaA2k1wgvfa3ZZZ",
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
             old_password_expire_last=3600)
-        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
-            cluster_id=test.id,
-            tablegroup_name="tf_test_group_name")
-        main = tencentcloud.tcaplus.Idl("main",
-            cluster_id=test.id,
-            tablegroup_id=tablegroup.id,
-            file_name="tf_idl_test_2",
+        example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
+            cluster_id=example_cluster.id,
+            tablegroup_name="tf_example_group_name")
+        example_idl = tencentcloud.tcaplus.Idl("exampleIdl",
+            cluster_id=example_cluster.id,
+            tablegroup_id=example_tablegroup.id,
+            file_name="tf_example_tcaplus_idl",
             file_type="PROTO",
             file_ext_type="proto",
             file_content=\"\"\"    syntax = "proto2";
             package myTcaplusTable;
             import "tcaplusservice.optionv1.proto";
-            message tb_online {
-               option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+            message example_table { # refer the table name
+                option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
                 required int64 uin = 1;
                 required string name = 2;
                 required int32 region = 3;
@@ -468,13 +480,13 @@ class Table(pulumi.CustomResource):
                 }
             }
         \"\"\")
-        table = tencentcloud.tcaplus.Table("table",
-            cluster_id=test.id,
-            tablegroup_id=tablegroup.id,
-            table_name="tb_online",
+        example_table = tencentcloud.tcaplus.Table("exampleTable",
+            cluster_id=example_cluster.id,
+            tablegroup_id=example_tablegroup.id,
+            table_name="example_table",
             table_type="GENERIC",
             description="test",
-            idl_id=main.id,
+            idl_id=example_idl.id,
             table_idl_type="PROTO",
             reserved_read_cu=1000,
             reserved_write_cu=20,
@@ -504,32 +516,44 @@ class Table(pulumi.CustomResource):
         Use this resource to create TcaplusDB table.
 
         ## Example Usage
+        ### Create a tcaplus database table
+
+        The tcaplus database table should be pre-defined in the idl file.
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.tcaplus.Cluster("test",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone)
+        vpc_id = vpc.instance_lists[0].vpc_id
+        subnet_id = vpc.instance_lists[0].subnet_id
+        example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
             idl_type="PROTO",
-            cluster_name="tf_tcaplus_cluster_test",
-            vpc_id="vpc-7k6gzox6",
-            subnet_id="subnet-akwgvfa3",
-            password="1qaA2k1wgvfa3ZZZ",
+            cluster_name="tf_example_tcaplus_cluster",
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            password="your_pw_123111",
             old_password_expire_last=3600)
-        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
-            cluster_id=test.id,
-            tablegroup_name="tf_test_group_name")
-        main = tencentcloud.tcaplus.Idl("main",
-            cluster_id=test.id,
-            tablegroup_id=tablegroup.id,
-            file_name="tf_idl_test_2",
+        example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
+            cluster_id=example_cluster.id,
+            tablegroup_name="tf_example_group_name")
+        example_idl = tencentcloud.tcaplus.Idl("exampleIdl",
+            cluster_id=example_cluster.id,
+            tablegroup_id=example_tablegroup.id,
+            file_name="tf_example_tcaplus_idl",
             file_type="PROTO",
             file_ext_type="proto",
             file_content=\"\"\"    syntax = "proto2";
             package myTcaplusTable;
             import "tcaplusservice.optionv1.proto";
-            message tb_online {
-               option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+            message example_table { # refer the table name
+                option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
                 required int64 uin = 1;
                 required string name = 2;
                 required int32 region = 3;
@@ -551,13 +575,13 @@ class Table(pulumi.CustomResource):
                 }
             }
         \"\"\")
-        table = tencentcloud.tcaplus.Table("table",
-            cluster_id=test.id,
-            tablegroup_id=tablegroup.id,
-            table_name="tb_online",
+        example_table = tencentcloud.tcaplus.Table("exampleTable",
+            cluster_id=example_cluster.id,
+            tablegroup_id=example_tablegroup.id,
+            table_name="example_table",
             table_type="GENERIC",
             description="test",
-            idl_id=main.id,
+            idl_id=example_idl.id,
             table_idl_type="PROTO",
             reserved_read_cu=1000,
             reserved_write_cu=20,

@@ -117,6 +117,7 @@ class AlarmNoticeArgs:
 @pulumi.input_type
 class _AlarmNoticeState:
     def __init__(__self__, *,
+                 amp_consumer_id: Optional[pulumi.Input[str]] = None,
                  cls_notices: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmNoticeClsNoticeArgs']]]] = None,
                  is_preset: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -129,6 +130,7 @@ class _AlarmNoticeState:
                  user_notices: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmNoticeUserNoticeArgs']]]] = None):
         """
         Input properties used for looking up and filtering AlarmNotice resources.
+        :param pulumi.Input[str] amp_consumer_id: Amp consumer ID.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeClsNoticeArgs']]] cls_notices: A maximum of one alarm notification can be pushed to the CLS service.
         :param pulumi.Input[int] is_preset: Whether it is the system default notification template 0=No 1=Yes.
         :param pulumi.Input[str] name: Notification template name within 60.
@@ -140,6 +142,8 @@ class _AlarmNoticeState:
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeUrlNoticeArgs']]] url_notices: The maximum number of callback notifications is 3.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeUserNoticeArgs']]] user_notices: Alarm notification template list.(At most five).
         """
+        if amp_consumer_id is not None:
+            pulumi.set(__self__, "amp_consumer_id", amp_consumer_id)
         if cls_notices is not None:
             pulumi.set(__self__, "cls_notices", cls_notices)
         if is_preset is not None:
@@ -160,6 +164,18 @@ class _AlarmNoticeState:
             pulumi.set(__self__, "url_notices", url_notices)
         if user_notices is not None:
             pulumi.set(__self__, "user_notices", user_notices)
+
+    @property
+    @pulumi.getter(name="ampConsumerId")
+    def amp_consumer_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Amp consumer ID.
+        """
+        return pulumi.get(self, "amp_consumer_id")
+
+    @amp_consumer_id.setter
+    def amp_consumer_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "amp_consumer_id", value)
 
     @property
     @pulumi.getter(name="clsNotices")
@@ -303,7 +319,7 @@ class AlarmNotice(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.monitor.AlarmNotice("example",
+        foo = tencentcloud.monitor.AlarmNotice("foo",
             notice_language="zh-CN",
             notice_type="ALL",
             url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
@@ -380,7 +396,7 @@ class AlarmNotice(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.monitor.AlarmNotice("example",
+        foo = tencentcloud.monitor.AlarmNotice("foo",
             notice_language="zh-CN",
             notice_type="ALL",
             url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
@@ -478,6 +494,7 @@ class AlarmNotice(pulumi.CustomResource):
             __props__.__dict__["notice_type"] = notice_type
             __props__.__dict__["url_notices"] = url_notices
             __props__.__dict__["user_notices"] = user_notices
+            __props__.__dict__["amp_consumer_id"] = None
             __props__.__dict__["is_preset"] = None
             __props__.__dict__["policy_ids"] = None
             __props__.__dict__["updated_at"] = None
@@ -492,6 +509,7 @@ class AlarmNotice(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            amp_consumer_id: Optional[pulumi.Input[str]] = None,
             cls_notices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmNoticeClsNoticeArgs']]]]] = None,
             is_preset: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
@@ -509,6 +527,7 @@ class AlarmNotice(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] amp_consumer_id: Amp consumer ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmNoticeClsNoticeArgs']]]] cls_notices: A maximum of one alarm notification can be pushed to the CLS service.
         :param pulumi.Input[int] is_preset: Whether it is the system default notification template 0=No 1=Yes.
         :param pulumi.Input[str] name: Notification template name within 60.
@@ -524,6 +543,7 @@ class AlarmNotice(pulumi.CustomResource):
 
         __props__ = _AlarmNoticeState.__new__(_AlarmNoticeState)
 
+        __props__.__dict__["amp_consumer_id"] = amp_consumer_id
         __props__.__dict__["cls_notices"] = cls_notices
         __props__.__dict__["is_preset"] = is_preset
         __props__.__dict__["name"] = name
@@ -535,6 +555,14 @@ class AlarmNotice(pulumi.CustomResource):
         __props__.__dict__["url_notices"] = url_notices
         __props__.__dict__["user_notices"] = user_notices
         return AlarmNotice(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="ampConsumerId")
+    def amp_consumer_id(self) -> pulumi.Output[str]:
+        """
+        Amp consumer ID.
+        """
+        return pulumi.get(self, "amp_consumer_id")
 
     @property
     @pulumi.getter(name="clsNotices")

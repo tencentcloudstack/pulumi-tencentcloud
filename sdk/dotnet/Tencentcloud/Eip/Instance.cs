@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// Provides an EIP resource.
     /// 
     /// ## Example Usage
+    /// ### Paid by the bandwidth package
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -33,6 +34,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// }
     /// ```
+    /// ### AntiDDos Eip
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///             AntiDdosPackageId = "xxxxxxxx",
+    ///             BandwidthPackageId = "bwp-4ocyia9s",
+    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             Type = "AntiDDoSEIP",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -45,6 +71,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     [TencentcloudResourceType("tencentcloud:Eip/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
+        /// <summary>
+        /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        /// </summary>
+        [Output("antiDdosPackageId")]
+        public Output<string> AntiDdosPackageId { get; private set; } = null!;
+
         /// <summary>
         /// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         /// </summary>
@@ -118,7 +150,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
@@ -170,6 +202,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
 
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        /// </summary>
+        [Input("antiDdosPackageId")]
+        public Input<string>? AntiDdosPackageId { get; set; }
+
         /// <summary>
         /// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         /// </summary>
@@ -237,7 +275,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -249,6 +287,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
 
     public sealed class InstanceState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+        /// </summary>
+        [Input("antiDdosPackageId")]
+        public Input<string>? AntiDdosPackageId { get; set; }
+
         /// <summary>
         /// The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
         /// </summary>
@@ -328,7 +372,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

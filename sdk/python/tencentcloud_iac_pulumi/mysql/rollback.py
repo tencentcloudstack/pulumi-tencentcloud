@@ -199,29 +199,6 @@ class Rollback(pulumi.CustomResource):
         """
         Provides a resource to create a mysql rollback
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        rollback = tencentcloud.mysql.Rollback("rollback",
-            databases=[tencentcloud.mysql.RollbackDatabaseArgs(
-                database_name="tf_ci_test_bak",
-                new_database_name="tf_ci_test_bak_5",
-            )],
-            instance_id="cdb-fitq5t9h",
-            rollback_time="2023-05-31 23:13:35",
-            strategy="full",
-            tables=[tencentcloud.mysql.RollbackTableArgs(
-                database="tf_ci_test_bak",
-                tables=[tencentcloud.mysql.RollbackTableTableArgs(
-                    new_table_name="test_bak",
-                    table_name="test",
-                )],
-            )])
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RollbackDatabaseArgs']]]] databases: The database information to be archived, indicating that the entire database is archived.
@@ -238,29 +215,6 @@ class Rollback(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a mysql rollback
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        rollback = tencentcloud.mysql.Rollback("rollback",
-            databases=[tencentcloud.mysql.RollbackDatabaseArgs(
-                database_name="tf_ci_test_bak",
-                new_database_name="tf_ci_test_bak_5",
-            )],
-            instance_id="cdb-fitq5t9h",
-            rollback_time="2023-05-31 23:13:35",
-            strategy="full",
-            tables=[tencentcloud.mysql.RollbackTableArgs(
-                database="tf_ci_test_bak",
-                tables=[tencentcloud.mysql.RollbackTableTableArgs(
-                    new_table_name="test_bak",
-                    table_name="test",
-                )],
-            )])
-        ```
 
         :param str resource_name: The name of the resource.
         :param RollbackArgs args: The arguments to use to populate this resource's properties.

@@ -5954,6 +5954,28 @@ export namespace Ckafka {
          */
         value: pulumi.Input<string>;
     }
+
+    export interface RouteBrokerVipList {
+        /**
+         * Virtual IP.
+         */
+        vip?: pulumi.Input<string>;
+        /**
+         * Virtual port.
+         */
+        vport?: pulumi.Input<string>;
+    }
+
+    export interface RouteVipList {
+        /**
+         * Virtual IP.
+         */
+        vip?: pulumi.Input<string>;
+        /**
+         * Virtual port.
+         */
+        vport?: pulumi.Input<string>;
+    }
 }
 
 export namespace Clb {
@@ -6234,6 +6256,38 @@ export namespace Clb {
          * The weight of target group instance.
          */
         weight?: pulumi.Input<number>;
+    }
+}
+
+export namespace Clickhouse {
+    export interface InstanceCommonSpec {
+        /**
+         * Node count. NOTE: Only support value 3.
+         */
+        count: pulumi.Input<number>;
+        /**
+         * Disk size.
+         */
+        diskSize: pulumi.Input<number>;
+        /**
+         * Spec name.
+         */
+        specName: pulumi.Input<string>;
+    }
+
+    export interface InstanceDataSpec {
+        /**
+         * Data spec count.
+         */
+        count: pulumi.Input<number>;
+        /**
+         * Disk size.
+         */
+        diskSize: pulumi.Input<number>;
+        /**
+         * Spec name.
+         */
+        specName: pulumi.Input<string>;
     }
 }
 
@@ -6874,6 +6928,17 @@ export namespace Cls {
         value: pulumi.Input<string>;
     }
 
+    export interface DataTransformDstResource {
+        /**
+         * alias.
+         */
+        alias: pulumi.Input<string>;
+        /**
+         * dst topic id.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
     export interface IndexRule {
         /**
          * Full-Text index configuration.
@@ -6986,6 +7051,84 @@ export namespace Cls {
         type: pulumi.Input<string>;
     }
 
+    export interface KafkaRechargeLogRechargeRule {
+        /**
+         * default time from.
+         */
+        defaultTimeSrc?: pulumi.Input<number>;
+        /**
+         * user default time.
+         */
+        defaultTimeSwitch: pulumi.Input<boolean>;
+        /**
+         * encoding format.
+         */
+        encodingFormat: pulumi.Input<number>;
+        /**
+         * log key list.
+         */
+        keys?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * log regex.
+         */
+        logRegex?: pulumi.Input<string>;
+        /**
+         * metadata.
+         */
+        metadatas?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * recharge type.
+         */
+        rechargeType: pulumi.Input<string>;
+        /**
+         * time format.
+         */
+        timeFormat?: pulumi.Input<string>;
+        /**
+         * time key.
+         */
+        timeKey?: pulumi.Input<string>;
+        /**
+         * time regex.
+         */
+        timeRegex?: pulumi.Input<string>;
+        /**
+         * time zone.
+         */
+        timeZone?: pulumi.Input<string>;
+        /**
+         * parse failed log key.
+         */
+        unMatchLogKey?: pulumi.Input<string>;
+        /**
+         * is push parse failed log.
+         */
+        unMatchLogSwitch?: pulumi.Input<boolean>;
+        /**
+         * parse failed log time from.
+         */
+        unMatchLogTimeSrc?: pulumi.Input<number>;
+    }
+
+    export interface KafkaRechargeProtocol {
+        /**
+         * encryption type.
+         */
+        mechanism?: pulumi.Input<string>;
+        /**
+         * user password.
+         */
+        password?: pulumi.Input<string>;
+        /**
+         * protocol type.
+         */
+        protocol?: pulumi.Input<string>;
+        /**
+         * username.
+         */
+        userName?: pulumi.Input<string>;
+    }
+
     export interface MachineGroupMachineGroupType {
         /**
          * Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
@@ -6997,6 +7140,24 @@ export namespace Cls {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
+    export interface ScheduledSqlDstResource {
+        /**
+         * topic type.
+         */
+        bizType?: pulumi.Input<number>;
+        /**
+         * metric name.
+         */
+        metricName?: pulumi.Input<string>;
+        /**
+         * topic region.
+         */
+        region?: pulumi.Input<string>;
+        /**
+         * dst topic id.
+         */
+        topicId: pulumi.Input<string>;
+    }
 }
 
 export namespace Cos {
@@ -8397,17 +8558,6 @@ export namespace Cynosdb {
         timestamp?: pulumi.Input<string>;
     }
 
-    export interface GetAccountAllGrantPrivilegesAccount {
-        /**
-         * Account.
-         */
-        accountName: string;
-        /**
-         * Host, default `%`.
-         */
-        host?: string;
-    }
-
     export interface GetAccountAllGrantPrivilegesAccountArgs {
         /**
          * Account.
@@ -8417,6 +8567,17 @@ export namespace Cynosdb {
          * Host, default `%`.
          */
         host?: pulumi.Input<string>;
+    }
+
+    export interface GetAccountAllGrantPrivilegesAccount {
+        /**
+         * Account.
+         */
+        accountName: string;
+        /**
+         * Host, default `%`.
+         */
+        host?: string;
     }
 
     export interface GetAuditLogsFilterArgs {
@@ -8617,6 +8778,11 @@ export namespace Cynosdb {
          * Proxy node availability zone.
          */
         proxyNodeZone?: pulumi.Input<string>;
+    }
+
+    export interface ProxyRoInstance {
+        instanceId?: pulumi.Input<string>;
+        weight?: pulumi.Input<number>;
     }
 
     export interface RollBackClusterRollbackDatabase {
@@ -10697,6 +10863,235 @@ export namespace Dts {
          */
         tagValue?: pulumi.Input<string>;
     }
+}
+
+export namespace Eb {
+    export interface EventTargetTargetDescription {
+        /**
+         * Ckafka parameters.
+         */
+        ckafkaTargetParams?: pulumi.Input<inputs.Eb.EventTargetTargetDescriptionCkafkaTargetParams>;
+        /**
+         * ElasticSearch parameters.
+         */
+        esTargetParams?: pulumi.Input<inputs.Eb.EventTargetTargetDescriptionEsTargetParams>;
+        /**
+         * QCS resource six-stage format, more references [resource six-stage format](https://cloud.tencent.com/document/product/598/10606).
+         */
+        resourceDescription: pulumi.Input<string>;
+        /**
+         * cloud function parameters.
+         */
+        scfParams?: pulumi.Input<inputs.Eb.EventTargetTargetDescriptionScfParams>;
+    }
+
+    export interface EventTargetTargetDescriptionCkafkaTargetParams {
+        /**
+         * retry strategy.
+         */
+        retryPolicy: pulumi.Input<inputs.Eb.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy>;
+        /**
+         * The ckafka topic to deliver to.
+         */
+        topicName: pulumi.Input<string>;
+    }
+
+    export interface EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy {
+        /**
+         * Maximum number of retries.
+         */
+        maxRetryAttempts: pulumi.Input<number>;
+        /**
+         * Retry Interval Unit: Seconds.
+         */
+        retryInterval: pulumi.Input<number>;
+    }
+
+    export interface EventTargetTargetDescriptionEsTargetParams {
+        /**
+         * index prefix.
+         */
+        indexPrefix: pulumi.Input<string>;
+        /**
+         * DTS index configuration.
+         */
+        indexSuffixMode: pulumi.Input<string>;
+        /**
+         * es template type.
+         */
+        indexTemplateType?: pulumi.Input<string>;
+        /**
+         * network connection type.
+         */
+        netMode: pulumi.Input<string>;
+        /**
+         * DTS event configuration.
+         */
+        outputMode: pulumi.Input<string>;
+        /**
+         * es log rotation granularity.
+         */
+        rotationInterval: pulumi.Input<string>;
+    }
+
+    export interface EventTargetTargetDescriptionScfParams {
+        /**
+         * Maximum number of events for batch delivery.
+         */
+        batchEventCount?: pulumi.Input<number>;
+        /**
+         * Maximum waiting time for bulk delivery.
+         */
+        batchTimeout?: pulumi.Input<number>;
+        /**
+         * Enable batch delivery.
+         */
+        enableBatchDelivery?: pulumi.Input<boolean>;
+    }
+
+    export interface EventTransformTransformation {
+        /**
+         * Describe how to filter data.
+         */
+        etlFilter?: pulumi.Input<inputs.Eb.EventTransformTransformationEtlFilter>;
+        /**
+         * Describe how to extract data.
+         */
+        extraction?: pulumi.Input<inputs.Eb.EventTransformTransformationExtraction>;
+        /**
+         * Describe how to convert data.
+         */
+        transform?: pulumi.Input<inputs.Eb.EventTransformTransformationTransform>;
+    }
+
+    export interface EventTransformTransformationEtlFilter {
+        /**
+         * Grammatical Rules are consistent.
+         */
+        filter: pulumi.Input<string>;
+    }
+
+    export interface EventTransformTransformationExtraction {
+        /**
+         * JsonPath, if not specified, the default value $.
+         */
+        extractionInputPath: pulumi.Input<string>;
+        /**
+         * Value: `TEXT`, `JSON`.
+         */
+        format: pulumi.Input<string>;
+        /**
+         * Only Text needs to be passed.
+         */
+        textParams?: pulumi.Input<inputs.Eb.EventTransformTransformationExtractionTextParams>;
+    }
+
+    export interface EventTransformTransformationExtractionTextParams {
+        /**
+         * Fill in the regular expression: length 128.
+         */
+        regex?: pulumi.Input<string>;
+        /**
+         * `Comma`, `|`, `tab`, `space`, `newline`, `%`, `#`, the limit length is 1.
+         */
+        separator?: pulumi.Input<string>;
+    }
+
+    export interface EventTransformTransformationTransform {
+        /**
+         * Describe how the data is transformed.
+         */
+        outputStructs: pulumi.Input<pulumi.Input<inputs.Eb.EventTransformTransformationTransformOutputStruct>[]>;
+    }
+
+    export interface EventTransformTransformationTransformOutputStruct {
+        /**
+         * Corresponding to the key in the output json.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * You can fill in the json-path and also support constants or built-in keyword date types.
+         */
+        value: pulumi.Input<string>;
+        /**
+         * The data type of value, optional values: `STRING`, `NUMBER`, `BOOLEAN`, `NULL`, `SYS_VARIABLE`, `JSONPATH`.
+         */
+        valueType: pulumi.Input<string>;
+    }
+
+    export interface GetBusFilter {
+        /**
+         * The name of the filter key.
+         */
+        name: string;
+        /**
+         * One or more filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetBusFilterArgs {
+        /**
+         * The name of the filter key.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetSearchFilter {
+        filters?: inputs.Eb.GetSearchFilterFilter[];
+        key?: string;
+        operator?: string;
+        type?: string;
+        value?: string;
+    }
+
+    export interface GetSearchFilterArgs {
+        filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetSearchFilterFilterArgs>[]>;
+        key?: pulumi.Input<string>;
+        operator?: pulumi.Input<string>;
+        type?: pulumi.Input<string>;
+        value?: pulumi.Input<string>;
+    }
+
+    export interface GetSearchFilterFilter {
+        key: string;
+        operator: string;
+        value: string;
+    }
+
+    export interface GetSearchFilterFilterArgs {
+        key: pulumi.Input<string>;
+        operator: pulumi.Input<string>;
+        value: pulumi.Input<string>;
+    }
+
+    export interface PutEventsEventList {
+        /**
+         * Event data, the content is controlled by the system that created the event, the current datacontenttype only supports application/json;charset=utf-8, so this field is a json string.
+         */
+        data: pulumi.Input<string>;
+        /**
+         * Event source information, new product reporting must comply with EB specifications.
+         */
+        source: pulumi.Input<string>;
+        /**
+         * Detailed description of the event source, customizable, optional. The cloud service defaults to the standard qcs resource representation syntax: qcs::dts:ap-guangzhou:appid/uin:xxx.
+         */
+        subject: pulumi.Input<string>;
+        /**
+         * The timestamp in milliseconds when the event occurred,time.Now().UnixNano()/1e6.
+         */
+        time?: pulumi.Input<number>;
+        /**
+         * Event type, customizable, optional. The cloud service writes COS:Created:PostObject by default, use: to separate the type field.
+         */
+        type: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Eip {
@@ -16601,28 +16996,6 @@ export namespace Scf {
 }
 
 export namespace Security {
-    export interface GroupRuleAddressTemplate {
-        /**
-         * Address template group ID, conflicts with `templateId`.
-         */
-        groupId?: pulumi.Input<string>;
-        /**
-         * Address template ID, conflicts with `groupId`.
-         */
-        templateId?: pulumi.Input<string>;
-    }
-
-    export interface GroupRuleProtocolTemplate {
-        /**
-         * Address template group ID, conflicts with `templateId`.
-         */
-        groupId?: pulumi.Input<string>;
-        /**
-         * Address template ID, conflicts with `groupId`.
-         */
-        templateId?: pulumi.Input<string>;
-    }
-
     export interface GroupRuleSetEgress {
         /**
          * Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
@@ -16648,6 +17021,7 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: pulumi.Input<string>;
+        policyIndex?: pulumi.Input<number>;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
@@ -16695,6 +17069,7 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: pulumi.Input<string>;
+        policyIndex?: pulumi.Input<number>;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
          */
@@ -16857,6 +17232,10 @@ export namespace Sqlserver {
          * Publish the database.
          */
         publishDatabase: pulumi.Input<string>;
+        /**
+         * Subscribe the database.
+         */
+        subscribeDatabase: pulumi.Input<string>;
     }
 
     export interface RestoreInstanceEncryption {
@@ -17052,6 +17431,28 @@ export namespace Ssl {
 }
 
 export namespace Ssm {
+    export interface ProductSecretPrivilegesList {
+        /**
+         * This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:Database: explicitly indicate the database instance.TableName: explicitly indicate the table.
+         */
+        columnName?: pulumi.Input<string>;
+        /**
+         * This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+         */
+        database?: pulumi.Input<string>;
+        /**
+         * Permission name. Valid values: `GlobalPrivileges`, `DatabasePrivileges`, `TablePrivileges`, `ColumnPrivileges`. When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter; When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters; When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+         */
+        privilegeName: pulumi.Input<string>;
+        /**
+         * Permission list. For the `Mysql` service, optional permission values are: 1. Valid values of `GlobalPrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, PROCESS, DROP,REFERENCES,INDEX,ALTER,SHOW DATABASES,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 2. Valid values of `DatabasePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 3. Valid values of `TablePrivileges`: SELECT,INSERT,UPDATE,DELETE,CREATE, DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW, TRIGGER. Note: if this parameter is not passed in, it means to clear the permission. 4. Valid values of `ColumnPrivileges`: SELECT,INSERT,UPDATE,REFERENCES.Note: if this parameter is not passed in, it means to clear the permission.
+         */
+        privileges: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+         */
+        tableName?: pulumi.Input<string>;
+    }
 }
 
 export namespace Tat {
@@ -17838,17 +18239,6 @@ export namespace Tdmq {
         values?: string[];
     }
 
-    export interface GetPublishersSortArgs {
-        /**
-         * sorter.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Ascending ASC, descending DESC.
-         */
-        order: pulumi.Input<string>;
-    }
-
     export interface GetPublishersSort {
         /**
          * sorter.
@@ -17858,6 +18248,17 @@ export namespace Tdmq {
          * Ascending ASC, descending DESC.
          */
         order: string;
+    }
+
+    export interface GetPublishersSortArgs {
+        /**
+         * sorter.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Ascending ASC, descending DESC.
+         */
+        order: pulumi.Input<string>;
     }
 
     export interface GetRabbitmqNodeListFilterArgs {
@@ -17870,14 +18271,25 @@ export namespace Tdmq {
         values?: string[];
     }
 
+    export interface GetRabbitmqVipInstanceFilter {
+        name?: string;
+        values?: string[];
+    }
+
     export interface GetRabbitmqVipInstanceFilterArgs {
         name?: pulumi.Input<string>;
         values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetRabbitmqVipInstanceFilter {
-        name?: string;
-        values?: string[];
+    export interface NamespaceRetentionPolicy {
+        /**
+         * the size of message to retain.
+         */
+        sizeInMb?: pulumi.Input<number>;
+        /**
+         * the time of message to retain.
+         */
+        timeInMinutes?: pulumi.Input<number>;
     }
 
     export interface RocketmqClusterVpc {
@@ -17891,6 +18303,16 @@ export namespace Tdmq {
         vpcId?: pulumi.Input<string>;
     }
 
+    export interface RocketmqVipInstanceVpcInfo {
+        /**
+         * Subnet ID.
+         */
+        subnetId: pulumi.Input<string>;
+        /**
+         * VPC ID.
+         */
+        vpcId: pulumi.Input<string>;
+    }
 }
 
 export namespace Tem {
@@ -18319,284 +18741,98 @@ export namespace Teo {
     }
 
     export interface DdosPolicyDdosRule {
-        /**
-         * DDoS ACL rule configuration.
-         */
         acl?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAcl>;
-        /**
-         * DDoS black-white list.
-         */
         allowBlock?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAllowBlock>;
-        /**
-         * DDoS protocol and connection protection.
-         */
         antiPly?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAntiPly>;
-        /**
-         * DDoS Protection by Geo Info.
-         */
         geoIp?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleGeoIp>;
-        /**
-         * DDoS feature filtering configuration.
-         */
         packetFilter?: pulumi.Input<inputs.Teo.DdosPolicyDdosRulePacketFilter>;
-        /**
-         * DDoS access origin site speed limit configuration.
-         */
         speedLimit?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleSpeedLimit>;
-        /**
-         * DDoS protection level.
-         */
         statusInfo?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleStatusInfo>;
-        /**
-         * DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleAcl {
-        /**
-         * DDoS ACL rule configuration detail.
-         */
         acls?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAclAcl>[]>;
-        /**
-         * - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleAclAcl {
-        /**
-         * Action to take. Valid values: `drop`, `transmit`, `forward`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * End of the dest port range. Valid value range: 0-65535.
-         */
         dportEnd?: pulumi.Input<number>;
-        /**
-         * Start of the dest port range. Valid value range: 0-65535.
-         */
         dportStart?: pulumi.Input<number>;
-        /**
-         * Valid values: `tcp`, `udp`, `all`.
-         */
         protocol?: pulumi.Input<string>;
-        /**
-         * End of the source port range. Valid value range: 0-65535.
-         */
         sportEnd?: pulumi.Input<number>;
-        /**
-         * Start of the source port range. Valid value range: 0-65535.
-         */
         sportStart?: pulumi.Input<number>;
     }
 
     export interface DdosPolicyDdosRuleAllowBlock {
-        /**
-         * DDoS black-white list detail.
-         */
         allowBlockIps?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAllowBlockAllowBlockIp>[]>;
-        /**
-         * - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-        /**
-         * Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-         */
         ip?: pulumi.Input<string>;
-        /**
-         * Valid values: `block`, `allow`.
-         */
         type: pulumi.Input<string>;
         updateTime?: pulumi.Input<number>;
     }
 
     export interface DdosPolicyDdosRuleAntiPly {
-        /**
-         * Abnormal connections threshold. Valid value range: 0-4294967295.
-         */
         abnormalConnectNum: pulumi.Input<number>;
-        /**
-         * Abnormal syn packet number threshold. Valid value range: 0-65535.
-         */
         abnormalSynNum: pulumi.Input<number>;
-        /**
-         * Abnormal syn packet ratio threshold. Valid value range: 0-100.
-         */
         abnormalSynRatio: pulumi.Input<number>;
-        /**
-         * Connection timeout detection per second. Valid value range: 0-65535.
-         */
         connectTimeout: pulumi.Input<number>;
-        /**
-         * Limitation of connections to dest port. Valid value range: 0-4294967295.
-         */
         destinationConnectLimit: pulumi.Input<number>;
-        /**
-         * Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-         */
         destinationCreateLimit: pulumi.Input<number>;
-        /**
-         * Block ICMP protocol. Valid values: `on`, `off`.
-         */
         dropIcmp: pulumi.Input<string>;
-        /**
-         * Block other protocols. Valid values: `on`, `off`.
-         */
         dropOther: pulumi.Input<string>;
-        /**
-         * Block TCP protocol. Valid values: `on`, `off`.
-         */
         dropTcp: pulumi.Input<string>;
-        /**
-         * Block UDP protocol. Valid values: `on`, `off`.
-         */
         dropUdp: pulumi.Input<string>;
-        /**
-         * Empty connection protection switch. Valid values: `on`, `off`.
-         */
         emptyConnectProtect: pulumi.Input<string>;
-        /**
-         * Limitation of connections to origin site. Valid value range: 0-4294967295.
-         */
         sourceConnectLimit: pulumi.Input<number>;
-        /**
-         * Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-         */
         sourceCreateLimit: pulumi.Input<number>;
-        /**
-         * UDP shard protection switch. Valid values: `on`, `off`.
-         */
         udpShard?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleGeoIp {
-        /**
-         * Region ID. See details in data source `securityPolicyRegions`.
-         */
         regionIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRulePacketFilter {
-        /**
-         * DDoS feature filtering configuration detail.
-         */
         packetFilters?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRulePacketFilterPacketFilter>[]>;
-        /**
-         * - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRulePacketFilterPacketFilter {
-        /**
-         * Action to take. Valid values: `drop`, `transmit`, `dropBlock`, `forward`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Packet character depth to check of feature 1. Valid value range: 1-1500.
-         */
         depth?: pulumi.Input<number>;
-        /**
-         * Packet character depth to check of feature 2. Valid value range: 1-1500.
-         */
         depth2?: pulumi.Input<number>;
-        /**
-         * End of the dest port range. Valid value range: 0-65535.
-         */
         dportEnd?: pulumi.Input<number>;
-        /**
-         * Start of the dest port range. Valid value range: 0-65535.
-         */
         dportStart?: pulumi.Input<number>;
-        /**
-         * Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-         */
         isNot?: pulumi.Input<number>;
-        /**
-         * Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-         */
         isNot2?: pulumi.Input<number>;
-        /**
-         * Packet layer for matching begin of feature 1. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-         */
         matchBegin?: pulumi.Input<string>;
-        /**
-         * Packet layer for matching begin of feature 2. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-         */
         matchBegin2?: pulumi.Input<string>;
-        /**
-         * Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-         */
         matchLogic?: pulumi.Input<string>;
-        /**
-         * Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-         */
         matchType?: pulumi.Input<string>;
-        /**
-         * Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-         */
         matchType2?: pulumi.Input<string>;
-        /**
-         * Offset of feature 1. Valid value range: 1-1500.
-         */
         offset?: pulumi.Input<number>;
-        /**
-         * Offset of feature 2. Valid value range: 1-1500.
-         */
         offset2?: pulumi.Input<number>;
-        /**
-         * Max packet size. Valid value range: 0-1500.
-         */
         packetMax?: pulumi.Input<number>;
-        /**
-         * Min packet size. Valid value range: 0-1500.
-         */
         packetMin?: pulumi.Input<number>;
-        /**
-         * Valid value: `tcp`, `udp`, `icmp`, `all`.
-         */
         protocol?: pulumi.Input<string>;
-        /**
-         * End of the source port range. Valid value range: 0-65535.
-         */
         sportEnd?: pulumi.Input<number>;
-        /**
-         * Start of the source port range. Valid value range: 0-65535.
-         */
         sportStart?: pulumi.Input<number>;
-        /**
-         * Regex expression or string to match.
-         */
         str?: pulumi.Input<string>;
-        /**
-         * Regex expression or string to match.
-         */
         str2?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleSpeedLimit {
-        /**
-         * Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-         */
         fluxLimit?: pulumi.Input<string>;
-        /**
-         * Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-         */
         packageLimit?: pulumi.Input<string>;
     }
 
     export interface DdosPolicyDdosRuleStatusInfo {
-        /**
-         * Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-         */
         plyLevel: pulumi.Input<string>;
     }
 
@@ -18938,564 +19174,213 @@ export namespace Teo {
     }
 
     export interface SecurityPolicyConfig {
-        /**
-         * ACL configuration.
-         */
         aclConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfig>;
-        /**
-         * Bot Configuration.
-         */
         botConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfig>;
-        /**
-         * Custom drop page configuration.
-         */
         dropPageConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfig>;
-        /**
-         * Exception rule configuration.
-         */
         exceptConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfig>;
-        /**
-         * Basic access control.
-         */
         ipTableConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigIpTableConfig>;
-        /**
-         * RateLimit Configuration.
-         */
         rateLimitConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfig>;
-        /**
-         * Main switch of 7-layer security.
-         */
         switchConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSwitchConfig>;
-        /**
-         * WAF (Web Application Firewall) Configuration.
-         */
         wafConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfig>;
     }
 
     export interface SecurityPolicyConfigAclConfig {
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch: pulumi.Input<string>;
-        /**
-         * Custom configuration.
-         */
         userRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfigUserRule>[]>;
     }
 
     export interface SecurityPolicyConfigAclConfigUserRule {
-        /**
-         * Valid values: `monitor`, `drop`.
-         */
         action: pulumi.Input<string>;
-        /**
-         * Conditions of the rule.
-         */
         conditions: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfigUserRuleCondition>[]>;
-        /**
-         * Name of the custom response page.
-         */
         name?: pulumi.Input<string>;
-        /**
-         * ID of the custom response page.
-         */
         pageId?: pulumi.Input<number>;
-        /**
-         * Punish time, Valid value range: 0-2 days.
-         */
         punishTime?: pulumi.Input<number>;
-        /**
-         * Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-         */
         punishTimeUnit?: pulumi.Input<string>;
-        /**
-         * Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-         */
         redirectUrl?: pulumi.Input<string>;
-        /**
-         * Response code to use when redirecting.
-         */
         responseCode?: pulumi.Input<number>;
         ruleId?: pulumi.Input<number>;
-        /**
-         * Rule Name.
-         */
         ruleName: pulumi.Input<string>;
-        /**
-         * Priority of the rule. Valid value range: 1-100.
-         */
         rulePriority: pulumi.Input<number>;
-        /**
-         * Status of the rule. Valid values: `on`, `off`, `hour`.
-         */
         ruleStatus: pulumi.Input<string>;
         updateTime?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigAclConfigUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent: pulumi.Input<string>;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom: pulumi.Input<string>;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam: pulumi.Input<string>;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigBotConfig {
-        /**
-         * Bot intelligent rule configuration.
-         */
         intelligenceRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRule>;
-        /**
-         * Preset rules.
-         */
         managedRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigManagedRule>;
-        /**
-         * Portrait rule.
-         */
         portraitRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigPortraitRule>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigBotConfigIntelligenceRule {
-        /**
-         * Configuration detail.
-         */
         items?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRuleItem>[]>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-        /**
-         * Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Bot label, valid values: `evilBot`, `suspectBot`, `goodBot`, `normal`.
-         */
         label?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigBotConfigManagedRule {
-        /**
-         * Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Rules to enable when action is `alg`. See details in data source `botManagedRules`.
-         */
         algManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
-         */
         capManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `drop`. See details in data source `botManagedRules`.
-         */
         dropManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
-         */
         monManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Name of the custom response page.
-         */
         name?: pulumi.Input<string>;
-        /**
-         * ID of the custom response page.
-         */
         pageId?: pulumi.Input<number>;
-        /**
-         * Punish time.
-         */
         punishTime?: pulumi.Input<number>;
-        /**
-         * Time unit of the punish time.
-         */
         punishTimeUnit?: pulumi.Input<string>;
-        /**
-         * Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-         */
         redirectUrl?: pulumi.Input<string>;
-        /**
-         * Response code to use when redirecting.
-         */
         responseCode?: pulumi.Input<number>;
         ruleId?: pulumi.Input<number>;
-        /**
-         * Rules to enable when action is `trans`. See details in data source `botManagedRules`.
-         */
         transManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
     }
 
     export interface SecurityPolicyConfigBotConfigPortraitRule {
-        /**
-         * Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
-         */
         algManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
-         */
         capManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
-         */
         dropManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
-         */
         monManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
         ruleId?: pulumi.Input<number>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigDropPageConfig {
-        /**
-         * Custom error page of ACL rules.
-         */
         aclDropPageDetail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfigAclDropPageDetail>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
-        /**
-         * Custom error page of WAF rules.
-         */
         wafDropPageDetail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfigWafDropPageDetail>;
     }
 
     export interface SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-        /**
-         * File name or URL.
-         */
         name?: pulumi.Input<string>;
-        /**
-         * ID of the custom error page. when set to 0, use system default error page.
-         */
         pageId?: pulumi.Input<number>;
-        /**
-         * HTTP status code to use. Valid range: 100-600.
-         */
         statusCode?: pulumi.Input<number>;
-        /**
-         * Type of the custom error page. Valid values: `file`, `url`.
-         */
         type?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-        /**
-         * File name or URL.
-         */
         name?: pulumi.Input<string>;
-        /**
-         * ID of the custom error page. when set to 0, use system default error page.
-         */
         pageId?: pulumi.Input<number>;
-        /**
-         * HTTP status code to use. Valid range: 100-600.
-         */
         statusCode?: pulumi.Input<number>;
-        /**
-         * Type of the custom error page. Valid values: `file`, `url`.
-         */
         type?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigExceptConfig {
-        /**
-         * Exception rules.
-         */
         exceptUserRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRule>[]>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRule {
-        /**
-         * Action to take. Valid values: `skip`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Conditions of the rule.
-         */
         exceptUserRuleConditions?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition>[]>;
-        /**
-         * Scope of the rule in effect.
-         */
         exceptUserRuleScope?: pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope>;
         ruleId?: pulumi.Input<number>;
-        /**
-         * Rule name.
-         */
         ruleName?: pulumi.Input<string>;
-        /**
-         * Priority of the rule. Valid value range: 0-100.
-         */
         rulePriority?: pulumi.Input<number>;
-        /**
-         * Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-         */
         ruleStatus?: pulumi.Input<string>;
         updateTime?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent?: pulumi.Input<string>;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom?: pulumi.Input<string>;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam?: pulumi.Input<string>;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-        /**
-         * Modules in which the rule take effect. Valid values: `waf`.
-         */
         modules?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface SecurityPolicyConfigIpTableConfig {
-        /**
-         * Rules list.
-         */
         rules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigIpTableConfigRule>[]>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigIpTableConfigRule {
-        /**
-         * Actions to take. Valid values: `drop`, `trans`, `monitor`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Matching content.
-         */
         matchContent?: pulumi.Input<string>;
-        /**
-         * Matching type. Valid values: `ip`, `area`.
-         */
         matchFrom?: pulumi.Input<string>;
         ruleId?: pulumi.Input<number>;
         updateTime?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfig {
-        /**
-         * Intelligent client filter.
-         */
         intelligence?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigIntelligence>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
-        /**
-         * Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         template?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigTemplate>;
-        /**
-         * Custom configuration.
-         */
         userRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigUserRule>[]>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigIntelligence {
-        /**
-         * Action to take. Valid values: `monitor`, `alg`.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         switch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigTemplate {
-        /**
-         * Detail of the template.
-         */
         detail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigTemplateDetail>;
-        /**
-         * Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         mode?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigTemplateDetail {
-        /**
-         * Action to take.
-         */
         action?: pulumi.Input<string>;
-        /**
-         * Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         id?: pulumi.Input<number>;
-        /**
-         * Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-         */
         mode?: pulumi.Input<string>;
-        /**
-         * Period.
-         */
         period?: pulumi.Input<number>;
-        /**
-         * Punish time.
-         */
         punishTime?: pulumi.Input<number>;
-        /**
-         * Threshold.
-         */
         threshold?: pulumi.Input<number>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigUserRule {
-        /**
-         * Valid values: `monitor`, `drop`.
-         */
         action: pulumi.Input<string>;
-        /**
-         * Conditions of the rule.
-         */
         conditions: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigUserRuleCondition>[]>;
-        /**
-         * Filter words.
-         */
         freqFields?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-         */
         period: pulumi.Input<number>;
-        /**
-         * Punish time, Valid value range: 0-2 days.
-         */
         punishTime: pulumi.Input<number>;
-        /**
-         * Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-         */
         punishTimeUnit: pulumi.Input<string>;
         ruleId?: pulumi.Input<number>;
-        /**
-         * Rule Name.
-         */
         ruleName: pulumi.Input<string>;
-        /**
-         * Priority of the rule. Valid value range: 1-100.
-         */
         rulePriority: pulumi.Input<number>;
-        /**
-         * Status of the rule. Valid values: `on`, `off`, `hour`.
-         */
         ruleStatus?: pulumi.Input<string>;
-        /**
-         * Threshold of the rate limit. Valid value range: 0-4294967294.
-         */
         threshold: pulumi.Input<number>;
         updateTime?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigRateLimitConfigUserRuleCondition {
-        /**
-         * Content to match.
-         */
         matchContent: pulumi.Input<string>;
-        /**
-         * Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-         */
         matchFrom: pulumi.Input<string>;
-        /**
-         * Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-         */
         matchParam: pulumi.Input<string>;
-        /**
-         * Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-         */
         operator: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigSwitchConfig {
-        /**
-         * - `on`: Enable.- `off`: Disable.
-         */
         webSwitch?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigWafConfig {
-        /**
-         * AI based rules configuration.
-         */
         aiRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfigAiRule>;
-        /**
-         * Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-         */
         level: pulumi.Input<string>;
-        /**
-         * Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-         */
         mode: pulumi.Input<string>;
-        /**
-         * Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-         */
         switch: pulumi.Input<string>;
-        /**
-         * WAF Rules Configuration.
-         */
         wafRules: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfigWafRules>;
     }
 
     export interface SecurityPolicyConfigWafConfigAiRule {
-        /**
-         * Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
-         */
         mode?: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigWafConfigWafRules {
-        /**
-         * Block mode rules list. See details in data source `wafManagedRules`.
-         */
         blockRuleIds: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Observe rules list. See details in data source `wafManagedRules`.
-         */
         observeRuleIds?: pulumi.Input<pulumi.Input<number>[]>;
-        /**
-         * Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-         */
         switch: pulumi.Input<string>;
     }
 
@@ -19820,6 +19705,285 @@ export namespace Teo {
 }
 
 export namespace Tse {
+    export interface CngwCanaryRuleCanaryRule {
+        /**
+         * service weight configuration.
+         */
+        balancedServiceLists?: pulumi.Input<pulumi.Input<inputs.Tse.CngwCanaryRuleCanaryRuleBalancedServiceList>[]>;
+        /**
+         * parameter matching condition list.
+         */
+        conditionLists?: pulumi.Input<pulumi.Input<inputs.Tse.CngwCanaryRuleCanaryRuleConditionList>[]>;
+        /**
+         * the status of canary rule.
+         */
+        enabled: pulumi.Input<boolean>;
+        /**
+         * priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+         */
+        priority: pulumi.Input<number>;
+        /**
+         * service ID.
+         */
+        serviceId?: pulumi.Input<string>;
+        /**
+         * service name.
+         */
+        serviceName?: pulumi.Input<string>;
+    }
+
+    export interface CngwCanaryRuleCanaryRuleBalancedServiceList {
+        /**
+         * percent, 10 is 10%, valid values:0 to 100.
+         */
+        percent?: pulumi.Input<number>;
+        /**
+         * service ID, required when used as an input parameter.
+         */
+        serviceId?: pulumi.Input<string>;
+        /**
+         * service name, meaningless when used as an input parameter.
+         */
+        serviceName?: pulumi.Input<string>;
+        upstreamName?: pulumi.Input<string>;
+    }
+
+    export interface CngwCanaryRuleCanaryRuleConditionList {
+        /**
+         * delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+         */
+        delimiter?: pulumi.Input<string>;
+        /**
+         * global configuration ID.
+         */
+        globalConfigId?: pulumi.Input<string>;
+        /**
+         * global configuration name.
+         */
+        globalConfigName?: pulumi.Input<string>;
+        /**
+         * parameter name.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+         */
+        operator?: pulumi.Input<string>;
+        /**
+         * type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * parameter value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface CngwRouteHeader {
+        key?: pulumi.Input<string>;
+        value?: pulumi.Input<string>;
+    }
+
+    export interface CngwRouteRateLimitLimitDetail {
+        enabled: pulumi.Input<boolean>;
+        externalRedis?: pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailExternalRedis>;
+        header?: pulumi.Input<string>;
+        hideClientHeaders: pulumi.Input<boolean>;
+        isDelay: pulumi.Input<boolean>;
+        limitBy: pulumi.Input<string>;
+        lineUpTime?: pulumi.Input<number>;
+        path?: pulumi.Input<string>;
+        policy?: pulumi.Input<string>;
+        qpsThresholds: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailQpsThreshold>[]>;
+        rateLimitResponse?: pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponse>;
+        rateLimitResponseUrl?: pulumi.Input<string>;
+        responseType: pulumi.Input<string>;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailExternalRedis {
+        redisHost: pulumi.Input<string>;
+        redisPassword: pulumi.Input<string>;
+        redisPort: pulumi.Input<number>;
+        redisTimeout: pulumi.Input<number>;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailQpsThreshold {
+        max: pulumi.Input<number>;
+        unit: pulumi.Input<string>;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailRateLimitResponse {
+        body?: pulumi.Input<string>;
+        headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponseHeader>[]>;
+        httpStatus?: pulumi.Input<number>;
+    }
+
+    export interface CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+        key?: pulumi.Input<string>;
+        value?: pulumi.Input<string>;
+    }
+
+    export interface CngwServiceRateLimitLimitDetail {
+        enabled: pulumi.Input<boolean>;
+        externalRedis?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailExternalRedis>;
+        header?: pulumi.Input<string>;
+        hideClientHeaders: pulumi.Input<boolean>;
+        isDelay: pulumi.Input<boolean>;
+        limitBy: pulumi.Input<string>;
+        lineUpTime?: pulumi.Input<number>;
+        path?: pulumi.Input<string>;
+        policy?: pulumi.Input<string>;
+        qpsThresholds: pulumi.Input<pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailQpsThreshold>[]>;
+        rateLimitResponse?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponse>;
+        rateLimitResponseUrl?: pulumi.Input<string>;
+        responseType: pulumi.Input<string>;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailExternalRedis {
+        redisHost: pulumi.Input<string>;
+        redisPassword: pulumi.Input<string>;
+        redisPort: pulumi.Input<number>;
+        redisTimeout: pulumi.Input<number>;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailQpsThreshold {
+        max: pulumi.Input<number>;
+        unit: pulumi.Input<string>;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailRateLimitResponse {
+        body?: pulumi.Input<string>;
+        headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponseHeader>[]>;
+        httpStatus?: pulumi.Input<number>;
+    }
+
+    export interface CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+        key?: pulumi.Input<string>;
+        value?: pulumi.Input<string>;
+    }
+
+    export interface CngwServiceUpstreamInfo {
+        /**
+         * load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+         */
+        algorithm?: pulumi.Input<string>;
+        /**
+         * auto scaling group port of cvm.
+         */
+        autoScalingCvmPort?: pulumi.Input<number>;
+        /**
+         * auto scaling group ID of cvm.
+         */
+        autoScalingGroupId?: pulumi.Input<string>;
+        /**
+         * hook status in auto scaling group of cvm.
+         */
+        autoScalingHookStatus?: pulumi.Input<string>;
+        /**
+         * tat cmd status in auto scaling group of cvm.
+         */
+        autoScalingTatCmdStatus?: pulumi.Input<string>;
+        /**
+         * an IP address or domain name.
+         */
+        host?: pulumi.Input<string>;
+        /**
+         * namespace.
+         */
+        namespace?: pulumi.Input<string>;
+        /**
+         * backend service port.valid values: `1` to `65535`.
+         */
+        port?: pulumi.Input<number>;
+        /**
+         * exact source service type.
+         */
+        realSourceType?: pulumi.Input<string>;
+        /**
+         * scf lambda name.
+         */
+        scfLambdaName?: pulumi.Input<string>;
+        /**
+         * scf lambda version.
+         */
+        scfLambdaQualifier?: pulumi.Input<string>;
+        /**
+         * scf lambda namespace.
+         */
+        scfNamespace?: pulumi.Input<string>;
+        /**
+         * scf lambda type.
+         */
+        scfType?: pulumi.Input<string>;
+        /**
+         * the name of the service in registry or kubernetes.
+         */
+        serviceName?: pulumi.Input<string>;
+        /**
+         * slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+         */
+        slowStart?: pulumi.Input<number>;
+        /**
+         * service source ID.
+         */
+        sourceId?: pulumi.Input<string>;
+        /**
+         * the name of source service.
+         */
+        sourceName?: pulumi.Input<string>;
+        /**
+         * source service type.
+         */
+        sourceType?: pulumi.Input<string>;
+        /**
+         * provided when service type is IPList.
+         */
+        targets?: pulumi.Input<pulumi.Input<inputs.Tse.CngwServiceUpstreamInfoTarget>[]>;
+    }
+
+    export interface CngwServiceUpstreamInfoTarget {
+        createdTime?: pulumi.Input<string>;
+        health?: pulumi.Input<string>;
+        /**
+         * host.
+         */
+        host: pulumi.Input<string>;
+        /**
+         * port.
+         */
+        port: pulumi.Input<number>;
+        /**
+         * source of target.
+         */
+        source?: pulumi.Input<string>;
+        /**
+         * weight.
+         */
+        weight: pulumi.Input<number>;
+    }
+
+    export interface GetGatewayServicesFilter {
+        /**
+         * filter name.
+         */
+        key?: string;
+        /**
+         * filter value.
+         */
+        value?: string;
+    }
+
+    export interface GetGatewayServicesFilterArgs {
+        /**
+         * filter name.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * filter value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
     export interface InstanceEngineRegionInfo {
         /**
          * Engine node region.

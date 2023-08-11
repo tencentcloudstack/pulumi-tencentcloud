@@ -23,14 +23,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cidr_block = new Tencentcloud.Vpc.Instance("cidr-block", new Tencentcloud.Vpc.InstanceArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
     ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
     ///         });
-    ///         var ipv6CidrBlock = new Tencentcloud.Vpc.Ipv6CidrBlock("ipv6CidrBlock", new Tencentcloud.Vpc.Ipv6CidrBlockArgs
+    ///         var example = new Tencentcloud.Vpc.Ipv6CidrBlock("example", new Tencentcloud.Vpc.Ipv6CidrBlockArgs
     ///         {
-    ///             VpcId = cidr_block.Id,
+    ///             VpcId = vpc.Id,
     ///         });
     ///     }
     /// 

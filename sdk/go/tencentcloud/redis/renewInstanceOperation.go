@@ -14,29 +14,6 @@ import (
 // Provides a resource to create a redis renewInstanceOperation
 //
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewRenewInstanceOperation(ctx, "renewInstanceOperation", &Redis.RenewInstanceOperationArgs{
-// 			InstanceId:    pulumi.String("crs-c1nl9rpv"),
-// 			ModifyPayMode: pulumi.String("prepaid"),
-// 			Period:        pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type RenewInstanceOperation struct {
 	pulumi.CustomResourceState
 

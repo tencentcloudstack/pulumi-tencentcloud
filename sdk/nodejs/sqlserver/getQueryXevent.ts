@@ -14,11 +14,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const queryXevent = pulumi.output(tencentcloud.Sqlserver.getQueryXevent({
- *     endTime: "2023-07-01 00:00:00",
+ * const example = pulumi.output(tencentcloud.Sqlserver.getQueryXevent({
+ *     endTime: "2023-08-10 00:00:00",
  *     eventType: "blocked",
  *     instanceId: "mssql-gyg9xycl",
- *     startTime: "2023-06-27 00:00:00",
+ *     startTime: "2023-08-01 00:00:00",
  * }));
  * ```
  */

@@ -11,17 +11,52 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const schedule = new tencentcloud.As.Schedule("schedule", {
- *     desiredCapacity: 0,
- *     endTime: "2019-12-01T00:00:00+08:00",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "as",
+ * });
+ * const image = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+ *     configurationName: "tf-example",
+ *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     instanceTypes: [
+ *         "SA1.SMALL1",
+ *         "SA2.SMALL1",
+ *         "SA2.SMALL2",
+ *         "SA2.SMALL4",
+ *     ],
+ *     instanceNameSettings: {
+ *         instanceName: "test-ins-name",
+ *     },
+ * });
+ * const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+ *     scalingGroupName: "tf-example",
+ *     configurationId: exampleScalingConfig.id,
+ *     maxSize: 1,
+ *     minSize: 0,
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ * });
+ * const exampleSchedule = new tencentcloud.as.Schedule("exampleSchedule", {
+ *     scalingGroupId: exampleScalingGroup.id,
+ *     scheduleActionName: "tf-as-schedule",
  *     maxSize: 10,
  *     minSize: 0,
- *     recurrence: "0 0 * * *",
- *     scalingGroupId: "sg-12af45",
- *     scheduleActionName: "tf-as-schedule",
+ *     desiredCapacity: 0,
  *     startTime: "2019-01-01T00:00:00+08:00",
+ *     endTime: "2019-12-01T00:00:00+08:00",
+ *     recurrence: "0 0 * * *",
  * });
  * ```
  */

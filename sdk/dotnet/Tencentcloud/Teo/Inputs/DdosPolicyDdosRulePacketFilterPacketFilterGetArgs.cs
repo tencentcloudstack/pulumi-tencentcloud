@@ -13,129 +13,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class DdosPolicyDdosRulePacketFilterPacketFilterGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `transmit`, `drop_block`, `forward`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// Packet character depth to check of feature 1. Valid value range: 1-1500.
-        /// </summary>
         [Input("depth")]
         public Input<int>? Depth { get; set; }
 
-        /// <summary>
-        /// Packet character depth to check of feature 2. Valid value range: 1-1500.
-        /// </summary>
         [Input("depth2")]
         public Input<int>? Depth2 { get; set; }
 
-        /// <summary>
-        /// End of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("dportEnd")]
         public Input<int>? DportEnd { get; set; }
 
-        /// <summary>
-        /// Start of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("dportStart")]
         public Input<int>? DportStart { get; set; }
 
-        /// <summary>
-        /// Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-        /// </summary>
         [Input("isNot")]
         public Input<int>? IsNot { get; set; }
 
-        /// <summary>
-        /// Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-        /// </summary>
         [Input("isNot2")]
         public Input<int>? IsNot2 { get; set; }
 
-        /// <summary>
-        /// Packet layer for matching begin of feature 1. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        /// </summary>
         [Input("matchBegin")]
         public Input<string>? MatchBegin { get; set; }
 
-        /// <summary>
-        /// Packet layer for matching begin of feature 2. Valid values:- `begin_l5`: matching from packet payload.- `begin_l4`: matching from TCP/UDP header.- `begin_l3`: matching from IP header.
-        /// </summary>
         [Input("matchBegin2")]
         public Input<string>? MatchBegin2 { get; set; }
 
-        /// <summary>
-        /// Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-        /// </summary>
         [Input("matchLogic")]
         public Input<string>? MatchLogic { get; set; }
 
-        /// <summary>
-        /// Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        /// </summary>
         [Input("matchType")]
         public Input<string>? MatchType { get; set; }
 
-        /// <summary>
-        /// Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-        /// </summary>
         [Input("matchType2")]
         public Input<string>? MatchType2 { get; set; }
 
-        /// <summary>
-        /// Offset of feature 1. Valid value range: 1-1500.
-        /// </summary>
         [Input("offset")]
         public Input<int>? Offset { get; set; }
 
-        /// <summary>
-        /// Offset of feature 2. Valid value range: 1-1500.
-        /// </summary>
         [Input("offset2")]
         public Input<int>? Offset2 { get; set; }
 
-        /// <summary>
-        /// Max packet size. Valid value range: 0-1500.
-        /// </summary>
         [Input("packetMax")]
         public Input<int>? PacketMax { get; set; }
 
-        /// <summary>
-        /// Min packet size. Valid value range: 0-1500.
-        /// </summary>
         [Input("packetMin")]
         public Input<int>? PacketMin { get; set; }
 
-        /// <summary>
-        /// Valid value: `tcp`, `udp`, `icmp`, `all`.
-        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
-        /// <summary>
-        /// End of the source port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("sportEnd")]
         public Input<int>? SportEnd { get; set; }
 
-        /// <summary>
-        /// Start of the source port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("sportStart")]
         public Input<int>? SportStart { get; set; }
 
-        /// <summary>
-        /// Regex expression or string to match.
-        /// </summary>
         [Input("str")]
         public Input<string>? Str { get; set; }
 
-        /// <summary>
-        /// Regex expression or string to match.
-        /// </summary>
         [Input("str2")]
         public Input<string>? Str2 { get; set; }
 

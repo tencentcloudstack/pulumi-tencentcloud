@@ -27,7 +27,7 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Redis.NewUpgradeMultiZoneOperation(ctx, "upgradeMultiZoneOperation", &Redis.UpgradeMultiZoneOperationArgs{
 // 			InstanceId:                 pulumi.String("crs-c1nl9rpv"),
-// 			UpgradeProxyAndRedisServer: pulumi.Bool(""),
+// 			UpgradeProxyAndRedisServer: pulumi.Bool(true),
 // 		})
 // 		if err != nil {
 // 			return err

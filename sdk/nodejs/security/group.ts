@@ -8,14 +8,28 @@ import * as utilities from "../utilities";
  * Provides a resource to create security group.
  *
  * ## Example Usage
+ * ### Create a basic security group
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sglab = new tencentcloud.Security.Group("sglab", {
- *     description: "favourite sg",
+ * const example = new tencentcloud.Security.Group("example", {
+ *     description: "sg test",
+ * });
+ * ```
+ * ### Create a complete security group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.Security.Group("example", {
+ *     description: "sg test",
  *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
  * });
  * ```
  *

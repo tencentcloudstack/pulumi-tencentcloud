@@ -89,7 +89,7 @@ def get_readonly_groups(master_instance_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    master = tencentcloud.Sqlserver.get_readonly_groups(master_instance_id="mssql-3cdq7kx5")
+    example = tencentcloud.Sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
     ```
 
 
@@ -127,7 +127,7 @@ def get_readonly_groups_output(master_instance_id: Optional[pulumi.Input[Optiona
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    master = tencentcloud.Sqlserver.get_readonly_groups(master_instance_id="mssql-3cdq7kx5")
+    example = tencentcloud.Sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
     ```
 
 

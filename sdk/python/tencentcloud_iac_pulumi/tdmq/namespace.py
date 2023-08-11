@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['NamespaceArgs', 'Namespace']
 
@@ -17,14 +19,14 @@ class NamespaceArgs:
                  environ_name: pulumi.Input[str],
                  msg_ttl: pulumi.Input[int],
                  remark: Optional[pulumi.Input[str]] = None,
-                 retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 retention_policy: Optional[pulumi.Input['NamespaceRetentionPolicyArgs']] = None):
         """
         The set of arguments for constructing a Namespace resource.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
+        :param pulumi.Input['NamespaceRetentionPolicyArgs'] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "environ_name", environ_name)
@@ -84,14 +86,14 @@ class NamespaceArgs:
 
     @property
     @pulumi.getter(name="retentionPolicy")
-    def retention_policy(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+    def retention_policy(self) -> Optional[pulumi.Input['NamespaceRetentionPolicyArgs']]:
         """
         The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         return pulumi.get(self, "retention_policy")
 
     @retention_policy.setter
-    def retention_policy(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+    def retention_policy(self, value: Optional[pulumi.Input['NamespaceRetentionPolicyArgs']]):
         pulumi.set(self, "retention_policy", value)
 
 
@@ -102,14 +104,14 @@ class _NamespaceState:
                  environ_name: Optional[pulumi.Input[str]] = None,
                  msg_ttl: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
-                 retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 retention_policy: Optional[pulumi.Input['NamespaceRetentionPolicyArgs']] = None):
         """
         Input properties used for looking up and filtering Namespace resources.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
+        :param pulumi.Input['NamespaceRetentionPolicyArgs'] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -172,14 +174,14 @@ class _NamespaceState:
 
     @property
     @pulumi.getter(name="retentionPolicy")
-    def retention_policy(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+    def retention_policy(self) -> Optional[pulumi.Input['NamespaceRetentionPolicyArgs']]:
         """
         The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         return pulumi.get(self, "retention_policy")
 
     @retention_policy.setter
-    def retention_policy(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+    def retention_policy(self, value: Optional[pulumi.Input['NamespaceRetentionPolicyArgs']]):
         pulumi.set(self, "retention_policy", value)
 
 
@@ -192,7 +194,7 @@ class Namespace(pulumi.CustomResource):
                  environ_name: Optional[pulumi.Input[str]] = None,
                  msg_ttl: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
-                 retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 retention_policy: Optional[pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']]] = None,
                  __props__=None):
         """
         Provide a resource to create a tdmq namespace.
@@ -203,14 +205,21 @@ class Namespace(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar = tencentcloud.tdmq.Namespace("bar",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
         ```
 
         ## Import
@@ -227,7 +236,7 @@ class Namespace(pulumi.CustomResource):
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
+        :param pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         ...
     @overload
@@ -244,14 +253,21 @@ class Namespace(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar = tencentcloud.tdmq.Namespace("bar",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
         ```
 
         ## Import
@@ -281,7 +297,7 @@ class Namespace(pulumi.CustomResource):
                  environ_name: Optional[pulumi.Input[str]] = None,
                  msg_ttl: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
-                 retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 retention_policy: Optional[pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -321,7 +337,7 @@ class Namespace(pulumi.CustomResource):
             environ_name: Optional[pulumi.Input[str]] = None,
             msg_ttl: Optional[pulumi.Input[int]] = None,
             remark: Optional[pulumi.Input[str]] = None,
-            retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'Namespace':
+            retention_policy: Optional[pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']]] = None) -> 'Namespace':
         """
         Get an existing Namespace resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -333,7 +349,7 @@ class Namespace(pulumi.CustomResource):
         :param pulumi.Input[str] environ_name: The name of namespace to be created.
         :param pulumi.Input[int] msg_ttl: The expiration time of unconsumed message.
         :param pulumi.Input[str] remark: Description of the namespace.
-        :param pulumi.Input[Mapping[str, Any]] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
+        :param pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']] retention_policy: The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -380,7 +396,7 @@ class Namespace(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="retentionPolicy")
-    def retention_policy(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+    def retention_policy(self) -> pulumi.Output['outputs.NamespaceRetentionPolicy']:
         """
         The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         """

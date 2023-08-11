@@ -13,11 +13,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const increBackupMigration = new tencentcloud.Sqlserver.IncreBackupMigration("incre_backup_migration", {
+ * const example = new tencentcloud.Sqlserver.IncreBackupMigration("example", {
  *     backupFiles: [],
  *     backupMigrationId: "mssql-backup-migration-9tj0sxnz",
  *     instanceId: "mssql-4gmc5805",
- *     isRecovery: "NO",
+ *     isRecovery: "YES",
  * });
  * ```
  *

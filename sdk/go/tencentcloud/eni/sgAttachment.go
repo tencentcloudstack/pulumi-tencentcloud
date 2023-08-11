@@ -19,17 +19,74 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eni"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eni.NewSgAttachment(ctx, "eniSgAttachment", &Eni.SgAttachmentArgs{
-// 			NetworkInterfaceIds: pulumi.String("eni-p0hkgx8p"),
+// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "vpc",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		example1, err := Security.NewGroup(ctx, "example1", &Security.GroupArgs{
+// 			Description: pulumi.String("sg desc."),
+// 			ProjectId:   pulumi.Int(0),
+// 			Tags: pulumi.AnyMap{
+// 				"example": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		example2, err := Security.NewGroup(ctx, "example2", &Security.GroupArgs{
+// 			Description: pulumi.String("sg desc."),
+// 			ProjectId:   pulumi.Int(0),
+// 			Tags: pulumi.AnyMap{
+// 				"example": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		example, err := Eni.NewInstance(ctx, "example", &Eni.InstanceArgs{
+// 			VpcId:       vpc.ID(),
+// 			SubnetId:    subnet.ID(),
+// 			Description: pulumi.String("eni desc."),
+// 			Ipv4Count:   pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Eni.NewSgAttachment(ctx, "eniSgAttachment", &Eni.SgAttachmentArgs{
+// 			NetworkInterfaceIds: pulumi.String{
+// 				example.ID(),
+// 			},
 // 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-902tl7t7"),
-// 				pulumi.String("sg-edmur627"),
+// 				example1.ID(),
+// 				example2.ID(),
 // 			},
 // 		})
 // 		if err != nil {

@@ -12,18 +12,30 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const businessIntelligenceInstance = new tencentcloud.sqlserver.BusinessIntelligenceInstance("businessIntelligenceInstance", {
- *     zone: "ap-guangzhou-6",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBusinessIntelligenceInstance = new tencentcloud.sqlserver.BusinessIntelligenceInstance("exampleBusinessIntelligenceInstance", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
  *     memory: 4,
- *     storage: 20,
+ *     storage: 100,
  *     cpu: 2,
  *     machineType: "CLOUD_PREMIUM",
  *     projectId: 0,
- *     subnetId: "subnet-dwj7ipnc",
- *     vpcId: "vpc-4owdpnwr",
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
  *     dbVersion: "201603",
- *     securityGroupLists: [],
+ *     securityGroupLists: [securityGroup.id],
  *     weeklies: [
  *         1,
  *         2,
@@ -35,13 +47,13 @@ import * as utilities from "../utilities";
  *     ],
  *     startTime: "00:00",
  *     span: 6,
- *     instanceName: "create_db_name",
+ *     instanceName: "tf_example",
  * });
- * const businessIntelligenceFile = new tencentcloud.sqlserver.BusinessIntelligenceFile("businessIntelligenceFile", {
- *     instanceId: businessIntelligenceInstance.id,
- *     fileUrl: "https://keep-sqlserver-1308919341.cos.ap-guangzhou.myqcloud.com/test.xlsx",
+ * const exampleBusinessIntelligenceFile = new tencentcloud.sqlserver.BusinessIntelligenceFile("exampleBusinessIntelligenceFile", {
+ *     instanceId: exampleBusinessIntelligenceInstance.id,
+ *     fileUrl: "https://tf-example-1208515315.cos.ap-guangzhou.myqcloud.com/sqlserver_business_intelligence_file.txt",
  *     fileType: "FLAT",
- *     remark: "test case.",
+ *     remark: "desc.",
  * });
  * ```
  *
@@ -50,7 +62,7 @@ import * as utilities from "../utilities";
  * sqlserver business_intelligence_file can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile business_intelligence_file business_intelligence_file_id
+ *  $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile example mssqlbi-fo2dwujt#test.xlsx
  * ```
  */
 export class BusinessIntelligenceFile extends pulumi.CustomResource {

@@ -116,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<ImmutableArray<Outputs.ProxyProxyZone>> ProxyZones { get; private set; } = null!;
 
         /// <summary>
+        /// Read only instance list.
+        /// </summary>
+        [Output("roInstances")]
+        public Output<ImmutableArray<Outputs.ProxyRoInstance>> RoInstances { get; private set; } = null!;
+
+        /// <summary>
         /// Security Group ID Array.
         /// </summary>
         [Output("securityGroupIds")]
@@ -335,6 +341,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         {
             get => _proxyZones ?? (_proxyZones = new InputList<Inputs.ProxyProxyZoneGetArgs>());
             set => _proxyZones = value;
+        }
+
+        [Input("roInstances")]
+        private InputList<Inputs.ProxyRoInstanceGetArgs>? _roInstances;
+
+        /// <summary>
+        /// Read only instance list.
+        /// </summary>
+        public InputList<Inputs.ProxyRoInstanceGetArgs> RoInstances
+        {
+            get => _roInstances ?? (_roInstances = new InputList<Inputs.ProxyRoInstanceGetArgs>());
+            set => _roInstances = value;
         }
 
         [Input("securityGroupIds")]

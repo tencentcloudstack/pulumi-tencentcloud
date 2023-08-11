@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleAllowBlock
     {
-        /// <summary>
-        /// DDoS black-white list detail.
-        /// </summary>
         public readonly ImmutableArray<Outputs.DdosPolicyDdosRuleAllowBlockAllowBlockIp> AllowBlockIps;
-        /// <summary>
-        /// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

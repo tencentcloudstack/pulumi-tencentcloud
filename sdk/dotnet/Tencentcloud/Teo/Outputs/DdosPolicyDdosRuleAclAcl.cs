@@ -14,29 +14,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleAclAcl
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `transmit`, `forward`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// End of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? DportEnd;
-        /// <summary>
-        /// Start of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? DportStart;
-        /// <summary>
-        /// Valid values: `tcp`, `udp`, `all`.
-        /// </summary>
         public readonly string? Protocol;
-        /// <summary>
-        /// End of the source port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? SportEnd;
-        /// <summary>
-        /// Start of the source port range. Valid value range: 0-65535.
-        /// </summary>
         public readonly int? SportStart;
 
         [OutputConstructor]

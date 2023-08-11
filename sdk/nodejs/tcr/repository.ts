@@ -8,18 +8,31 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr repository.
  *
  * ## Example Usage
+ * ### Create a tcr repository instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = tencentcloud.Tcr.getInstances({
- *     name: "test",
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     deleteBucket: true,
  * });
- * const foo = new tencentcloud.tcr.Repository("foo", {
- *     instanceId: test.then(test => test.instanceLists?[0]?.id),
- *     namespaceName: "exampleNamespace",
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * const exampleRepository = new tencentcloud.tcr.Repository("exampleRepository", {
+ *     instanceId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
+ *     briefDesc: "111",
+ *     description: "111111111111111111111111111111111111",
  * });
  * ```
  *
@@ -28,7 +41,7 @@ import * as utilities from "../utilities";
  * tcr repository can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+ *  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
  * ```
  */
 export class Repository extends pulumi.CustomResource {

@@ -842,6 +842,8 @@ type GetCertificatesCertificate struct {
 	CreateTime string `pulumi:"createTime"`
 	// Primary domain of the SSL certificate.
 	Domain string `pulumi:"domain"`
+	// DV certification information.
+	DvAuths []GetCertificatesCertificateDvAuth `pulumi:"dvAuths"`
 	// Ending time of the SSL certificate.
 	EndTime string `pulumi:"endTime"`
 	// ID of the SSL certificate to be queried.
@@ -850,6 +852,8 @@ type GetCertificatesCertificate struct {
 	Key string `pulumi:"key"`
 	// Name of the SSL certificate to be queried.
 	Name string `pulumi:"name"`
+	// Order ID returned.
+	OrderId string `pulumi:"orderId"`
 	// Certificate authority.
 	ProductZhName string `pulumi:"productZhName"`
 	// Project ID of the SSL certificate.
@@ -882,6 +886,8 @@ type GetCertificatesCertificateArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Primary domain of the SSL certificate.
 	Domain pulumi.StringInput `pulumi:"domain"`
+	// DV certification information.
+	DvAuths GetCertificatesCertificateDvAuthArrayInput `pulumi:"dvAuths"`
 	// Ending time of the SSL certificate.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
 	// ID of the SSL certificate to be queried.
@@ -890,6 +896,8 @@ type GetCertificatesCertificateArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// Name of the SSL certificate to be queried.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Order ID returned.
+	OrderId pulumi.StringInput `pulumi:"orderId"`
 	// Certificate authority.
 	ProductZhName pulumi.StringInput `pulumi:"productZhName"`
 	// Project ID of the SSL certificate.
@@ -973,6 +981,11 @@ func (o GetCertificatesCertificateOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Domain }).(pulumi.StringOutput)
 }
 
+// DV certification information.
+func (o GetCertificatesCertificateOutput) DvAuths() GetCertificatesCertificateDvAuthArrayOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) []GetCertificatesCertificateDvAuth { return v.DvAuths }).(GetCertificatesCertificateDvAuthArrayOutput)
+}
+
 // Ending time of the SSL certificate.
 func (o GetCertificatesCertificateOutput) EndTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.EndTime }).(pulumi.StringOutput)
@@ -991,6 +1004,11 @@ func (o GetCertificatesCertificateOutput) Key() pulumi.StringOutput {
 // Name of the SSL certificate to be queried.
 func (o GetCertificatesCertificateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Order ID returned.
+func (o GetCertificatesCertificateOutput) OrderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.OrderId }).(pulumi.StringOutput)
 }
 
 // Certificate authority.
@@ -1038,6 +1056,121 @@ func (o GetCertificatesCertificateArrayOutput) Index(i pulumi.IntInput) GetCerti
 	}).(GetCertificatesCertificateOutput)
 }
 
+type GetCertificatesCertificateDvAuth struct {
+	// DV authentication key.
+	DvAuthKey string `pulumi:"dvAuthKey"`
+	// DV authentication value.
+	DvAuthValue string `pulumi:"dvAuthValue"`
+	// DV authentication type.
+	DvAuthVerifyType string `pulumi:"dvAuthVerifyType"`
+}
+
+// GetCertificatesCertificateDvAuthInput is an input type that accepts GetCertificatesCertificateDvAuthArgs and GetCertificatesCertificateDvAuthOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateDvAuthInput` via:
+//
+//          GetCertificatesCertificateDvAuthArgs{...}
+type GetCertificatesCertificateDvAuthInput interface {
+	pulumi.Input
+
+	ToGetCertificatesCertificateDvAuthOutput() GetCertificatesCertificateDvAuthOutput
+	ToGetCertificatesCertificateDvAuthOutputWithContext(context.Context) GetCertificatesCertificateDvAuthOutput
+}
+
+type GetCertificatesCertificateDvAuthArgs struct {
+	// DV authentication key.
+	DvAuthKey pulumi.StringInput `pulumi:"dvAuthKey"`
+	// DV authentication value.
+	DvAuthValue pulumi.StringInput `pulumi:"dvAuthValue"`
+	// DV authentication type.
+	DvAuthVerifyType pulumi.StringInput `pulumi:"dvAuthVerifyType"`
+}
+
+func (GetCertificatesCertificateDvAuthArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificateDvAuth)(nil)).Elem()
+}
+
+func (i GetCertificatesCertificateDvAuthArgs) ToGetCertificatesCertificateDvAuthOutput() GetCertificatesCertificateDvAuthOutput {
+	return i.ToGetCertificatesCertificateDvAuthOutputWithContext(context.Background())
+}
+
+func (i GetCertificatesCertificateDvAuthArgs) ToGetCertificatesCertificateDvAuthOutputWithContext(ctx context.Context) GetCertificatesCertificateDvAuthOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateDvAuthOutput)
+}
+
+// GetCertificatesCertificateDvAuthArrayInput is an input type that accepts GetCertificatesCertificateDvAuthArray and GetCertificatesCertificateDvAuthArrayOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateDvAuthArrayInput` via:
+//
+//          GetCertificatesCertificateDvAuthArray{ GetCertificatesCertificateDvAuthArgs{...} }
+type GetCertificatesCertificateDvAuthArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificatesCertificateDvAuthArrayOutput() GetCertificatesCertificateDvAuthArrayOutput
+	ToGetCertificatesCertificateDvAuthArrayOutputWithContext(context.Context) GetCertificatesCertificateDvAuthArrayOutput
+}
+
+type GetCertificatesCertificateDvAuthArray []GetCertificatesCertificateDvAuthInput
+
+func (GetCertificatesCertificateDvAuthArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificateDvAuth)(nil)).Elem()
+}
+
+func (i GetCertificatesCertificateDvAuthArray) ToGetCertificatesCertificateDvAuthArrayOutput() GetCertificatesCertificateDvAuthArrayOutput {
+	return i.ToGetCertificatesCertificateDvAuthArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificatesCertificateDvAuthArray) ToGetCertificatesCertificateDvAuthArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateDvAuthArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateDvAuthArrayOutput)
+}
+
+type GetCertificatesCertificateDvAuthOutput struct{ *pulumi.OutputState }
+
+func (GetCertificatesCertificateDvAuthOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificateDvAuth)(nil)).Elem()
+}
+
+func (o GetCertificatesCertificateDvAuthOutput) ToGetCertificatesCertificateDvAuthOutput() GetCertificatesCertificateDvAuthOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateDvAuthOutput) ToGetCertificatesCertificateDvAuthOutputWithContext(ctx context.Context) GetCertificatesCertificateDvAuthOutput {
+	return o
+}
+
+// DV authentication key.
+func (o GetCertificatesCertificateDvAuthOutput) DvAuthKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificateDvAuth) string { return v.DvAuthKey }).(pulumi.StringOutput)
+}
+
+// DV authentication value.
+func (o GetCertificatesCertificateDvAuthOutput) DvAuthValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificateDvAuth) string { return v.DvAuthValue }).(pulumi.StringOutput)
+}
+
+// DV authentication type.
+func (o GetCertificatesCertificateDvAuthOutput) DvAuthVerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificateDvAuth) string { return v.DvAuthVerifyType }).(pulumi.StringOutput)
+}
+
+type GetCertificatesCertificateDvAuthArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificatesCertificateDvAuthArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificateDvAuth)(nil)).Elem()
+}
+
+func (o GetCertificatesCertificateDvAuthArrayOutput) ToGetCertificatesCertificateDvAuthArrayOutput() GetCertificatesCertificateDvAuthArrayOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateDvAuthArrayOutput) ToGetCertificatesCertificateDvAuthArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateDvAuthArrayOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateDvAuthArrayOutput) Index(i pulumi.IntInput) GetCertificatesCertificateDvAuthOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificatesCertificateDvAuth {
+		return vs[0].([]GetCertificatesCertificateDvAuth)[vs[1].(int)]
+	}).(GetCertificatesCertificateDvAuthOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FreeCertificateDvAuthInput)(nil)).Elem(), FreeCertificateDvAuthArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FreeCertificateDvAuthArrayInput)(nil)).Elem(), FreeCertificateDvAuthArray{})
@@ -1047,6 +1180,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationPtrInput)(nil)).Elem(), PayCertificateInformationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateDvAuthInput)(nil)).Elem(), GetCertificatesCertificateDvAuthArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateDvAuthArrayInput)(nil)).Elem(), GetCertificatesCertificateDvAuthArray{})
 	pulumi.RegisterOutputType(FreeCertificateDvAuthOutput{})
 	pulumi.RegisterOutputType(FreeCertificateDvAuthArrayOutput{})
 	pulumi.RegisterOutputType(PayCertificateDvAuthOutput{})
@@ -1055,4 +1190,6 @@ func init() {
 	pulumi.RegisterOutputType(PayCertificateInformationPtrOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateDvAuthOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateDvAuthArrayOutput{})
 }

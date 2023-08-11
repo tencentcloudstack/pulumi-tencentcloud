@@ -13,24 +13,51 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const _default = new tencentcloud.mysql.Instance("default", {
- *     memSize: 1000,
- *     volumeSize: 25,
- *     instanceName: "guagua",
- *     engineVersion: "5.7",
- *     rootPassword: "0153Y474",
- *     availabilityZone: "ap-guangzhou-3",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
  *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
  * });
- * const mysqlAccount2 = new tencentcloud.mysql.Account("mysqlAccount2", {
- *     mysqlId: _default.id,
- *     password: "test1234",
- *     description: "test from terraform",
+ * const exampleAccount = new tencentcloud.mysql.Account("exampleAccount", {
+ *     mysqlId: exampleInstance.id,
+ *     password: "Qwer@234",
+ *     description: "desc.",
+ *     maxUserConnections: 10,
  * });
- * const tttt = new tencentcloud.mysql.Privilege("tttt", {
- *     mysqlId: _default.id,
- *     accountName: mysqlAccount2.name,
+ * const examplePrivilege = new tencentcloud.mysql.Privilege("examplePrivilege", {
+ *     mysqlId: exampleInstance.id,
+ *     accountName: exampleAccount.name,
  *     globals: ["TRIGGER"],
  *     databases: [
  *         {

@@ -26,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRoGroup(ctx, "roGroup", &Mysql.RoGroupArgs{
+// 		_, err := Mysql.NewRoGroup(ctx, "example", &Mysql.RoGroupArgs{
 // 			InstanceId:      pulumi.String("cdb-e8i766hx"),
 // 			IsBalanceRoLoad: pulumi.Int(1),
 // 			RoGroupId:       pulumi.String("cdbrg-f49t0gnj"),

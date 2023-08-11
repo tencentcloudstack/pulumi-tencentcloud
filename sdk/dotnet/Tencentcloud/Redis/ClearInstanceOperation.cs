@@ -14,19 +14,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis clear_instance_operation
     /// 
     /// ## Example Usage
+    /// ### Clear the instance data of the Redis instance
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
+    ///         var config = new Config();
+    ///         var password = config.Get("password") ?? "test12345789";
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
+    ///         {
+    ///             TypeId = 7,
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
+    ///             Password = password,
+    ///             MemSize = 8192,
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///         });
     ///         var clearInstanceOperation = new Tencentcloud.Redis.ClearInstanceOperation("clearInstanceOperation", new Tencentcloud.Redis.ClearInstanceOperationArgs
     ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             Password = "",
+    ///             InstanceId = foo.Id,
+    ///             Password = password,
     ///         });
     ///     }
     /// 

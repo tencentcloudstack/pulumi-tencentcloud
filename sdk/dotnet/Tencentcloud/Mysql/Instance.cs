@@ -15,7 +15,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// &gt; **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
     /// 
+    /// &gt; **NOTE:** The value of parameter `parameters` can be used with tencentcloud.Mysql.getParameterList to obtain.
+    /// 
     /// ## Example Usage
+    /// ### Create a single node instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         {
+    ///             Product = "cdb",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "mysql test",
+    ///         });
+    ///         var example = new Tencentcloud.Mysql.Instance("example", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a double node instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -25,37 +91,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// {
     ///     public MyStack()
     ///     {
-    ///         var @default = new Tencentcloud.Mysql.Instance("default", new Tencentcloud.Mysql.InstanceArgs
+    ///         var example = new Tencentcloud.Mysql.Instance("example", new Tencentcloud.Mysql.InstanceArgs
     ///         {
-    ///             AvailabilityZone = "ap-guangzhou-4",
-    ///             ChargeType = "POSTPAID",
-    ///             EngineVersion = "5.7",
-    ///             FirstSlaveZone = "ap-guangzhou-4",
-    ///             InstanceName = "myTestMysql",
     ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 1,
+    ///             AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[0].Name,
+    ///             FirstSlaveZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[1].Name,
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example-mysql",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             SubnetId = tencentcloud_subnet.Subnet.Id,
     ///             IntranetPort = 3306,
-    ///             MemSize = 128000,
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "UTF8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///             ProjectId = 201901010001,
-    ///             RootPassword = "********",
-    ///             SecondSlaveZone = "ap-guangzhou-4",
     ///             SecurityGroups = 
     ///             {
-    ///                 "sg-ot8eclwz",
+    ///                 tencentcloud_security_group.Security_group.Id,
     ///             },
-    ///             SlaveDeployMode = 0,
-    ///             SlaveSyncMode = 1,
-    ///             SubnetId = "subnet-9uivyb1g",
     ///             Tags = 
     ///             {
     ///                 { "name", "test" },
     ///             },
-    ///             VolumeSize = 250,
-    ///             VpcId = "vpc-12mt3l31",
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -67,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// MySQL instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+    ///  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/instance:Instance")]

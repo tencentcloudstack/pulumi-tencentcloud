@@ -383,19 +383,37 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        foo_subnet_instance_instance = tencentcloud.subnet.Instance("fooSubnet/instanceInstance",
-            availability_zone="ap-guangzhou-3",
-            vpc_id=foo_instance.id,
+        zones = tencentcloud.Availability.get_zones_by_product(product="vpc")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
             cidr_block="10.0.0.0/16",
             is_multicast=False)
-        foo_eni_instance_instance = tencentcloud.eni.Instance("fooEni/instanceInstance",
-            vpc_id=foo_instance.id,
-            subnet_id=foo_subnet / instance_instance["id"],
-            description="eni desc",
-            ipv4_count=1)
+        example1 = tencentcloud.security.Group("example1",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example2 = tencentcloud.security.Group("example2",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example = tencentcloud.eni.Instance("example",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            description="eni desc.",
+            ipv4_count=1,
+            security_groups=[
+                example1.id,
+                example2.id,
+            ])
         ```
 
         ## Import
@@ -430,19 +448,37 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        foo_subnet_instance_instance = tencentcloud.subnet.Instance("fooSubnet/instanceInstance",
-            availability_zone="ap-guangzhou-3",
-            vpc_id=foo_instance.id,
+        zones = tencentcloud.Availability.get_zones_by_product(product="vpc")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
             cidr_block="10.0.0.0/16",
             is_multicast=False)
-        foo_eni_instance_instance = tencentcloud.eni.Instance("fooEni/instanceInstance",
-            vpc_id=foo_instance.id,
-            subnet_id=foo_subnet / instance_instance["id"],
-            description="eni desc",
-            ipv4_count=1)
+        example1 = tencentcloud.security.Group("example1",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example2 = tencentcloud.security.Group("example2",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example = tencentcloud.eni.Instance("example",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            description="eni desc.",
+            ipv4_count=1,
+            security_groups=[
+                example1.id,
+                example2.id,
+            ])
         ```
 
         ## Import
@@ -636,7 +672,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="securityGroups")
-    def security_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
+    def security_groups(self) -> pulumi.Output[Sequence[str]]:
         """
         A set of security group IDs.
         """

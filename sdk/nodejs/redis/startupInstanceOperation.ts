@@ -8,12 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis startupInstanceOperation
  *
  * ## Example Usage
+ * ### Recover the redis instance that has been isolated
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const startupInstanceOperation = new tencentcloud.Redis.StartupInstanceOperation("startup_instance_operation", {
+ * const foo = new tencentcloud.Redis.StartupInstanceOperation("foo", {
  *     instanceId: "crs-c1nl9rpv",
  * });
  * ```

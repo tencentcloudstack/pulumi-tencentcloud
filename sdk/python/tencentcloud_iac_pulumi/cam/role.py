@@ -248,25 +248,31 @@ class Role(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        info = tencentcloud.User.get_info()
+        uin = info.uin
         foo = tencentcloud.cam.Role("foo",
-            console_login=True,
-            description="test",
-            document=\"\"\"{
+            document=f\"\"\"{{
           "version": "2.0",
           "statement": [
-            {
-              "action": ["name/sts:AssumeRole"],
+            {{
+              "action": [
+                "name/sts:AssumeRole"
+              ],
               "effect": "allow",
-              "principal": {
-                "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
-              }
-            }
+              "principal": {{
+                "qcs": [
+                  "qcs::cam::uin/{uin}:uin/{uin}"
+                ]
+              }}
+            }}
           ]
-        }
-
+        }}
         \"\"\",
+            description="test",
+            console_login=True,
             tags={
                 "test": "tf-cam-role",
             })
@@ -275,25 +281,36 @@ class Role(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        saml_provider = config.get("saml-provider")
+        if saml_provider is None:
+            saml_provider = "example"
+        info = tencentcloud.User.get_info()
+        uin = info.uin
+        saml_provider = saml_provider
         boo = tencentcloud.cam.Role("boo",
-            console_login=True,
-            description="test",
-            document=\"\"\"{
+            document=f\"\"\"{{
           "version": "2.0",
           "statement": [
-            {
-              "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+            {{
+              "action": [
+                "name/sts:AssumeRole"
+              ],
               "effect": "allow",
-              "principal": {
-                "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
-              }
-            }
+              "principal": {{
+                "qcs": [
+                  "qcs::cam::uin/{uin}:saml-provider/{saml_provider}"
+                ]
+              }}
+            }}
           ]
-        }
-
-        \"\"\")
+        }}
+        \"\"\",
+            description="tf_test",
+            console_login=True)
         ```
 
         ## Import
@@ -329,25 +346,31 @@ class Role(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        info = tencentcloud.User.get_info()
+        uin = info.uin
         foo = tencentcloud.cam.Role("foo",
-            console_login=True,
-            description="test",
-            document=\"\"\"{
+            document=f\"\"\"{{
           "version": "2.0",
           "statement": [
-            {
-              "action": ["name/sts:AssumeRole"],
+            {{
+              "action": [
+                "name/sts:AssumeRole"
+              ],
               "effect": "allow",
-              "principal": {
-                "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
-              }
-            }
+              "principal": {{
+                "qcs": [
+                  "qcs::cam::uin/{uin}:uin/{uin}"
+                ]
+              }}
+            }}
           ]
-        }
-
+        }}
         \"\"\",
+            description="test",
+            console_login=True,
             tags={
                 "test": "tf-cam-role",
             })
@@ -356,25 +379,36 @@ class Role(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        saml_provider = config.get("saml-provider")
+        if saml_provider is None:
+            saml_provider = "example"
+        info = tencentcloud.User.get_info()
+        uin = info.uin
+        saml_provider = saml_provider
         boo = tencentcloud.cam.Role("boo",
-            console_login=True,
-            description="test",
-            document=\"\"\"{
+            document=f\"\"\"{{
           "version": "2.0",
           "statement": [
-            {
-              "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+            {{
+              "action": [
+                "name/sts:AssumeRole"
+              ],
               "effect": "allow",
-              "principal": {
-                "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
-              }
-            }
+              "principal": {{
+                "qcs": [
+                  "qcs::cam::uin/{uin}:saml-provider/{saml_provider}"
+                ]
+              }}
+            }}
           ]
-        }
-
-        \"\"\")
+        }}
+        \"\"\",
+            description="tf_test",
+            console_login=True)
         ```
 
         ## Import

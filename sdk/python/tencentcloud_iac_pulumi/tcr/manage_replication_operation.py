@@ -230,7 +230,9 @@ class ManageReplicationOperation(pulumi.CustomResource):
                  source_registry_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr manage_replication_operation
+        Provides a resource to start a tcr instance replication operation
+
+        ## Example Usage
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -248,7 +250,9 @@ class ManageReplicationOperation(pulumi.CustomResource):
                  args: ManageReplicationOperationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr manage_replication_operation
+        Provides a resource to start a tcr instance replication operation
+
+        ## Example Usage
 
         :param str resource_name: The name of the resource.
         :param ManageReplicationOperationArgs args: The arguments to use to populate this resource's properties.

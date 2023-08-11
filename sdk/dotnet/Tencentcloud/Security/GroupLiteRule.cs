@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// <summary>
     /// Provide a resource to create security group some lite rules quickly.
     /// 
-    /// &gt; **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple tencentcloud.Security.GroupRule resources, otherwise it may cause problems.
+    /// &gt; **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple tencentcloud_security_group_rule resources, otherwise it may cause problems.
     /// 
     /// ## Import
     /// 

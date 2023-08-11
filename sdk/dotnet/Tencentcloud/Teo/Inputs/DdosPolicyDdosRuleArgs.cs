@@ -13,51 +13,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class DdosPolicyDdosRuleArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// DDoS ACL rule configuration.
-        /// </summary>
         [Input("acl")]
         public Input<Inputs.DdosPolicyDdosRuleAclArgs>? Acl { get; set; }
 
-        /// <summary>
-        /// DDoS black-white list.
-        /// </summary>
         [Input("allowBlock")]
         public Input<Inputs.DdosPolicyDdosRuleAllowBlockArgs>? AllowBlock { get; set; }
 
-        /// <summary>
-        /// DDoS protocol and connection protection.
-        /// </summary>
         [Input("antiPly")]
         public Input<Inputs.DdosPolicyDdosRuleAntiPlyArgs>? AntiPly { get; set; }
 
-        /// <summary>
-        /// DDoS Protection by Geo Info.
-        /// </summary>
         [Input("geoIp")]
         public Input<Inputs.DdosPolicyDdosRuleGeoIpArgs>? GeoIp { get; set; }
 
-        /// <summary>
-        /// DDoS feature filtering configuration.
-        /// </summary>
         [Input("packetFilter")]
         public Input<Inputs.DdosPolicyDdosRulePacketFilterArgs>? PacketFilter { get; set; }
 
-        /// <summary>
-        /// DDoS access origin site speed limit configuration.
-        /// </summary>
         [Input("speedLimit")]
         public Input<Inputs.DdosPolicyDdosRuleSpeedLimitArgs>? SpeedLimit { get; set; }
 
-        /// <summary>
-        /// DDoS protection level.
-        /// </summary>
         [Input("statusInfo")]
         public Input<Inputs.DdosPolicyDdosRuleStatusInfoArgs>? StatusInfo { get; set; }
 
-        /// <summary>
-        /// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

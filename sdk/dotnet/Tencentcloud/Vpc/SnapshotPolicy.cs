@@ -23,8 +23,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var snapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("snapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
+    ///         var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = "tf-example-1308919341",
+    ///             Acl = "private",
+    ///         });
+    ///         var exampleSnapshotPolicy = new Tencentcloud.Vpc.SnapshotPolicy("exampleSnapshotPolicy", new Tencentcloud.Vpc.SnapshotPolicyArgs
+    ///         {
+    ///             SnapshotPolicyName = "tf-example",
+    ///             BackupType = "time",
+    ///             CosBucket = exampleBucket.CosBucket,
+    ///             CosRegion = "ap-guangzhou",
+    ///             CreateNewCos = false,
+    ///             KeepTime = 2,
     ///             BackupPolicies = 
     ///             {
     ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
@@ -35,20 +46,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
     ///                 {
     ///                     BackupDay = "tuesday",
-    ///                     BackupTime = "02:03:03",
+    ///                     BackupTime = "01:00:00",
     ///                 },
     ///                 new Tencentcloud.Vpc.Inputs.SnapshotPolicyBackupPolicyArgs
     ///                 {
     ///                     BackupDay = "wednesday",
-    ///                     BackupTime = "04:13:23",
+    ///                     BackupTime = "02:00:00",
     ///                 },
     ///             },
-    ///             BackupType = "time",
-    ///             CosBucket = "cos-lock-1308919341",
-    ///             CosRegion = "ap-guangzhou",
-    ///             CreateNewCos = false,
-    ///             KeepTime = 2,
-    ///             SnapshotPolicyName = "terraform-test",
     ///         });
     ///     }
     /// 

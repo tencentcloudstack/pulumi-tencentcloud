@@ -10,37 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
-    /// <summary>
-    /// Provides a resource to create a teo dns_sec
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var dnsSec = new Tencentcloud.Teo.DnsSec("dnsSec", new Tencentcloud.Teo.DnsSecArgs
-    ///         {
-    ///             Status = "enabled",
-    ///             ZoneId = "zone-297z8rf93cfw",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// teo dns_sec can be imported using the zone_id, e.g.
-    /// 
-    /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/dnsSec:DnsSec dns_sec zone-297z8rf93cfw
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/dnsSec:DnsSec")]
     public partial class DnsSec : Pulumi.CustomResource
     {

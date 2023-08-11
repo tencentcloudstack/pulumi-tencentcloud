@@ -96,7 +96,7 @@ def get_rollback_time(dbs: Optional[Sequence[str]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    rollback_time = tencentcloud.Sqlserver.get_rollback_time(dbs=["keep_pubsub_db"],
+    example = tencentcloud.Sqlserver.get_rollback_time(dbs=["keep_pubsub_db"],
         instance_id="mssql-qelbzgwf")
     ```
 
@@ -139,7 +139,7 @@ def get_rollback_time_output(dbs: Optional[pulumi.Input[Sequence[str]]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    rollback_time = tencentcloud.Sqlserver.get_rollback_time(dbs=["keep_pubsub_db"],
+    example = tencentcloud.Sqlserver.get_rollback_time(dbs=["keep_pubsub_db"],
         instance_id="mssql-qelbzgwf")
     ```
 

@@ -97,7 +97,7 @@ def get_cross_region_zone(instance_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    cross_region_zone = tencentcloud.Sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
     ```
 
 
@@ -136,7 +136,7 @@ def get_cross_region_zone_output(instance_id: Optional[pulumi.Input[str]] = None
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    cross_region_zone = tencentcloud.Sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
     ```
 
 

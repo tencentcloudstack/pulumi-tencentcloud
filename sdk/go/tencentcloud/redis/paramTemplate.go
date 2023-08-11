@@ -55,15 +55,22 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
-// 			Description: pulumi.String("This is an copied redis param template from xxx."),
+// 		foo, err := Redis.NewParamTemplate(ctx, "foo", &Redis.ParamTemplateArgs{
+// 			Description: pulumi.String("This is an example redis param template."),
+// 			ProductType: pulumi.Int(6),
 // 			ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
 // 				&redis.ParamTemplateParamsOverrideArgs{
 // 					Key:   pulumi.String("timeout"),
 // 					Value: pulumi.String("7200"),
 // 				},
 // 			},
-// 			TemplateId: pulumi.String("xxx"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
+// 			Description: pulumi.String("This is an copied redis param template from tf-template."),
+// 			TemplateId:  foo.ID(),
 // 		})
 // 		if err != nil {
 // 			return err

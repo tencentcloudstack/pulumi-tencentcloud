@@ -29,7 +29,6 @@ import (
 // 			BackupFileType: "FULL",
 // 			DataBaseName:   "keep-publish-instance",
 // 			IsRecovery:     "NO",
-// 			LocalPath:      pulumi.StringRef(""),
 // 		}, nil)
 // 		if err != nil {
 // 			return err

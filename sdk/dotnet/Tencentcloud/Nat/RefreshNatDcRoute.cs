@@ -14,6 +14,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// Provides a resource to create a vpc refresh_nat_dc_route
     /// 
     /// ## Example Usage
+    /// ### is True
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var eipExample = new Tencentcloud.Eip.Instance("eipExample", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///         var nat = new Tencentcloud.Nat.Gateway("nat", new Tencentcloud.Nat.GatewayArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             MaxConcurrent = 3000000,
+    ///             Bandwidth = 500,
+    ///             AssignedEipSets = 
+    ///             {
+    ///                 eipExample.PublicIp,
+    ///             },
+    ///         });
+    ///         var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new Tencentcloud.Nat.RefreshNatDcRouteArgs
+    ///         {
+    ///             NatGatewayId = nat.Id,
+    ///             VpcId = vpc.Id,
+    ///             DryRun = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### is False
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -25,9 +63,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     ///     {
     ///         var refreshNatDcRoute = new Tencentcloud.Nat.RefreshNatDcRoute("refreshNatDcRoute", new Tencentcloud.Nat.RefreshNatDcRouteArgs
     ///         {
-    ///             DryRun = true,
-    ///             NatGatewayId = "nat-gnxkey2e",
-    ///             VpcId = "vpc-pyyv5k3v",
+    ///             NatGatewayId = tencentcloud_nat_gateway.Nat.Id,
+    ///             VpcId = tencentcloud_vpc.Vpc.Id,
+    ///             DryRun = false,
     ///         });
     ///     }
     /// 

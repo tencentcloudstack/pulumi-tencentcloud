@@ -13,18 +13,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigBotConfigManagedRuleGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         [Input("algManagedIds")]
         private InputList<int>? _algManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `alg`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public InputList<int> AlgManagedIds
         {
             get => _algManagedIds ?? (_algManagedIds = new InputList<int>());
@@ -33,10 +26,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("capManagedIds")]
         private InputList<int>? _capManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `captcha`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public InputList<int> CapManagedIds
         {
             get => _capManagedIds ?? (_capManagedIds = new InputList<int>());
@@ -45,10 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("dropManagedIds")]
         private InputList<int>? _dropManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `drop`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public InputList<int> DropManagedIds
         {
             get => _dropManagedIds ?? (_dropManagedIds = new InputList<int>());
@@ -57,49 +42,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("monManagedIds")]
         private InputList<int>? _monManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `monitor`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public InputList<int> MonManagedIds
         {
             get => _monManagedIds ?? (_monManagedIds = new InputList<int>());
             set => _monManagedIds = value;
         }
 
-        /// <summary>
-        /// Name of the custom response page.
-        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// ID of the custom response page.
-        /// </summary>
         [Input("pageId")]
         public Input<int>? PageId { get; set; }
 
-        /// <summary>
-        /// Punish time.
-        /// </summary>
         [Input("punishTime")]
         public Input<int>? PunishTime { get; set; }
 
-        /// <summary>
-        /// Time unit of the punish time.
-        /// </summary>
         [Input("punishTimeUnit")]
         public Input<string>? PunishTimeUnit { get; set; }
 
-        /// <summary>
-        /// Redirect target URL, must be an sub-domain from one of the account&amp;#39;s site.
-        /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
 
-        /// <summary>
-        /// Response code to use when redirecting.
-        /// </summary>
         [Input("responseCode")]
         public Input<int>? ResponseCode { get; set; }
 
@@ -108,10 +71,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("transManagedIds")]
         private InputList<int>? _transManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `trans`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public InputList<int> TransManagedIds
         {
             get => _transManagedIds ?? (_transManagedIds = new InputList<int>());

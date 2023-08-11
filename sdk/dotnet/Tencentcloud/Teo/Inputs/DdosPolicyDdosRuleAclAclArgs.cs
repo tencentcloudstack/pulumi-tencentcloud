@@ -13,39 +13,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class DdosPolicyDdosRuleAclAclArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `transmit`, `forward`.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// End of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("dportEnd")]
         public Input<int>? DportEnd { get; set; }
 
-        /// <summary>
-        /// Start of the dest port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("dportStart")]
         public Input<int>? DportStart { get; set; }
 
-        /// <summary>
-        /// Valid values: `tcp`, `udp`, `all`.
-        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
-        /// <summary>
-        /// End of the source port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("sportEnd")]
         public Input<int>? SportEnd { get; set; }
 
-        /// <summary>
-        /// Start of the source port range. Valid value range: 0-65535.
-        /// </summary>
         [Input("sportStart")]
         public Input<int>? SportStart { get; set; }
 

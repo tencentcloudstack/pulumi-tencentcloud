@@ -14,61 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleAntiPly
     {
-        /// <summary>
-        /// Abnormal connections threshold. Valid value range: 0-4294967295.
-        /// </summary>
         public readonly int AbnormalConnectNum;
-        /// <summary>
-        /// Abnormal syn packet number threshold. Valid value range: 0-65535.
-        /// </summary>
         public readonly int AbnormalSynNum;
-        /// <summary>
-        /// Abnormal syn packet ratio threshold. Valid value range: 0-100.
-        /// </summary>
         public readonly int AbnormalSynRatio;
-        /// <summary>
-        /// Connection timeout detection per second. Valid value range: 0-65535.
-        /// </summary>
         public readonly int ConnectTimeout;
-        /// <summary>
-        /// Limitation of connections to dest port. Valid value range: 0-4294967295.
-        /// </summary>
         public readonly int DestinationConnectLimit;
-        /// <summary>
-        /// Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-        /// </summary>
         public readonly int DestinationCreateLimit;
-        /// <summary>
-        /// Block ICMP protocol. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string DropIcmp;
-        /// <summary>
-        /// Block other protocols. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string DropOther;
-        /// <summary>
-        /// Block TCP protocol. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string DropTcp;
-        /// <summary>
-        /// Block UDP protocol. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string DropUdp;
-        /// <summary>
-        /// Empty connection protection switch. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string EmptyConnectProtect;
-        /// <summary>
-        /// Limitation of connections to origin site. Valid value range: 0-4294967295.
-        /// </summary>
         public readonly int SourceConnectLimit;
-        /// <summary>
-        /// Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-        /// </summary>
         public readonly int SourceCreateLimit;
-        /// <summary>
-        /// UDP shard protection switch. Valid values: `on`, `off`.
-        /// </summary>
         public readonly string? UdpShard;
 
         [OutputConstructor]

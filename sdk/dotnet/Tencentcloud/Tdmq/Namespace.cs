@@ -23,17 +23,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
     ///         {
-    ///             ClusterName = "example",
-    ///             Remark = "this is description.",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
     ///         });
-    ///         var bar = new Tencentcloud.Tdmq.Namespace("bar", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
     ///         {
-    ///             ClusterId = foo.Id,
-    ///             EnvironName = "example",
+    ///             EnvironName = "tf_example",
     ///             MsgTtl = 300,
-    ///             Remark = "this is description.",
+    ///             ClusterId = exampleInstance.Id,
+    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///             {
+    ///                 TimeInMinutes = 60,
+    ///                 SizeInMb = 10,
+    ///             },
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 
@@ -79,7 +88,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
         [Output("retentionPolicy")]
-        public Output<ImmutableDictionary<string, object>?> RetentionPolicy { get; private set; } = null!;
+        public Output<Outputs.NamespaceRetentionPolicy> RetentionPolicy { get; private set; } = null!;
 
 
         /// <summary>
@@ -152,17 +161,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
-        [Input("retentionPolicy")]
-        private InputMap<object>? _retentionPolicy;
-
         /// <summary>
         /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
-        public InputMap<object> RetentionPolicy
-        {
-            get => _retentionPolicy ?? (_retentionPolicy = new InputMap<object>());
-            set => _retentionPolicy = value;
-        }
+        [Input("retentionPolicy")]
+        public Input<Inputs.NamespaceRetentionPolicyArgs>? RetentionPolicy { get; set; }
 
         public NamespaceArgs()
         {
@@ -195,17 +198,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
-        [Input("retentionPolicy")]
-        private InputMap<object>? _retentionPolicy;
-
         /// <summary>
         /// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `time_in_minutes`: the time of message to retain; `size_in_mb`: the size of message to retain.
         /// </summary>
-        public InputMap<object> RetentionPolicy
-        {
-            get => _retentionPolicy ?? (_retentionPolicy = new InputMap<object>());
-            set => _retentionPolicy = value;
-        }
+        [Input("retentionPolicy")]
+        public Input<Inputs.NamespaceRetentionPolicyGetArgs>? RetentionPolicy { get; set; }
 
         public NamespaceState()
         {

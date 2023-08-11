@@ -19,15 +19,38 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewGroupPolicyAttachment(ctx, "foo", &Cam.GroupPolicyAttachmentArgs{
-// 			GroupId:  pulumi.Any(tencentcloud_cam_group.Foo.Id),
-// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+// 		cfg := config.New(ctx, "")
+// 		camPolicyBasic := "keep-cam-policy"
+// 		if param := cfg.Get("camPolicyBasic"); param != "" {
+// 			camPolicyBasic = param
+// 		}
+// 		camGroupBasic := "keep-cam-group"
+// 		if param := cfg.Get("camGroupBasic"); param != "" {
+// 			camGroupBasic = param
+// 		}
+// 		groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+// 			Name: pulumi.StringRef(camGroupBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		policy, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+// 			Name: pulumi.StringRef(camPolicyBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.NewGroupPolicyAttachment(ctx, "groupPolicyAttachmentBasic", &Cam.GroupPolicyAttachmentArgs{
+// 			GroupId:  pulumi.String(groups.GroupLists[0].GroupId),
+// 			PolicyId: pulumi.String(policy.PolicyLists[0].PolicyId),
 // 		})
 // 		if err != nil {
 // 			return err

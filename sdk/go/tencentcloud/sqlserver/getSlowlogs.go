@@ -26,9 +26,9 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Sqlserver.GetSlowlogs(ctx, &sqlserver.GetSlowlogsArgs{
-// 			EndTime:    "2023-05-18 00:00:00",
+// 			EndTime:    "2023-08-07 00:00:00",
 // 			InstanceId: "mssql-qelbzgwf",
-// 			StartTime:  "2020-05-01 00:00:00",
+// 			StartTime:  "2023-08-01 00:00:00",
 // 		}, nil)
 // 		if err != nil {
 // 			return err

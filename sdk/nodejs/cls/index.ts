@@ -13,13 +13,16 @@ export * from "./configAttachment";
 export * from "./configExtra";
 export * from "./cosRecharge";
 export * from "./cosShipper";
+export * from "./dataTransform";
 export * from "./export";
 export * from "./getMachineGroupConfigs";
 export * from "./getMachines";
 export * from "./getShipperTasks";
 export * from "./index_";
+export * from "./kafkaRecharge";
 export * from "./logset";
 export * from "./machineGroup";
+export * from "./scheduledSql";
 export * from "./topic";
 
 // Import resources to register:
@@ -31,10 +34,13 @@ import { ConfigAttachment } from "./configAttachment";
 import { ConfigExtra } from "./configExtra";
 import { CosRecharge } from "./cosRecharge";
 import { CosShipper } from "./cosShipper";
+import { DataTransform } from "./dataTransform";
 import { Export } from "./export";
 import { Index } from "./index_";
+import { KafkaRecharge } from "./kafkaRecharge";
 import { Logset } from "./logset";
 import { MachineGroup } from "./machineGroup";
+import { ScheduledSql } from "./scheduledSql";
 import { Topic } from "./topic";
 
 const _module = {
@@ -57,14 +63,20 @@ const _module = {
                 return new CosRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/cosShipper:CosShipper":
                 return new CosShipper(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/dataTransform:DataTransform":
+                return new DataTransform(name, <any>undefined, { urn })
             case "tencentcloud:Cls/export:Export":
                 return new Export(name, <any>undefined, { urn })
             case "tencentcloud:Cls/index:Index":
                 return new Index(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
+                return new KafkaRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/logset:Logset":
                 return new Logset(name, <any>undefined, { urn })
             case "tencentcloud:Cls/machineGroup:MachineGroup":
                 return new MachineGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/scheduledSql:ScheduledSql":
+                return new ScheduledSql(name, <any>undefined, { urn })
             case "tencentcloud:Cls/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             default:
@@ -80,8 +92,11 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configAttachment", _m
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configExtra", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dataTransform", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/export", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/kafkaRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/logset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/scheduledSql", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/topic", _module)

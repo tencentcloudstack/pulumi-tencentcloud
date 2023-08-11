@@ -71,9 +71,39 @@ class GeneralCommunication(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_communication = tencentcloud.sqlserver.GeneralCommunication("generalCommunication", instance_id="mssql-qelbzgwf")
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_general_communication = tencentcloud.sqlserver.GeneralCommunication("exampleGeneralCommunication", instance_id=example_basic_instance.id)
         ```
 
         ## Import
@@ -81,7 +111,7 @@ class GeneralCommunication(pulumi.CustomResource):
         sqlserver general_communication can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/generalCommunication:GeneralCommunication general_communication general_communication_id
+         $ pulumi import tencentcloud:Sqlserver/generalCommunication:GeneralCommunication example mssql-hlh6yka1
         ```
 
         :param str resource_name: The name of the resource.
@@ -101,9 +131,39 @@ class GeneralCommunication(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_communication = tencentcloud.sqlserver.GeneralCommunication("generalCommunication", instance_id="mssql-qelbzgwf")
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_general_communication = tencentcloud.sqlserver.GeneralCommunication("exampleGeneralCommunication", instance_id=example_basic_instance.id)
         ```
 
         ## Import
@@ -111,7 +171,7 @@ class GeneralCommunication(pulumi.CustomResource):
         sqlserver general_communication can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/generalCommunication:GeneralCommunication general_communication general_communication_id
+         $ pulumi import tencentcloud:Sqlserver/generalCommunication:GeneralCommunication example mssql-hlh6yka1
         ```
 
         :param str resource_name: The name of the resource.

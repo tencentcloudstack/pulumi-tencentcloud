@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const datasourceRegions = pulumi.output(tencentcloud.Sqlserver.getRegions());
+ * const example = pulumi.output(tencentcloud.Sqlserver.getRegions());
  * ```
  */
 export function getRegions(args?: GetRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionsResult> {

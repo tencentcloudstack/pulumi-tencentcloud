@@ -123,7 +123,7 @@ class AccessGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cfs.AccessGroup("foo", description="test")
+        example = tencentcloud.cfs.AccessGroup("example", description="desc.")
         ```
 
         ## Import
@@ -131,7 +131,7 @@ class AccessGroup(pulumi.CustomResource):
         CFS access group can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
         ```
 
         :param str resource_name: The name of the resource.
@@ -154,7 +154,7 @@ class AccessGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cfs.AccessGroup("foo", description="test")
+        example = tencentcloud.cfs.AccessGroup("example", description="desc.")
         ```
 
         ## Import
@@ -162,7 +162,7 @@ class AccessGroup(pulumi.CustomResource):
         CFS access group can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
         ```
 
         :param str resource_name: The name of the resource.

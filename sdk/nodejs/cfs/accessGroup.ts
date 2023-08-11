@@ -13,8 +13,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Cfs.AccessGroup("foo", {
- *     description: "test",
+ * const example = new tencentcloud.Cfs.AccessGroup("example", {
+ *     description: "desc.",
  * });
  * ```
  *
@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  * CFS access group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+ *  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup example pgroup-7nx89k7l
  * ```
  */
 export class AccessGroup extends pulumi.CustomResource {

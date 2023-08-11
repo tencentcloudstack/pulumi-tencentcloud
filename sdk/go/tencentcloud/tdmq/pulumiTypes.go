@@ -10,6 +10,162 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type NamespaceRetentionPolicy struct {
+	// the size of message to retain.
+	SizeInMb *int `pulumi:"sizeInMb"`
+	// the time of message to retain.
+	TimeInMinutes *int `pulumi:"timeInMinutes"`
+}
+
+// NamespaceRetentionPolicyInput is an input type that accepts NamespaceRetentionPolicyArgs and NamespaceRetentionPolicyOutput values.
+// You can construct a concrete instance of `NamespaceRetentionPolicyInput` via:
+//
+//          NamespaceRetentionPolicyArgs{...}
+type NamespaceRetentionPolicyInput interface {
+	pulumi.Input
+
+	ToNamespaceRetentionPolicyOutput() NamespaceRetentionPolicyOutput
+	ToNamespaceRetentionPolicyOutputWithContext(context.Context) NamespaceRetentionPolicyOutput
+}
+
+type NamespaceRetentionPolicyArgs struct {
+	// the size of message to retain.
+	SizeInMb pulumi.IntPtrInput `pulumi:"sizeInMb"`
+	// the time of message to retain.
+	TimeInMinutes pulumi.IntPtrInput `pulumi:"timeInMinutes"`
+}
+
+func (NamespaceRetentionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceRetentionPolicy)(nil)).Elem()
+}
+
+func (i NamespaceRetentionPolicyArgs) ToNamespaceRetentionPolicyOutput() NamespaceRetentionPolicyOutput {
+	return i.ToNamespaceRetentionPolicyOutputWithContext(context.Background())
+}
+
+func (i NamespaceRetentionPolicyArgs) ToNamespaceRetentionPolicyOutputWithContext(ctx context.Context) NamespaceRetentionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceRetentionPolicyOutput)
+}
+
+func (i NamespaceRetentionPolicyArgs) ToNamespaceRetentionPolicyPtrOutput() NamespaceRetentionPolicyPtrOutput {
+	return i.ToNamespaceRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i NamespaceRetentionPolicyArgs) ToNamespaceRetentionPolicyPtrOutputWithContext(ctx context.Context) NamespaceRetentionPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceRetentionPolicyOutput).ToNamespaceRetentionPolicyPtrOutputWithContext(ctx)
+}
+
+// NamespaceRetentionPolicyPtrInput is an input type that accepts NamespaceRetentionPolicyArgs, NamespaceRetentionPolicyPtr and NamespaceRetentionPolicyPtrOutput values.
+// You can construct a concrete instance of `NamespaceRetentionPolicyPtrInput` via:
+//
+//          NamespaceRetentionPolicyArgs{...}
+//
+//  or:
+//
+//          nil
+type NamespaceRetentionPolicyPtrInput interface {
+	pulumi.Input
+
+	ToNamespaceRetentionPolicyPtrOutput() NamespaceRetentionPolicyPtrOutput
+	ToNamespaceRetentionPolicyPtrOutputWithContext(context.Context) NamespaceRetentionPolicyPtrOutput
+}
+
+type namespaceRetentionPolicyPtrType NamespaceRetentionPolicyArgs
+
+func NamespaceRetentionPolicyPtr(v *NamespaceRetentionPolicyArgs) NamespaceRetentionPolicyPtrInput {
+	return (*namespaceRetentionPolicyPtrType)(v)
+}
+
+func (*namespaceRetentionPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NamespaceRetentionPolicy)(nil)).Elem()
+}
+
+func (i *namespaceRetentionPolicyPtrType) ToNamespaceRetentionPolicyPtrOutput() NamespaceRetentionPolicyPtrOutput {
+	return i.ToNamespaceRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *namespaceRetentionPolicyPtrType) ToNamespaceRetentionPolicyPtrOutputWithContext(ctx context.Context) NamespaceRetentionPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceRetentionPolicyPtrOutput)
+}
+
+type NamespaceRetentionPolicyOutput struct{ *pulumi.OutputState }
+
+func (NamespaceRetentionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceRetentionPolicy)(nil)).Elem()
+}
+
+func (o NamespaceRetentionPolicyOutput) ToNamespaceRetentionPolicyOutput() NamespaceRetentionPolicyOutput {
+	return o
+}
+
+func (o NamespaceRetentionPolicyOutput) ToNamespaceRetentionPolicyOutputWithContext(ctx context.Context) NamespaceRetentionPolicyOutput {
+	return o
+}
+
+func (o NamespaceRetentionPolicyOutput) ToNamespaceRetentionPolicyPtrOutput() NamespaceRetentionPolicyPtrOutput {
+	return o.ToNamespaceRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o NamespaceRetentionPolicyOutput) ToNamespaceRetentionPolicyPtrOutputWithContext(ctx context.Context) NamespaceRetentionPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NamespaceRetentionPolicy) *NamespaceRetentionPolicy {
+		return &v
+	}).(NamespaceRetentionPolicyPtrOutput)
+}
+
+// the size of message to retain.
+func (o NamespaceRetentionPolicyOutput) SizeInMb() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NamespaceRetentionPolicy) *int { return v.SizeInMb }).(pulumi.IntPtrOutput)
+}
+
+// the time of message to retain.
+func (o NamespaceRetentionPolicyOutput) TimeInMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NamespaceRetentionPolicy) *int { return v.TimeInMinutes }).(pulumi.IntPtrOutput)
+}
+
+type NamespaceRetentionPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (NamespaceRetentionPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NamespaceRetentionPolicy)(nil)).Elem()
+}
+
+func (o NamespaceRetentionPolicyPtrOutput) ToNamespaceRetentionPolicyPtrOutput() NamespaceRetentionPolicyPtrOutput {
+	return o
+}
+
+func (o NamespaceRetentionPolicyPtrOutput) ToNamespaceRetentionPolicyPtrOutputWithContext(ctx context.Context) NamespaceRetentionPolicyPtrOutput {
+	return o
+}
+
+func (o NamespaceRetentionPolicyPtrOutput) Elem() NamespaceRetentionPolicyOutput {
+	return o.ApplyT(func(v *NamespaceRetentionPolicy) NamespaceRetentionPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret NamespaceRetentionPolicy
+		return ret
+	}).(NamespaceRetentionPolicyOutput)
+}
+
+// the size of message to retain.
+func (o NamespaceRetentionPolicyPtrOutput) SizeInMb() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NamespaceRetentionPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SizeInMb
+	}).(pulumi.IntPtrOutput)
+}
+
+// the time of message to retain.
+func (o NamespaceRetentionPolicyPtrOutput) TimeInMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NamespaceRetentionPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeInMinutes
+	}).(pulumi.IntPtrOutput)
+}
+
 type RocketmqClusterVpc struct {
 	// Subnet ID.
 	SubnetId *string `pulumi:"subnetId"`
@@ -114,6 +270,162 @@ func (o RocketmqClusterVpcArrayOutput) Index(i pulumi.IntInput) RocketmqClusterV
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RocketmqClusterVpc {
 		return vs[0].([]RocketmqClusterVpc)[vs[1].(int)]
 	}).(RocketmqClusterVpcOutput)
+}
+
+type RocketmqVipInstanceVpcInfo struct {
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// RocketmqVipInstanceVpcInfoInput is an input type that accepts RocketmqVipInstanceVpcInfoArgs and RocketmqVipInstanceVpcInfoOutput values.
+// You can construct a concrete instance of `RocketmqVipInstanceVpcInfoInput` via:
+//
+//          RocketmqVipInstanceVpcInfoArgs{...}
+type RocketmqVipInstanceVpcInfoInput interface {
+	pulumi.Input
+
+	ToRocketmqVipInstanceVpcInfoOutput() RocketmqVipInstanceVpcInfoOutput
+	ToRocketmqVipInstanceVpcInfoOutputWithContext(context.Context) RocketmqVipInstanceVpcInfoOutput
+}
+
+type RocketmqVipInstanceVpcInfoArgs struct {
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (RocketmqVipInstanceVpcInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RocketmqVipInstanceVpcInfo)(nil)).Elem()
+}
+
+func (i RocketmqVipInstanceVpcInfoArgs) ToRocketmqVipInstanceVpcInfoOutput() RocketmqVipInstanceVpcInfoOutput {
+	return i.ToRocketmqVipInstanceVpcInfoOutputWithContext(context.Background())
+}
+
+func (i RocketmqVipInstanceVpcInfoArgs) ToRocketmqVipInstanceVpcInfoOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RocketmqVipInstanceVpcInfoOutput)
+}
+
+func (i RocketmqVipInstanceVpcInfoArgs) ToRocketmqVipInstanceVpcInfoPtrOutput() RocketmqVipInstanceVpcInfoPtrOutput {
+	return i.ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i RocketmqVipInstanceVpcInfoArgs) ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RocketmqVipInstanceVpcInfoOutput).ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(ctx)
+}
+
+// RocketmqVipInstanceVpcInfoPtrInput is an input type that accepts RocketmqVipInstanceVpcInfoArgs, RocketmqVipInstanceVpcInfoPtr and RocketmqVipInstanceVpcInfoPtrOutput values.
+// You can construct a concrete instance of `RocketmqVipInstanceVpcInfoPtrInput` via:
+//
+//          RocketmqVipInstanceVpcInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type RocketmqVipInstanceVpcInfoPtrInput interface {
+	pulumi.Input
+
+	ToRocketmqVipInstanceVpcInfoPtrOutput() RocketmqVipInstanceVpcInfoPtrOutput
+	ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(context.Context) RocketmqVipInstanceVpcInfoPtrOutput
+}
+
+type rocketmqVipInstanceVpcInfoPtrType RocketmqVipInstanceVpcInfoArgs
+
+func RocketmqVipInstanceVpcInfoPtr(v *RocketmqVipInstanceVpcInfoArgs) RocketmqVipInstanceVpcInfoPtrInput {
+	return (*rocketmqVipInstanceVpcInfoPtrType)(v)
+}
+
+func (*rocketmqVipInstanceVpcInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RocketmqVipInstanceVpcInfo)(nil)).Elem()
+}
+
+func (i *rocketmqVipInstanceVpcInfoPtrType) ToRocketmqVipInstanceVpcInfoPtrOutput() RocketmqVipInstanceVpcInfoPtrOutput {
+	return i.ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *rocketmqVipInstanceVpcInfoPtrType) ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RocketmqVipInstanceVpcInfoPtrOutput)
+}
+
+type RocketmqVipInstanceVpcInfoOutput struct{ *pulumi.OutputState }
+
+func (RocketmqVipInstanceVpcInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RocketmqVipInstanceVpcInfo)(nil)).Elem()
+}
+
+func (o RocketmqVipInstanceVpcInfoOutput) ToRocketmqVipInstanceVpcInfoOutput() RocketmqVipInstanceVpcInfoOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceVpcInfoOutput) ToRocketmqVipInstanceVpcInfoOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceVpcInfoOutput) ToRocketmqVipInstanceVpcInfoPtrOutput() RocketmqVipInstanceVpcInfoPtrOutput {
+	return o.ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(context.Background())
+}
+
+func (o RocketmqVipInstanceVpcInfoOutput) ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RocketmqVipInstanceVpcInfo) *RocketmqVipInstanceVpcInfo {
+		return &v
+	}).(RocketmqVipInstanceVpcInfoPtrOutput)
+}
+
+// Subnet ID.
+func (o RocketmqVipInstanceVpcInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v RocketmqVipInstanceVpcInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o RocketmqVipInstanceVpcInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v RocketmqVipInstanceVpcInfo) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type RocketmqVipInstanceVpcInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (RocketmqVipInstanceVpcInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RocketmqVipInstanceVpcInfo)(nil)).Elem()
+}
+
+func (o RocketmqVipInstanceVpcInfoPtrOutput) ToRocketmqVipInstanceVpcInfoPtrOutput() RocketmqVipInstanceVpcInfoPtrOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceVpcInfoPtrOutput) ToRocketmqVipInstanceVpcInfoPtrOutputWithContext(ctx context.Context) RocketmqVipInstanceVpcInfoPtrOutput {
+	return o
+}
+
+func (o RocketmqVipInstanceVpcInfoPtrOutput) Elem() RocketmqVipInstanceVpcInfoOutput {
+	return o.ApplyT(func(v *RocketmqVipInstanceVpcInfo) RocketmqVipInstanceVpcInfo {
+		if v != nil {
+			return *v
+		}
+		var ret RocketmqVipInstanceVpcInfo
+		return ret
+	}).(RocketmqVipInstanceVpcInfoOutput)
+}
+
+// Subnet ID.
+func (o RocketmqVipInstanceVpcInfoPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RocketmqVipInstanceVpcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// VPC ID.
+func (o RocketmqVipInstanceVpcInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RocketmqVipInstanceVpcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.VpcId
+	}).(pulumi.StringPtrOutput)
 }
 
 type GetProInstanceDetailClusterInfo struct {
@@ -3911,8 +4223,12 @@ func (o GetVipInstanceInstanceConfigTopicDistributionArrayOutput) Index(i pulumi
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceRetentionPolicyInput)(nil)).Elem(), NamespaceRetentionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceRetentionPolicyPtrInput)(nil)).Elem(), NamespaceRetentionPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcInput)(nil)).Elem(), RocketmqClusterVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcArrayInput)(nil)).Elem(), RocketmqClusterVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoPtrInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoArrayInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistributionInput)(nil)).Elem(), GetProInstanceDetailClusterInfoNodeDistributionArgs{})
@@ -3967,8 +4283,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigNodeDistributionArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigNodeDistributionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistributionInput)(nil)).Elem(), GetVipInstanceInstanceConfigTopicDistributionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistributionArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigTopicDistributionArray{})
+	pulumi.RegisterOutputType(NamespaceRetentionPolicyOutput{})
+	pulumi.RegisterOutputType(NamespaceRetentionPolicyPtrOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcArrayOutput{})
+	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoOutput{})
+	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoPtrOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoNodeDistributionOutput{})

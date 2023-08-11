@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provides a resource to create a vpc flow_log_config
     /// 
     /// ## Example Usage
+    /// ### If enable FlowLogs
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,10 +24,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// {
     ///     public MyStack()
     ///     {
-    ///         var flowLogConfig = new Tencentcloud.Vpc.FlowLogConfig("flowLogConfig", new Tencentcloud.Vpc.FlowLogConfigArgs
+    ///         var config = new Tencentcloud.Vpc.FlowLogConfig("config", new Tencentcloud.Vpc.FlowLogConfigArgs
     ///         {
-    ///             Enable = false,
-    ///             FlowLogId = "fl-geg2keoj",
+    ///             FlowLogId = tencentcloud_vpc_flow_log.Example.Id,
+    ///             Enable = true,
     ///         });
     ///     }
     /// 

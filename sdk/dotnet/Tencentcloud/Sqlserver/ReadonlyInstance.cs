@@ -17,23 +17,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Sqlserver.ReadonlyInstance("foo", new Tencentcloud.Sqlserver.ReadonlyInstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             AvailabilityZone = "ap-guangzhou-4",
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = "vpc-xxxxxxxx",
-    ///             SubnetId = "subnet-xxxxxxxx",
-    ///             Memory = 2,
-    ///             Storage = 10,
-    ///             MasterInstanceId = tencentcloud_sqlserver_instance.Test.Id,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             ProjectId = 0,
+    ///             Memory = 4,
+    ///             Storage = 100,
+    ///             Cpu = 2,
+    ///             MachineType = "CLOUD_PREMIUM",
+    ///             MaintenanceWeekSets = 
+    ///             {
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///             },
+    ///             MaintenanceStartTime = "09:00",
+    ///             MaintenanceTimeSpan = 3,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///         });
+    ///         var exampleReadonlyInstance = new Tencentcloud.Sqlserver.ReadonlyInstance("exampleReadonlyInstance", new Tencentcloud.Sqlserver.ReadonlyInstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             Memory = 4,
+    ///             Storage = 20,
+    ///             MasterInstanceId = exampleBasicInstance.Id,
     ///             ReadonlyGroupType = 1,
     ///             ForceUpgrade = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -45,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// SQL Server readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+    ///  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance")]
@@ -112,10 +164,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Output<string> ReadonlyGroupId { get; private set; } = null!;
 
         /// <summary>
+        /// Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        /// </summary>
+        [Output("readonlyGroupName")]
+        public Output<string> ReadonlyGroupName { get; private set; } = null!;
+
+        /// <summary>
         /// Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         /// </summary>
         [Output("readonlyGroupType")]
         public Output<int> ReadonlyGroupType { get; private set; } = null!;
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        /// </summary>
+        [Output("readonlyGroupsIsOfflineDelay")]
+        public Output<int> ReadonlyGroupsIsOfflineDelay { get; private set; } = null!;
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        /// </summary>
+        [Output("readonlyGroupsMaxDelayTime")]
+        public Output<int> ReadonlyGroupsMaxDelayTime { get; private set; } = null!;
+
+        /// <summary>
+        /// When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        /// </summary>
+        [Output("readonlyGroupsMinInGroup")]
+        public Output<int> ReadonlyGroupsMinInGroup { get; private set; } = null!;
 
         /// <summary>
         /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
@@ -285,10 +361,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? ReadonlyGroupId { get; set; }
 
         /// <summary>
+        /// Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        /// </summary>
+        [Input("readonlyGroupName")]
+        public Input<string>? ReadonlyGroupName { get; set; }
+
+        /// <summary>
         /// Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         /// </summary>
         [Input("readonlyGroupType", required: true)]
         public Input<int> ReadonlyGroupType { get; set; } = null!;
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        /// </summary>
+        [Input("readonlyGroupsIsOfflineDelay")]
+        public Input<int>? ReadonlyGroupsIsOfflineDelay { get; set; }
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        /// </summary>
+        [Input("readonlyGroupsMaxDelayTime")]
+        public Input<int>? ReadonlyGroupsMaxDelayTime { get; set; }
+
+        /// <summary>
+        /// When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        /// </summary>
+        [Input("readonlyGroupsMinInGroup")]
+        public Input<int>? ReadonlyGroupsMinInGroup { get; set; }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;
@@ -418,10 +518,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? ReadonlyGroupId { get; set; }
 
         /// <summary>
+        /// Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        /// </summary>
+        [Input("readonlyGroupName")]
+        public Input<string>? ReadonlyGroupName { get; set; }
+
+        /// <summary>
         /// Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         /// </summary>
         [Input("readonlyGroupType")]
         public Input<int>? ReadonlyGroupType { get; set; }
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        /// </summary>
+        [Input("readonlyGroupsIsOfflineDelay")]
+        public Input<int>? ReadonlyGroupsIsOfflineDelay { get; set; }
+
+        /// <summary>
+        /// Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        /// </summary>
+        [Input("readonlyGroupsMaxDelayTime")]
+        public Input<int>? ReadonlyGroupsMaxDelayTime { get; set; }
+
+        /// <summary>
+        /// When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        /// </summary>
+        [Input("readonlyGroupsMinInGroup")]
+        public Input<int>? ReadonlyGroupsMinInGroup { get; set; }
 
         /// <summary>
         /// Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.

@@ -139,15 +139,33 @@ class BackupConfig(pulumi.CustomResource):
         Use this resource to create a backup config of redis.
 
         ## Example Usage
+        ### Set configuration for automatic backups
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        redislab = tencentcloud.redis.BackupConfig("redislab",
-            backup_periods=["Monday"],
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        foo_backup_config = tencentcloud.redis.BackupConfig("fooBackupConfig",
+            redis_id=foo_instance.id,
             backup_time="04:00-05:00",
-            redis_id="crs-7yl0q0dd")
+            backup_periods=["Monday"])
         ```
 
         ## Import
@@ -157,7 +175,7 @@ class BackupConfig(pulumi.CustomResource):
         backup config can be imported, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
         ```
 
         :param str resource_name: The name of the resource.
@@ -176,15 +194,33 @@ class BackupConfig(pulumi.CustomResource):
         Use this resource to create a backup config of redis.
 
         ## Example Usage
+        ### Set configuration for automatic backups
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        redislab = tencentcloud.redis.BackupConfig("redislab",
-            backup_periods=["Monday"],
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[1].zone,
+            type_id=zone.lists[1].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[1].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        foo_backup_config = tencentcloud.redis.BackupConfig("fooBackupConfig",
+            redis_id=foo_instance.id,
             backup_time="04:00-05:00",
-            redis_id="crs-7yl0q0dd")
+            backup_periods=["Monday"])
         ```
 
         ## Import
@@ -194,7 +230,7 @@ class BackupConfig(pulumi.CustomResource):
         backup config can be imported, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
         ```
 
         :param str resource_name: The name of the resource.

@@ -23,6 +23,7 @@ __all__ = [
     'ParamTemplateParamListArgs',
     'ProxyEndPointInstanceWeightArgs',
     'ProxyProxyZoneArgs',
+    'ProxyRoInstanceArgs',
     'RollBackClusterRollbackDatabaseArgs',
     'RollBackClusterRollbackTableArgs',
     'RollBackClusterRollbackTableTableArgs',
@@ -801,6 +802,35 @@ class ProxyProxyZoneArgs:
     @proxy_node_zone.setter
     def proxy_node_zone(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "proxy_node_zone", value)
+
+
+@pulumi.input_type
+class ProxyRoInstanceArgs:
+    def __init__(__self__, *,
+                 instance_id: Optional[pulumi.Input[str]] = None,
+                 weight: Optional[pulumi.Input[int]] = None):
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "weight", value)
 
 
 @pulumi.input_type

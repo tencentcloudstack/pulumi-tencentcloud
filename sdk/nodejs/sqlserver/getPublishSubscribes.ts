@@ -13,15 +13,99 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = new tencentcloud.sqlserver.PublishSubscribe("example", {
- *     publishInstanceId: tencentcloud_sqlserver_instance.publish_instance.id,
- *     subscribeInstanceId: tencentcloud_sqlserver_instance.subscribe_instance.id,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_HSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     projectId: 0,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "2008R2",
+ *     securityGroupLists: [securityGroup.id],
+ *     weeklies: [
+ *         1,
+ *         2,
+ *         3,
+ *         5,
+ *         6,
+ *         7,
+ *     ],
+ *     startTime: "00:00",
+ *     span: 6,
+ *     resourceTags: [{
+ *         tagKey: "test",
+ *         tagValue: "test",
+ *     }],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
+ * });
+ * const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_HSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     projectId: 0,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "2008R2",
+ *     securityGroupLists: [securityGroup.id],
+ *     weeklies: [
+ *         1,
+ *         2,
+ *         3,
+ *         5,
+ *         6,
+ *         7,
+ *     ],
+ *     startTime: "00:00",
+ *     span: 6,
+ *     resourceTags: [{
+ *         tagKey: "test",
+ *         tagValue: "test",
+ *     }],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
+ * });
+ * const examplePubDb = new tencentcloud.sqlserver.Db("examplePubDb", {
+ *     instanceId: examplePubGeneralCloudInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleSubDb = new tencentcloud.sqlserver.Db("exampleSubDb", {
+ *     instanceId: exampleSubGeneralCloudInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const examplePublishSubscribe = new tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe", {
+ *     publishInstanceId: examplePubGeneralCloudInstance.id,
+ *     subscribeInstanceId: exampleSubGeneralCloudInstance.id,
  *     publishSubscribeName: "example",
  *     deleteSubscribeDb: false,
  *     databaseTuples: [{
- *         publishDatabase: tencentcloud_sqlserver_db.test_publish_subscribe.name,
+ *         publishDatabase: examplePubDb.name,
+ *         subscribeDatabase: exampleSubDb.name,
  *     }],
+ * });
+ * const examplePublishSubscribes = tencentcloud.Sqlserver.getPublishSubscribesOutput({
+ *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
  */

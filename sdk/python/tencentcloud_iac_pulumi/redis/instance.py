@@ -57,7 +57,7 @@ class InstanceArgs:
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
@@ -304,7 +304,7 @@ class InstanceArgs:
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 
@@ -471,7 +471,7 @@ class _InstanceState:
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
@@ -751,7 +751,7 @@ class _InstanceState:
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 
@@ -919,21 +919,116 @@ class Instance(pulumi.CustomResource):
         > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 
         ## Example Usage
+        ### Create a base version of redis
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        zone = tencentcloud.Redis.get_zone_config()
-        redis_instance_test2 = tencentcloud.redis.Instance("redisInstanceTest2",
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[0].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
             availability_zone=zone.lists[0].zone,
             type_id=zone.lists[0].type_id,
             password="test12345789",
             mem_size=8192,
             redis_shard_num=zone.lists[0].redis_shard_nums[0],
             redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
-            port=6379)
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        ```
+        ### Buy a month of prepaid instances
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id],
+            charge_type="PREPAID",
+            prepaid_period=1)
+        ```
+        ### Create a multi-AZ instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7,
+            region="ap-guangzhou")
+        config = pulumi.Config()
+        replica_zone_ids = config.get_object("replicaZoneIds")
+        if replica_zone_ids is None:
+            replica_zone_ids = [
+                100004,
+                100006,
+            ]
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[2].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[2].zone,
+            type_id=zone.lists[2].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[2].redis_shard_nums[0],
+            redis_replicas_num=2,
+            replica_zone_ids=replica_zone_ids,
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
         ```
 
         ## Import
@@ -961,7 +1056,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
@@ -986,21 +1081,116 @@ class Instance(pulumi.CustomResource):
         > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 
         ## Example Usage
+        ### Create a base version of redis
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        zone = tencentcloud.Redis.get_zone_config()
-        redis_instance_test2 = tencentcloud.redis.Instance("redisInstanceTest2",
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[0].zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.redis.Instance("foo",
             availability_zone=zone.lists[0].zone,
             type_id=zone.lists[0].type_id,
             password="test12345789",
             mem_size=8192,
             redis_shard_num=zone.lists[0].redis_shard_nums[0],
             redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
-            port=6379)
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        ```
+        ### Buy a month of prepaid instances
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id],
+            charge_type="PREPAID",
+            prepaid_period=1)
+        ```
+        ### Create a multi-AZ instance
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zone = tencentcloud.Redis.get_zone_config(type_id=7,
+            region="ap-guangzhou")
+        config = pulumi.Config()
+        replica_zone_ids = config.get_object("replicaZoneIds")
+        if replica_zone_ids is None:
+            replica_zone_ids = [
+                100004,
+                100006,
+            ]
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[2].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[2].zone,
+            type_id=zone.lists[2].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[2].redis_shard_nums[0],
+            redis_replicas_num=2,
+            replica_zone_ids=replica_zone_ids,
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
         ```
 
         ## Import
@@ -1162,7 +1352,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
-        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
         :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
@@ -1348,7 +1538,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="redisReplicasNum")
     def redis_replicas_num(self) -> pulumi.Output[Optional[int]]:
         """
-        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`.
+        The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
         """
         return pulumi.get(self, "redis_replicas_num")
 

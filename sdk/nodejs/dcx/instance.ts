@@ -32,6 +32,7 @@ import * as utilities from "../utilities";
  *     bandwidth: 900,
  *     dcId: dcId,
  *     dcgId: dcgId,
+ *     dcOwnerAccount: "xxxxxxxx",
  *     networkType: "VPC",
  *     routeType: "STATIC",
  *     vlan: 301,
@@ -95,6 +96,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly dcId!: pulumi.Output<string>;
     /**
+     * Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+     */
+    public readonly dcOwnerAccount!: pulumi.Output<string>;
+    /**
      * ID of the DC Gateway. Currently only new in the console.
      */
     public readonly dcgId!: pulumi.Output<string>;
@@ -129,7 +134,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * ID of the VPC or BMVPC.
      */
-    public readonly vpcId!: pulumi.Output<string>;
+    public readonly vpcId!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -150,6 +155,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["customerAddress"] = state ? state.customerAddress : undefined;
             resourceInputs["dcId"] = state ? state.dcId : undefined;
+            resourceInputs["dcOwnerAccount"] = state ? state.dcOwnerAccount : undefined;
             resourceInputs["dcgId"] = state ? state.dcgId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["networkType"] = state ? state.networkType : undefined;
@@ -167,14 +173,12 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.dcgId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'dcgId'");
             }
-            if ((!args || args.vpcId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'vpcId'");
-            }
             resourceInputs["bandwidth"] = args ? args.bandwidth : undefined;
             resourceInputs["bgpAsn"] = args ? args.bgpAsn : undefined;
             resourceInputs["bgpAuthKey"] = args ? args.bgpAuthKey : undefined;
             resourceInputs["customerAddress"] = args ? args.customerAddress : undefined;
             resourceInputs["dcId"] = args ? args.dcId : undefined;
+            resourceInputs["dcOwnerAccount"] = args ? args.dcOwnerAccount : undefined;
             resourceInputs["dcgId"] = args ? args.dcgId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["networkType"] = args ? args.networkType : undefined;
@@ -219,6 +223,10 @@ export interface InstanceState {
      * ID of the DC to be queried, application deployment offline.
      */
     dcId?: pulumi.Input<string>;
+    /**
+     * Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+     */
+    dcOwnerAccount?: pulumi.Input<string>;
     /**
      * ID of the DC Gateway. Currently only new in the console.
      */
@@ -282,6 +290,10 @@ export interface InstanceArgs {
      */
     dcId: pulumi.Input<string>;
     /**
+     * Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
+     */
+    dcOwnerAccount?: pulumi.Input<string>;
+    /**
      * ID of the DC Gateway. Currently only new in the console.
      */
     dcgId: pulumi.Input<string>;
@@ -312,5 +324,5 @@ export interface InstanceArgs {
     /**
      * ID of the VPC or BMVPC.
      */
-    vpcId: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string>;
 }

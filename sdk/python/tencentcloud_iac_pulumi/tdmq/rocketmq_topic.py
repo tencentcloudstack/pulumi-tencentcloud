@@ -267,21 +267,19 @@ class RocketmqTopic(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
-        topic = tencentcloud.tdmq.RocketmqTopic("topic",
-            topic_name="test_rocketmq_topic",
-            namespace_name=namespace.namespace_name,
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
+        example_rocketmq_topic = tencentcloud.tdmq.RocketmqTopic("exampleRocketmqTopic",
+            topic_name="tf_example",
+            namespace_name=example_rocketmq_namespace.namespace_name,
+            cluster_id=example_rocketmq_cluster.cluster_id,
             type="Normal",
-            cluster_id=cluster.cluster_id,
-            remark="test rocketmq topic")
+            remark="remark.")
         ```
 
         ## Import
@@ -316,21 +314,19 @@ class RocketmqTopic(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
-        topic = tencentcloud.tdmq.RocketmqTopic("topic",
-            topic_name="test_rocketmq_topic",
-            namespace_name=namespace.namespace_name,
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
+        example_rocketmq_topic = tencentcloud.tdmq.RocketmqTopic("exampleRocketmqTopic",
+            topic_name="tf_example",
+            namespace_name=example_rocketmq_namespace.namespace_name,
+            cluster_id=example_rocketmq_cluster.cluster_id,
             type="Normal",
-            cluster_id=cluster.cluster_id,
-            remark="test rocketmq topic")
+            remark="remark.")
         ```
 
         ## Import

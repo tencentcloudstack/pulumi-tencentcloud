@@ -93,7 +93,7 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly domain!: pulumi.Output<string>;
     /**
-     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */
     public readonly forwardType!: pulumi.Output<string>;
     /**
@@ -269,7 +269,7 @@ export interface ListenerRuleState {
      */
     domain?: pulumi.Input<string>;
     /**
-     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */
     forwardType?: pulumi.Input<string>;
     /**
@@ -367,7 +367,7 @@ export interface ListenerRuleArgs {
      */
     domain: pulumi.Input<string>;
     /**
-     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`.
+     * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */
     forwardType?: pulumi.Input<string>;
     /**

@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     /// Provides a resource to create a sms sign
     /// 
     /// ## Example Usage
+    /// ### Create a sms sign instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,15 +24,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     /// {
     ///     public MyStack()
     ///     {
-    ///         var sign = new Tencentcloud.Sms.Sign("sign", new Tencentcloud.Sms.SignArgs
+    ///         var example = new Tencentcloud.Sms.Sign("example", new Tencentcloud.Sms.SignArgs
     ///         {
     ///             DocumentType = 4,
     ///             International = 0,
-    ///             ProofImage = "dGhpcyBpcyBhIGV4YW1wbGU=",
-    ///             SignName = "terraform",
+    ///             ProofImage = "your_proof_image",
+    ///             SignName = "tf_example_sms_sign",
     ///             SignPurpose = 0,
     ///             SignType = 1,
     ///         });
+    ///         // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
     ///     }
     /// 
     /// }

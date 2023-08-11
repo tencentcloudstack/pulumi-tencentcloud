@@ -11,30 +11,19 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tdmq.Instance("foo", {
- *     clusterName: "example",
- *     remark: "this is description.",
+ * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
- * const barNamespace = new tencentcloud.Tdmq.Namespace("bar", {
- *     clusterId: foo.id,
- *     environName: "example",
- *     msgTtl: 300,
- *     remark: "this is description.",
- * });
- * const barTopic = new tencentcloud.Tdmq.Topic("bar", {
- *     clusterId: foo.id,
- *     environId: barNamespace.id,
- *     partitions: 6,
- *     remark: "this is description.",
- *     topicName: "example",
- *     topicType: 0,
- * });
- * const barRole = new tencentcloud.Tdmq.Role("bar", {
- *     clusterId: foo.id,
- *     remark: "this is description world",
- *     roleName: "example",
+ * const exampleRole = new tencentcloud.tdmq.Role("exampleRole", {
+ *     roleName: "tf_example",
+ *     clusterId: exampleInstance.id,
+ *     remark: "remark.",
  * });
  * ```
  *

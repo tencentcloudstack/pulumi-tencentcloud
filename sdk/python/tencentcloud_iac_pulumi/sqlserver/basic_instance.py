@@ -759,17 +759,26 @@ class BasicInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.BasicInstance("foo",
-            availability_zone=var["availability_zone"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.BasicInstance("example",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-26w7r56z",
-            subnet_id="subnet-lvlr6eeu",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             project_id=0,
-            memory=2,
-            storage=20,
-            cpu=1,
+            memory=4,
+            storage=100,
+            cpu=2,
             machine_type="CLOUD_PREMIUM",
             maintenance_week_sets=[
                 1,
@@ -778,7 +787,7 @@ class BasicInstance(pulumi.CustomResource):
             ],
             maintenance_start_time="09:00",
             maintenance_time_span=3,
-            security_groups=["sg-nltpbqg1"],
+            security_groups=[security_group.id],
             tags={
                 "test": "test",
             })
@@ -789,7 +798,7 @@ class BasicInstance(pulumi.CustomResource):
         SQL Server basic instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance foo mssql-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.
@@ -828,17 +837,26 @@ class BasicInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.BasicInstance("foo",
-            availability_zone=var["availability_zone"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.BasicInstance("example",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-26w7r56z",
-            subnet_id="subnet-lvlr6eeu",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             project_id=0,
-            memory=2,
-            storage=20,
-            cpu=1,
+            memory=4,
+            storage=100,
+            cpu=2,
             machine_type="CLOUD_PREMIUM",
             maintenance_week_sets=[
                 1,
@@ -847,7 +865,7 @@ class BasicInstance(pulumi.CustomResource):
             ],
             maintenance_start_time="09:00",
             maintenance_time_span=3,
-            security_groups=["sg-nltpbqg1"],
+            security_groups=[security_group.id],
             tags={
                 "test": "test",
             })
@@ -858,7 +876,7 @@ class BasicInstance(pulumi.CustomResource):
         SQL Server basic instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance foo mssql-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.

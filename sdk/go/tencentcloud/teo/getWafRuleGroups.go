@@ -10,32 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Use this data source to query detailed information of teo wafRuleGroups
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.GetWafRuleGroups(ctx, &teo.GetWafRuleGroupsArgs{
-// 			Entity: "",
-// 			ZoneId: "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetWafRuleGroups(ctx *pulumi.Context, args *GetWafRuleGroupsArgs, opts ...pulumi.InvokeOption) (*GetWafRuleGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetWafRuleGroupsResult
@@ -48,23 +22,19 @@ func GetWafRuleGroups(ctx *pulumi.Context, args *GetWafRuleGroupsArgs, opts ...p
 
 // A collection of arguments for invoking getWafRuleGroups.
 type GetWafRuleGroupsArgs struct {
-	// Subdomain or application name.
-	Entity string `pulumi:"entity"`
-	// Used to save results.
+	Entity           string  `pulumi:"entity"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId string `pulumi:"zoneId"`
+	ZoneId           string  `pulumi:"zoneId"`
 }
 
 // A collection of values returned by getWafRuleGroups.
 type GetWafRuleGroupsResult struct {
 	Entity string `pulumi:"entity"`
 	// The provider-assigned unique ID for this managed resource.
-	Id               string  `pulumi:"id"`
-	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// List of WAF rule groups.
-	WafRuleGroups []GetWafRuleGroupsWafRuleGroup `pulumi:"wafRuleGroups"`
-	ZoneId        string                         `pulumi:"zoneId"`
+	Id               string                         `pulumi:"id"`
+	ResultOutputFile *string                        `pulumi:"resultOutputFile"`
+	WafRuleGroups    []GetWafRuleGroupsWafRuleGroup `pulumi:"wafRuleGroups"`
+	ZoneId           string                         `pulumi:"zoneId"`
 }
 
 func GetWafRuleGroupsOutput(ctx *pulumi.Context, args GetWafRuleGroupsOutputArgs, opts ...pulumi.InvokeOption) GetWafRuleGroupsResultOutput {
@@ -82,12 +52,9 @@ func GetWafRuleGroupsOutput(ctx *pulumi.Context, args GetWafRuleGroupsOutputArgs
 
 // A collection of arguments for invoking getWafRuleGroups.
 type GetWafRuleGroupsOutputArgs struct {
-	// Subdomain or application name.
-	Entity pulumi.StringInput `pulumi:"entity"`
-	// Used to save results.
+	Entity           pulumi.StringInput    `pulumi:"entity"`
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	ZoneId           pulumi.StringInput    `pulumi:"zoneId"`
 }
 
 func (GetWafRuleGroupsOutputArgs) ElementType() reflect.Type {
@@ -122,7 +89,6 @@ func (o GetWafRuleGroupsResultOutput) ResultOutputFile() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v GetWafRuleGroupsResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
-// List of WAF rule groups.
 func (o GetWafRuleGroupsResultOutput) WafRuleGroups() GetWafRuleGroupsWafRuleGroupArrayOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsResult) []GetWafRuleGroupsWafRuleGroup { return v.WafRuleGroups }).(GetWafRuleGroupsWafRuleGroupArrayOutput)
 }

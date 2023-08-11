@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis backup_download_restriction
     /// 
     /// ## Example Usage
+    /// ### Modify the network information and address of the current region backup file download
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// {
     ///     public MyStack()
     ///     {
-    ///         var backupDownloadRestriction = new Tencentcloud.Redis.BackupDownloadRestriction("backupDownloadRestriction", new Tencentcloud.Redis.BackupDownloadRestrictionArgs
+    ///         var foo = new Tencentcloud.Redis.BackupDownloadRestriction("foo", new Tencentcloud.Redis.BackupDownloadRestrictionArgs
     ///         {
     ///             LimitType = "Customize",
     ///             VpcComparisonSymbol = "In",
@@ -52,10 +53,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Import
     /// 
-    /// redis backup_download_restriction can be imported using the id, e.g.
+    /// redis backup_download_restriction can be imported using the region, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction backup_download_restriction_id
+    ///  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction")]

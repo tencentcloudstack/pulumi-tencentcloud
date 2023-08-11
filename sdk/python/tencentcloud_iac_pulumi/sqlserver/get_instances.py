@@ -124,15 +124,30 @@ def get_instances(id: Optional[str] = None,
     Use this data source to query SQL Server instances
 
     ## Example Usage
+    ### Filter instance by Id
 
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    vpc = tencentcloud.Sqlserver.get_instances(subnet_id="subnet-nf9n81ps",
+    example_id = tencentcloud.Sqlserver.get_instances(id="mssql-3l3fgqn7")
+    ```
+    ### Filter instance by project Id
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_project = tencentcloud.Sqlserver.get_instances(project_id=0)
+    ```
+    ### Filter instance by VPC/Subnet
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_vpc = tencentcloud.Sqlserver.get_instances(subnet_id="subnet-nf9n81ps",
         vpc_id="vpc-409mvdvv")
-    project = tencentcloud.Sqlserver.get_instances(project_id=0)
-    id = tencentcloud.Sqlserver.get_instances(id="postgres-h9t4fde1")
     ```
 
 
@@ -180,15 +195,30 @@ def get_instances_output(id: Optional[pulumi.Input[Optional[str]]] = None,
     Use this data source to query SQL Server instances
 
     ## Example Usage
+    ### Filter instance by Id
 
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    vpc = tencentcloud.Sqlserver.get_instances(subnet_id="subnet-nf9n81ps",
+    example_id = tencentcloud.Sqlserver.get_instances(id="mssql-3l3fgqn7")
+    ```
+    ### Filter instance by project Id
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_project = tencentcloud.Sqlserver.get_instances(project_id=0)
+    ```
+    ### Filter instance by VPC/Subnet
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_vpc = tencentcloud.Sqlserver.get_instances(subnet_id="subnet-nf9n81ps",
         vpc_id="vpc-409mvdvv")
-    project = tencentcloud.Sqlserver.get_instances(project_id=0)
-    id = tencentcloud.Sqlserver.get_instances(id="postgres-h9t4fde1")
     ```
 
 

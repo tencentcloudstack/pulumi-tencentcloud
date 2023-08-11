@@ -13,19 +13,41 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
- * const fooSubnet_instanceInstance = new tencentcloud.subnet.Instance("fooSubnet/instanceInstance", {
- *     availabilityZone: "ap-guangzhou-3",
- *     vpcId: fooInstance.id,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "vpc",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
- * const fooEni_instanceInstance = new tencentcloud.eni.Instance("fooEni/instanceInstance", {
- *     vpcId: fooInstance.id,
- *     subnetId: fooSubnet / instanceInstance.id,
- *     description: "eni desc",
+ * const example1 = new tencentcloud.security.Group("example1", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const example2 = new tencentcloud.security.Group("example2", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const example = new tencentcloud.eni.Instance("example", {
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     description: "eni desc.",
  *     ipv4Count: 1,
+ *     securityGroups: [
+ *         example1.id,
+ *         example2.id,
+ *     ],
  * });
  * ```
  *
@@ -100,7 +122,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * A set of security group IDs.
      */
-    public readonly securityGroups!: pulumi.Output<string[] | undefined>;
+    public readonly securityGroups!: pulumi.Output<string[]>;
     /**
      * State of the ENI.
      */

@@ -10,31 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Use this data source to query detailed information of teo zoneDDoSPolicy
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.GetZoneDdosPolicy(ctx, &teo.GetZoneDdosPolicyArgs{
-// 			ZoneId: "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetZoneDdosPolicy(ctx *pulumi.Context, args *GetZoneDdosPolicyArgs, opts ...pulumi.InvokeOption) (*GetZoneDdosPolicyResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetZoneDdosPolicyResult
@@ -47,23 +22,18 @@ func GetZoneDdosPolicy(ctx *pulumi.Context, args *GetZoneDdosPolicyArgs, opts ..
 
 // A collection of arguments for invoking getZoneDdosPolicy.
 type GetZoneDdosPolicyArgs struct {
-	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId string `pulumi:"zoneId"`
+	ZoneId           string  `pulumi:"zoneId"`
 }
 
 // A collection of values returned by getZoneDdosPolicy.
 type GetZoneDdosPolicyResult struct {
-	// All subdomain info. Note: This field may return null, indicating that no valid value can be obtained.
 	Domains []GetZoneDdosPolicyDomain `pulumi:"domains"`
 	// The provider-assigned unique ID for this managed resource.
-	Id               string  `pulumi:"id"`
-	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Shielded areas of the zone.
-	ShieldAreas []GetZoneDdosPolicyShieldArea `pulumi:"shieldAreas"`
-	// Site ID.
-	ZoneId string `pulumi:"zoneId"`
+	Id               string                        `pulumi:"id"`
+	ResultOutputFile *string                       `pulumi:"resultOutputFile"`
+	ShieldAreas      []GetZoneDdosPolicyShieldArea `pulumi:"shieldAreas"`
+	ZoneId           string                        `pulumi:"zoneId"`
 }
 
 func GetZoneDdosPolicyOutput(ctx *pulumi.Context, args GetZoneDdosPolicyOutputArgs, opts ...pulumi.InvokeOption) GetZoneDdosPolicyResultOutput {
@@ -81,10 +51,8 @@ func GetZoneDdosPolicyOutput(ctx *pulumi.Context, args GetZoneDdosPolicyOutputAr
 
 // A collection of arguments for invoking getZoneDdosPolicy.
 type GetZoneDdosPolicyOutputArgs struct {
-	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	ZoneId           pulumi.StringInput    `pulumi:"zoneId"`
 }
 
 func (GetZoneDdosPolicyOutputArgs) ElementType() reflect.Type {
@@ -106,7 +74,6 @@ func (o GetZoneDdosPolicyResultOutput) ToGetZoneDdosPolicyResultOutputWithContex
 	return o
 }
 
-// All subdomain info. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetZoneDdosPolicyResultOutput) Domains() GetZoneDdosPolicyDomainArrayOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyResult) []GetZoneDdosPolicyDomain { return v.Domains }).(GetZoneDdosPolicyDomainArrayOutput)
 }
@@ -120,12 +87,10 @@ func (o GetZoneDdosPolicyResultOutput) ResultOutputFile() pulumi.StringPtrOutput
 	return o.ApplyT(func(v GetZoneDdosPolicyResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
-// Shielded areas of the zone.
 func (o GetZoneDdosPolicyResultOutput) ShieldAreas() GetZoneDdosPolicyShieldAreaArrayOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyResult) []GetZoneDdosPolicyShieldArea { return v.ShieldAreas }).(GetZoneDdosPolicyShieldAreaArrayOutput)
 }
 
-// Site ID.
 func (o GetZoneDdosPolicyResultOutput) ZoneId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyResult) string { return v.ZoneId }).(pulumi.StringOutput)
 }

@@ -32,9 +32,9 @@ import (
 // 			NeedResetPassword: pulumi.Bool(true),
 // 			Password:          pulumi.String("Gail@1234"),
 // 			PhoneNum:          pulumi.String("12345678910"),
-// 			Remark:            pulumi.String("test"),
+// 			Remark:            pulumi.String("tf_user_test"),
 // 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf-cam-user"),
+// 				"test": pulumi.Any("tf_cam_user"),
 // 			},
 // 			UseApi: pulumi.Bool(true),
 // 		})

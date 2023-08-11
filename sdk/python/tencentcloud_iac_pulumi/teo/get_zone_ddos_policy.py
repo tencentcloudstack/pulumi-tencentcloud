@@ -41,9 +41,6 @@ class GetZoneDdosPolicyResult:
     @property
     @pulumi.getter
     def domains(self) -> Sequence['outputs.GetZoneDdosPolicyDomainResult']:
-        """
-        All subdomain info. Note: This field may return null, indicating that no valid value can be obtained.
-        """
         return pulumi.get(self, "domains")
 
     @property
@@ -62,17 +59,11 @@ class GetZoneDdosPolicyResult:
     @property
     @pulumi.getter(name="shieldAreas")
     def shield_areas(self) -> Sequence['outputs.GetZoneDdosPolicyShieldAreaResult']:
-        """
-        Shielded areas of the zone.
-        """
         return pulumi.get(self, "shield_areas")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> str:
-        """
-        Site ID.
-        """
         return pulumi.get(self, "zone_id")
 
 
@@ -93,20 +84,7 @@ def get_zone_ddos_policy(result_output_file: Optional[str] = None,
                          zone_id: Optional[str] = None,
                          opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetZoneDdosPolicyResult:
     """
-    Use this data source to query detailed information of teo zoneDDoSPolicy
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    zone_d_do_s_policy = tencentcloud.Teo.get_zone_ddos_policy(zone_id="")
-    ```
-
-
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['resultOutputFile'] = result_output_file
@@ -132,19 +110,6 @@ def get_zone_ddos_policy_output(result_output_file: Optional[pulumi.Input[Option
                                 zone_id: Optional[pulumi.Input[str]] = None,
                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetZoneDdosPolicyResult]:
     """
-    Use this data source to query detailed information of teo zoneDDoSPolicy
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    zone_d_do_s_policy = tencentcloud.Teo.get_zone_ddos_policy(zone_id="")
-    ```
-
-
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     ...

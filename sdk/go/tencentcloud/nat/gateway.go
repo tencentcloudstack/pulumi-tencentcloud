@@ -14,12 +14,12 @@ import (
 // Provides a resource to create a NAT gateway.
 //
 // ## Example Usage
+// ### Create a NAT gateway.
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
@@ -28,31 +28,30 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
-// 			Name: pulumi.StringRef("Default-VPC"),
-// 		}, nil)
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		eipDevDnat, err := Eip.NewInstance(ctx, "eipDevDnat", nil)
+// 		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		newEip, err := Eip.NewInstance(ctx, "newEip", nil)
+// 		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Nat.NewGateway(ctx, "myNat", &Nat.GatewayArgs{
-// 			VpcId:         pulumi.String(foo.InstanceLists[0].VpcId),
-// 			MaxConcurrent: pulumi.Int(10000000),
-// 			Bandwidth:     pulumi.Int(1000),
-// 			Zone:          pulumi.String("ap-guangzhou-3"),
+// 		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
+// 			VpcId:         vpc.ID(),
+// 			Bandwidth:     pulumi.Int(100),
+// 			MaxConcurrent: pulumi.Int(1000000),
 // 			AssignedEipSets: pulumi.StringArray{
-// 				eipDevDnat.PublicIp,
-// 				newEip.PublicIp,
+// 				eipExample1.PublicIp,
+// 				eipExample2.PublicIp,
 // 			},
 // 			Tags: pulumi.AnyMap{
-// 				"tf": pulumi.Any("test"),
+// 				"tf_tag_key": pulumi.Any("tf_tag_value"),
 // 			},
 // 		})
 // 		if err != nil {

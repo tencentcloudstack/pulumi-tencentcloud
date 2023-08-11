@@ -298,15 +298,24 @@ class TmpInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_instance = tencentcloud.monitor.TmpInstance("tmpInstance",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.TmpInstance("foo",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             data_retention_time=30,
-            instance_name="demo",
-            subnet_id="subnet-rdkj0agk",
+            zone=availability_zone,
             tags={
                 "createdBy": "terraform",
-            },
-            vpc_id="vpc-2hfyray3",
-            zone="ap-guangzhou-3")
+            })
         ```
 
         ## Import
@@ -341,15 +350,24 @@ class TmpInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_instance = tencentcloud.monitor.TmpInstance("tmpInstance",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.TmpInstance("foo",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             data_retention_time=30,
-            instance_name="demo",
-            subnet_id="subnet-rdkj0agk",
+            zone=availability_zone,
             tags={
                 "createdBy": "terraform",
-            },
-            vpc_id="vpc-2hfyray3",
-            zone="ap-guangzhou-3")
+            })
         ```
 
         ## Import

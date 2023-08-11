@@ -12,11 +12,10 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const default = tencentcloud.Vpc.getInstances({});
- * const foo = new tencentcloud.vpc.Acl("foo", {
- *     vpcId: _default.then(_default => _default.instanceLists?[0]?.vpcId),
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const example = new tencentcloud.vpc.Acl("example", {
+ *     vpcId: vpc.id,
  *     ingresses: [
  *         "ACCEPT#192.168.1.0/24#800#TCP",
  *         "ACCEPT#192.168.1.0/24#800-900#TCP",

@@ -107,22 +107,39 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy_attachment = tencentcloud.vpc.SnapshotPolicyAttachment("snapshotPolicyAttachment",
-            instances=[
-                tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
-                    instance_id="sg-r8ibzbd9",
-                    instance_name="cm-eks-cls-eizsc1iw-security-group",
-                    instance_region="ap-guangzhou",
-                    instance_type="securitygroup",
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
                 ),
-                tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
-                    instance_id="sg-k3tn70lh",
-                    instance_name="keep-ci-temp-test-sg",
-                    instance_region="ap-guangzhou",
-                    instance_type="securitygroup",
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
                 ),
-            ],
-            snapshot_policy_id="sspolicy-1t6cobbv")
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        example_group = tencentcloud.security.Group("exampleGroup", description="desc.")
+        attachment = tencentcloud.vpc.SnapshotPolicyAttachment("attachment",
+            snapshot_policy_id=example_snapshot_policy.id,
+            instances=[tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
+                instance_type="securitygroup",
+                instance_id=example_group.id,
+                instance_name="tf-example",
+                instance_region="ap-guangzhou",
+            )])
         ```
 
         ## Import
@@ -153,22 +170,39 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy_attachment = tencentcloud.vpc.SnapshotPolicyAttachment("snapshotPolicyAttachment",
-            instances=[
-                tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
-                    instance_id="sg-r8ibzbd9",
-                    instance_name="cm-eks-cls-eizsc1iw-security-group",
-                    instance_region="ap-guangzhou",
-                    instance_type="securitygroup",
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket="tf-example-1308919341",
+            acl="private")
+        example_snapshot_policy = tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy",
+            snapshot_policy_name="tf-example",
+            backup_type="time",
+            cos_bucket=example_bucket.bucket,
+            cos_region="ap-guangzhou",
+            create_new_cos=False,
+            keep_time=2,
+            backup_policies=[
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="monday",
+                    backup_time="00:00:00",
                 ),
-                tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
-                    instance_id="sg-k3tn70lh",
-                    instance_name="keep-ci-temp-test-sg",
-                    instance_region="ap-guangzhou",
-                    instance_type="securitygroup",
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="tuesday",
+                    backup_time="01:00:00",
                 ),
-            ],
-            snapshot_policy_id="sspolicy-1t6cobbv")
+                tencentcloud.vpc.SnapshotPolicyBackupPolicyArgs(
+                    backup_day="wednesday",
+                    backup_time="02:00:00",
+                ),
+            ])
+        example_group = tencentcloud.security.Group("exampleGroup", description="desc.")
+        attachment = tencentcloud.vpc.SnapshotPolicyAttachment("attachment",
+            snapshot_policy_id=example_snapshot_policy.id,
+            instances=[tencentcloud.vpc.SnapshotPolicyAttachmentInstanceArgs(
+                instance_type="securitygroup",
+                instance_id=example_group.id,
+                instance_name="tf-example",
+                instance_region="ap-guangzhou",
+            )])
         ```
 
         ## Import

@@ -21,6 +21,16 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule":
+		r = &CngwCanaryRule{}
+	case "tencentcloud:Tse/cngwRoute:CngwRoute":
+		r = &CngwRoute{}
+	case "tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit":
+		r = &CngwRouteRateLimit{}
+	case "tencentcloud:Tse/cngwService:CngwService":
+		r = &CngwService{}
+	case "tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit":
+		r = &CngwServiceRateLimit{}
 	case "tencentcloud:Tse/instance:Instance":
 		r = &Instance{}
 	default:
@@ -36,6 +46,31 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwCanaryRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwRoute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwRouteRateLimit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwService",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwServiceRateLimit",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tse/instance",

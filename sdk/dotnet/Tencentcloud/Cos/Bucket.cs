@@ -18,16 +18,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var privateSbucket = new Tencentcloud.Cos.Bucket("privateSbucket", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = appId.Apply(appId =&gt; $"private-bucket-{appId}"),
     ///             Acl = "private",
-    ///             Bucket = "mycos-1258798060",
     ///         });
     ///     }
     /// 
@@ -37,19 +40,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var multiZoneBucket = new Tencentcloud.Cos.Bucket("multiZoneBucket", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = appId.Apply(appId =&gt; $"multi-zone-bucket-{appId}"),
     ///             Acl = "private",
-    ///             Bucket = "mycos-1258798060",
-    ///             ForceClean = true,
     ///             MultiAz = true,
     ///             VersioningEnable = true,
+    ///             ForceClean = true,
     ///         });
     ///     }
     /// 
@@ -59,14 +65,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var withAclBody = new Tencentcloud.Cos.Bucket("withAclBody", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var bucketWithAcl = new Tencentcloud.Cos.Bucket("bucketWithAcl", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = appId.Apply(appId =&gt; $"bucketwith-acl-{appId}"),
     ///             AclBody = @"&lt;AccessControlPolicy&gt;
     /// 	&lt;Owner&gt;
     /// 		&lt;ID&gt;qcs::cam::uin/100022975249:uin/100022975249&lt;/ID&gt;
@@ -127,9 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 		&lt;/Grant&gt;
     /// 	&lt;/AccessControlList&gt;
     /// &lt;/AccessControlPolicy&gt;
-    /// 
     /// ",
-    ///             Bucket = "mycos-1258798060",
     ///         });
     ///     }
     /// 
@@ -139,22 +147,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var bucketWithStaticWebsite = new Tencentcloud.Cos.Bucket("bucketWithStaticWebsite", new Tencentcloud.Cos.BucketArgs
     ///         {
-    ///             Bucket = "mycos-1258798060",
+    ///             Bucket = appId.Apply(appId =&gt; $"bucket-with-static-website-{appId}"),
     ///             Website = new Tencentcloud.Cos.Inputs.BucketWebsiteArgs
     ///             {
     ///                 IndexDocument = "index.html",
     ///                 ErrorDocument = "error.html",
     ///             },
     ///         });
-    ///         this.EndpointTest = mycos.Website.Apply(website =&gt; website?.Endpoint);
+    ///         this.EndpointTest = bucketWithStaticWebsite.Website.Apply(website =&gt; website?.Endpoint);
     ///     }
     /// 
     ///     [Output("endpointTest")]
@@ -165,38 +176,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var bucketWithCors = new Tencentcloud.Cos.Bucket("bucketWithCors", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = appId.Apply(appId =&gt; $"bucket-with-cors-{appId}"),
     ///             Acl = "public-read-write",
-    ///             Bucket = "mycos-1258798060",
     ///             CorsRules = 
     ///             {
     ///                 new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
     ///                 {
-    ///                     AllowedHeaders = 
+    ///                     AllowedOrigins = 
     ///                     {
-    ///                         "*",
+    ///                         "http://*.abc.com",
     ///                     },
     ///                     AllowedMethods = 
     ///                     {
     ///                         "PUT",
     ///                         "POST",
     ///                     },
-    ///                     AllowedOrigins = 
+    ///                     AllowedHeaders = 
     ///                     {
-    ///                         "http://*.abc.com",
+    ///                         "*",
     ///                     },
+    ///                     MaxAgeSeconds = 300,
     ///                     ExposeHeaders = 
     ///                     {
     ///                         "Etag",
     ///                     },
-    ///                     MaxAgeSeconds = 300,
     ///                 },
     ///             },
     ///         });
@@ -208,102 +222,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var bucketWithLifecycle = new Tencentcloud.Cos.Bucket("bucketWithLifecycle", new Tencentcloud.Cos.BucketArgs
     ///         {
+    ///             Bucket = appId.Apply(appId =&gt; $"bucket-with-lifecycle-{appId}"),
     ///             Acl = "public-read-write",
-    ///             Bucket = "mycos-1258798060",
     ///             LifecycleRules = 
     ///             {
     ///                 new Tencentcloud.Cos.Inputs.BucketLifecycleRuleArgs
     ///                 {
-    ///                     Expiration = new Tencentcloud.Cos.Inputs.BucketLifecycleRuleExpirationArgs
-    ///                     {
-    ///                         Days = 90,
-    ///                     },
     ///                     FilterPrefix = "path1/",
     ///                     Transitions = 
     ///                     {
     ///                         new Tencentcloud.Cos.Inputs.BucketLifecycleRuleTransitionArgs
     ///                         {
-    ///                             Date = "2019-06-01",
+    ///                             Days = 30,
     ///                             StorageClass = "STANDARD_IA",
     ///                         },
     ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### Using custom origin domain settings
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var withOrigin = new Tencentcloud.Cos.Bucket("withOrigin", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Acl = "private",
-    ///             Bucket = "mycos-1258798060",
-    ///             OriginDomainRules = 
-    ///             {
-    ///                 new Tencentcloud.Cos.Inputs.BucketOriginDomainRuleArgs
-    ///                 {
-    ///                     Domain = "abc.example.com",
-    ///                     Status = "ENABLE",
-    ///                     Type = "REST",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### Using origin-pull settings
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var withOrigin = new Tencentcloud.Cos.Bucket("withOrigin", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Acl = "private",
-    ///             Bucket = "mycos-1258798060",
-    ///             OriginPullRules = 
-    ///             {
-    ///                 new Tencentcloud.Cos.Inputs.BucketOriginPullRuleArgs
-    ///                 {
-    ///                     CustomHttpHeaders = 
+    ///                     Expiration = new Tencentcloud.Cos.Inputs.BucketLifecycleRuleExpirationArgs
     ///                     {
-    ///                         { "x-custom-header", "custom_value" },
+    ///                         Days = 90,
     ///                     },
-    ///                     FollowHttpHeaders = 
-    ///                     {
-    ///                         "origin",
-    ///                         "host",
-    ///                     },
-    ///                     FollowQueryString = true,
-    ///                     FollowRedirection = true,
-    ///                     Host = "abc.example.com",
-    ///                     Prefix = "/",
-    ///                     Priority = 1,
-    ///                     Protocol = "FOLLOW",
-    ///                     SyncBackToSource = false,
     ///                 },
     ///             },
     ///         });
@@ -315,43 +263,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var replica1 = new Tencentcloud.Cos.Bucket("replica1", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Acl = "private",
-    ///             Bucket = "tf-replica-foo-1234567890",
-    ///             VersioningEnable = true,
-    ///         });
-    ///         var withReplication = new Tencentcloud.Cos.Bucket("withReplication", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Acl = "private",
-    ///             Bucket = "tf-bucket-replica-1234567890",
-    ///             ReplicaRole = "qcs::cam::uin/100000000001:uin/100000000001",
-    ///             ReplicaRules = 
-    ///             {
-    ///                 new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
-    ///                 {
-    ///                     DestinationBucket = replica1.CosBucket.Apply(bucket =&gt; $"qcs::cos:%s::{bucket}"),
-    ///                     Id = "test-rep1",
-    ///                     Prefix = "dist",
-    ///                     Status = "Enabled",
-    ///                 },
-    ///             },
-    ///             VersioningEnable = true,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### Setting log status
-    /// 
-    /// ```csharp
-    /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
@@ -359,48 +270,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cosLogGrantRole = new Tencentcloud.Cam.Role("cosLogGrantRole", new Tencentcloud.Cam.RoleArgs
+    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
+    ///         var appId = info.Apply(info =&gt; info.AppId);
+    ///         var uin = info.Apply(info =&gt; info.Uin);
+    ///         var ownerUin = info.Apply(info =&gt; info.OwnerUin);
+    ///         var region = "ap-guangzhou";
+    ///         var bucketReplicate = new Tencentcloud.Cos.Bucket("bucketReplicate", new Tencentcloud.Cos.BucketArgs
     ///         {
-    ///             Document = @"{
-    ///   ""version"": ""2.0"",
-    ///   ""statement"": [
-    ///     {
-    ///       ""action"": [
-    ///         ""name/sts:AssumeRole""
-    ///       ],
-    ///       ""effect"": ""allow"",
-    ///       ""principal"": {
-    ///         ""service"": [
-    ///           ""cls.cloud.tencent.com""
-    ///         ]
-    ///       }
-    ///     }
-    ///   ]
-    /// }
-    /// ",
-    ///             Description = "cos log enable grant",
-    ///         });
-    ///         var cosAccess = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-    ///         {
-    ///             Name = "QcloudCOSAccessForCLSRole",
-    ///         }));
-    ///         var cosLogGrantRolePolicyAttachment = new Tencentcloud.Cam.RolePolicyAttachment("cosLogGrantRolePolicyAttachment", new Tencentcloud.Cam.RolePolicyAttachmentArgs
-    ///         {
-    ///             RoleId = cosLogGrantRole.Id,
-    ///             PolicyId = cosAccess.Apply(cosAccess =&gt; cosAccess.PolicyLists?[0]?.PolicyId),
-    ///         });
-    ///         var mylog = new Tencentcloud.Cos.Bucket("mylog", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = "mylog-1258798060",
+    ///             Bucket = appId.Apply(appId =&gt; $"bucket-replicate-{appId}"),
     ///             Acl = "private",
+    ///             VersioningEnable = true,
     ///         });
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
+    ///         var bucketWithReplication = new Tencentcloud.Cos.Bucket("bucketWithReplication", new Tencentcloud.Cos.BucketArgs
     ///         {
-    ///             Bucket = "mycos-1258798060",
+    ///             Bucket = appId.Apply(appId =&gt; $"bucket-with-replication-{appId}"),
     ///             Acl = "private",
-    ///             LogEnable = true,
-    ///             LogTargetBucket = "mylog-1258798060",
-    ///             LogPrefix = "MyLogPrefix",
+    ///             VersioningEnable = true,
+    ///             ReplicaRole = Output.Tuple(ownerUin, uin).Apply(values =&gt;
+    ///             {
+    ///                 var ownerUin = values.Item1;
+    ///                 var uin = values.Item2;
+    ///                 return $"qcs::cam::uin/{ownerUin}:uin/{uin}";
+    ///             }),
+    ///             ReplicaRules = 
+    ///             {
+    ///                 new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
+    ///                 {
+    ///                     Id = "test-rep1",
+    ///                     Status = "Enabled",
+    ///                     Prefix = "dist",
+    ///                     DestinationBucket = bucketReplicate.CosBucket.Apply(bucket =&gt; $"qcs::cos:{region}::{bucket}"),
+    ///                 },
+    ///             },
     ///         });
     ///     }
     /// 

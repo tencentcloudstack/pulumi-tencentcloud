@@ -6,16 +6,24 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr tagRetentionRule
+ * Provides a resource to create a tcr tag retention rule.
  *
  * ## Example Usage
+ * ### Create a tcr tag retention rule instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const myNs = new tencentcloud.tcr.Namespace("myNs", {
- *     instanceId: local.tcr_id,
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "basic",
+ *     deleteBucket: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
  *     isPublic: true,
  *     isAutoScan: true,
  *     isPreventVul: true,
@@ -25,8 +33,8 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * const myRule = new tencentcloud.tcr.TagRetentionRule("myRule", {
- *     registryId: local.tcr_id,
- *     namespaceName: myNs.name,
+ *     registryId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
  *     retentionRule: {
  *         key: "nDaysSinceLastPush",
  *         value: 2,

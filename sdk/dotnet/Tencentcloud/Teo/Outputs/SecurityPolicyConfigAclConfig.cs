@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigAclConfig
     {
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string Switch;
-        /// <summary>
-        /// Custom configuration.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigAclConfigUserRule> UserRules;
 
         [OutputConstructor]

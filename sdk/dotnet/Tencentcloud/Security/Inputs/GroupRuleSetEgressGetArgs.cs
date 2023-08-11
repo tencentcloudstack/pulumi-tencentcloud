@@ -49,6 +49,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Inputs
         [Input("ipv6CidrBlock")]
         public Input<string>? Ipv6CidrBlock { get; set; }
 
+        [Input("policyIndex")]
+        public Input<int>? PolicyIndex { get; set; }
+
         /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
         /// </summary>

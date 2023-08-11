@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
@@ -11,17 +12,24 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tdmq.Instance("foo", {
- *     clusterName: "example",
- *     remark: "this is description.",
+ * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
- * const bar = new tencentcloud.Tdmq.Namespace("bar", {
- *     clusterId: foo.id,
- *     environName: "example",
+ * const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+ *     environName: "tf_example",
  *     msgTtl: 300,
- *     remark: "this is description.",
+ *     clusterId: exampleInstance.id,
+ *     retentionPolicy: {
+ *         timeInMinutes: 60,
+ *         sizeInMb: 10,
+ *     },
+ *     remark: "remark.",
  * });
  * ```
  *
@@ -80,7 +88,7 @@ export class Namespace extends pulumi.CustomResource {
     /**
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
-    public readonly retentionPolicy!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly retentionPolicy!: pulumi.Output<outputs.Tdmq.NamespaceRetentionPolicy>;
 
     /**
      * Create a Namespace resource with the given unique name, arguments, and options.
@@ -145,7 +153,7 @@ export interface NamespaceState {
     /**
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
-    retentionPolicy?: pulumi.Input<{[key: string]: any}>;
+    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy>;
 }
 
 /**
@@ -171,5 +179,5 @@ export interface NamespaceArgs {
     /**
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
-    retentionPolicy?: pulumi.Input<{[key: string]: any}>;
+    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy>;
 }

@@ -6,19 +6,38 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a ses template
+ * Provides a resource to create a ses template.
  *
  * ## Example Usage
+ * ### Create a ses html template
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const template = new tencentcloud.Ses.Template("template", {
+ * const example = new tencentcloud.Ses.Template("example", {
  *     templateContent: {
- *         text: "This is the content of the test",
+ *         html: `<!DOCTYPE html>
+ * <html lang="en">
+ * <head>
+ *   <meta charset="UTF-8">
+ *   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ *   <title>mail title</title>
+ * </head>
+ * <body>
+ * <div class="container">
+ *   <h1>Welcome to our service! </h1>
+ *   <p>Dear user,</p>
+ *   <p>Thank you for using Tencent Cloud:</p>
+ *   <p><a href="https://cloud.tencent.com/document/product/1653">https://cloud.tencent.com/document/product/1653</a></p>
+ *   <p>If you did not request this email, please ignore it. </p>
+ *   <p><strong>from the iac team</strong></p>
+ * </div>
+ * </body>
+ * </html>
+ * `,
  *     },
- *     templateName: "sesTemplateName",
+ *     templateName: "tf_example_ses_temp",
  * });
  * ```
  *
@@ -27,7 +46,7 @@ import * as utilities from "../utilities";
  * ses template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ses/template:Template template template_id
+ *  $ pulumi import tencentcloud:Ses/template:Template example template_id
  * ```
  */
 export class Template extends pulumi.CustomResource {

@@ -15,23 +15,31 @@ class RocketmqNamespaceArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
                  namespace_name: pulumi.Input[str],
-                 retention_time: pulumi.Input[int],
-                 ttl: pulumi.Input[int],
-                 remark: Optional[pulumi.Input[str]] = None):
+                 remark: Optional[pulumi.Input[str]] = None,
+                 retention_time: Optional[pulumi.Input[int]] = None,
+                 ttl: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a RocketmqNamespace resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] namespace_name: Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
-        :param pulumi.Input[int] retention_time: Retention time of persisted messages in milliseconds.
-        :param pulumi.Input[int] ttl: Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         :param pulumi.Input[str] remark: Remarks (up to 128 characters).
+        :param pulumi.Input[int] retention_time: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+        :param pulumi.Input[int] ttl: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "namespace_name", namespace_name)
-        pulumi.set(__self__, "retention_time", retention_time)
-        pulumi.set(__self__, "ttl", ttl)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if retention_time is not None:
+            warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+            pulumi.log.warn("""retention_time is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
+        if retention_time is not None:
+            pulumi.set(__self__, "retention_time", retention_time)
+        if ttl is not None:
+            warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+            pulumi.log.warn("""ttl is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
+        if ttl is not None:
+            pulumi.set(__self__, "ttl", ttl)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -58,30 +66,6 @@ class RocketmqNamespaceArgs:
         pulumi.set(self, "namespace_name", value)
 
     @property
-    @pulumi.getter(name="retentionTime")
-    def retention_time(self) -> pulumi.Input[int]:
-        """
-        Retention time of persisted messages in milliseconds.
-        """
-        return pulumi.get(self, "retention_time")
-
-    @retention_time.setter
-    def retention_time(self, value: pulumi.Input[int]):
-        pulumi.set(self, "retention_time", value)
-
-    @property
-    @pulumi.getter
-    def ttl(self) -> pulumi.Input[int]:
-        """
-        Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
-        """
-        return pulumi.get(self, "ttl")
-
-    @ttl.setter
-    def ttl(self, value: pulumi.Input[int]):
-        pulumi.set(self, "ttl", value)
-
-    @property
     @pulumi.getter
     def remark(self) -> Optional[pulumi.Input[str]]:
         """
@@ -92,6 +76,30 @@ class RocketmqNamespaceArgs:
     @remark.setter
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
+
+    @property
+    @pulumi.getter(name="retentionTime")
+    def retention_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+        """
+        return pulumi.get(self, "retention_time")
+
+    @retention_time.setter
+    def retention_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retention_time", value)
+
+    @property
+    @pulumi.getter
+    def ttl(self) -> Optional[pulumi.Input[int]]:
+        """
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        """
+        return pulumi.get(self, "ttl")
+
+    @ttl.setter
+    def ttl(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ttl", value)
 
 
 @pulumi.input_type
@@ -110,8 +118,8 @@ class _RocketmqNamespaceState:
         :param pulumi.Input[str] namespace_name: Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
         :param pulumi.Input[str] public_endpoint: Public network access point address.
         :param pulumi.Input[str] remark: Remarks (up to 128 characters).
-        :param pulumi.Input[int] retention_time: Retention time of persisted messages in milliseconds.
-        :param pulumi.Input[int] ttl: Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        :param pulumi.Input[int] retention_time: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+        :param pulumi.Input[int] ttl: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         :param pulumi.Input[str] vpc_endpoint: VPC access point address.
         """
         if cluster_id is not None:
@@ -123,7 +131,13 @@ class _RocketmqNamespaceState:
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
         if retention_time is not None:
+            warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+            pulumi.log.warn("""retention_time is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
+        if retention_time is not None:
             pulumi.set(__self__, "retention_time", retention_time)
+        if ttl is not None:
+            warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+            pulumi.log.warn("""ttl is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
         if ttl is not None:
             pulumi.set(__self__, "ttl", ttl)
         if vpc_endpoint is not None:
@@ -181,7 +195,7 @@ class _RocketmqNamespaceState:
     @pulumi.getter(name="retentionTime")
     def retention_time(self) -> Optional[pulumi.Input[int]]:
         """
-        Retention time of persisted messages in milliseconds.
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
         """
         return pulumi.get(self, "retention_time")
 
@@ -193,7 +207,7 @@ class _RocketmqNamespaceState:
     @pulumi.getter
     def ttl(self) -> Optional[pulumi.Input[int]]:
         """
-        Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         """
         return pulumi.get(self, "ttl")
 
@@ -234,15 +248,13 @@ class RocketmqNamespace(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
         ```
 
         ## Import
@@ -258,8 +270,8 @@ class RocketmqNamespace(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] namespace_name: Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
         :param pulumi.Input[str] remark: Remarks (up to 128 characters).
-        :param pulumi.Input[int] retention_time: Retention time of persisted messages in milliseconds.
-        :param pulumi.Input[int] ttl: Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        :param pulumi.Input[int] retention_time: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+        :param pulumi.Input[int] ttl: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         """
         ...
     @overload
@@ -276,15 +288,13 @@ class RocketmqNamespace(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
-            cluster_name="test_rocketmq",
-            remark="test recket mq")
-        namespace = tencentcloud.tdmq.RocketmqNamespace("namespace",
-            cluster_id=cluster.cluster_id,
-            namespace_name="test_namespace",
-            ttl=65000,
-            retention_time=65000,
-            remark="test namespace")
+        example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+            cluster_name="tf_example",
+            remark="remark.")
+        example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+            cluster_id=example_rocketmq_cluster.cluster_id,
+            namespace_name="tf_example_namespace",
+            remark="remark.")
         ```
 
         ## Import
@@ -336,11 +346,13 @@ class RocketmqNamespace(pulumi.CustomResource):
                 raise TypeError("Missing required property 'namespace_name'")
             __props__.__dict__["namespace_name"] = namespace_name
             __props__.__dict__["remark"] = remark
-            if retention_time is None and not opts.urn:
-                raise TypeError("Missing required property 'retention_time'")
+            if retention_time is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+                pulumi.log.warn("""retention_time is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
             __props__.__dict__["retention_time"] = retention_time
-            if ttl is None and not opts.urn:
-                raise TypeError("Missing required property 'ttl'")
+            if ttl is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""", DeprecationWarning)
+                pulumi.log.warn("""ttl is deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.""")
             __props__.__dict__["ttl"] = ttl
             __props__.__dict__["public_endpoint"] = None
             __props__.__dict__["vpc_endpoint"] = None
@@ -372,8 +384,8 @@ class RocketmqNamespace(pulumi.CustomResource):
         :param pulumi.Input[str] namespace_name: Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.
         :param pulumi.Input[str] public_endpoint: Public network access point address.
         :param pulumi.Input[str] remark: Remarks (up to 128 characters).
-        :param pulumi.Input[int] retention_time: Retention time of persisted messages in milliseconds.
-        :param pulumi.Input[int] ttl: Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        :param pulumi.Input[int] retention_time: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+        :param pulumi.Input[int] ttl: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         :param pulumi.Input[str] vpc_endpoint: VPC access point address.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -423,17 +435,17 @@ class RocketmqNamespace(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="retentionTime")
-    def retention_time(self) -> pulumi.Output[int]:
+    def retention_time(self) -> pulumi.Output[Optional[int]]:
         """
-        Retention time of persisted messages in milliseconds.
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
         """
         return pulumi.get(self, "retention_time")
 
     @property
     @pulumi.getter
-    def ttl(self) -> pulumi.Output[int]:
+    def ttl(self) -> pulumi.Output[Optional[int]]:
         """
-        Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+        It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
         """
         return pulumi.get(self, "ttl")
 

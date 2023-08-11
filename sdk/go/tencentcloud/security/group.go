@@ -13,6 +13,7 @@ import (
 // Provides a resource to create security group.
 //
 // ## Example Usage
+// ### Create a basic security group
 //
 // ```go
 // package main
@@ -24,9 +25,34 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Security.NewGroup(ctx, "sglab", &Security.GroupArgs{
-// 			Description: pulumi.String("favourite sg"),
+// 		_, err := Security.NewGroup(ctx, "example", &Security.GroupArgs{
+// 			Description: pulumi.String("sg test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Create a complete security group
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Security.NewGroup(ctx, "example", &Security.GroupArgs{
+// 			Description: pulumi.String("sg test"),
 // 			ProjectId:   pulumi.Int(0),
+// 			Tags: pulumi.AnyMap{
+// 				"example": pulumi.Any("test"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err

@@ -268,18 +268,62 @@ class AuditLogFile(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        audit_log_file = tencentcloud.mysql.AuditLogFile("auditLogFile",
-            end_time="2023-03-29 20:14:00",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_audit_log_file = tencentcloud.mysql.AuditLogFile("exampleAuditLogFile",
+            instance_id=example_instance.id,
+            start_time="2023-07-01 00:00:00",
+            end_time="2023-10-01 00:00:00",
+            order="ASC",
+            order_by="timestamp")
+        ```
+        ### Add filter
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.AuditLogFile("example",
+            instance_id=tencentcloud_mysql_instance["example"]["id"],
+            start_time="2023-07-01 00:00:00",
+            end_time="2023-10-01 00:00:00",
+            order="ASC",
+            order_by="timestamp",
             filter=tencentcloud.mysql.AuditLogFileFilterArgs(
                 hosts=["30.50.207.46"],
                 users=["keep_dbbrain"],
-            ),
-            instance_id="cdb-fitq5t9h",
-            order="ASC",
-            order_by="timestamp",
-            start_time="2023-03-28 20:14:00")
+            ))
         ```
 
         :param str resource_name: The name of the resource.
@@ -304,18 +348,62 @@ class AuditLogFile(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        audit_log_file = tencentcloud.mysql.AuditLogFile("auditLogFile",
-            end_time="2023-03-29 20:14:00",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_audit_log_file = tencentcloud.mysql.AuditLogFile("exampleAuditLogFile",
+            instance_id=example_instance.id,
+            start_time="2023-07-01 00:00:00",
+            end_time="2023-10-01 00:00:00",
+            order="ASC",
+            order_by="timestamp")
+        ```
+        ### Add filter
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.AuditLogFile("example",
+            instance_id=tencentcloud_mysql_instance["example"]["id"],
+            start_time="2023-07-01 00:00:00",
+            end_time="2023-10-01 00:00:00",
+            order="ASC",
+            order_by="timestamp",
             filter=tencentcloud.mysql.AuditLogFileFilterArgs(
                 hosts=["30.50.207.46"],
                 users=["keep_dbbrain"],
-            ),
-            instance_id="cdb-fitq5t9h",
-            order="ASC",
-            order_by="timestamp",
-            start_time="2023-03-28 20:14:00")
+            ))
         ```
 
         :param str resource_name: The name of the resource.

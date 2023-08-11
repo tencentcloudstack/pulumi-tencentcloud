@@ -68,12 +68,13 @@ class RollbackStop(pulumi.CustomResource):
         Provides a resource to create a mysql rollback_stop
 
         ## Example Usage
+        ### Revoke the ongoing rollback task of the instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        rollback_stop = tencentcloud.mysql.RollbackStop("rollbackStop", instance_id="cdb-fitq5t9h")
+        example = tencentcloud.mysql.RollbackStop("example", instance_id="cdb-fitq5t9h")
         ```
 
         :param str resource_name: The name of the resource.
@@ -90,12 +91,13 @@ class RollbackStop(pulumi.CustomResource):
         Provides a resource to create a mysql rollback_stop
 
         ## Example Usage
+        ### Revoke the ongoing rollback task of the instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        rollback_stop = tencentcloud.mysql.RollbackStop("rollbackStop", instance_id="cdb-fitq5t9h")
+        example = tencentcloud.mysql.RollbackStop("example", instance_id="cdb-fitq5t9h")
         ```
 
         :param str resource_name: The name of the resource.

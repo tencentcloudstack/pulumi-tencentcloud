@@ -136,11 +136,41 @@ class InstanceTde(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance_tde = tencentcloud.sqlserver.InstanceTde("instanceTde",
-            certificate_attribution="self",
-            instance_id="mssql-qelbzgwf")
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_instance_tde = tencentcloud.sqlserver.InstanceTde("exampleInstanceTde",
+            instance_id=example_basic_instance.id,
+            certificate_attribution="self")
         ```
 
         ## Import
@@ -148,7 +178,7 @@ class InstanceTde(pulumi.CustomResource):
         sqlserver instance_tde can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/instanceTde:InstanceTde instance_tde instance_tde_id
+         $ pulumi import tencentcloud:Sqlserver/instanceTde:InstanceTde example mssql-farjz9tz
         ```
 
         :param str resource_name: The name of the resource.
@@ -170,11 +200,41 @@ class InstanceTde(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance_tde = tencentcloud.sqlserver.InstanceTde("instanceTde",
-            certificate_attribution="self",
-            instance_id="mssql-qelbzgwf")
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_instance_tde = tencentcloud.sqlserver.InstanceTde("exampleInstanceTde",
+            instance_id=example_basic_instance.id,
+            certificate_attribution="self")
         ```
 
         ## Import
@@ -182,7 +242,7 @@ class InstanceTde(pulumi.CustomResource):
         sqlserver instance_tde can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/instanceTde:InstanceTde instance_tde instance_tde_id
+         $ pulumi import tencentcloud:Sqlserver/instanceTde:InstanceTde example mssql-farjz9tz
         ```
 
         :param str resource_name: The name of the resource.

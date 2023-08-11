@@ -125,10 +125,10 @@ def get_query_xevent(end_time: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    query_xevent = tencentcloud.Sqlserver.get_query_xevent(end_time="2023-07-01 00:00:00",
+    example = tencentcloud.Sqlserver.get_query_xevent(end_time="2023-08-10 00:00:00",
         event_type="blocked",
         instance_id="mssql-gyg9xycl",
-        start_time="2023-06-27 00:00:00")
+        start_time="2023-08-01 00:00:00")
     ```
 
 
@@ -178,10 +178,10 @@ def get_query_xevent_output(end_time: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    query_xevent = tencentcloud.Sqlserver.get_query_xevent(end_time="2023-07-01 00:00:00",
+    example = tencentcloud.Sqlserver.get_query_xevent(end_time="2023-08-10 00:00:00",
         event_type="blocked",
         instance_id="mssql-gyg9xycl",
-        start_time="2023-06-27 00:00:00")
+        start_time="2023-08-01 00:00:00")
     ```
 
 

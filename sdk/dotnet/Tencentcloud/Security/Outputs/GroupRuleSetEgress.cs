@@ -38,6 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
         /// </summary>
         public readonly string? Ipv6CidrBlock;
+        public readonly int? PolicyIndex;
         /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
         /// </summary>
@@ -73,6 +74,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
 
             string? ipv6CidrBlock,
 
+            int? policyIndex,
+
             string? port,
 
             string? protocol,
@@ -89,6 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
             CidrBlock = cidrBlock;
             Description = description;
             Ipv6CidrBlock = ipv6CidrBlock;
+            PolicyIndex = policyIndex;
             Port = port;
             Protocol = protocol;
             ServiceTemplateGroup = serviceTemplateGroup;

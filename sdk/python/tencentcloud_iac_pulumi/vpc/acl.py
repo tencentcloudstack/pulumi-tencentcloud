@@ -219,12 +219,11 @@ class Acl(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.Vpc.get_instances()
-        foo = tencentcloud.vpc.Acl("foo",
-            vpc_id=default.instance_lists[0].vpc_id,
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.Acl("example",
+            vpc_id=vpc.id,
             ingresses=[
                 "ACCEPT#192.168.1.0/24#800#TCP",
                 "ACCEPT#192.168.1.0/24#800-900#TCP",
@@ -264,12 +263,11 @@ class Acl(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        default = tencentcloud.Vpc.get_instances()
-        foo = tencentcloud.vpc.Acl("foo",
-            vpc_id=default.instance_lists[0].vpc_id,
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.Acl("example",
+            vpc_id=vpc.id,
             ingresses=[
                 "ACCEPT#192.168.1.0/24#800#TCP",
                 "ACCEPT#192.168.1.0/24#800-900#TCP",

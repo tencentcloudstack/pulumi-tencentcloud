@@ -21,7 +21,10 @@ class GetBackupsResult:
     """
     A collection of values returned by getBackups.
     """
-    def __init__(__self__, end_time=None, id=None, instance_id=None, lists=None, result_output_file=None, start_time=None):
+    def __init__(__self__, backup_name=None, end_time=None, id=None, instance_id=None, lists=None, result_output_file=None, start_time=None):
+        if backup_name and not isinstance(backup_name, str):
+            raise TypeError("Expected argument 'backup_name' to be a str")
+        pulumi.set(__self__, "backup_name", backup_name)
         if end_time and not isinstance(end_time, str):
             raise TypeError("Expected argument 'end_time' to be a str")
         pulumi.set(__self__, "end_time", end_time)
@@ -40,6 +43,11 @@ class GetBackupsResult:
         if start_time and not isinstance(start_time, str):
             raise TypeError("Expected argument 'start_time' to be a str")
         pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="backupName")
+    def backup_name(self) -> Optional[str]:
+        return pulumi.get(self, "backup_name")
 
     @property
     @pulumi.getter(name="endTime")
@@ -93,6 +101,7 @@ class AwaitableGetBackupsResult(GetBackupsResult):
         if False:
             yield self
         return GetBackupsResult(
+            backup_name=self.backup_name,
             end_time=self.end_time,
             id=self.id,
             instance_id=self.instance_id,
@@ -101,7 +110,8 @@ class AwaitableGetBackupsResult(GetBackupsResult):
             start_time=self.start_time)
 
 
-def get_backups(end_time: Optional[str] = None,
+def get_backups(backup_name: Optional[str] = None,
+                end_time: Optional[str] = None,
                 instance_id: Optional[str] = None,
                 result_output_file: Optional[str] = None,
                 start_time: Optional[str] = None,
@@ -127,6 +137,7 @@ def get_backups(end_time: Optional[str] = None,
     :param str start_time: Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
     """
     __args__ = dict()
+    __args__['backupName'] = backup_name
     __args__['endTime'] = end_time
     __args__['instanceId'] = instance_id
     __args__['resultOutputFile'] = result_output_file
@@ -140,6 +151,7 @@ def get_backups(end_time: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('tencentcloud:Sqlserver/getBackups:getBackups', __args__, opts=opts, typ=GetBackupsResult).value
 
     return AwaitableGetBackupsResult(
+        backup_name=__ret__.backup_name,
         end_time=__ret__.end_time,
         id=__ret__.id,
         instance_id=__ret__.instance_id,
@@ -149,7 +161,8 @@ def get_backups(end_time: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_backups)
-def get_backups_output(end_time: Optional[pulumi.Input[str]] = None,
+def get_backups_output(backup_name: Optional[pulumi.Input[Optional[str]]] = None,
+                       end_time: Optional[pulumi.Input[str]] = None,
                        instance_id: Optional[pulumi.Input[str]] = None,
                        result_output_file: Optional[pulumi.Input[Optional[str]]] = None,
                        start_time: Optional[pulumi.Input[str]] = None,

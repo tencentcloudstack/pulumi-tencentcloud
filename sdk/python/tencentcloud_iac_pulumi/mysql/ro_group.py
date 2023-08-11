@@ -206,7 +206,7 @@ class RoGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_group = tencentcloud.mysql.RoGroup("roGroup",
+        example = tencentcloud.mysql.RoGroup("example",
             instance_id="cdb-e8i766hx",
             is_balance_ro_load=1,
             ro_group_id="cdbrg-f49t0gnj",
@@ -247,7 +247,7 @@ class RoGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_group = tencentcloud.mysql.RoGroup("roGroup",
+        example = tencentcloud.mysql.RoGroup("example",
             instance_id="cdb-e8i766hx",
             is_balance_ro_load=1,
             ro_group_id="cdbrg-f49t0gnj",

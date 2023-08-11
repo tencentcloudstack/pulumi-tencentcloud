@@ -8,18 +8,76 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis account
  *
  * ## Example Usage
+ * ### Create an account with read and write permissions
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const account = new tencentcloud.Redis.Account("account", {
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.redis.Instance("foo", {
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * const account = new tencentcloud.redis.Account("account", {
+ *     instanceId: foo.id,
  *     accountName: "account_test",
  *     accountPassword: "test1234",
- *     instanceId: "crs-xxxxxx",
- *     privilege: "rw",
- *     readonlyPolicies: ["master"],
  *     remark: "master",
+ *     readonlyPolicies: ["master"],
+ *     privilege: "rw",
+ * });
+ * ```
+ * ### Create an account with read-only permissions
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.redis.Instance("foo", {
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * const account = new tencentcloud.redis.Account("account", {
+ *     instanceId: foo.id,
+ *     accountName: "account_test",
+ *     accountPassword: "test1234",
+ *     remark: "master",
+ *     readonlyPolicies: ["master"],
+ *     privilege: "r",
  * });
  * ```
  *

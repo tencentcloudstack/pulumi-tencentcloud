@@ -15,35 +15,6 @@ import (
 //
 // ## Example Usage
 //
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewNetDetect(ctx, "netDetect", &Vpc.NetDetectArgs{
-// 			DetectDestinationIps: pulumi.StringArray{
-// 				pulumi.String("10.0.0.1"),
-// 				pulumi.String("10.0.0.2"),
-// 			},
-// 			NetDetectName:      pulumi.String("terrform-test"),
-// 			NextHopDestination: pulumi.String("172.16.128.57"),
-// 			NextHopType:        pulumi.String("NORMAL_CVM"),
-// 			SubnetId:           pulumi.String("subnet-c1l35990"),
-// 			VpcId:              pulumi.String("vpc-4owdpnwr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // vpc net_detect can be imported using the id, e.g.

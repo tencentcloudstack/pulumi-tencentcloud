@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigIpTableConfig
     {
-        /// <summary>
-        /// Rules list.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigIpTableConfigRule> Rules;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

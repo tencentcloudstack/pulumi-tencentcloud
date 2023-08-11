@@ -24,6 +24,7 @@ __all__ = [
     'ParamTemplateParamList',
     'ProxyEndPointInstanceWeight',
     'ProxyProxyZone',
+    'ProxyRoInstance',
     'RollBackClusterRollbackDatabase',
     'RollBackClusterRollbackTable',
     'RollBackClusterRollbackTableTable',
@@ -865,6 +866,44 @@ class ProxyProxyZone(dict):
         Proxy node availability zone.
         """
         return pulumi.get(self, "proxy_node_zone")
+
+
+@pulumi.output_type
+class ProxyRoInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProxyRoInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProxyRoInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProxyRoInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: Optional[str] = None,
+                 weight: Optional[int] = None):
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        return pulumi.get(self, "weight")
 
 
 @pulumi.output_type

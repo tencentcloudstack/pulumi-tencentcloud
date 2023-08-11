@@ -21,12 +21,26 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewSnapshotPolicy(ctx, "snapshotPolicy", &Vpc.SnapshotPolicyArgs{
+// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("tf-example-1308919341"),
+// 			Acl:    pulumi.String("private"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+// 			SnapshotPolicyName: pulumi.String("tf-example"),
+// 			BackupType:         pulumi.String("time"),
+// 			CosBucket:          exampleBucket.Bucket,
+// 			CosRegion:          pulumi.String("ap-guangzhou"),
+// 			CreateNewCos:       pulumi.Bool(false),
+// 			KeepTime:           pulumi.Int(2),
 // 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
 // 				&vpc.SnapshotPolicyBackupPolicyArgs{
 // 					BackupDay:  pulumi.String("monday"),
@@ -34,19 +48,13 @@ import (
 // 				},
 // 				&vpc.SnapshotPolicyBackupPolicyArgs{
 // 					BackupDay:  pulumi.String("tuesday"),
-// 					BackupTime: pulumi.String("02:03:03"),
+// 					BackupTime: pulumi.String("01:00:00"),
 // 				},
 // 				&vpc.SnapshotPolicyBackupPolicyArgs{
 // 					BackupDay:  pulumi.String("wednesday"),
-// 					BackupTime: pulumi.String("04:13:23"),
+// 					BackupTime: pulumi.String("02:00:00"),
 // 				},
 // 			},
-// 			BackupType:         pulumi.String("time"),
-// 			CosBucket:          pulumi.String("cos-lock-1308919341"),
-// 			CosRegion:          pulumi.String("ap-guangzhou"),
-// 			CreateNewCos:       pulumi.Bool(false),
-// 			KeepTime:           pulumi.Int(2),
-// 			SnapshotPolicyName: pulumi.String("terraform-test"),
 // 		})
 // 		if err != nil {
 // 			return err

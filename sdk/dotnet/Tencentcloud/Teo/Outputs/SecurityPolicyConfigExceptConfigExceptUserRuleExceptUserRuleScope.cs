@@ -14,9 +14,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope
     {
-        /// <summary>
-        /// Modules in which the rule take effect. Valid values: `waf`.
-        /// </summary>
         public readonly ImmutableArray<string> Modules;
 
         [OutputConstructor]

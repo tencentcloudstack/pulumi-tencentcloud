@@ -13,34 +13,69 @@ import (
 // Use this data source to query SQL Server basic instances
 //
 // ## Example Usage
+// ### Filter instance by Id
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewBasicInstance(ctx, "test", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.Any(_var.Availability_zone),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            pulumi.String("vpc-26w7r56z"),
-// 			SubnetId:         pulumi.String("subnet-lvlr6eeu"),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(2),
-// 			Storage:          pulumi.Int(10),
-// 			Cpu:              pulumi.Int(1),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.String("sg-nltpbqg1"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
+// 		_, err := Sqlserver.GetBasicInstances(ctx, &sqlserver.GetBasicInstancesArgs{
+// 			Id: pulumi.StringRef("mssql-3l3fgqn7"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Filter instance by project Id
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.GetBasicInstances(ctx, &sqlserver.GetBasicInstancesArgs{
+// 			ProjectId: pulumi.IntRef(0),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Filter instance by VPC/Subnet
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.GetBasicInstances(ctx, &sqlserver.GetBasicInstancesArgs{
+// 			SubnetId: pulumi.StringRef("subnet-nf9n81ps"),
+// 			VpcId:    pulumi.StringRef("vpc-409mvdvv"),
+// 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}

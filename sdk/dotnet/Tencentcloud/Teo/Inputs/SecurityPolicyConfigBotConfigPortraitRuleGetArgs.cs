@@ -15,10 +15,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("algManagedIds")]
         private InputList<int>? _algManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `alg`. See details in data source `bot_portrait_rules`.
-        /// </summary>
         public InputList<int> AlgManagedIds
         {
             get => _algManagedIds ?? (_algManagedIds = new InputList<int>());
@@ -27,10 +23,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("capManagedIds")]
         private InputList<int>? _capManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `captcha`. See details in data source `bot_portrait_rules`.
-        /// </summary>
         public InputList<int> CapManagedIds
         {
             get => _capManagedIds ?? (_capManagedIds = new InputList<int>());
@@ -39,10 +31,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("dropManagedIds")]
         private InputList<int>? _dropManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `drop`. See details in data source `bot_portrait_rules`.
-        /// </summary>
         public InputList<int> DropManagedIds
         {
             get => _dropManagedIds ?? (_dropManagedIds = new InputList<int>());
@@ -51,10 +39,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("monManagedIds")]
         private InputList<int>? _monManagedIds;
-
-        /// <summary>
-        /// Rules to enable when action is `monitor`. See details in data source `bot_portrait_rules`.
-        /// </summary>
         public InputList<int> MonManagedIds
         {
             get => _monManagedIds ?? (_monManagedIds = new InputList<int>());
@@ -64,9 +48,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         [Input("ruleId")]
         public Input<int>? RuleId { get; set; }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

@@ -327,6 +327,84 @@ class GatewaySnat(pulumi.CustomResource):
         """
         Provides a resource to create a NAT Gateway SNat rule.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="nat")
+        image = tencentcloud.Images.get_instance(os_name="centos")
+        instance_types = tencentcloud.Instance.get_types(filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[zones.zones[0].name],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-family",
+                    values=["S5"],
+                ),
+            ],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # Create route_table and entry
+        route_table = tencentcloud.route.Table("routeTable", vpc_id=vpc.id)
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name,
+            route_table_id=route_table.id)
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        # Create NAT Gateway
+        my_nat = tencentcloud.nat.Gateway("myNat",
+            vpc_id=vpc.id,
+            max_concurrent=3000000,
+            bandwidth=500,
+            assigned_eip_sets=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ])
+        route_entry = tencentcloud.route.TableEntry("routeEntry",
+            route_table_id=route_table.id,
+            destination_cidr_block="10.0.0.0/8",
+            next_type="NAT",
+            next_hub=my_nat.id)
+        # Subnet Nat gateway snat
+        subnet_snat = tencentcloud.nat.GatewaySnat("subnetSnat",
+            nat_gateway_id=my_nat.id,
+            resource_type="SUBNET",
+            subnet_id=subnet.id,
+            subnet_cidr_block=subnet.cidr_block,
+            description="terraform test",
+            public_ip_addrs=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ])
+        # Create instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf_example",
+            availability_zone=zones.zones[0].name,
+            image_id=image.images[0].image_id,
+            instance_type=instance_types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        # NetWorkInterface Nat gateway snat
+        my_instance_snat = tencentcloud.nat.GatewaySnat("myInstanceSnat",
+            nat_gateway_id=my_nat.id,
+            resource_type="NETWORKINTERFACE",
+            instance_id=example.id,
+            instance_private_ip_addr=example.private_ip,
+            description="terraform test",
+            public_ip_addrs=[eip_example1.public_ip])
+        ```
+
         ## Import
 
         VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
@@ -360,6 +438,84 @@ class GatewaySnat(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a NAT Gateway SNat rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="nat")
+        image = tencentcloud.Images.get_instance(os_name="centos")
+        instance_types = tencentcloud.Instance.get_types(filters=[
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="zone",
+                    values=[zones.zones[0].name],
+                ),
+                tencentcloud.instance.GetTypesFilterArgs(
+                    name="instance-family",
+                    values=["S5"],
+                ),
+            ],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # Create route_table and entry
+        route_table = tencentcloud.route.Table("routeTable", vpc_id=vpc.id)
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            availability_zone=zones.zones[0].name,
+            route_table_id=route_table.id)
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        # Create NAT Gateway
+        my_nat = tencentcloud.nat.Gateway("myNat",
+            vpc_id=vpc.id,
+            max_concurrent=3000000,
+            bandwidth=500,
+            assigned_eip_sets=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ])
+        route_entry = tencentcloud.route.TableEntry("routeEntry",
+            route_table_id=route_table.id,
+            destination_cidr_block="10.0.0.0/8",
+            next_type="NAT",
+            next_hub=my_nat.id)
+        # Subnet Nat gateway snat
+        subnet_snat = tencentcloud.nat.GatewaySnat("subnetSnat",
+            nat_gateway_id=my_nat.id,
+            resource_type="SUBNET",
+            subnet_id=subnet.id,
+            subnet_cidr_block=subnet.cidr_block,
+            description="terraform test",
+            public_ip_addrs=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ])
+        # Create instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf_example",
+            availability_zone=zones.zones[0].name,
+            image_id=image.images[0].image_id,
+            instance_type=instance_types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        # NetWorkInterface Nat gateway snat
+        my_instance_snat = tencentcloud.nat.GatewaySnat("myInstanceSnat",
+            nat_gateway_id=my_nat.id,
+            resource_type="NETWORKINTERFACE",
+            instance_id=example.id,
+            instance_private_ip_addr=example.private_ip,
+            description="terraform test",
+            public_ip_addrs=[eip_example1.public_ip])
+        ```
 
         ## Import
 

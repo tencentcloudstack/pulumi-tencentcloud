@@ -76,6 +76,8 @@ type Proxy struct {
 	ProxyGroupId pulumi.StringOutput `pulumi:"proxyGroupId"`
 	// Database node information.
 	ProxyZones ProxyProxyZoneArrayOutput `pulumi:"proxyZones"`
+	// Read only instance list.
+	RoInstances ProxyRoInstanceArrayOutput `pulumi:"roInstances"`
 	// Security Group ID Array.
 	SecurityGroupIds pulumi.StringArrayOutput `pulumi:"securityGroupIds"`
 	// The private network subnet ID is consistent with the cluster subnet ID by default.
@@ -143,6 +145,8 @@ type proxyState struct {
 	ProxyGroupId *string `pulumi:"proxyGroupId"`
 	// Database node information.
 	ProxyZones []ProxyProxyZone `pulumi:"proxyZones"`
+	// Read only instance list.
+	RoInstances []ProxyRoInstance `pulumi:"roInstances"`
 	// Security Group ID Array.
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// The private network subnet ID is consistent with the cluster subnet ID by default.
@@ -172,6 +176,8 @@ type ProxyState struct {
 	ProxyGroupId pulumi.StringPtrInput
 	// Database node information.
 	ProxyZones ProxyProxyZoneArrayInput
+	// Read only instance list.
+	RoInstances ProxyRoInstanceArrayInput
 	// Security Group ID Array.
 	SecurityGroupIds pulumi.StringArrayInput
 	// The private network subnet ID is consistent with the cluster subnet ID by default.
@@ -374,6 +380,11 @@ func (o ProxyOutput) ProxyGroupId() pulumi.StringOutput {
 // Database node information.
 func (o ProxyOutput) ProxyZones() ProxyProxyZoneArrayOutput {
 	return o.ApplyT(func(v *Proxy) ProxyProxyZoneArrayOutput { return v.ProxyZones }).(ProxyProxyZoneArrayOutput)
+}
+
+// Read only instance list.
+func (o ProxyOutput) RoInstances() ProxyRoInstanceArrayOutput {
+	return o.ApplyT(func(v *Proxy) ProxyRoInstanceArrayOutput { return v.RoInstances }).(ProxyRoInstanceArrayOutput)
 }
 
 // Security Group ID Array.

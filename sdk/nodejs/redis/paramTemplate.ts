@@ -27,15 +27,19 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const paramTemplate = new tencentcloud.Redis.ParamTemplate("param_template", {
- *     description: "This is an copied redis param template from xxx.",
+ * const foo = new tencentcloud.redis.ParamTemplate("foo", {
+ *     description: "This is an example redis param template.",
+ *     productType: 6,
  *     paramsOverrides: [{
  *         key: "timeout",
  *         value: "7200",
  *     }],
- *     templateId: "xxx",
+ * });
+ * const paramTemplate = new tencentcloud.redis.ParamTemplate("paramTemplate", {
+ *     description: "This is an copied redis param template from tf-template.",
+ *     templateId: foo.id,
  * });
  * ```
  *

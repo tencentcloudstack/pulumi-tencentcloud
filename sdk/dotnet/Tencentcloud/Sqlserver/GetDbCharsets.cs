@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var dbCharsets = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));
@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var dbCharsets = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));

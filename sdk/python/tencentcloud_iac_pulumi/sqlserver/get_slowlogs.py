@@ -112,9 +112,9 @@ def get_slowlogs(end_time: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    slowlogs = tencentcloud.Sqlserver.get_slowlogs(end_time="2023-05-18 00:00:00",
+    example = tencentcloud.Sqlserver.get_slowlogs(end_time="2023-08-07 00:00:00",
         instance_id="mssql-qelbzgwf",
-        start_time="2020-05-01 00:00:00")
+        start_time="2023-08-01 00:00:00")
     ```
 
 
@@ -160,9 +160,9 @@ def get_slowlogs_output(end_time: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    slowlogs = tencentcloud.Sqlserver.get_slowlogs(end_time="2023-05-18 00:00:00",
+    example = tencentcloud.Sqlserver.get_slowlogs(end_time="2023-08-07 00:00:00",
         instance_id="mssql-qelbzgwf",
-        start_time="2020-05-01 00:00:00")
+        start_time="2023-08-01 00:00:00")
     ```
 
 

@@ -11,39 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a teo dnsSec
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewDnsSec(ctx, "dnsSec", &Teo.DnsSecArgs{
-// 			Status: pulumi.String("enabled"),
-// 			ZoneId: pulumi.String("zone-297z8rf93cfw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
-// ## Import
-//
-// teo dns_sec can be imported using the zone_id, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Teo/dnsSec:DnsSec dns_sec zone-297z8rf93cfw
-// ```
 type DnsSec struct {
 	pulumi.CustomResourceState
 

@@ -14,6 +14,7 @@ import * as utilities from "../utilities";
  * It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
  *
  * ## Example Usage
+ * ### Create a basic cluster with two worker nodes
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -21,26 +22,48 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const config = new pulumi.Config();
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const clusterCidr = config.get("clusterCidr") || "10.31.0.0/16";
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const vpcFirst = tencentcloud.Vpc.getSubnets({
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpcOne = tencentcloud.Vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
- * const vpcSecond = tencentcloud.Vpc.getSubnets({
+ * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
+ * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
+ * const vpcTwo = tencentcloud.Vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
- * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.vpcId),
- *     clusterCidr: clusterCidr,
+ * const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.vpcId);
+ * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.subnetId);
+ * const sg = new tencentcloud.security.Group("sg", {});
+ * const sgId = sg.id;
+ * const default = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "Final",
+ * });
+ * const imageId = _default.then(_default => _default.imageId);
+ * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
+ *     securityGroupId: sg.id,
+ *     ingresses: [
+ *         "ACCEPT#10.0.0.0/16#ALL#ALL",
+ *         "ACCEPT#172.16.0.0/22#ALL#ALL",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+ * });
+ * const example = new tencentcloud.kubernetes.Cluster("example", {
+ *     vpcId: firstVpcId,
+ *     clusterCidr: exampleClusterCidr,
  *     clusterMaxPodNum: 32,
- *     clusterName: "test",
- *     clusterDesc: "test cluster desc",
+ *     clusterName: "tf_example_cluster",
+ *     clusterDesc: "example for tke cluster",
  *     clusterMaxServiceNum: 32,
- *     clusterInternet: true,
+ *     clusterInternet: false,
+ *     clusterInternetSecurityGroup: sgId,
+ *     clusterVersion: "1.22.5",
  *     clusterDeployType: "MANAGED_CLUSTER",
  *     workerConfigs: [
  *         {
@@ -52,8 +75,8 @@ import * as utilities from "../utilities";
  *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *             internetMaxBandwidthOut: 100,
  *             publicIpAssigned: true,
- *             subnetId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.subnetId),
- *             imgId: "img-rkiynh11",
+ *             subnetId: firstSubnetId,
+ *             imgId: imageId,
  *             dataDisks: [{
  *                 diskType: "CLOUD_PREMIUM",
  *                 diskSize: 50,
@@ -61,7 +84,7 @@ import * as utilities from "../utilities";
  *             enhancedSecurityService: false,
  *             enhancedMonitorService: false,
  *             userData: "dGVzdA==",
- *             keyIds: "skey-11112222",
+ *             password: "ZZXXccvv1212",
  *         },
  *         {
  *             count: 1,
@@ -72,7 +95,7 @@ import * as utilities from "../utilities";
  *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *             internetMaxBandwidthOut: 100,
  *             publicIpAssigned: true,
- *             subnetId: vpcSecond.then(vpcSecond => vpcSecond.instanceLists?[0]?.subnetId),
+ *             subnetId: secondSubnetId,
  *             dataDisks: [{
  *                 diskType: "CLOUD_PREMIUM",
  *                 diskSize: 50,
@@ -80,7 +103,7 @@ import * as utilities from "../utilities";
  *             enhancedSecurityService: false,
  *             enhancedMonitorService: false,
  *             userData: "dGVzdA==",
- *             keyIds: "skey-11112222",
+ *             keyIds: ["skey-11112222"],
  *             camRoleName: "CVM_QcsRole",
  *         },
  *     ],
@@ -98,26 +121,48 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const config = new pulumi.Config();
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const clusterCidr = config.get("clusterCidr") || "10.31.0.0/16";
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const vpcFirst = tencentcloud.Vpc.getSubnets({
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpcOne = tencentcloud.Vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
- * const vpcSecond = tencentcloud.Vpc.getSubnets({
+ * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
+ * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
+ * const vpcTwo = tencentcloud.Vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
- * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.vpcId),
- *     clusterCidr: clusterCidr,
+ * const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.vpcId);
+ * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.subnetId);
+ * const sg = new tencentcloud.security.Group("sg", {});
+ * const sgId = sg.id;
+ * const default = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "Final",
+ * });
+ * const imageId = _default.then(_default => _default.imageId);
+ * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
+ *     securityGroupId: sg.id,
+ *     ingresses: [
+ *         "ACCEPT#10.0.0.0/16#ALL#ALL",
+ *         "ACCEPT#172.16.0.0/22#ALL#ALL",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+ * });
+ * const example = new tencentcloud.kubernetes.Cluster("example", {
+ *     vpcId: firstVpcId,
+ *     clusterCidr: exampleClusterCidr,
  *     clusterMaxPodNum: 32,
- *     clusterName: "test",
- *     clusterDesc: "test cluster desc",
+ *     clusterName: "tf_example_cluster",
+ *     clusterDesc: "example for tke cluster",
  *     clusterMaxServiceNum: 32,
- *     clusterInternet: true,
+ *     clusterInternet: false,
+ *     clusterInternetSecurityGroup: sgId,
+ *     clusterVersion: "1.22.5",
  *     clusterDeployType: "MANAGED_CLUSTER",
  *     workerConfigs: [
  *         {
@@ -129,15 +174,20 @@ import * as utilities from "../utilities";
  *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *             internetMaxBandwidthOut: 100,
  *             publicIpAssigned: true,
- *             subnetId: vpcFirst.then(vpcFirst => vpcFirst.instanceLists?[0]?.subnetId),
+ *             subnetId: firstSubnetId,
+ *             imgId: imageId,
  *             dataDisks: [{
  *                 diskType: "CLOUD_PREMIUM",
  *                 diskSize: 50,
+ *                 encrypt: false,
  *             }],
  *             enhancedSecurityService: false,
  *             enhancedMonitorService: false,
  *             userData: "dGVzdA==",
- *             keyIds: "skey-11112222",
+ *             disasterRecoverGroupIds: [],
+ *             securityGroupIds: [],
+ *             keyIds: [],
+ *             password: "ZZXXccvv1212",
  *         },
  *         {
  *             count: 1,
@@ -148,7 +198,7 @@ import * as utilities from "../utilities";
  *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *             internetMaxBandwidthOut: 100,
  *             publicIpAssigned: true,
- *             subnetId: vpcSecond.then(vpcSecond => vpcSecond.instanceLists?[0]?.subnetId),
+ *             subnetId: secondSubnetId,
  *             dataDisks: [{
  *                 diskType: "CLOUD_PREMIUM",
  *                 diskSize: 50,
@@ -156,8 +206,11 @@ import * as utilities from "../utilities";
  *             enhancedSecurityService: false,
  *             enhancedMonitorService: false,
  *             userData: "dGVzdA==",
+ *             disasterRecoverGroupIds: [],
+ *             securityGroupIds: [],
+ *             keyIds: [],
  *             camRoleName: "CVM_QcsRole",
- *             keyIds: "skey-11112222",
+ *             password: "ZZXXccvv1212",
  *         },
  *     ],
  *     labels: {
@@ -279,12 +332,12 @@ import * as utilities from "../utilities";
  *     clusterAudit: {
  *         enabled: true,
  *         logSetId: "", // optional
- *         logSetTopic: "", // optional
+ *         topicId: "", // optional
  *     },
  *     eventPersistence: {
  *         enabled: true,
  *         logSetId: "", // optional
- *         logSetTopic: "", // optional
+ *         topicId: "", // optional
  *     },
  *     logAgent: {
  *         enabled: true,

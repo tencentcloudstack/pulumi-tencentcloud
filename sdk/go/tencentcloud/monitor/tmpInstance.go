@@ -20,20 +20,42 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpInstance(ctx, "tmpInstance", &Monitor.TmpInstanceArgs{
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-4"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewTmpInstance(ctx, "foo", &Monitor.TmpInstanceArgs{
+// 			InstanceName:      pulumi.String("tf-tmp-instance"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          subnet.ID(),
 // 			DataRetentionTime: pulumi.Int(30),
-// 			InstanceName:      pulumi.String("demo"),
-// 			SubnetId:          pulumi.String("subnet-rdkj0agk"),
+// 			Zone:              pulumi.String(availabilityZone),
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("terraform"),
 // 			},
-// 			VpcId: pulumi.String("vpc-2hfyray3"),
-// 			Zone:  pulumi.String("ap-guangzhou-3"),
 // 		})
 // 		if err != nil {
 // 			return err

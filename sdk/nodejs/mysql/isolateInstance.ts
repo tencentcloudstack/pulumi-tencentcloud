@@ -4,6 +4,56 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a mysql isolateInstance
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
+ * const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * const exampleIsolateInstance = new tencentcloud.mysql.IsolateInstance("exampleIsolateInstance", {
+ *     instanceId: exampleInstance.id,
+ *     operate: "recover",
+ * });
+ * ```
+ */
 export class IsolateInstance extends pulumi.CustomResource {
     /**
      * Get an existing IsolateInstance resource's state with the given name, ID, and optional extra
@@ -33,15 +83,17 @@ export class IsolateInstance extends pulumi.CustomResource {
     }
 
     /**
-     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-     * page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-     * value of the field InstanceId in the output parameter.
+     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
+     * Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+     */
+    public readonly operate!: pulumi.Output<string>;
+    /**
      * Instance status.
      */
-    public /*out*/ readonly status!: pulumi.Output<string>;
+    public /*out*/ readonly status!: pulumi.Output<number>;
 
     /**
      * Create a IsolateInstance resource with the given unique name, arguments, and options.
@@ -57,13 +109,18 @@ export class IsolateInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as IsolateInstanceState | undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
+            resourceInputs["operate"] = state ? state.operate : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
         } else {
             const args = argsOrState as IsolateInstanceArgs | undefined;
             if ((!args || args.instanceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceId'");
             }
+            if ((!args || args.operate === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'operate'");
+            }
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
+            resourceInputs["operate"] = args ? args.operate : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -76,15 +133,17 @@ export class IsolateInstance extends pulumi.CustomResource {
  */
 export interface IsolateInstanceState {
     /**
-     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-     * page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-     * value of the field InstanceId in the output parameter.
+     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
      */
     instanceId?: pulumi.Input<string>;
     /**
+     * Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+     */
+    operate?: pulumi.Input<string>;
+    /**
      * Instance status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<number>;
 }
 
 /**
@@ -92,9 +151,11 @@ export interface IsolateInstanceState {
  */
 export interface IsolateInstanceArgs {
     /**
-     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-     * page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-     * value of the field InstanceId in the output parameter.
+     * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
      */
     instanceId: pulumi.Input<string>;
+    /**
+     * Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+     */
+    operate: pulumi.Input<string>;
 }

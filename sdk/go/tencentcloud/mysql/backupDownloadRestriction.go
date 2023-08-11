@@ -26,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewBackupDownloadRestriction(ctx, "backupDownloadRestriction", &Mysql.BackupDownloadRestrictionArgs{
+// 		_, err := Mysql.NewBackupDownloadRestriction(ctx, "example", &Mysql.BackupDownloadRestrictionArgs{
 // 			IpComparisonSymbol: pulumi.String("In"),
 // 			LimitIps: pulumi.StringArray{
 // 				pulumi.String("127.0.0.1"),

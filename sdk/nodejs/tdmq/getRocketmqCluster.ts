@@ -12,11 +12,16 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cluster = pulumi.output(tencentcloud.Tdmq.getRocketmqCluster({
- *     nameKeyword: "test_rocketmq",
- * }));
+ * const exampleRocketmqCluster = tencentcloud.Tdmq.getRocketmqCluster({
+ *     nameKeyword: exampleTdmq / rocketmqClusterRocketmqCluster.clusterName,
+ * });
+ * const exampleTdmq_rocketmqClusterRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleTdmq/rocketmqClusterRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
+ * });
  * ```
  */
 export function getRocketmqCluster(args?: GetRocketmqClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqClusterResult> {

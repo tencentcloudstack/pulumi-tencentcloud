@@ -50,9 +50,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// {
     ///     public MyStack()
     ///     {
-    ///         var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new Tencentcloud.Redis.ParamTemplateArgs
+    ///         var foo = new Tencentcloud.Redis.ParamTemplate("foo", new Tencentcloud.Redis.ParamTemplateArgs
     ///         {
-    ///             Description = "This is an copied redis param template from xxx.",
+    ///             Description = "This is an example redis param template.",
+    ///             ProductType = 6,
     ///             ParamsOverrides = 
     ///             {
     ///                 new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
@@ -61,7 +62,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///                     Value = "7200",
     ///                 },
     ///             },
-    ///             TemplateId = "xxx",
+    ///         });
+    ///         var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new Tencentcloud.Redis.ParamTemplateArgs
+    ///         {
+    ///             Description = "This is an copied redis param template from tf-template.",
+    ///             TemplateId = foo.Id,
     ///         });
     ///     }
     /// 

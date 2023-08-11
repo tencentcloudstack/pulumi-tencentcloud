@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// Provides a resource to create a mysql rollback_stop
     /// 
     /// ## Example Usage
+    /// ### Revoke the ongoing rollback task of the instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// {
     ///     public MyStack()
     ///     {
-    ///         var rollbackStop = new Tencentcloud.Mysql.RollbackStop("rollbackStop", new Tencentcloud.Mysql.RollbackStopArgs
+    ///         var example = new Tencentcloud.Mysql.RollbackStop("example", new Tencentcloud.Mysql.RollbackStopArgs
     ///         {
     ///             InstanceId = "cdb-fitq5t9h",
     ///         });

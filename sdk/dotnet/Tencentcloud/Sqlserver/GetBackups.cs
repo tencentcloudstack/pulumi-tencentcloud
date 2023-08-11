@@ -78,6 +78,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 
     public sealed class GetBackupsArgs : Pulumi.InvokeArgs
     {
+        [Input("backupName")]
+        public string? BackupName { get; set; }
+
         /// <summary>
         /// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
         /// </summary>
@@ -109,6 +112,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 
     public sealed class GetBackupsInvokeArgs : Pulumi.InvokeArgs
     {
+        [Input("backupName")]
+        public Input<string>? BackupName { get; set; }
+
         /// <summary>
         /// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
         /// </summary>
@@ -142,6 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     [OutputType]
     public sealed class GetBackupsResult
     {
+        public readonly string? BackupName;
         /// <summary>
         /// End time of the backup.
         /// </summary>
@@ -166,6 +173,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 
         [OutputConstructor]
         private GetBackupsResult(
+            string? backupName,
+
             string endTime,
 
             string id,
@@ -178,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 
             string startTime)
         {
+            BackupName = backupName;
             EndTime = endTime;
             Id = id;
             InstanceId = instanceId;

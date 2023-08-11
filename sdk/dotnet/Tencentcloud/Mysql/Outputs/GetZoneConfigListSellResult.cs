@@ -14,7 +14,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
     [OutputType]
     public sealed class GetZoneConfigListSellResult
     {
+        /// <summary>
+        /// Instance type, the possible value ranges are: `UNIVERSAL` (universal type), `EXCLUSIVE` (exclusive type), `BASIC` (basic type), `BASIC_V2` (basic type v2).
+        /// </summary>
         public readonly string CdbType;
+        /// <summary>
+        /// Number of CPU cores.
+        /// </summary>
+        public readonly int Cpu;
+        /// <summary>
+        /// Application Scenario Description.
+        /// </summary>
+        public readonly string Info;
         /// <summary>
         /// Maximum disk size (in GB).
         /// </summary>
@@ -40,6 +51,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
         private GetZoneConfigListSellResult(
             string cdbType,
 
+            int cpu,
+
+            string info,
+
             int maxVolumeSize,
 
             int memSize,
@@ -51,6 +66,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
             int volumeStep)
         {
             CdbType = cdbType;
+            Cpu = cpu;
+            Info = info;
             MaxVolumeSize = maxVolumeSize;
             MemSize = memSize;
             MinVolumeSize = minVolumeSize;

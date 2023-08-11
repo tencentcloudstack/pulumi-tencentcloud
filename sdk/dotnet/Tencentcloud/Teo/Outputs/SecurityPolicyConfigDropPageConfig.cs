@@ -14,17 +14,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigDropPageConfig
     {
-        /// <summary>
-        /// Custom error page of ACL rules.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigDropPageConfigAclDropPageDetail? AclDropPageDetail;
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
-        /// <summary>
-        /// Custom error page of WAF rules.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigDropPageConfigWafDropPageDetail? WafDropPageDetail;
 
         [OutputConstructor]

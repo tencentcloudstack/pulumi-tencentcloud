@@ -1789,6 +1789,106 @@ func (o ProxyProxyZoneArrayOutput) Index(i pulumi.IntInput) ProxyProxyZoneOutput
 	}).(ProxyProxyZoneOutput)
 }
 
+type ProxyRoInstance struct {
+	InstanceId *string `pulumi:"instanceId"`
+	Weight     *int    `pulumi:"weight"`
+}
+
+// ProxyRoInstanceInput is an input type that accepts ProxyRoInstanceArgs and ProxyRoInstanceOutput values.
+// You can construct a concrete instance of `ProxyRoInstanceInput` via:
+//
+//          ProxyRoInstanceArgs{...}
+type ProxyRoInstanceInput interface {
+	pulumi.Input
+
+	ToProxyRoInstanceOutput() ProxyRoInstanceOutput
+	ToProxyRoInstanceOutputWithContext(context.Context) ProxyRoInstanceOutput
+}
+
+type ProxyRoInstanceArgs struct {
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	Weight     pulumi.IntPtrInput    `pulumi:"weight"`
+}
+
+func (ProxyRoInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyRoInstance)(nil)).Elem()
+}
+
+func (i ProxyRoInstanceArgs) ToProxyRoInstanceOutput() ProxyRoInstanceOutput {
+	return i.ToProxyRoInstanceOutputWithContext(context.Background())
+}
+
+func (i ProxyRoInstanceArgs) ToProxyRoInstanceOutputWithContext(ctx context.Context) ProxyRoInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyRoInstanceOutput)
+}
+
+// ProxyRoInstanceArrayInput is an input type that accepts ProxyRoInstanceArray and ProxyRoInstanceArrayOutput values.
+// You can construct a concrete instance of `ProxyRoInstanceArrayInput` via:
+//
+//          ProxyRoInstanceArray{ ProxyRoInstanceArgs{...} }
+type ProxyRoInstanceArrayInput interface {
+	pulumi.Input
+
+	ToProxyRoInstanceArrayOutput() ProxyRoInstanceArrayOutput
+	ToProxyRoInstanceArrayOutputWithContext(context.Context) ProxyRoInstanceArrayOutput
+}
+
+type ProxyRoInstanceArray []ProxyRoInstanceInput
+
+func (ProxyRoInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyRoInstance)(nil)).Elem()
+}
+
+func (i ProxyRoInstanceArray) ToProxyRoInstanceArrayOutput() ProxyRoInstanceArrayOutput {
+	return i.ToProxyRoInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i ProxyRoInstanceArray) ToProxyRoInstanceArrayOutputWithContext(ctx context.Context) ProxyRoInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyRoInstanceArrayOutput)
+}
+
+type ProxyRoInstanceOutput struct{ *pulumi.OutputState }
+
+func (ProxyRoInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyRoInstance)(nil)).Elem()
+}
+
+func (o ProxyRoInstanceOutput) ToProxyRoInstanceOutput() ProxyRoInstanceOutput {
+	return o
+}
+
+func (o ProxyRoInstanceOutput) ToProxyRoInstanceOutputWithContext(ctx context.Context) ProxyRoInstanceOutput {
+	return o
+}
+
+func (o ProxyRoInstanceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyRoInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+func (o ProxyRoInstanceOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ProxyRoInstance) *int { return v.Weight }).(pulumi.IntPtrOutput)
+}
+
+type ProxyRoInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (ProxyRoInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyRoInstance)(nil)).Elem()
+}
+
+func (o ProxyRoInstanceArrayOutput) ToProxyRoInstanceArrayOutput() ProxyRoInstanceArrayOutput {
+	return o
+}
+
+func (o ProxyRoInstanceArrayOutput) ToProxyRoInstanceArrayOutputWithContext(ctx context.Context) ProxyRoInstanceArrayOutput {
+	return o
+}
+
+func (o ProxyRoInstanceArrayOutput) Index(i pulumi.IntInput) ProxyRoInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyRoInstance {
+		return vs[0].([]ProxyRoInstance)[vs[1].(int)]
+	}).(ProxyRoInstanceOutput)
+}
+
 type RollBackClusterRollbackDatabase struct {
 	// New database name.
 	NewDatabase string `pulumi:"newDatabase"`
@@ -8042,6 +8142,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyEndPointInstanceWeightArrayInput)(nil)).Elem(), ProxyEndPointInstanceWeightArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyProxyZoneInput)(nil)).Elem(), ProxyProxyZoneArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyProxyZoneArrayInput)(nil)).Elem(), ProxyProxyZoneArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyRoInstanceInput)(nil)).Elem(), ProxyRoInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyRoInstanceArrayInput)(nil)).Elem(), ProxyRoInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RollBackClusterRollbackDatabaseInput)(nil)).Elem(), RollBackClusterRollbackDatabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RollBackClusterRollbackDatabaseArrayInput)(nil)).Elem(), RollBackClusterRollbackDatabaseArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RollBackClusterRollbackTableInput)(nil)).Elem(), RollBackClusterRollbackTableArgs{})
@@ -8147,6 +8249,8 @@ func init() {
 	pulumi.RegisterOutputType(ProxyEndPointInstanceWeightArrayOutput{})
 	pulumi.RegisterOutputType(ProxyProxyZoneOutput{})
 	pulumi.RegisterOutputType(ProxyProxyZoneArrayOutput{})
+	pulumi.RegisterOutputType(ProxyRoInstanceOutput{})
+	pulumi.RegisterOutputType(ProxyRoInstanceArrayOutput{})
 	pulumi.RegisterOutputType(RollBackClusterRollbackDatabaseOutput{})
 	pulumi.RegisterOutputType(RollBackClusterRollbackDatabaseArrayOutput{})
 	pulumi.RegisterOutputType(RollBackClusterRollbackTableOutput{})

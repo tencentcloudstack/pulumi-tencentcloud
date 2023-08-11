@@ -14,13 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleAcl
     {
-        /// <summary>
-        /// DDoS ACL rule configuration detail.
-        /// </summary>
         public readonly ImmutableArray<Outputs.DdosPolicyDdosRuleAclAcl> Acls;
-        /// <summary>
-        /// - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-        /// </summary>
         public readonly string? Switch;
 
         [OutputConstructor]

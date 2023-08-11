@@ -13,45 +13,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// <summary>
     /// Provides a resource to create a sqlserver config_instance_ro_group
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var configInstanceRoGroup = new Tencentcloud.Sqlserver.ConfigInstanceRoGroup("configInstanceRoGroup", new Tencentcloud.Sqlserver.ConfigInstanceRoGroupArgs
-    ///         {
-    ///             AutoWeight = 0,
-    ///             InstanceId = "mssql-ds1xhnt9",
-    ///             IsOfflineDelay = 1,
-    ///             MinReadOnlyInGroup = 1,
-    ///             ReadOnlyGroupId = "mssqlrg-cbya44fb",
-    ///             ReadOnlyGroupName = "keep-ro-group-customize",
-    ///             ReadOnlyMaxDelayTime = 10,
-    ///             WeightPairs = 
-    ///             {
-    ///                 new Tencentcloud.Sqlserver.Inputs.ConfigInstanceRoGroupWeightPairArgs
-    ///                 {
-    ///                     ReadOnlyInstanceId = "mssqlro-o6dv2ugx",
-    ///                     ReadOnlyWeight = 50,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// sqlserver config_instance_ro_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup config_instance_ro_group config_instance_ro_group_id
+    ///  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup")]

@@ -124,25 +124,30 @@ def get_basic_instances(id: Optional[str] = None,
     Use this data source to query SQL Server basic instances
 
     ## Example Usage
+    ### Filter instance by Id
 
     ```python
     import pulumi
-    import tencentcloud_iac_pulumi as tencentcloud
+    import pulumi_tencentcloud as tencentcloud
 
-    test = tencentcloud.sqlserver.BasicInstance("test",
-        availability_zone=var["availability_zone"],
-        charge_type="POSTPAID_BY_HOUR",
-        vpc_id="vpc-26w7r56z",
-        subnet_id="subnet-lvlr6eeu",
-        machine_type="CLOUD_PREMIUM",
-        project_id=0,
-        memory=2,
-        storage=10,
-        cpu=1,
-        security_groups=["sg-nltpbqg1"],
-        tags={
-            "test": "test",
-        })
+    example_id = tencentcloud.Sqlserver.get_basic_instances(id="mssql-3l3fgqn7")
+    ```
+    ### Filter instance by project Id
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_project = tencentcloud.Sqlserver.get_basic_instances(project_id=0)
+    ```
+    ### Filter instance by VPC/Subnet
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_vpc = tencentcloud.Sqlserver.get_basic_instances(subnet_id="subnet-nf9n81ps",
+        vpc_id="vpc-409mvdvv")
     ```
 
 
@@ -190,25 +195,30 @@ def get_basic_instances_output(id: Optional[pulumi.Input[Optional[str]]] = None,
     Use this data source to query SQL Server basic instances
 
     ## Example Usage
+    ### Filter instance by Id
 
     ```python
     import pulumi
-    import tencentcloud_iac_pulumi as tencentcloud
+    import pulumi_tencentcloud as tencentcloud
 
-    test = tencentcloud.sqlserver.BasicInstance("test",
-        availability_zone=var["availability_zone"],
-        charge_type="POSTPAID_BY_HOUR",
-        vpc_id="vpc-26w7r56z",
-        subnet_id="subnet-lvlr6eeu",
-        machine_type="CLOUD_PREMIUM",
-        project_id=0,
-        memory=2,
-        storage=10,
-        cpu=1,
-        security_groups=["sg-nltpbqg1"],
-        tags={
-            "test": "test",
-        })
+    example_id = tencentcloud.Sqlserver.get_basic_instances(id="mssql-3l3fgqn7")
+    ```
+    ### Filter instance by project Id
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_project = tencentcloud.Sqlserver.get_basic_instances(project_id=0)
+    ```
+    ### Filter instance by VPC/Subnet
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example_vpc = tencentcloud.Sqlserver.get_basic_instances(subnet_id="subnet-nf9n81ps",
+        vpc_id="vpc-409mvdvv")
     ```
 
 

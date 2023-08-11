@@ -14,42 +14,52 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const launchConfiguration = new tencentcloud.As.ScalingConfig("launch_configuration", {
- *     configurationName: "launch-configuration",
- *     dataDisks: [{
- *         diskSize: 50,
- *         diskType: "CLOUD_PREMIUM",
- *     }],
- *     enhancedMonitorService: false,
- *     enhancedSecurityService: false,
- *     imageId: "img-9qabwvbn",
- *     instanceTags: {
- *         tag: "as",
- *     },
+ * const exampleInstance = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+ *     configurationName: "example-launch-configuration",
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?[0]?.imageId),
  *     instanceTypes: ["SA1.SMALL1"],
+ *     projectId: 0,
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     systemDiskSize: 50,
+ *     dataDisks: [{
+ *         diskType: "CLOUD_PREMIUM",
+ *         diskSize: 50,
+ *     }],
  *     internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *     internetMaxBandwidthOut: 10,
- *     password: "test123#",
- *     projectId: 0,
  *     publicIpAssigned: true,
- *     systemDiskSize: 50,
- *     systemDiskType: "CLOUD_PREMIUM",
+ *     password: "Test@123#",
+ *     enhancedSecurityService: false,
+ *     enhancedMonitorService: false,
  *     userData: "dGVzdA==",
+ *     instanceTags: {
+ *         tag: "example",
+ *     },
  * });
  * ```
- * ### Using SPOT charge type
+ * ### charge type
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const launchConfiguration = new tencentcloud.As.ScalingConfig("launch_configuration", {
+ * const exampleInstance = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "launch-configuration",
- *     imageId: "img-9qabwvbn",
- *     instanceChargeType: "SPOTPAID",
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?[0]?.imageId),
  *     instanceTypes: ["SA1.SMALL1"],
+ *     instanceChargeType: "SPOTPAID",
  *     spotInstanceType: "one-time",
  *     spotMaxPrice: "1000",
  * });

@@ -131,18 +131,6 @@ class DhcpIp(pulumi.CustomResource):
         """
         Provides a resource to create a vpc dhcp_ip
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dhcp_ip = tencentcloud.vpc.DhcpIp("dhcpIp",
-            dhcp_ip_name="terraform-test",
-            subnet_id="subnet-h7av55g8",
-            vpc_id="vpc-1yg5ua6l")
-        ```
-
         ## Import
 
         vpc dhcp_ip can be imported using the id, e.g.
@@ -165,18 +153,6 @@ class DhcpIp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a vpc dhcp_ip
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dhcp_ip = tencentcloud.vpc.DhcpIp("dhcpIp",
-            dhcp_ip_name="terraform-test",
-            subnet_id="subnet-h7av55g8",
-            vpc_id="vpc-1yg5ua6l")
-        ```
 
         ## Import
 

@@ -13,7 +13,26 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const tmpGrafanaConfig = new tencentcloud.monitor.TmpGrafanaConfig("tmpGrafanaConfig", {
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooGrafanaInstance = new tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance", {
+ *     instanceName: "tf-grafana",
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     isDestroy: true,
+ *     tags: {
+ *         createdBy: "test",
+ *     },
+ * });
+ * const fooTmpGrafanaConfig = new tencentcloud.monitor.TmpGrafanaConfig("fooTmpGrafanaConfig", {
  *     config: JSON.stringify({
  *         server: {
  *             http_port: 8080,
@@ -21,7 +40,7 @@ import * as utilities from "../utilities";
  *             serve_from_sub_path: true,
  *         },
  *     }),
- *     instanceId: "grafana-29phe08q",
+ *     instanceId: fooGrafanaInstance.id,
  * });
  * ```
  *

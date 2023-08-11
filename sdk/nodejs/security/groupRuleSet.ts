@@ -16,42 +16,69 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const sglab1Group = new tencentcloud.security.Group("sglab1Group", {description: "favourite sg_1"});
- * const sglab1GroupRuleSet = new tencentcloud.security.GroupRuleSet("sglab1GroupRuleSet", {
- *     securityGroupId: sglab1Group.id,
+ * const baseGroup = new tencentcloud.security.Group("baseGroup", {description: "Testing Rule Set Security"});
+ * const relative = new tencentcloud.security.Group("relative", {description: "Used for attach security policy"});
+ * const fooTemplate = new tencentcloud.address.Template("fooTemplate", {addresses: [
+ *     "10.0.0.1",
+ *     "10.0.1.0/24",
+ *     "10.0.0.1-10.0.0.100",
+ * ]});
+ * const fooTemplateGroup = new tencentcloud.address.TemplateGroup("fooTemplateGroup", {templateIds: [fooTemplate.id]});
+ * const baseGroupRuleSet = new tencentcloud.security.GroupRuleSet("baseGroupRuleSet", {
+ *     securityGroupId: baseGroup.id,
  *     ingresses: [
  *         {
- *             cidrBlock: "10.0.0.0/16",
- *             protocol: "TCP",
- *             port: "80",
  *             action: "ACCEPT",
- *             description: "favourite sg rule_1",
+ *             cidrBlock: "10.0.0.0/22",
+ *             protocol: "TCP",
+ *             port: "80-90",
+ *             description: "A:Allow Ips and 80-90",
  *         },
  *         {
+ *             action: "ACCEPT",
+ *             cidrBlock: "10.0.2.1",
+ *             protocol: "UDP",
+ *             port: "8080",
+ *             description: "B:Allow UDP 8080",
+ *         },
+ *         {
+ *             action: "ACCEPT",
+ *             cidrBlock: "10.0.2.1",
+ *             protocol: "UDP",
+ *             port: "8080",
+ *             description: "C:Allow UDP 8080",
+ *         },
+ *         {
+ *             action: "ACCEPT",
+ *             cidrBlock: "172.18.1.2",
+ *             protocol: "ALL",
+ *             port: "ALL",
+ *             description: "D:Allow ALL",
+ *         },
+ *         {
+ *             action: "DROP",
  *             protocol: "TCP",
  *             port: "80",
- *             action: "ACCEPT",
- *             sourceSecurityId: tencentcloud_security_group.sglab_3.id,
- *             description: "favourite sg rule_2",
+ *             sourceSecurityId: relative.id,
+ *             description: "E:Block relative",
  *         },
  *     ],
  *     egresses: [
  *         {
- *             action: "ACCEPT",
- *             addressTemplateId: "ipm-xxxxxxxx",
- *             description: "Allow address template",
- *         },
- *         {
- *             action: "ACCEPT",
- *             serviceTemplateGroup: "ppmg-xxxxxxxx",
- *             description: "Allow protocol template",
- *         },
- *         {
- *             cidrBlock: "10.0.0.0/16",
- *             protocol: "TCP",
- *             port: "80",
  *             action: "DROP",
- *             description: "favourite sg egress rule",
+ *             cidrBlock: "10.0.0.0/16",
+ *             protocol: "ICMP",
+ *             description: "A:Block ping3",
+ *         },
+ *         {
+ *             action: "DROP",
+ *             addressTemplateId: fooTemplate.id,
+ *             description: "B:Allow template",
+ *         },
+ *         {
+ *             action: "DROP",
+ *             addressTemplateGroup: fooTemplateGroup.id,
+ *             description: "C:DROP template group",
  *         },
  *     ],
  * });

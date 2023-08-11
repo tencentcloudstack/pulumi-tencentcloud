@@ -11,16 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr immutableTagRule
+// Provides a resource to create a tcr immutable tag rule.
 //
 // ## Example Usage
+// ### Create a immutable tag rule with specified tags and exclude specified repositories
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
-//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
@@ -28,15 +27,122 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewImmutableTagRule(ctx, "myRule", &Tcr.ImmutableTagRuleArgs{
-// 			NamespaceName: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			RegistryId:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewImmutableTagRule(ctx, "exampleImmutableTagRule", &Tcr.ImmutableTagRuleArgs{
+// 			RegistryId:    exampleInstance.ID(),
+// 			NamespaceName: exampleNamespace.Name,
 // 			Rule: &tcr.ImmutableTagRuleRuleArgs{
-// 				Disabled:             pulumi.Bool(false),
-// 				RepositoryDecoration: pulumi.String("repoMatches"),
-// 				RepositoryPattern:    pulumi.String("**"),
-// 				TagDecoration:        pulumi.String("matches"),
+// 				RepositoryPattern:    pulumi.String("deprecated_repo"),
 // 				TagPattern:           pulumi.String("**"),
+// 				RepositoryDecoration: pulumi.String("repoExcludes"),
+// 				TagDecoration:        pulumi.String("matches"),
+// 				Disabled:             pulumi.Bool(false),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### With specified repositories and exclude specified version tag
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewImmutableTagRule(ctx, "example", &Tcr.ImmutableTagRuleArgs{
+// 			RegistryId:    pulumi.Any(tencentcloud_tcr_instance.Example.Id),
+// 			NamespaceName: pulumi.Any(tencentcloud_tcr_namespace.Example.Name),
+// 			Rule: &tcr.ImmutableTagRuleRuleArgs{
+// 				RepositoryPattern:    pulumi.String("**"),
+// 				TagPattern:           pulumi.String("v1"),
+// 				RepositoryDecoration: pulumi.String("repoMatches"),
+// 				TagDecoration:        pulumi.String("excludes"),
+// 				Disabled:             pulumi.Bool(false),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Disabled the specified rule
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewImmutableTagRule(ctx, "exampleRuleA", &Tcr.ImmutableTagRuleArgs{
+// 			RegistryId:    pulumi.Any(tencentcloud_tcr_instance.Example.Id),
+// 			NamespaceName: pulumi.Any(tencentcloud_tcr_namespace.Example.Name),
+// 			Rule: &tcr.ImmutableTagRuleRuleArgs{
+// 				RepositoryPattern:    pulumi.String("deprecated_repo"),
+// 				TagPattern:           pulumi.String("**"),
+// 				RepositoryDecoration: pulumi.String("repoExcludes"),
+// 				TagDecoration:        pulumi.String("matches"),
+// 				Disabled:             pulumi.Bool(false),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewImmutableTagRule(ctx, "exampleRuleB", &Tcr.ImmutableTagRuleArgs{
+// 			RegistryId:    pulumi.Any(tencentcloud_tcr_instance.Example.Id),
+// 			NamespaceName: pulumi.Any(tencentcloud_tcr_namespace.Example.Name),
+// 			Rule: &tcr.ImmutableTagRuleRuleArgs{
+// 				RepositoryPattern:    pulumi.String("**"),
+// 				TagPattern:           pulumi.String("v1"),
+// 				RepositoryDecoration: pulumi.String("repoMatches"),
+// 				TagDecoration:        pulumi.String("excludes"),
+// 				Disabled:             pulumi.Bool(true),
 // 			},
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("terraform"),

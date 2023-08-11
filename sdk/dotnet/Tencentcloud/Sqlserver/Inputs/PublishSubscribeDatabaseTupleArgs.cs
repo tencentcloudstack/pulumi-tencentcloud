@@ -19,6 +19,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         [Input("publishDatabase", required: true)]
         public Input<string> PublishDatabase { get; set; } = null!;
 
+        /// <summary>
+        /// Subscribe the database.
+        /// </summary>
+        [Input("subscribeDatabase", required: true)]
+        public Input<string> SubscribeDatabase { get; set; } = null!;
+
         public PublishSubscribeDatabaseTupleArgs()
         {
         }

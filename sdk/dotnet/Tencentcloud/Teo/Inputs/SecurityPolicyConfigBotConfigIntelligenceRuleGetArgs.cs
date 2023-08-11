@@ -15,19 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("items")]
         private InputList<Inputs.SecurityPolicyConfigBotConfigIntelligenceRuleItemGetArgs>? _items;
-
-        /// <summary>
-        /// Configuration detail.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigBotConfigIntelligenceRuleItemGetArgs> Items
         {
             get => _items ?? (_items = new InputList<Inputs.SecurityPolicyConfigBotConfigIntelligenceRuleItemGetArgs>());
             set => _items = value;
         }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

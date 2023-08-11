@@ -7,31 +7,6 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to attach an existing subnet to Network ACL.
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const idInstances = tencentcloud.Vpc.getInstances({});
- * const foo = new tencentcloud.vpc.Acl("foo", {
- *     vpcId: idInstances.then(idInstances => idInstances.instanceLists?[0]?.vpcId),
- *     ingresses: [
- *         "ACCEPT#192.168.1.0/24#800#TCP",
- *         "ACCEPT#192.168.1.0/24#800-900#TCP",
- *     ],
- *     egresses: [
- *         "ACCEPT#192.168.1.0/24#800#TCP",
- *         "ACCEPT#192.168.1.0/24#800-900#TCP",
- *     ],
- * });
- * const attachment = new tencentcloud.vpc.AclAttachment("attachment", {
- *     aclId: foo.id,
- *     subnetId: idInstances.then(idInstances => idInstances.instanceLists?[0]?.subnetIds?[0]),
- * });
- * ```
- *
  * ## Import
  *
  * Acl attachment can be imported using the id, e.g.

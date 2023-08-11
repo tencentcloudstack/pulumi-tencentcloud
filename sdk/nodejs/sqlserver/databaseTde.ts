@@ -8,18 +8,67 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver databaseTde
  *
  * ## Example Usage
+ * ### Open database tde encryption
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const databaseTde = new tencentcloud.Sqlserver.DatabaseTde("database_tde", {
- *     dbNames: [
- *         "keep_tde_db",
- *         "keep_tde_db2",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
  *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleDatabaseTde = new tencentcloud.sqlserver.DatabaseTde("exampleDatabaseTde", {
+ *     instanceId: exampleBasicInstance.id,
+ *     dbNames: [exampleDb.name],
  *     encryption: "enable",
- *     instanceId: "mssql-qelbzgwf",
+ * });
+ * ```
+ * ### Close database tde encryption
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.sqlserver.DatabaseTde("example", {
+ *     instanceId: tencentcloud_sqlserver_instance.example.id,
+ *     dbNames: [tencentcloud_sqlserver_db.example.name],
+ *     encryption: "disable",
  * });
  * ```
  *
@@ -28,7 +77,7 @@ import * as utilities from "../utilities";
  * sqlserver database_tde can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde database_tde database_tde_id
+ *  $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde example mssql-farjz9tz#tf_example_db
  * ```
  */
 export class DatabaseTde extends pulumi.CustomResource {

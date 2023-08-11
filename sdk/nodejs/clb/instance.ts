@@ -209,6 +209,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly clbVips!: pulumi.Output<string[]>;
     /**
+     * Whether to enable delete protection.
+     */
+    public readonly deleteProtect!: pulumi.Output<boolean | undefined>;
+    /**
      * Domain name of the CLB instance.
      */
     public /*out*/ readonly domain!: pulumi.Output<string>;
@@ -310,6 +314,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = state ? state.clbName : undefined;
             resourceInputs["clbVips"] = state ? state.clbVips : undefined;
+            resourceInputs["deleteProtect"] = state ? state.deleteProtect : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["dynamicVip"] = state ? state.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = state ? state.internetBandwidthMaxOut : undefined;
@@ -342,6 +347,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["addressIpVersion"] = args ? args.addressIpVersion : undefined;
             resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = args ? args.clbName : undefined;
+            resourceInputs["deleteProtect"] = args ? args.deleteProtect : undefined;
             resourceInputs["dynamicVip"] = args ? args.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = args ? args.internetBandwidthMaxOut : undefined;
             resourceInputs["internetChargeType"] = args ? args.internetChargeType : undefined;
@@ -390,6 +396,10 @@ export interface InstanceState {
      * The virtual service address table of the CLB.
      */
     clbVips?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether to enable delete protection.
+     */
+    deleteProtect?: pulumi.Input<boolean>;
     /**
      * Domain name of the CLB instance.
      */
@@ -492,6 +502,10 @@ export interface InstanceArgs {
      * Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
     clbName: pulumi.Input<string>;
+    /**
+     * Whether to enable delete protection.
+     */
+    deleteProtect?: pulumi.Input<boolean>;
     /**
      * If create dynamic vip CLB instance, `true` or `false`.
      */

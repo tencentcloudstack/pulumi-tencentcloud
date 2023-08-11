@@ -170,7 +170,7 @@ def get_ins_attribute(instance_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    ins_attribute = tencentcloud.Sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
+    example = tencentcloud.Sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
     ```
 
 
@@ -215,7 +215,7 @@ def get_ins_attribute_output(instance_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    ins_attribute = tencentcloud.Sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
+    example = tencentcloud.Sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
     ```
 
 

@@ -146,7 +146,7 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
                  retention_id: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr tag_retention_execution_config
+        Provides a resource to configure a tcr tag retention execution.
 
         ## Example Usage
 
@@ -154,8 +154,14 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=tencentcloud_tcr_instance["mytcr_retention"]["id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -163,18 +169,18 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
             cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
                 cve_id="cve-xxxxx",
             )])
-        my_rule = tencentcloud.tcr.TagRetentionRule("myRule",
-            registry_id=tencentcloud_tcr_instance["mytcr_retention"]["id"],
-            namespace_name=my_ns.name,
+        example_tag_retention_rule = tencentcloud.tcr.TagRetentionRule("exampleTagRetentionRule",
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             retention_rule=tencentcloud.tcr.TagRetentionRuleRetentionRuleArgs(
                 key="nDaysSinceLastPush",
                 value=2,
             ),
             cron_setting="manual",
             disabled=True)
-        tag_retention_execution_config = tencentcloud.tcr.TagRetentionExecutionConfig("tagRetentionExecutionConfig",
-            registry_id=my_rule.registry_id,
-            retention_id=my_rule.retention_id,
+        example_tag_retention_execution_config = tencentcloud.tcr.TagRetentionExecutionConfig("exampleTagRetentionExecutionConfig",
+            registry_id=example_tag_retention_rule.registry_id,
+            retention_id=example_tag_retention_rule.retention_id,
             dry_run=False)
         ```
 
@@ -191,7 +197,7 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
                  args: TagRetentionExecutionConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr tag_retention_execution_config
+        Provides a resource to configure a tcr tag retention execution.
 
         ## Example Usage
 
@@ -199,8 +205,14 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=tencentcloud_tcr_instance["mytcr_retention"]["id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -208,18 +220,18 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
             cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
                 cve_id="cve-xxxxx",
             )])
-        my_rule = tencentcloud.tcr.TagRetentionRule("myRule",
-            registry_id=tencentcloud_tcr_instance["mytcr_retention"]["id"],
-            namespace_name=my_ns.name,
+        example_tag_retention_rule = tencentcloud.tcr.TagRetentionRule("exampleTagRetentionRule",
+            registry_id=example_instance.id,
+            namespace_name=example_namespace.name,
             retention_rule=tencentcloud.tcr.TagRetentionRuleRetentionRuleArgs(
                 key="nDaysSinceLastPush",
                 value=2,
             ),
             cron_setting="manual",
             disabled=True)
-        tag_retention_execution_config = tencentcloud.tcr.TagRetentionExecutionConfig("tagRetentionExecutionConfig",
-            registry_id=my_rule.registry_id,
-            retention_id=my_rule.retention_id,
+        example_tag_retention_execution_config = tencentcloud.tcr.TagRetentionExecutionConfig("exampleTagRetentionExecutionConfig",
+            registry_id=example_tag_retention_rule.registry_id,
+            retention_id=example_tag_retention_rule.retention_id,
             dry_run=False)
         ```
 

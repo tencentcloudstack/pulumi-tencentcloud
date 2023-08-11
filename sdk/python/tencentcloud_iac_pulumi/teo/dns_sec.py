@@ -148,27 +148,7 @@ class DnsSec(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo dns_sec
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dns_sec = tencentcloud.teo.DnsSec("dnsSec",
-            status="enabled",
-            zone_id="zone-297z8rf93cfw")
-        ```
-
-        ## Import
-
-        teo dns_sec can be imported using the zone_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/dnsSec:DnsSec dns_sec zone-297z8rf93cfw
-        ```
-
+        Create a DnsSec resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['DnsSecDnssecArgs']] dnssec: DNSSEC infos.
@@ -182,27 +162,7 @@ class DnsSec(pulumi.CustomResource):
                  args: DnsSecArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo dns_sec
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        dns_sec = tencentcloud.teo.DnsSec("dnsSec",
-            status="enabled",
-            zone_id="zone-297z8rf93cfw")
-        ```
-
-        ## Import
-
-        teo dns_sec can be imported using the zone_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/dnsSec:DnsSec dns_sec zone-297z8rf93cfw
-        ```
-
+        Create a DnsSec resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param DnsSecArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

@@ -11,6 +11,72 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM role.
+//
+// ## Example Usage
+// ### Create normally
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewRoleByName(ctx, "foo", &Cam.RoleByNameArgs{
+// 			ConsoleLogin: pulumi.Bool(true),
+// 			Description:  pulumi.String("test"),
+// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\"qcs::cam::uin/<your-account-id>:uin/<your-account-id>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf-cam-role"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Create with SAML provider
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewRoleByName(ctx, "boo", &Cam.RoleByNameArgs{
+// 			ConsoleLogin: pulumi.Bool(true),
+// 			Description:  pulumi.String("test"),
+// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\"name/sts:AssumeRole\", \"name/sts:AssumeRoleWithWebIdentity\"],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"federated\": [\"qcs::cam::uin/<your-account-id>:saml-provider/<your-name>\"]\n", "      }\n", "    }\n", "  ]\n", "}\n", "\n")),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM role can be imported using the name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/roleByName:RoleByName foo cam-role-test
+// ```
 type RoleByName struct {
 	pulumi.CustomResourceState
 

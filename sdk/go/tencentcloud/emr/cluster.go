@@ -19,42 +19,100 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
+//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Emr.NewCluster(ctx, "emrrrr", &Emr.ClusterArgs{
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		cvm4c8m, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+// 			ExcludeSoldOut: pulumi.BoolRef(true),
+// 			CpuCoreCount:   pulumi.IntRef(4),
+// 			MemorySize:     pulumi.IntRef(8),
+// 			Filters: []instance.GetTypesFilter{
+// 				instance.GetTypesFilter{
+// 					Name: "instance-charge-type",
+// 					Values: []string{
+// 						"POSTPAID_BY_HOUR",
+// 					},
+// 				},
+// 				instance.GetTypesFilter{
+// 					Name: "zone",
+// 					Values: []string{
+// 						availabilityZone,
+// 					},
+// 				},
+// 			},
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		emrVpc, err := Vpc.NewInstance(ctx, "emrVpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		emrSubnet, err := Subnet.NewInstance(ctx, "emrSubnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			VpcId:            emrVpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.20.0/28"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		emrSg, err := Security.NewGroup(ctx, "emrSg", &Security.GroupArgs{
+// 			Description: pulumi.String("emr sg"),
+// 			ProjectId:   pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Emr.NewCluster(ctx, "emrCluster", &Emr.ClusterArgs{
 // 			ProductId:       pulumi.Int(4),
 // 			DisplayStrategy: pulumi.String("clusterList"),
 // 			VpcSettings: pulumi.AnyMap{
-// 				"vpc_id":    pulumi.Any("vpc-fuwly8x5"),
-// 				"subnet_id": pulumi.Any("subnet-d830wfso"),
+// 				"vpc_id":    emrVpc.ID(),
+// 				"subnet_id": emrSubnet.ID(),
 // 			},
 // 			Softwares: pulumi.StringArray{
-// 				pulumi.String("hadoop-2.8.4"),
-// 				pulumi.String("zookeeper-3.4.9"),
+// 				pulumi.String("zookeeper-3.6.1"),
 // 			},
 // 			SupportHa:    pulumi.Int(0),
-// 			InstanceName: pulumi.String("emr-test"),
+// 			InstanceName: pulumi.String("emr-cluster-test"),
 // 			ResourceSpec: &emr.ClusterResourceSpecArgs{
 // 				MasterResourceSpec: &emr.ClusterResourceSpecMasterResourceSpecArgs{
 // 					MemSize:     pulumi.Int(8192),
 // 					Cpu:         pulumi.Int(4),
 // 					DiskSize:    pulumi.Int(100),
 // 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String("CVM.S2"),
+// 					Spec:        pulumi.String(fmt.Sprintf("%v%v", "CVM.", cvm4c8m.InstanceTypes[0].Family)),
 // 					StorageType: pulumi.Int(5),
+// 					RootSize:    pulumi.Int(50),
 // 				},
 // 				CoreResourceSpec: &emr.ClusterResourceSpecCoreResourceSpecArgs{
 // 					MemSize:     pulumi.Int(8192),
 // 					Cpu:         pulumi.Int(4),
 // 					DiskSize:    pulumi.Int(100),
 // 					DiskType:    pulumi.String("CLOUD_PREMIUM"),
-// 					Spec:        pulumi.String("CVM.S2"),
+// 					Spec:        pulumi.String(fmt.Sprintf("%v%v", "CVM.", cvm4c8m.InstanceTypes[0].Family)),
 // 					StorageType: pulumi.Int(5),
+// 					RootSize:    pulumi.Int(50),
 // 				},
 // 				MasterCount: pulumi.Int(1),
 // 				CoreCount:   pulumi.Int(2),
@@ -62,13 +120,14 @@ import (
 // 			LoginSettings: pulumi.AnyMap{
 // 				"password": pulumi.Any("Tencent@cloud123"),
 // 			},
-// 			TimeSpan: pulumi.Int(1),
-// 			TimeUnit: pulumi.String("m"),
-// 			PayMode:  pulumi.Int(1),
+// 			TimeSpan: pulumi.Int(3600),
+// 			TimeUnit: pulumi.String("s"),
+// 			PayMode:  pulumi.Int(0),
 // 			Placement: pulumi.AnyMap{
-// 				"zone":       pulumi.Any("ap-guangzhou-3"),
+// 				"zone":       pulumi.String(availabilityZone),
 // 				"project_id": pulumi.Any(0),
 // 			},
+// 			SgId: emrSg.ID(),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -121,6 +180,8 @@ type Cluster struct {
 	Softwares pulumi.StringArrayOutput `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntOutput `pulumi:"supportHa"`
+	// Tag description list.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntOutput `pulumi:"timeSpan"`
@@ -234,6 +295,8 @@ type clusterState struct {
 	Softwares []string `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa *int `pulumi:"supportHa"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan *int `pulumi:"timeSpan"`
@@ -285,6 +348,8 @@ type ClusterState struct {
 	Softwares pulumi.StringArrayInput
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntPtrInput
@@ -338,6 +403,8 @@ type clusterArgs struct {
 	Softwares []string `pulumi:"softwares"`
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa int `pulumi:"supportHa"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan int `pulumi:"timeSpan"`
@@ -388,6 +455,8 @@ type ClusterArgs struct {
 	Softwares pulumi.StringArrayInput
 	// The flag whether the instance support high availability.(0=>not support, 1=>support).
 	SupportHa pulumi.IntInput
+	// Tag description list.
+	Tags pulumi.MapInput
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntInput
@@ -562,6 +631,11 @@ func (o ClusterOutput) Softwares() pulumi.StringArrayOutput {
 // The flag whether the instance support high availability.(0=>not support, 1=>support).
 func (o ClusterOutput) SupportHa() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.SupportHa }).(pulumi.IntOutput)
+}
+
+// Tag description list.
+func (o ClusterOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.

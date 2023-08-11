@@ -108,25 +108,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// }
     /// ```
-    /// ### Update the slave zone with specified value.
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var clusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("clusterSlaveZone", new Tencentcloud.Cynosdb.ClusterSlaveZoneArgs
-    ///         {
-    ///             ClusterId = tencentcloud_cynosdb_cluster.Instance.Id,
-    ///             SlaveZone = @var.Availability_zone,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// 
     /// ## Import
     /// 

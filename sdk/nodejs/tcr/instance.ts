@@ -9,25 +9,26 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr instance.
  *
  * ## Example Usage
+ * ### Create a basic tcr instance.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Tcr.Instance("foo", {
+ * const example = new tencentcloud.Tcr.Instance("example", {
  *     instanceType: "basic",
  *     tags: {
- *         test: "tf",
+ *         createdBy: "terraform",
  *     },
  * });
  * ```
- * ### Using public network access whitelist
+ * ### Create instance with the public network access whitelist.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Tcr.Instance("foo", {
+ * const example = new tencentcloud.Tcr.Instance("example", {
  *     instanceType: "basic",
  *     openPublicOperation: true,
  *     securityPolicies: [
@@ -40,7 +41,7 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
- * ### Create with Replications
+ * ### Create instance with Replications.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -67,7 +68,7 @@ import * as utilities from "../utilities";
  *     "ap-taipei": 39,
  *     "ap-jakarta": 72,
  * };
- * const foo = new tencentcloud.tcr.Instance("foo", {
+ * const example = new tencentcloud.tcr.Instance("example", {
  *     instanceType: "premium",
  *     replications: [
  *         {
@@ -85,7 +86,7 @@ import * as utilities from "../utilities";
  * tcr instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+ *  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

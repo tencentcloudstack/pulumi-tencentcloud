@@ -17,27 +17,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ```csharp
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var generalCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("generalCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             Zone = "ap-guangzhou-6",
+    ///             Product = "sqlserver",
+    ///         }));
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var example = new Tencentcloud.Sqlserver.GeneralCloudInstance("example", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+    ///         {
+    ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
     ///             Memory = 4,
-    ///             Storage = 20,
+    ///             Storage = 100,
     ///             Cpu = 2,
     ///             MachineType = "CLOUD_HSSD",
     ///             InstanceChargeType = "POSTPAID",
     ///             ProjectId = 0,
-    ///             SubnetId = local.Subnet_id,
-    ///             VpcId = local.Vpc_id,
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
     ///             DbVersion = "2008R2",
     ///             SecurityGroupLists = 
     ///             {
-    ///                 local.Sg_id,
+    ///                 securityGroup.Id,
     ///             },
     ///             Weeklies = 
     ///             {
@@ -71,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver general_cloud_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance general_cloud_instance general_cloud_instance_id
+    ///  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance")]

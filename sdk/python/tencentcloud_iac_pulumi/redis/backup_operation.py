@@ -134,14 +134,17 @@ class BackupOperation(pulumi.CustomResource):
         Provides a resource to create a redis backup_operation
 
         ## Example Usage
+        ### Manually back up the Redis instance, and the backup data is kept for 7 days
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        foo = tencentcloud.Mysql.get_instance()
         backup_operation = tencentcloud.redis.BackupOperation("backupOperation",
-            instance_id="crs-c1nl9rpv",
-            remark="",
+            instance_id=foo.instance_lists[0].mysql_id,
+            remark="manually back",
             storage_days=7)
         ```
 
@@ -161,14 +164,17 @@ class BackupOperation(pulumi.CustomResource):
         Provides a resource to create a redis backup_operation
 
         ## Example Usage
+        ### Manually back up the Redis instance, and the backup data is kept for 7 days
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        foo = tencentcloud.Mysql.get_instance()
         backup_operation = tencentcloud.redis.BackupOperation("backupOperation",
-            instance_id="crs-c1nl9rpv",
-            remark="",
+            instance_id=foo.instance_lists[0].mysql_id,
+            remark="manually back",
             storage_days=7)
         ```
 

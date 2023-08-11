@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const crossRegionZone = pulumi.output(tencentcloud.Sqlserver.getCrossRegionZone({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getCrossRegionZone({
  *     instanceId: "mssql-qelbzgwf",
  * }));
  * ```

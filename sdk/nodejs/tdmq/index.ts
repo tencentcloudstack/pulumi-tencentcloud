@@ -23,6 +23,7 @@ export * from "./instance";
 export * from "./namespace";
 export * from "./namespaceRoleAttachment";
 export * from "./rabbitmqUser";
+export * from "./rabbitmqVipInstance";
 export * from "./rabbitmqVirtualHost";
 export * from "./rocketmqCluster";
 export * from "./rocketmqEnvironmentRole";
@@ -30,6 +31,7 @@ export * from "./rocketmqGroup";
 export * from "./rocketmqNamespace";
 export * from "./rocketmqRole";
 export * from "./rocketmqTopic";
+export * from "./rocketmqVipInstance";
 export * from "./role";
 export * from "./sendRocketmqMessage";
 export * from "./subscriptionAttachment";
@@ -40,6 +42,7 @@ import { Instance } from "./instance";
 import { Namespace } from "./namespace";
 import { NamespaceRoleAttachment } from "./namespaceRoleAttachment";
 import { RabbitmqUser } from "./rabbitmqUser";
+import { RabbitmqVipInstance } from "./rabbitmqVipInstance";
 import { RabbitmqVirtualHost } from "./rabbitmqVirtualHost";
 import { RocketmqCluster } from "./rocketmqCluster";
 import { RocketmqEnvironmentRole } from "./rocketmqEnvironmentRole";
@@ -47,6 +50,7 @@ import { RocketmqGroup } from "./rocketmqGroup";
 import { RocketmqNamespace } from "./rocketmqNamespace";
 import { RocketmqRole } from "./rocketmqRole";
 import { RocketmqTopic } from "./rocketmqTopic";
+import { RocketmqVipInstance } from "./rocketmqVipInstance";
 import { Role } from "./role";
 import { SendRocketmqMessage } from "./sendRocketmqMessage";
 import { SubscriptionAttachment } from "./subscriptionAttachment";
@@ -64,6 +68,8 @@ const _module = {
                 return new NamespaceRoleAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser":
                 return new RabbitmqUser(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance":
+                return new RabbitmqVipInstance(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost":
                 return new RabbitmqVirtualHost(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster":
@@ -78,6 +84,8 @@ const _module = {
                 return new RocketmqRole(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic":
                 return new RocketmqTopic(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/rocketmqVipInstance:RocketmqVipInstance":
+                return new RocketmqVipInstance(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/role:Role":
                 return new Role(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/sendRocketmqMessage:SendRocketmqMessage":
@@ -95,6 +103,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespaceRoleAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqUser", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqVipInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqVirtualHost", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqCluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqEnvironmentRole", _module)
@@ -102,6 +111,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqGroup", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqNamespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqRole", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqTopic", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqVipInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/role", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/sendRocketmqMessage", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/subscriptionAttachment", _module)

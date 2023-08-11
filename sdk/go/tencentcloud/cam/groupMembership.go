@@ -19,17 +19,43 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewGroupMembership(ctx, "foo", &Cam.GroupMembershipArgs{
-// 			GroupId: pulumi.Any(tencentcloud_cam_group.Foo.Id),
+// 		cfg := config.New(ctx, "")
+// 		camGroupBasic := "keep-cam-group"
+// 		if param := cfg.Get("camGroupBasic"); param != "" {
+// 			camGroupBasic = param
+// 		}
+// 		groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+// 			Name: pulumi.StringRef(camGroupBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		foo, err := Cam.NewUser(ctx, "foo", &Cam.UserArgs{
+// 			Remark:            pulumi.String("tf_user_remark"),
+// 			ConsoleLogin:      pulumi.Bool(true),
+// 			UseApi:            pulumi.Bool(true),
+// 			NeedResetPassword: pulumi.Bool(true),
+// 			Password:          pulumi.String("Gail@1234"),
+// 			PhoneNum:          pulumi.String("12345678910"),
+// 			CountryCode:       pulumi.String("86"),
+// 			Email:             pulumi.String("1234@qq.com"),
+// 			ForceDelete:       pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.NewGroupMembership(ctx, "groupMembershipBasic", &Cam.GroupMembershipArgs{
+// 			GroupId: pulumi.String(groups.GroupLists[0].GroupId),
 // 			UserNames: pulumi.StringArray{
-// 				pulumi.Any(tencentcloud_cam_user.Foo.Name),
-// 				pulumi.Any(tencentcloud_cam_user.Bar.Name),
+// 				foo.ID(),
 // 			},
 // 		})
 // 		if err != nil {

@@ -14,50 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigAclConfigUserRule
     {
-        /// <summary>
-        /// Valid values: `monitor`, `drop`.
-        /// </summary>
         public readonly string Action;
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigAclConfigUserRuleCondition> Conditions;
-        /// <summary>
-        /// Name of the custom response page.
-        /// </summary>
         public readonly string? Name;
-        /// <summary>
-        /// ID of the custom response page.
-        /// </summary>
         public readonly int? PageId;
-        /// <summary>
-        /// Punish time, Valid value range: 0-2 days.
-        /// </summary>
         public readonly int? PunishTime;
-        /// <summary>
-        /// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        /// </summary>
         public readonly string? PunishTimeUnit;
-        /// <summary>
-        /// Redirect target URL, must be an sub-domain from one of the account&amp;#39;s site.
-        /// </summary>
         public readonly string? RedirectUrl;
-        /// <summary>
-        /// Response code to use when redirecting.
-        /// </summary>
         public readonly int? ResponseCode;
         public readonly int? RuleId;
-        /// <summary>
-        /// Rule Name.
-        /// </summary>
         public readonly string RuleName;
-        /// <summary>
-        /// Priority of the rule. Valid value range: 1-100.
-        /// </summary>
         public readonly int RulePriority;
-        /// <summary>
-        /// Status of the rule. Valid values: `on`, `off`, `hour`.
-        /// </summary>
         public readonly string RuleStatus;
         public readonly string? UpdateTime;
 

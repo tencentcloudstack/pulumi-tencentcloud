@@ -13,30 +13,6 @@ import (
 
 // Provides a resource to create a CAM user policy attachment.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewUserPolicyAttachment(ctx, "foo", &Cam.UserPolicyAttachmentArgs{
-// 			UserId:   pulumi.Any(tencentcloud_cam_user.Foo.Id),
-// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // CAM user policy attachment can be imported using the id, e.g.

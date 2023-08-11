@@ -20,22 +20,45 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaInstance(ctx, "grafanaInstance", &Monitor.GrafanaInstanceArgs{
-// 			EnableInternet:      pulumi.Bool(false),
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			InstanceName:        pulumi.String("test-grafana"),
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-6"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
+// 			InstanceName: pulumi.String("test-grafana"),
+// 			VpcId:        vpc.ID(),
 // 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String("subnet-rdkj0agk"),
+// 				subnet.ID(),
 // 			},
+// 			GrafanaInitPassword: pulumi.String("1234567890"),
+// 			EnableInternet:      pulumi.Bool(false),
+// 			IsDestroy:           pulumi.Bool(true),
 // 			Tags: pulumi.AnyMap{
 // 				"createdBy": pulumi.Any("test"),
 // 			},
-// 			VpcId: pulumi.String("vpc-2hfyray3"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -50,7 +73,7 @@ import (
 // monitor grafanaInstance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance grafanaInstance grafanaInstance_id
+//  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
 // ```
 type GrafanaInstance struct {
 	pulumi.CustomResourceState
@@ -69,6 +92,12 @@ type GrafanaInstance struct {
 	InternalUrl pulumi.StringOutput `pulumi:"internalUrl"`
 	// Grafana intranet address.
 	InternetUrl pulumi.StringOutput `pulumi:"internetUrl"`
+	// Whether to clean up completely, the default is false.
+	IsDestroy pulumi.BoolPtrOutput `pulumi:"isDestroy"`
+	// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.81.16.
+	IsDistroy pulumi.BoolPtrOutput `pulumi:"isDistroy"`
 	// Grafana external url which could be accessed by user.
 	RootUrl pulumi.StringOutput `pulumi:"rootUrl"`
 	// Subnet Id array.
@@ -126,6 +155,12 @@ type grafanaInstanceState struct {
 	InternalUrl *string `pulumi:"internalUrl"`
 	// Grafana intranet address.
 	InternetUrl *string `pulumi:"internetUrl"`
+	// Whether to clean up completely, the default is false.
+	IsDestroy *bool `pulumi:"isDestroy"`
+	// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.81.16.
+	IsDistroy *bool `pulumi:"isDistroy"`
 	// Grafana external url which could be accessed by user.
 	RootUrl *string `pulumi:"rootUrl"`
 	// Subnet Id array.
@@ -151,6 +186,12 @@ type GrafanaInstanceState struct {
 	InternalUrl pulumi.StringPtrInput
 	// Grafana intranet address.
 	InternetUrl pulumi.StringPtrInput
+	// Whether to clean up completely, the default is false.
+	IsDestroy pulumi.BoolPtrInput
+	// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.81.16.
+	IsDistroy pulumi.BoolPtrInput
 	// Grafana external url which could be accessed by user.
 	RootUrl pulumi.StringPtrInput
 	// Subnet Id array.
@@ -172,6 +213,12 @@ type grafanaInstanceArgs struct {
 	GrafanaInitPassword *string `pulumi:"grafanaInitPassword"`
 	// Instance name.
 	InstanceName string `pulumi:"instanceName"`
+	// Whether to clean up completely, the default is false.
+	IsDestroy *bool `pulumi:"isDestroy"`
+	// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.81.16.
+	IsDistroy *bool `pulumi:"isDistroy"`
 	// Subnet Id array.
 	SubnetIds []string `pulumi:"subnetIds"`
 	// Tag description list.
@@ -188,6 +235,12 @@ type GrafanaInstanceArgs struct {
 	GrafanaInitPassword pulumi.StringPtrInput
 	// Instance name.
 	InstanceName pulumi.StringInput
+	// Whether to clean up completely, the default is false.
+	IsDestroy pulumi.BoolPtrInput
+	// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.81.16.
+	IsDistroy pulumi.BoolPtrInput
 	// Subnet Id array.
 	SubnetIds pulumi.StringArrayInput
 	// Tag description list.
@@ -316,6 +369,18 @@ func (o GrafanaInstanceOutput) InternalUrl() pulumi.StringOutput {
 // Grafana intranet address.
 func (o GrafanaInstanceOutput) InternetUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *GrafanaInstance) pulumi.StringOutput { return v.InternetUrl }).(pulumi.StringOutput)
+}
+
+// Whether to clean up completely, the default is false.
+func (o GrafanaInstanceOutput) IsDestroy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *GrafanaInstance) pulumi.BoolPtrOutput { return v.IsDestroy }).(pulumi.BoolPtrOutput)
+}
+
+// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+//
+// Deprecated: It has been deprecated from version 1.81.16.
+func (o GrafanaInstanceOutput) IsDistroy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *GrafanaInstance) pulumi.BoolPtrOutput { return v.IsDistroy }).(pulumi.BoolPtrOutput)
 }
 
 // Grafana external url which could be accessed by user.

@@ -25,9 +25,9 @@ class AclArgs:
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
         :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
-        :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
+        :param pulumi.Input[str] host: The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         pulumi.set(__self__, "instance_id", instance_id)
@@ -82,7 +82,7 @@ class AclArgs:
     @pulumi.getter
     def host(self) -> Optional[pulumi.Input[str]]:
         """
-        IP address allowed to access. The default value is `*`, which means that any host can access.
+        The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         """
         return pulumi.get(self, "host")
 
@@ -106,7 +106,7 @@ class AclArgs:
     @pulumi.getter
     def principal(self) -> Optional[pulumi.Input[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         """
         return pulumi.get(self, "principal")
 
@@ -139,11 +139,11 @@ class _AclState:
                  resource_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Acl resources.
-        :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
+        :param pulumi.Input[str] host: The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
         :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
@@ -166,7 +166,7 @@ class _AclState:
     @pulumi.getter
     def host(self) -> Optional[pulumi.Input[str]]:
         """
-        IP address allowed to access. The default value is `*`, which means that any host can access.
+        The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         """
         return pulumi.get(self, "host")
 
@@ -214,7 +214,7 @@ class _AclState:
     @pulumi.getter
     def principal(self) -> Optional[pulumi.Input[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         """
         return pulumi.get(self, "principal")
 
@@ -290,11 +290,11 @@ class Acl(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
+        :param pulumi.Input[str] host: The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
         :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
@@ -405,11 +405,11 @@ class Acl(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
+        :param pulumi.Input[str] host: The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
         :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
@@ -430,7 +430,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter
     def host(self) -> pulumi.Output[Optional[str]]:
         """
-        IP address allowed to access. The default value is `*`, which means that any host can access.
+        The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         """
         return pulumi.get(self, "host")
 
@@ -462,7 +462,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter
     def principal(self) -> pulumi.Output[Optional[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         """
         return pulumi.get(self, "principal")
 

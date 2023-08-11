@@ -132,66 +132,7 @@ class DdosPolicy(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo ddos_policy
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ddos_policy = tencentcloud.teo.DdosPolicy("ddosPolicy",
-            ddos_rule=tencentcloud.teo.DdosPolicyDdosRuleArgs(
-                acl=tencentcloud.teo.DdosPolicyDdosRuleAclArgs(
-                    switch="on",
-                ),
-                allow_block=tencentcloud.teo.DdosPolicyDdosRuleAllowBlockArgs(
-                    switch="on",
-                ),
-                anti_ply=tencentcloud.teo.DdosPolicyDdosRuleAntiPlyArgs(
-                    abnormal_connect_num=0,
-                    abnormal_syn_num=0,
-                    abnormal_syn_ratio=0,
-                    connect_timeout=0,
-                    destination_connect_limit=0,
-                    destination_create_limit=0,
-                    drop_icmp="off",
-                    drop_other="off",
-                    drop_tcp="off",
-                    drop_udp="off",
-                    empty_connect_protect="off",
-                    source_connect_limit=0,
-                    source_create_limit=0,
-                    udp_shard="off",
-                ),
-                geo_ip=tencentcloud.teo.DdosPolicyDdosRuleGeoIpArgs(
-                    region_ids=[],
-                    switch="on",
-                ),
-                packet_filter=tencentcloud.teo.DdosPolicyDdosRulePacketFilterArgs(
-                    switch="on",
-                ),
-                speed_limit=tencentcloud.teo.DdosPolicyDdosRuleSpeedLimitArgs(
-                    flux_limit="0 bps",
-                    package_limit="0 pps",
-                ),
-                status_info=tencentcloud.teo.DdosPolicyDdosRuleStatusInfoArgs(
-                    ply_level="middle",
-                ),
-                switch="on",
-            ),
-            policy_id=1278,
-            zone_id="zone-2983wizgxqvm")
-        ```
-
-        ## Import
-
-        teo ddos_policy can be imported using the id#ddosPolicy_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/ddosPolicy:DdosPolicy ddos_policy zone-2a1u0y616jz6#11587
-        ```
-
+        Create a DdosPolicy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['DdosPolicyDdosRuleArgs']] ddos_rule: DDoS Configuration of the zone.
@@ -205,66 +146,7 @@ class DdosPolicy(pulumi.CustomResource):
                  args: DdosPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo ddos_policy
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ddos_policy = tencentcloud.teo.DdosPolicy("ddosPolicy",
-            ddos_rule=tencentcloud.teo.DdosPolicyDdosRuleArgs(
-                acl=tencentcloud.teo.DdosPolicyDdosRuleAclArgs(
-                    switch="on",
-                ),
-                allow_block=tencentcloud.teo.DdosPolicyDdosRuleAllowBlockArgs(
-                    switch="on",
-                ),
-                anti_ply=tencentcloud.teo.DdosPolicyDdosRuleAntiPlyArgs(
-                    abnormal_connect_num=0,
-                    abnormal_syn_num=0,
-                    abnormal_syn_ratio=0,
-                    connect_timeout=0,
-                    destination_connect_limit=0,
-                    destination_create_limit=0,
-                    drop_icmp="off",
-                    drop_other="off",
-                    drop_tcp="off",
-                    drop_udp="off",
-                    empty_connect_protect="off",
-                    source_connect_limit=0,
-                    source_create_limit=0,
-                    udp_shard="off",
-                ),
-                geo_ip=tencentcloud.teo.DdosPolicyDdosRuleGeoIpArgs(
-                    region_ids=[],
-                    switch="on",
-                ),
-                packet_filter=tencentcloud.teo.DdosPolicyDdosRulePacketFilterArgs(
-                    switch="on",
-                ),
-                speed_limit=tencentcloud.teo.DdosPolicyDdosRuleSpeedLimitArgs(
-                    flux_limit="0 bps",
-                    package_limit="0 pps",
-                ),
-                status_info=tencentcloud.teo.DdosPolicyDdosRuleStatusInfoArgs(
-                    ply_level="middle",
-                ),
-                switch="on",
-            ),
-            policy_id=1278,
-            zone_id="zone-2983wizgxqvm")
-        ```
-
-        ## Import
-
-        teo ddos_policy can be imported using the id#ddosPolicy_id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/ddosPolicy:DdosPolicy ddos_policy zone-2a1u0y616jz6#11587
-        ```
-
+        Create a DdosPolicy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param DdosPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

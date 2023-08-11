@@ -13,78 +13,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigAclConfigUserRuleGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Valid values: `monitor`, `drop`.
-        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         [Input("conditions", required: true)]
         private InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleConditionGetArgs>? _conditions;
-
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleConditionGetArgs> Conditions
         {
             get => _conditions ?? (_conditions = new InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleConditionGetArgs>());
             set => _conditions = value;
         }
 
-        /// <summary>
-        /// Name of the custom response page.
-        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// ID of the custom response page.
-        /// </summary>
         [Input("pageId")]
         public Input<int>? PageId { get; set; }
 
-        /// <summary>
-        /// Punish time, Valid value range: 0-2 days.
-        /// </summary>
         [Input("punishTime")]
         public Input<int>? PunishTime { get; set; }
 
-        /// <summary>
-        /// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        /// </summary>
         [Input("punishTimeUnit")]
         public Input<string>? PunishTimeUnit { get; set; }
 
-        /// <summary>
-        /// Redirect target URL, must be an sub-domain from one of the account&amp;#39;s site.
-        /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
 
-        /// <summary>
-        /// Response code to use when redirecting.
-        /// </summary>
         [Input("responseCode")]
         public Input<int>? ResponseCode { get; set; }
 
         [Input("ruleId")]
         public Input<int>? RuleId { get; set; }
 
-        /// <summary>
-        /// Rule Name.
-        /// </summary>
         [Input("ruleName", required: true)]
         public Input<string> RuleName { get; set; } = null!;
 
-        /// <summary>
-        /// Priority of the rule. Valid value range: 1-100.
-        /// </summary>
         [Input("rulePriority", required: true)]
         public Input<int> RulePriority { get; set; } = null!;
 
-        /// <summary>
-        /// Status of the rule. Valid values: `on`, `off`, `hour`.
-        /// </summary>
         [Input("ruleStatus", required: true)]
         public Input<string> RuleStatus { get; set; } = null!;
 

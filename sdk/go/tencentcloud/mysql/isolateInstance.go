@@ -11,15 +11,100 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a mysql isolateInstance
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "cdb",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+// 			Description: pulumi.String("mysql test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+// 			InternetService:  pulumi.Int(1),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			ChargeType:       pulumi.String("POSTPAID"),
+// 			RootPassword:     pulumi.String("PassWord123"),
+// 			SlaveDeployMode:  pulumi.Int(0),
+// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// 			SlaveSyncMode:    pulumi.Int(1),
+// 			InstanceName:     pulumi.String("tf-example-mysql"),
+// 			MemSize:          pulumi.Int(4000),
+// 			VolumeSize:       pulumi.Int(200),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			SecurityGroups: pulumi.StringArray{
+// 				securityGroup.ID(),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"name": pulumi.Any("test"),
+// 			},
+// 			Parameters: pulumi.AnyMap{
+// 				"character_set_server": pulumi.Any("utf8"),
+// 				"max_connections":      pulumi.Any("1000"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewIsolateInstance(ctx, "exampleIsolateInstance", &Mysql.IsolateInstanceArgs{
+// 			InstanceId: exampleInstance.ID(),
+// 			Operate:    pulumi.String("recover"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type IsolateInstance struct {
 	pulumi.CustomResourceState
 
-	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-	// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-	// value of the field InstanceId in the output parameter.
+	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+	Operate pulumi.StringOutput `pulumi:"operate"`
 	// Instance status.
-	Status pulumi.StringOutput `pulumi:"status"`
+	Status pulumi.IntOutput `pulumi:"status"`
 }
 
 // NewIsolateInstance registers a new resource with the given unique name, arguments, and options.
@@ -31,6 +116,9 @@ func NewIsolateInstance(ctx *pulumi.Context,
 
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
+	}
+	if args.Operate == nil {
+		return nil, errors.New("invalid value for required argument 'Operate'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource IsolateInstance
@@ -55,21 +143,21 @@ func GetIsolateInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering IsolateInstance resources.
 type isolateInstanceState struct {
-	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-	// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-	// value of the field InstanceId in the output parameter.
+	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 	InstanceId *string `pulumi:"instanceId"`
+	// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+	Operate *string `pulumi:"operate"`
 	// Instance status.
-	Status *string `pulumi:"status"`
+	Status *int `pulumi:"status"`
 }
 
 type IsolateInstanceState struct {
-	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-	// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-	// value of the field InstanceId in the output parameter.
+	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 	InstanceId pulumi.StringPtrInput
+	// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+	Operate pulumi.StringPtrInput
 	// Instance status.
-	Status pulumi.StringPtrInput
+	Status pulumi.IntPtrInput
 }
 
 func (IsolateInstanceState) ElementType() reflect.Type {
@@ -77,18 +165,18 @@ func (IsolateInstanceState) ElementType() reflect.Type {
 }
 
 type isolateInstanceArgs struct {
-	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-	// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-	// value of the field InstanceId in the output parameter.
+	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 	InstanceId string `pulumi:"instanceId"`
+	// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+	Operate string `pulumi:"operate"`
 }
 
 // The set of arguments for constructing a IsolateInstance resource.
 type IsolateInstanceArgs struct {
-	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-	// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-	// value of the field InstanceId in the output parameter.
+	// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 	InstanceId pulumi.StringInput
+	// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+	Operate pulumi.StringInput
 }
 
 func (IsolateInstanceArgs) ElementType() reflect.Type {
@@ -178,16 +266,19 @@ func (o IsolateInstanceOutput) ToIsolateInstanceOutputWithContext(ctx context.Co
 	return o
 }
 
-// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console
-// page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the
-// value of the field InstanceId in the output parameter.
+// Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
 func (o IsolateInstanceOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *IsolateInstance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
+// Manipulate instance, `isolate` - isolate instance, `recover`- recover isolated instance.
+func (o IsolateInstanceOutput) Operate() pulumi.StringOutput {
+	return o.ApplyT(func(v *IsolateInstance) pulumi.StringOutput { return v.Operate }).(pulumi.StringOutput)
+}
+
 // Instance status.
-func (o IsolateInstanceOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v *IsolateInstance) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+func (o IsolateInstanceOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v *IsolateInstance) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
 type IsolateInstanceArrayOutput struct{ *pulumi.OutputState }

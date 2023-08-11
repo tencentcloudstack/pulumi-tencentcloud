@@ -166,9 +166,21 @@ def get_environment_attributes(cluster_id: Optional[str] = None,
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    environment_attributes = tencentcloud.Tdmq.get_environment_attributes(cluster_id="pulsar-9n95ax58b9vn",
-        environment_id="keep-ns")
+    example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+        cluster_name="tf_example",
+        remark="remark.",
+        tags={
+            "createdBy": "terraform",
+        })
+    example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+        environ_name="tf_example",
+        msg_ttl=300,
+        cluster_id=example_instance.id,
+        remark="remark.")
+    example_environment_attributes = tencentcloud.Tdmq.get_environment_attributes_output(environment_id=example_namespace.environ_name,
+        cluster_id=example_instance.id)
     ```
 
 
@@ -215,9 +227,21 @@ def get_environment_attributes_output(cluster_id: Optional[pulumi.Input[Optional
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    environment_attributes = tencentcloud.Tdmq.get_environment_attributes(cluster_id="pulsar-9n95ax58b9vn",
-        environment_id="keep-ns")
+    example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+        cluster_name="tf_example",
+        remark="remark.",
+        tags={
+            "createdBy": "terraform",
+        })
+    example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+        environ_name="tf_example",
+        msg_ttl=300,
+        cluster_id=example_instance.id,
+        remark="remark.")
+    example_environment_attributes = tencentcloud.Tdmq.get_environment_attributes_output(environment_id=example_namespace.environ_name,
+        cluster_id=example_instance.id)
     ```
 
 

@@ -10,32 +10,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Use this data source to query detailed information of teo botManagedRules
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.GetBotManagedRules(ctx, &teo.GetBotManagedRulesArgs{
-// 			Entity: "",
-// 			ZoneId: "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 func GetBotManagedRules(ctx *pulumi.Context, args *GetBotManagedRulesArgs, opts ...pulumi.InvokeOption) (*GetBotManagedRulesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetBotManagedRulesResult
@@ -48,23 +22,19 @@ func GetBotManagedRules(ctx *pulumi.Context, args *GetBotManagedRulesArgs, opts 
 
 // A collection of arguments for invoking getBotManagedRules.
 type GetBotManagedRulesArgs struct {
-	// Subdomain or application name.
-	Entity string `pulumi:"entity"`
-	// Used to save results.
+	Entity           string  `pulumi:"entity"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId string `pulumi:"zoneId"`
+	ZoneId           string  `pulumi:"zoneId"`
 }
 
 // A collection of values returned by getBotManagedRules.
 type GetBotManagedRulesResult struct {
 	Entity string `pulumi:"entity"`
 	// The provider-assigned unique ID for this managed resource.
-	Id               string  `pulumi:"id"`
-	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Managed rules list.
-	Rules  []GetBotManagedRulesRule `pulumi:"rules"`
-	ZoneId string                   `pulumi:"zoneId"`
+	Id               string                   `pulumi:"id"`
+	ResultOutputFile *string                  `pulumi:"resultOutputFile"`
+	Rules            []GetBotManagedRulesRule `pulumi:"rules"`
+	ZoneId           string                   `pulumi:"zoneId"`
 }
 
 func GetBotManagedRulesOutput(ctx *pulumi.Context, args GetBotManagedRulesOutputArgs, opts ...pulumi.InvokeOption) GetBotManagedRulesResultOutput {
@@ -82,12 +52,9 @@ func GetBotManagedRulesOutput(ctx *pulumi.Context, args GetBotManagedRulesOutput
 
 // A collection of arguments for invoking getBotManagedRules.
 type GetBotManagedRulesOutputArgs struct {
-	// Subdomain or application name.
-	Entity pulumi.StringInput `pulumi:"entity"`
-	// Used to save results.
+	Entity           pulumi.StringInput    `pulumi:"entity"`
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	// Site ID.
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	ZoneId           pulumi.StringInput    `pulumi:"zoneId"`
 }
 
 func (GetBotManagedRulesOutputArgs) ElementType() reflect.Type {
@@ -122,7 +89,6 @@ func (o GetBotManagedRulesResultOutput) ResultOutputFile() pulumi.StringPtrOutpu
 	return o.ApplyT(func(v GetBotManagedRulesResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
-// Managed rules list.
 func (o GetBotManagedRulesResultOutput) Rules() GetBotManagedRulesRuleArrayOutput {
 	return o.ApplyT(func(v GetBotManagedRulesResult) []GetBotManagedRulesRule { return v.Rules }).(GetBotManagedRulesRuleArrayOutput)
 }

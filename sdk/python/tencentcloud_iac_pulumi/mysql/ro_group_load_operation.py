@@ -71,9 +71,53 @@ class RoGroupLoadOperation(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", ro_group_id="cdbrg-bdlvcfpj")
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        example_instance = tencentcloud.Mysql.get_instance(mysql_id=example_mysql / instance_instance["id"])
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[1].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_mysql_instance_instance = tencentcloud.mysql.Instance("exampleMysql/instanceInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[1].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_readonly_instance = tencentcloud.mysql.ReadonlyInstance("exampleReadonlyInstance",
+            master_instance_id=example_mysql / instance_instance["id"],
+            instance_name="tf-mysql",
+            mem_size=2000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", ro_group_id=example_instance.instance_lists[0].ro_groups[0].group_id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -93,9 +137,53 @@ class RoGroupLoadOperation(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", ro_group_id="cdbrg-bdlvcfpj")
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        example_instance = tencentcloud.Mysql.get_instance(mysql_id=example_mysql / instance_instance["id"])
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[1].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_mysql_instance_instance = tencentcloud.mysql.Instance("exampleMysql/instanceInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[1].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_readonly_instance = tencentcloud.mysql.ReadonlyInstance("exampleReadonlyInstance",
+            master_instance_id=example_mysql / instance_instance["id"],
+            instance_name="tf-mysql",
+            mem_size=2000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("roGroupLoadOperation", ro_group_id=example_instance.instance_lists[0].ro_groups[0].group_id)
         ```
 
         :param str resource_name: The name of the resource.

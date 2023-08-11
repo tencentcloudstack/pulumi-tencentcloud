@@ -13,33 +13,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigWafConfigGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// AI based rules configuration.
-        /// </summary>
         [Input("aiRule")]
         public Input<Inputs.SecurityPolicyConfigWafConfigAiRuleGetArgs>? AiRule { get; set; }
 
-        /// <summary>
-        /// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-        /// </summary>
         [Input("level", required: true)]
         public Input<string> Level { get; set; } = null!;
 
-        /// <summary>
-        /// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-        /// </summary>
         [Input("mode", required: true)]
         public Input<string> Mode { get; set; } = null!;
 
-        /// <summary>
-        /// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
 
-        /// <summary>
-        /// WAF Rules Configuration.
-        /// </summary>
         [Input("wafRules", required: true)]
         public Input<Inputs.SecurityPolicyConfigWafConfigWafRulesGetArgs> WafRules { get; set; } = null!;
 

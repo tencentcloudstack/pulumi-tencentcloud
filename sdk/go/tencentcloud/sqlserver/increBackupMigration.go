@@ -25,11 +25,11 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewIncreBackupMigration(ctx, "increBackupMigration", &Sqlserver.IncreBackupMigrationArgs{
+// 		_, err := Sqlserver.NewIncreBackupMigration(ctx, "example", &Sqlserver.IncreBackupMigrationArgs{
 // 			BackupFiles:       pulumi.StringArray{},
 // 			BackupMigrationId: pulumi.String("mssql-backup-migration-9tj0sxnz"),
 // 			InstanceId:        pulumi.String("mssql-4gmc5805"),
-// 			IsRecovery:        pulumi.String("NO"),
+// 			IsRecovery:        pulumi.String("YES"),
 // 		})
 // 		if err != nil {
 // 			return err

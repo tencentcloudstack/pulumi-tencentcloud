@@ -19,6 +19,8 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
+//
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
@@ -26,15 +28,25 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpTkeTemplate(ctx, "template", &Monitor.TmpTkeTemplateArgs{
+// 		_, err := Monitor.NewTmpTkeTemplate(ctx, "foo", &Monitor.TmpTkeTemplateArgs{
 // 			Template: &monitor.TmpTkeTemplateTemplateArgs{
-// 				Describe: pulumi.String("template"),
+// 				Name:     pulumi.String("tf-template"),
 // 				Level:    pulumi.String("cluster"),
-// 				Name:     pulumi.String("test"),
+// 				Describe: pulumi.String("template"),
 // 				ServiceMonitors: monitor.TmpTkeTemplateTemplateServiceMonitorArray{
 // 					&monitor.TmpTkeTemplateTemplateServiceMonitorArgs{
-// 						Config: pulumi.String("xxxxx"),
-// 						Name:   pulumi.String("test"),
+// 						Name:   pulumi.String("tf-ServiceMonitor"),
+// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "apiVersion: monitoring.coreos.com/v1\n", "kind: ServiceMonitor\n", "metadata:\n", "  name: example-service-monitor\n", "  namespace: monitoring\n", "  labels:\n", "    k8s-app: example-service\n", "spec:\n", "  selector:\n", "    matchLabels:\n", "      k8s-app: example-service\n", "  namespaceSelector:\n", "    matchNames:\n", "      - default\n", "  endpoints:\n", "  - port: http-metrics\n", "    interval: 30s\n", "    path: /metrics\n", "    scheme: http\n", "    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tlsConfig:\n", "      insecureSkipVerify: true\n")),
+// 					},
+// 				},
+// 				PodMonitors: monitor.TmpTkeTemplateTemplatePodMonitorArray{
+// 					&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
+// 						Name:   pulumi.String("tf-PodMonitors"),
+// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "apiVersion: monitoring.coreos.com/v1\n", "kind: PodMonitor\n", "metadata:\n", "  name: example-pod-monitor\n", "  namespace: monitoring\n", "  labels:\n", "    k8s-app: example-pod\n", "spec:\n", "  selector:\n", "    matchLabels:\n", "      k8s-app: example-pod\n", "  namespaceSelector:\n", "    matchNames:\n", "      - default\n", "  podMetricsEndpoints:\n", "  - port: http-metrics\n", "    interval: 30s\n", "    path: /metrics\n", "    scheme: http\n", "    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tlsConfig:\n", "      insecureSkipVerify: true\n")),
+// 					},
+// 					&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
+// 						Name:   pulumi.String("tf-RawJobs"),
+// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "scrape_configs:\n", "  - job_name: 'example-job'\n", "    scrape_interval: 30s\n", "    static_configs:\n", "      - targets: ['example-service.default.svc.cluster.local:8080']\n", "    metrics_path: /metrics\n", "    scheme: http\n", "    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tls_config:\n", "      insecure_skip_verify: true\n")),
 // 					},
 // 				},
 // 			},

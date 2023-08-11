@@ -23,19 +23,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var template = new Tencentcloud.Monitor.TmpTkeTemplate("template", new Tencentcloud.Monitor.TmpTkeTemplateArgs
+    ///         var foo = new Tencentcloud.Monitor.TmpTkeTemplate("foo", new Tencentcloud.Monitor.TmpTkeTemplateArgs
     ///         {
     ///             Template = new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateArgs
     ///             {
-    ///                 Describe = "template",
+    ///                 Name = "tf-template",
     ///                 Level = "cluster",
-    ///                 Name = "test",
+    ///                 Describe = "template",
     ///                 ServiceMonitors = 
     ///                 {
     ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateServiceMonitorArgs
     ///                     {
-    ///                         Config = "xxxxx",
-    ///                         Name = "test",
+    ///                         Name = "tf-ServiceMonitor",
+    ///                         Config = @"apiVersion: monitoring.coreos.com/v1
+    /// kind: ServiceMonitor
+    /// metadata:
+    ///   name: example-service-monitor
+    ///   namespace: monitoring
+    ///   labels:
+    ///     k8s-app: example-service
+    /// spec:
+    ///   selector:
+    ///     matchLabels:
+    ///       k8s-app: example-service
+    ///   namespaceSelector:
+    ///     matchNames:
+    ///       - default
+    ///   endpoints:
+    ///   - port: http-metrics
+    ///     interval: 30s
+    ///     path: /metrics
+    ///     scheme: http
+    ///     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    ///     tlsConfig:
+    ///       insecureSkipVerify: true
+    /// ",
+    ///                     },
+    ///                 },
+    ///                 PodMonitors = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
+    ///                     {
+    ///                         Name = "tf-PodMonitors",
+    ///                         Config = @"apiVersion: monitoring.coreos.com/v1
+    /// kind: PodMonitor
+    /// metadata:
+    ///   name: example-pod-monitor
+    ///   namespace: monitoring
+    ///   labels:
+    ///     k8s-app: example-pod
+    /// spec:
+    ///   selector:
+    ///     matchLabels:
+    ///       k8s-app: example-pod
+    ///   namespaceSelector:
+    ///     matchNames:
+    ///       - default
+    ///   podMetricsEndpoints:
+    ///   - port: http-metrics
+    ///     interval: 30s
+    ///     path: /metrics
+    ///     scheme: http
+    ///     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    ///     tlsConfig:
+    ///       insecureSkipVerify: true
+    /// ",
+    ///                     },
+    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
+    ///                     {
+    ///                         Name = "tf-RawJobs",
+    ///                         Config = @"scrape_configs:
+    ///   - job_name: 'example-job'
+    ///     scrape_interval: 30s
+    ///     static_configs:
+    ///       - targets: ['example-service.default.svc.cluster.local:8080']
+    ///     metrics_path: /metrics
+    ///     scheme: http
+    ///     bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    ///     tls_config:
+    ///       insecure_skip_verify: true
+    /// ",
     ///                     },
     ///                 },
     ///             },

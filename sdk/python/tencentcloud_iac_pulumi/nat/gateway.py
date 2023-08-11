@@ -281,27 +281,25 @@ class Gateway(pulumi.CustomResource):
         Provides a resource to create a NAT gateway.
 
         ## Example Usage
+        ### Create a NAT gateway.
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.Vpc.get_instances(name="Default-VPC")
-        # Create EIP
-        eip_dev_dnat = tencentcloud.eip.Instance("eipDevDnat")
-        new_eip = tencentcloud.eip.Instance("newEip")
-        my_nat = tencentcloud.nat.Gateway("myNat",
-            vpc_id=foo.instance_lists[0].vpc_id,
-            max_concurrent=10000000,
-            bandwidth=1000,
-            zone="ap-guangzhou-3",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        example = tencentcloud.nat.Gateway("example",
+            vpc_id=vpc.id,
+            bandwidth=100,
+            max_concurrent=1000000,
             assigned_eip_sets=[
-                eip_dev_dnat.public_ip,
-                new_eip.public_ip,
+                eip_example1.public_ip,
+                eip_example2.public_ip,
             ],
             tags={
-                "tf": "test",
+                "tf_tag_key": "tf_tag_value",
             })
         ```
 
@@ -333,27 +331,25 @@ class Gateway(pulumi.CustomResource):
         Provides a resource to create a NAT gateway.
 
         ## Example Usage
+        ### Create a NAT gateway.
 
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.Vpc.get_instances(name="Default-VPC")
-        # Create EIP
-        eip_dev_dnat = tencentcloud.eip.Instance("eipDevDnat")
-        new_eip = tencentcloud.eip.Instance("newEip")
-        my_nat = tencentcloud.nat.Gateway("myNat",
-            vpc_id=foo.instance_lists[0].vpc_id,
-            max_concurrent=10000000,
-            bandwidth=1000,
-            zone="ap-guangzhou-3",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        example = tencentcloud.nat.Gateway("example",
+            vpc_id=vpc.id,
+            bandwidth=100,
+            max_concurrent=1000000,
             assigned_eip_sets=[
-                eip_dev_dnat.public_ip,
-                new_eip.public_ip,
+                eip_example1.public_ip,
+                eip_example2.public_ip,
             ],
             tags={
-                "tf": "test",
+                "tf_tag_key": "tf_tag_value",
             })
         ```
 

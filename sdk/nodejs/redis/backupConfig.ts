@@ -8,15 +8,37 @@ import * as utilities from "../utilities";
  * Use this resource to create a backup config of redis.
  *
  * ## Example Usage
+ * ### Set configuration for automatic backups
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const redislab = new tencentcloud.Redis.BackupConfig("redislab", {
- *     backupPeriods: ["Monday"],
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * const fooBackupConfig = new tencentcloud.redis.BackupConfig("fooBackupConfig", {
+ *     redisId: fooInstance.id,
  *     backupTime: "04:00-05:00",
- *     redisId: "crs-7yl0q0dd",
+ *     backupPeriods: ["Monday"],
  * });
  * ```
  *
@@ -27,7 +49,7 @@ import * as utilities from "../utilities";
  * backup config can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+ *  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
  * ```
  */
 export class BackupConfig extends pulumi.CustomResource {

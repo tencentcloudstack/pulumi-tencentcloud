@@ -21,9 +21,9 @@ import * as utilities from "../utilities";
  *     needResetPassword: true,
  *     password: "Gail@1234",
  *     phoneNum: "12345678910",
- *     remark: "test",
+ *     remark: "tf_user_test",
  *     tags: {
- *         test: "tf-cam-user",
+ *         test: "tf_cam_user",
  *     },
  *     useApi: true,
  * });

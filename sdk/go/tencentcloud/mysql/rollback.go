@@ -12,49 +12,6 @@ import (
 )
 
 // Provides a resource to create a mysql rollback
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRollback(ctx, "rollback", &Mysql.RollbackArgs{
-// 			Databases: mysql.RollbackDatabaseArray{
-// 				&mysql.RollbackDatabaseArgs{
-// 					DatabaseName:    pulumi.String("tf_ci_test_bak"),
-// 					NewDatabaseName: pulumi.String("tf_ci_test_bak_5"),
-// 				},
-// 			},
-// 			InstanceId:   pulumi.String("cdb-fitq5t9h"),
-// 			RollbackTime: pulumi.String("2023-05-31 23:13:35"),
-// 			Strategy:     pulumi.String("full"),
-// 			Tables: mysql.RollbackTableArray{
-// 				&mysql.RollbackTableArgs{
-// 					Database: pulumi.String("tf_ci_test_bak"),
-// 					Tables: mysql.RollbackTableTableArray{
-// 						&mysql.RollbackTableTableArgs{
-// 							NewTableName: pulumi.String("test_bak"),
-// 							TableName:    pulumi.String("test"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type Rollback struct {
 	pulumi.CustomResourceState
 

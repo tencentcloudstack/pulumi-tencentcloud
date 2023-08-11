@@ -11,17 +11,26 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const grafanaInstance = new tencentcloud.Monitor.GrafanaInstance("grafanaInstance", {
- *     enableInternet: false,
- *     grafanaInitPassword: "1234567890",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.monitor.GrafanaInstance("foo", {
  *     instanceName: "test-grafana",
- *     subnetIds: ["subnet-rdkj0agk"],
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ *     grafanaInitPassword: "1234567890",
+ *     enableInternet: false,
+ *     isDestroy: true,
  *     tags: {
  *         createdBy: "test",
  *     },
- *     vpcId: "vpc-2hfyray3",
  * });
  * ```
  *
@@ -30,7 +39,7 @@ import * as utilities from "../utilities";
  * monitor grafanaInstance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance grafanaInstance grafanaInstance_id
+ *  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
  * ```
  */
 export class GrafanaInstance extends pulumi.CustomResource {
@@ -90,6 +99,16 @@ export class GrafanaInstance extends pulumi.CustomResource {
      */
     public /*out*/ readonly internetUrl!: pulumi.Output<string>;
     /**
+     * Whether to clean up completely, the default is false.
+     */
+    public readonly isDestroy!: pulumi.Output<boolean | undefined>;
+    /**
+     * It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+     *
+     * @deprecated It has been deprecated from version 1.81.16.
+     */
+    public readonly isDistroy!: pulumi.Output<boolean | undefined>;
+    /**
      * Grafana external url which could be accessed by user.
      */
     public /*out*/ readonly rootUrl!: pulumi.Output<string>;
@@ -126,6 +145,8 @@ export class GrafanaInstance extends pulumi.CustomResource {
             resourceInputs["instanceStatus"] = state ? state.instanceStatus : undefined;
             resourceInputs["internalUrl"] = state ? state.internalUrl : undefined;
             resourceInputs["internetUrl"] = state ? state.internetUrl : undefined;
+            resourceInputs["isDestroy"] = state ? state.isDestroy : undefined;
+            resourceInputs["isDistroy"] = state ? state.isDistroy : undefined;
             resourceInputs["rootUrl"] = state ? state.rootUrl : undefined;
             resourceInputs["subnetIds"] = state ? state.subnetIds : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -138,6 +159,8 @@ export class GrafanaInstance extends pulumi.CustomResource {
             resourceInputs["enableInternet"] = args ? args.enableInternet : undefined;
             resourceInputs["grafanaInitPassword"] = args ? args.grafanaInitPassword : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["isDestroy"] = args ? args.isDestroy : undefined;
+            resourceInputs["isDistroy"] = args ? args.isDistroy : undefined;
             resourceInputs["subnetIds"] = args ? args.subnetIds : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
@@ -185,6 +208,16 @@ export interface GrafanaInstanceState {
      */
     internetUrl?: pulumi.Input<string>;
     /**
+     * Whether to clean up completely, the default is false.
+     */
+    isDestroy?: pulumi.Input<boolean>;
+    /**
+     * It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+     *
+     * @deprecated It has been deprecated from version 1.81.16.
+     */
+    isDistroy?: pulumi.Input<boolean>;
+    /**
      * Grafana external url which could be accessed by user.
      */
     rootUrl?: pulumi.Input<string>;
@@ -218,6 +251,16 @@ export interface GrafanaInstanceArgs {
      * Instance name.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * Whether to clean up completely, the default is false.
+     */
+    isDestroy?: pulumi.Input<boolean>;
+    /**
+     * It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+     *
+     * @deprecated It has been deprecated from version 1.81.16.
+     */
+    isDistroy?: pulumi.Input<boolean>;
     /**
      * Subnet Id array.
      */

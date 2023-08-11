@@ -9,20 +9,27 @@ import * as utilities from "../utilities";
  * Use this resource to create tcr namespace.
  *
  * ## Example Usage
+ * ### Create a tcr namespace instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tcr.Namespace("foo", {
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
  *     cveWhitelistItems: [{
  *         cveId: "cve-xxxxx",
  *     }],
- *     instanceId: "",
- *     isAutoScan: true,
- *     isPreventVul: true,
- *     isPublic: true,
- *     severity: "medium",
  * });
  * ```
  *
@@ -31,7 +38,7 @@ import * as utilities from "../utilities";
  * tcr namespace can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+ *  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
  * ```
  */
 export class Namespace extends pulumi.CustomResource {

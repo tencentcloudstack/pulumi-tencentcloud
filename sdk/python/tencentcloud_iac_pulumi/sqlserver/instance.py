@@ -816,15 +816,23 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.Instance("foo",
-            availability_zone=var["availability_zone"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-409mvdvv",
-            subnet_id="subnet-nf9n81ps",
-            project_id=123,
-            memory=2,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=16,
             storage=100)
         ```
 
@@ -833,7 +841,7 @@ class Instance(pulumi.CustomResource):
         SQL Server instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/instance:Instance example mssql-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.
@@ -873,15 +881,23 @@ class Instance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.Instance("foo",
-            availability_zone=var["availability_zone"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example = tencentcloud.sqlserver.Instance("example",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-409mvdvv",
-            subnet_id="subnet-nf9n81ps",
-            project_id=123,
-            memory=2,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=16,
             storage=100)
         ```
 
@@ -890,7 +906,7 @@ class Instance(pulumi.CustomResource):
         SQL Server instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/instance:Instance foo mssql-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/instance:Instance example mssql-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.

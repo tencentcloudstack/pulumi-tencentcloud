@@ -11,12 +11,23 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const roInstanceIp = new tencentcloud.Mysql.RoInstanceIp("ro_instance_ip", {
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const example = new tencentcloud.mysql.RoInstanceIp("example", {
  *     instanceId: "cdbro-bdlvcfpj",
- *     uniqSubnetId: "subnet-dwj7ipnc",
- *     uniqVpcId: "vpc-4owdpnwr",
+ *     uniqSubnetId: subnet.id,
+ *     uniqVpcId: vpc.id,
  * });
  * ```
  */

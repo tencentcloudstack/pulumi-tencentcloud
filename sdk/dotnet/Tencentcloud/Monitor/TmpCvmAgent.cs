@@ -23,9 +23,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var tmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("tmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             InstanceId = "prom-dko9d0nu",
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new Tencentcloud.Monitor.TmpInstanceArgs
+    ///         {
+    ///             InstanceName = "tf-tmp-instance",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             DataRetentionTime = 30,
+    ///             Zone = availabilityZone,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new Tencentcloud.Monitor.TmpCvmAgentArgs
+    ///         {
+    ///             InstanceId = fooTmpInstance.Id,
     ///         });
     ///     }
     /// 

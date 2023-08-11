@@ -100,14 +100,56 @@ class BackupEncryptionStatus(pulumi.CustomResource):
         Provides a resource to create a mysql backup_encryption_status
 
         ## Example Usage
+        ### Enable encryption
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_backup_encryption_status = tencentcloud.mysql.BackupEncryptionStatus("exampleBackupEncryptionStatus",
+            instance_id=example_instance.id,
+            encryption_status="on")
+        ```
+        ### Disable encryption
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_encryption_status = tencentcloud.mysql.BackupEncryptionStatus("backupEncryptionStatus",
-            encryption_status="on",
-            instance_id="cdb-c1nl9rpv")
+        example = tencentcloud.mysql.BackupEncryptionStatus("example",
+            instance_id=tencentcloud_mysql_instance["example"]["id"],
+            encryption_status="off")
         ```
 
         ## Import
@@ -133,14 +175,56 @@ class BackupEncryptionStatus(pulumi.CustomResource):
         Provides a resource to create a mysql backup_encryption_status
 
         ## Example Usage
+        ### Enable encryption
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_backup_encryption_status = tencentcloud.mysql.BackupEncryptionStatus("exampleBackupEncryptionStatus",
+            instance_id=example_instance.id,
+            encryption_status="on")
+        ```
+        ### Disable encryption
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_encryption_status = tencentcloud.mysql.BackupEncryptionStatus("backupEncryptionStatus",
-            encryption_status="on",
-            instance_id="cdb-c1nl9rpv")
+        example = tencentcloud.mysql.BackupEncryptionStatus("example",
+            instance_id=tencentcloud_mysql_instance["example"]["id"],
+            encryption_status="off")
         ```
 
         ## Import

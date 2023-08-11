@@ -25,39 +25,37 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cluster, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq"),
-// 			Remark:      pulumi.String("test recket mq"),
+// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		role, err := Tdmq.NewRocketmqRole(ctx, "role", &Tdmq.RocketmqRoleArgs{
-// 			RoleName:  pulumi.String("test_rocketmq_role"),
-// 			Remark:    pulumi.String("test rocketmq role"),
-// 			ClusterId: cluster.ClusterId,
+// 		exampleRocketmqRole, err := Tdmq.NewRocketmqRole(ctx, "exampleRocketmqRole", &Tdmq.RocketmqRoleArgs{
+// 			RoleName:  pulumi.String("tf_example_role"),
+// 			Remark:    pulumi.String("remark."),
+// 			ClusterId: exampleRocketmqCluster.ClusterId,
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		namespace, err := Tdmq.NewRocketmqNamespace(ctx, "namespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     cluster.ClusterId,
-// 			NamespaceName: pulumi.String("test_namespace"),
-// 			Ttl:           pulumi.Int(65000),
-// 			RetentionTime: pulumi.Int(65000),
-// 			Remark:        pulumi.String("test namespace"),
+// 		exampleRocketmqNamespace, err := Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+// 			ClusterId:     exampleRocketmqCluster.ClusterId,
+// 			NamespaceName: pulumi.String("tf_example_namespace"),
+// 			Remark:        pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewRocketmqEnvironmentRole(ctx, "environmentRole", &Tdmq.RocketmqEnvironmentRoleArgs{
-// 			EnvironmentName: namespace.NamespaceName,
-// 			RoleName:        role.RoleName,
+// 		_, err = Tdmq.NewRocketmqEnvironmentRole(ctx, "exampleRocketmqEnvironmentRole", &Tdmq.RocketmqEnvironmentRoleArgs{
+// 			EnvironmentName: exampleRocketmqNamespace.NamespaceName,
+// 			RoleName:        exampleRocketmqRole.RoleName,
 // 			Permissions: pulumi.StringArray{
 // 				pulumi.String("produce"),
 // 				pulumi.String("consume"),
 // 			},
-// 			ClusterId: cluster.ClusterId,
+// 			ClusterId: exampleRocketmqCluster.ClusterId,
 // 		})
 // 		if err != nil {
 // 			return err

@@ -12,61 +12,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     public static class GetZoneDdosPolicy
     {
-        /// <summary>
-        /// Use this data source to query detailed information of teo zoneDDoSPolicy
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var zoneDDoSPolicy = Output.Create(Tencentcloud.Teo.GetZoneDdosPolicy.InvokeAsync(new Tencentcloud.Teo.GetZoneDdosPolicyArgs
-        ///         {
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetZoneDdosPolicyResult> InvokeAsync(GetZoneDdosPolicyArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetZoneDdosPolicyResult>("tencentcloud:Teo/getZoneDdosPolicy:getZoneDdosPolicy", args ?? new GetZoneDdosPolicyArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of teo zoneDDoSPolicy
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var zoneDDoSPolicy = Output.Create(Tencentcloud.Teo.GetZoneDdosPolicy.InvokeAsync(new Tencentcloud.Teo.GetZoneDdosPolicyArgs
-        ///         {
-        ///             ZoneId = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetZoneDdosPolicyResult> Invoke(GetZoneDdosPolicyInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetZoneDdosPolicyResult>("tencentcloud:Teo/getZoneDdosPolicy:getZoneDdosPolicy", args ?? new GetZoneDdosPolicyInvokeArgs(), options.WithDefaults());
     }
@@ -74,15 +22,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetZoneDdosPolicyArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public string ZoneId { get; set; } = null!;
 
@@ -93,15 +35,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
     public sealed class GetZoneDdosPolicyInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
 
@@ -114,22 +50,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     [OutputType]
     public sealed class GetZoneDdosPolicyResult
     {
-        /// <summary>
-        /// All subdomain info. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetZoneDdosPolicyDomainResult> Domains;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
-        /// <summary>
-        /// Shielded areas of the zone.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetZoneDdosPolicyShieldAreaResult> ShieldAreas;
-        /// <summary>
-        /// Site ID.
-        /// </summary>
         public readonly string ZoneId;
 
         [OutputConstructor]

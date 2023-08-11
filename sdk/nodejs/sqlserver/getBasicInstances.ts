@@ -9,26 +9,36 @@ import * as utilities from "../utilities";
  * Use this data source to query SQL Server basic instances
  *
  * ## Example Usage
+ * ### Filter instance by Id
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = new tencentcloud.sqlserver.BasicInstance("test", {
- *     availabilityZone: _var.availability_zone,
- *     chargeType: "POSTPAID_BY_HOUR",
- *     vpcId: "vpc-26w7r56z",
- *     subnetId: "subnet-lvlr6eeu",
- *     machineType: "CLOUD_PREMIUM",
+ * const exampleId = pulumi.output(tencentcloud.Sqlserver.getBasicInstances({
+ *     id: "mssql-3l3fgqn7",
+ * }));
+ * ```
+ * ### Filter instance by project Id
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleProject = pulumi.output(tencentcloud.Sqlserver.getBasicInstances({
  *     projectId: 0,
- *     memory: 2,
- *     storage: 10,
- *     cpu: 1,
- *     securityGroups: ["sg-nltpbqg1"],
- *     tags: {
- *         test: "test",
- *     },
- * });
+ * }));
+ * ```
+ * ### Filter instance by VPC/Subnet
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleVpc = pulumi.output(tencentcloud.Sqlserver.getBasicInstances({
+ *     subnetId: "subnet-nf9n81ps",
+ *     vpcId: "vpc-409mvdvv",
+ * }));
  * ```
  */
 export function getBasicInstances(args?: GetBasicInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetBasicInstancesResult> {

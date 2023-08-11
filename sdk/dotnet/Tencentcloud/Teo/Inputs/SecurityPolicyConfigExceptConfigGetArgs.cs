@@ -15,19 +15,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("exceptUserRules")]
         private InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleGetArgs>? _exceptUserRules;
-
-        /// <summary>
-        /// Exception rules.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleGetArgs> ExceptUserRules
         {
             get => _exceptUserRules ?? (_exceptUserRules = new InputList<Inputs.SecurityPolicyConfigExceptConfigExceptUserRuleGetArgs>());
             set => _exceptUserRules = value;
         }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 

@@ -13,14 +13,23 @@ import * as utilities from "../utilities";
  * > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
  *
  * ## Example Usage
+ * ### Create a base version of redis
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({});
- * const redisInstanceTest2 = new tencentcloud.redis.Instance("redisInstanceTest2", {
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const foo = new tencentcloud.redis.Instance("foo", {
  *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
  *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
  *     password: "test12345789",
@@ -28,6 +37,103 @@ import * as utilities from "../utilities";
  *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
  *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
  *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * ```
+ * ### Buy a month of prepaid instances
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
+ * const fooGroupLiteRule = new tencentcloud.security.GroupLiteRule("fooGroupLiteRule", {
+ *     securityGroupId: fooGroup.id,
+ *     ingresses: [
+ *         "ACCEPT#192.168.1.0/24#80#TCP",
+ *         "DROP#8.8.8.8#80,90#UDP",
+ *         "DROP#0.0.0.0/0#80-90#TCP",
+ *     ],
+ *     egresses: [
+ *         "ACCEPT#192.168.0.0/16#ALL#TCP",
+ *         "ACCEPT#10.0.0.0/8#ALL#ICMP",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ * });
+ * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     securityGroups: [fooGroup.id],
+ *     chargeType: "PREPAID",
+ *     prepaidPeriod: 1,
+ * });
+ * ```
+ * ### Create a multi-AZ instance
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ *     region: "ap-guangzhou",
+ * });
+ * const config = new pulumi.Config();
+ * const replicaZoneIds = config.getObject("replicaZoneIds") || [
+ *     100004,
+ *     100006,
+ * ];
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[2]?.zone),
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
+ * const fooGroupLiteRule = new tencentcloud.security.GroupLiteRule("fooGroupLiteRule", {
+ *     securityGroupId: fooGroup.id,
+ *     ingresses: [
+ *         "ACCEPT#192.168.1.0/24#80#TCP",
+ *         "DROP#8.8.8.8#80,90#UDP",
+ *         "DROP#0.0.0.0/0#80-90#TCP",
+ *     ],
+ *     egresses: [
+ *         "ACCEPT#192.168.0.0/16#ALL#TCP",
+ *         "ACCEPT#10.0.0.0/8#ALL#ICMP",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ * });
+ * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[2]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[2]?.typeId),
+ *     password: "test12345789",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?[2]?.redisShardNums?[0]),
+ *     redisReplicasNum: 2,
+ *     replicaZoneIds: replicaZoneIds,
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     securityGroups: [fooGroup.id],
  * });
  * ```
  *
@@ -136,7 +242,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly recycle!: pulumi.Output<number | undefined>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
      */
     public readonly redisReplicasNum!: pulumi.Output<number | undefined>;
     /**
@@ -338,7 +444,7 @@ export interface InstanceState {
      */
     recycle?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**
@@ -450,7 +556,7 @@ export interface InstanceArgs {
      */
     recycle?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**

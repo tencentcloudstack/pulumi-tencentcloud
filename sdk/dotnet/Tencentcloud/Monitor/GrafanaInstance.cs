@@ -23,20 +23,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var grafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("grafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             EnableInternet = false,
-    ///             GrafanaInitPassword = "1234567890",
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
+    ///         {
     ///             InstanceName = "test-grafana",
+    ///             VpcId = vpc.Id,
     ///             SubnetIds = 
     ///             {
-    ///                 "subnet-rdkj0agk",
+    ///                 subnet.Id,
     ///             },
+    ///             GrafanaInitPassword = "1234567890",
+    ///             EnableInternet = false,
+    ///             IsDestroy = true,
     ///             Tags = 
     ///             {
     ///                 { "createdBy", "test" },
     ///             },
-    ///             VpcId = "vpc-2hfyray3",
     ///         });
     ///     }
     /// 
@@ -48,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// monitor grafanaInstance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance grafanaInstance grafanaInstance_id
+    ///  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaInstance:GrafanaInstance")]
@@ -95,6 +108,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Output("internetUrl")]
         public Output<string> InternetUrl { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to clean up completely, the default is false.
+        /// </summary>
+        [Output("isDestroy")]
+        public Output<bool?> IsDestroy { get; private set; } = null!;
+
+        /// <summary>
+        /// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        /// </summary>
+        [Output("isDistroy")]
+        public Output<bool?> IsDistroy { get; private set; } = null!;
 
         /// <summary>
         /// Grafana external url which could be accessed by user.
@@ -185,6 +210,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
 
+        /// <summary>
+        /// Whether to clean up completely, the default is false.
+        /// </summary>
+        [Input("isDestroy")]
+        public Input<bool>? IsDestroy { get; set; }
+
+        /// <summary>
+        /// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        /// </summary>
+        [Input("isDistroy")]
+        public Input<bool>? IsDistroy { get; set; }
+
         [Input("subnetIds")]
         private InputList<string>? _subnetIds;
 
@@ -263,6 +300,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Input("internetUrl")]
         public Input<string>? InternetUrl { get; set; }
+
+        /// <summary>
+        /// Whether to clean up completely, the default is false.
+        /// </summary>
+        [Input("isDestroy")]
+        public Input<bool>? IsDestroy { get; set; }
+
+        /// <summary>
+        /// It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
+        /// </summary>
+        [Input("isDistroy")]
+        public Input<bool>? IsDistroy { get; set; }
 
         /// <summary>
         /// Grafana external url which could be accessed by user.

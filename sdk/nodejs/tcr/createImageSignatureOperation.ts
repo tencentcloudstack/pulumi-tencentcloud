@@ -5,19 +5,41 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr imageSignatureOperation
+ * Provides a resource to operate a tcr image signature.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const imageSignatureOperation = new tencentcloud.Tcr.CreateImageSignatureOperation("image_signature_operation", {
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "premium",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
+ *     isPublic: true,
+ *     isAutoScan: true,
+ *     isPreventVul: true,
+ *     severity: "medium",
+ *     cveWhitelistItems: [{
+ *         cveId: "cve-xxxxx",
+ *     }],
+ * });
+ * const exampleRepository = new tencentcloud.tcr.Repository("exampleRepository", {
+ *     instanceId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
+ *     briefDesc: "111",
+ *     description: "111111111111111111111111111111111111",
+ * });
+ * const exampleCreateImageSignatureOperation = new tencentcloud.tcr.CreateImageSignatureOperation("exampleCreateImageSignatureOperation", {
+ *     registryId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
+ *     repositoryName: exampleRepository.name,
  *     imageVersion: "v1",
- *     namespaceName: "ns",
- *     registryId: "tcr-xxx",
- *     repositoryName: "repo",
  * });
  * ```
  *

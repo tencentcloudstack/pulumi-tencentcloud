@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var projectSecurityGroups = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
         ///         {
         ///             ProjectId = 0,
         ///         }));
@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var projectSecurityGroups = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
         ///         {
         ///             ProjectId = 0,
         ///         }));

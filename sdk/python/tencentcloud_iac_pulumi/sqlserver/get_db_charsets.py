@@ -85,7 +85,7 @@ def get_db_charsets(instance_id: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    db_charsets = tencentcloud.Sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
     ```
 
 
@@ -123,7 +123,7 @@ def get_db_charsets_output(instance_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    db_charsets = tencentcloud.Sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
+    example = tencentcloud.Sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
     ```
 
 

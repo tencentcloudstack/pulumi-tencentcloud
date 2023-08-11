@@ -14,6 +14,7 @@ import (
 // Provide a resource to create a KMS external key.
 //
 // ## Example Usage
+// ### Create a basic instance.
 //
 // ```go
 // package main
@@ -25,12 +26,69 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewExternalKey(ctx, "foo", &Kms.ExternalKeyArgs{
-// 			Alias:             pulumi.String("test"),
-// 			Description:       pulumi.String("describe key test message."),
+// 		_, err := Kms.NewExternalKey(ctx, "example", &Kms.ExternalKeyArgs{
+// 			Alias:       pulumi.String("tf-example-kms-externalkey"),
+// 			Description: pulumi.String("example of kms external key"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Specify the encryption algorithm and public key.
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewExternalKey(ctx, "example", &Kms.ExternalKeyArgs{
+// 			Alias:             pulumi.String("tf-example-kms-externalkey"),
+// 			Description:       pulumi.String("example of kms external key"),
 // 			IsEnabled:         pulumi.Bool(true),
-// 			KeyMaterialBase64: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
-// 			ValidTo:           pulumi.Int(2147443200),
+// 			KeyMaterialBase64: pulumi.String("your_public_key_base64_encoded"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 			WrappingAlgorithm: pulumi.String("RSAES_PKCS1_V1_5"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Disable the external kms key.
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewExternalKey(ctx, "example", &Kms.ExternalKeyArgs{
+// 			Alias:             pulumi.String("tf-example-kms-externalkey"),
+// 			Description:       pulumi.String("example of kms external key"),
+// 			IsEnabled:         pulumi.Bool(false),
+// 			KeyMaterialBase64: pulumi.String("your_public_key_base64_encoded"),
+// 			Tags: pulumi.AnyMap{
+// 				"test-tag": pulumi.Any("unit-test"),
+// 			},
 // 			WrappingAlgorithm: pulumi.String("RSAES_PKCS1_V1_5"),
 // 		})
 // 		if err != nil {
@@ -46,7 +104,7 @@ import (
 // KMS external keys can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+//  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
 // ```
 type ExternalKey struct {
 	pulumi.CustomResourceState

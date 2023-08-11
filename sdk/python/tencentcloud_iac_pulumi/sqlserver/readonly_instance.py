@@ -24,6 +24,10 @@ class ReadonlyInstanceArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  readonly_group_id: Optional[pulumi.Input[str]] = None,
+                 readonly_group_name: Optional[pulumi.Input[str]] = None,
+                 readonly_groups_is_offline_delay: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_max_delay_time: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_min_in_group: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -43,6 +47,10 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[str] readonly_group_name: Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        :param pulumi.Input[int] readonly_groups_is_offline_delay: Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        :param pulumi.Input[int] readonly_groups_max_delay_time: Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        :param pulumi.Input[int] readonly_groups_min_in_group: When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
@@ -68,6 +76,14 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "period", period)
         if readonly_group_id is not None:
             pulumi.set(__self__, "readonly_group_id", readonly_group_id)
+        if readonly_group_name is not None:
+            pulumi.set(__self__, "readonly_group_name", readonly_group_name)
+        if readonly_groups_is_offline_delay is not None:
+            pulumi.set(__self__, "readonly_groups_is_offline_delay", readonly_groups_is_offline_delay)
+        if readonly_groups_max_delay_time is not None:
+            pulumi.set(__self__, "readonly_groups_max_delay_time", readonly_groups_max_delay_time)
+        if readonly_groups_min_in_group is not None:
+            pulumi.set(__self__, "readonly_groups_min_in_group", readonly_groups_min_in_group)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
         if subnet_id is not None:
@@ -217,6 +233,54 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "readonly_group_id", value)
 
     @property
+    @pulumi.getter(name="readonlyGroupName")
+    def readonly_group_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        """
+        return pulumi.get(self, "readonly_group_name")
+
+    @readonly_group_name.setter
+    def readonly_group_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "readonly_group_name", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsIsOfflineDelay")
+    def readonly_groups_is_offline_delay(self) -> Optional[pulumi.Input[int]]:
+        """
+        Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        """
+        return pulumi.get(self, "readonly_groups_is_offline_delay")
+
+    @readonly_groups_is_offline_delay.setter
+    def readonly_groups_is_offline_delay(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_is_offline_delay", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMaxDelayTime")
+    def readonly_groups_max_delay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        """
+        return pulumi.get(self, "readonly_groups_max_delay_time")
+
+    @readonly_groups_max_delay_time.setter
+    def readonly_groups_max_delay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_max_delay_time", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMinInGroup")
+    def readonly_groups_min_in_group(self) -> Optional[pulumi.Input[int]]:
+        """
+        When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        """
+        return pulumi.get(self, "readonly_groups_min_in_group")
+
+    @readonly_groups_min_in_group.setter
+    def readonly_groups_min_in_group(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_min_in_group", value)
+
+    @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -302,7 +366,11 @@ class _ReadonlyInstanceState:
                  name: Optional[pulumi.Input[str]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  readonly_group_id: Optional[pulumi.Input[str]] = None,
+                 readonly_group_name: Optional[pulumi.Input[str]] = None,
                  readonly_group_type: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_is_offline_delay: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_max_delay_time: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_min_in_group: Optional[pulumi.Input[int]] = None,
                  ro_flag: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  status: Optional[pulumi.Input[int]] = None,
@@ -326,7 +394,11 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[str] readonly_group_name: Required when `readonly_group_type`=2, the name of the newly created read-only group.
         :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[int] readonly_groups_is_offline_delay: Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        :param pulumi.Input[int] readonly_groups_max_delay_time: Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        :param pulumi.Input[int] readonly_groups_min_in_group: When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
         :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
         :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
@@ -359,8 +431,16 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "period", period)
         if readonly_group_id is not None:
             pulumi.set(__self__, "readonly_group_id", readonly_group_id)
+        if readonly_group_name is not None:
+            pulumi.set(__self__, "readonly_group_name", readonly_group_name)
         if readonly_group_type is not None:
             pulumi.set(__self__, "readonly_group_type", readonly_group_type)
+        if readonly_groups_is_offline_delay is not None:
+            pulumi.set(__self__, "readonly_groups_is_offline_delay", readonly_groups_is_offline_delay)
+        if readonly_groups_max_delay_time is not None:
+            pulumi.set(__self__, "readonly_groups_max_delay_time", readonly_groups_max_delay_time)
+        if readonly_groups_min_in_group is not None:
+            pulumi.set(__self__, "readonly_groups_min_in_group", readonly_groups_min_in_group)
         if ro_flag is not None:
             pulumi.set(__self__, "ro_flag", ro_flag)
         if security_groups is not None:
@@ -508,6 +588,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "readonly_group_id", value)
 
     @property
+    @pulumi.getter(name="readonlyGroupName")
+    def readonly_group_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        """
+        return pulumi.get(self, "readonly_group_name")
+
+    @readonly_group_name.setter
+    def readonly_group_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "readonly_group_name", value)
+
+    @property
     @pulumi.getter(name="readonlyGroupType")
     def readonly_group_type(self) -> Optional[pulumi.Input[int]]:
         """
@@ -518,6 +610,42 @@ class _ReadonlyInstanceState:
     @readonly_group_type.setter
     def readonly_group_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "readonly_group_type", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsIsOfflineDelay")
+    def readonly_groups_is_offline_delay(self) -> Optional[pulumi.Input[int]]:
+        """
+        Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        """
+        return pulumi.get(self, "readonly_groups_is_offline_delay")
+
+    @readonly_groups_is_offline_delay.setter
+    def readonly_groups_is_offline_delay(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_is_offline_delay", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMaxDelayTime")
+    def readonly_groups_max_delay_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        """
+        return pulumi.get(self, "readonly_groups_max_delay_time")
+
+    @readonly_groups_max_delay_time.setter
+    def readonly_groups_max_delay_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_max_delay_time", value)
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMinInGroup")
+    def readonly_groups_min_in_group(self) -> Optional[pulumi.Input[int]]:
+        """
+        When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        """
+        return pulumi.get(self, "readonly_groups_min_in_group")
+
+    @readonly_groups_min_in_group.setter
+    def readonly_groups_min_in_group(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "readonly_groups_min_in_group", value)
 
     @property
     @pulumi.getter(name="roFlag")
@@ -666,7 +794,11 @@ class ReadonlyInstance(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  readonly_group_id: Optional[pulumi.Input[str]] = None,
+                 readonly_group_name: Optional[pulumi.Input[str]] = None,
                  readonly_group_type: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_is_offline_delay: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_max_delay_time: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_min_in_group: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -682,18 +814,51 @@ class ReadonlyInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.ReadonlyInstance("foo",
-            availability_zone="ap-guangzhou-4",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
-            memory=2,
-            storage=10,
-            master_instance_id=tencentcloud_sqlserver_instance["test"]["id"],
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_readonly_instance = tencentcloud.sqlserver.ReadonlyInstance("exampleReadonlyInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            memory=4,
+            storage=20,
+            master_instance_id=example_basic_instance.id,
             readonly_group_type=1,
-            force_upgrade=True)
+            force_upgrade=True,
+            tags={
+                "test": "test",
+            })
         ```
 
         ## Import
@@ -701,7 +866,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         SQL Server readonly instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.
@@ -715,7 +880,11 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[str] readonly_group_name: Required when `readonly_group_type`=2, the name of the newly created read-only group.
         :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[int] readonly_groups_is_offline_delay: Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        :param pulumi.Input[int] readonly_groups_max_delay_time: Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        :param pulumi.Input[int] readonly_groups_min_in_group: When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
         :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
@@ -737,18 +906,51 @@ class ReadonlyInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.sqlserver.ReadonlyInstance("foo",
-            availability_zone="ap-guangzhou-4",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_basic_instance = tencentcloud.sqlserver.BasicInstance("exampleBasicInstance",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
-            memory=2,
-            storage=10,
-            master_instance_id=tencentcloud_sqlserver_instance["test"]["id"],
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        example_readonly_instance = tencentcloud.sqlserver.ReadonlyInstance("exampleReadonlyInstance",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            memory=4,
+            storage=20,
+            master_instance_id=example_basic_instance.id,
             readonly_group_type=1,
-            force_upgrade=True)
+            force_upgrade=True,
+            tags={
+                "test": "test",
+            })
         ```
 
         ## Import
@@ -756,7 +958,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         SQL Server readonly instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
         ```
 
         :param str resource_name: The name of the resource.
@@ -783,7 +985,11 @@ class ReadonlyInstance(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  readonly_group_id: Optional[pulumi.Input[str]] = None,
+                 readonly_group_name: Optional[pulumi.Input[str]] = None,
                  readonly_group_type: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_is_offline_delay: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_max_delay_time: Optional[pulumi.Input[int]] = None,
+                 readonly_groups_min_in_group: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  storage: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -818,9 +1024,13 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["period"] = period
             __props__.__dict__["readonly_group_id"] = readonly_group_id
+            __props__.__dict__["readonly_group_name"] = readonly_group_name
             if readonly_group_type is None and not opts.urn:
                 raise TypeError("Missing required property 'readonly_group_type'")
             __props__.__dict__["readonly_group_type"] = readonly_group_type
+            __props__.__dict__["readonly_groups_is_offline_delay"] = readonly_groups_is_offline_delay
+            __props__.__dict__["readonly_groups_max_delay_time"] = readonly_groups_max_delay_time
+            __props__.__dict__["readonly_groups_min_in_group"] = readonly_groups_min_in_group
             __props__.__dict__["security_groups"] = security_groups
             if storage is None and not opts.urn:
                 raise TypeError("Missing required property 'storage'")
@@ -858,7 +1068,11 @@ class ReadonlyInstance(pulumi.CustomResource):
             name: Optional[pulumi.Input[str]] = None,
             period: Optional[pulumi.Input[int]] = None,
             readonly_group_id: Optional[pulumi.Input[str]] = None,
+            readonly_group_name: Optional[pulumi.Input[str]] = None,
             readonly_group_type: Optional[pulumi.Input[int]] = None,
+            readonly_groups_is_offline_delay: Optional[pulumi.Input[int]] = None,
+            readonly_groups_max_delay_time: Optional[pulumi.Input[int]] = None,
+            readonly_groups_min_in_group: Optional[pulumi.Input[int]] = None,
             ro_flag: Optional[pulumi.Input[str]] = None,
             security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             status: Optional[pulumi.Input[int]] = None,
@@ -887,7 +1101,11 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
         :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[str] readonly_group_name: Required when `readonly_group_type`=2, the name of the newly created read-only group.
         :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[int] readonly_groups_is_offline_delay: Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        :param pulumi.Input[int] readonly_groups_max_delay_time: Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        :param pulumi.Input[int] readonly_groups_min_in_group: When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
         :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
         :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
@@ -914,7 +1132,11 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["period"] = period
         __props__.__dict__["readonly_group_id"] = readonly_group_id
+        __props__.__dict__["readonly_group_name"] = readonly_group_name
         __props__.__dict__["readonly_group_type"] = readonly_group_type
+        __props__.__dict__["readonly_groups_is_offline_delay"] = readonly_groups_is_offline_delay
+        __props__.__dict__["readonly_groups_max_delay_time"] = readonly_groups_max_delay_time
+        __props__.__dict__["readonly_groups_min_in_group"] = readonly_groups_min_in_group
         __props__.__dict__["ro_flag"] = ro_flag
         __props__.__dict__["security_groups"] = security_groups
         __props__.__dict__["status"] = status
@@ -1009,12 +1231,44 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "readonly_group_id")
 
     @property
+    @pulumi.getter(name="readonlyGroupName")
+    def readonly_group_name(self) -> pulumi.Output[str]:
+        """
+        Required when `readonly_group_type`=2, the name of the newly created read-only group.
+        """
+        return pulumi.get(self, "readonly_group_name")
+
+    @property
     @pulumi.getter(name="readonlyGroupType")
     def readonly_group_type(self) -> pulumi.Output[int]:
         """
         Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         """
         return pulumi.get(self, "readonly_group_type")
+
+    @property
+    @pulumi.getter(name="readonlyGroupsIsOfflineDelay")
+    def readonly_groups_is_offline_delay(self) -> pulumi.Output[int]:
+        """
+        Required when `readonly_group_type`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+        """
+        return pulumi.get(self, "readonly_groups_is_offline_delay")
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMaxDelayTime")
+    def readonly_groups_max_delay_time(self) -> pulumi.Output[int]:
+        """
+        Required when `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, the threshold for delayed elimination of newly created read-only groups.
+        """
+        return pulumi.get(self, "readonly_groups_max_delay_time")
+
+    @property
+    @pulumi.getter(name="readonlyGroupsMinInGroup")
+    def readonly_groups_min_in_group(self) -> pulumi.Output[int]:
+        """
+        When `readonly_group_type`=2 and `readonly_groups_is_offline_delay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+        """
+        return pulumi.get(self, "readonly_groups_min_in_group")
 
     @property
     @pulumi.getter(name="roFlag")

@@ -27,12 +27,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var backupCommand = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
         ///         {
         ///             BackupFileType = "FULL",
         ///             DataBaseName = "keep-publish-instance",
         ///             IsRecovery = "NO",
-        ///             LocalPath = "",
         ///         }));
         ///     }
         /// 
@@ -59,12 +58,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var backupCommand = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupCommands.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupCommandsArgs
         ///         {
         ///             BackupFileType = "FULL",
         ///             DataBaseName = "keep-publish-instance",
         ///             IsRecovery = "NO",
-        ///             LocalPath = "",
         ///         }));
         ///     }
         /// 

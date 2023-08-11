@@ -14,11 +14,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupCommand = pulumi.output(tencentcloud.Sqlserver.getBackupCommands({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getBackupCommands({
  *     backupFileType: "FULL",
  *     dataBaseName: "keep-publish-instance",
  *     isRecovery: "NO",
- *     localPath: "",
  * }));
  * ```
  */

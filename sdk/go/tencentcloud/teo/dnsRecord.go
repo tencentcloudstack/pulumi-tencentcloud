@@ -11,41 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewDnsRecord(ctx, "dnsRecord", &Teo.DnsRecordArgs{
-// 			Content:  pulumi.String("150.109.8.2"),
-// 			Mode:     pulumi.String("proxied"),
-// 			Priority: pulumi.Int(1),
-// 			Ttl:      pulumi.Int(1),
-// 			Type:     pulumi.String("A"),
-// 			ZoneId:   pulumi.String("zone-297z8rf93cfw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
-// ## Import
-//
-// teo dns_record can be imported using the zone_id#dns_record_id, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord dns_record zone-297z8rf93cfw#record-297z9ei9b9oc
-// ```
 type DnsRecord struct {
 	pulumi.CustomResourceState
 
@@ -61,7 +26,8 @@ type DnsRecord struct {
 	DomainStatuses pulumi.StringArrayOutput `pulumi:"domainStatuses"`
 	// Whether the DNS record is locked.
 	Locked pulumi.BoolOutput `pulumi:"locked"`
-	// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+	// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+	// and accelerated.
 	Mode pulumi.StringOutput `pulumi:"mode"`
 	// Last modification date.
 	ModifiedOn pulumi.StringOutput `pulumi:"modifiedOn"`
@@ -133,7 +99,8 @@ type dnsRecordState struct {
 	DomainStatuses []string `pulumi:"domainStatuses"`
 	// Whether the DNS record is locked.
 	Locked *bool `pulumi:"locked"`
-	// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+	// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+	// and accelerated.
 	Mode *string `pulumi:"mode"`
 	// Last modification date.
 	ModifiedOn *string `pulumi:"modifiedOn"`
@@ -164,7 +131,8 @@ type DnsRecordState struct {
 	DomainStatuses pulumi.StringArrayInput
 	// Whether the DNS record is locked.
 	Locked pulumi.BoolPtrInput
-	// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+	// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+	// and accelerated.
 	Mode pulumi.StringPtrInput
 	// Last modification date.
 	ModifiedOn pulumi.StringPtrInput
@@ -189,7 +157,8 @@ func (DnsRecordState) ElementType() reflect.Type {
 type dnsRecordArgs struct {
 	// DNS record Content.
 	Content string `pulumi:"content"`
-	// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+	// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+	// and accelerated.
 	Mode string `pulumi:"mode"`
 	// DNS record Name.
 	Name *string `pulumi:"name"`
@@ -209,7 +178,8 @@ type dnsRecordArgs struct {
 type DnsRecordArgs struct {
 	// DNS record Content.
 	Content pulumi.StringInput
-	// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+	// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+	// and accelerated.
 	Mode pulumi.StringInput
 	// DNS record Name.
 	Name pulumi.StringPtrInput
@@ -342,7 +312,8 @@ func (o DnsRecordOutput) Locked() pulumi.BoolOutput {
 	return o.ApplyT(func(v *DnsRecord) pulumi.BoolOutput { return v.Locked }).(pulumi.BoolOutput)
 }
 
-// Proxy mode. Valid values:- `dnsOnly`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+// and accelerated.
 func (o DnsRecordOutput) Mode() pulumi.StringOutput {
 	return o.ApplyT(func(v *DnsRecord) pulumi.StringOutput { return v.Mode }).(pulumi.StringOutput)
 }

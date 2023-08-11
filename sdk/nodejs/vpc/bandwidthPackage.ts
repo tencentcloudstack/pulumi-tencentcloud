@@ -13,13 +13,30 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const bandwidthPackage = new tencentcloud.Vpc.BandwidthPackage("bandwidth_package", {
- *     bandwidthPackageName: "test-001",
+ * const example = new tencentcloud.Vpc.BandwidthPackage("example", {
+ *     bandwidthPackageName: "tf-example",
  *     chargeType: "TOP5_POSTPAID_BY_MONTH",
  *     networkType: "BGP",
  *     tags: {
  *         createdBy: "terraform",
  *     },
+ * });
+ * ```
+ * ### PrePaid Bandwidth Package
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const bandwidthPackage = new tencentcloud.Vpc.BandwidthPackage("bandwidth_package", {
+ *     bandwidthPackageName: "test-001",
+ *     chargeType: "FIXED_PREPAID_BY_MONTH",
+ *     internetMaxBandwidth: 100,
+ *     networkType: "BGP",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ *     timeSpan: 3,
  * });
  * ```
  *
@@ -64,7 +81,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
      */
     public readonly bandwidthPackageName!: pulumi.Output<string | undefined>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -79,6 +96,10 @@ export class BandwidthPackage extends pulumi.CustomResource {
      * Tag description list.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    /**
+     * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+     */
+    public readonly timeSpan!: pulumi.Output<number | undefined>;
 
     /**
      * Create a BandwidthPackage resource with the given unique name, arguments, and options.
@@ -98,6 +119,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             resourceInputs["internetMaxBandwidth"] = state ? state.internetMaxBandwidth : undefined;
             resourceInputs["networkType"] = state ? state.networkType : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["timeSpan"] = state ? state.timeSpan : undefined;
         } else {
             const args = argsOrState as BandwidthPackageArgs | undefined;
             resourceInputs["bandwidthPackageName"] = args ? args.bandwidthPackageName : undefined;
@@ -105,6 +127,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             resourceInputs["internetMaxBandwidth"] = args ? args.internetMaxBandwidth : undefined;
             resourceInputs["networkType"] = args ? args.networkType : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["timeSpan"] = args ? args.timeSpan : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(BandwidthPackage.__pulumiType, name, resourceInputs, opts);
@@ -120,7 +143,7 @@ export interface BandwidthPackageState {
      */
     bandwidthPackageName?: pulumi.Input<string>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -135,6 +158,10 @@ export interface BandwidthPackageState {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+     */
+    timeSpan?: pulumi.Input<number>;
 }
 
 /**
@@ -146,7 +173,7 @@ export interface BandwidthPackageArgs {
      */
     bandwidthPackageName?: pulumi.Input<string>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -161,4 +188,8 @@ export interface BandwidthPackageArgs {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+     */
+    timeSpan?: pulumi.Input<number>;
 }

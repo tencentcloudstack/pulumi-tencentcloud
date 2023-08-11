@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const trafficPackage = new tencentcloud.Vpc.TrafficPackage("traffic_package", {
+ * const example = new tencentcloud.Vpc.TrafficPackage("example", {
  *     trafficAmount: 10,
  * });
  * ```

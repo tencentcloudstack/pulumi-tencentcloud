@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Ssm/productSecret:ProductSecret":
+		r = &ProductSecret{}
 	case "tencentcloud:Ssm/secret:Secret":
 		r = &Secret{}
 	case "tencentcloud:Ssm/secretVersion:SecretVersion":
@@ -40,6 +42,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssm/productSecret",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ssm/secret",

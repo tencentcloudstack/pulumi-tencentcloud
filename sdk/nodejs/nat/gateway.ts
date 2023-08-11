@@ -8,29 +8,25 @@ import * as utilities from "../utilities";
  * Provides a resource to create a NAT gateway.
  *
  * ## Example Usage
+ * ### Create a NAT gateway.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Vpc.getInstances({
- *     name: "Default-VPC",
- * });
- * // Create EIP
- * const eipDevDnat = new tencentcloud.eip.Instance("eipDevDnat", {});
- * const newEip = new tencentcloud.eip.Instance("newEip", {});
- * const myNat = new tencentcloud.nat.Gateway("myNat", {
- *     vpcId: foo.then(foo => foo.instanceLists?[0]?.vpcId),
- *     maxConcurrent: 10000000,
- *     bandwidth: 1000,
- *     zone: "ap-guangzhou-3",
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
+ * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+ * const example = new tencentcloud.nat.Gateway("example", {
+ *     vpcId: vpc.id,
+ *     bandwidth: 100,
+ *     maxConcurrent: 1000000,
  *     assignedEipSets: [
- *         eipDevDnat.publicIp,
- *         newEip.publicIp,
+ *         eipExample1.publicIp,
+ *         eipExample2.publicIp,
  *     ],
  *     tags: {
- *         tf: "test",
+ *         tf_tag_key: "tf_tag_value",
  *     },
  * });
  * ```

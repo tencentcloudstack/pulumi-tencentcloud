@@ -297,12 +297,13 @@ class Instance(pulumi.CustomResource):
         Provide a resource to create a VPC.
 
         ## Example Usage
+        ### Create a basic VPC
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
+        vpc = tencentcloud.vpc.Instance("vpc",
             cidr_block="10.0.0.0/16",
             dns_servers=[
                 "119.29.29.29",
@@ -319,7 +320,7 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
+        vpc = tencentcloud.vpc.Instance("vpc",
             assistant_cidrs=["172.16.0.0/24"],
             cidr_block="10.0.0.0/16",
             is_multicast=False,
@@ -355,12 +356,13 @@ class Instance(pulumi.CustomResource):
         Provide a resource to create a VPC.
 
         ## Example Usage
+        ### Create a basic VPC
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
+        vpc = tencentcloud.vpc.Instance("vpc",
             cidr_block="10.0.0.0/16",
             dns_servers=[
                 "119.29.29.29",
@@ -377,7 +379,7 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
+        vpc = tencentcloud.vpc.Instance("vpc",
             assistant_cidrs=["172.16.0.0/24"],
             cidr_block="10.0.0.0/16",
             is_multicast=False,

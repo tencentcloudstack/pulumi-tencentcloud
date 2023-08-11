@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr tagRetentionExecutionConfig
+// Provides a resource to configure a tcr tag retention execution.
 //
 // ## Example Usage
 //
@@ -26,8 +26,18 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myNs, err := Tcr.NewNamespace(ctx, "myNs", &Tcr.NamespaceArgs{
-// 			InstanceId:   pulumi.Any(tencentcloud_tcr_instance.Mytcr_retention.Id),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("basic"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
 // 			IsPublic:     pulumi.Bool(true),
 // 			IsAutoScan:   pulumi.Bool(true),
 // 			IsPreventVul: pulumi.Bool(true),
@@ -41,9 +51,9 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		myRule, err := Tcr.NewTagRetentionRule(ctx, "myRule", &Tcr.TagRetentionRuleArgs{
-// 			RegistryId:    pulumi.Any(tencentcloud_tcr_instance.Mytcr_retention.Id),
-// 			NamespaceName: myNs.Name,
+// 		exampleTagRetentionRule, err := Tcr.NewTagRetentionRule(ctx, "exampleTagRetentionRule", &Tcr.TagRetentionRuleArgs{
+// 			RegistryId:    exampleInstance.ID(),
+// 			NamespaceName: exampleNamespace.Name,
 // 			RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
 // 				Key:   pulumi.String("nDaysSinceLastPush"),
 // 				Value: pulumi.Int(2),
@@ -54,9 +64,9 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tcr.NewTagRetentionExecutionConfig(ctx, "tagRetentionExecutionConfig", &Tcr.TagRetentionExecutionConfigArgs{
-// 			RegistryId:  myRule.RegistryId,
-// 			RetentionId: myRule.RetentionId,
+// 		_, err = Tcr.NewTagRetentionExecutionConfig(ctx, "exampleTagRetentionExecutionConfig", &Tcr.TagRetentionExecutionConfigArgs{
+// 			RegistryId:  exampleTagRetentionRule.RegistryId,
+// 			RetentionId: exampleTagRetentionRule.RetentionId,
 // 			DryRun:      pulumi.Bool(false),
 // 		})
 // 		if err != nil {

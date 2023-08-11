@@ -7,23 +7,6 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a VPC subnet.
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- *
- * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: availabilityZone,
- *     vpcId: foo.id,
- *     cidrBlock: "10.0.20.0/28",
- *     isMulticast: false,
- * });
- * ```
- *
  * ## Import
  *
  * Vpc subnet instance can be imported, e.g.

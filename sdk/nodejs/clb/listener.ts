@@ -285,7 +285,7 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
-     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
      */
     public readonly protocol!: pulumi.Output<string>;
     /**
@@ -482,7 +482,7 @@ export interface ListenerState {
      */
     port?: pulumi.Input<number>;
     /**
-     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
      */
     protocol?: pulumi.Input<string>;
     /**
@@ -592,7 +592,7 @@ export interface ListenerArgs {
      */
     port?: pulumi.Input<number>;
     /**
-     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+     * Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
      */
     protocol: pulumi.Input<string>;
     /**

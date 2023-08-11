@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///     {
     ///         var foo = new Tencentcloud.Cam.Policy("foo", new Tencentcloud.Cam.PolicyArgs
     ///         {
-    ///             Description = "test",
+    ///             Description = "tf_test",
     ///             Document = @"{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [

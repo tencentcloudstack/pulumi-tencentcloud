@@ -140,7 +140,7 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly ikeProtoAuthenAlgorithm!: pulumi.Output<string | undefined>;
     /**
-     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     public readonly ikeProtoEncryAlgorithm!: pulumi.Output<string | undefined>;
     /**
@@ -160,11 +160,11 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly ikeSaLifetimeSeconds!: pulumi.Output<number | undefined>;
     /**
-     * Version of the IKE operation specification. Default value is `IKEV1`.
+     * Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
      */
     public readonly ikeVersion!: pulumi.Output<string | undefined>;
     /**
-     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     public readonly ipsecEncryptAlgorithm!: pulumi.Output<string | undefined>;
     /**
@@ -400,7 +400,7 @@ export interface ConnectionState {
      */
     ikeProtoAuthenAlgorithm?: pulumi.Input<string>;
     /**
-     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     ikeProtoEncryAlgorithm?: pulumi.Input<string>;
     /**
@@ -420,11 +420,11 @@ export interface ConnectionState {
      */
     ikeSaLifetimeSeconds?: pulumi.Input<number>;
     /**
-     * Version of the IKE operation specification. Default value is `IKEV1`.
+     * Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
      */
     ikeVersion?: pulumi.Input<string>;
     /**
-     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     ipsecEncryptAlgorithm?: pulumi.Input<string>;
     /**
@@ -546,7 +546,7 @@ export interface ConnectionArgs {
      */
     ikeProtoAuthenAlgorithm?: pulumi.Input<string>;
     /**
-     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     ikeProtoEncryAlgorithm?: pulumi.Input<string>;
     /**
@@ -566,11 +566,11 @@ export interface ConnectionArgs {
      */
     ikeSaLifetimeSeconds?: pulumi.Input<number>;
     /**
-     * Version of the IKE operation specification. Default value is `IKEV1`.
+     * Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
      */
     ikeVersion?: pulumi.Input<string>;
     /**
-     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+     * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
     ipsecEncryptAlgorithm?: pulumi.Input<string>;
     /**

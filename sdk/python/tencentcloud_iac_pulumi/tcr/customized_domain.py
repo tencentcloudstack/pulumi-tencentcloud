@@ -162,18 +162,24 @@ class CustomizedDomain(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr customized_domain
+        Provides a resource to create a tcr customized domain
 
         ## Example Usage
+        ### Create a tcr customized domain
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_domain = tencentcloud.tcr.CustomizedDomain("myDomain",
-            registry_id=local["tcr_id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_customized_domain = tencentcloud.tcr.CustomizedDomain("exampleCustomizedDomain",
+            registry_id=example_instance.id,
             domain_name="www.test.com",
-            certificate_id="%s",
+            certificate_id="your_cert_id",
             tags={
                 "createdBy": "terraform",
             })
@@ -201,18 +207,24 @@ class CustomizedDomain(pulumi.CustomResource):
                  args: CustomizedDomainArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr customized_domain
+        Provides a resource to create a tcr customized domain
 
         ## Example Usage
+        ### Create a tcr customized domain
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_domain = tencentcloud.tcr.CustomizedDomain("myDomain",
-            registry_id=local["tcr_id"],
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_customized_domain = tencentcloud.tcr.CustomizedDomain("exampleCustomizedDomain",
+            registry_id=example_instance.id,
             domain_name="www.test.com",
-            certificate_id="%s",
+            certificate_id="your_cert_id",
             tags={
                 "createdBy": "terraform",
             })

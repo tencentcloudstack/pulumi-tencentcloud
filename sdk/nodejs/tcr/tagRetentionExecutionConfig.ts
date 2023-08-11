@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr tagRetentionExecutionConfig
+ * Provides a resource to configure a tcr tag retention execution.
  *
  * ## Example Usage
  *
@@ -13,8 +13,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const myNs = new tencentcloud.tcr.Namespace("myNs", {
- *     instanceId: tencentcloud_tcr_instance.mytcr_retention.id,
+ * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+ *     instanceType: "basic",
+ *     deleteBucket: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
+ *     instanceId: exampleInstance.id,
  *     isPublic: true,
  *     isAutoScan: true,
  *     isPreventVul: true,
@@ -23,9 +30,9 @@ import * as utilities from "../utilities";
  *         cveId: "cve-xxxxx",
  *     }],
  * });
- * const myRule = new tencentcloud.tcr.TagRetentionRule("myRule", {
- *     registryId: tencentcloud_tcr_instance.mytcr_retention.id,
- *     namespaceName: myNs.name,
+ * const exampleTagRetentionRule = new tencentcloud.tcr.TagRetentionRule("exampleTagRetentionRule", {
+ *     registryId: exampleInstance.id,
+ *     namespaceName: exampleNamespace.name,
  *     retentionRule: {
  *         key: "nDaysSinceLastPush",
  *         value: 2,
@@ -33,9 +40,9 @@ import * as utilities from "../utilities";
  *     cronSetting: "manual",
  *     disabled: true,
  * });
- * const tagRetentionExecutionConfig = new tencentcloud.tcr.TagRetentionExecutionConfig("tagRetentionExecutionConfig", {
- *     registryId: myRule.registryId,
- *     retentionId: myRule.retentionId,
+ * const exampleTagRetentionExecutionConfig = new tencentcloud.tcr.TagRetentionExecutionConfig("exampleTagRetentionExecutionConfig", {
+ *     registryId: exampleTagRetentionRule.registryId,
+ *     retentionId: exampleTagRetentionRule.retentionId,
  *     dryRun: false,
  * });
  * ```

@@ -11,14 +11,64 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myMigration = new tencentcloud.Sqlserver.FullBackupMigration("my_migration", {
- *     backupFiles: [],
- *     instanceId: "mssql-qelbzgwf",
- *     migrationName: "migration_test",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleDb = new tencentcloud.sqlserver.Db("exampleDb", {
+ *     instanceId: exampleBasicInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleGeneralBackup = new tencentcloud.sqlserver.GeneralBackup("exampleGeneralBackup", {
+ *     instanceId: exampleDb.instanceId,
+ *     backupName: "tf_example_backup",
+ *     strategy: 0,
+ * });
+ * const exampleBackups = tencentcloud.Sqlserver.getBackupsOutput({
+ *     instanceId: exampleDb.instanceId,
+ *     backupName: exampleGeneralBackup.backupName,
+ *     startTime: "2023-07-25 00:00:00",
+ *     endTime: "2023-08-04 00:00:00",
+ * });
+ * const exampleFullBackupMigration = new tencentcloud.sqlserver.FullBackupMigration("exampleFullBackupMigration", {
+ *     instanceId: exampleGeneralBackup.instanceId,
  *     recoveryType: "FULL",
  *     uploadType: "COS_URL",
+ *     migrationName: "migration_test",
+ *     backupFiles: [exampleBackups.apply(exampleBackups => exampleBackups.lists?[0]?.internetUrl)],
  * });
  * ```
  *
@@ -27,7 +77,7 @@ import * as utilities from "../utilities";
  * sqlserver full_backup_migration can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration full_backup_migration full_backup_migration_id
+ *  $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
  * ```
  */
 export class FullBackupMigration extends pulumi.CustomResource {
@@ -63,6 +113,10 @@ export class FullBackupMigration extends pulumi.CustomResource {
      */
     public readonly backupFiles!: pulumi.Output<string[] | undefined>;
     /**
+     * Backup import task ID.
+     */
+    public /*out*/ readonly backupMigrationId!: pulumi.Output<string>;
+    /**
      * ID of imported target instance.
      */
     public readonly instanceId!: pulumi.Output<string>;
@@ -93,6 +147,7 @@ export class FullBackupMigration extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as FullBackupMigrationState | undefined;
             resourceInputs["backupFiles"] = state ? state.backupFiles : undefined;
+            resourceInputs["backupMigrationId"] = state ? state.backupMigrationId : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["migrationName"] = state ? state.migrationName : undefined;
             resourceInputs["recoveryType"] = state ? state.recoveryType : undefined;
@@ -116,6 +171,7 @@ export class FullBackupMigration extends pulumi.CustomResource {
             resourceInputs["migrationName"] = args ? args.migrationName : undefined;
             resourceInputs["recoveryType"] = args ? args.recoveryType : undefined;
             resourceInputs["uploadType"] = args ? args.uploadType : undefined;
+            resourceInputs["backupMigrationId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(FullBackupMigration.__pulumiType, name, resourceInputs, opts);
@@ -130,6 +186,10 @@ export interface FullBackupMigrationState {
      * If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
      */
     backupFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Backup import task ID.
+     */
+    backupMigrationId?: pulumi.Input<string>;
     /**
      * ID of imported target instance.
      */

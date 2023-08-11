@@ -120,6 +120,32 @@ def get_rocketmq_group(cluster_id: Optional[str] = None,
     """
     Use this data source to query detailed information of tdmqRocketmq group
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
+
+    example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
+    example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_name="tf_example",
+        remark="remark.")
+    example_rocketmq_group = tencentcloud.Tdmq.get_rocketmq_group_output(cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_id=example_rocketmq_namespace.namespace_name,
+        filter_group=example_tdmq / rocketmq_group_rocketmq_group["groupName"])
+    example_tdmq_rocketmq_group_rocketmq_group = tencentcloud.tdmq.RocketmqGroup("exampleTdmq/rocketmqGroupRocketmqGroup",
+        group_name="tf_example",
+        namespace=example_rocketmq_namespace.namespace_name,
+        read_enable=True,
+        broadcast_enable=True,
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        remark="remark.")
+    ```
+
 
     :param str cluster_id: Cluster ID.
     :param str filter_group: Consumer group query by consumer group name. Fuzzy query is supported.
@@ -164,6 +190,32 @@ def get_rocketmq_group_output(cluster_id: Optional[pulumi.Input[str]] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetRocketmqGroupResult]:
     """
     Use this data source to query detailed information of tdmqRocketmq group
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
+
+    example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+        cluster_name="tf_example",
+        remark="remark.")
+    example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace",
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_name="tf_example",
+        remark="remark.")
+    example_rocketmq_group = tencentcloud.Tdmq.get_rocketmq_group_output(cluster_id=example_rocketmq_cluster.cluster_id,
+        namespace_id=example_rocketmq_namespace.namespace_name,
+        filter_group=example_tdmq / rocketmq_group_rocketmq_group["groupName"])
+    example_tdmq_rocketmq_group_rocketmq_group = tencentcloud.tdmq.RocketmqGroup("exampleTdmq/rocketmqGroupRocketmqGroup",
+        group_name="tf_example",
+        namespace=example_rocketmq_namespace.namespace_name,
+        read_enable=True,
+        broadcast_enable=True,
+        cluster_id=example_rocketmq_cluster.cluster_id,
+        remark="remark.")
+    ```
 
 
     :param str cluster_id: Cluster ID.

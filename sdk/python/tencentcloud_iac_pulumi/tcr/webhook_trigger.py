@@ -164,23 +164,24 @@ class WebhookTrigger(pulumi.CustomResource):
                  trigger: Optional[pulumi.Input[pulumi.InputType['WebhookTriggerTriggerArgs']]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tcr webhook_trigger
+        Provides a resource to create a tcr webhook trigger
 
         ## Example Usage
+        ### Create a tcr webhook trigger instance
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mytcr_webhooktrigger = tencentcloud.tcr.Instance("mytcrWebhooktrigger",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
             instance_type="basic",
             delete_bucket=True,
             tags={
                 "test": "test",
             })
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=mytcr_webhooktrigger.id,
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -188,13 +189,13 @@ class WebhookTrigger(pulumi.CustomResource):
             cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
                 cve_id="cve-xxxxx",
             )])
-        id_test = tencentcloud.Tcr.get_namespaces_output(instance_id=my_ns.instance_id)
-        ns_id = id_test.namespace_lists[0].id
-        my_trigger = tencentcloud.tcr.WebhookTrigger("myTrigger",
-            registry_id=mytcr_webhooktrigger.id,
-            namespace=my_ns.name,
+        example_namespaces = tencentcloud.Tcr.get_namespaces_output(instance_id=example_namespace.instance_id)
+        ns_id = example_namespaces.namespace_lists[0].id
+        example_webhook_trigger = tencentcloud.tcr.WebhookTrigger("exampleWebhookTrigger",
+            registry_id=example_instance.id,
+            namespace=example_namespace.name,
             trigger=tencentcloud.tcr.WebhookTriggerTriggerArgs(
-                name="trigger-%s",
+                name="trigger-example",
                 targets=[tencentcloud.tcr.WebhookTriggerTriggerTargetArgs(
                     address="http://example.org/post",
                     headers=[tencentcloud.tcr.WebhookTriggerTriggerTargetHeaderArgs(
@@ -205,7 +206,7 @@ class WebhookTrigger(pulumi.CustomResource):
                 event_types=["pushImage"],
                 condition=".*",
                 enabled=True,
-                description="this is trigger description",
+                description="example for trigger description",
                 namespace_id=ns_id,
             ),
             tags={
@@ -218,7 +219,7 @@ class WebhookTrigger(pulumi.CustomResource):
         tcr webhook_trigger can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger webhook_trigger webhook_trigger_id
+         $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -235,23 +236,24 @@ class WebhookTrigger(pulumi.CustomResource):
                  args: WebhookTriggerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tcr webhook_trigger
+        Provides a resource to create a tcr webhook trigger
 
         ## Example Usage
+        ### Create a tcr webhook trigger instance
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mytcr_webhooktrigger = tencentcloud.tcr.Instance("mytcrWebhooktrigger",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
             instance_type="basic",
             delete_bucket=True,
             tags={
                 "test": "test",
             })
-        my_ns = tencentcloud.tcr.Namespace("myNs",
-            instance_id=mytcr_webhooktrigger.id,
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
             is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
@@ -259,13 +261,13 @@ class WebhookTrigger(pulumi.CustomResource):
             cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
                 cve_id="cve-xxxxx",
             )])
-        id_test = tencentcloud.Tcr.get_namespaces_output(instance_id=my_ns.instance_id)
-        ns_id = id_test.namespace_lists[0].id
-        my_trigger = tencentcloud.tcr.WebhookTrigger("myTrigger",
-            registry_id=mytcr_webhooktrigger.id,
-            namespace=my_ns.name,
+        example_namespaces = tencentcloud.Tcr.get_namespaces_output(instance_id=example_namespace.instance_id)
+        ns_id = example_namespaces.namespace_lists[0].id
+        example_webhook_trigger = tencentcloud.tcr.WebhookTrigger("exampleWebhookTrigger",
+            registry_id=example_instance.id,
+            namespace=example_namespace.name,
             trigger=tencentcloud.tcr.WebhookTriggerTriggerArgs(
-                name="trigger-%s",
+                name="trigger-example",
                 targets=[tencentcloud.tcr.WebhookTriggerTriggerTargetArgs(
                     address="http://example.org/post",
                     headers=[tencentcloud.tcr.WebhookTriggerTriggerTargetHeaderArgs(
@@ -276,7 +278,7 @@ class WebhookTrigger(pulumi.CustomResource):
                 event_types=["pushImage"],
                 condition=".*",
                 enabled=True,
-                description="this is trigger description",
+                description="example for trigger description",
                 namespace_id=ns_id,
             ),
             tags={
@@ -289,7 +291,7 @@ class WebhookTrigger(pulumi.CustomResource):
         tcr webhook_trigger can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger webhook_trigger webhook_trigger_id
+         $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
         ```
 
         :param str resource_name: The name of the resource.

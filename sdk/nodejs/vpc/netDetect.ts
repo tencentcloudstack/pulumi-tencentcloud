@@ -9,23 +9,6 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const netDetect = new tencentcloud.Vpc.NetDetect("net_detect", {
- *     detectDestinationIps: [
- *         "10.0.0.1",
- *         "10.0.0.2",
- *     ],
- *     netDetectName: "terrform-test",
- *     nextHopDestination: "172.16.128.57",
- *     nextHopType: "NORMAL_CVM",
- *     subnetId: "subnet-c1l35990",
- *     vpcId: "vpc-4owdpnwr",
- * });
- * ```
- *
  * ## Import
  *
  * vpc net_detect can be imported using the id, e.g.

@@ -171,16 +171,33 @@ class TmpRecordingRule(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.TmpInstance("foo",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
         recording_rule = tencentcloud.monitor.TmpRecordingRule("recordingRule",
+            instance_id=foo.id,
+            rule_state=2,
             group=\"\"\"---
         name: example-test
         rules:
           - record: job:http_inprogress_requests:sum
             expr: sum by (job) (http_inprogress_requests)
-
-        \"\"\",
-            instance_id="prom-c89b3b3u",
-            rule_state=2)
+        \"\"\")
         ```
 
         ## Import
@@ -213,16 +230,33 @@ class TmpRecordingRule(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo = tencentcloud.monitor.TmpInstance("foo",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
         recording_rule = tencentcloud.monitor.TmpRecordingRule("recordingRule",
+            instance_id=foo.id,
+            rule_state=2,
             group=\"\"\"---
         name: example-test
         rules:
           - record: job:http_inprogress_requests:sum
             expr: sum by (job) (http_inprogress_requests)
-
-        \"\"\",
-            instance_id="prom-c89b3b3u",
-            rule_state=2)
+        \"\"\")
         ```
 
         ## Import

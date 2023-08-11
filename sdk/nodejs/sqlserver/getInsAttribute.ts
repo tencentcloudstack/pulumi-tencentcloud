@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const insAttribute = pulumi.output(tencentcloud.Sqlserver.getInsAttribute({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getInsAttribute({
  *     instanceId: "mssql-gyg9xycl",
  * }));
  * ```

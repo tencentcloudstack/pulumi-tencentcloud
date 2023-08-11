@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a mysql rollbackStop
 //
 // ## Example Usage
+// ### Revoke the ongoing rollback task of the instance
 //
 // ```go
 // package main
@@ -25,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRollbackStop(ctx, "rollbackStop", &Mysql.RollbackStopArgs{
+// 		_, err := Mysql.NewRollbackStop(ctx, "example", &Mysql.RollbackStopArgs{
 // 			InstanceId: pulumi.String("cdb-fitq5t9h"),
 // 		})
 // 		if err != nil {

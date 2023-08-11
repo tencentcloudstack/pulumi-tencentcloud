@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const uploadIncrementalInfo = pulumi.output(tencentcloud.Sqlserver.getUploadIncrementalInfo({
+ * const example = pulumi.output(tencentcloud.Sqlserver.getUploadIncrementalInfo({
  *     backupMigrationId: "mssql-backup-migration-83t5u3tv",
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
  *     instanceId: "mssql-4tgeyeeh",

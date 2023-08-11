@@ -290,21 +290,28 @@ class Topic(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
+        example_topic = tencentcloud.tdmq.Topic("exampleTopic",
+            environ_id=example_namespace.environ_name,
+            cluster_id=example_instance.id,
+            topic_name="tf-example-topic",
             partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
+            pulsar_topic_type=3,
+            remark="remark.")
         ```
 
         ## Import
@@ -340,21 +347,28 @@ class Topic(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.")
-        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
-            cluster_id=foo.id,
-            environ_name="example",
+        example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+            cluster_name="tf_example",
+            remark="remark.",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+            environ_name="tf_example",
             msg_ttl=300,
-            remark="this is description.")
-        bar_topic = tencentcloud.tdmq.Topic("barTopic",
-            cluster_id=foo.id,
-            environ_id=bar_namespace.id,
+            cluster_id=example_instance.id,
+            retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
+                time_in_minutes=60,
+                size_in_mb=10,
+            ),
+            remark="remark.")
+        example_topic = tencentcloud.tdmq.Topic("exampleTopic",
+            environ_id=example_namespace.environ_name,
+            cluster_id=example_instance.id,
+            topic_name="tf-example-topic",
             partitions=6,
-            remark="this is description.",
-            topic_name="example",
-            topic_type=0)
+            pulsar_topic_type=3,
+            remark="remark.")
         ```
 
         ## Import

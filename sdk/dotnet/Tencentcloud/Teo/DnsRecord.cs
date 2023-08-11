@@ -10,39 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
-    /// <summary>
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var dnsRecord = new Tencentcloud.Teo.DnsRecord("dnsRecord", new Tencentcloud.Teo.DnsRecordArgs
-    ///         {
-    ///             Content = "150.109.8.2",
-    ///             Mode = "proxied",
-    ///             Priority = 1,
-    ///             Ttl = 1,
-    ///             Type = "A",
-    ///             ZoneId = "zone-297z8rf93cfw",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// teo dns_record can be imported using the zone_id#dns_record_id, e.g.
-    /// 
-    /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord dns_record zone-297z8rf93cfw#record-297z9ei9b9oc
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/dnsRecord:DnsRecord")]
     public partial class DnsRecord : Pulumi.CustomResource
     {
@@ -83,7 +50,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<bool> Locked { get; private set; } = null!;
 
         /// <summary>
-        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        /// and accelerated.
         /// </summary>
         [Output("mode")]
         public Output<string> Mode { get; private set; } = null!;
@@ -184,7 +152,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> Content { get; set; } = null!;
 
         /// <summary>
-        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        /// and accelerated.
         /// </summary>
         [Input("mode", required: true)]
         public Input<string> Mode { get; set; } = null!;
@@ -275,7 +244,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<bool>? Locked { get; set; }
 
         /// <summary>
-        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied and accelerated.
+        /// Proxy mode. Valid values:- `dns_only`: only DNS resolution of the subdomain is enabled.- `proxied`: subdomain is proxied
+        /// and accelerated.
         /// </summary>
         [Input("mode")]
         public Input<string>? Mode { get; set; }

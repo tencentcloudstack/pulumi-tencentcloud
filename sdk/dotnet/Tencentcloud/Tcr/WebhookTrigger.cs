@@ -11,9 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr webhook_trigger
+    /// Provides a resource to create a tcr webhook trigger
     /// 
     /// ## Example Usage
+    /// ### Create a tcr webhook trigger instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -24,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var mytcrWebhooktrigger = new Tencentcloud.Tcr.Instance("mytcrWebhooktrigger", new Tencentcloud.Tcr.InstanceArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
     ///             InstanceType = "basic",
     ///             DeleteBucket = true,
@@ -33,9 +34,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                 { "test", "test" },
     ///             },
     ///         });
-    ///         var myNs = new Tencentcloud.Tcr.Namespace("myNs", new Tencentcloud.Tcr.NamespaceArgs
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
     ///         {
-    ///             InstanceId = mytcrWebhooktrigger.Id,
+    ///             InstanceId = exampleInstance.Id,
     ///             IsPublic = true,
     ///             IsAutoScan = true,
     ///             IsPreventVul = true,
@@ -48,18 +49,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                 },
     ///             },
     ///         });
-    ///         var idTest = Tencentcloud.Tcr.GetNamespaces.Invoke(new Tencentcloud.Tcr.GetNamespacesInvokeArgs
+    ///         var exampleNamespaces = Tencentcloud.Tcr.GetNamespaces.Invoke(new Tencentcloud.Tcr.GetNamespacesInvokeArgs
     ///         {
-    ///             InstanceId = myNs.InstanceId,
+    ///             InstanceId = exampleNamespace.InstanceId,
     ///         });
-    ///         var nsId = idTest.Apply(idTest =&gt; idTest.NamespaceLists?[0]?.Id);
-    ///         var myTrigger = new Tencentcloud.Tcr.WebhookTrigger("myTrigger", new Tencentcloud.Tcr.WebhookTriggerArgs
+    ///         var nsId = exampleNamespaces.Apply(exampleNamespaces =&gt; exampleNamespaces.NamespaceLists?[0]?.Id);
+    ///         var exampleWebhookTrigger = new Tencentcloud.Tcr.WebhookTrigger("exampleWebhookTrigger", new Tencentcloud.Tcr.WebhookTriggerArgs
     ///         {
-    ///             RegistryId = mytcrWebhooktrigger.Id,
-    ///             Namespace = myNs.Name,
+    ///             RegistryId = exampleInstance.Id,
+    ///             Namespace = exampleNamespace.Name,
     ///             Trigger = new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerArgs
     ///             {
-    ///                 Name = "trigger-%s",
+    ///                 Name = "trigger-example",
     ///                 Targets = 
     ///                 {
     ///                     new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerTargetArgs
@@ -84,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                 },
     ///                 Condition = ".*",
     ///                 Enabled = true,
-    ///                 Description = "this is trigger description",
+    ///                 Description = "example for trigger description",
     ///                 NamespaceId = nsId,
     ///             },
     ///             Tags = 
@@ -102,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr webhook_trigger can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger webhook_trigger webhook_trigger_id
+    ///  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/webhookTrigger:WebhookTrigger")]

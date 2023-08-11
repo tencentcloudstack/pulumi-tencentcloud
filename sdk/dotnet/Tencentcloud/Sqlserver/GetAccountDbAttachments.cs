@@ -14,60 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     {
         /// <summary>
         /// Use this data source to query the list of SQL Server account DB privileges.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var test = Output.Create(Tencentcloud.Sqlserver.GetAccountDbAttachments.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountDbAttachmentsArgs
-        ///         {
-        ///             InstanceId = tencentcloud_sqlserver_instance.Test.Id,
-        ///             AccountName = tencentcloud_sqlserver_account_db_attachment.Test.Account_name,
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetAccountDbAttachmentsResult> InvokeAsync(GetAccountDbAttachmentsArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the list of SQL Server account DB privileges.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var test = Output.Create(Tencentcloud.Sqlserver.GetAccountDbAttachments.InvokeAsync(new Tencentcloud.Sqlserver.GetAccountDbAttachmentsArgs
-        ///         {
-        ///             InstanceId = tencentcloud_sqlserver_instance.Test.Id,
-        ///             AccountName = tencentcloud_sqlserver_account_db_attachment.Test.Account_name,
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetAccountDbAttachmentsResult> Invoke(GetAccountDbAttachmentsInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetAccountDbAttachmentsResult>("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args ?? new GetAccountDbAttachmentsInvokeArgs(), options.WithDefaults());

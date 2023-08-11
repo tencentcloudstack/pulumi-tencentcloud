@@ -14,37 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfig
     {
-        /// <summary>
-        /// ACL configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigAclConfig? AclConfig;
-        /// <summary>
-        /// Bot Configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigBotConfig? BotConfig;
-        /// <summary>
-        /// Custom drop page configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigDropPageConfig? DropPageConfig;
-        /// <summary>
-        /// Exception rule configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigExceptConfig? ExceptConfig;
-        /// <summary>
-        /// Basic access control.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigIpTableConfig? IpTableConfig;
-        /// <summary>
-        /// RateLimit Configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigRateLimitConfig? RateLimitConfig;
-        /// <summary>
-        /// Main switch of 7-layer security.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigSwitchConfig? SwitchConfig;
-        /// <summary>
-        /// WAF (Web Application Firewall) Configuration.
-        /// </summary>
         public readonly Outputs.SecurityPolicyConfigWafConfig? WafConfig;
 
         [OutputConstructor]

@@ -13,18 +13,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigAclConfigArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
 
         [Input("userRules")]
         private InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleArgs>? _userRules;
-
-        /// <summary>
-        /// Custom configuration.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleArgs> UserRules
         {
             get => _userRules ?? (_userRules = new InputList<Inputs.SecurityPolicyConfigAclConfigUserRuleArgs>());

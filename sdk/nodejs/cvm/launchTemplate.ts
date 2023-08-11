@@ -6,23 +6,26 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cvm launchTemplate
+ * Provides a resource to create a cvm launch template
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const demo = new tencentcloud.Cvm.LaunchTemplate("demo", {
- *     imageId: "img-xxxxxxxxx",
+ * const myFavoriteImage = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "Final",
+ * });
+ * const demo = new tencentcloud.cvm.LaunchTemplate("demo", {
  *     launchTemplateName: "test",
  *     placement: {
- *         hostIds: [],
- *         hostIps: [],
- *         projectId: 0,
  *         zone: "ap-guangzhou-6",
+ *         projectId: 0,
  *     },
+ *     imageId: myFavoriteImage.then(myFavoriteImage => myFavoriteImage.images?[0]?.imageId),
  * });
  * ```
  */

@@ -9,20 +9,35 @@ import * as utilities from "../utilities";
  * Use this data source to query SQL Server instances
  *
  * ## Example Usage
+ * ### Filter instance by Id
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const vpc = pulumi.output(tencentcloud.Sqlserver.getInstances({
- *     subnetId: "subnet-nf9n81ps",
- *     vpcId: "vpc-409mvdvv",
+ * const exampleId = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ *     id: "mssql-3l3fgqn7",
  * }));
- * const project = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ * ```
+ * ### Filter instance by project Id
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleProject = pulumi.output(tencentcloud.Sqlserver.getInstances({
  *     projectId: 0,
  * }));
- * const id = pulumi.output(tencentcloud.Sqlserver.getInstances({
- *     id: "postgres-h9t4fde1",
+ * ```
+ * ### Filter instance by VPC/Subnet
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleVpc = pulumi.output(tencentcloud.Sqlserver.getInstances({
+ *     subnetId: "subnet-nf9n81ps",
+ *     vpcId: "vpc-409mvdvv",
  * }));
  * ```
  */

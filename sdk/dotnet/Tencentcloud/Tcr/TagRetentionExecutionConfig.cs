@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr tag_retention_execution_config
+    /// Provides a resource to configure a tcr tag retention execution.
     /// 
     /// ## Example Usage
     /// 
@@ -23,9 +23,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var myNs = new Tencentcloud.Tcr.Namespace("myNs", new Tencentcloud.Tcr.NamespaceArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             InstanceId = tencentcloud_tcr_instance.Mytcr_retention.Id,
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
     ///             IsPublic = true,
     ///             IsAutoScan = true,
     ///             IsPreventVul = true,
@@ -38,10 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                 },
     ///             },
     ///         });
-    ///         var myRule = new Tencentcloud.Tcr.TagRetentionRule("myRule", new Tencentcloud.Tcr.TagRetentionRuleArgs
+    ///         var exampleTagRetentionRule = new Tencentcloud.Tcr.TagRetentionRule("exampleTagRetentionRule", new Tencentcloud.Tcr.TagRetentionRuleArgs
     ///         {
-    ///             RegistryId = tencentcloud_tcr_instance.Mytcr_retention.Id,
-    ///             NamespaceName = myNs.Name,
+    ///             RegistryId = exampleInstance.Id,
+    ///             NamespaceName = exampleNamespace.Name,
     ///             RetentionRule = new Tencentcloud.Tcr.Inputs.TagRetentionRuleRetentionRuleArgs
     ///             {
     ///                 Key = "nDaysSinceLastPush",
@@ -50,10 +59,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///             CronSetting = "manual",
     ///             Disabled = true,
     ///         });
-    ///         var tagRetentionExecutionConfig = new Tencentcloud.Tcr.TagRetentionExecutionConfig("tagRetentionExecutionConfig", new Tencentcloud.Tcr.TagRetentionExecutionConfigArgs
+    ///         var exampleTagRetentionExecutionConfig = new Tencentcloud.Tcr.TagRetentionExecutionConfig("exampleTagRetentionExecutionConfig", new Tencentcloud.Tcr.TagRetentionExecutionConfigArgs
     ///         {
-    ///             RegistryId = myRule.RegistryId,
-    ///             RetentionId = myRule.RetentionId,
+    ///             RegistryId = exampleTagRetentionRule.RegistryId,
+    ///             RetentionId = exampleTagRetentionRule.RetentionId,
     ///             DryRun = false,
     ///         });
     ///     }

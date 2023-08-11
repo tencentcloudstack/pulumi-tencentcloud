@@ -132,15 +132,34 @@ class RefreshNatDcRoute(pulumi.CustomResource):
         Provides a resource to create a vpc refresh_nat_dc_route
 
         ## Example Usage
+        ### is True
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example = tencentcloud.eip.Instance("eipExample")
+        nat = tencentcloud.nat.Gateway("nat",
+            vpc_id=vpc.id,
+            max_concurrent=3000000,
+            bandwidth=500,
+            assigned_eip_sets=[eip_example.public_ip])
+        refresh_nat_dc_route = tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute",
+            nat_gateway_id=nat.id,
+            vpc_id=vpc.id,
+            dry_run=True)
+        ```
+        ### is False
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         refresh_nat_dc_route = tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute",
-            dry_run=True,
-            nat_gateway_id="nat-gnxkey2e",
-            vpc_id="vpc-pyyv5k3v")
+            nat_gateway_id=tencentcloud_nat_gateway["nat"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            dry_run=False)
         ```
 
         ## Import
@@ -167,15 +186,34 @@ class RefreshNatDcRoute(pulumi.CustomResource):
         Provides a resource to create a vpc refresh_nat_dc_route
 
         ## Example Usage
+        ### is True
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example = tencentcloud.eip.Instance("eipExample")
+        nat = tencentcloud.nat.Gateway("nat",
+            vpc_id=vpc.id,
+            max_concurrent=3000000,
+            bandwidth=500,
+            assigned_eip_sets=[eip_example.public_ip])
+        refresh_nat_dc_route = tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute",
+            nat_gateway_id=nat.id,
+            vpc_id=vpc.id,
+            dry_run=True)
+        ```
+        ### is False
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
         refresh_nat_dc_route = tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute",
-            dry_run=True,
-            nat_gateway_id="nat-gnxkey2e",
-            vpc_id="vpc-pyyv5k3v")
+            nat_gateway_id=tencentcloud_nat_gateway["nat"]["id"],
+            vpc_id=tencentcloud_vpc["vpc"]["id"],
+            dry_run=False)
         ```
 
         ## Import

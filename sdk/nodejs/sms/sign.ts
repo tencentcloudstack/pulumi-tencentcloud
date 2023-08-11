@@ -8,18 +8,19 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sms sign
  *
  * ## Example Usage
+ * ### Create a sms sign instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sign = new tencentcloud.Sms.Sign("sign", {
- *     documentType: 4,
- *     international: 0,
- *     proofImage: "dGhpcyBpcyBhIGV4YW1wbGU=",
- *     signName: "terraform",
- *     signPurpose: 0,
- *     signType: 1,
+ * const example = new tencentcloud.Sms.Sign("example", {
+ *     documentType: 4, // Screenshot of application background management (personally developed APP)
+ *     international: 0, // Mainland China SMS
+ *     proofImage: "your_proof_image",
+ *     signName: "tf_example_sms_sign",
+ *     signPurpose: 0, // personal use
+ *     signType: 1, // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
  * });
  * ```
  */

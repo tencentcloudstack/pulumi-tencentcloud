@@ -12,50 +12,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
 {
     /// <summary>
     /// Provides a resource to create a mysql rollback
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var rollback = new Tencentcloud.Mysql.Rollback("rollback", new Tencentcloud.Mysql.RollbackArgs
-    ///         {
-    ///             Databases = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.RollbackDatabaseArgs
-    ///                 {
-    ///                     DatabaseName = "tf_ci_test_bak",
-    ///                     NewDatabaseName = "tf_ci_test_bak_5",
-    ///                 },
-    ///             },
-    ///             InstanceId = "cdb-fitq5t9h",
-    ///             RollbackTime = "2023-05-31 23:13:35",
-    ///             Strategy = "full",
-    ///             Tables = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.RollbackTableArgs
-    ///                 {
-    ///                     Database = "tf_ci_test_bak",
-    ///                     Tables = 
-    ///                     {
-    ///                         new Tencentcloud.Mysql.Inputs.RollbackTableTableArgs
-    ///                         {
-    ///                             NewTableName = "test_bak",
-    ///                             TableName = "test",
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/rollback:Rollback")]
     public partial class Rollback : Pulumi.CustomResource

@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var example = new Tencentcloud.Monitor.AlarmNotice("example", new Tencentcloud.Monitor.AlarmNoticeArgs
+    ///         var foo = new Tencentcloud.Monitor.AlarmNotice("foo", new Tencentcloud.Monitor.AlarmNoticeArgs
     ///         {
     ///             NoticeLanguage = "zh-CN",
     ///             NoticeType = "ALL",
@@ -101,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     [TencentcloudResourceType("tencentcloud:Monitor/alarmNotice:AlarmNotice")]
     public partial class AlarmNotice : Pulumi.CustomResource
     {
+        /// <summary>
+        /// Amp consumer ID.
+        /// </summary>
+        [Output("ampConsumerId")]
+        public Output<string> AmpConsumerId { get; private set; } = null!;
+
         /// <summary>
         /// A maximum of one alarm notification can be pushed to the CLS service.
         /// </summary>
@@ -269,6 +275,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 
     public sealed class AlarmNoticeState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Amp consumer ID.
+        /// </summary>
+        [Input("ampConsumerId")]
+        public Input<string>? AmpConsumerId { get; set; }
+
         [Input("clsNotices")]
         private InputList<Inputs.AlarmNoticeClsNoticeGetArgs>? _clsNotices;
 

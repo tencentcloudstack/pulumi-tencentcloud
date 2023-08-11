@@ -11,11 +11,66 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM role policy attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		cfg := config.New(ctx, "")
+// 		camPolicyBasic := "keep-cam-policy"
+// 		if param := cfg.Get("camPolicyBasic"); param != "" {
+// 			camPolicyBasic = param
+// 		}
+// 		camRoleBasic := "keep-cam-role"
+// 		if param := cfg.Get("camRoleBasic"); param != "" {
+// 			camRoleBasic = param
+// 		}
+// 		_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+// 			Name: pulumi.StringRef(camPolicyBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.GetRoles(ctx, &cam.GetRolesArgs{
+// 			Name: pulumi.StringRef(camRoleBasic),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cam.NewRolePolicyAttachmentByName(ctx, "rolePolicyAttachmentBasic", &Cam.RolePolicyAttachmentByNameArgs{
+// 			RoleName:   pulumi.String(camRoleBasic),
+// 			PolicyName: pulumi.String(camPolicyBasic),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM role policy attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+// ```
 type RolePolicyAttachmentByName struct {
 	pulumi.CustomResourceState
 
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntOutput `pulumi:"createMode"`
 	// The create time of the CAM role policy attachment.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -63,8 +118,7 @@ func GetRolePolicyAttachmentByName(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RolePolicyAttachmentByName resources.
 type rolePolicyAttachmentByNameState struct {
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode *int `pulumi:"createMode"`
 	// The create time of the CAM role policy attachment.
 	CreateTime *string `pulumi:"createTime"`
@@ -77,8 +131,7 @@ type rolePolicyAttachmentByNameState struct {
 }
 
 type RolePolicyAttachmentByNameState struct {
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntPtrInput
 	// The create time of the CAM role policy attachment.
 	CreateTime pulumi.StringPtrInput
@@ -196,8 +249,7 @@ func (o RolePolicyAttachmentByNameOutput) ToRolePolicyAttachmentByNameOutputWith
 	return o
 }
 
-// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-// the others indicate syntax strategy ways.
+// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 func (o RolePolicyAttachmentByNameOutput) CreateMode() pulumi.IntOutput {
 	return o.ApplyT(func(v *RolePolicyAttachmentByName) pulumi.IntOutput { return v.CreateMode }).(pulumi.IntOutput)
 }

@@ -26,15 +26,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     ///         var mongodb = new Tencentcloud.Mongodb.Instance("mongodb", new Tencentcloud.Mongodb.InstanceArgs
     ///         {
     ///             AvailableZone = "ap-guangzhou-2",
-    ///             EngineVersion = "MONGO_3_WT",
+    ///             EngineVersion = "MONGO_36_WT",
     ///             InstanceName = "mongodb",
-    ///             MachineType = "GIO",
+    ///             MachineType = "HIO10G",
     ///             Memory = 4,
     ///             Password = "password1234",
     ///             ProjectId = 0,
-    ///             SubnetId = "subnet-lk0svi3p",
+    ///             SubnetId = "subnet-xxxxxx",
     ///             Volume = 100,
-    ///             VpcId = "vpc-mz3efvbw",
+    ///             VpcId = "vpc-xxxxxx",
     ///         });
     ///     }
     /// 
@@ -57,6 +57,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        [Output("availabilityZoneLists")]
+        public Output<ImmutableArray<string>> AvailabilityZoneLists { get; private set; } = null!;
 
         /// <summary>
         /// The available zone of the Mongodb.
@@ -83,6 +93,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string> EngineVersion { get; private set; } = null!;
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Output("hiddenZone")]
+        public Output<string> HiddenZone { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Output("instanceName")]
@@ -99,6 +115,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("memory")]
         public Output<int> Memory { get; private set; } = null!;
+
+        /// <summary>
+        /// The number of nodes in each replica set. Default value: 3.
+        /// </summary>
+        [Output("nodeNum")]
+        public Output<int> NodeNum { get; private set; } = null!;
 
         /// <summary>
         /// Password of this Mongodb account.
@@ -225,6 +247,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
 
+        [Input("availabilityZoneLists")]
+        private InputList<string>? _availabilityZoneLists;
+
+        /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        public InputList<string> AvailabilityZoneLists
+        {
+            get => _availabilityZoneLists ?? (_availabilityZoneLists = new InputList<string>());
+            set => _availabilityZoneLists = value;
+        }
+
         /// <summary>
         /// The available zone of the Mongodb.
         /// </summary>
@@ -244,6 +282,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string> EngineVersion { get; set; } = null!;
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Input("hiddenZone")]
+        public Input<string>? HiddenZone { get; set; }
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Input("instanceName", required: true)]
@@ -260,6 +304,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("memory", required: true)]
         public Input<int> Memory { get; set; } = null!;
+
+        /// <summary>
+        /// The number of nodes in each replica set. Default value: 3.
+        /// </summary>
+        [Input("nodeNum")]
+        public Input<int>? NodeNum { get; set; }
 
         /// <summary>
         /// Password of this Mongodb account.
@@ -334,6 +384,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
 
+        [Input("availabilityZoneLists")]
+        private InputList<string>? _availabilityZoneLists;
+
+        /// <summary>
+        /// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
+        /// - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
+        /// - Version 4.2 and above are not supported.
+        /// - Read-only disaster recovery instances are not supported.
+        /// - Basic network cannot be selected.
+        /// </summary>
+        public InputList<string> AvailabilityZoneLists
+        {
+            get => _availabilityZoneLists ?? (_availabilityZoneLists = new InputList<string>());
+            set => _availabilityZoneLists = value;
+        }
+
         /// <summary>
         /// The available zone of the Mongodb.
         /// </summary>
@@ -359,6 +425,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
+        /// The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        /// </summary>
+        [Input("hiddenZone")]
+        public Input<string>? HiddenZone { get; set; }
+
+        /// <summary>
         /// Name of the Mongodb instance.
         /// </summary>
         [Input("instanceName")]
@@ -375,6 +447,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
+
+        /// <summary>
+        /// The number of nodes in each replica set. Default value: 3.
+        /// </summary>
+        [Input("nodeNum")]
+        public Input<int>? NodeNum { get; set; }
 
         /// <summary>
         /// Password of this Mongodb account.

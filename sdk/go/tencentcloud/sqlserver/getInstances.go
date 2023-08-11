@@ -13,6 +13,53 @@ import (
 // Use this data source to query SQL Server instances
 //
 // ## Example Usage
+// ### Filter instance by Id
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.GetInstances(ctx, &sqlserver.GetInstancesArgs{
+// 			Id: pulumi.StringRef("mssql-3l3fgqn7"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Filter instance by project Id
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.GetInstances(ctx, &sqlserver.GetInstancesArgs{
+// 			ProjectId: pulumi.IntRef(0),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Filter instance by VPC/Subnet
 //
 // ```go
 // package main
@@ -28,18 +75,6 @@ import (
 // 		_, err := Sqlserver.GetInstances(ctx, &sqlserver.GetInstancesArgs{
 // 			SubnetId: pulumi.StringRef("subnet-nf9n81ps"),
 // 			VpcId:    pulumi.StringRef("vpc-409mvdvv"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.GetInstances(ctx, &sqlserver.GetInstancesArgs{
-// 			ProjectId: pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.GetInstances(ctx, &sqlserver.GetInstancesArgs{
-// 			Id: pulumi.StringRef("postgres-h9t4fde1"),
 // 		}, nil)
 // 		if err != nil {
 // 			return err

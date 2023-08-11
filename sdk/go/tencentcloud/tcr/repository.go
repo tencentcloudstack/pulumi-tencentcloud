@@ -14,6 +14,7 @@ import (
 // Use this resource to create tcr repository.
 //
 // ## Example Usage
+// ### Create a tcr repository instance
 //
 // ```go
 // package main
@@ -26,15 +27,33 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		test, err := Tcr.GetInstances(ctx, &tcr.GetInstancesArgs{
-// 			Name: pulumi.StringRef("test"),
-// 		}, nil)
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			DeleteBucket: pulumi.Bool(true),
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tcr.NewRepository(ctx, "foo", &Tcr.RepositoryArgs{
-// 			InstanceId:    pulumi.String(test.InstanceLists[0].Id),
-// 			NamespaceName: pulumi.String("exampleNamespace"),
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
+// 			InstanceId:    exampleInstance.ID(),
+// 			NamespaceName: exampleNamespace.Name,
+// 			BriefDesc:     pulumi.String("111"),
+// 			Description:   pulumi.String("111111111111111111111111111111111111"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -49,7 +68,7 @@ import (
 // tcr repository can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+//  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
 // ```
 type Repository struct {
 	pulumi.CustomResourceState

@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// </summary>
         public readonly string Domain;
         /// <summary>
+        /// DV certification information.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetCertificatesCertificateDvAuthResult> DvAuths;
+        /// <summary>
         /// Ending time of the SSL certificate.
         /// </summary>
         public readonly string EndTime;
@@ -46,6 +50,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// Name of the SSL certificate to be queried.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Order ID returned.
+        /// </summary>
+        public readonly string OrderId;
         /// <summary>
         /// Certificate authority.
         /// </summary>
@@ -77,6 +85,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
 
             string domain,
 
+            ImmutableArray<Outputs.GetCertificatesCertificateDvAuthResult> dvAuths,
+
             string endTime,
 
             string id,
@@ -84,6 +94,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
             string key,
 
             string name,
+
+            string orderId,
 
             string productZhName,
 
@@ -99,10 +111,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
             Cert = cert;
             CreateTime = createTime;
             Domain = domain;
+            DvAuths = dvAuths;
             EndTime = endTime;
             Id = id;
             Key = key;
             Name = name;
+            OrderId = orderId;
             ProductZhName = productZhName;
             ProjectId = projectId;
             Status = status;

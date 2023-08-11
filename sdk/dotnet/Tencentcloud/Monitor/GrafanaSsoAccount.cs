@@ -23,9 +23,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var foo = new Tencentcloud.Monitor.GrafanaInstance("foo", new Tencentcloud.Monitor.GrafanaInstanceArgs
+    ///         {
+    ///             InstanceName = "test-grafana",
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 subnet.Id,
+    ///             },
+    ///             GrafanaInitPassword = "1234567890",
+    ///             EnableInternet = false,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "test" },
+    ///             },
+    ///         });
     ///         var ssoAccount = new Tencentcloud.Monitor.GrafanaSsoAccount("ssoAccount", new Tencentcloud.Monitor.GrafanaSsoAccountArgs
     ///         {
-    ///             InstanceId = "grafana-50nj6v00",
+    ///             InstanceId = foo.Id,
+    ///             UserId = "111",
     ///             Notes = "desc12222",
     ///             Roles = 
     ///             {
@@ -35,7 +63,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///                     Role = "Admin",
     ///                 },
     ///             },
-    ///             UserId = "111",
     ///         });
     ///     }
     /// 

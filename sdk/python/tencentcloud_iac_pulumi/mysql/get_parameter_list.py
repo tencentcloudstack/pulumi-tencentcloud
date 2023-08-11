@@ -102,7 +102,7 @@ def get_parameter_list(engine_version: Optional[str] = None,
     ```
 
 
-    :param str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+    :param str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
     :param str mysql_id: Instance ID.
     :param str result_output_file: Used to store results.
     """
@@ -146,7 +146,7 @@ def get_parameter_list_output(engine_version: Optional[pulumi.Input[Optional[str
     ```
 
 
-    :param str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7.
+    :param str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
     :param str mysql_id: Instance ID.
     :param str result_output_file: Used to store results.
     """

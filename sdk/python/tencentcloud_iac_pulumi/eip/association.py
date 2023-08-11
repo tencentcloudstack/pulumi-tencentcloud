@@ -170,26 +170,6 @@ class Association(pulumi.CustomResource):
 
         ## Example Usage
 
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        foo = tencentcloud.eip.Association("foo",
-            eip_id="eip-xxxxxx",
-            instance_id="ins-xxxxxx")
-        ```
-        ### or
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        bar = tencentcloud.eip.Association("bar",
-            eip_id="eip-xxxxxx",
-            network_interface_id="eni-xxxxxx",
-            private_ip="10.0.1.22")
-        ```
-
         ## Import
 
         Eip association can be imported using the id, e.g.
@@ -217,26 +197,6 @@ class Association(pulumi.CustomResource):
         > **NOTE:** Please DO NOT define `allocate_public_ip` in `Instance.Instance` resource when using `Eip.Association`.
 
         ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        foo = tencentcloud.eip.Association("foo",
-            eip_id="eip-xxxxxx",
-            instance_id="ins-xxxxxx")
-        ```
-        ### or
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        bar = tencentcloud.eip.Association("bar",
-            eip_id="eip-xxxxxx",
-            network_interface_id="eni-xxxxxx",
-            private_ip="10.0.1.22")
-        ```
 
         ## Import
 

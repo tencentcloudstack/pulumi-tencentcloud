@@ -11,9 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr tag_retention_rule
+    /// Provides a resource to create a tcr tag retention rule.
     /// 
     /// ## Example Usage
+    /// ### Create a tcr tag retention rule instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,9 +24,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var myNs = new Tencentcloud.Tcr.Namespace("myNs", new Tencentcloud.Tcr.NamespaceArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             InstanceId = local.Tcr_id,
+    ///             InstanceType = "basic",
+    ///             DeleteBucket = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
     ///             IsPublic = true,
     ///             IsAutoScan = true,
     ///             IsPreventVul = true,
@@ -40,8 +50,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///         });
     ///         var myRule = new Tencentcloud.Tcr.TagRetentionRule("myRule", new Tencentcloud.Tcr.TagRetentionRuleArgs
     ///         {
-    ///             RegistryId = local.Tcr_id,
-    ///             NamespaceName = myNs.Name,
+    ///             RegistryId = exampleInstance.Id,
+    ///             NamespaceName = exampleNamespace.Name,
     ///             RetentionRule = new Tencentcloud.Tcr.Inputs.TagRetentionRuleRetentionRuleArgs
     ///             {
     ///                 Key = "nDaysSinceLastPush",

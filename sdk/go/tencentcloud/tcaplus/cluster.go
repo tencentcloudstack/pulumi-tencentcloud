@@ -16,24 +16,42 @@ import (
 // > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
 //
 // ## Example Usage
+// ### Create a new tcaplus cluster instance
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
-// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-3"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+// 			IsDefault:        pulumi.BoolRef(true),
+// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		vpcId := vpc.InstanceLists[0].VpcId
+// 		subnetId := vpc.InstanceLists[0].SubnetId
+// 		_, err = Tcaplus.NewCluster(ctx, "example", &Tcaplus.ClusterArgs{
 // 			IdlType:               pulumi.String("PROTO"),
+// 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+// 			VpcId:                 pulumi.String(vpcId),
+// 			SubnetId:              pulumi.String(subnetId),
+// 			Password:              pulumi.String("your_pw_123111"),
 // 			OldPasswordExpireLast: pulumi.Int(3600),
-// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
-// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
-// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -48,7 +66,7 @@ import (
 // tcaplus cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+//  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState

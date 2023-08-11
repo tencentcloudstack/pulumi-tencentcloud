@@ -11,25 +11,51 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a tcr deleteImageOperation
+// Provides a resource to delete the specified tcr image.
 //
 // ## Example Usage
+// ### To delete the specified image
 //
 // ```go
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewDeleteImageOperation(ctx, "deleteImageOperation", &Tcr.DeleteImageOperationArgs{
-// 			ImageVersion:   pulumi.String("v1"),
-// 			NamespaceName:  pulumi.String("ns"),
-// 			RegistryId:     pulumi.String("tcr-xxx"),
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
+// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+// 				&tcr.NamespaceCveWhitelistItemArgs{
+// 					CveId: pulumi.String("cve-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewDeleteImageOperation(ctx, "exampleDeleteImageOperation", &Tcr.DeleteImageOperationArgs{
+// 			RegistryId:     exampleInstance.ID(),
 // 			RepositoryName: pulumi.String("repo"),
+// 			ImageVersion:   pulumi.String("v1"),
+// 			NamespaceName:  exampleNamespace.Name,
 // 		})
 // 		if err != nil {
 // 			return err

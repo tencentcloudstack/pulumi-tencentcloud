@@ -13,9 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigSwitchConfigArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("webSwitch")]
         public Input<string>? WebSwitch { get; set; }
 

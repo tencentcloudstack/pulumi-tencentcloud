@@ -130,29 +130,6 @@ import (
 // 	})
 // }
 // ```
-// ### Update the slave zone with specified value.
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewClusterSlaveZone(ctx, "clusterSlaveZone", &Cynosdb.ClusterSlaveZoneArgs{
-// 			ClusterId: pulumi.Any(tencentcloud_cynosdb_cluster.Instance.Id),
-// 			SlaveZone: pulumi.Any(_var.Availability_zone),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 //
 // ## Import
 //

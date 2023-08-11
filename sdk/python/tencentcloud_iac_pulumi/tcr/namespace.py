@@ -268,20 +268,26 @@ class Namespace(pulumi.CustomResource):
         Use this resource to create tcr namespace.
 
         ## Example Usage
+        ### Create a tcr namespace instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Namespace("foo",
-            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
-                cve_id="cve-xxxxx",
-            )],
-            instance_id="",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
-            is_public=True,
-            severity="medium")
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
         ```
 
         ## Import
@@ -289,7 +295,7 @@ class Namespace(pulumi.CustomResource):
         tcr namespace can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+         $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
         ```
 
         :param str resource_name: The name of the resource.
@@ -312,20 +318,26 @@ class Namespace(pulumi.CustomResource):
         Use this resource to create tcr namespace.
 
         ## Example Usage
+        ### Create a tcr namespace instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Namespace("foo",
-            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
-                cve_id="cve-xxxxx",
-            )],
-            instance_id="",
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="premium",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
+            instance_id=example_instance.id,
+            is_public=True,
             is_auto_scan=True,
             is_prevent_vul=True,
-            is_public=True,
-            severity="medium")
+            severity="medium",
+            cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
+                cve_id="cve-xxxxx",
+            )])
         ```
 
         ## Import
@@ -333,7 +345,7 @@ class Namespace(pulumi.CustomResource):
         tcr namespace can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+         $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
         ```
 
         :param str resource_name: The name of the resource.

@@ -101,20 +101,6 @@ class Ipv6SubnetCidrBlock(pulumi.CustomResource):
         """
         Provides a resource to create a vpc ipv6_subnet_cidr_block
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ipv6_subnet_cidr_block = tencentcloud.vpc.Ipv6SubnetCidrBlock("ipv6SubnetCidrBlock",
-            ipv6_subnet_cidr_blocks=tencentcloud.vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs(
-                ipv6_cidr_block="2402:4e00:1019:6a7b::/64",
-                subnet_id="subnet-plg028y8",
-            ),
-            vpc_id="vpc-7w3kgnpl")
-        ```
-
         ## Import
 
         vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
@@ -136,20 +122,6 @@ class Ipv6SubnetCidrBlock(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a vpc ipv6_subnet_cidr_block
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        ipv6_subnet_cidr_block = tencentcloud.vpc.Ipv6SubnetCidrBlock("ipv6SubnetCidrBlock",
-            ipv6_subnet_cidr_blocks=tencentcloud.vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs(
-                ipv6_cidr_block="2402:4e00:1019:6a7b::/64",
-                subnet_id="subnet-plg028y8",
-            ),
-            vpc_id="vpc-7w3kgnpl")
-        ```
 
         ## Import
 

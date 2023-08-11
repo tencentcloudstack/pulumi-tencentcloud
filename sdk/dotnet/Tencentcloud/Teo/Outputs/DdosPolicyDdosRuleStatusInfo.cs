@@ -14,9 +14,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class DdosPolicyDdosRuleStatusInfo
     {
-        /// <summary>
-        /// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
-        /// </summary>
         public readonly string PlyLevel;
 
         [OutputConstructor]

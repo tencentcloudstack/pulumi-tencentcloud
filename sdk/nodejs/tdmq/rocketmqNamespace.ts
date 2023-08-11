@@ -13,16 +13,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cluster = new tencentcloud.tdmq.RocketmqCluster("cluster", {
- *     clusterName: "test_rocketmq",
- *     remark: "test recket mq",
+ * const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+ *     clusterName: "tf_example",
+ *     remark: "remark.",
  * });
- * const namespace = new tencentcloud.tdmq.RocketmqNamespace("namespace", {
- *     clusterId: cluster.clusterId,
- *     namespaceName: "test_namespace",
- *     ttl: 65000,
- *     retentionTime: 65000,
- *     remark: "test namespace",
+ * const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleRocketmqNamespace", {
+ *     clusterId: exampleRocketmqCluster.clusterId,
+ *     namespaceName: "tf_example_namespace",
+ *     remark: "remark.",
  * });
  * ```
  *
@@ -79,13 +77,17 @@ export class RocketmqNamespace extends pulumi.CustomResource {
      */
     public readonly remark!: pulumi.Output<string | undefined>;
     /**
-     * Retention time of persisted messages in milliseconds.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
-    public readonly retentionTime!: pulumi.Output<number>;
+    public readonly retentionTime!: pulumi.Output<number | undefined>;
     /**
-     * Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
-    public readonly ttl!: pulumi.Output<number>;
+    public readonly ttl!: pulumi.Output<number | undefined>;
     /**
      * VPC access point address.
      */
@@ -118,12 +120,6 @@ export class RocketmqNamespace extends pulumi.CustomResource {
             }
             if ((!args || args.namespaceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'namespaceName'");
-            }
-            if ((!args || args.retentionTime === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'retentionTime'");
-            }
-            if ((!args || args.ttl === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'ttl'");
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["namespaceName"] = args ? args.namespaceName : undefined;
@@ -159,11 +155,15 @@ export interface RocketmqNamespaceState {
      */
     remark?: pulumi.Input<string>;
     /**
-     * Retention time of persisted messages in milliseconds.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
     retentionTime?: pulumi.Input<number>;
     /**
-     * Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
     ttl?: pulumi.Input<number>;
     /**
@@ -189,11 +189,15 @@ export interface RocketmqNamespaceArgs {
      */
     remark?: pulumi.Input<string>;
     /**
-     * Retention time of persisted messages in milliseconds.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
-    retentionTime: pulumi.Input<number>;
+    retentionTime?: pulumi.Input<number>;
     /**
-     * Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     * It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+     *
+     * @deprecated It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
      */
-    ttl: pulumi.Input<number>;
+    ttl?: pulumi.Input<number>;
 }

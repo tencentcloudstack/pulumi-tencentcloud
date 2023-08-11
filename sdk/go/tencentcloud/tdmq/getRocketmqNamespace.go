@@ -25,27 +25,25 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cluster, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq_namespace_sdatasource"),
-// 			Remark:      pulumi.String("test recket mq"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		namespacedata, err := Tdmq.NewRocketmqNamespace(ctx, "namespacedata", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     cluster.ClusterId,
-// 			NamespaceName: pulumi.String("test_namespace_datasource"),
-// 			Ttl:           pulumi.Int(65000),
-// 			RetentionTime: pulumi.Int(65000),
-// 			Remark:        pulumi.String("test namespace"),
+// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
 // 		_ = Tdmq.GetRocketmqNamespaceOutput(ctx, tdmq.GetRocketmqNamespaceOutputArgs{
-// 			ClusterId:   cluster.ClusterId,
-// 			NameKeyword: namespacedata.NamespaceName,
+// 			ClusterId:   exampleRocketmqCluster.ClusterId,
+// 			NameKeyword: exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
 // 		}, nil)
+// 		_, err = Tdmq.NewRocketmqNamespace(ctx, "exampleTdmq/rocketmqNamespaceRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+// 			ClusterId:     exampleRocketmqCluster.ClusterId,
+// 			NamespaceName: pulumi.String("tf_example"),
+// 			Remark:        pulumi.String("remark."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
 // 		return nil
 // 	})
 // }

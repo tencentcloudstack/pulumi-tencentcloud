@@ -207,7 +207,7 @@ class BackupDownloadRestriction(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_download_restriction = tencentcloud.mysql.BackupDownloadRestriction("backupDownloadRestriction",
+        example = tencentcloud.mysql.BackupDownloadRestriction("example",
             ip_comparison_symbol="In",
             limit_ips=["127.0.0.1"],
             limit_type="Customize",
@@ -249,7 +249,7 @@ class BackupDownloadRestriction(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_download_restriction = tencentcloud.mysql.BackupDownloadRestriction("backupDownloadRestriction",
+        example = tencentcloud.mysql.BackupDownloadRestriction("example",
             ip_comparison_symbol="In",
             limit_ips=["127.0.0.1"],
             limit_type="Customize",

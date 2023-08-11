@@ -19,15 +19,49 @@ import (
 // package main
 //
 // import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewSnapshotPolicyConfig(ctx, "snapshotPolicyConfig", &Vpc.SnapshotPolicyConfigArgs{
+// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("tf-example-1308919341"),
+// 			Acl:    pulumi.String("private"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+// 			SnapshotPolicyName: pulumi.String("tf-example"),
+// 			BackupType:         pulumi.String("time"),
+// 			CosBucket:          exampleBucket.Bucket,
+// 			CosRegion:          pulumi.String("ap-guangzhou"),
+// 			CreateNewCos:       pulumi.Bool(false),
+// 			KeepTime:           pulumi.Int(2),
+// 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("monday"),
+// 					BackupTime: pulumi.String("00:00:00"),
+// 				},
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("tuesday"),
+// 					BackupTime: pulumi.String("01:00:00"),
+// 				},
+// 				&vpc.SnapshotPolicyBackupPolicyArgs{
+// 					BackupDay:  pulumi.String("wednesday"),
+// 					BackupTime: pulumi.String("02:00:00"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Vpc.NewSnapshotPolicyConfig(ctx, "config", &Vpc.SnapshotPolicyConfigArgs{
+// 			SnapshotPolicyId: exampleSnapshotPolicy.ID(),
 // 			Enable:           pulumi.Bool(false),
-// 			SnapshotPolicyId: pulumi.String("sspolicy-1t6cobbv"),
 // 		})
 // 		if err != nil {
 // 			return err

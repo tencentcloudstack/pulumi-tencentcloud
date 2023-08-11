@@ -13,49 +13,6 @@ import (
 
 // Provide a resource to attach an existing subnet to Network ACL.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		idInstances, err := Vpc.GetInstances(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Vpc.NewAcl(ctx, "foo", &Vpc.AclArgs{
-// 			VpcId: pulumi.String(idInstances.InstanceLists[0].VpcId),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-// 				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewAclAttachment(ctx, "attachment", &Vpc.AclAttachmentArgs{
-// 			AclId:    foo.ID(),
-// 			SubnetId: pulumi.String(idInstances.InstanceLists[0].SubnetIds[0]),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // Acl attachment can be imported using the id, e.g.

@@ -252,37 +252,149 @@ class TmpTkeConfig(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.monitor.TmpTkeConfig("foo",
-            cluster_id="xxx",
-            cluster_type="xxx",
-            instance_id="xxx",
-            pod_monitors=[tencentcloud.monitor.TmpTkeConfigPodMonitorArgs(
-                config=\"\"\"apiVersion: monitoring.coreos.com/v1
-        kind: PodMonitor
-        metadata:
-          name: pod-monitor-001
-          namespace: mynamespace
-
-        \"\"\",
-                name="mynamespace/pod-monitor-001",
-            )],
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA1.MEDIUM2"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        second_vpc_id = vpc_two.instance_lists[0].vpc_id
+        second_subnet_id = vpc_two.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="Final")
+        image_id = default.image_id
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example = tencentcloud.kubernetes.Cluster("example",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_internet=False,
+            cluster_internet_security_group=sg_id,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=first_subnet_id,
+                    img_id=image_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    password="ZZXXccvv1212",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=second_subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    cam_role_name="CVM_QcsRole",
+                    password="ZZXXccvv1212",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        cluster_type = config.get("clusterType")
+        if cluster_type is None:
+            cluster_type = "tke"
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=first_vpc_id,
+            subnet_id=first_subnet_id,
+            data_retention_time=30,
+            zone=availability_zone_second,
+            tags={
+                "createdBy": "terraform",
+            })
+        # tmp tke bind
+        foo_tmp_tke_cluster_agent = tencentcloud.monitor.TmpTkeClusterAgent("fooTmpTkeClusterAgent",
+            instance_id=foo_tmp_instance.id,
+            agents=tencentcloud.monitor.TmpTkeClusterAgentAgentsArgs(
+                region=zone,
+                cluster_type=cluster_type,
+                cluster_id=example.id,
+                enable_external=False,
+            ))
+        foo_tmp_tke_config = tencentcloud.monitor.TmpTkeConfig("fooTmpTkeConfig",
+            instance_id=foo_tmp_instance.id,
+            cluster_type=cluster_type,
+            cluster_id=example.id,
             raw_jobs=[tencentcloud.monitor.TmpTkeConfigRawJobArgs(
-                config=\"\"\"your config for raw_jobs_001
-
-        \"\"\",
                 name="raw_jobs_001",
+                config="your config for raw_jobs_001\n",
             )],
             service_monitors=[tencentcloud.monitor.TmpTkeConfigServiceMonitorArgs(
+                name="kube-system/service-monitor-001",
                 config=\"\"\"apiVersion: monitoring.coreos.com/v1
         kind: ServiceMonitor
         metadata:
           name: service-monitor-001
           namespace: kube-system
-
         \"\"\",
-                name="kube-system/service-monitor-001",
+            )],
+            pod_monitors=[tencentcloud.monitor.TmpTkeConfigPodMonitorArgs(
+                name="mynamespace/pod-monitor-001",
+                config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: PodMonitor
+        metadata:
+          name: pod-monitor-001
+          namespace: mynamespace
+        \"\"\",
             )])
         ```
 
@@ -308,37 +420,149 @@ class TmpTkeConfig(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.monitor.TmpTkeConfig("foo",
-            cluster_id="xxx",
-            cluster_type="xxx",
-            instance_id="xxx",
-            pod_monitors=[tencentcloud.monitor.TmpTkeConfigPodMonitorArgs(
-                config=\"\"\"apiVersion: monitoring.coreos.com/v1
-        kind: PodMonitor
-        metadata:
-          name: pod-monitor-001
-          namespace: mynamespace
-
-        \"\"\",
-                name="mynamespace/pod-monitor-001",
-            )],
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA1.MEDIUM2"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        second_vpc_id = vpc_two.instance_lists[0].vpc_id
+        second_subnet_id = vpc_two.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="Final")
+        image_id = default.image_id
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example = tencentcloud.kubernetes.Cluster("example",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_internet=False,
+            cluster_internet_security_group=sg_id,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER",
+            worker_configs=[
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_first,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=first_subnet_id,
+                    img_id=image_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    password="ZZXXccvv1212",
+                ),
+                tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                    count=1,
+                    availability_zone=availability_zone_second,
+                    instance_type=default_instance_type,
+                    system_disk_type="CLOUD_SSD",
+                    system_disk_size=60,
+                    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                    internet_max_bandwidth_out=100,
+                    public_ip_assigned=True,
+                    subnet_id=second_subnet_id,
+                    data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                        disk_type="CLOUD_PREMIUM",
+                        disk_size=50,
+                    )],
+                    enhanced_security_service=False,
+                    enhanced_monitor_service=False,
+                    user_data="dGVzdA==",
+                    cam_role_name="CVM_QcsRole",
+                    password="ZZXXccvv1212",
+                ),
+            ],
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            })
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        cluster_type = config.get("clusterType")
+        if cluster_type is None:
+            cluster_type = "tke"
+        foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=first_vpc_id,
+            subnet_id=first_subnet_id,
+            data_retention_time=30,
+            zone=availability_zone_second,
+            tags={
+                "createdBy": "terraform",
+            })
+        # tmp tke bind
+        foo_tmp_tke_cluster_agent = tencentcloud.monitor.TmpTkeClusterAgent("fooTmpTkeClusterAgent",
+            instance_id=foo_tmp_instance.id,
+            agents=tencentcloud.monitor.TmpTkeClusterAgentAgentsArgs(
+                region=zone,
+                cluster_type=cluster_type,
+                cluster_id=example.id,
+                enable_external=False,
+            ))
+        foo_tmp_tke_config = tencentcloud.monitor.TmpTkeConfig("fooTmpTkeConfig",
+            instance_id=foo_tmp_instance.id,
+            cluster_type=cluster_type,
+            cluster_id=example.id,
             raw_jobs=[tencentcloud.monitor.TmpTkeConfigRawJobArgs(
-                config=\"\"\"your config for raw_jobs_001
-
-        \"\"\",
                 name="raw_jobs_001",
+                config="your config for raw_jobs_001\n",
             )],
             service_monitors=[tencentcloud.monitor.TmpTkeConfigServiceMonitorArgs(
+                name="kube-system/service-monitor-001",
                 config=\"\"\"apiVersion: monitoring.coreos.com/v1
         kind: ServiceMonitor
         metadata:
           name: service-monitor-001
           namespace: kube-system
-
         \"\"\",
-                name="kube-system/service-monitor-001",
+            )],
+            pod_monitors=[tencentcloud.monitor.TmpTkeConfigPodMonitorArgs(
+                name="mynamespace/pod-monitor-001",
+                config=\"\"\"apiVersion: monitoring.coreos.com/v1
+        kind: PodMonitor
+        metadata:
+          name: pod-monitor-001
+          namespace: mynamespace
+        \"\"\",
             )])
         ```
 

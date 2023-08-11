@@ -23,35 +23,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test recket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var role = new Tencentcloud.Tdmq.RocketmqRole("role", new Tencentcloud.Tdmq.RocketmqRoleArgs
+    ///         var exampleRocketmqRole = new Tencentcloud.Tdmq.RocketmqRole("exampleRocketmqRole", new Tencentcloud.Tdmq.RocketmqRoleArgs
     ///         {
-    ///             RoleName = "test_rocketmq_role",
-    ///             Remark = "test rocketmq role",
-    ///             ClusterId = cluster.ClusterId,
+    ///             RoleName = "tf_example_role",
+    ///             Remark = "remark.",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
     ///         });
-    ///         var @namespace = new Tencentcloud.Tdmq.RocketmqNamespace("namespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
     ///         {
-    ///             ClusterId = cluster.ClusterId,
-    ///             NamespaceName = "test_namespace",
-    ///             Ttl = 65000,
-    ///             RetentionTime = 65000,
-    ///             Remark = "test namespace",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             NamespaceName = "tf_example_namespace",
+    ///             Remark = "remark.",
     ///         });
-    ///         var environmentRole = new Tencentcloud.Tdmq.RocketmqEnvironmentRole("environmentRole", new Tencentcloud.Tdmq.RocketmqEnvironmentRoleArgs
+    ///         var exampleRocketmqEnvironmentRole = new Tencentcloud.Tdmq.RocketmqEnvironmentRole("exampleRocketmqEnvironmentRole", new Tencentcloud.Tdmq.RocketmqEnvironmentRoleArgs
     ///         {
-    ///             EnvironmentName = @namespace.NamespaceName,
-    ///             RoleName = role.RoleName,
+    ///             EnvironmentName = exampleRocketmqNamespace.NamespaceName,
+    ///             RoleName = exampleRocketmqRole.RoleName,
     ///             Permissions = 
     ///             {
     ///                 "produce",
     ///                 "consume",
     ///             },
-    ///             ClusterId = cluster.ClusterId,
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
     ///         });
     ///     }
     /// 

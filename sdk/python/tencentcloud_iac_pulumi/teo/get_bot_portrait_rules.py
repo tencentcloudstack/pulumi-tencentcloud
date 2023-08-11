@@ -59,9 +59,6 @@ class GetBotPortraitRulesResult:
     @property
     @pulumi.getter
     def rules(self) -> Sequence['outputs.GetBotPortraitRulesRuleResult']:
-        """
-        Portrait rules list.
-        """
         return pulumi.get(self, "rules")
 
     @property
@@ -88,22 +85,7 @@ def get_bot_portrait_rules(entity: Optional[str] = None,
                            zone_id: Optional[str] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetBotPortraitRulesResult:
     """
-    Use this data source to query detailed information of teo botPortraitRules
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    bot_portrait_rules = tencentcloud.Teo.get_bot_portrait_rules(entity="",
-        zone_id="")
-    ```
-
-
-    :param str entity: Subdomain or application name.
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['entity'] = entity
@@ -131,21 +113,6 @@ def get_bot_portrait_rules_output(entity: Optional[pulumi.Input[str]] = None,
                                   zone_id: Optional[pulumi.Input[str]] = None,
                                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetBotPortraitRulesResult]:
     """
-    Use this data source to query detailed information of teo botPortraitRules
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_tencentcloud as tencentcloud
-
-    bot_portrait_rules = tencentcloud.Teo.get_bot_portrait_rules(entity="",
-        zone_id="")
-    ```
-
-
-    :param str entity: Subdomain or application name.
-    :param str result_output_file: Used to save results.
-    :param str zone_id: Site ID.
+    Use this data source to access information about an existing resource.
     """
     ...

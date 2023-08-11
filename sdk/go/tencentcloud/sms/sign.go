@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a sms sign
 //
 // ## Example Usage
+// ### Create a sms sign instance
 //
 // ```go
 // package main
@@ -25,11 +26,11 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sms.NewSign(ctx, "sign", &Sms.SignArgs{
+// 		_, err := Sms.NewSign(ctx, "example", &Sms.SignArgs{
 // 			DocumentType:  pulumi.Int(4),
 // 			International: pulumi.Int(0),
-// 			ProofImage:    pulumi.String("dGhpcyBpcyBhIGV4YW1wbGU="),
-// 			SignName:      pulumi.String("terraform"),
+// 			ProofImage:    pulumi.String("your_proof_image"),
+// 			SignName:      pulumi.String("tf_example_sms_sign"),
 // 			SignPurpose:   pulumi.Int(0),
 // 			SignType:      pulumi.Int(1),
 // 		})

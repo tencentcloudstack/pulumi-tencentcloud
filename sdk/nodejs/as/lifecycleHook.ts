@@ -8,20 +8,86 @@ import * as utilities from "../utilities";
  * Provides a resource for an AS (Auto scaling) lifecycle hook.
  *
  * ## Example Usage
+ * ### Create a basic LifecycleHook
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const lifecycleHook = new tencentcloud.As.LifecycleHook("lifecycle_hook", {
- *     defaultResult: "CONTINUE",
- *     heartbeatTimeout: 500,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "as",
+ * });
+ * const image = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 3.2 (Final)",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+ *     configurationName: "tf-example",
+ *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     instanceTypes: [
+ *         "SA1.SMALL1",
+ *         "SA2.SMALL1",
+ *         "SA2.SMALL2",
+ *         "SA2.SMALL4",
+ *     ],
+ *     instanceNameSettings: {
+ *         instanceName: "test-ins-name",
+ *     },
+ * });
+ * const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+ *     scalingGroupName: "tf-example",
+ *     configurationId: exampleScalingConfig.id,
+ *     maxSize: 1,
+ *     minSize: 0,
+ *     vpcId: vpc.id,
+ *     subnetIds: [subnet.id],
+ * });
+ * const exampleLifecycleHook = new tencentcloud.as.LifecycleHook("exampleLifecycleHook", {
+ *     scalingGroupId: exampleScalingGroup.id,
  *     lifecycleHookName: "tf-as-lifecycle-hook",
  *     lifecycleTransition: "INSTANCE_LAUNCHING",
+ *     defaultResult: "CONTINUE",
+ *     heartbeatTimeout: 500,
  *     notificationMetadata: "tf test",
- *     notificationQueueName: "lifcyclehook",
+ * });
+ * ```
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.as.LifecycleHook("example", {
+ *     scalingGroupId: tencentcloud_as_scaling_group.example.id,
+ *     lifecycleHookName: "tf-as-lifecycle-hook",
+ *     lifecycleTransition: "INSTANCE_LAUNCHING",
+ *     defaultResult: "CONTINUE",
+ *     heartbeatTimeout: 500,
+ *     notificationMetadata: "tf test",
  *     notificationTargetType: "CMQ_QUEUE",
- *     scalingGroupId: "sg-12af45",
+ *     notificationQueueName: "lifcyclehook",
+ * });
+ * ```
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.as.LifecycleHook("example", {
+ *     scalingGroupId: tencentcloud_as_scaling_group.example.id,
+ *     lifecycleHookName: "tf-as-lifecycle-hook",
+ *     lifecycleTransition: "INSTANCE_LAUNCHING",
+ *     defaultResult: "CONTINUE",
+ *     heartbeatTimeout: 500,
+ *     notificationMetadata: "tf test",
+ *     notificationTargetType: "CMQ_TOPIC",
+ *     notificationTopicName: "lifcyclehook",
  * });
  * ```
  */

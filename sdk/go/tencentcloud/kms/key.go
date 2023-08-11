@@ -14,6 +14,7 @@ import (
 // Provide a resource to create a KMS key.
 //
 // ## Example Usage
+// ### Create and enable a instance.
 //
 // ```go
 // package main
@@ -25,13 +26,66 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewKey(ctx, "foo", &Kms.KeyArgs{
-// 			Alias:              pulumi.String("test"),
-// 			Description:        pulumi.String("describe key test message."),
-// 			KeyRotationEnabled: pulumi.Bool(true),
+// 		_, err := Kms.NewKey(ctx, "example", &Kms.KeyArgs{
+// 			Alias:              pulumi.String("tf-example-kms-key"),
+// 			Description:        pulumi.String("example of kms key"),
 // 			IsEnabled:          pulumi.Bool(true),
+// 			KeyRotationEnabled: pulumi.Bool(false),
 // 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("key-test"),
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Specify the Key Usage as an asymmetry method.
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewKey(ctx, "example2", &Kms.KeyArgs{
+// 			Alias:       pulumi.String("tf-example-kms-key"),
+// 			Description: pulumi.String("example of kms key"),
+// 			IsEnabled:   pulumi.Bool(false),
+// 			KeyUsage:    pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Disable the kms key instance.
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewKey(ctx, "example3", &Kms.KeyArgs{
+// 			Alias:              pulumi.String("tf-example-kms-key"),
+// 			Description:        pulumi.String("example of kms key"),
+// 			IsEnabled:          pulumi.Bool(false),
+// 			KeyRotationEnabled: pulumi.Bool(false),
+// 			Tags: pulumi.AnyMap{
+// 				"test-tag": pulumi.Any("unit-test"),
 // 			},
 // 		})
 // 		if err != nil {

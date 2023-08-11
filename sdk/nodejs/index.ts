@@ -27,6 +27,7 @@ import * as ci from "./ci";
 import * as ciam from "./ciam";
 import * as ckafka from "./ckafka";
 import * as clb from "./clb";
+import * as clickhouse from "./clickhouse";
 import * as cls from "./cls";
 import * as config from "./config";
 import * as cos from "./cos";
@@ -43,6 +44,7 @@ import * as dnats from "./dnats";
 import * as dnspod from "./dnspod";
 import * as domains from "./domains";
 import * as dts from "./dts";
+import * as eb from "./eb";
 import * as eip from "./eip";
 import * as eips from "./eips";
 import * as elasticsearch from "./elasticsearch";
@@ -88,6 +90,7 @@ import * as ssl from "./ssl";
 import * as ssm from "./ssm";
 import * as sts from "./sts";
 import * as subnet from "./subnet";
+import * as tag from "./tag";
 import * as tat from "./tat";
 import * as tcaplus from "./tcaplus";
 import * as tcm from "./tcm";
@@ -125,6 +128,7 @@ export {
     ciam,
     ckafka,
     clb,
+    clickhouse,
     cls,
     config,
     cos,
@@ -141,6 +145,7 @@ export {
     dnspod,
     domains,
     dts,
+    eb,
     eip,
     eips,
     elasticsearch,
@@ -186,6 +191,7 @@ export {
     ssm,
     sts,
     subnet,
+    tag,
     tat,
     tcaplus,
     tcm,

@@ -22,14 +22,55 @@ import (
 // 	"fmt"
 //
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpScrapeJob(ctx, "tmpScrapeJob", &Monitor.TmpScrapeJobArgs{
-// 			InstanceId: pulumi.String("prom-dko9d0nu"),
-// 			AgentId:    pulumi.String("agent-6a7g40k2"),
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-4"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
+// 			InstanceName:      pulumi.String("tf-tmp-instance"),
+// 			VpcId:             vpc.ID(),
+// 			SubnetId:          subnet.ID(),
+// 			DataRetentionTime: pulumi.Int(30),
+// 			Zone:              pulumi.String(availabilityZone),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooTmpCvmAgent, err := Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
+// 			InstanceId: fooTmpInstance.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Monitor.NewTmpScrapeJob(ctx, "fooTmpScrapeJob", &Monitor.TmpScrapeJobArgs{
+// 			InstanceId: fooTmpInstance.ID(),
+// 			AgentId:    fooTmpCvmAgent.AgentId,
 // 			Config:     pulumi.String(fmt.Sprintf("%v%v%v%v", "job_name: demo-config\n", "honor_timestamps: true\n", "metrics_path: /metrics\n", "scheme: https\n")),
 // 		})
 // 		if err != nil {

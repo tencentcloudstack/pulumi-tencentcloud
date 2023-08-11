@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var instanceParamRecords = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));
@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var instanceParamRecords = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInstanceParamRecords.InvokeAsync(new Tencentcloud.Sqlserver.GetInstanceParamRecordsArgs
         ///         {
         ///             InstanceId = "mssql-qelbzgwf",
         ///         }));

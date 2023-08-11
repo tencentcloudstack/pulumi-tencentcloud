@@ -8,26 +8,9 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a vpc flowLog
  *
- * ## Example Usage
+ * > **NOTE:** The cloud server instance specifications that support stream log collection include: M6ce, M6p, SA3se, S4m, DA3, ITA3, I6t, I6, S5se, SA2, SK1, S4, S5, SN3ne, S3ne, S2ne, SA2a, S3ne, SW3a, SW3b, SW3ne, ITA3, IT5c, IT5, IT5c, IT3, I3, D3, DA2, D2, M6, MA2, M4, C6, IT3a, IT3b, IT3c, C4ne, CN3ne, C3ne, GI1, PNV4, GNV4v, GNV4, GT4, GI3X, GN7, GN7vw.
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const flowLog = new tencentcloud.Vpc.FlowLog("flow_log", {
- *     cloudLogId: "a1b2c3d4-e5f6a7b8-c9d0e1f2-a3b4c5d6",
- *     flowLogDescription: "My testing log",
- *     flowLogName: "foo",
- *     resourceId: "eni-xxxxxxxx",
- *     resourceType: "NETWORKINTERFACE",
- *     storageType: "cls",
- *     tags: {
- *         createdBy: "terraform",
- *     },
- *     trafficType: "ALL",
- *     vpcId: "vpc-xxxxxxxx",
- * });
- * ```
+ * > **NOTE:** The following models no longer support the collection of new stream logs, and the stock stream logs will no longer be reported for data from July 25, 2022: Standard models: S3, SA1, S2, S1;Memory type: M3, M2, M1;Calculation type: C4, CN3, C3, C2;Batch calculation type: BC1, BS1;HPCC: HCCIC5, HCCG5v.
  *
  * ## Import
  *

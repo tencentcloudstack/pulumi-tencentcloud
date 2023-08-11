@@ -267,26 +267,27 @@ class Migration(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        src_account = tencentcloud.sqlserver.Account("srcAccount",
-            instance_id=local["sqlserver_id"],
-            password="password",
-            is_admin=True)
-        src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment",
-            instance_id=local["sqlserver_id"],
-            account_name=src_account.name,
-            db_name=local["sqlserver_db"],
-            privilege="ReadWrite")
-        dst_instance = tencentcloud.sqlserver.Instance("dstInstance",
-            availability_zone=var["default_az"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        src_example = tencentcloud.sqlserver.BasicInstance("srcExample",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id=local["vpc_id"],
-            subnet_id=local["subnet_id"],
-            security_groups=[local["sg_id"]],
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             project_id=0,
-            memory=2,
-            storage=10,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
             maintenance_week_sets=[
                 1,
                 2,
@@ -294,33 +295,73 @@ class Migration(pulumi.CustomResource):
             ],
             maintenance_start_time="09:00",
             maintenance_time_span=3,
+            security_groups=[security_group.id],
             tags={
                 "test": "test",
             })
-        dst_account = tencentcloud.sqlserver.Account("dstAccount",
-            instance_id=dst_instance.id,
-            password="password",
-            is_admin=True)
-        dst_db = tencentcloud.sqlserver.Db("dstDb",
-            instance_id=dst_instance.id,
+        dst_example = tencentcloud.sqlserver.BasicInstance("dstExample",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        src_db = tencentcloud.sqlserver.Db("srcDb",
+            instance_id=src_example.id,
             charset="Chinese_PRC_BIN",
             remark="testACC-remark")
+        dst_db = tencentcloud.sqlserver.Db("dstDb",
+            instance_id=dst_example.id,
+            charset="Chinese_PRC_BIN",
+            remark="testACC-remark")
+        src_account = tencentcloud.sqlserver.Account("srcAccount",
+            instance_id=src_example.id,
+            password="Qwer@234",
+            is_admin=True)
+        dst_account = tencentcloud.sqlserver.Account("dstAccount",
+            instance_id=dst_example.id,
+            password="Qwer@234",
+            is_admin=True)
+        src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment",
+            instance_id=src_example.id,
+            account_name=src_account.name,
+            db_name=src_db.name,
+            privilege="ReadWrite")
+        dst_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("dstAccountDbAttachment",
+            instance_id=dst_example.id,
+            account_name=dst_account.name,
+            db_name=dst_db.name,
+            privilege="ReadWrite")
         migration = tencentcloud.sqlserver.Migration("migration",
             migrate_name="tf_test_migration",
             migrate_type=1,
             source_type=1,
             source=tencentcloud.sqlserver.MigrationSourceArgs(
-                instance_id=local["sqlserver_id"],
+                instance_id=src_example.id,
                 user_name=src_account.name,
                 password=src_account.password,
             ),
             target=tencentcloud.sqlserver.MigrationTargetArgs(
-                instance_id=dst_instance.id,
+                instance_id=dst_example.id,
                 user_name=dst_account.name,
                 password=dst_account.password,
             ),
             migrate_db_sets=[tencentcloud.sqlserver.MigrationMigrateDbSetArgs(
-                db_name=local["sqlserver_db"],
+                db_name=src_db.name,
             )])
         ```
 
@@ -355,26 +396,27 @@ class Migration(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        src_account = tencentcloud.sqlserver.Account("srcAccount",
-            instance_id=local["sqlserver_id"],
-            password="password",
-            is_admin=True)
-        src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment",
-            instance_id=local["sqlserver_id"],
-            account_name=src_account.name,
-            db_name=local["sqlserver_db"],
-            privilege="ReadWrite")
-        dst_instance = tencentcloud.sqlserver.Instance("dstInstance",
-            availability_zone=var["default_az"],
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        src_example = tencentcloud.sqlserver.BasicInstance("srcExample",
+            availability_zone=zones.zones[4].name,
             charge_type="POSTPAID_BY_HOUR",
-            vpc_id=local["vpc_id"],
-            subnet_id=local["subnet_id"],
-            security_groups=[local["sg_id"]],
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             project_id=0,
-            memory=2,
-            storage=10,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
             maintenance_week_sets=[
                 1,
                 2,
@@ -382,33 +424,73 @@ class Migration(pulumi.CustomResource):
             ],
             maintenance_start_time="09:00",
             maintenance_time_span=3,
+            security_groups=[security_group.id],
             tags={
                 "test": "test",
             })
-        dst_account = tencentcloud.sqlserver.Account("dstAccount",
-            instance_id=dst_instance.id,
-            password="password",
-            is_admin=True)
-        dst_db = tencentcloud.sqlserver.Db("dstDb",
-            instance_id=dst_instance.id,
+        dst_example = tencentcloud.sqlserver.BasicInstance("dstExample",
+            availability_zone=zones.zones[4].name,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            project_id=0,
+            memory=4,
+            storage=100,
+            cpu=2,
+            machine_type="CLOUD_PREMIUM",
+            maintenance_week_sets=[
+                1,
+                2,
+                3,
+            ],
+            maintenance_start_time="09:00",
+            maintenance_time_span=3,
+            security_groups=[security_group.id],
+            tags={
+                "test": "test",
+            })
+        src_db = tencentcloud.sqlserver.Db("srcDb",
+            instance_id=src_example.id,
             charset="Chinese_PRC_BIN",
             remark="testACC-remark")
+        dst_db = tencentcloud.sqlserver.Db("dstDb",
+            instance_id=dst_example.id,
+            charset="Chinese_PRC_BIN",
+            remark="testACC-remark")
+        src_account = tencentcloud.sqlserver.Account("srcAccount",
+            instance_id=src_example.id,
+            password="Qwer@234",
+            is_admin=True)
+        dst_account = tencentcloud.sqlserver.Account("dstAccount",
+            instance_id=dst_example.id,
+            password="Qwer@234",
+            is_admin=True)
+        src_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("srcAccountDbAttachment",
+            instance_id=src_example.id,
+            account_name=src_account.name,
+            db_name=src_db.name,
+            privilege="ReadWrite")
+        dst_account_db_attachment = tencentcloud.sqlserver.AccountDbAttachment("dstAccountDbAttachment",
+            instance_id=dst_example.id,
+            account_name=dst_account.name,
+            db_name=dst_db.name,
+            privilege="ReadWrite")
         migration = tencentcloud.sqlserver.Migration("migration",
             migrate_name="tf_test_migration",
             migrate_type=1,
             source_type=1,
             source=tencentcloud.sqlserver.MigrationSourceArgs(
-                instance_id=local["sqlserver_id"],
+                instance_id=src_example.id,
                 user_name=src_account.name,
                 password=src_account.password,
             ),
             target=tencentcloud.sqlserver.MigrationTargetArgs(
-                instance_id=dst_instance.id,
+                instance_id=dst_example.id,
                 user_name=dst_account.name,
                 password=dst_account.password,
             ),
             migrate_db_sets=[tencentcloud.sqlserver.MigrationMigrateDbSetArgs(
-                db_name=local["sqlserver_db"],
+                db_name=src_db.name,
             )])
         ```
 

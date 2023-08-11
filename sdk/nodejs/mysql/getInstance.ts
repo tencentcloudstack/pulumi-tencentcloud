@@ -14,9 +14,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const database = pulumi.output(tencentcloud.Mysql.getInstance({
- *     mysqlId: "terraform-test-local-database",
- *     resultOutputFile: "mytestpath",
+ * const mysql = pulumi.output(tencentcloud.Mysql.getInstance({
+ *     mysqlId: "cdb-fitq5t9h",
  * }));
  * ```
  */

@@ -100,14 +100,46 @@ class ReadOnly(pulumi.CustomResource):
         Provides a resource to create a redis read_only
 
         ## Example Usage
+        ### Set instance input mode
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
         read_only = tencentcloud.redis.ReadOnly("readOnly",
-            input_mode="0",
-            instance_id="crs-c1nl9rpv")
+            instance_id=foo_instance.id,
+            input_mode="0")
         ```
 
         ## Import
@@ -133,14 +165,46 @@ class ReadOnly(pulumi.CustomResource):
         Provides a resource to create a redis read_only
 
         ## Example Usage
+        ### Set instance input mode
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zone = tencentcloud.Redis.get_zone_config(type_id=7)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[1].zone,
+            cidr_block="10.0.1.0/24")
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        foo_instance = tencentcloud.redis.Instance("fooInstance",
+            availability_zone=zone.lists[0].zone,
+            type_id=zone.lists[0].type_id,
+            password="test12345789",
+            mem_size=8192,
+            redis_shard_num=zone.lists[0].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[foo_group.id])
         read_only = tencentcloud.redis.ReadOnly("readOnly",
-            input_mode="0",
-            instance_id="crs-c1nl9rpv")
+            instance_id=foo_instance.id,
+            input_mode="0")
         ```
 
         ## Import

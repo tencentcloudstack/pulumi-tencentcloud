@@ -76,7 +76,7 @@ def get_regions(result_output_file: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    datasource_regions = tencentcloud.Sqlserver.get_regions()
+    example = tencentcloud.Sqlserver.get_regions()
     ```
 
 
@@ -110,7 +110,7 @@ def get_regions_output(result_output_file: Optional[pulumi.Input[Optional[str]]]
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    datasource_regions = tencentcloud.Sqlserver.get_regions()
+    example = tencentcloud.Sqlserver.get_regions()
     ```
 
 

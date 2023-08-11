@@ -17,14 +17,16 @@ class BandwidthPackageArgs:
                  charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 time_span: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a BandwidthPackage resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
         :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
         if bandwidth_package_name is not None:
             pulumi.set(__self__, "bandwidth_package_name", bandwidth_package_name)
@@ -36,6 +38,8 @@ class BandwidthPackageArgs:
             pulumi.set(__self__, "network_type", network_type)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if time_span is not None:
+            pulumi.set(__self__, "time_span", time_span)
 
     @property
     @pulumi.getter(name="bandwidthPackageName")
@@ -53,7 +57,7 @@ class BandwidthPackageArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
 
@@ -96,6 +100,18 @@ class BandwidthPackageArgs:
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="timeSpan")
+    def time_span(self) -> Optional[pulumi.Input[int]]:
+        """
+        The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        """
+        return pulumi.get(self, "time_span")
+
+    @time_span.setter
+    def time_span(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "time_span", value)
 
 
 @pulumi.input_type
@@ -105,14 +121,16 @@ class _BandwidthPackageState:
                  charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 time_span: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering BandwidthPackage resources.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
         :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
         if bandwidth_package_name is not None:
             pulumi.set(__self__, "bandwidth_package_name", bandwidth_package_name)
@@ -124,6 +142,8 @@ class _BandwidthPackageState:
             pulumi.set(__self__, "network_type", network_type)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if time_span is not None:
+            pulumi.set(__self__, "time_span", time_span)
 
     @property
     @pulumi.getter(name="bandwidthPackageName")
@@ -141,7 +161,7 @@ class _BandwidthPackageState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
 
@@ -184,6 +204,18 @@ class _BandwidthPackageState:
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="timeSpan")
+    def time_span(self) -> Optional[pulumi.Input[int]]:
+        """
+        The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        """
+        return pulumi.get(self, "time_span")
+
+    @time_span.setter
+    def time_span(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "time_span", value)
 
 
 class BandwidthPackage(pulumi.CustomResource):
@@ -196,6 +228,7 @@ class BandwidthPackage(pulumi.CustomResource):
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 time_span: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Provides a resource to create a vpc bandwidth_package
@@ -206,13 +239,29 @@ class BandwidthPackage(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        bandwidth_package = tencentcloud.vpc.BandwidthPackage("bandwidthPackage",
-            bandwidth_package_name="test-001",
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            bandwidth_package_name="tf-example",
             charge_type="TOP5_POSTPAID_BY_MONTH",
             network_type="BGP",
             tags={
                 "createdBy": "terraform",
             })
+        ```
+        ### PrePaid Bandwidth Package
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        bandwidth_package = tencentcloud.vpc.BandwidthPackage("bandwidthPackage",
+            bandwidth_package_name="test-001",
+            charge_type="FIXED_PREPAID_BY_MONTH",
+            internet_max_bandwidth=100,
+            network_type="BGP",
+            tags={
+                "createdBy": "terraform",
+            },
+            time_span=3)
         ```
 
         ## Import
@@ -226,10 +275,11 @@ class BandwidthPackage(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
         :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
         ...
     @overload
@@ -246,13 +296,29 @@ class BandwidthPackage(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        bandwidth_package = tencentcloud.vpc.BandwidthPackage("bandwidthPackage",
-            bandwidth_package_name="test-001",
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            bandwidth_package_name="tf-example",
             charge_type="TOP5_POSTPAID_BY_MONTH",
             network_type="BGP",
             tags={
                 "createdBy": "terraform",
             })
+        ```
+        ### PrePaid Bandwidth Package
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        bandwidth_package = tencentcloud.vpc.BandwidthPackage("bandwidthPackage",
+            bandwidth_package_name="test-001",
+            charge_type="FIXED_PREPAID_BY_MONTH",
+            internet_max_bandwidth=100,
+            network_type="BGP",
+            tags={
+                "createdBy": "terraform",
+            },
+            time_span=3)
         ```
 
         ## Import
@@ -283,6 +349,7 @@ class BandwidthPackage(pulumi.CustomResource):
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 time_span: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -302,6 +369,7 @@ class BandwidthPackage(pulumi.CustomResource):
             __props__.__dict__["internet_max_bandwidth"] = internet_max_bandwidth
             __props__.__dict__["network_type"] = network_type
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["time_span"] = time_span
         super(BandwidthPackage, __self__).__init__(
             'tencentcloud:Vpc/bandwidthPackage:BandwidthPackage',
             resource_name,
@@ -316,7 +384,8 @@ class BandwidthPackage(pulumi.CustomResource):
             charge_type: Optional[pulumi.Input[str]] = None,
             internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
             network_type: Optional[pulumi.Input[str]] = None,
-            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'BandwidthPackage':
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+            time_span: Optional[pulumi.Input[int]] = None) -> 'BandwidthPackage':
         """
         Get an existing BandwidthPackage resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -325,10 +394,11 @@ class BandwidthPackage(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
         :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -339,6 +409,7 @@ class BandwidthPackage(pulumi.CustomResource):
         __props__.__dict__["internet_max_bandwidth"] = internet_max_bandwidth
         __props__.__dict__["network_type"] = network_type
         __props__.__dict__["tags"] = tags
+        __props__.__dict__["time_span"] = time_span
         return BandwidthPackage(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -353,7 +424,7 @@ class BandwidthPackage(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH, optional value:- `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid- `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid- `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction).
+        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
 
@@ -380,4 +451,12 @@ class BandwidthPackage(pulumi.CustomResource):
         Tag description list.
         """
         return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="timeSpan")
+    def time_span(self) -> pulumi.Output[Optional[int]]:
+        """
+        The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
+        """
+        return pulumi.get(self, "time_span")
 

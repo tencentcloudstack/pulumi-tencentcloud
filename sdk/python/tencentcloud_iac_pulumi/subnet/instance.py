@@ -311,24 +311,6 @@ class Instance(pulumi.CustomResource):
         """
         Provide a resource to create a VPC subnet.
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-3"
-        foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
-        subnet = tencentcloud.subnet.Instance("subnet",
-            availability_zone=availability_zone,
-            vpc_id=foo.id,
-            cidr_block="10.0.20.0/28",
-            is_multicast=False)
-        ```
-
         ## Import
 
         Vpc subnet instance can be imported, e.g.
@@ -355,24 +337,6 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a VPC subnet.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        config = pulumi.Config()
-        availability_zone = config.get("availabilityZone")
-        if availability_zone is None:
-            availability_zone = "ap-guangzhou-3"
-        foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
-        subnet = tencentcloud.subnet.Instance("subnet",
-            availability_zone=availability_zone,
-            vpc_id=foo.id,
-            cidr_block="10.0.20.0/28",
-            is_multicast=False)
-        ```
 
         ## Import
 

@@ -9,89 +9,9 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'GroupRuleAddressTemplateArgs',
-    'GroupRuleProtocolTemplateArgs',
     'GroupRuleSetEgressArgs',
     'GroupRuleSetIngressArgs',
 ]
-
-@pulumi.input_type
-class GroupRuleAddressTemplateArgs:
-    def __init__(__self__, *,
-                 group_id: Optional[pulumi.Input[str]] = None,
-                 template_id: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] group_id: Address template group ID, conflicts with `template_id`.
-        :param pulumi.Input[str] template_id: Address template ID, conflicts with `group_id`.
-        """
-        if group_id is not None:
-            pulumi.set(__self__, "group_id", group_id)
-        if template_id is not None:
-            pulumi.set(__self__, "template_id", template_id)
-
-    @property
-    @pulumi.getter(name="groupId")
-    def group_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Address template group ID, conflicts with `template_id`.
-        """
-        return pulumi.get(self, "group_id")
-
-    @group_id.setter
-    def group_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "group_id", value)
-
-    @property
-    @pulumi.getter(name="templateId")
-    def template_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Address template ID, conflicts with `group_id`.
-        """
-        return pulumi.get(self, "template_id")
-
-    @template_id.setter
-    def template_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "template_id", value)
-
-
-@pulumi.input_type
-class GroupRuleProtocolTemplateArgs:
-    def __init__(__self__, *,
-                 group_id: Optional[pulumi.Input[str]] = None,
-                 template_id: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] group_id: Address template group ID, conflicts with `template_id`.
-        :param pulumi.Input[str] template_id: Address template ID, conflicts with `group_id`.
-        """
-        if group_id is not None:
-            pulumi.set(__self__, "group_id", group_id)
-        if template_id is not None:
-            pulumi.set(__self__, "template_id", template_id)
-
-    @property
-    @pulumi.getter(name="groupId")
-    def group_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Address template group ID, conflicts with `template_id`.
-        """
-        return pulumi.get(self, "group_id")
-
-    @group_id.setter
-    def group_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "group_id", value)
-
-    @property
-    @pulumi.getter(name="templateId")
-    def template_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Address template ID, conflicts with `group_id`.
-        """
-        return pulumi.get(self, "template_id")
-
-    @template_id.setter
-    def template_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "template_id", value)
-
 
 @pulumi.input_type
 class GroupRuleSetEgressArgs:
@@ -102,6 +22,7 @@ class GroupRuleSetEgressArgs:
                  cidr_block: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  service_template_group: Optional[pulumi.Input[str]] = None,
@@ -131,6 +52,8 @@ class GroupRuleSetEgressArgs:
             pulumi.set(__self__, "description", description)
         if ipv6_cidr_block is not None:
             pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -213,6 +136,15 @@ class GroupRuleSetEgressArgs:
     @ipv6_cidr_block.setter
     def ipv6_cidr_block(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ipv6_cidr_block", value)
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "policy_index")
+
+    @policy_index.setter
+    def policy_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_index", value)
 
     @property
     @pulumi.getter
@@ -284,6 +216,7 @@ class GroupRuleSetIngressArgs:
                  cidr_block: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
+                 policy_index: Optional[pulumi.Input[int]] = None,
                  port: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  service_template_group: Optional[pulumi.Input[str]] = None,
@@ -313,6 +246,8 @@ class GroupRuleSetIngressArgs:
             pulumi.set(__self__, "description", description)
         if ipv6_cidr_block is not None:
             pulumi.set(__self__, "ipv6_cidr_block", ipv6_cidr_block)
+        if policy_index is not None:
+            pulumi.set(__self__, "policy_index", policy_index)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -395,6 +330,15 @@ class GroupRuleSetIngressArgs:
     @ipv6_cidr_block.setter
     def ipv6_cidr_block(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ipv6_cidr_block", value)
+
+    @property
+    @pulumi.getter(name="policyIndex")
+    def policy_index(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "policy_index")
+
+    @policy_index.setter
+    def policy_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_index", value)
 
     @property
     @pulumi.getter

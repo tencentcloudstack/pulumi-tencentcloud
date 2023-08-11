@@ -14,21 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetSecurityPolicyRegionsGeoIpResult
     {
-        /// <summary>
-        /// Name of the continent.
-        /// </summary>
         public readonly string Continent;
-        /// <summary>
-        /// Name of the country.
-        /// </summary>
         public readonly string Country;
-        /// <summary>
-        /// Province of the region. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string Province;
-        /// <summary>
-        /// Region ID.
-        /// </summary>
         public readonly int RegionId;
 
         [OutputConstructor]

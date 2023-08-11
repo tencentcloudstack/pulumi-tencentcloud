@@ -10,6 +10,2951 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type CngwCanaryRuleCanaryRule struct {
+	// service weight configuration.
+	BalancedServiceLists []CngwCanaryRuleCanaryRuleBalancedServiceList `pulumi:"balancedServiceLists"`
+	// parameter matching condition list.
+	ConditionLists []CngwCanaryRuleCanaryRuleConditionList `pulumi:"conditionLists"`
+	// the status of canary rule.
+	Enabled bool `pulumi:"enabled"`
+	// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+	Priority int `pulumi:"priority"`
+	// service ID.
+	ServiceId *string `pulumi:"serviceId"`
+	// service name.
+	ServiceName *string `pulumi:"serviceName"`
+}
+
+// CngwCanaryRuleCanaryRuleInput is an input type that accepts CngwCanaryRuleCanaryRuleArgs and CngwCanaryRuleCanaryRuleOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRuleInput` via:
+//
+//          CngwCanaryRuleCanaryRuleArgs{...}
+type CngwCanaryRuleCanaryRuleInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRuleOutput() CngwCanaryRuleCanaryRuleOutput
+	ToCngwCanaryRuleCanaryRuleOutputWithContext(context.Context) CngwCanaryRuleCanaryRuleOutput
+}
+
+type CngwCanaryRuleCanaryRuleArgs struct {
+	// service weight configuration.
+	BalancedServiceLists CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput `pulumi:"balancedServiceLists"`
+	// parameter matching condition list.
+	ConditionLists CngwCanaryRuleCanaryRuleConditionListArrayInput `pulumi:"conditionLists"`
+	// the status of canary rule.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// service ID.
+	ServiceId pulumi.StringPtrInput `pulumi:"serviceId"`
+	// service name.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
+}
+
+func (CngwCanaryRuleCanaryRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRule)(nil)).Elem()
+}
+
+func (i CngwCanaryRuleCanaryRuleArgs) ToCngwCanaryRuleCanaryRuleOutput() CngwCanaryRuleCanaryRuleOutput {
+	return i.ToCngwCanaryRuleCanaryRuleOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleArgs) ToCngwCanaryRuleCanaryRuleOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleOutput)
+}
+
+func (i CngwCanaryRuleCanaryRuleArgs) ToCngwCanaryRuleCanaryRulePtrOutput() CngwCanaryRuleCanaryRulePtrOutput {
+	return i.ToCngwCanaryRuleCanaryRulePtrOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleArgs) ToCngwCanaryRuleCanaryRulePtrOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleOutput).ToCngwCanaryRuleCanaryRulePtrOutputWithContext(ctx)
+}
+
+// CngwCanaryRuleCanaryRulePtrInput is an input type that accepts CngwCanaryRuleCanaryRuleArgs, CngwCanaryRuleCanaryRulePtr and CngwCanaryRuleCanaryRulePtrOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRulePtrInput` via:
+//
+//          CngwCanaryRuleCanaryRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwCanaryRuleCanaryRulePtrInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRulePtrOutput() CngwCanaryRuleCanaryRulePtrOutput
+	ToCngwCanaryRuleCanaryRulePtrOutputWithContext(context.Context) CngwCanaryRuleCanaryRulePtrOutput
+}
+
+type cngwCanaryRuleCanaryRulePtrType CngwCanaryRuleCanaryRuleArgs
+
+func CngwCanaryRuleCanaryRulePtr(v *CngwCanaryRuleCanaryRuleArgs) CngwCanaryRuleCanaryRulePtrInput {
+	return (*cngwCanaryRuleCanaryRulePtrType)(v)
+}
+
+func (*cngwCanaryRuleCanaryRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwCanaryRuleCanaryRule)(nil)).Elem()
+}
+
+func (i *cngwCanaryRuleCanaryRulePtrType) ToCngwCanaryRuleCanaryRulePtrOutput() CngwCanaryRuleCanaryRulePtrOutput {
+	return i.ToCngwCanaryRuleCanaryRulePtrOutputWithContext(context.Background())
+}
+
+func (i *cngwCanaryRuleCanaryRulePtrType) ToCngwCanaryRuleCanaryRulePtrOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRulePtrOutput)
+}
+
+type CngwCanaryRuleCanaryRuleOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRule)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRuleOutput) ToCngwCanaryRuleCanaryRuleOutput() CngwCanaryRuleCanaryRuleOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleOutput) ToCngwCanaryRuleCanaryRuleOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleOutput) ToCngwCanaryRuleCanaryRulePtrOutput() CngwCanaryRuleCanaryRulePtrOutput {
+	return o.ToCngwCanaryRuleCanaryRulePtrOutputWithContext(context.Background())
+}
+
+func (o CngwCanaryRuleCanaryRuleOutput) ToCngwCanaryRuleCanaryRulePtrOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwCanaryRuleCanaryRule) *CngwCanaryRuleCanaryRule {
+		return &v
+	}).(CngwCanaryRuleCanaryRulePtrOutput)
+}
+
+// service weight configuration.
+func (o CngwCanaryRuleCanaryRuleOutput) BalancedServiceLists() CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) []CngwCanaryRuleCanaryRuleBalancedServiceList {
+		return v.BalancedServiceLists
+	}).(CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput)
+}
+
+// parameter matching condition list.
+func (o CngwCanaryRuleCanaryRuleOutput) ConditionLists() CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) []CngwCanaryRuleCanaryRuleConditionList { return v.ConditionLists }).(CngwCanaryRuleCanaryRuleConditionListArrayOutput)
+}
+
+// the status of canary rule.
+func (o CngwCanaryRuleCanaryRuleOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+func (o CngwCanaryRuleCanaryRuleOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// service ID.
+func (o CngwCanaryRuleCanaryRuleOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) *string { return v.ServiceId }).(pulumi.StringPtrOutput)
+}
+
+// service name.
+func (o CngwCanaryRuleCanaryRuleOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRule) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+type CngwCanaryRuleCanaryRulePtrOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwCanaryRuleCanaryRule)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRulePtrOutput) ToCngwCanaryRuleCanaryRulePtrOutput() CngwCanaryRuleCanaryRulePtrOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRulePtrOutput) ToCngwCanaryRuleCanaryRulePtrOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRulePtrOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRulePtrOutput) Elem() CngwCanaryRuleCanaryRuleOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) CngwCanaryRuleCanaryRule {
+		if v != nil {
+			return *v
+		}
+		var ret CngwCanaryRuleCanaryRule
+		return ret
+	}).(CngwCanaryRuleCanaryRuleOutput)
+}
+
+// service weight configuration.
+func (o CngwCanaryRuleCanaryRulePtrOutput) BalancedServiceLists() CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) []CngwCanaryRuleCanaryRuleBalancedServiceList {
+		if v == nil {
+			return nil
+		}
+		return v.BalancedServiceLists
+	}).(CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput)
+}
+
+// parameter matching condition list.
+func (o CngwCanaryRuleCanaryRulePtrOutput) ConditionLists() CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) []CngwCanaryRuleCanaryRuleConditionList {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionLists
+	}).(CngwCanaryRuleCanaryRuleConditionListArrayOutput)
+}
+
+// the status of canary rule.
+func (o CngwCanaryRuleCanaryRulePtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+func (o CngwCanaryRuleCanaryRulePtrOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Priority
+	}).(pulumi.IntPtrOutput)
+}
+
+// service ID.
+func (o CngwCanaryRuleCanaryRulePtrOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// service name.
+func (o CngwCanaryRuleCanaryRulePtrOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwCanaryRuleCanaryRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceName
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwCanaryRuleCanaryRuleBalancedServiceList struct {
+	// percent, 10 is 10%, valid values:0 to 100.
+	Percent *float64 `pulumi:"percent"`
+	// service ID, required when used as an input parameter.
+	ServiceId *string `pulumi:"serviceId"`
+	// service name, meaningless when used as an input parameter.
+	ServiceName  *string `pulumi:"serviceName"`
+	UpstreamName *string `pulumi:"upstreamName"`
+}
+
+// CngwCanaryRuleCanaryRuleBalancedServiceListInput is an input type that accepts CngwCanaryRuleCanaryRuleBalancedServiceListArgs and CngwCanaryRuleCanaryRuleBalancedServiceListOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRuleBalancedServiceListInput` via:
+//
+//          CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...}
+type CngwCanaryRuleCanaryRuleBalancedServiceListInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRuleBalancedServiceListOutput() CngwCanaryRuleCanaryRuleBalancedServiceListOutput
+	ToCngwCanaryRuleCanaryRuleBalancedServiceListOutputWithContext(context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListOutput
+}
+
+type CngwCanaryRuleCanaryRuleBalancedServiceListArgs struct {
+	// percent, 10 is 10%, valid values:0 to 100.
+	Percent pulumi.Float64PtrInput `pulumi:"percent"`
+	// service ID, required when used as an input parameter.
+	ServiceId pulumi.StringPtrInput `pulumi:"serviceId"`
+	// service name, meaningless when used as an input parameter.
+	ServiceName  pulumi.StringPtrInput `pulumi:"serviceName"`
+	UpstreamName pulumi.StringPtrInput `pulumi:"upstreamName"`
+}
+
+func (CngwCanaryRuleCanaryRuleBalancedServiceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRuleBalancedServiceList)(nil)).Elem()
+}
+
+func (i CngwCanaryRuleCanaryRuleBalancedServiceListArgs) ToCngwCanaryRuleCanaryRuleBalancedServiceListOutput() CngwCanaryRuleCanaryRuleBalancedServiceListOutput {
+	return i.ToCngwCanaryRuleCanaryRuleBalancedServiceListOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleBalancedServiceListArgs) ToCngwCanaryRuleCanaryRuleBalancedServiceListOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleBalancedServiceListOutput)
+}
+
+// CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput is an input type that accepts CngwCanaryRuleCanaryRuleBalancedServiceListArray and CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput` via:
+//
+//          CngwCanaryRuleCanaryRuleBalancedServiceListArray{ CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...} }
+type CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput() CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput
+	ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutputWithContext(context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput
+}
+
+type CngwCanaryRuleCanaryRuleBalancedServiceListArray []CngwCanaryRuleCanaryRuleBalancedServiceListInput
+
+func (CngwCanaryRuleCanaryRuleBalancedServiceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwCanaryRuleCanaryRuleBalancedServiceList)(nil)).Elem()
+}
+
+func (i CngwCanaryRuleCanaryRuleBalancedServiceListArray) ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput() CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return i.ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleBalancedServiceListArray) ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput)
+}
+
+type CngwCanaryRuleCanaryRuleBalancedServiceListOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRuleBalancedServiceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRuleBalancedServiceList)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) ToCngwCanaryRuleCanaryRuleBalancedServiceListOutput() CngwCanaryRuleCanaryRuleBalancedServiceListOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) ToCngwCanaryRuleCanaryRuleBalancedServiceListOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListOutput {
+	return o
+}
+
+// percent, 10 is 10%, valid values:0 to 100.
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) Percent() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleBalancedServiceList) *float64 { return v.Percent }).(pulumi.Float64PtrOutput)
+}
+
+// service ID, required when used as an input parameter.
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleBalancedServiceList) *string { return v.ServiceId }).(pulumi.StringPtrOutput)
+}
+
+// service name, meaningless when used as an input parameter.
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleBalancedServiceList) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListOutput) UpstreamName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleBalancedServiceList) *string { return v.UpstreamName }).(pulumi.StringPtrOutput)
+}
+
+type CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwCanaryRuleCanaryRuleBalancedServiceList)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput) ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput() CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput) ToCngwCanaryRuleCanaryRuleBalancedServiceListArrayOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput) Index(i pulumi.IntInput) CngwCanaryRuleCanaryRuleBalancedServiceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwCanaryRuleCanaryRuleBalancedServiceList {
+		return vs[0].([]CngwCanaryRuleCanaryRuleBalancedServiceList)[vs[1].(int)]
+	}).(CngwCanaryRuleCanaryRuleBalancedServiceListOutput)
+}
+
+type CngwCanaryRuleCanaryRuleConditionList struct {
+	// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+	Delimiter *string `pulumi:"delimiter"`
+	// global configuration ID.
+	GlobalConfigId *string `pulumi:"globalConfigId"`
+	// global configuration name.
+	GlobalConfigName *string `pulumi:"globalConfigName"`
+	// parameter name.
+	Key *string `pulumi:"key"`
+	// operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+	Operator *string `pulumi:"operator"`
+	// type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+	Type string `pulumi:"type"`
+	// parameter value.
+	Value *string `pulumi:"value"`
+}
+
+// CngwCanaryRuleCanaryRuleConditionListInput is an input type that accepts CngwCanaryRuleCanaryRuleConditionListArgs and CngwCanaryRuleCanaryRuleConditionListOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRuleConditionListInput` via:
+//
+//          CngwCanaryRuleCanaryRuleConditionListArgs{...}
+type CngwCanaryRuleCanaryRuleConditionListInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRuleConditionListOutput() CngwCanaryRuleCanaryRuleConditionListOutput
+	ToCngwCanaryRuleCanaryRuleConditionListOutputWithContext(context.Context) CngwCanaryRuleCanaryRuleConditionListOutput
+}
+
+type CngwCanaryRuleCanaryRuleConditionListArgs struct {
+	// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
+	// global configuration ID.
+	GlobalConfigId pulumi.StringPtrInput `pulumi:"globalConfigId"`
+	// global configuration name.
+	GlobalConfigName pulumi.StringPtrInput `pulumi:"globalConfigName"`
+	// parameter name.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// parameter value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CngwCanaryRuleCanaryRuleConditionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionList)(nil)).Elem()
+}
+
+func (i CngwCanaryRuleCanaryRuleConditionListArgs) ToCngwCanaryRuleCanaryRuleConditionListOutput() CngwCanaryRuleCanaryRuleConditionListOutput {
+	return i.ToCngwCanaryRuleCanaryRuleConditionListOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleConditionListArgs) ToCngwCanaryRuleCanaryRuleConditionListOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleConditionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleConditionListOutput)
+}
+
+// CngwCanaryRuleCanaryRuleConditionListArrayInput is an input type that accepts CngwCanaryRuleCanaryRuleConditionListArray and CngwCanaryRuleCanaryRuleConditionListArrayOutput values.
+// You can construct a concrete instance of `CngwCanaryRuleCanaryRuleConditionListArrayInput` via:
+//
+//          CngwCanaryRuleCanaryRuleConditionListArray{ CngwCanaryRuleCanaryRuleConditionListArgs{...} }
+type CngwCanaryRuleCanaryRuleConditionListArrayInput interface {
+	pulumi.Input
+
+	ToCngwCanaryRuleCanaryRuleConditionListArrayOutput() CngwCanaryRuleCanaryRuleConditionListArrayOutput
+	ToCngwCanaryRuleCanaryRuleConditionListArrayOutputWithContext(context.Context) CngwCanaryRuleCanaryRuleConditionListArrayOutput
+}
+
+type CngwCanaryRuleCanaryRuleConditionListArray []CngwCanaryRuleCanaryRuleConditionListInput
+
+func (CngwCanaryRuleCanaryRuleConditionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwCanaryRuleCanaryRuleConditionList)(nil)).Elem()
+}
+
+func (i CngwCanaryRuleCanaryRuleConditionListArray) ToCngwCanaryRuleCanaryRuleConditionListArrayOutput() CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return i.ToCngwCanaryRuleCanaryRuleConditionListArrayOutputWithContext(context.Background())
+}
+
+func (i CngwCanaryRuleCanaryRuleConditionListArray) ToCngwCanaryRuleCanaryRuleConditionListArrayOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwCanaryRuleCanaryRuleConditionListArrayOutput)
+}
+
+type CngwCanaryRuleCanaryRuleConditionListOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRuleConditionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionList)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) ToCngwCanaryRuleCanaryRuleConditionListOutput() CngwCanaryRuleCanaryRuleConditionListOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) ToCngwCanaryRuleCanaryRuleConditionListOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleConditionListOutput {
+	return o
+}
+
+// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) Delimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.Delimiter }).(pulumi.StringPtrOutput)
+}
+
+// global configuration ID.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) GlobalConfigId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.GlobalConfigId }).(pulumi.StringPtrOutput)
+}
+
+// global configuration name.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) GlobalConfigName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.GlobalConfigName }).(pulumi.StringPtrOutput)
+}
+
+// parameter name.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.Operator }).(pulumi.StringPtrOutput)
+}
+
+// type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// parameter value.
+func (o CngwCanaryRuleCanaryRuleConditionListOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwCanaryRuleCanaryRuleConditionList) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CngwCanaryRuleCanaryRuleConditionListArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwCanaryRuleCanaryRuleConditionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwCanaryRuleCanaryRuleConditionList)(nil)).Elem()
+}
+
+func (o CngwCanaryRuleCanaryRuleConditionListArrayOutput) ToCngwCanaryRuleCanaryRuleConditionListArrayOutput() CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleConditionListArrayOutput) ToCngwCanaryRuleCanaryRuleConditionListArrayOutputWithContext(ctx context.Context) CngwCanaryRuleCanaryRuleConditionListArrayOutput {
+	return o
+}
+
+func (o CngwCanaryRuleCanaryRuleConditionListArrayOutput) Index(i pulumi.IntInput) CngwCanaryRuleCanaryRuleConditionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwCanaryRuleCanaryRuleConditionList {
+		return vs[0].([]CngwCanaryRuleCanaryRuleConditionList)[vs[1].(int)]
+	}).(CngwCanaryRuleCanaryRuleConditionListOutput)
+}
+
+type CngwRouteHeader struct {
+	Key   *string `pulumi:"key"`
+	Value *string `pulumi:"value"`
+}
+
+// CngwRouteHeaderInput is an input type that accepts CngwRouteHeaderArgs and CngwRouteHeaderOutput values.
+// You can construct a concrete instance of `CngwRouteHeaderInput` via:
+//
+//          CngwRouteHeaderArgs{...}
+type CngwRouteHeaderInput interface {
+	pulumi.Input
+
+	ToCngwRouteHeaderOutput() CngwRouteHeaderOutput
+	ToCngwRouteHeaderOutputWithContext(context.Context) CngwRouteHeaderOutput
+}
+
+type CngwRouteHeaderArgs struct {
+	Key   pulumi.StringPtrInput `pulumi:"key"`
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CngwRouteHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteHeader)(nil)).Elem()
+}
+
+func (i CngwRouteHeaderArgs) ToCngwRouteHeaderOutput() CngwRouteHeaderOutput {
+	return i.ToCngwRouteHeaderOutputWithContext(context.Background())
+}
+
+func (i CngwRouteHeaderArgs) ToCngwRouteHeaderOutputWithContext(ctx context.Context) CngwRouteHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteHeaderOutput)
+}
+
+// CngwRouteHeaderArrayInput is an input type that accepts CngwRouteHeaderArray and CngwRouteHeaderArrayOutput values.
+// You can construct a concrete instance of `CngwRouteHeaderArrayInput` via:
+//
+//          CngwRouteHeaderArray{ CngwRouteHeaderArgs{...} }
+type CngwRouteHeaderArrayInput interface {
+	pulumi.Input
+
+	ToCngwRouteHeaderArrayOutput() CngwRouteHeaderArrayOutput
+	ToCngwRouteHeaderArrayOutputWithContext(context.Context) CngwRouteHeaderArrayOutput
+}
+
+type CngwRouteHeaderArray []CngwRouteHeaderInput
+
+func (CngwRouteHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteHeader)(nil)).Elem()
+}
+
+func (i CngwRouteHeaderArray) ToCngwRouteHeaderArrayOutput() CngwRouteHeaderArrayOutput {
+	return i.ToCngwRouteHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i CngwRouteHeaderArray) ToCngwRouteHeaderArrayOutputWithContext(ctx context.Context) CngwRouteHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteHeaderArrayOutput)
+}
+
+type CngwRouteHeaderOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteHeader)(nil)).Elem()
+}
+
+func (o CngwRouteHeaderOutput) ToCngwRouteHeaderOutput() CngwRouteHeaderOutput {
+	return o
+}
+
+func (o CngwRouteHeaderOutput) ToCngwRouteHeaderOutputWithContext(ctx context.Context) CngwRouteHeaderOutput {
+	return o
+}
+
+func (o CngwRouteHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteHeaderOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CngwRouteHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteHeader)(nil)).Elem()
+}
+
+func (o CngwRouteHeaderArrayOutput) ToCngwRouteHeaderArrayOutput() CngwRouteHeaderArrayOutput {
+	return o
+}
+
+func (o CngwRouteHeaderArrayOutput) ToCngwRouteHeaderArrayOutputWithContext(ctx context.Context) CngwRouteHeaderArrayOutput {
+	return o
+}
+
+func (o CngwRouteHeaderArrayOutput) Index(i pulumi.IntInput) CngwRouteHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwRouteHeader {
+		return vs[0].([]CngwRouteHeader)[vs[1].(int)]
+	}).(CngwRouteHeaderOutput)
+}
+
+type CngwRouteRateLimitLimitDetail struct {
+	Enabled              bool                                            `pulumi:"enabled"`
+	ExternalRedis        *CngwRouteRateLimitLimitDetailExternalRedis     `pulumi:"externalRedis"`
+	Header               *string                                         `pulumi:"header"`
+	HideClientHeaders    bool                                            `pulumi:"hideClientHeaders"`
+	IsDelay              bool                                            `pulumi:"isDelay"`
+	LimitBy              string                                          `pulumi:"limitBy"`
+	LineUpTime           *int                                            `pulumi:"lineUpTime"`
+	Path                 *string                                         `pulumi:"path"`
+	Policy               *string                                         `pulumi:"policy"`
+	QpsThresholds        []CngwRouteRateLimitLimitDetailQpsThreshold     `pulumi:"qpsThresholds"`
+	RateLimitResponse    *CngwRouteRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
+	RateLimitResponseUrl *string                                         `pulumi:"rateLimitResponseUrl"`
+	ResponseType         string                                          `pulumi:"responseType"`
+}
+
+// CngwRouteRateLimitLimitDetailInput is an input type that accepts CngwRouteRateLimitLimitDetailArgs and CngwRouteRateLimitLimitDetailOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailInput` via:
+//
+//          CngwRouteRateLimitLimitDetailArgs{...}
+type CngwRouteRateLimitLimitDetailInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailOutput() CngwRouteRateLimitLimitDetailOutput
+	ToCngwRouteRateLimitLimitDetailOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailOutput
+}
+
+type CngwRouteRateLimitLimitDetailArgs struct {
+	Enabled              pulumi.BoolInput                                       `pulumi:"enabled"`
+	ExternalRedis        CngwRouteRateLimitLimitDetailExternalRedisPtrInput     `pulumi:"externalRedis"`
+	Header               pulumi.StringPtrInput                                  `pulumi:"header"`
+	HideClientHeaders    pulumi.BoolInput                                       `pulumi:"hideClientHeaders"`
+	IsDelay              pulumi.BoolInput                                       `pulumi:"isDelay"`
+	LimitBy              pulumi.StringInput                                     `pulumi:"limitBy"`
+	LineUpTime           pulumi.IntPtrInput                                     `pulumi:"lineUpTime"`
+	Path                 pulumi.StringPtrInput                                  `pulumi:"path"`
+	Policy               pulumi.StringPtrInput                                  `pulumi:"policy"`
+	QpsThresholds        CngwRouteRateLimitLimitDetailQpsThresholdArrayInput    `pulumi:"qpsThresholds"`
+	RateLimitResponse    CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
+	RateLimitResponseUrl pulumi.StringPtrInput                                  `pulumi:"rateLimitResponseUrl"`
+	ResponseType         pulumi.StringInput                                     `pulumi:"responseType"`
+}
+
+func (CngwRouteRateLimitLimitDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailArgs) ToCngwRouteRateLimitLimitDetailOutput() CngwRouteRateLimitLimitDetailOutput {
+	return i.ToCngwRouteRateLimitLimitDetailOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailArgs) ToCngwRouteRateLimitLimitDetailOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailOutput)
+}
+
+func (i CngwRouteRateLimitLimitDetailArgs) ToCngwRouteRateLimitLimitDetailPtrOutput() CngwRouteRateLimitLimitDetailPtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailArgs) ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailOutput).ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(ctx)
+}
+
+// CngwRouteRateLimitLimitDetailPtrInput is an input type that accepts CngwRouteRateLimitLimitDetailArgs, CngwRouteRateLimitLimitDetailPtr and CngwRouteRateLimitLimitDetailPtrOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailPtrInput` via:
+//
+//          CngwRouteRateLimitLimitDetailArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwRouteRateLimitLimitDetailPtrInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailPtrOutput() CngwRouteRateLimitLimitDetailPtrOutput
+	ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailPtrOutput
+}
+
+type cngwRouteRateLimitLimitDetailPtrType CngwRouteRateLimitLimitDetailArgs
+
+func CngwRouteRateLimitLimitDetailPtr(v *CngwRouteRateLimitLimitDetailArgs) CngwRouteRateLimitLimitDetailPtrInput {
+	return (*cngwRouteRateLimitLimitDetailPtrType)(v)
+}
+
+func (*cngwRouteRateLimitLimitDetailPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (i *cngwRouteRateLimitLimitDetailPtrType) ToCngwRouteRateLimitLimitDetailPtrOutput() CngwRouteRateLimitLimitDetailPtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwRouteRateLimitLimitDetailPtrType) ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ToCngwRouteRateLimitLimitDetailOutput() CngwRouteRateLimitLimitDetailOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ToCngwRouteRateLimitLimitDetailOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ToCngwRouteRateLimitLimitDetailPtrOutput() CngwRouteRateLimitLimitDetailPtrOutput {
+	return o.ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetail {
+		return &v
+	}).(CngwRouteRateLimitLimitDetailPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ExternalRedis() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailExternalRedis {
+		return v.ExternalRedis
+	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Header }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) HideClientHeaders() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.HideClientHeaders }).(pulumi.BoolOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) IsDelay() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.IsDelay }).(pulumi.BoolOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) LimitBy() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) string { return v.LimitBy }).(pulumi.StringOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) LineUpTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *int { return v.LineUpTime }).(pulumi.IntPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Policy }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) QpsThresholds() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) []CngwRouteRateLimitLimitDetailQpsThreshold {
+		return v.QpsThresholds
+	}).(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) RateLimitResponse() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailRateLimitResponse {
+		return v.RateLimitResponse
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.RateLimitResponseUrl }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailOutput) ResponseType() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) string { return v.ResponseType }).(pulumi.StringOutput)
+}
+
+type CngwRouteRateLimitLimitDetailPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) ToCngwRouteRateLimitLimitDetailPtrOutput() CngwRouteRateLimitLimitDetailPtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) ToCngwRouteRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailPtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) Elem() CngwRouteRateLimitLimitDetailOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) CngwRouteRateLimitLimitDetail {
+		if v != nil {
+			return *v
+		}
+		var ret CngwRouteRateLimitLimitDetail
+		return ret
+	}).(CngwRouteRateLimitLimitDetailOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) ExternalRedis() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailExternalRedis {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalRedis
+	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.HideClientHeaders
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.IsDelay
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LimitBy
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LineUpTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Policy
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) QpsThresholds() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) []CngwRouteRateLimitLimitDetailQpsThreshold {
+		if v == nil {
+			return nil
+		}
+		return v.QpsThresholds
+	}).(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailRateLimitResponse {
+		if v == nil {
+			return nil
+		}
+		return v.RateLimitResponse
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RateLimitResponseUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ResponseType
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailExternalRedis struct {
+	RedisHost     string `pulumi:"redisHost"`
+	RedisPassword string `pulumi:"redisPassword"`
+	RedisPort     int    `pulumi:"redisPort"`
+	RedisTimeout  int    `pulumi:"redisTimeout"`
+}
+
+// CngwRouteRateLimitLimitDetailExternalRedisInput is an input type that accepts CngwRouteRateLimitLimitDetailExternalRedisArgs and CngwRouteRateLimitLimitDetailExternalRedisOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailExternalRedisInput` via:
+//
+//          CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
+type CngwRouteRateLimitLimitDetailExternalRedisInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailExternalRedisOutput() CngwRouteRateLimitLimitDetailExternalRedisOutput
+	ToCngwRouteRateLimitLimitDetailExternalRedisOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailExternalRedisOutput
+}
+
+type CngwRouteRateLimitLimitDetailExternalRedisArgs struct {
+	RedisHost     pulumi.StringInput `pulumi:"redisHost"`
+	RedisPassword pulumi.StringInput `pulumi:"redisPassword"`
+	RedisPort     pulumi.IntInput    `pulumi:"redisPort"`
+	RedisTimeout  pulumi.IntInput    `pulumi:"redisTimeout"`
+}
+
+func (CngwRouteRateLimitLimitDetailExternalRedisArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailExternalRedisArgs) ToCngwRouteRateLimitLimitDetailExternalRedisOutput() CngwRouteRateLimitLimitDetailExternalRedisOutput {
+	return i.ToCngwRouteRateLimitLimitDetailExternalRedisOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailExternalRedisArgs) ToCngwRouteRateLimitLimitDetailExternalRedisOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailExternalRedisOutput)
+}
+
+func (i CngwRouteRateLimitLimitDetailExternalRedisArgs) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutput() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailExternalRedisArgs) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailExternalRedisOutput).ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx)
+}
+
+// CngwRouteRateLimitLimitDetailExternalRedisPtrInput is an input type that accepts CngwRouteRateLimitLimitDetailExternalRedisArgs, CngwRouteRateLimitLimitDetailExternalRedisPtr and CngwRouteRateLimitLimitDetailExternalRedisPtrOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailExternalRedisPtrInput` via:
+//
+//          CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwRouteRateLimitLimitDetailExternalRedisPtrInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutput() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput
+	ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailExternalRedisPtrOutput
+}
+
+type cngwRouteRateLimitLimitDetailExternalRedisPtrType CngwRouteRateLimitLimitDetailExternalRedisArgs
+
+func CngwRouteRateLimitLimitDetailExternalRedisPtr(v *CngwRouteRateLimitLimitDetailExternalRedisArgs) CngwRouteRateLimitLimitDetailExternalRedisPtrInput {
+	return (*cngwRouteRateLimitLimitDetailExternalRedisPtrType)(v)
+}
+
+func (*cngwRouteRateLimitLimitDetailExternalRedisPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (i *cngwRouteRateLimitLimitDetailExternalRedisPtrType) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutput() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwRouteRateLimitLimitDetailExternalRedisPtrType) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailExternalRedisOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailExternalRedisOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) ToCngwRouteRateLimitLimitDetailExternalRedisOutput() CngwRouteRateLimitLimitDetailExternalRedisOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) ToCngwRouteRateLimitLimitDetailExternalRedisOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutput() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwRouteRateLimitLimitDetailExternalRedis) *CngwRouteRateLimitLimitDetailExternalRedis {
+		return &v
+	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisHost() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) string { return v.RedisHost }).(pulumi.StringOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisPassword() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) string { return v.RedisPassword }).(pulumi.StringOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisPort() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) int { return v.RedisPort }).(pulumi.IntOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) int { return v.RedisTimeout }).(pulumi.IntOutput)
+}
+
+type CngwRouteRateLimitLimitDetailExternalRedisPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutput() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) ToCngwRouteRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) Elem() CngwRouteRateLimitLimitDetailExternalRedisOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) CngwRouteRateLimitLimitDetailExternalRedis {
+		if v != nil {
+			return *v
+		}
+		var ret CngwRouteRateLimitLimitDetailExternalRedis
+		return ret
+	}).(CngwRouteRateLimitLimitDetailExternalRedisOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisHost
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisPassword
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisPort
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisTimeout
+	}).(pulumi.IntPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailQpsThreshold struct {
+	Max  int    `pulumi:"max"`
+	Unit string `pulumi:"unit"`
+}
+
+// CngwRouteRateLimitLimitDetailQpsThresholdInput is an input type that accepts CngwRouteRateLimitLimitDetailQpsThresholdArgs and CngwRouteRateLimitLimitDetailQpsThresholdOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailQpsThresholdInput` via:
+//
+//          CngwRouteRateLimitLimitDetailQpsThresholdArgs{...}
+type CngwRouteRateLimitLimitDetailQpsThresholdInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailQpsThresholdOutput() CngwRouteRateLimitLimitDetailQpsThresholdOutput
+	ToCngwRouteRateLimitLimitDetailQpsThresholdOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailQpsThresholdOutput
+}
+
+type CngwRouteRateLimitLimitDetailQpsThresholdArgs struct {
+	Max  pulumi.IntInput    `pulumi:"max"`
+	Unit pulumi.StringInput `pulumi:"unit"`
+}
+
+func (CngwRouteRateLimitLimitDetailQpsThresholdArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailQpsThresholdArgs) ToCngwRouteRateLimitLimitDetailQpsThresholdOutput() CngwRouteRateLimitLimitDetailQpsThresholdOutput {
+	return i.ToCngwRouteRateLimitLimitDetailQpsThresholdOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailQpsThresholdArgs) ToCngwRouteRateLimitLimitDetailQpsThresholdOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailQpsThresholdOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailQpsThresholdOutput)
+}
+
+// CngwRouteRateLimitLimitDetailQpsThresholdArrayInput is an input type that accepts CngwRouteRateLimitLimitDetailQpsThresholdArray and CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailQpsThresholdArrayInput` via:
+//
+//          CngwRouteRateLimitLimitDetailQpsThresholdArray{ CngwRouteRateLimitLimitDetailQpsThresholdArgs{...} }
+type CngwRouteRateLimitLimitDetailQpsThresholdArrayInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutput() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput
+	ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput
+}
+
+type CngwRouteRateLimitLimitDetailQpsThresholdArray []CngwRouteRateLimitLimitDetailQpsThresholdInput
+
+func (CngwRouteRateLimitLimitDetailQpsThresholdArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailQpsThresholdArray) ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutput() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return i.ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailQpsThresholdArray) ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+type CngwRouteRateLimitLimitDetailQpsThresholdOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailQpsThresholdOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) ToCngwRouteRateLimitLimitDetailQpsThresholdOutput() CngwRouteRateLimitLimitDetailQpsThresholdOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) ToCngwRouteRateLimitLimitDetailQpsThresholdOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailQpsThresholdOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailQpsThreshold) int { return v.Max }).(pulumi.IntOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailQpsThreshold) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+type CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput) ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutput() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput) ToCngwRouteRateLimitLimitDetailQpsThresholdArrayOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput) Index(i pulumi.IntInput) CngwRouteRateLimitLimitDetailQpsThresholdOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwRouteRateLimitLimitDetailQpsThreshold {
+		return vs[0].([]CngwRouteRateLimitLimitDetailQpsThreshold)[vs[1].(int)]
+	}).(CngwRouteRateLimitLimitDetailQpsThresholdOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponse struct {
+	Body       *string                                                `pulumi:"body"`
+	Headers    []CngwRouteRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
+	HttpStatus *int                                                   `pulumi:"httpStatus"`
+}
+
+// CngwRouteRateLimitLimitDetailRateLimitResponseInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseArgs and CngwRouteRateLimitLimitDetailRateLimitResponseOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseInput` via:
+//
+//          CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
+type CngwRouteRateLimitLimitDetailRateLimitResponseInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseOutput() CngwRouteRateLimitLimitDetailRateLimitResponseOutput
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseOutput
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseArgs struct {
+	Body       pulumi.StringPtrInput                                          `pulumi:"body"`
+	Headers    CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
+	HttpStatus pulumi.IntPtrInput                                             `pulumi:"httpStatus"`
+}
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponseOutput() CngwRouteRateLimitLimitDetailRateLimitResponseOutput {
+	return i.ToCngwRouteRateLimitLimitDetailRateLimitResponseOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponseOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailRateLimitResponseOutput)
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailRateLimitResponseOutput).ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx)
+}
+
+// CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseArgs, CngwRouteRateLimitLimitDetailRateLimitResponsePtr and CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput` via:
+//
+//          CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput
+	ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput
+}
+
+type cngwRouteRateLimitLimitDetailRateLimitResponsePtrType CngwRouteRateLimitLimitDetailRateLimitResponseArgs
+
+func CngwRouteRateLimitLimitDetailRateLimitResponsePtr(v *CngwRouteRateLimitLimitDetailRateLimitResponseArgs) CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput {
+	return (*cngwRouteRateLimitLimitDetailRateLimitResponsePtrType)(v)
+}
+
+func (*cngwRouteRateLimitLimitDetailRateLimitResponsePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (i *cngwRouteRateLimitLimitDetailRateLimitResponsePtrType) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return i.ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (i *cngwRouteRateLimitLimitDetailRateLimitResponsePtrType) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseOutput() CngwRouteRateLimitLimitDetailRateLimitResponseOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwRouteRateLimitLimitDetailRateLimitResponse) *CngwRouteRateLimitLimitDetailRateLimitResponse {
+		return &v
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) Headers() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) []CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+		return v.Headers
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) HttpStatus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) *int { return v.HttpStatus }).(pulumi.IntPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwRouteRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Elem() CngwRouteRateLimitLimitDetailRateLimitResponseOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) CngwRouteRateLimitLimitDetailRateLimitResponse {
+		if v != nil {
+			return *v
+		}
+		var ret CngwRouteRateLimitLimitDetailRateLimitResponse
+		return ret
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponseOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Body
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) []CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatus
+	}).(pulumi.IntPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeader struct {
+	Key   *string `pulumi:"key"`
+	Value *string `pulumi:"value"`
+}
+
+// CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs and CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput` via:
+//
+//          CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs struct {
+	Key   pulumi.StringPtrInput `pulumi:"key"`
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return i.ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput)
+}
+
+// CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray and CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput values.
+// You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput` via:
+//
+//          CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput interface {
+	pulumi.Input
+
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput
+	ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray []CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return i.ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwRouteRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ToCngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(ctx context.Context) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o
+}
+
+func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) Index(i pulumi.IntInput) CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+		return vs[0].([]CngwRouteRateLimitLimitDetailRateLimitResponseHeader)[vs[1].(int)]
+	}).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput)
+}
+
+type CngwServiceRateLimitLimitDetail struct {
+	Enabled              bool                                              `pulumi:"enabled"`
+	ExternalRedis        *CngwServiceRateLimitLimitDetailExternalRedis     `pulumi:"externalRedis"`
+	Header               *string                                           `pulumi:"header"`
+	HideClientHeaders    bool                                              `pulumi:"hideClientHeaders"`
+	IsDelay              bool                                              `pulumi:"isDelay"`
+	LimitBy              string                                            `pulumi:"limitBy"`
+	LineUpTime           *int                                              `pulumi:"lineUpTime"`
+	Path                 *string                                           `pulumi:"path"`
+	Policy               *string                                           `pulumi:"policy"`
+	QpsThresholds        []CngwServiceRateLimitLimitDetailQpsThreshold     `pulumi:"qpsThresholds"`
+	RateLimitResponse    *CngwServiceRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
+	RateLimitResponseUrl *string                                           `pulumi:"rateLimitResponseUrl"`
+	ResponseType         string                                            `pulumi:"responseType"`
+}
+
+// CngwServiceRateLimitLimitDetailInput is an input type that accepts CngwServiceRateLimitLimitDetailArgs and CngwServiceRateLimitLimitDetailOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailInput` via:
+//
+//          CngwServiceRateLimitLimitDetailArgs{...}
+type CngwServiceRateLimitLimitDetailInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailOutput() CngwServiceRateLimitLimitDetailOutput
+	ToCngwServiceRateLimitLimitDetailOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailOutput
+}
+
+type CngwServiceRateLimitLimitDetailArgs struct {
+	Enabled              pulumi.BoolInput                                         `pulumi:"enabled"`
+	ExternalRedis        CngwServiceRateLimitLimitDetailExternalRedisPtrInput     `pulumi:"externalRedis"`
+	Header               pulumi.StringPtrInput                                    `pulumi:"header"`
+	HideClientHeaders    pulumi.BoolInput                                         `pulumi:"hideClientHeaders"`
+	IsDelay              pulumi.BoolInput                                         `pulumi:"isDelay"`
+	LimitBy              pulumi.StringInput                                       `pulumi:"limitBy"`
+	LineUpTime           pulumi.IntPtrInput                                       `pulumi:"lineUpTime"`
+	Path                 pulumi.StringPtrInput                                    `pulumi:"path"`
+	Policy               pulumi.StringPtrInput                                    `pulumi:"policy"`
+	QpsThresholds        CngwServiceRateLimitLimitDetailQpsThresholdArrayInput    `pulumi:"qpsThresholds"`
+	RateLimitResponse    CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
+	RateLimitResponseUrl pulumi.StringPtrInput                                    `pulumi:"rateLimitResponseUrl"`
+	ResponseType         pulumi.StringInput                                       `pulumi:"responseType"`
+}
+
+func (CngwServiceRateLimitLimitDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailArgs) ToCngwServiceRateLimitLimitDetailOutput() CngwServiceRateLimitLimitDetailOutput {
+	return i.ToCngwServiceRateLimitLimitDetailOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailArgs) ToCngwServiceRateLimitLimitDetailOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailOutput)
+}
+
+func (i CngwServiceRateLimitLimitDetailArgs) ToCngwServiceRateLimitLimitDetailPtrOutput() CngwServiceRateLimitLimitDetailPtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailArgs) ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailOutput).ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(ctx)
+}
+
+// CngwServiceRateLimitLimitDetailPtrInput is an input type that accepts CngwServiceRateLimitLimitDetailArgs, CngwServiceRateLimitLimitDetailPtr and CngwServiceRateLimitLimitDetailPtrOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailPtrInput` via:
+//
+//          CngwServiceRateLimitLimitDetailArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwServiceRateLimitLimitDetailPtrInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailPtrOutput() CngwServiceRateLimitLimitDetailPtrOutput
+	ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailPtrOutput
+}
+
+type cngwServiceRateLimitLimitDetailPtrType CngwServiceRateLimitLimitDetailArgs
+
+func CngwServiceRateLimitLimitDetailPtr(v *CngwServiceRateLimitLimitDetailArgs) CngwServiceRateLimitLimitDetailPtrInput {
+	return (*cngwServiceRateLimitLimitDetailPtrType)(v)
+}
+
+func (*cngwServiceRateLimitLimitDetailPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (i *cngwServiceRateLimitLimitDetailPtrType) ToCngwServiceRateLimitLimitDetailPtrOutput() CngwServiceRateLimitLimitDetailPtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwServiceRateLimitLimitDetailPtrType) ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ToCngwServiceRateLimitLimitDetailOutput() CngwServiceRateLimitLimitDetailOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ToCngwServiceRateLimitLimitDetailOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ToCngwServiceRateLimitLimitDetailPtrOutput() CngwServiceRateLimitLimitDetailPtrOutput {
+	return o.ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(context.Background())
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetail {
+		return &v
+	}).(CngwServiceRateLimitLimitDetailPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ExternalRedis() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailExternalRedis {
+		return v.ExternalRedis
+	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Header }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) HideClientHeaders() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.HideClientHeaders }).(pulumi.BoolOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) IsDelay() pulumi.BoolOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.IsDelay }).(pulumi.BoolOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) LimitBy() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) string { return v.LimitBy }).(pulumi.StringOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) LineUpTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *int { return v.LineUpTime }).(pulumi.IntPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Policy }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) QpsThresholds() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) []CngwServiceRateLimitLimitDetailQpsThreshold {
+		return v.QpsThresholds
+	}).(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) RateLimitResponse() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailRateLimitResponse {
+		return v.RateLimitResponse
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.RateLimitResponseUrl }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailOutput) ResponseType() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) string { return v.ResponseType }).(pulumi.StringOutput)
+}
+
+type CngwServiceRateLimitLimitDetailPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetail)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) ToCngwServiceRateLimitLimitDetailPtrOutput() CngwServiceRateLimitLimitDetailPtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) ToCngwServiceRateLimitLimitDetailPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailPtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) Elem() CngwServiceRateLimitLimitDetailOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) CngwServiceRateLimitLimitDetail {
+		if v != nil {
+			return *v
+		}
+		var ret CngwServiceRateLimitLimitDetail
+		return ret
+	}).(CngwServiceRateLimitLimitDetailOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) ExternalRedis() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailExternalRedis {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalRedis
+	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.HideClientHeaders
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.IsDelay
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LimitBy
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LineUpTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Policy
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) QpsThresholds() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) []CngwServiceRateLimitLimitDetailQpsThreshold {
+		if v == nil {
+			return nil
+		}
+		return v.QpsThresholds
+	}).(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailRateLimitResponse {
+		if v == nil {
+			return nil
+		}
+		return v.RateLimitResponse
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RateLimitResponseUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ResponseType
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailExternalRedis struct {
+	RedisHost     string `pulumi:"redisHost"`
+	RedisPassword string `pulumi:"redisPassword"`
+	RedisPort     int    `pulumi:"redisPort"`
+	RedisTimeout  int    `pulumi:"redisTimeout"`
+}
+
+// CngwServiceRateLimitLimitDetailExternalRedisInput is an input type that accepts CngwServiceRateLimitLimitDetailExternalRedisArgs and CngwServiceRateLimitLimitDetailExternalRedisOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailExternalRedisInput` via:
+//
+//          CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
+type CngwServiceRateLimitLimitDetailExternalRedisInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailExternalRedisOutput() CngwServiceRateLimitLimitDetailExternalRedisOutput
+	ToCngwServiceRateLimitLimitDetailExternalRedisOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailExternalRedisOutput
+}
+
+type CngwServiceRateLimitLimitDetailExternalRedisArgs struct {
+	RedisHost     pulumi.StringInput `pulumi:"redisHost"`
+	RedisPassword pulumi.StringInput `pulumi:"redisPassword"`
+	RedisPort     pulumi.IntInput    `pulumi:"redisPort"`
+	RedisTimeout  pulumi.IntInput    `pulumi:"redisTimeout"`
+}
+
+func (CngwServiceRateLimitLimitDetailExternalRedisArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailExternalRedisArgs) ToCngwServiceRateLimitLimitDetailExternalRedisOutput() CngwServiceRateLimitLimitDetailExternalRedisOutput {
+	return i.ToCngwServiceRateLimitLimitDetailExternalRedisOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailExternalRedisArgs) ToCngwServiceRateLimitLimitDetailExternalRedisOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailExternalRedisOutput)
+}
+
+func (i CngwServiceRateLimitLimitDetailExternalRedisArgs) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutput() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailExternalRedisArgs) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailExternalRedisOutput).ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx)
+}
+
+// CngwServiceRateLimitLimitDetailExternalRedisPtrInput is an input type that accepts CngwServiceRateLimitLimitDetailExternalRedisArgs, CngwServiceRateLimitLimitDetailExternalRedisPtr and CngwServiceRateLimitLimitDetailExternalRedisPtrOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailExternalRedisPtrInput` via:
+//
+//          CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwServiceRateLimitLimitDetailExternalRedisPtrInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutput() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput
+	ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailExternalRedisPtrOutput
+}
+
+type cngwServiceRateLimitLimitDetailExternalRedisPtrType CngwServiceRateLimitLimitDetailExternalRedisArgs
+
+func CngwServiceRateLimitLimitDetailExternalRedisPtr(v *CngwServiceRateLimitLimitDetailExternalRedisArgs) CngwServiceRateLimitLimitDetailExternalRedisPtrInput {
+	return (*cngwServiceRateLimitLimitDetailExternalRedisPtrType)(v)
+}
+
+func (*cngwServiceRateLimitLimitDetailExternalRedisPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (i *cngwServiceRateLimitLimitDetailExternalRedisPtrType) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutput() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwServiceRateLimitLimitDetailExternalRedisPtrType) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailExternalRedisOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailExternalRedisOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) ToCngwServiceRateLimitLimitDetailExternalRedisOutput() CngwServiceRateLimitLimitDetailExternalRedisOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) ToCngwServiceRateLimitLimitDetailExternalRedisOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutput() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(context.Background())
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwServiceRateLimitLimitDetailExternalRedis) *CngwServiceRateLimitLimitDetailExternalRedis {
+		return &v
+	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisHost() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) string { return v.RedisHost }).(pulumi.StringOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisPassword() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) string { return v.RedisPassword }).(pulumi.StringOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisPort() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) int { return v.RedisPort }).(pulumi.IntOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) int { return v.RedisTimeout }).(pulumi.IntOutput)
+}
+
+type CngwServiceRateLimitLimitDetailExternalRedisPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetailExternalRedis)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutput() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) ToCngwServiceRateLimitLimitDetailExternalRedisPtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) Elem() CngwServiceRateLimitLimitDetailExternalRedisOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) CngwServiceRateLimitLimitDetailExternalRedis {
+		if v != nil {
+			return *v
+		}
+		var ret CngwServiceRateLimitLimitDetailExternalRedis
+		return ret
+	}).(CngwServiceRateLimitLimitDetailExternalRedisOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisHost
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisPassword
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisPort
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.RedisTimeout
+	}).(pulumi.IntPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailQpsThreshold struct {
+	Max  int    `pulumi:"max"`
+	Unit string `pulumi:"unit"`
+}
+
+// CngwServiceRateLimitLimitDetailQpsThresholdInput is an input type that accepts CngwServiceRateLimitLimitDetailQpsThresholdArgs and CngwServiceRateLimitLimitDetailQpsThresholdOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailQpsThresholdInput` via:
+//
+//          CngwServiceRateLimitLimitDetailQpsThresholdArgs{...}
+type CngwServiceRateLimitLimitDetailQpsThresholdInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailQpsThresholdOutput() CngwServiceRateLimitLimitDetailQpsThresholdOutput
+	ToCngwServiceRateLimitLimitDetailQpsThresholdOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailQpsThresholdOutput
+}
+
+type CngwServiceRateLimitLimitDetailQpsThresholdArgs struct {
+	Max  pulumi.IntInput    `pulumi:"max"`
+	Unit pulumi.StringInput `pulumi:"unit"`
+}
+
+func (CngwServiceRateLimitLimitDetailQpsThresholdArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailQpsThresholdArgs) ToCngwServiceRateLimitLimitDetailQpsThresholdOutput() CngwServiceRateLimitLimitDetailQpsThresholdOutput {
+	return i.ToCngwServiceRateLimitLimitDetailQpsThresholdOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailQpsThresholdArgs) ToCngwServiceRateLimitLimitDetailQpsThresholdOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailQpsThresholdOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailQpsThresholdOutput)
+}
+
+// CngwServiceRateLimitLimitDetailQpsThresholdArrayInput is an input type that accepts CngwServiceRateLimitLimitDetailQpsThresholdArray and CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailQpsThresholdArrayInput` via:
+//
+//          CngwServiceRateLimitLimitDetailQpsThresholdArray{ CngwServiceRateLimitLimitDetailQpsThresholdArgs{...} }
+type CngwServiceRateLimitLimitDetailQpsThresholdArrayInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutput() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput
+	ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput
+}
+
+type CngwServiceRateLimitLimitDetailQpsThresholdArray []CngwServiceRateLimitLimitDetailQpsThresholdInput
+
+func (CngwServiceRateLimitLimitDetailQpsThresholdArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailQpsThresholdArray) ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutput() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return i.ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailQpsThresholdArray) ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput)
+}
+
+type CngwServiceRateLimitLimitDetailQpsThresholdOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailQpsThresholdOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) ToCngwServiceRateLimitLimitDetailQpsThresholdOutput() CngwServiceRateLimitLimitDetailQpsThresholdOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) ToCngwServiceRateLimitLimitDetailQpsThresholdOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailQpsThresholdOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) Max() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailQpsThreshold) int { return v.Max }).(pulumi.IntOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailQpsThreshold) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+type CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceRateLimitLimitDetailQpsThreshold)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput) ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutput() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput) ToCngwServiceRateLimitLimitDetailQpsThresholdArrayOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput) Index(i pulumi.IntInput) CngwServiceRateLimitLimitDetailQpsThresholdOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwServiceRateLimitLimitDetailQpsThreshold {
+		return vs[0].([]CngwServiceRateLimitLimitDetailQpsThreshold)[vs[1].(int)]
+	}).(CngwServiceRateLimitLimitDetailQpsThresholdOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponse struct {
+	Body       *string                                                  `pulumi:"body"`
+	Headers    []CngwServiceRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
+	HttpStatus *int                                                     `pulumi:"httpStatus"`
+}
+
+// CngwServiceRateLimitLimitDetailRateLimitResponseInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseArgs and CngwServiceRateLimitLimitDetailRateLimitResponseOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseInput` via:
+//
+//          CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
+type CngwServiceRateLimitLimitDetailRateLimitResponseInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseOutput() CngwServiceRateLimitLimitDetailRateLimitResponseOutput
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseOutput
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseArgs struct {
+	Body       pulumi.StringPtrInput                                            `pulumi:"body"`
+	Headers    CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
+	HttpStatus pulumi.IntPtrInput                                               `pulumi:"httpStatus"`
+}
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponseOutput() CngwServiceRateLimitLimitDetailRateLimitResponseOutput {
+	return i.ToCngwServiceRateLimitLimitDetailRateLimitResponseOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponseOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailRateLimitResponseOutput)
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailRateLimitResponseOutput).ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx)
+}
+
+// CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseArgs, CngwServiceRateLimitLimitDetailRateLimitResponsePtr and CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput` via:
+//
+//          CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput
+	ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput
+}
+
+type cngwServiceRateLimitLimitDetailRateLimitResponsePtrType CngwServiceRateLimitLimitDetailRateLimitResponseArgs
+
+func CngwServiceRateLimitLimitDetailRateLimitResponsePtr(v *CngwServiceRateLimitLimitDetailRateLimitResponseArgs) CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput {
+	return (*cngwServiceRateLimitLimitDetailRateLimitResponsePtrType)(v)
+}
+
+func (*cngwServiceRateLimitLimitDetailRateLimitResponsePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (i *cngwServiceRateLimitLimitDetailRateLimitResponsePtrType) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return i.ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (i *cngwServiceRateLimitLimitDetailRateLimitResponsePtrType) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseOutput() CngwServiceRateLimitLimitDetailRateLimitResponseOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(context.Background())
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwServiceRateLimitLimitDetailRateLimitResponse) *CngwServiceRateLimitLimitDetailRateLimitResponse {
+		return &v
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) Headers() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) []CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+		return v.Headers
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) HttpStatus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) *int { return v.HttpStatus }).(pulumi.IntPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceRateLimitLimitDetailRateLimitResponse)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponsePtrOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Elem() CngwServiceRateLimitLimitDetailRateLimitResponseOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) CngwServiceRateLimitLimitDetailRateLimitResponse {
+		if v != nil {
+			return *v
+		}
+		var ret CngwServiceRateLimitLimitDetailRateLimitResponse
+		return ret
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponseOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Body
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) []CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStatus
+	}).(pulumi.IntPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeader struct {
+	Key   *string `pulumi:"key"`
+	Value *string `pulumi:"value"`
+}
+
+// CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs and CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput` via:
+//
+//          CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs struct {
+	Key   pulumi.StringPtrInput `pulumi:"key"`
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return i.ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput)
+}
+
+// CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray and CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput values.
+// You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput` via:
+//
+//          CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput interface {
+	pulumi.Input
+
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput
+	ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray []CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return i.ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceRateLimitLimitDetailRateLimitResponseHeader)(nil)).Elem()
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) ToCngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutputWithContext(ctx context.Context) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
+	return o
+}
+
+func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) Index(i pulumi.IntInput) CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+		return vs[0].([]CngwServiceRateLimitLimitDetailRateLimitResponseHeader)[vs[1].(int)]
+	}).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput)
+}
+
+type CngwServiceUpstreamInfo struct {
+	// load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+	Algorithm *string `pulumi:"algorithm"`
+	// auto scaling group port of cvm.
+	AutoScalingCvmPort *int `pulumi:"autoScalingCvmPort"`
+	// auto scaling group ID of cvm.
+	AutoScalingGroupId *string `pulumi:"autoScalingGroupId"`
+	// hook status in auto scaling group of cvm.
+	AutoScalingHookStatus *string `pulumi:"autoScalingHookStatus"`
+	// tat cmd status in auto scaling group of cvm.
+	AutoScalingTatCmdStatus *string `pulumi:"autoScalingTatCmdStatus"`
+	// an IP address or domain name.
+	Host *string `pulumi:"host"`
+	// namespace.
+	Namespace *string `pulumi:"namespace"`
+	// backend service port.valid values: `1` to `65535`.
+	Port *int `pulumi:"port"`
+	// exact source service type.
+	RealSourceType *string `pulumi:"realSourceType"`
+	// scf lambda name.
+	ScfLambdaName *string `pulumi:"scfLambdaName"`
+	// scf lambda version.
+	ScfLambdaQualifier *string `pulumi:"scfLambdaQualifier"`
+	// scf lambda namespace.
+	ScfNamespace *string `pulumi:"scfNamespace"`
+	// scf lambda type.
+	ScfType *string `pulumi:"scfType"`
+	// the name of the service in registry or kubernetes.
+	ServiceName *string `pulumi:"serviceName"`
+	// slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+	SlowStart *int `pulumi:"slowStart"`
+	// service source ID.
+	SourceId *string `pulumi:"sourceId"`
+	// the name of source service.
+	SourceName *string `pulumi:"sourceName"`
+	// source service type.
+	SourceType *string `pulumi:"sourceType"`
+	// provided when service type is IPList.
+	Targets []CngwServiceUpstreamInfoTarget `pulumi:"targets"`
+}
+
+// CngwServiceUpstreamInfoInput is an input type that accepts CngwServiceUpstreamInfoArgs and CngwServiceUpstreamInfoOutput values.
+// You can construct a concrete instance of `CngwServiceUpstreamInfoInput` via:
+//
+//          CngwServiceUpstreamInfoArgs{...}
+type CngwServiceUpstreamInfoInput interface {
+	pulumi.Input
+
+	ToCngwServiceUpstreamInfoOutput() CngwServiceUpstreamInfoOutput
+	ToCngwServiceUpstreamInfoOutputWithContext(context.Context) CngwServiceUpstreamInfoOutput
+}
+
+type CngwServiceUpstreamInfoArgs struct {
+	// load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+	Algorithm pulumi.StringPtrInput `pulumi:"algorithm"`
+	// auto scaling group port of cvm.
+	AutoScalingCvmPort pulumi.IntPtrInput `pulumi:"autoScalingCvmPort"`
+	// auto scaling group ID of cvm.
+	AutoScalingGroupId pulumi.StringPtrInput `pulumi:"autoScalingGroupId"`
+	// hook status in auto scaling group of cvm.
+	AutoScalingHookStatus pulumi.StringPtrInput `pulumi:"autoScalingHookStatus"`
+	// tat cmd status in auto scaling group of cvm.
+	AutoScalingTatCmdStatus pulumi.StringPtrInput `pulumi:"autoScalingTatCmdStatus"`
+	// an IP address or domain name.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	// namespace.
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// backend service port.valid values: `1` to `65535`.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// exact source service type.
+	RealSourceType pulumi.StringPtrInput `pulumi:"realSourceType"`
+	// scf lambda name.
+	ScfLambdaName pulumi.StringPtrInput `pulumi:"scfLambdaName"`
+	// scf lambda version.
+	ScfLambdaQualifier pulumi.StringPtrInput `pulumi:"scfLambdaQualifier"`
+	// scf lambda namespace.
+	ScfNamespace pulumi.StringPtrInput `pulumi:"scfNamespace"`
+	// scf lambda type.
+	ScfType pulumi.StringPtrInput `pulumi:"scfType"`
+	// the name of the service in registry or kubernetes.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
+	// slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+	SlowStart pulumi.IntPtrInput `pulumi:"slowStart"`
+	// service source ID.
+	SourceId pulumi.StringPtrInput `pulumi:"sourceId"`
+	// the name of source service.
+	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
+	// source service type.
+	SourceType pulumi.StringPtrInput `pulumi:"sourceType"`
+	// provided when service type is IPList.
+	Targets CngwServiceUpstreamInfoTargetArrayInput `pulumi:"targets"`
+}
+
+func (CngwServiceUpstreamInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceUpstreamInfo)(nil)).Elem()
+}
+
+func (i CngwServiceUpstreamInfoArgs) ToCngwServiceUpstreamInfoOutput() CngwServiceUpstreamInfoOutput {
+	return i.ToCngwServiceUpstreamInfoOutputWithContext(context.Background())
+}
+
+func (i CngwServiceUpstreamInfoArgs) ToCngwServiceUpstreamInfoOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceUpstreamInfoOutput)
+}
+
+func (i CngwServiceUpstreamInfoArgs) ToCngwServiceUpstreamInfoPtrOutput() CngwServiceUpstreamInfoPtrOutput {
+	return i.ToCngwServiceUpstreamInfoPtrOutputWithContext(context.Background())
+}
+
+func (i CngwServiceUpstreamInfoArgs) ToCngwServiceUpstreamInfoPtrOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceUpstreamInfoOutput).ToCngwServiceUpstreamInfoPtrOutputWithContext(ctx)
+}
+
+// CngwServiceUpstreamInfoPtrInput is an input type that accepts CngwServiceUpstreamInfoArgs, CngwServiceUpstreamInfoPtr and CngwServiceUpstreamInfoPtrOutput values.
+// You can construct a concrete instance of `CngwServiceUpstreamInfoPtrInput` via:
+//
+//          CngwServiceUpstreamInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type CngwServiceUpstreamInfoPtrInput interface {
+	pulumi.Input
+
+	ToCngwServiceUpstreamInfoPtrOutput() CngwServiceUpstreamInfoPtrOutput
+	ToCngwServiceUpstreamInfoPtrOutputWithContext(context.Context) CngwServiceUpstreamInfoPtrOutput
+}
+
+type cngwServiceUpstreamInfoPtrType CngwServiceUpstreamInfoArgs
+
+func CngwServiceUpstreamInfoPtr(v *CngwServiceUpstreamInfoArgs) CngwServiceUpstreamInfoPtrInput {
+	return (*cngwServiceUpstreamInfoPtrType)(v)
+}
+
+func (*cngwServiceUpstreamInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceUpstreamInfo)(nil)).Elem()
+}
+
+func (i *cngwServiceUpstreamInfoPtrType) ToCngwServiceUpstreamInfoPtrOutput() CngwServiceUpstreamInfoPtrOutput {
+	return i.ToCngwServiceUpstreamInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwServiceUpstreamInfoPtrType) ToCngwServiceUpstreamInfoPtrOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceUpstreamInfoPtrOutput)
+}
+
+type CngwServiceUpstreamInfoOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceUpstreamInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceUpstreamInfo)(nil)).Elem()
+}
+
+func (o CngwServiceUpstreamInfoOutput) ToCngwServiceUpstreamInfoOutput() CngwServiceUpstreamInfoOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoOutput) ToCngwServiceUpstreamInfoOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoOutput) ToCngwServiceUpstreamInfoPtrOutput() CngwServiceUpstreamInfoPtrOutput {
+	return o.ToCngwServiceUpstreamInfoPtrOutputWithContext(context.Background())
+}
+
+func (o CngwServiceUpstreamInfoOutput) ToCngwServiceUpstreamInfoPtrOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwServiceUpstreamInfo) *CngwServiceUpstreamInfo {
+		return &v
+	}).(CngwServiceUpstreamInfoPtrOutput)
+}
+
+// load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+func (o CngwServiceUpstreamInfoOutput) Algorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.Algorithm }).(pulumi.StringPtrOutput)
+}
+
+// auto scaling group port of cvm.
+func (o CngwServiceUpstreamInfoOutput) AutoScalingCvmPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *int { return v.AutoScalingCvmPort }).(pulumi.IntPtrOutput)
+}
+
+// auto scaling group ID of cvm.
+func (o CngwServiceUpstreamInfoOutput) AutoScalingGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.AutoScalingGroupId }).(pulumi.StringPtrOutput)
+}
+
+// hook status in auto scaling group of cvm.
+func (o CngwServiceUpstreamInfoOutput) AutoScalingHookStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.AutoScalingHookStatus }).(pulumi.StringPtrOutput)
+}
+
+// tat cmd status in auto scaling group of cvm.
+func (o CngwServiceUpstreamInfoOutput) AutoScalingTatCmdStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.AutoScalingTatCmdStatus }).(pulumi.StringPtrOutput)
+}
+
+// an IP address or domain name.
+func (o CngwServiceUpstreamInfoOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// namespace.
+func (o CngwServiceUpstreamInfoOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.Namespace }).(pulumi.StringPtrOutput)
+}
+
+// backend service port.valid values: `1` to `65535`.
+func (o CngwServiceUpstreamInfoOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// exact source service type.
+func (o CngwServiceUpstreamInfoOutput) RealSourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.RealSourceType }).(pulumi.StringPtrOutput)
+}
+
+// scf lambda name.
+func (o CngwServiceUpstreamInfoOutput) ScfLambdaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.ScfLambdaName }).(pulumi.StringPtrOutput)
+}
+
+// scf lambda version.
+func (o CngwServiceUpstreamInfoOutput) ScfLambdaQualifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.ScfLambdaQualifier }).(pulumi.StringPtrOutput)
+}
+
+// scf lambda namespace.
+func (o CngwServiceUpstreamInfoOutput) ScfNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.ScfNamespace }).(pulumi.StringPtrOutput)
+}
+
+// scf lambda type.
+func (o CngwServiceUpstreamInfoOutput) ScfType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.ScfType }).(pulumi.StringPtrOutput)
+}
+
+// the name of the service in registry or kubernetes.
+func (o CngwServiceUpstreamInfoOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+// slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+func (o CngwServiceUpstreamInfoOutput) SlowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *int { return v.SlowStart }).(pulumi.IntPtrOutput)
+}
+
+// service source ID.
+func (o CngwServiceUpstreamInfoOutput) SourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.SourceId }).(pulumi.StringPtrOutput)
+}
+
+// the name of source service.
+func (o CngwServiceUpstreamInfoOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.SourceName }).(pulumi.StringPtrOutput)
+}
+
+// source service type.
+func (o CngwServiceUpstreamInfoOutput) SourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) *string { return v.SourceType }).(pulumi.StringPtrOutput)
+}
+
+// provided when service type is IPList.
+func (o CngwServiceUpstreamInfoOutput) Targets() CngwServiceUpstreamInfoTargetArrayOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfo) []CngwServiceUpstreamInfoTarget { return v.Targets }).(CngwServiceUpstreamInfoTargetArrayOutput)
+}
+
+type CngwServiceUpstreamInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceUpstreamInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwServiceUpstreamInfo)(nil)).Elem()
+}
+
+func (o CngwServiceUpstreamInfoPtrOutput) ToCngwServiceUpstreamInfoPtrOutput() CngwServiceUpstreamInfoPtrOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoPtrOutput) ToCngwServiceUpstreamInfoPtrOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoPtrOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoPtrOutput) Elem() CngwServiceUpstreamInfoOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) CngwServiceUpstreamInfo {
+		if v != nil {
+			return *v
+		}
+		var ret CngwServiceUpstreamInfo
+		return ret
+	}).(CngwServiceUpstreamInfoOutput)
+}
+
+// load balance algorithm,default: `round-robin`, `least-connections` and `consistenHashing` also support.
+func (o CngwServiceUpstreamInfoPtrOutput) Algorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Algorithm
+	}).(pulumi.StringPtrOutput)
+}
+
+// auto scaling group port of cvm.
+func (o CngwServiceUpstreamInfoPtrOutput) AutoScalingCvmPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AutoScalingCvmPort
+	}).(pulumi.IntPtrOutput)
+}
+
+// auto scaling group ID of cvm.
+func (o CngwServiceUpstreamInfoPtrOutput) AutoScalingGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AutoScalingGroupId
+	}).(pulumi.StringPtrOutput)
+}
+
+// hook status in auto scaling group of cvm.
+func (o CngwServiceUpstreamInfoPtrOutput) AutoScalingHookStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AutoScalingHookStatus
+	}).(pulumi.StringPtrOutput)
+}
+
+// tat cmd status in auto scaling group of cvm.
+func (o CngwServiceUpstreamInfoPtrOutput) AutoScalingTatCmdStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AutoScalingTatCmdStatus
+	}).(pulumi.StringPtrOutput)
+}
+
+// an IP address or domain name.
+func (o CngwServiceUpstreamInfoPtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// namespace.
+func (o CngwServiceUpstreamInfoPtrOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Namespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// backend service port.valid values: `1` to `65535`.
+func (o CngwServiceUpstreamInfoPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// exact source service type.
+func (o CngwServiceUpstreamInfoPtrOutput) RealSourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RealSourceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// scf lambda name.
+func (o CngwServiceUpstreamInfoPtrOutput) ScfLambdaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScfLambdaName
+	}).(pulumi.StringPtrOutput)
+}
+
+// scf lambda version.
+func (o CngwServiceUpstreamInfoPtrOutput) ScfLambdaQualifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScfLambdaQualifier
+	}).(pulumi.StringPtrOutput)
+}
+
+// scf lambda namespace.
+func (o CngwServiceUpstreamInfoPtrOutput) ScfNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScfNamespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// scf lambda type.
+func (o CngwServiceUpstreamInfoPtrOutput) ScfType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScfType
+	}).(pulumi.StringPtrOutput)
+}
+
+// the name of the service in registry or kubernetes.
+func (o CngwServiceUpstreamInfoPtrOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+func (o CngwServiceUpstreamInfoPtrOutput) SlowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SlowStart
+	}).(pulumi.IntPtrOutput)
+}
+
+// service source ID.
+func (o CngwServiceUpstreamInfoPtrOutput) SourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// the name of source service.
+func (o CngwServiceUpstreamInfoPtrOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// source service type.
+func (o CngwServiceUpstreamInfoPtrOutput) SourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// provided when service type is IPList.
+func (o CngwServiceUpstreamInfoPtrOutput) Targets() CngwServiceUpstreamInfoTargetArrayOutput {
+	return o.ApplyT(func(v *CngwServiceUpstreamInfo) []CngwServiceUpstreamInfoTarget {
+		if v == nil {
+			return nil
+		}
+		return v.Targets
+	}).(CngwServiceUpstreamInfoTargetArrayOutput)
+}
+
+type CngwServiceUpstreamInfoTarget struct {
+	CreatedTime *string `pulumi:"createdTime"`
+	Health      *string `pulumi:"health"`
+	// host.
+	Host string `pulumi:"host"`
+	// port.
+	Port int `pulumi:"port"`
+	// source of target.
+	Source *string `pulumi:"source"`
+	// weight.
+	Weight int `pulumi:"weight"`
+}
+
+// CngwServiceUpstreamInfoTargetInput is an input type that accepts CngwServiceUpstreamInfoTargetArgs and CngwServiceUpstreamInfoTargetOutput values.
+// You can construct a concrete instance of `CngwServiceUpstreamInfoTargetInput` via:
+//
+//          CngwServiceUpstreamInfoTargetArgs{...}
+type CngwServiceUpstreamInfoTargetInput interface {
+	pulumi.Input
+
+	ToCngwServiceUpstreamInfoTargetOutput() CngwServiceUpstreamInfoTargetOutput
+	ToCngwServiceUpstreamInfoTargetOutputWithContext(context.Context) CngwServiceUpstreamInfoTargetOutput
+}
+
+type CngwServiceUpstreamInfoTargetArgs struct {
+	CreatedTime pulumi.StringPtrInput `pulumi:"createdTime"`
+	Health      pulumi.StringPtrInput `pulumi:"health"`
+	// host.
+	Host pulumi.StringInput `pulumi:"host"`
+	// port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// source of target.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// weight.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (CngwServiceUpstreamInfoTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (i CngwServiceUpstreamInfoTargetArgs) ToCngwServiceUpstreamInfoTargetOutput() CngwServiceUpstreamInfoTargetOutput {
+	return i.ToCngwServiceUpstreamInfoTargetOutputWithContext(context.Background())
+}
+
+func (i CngwServiceUpstreamInfoTargetArgs) ToCngwServiceUpstreamInfoTargetOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceUpstreamInfoTargetOutput)
+}
+
+// CngwServiceUpstreamInfoTargetArrayInput is an input type that accepts CngwServiceUpstreamInfoTargetArray and CngwServiceUpstreamInfoTargetArrayOutput values.
+// You can construct a concrete instance of `CngwServiceUpstreamInfoTargetArrayInput` via:
+//
+//          CngwServiceUpstreamInfoTargetArray{ CngwServiceUpstreamInfoTargetArgs{...} }
+type CngwServiceUpstreamInfoTargetArrayInput interface {
+	pulumi.Input
+
+	ToCngwServiceUpstreamInfoTargetArrayOutput() CngwServiceUpstreamInfoTargetArrayOutput
+	ToCngwServiceUpstreamInfoTargetArrayOutputWithContext(context.Context) CngwServiceUpstreamInfoTargetArrayOutput
+}
+
+type CngwServiceUpstreamInfoTargetArray []CngwServiceUpstreamInfoTargetInput
+
+func (CngwServiceUpstreamInfoTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (i CngwServiceUpstreamInfoTargetArray) ToCngwServiceUpstreamInfoTargetArrayOutput() CngwServiceUpstreamInfoTargetArrayOutput {
+	return i.ToCngwServiceUpstreamInfoTargetArrayOutputWithContext(context.Background())
+}
+
+func (i CngwServiceUpstreamInfoTargetArray) ToCngwServiceUpstreamInfoTargetArrayOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwServiceUpstreamInfoTargetArrayOutput)
+}
+
+type CngwServiceUpstreamInfoTargetOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceUpstreamInfoTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwServiceUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (o CngwServiceUpstreamInfoTargetOutput) ToCngwServiceUpstreamInfoTargetOutput() CngwServiceUpstreamInfoTargetOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoTargetOutput) ToCngwServiceUpstreamInfoTargetOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoTargetOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoTargetOutput) CreatedTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) *string { return v.CreatedTime }).(pulumi.StringPtrOutput)
+}
+
+func (o CngwServiceUpstreamInfoTargetOutput) Health() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) *string { return v.Health }).(pulumi.StringPtrOutput)
+}
+
+// host.
+func (o CngwServiceUpstreamInfoTargetOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// port.
+func (o CngwServiceUpstreamInfoTargetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// source of target.
+func (o CngwServiceUpstreamInfoTargetOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+// weight.
+func (o CngwServiceUpstreamInfoTargetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwServiceUpstreamInfoTarget) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type CngwServiceUpstreamInfoTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwServiceUpstreamInfoTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwServiceUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (o CngwServiceUpstreamInfoTargetArrayOutput) ToCngwServiceUpstreamInfoTargetArrayOutput() CngwServiceUpstreamInfoTargetArrayOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoTargetArrayOutput) ToCngwServiceUpstreamInfoTargetArrayOutputWithContext(ctx context.Context) CngwServiceUpstreamInfoTargetArrayOutput {
+	return o
+}
+
+func (o CngwServiceUpstreamInfoTargetArrayOutput) Index(i pulumi.IntInput) CngwServiceUpstreamInfoTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwServiceUpstreamInfoTarget {
+		return vs[0].([]CngwServiceUpstreamInfoTarget)[vs[1].(int)]
+	}).(CngwServiceUpstreamInfoTargetOutput)
+}
+
 type InstanceEngineRegionInfo struct {
 	// Engine node region.
 	EngineRegion string `pulumi:"engineRegion"`
@@ -479,6 +3424,535 @@ func (o GetAccessAddressLimiterAddressInfoArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetAccessAddressLimiterAddressInfoOutput)
 }
 
+type GetGatewayCanaryRulesResult struct {
+	// canary rule list.
+	CanaryRuleLists []GetGatewayCanaryRulesResultCanaryRuleList `pulumi:"canaryRuleLists"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGatewayCanaryRulesResultInput is an input type that accepts GetGatewayCanaryRulesResultArgs and GetGatewayCanaryRulesResultOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultInput` via:
+//
+//          GetGatewayCanaryRulesResultArgs{...}
+type GetGatewayCanaryRulesResultInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultOutput() GetGatewayCanaryRulesResultOutput
+	ToGetGatewayCanaryRulesResultOutputWithContext(context.Context) GetGatewayCanaryRulesResultOutput
+}
+
+type GetGatewayCanaryRulesResultArgs struct {
+	// canary rule list.
+	CanaryRuleLists GetGatewayCanaryRulesResultCanaryRuleListArrayInput `pulumi:"canaryRuleLists"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGatewayCanaryRulesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResult)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultArgs) ToGetGatewayCanaryRulesResultOutput() GetGatewayCanaryRulesResultOutput {
+	return i.ToGetGatewayCanaryRulesResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultArgs) ToGetGatewayCanaryRulesResultOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultOutput)
+}
+
+// GetGatewayCanaryRulesResultArrayInput is an input type that accepts GetGatewayCanaryRulesResultArray and GetGatewayCanaryRulesResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultArrayInput` via:
+//
+//          GetGatewayCanaryRulesResultArray{ GetGatewayCanaryRulesResultArgs{...} }
+type GetGatewayCanaryRulesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultArrayOutput() GetGatewayCanaryRulesResultArrayOutput
+	ToGetGatewayCanaryRulesResultArrayOutputWithContext(context.Context) GetGatewayCanaryRulesResultArrayOutput
+}
+
+type GetGatewayCanaryRulesResultArray []GetGatewayCanaryRulesResultInput
+
+func (GetGatewayCanaryRulesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResult)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultArray) ToGetGatewayCanaryRulesResultArrayOutput() GetGatewayCanaryRulesResultArrayOutput {
+	return i.ToGetGatewayCanaryRulesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultArray) ToGetGatewayCanaryRulesResultArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultArrayOutput)
+}
+
+type GetGatewayCanaryRulesResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResult)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultOutput) ToGetGatewayCanaryRulesResultOutput() GetGatewayCanaryRulesResultOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultOutput) ToGetGatewayCanaryRulesResultOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultOutput {
+	return o
+}
+
+// canary rule list.
+func (o GetGatewayCanaryRulesResultOutput) CanaryRuleLists() GetGatewayCanaryRulesResultCanaryRuleListArrayOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResult) []GetGatewayCanaryRulesResultCanaryRuleList {
+		return v.CanaryRuleLists
+	}).(GetGatewayCanaryRulesResultCanaryRuleListArrayOutput)
+}
+
+// total count.
+func (o GetGatewayCanaryRulesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGatewayCanaryRulesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResult)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultArrayOutput) ToGetGatewayCanaryRulesResultArrayOutput() GetGatewayCanaryRulesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultArrayOutput) ToGetGatewayCanaryRulesResultArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultArrayOutput) Index(i pulumi.IntInput) GetGatewayCanaryRulesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCanaryRulesResult {
+		return vs[0].([]GetGatewayCanaryRulesResult)[vs[1].(int)]
+	}).(GetGatewayCanaryRulesResultOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleList struct {
+	// service weight configuration.
+	BalancedServiceLists []GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList `pulumi:"balancedServiceLists"`
+	// parameter matching condition list.
+	ConditionLists []GetGatewayCanaryRulesResultCanaryRuleListConditionList `pulumi:"conditionLists"`
+	// the status of canary rule.
+	Enabled bool `pulumi:"enabled"`
+	// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+	Priority int `pulumi:"priority"`
+	// service ID.
+	ServiceId string `pulumi:"serviceId"`
+	// service name.
+	ServiceName string `pulumi:"serviceName"`
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListArgs and GetGatewayCanaryRulesResultCanaryRuleListOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListArgs{...}
+type GetGatewayCanaryRulesResultCanaryRuleListInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListOutput() GetGatewayCanaryRulesResultCanaryRuleListOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListArgs struct {
+	// service weight configuration.
+	BalancedServiceLists GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput `pulumi:"balancedServiceLists"`
+	// parameter matching condition list.
+	ConditionLists GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput `pulumi:"conditionLists"`
+	// the status of canary rule.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// service ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// service name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+}
+
+func (GetGatewayCanaryRulesResultCanaryRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListOutput() GetGatewayCanaryRulesResultCanaryRuleListOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListOutput)
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListArray and GetGatewayCanaryRulesResultCanaryRuleListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListArrayInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListArray{ GetGatewayCanaryRulesResultCanaryRuleListArgs{...} }
+type GetGatewayCanaryRulesResultCanaryRuleListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListArrayOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListArrayOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListArray []GetGatewayCanaryRulesResultCanaryRuleListInput
+
+func (GetGatewayCanaryRulesResultCanaryRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListArray) ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListArrayOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListArray) ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListArrayOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListOutput() GetGatewayCanaryRulesResultCanaryRuleListOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListOutput {
+	return o
+}
+
+// service weight configuration.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) BalancedServiceLists() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) []GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList {
+		return v.BalancedServiceLists
+	}).(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput)
+}
+
+// parameter matching condition list.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) ConditionLists() GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) []GetGatewayCanaryRulesResultCanaryRuleListConditionList {
+		return v.ConditionLists
+	}).(GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput)
+}
+
+// the status of canary rule.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// service ID.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// service name.
+func (o GetGatewayCanaryRulesResultCanaryRuleListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListArrayOutput) Index(i pulumi.IntInput) GetGatewayCanaryRulesResultCanaryRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCanaryRulesResultCanaryRuleList {
+		return vs[0].([]GetGatewayCanaryRulesResultCanaryRuleList)[vs[1].(int)]
+	}).(GetGatewayCanaryRulesResultCanaryRuleListOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList struct {
+	// percent, 10 is 10%, valid values: 0 to 100.
+	Percent float64 `pulumi:"percent"`
+	// service ID.
+	ServiceId string `pulumi:"serviceId"`
+	// service name.
+	ServiceName string `pulumi:"serviceName"`
+	// upstream name.
+	UpstreamName string `pulumi:"upstreamName"`
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs and GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...}
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs struct {
+	// percent, 10 is 10%, valid values: 0 to 100.
+	Percent pulumi.Float64Input `pulumi:"percent"`
+	// service ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// service name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+	// upstream name.
+	UpstreamName pulumi.StringInput `pulumi:"upstreamName"`
+}
+
+func (GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput)
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray and GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray{ GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...} }
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray []GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput
+
+func (GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput {
+	return o
+}
+
+// percent, 10 is 10%, valid values: 0 to 100.
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) Percent() pulumi.Float64Output {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList) float64 { return v.Percent }).(pulumi.Float64Output)
+}
+
+// service ID.
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// service name.
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+// upstream name.
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput) UpstreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList) string { return v.UpstreamName }).(pulumi.StringOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput) Index(i pulumi.IntInput) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList {
+		return vs[0].([]GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList)[vs[1].(int)]
+	}).(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListConditionList struct {
+	// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+	Delimiter string `pulumi:"delimiter"`
+	// global configuration ID.
+	GlobalConfigId string `pulumi:"globalConfigId"`
+	// global configuration name.
+	GlobalConfigName string `pulumi:"globalConfigName"`
+	// parameter name.
+	Key string `pulumi:"key"`
+	// operator.Reference value:`le`, `eq`, `lt`, `ne`, `ge`, `gt`, `regex`, `exists`, `in`, `not in`,  `prefix`, `exact`, `regex`.
+	Operator string `pulumi:"operator"`
+	// type.Reference value:- path- method- query- header- cookie- body- system.
+	Type string `pulumi:"type"`
+	// parameter value.
+	Value string `pulumi:"value"`
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListConditionListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs and GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListConditionListInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...}
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs struct {
+	// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+	Delimiter pulumi.StringInput `pulumi:"delimiter"`
+	// global configuration ID.
+	GlobalConfigId pulumi.StringInput `pulumi:"globalConfigId"`
+	// global configuration name.
+	GlobalConfigName pulumi.StringInput `pulumi:"globalConfigName"`
+	// parameter name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// operator.Reference value:`le`, `eq`, `lt`, `ne`, `ge`, `gt`, `regex`, `exists`, `in`, `not in`,  `prefix`, `exact`, `regex`.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// type.Reference value:- path- method- query- header- cookie- body- system.
+	Type pulumi.StringInput `pulumi:"type"`
+	// parameter value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput)
+}
+
+// GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListConditionListArray and GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput` via:
+//
+//          GetGatewayCanaryRulesResultCanaryRuleListConditionListArray{ GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...} }
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput
+	ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutputWithContext(context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListArray []GetGatewayCanaryRulesResultCanaryRuleListConditionListInput
+
+func (GetGatewayCanaryRulesResultCanaryRuleListConditionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleListConditionList)(nil)).Elem()
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListConditionListArray) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput {
+	return i.ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCanaryRulesResultCanaryRuleListConditionListArray) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput {
+	return o
+}
+
+// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) Delimiter() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.Delimiter }).(pulumi.StringOutput)
+}
+
+// global configuration ID.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) GlobalConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.GlobalConfigId }).(pulumi.StringOutput)
+}
+
+// global configuration name.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) GlobalConfigName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.GlobalConfigName }).(pulumi.StringOutput)
+}
+
+// parameter name.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// operator.Reference value:`le`, `eq`, `lt`, `ne`, `ge`, `gt`, `regex`, `exists`, `in`, `not in`,  `prefix`, `exact`, `regex`.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// type.Reference value:- path- method- query- header- cookie- body- system.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// parameter value.
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCanaryRulesResultCanaryRuleListConditionList) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCanaryRulesResultCanaryRuleListConditionList)(nil)).Elem()
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput() GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput) ToGetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutputWithContext(ctx context.Context) GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput) Index(i pulumi.IntInput) GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCanaryRulesResultCanaryRuleListConditionList {
+		return vs[0].([]GetGatewayCanaryRulesResultCanaryRuleListConditionList)[vs[1].(int)]
+	}).(GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput)
+}
+
 type GetGatewayNodesNodeList struct {
 	// gateway group ID.
 	GroupId string `pulumi:"groupId"`
@@ -628,6 +4102,1152 @@ func (o GetGatewayNodesNodeListArrayOutput) Index(i pulumi.IntInput) GetGatewayN
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayNodesNodeList {
 		return vs[0].([]GetGatewayNodesNodeList)[vs[1].(int)]
 	}).(GetGatewayNodesNodeListOutput)
+}
+
+type GetGatewayRoutesResult struct {
+	RouteLists []GetGatewayRoutesResultRouteList `pulumi:"routeLists"`
+	TotalCount int                               `pulumi:"totalCount"`
+}
+
+// GetGatewayRoutesResultInput is an input type that accepts GetGatewayRoutesResultArgs and GetGatewayRoutesResultOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultInput` via:
+//
+//          GetGatewayRoutesResultArgs{...}
+type GetGatewayRoutesResultInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultOutput() GetGatewayRoutesResultOutput
+	ToGetGatewayRoutesResultOutputWithContext(context.Context) GetGatewayRoutesResultOutput
+}
+
+type GetGatewayRoutesResultArgs struct {
+	RouteLists GetGatewayRoutesResultRouteListArrayInput `pulumi:"routeLists"`
+	TotalCount pulumi.IntInput                           `pulumi:"totalCount"`
+}
+
+func (GetGatewayRoutesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResult)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultArgs) ToGetGatewayRoutesResultOutput() GetGatewayRoutesResultOutput {
+	return i.ToGetGatewayRoutesResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultArgs) ToGetGatewayRoutesResultOutputWithContext(ctx context.Context) GetGatewayRoutesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultOutput)
+}
+
+// GetGatewayRoutesResultArrayInput is an input type that accepts GetGatewayRoutesResultArray and GetGatewayRoutesResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultArrayInput` via:
+//
+//          GetGatewayRoutesResultArray{ GetGatewayRoutesResultArgs{...} }
+type GetGatewayRoutesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultArrayOutput() GetGatewayRoutesResultArrayOutput
+	ToGetGatewayRoutesResultArrayOutputWithContext(context.Context) GetGatewayRoutesResultArrayOutput
+}
+
+type GetGatewayRoutesResultArray []GetGatewayRoutesResultInput
+
+func (GetGatewayRoutesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResult)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultArray) ToGetGatewayRoutesResultArrayOutput() GetGatewayRoutesResultArrayOutput {
+	return i.ToGetGatewayRoutesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultArray) ToGetGatewayRoutesResultArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultArrayOutput)
+}
+
+type GetGatewayRoutesResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResult)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultOutput) ToGetGatewayRoutesResultOutput() GetGatewayRoutesResultOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultOutput) ToGetGatewayRoutesResultOutputWithContext(ctx context.Context) GetGatewayRoutesResultOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultOutput) RouteLists() GetGatewayRoutesResultRouteListArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResult) []GetGatewayRoutesResultRouteList { return v.RouteLists }).(GetGatewayRoutesResultRouteListArrayOutput)
+}
+
+func (o GetGatewayRoutesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGatewayRoutesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResult)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultArrayOutput) ToGetGatewayRoutesResultArrayOutput() GetGatewayRoutesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultArrayOutput) ToGetGatewayRoutesResultArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultArrayOutput) Index(i pulumi.IntInput) GetGatewayRoutesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayRoutesResult {
+		return vs[0].([]GetGatewayRoutesResult)[vs[1].(int)]
+	}).(GetGatewayRoutesResultOutput)
+}
+
+type GetGatewayRoutesResultRouteList struct {
+	CreatedTime             string                                  `pulumi:"createdTime"`
+	DestinationPorts        []int                                   `pulumi:"destinationPorts"`
+	ForceHttps              bool                                    `pulumi:"forceHttps"`
+	Headers                 []GetGatewayRoutesResultRouteListHeader `pulumi:"headers"`
+	Hosts                   []string                                `pulumi:"hosts"`
+	HttpsRedirectStatusCode int                                     `pulumi:"httpsRedirectStatusCode"`
+	Id                      string                                  `pulumi:"id"`
+	Methods                 []string                                `pulumi:"methods"`
+	Name                    string                                  `pulumi:"name"`
+	Paths                   []string                                `pulumi:"paths"`
+	PreserveHost            bool                                    `pulumi:"preserveHost"`
+	Protocols               []string                                `pulumi:"protocols"`
+	ServiceId               string                                  `pulumi:"serviceId"`
+	ServiceName             string                                  `pulumi:"serviceName"`
+	StripPath               bool                                    `pulumi:"stripPath"`
+}
+
+// GetGatewayRoutesResultRouteListInput is an input type that accepts GetGatewayRoutesResultRouteListArgs and GetGatewayRoutesResultRouteListOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultRouteListInput` via:
+//
+//          GetGatewayRoutesResultRouteListArgs{...}
+type GetGatewayRoutesResultRouteListInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultRouteListOutput() GetGatewayRoutesResultRouteListOutput
+	ToGetGatewayRoutesResultRouteListOutputWithContext(context.Context) GetGatewayRoutesResultRouteListOutput
+}
+
+type GetGatewayRoutesResultRouteListArgs struct {
+	CreatedTime             pulumi.StringInput                              `pulumi:"createdTime"`
+	DestinationPorts        pulumi.IntArrayInput                            `pulumi:"destinationPorts"`
+	ForceHttps              pulumi.BoolInput                                `pulumi:"forceHttps"`
+	Headers                 GetGatewayRoutesResultRouteListHeaderArrayInput `pulumi:"headers"`
+	Hosts                   pulumi.StringArrayInput                         `pulumi:"hosts"`
+	HttpsRedirectStatusCode pulumi.IntInput                                 `pulumi:"httpsRedirectStatusCode"`
+	Id                      pulumi.StringInput                              `pulumi:"id"`
+	Methods                 pulumi.StringArrayInput                         `pulumi:"methods"`
+	Name                    pulumi.StringInput                              `pulumi:"name"`
+	Paths                   pulumi.StringArrayInput                         `pulumi:"paths"`
+	PreserveHost            pulumi.BoolInput                                `pulumi:"preserveHost"`
+	Protocols               pulumi.StringArrayInput                         `pulumi:"protocols"`
+	ServiceId               pulumi.StringInput                              `pulumi:"serviceId"`
+	ServiceName             pulumi.StringInput                              `pulumi:"serviceName"`
+	StripPath               pulumi.BoolInput                                `pulumi:"stripPath"`
+}
+
+func (GetGatewayRoutesResultRouteListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResultRouteList)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultRouteListArgs) ToGetGatewayRoutesResultRouteListOutput() GetGatewayRoutesResultRouteListOutput {
+	return i.ToGetGatewayRoutesResultRouteListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultRouteListArgs) ToGetGatewayRoutesResultRouteListOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultRouteListOutput)
+}
+
+// GetGatewayRoutesResultRouteListArrayInput is an input type that accepts GetGatewayRoutesResultRouteListArray and GetGatewayRoutesResultRouteListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultRouteListArrayInput` via:
+//
+//          GetGatewayRoutesResultRouteListArray{ GetGatewayRoutesResultRouteListArgs{...} }
+type GetGatewayRoutesResultRouteListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultRouteListArrayOutput() GetGatewayRoutesResultRouteListArrayOutput
+	ToGetGatewayRoutesResultRouteListArrayOutputWithContext(context.Context) GetGatewayRoutesResultRouteListArrayOutput
+}
+
+type GetGatewayRoutesResultRouteListArray []GetGatewayRoutesResultRouteListInput
+
+func (GetGatewayRoutesResultRouteListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResultRouteList)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultRouteListArray) ToGetGatewayRoutesResultRouteListArrayOutput() GetGatewayRoutesResultRouteListArrayOutput {
+	return i.ToGetGatewayRoutesResultRouteListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultRouteListArray) ToGetGatewayRoutesResultRouteListArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultRouteListArrayOutput)
+}
+
+type GetGatewayRoutesResultRouteListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultRouteListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResultRouteList)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) ToGetGatewayRoutesResultRouteListOutput() GetGatewayRoutesResultRouteListOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) ToGetGatewayRoutesResultRouteListOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) DestinationPorts() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []int { return v.DestinationPorts }).(pulumi.IntArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) ForceHttps() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.ForceHttps }).(pulumi.BoolOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Headers() GetGatewayRoutesResultRouteListHeaderArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []GetGatewayRoutesResultRouteListHeader { return v.Headers }).(GetGatewayRoutesResultRouteListHeaderArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) HttpsRedirectStatusCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) int { return v.HttpsRedirectStatusCode }).(pulumi.IntOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Methods() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Methods }).(pulumi.StringArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Paths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Paths }).(pulumi.StringArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) PreserveHost() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.PreserveHost }).(pulumi.BoolOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) Protocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Protocols }).(pulumi.StringArrayOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListOutput) StripPath() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.StripPath }).(pulumi.BoolOutput)
+}
+
+type GetGatewayRoutesResultRouteListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultRouteListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResultRouteList)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultRouteListArrayOutput) ToGetGatewayRoutesResultRouteListArrayOutput() GetGatewayRoutesResultRouteListArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListArrayOutput) ToGetGatewayRoutesResultRouteListArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListArrayOutput) Index(i pulumi.IntInput) GetGatewayRoutesResultRouteListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayRoutesResultRouteList {
+		return vs[0].([]GetGatewayRoutesResultRouteList)[vs[1].(int)]
+	}).(GetGatewayRoutesResultRouteListOutput)
+}
+
+type GetGatewayRoutesResultRouteListHeader struct {
+	Key   string `pulumi:"key"`
+	Value string `pulumi:"value"`
+}
+
+// GetGatewayRoutesResultRouteListHeaderInput is an input type that accepts GetGatewayRoutesResultRouteListHeaderArgs and GetGatewayRoutesResultRouteListHeaderOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultRouteListHeaderInput` via:
+//
+//          GetGatewayRoutesResultRouteListHeaderArgs{...}
+type GetGatewayRoutesResultRouteListHeaderInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultRouteListHeaderOutput() GetGatewayRoutesResultRouteListHeaderOutput
+	ToGetGatewayRoutesResultRouteListHeaderOutputWithContext(context.Context) GetGatewayRoutesResultRouteListHeaderOutput
+}
+
+type GetGatewayRoutesResultRouteListHeaderArgs struct {
+	Key   pulumi.StringInput `pulumi:"key"`
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetGatewayRoutesResultRouteListHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResultRouteListHeader)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultRouteListHeaderArgs) ToGetGatewayRoutesResultRouteListHeaderOutput() GetGatewayRoutesResultRouteListHeaderOutput {
+	return i.ToGetGatewayRoutesResultRouteListHeaderOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultRouteListHeaderArgs) ToGetGatewayRoutesResultRouteListHeaderOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultRouteListHeaderOutput)
+}
+
+// GetGatewayRoutesResultRouteListHeaderArrayInput is an input type that accepts GetGatewayRoutesResultRouteListHeaderArray and GetGatewayRoutesResultRouteListHeaderArrayOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesResultRouteListHeaderArrayInput` via:
+//
+//          GetGatewayRoutesResultRouteListHeaderArray{ GetGatewayRoutesResultRouteListHeaderArgs{...} }
+type GetGatewayRoutesResultRouteListHeaderArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayRoutesResultRouteListHeaderArrayOutput() GetGatewayRoutesResultRouteListHeaderArrayOutput
+	ToGetGatewayRoutesResultRouteListHeaderArrayOutputWithContext(context.Context) GetGatewayRoutesResultRouteListHeaderArrayOutput
+}
+
+type GetGatewayRoutesResultRouteListHeaderArray []GetGatewayRoutesResultRouteListHeaderInput
+
+func (GetGatewayRoutesResultRouteListHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResultRouteListHeader)(nil)).Elem()
+}
+
+func (i GetGatewayRoutesResultRouteListHeaderArray) ToGetGatewayRoutesResultRouteListHeaderArrayOutput() GetGatewayRoutesResultRouteListHeaderArrayOutput {
+	return i.ToGetGatewayRoutesResultRouteListHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayRoutesResultRouteListHeaderArray) ToGetGatewayRoutesResultRouteListHeaderArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesResultRouteListHeaderArrayOutput)
+}
+
+type GetGatewayRoutesResultRouteListHeaderOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultRouteListHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesResultRouteListHeader)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderOutput) ToGetGatewayRoutesResultRouteListHeaderOutput() GetGatewayRoutesResultRouteListHeaderOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderOutput) ToGetGatewayRoutesResultRouteListHeaderOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListHeaderOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteListHeader) string { return v.Key }).(pulumi.StringOutput)
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesResultRouteListHeader) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetGatewayRoutesResultRouteListHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayRoutesResultRouteListHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesResultRouteListHeader)(nil)).Elem()
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderArrayOutput) ToGetGatewayRoutesResultRouteListHeaderArrayOutput() GetGatewayRoutesResultRouteListHeaderArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderArrayOutput) ToGetGatewayRoutesResultRouteListHeaderArrayOutputWithContext(ctx context.Context) GetGatewayRoutesResultRouteListHeaderArrayOutput {
+	return o
+}
+
+func (o GetGatewayRoutesResultRouteListHeaderArrayOutput) Index(i pulumi.IntInput) GetGatewayRoutesResultRouteListHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayRoutesResultRouteListHeader {
+		return vs[0].([]GetGatewayRoutesResultRouteListHeader)[vs[1].(int)]
+	}).(GetGatewayRoutesResultRouteListHeaderOutput)
+}
+
+type GetGatewayServicesFilter struct {
+	// filter name.
+	Key *string `pulumi:"key"`
+	// filter value.
+	Value *string `pulumi:"value"`
+}
+
+// GetGatewayServicesFilterInput is an input type that accepts GetGatewayServicesFilterArgs and GetGatewayServicesFilterOutput values.
+// You can construct a concrete instance of `GetGatewayServicesFilterInput` via:
+//
+//          GetGatewayServicesFilterArgs{...}
+type GetGatewayServicesFilterInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesFilterOutput() GetGatewayServicesFilterOutput
+	ToGetGatewayServicesFilterOutputWithContext(context.Context) GetGatewayServicesFilterOutput
+}
+
+type GetGatewayServicesFilterArgs struct {
+	// filter name.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// filter value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (GetGatewayServicesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesFilter)(nil)).Elem()
+}
+
+func (i GetGatewayServicesFilterArgs) ToGetGatewayServicesFilterOutput() GetGatewayServicesFilterOutput {
+	return i.ToGetGatewayServicesFilterOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesFilterArgs) ToGetGatewayServicesFilterOutputWithContext(ctx context.Context) GetGatewayServicesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesFilterOutput)
+}
+
+// GetGatewayServicesFilterArrayInput is an input type that accepts GetGatewayServicesFilterArray and GetGatewayServicesFilterArrayOutput values.
+// You can construct a concrete instance of `GetGatewayServicesFilterArrayInput` via:
+//
+//          GetGatewayServicesFilterArray{ GetGatewayServicesFilterArgs{...} }
+type GetGatewayServicesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesFilterArrayOutput() GetGatewayServicesFilterArrayOutput
+	ToGetGatewayServicesFilterArrayOutputWithContext(context.Context) GetGatewayServicesFilterArrayOutput
+}
+
+type GetGatewayServicesFilterArray []GetGatewayServicesFilterInput
+
+func (GetGatewayServicesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesFilter)(nil)).Elem()
+}
+
+func (i GetGatewayServicesFilterArray) ToGetGatewayServicesFilterArrayOutput() GetGatewayServicesFilterArrayOutput {
+	return i.ToGetGatewayServicesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesFilterArray) ToGetGatewayServicesFilterArrayOutputWithContext(ctx context.Context) GetGatewayServicesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesFilterArrayOutput)
+}
+
+type GetGatewayServicesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesFilter)(nil)).Elem()
+}
+
+func (o GetGatewayServicesFilterOutput) ToGetGatewayServicesFilterOutput() GetGatewayServicesFilterOutput {
+	return o
+}
+
+func (o GetGatewayServicesFilterOutput) ToGetGatewayServicesFilterOutputWithContext(ctx context.Context) GetGatewayServicesFilterOutput {
+	return o
+}
+
+// filter name.
+func (o GetGatewayServicesFilterOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetGatewayServicesFilter) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// filter value.
+func (o GetGatewayServicesFilterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetGatewayServicesFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type GetGatewayServicesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesFilter)(nil)).Elem()
+}
+
+func (o GetGatewayServicesFilterArrayOutput) ToGetGatewayServicesFilterArrayOutput() GetGatewayServicesFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesFilterArrayOutput) ToGetGatewayServicesFilterArrayOutputWithContext(ctx context.Context) GetGatewayServicesFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesFilterArrayOutput) Index(i pulumi.IntInput) GetGatewayServicesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayServicesFilter {
+		return vs[0].([]GetGatewayServicesFilter)[vs[1].(int)]
+	}).(GetGatewayServicesFilterOutput)
+}
+
+type GetGatewayServicesResult struct {
+	// service list.
+	ServiceLists []GetGatewayServicesResultServiceList `pulumi:"serviceLists"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGatewayServicesResultInput is an input type that accepts GetGatewayServicesResultArgs and GetGatewayServicesResultOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultInput` via:
+//
+//          GetGatewayServicesResultArgs{...}
+type GetGatewayServicesResultInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultOutput() GetGatewayServicesResultOutput
+	ToGetGatewayServicesResultOutputWithContext(context.Context) GetGatewayServicesResultOutput
+}
+
+type GetGatewayServicesResultArgs struct {
+	// service list.
+	ServiceLists GetGatewayServicesResultServiceListArrayInput `pulumi:"serviceLists"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGatewayServicesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResult)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultArgs) ToGetGatewayServicesResultOutput() GetGatewayServicesResultOutput {
+	return i.ToGetGatewayServicesResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultArgs) ToGetGatewayServicesResultOutputWithContext(ctx context.Context) GetGatewayServicesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultOutput)
+}
+
+// GetGatewayServicesResultArrayInput is an input type that accepts GetGatewayServicesResultArray and GetGatewayServicesResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultArrayInput` via:
+//
+//          GetGatewayServicesResultArray{ GetGatewayServicesResultArgs{...} }
+type GetGatewayServicesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultArrayOutput() GetGatewayServicesResultArrayOutput
+	ToGetGatewayServicesResultArrayOutputWithContext(context.Context) GetGatewayServicesResultArrayOutput
+}
+
+type GetGatewayServicesResultArray []GetGatewayServicesResultInput
+
+func (GetGatewayServicesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResult)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultArray) ToGetGatewayServicesResultArrayOutput() GetGatewayServicesResultArrayOutput {
+	return i.ToGetGatewayServicesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultArray) ToGetGatewayServicesResultArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultArrayOutput)
+}
+
+type GetGatewayServicesResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResult)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultOutput) ToGetGatewayServicesResultOutput() GetGatewayServicesResultOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultOutput) ToGetGatewayServicesResultOutputWithContext(ctx context.Context) GetGatewayServicesResultOutput {
+	return o
+}
+
+// service list.
+func (o GetGatewayServicesResultOutput) ServiceLists() GetGatewayServicesResultServiceListArrayOutput {
+	return o.ApplyT(func(v GetGatewayServicesResult) []GetGatewayServicesResultServiceList { return v.ServiceLists }).(GetGatewayServicesResultServiceListArrayOutput)
+}
+
+// total count.
+func (o GetGatewayServicesResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGatewayServicesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResult)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultArrayOutput) ToGetGatewayServicesResultArrayOutput() GetGatewayServicesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultArrayOutput) ToGetGatewayServicesResultArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultArrayOutput) Index(i pulumi.IntInput) GetGatewayServicesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayServicesResult {
+		return vs[0].([]GetGatewayServicesResult)[vs[1].(int)]
+	}).(GetGatewayServicesResultOutput)
+}
+
+type GetGatewayServicesResultServiceList struct {
+	// created time.
+	CreatedTime string `pulumi:"createdTime"`
+	// editable status.
+	Editable bool `pulumi:"editable"`
+	// service ID.
+	Id string `pulumi:"id"`
+	// service name.
+	Name string `pulumi:"name"`
+	// tag list.
+	Tags []string `pulumi:"tags"`
+	// upstream information.
+	UpstreamInfos []GetGatewayServicesResultServiceListUpstreamInfo `pulumi:"upstreamInfos"`
+	// service type.
+	UpstreamType string `pulumi:"upstreamType"`
+}
+
+// GetGatewayServicesResultServiceListInput is an input type that accepts GetGatewayServicesResultServiceListArgs and GetGatewayServicesResultServiceListOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListInput` via:
+//
+//          GetGatewayServicesResultServiceListArgs{...}
+type GetGatewayServicesResultServiceListInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListOutput() GetGatewayServicesResultServiceListOutput
+	ToGetGatewayServicesResultServiceListOutputWithContext(context.Context) GetGatewayServicesResultServiceListOutput
+}
+
+type GetGatewayServicesResultServiceListArgs struct {
+	// created time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// editable status.
+	Editable pulumi.BoolInput `pulumi:"editable"`
+	// service ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// service name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// tag list.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	// upstream information.
+	UpstreamInfos GetGatewayServicesResultServiceListUpstreamInfoArrayInput `pulumi:"upstreamInfos"`
+	// service type.
+	UpstreamType pulumi.StringInput `pulumi:"upstreamType"`
+}
+
+func (GetGatewayServicesResultServiceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceList)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListArgs) ToGetGatewayServicesResultServiceListOutput() GetGatewayServicesResultServiceListOutput {
+	return i.ToGetGatewayServicesResultServiceListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListArgs) ToGetGatewayServicesResultServiceListOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListOutput)
+}
+
+// GetGatewayServicesResultServiceListArrayInput is an input type that accepts GetGatewayServicesResultServiceListArray and GetGatewayServicesResultServiceListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListArrayInput` via:
+//
+//          GetGatewayServicesResultServiceListArray{ GetGatewayServicesResultServiceListArgs{...} }
+type GetGatewayServicesResultServiceListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListArrayOutput() GetGatewayServicesResultServiceListArrayOutput
+	ToGetGatewayServicesResultServiceListArrayOutputWithContext(context.Context) GetGatewayServicesResultServiceListArrayOutput
+}
+
+type GetGatewayServicesResultServiceListArray []GetGatewayServicesResultServiceListInput
+
+func (GetGatewayServicesResultServiceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceList)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListArray) ToGetGatewayServicesResultServiceListArrayOutput() GetGatewayServicesResultServiceListArrayOutput {
+	return i.ToGetGatewayServicesResultServiceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListArray) ToGetGatewayServicesResultServiceListArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListArrayOutput)
+}
+
+type GetGatewayServicesResultServiceListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceList)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListOutput) ToGetGatewayServicesResultServiceListOutput() GetGatewayServicesResultServiceListOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListOutput) ToGetGatewayServicesResultServiceListOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListOutput {
+	return o
+}
+
+// created time.
+func (o GetGatewayServicesResultServiceListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// editable status.
+func (o GetGatewayServicesResultServiceListOutput) Editable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) bool { return v.Editable }).(pulumi.BoolOutput)
+}
+
+// service ID.
+func (o GetGatewayServicesResultServiceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// service name.
+func (o GetGatewayServicesResultServiceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// tag list.
+func (o GetGatewayServicesResultServiceListOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// upstream information.
+func (o GetGatewayServicesResultServiceListOutput) UpstreamInfos() GetGatewayServicesResultServiceListUpstreamInfoArrayOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) []GetGatewayServicesResultServiceListUpstreamInfo {
+		return v.UpstreamInfos
+	}).(GetGatewayServicesResultServiceListUpstreamInfoArrayOutput)
+}
+
+// service type.
+func (o GetGatewayServicesResultServiceListOutput) UpstreamType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceList) string { return v.UpstreamType }).(pulumi.StringOutput)
+}
+
+type GetGatewayServicesResultServiceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceList)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListArrayOutput) ToGetGatewayServicesResultServiceListArrayOutput() GetGatewayServicesResultServiceListArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListArrayOutput) ToGetGatewayServicesResultServiceListArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListArrayOutput) Index(i pulumi.IntInput) GetGatewayServicesResultServiceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayServicesResultServiceList {
+		return vs[0].([]GetGatewayServicesResultServiceList)[vs[1].(int)]
+	}).(GetGatewayServicesResultServiceListOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfo struct {
+	// load balance algorithm,default:round-robin,least-connections and consistenHashing also support.
+	Algorithm string `pulumi:"algorithm"`
+	// auto scaling group port of cvm.
+	AutoScalingCvmPort int `pulumi:"autoScalingCvmPort"`
+	// auto scaling group ID of cvm.
+	AutoScalingGroupId string `pulumi:"autoScalingGroupId"`
+	// hook status in auto scaling group of cvm.
+	AutoScalingHookStatus string `pulumi:"autoScalingHookStatus"`
+	// tat cmd status in auto scaling group of cvm.
+	AutoScalingTatCmdStatus string `pulumi:"autoScalingTatCmdStatus"`
+	// Host.
+	Host string `pulumi:"host"`
+	// namespace.
+	Namespace string `pulumi:"namespace"`
+	// port.
+	Port int `pulumi:"port"`
+	// exact source service type.
+	RealSourceType string `pulumi:"realSourceType"`
+	// scf lambda name.
+	ScfLambdaName string `pulumi:"scfLambdaName"`
+	// scf lambda version.
+	ScfLambdaQualifier string `pulumi:"scfLambdaQualifier"`
+	// scf lambda namespace.
+	ScfNamespace string `pulumi:"scfNamespace"`
+	// scf lambda type.
+	ScfType string `pulumi:"scfType"`
+	// the name of the service in registry or kubernetes.
+	ServiceName string `pulumi:"serviceName"`
+	// slow start time, unit:second,when it&#39;s enabled, weight of the node is increased from 1 to the target value gradually.
+	SlowStart int `pulumi:"slowStart"`
+	// service source ID.
+	SourceId string `pulumi:"sourceId"`
+	// the name of source service.
+	SourceName string `pulumi:"sourceName"`
+	// source service type.
+	SourceType string `pulumi:"sourceType"`
+	// provided when service type is IPList.
+	Targets []GetGatewayServicesResultServiceListUpstreamInfoTarget `pulumi:"targets"`
+}
+
+// GetGatewayServicesResultServiceListUpstreamInfoInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoArgs and GetGatewayServicesResultServiceListUpstreamInfoOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoInput` via:
+//
+//          GetGatewayServicesResultServiceListUpstreamInfoArgs{...}
+type GetGatewayServicesResultServiceListUpstreamInfoInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListUpstreamInfoOutput() GetGatewayServicesResultServiceListUpstreamInfoOutput
+	ToGetGatewayServicesResultServiceListUpstreamInfoOutputWithContext(context.Context) GetGatewayServicesResultServiceListUpstreamInfoOutput
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoArgs struct {
+	// load balance algorithm,default:round-robin,least-connections and consistenHashing also support.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// auto scaling group port of cvm.
+	AutoScalingCvmPort pulumi.IntInput `pulumi:"autoScalingCvmPort"`
+	// auto scaling group ID of cvm.
+	AutoScalingGroupId pulumi.StringInput `pulumi:"autoScalingGroupId"`
+	// hook status in auto scaling group of cvm.
+	AutoScalingHookStatus pulumi.StringInput `pulumi:"autoScalingHookStatus"`
+	// tat cmd status in auto scaling group of cvm.
+	AutoScalingTatCmdStatus pulumi.StringInput `pulumi:"autoScalingTatCmdStatus"`
+	// Host.
+	Host pulumi.StringInput `pulumi:"host"`
+	// namespace.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// exact source service type.
+	RealSourceType pulumi.StringInput `pulumi:"realSourceType"`
+	// scf lambda name.
+	ScfLambdaName pulumi.StringInput `pulumi:"scfLambdaName"`
+	// scf lambda version.
+	ScfLambdaQualifier pulumi.StringInput `pulumi:"scfLambdaQualifier"`
+	// scf lambda namespace.
+	ScfNamespace pulumi.StringInput `pulumi:"scfNamespace"`
+	// scf lambda type.
+	ScfType pulumi.StringInput `pulumi:"scfType"`
+	// the name of the service in registry or kubernetes.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+	// slow start time, unit:second,when it&#39;s enabled, weight of the node is increased from 1 to the target value gradually.
+	SlowStart pulumi.IntInput `pulumi:"slowStart"`
+	// service source ID.
+	SourceId pulumi.StringInput `pulumi:"sourceId"`
+	// the name of source service.
+	SourceName pulumi.StringInput `pulumi:"sourceName"`
+	// source service type.
+	SourceType pulumi.StringInput `pulumi:"sourceType"`
+	// provided when service type is IPList.
+	Targets GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput `pulumi:"targets"`
+}
+
+func (GetGatewayServicesResultServiceListUpstreamInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfo)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoArgs) ToGetGatewayServicesResultServiceListUpstreamInfoOutput() GetGatewayServicesResultServiceListUpstreamInfoOutput {
+	return i.ToGetGatewayServicesResultServiceListUpstreamInfoOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoArgs) ToGetGatewayServicesResultServiceListUpstreamInfoOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListUpstreamInfoOutput)
+}
+
+// GetGatewayServicesResultServiceListUpstreamInfoArrayInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoArray and GetGatewayServicesResultServiceListUpstreamInfoArrayOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoArrayInput` via:
+//
+//          GetGatewayServicesResultServiceListUpstreamInfoArray{ GetGatewayServicesResultServiceListUpstreamInfoArgs{...} }
+type GetGatewayServicesResultServiceListUpstreamInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoArrayOutput
+	ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutputWithContext(context.Context) GetGatewayServicesResultServiceListUpstreamInfoArrayOutput
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoArray []GetGatewayServicesResultServiceListUpstreamInfoInput
+
+func (GetGatewayServicesResultServiceListUpstreamInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceListUpstreamInfo)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoArray) ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoArrayOutput {
+	return i.ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoArray) ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListUpstreamInfoArrayOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListUpstreamInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfo)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ToGetGatewayServicesResultServiceListUpstreamInfoOutput() GetGatewayServicesResultServiceListUpstreamInfoOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ToGetGatewayServicesResultServiceListUpstreamInfoOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoOutput {
+	return o
+}
+
+// load balance algorithm,default:round-robin,least-connections and consistenHashing also support.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// auto scaling group port of cvm.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) AutoScalingCvmPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) int { return v.AutoScalingCvmPort }).(pulumi.IntOutput)
+}
+
+// auto scaling group ID of cvm.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) AutoScalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.AutoScalingGroupId }).(pulumi.StringOutput)
+}
+
+// hook status in auto scaling group of cvm.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) AutoScalingHookStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.AutoScalingHookStatus }).(pulumi.StringOutput)
+}
+
+// tat cmd status in auto scaling group of cvm.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) AutoScalingTatCmdStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.AutoScalingTatCmdStatus }).(pulumi.StringOutput)
+}
+
+// Host.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// namespace.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// port.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// exact source service type.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) RealSourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.RealSourceType }).(pulumi.StringOutput)
+}
+
+// scf lambda name.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ScfLambdaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.ScfLambdaName }).(pulumi.StringOutput)
+}
+
+// scf lambda version.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ScfLambdaQualifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.ScfLambdaQualifier }).(pulumi.StringOutput)
+}
+
+// scf lambda namespace.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ScfNamespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.ScfNamespace }).(pulumi.StringOutput)
+}
+
+// scf lambda type.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ScfType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.ScfType }).(pulumi.StringOutput)
+}
+
+// the name of the service in registry or kubernetes.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+// slow start time, unit:second,when it&#39;s enabled, weight of the node is increased from 1 to the target value gradually.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) SlowStart() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) int { return v.SlowStart }).(pulumi.IntOutput)
+}
+
+// service source ID.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) SourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.SourceId }).(pulumi.StringOutput)
+}
+
+// the name of source service.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) SourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.SourceName }).(pulumi.StringOutput)
+}
+
+// source service type.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) SourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) string { return v.SourceType }).(pulumi.StringOutput)
+}
+
+// provided when service type is IPList.
+func (o GetGatewayServicesResultServiceListUpstreamInfoOutput) Targets() GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfo) []GetGatewayServicesResultServiceListUpstreamInfoTarget {
+		return v.Targets
+	}).(GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListUpstreamInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceListUpstreamInfo)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoArrayOutput) ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoArrayOutput) ToGetGatewayServicesResultServiceListUpstreamInfoArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoArrayOutput) Index(i pulumi.IntInput) GetGatewayServicesResultServiceListUpstreamInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayServicesResultServiceListUpstreamInfo {
+		return vs[0].([]GetGatewayServicesResultServiceListUpstreamInfo)[vs[1].(int)]
+	}).(GetGatewayServicesResultServiceListUpstreamInfoOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoTarget struct {
+	// created time.
+	CreatedTime string `pulumi:"createdTime"`
+	// health.
+	Health string `pulumi:"health"`
+	// Host.
+	Host string `pulumi:"host"`
+	// port.
+	Port int `pulumi:"port"`
+	// source of target.
+	Source string `pulumi:"source"`
+	// weight.
+	Weight int `pulumi:"weight"`
+}
+
+// GetGatewayServicesResultServiceListUpstreamInfoTargetInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoTargetArgs and GetGatewayServicesResultServiceListUpstreamInfoTargetOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoTargetInput` via:
+//
+//          GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...}
+type GetGatewayServicesResultServiceListUpstreamInfoTargetInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetOutput
+	ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutputWithContext(context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetOutput
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoTargetArgs struct {
+	// created time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// health.
+	Health pulumi.StringInput `pulumi:"health"`
+	// Host.
+	Host pulumi.StringInput `pulumi:"host"`
+	// port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// source of target.
+	Source pulumi.StringInput `pulumi:"source"`
+	// weight.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetGatewayServicesResultServiceListUpstreamInfoTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoTargetArgs) ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetOutput {
+	return i.ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoTargetArgs) ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListUpstreamInfoTargetOutput)
+}
+
+// GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoTargetArray and GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput values.
+// You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput` via:
+//
+//          GetGatewayServicesResultServiceListUpstreamInfoTargetArray{ GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...} }
+type GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput
+	ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutputWithContext(context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoTargetArray []GetGatewayServicesResultServiceListUpstreamInfoTargetInput
+
+func (GetGatewayServicesResultServiceListUpstreamInfoTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceListUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoTargetArray) ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput {
+	return i.ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayServicesResultServiceListUpstreamInfoTargetArray) ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoTargetOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) ToGetGatewayServicesResultServiceListUpstreamInfoTargetOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetOutput {
+	return o
+}
+
+// created time.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// health.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) Health() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) string { return v.Health }).(pulumi.StringOutput)
+}
+
+// Host.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// port.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// source of target.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// weight.
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayServicesResultServiceListUpstreamInfoTarget) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayServicesResultServiceListUpstreamInfoTarget)(nil)).Elem()
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput) ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput() GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput) ToGetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutputWithContext(ctx context.Context) GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput {
+	return o
+}
+
+func (o GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput) Index(i pulumi.IntInput) GetGatewayServicesResultServiceListUpstreamInfoTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayServicesResultServiceListUpstreamInfoTarget {
+		return vs[0].([]GetGatewayServicesResultServiceListUpstreamInfoTarget)[vs[1].(int)]
+	}).(GetGatewayServicesResultServiceListUpstreamInfoTargetOutput)
 }
 
 type GetNacosReplicasReplica struct {
@@ -1136,6 +5756,38 @@ func (o GetZookeeperServerInterfacesContentArrayOutput) Index(i pulumi.IntInput)
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRulePtrInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleBalancedServiceListInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleBalancedServiceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleBalancedServiceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionListInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleConditionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionListArrayInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleConditionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteHeaderInput)(nil)).Elem(), CngwRouteHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteHeaderArrayInput)(nil)).Elem(), CngwRouteHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailPtrInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailExternalRedisInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailExternalRedisArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailExternalRedisPtrInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailExternalRedisArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailQpsThresholdInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailQpsThresholdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailQpsThresholdArrayInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailQpsThresholdArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponseInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailRateLimitResponseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailRateLimitResponseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailPtrInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailExternalRedisInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailExternalRedisArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailExternalRedisPtrInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailExternalRedisArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailQpsThresholdInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailQpsThresholdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailQpsThresholdArrayInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailQpsThresholdArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponseInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailRateLimitResponseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailRateLimitResponseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput)(nil)).Elem(), CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceUpstreamInfoInput)(nil)).Elem(), CngwServiceUpstreamInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceUpstreamInfoPtrInput)(nil)).Elem(), CngwServiceUpstreamInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceUpstreamInfoTargetInput)(nil)).Elem(), CngwServiceUpstreamInfoTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwServiceUpstreamInfoTargetArrayInput)(nil)).Elem(), CngwServiceUpstreamInfoTargetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEngineRegionInfoInput)(nil)).Elem(), InstanceEngineRegionInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEngineRegionInfoArrayInput)(nil)).Elem(), InstanceEngineRegionInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEngineRegionInfoVpcInfoInput)(nil)).Elem(), InstanceEngineRegionInfoVpcInfoArgs{})
@@ -1144,8 +5796,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessAddressEnvAddressInfoArrayInput)(nil)).Elem(), GetAccessAddressEnvAddressInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessAddressLimiterAddressInfoInput)(nil)).Elem(), GetAccessAddressLimiterAddressInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessAddressLimiterAddressInfoArrayInput)(nil)).Elem(), GetAccessAddressLimiterAddressInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultInput)(nil)).Elem(), GetGatewayCanaryRulesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionListInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListConditionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayNodesNodeListInput)(nil)).Elem(), GetGatewayNodesNodeListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayNodesNodeListArrayInput)(nil)).Elem(), GetGatewayNodesNodeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultInput)(nil)).Elem(), GetGatewayRoutesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultArrayInput)(nil)).Elem(), GetGatewayRoutesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultRouteListInput)(nil)).Elem(), GetGatewayRoutesResultRouteListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultRouteListArrayInput)(nil)).Elem(), GetGatewayRoutesResultRouteListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultRouteListHeaderInput)(nil)).Elem(), GetGatewayRoutesResultRouteListHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultRouteListHeaderArrayInput)(nil)).Elem(), GetGatewayRoutesResultRouteListHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesFilterInput)(nil)).Elem(), GetGatewayServicesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesFilterArrayInput)(nil)).Elem(), GetGatewayServicesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultInput)(nil)).Elem(), GetGatewayServicesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultArrayInput)(nil)).Elem(), GetGatewayServicesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListInput)(nil)).Elem(), GetGatewayServicesResultServiceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListArrayInput)(nil)).Elem(), GetGatewayServicesResultServiceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoArrayInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTargetInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoTargetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosReplicasReplicaInput)(nil)).Elem(), GetNacosReplicasReplicaArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosReplicasReplicaArrayInput)(nil)).Elem(), GetNacosReplicasReplicaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosServerInterfacesContentInput)(nil)).Elem(), GetNacosServerInterfacesContentArgs{})
@@ -1154,6 +5830,38 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZookeeperReplicasReplicaArrayInput)(nil)).Elem(), GetZookeeperReplicasReplicaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZookeeperServerInterfacesContentInput)(nil)).Elem(), GetZookeeperServerInterfacesContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZookeeperServerInterfacesContentArrayInput)(nil)).Elem(), GetZookeeperServerInterfacesContentArray{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleOutput{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRulePtrOutput{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleBalancedServiceListOutput{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleConditionListOutput{})
+	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleConditionListArrayOutput{})
+	pulumi.RegisterOutputType(CngwRouteHeaderOutput{})
+	pulumi.RegisterOutputType(CngwRouteHeaderArrayOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailPtrOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailExternalRedisOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailQpsThresholdOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailRateLimitResponseOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput{})
+	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailPtrOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailExternalRedisOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailQpsThresholdOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailRateLimitResponseOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput{})
+	pulumi.RegisterOutputType(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput{})
+	pulumi.RegisterOutputType(CngwServiceUpstreamInfoOutput{})
+	pulumi.RegisterOutputType(CngwServiceUpstreamInfoPtrOutput{})
+	pulumi.RegisterOutputType(CngwServiceUpstreamInfoTargetOutput{})
+	pulumi.RegisterOutputType(CngwServiceUpstreamInfoTargetArrayOutput{})
 	pulumi.RegisterOutputType(InstanceEngineRegionInfoOutput{})
 	pulumi.RegisterOutputType(InstanceEngineRegionInfoArrayOutput{})
 	pulumi.RegisterOutputType(InstanceEngineRegionInfoVpcInfoOutput{})
@@ -1162,8 +5870,32 @@ func init() {
 	pulumi.RegisterOutputType(GetAccessAddressEnvAddressInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetAccessAddressLimiterAddressInfoOutput{})
 	pulumi.RegisterOutputType(GetAccessAddressLimiterAddressInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput{})
+	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayNodesNodeListOutput{})
 	pulumi.RegisterOutputType(GetGatewayNodesNodeListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultRouteListOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultRouteListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultRouteListHeaderOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesResultRouteListHeaderArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesFilterOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoTargetOutput{})
+	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput{})
 	pulumi.RegisterOutputType(GetNacosReplicasReplicaOutput{})
 	pulumi.RegisterOutputType(GetNacosReplicasReplicaArrayOutput{})
 	pulumi.RegisterOutputType(GetNacosServerInterfacesContentOutput{})

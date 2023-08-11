@@ -25,53 +25,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// {
     ///     public MyStack()
     ///     {
-    ///         var sglab1Group = new Tencentcloud.Security.Group("sglab1Group", new Tencentcloud.Security.GroupArgs
+    ///         var baseGroup = new Tencentcloud.Security.Group("baseGroup", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             Description = "favourite sg_1",
+    ///             Description = "Testing Rule Set Security",
     ///         });
-    ///         var sglab1GroupRuleSet = new Tencentcloud.Security.GroupRuleSet("sglab1GroupRuleSet", new Tencentcloud.Security.GroupRuleSetArgs
+    ///         var relative = new Tencentcloud.Security.Group("relative", new Tencentcloud.Security.GroupArgs
     ///         {
-    ///             SecurityGroupId = sglab1Group.Id,
+    ///             Description = "Used for attach security policy",
+    ///         });
+    ///         var fooTemplate = new Tencentcloud.Address.Template("fooTemplate", new Tencentcloud.Address.TemplateArgs
+    ///         {
+    ///             Addresses = 
+    ///             {
+    ///                 "10.0.0.1",
+    ///                 "10.0.1.0/24",
+    ///                 "10.0.0.1-10.0.0.100",
+    ///             },
+    ///         });
+    ///         var fooTemplateGroup = new Tencentcloud.Address.TemplateGroup("fooTemplateGroup", new Tencentcloud.Address.TemplateGroupArgs
+    ///         {
+    ///             TemplateIds = 
+    ///             {
+    ///                 fooTemplate.Id,
+    ///             },
+    ///         });
+    ///         var baseGroupRuleSet = new Tencentcloud.Security.GroupRuleSet("baseGroupRuleSet", new Tencentcloud.Security.GroupRuleSetArgs
+    ///         {
+    ///             SecurityGroupId = baseGroup.Id,
     ///             Ingresses = 
     ///             {
     ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
     ///                 {
-    ///                     CidrBlock = "10.0.0.0/16",
-    ///                     Protocol = "TCP",
-    ///                     Port = "80",
     ///                     Action = "ACCEPT",
-    ///                     Description = "favourite sg rule_1",
+    ///                     CidrBlock = "10.0.0.0/22",
+    ///                     Protocol = "TCP",
+    ///                     Port = "80-90",
+    ///                     Description = "A:Allow Ips and 80-90",
     ///                 },
     ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
     ///                 {
+    ///                     Action = "ACCEPT",
+    ///                     CidrBlock = "10.0.2.1",
+    ///                     Protocol = "UDP",
+    ///                     Port = "8080",
+    ///                     Description = "B:Allow UDP 8080",
+    ///                 },
+    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///                 {
+    ///                     Action = "ACCEPT",
+    ///                     CidrBlock = "10.0.2.1",
+    ///                     Protocol = "UDP",
+    ///                     Port = "8080",
+    ///                     Description = "C:Allow UDP 8080",
+    ///                 },
+    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///                 {
+    ///                     Action = "ACCEPT",
+    ///                     CidrBlock = "172.18.1.2",
+    ///                     Protocol = "ALL",
+    ///                     Port = "ALL",
+    ///                     Description = "D:Allow ALL",
+    ///                 },
+    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///                 {
+    ///                     Action = "DROP",
     ///                     Protocol = "TCP",
     ///                     Port = "80",
-    ///                     Action = "ACCEPT",
-    ///                     SourceSecurityId = tencentcloud_security_group.Sglab_3.Id,
-    ///                     Description = "favourite sg rule_2",
+    ///                     SourceSecurityId = relative.Id,
+    ///                     Description = "E:Block relative",
     ///                 },
     ///             },
     ///             Egresses = 
     ///             {
     ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
     ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     AddressTemplateId = "ipm-xxxxxxxx",
-    ///                     Description = "Allow address template",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     ServiceTemplateGroup = "ppmg-xxxxxxxx",
-    ///                     Description = "Allow protocol template",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
-    ///                 {
-    ///                     CidrBlock = "10.0.0.0/16",
-    ///                     Protocol = "TCP",
-    ///                     Port = "80",
     ///                     Action = "DROP",
-    ///                     Description = "favourite sg egress rule",
+    ///                     CidrBlock = "10.0.0.0/16",
+    ///                     Protocol = "ICMP",
+    ///                     Description = "A:Block ping3",
+    ///                 },
+    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+    ///                 {
+    ///                     Action = "DROP",
+    ///                     AddressTemplateId = fooTemplate.Id,
+    ///                     Description = "B:Allow template",
+    ///                 },
+    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+    ///                 {
+    ///                     Action = "DROP",
+    ///                     AddressTemplateGroup = fooTemplateGroup.Id,
+    ///                     Description = "C:DROP template group",
     ///                 },
     ///             },
     ///         });

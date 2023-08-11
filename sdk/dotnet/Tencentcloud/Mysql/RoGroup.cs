@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// {
     ///     public MyStack()
     ///     {
-    ///         var roGroup = new Tencentcloud.Mysql.RoGroup("roGroup", new Tencentcloud.Mysql.RoGroupArgs
+    ///         var example = new Tencentcloud.Mysql.RoGroup("example", new Tencentcloud.Mysql.RoGroupArgs
     ///         {
     ///             InstanceId = "cdb-e8i766hx",
     ///             IsBalanceRoLoad = 1,

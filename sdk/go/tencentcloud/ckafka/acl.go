@@ -53,7 +53,7 @@ import (
 type Acl struct {
 	pulumi.CustomResourceState
 
-	// IP address allowed to access. The default value is `*`, which means that any host can access.
+	// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 	Host pulumi.StringPtrOutput `pulumi:"host"`
 	// ID of the ckafka instance.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
@@ -61,7 +61,7 @@ type Acl struct {
 	OperationType pulumi.StringOutput `pulumi:"operationType"`
 	// ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
 	PermissionType pulumi.StringPtrOutput `pulumi:"permissionType"`
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 	Principal pulumi.StringPtrOutput `pulumi:"principal"`
 	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
 	ResourceName pulumi.StringOutput `pulumi:"resourceName"`
@@ -108,7 +108,7 @@ func GetAcl(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Acl resources.
 type aclState struct {
-	// IP address allowed to access. The default value is `*`, which means that any host can access.
+	// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 	Host *string `pulumi:"host"`
 	// ID of the ckafka instance.
 	InstanceId *string `pulumi:"instanceId"`
@@ -116,7 +116,7 @@ type aclState struct {
 	OperationType *string `pulumi:"operationType"`
 	// ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
 	PermissionType *string `pulumi:"permissionType"`
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 	Principal *string `pulumi:"principal"`
 	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
 	ResourceName *string `pulumi:"resourceName"`
@@ -125,7 +125,7 @@ type aclState struct {
 }
 
 type AclState struct {
-	// IP address allowed to access. The default value is `*`, which means that any host can access.
+	// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 	Host pulumi.StringPtrInput
 	// ID of the ckafka instance.
 	InstanceId pulumi.StringPtrInput
@@ -133,7 +133,7 @@ type AclState struct {
 	OperationType pulumi.StringPtrInput
 	// ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
 	PermissionType pulumi.StringPtrInput
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 	Principal pulumi.StringPtrInput
 	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
 	ResourceName pulumi.StringPtrInput
@@ -146,7 +146,7 @@ func (AclState) ElementType() reflect.Type {
 }
 
 type aclArgs struct {
-	// IP address allowed to access. The default value is `*`, which means that any host can access.
+	// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 	Host *string `pulumi:"host"`
 	// ID of the ckafka instance.
 	InstanceId string `pulumi:"instanceId"`
@@ -154,7 +154,7 @@ type aclArgs struct {
 	OperationType string `pulumi:"operationType"`
 	// ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
 	PermissionType *string `pulumi:"permissionType"`
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 	Principal *string `pulumi:"principal"`
 	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
 	ResourceName string `pulumi:"resourceName"`
@@ -164,7 +164,7 @@ type aclArgs struct {
 
 // The set of arguments for constructing a Acl resource.
 type AclArgs struct {
-	// IP address allowed to access. The default value is `*`, which means that any host can access.
+	// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 	Host pulumi.StringPtrInput
 	// ID of the ckafka instance.
 	InstanceId pulumi.StringInput
@@ -172,7 +172,7 @@ type AclArgs struct {
 	OperationType pulumi.StringInput
 	// ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
 	PermissionType pulumi.StringPtrInput
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 	Principal pulumi.StringPtrInput
 	// ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
 	ResourceName pulumi.StringInput
@@ -267,7 +267,7 @@ func (o AclOutput) ToAclOutputWithContext(ctx context.Context) AclOutput {
 	return o
 }
 
-// IP address allowed to access. The default value is `*`, which means that any host can access.
+// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
 func (o AclOutput) Host() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Acl) pulumi.StringPtrOutput { return v.Host }).(pulumi.StringPtrOutput)
 }
@@ -287,7 +287,7 @@ func (o AclOutput) PermissionType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Acl) pulumi.StringPtrOutput { return v.PermissionType }).(pulumi.StringPtrOutput)
 }
 
-// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
 func (o AclOutput) Principal() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Acl) pulumi.StringPtrOutput { return v.Principal }).(pulumi.StringPtrOutput)
 }

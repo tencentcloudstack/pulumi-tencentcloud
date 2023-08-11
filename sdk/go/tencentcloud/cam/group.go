@@ -25,7 +25,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cam.NewGroup(ctx, "foo", &Cam.GroupArgs{
-// 			Remark: pulumi.String("test"),
+// 			Remark: pulumi.String("tf_group_remark"),
 // 		})
 // 		if err != nil {
 // 			return err

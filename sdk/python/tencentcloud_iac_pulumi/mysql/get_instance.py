@@ -244,8 +244,7 @@ def get_instance(charge_type: Optional[str] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    database = tencentcloud.Mysql.get_instance(mysql_id="terraform-test-local-database",
-        result_output_file="mytestpath")
+    mysql = tencentcloud.Mysql.get_instance(mysql_id="cdb-fitq5t9h")
     ```
 
 
@@ -335,8 +334,7 @@ def get_instance_output(charge_type: Optional[pulumi.Input[Optional[str]]] = Non
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    database = tencentcloud.Mysql.get_instance(mysql_id="terraform-test-local-database",
-        result_output_file="mytestpath")
+    mysql = tencentcloud.Mysql.get_instance(mysql_id="cdb-fitq5t9h")
     ```
 
 

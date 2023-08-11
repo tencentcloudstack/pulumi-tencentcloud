@@ -14,9 +14,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigWafConfigAiRule
     {
-        /// <summary>
-        /// Valid values:- `smart_status_close`: disabled.- `smart_status_open`: blocked.- `smart_status_observe`: observed.
-        /// </summary>
         public readonly string? Mode;
 
         [OutputConstructor]

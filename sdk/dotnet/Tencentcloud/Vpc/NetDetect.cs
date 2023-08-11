@@ -15,32 +15,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var netDetect = new Tencentcloud.Vpc.NetDetect("netDetect", new Tencentcloud.Vpc.NetDetectArgs
-    ///         {
-    ///             DetectDestinationIps = 
-    ///             {
-    ///                 "10.0.0.1",
-    ///                 "10.0.0.2",
-    ///             },
-    ///             NetDetectName = "terrform-test",
-    ///             NextHopDestination = "172.16.128.57",
-    ///             NextHopType = "NORMAL_CVM",
-    ///             SubnetId = "subnet-c1l35990",
-    ///             VpcId = "vpc-4owdpnwr",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// vpc net_detect can be imported using the id, e.g.

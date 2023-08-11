@@ -13,39 +13,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigRateLimitConfigTemplateDetailArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Action to take.
-        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
-        /// <summary>
-        /// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }
 
-        /// <summary>
-        /// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         [Input("mode")]
         public Input<string>? Mode { get; set; }
 
-        /// <summary>
-        /// Period.
-        /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
-        /// <summary>
-        /// Punish time.
-        /// </summary>
         [Input("punishTime")]
         public Input<int>? PunishTime { get; set; }
 
-        /// <summary>
-        /// Threshold.
-        /// </summary>
         [Input("threshold")]
         public Input<int>? Threshold { get; set; }
 

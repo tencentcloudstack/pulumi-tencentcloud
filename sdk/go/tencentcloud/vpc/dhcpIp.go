@@ -13,31 +13,6 @@ import (
 
 // Provides a resource to create a vpc dhcpIp
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewDhcpIp(ctx, "dhcpIp", &Vpc.DhcpIpArgs{
-// 			DhcpIpName: pulumi.String("terraform-test"),
-// 			SubnetId:   pulumi.String("subnet-h7av55g8"),
-// 			VpcId:      pulumi.String("vpc-1yg5ua6l"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
 // vpc dhcp_ip can be imported using the id, e.g.

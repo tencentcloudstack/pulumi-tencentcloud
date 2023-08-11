@@ -14,6 +14,7 @@ import (
 // Use this resource to create tcr namespace.
 //
 // ## Example Usage
+// ### Create a tcr namespace instance
 //
 // ```go
 // package main
@@ -26,17 +27,26 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.NewNamespace(ctx, "foo", &Tcr.NamespaceArgs{
+// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+// 			InstanceType: pulumi.String("premium"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+// 			InstanceId:   exampleInstance.ID(),
+// 			IsPublic:     pulumi.Bool(true),
+// 			IsAutoScan:   pulumi.Bool(true),
+// 			IsPreventVul: pulumi.Bool(true),
+// 			Severity:     pulumi.String("medium"),
 // 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
 // 				&tcr.NamespaceCveWhitelistItemArgs{
 // 					CveId: pulumi.String("cve-xxxxx"),
 // 				},
 // 			},
-// 			InstanceId:   pulumi.String(""),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			IsPublic:     pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -51,7 +61,7 @@ import (
 // tcr namespace can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+//  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState

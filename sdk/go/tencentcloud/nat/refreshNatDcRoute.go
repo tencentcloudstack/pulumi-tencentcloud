@@ -14,6 +14,54 @@ import (
 // Provides a resource to create a vpc refreshNatDcRoute
 //
 // ## Example Usage
+// ### is True
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		eipExample, err := Eip.NewInstance(ctx, "eipExample", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		nat, err := Nat.NewGateway(ctx, "nat", &Nat.GatewayArgs{
+// 			VpcId:         vpc.ID(),
+// 			MaxConcurrent: pulumi.Int(3000000),
+// 			Bandwidth:     pulumi.Int(500),
+// 			AssignedEipSets: pulumi.StringArray{
+// 				eipExample.PublicIp,
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
+// 			NatGatewayId: nat.ID(),
+// 			VpcId:        vpc.ID(),
+// 			DryRun:       pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### is False
 //
 // ```go
 // package main
@@ -26,9 +74,9 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
-// 			DryRun:       pulumi.Bool(true),
-// 			NatGatewayId: pulumi.String("nat-gnxkey2e"),
-// 			VpcId:        pulumi.String("vpc-pyyv5k3v"),
+// 			NatGatewayId: pulumi.Any(tencentcloud_nat_gateway.Nat.Id),
+// 			VpcId:        pulumi.Any(tencentcloud_vpc.Vpc.Id),
+// 			DryRun:       pulumi.Bool(false),
 // 		})
 // 		if err != nil {
 // 			return err

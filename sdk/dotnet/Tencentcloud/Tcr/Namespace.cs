@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr namespace.
     /// 
     /// ## Example Usage
+    /// ### Create a tcr namespace instance
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,8 +24,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Tcr.Namespace("foo", new Tencentcloud.Tcr.NamespaceArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
+    ///             InstanceType = "premium",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
     ///             CveWhitelistItems = 
     ///             {
     ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
@@ -32,11 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                     CveId = "cve-xxxxx",
     ///                 },
     ///             },
-    ///             InstanceId = "",
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             IsPublic = true,
-    ///             Severity = "medium",
     ///         });
     ///     }
     /// 
@@ -48,7 +57,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr namespace can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+    ///  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/namespace:Namespace")]

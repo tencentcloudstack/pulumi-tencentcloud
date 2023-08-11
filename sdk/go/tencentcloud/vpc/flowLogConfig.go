@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a vpc flowLogConfig
 //
 // ## Example Usage
+// ### If enable FlowLogs
 //
 // ```go
 // package main
@@ -25,9 +26,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewFlowLogConfig(ctx, "flowLogConfig", &Vpc.FlowLogConfigArgs{
-// 			Enable:    pulumi.Bool(false),
-// 			FlowLogId: pulumi.String("fl-geg2keoj"),
+// 		_, err := Vpc.NewFlowLogConfig(ctx, "config", &Vpc.FlowLogConfigArgs{
+// 			FlowLogId: pulumi.Any(tencentcloud_vpc_flow_log.Example.Id),
+// 			Enable:    pulumi.Bool(true),
 // 		})
 // 		if err != nil {
 // 			return err

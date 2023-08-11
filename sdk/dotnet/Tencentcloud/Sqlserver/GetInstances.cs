@@ -18,6 +18,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {{% examples %}}
         /// ## Example Usage
         /// {{% example %}}
+        /// ### Filter instance by Id
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -27,18 +28,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var vpc = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///         var exampleId = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
-        ///             SubnetId = "subnet-nf9n81ps",
-        ///             VpcId = "vpc-409mvdvv",
+        ///             Id = "mssql-3l3fgqn7",
         ///         }));
-        ///         var project = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Filter instance by project Id
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleProject = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
         ///             ProjectId = 0,
         ///         }));
-        ///         var id = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Filter instance by VPC/Subnet
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleVpc = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
-        ///             Id = "postgres-h9t4fde1",
+        ///             SubnetId = "subnet-nf9n81ps",
+        ///             VpcId = "vpc-409mvdvv",
         ///         }));
         ///     }
         /// 
@@ -56,6 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {{% examples %}}
         /// ## Example Usage
         /// {{% example %}}
+        /// ### Filter instance by Id
         /// 
         /// ```csharp
         /// using Pulumi;
@@ -65,18 +99,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var vpc = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///         var exampleId = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
-        ///             SubnetId = "subnet-nf9n81ps",
-        ///             VpcId = "vpc-409mvdvv",
+        ///             Id = "mssql-3l3fgqn7",
         ///         }));
-        ///         var project = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Filter instance by project Id
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleProject = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
         ///             ProjectId = 0,
         ///         }));
-        ///         var id = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### Filter instance by VPC/Subnet
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleVpc = Output.Create(Tencentcloud.Sqlserver.GetInstances.InvokeAsync(new Tencentcloud.Sqlserver.GetInstancesArgs
         ///         {
-        ///             Id = "postgres-h9t4fde1",
+        ///             SubnetId = "subnet-nf9n81ps",
+        ///             VpcId = "vpc-409mvdvv",
         ///         }));
         ///     }
         /// 

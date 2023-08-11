@@ -348,17 +348,49 @@ class ExternalKey(pulumi.CustomResource):
         Provide a resource to create a KMS external key.
 
         ## Example Usage
+        ### Create a basic instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.kms.ExternalKey("foo",
-            alias="test",
-            description="describe key test message.",
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Specify the encryption algorithm and public key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
             is_enabled=True,
-            key_material_base64="MTIzMTIzMTIzMTIzMTIzQQ==",
-            valid_to=2147443200,
+            key_material_base64="your_public_key_base64_encoded",
+            tags={
+                "createdBy": "terraform",
+            },
+            wrapping_algorithm="RSAES_PKCS1_V1_5")
+        ```
+        ### Disable the external kms key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
+            is_enabled=False,
+            key_material_base64="your_public_key_base64_encoded",
+            tags={
+                "test-tag": "unit-test",
+            },
             wrapping_algorithm="RSAES_PKCS1_V1_5")
         ```
 
@@ -367,7 +399,7 @@ class ExternalKey(pulumi.CustomResource):
         KMS external keys can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
         ```
 
         :param str resource_name: The name of the resource.
@@ -392,17 +424,49 @@ class ExternalKey(pulumi.CustomResource):
         Provide a resource to create a KMS external key.
 
         ## Example Usage
+        ### Create a basic instance.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.kms.ExternalKey("foo",
-            alias="test",
-            description="describe key test message.",
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Specify the encryption algorithm and public key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
             is_enabled=True,
-            key_material_base64="MTIzMTIzMTIzMTIzMTIzQQ==",
-            valid_to=2147443200,
+            key_material_base64="your_public_key_base64_encoded",
+            tags={
+                "createdBy": "terraform",
+            },
+            wrapping_algorithm="RSAES_PKCS1_V1_5")
+        ```
+        ### Disable the external kms key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.ExternalKey("example",
+            alias="tf-example-kms-externalkey",
+            description="example of kms external key",
+            is_enabled=False,
+            key_material_base64="your_public_key_base64_encoded",
+            tags={
+                "test-tag": "unit-test",
+            },
             wrapping_algorithm="RSAES_PKCS1_V1_5")
         ```
 
@@ -411,7 +475,7 @@ class ExternalKey(pulumi.CustomResource):
         KMS external keys can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
         ```
 
         :param str resource_name: The name of the resource.

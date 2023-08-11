@@ -63,13 +63,13 @@ class ConnectionArgs:
         :param pulumi.Input[str] ike_local_fqdn_name: Local FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_local_identity: Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[str] ike_proto_authen_algorithm: Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
-        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ike_remote_address: Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         :param pulumi.Input[str] ike_remote_fqdn_name: Remote FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_remote_identity: Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[int] ike_sa_lifetime_seconds: SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
-        :param pulumi.Input[str] ike_version: Version of the IKE operation specification. Default value is `IKEV1`.
-        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
+        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
@@ -331,7 +331,7 @@ class ConnectionArgs:
     @pulumi.getter(name="ikeProtoEncryAlgorithm")
     def ike_proto_encry_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ike_proto_encry_algorithm")
 
@@ -391,7 +391,7 @@ class ConnectionArgs:
     @pulumi.getter(name="ikeVersion")
     def ike_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the IKE operation specification. Default value is `IKEV1`.
+        Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         """
         return pulumi.get(self, "ike_version")
 
@@ -403,7 +403,7 @@ class ConnectionArgs:
     @pulumi.getter(name="ipsecEncryptAlgorithm")
     def ipsec_encrypt_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ipsec_encrypt_algorithm")
 
@@ -553,13 +553,13 @@ class _ConnectionState:
         :param pulumi.Input[str] ike_local_fqdn_name: Local FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_local_identity: Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[str] ike_proto_authen_algorithm: Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
-        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ike_remote_address: Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         :param pulumi.Input[str] ike_remote_fqdn_name: Remote FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_remote_identity: Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[int] ike_sa_lifetime_seconds: SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
-        :param pulumi.Input[str] ike_version: Version of the IKE operation specification. Default value is `IKEV1`.
-        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
+        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
@@ -835,7 +835,7 @@ class _ConnectionState:
     @pulumi.getter(name="ikeProtoEncryAlgorithm")
     def ike_proto_encry_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ike_proto_encry_algorithm")
 
@@ -895,7 +895,7 @@ class _ConnectionState:
     @pulumi.getter(name="ikeVersion")
     def ike_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the IKE operation specification. Default value is `IKEV1`.
+        Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         """
         return pulumi.get(self, "ike_version")
 
@@ -907,7 +907,7 @@ class _ConnectionState:
     @pulumi.getter(name="ipsecEncryptAlgorithm")
     def ipsec_encrypt_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ipsec_encrypt_algorithm")
 
@@ -1192,13 +1192,13 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[str] ike_local_fqdn_name: Local FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_local_identity: Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[str] ike_proto_authen_algorithm: Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
-        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ike_remote_address: Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         :param pulumi.Input[str] ike_remote_fqdn_name: Remote FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_remote_identity: Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[int] ike_sa_lifetime_seconds: SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
-        :param pulumi.Input[str] ike_version: Version of the IKE operation specification. Default value is `IKEV1`.
-        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
+        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
@@ -1434,13 +1434,13 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[str] ike_local_fqdn_name: Local FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_local_identity: Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[str] ike_proto_authen_algorithm: Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
-        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_proto_encry_algorithm: Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ike_remote_address: Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is `public_ip_address` of the related customer gateway.
         :param pulumi.Input[str] ike_remote_fqdn_name: Remote FQDN name of the IKE operation specification.
         :param pulumi.Input[str] ike_remote_identity: Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
         :param pulumi.Input[int] ike_sa_lifetime_seconds: SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
-        :param pulumi.Input[str] ike_version: Version of the IKE operation specification. Default value is `IKEV1`.
-        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
+        :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
         :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
@@ -1624,7 +1624,7 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="ikeProtoEncryAlgorithm")
     def ike_proto_encry_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ike_proto_encry_algorithm")
 
@@ -1664,7 +1664,7 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="ikeVersion")
     def ike_version(self) -> pulumi.Output[Optional[str]]:
         """
-        Version of the IKE operation specification. Default value is `IKEV1`.
+        Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         """
         return pulumi.get(self, "ike_version")
 
@@ -1672,7 +1672,7 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="ipsecEncryptAlgorithm")
     def ipsec_encrypt_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+        Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         """
         return pulumi.get(self, "ipsec_encrypt_algorithm")
 

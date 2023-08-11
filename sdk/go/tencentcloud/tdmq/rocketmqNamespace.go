@@ -25,19 +25,17 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cluster, err := Tdmq.NewRocketmqCluster(ctx, "cluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("test_rocketmq"),
-// 			Remark:      pulumi.String("test recket mq"),
+// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+// 			ClusterName: pulumi.String("tf_example"),
+// 			Remark:      pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Tdmq.NewRocketmqNamespace(ctx, "namespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     cluster.ClusterId,
-// 			NamespaceName: pulumi.String("test_namespace"),
-// 			Ttl:           pulumi.Int(65000),
-// 			RetentionTime: pulumi.Int(65000),
-// 			Remark:        pulumi.String("test namespace"),
+// 		_, err = Tdmq.NewRocketmqNamespace(ctx, "exampleRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+// 			ClusterId:     exampleRocketmqCluster.ClusterId,
+// 			NamespaceName: pulumi.String("tf_example_namespace"),
+// 			Remark:        pulumi.String("remark."),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -65,10 +63,14 @@ type RocketmqNamespace struct {
 	PublicEndpoint pulumi.StringOutput `pulumi:"publicEndpoint"`
 	// Remarks (up to 128 characters).
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// Retention time of persisted messages in milliseconds.
-	RetentionTime pulumi.IntOutput `pulumi:"retentionTime"`
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
-	Ttl pulumi.IntOutput `pulumi:"ttl"`
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	RetentionTime pulumi.IntPtrOutput `pulumi:"retentionTime"`
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	Ttl pulumi.IntPtrOutput `pulumi:"ttl"`
 	// VPC access point address.
 	VpcEndpoint pulumi.StringOutput `pulumi:"vpcEndpoint"`
 }
@@ -85,12 +87,6 @@ func NewRocketmqNamespace(ctx *pulumi.Context,
 	}
 	if args.NamespaceName == nil {
 		return nil, errors.New("invalid value for required argument 'NamespaceName'")
-	}
-	if args.RetentionTime == nil {
-		return nil, errors.New("invalid value for required argument 'RetentionTime'")
-	}
-	if args.Ttl == nil {
-		return nil, errors.New("invalid value for required argument 'Ttl'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource RocketmqNamespace
@@ -123,9 +119,13 @@ type rocketmqNamespaceState struct {
 	PublicEndpoint *string `pulumi:"publicEndpoint"`
 	// Remarks (up to 128 characters).
 	Remark *string `pulumi:"remark"`
-	// Retention time of persisted messages in milliseconds.
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
 	RetentionTime *int `pulumi:"retentionTime"`
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
 	Ttl *int `pulumi:"ttl"`
 	// VPC access point address.
 	VpcEndpoint *string `pulumi:"vpcEndpoint"`
@@ -140,9 +140,13 @@ type RocketmqNamespaceState struct {
 	PublicEndpoint pulumi.StringPtrInput
 	// Remarks (up to 128 characters).
 	Remark pulumi.StringPtrInput
-	// Retention time of persisted messages in milliseconds.
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
 	RetentionTime pulumi.IntPtrInput
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
 	Ttl pulumi.IntPtrInput
 	// VPC access point address.
 	VpcEndpoint pulumi.StringPtrInput
@@ -159,10 +163,14 @@ type rocketmqNamespaceArgs struct {
 	NamespaceName string `pulumi:"namespaceName"`
 	// Remarks (up to 128 characters).
 	Remark *string `pulumi:"remark"`
-	// Retention time of persisted messages in milliseconds.
-	RetentionTime int `pulumi:"retentionTime"`
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
-	Ttl int `pulumi:"ttl"`
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	RetentionTime *int `pulumi:"retentionTime"`
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	Ttl *int `pulumi:"ttl"`
 }
 
 // The set of arguments for constructing a RocketmqNamespace resource.
@@ -173,10 +181,14 @@ type RocketmqNamespaceArgs struct {
 	NamespaceName pulumi.StringInput
 	// Remarks (up to 128 characters).
 	Remark pulumi.StringPtrInput
-	// Retention time of persisted messages in milliseconds.
-	RetentionTime pulumi.IntInput
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
-	Ttl pulumi.IntInput
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	RetentionTime pulumi.IntPtrInput
+	// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+	//
+	// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+	Ttl pulumi.IntPtrInput
 }
 
 func (RocketmqNamespaceArgs) ElementType() reflect.Type {
@@ -286,14 +298,18 @@ func (o RocketmqNamespaceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RocketmqNamespace) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// Retention time of persisted messages in milliseconds.
-func (o RocketmqNamespaceOutput) RetentionTime() pulumi.IntOutput {
-	return o.ApplyT(func(v *RocketmqNamespace) pulumi.IntOutput { return v.RetentionTime }).(pulumi.IntOutput)
+// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of persisted messages in milliseconds.
+//
+// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+func (o RocketmqNamespaceOutput) RetentionTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RocketmqNamespace) pulumi.IntPtrOutput { return v.RetentionTime }).(pulumi.IntPtrOutput)
 }
 
-// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
-func (o RocketmqNamespaceOutput) Ttl() pulumi.IntOutput {
-	return o.ApplyT(func(v *RocketmqNamespace) pulumi.IntOutput { return v.Ttl }).(pulumi.IntOutput)
+// It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored. Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.
+//
+// Deprecated: It has been deprecated from version 1.81.20. Due to the adjustment of RocketMQ, the creation or modification of this parameter will be ignored.
+func (o RocketmqNamespaceOutput) Ttl() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RocketmqNamespace) pulumi.IntPtrOutput { return v.Ttl }).(pulumi.IntPtrOutput)
 }
 
 // VPC access point address.

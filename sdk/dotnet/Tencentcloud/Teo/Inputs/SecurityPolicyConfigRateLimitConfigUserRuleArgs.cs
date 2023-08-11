@@ -13,18 +13,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigRateLimitConfigUserRuleArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Valid values: `monitor`, `drop`.
-        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         [Input("conditions", required: true)]
         private InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs>? _conditions;
-
-        /// <summary>
-        /// Conditions of the rule.
-        /// </summary>
         public InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs> Conditions
         {
             get => _conditions ?? (_conditions = new InputList<Inputs.SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs>());
@@ -33,58 +26,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
         [Input("freqFields")]
         private InputList<string>? _freqFields;
-
-        /// <summary>
-        /// Filter words.
-        /// </summary>
         public InputList<string> FreqFields
         {
             get => _freqFields ?? (_freqFields = new InputList<string>());
             set => _freqFields = value;
         }
 
-        /// <summary>
-        /// Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-        /// </summary>
         [Input("period", required: true)]
         public Input<int> Period { get; set; } = null!;
 
-        /// <summary>
-        /// Punish time, Valid value range: 0-2 days.
-        /// </summary>
         [Input("punishTime", required: true)]
         public Input<int> PunishTime { get; set; } = null!;
 
-        /// <summary>
-        /// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-        /// </summary>
         [Input("punishTimeUnit", required: true)]
         public Input<string> PunishTimeUnit { get; set; } = null!;
 
         [Input("ruleId")]
         public Input<int>? RuleId { get; set; }
 
-        /// <summary>
-        /// Rule Name.
-        /// </summary>
         [Input("ruleName", required: true)]
         public Input<string> RuleName { get; set; } = null!;
 
-        /// <summary>
-        /// Priority of the rule. Valid value range: 1-100.
-        /// </summary>
         [Input("rulePriority", required: true)]
         public Input<int> RulePriority { get; set; } = null!;
 
-        /// <summary>
-        /// Status of the rule. Valid values: `on`, `off`, `hour`.
-        /// </summary>
         [Input("ruleStatus")]
         public Input<string>? RuleStatus { get; set; }
 
-        /// <summary>
-        /// Threshold of the rate limit. Valid value range: 0-4294967294.
-        /// </summary>
         [Input("threshold", required: true)]
         public Input<int> Threshold { get; set; } = null!;
 

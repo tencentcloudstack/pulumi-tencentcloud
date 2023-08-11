@@ -23,10 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var example = new Tencentcloud.Tdmq.RocketmqCluster("example", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test rocket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 

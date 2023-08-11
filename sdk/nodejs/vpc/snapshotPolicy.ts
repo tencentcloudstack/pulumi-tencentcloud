@@ -12,9 +12,19 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const snapshotPolicy = new tencentcloud.Vpc.SnapshotPolicy("snapshot_policy", {
+ * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
+ *     bucket: "tf-example-1308919341",
+ *     acl: "private",
+ * });
+ * const exampleSnapshotPolicy = new tencentcloud.vpc.SnapshotPolicy("exampleSnapshotPolicy", {
+ *     snapshotPolicyName: "tf-example",
+ *     backupType: "time",
+ *     cosBucket: exampleBucket.bucket,
+ *     cosRegion: "ap-guangzhou",
+ *     createNewCos: false,
+ *     keepTime: 2,
  *     backupPolicies: [
  *         {
  *             backupDay: "monday",
@@ -22,19 +32,13 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             backupDay: "tuesday",
- *             backupTime: "02:03:03",
+ *             backupTime: "01:00:00",
  *         },
  *         {
  *             backupDay: "wednesday",
- *             backupTime: "04:13:23",
+ *             backupTime: "02:00:00",
  *         },
  *     ],
- *     backupType: "time",
- *     cosBucket: "cos-lock-1308919341",
- *     cosRegion: "ap-guangzhou",
- *     createNewCos: false,
- *     keepTime: 2,
- *     snapshotPolicyName: "terraform-test",
  * });
  * ```
  *

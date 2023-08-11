@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a sms template
 //
 // ## Example Usage
+// ### Create a sms template
 //
 // ```go
 // package main
@@ -27,10 +28,10 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Sms.NewTemplate(ctx, "template", &Sms.TemplateArgs{
 // 			International:   pulumi.Int(0),
-// 			Remark:          pulumi.String("terraform test"),
+// 			Remark:          pulumi.String("terraform example"),
 // 			SmsType:         pulumi.Int(0),
-// 			TemplateContent: pulumi.String("Template Content"),
-// 			TemplateName:    pulumi.String("Template By Terraform"),
+// 			TemplateContent: pulumi.String("example for sms template"),
+// 			TemplateName:    pulumi.String("tf_example_sms_template"),
 // 		})
 // 		if err != nil {
 // 			return err

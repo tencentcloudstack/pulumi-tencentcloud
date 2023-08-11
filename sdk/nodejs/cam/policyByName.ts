@@ -4,6 +4,43 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM policy.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cam.PolicyByName("foo", {
+ *     description: "tf_test",
+ *     document: `{
+ *   "version": "2.0",
+ *   "statement": [
+ *     {
+ *       "action": [
+ *         "name/sts:AssumeRole"
+ *       ],
+ *       "effect": "allow",
+ *       "resource": [
+ *         "*"
+ *       ]
+ *     }
+ *   ]
+ * }
+ * `,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM policy can be imported using the name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/policyByName:PolicyByName foo name
+ * ```
+ */
 export class PolicyByName extends pulumi.CustomResource {
     /**
      * Get an existing PolicyByName resource's state with the given name, ID, and optional extra
@@ -52,7 +89,7 @@ export class PolicyByName extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+     * Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
      */
     public /*out*/ readonly type!: pulumi.Output<number>;
     /**
@@ -120,7 +157,7 @@ export interface PolicyByNameState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
+     * Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
      */
     type?: pulumi.Input<number>;
     /**

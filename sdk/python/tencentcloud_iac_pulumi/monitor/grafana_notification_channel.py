@@ -221,12 +221,73 @@ class GrafanaNotificationChannel(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_grafana_instance = tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
+        foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
+            notice_type="ALL",
+            notice_language="zh-CN",
+            user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
+                receiver_type="USER",
+                start_time=0,
+                end_time=1,
+                notice_ways=[
+                    "SMS",
+                    "EMAIL",
+                ],
+                user_ids=[10001],
+                group_ids=[],
+                phone_orders=[10001],
+                phone_circle_times=2,
+                phone_circle_interval=50,
+                phone_inner_interval=60,
+                need_phone_arrive_notice=1,
+                phone_call_type="CIRCLE",
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )],
+            url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
+                url="https://www.mytest.com/validate",
+                end_time=0,
+                start_time=1,
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )])
         grafana_notification_channel = tencentcloud.monitor.GrafanaNotificationChannel("grafanaNotificationChannel",
-            channel_name="create-channel",
-            extra_org_ids=[],
-            instance_id="grafana-50nj6v00",
+            instance_id=foo_grafana_instance.id,
+            channel_name="tf-channel",
             org_id=1,
-            receivers=["Consumer-6vkna7pevq"])
+            receivers=[foo_alarm_notice.amp_consumer_id],
+            extra_org_ids=["1"])
         ```
 
         :param str resource_name: The name of the resource.
@@ -252,12 +313,73 @@ class GrafanaNotificationChannel(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-6"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_grafana_instance = tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance",
+            instance_name="test-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            tags={
+                "createdBy": "test",
+            })
+        foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
+            notice_type="ALL",
+            notice_language="zh-CN",
+            user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
+                receiver_type="USER",
+                start_time=0,
+                end_time=1,
+                notice_ways=[
+                    "SMS",
+                    "EMAIL",
+                ],
+                user_ids=[10001],
+                group_ids=[],
+                phone_orders=[10001],
+                phone_circle_times=2,
+                phone_circle_interval=50,
+                phone_inner_interval=60,
+                need_phone_arrive_notice=1,
+                phone_call_type="CIRCLE",
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )],
+            url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
+                url="https://www.mytest.com/validate",
+                end_time=0,
+                start_time=1,
+                weekdays=[
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                ],
+            )])
         grafana_notification_channel = tencentcloud.monitor.GrafanaNotificationChannel("grafanaNotificationChannel",
-            channel_name="create-channel",
-            extra_org_ids=[],
-            instance_id="grafana-50nj6v00",
+            instance_id=foo_grafana_instance.id,
+            channel_name="tf-channel",
             org_id=1,
-            receivers=["Consumer-6vkna7pevq"])
+            receivers=[foo_alarm_notice.amp_consumer_id],
+            extra_org_ids=["1"])
         ```
 
         :param str resource_name: The name of the resource.

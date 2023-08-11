@@ -14,29 +14,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigRateLimitConfigTemplateDetail
     {
-        /// <summary>
-        /// Action to take.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly int? Id;
-        /// <summary>
-        /// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string? Mode;
-        /// <summary>
-        /// Period.
-        /// </summary>
         public readonly int? Period;
-        /// <summary>
-        /// Punish time.
-        /// </summary>
         public readonly int? PunishTime;
-        /// <summary>
-        /// Threshold.
-        /// </summary>
         public readonly int? Threshold;
 
         [OutputConstructor]

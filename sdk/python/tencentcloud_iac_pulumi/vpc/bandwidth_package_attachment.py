@@ -198,20 +198,6 @@ class BandwidthPackageAttachment(pulumi.CustomResource):
         """
         Provides a resource to create a vpc bandwidth_package_attachment
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        bandwidth_package_attachment = tencentcloud.vpc.BandwidthPackageAttachment("bandwidthPackageAttachment",
-            bandwidth_package_id="bwp-atmf0p9g",
-            network_type="BGP",
-            protocol="",
-            resource_id="lb-dv1ai6ma",
-            resource_type="LoadBalance")
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package unique ID, in the form of `bwp-xxxx`.
@@ -228,20 +214,6 @@ class BandwidthPackageAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a vpc bandwidth_package_attachment
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        bandwidth_package_attachment = tencentcloud.vpc.BandwidthPackageAttachment("bandwidthPackageAttachment",
-            bandwidth_package_id="bwp-atmf0p9g",
-            network_type="BGP",
-            protocol="",
-            resource_id="lb-dv1ai6ma",
-            resource_type="LoadBalance")
-        ```
 
         :param str resource_name: The name of the resource.
         :param BandwidthPackageAttachmentArgs args: The arguments to use to populate this resource's properties.

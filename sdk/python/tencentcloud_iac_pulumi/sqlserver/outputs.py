@@ -553,6 +553,8 @@ class PublishSubscribeDatabaseTuple(dict):
         suggest = None
         if key == "publishDatabase":
             suggest = "publish_database"
+        elif key == "subscribeDatabase":
+            suggest = "subscribe_database"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in PublishSubscribeDatabaseTuple. Access the value via the '{suggest}' property getter instead.")
@@ -566,11 +568,14 @@ class PublishSubscribeDatabaseTuple(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 publish_database: str):
+                 publish_database: str,
+                 subscribe_database: str):
         """
         :param str publish_database: Publish the database.
+        :param str subscribe_database: Subscribe the database.
         """
         pulumi.set(__self__, "publish_database", publish_database)
+        pulumi.set(__self__, "subscribe_database", subscribe_database)
 
     @property
     @pulumi.getter(name="publishDatabase")
@@ -579,6 +584,14 @@ class PublishSubscribeDatabaseTuple(dict):
         Publish the database.
         """
         return pulumi.get(self, "publish_database")
+
+    @property
+    @pulumi.getter(name="subscribeDatabase")
+    def subscribe_database(self) -> str:
+        """
+        Subscribe the database.
+        """
+        return pulumi.get(self, "subscribe_database")
 
 
 @pulumi.output_type

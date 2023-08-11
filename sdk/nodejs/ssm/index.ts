@@ -5,13 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getProducts";
 export * from "./getSecretVersions";
 export * from "./getSecrets";
+export * from "./productSecret";
 export * from "./secret";
 export * from "./secretVersion";
 export * from "./sshKeyPairSecret";
 
 // Import resources to register:
+import { ProductSecret } from "./productSecret";
 import { Secret } from "./secret";
 import { SecretVersion } from "./secretVersion";
 import { SshKeyPairSecret } from "./sshKeyPairSecret";
@@ -20,6 +23,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Ssm/productSecret:ProductSecret":
+                return new ProductSecret(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/secret:Secret":
                 return new Secret(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/secretVersion:SecretVersion":
@@ -31,6 +36,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/productSecret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secretVersion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/sshKeyPairSecret", _module)

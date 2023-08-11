@@ -21,25 +21,138 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// ```csharp
         /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var example = new Tencentcloud.Sqlserver.PublishSubscribe("example", new Tencentcloud.Sqlserver.PublishSubscribeArgs
+        ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
         ///         {
-        ///             PublishInstanceId = tencentcloud_sqlserver_instance.Publish_instance.Id,
-        ///             SubscribeInstanceId = tencentcloud_sqlserver_instance.Subscribe_instance.Id,
+        ///             Product = "sqlserver",
+        ///         }));
+        ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+        ///         {
+        ///             CidrBlock = "10.0.0.0/16",
+        ///         });
+        ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+        ///         {
+        ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             VpcId = vpc.Id,
+        ///             CidrBlock = "10.0.0.0/16",
+        ///             IsMulticast = false,
+        ///         });
+        ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+        ///         {
+        ///             Description = "desc.",
+        ///         });
+        ///         var examplePubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+        ///         {
+        ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             Memory = 4,
+        ///             Storage = 100,
+        ///             Cpu = 2,
+        ///             MachineType = "CLOUD_HSSD",
+        ///             InstanceChargeType = "POSTPAID",
+        ///             ProjectId = 0,
+        ///             SubnetId = subnet.Id,
+        ///             VpcId = vpc.Id,
+        ///             DbVersion = "2008R2",
+        ///             SecurityGroupLists = 
+        ///             {
+        ///                 securityGroup.Id,
+        ///             },
+        ///             Weeklies = 
+        ///             {
+        ///                 1,
+        ///                 2,
+        ///                 3,
+        ///                 5,
+        ///                 6,
+        ///                 7,
+        ///             },
+        ///             StartTime = "00:00",
+        ///             Span = 6,
+        ///             ResourceTags = 
+        ///             {
+        ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+        ///                 {
+        ///                     TagKey = "test",
+        ///                     TagValue = "test",
+        ///                 },
+        ///             },
+        ///             Collation = "Chinese_PRC_CI_AS",
+        ///             TimeZone = "China Standard Time",
+        ///         });
+        ///         var exampleSubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+        ///         {
+        ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             Memory = 4,
+        ///             Storage = 100,
+        ///             Cpu = 2,
+        ///             MachineType = "CLOUD_HSSD",
+        ///             InstanceChargeType = "POSTPAID",
+        ///             ProjectId = 0,
+        ///             SubnetId = subnet.Id,
+        ///             VpcId = vpc.Id,
+        ///             DbVersion = "2008R2",
+        ///             SecurityGroupLists = 
+        ///             {
+        ///                 securityGroup.Id,
+        ///             },
+        ///             Weeklies = 
+        ///             {
+        ///                 1,
+        ///                 2,
+        ///                 3,
+        ///                 5,
+        ///                 6,
+        ///                 7,
+        ///             },
+        ///             StartTime = "00:00",
+        ///             Span = 6,
+        ///             ResourceTags = 
+        ///             {
+        ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+        ///                 {
+        ///                     TagKey = "test",
+        ///                     TagValue = "test",
+        ///                 },
+        ///             },
+        ///             Collation = "Chinese_PRC_CI_AS",
+        ///             TimeZone = "China Standard Time",
+        ///         });
+        ///         var examplePubDb = new Tencentcloud.Sqlserver.Db("examplePubDb", new Tencentcloud.Sqlserver.DbArgs
+        ///         {
+        ///             InstanceId = examplePubGeneralCloudInstance.Id,
+        ///             Charset = "Chinese_PRC_BIN",
+        ///             Remark = "test-remark",
+        ///         });
+        ///         var exampleSubDb = new Tencentcloud.Sqlserver.Db("exampleSubDb", new Tencentcloud.Sqlserver.DbArgs
+        ///         {
+        ///             InstanceId = exampleSubGeneralCloudInstance.Id,
+        ///             Charset = "Chinese_PRC_BIN",
+        ///             Remark = "test-remark",
+        ///         });
+        ///         var examplePublishSubscribe = new Tencentcloud.Sqlserver.PublishSubscribe("examplePublishSubscribe", new Tencentcloud.Sqlserver.PublishSubscribeArgs
+        ///         {
+        ///             PublishInstanceId = examplePubGeneralCloudInstance.Id,
+        ///             SubscribeInstanceId = exampleSubGeneralCloudInstance.Id,
         ///             PublishSubscribeName = "example",
         ///             DeleteSubscribeDb = false,
         ///             DatabaseTuples = 
         ///             {
         ///                 new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
         ///                 {
-        ///                     PublishDatabase = tencentcloud_sqlserver_db.Test_publish_subscribe.Name,
+        ///                     PublishDatabase = examplePubDb.Name,
+        ///                     SubscribeDatabase = exampleSubDb.Name,
         ///                 },
         ///             },
+        ///         });
+        ///         var examplePublishSubscribes = Tencentcloud.Sqlserver.GetPublishSubscribes.Invoke(new Tencentcloud.Sqlserver.GetPublishSubscribesInvokeArgs
+        ///         {
+        ///             InstanceId = examplePublishSubscribe.PublishInstanceId,
         ///         });
         ///     }
         /// 
@@ -60,25 +173,138 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// ```csharp
         /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var example = new Tencentcloud.Sqlserver.PublishSubscribe("example", new Tencentcloud.Sqlserver.PublishSubscribeArgs
+        ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
         ///         {
-        ///             PublishInstanceId = tencentcloud_sqlserver_instance.Publish_instance.Id,
-        ///             SubscribeInstanceId = tencentcloud_sqlserver_instance.Subscribe_instance.Id,
+        ///             Product = "sqlserver",
+        ///         }));
+        ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+        ///         {
+        ///             CidrBlock = "10.0.0.0/16",
+        ///         });
+        ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+        ///         {
+        ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             VpcId = vpc.Id,
+        ///             CidrBlock = "10.0.0.0/16",
+        ///             IsMulticast = false,
+        ///         });
+        ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+        ///         {
+        ///             Description = "desc.",
+        ///         });
+        ///         var examplePubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+        ///         {
+        ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             Memory = 4,
+        ///             Storage = 100,
+        ///             Cpu = 2,
+        ///             MachineType = "CLOUD_HSSD",
+        ///             InstanceChargeType = "POSTPAID",
+        ///             ProjectId = 0,
+        ///             SubnetId = subnet.Id,
+        ///             VpcId = vpc.Id,
+        ///             DbVersion = "2008R2",
+        ///             SecurityGroupLists = 
+        ///             {
+        ///                 securityGroup.Id,
+        ///             },
+        ///             Weeklies = 
+        ///             {
+        ///                 1,
+        ///                 2,
+        ///                 3,
+        ///                 5,
+        ///                 6,
+        ///                 7,
+        ///             },
+        ///             StartTime = "00:00",
+        ///             Span = 6,
+        ///             ResourceTags = 
+        ///             {
+        ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+        ///                 {
+        ///                     TagKey = "test",
+        ///                     TagValue = "test",
+        ///                 },
+        ///             },
+        ///             Collation = "Chinese_PRC_CI_AS",
+        ///             TimeZone = "China Standard Time",
+        ///         });
+        ///         var exampleSubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", new Tencentcloud.Sqlserver.GeneralCloudInstanceArgs
+        ///         {
+        ///             Zone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
+        ///             Memory = 4,
+        ///             Storage = 100,
+        ///             Cpu = 2,
+        ///             MachineType = "CLOUD_HSSD",
+        ///             InstanceChargeType = "POSTPAID",
+        ///             ProjectId = 0,
+        ///             SubnetId = subnet.Id,
+        ///             VpcId = vpc.Id,
+        ///             DbVersion = "2008R2",
+        ///             SecurityGroupLists = 
+        ///             {
+        ///                 securityGroup.Id,
+        ///             },
+        ///             Weeklies = 
+        ///             {
+        ///                 1,
+        ///                 2,
+        ///                 3,
+        ///                 5,
+        ///                 6,
+        ///                 7,
+        ///             },
+        ///             StartTime = "00:00",
+        ///             Span = 6,
+        ///             ResourceTags = 
+        ///             {
+        ///                 new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+        ///                 {
+        ///                     TagKey = "test",
+        ///                     TagValue = "test",
+        ///                 },
+        ///             },
+        ///             Collation = "Chinese_PRC_CI_AS",
+        ///             TimeZone = "China Standard Time",
+        ///         });
+        ///         var examplePubDb = new Tencentcloud.Sqlserver.Db("examplePubDb", new Tencentcloud.Sqlserver.DbArgs
+        ///         {
+        ///             InstanceId = examplePubGeneralCloudInstance.Id,
+        ///             Charset = "Chinese_PRC_BIN",
+        ///             Remark = "test-remark",
+        ///         });
+        ///         var exampleSubDb = new Tencentcloud.Sqlserver.Db("exampleSubDb", new Tencentcloud.Sqlserver.DbArgs
+        ///         {
+        ///             InstanceId = exampleSubGeneralCloudInstance.Id,
+        ///             Charset = "Chinese_PRC_BIN",
+        ///             Remark = "test-remark",
+        ///         });
+        ///         var examplePublishSubscribe = new Tencentcloud.Sqlserver.PublishSubscribe("examplePublishSubscribe", new Tencentcloud.Sqlserver.PublishSubscribeArgs
+        ///         {
+        ///             PublishInstanceId = examplePubGeneralCloudInstance.Id,
+        ///             SubscribeInstanceId = exampleSubGeneralCloudInstance.Id,
         ///             PublishSubscribeName = "example",
         ///             DeleteSubscribeDb = false,
         ///             DatabaseTuples = 
         ///             {
         ///                 new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
         ///                 {
-        ///                     PublishDatabase = tencentcloud_sqlserver_db.Test_publish_subscribe.Name,
+        ///                     PublishDatabase = examplePubDb.Name,
+        ///                     SubscribeDatabase = exampleSubDb.Name,
         ///                 },
         ///             },
+        ///         });
+        ///         var examplePublishSubscribes = Tencentcloud.Sqlserver.GetPublishSubscribes.Invoke(new Tencentcloud.Sqlserver.GetPublishSubscribesInvokeArgs
+        ///         {
+        ///             InstanceId = examplePublishSubscribe.PublishInstanceId,
         ///         });
         ///     }
         /// 

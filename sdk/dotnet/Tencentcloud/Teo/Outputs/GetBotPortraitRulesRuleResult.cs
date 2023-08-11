@@ -14,25 +14,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class GetBotPortraitRulesRuleResult
     {
-        /// <summary>
-        /// Classification of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly int ClassificationId;
-        /// <summary>
-        /// Description of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string Description;
-        /// <summary>
-        /// Rule ID.
-        /// </summary>
         public readonly int RuleId;
-        /// <summary>
-        /// Type of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string RuleTypeName;
-        /// <summary>
-        /// Status of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
         public readonly string Status;
 
         [OutputConstructor]

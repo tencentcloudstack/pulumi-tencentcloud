@@ -13,27 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// <summary>
     /// Provides a resource to create a vpc dhcp_ip
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var dhcpIp = new Tencentcloud.Vpc.DhcpIp("dhcpIp", new Tencentcloud.Vpc.DhcpIpArgs
-    ///         {
-    ///             DhcpIpName = "terraform-test",
-    ///             SubnetId = "subnet-h7av55g8",
-    ///             VpcId = "vpc-1yg5ua6l",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// vpc dhcp_ip can be imported using the id, e.g.

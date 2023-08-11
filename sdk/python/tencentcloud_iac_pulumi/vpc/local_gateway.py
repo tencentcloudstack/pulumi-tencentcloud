@@ -137,10 +137,11 @@ class LocalGateway(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        local_gateway = tencentcloud.vpc.LocalGateway("localGateway",
-            cdc_id="cluster-j9gyu1iy",
-            local_gateway_name="local-gw-test",
-            vpc_id="vpc-lh4nqig9")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.LocalGateway("example",
+            local_gateway_name="tf-example",
+            vpc_id=vpc.id,
+            cdc_id="cluster-j9gyu1iy")
         ```
 
         ## Import
@@ -172,10 +173,11 @@ class LocalGateway(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        local_gateway = tencentcloud.vpc.LocalGateway("localGateway",
-            cdc_id="cluster-j9gyu1iy",
-            local_gateway_name="local-gw-test",
-            vpc_id="vpc-lh4nqig9")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.vpc.LocalGateway("example",
+            local_gateway_name="tf-example",
+            vpc_id=vpc.id,
+            cdc_id="cluster-j9gyu1iy")
         ```
 
         ## Import

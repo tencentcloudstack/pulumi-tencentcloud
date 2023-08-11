@@ -8,12 +8,13 @@ import * as utilities from "../utilities";
  * Provide a resource to create a VPC.
  *
  * ## Example Usage
+ * ### Create a basic VPC
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Vpc.Instance("foo", {
+ * const vpc = new tencentcloud.Vpc.Instance("vpc", {
  *     cidrBlock: "10.0.0.0/16",
  *     dnsServers: [
  *         "119.29.29.29",
@@ -31,7 +32,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Vpc.Instance("foo", {
+ * const vpc = new tencentcloud.Vpc.Instance("vpc", {
  *     assistantCidrs: ["172.16.0.0/24"],
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,

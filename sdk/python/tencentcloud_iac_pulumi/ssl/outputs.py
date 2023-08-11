@@ -7,12 +7,14 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
     'FreeCertificateDvAuth',
     'PayCertificateDvAuth',
     'PayCertificateInformation',
     'GetCertificatesCertificateResult',
+    'GetCertificatesCertificateDvAuthResult',
 ]
 
 @pulumi.output_type
@@ -501,10 +503,12 @@ class GetCertificatesCertificateResult(dict):
                  cert: str,
                  create_time: str,
                  domain: str,
+                 dv_auths: Sequence['outputs.GetCertificatesCertificateDvAuthResult'],
                  end_time: str,
                  id: str,
                  key: str,
                  name: str,
+                 order_id: str,
                  product_zh_name: str,
                  project_id: int,
                  status: int,
@@ -515,10 +519,12 @@ class GetCertificatesCertificateResult(dict):
         :param str cert: Content of the SSL certificate.
         :param str create_time: Creation time of the SSL certificate.
         :param str domain: Primary domain of the SSL certificate.
+        :param Sequence['GetCertificatesCertificateDvAuthArgs'] dv_auths: DV certification information.
         :param str end_time: Ending time of the SSL certificate.
         :param str id: ID of the SSL certificate to be queried.
         :param str key: Key of the SSL certificate.
         :param str name: Name of the SSL certificate to be queried.
+        :param str order_id: Order ID returned.
         :param str product_zh_name: Certificate authority.
         :param int project_id: Project ID of the SSL certificate.
         :param int status: Status of the SSL certificate.
@@ -529,10 +535,12 @@ class GetCertificatesCertificateResult(dict):
         pulumi.set(__self__, "cert", cert)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "dv_auths", dv_auths)
         pulumi.set(__self__, "end_time", end_time)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order_id", order_id)
         pulumi.set(__self__, "product_zh_name", product_zh_name)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "status", status)
@@ -572,6 +580,14 @@ class GetCertificatesCertificateResult(dict):
         return pulumi.get(self, "domain")
 
     @property
+    @pulumi.getter(name="dvAuths")
+    def dv_auths(self) -> Sequence['outputs.GetCertificatesCertificateDvAuthResult']:
+        """
+        DV certification information.
+        """
+        return pulumi.get(self, "dv_auths")
+
+    @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> str:
         """
@@ -602,6 +618,14 @@ class GetCertificatesCertificateResult(dict):
         Name of the SSL certificate to be queried.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="orderId")
+    def order_id(self) -> str:
+        """
+        Order ID returned.
+        """
+        return pulumi.get(self, "order_id")
 
     @property
     @pulumi.getter(name="productZhName")
@@ -642,5 +666,45 @@ class GetCertificatesCertificateResult(dict):
         Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetCertificatesCertificateDvAuthResult(dict):
+    def __init__(__self__, *,
+                 dv_auth_key: str,
+                 dv_auth_value: str,
+                 dv_auth_verify_type: str):
+        """
+        :param str dv_auth_key: DV authentication key.
+        :param str dv_auth_value: DV authentication value.
+        :param str dv_auth_verify_type: DV authentication type.
+        """
+        pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> str:
+        """
+        DV authentication key.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> str:
+        """
+        DV authentication value.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> str:
+        """
+        DV authentication type.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
 
 

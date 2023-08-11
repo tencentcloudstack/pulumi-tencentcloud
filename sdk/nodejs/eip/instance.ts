@@ -8,6 +8,7 @@ import * as utilities from "../utilities";
  * Provides an EIP resource.
  *
  * ## Example Usage
+ * ### Paid by the bandwidth package
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -17,6 +18,22 @@ import * as utilities from "../utilities";
  *     bandwidthPackageId: "bwp-jtvzuky6",
  *     internetChargeType: "BANDWIDTH_PACKAGE",
  *     type: "EIP",
+ * });
+ * ```
+ * ### AntiDDos Eip
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Eip.Instance("foo", {
+ *     antiDdosPackageId: "xxxxxxxx",
+ *     bandwidthPackageId: "bwp-4ocyia9s",
+ *     internetChargeType: "BANDWIDTH_PACKAGE",
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     type: "AntiDDoSEIP",
  * });
  * ```
  *
@@ -56,6 +73,10 @@ export class Instance extends pulumi.CustomResource {
         return obj['__pulumiType'] === Instance.__pulumiType;
     }
 
+    /**
+     * ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+     */
+    public readonly antiDdosPackageId!: pulumi.Output<string>;
     /**
      * The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
      */
@@ -107,7 +128,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
      */
     public readonly type!: pulumi.Output<string | undefined>;
 
@@ -124,6 +145,7 @@ export class Instance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
+            resourceInputs["antiDdosPackageId"] = state ? state.antiDdosPackageId : undefined;
             resourceInputs["anycastZone"] = state ? state.anycastZone : undefined;
             resourceInputs["applicableForClb"] = state ? state.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
@@ -139,6 +161,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["type"] = state ? state.type : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
+            resourceInputs["antiDdosPackageId"] = args ? args.antiDdosPackageId : undefined;
             resourceInputs["anycastZone"] = args ? args.anycastZone : undefined;
             resourceInputs["applicableForClb"] = args ? args.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
@@ -162,6 +185,10 @@ export class Instance extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Instance resources.
  */
 export interface InstanceState {
+    /**
+     * ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+     */
+    antiDdosPackageId?: pulumi.Input<string>;
     /**
      * The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
      */
@@ -213,7 +240,7 @@ export interface InstanceState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
      */
     type?: pulumi.Input<string>;
 }
@@ -222,6 +249,10 @@ export interface InstanceState {
  * The set of arguments for constructing a Instance resource.
  */
 export interface InstanceArgs {
+    /**
+     * ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
+     */
+    antiDdosPackageId?: pulumi.Input<string>;
     /**
      * The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
      */
@@ -265,7 +296,7 @@ export interface InstanceArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
      */
     type?: pulumi.Input<string>;
 }

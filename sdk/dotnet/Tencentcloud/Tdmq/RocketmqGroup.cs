@@ -23,27 +23,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// {
     ///     public MyStack()
     ///     {
-    ///         var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
+    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
     ///         {
-    ///             ClusterName = "test_rocketmq",
-    ///             Remark = "test recket mq",
+    ///             ClusterName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var @namespace = new Tencentcloud.Tdmq.RocketmqNamespace("namespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
+    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
     ///         {
-    ///             ClusterId = cluster.ClusterId,
-    ///             NamespaceName = "test_namespace",
-    ///             Ttl = 65000,
-    ///             RetentionTime = 65000,
-    ///             Remark = "test namespace",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             NamespaceName = "tf_example",
+    ///             Remark = "remark.",
     ///         });
-    ///         var @group = new Tencentcloud.Tdmq.RocketmqGroup("group", new Tencentcloud.Tdmq.RocketmqGroupArgs
+    ///         var exampleRocketmqGroup = new Tencentcloud.Tdmq.RocketmqGroup("exampleRocketmqGroup", new Tencentcloud.Tdmq.RocketmqGroupArgs
     ///         {
-    ///             GroupName = "test_rocketmq_group",
-    ///             Namespace = @namespace.NamespaceName,
+    ///             GroupName = "tf_example",
+    ///             ClusterId = exampleRocketmqCluster.ClusterId,
+    ///             Namespace = exampleRocketmqNamespace.NamespaceName,
     ///             ReadEnable = true,
     ///             BroadcastEnable = true,
-    ///             ClusterId = cluster.ClusterId,
-    ///             Remark = "test rocketmq group",
+    ///             Remark = "remark.",
     ///         });
     ///     }
     /// 

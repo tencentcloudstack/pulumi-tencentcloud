@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const roGroup = new tencentcloud.Mysql.RoGroup("ro_group", {
+ * const example = new tencentcloud.Mysql.RoGroup("example", {
  *     instanceId: "cdb-e8i766hx",
  *     isBalanceRoLoad: 1,
  *     roGroupId: "cdbrg-f49t0gnj",

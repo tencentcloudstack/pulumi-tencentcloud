@@ -14,24 +14,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr repository.
     /// 
     /// ## Example Usage
+    /// ### Create a tcr repository instance
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var test = Output.Create(Tencentcloud.Tcr.GetInstances.InvokeAsync(new Tencentcloud.Tcr.GetInstancesArgs
+    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
     ///         {
-    ///             Name = "test",
-    ///         }));
-    ///         var foo = new Tencentcloud.Tcr.Repository("foo", new Tencentcloud.Tcr.RepositoryArgs
+    ///             InstanceType = "premium",
+    ///             DeleteBucket = true,
+    ///         });
+    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
     ///         {
-    ///             InstanceId = test.Apply(test =&gt; test.InstanceLists?[0]?.Id),
-    ///             NamespaceName = "exampleNamespace",
+    ///             InstanceId = exampleInstance.Id,
+    ///             IsPublic = true,
+    ///             IsAutoScan = true,
+    ///             IsPreventVul = true,
+    ///             Severity = "medium",
+    ///             CveWhitelistItems = 
+    ///             {
+    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 {
+    ///                     CveId = "cve-xxxxx",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new Tencentcloud.Tcr.RepositoryArgs
+    ///         {
+    ///             InstanceId = exampleInstance.Id,
+    ///             NamespaceName = exampleNamespace.Name,
+    ///             BriefDesc = "111",
+    ///             Description = "111111111111111111111111111111111111",
     ///         });
     ///     }
     /// 
@@ -43,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// tcr repository can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+    ///  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/repository:Repository")]

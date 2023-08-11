@@ -12,24 +12,31 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Cam.Role("foo", {
- *     consoleLogin: true,
- *     description: "test",
- *     document: `{
+ * const info = tencentcloud.User.getInfo({});
+ * const uin = info.then(info => info.uin);
+ * const foo = new tencentcloud.cam.Role("foo", {
+ *     document: Promise.all([uin, uin]).then(([uin, uin1]) => `{
  *   "version": "2.0",
  *   "statement": [
  *     {
- *       "action": ["name/sts:AssumeRole"],
+ *       "action": [
+ *         "name/sts:AssumeRole"
+ *       ],
  *       "effect": "allow",
  *       "principal": {
- *         "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
+ *         "qcs": [
+ *           "qcs::cam::uin/${uin}:uin/${uin1}"
+ *         ]
  *       }
  *     }
  *   ]
  * }
- * `,
+ * `),
+ *     description: "test",
+ *     consoleLogin: true,
  *     tags: {
  *         test: "tf-cam-role",
  *     },
@@ -39,24 +46,34 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const boo = new tencentcloud.Cam.Role("boo", {
- *     consoleLogin: true,
- *     description: "test",
- *     document: `{
+ * const config = new pulumi.Config();
+ * const saml-provider = config.get("saml-provider") || "example";
+ * const info = tencentcloud.User.getInfo({});
+ * const uin = info.then(info => info.uin);
+ * const samlProvider = saml_provider;
+ * const boo = new tencentcloud.cam.Role("boo", {
+ *     document: uin.then(uin => `{
  *   "version": "2.0",
  *   "statement": [
  *     {
- *       "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+ *       "action": [
+ *         "name/sts:AssumeRole"
+ *       ],
  *       "effect": "allow",
  *       "principal": {
- *         "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
+ *         "qcs": [
+ *           "qcs::cam::uin/${uin}:saml-provider/${samlProvider}"
+ *         ]
  *       }
  *     }
  *   ]
  * }
- * `,
+ * `),
+ *     description: "tf_test",
+ *     consoleLogin: true,
  * });
  * ```
  *

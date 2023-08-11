@@ -14,8 +14,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const master = pulumi.output(tencentcloud.Sqlserver.getReadonlyGroups({
- *     masterInstanceId: "mssql-3cdq7kx5",
+ * const example = pulumi.output(tencentcloud.Sqlserver.getDbs({
+ *     instanceId: "mssql-ds1xhnt9",
  * }));
  * ```
  */

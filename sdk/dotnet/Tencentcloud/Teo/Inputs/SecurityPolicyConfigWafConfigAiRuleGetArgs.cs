@@ -13,9 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigWafConfigAiRuleGetArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Valid values:- `smart_status_close`: disabled.- `smart_status_open`: blocked.- `smart_status_observe`: observed.
-        /// </summary>
         [Input("mode")]
         public Input<string>? Mode { get; set; }
 

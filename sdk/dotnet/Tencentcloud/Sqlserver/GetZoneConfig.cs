@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var mysqlserver = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
         ///     }
         /// 
         /// }
@@ -53,7 +53,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// {
         ///     public MyStack()
         ///     {
-        ///         var mysqlserver = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
+        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
         ///     }
         /// 
         /// }

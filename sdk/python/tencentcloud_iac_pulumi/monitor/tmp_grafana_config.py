@@ -106,7 +106,26 @@ class TmpGrafanaConfig(pulumi.CustomResource):
         import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_grafana_config = tencentcloud.monitor.TmpGrafanaConfig("tmpGrafanaConfig",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_grafana_instance = tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance",
+            instance_name="tf-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            is_destroy=True,
+            tags={
+                "createdBy": "test",
+            })
+        foo_tmp_grafana_config = tencentcloud.monitor.TmpGrafanaConfig("fooTmpGrafanaConfig",
             config=json.dumps({
                 "server": {
                     "http_port": 8080,
@@ -114,7 +133,7 @@ class TmpGrafanaConfig(pulumi.CustomResource):
                     "serve_from_sub_path": True,
                 },
             }),
-            instance_id="grafana-29phe08q")
+            instance_id=foo_grafana_instance.id)
         ```
 
         ## Import
@@ -146,7 +165,26 @@ class TmpGrafanaConfig(pulumi.CustomResource):
         import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_grafana_config = tencentcloud.monitor.TmpGrafanaConfig("tmpGrafanaConfig",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        foo_grafana_instance = tencentcloud.monitor.GrafanaInstance("fooGrafanaInstance",
+            instance_name="tf-grafana",
+            vpc_id=vpc.id,
+            subnet_ids=[subnet.id],
+            grafana_init_password="1234567890",
+            enable_internet=False,
+            is_destroy=True,
+            tags={
+                "createdBy": "test",
+            })
+        foo_tmp_grafana_config = tencentcloud.monitor.TmpGrafanaConfig("fooTmpGrafanaConfig",
             config=json.dumps({
                 "server": {
                     "http_port": 8080,
@@ -154,7 +192,7 @@ class TmpGrafanaConfig(pulumi.CustomResource):
                     "serve_from_sub_path": True,
                 },
             }),
-            instance_id="grafana-29phe08q")
+            instance_id=foo_grafana_instance.id)
         ```
 
         ## Import

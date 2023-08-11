@@ -29,9 +29,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// {
     ///     public MyStack()
     ///     {
-    ///         var ssl = new Tencentcloud.Ssl.PayCertificate("ssl", new Tencentcloud.Ssl.PayCertificateArgs
+    ///         var example = new Tencentcloud.Ssl.PayCertificate("example", new Tencentcloud.Ssl.PayCertificateArgs
     ///         {
-    ///             Alias = "test-ssl",
+    ///             Alias = "ssl desc.",
     ///             DomainNum = 1,
     ///             Information = new Tencentcloud.Ssl.Inputs.PayCertificateInformationArgs
     ///             {
@@ -39,22 +39,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     ///                 AdminFirstName = "test",
     ///                 AdminLastName = "test",
     ///                 AdminPhoneNum = "12345678901",
-    ///                 AdminPosition = "dev",
-    ///                 CertificateDomain = "www.domain.com",
+    ///                 AdminPosition = "developer",
+    ///                 CertificateDomain = "www.example.com",
     ///                 ContactEmail = "test@tencent.com",
     ///                 ContactFirstName = "test",
     ///                 ContactLastName = "test",
     ///                 ContactNumber = "12345678901",
-    ///                 ContactPosition = "dev",
+    ///                 ContactPosition = "developer",
     ///                 CsrType = "online",
-    ///                 OrganizationAddress = "test",
-    ///                 OrganizationCity = "test",
+    ///                 OrganizationAddress = "广东省深圳市南山区腾讯大厦1000号",
+    ///                 OrganizationCity = "深圳市",
     ///                 OrganizationCountry = "CN",
-    ///                 OrganizationDivision = "test",
-    ///                 OrganizationName = "test",
-    ///                 OrganizationRegion = "test",
+    ///                 OrganizationDivision = "Qcloud",
+    ///                 OrganizationName = "Tencent",
+    ///                 OrganizationRegion = "广东省",
     ///                 PhoneAreaCode = "0755",
-    ///                 PhoneNumber = "12345678901",
+    ///                 PhoneNumber = "86013388",
     ///                 PostalCode = "0755",
     ///                 VerifyType = "DNS",
     ///             },

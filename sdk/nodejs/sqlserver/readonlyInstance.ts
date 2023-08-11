@@ -12,17 +12,54 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.sqlserver.ReadonlyInstance("foo", {
- *     availabilityZone: "ap-guangzhou-4",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleBasicInstance = new tencentcloud.sqlserver.BasicInstance("exampleBasicInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
  *     chargeType: "POSTPAID_BY_HOUR",
- *     vpcId: "vpc-xxxxxxxx",
- *     subnetId: "subnet-xxxxxxxx",
- *     memory: 2,
- *     storage: 10,
- *     masterInstanceId: tencentcloud_sqlserver_instance.test.id,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     projectId: 0,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     maintenanceWeekSets: [
+ *         1,
+ *         2,
+ *         3,
+ *     ],
+ *     maintenanceStartTime: "09:00",
+ *     maintenanceTimeSpan: 3,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const exampleReadonlyInstance = new tencentcloud.sqlserver.ReadonlyInstance("exampleReadonlyInstance", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     memory: 4,
+ *     storage: 20,
+ *     masterInstanceId: exampleBasicInstance.id,
  *     readonlyGroupType: 1,
  *     forceUpgrade: true,
+ *     tags: {
+ *         test: "test",
+ *     },
  * });
  * ```
  *
@@ -31,7 +68,7 @@ import * as utilities from "../utilities";
  * SQL Server readonly instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+ *  $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance example mssqlro-3cdq7kx5
  * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
@@ -103,9 +140,25 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly readonlyGroupId!: pulumi.Output<string>;
     /**
+     * Required when `readonlyGroupType`=2, the name of the newly created read-only group.
+     */
+    public readonly readonlyGroupName!: pulumi.Output<string>;
+    /**
      * Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
      */
     public readonly readonlyGroupType!: pulumi.Output<number>;
+    /**
+     * Required when `readonlyGroupType`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+     */
+    public readonly readonlyGroupsIsOfflineDelay!: pulumi.Output<number>;
+    /**
+     * Required when `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, the threshold for delayed elimination of newly created read-only groups.
+     */
+    public readonly readonlyGroupsMaxDelayTime!: pulumi.Output<number>;
+    /**
+     * When `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+     */
+    public readonly readonlyGroupsMinInGroup!: pulumi.Output<number>;
     /**
      * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
@@ -176,7 +229,11 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["readonlyGroupId"] = state ? state.readonlyGroupId : undefined;
+            resourceInputs["readonlyGroupName"] = state ? state.readonlyGroupName : undefined;
             resourceInputs["readonlyGroupType"] = state ? state.readonlyGroupType : undefined;
+            resourceInputs["readonlyGroupsIsOfflineDelay"] = state ? state.readonlyGroupsIsOfflineDelay : undefined;
+            resourceInputs["readonlyGroupsMaxDelayTime"] = state ? state.readonlyGroupsMaxDelayTime : undefined;
+            resourceInputs["readonlyGroupsMinInGroup"] = state ? state.readonlyGroupsMinInGroup : undefined;
             resourceInputs["roFlag"] = state ? state.roFlag : undefined;
             resourceInputs["securityGroups"] = state ? state.securityGroups : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -211,7 +268,11 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["readonlyGroupId"] = args ? args.readonlyGroupId : undefined;
+            resourceInputs["readonlyGroupName"] = args ? args.readonlyGroupName : undefined;
             resourceInputs["readonlyGroupType"] = args ? args.readonlyGroupType : undefined;
+            resourceInputs["readonlyGroupsIsOfflineDelay"] = args ? args.readonlyGroupsIsOfflineDelay : undefined;
+            resourceInputs["readonlyGroupsMaxDelayTime"] = args ? args.readonlyGroupsMaxDelayTime : undefined;
+            resourceInputs["readonlyGroupsMinInGroup"] = args ? args.readonlyGroupsMinInGroup : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
             resourceInputs["storage"] = args ? args.storage : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
@@ -275,9 +336,25 @@ export interface ReadonlyInstanceState {
      */
     readonlyGroupId?: pulumi.Input<string>;
     /**
+     * Required when `readonlyGroupType`=2, the name of the newly created read-only group.
+     */
+    readonlyGroupName?: pulumi.Input<string>;
+    /**
      * Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
      */
     readonlyGroupType?: pulumi.Input<number>;
+    /**
+     * Required when `readonlyGroupType`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+     */
+    readonlyGroupsIsOfflineDelay?: pulumi.Input<number>;
+    /**
+     * Required when `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, the threshold for delayed elimination of newly created read-only groups.
+     */
+    readonlyGroupsMaxDelayTime?: pulumi.Input<number>;
+    /**
+     * When `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+     */
+    readonlyGroupsMinInGroup?: pulumi.Input<number>;
     /**
      * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
@@ -367,9 +444,25 @@ export interface ReadonlyInstanceArgs {
      */
     readonlyGroupId?: pulumi.Input<string>;
     /**
+     * Required when `readonlyGroupType`=2, the name of the newly created read-only group.
+     */
+    readonlyGroupName?: pulumi.Input<string>;
+    /**
      * Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
      */
     readonlyGroupType: pulumi.Input<number>;
+    /**
+     * Required when `readonlyGroupType`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
+     */
+    readonlyGroupsIsOfflineDelay?: pulumi.Input<number>;
+    /**
+     * Required when `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, the threshold for delayed elimination of newly created read-only groups.
+     */
+    readonlyGroupsMaxDelayTime?: pulumi.Input<number>;
+    /**
+     * When `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
+     */
+    readonlyGroupsMinInGroup?: pulumi.Input<number>;
     /**
      * Security group bound to the instance.
      */

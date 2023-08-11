@@ -15,10 +15,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     {
         [Input("modules")]
         private InputList<string>? _modules;
-
-        /// <summary>
-        /// Modules in which the rule take effect. Valid values: `waf`.
-        /// </summary>
         public InputList<string> Modules
         {
             get => _modules ?? (_modules = new InputList<string>());

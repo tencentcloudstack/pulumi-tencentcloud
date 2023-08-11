@@ -171,16 +171,6 @@ class ClusterSlaveZone(pulumi.CustomResource):
             cluster_id=instance.id,
             slave_zone=new_availability_zone)
         ```
-        ### Update the slave zone with specified value.
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        cluster_slave_zone = tencentcloud.cynosdb.ClusterSlaveZone("clusterSlaveZone",
-            cluster_id=tencentcloud_cynosdb_cluster["instance"]["id"],
-            slave_zone=var["availability_zone"])
-        ```
 
         ## Import
 
@@ -275,16 +265,6 @@ class ClusterSlaveZone(pulumi.CustomResource):
         cluster_slave_zone = tencentcloud.cynosdb.ClusterSlaveZone("clusterSlaveZone",
             cluster_id=instance.id,
             slave_zone=new_availability_zone)
-        ```
-        ### Update the slave zone with specified value.
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        cluster_slave_zone = tencentcloud.cynosdb.ClusterSlaveZone("clusterSlaveZone",
-            cluster_id=tencentcloud_cynosdb_cluster["instance"]["id"],
-            slave_zone=var["availability_zone"])
         ```
 
         ## Import

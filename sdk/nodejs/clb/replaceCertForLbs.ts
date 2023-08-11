@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a clb replaceCertForLbs
  *
  * ## Example Usage
+ * ### Replace Server Cert By Cert ID
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -16,10 +17,52 @@ import * as utilities from "../utilities";
  *
  * const replaceCertForLbs = new tencentcloud.Clb.ReplaceCertForLbs("replace_cert_for_lbs", {
  *     certificate: {
- *         certCaContent: "XXXXX",
- *         certCaName: "test",
+ *         certId: "6vcK02GC",
  *     },
  *     oldCertificateId: "zjUMifFK",
+ * });
+ * ```
+ * ### Replace Server Cert By Cert Content
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Ssl.getCertificates({
+ *     name: "keep-ssl-ca",
+ * });
+ * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs", {
+ *     oldCertificateId: foo.then(foo => foo.certificates?[0]?.id),
+ *     certificate: {
+ *         certName: "tf-test-cert",
+ *         certContent: `-----BEGIN CERTIFICATE-----
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxx
+ * -----END CERTIFICATE-----
+ * EOT,
+ *     certKey     = <<-EOT
+ * -----BEGIN RSA PRIVATE KEY-----
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ * -----END RSA PRIVATE KEY-----
+ * `,
+ *     },
+ * });
+ * ```
+ * ### Replace Client Cert By Cert Content
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs", {
+ *     oldCertificateId: "zjUMifFK",
+ *     certificate: {
+ *         certCaName: "tf-test-cert",
+ *         certCaContent: `-----BEGIN CERTIFICATE-----
+ * xxxxxxxxContentxxxxxxxxxxxxxx
+ * -----END CERTIFICATE-----
+ * `,
+ *     },
  * });
  * ```
  *

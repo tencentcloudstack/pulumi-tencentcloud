@@ -13,19 +13,31 @@ import * as utilities from "../utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const generalCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("generalCloudInstance", {
- *     zone: "ap-guangzhou-6",
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const example = new tencentcloud.sqlserver.GeneralCloudInstance("example", {
+ *     zone: zones.then(zones => zones.zones?[4]?.name),
  *     memory: 4,
- *     storage: 20,
+ *     storage: 100,
  *     cpu: 2,
  *     machineType: "CLOUD_HSSD",
  *     instanceChargeType: "POSTPAID",
  *     projectId: 0,
- *     subnetId: local.subnet_id,
- *     vpcId: local.vpc_id,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
  *     dbVersion: "2008R2",
- *     securityGroupLists: [local.sg_id],
+ *     securityGroupLists: [securityGroup.id],
  *     weeklies: [
  *         1,
  *         2,
@@ -50,7 +62,7 @@ import * as utilities from "../utilities";
  * sqlserver general_cloud_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance general_cloud_instance general_cloud_instance_id
+ *  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
  * ```
  */
 export class GeneralCloudInstance extends pulumi.CustomResource {

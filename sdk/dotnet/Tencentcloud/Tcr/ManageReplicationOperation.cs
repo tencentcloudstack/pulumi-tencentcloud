@@ -11,7 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr manage_replication_operation
+    /// Provides a resource to start a tcr instance replication operation
+    /// 
+    /// ## Example Usage
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation")]
     public partial class ManageReplicationOperation : Pulumi.CustomResource

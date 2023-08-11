@@ -198,14 +198,21 @@ class Token(pulumi.CustomResource):
         Use this resource to create tcr long term token.
 
         ## Example Usage
+        ### Create a token for tcr instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Token("foo",
-            description="test",
-            instance_id="cls-cda1iex1")
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_token = tencentcloud.tcr.Token("exampleToken",
+            instance_id=example_instance.id,
+            description="example for the tcr token")
         ```
 
         ## Import
@@ -213,7 +220,7 @@ class Token(pulumi.CustomResource):
         tcr token can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/token:Token foo cls-cda1iex1#namespace#buv3h3j96j2d1rk1cllg
+         $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
         ```
 
         :param str resource_name: The name of the resource.
@@ -232,14 +239,21 @@ class Token(pulumi.CustomResource):
         Use this resource to create tcr long term token.
 
         ## Example Usage
+        ### Create a token for tcr instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tcr.Token("foo",
-            description="test",
-            instance_id="cls-cda1iex1")
+        example_instance = tencentcloud.tcr.Instance("exampleInstance",
+            instance_type="basic",
+            delete_bucket=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_token = tencentcloud.tcr.Token("exampleToken",
+            instance_id=example_instance.id,
+            description="example for the tcr token")
         ```
 
         ## Import
@@ -247,7 +261,7 @@ class Token(pulumi.CustomResource):
         tcr token can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tcr/token:Token foo cls-cda1iex1#namespace#buv3h3j96j2d1rk1cllg
+         $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
         ```
 
         :param str resource_name: The name of the resource.

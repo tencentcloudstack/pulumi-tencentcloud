@@ -13,13 +13,16 @@ from .config_attachment import *
 from .config_extra import *
 from .cos_recharge import *
 from .cos_shipper import *
+from .data_transform import *
 from .export import *
 from .get_machine_group_configs import *
 from .get_machines import *
 from .get_shipper_tasks import *
 from .index import *
+from .kafka_recharge import *
 from .logset import *
 from .machine_group import *
+from .scheduled_sql import *
 from .topic import *
 from ._inputs import *
 from . import outputs

@@ -366,7 +366,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         /// </summary>
         [Output("protocol")]
         public Output<string> Protocol { get; private set; } = null!;
@@ -569,7 +569,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
@@ -738,7 +738,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        /// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }

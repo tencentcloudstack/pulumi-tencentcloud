@@ -78,7 +78,7 @@ class InstanceArgs:
         :param pulumi.Input[int] instance_count: It has been deprecated from version 1.59.18. Use built-in `count` instead. The number of instances to be purchased. Value range:[1,100]; default value: 1.
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
@@ -426,7 +426,7 @@ class InstanceArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -772,7 +772,7 @@ class _InstanceState:
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_status: Current status of the instance.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
@@ -1167,7 +1167,7 @@ class _InstanceState:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -1505,7 +1505,7 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpc_id`. One instance can only belong to one VPC.
 
-        > **NOTE:** At present, 'PREPAID' instance cannot be deleted and must wait it to be outdated and released automatically.
+        > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 
         ## Import
 
@@ -1536,7 +1536,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] instance_count: It has been deprecated from version 1.59.18. Use built-in `count` instead. The number of instances to be purchased. Value range:[1,100]; default value: 1.
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
@@ -1571,7 +1571,7 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpc_id`. One instance can only belong to one VPC.
 
-        > **NOTE:** At present, 'PREPAID' instance cannot be deleted and must wait it to be outdated and released automatically.
+        > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 
         ## Import
 
@@ -1796,7 +1796,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: The name of the instance. The max length of instance_name is 60, and default value is `Terraform-CVM-Instance`.
         :param pulumi.Input[str] instance_status: Current status of the instance.
         :param pulumi.Input[str] instance_type: The type of the instance.
-        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        :param pulumi.Input[str] internet_charge_type: Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[int] internet_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocate_public_ip` is false.
         :param pulumi.Input[bool] keep_image_login: Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifying will cause the instance reset.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
@@ -2053,7 +2053,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> pulumi.Output[str]:
         """
-        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
+        Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocate_public_ip` is false.
         """
         return pulumi.get(self, "internet_charge_type")
 

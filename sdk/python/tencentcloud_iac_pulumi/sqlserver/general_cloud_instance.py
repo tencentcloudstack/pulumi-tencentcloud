@@ -735,20 +735,29 @@ class GeneralCloudInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("generalCloudInstance",
-            zone="ap-guangzhou-6",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.GeneralCloudInstance("example",
+            zone=zones.zones[4].name,
             memory=4,
-            storage=20,
+            storage=100,
             cpu=2,
             machine_type="CLOUD_HSSD",
             instance_charge_type="POSTPAID",
             project_id=0,
-            subnet_id=local["subnet_id"],
-            vpc_id=local["vpc_id"],
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
             db_version="2008R2",
-            security_group_lists=[local["sg_id"]],
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -772,7 +781,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         sqlserver general_cloud_instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance general_cloud_instance general_cloud_instance_id
+         $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
         ```
 
         :param str resource_name: The name of the resource.
@@ -812,20 +821,29 @@ class GeneralCloudInstance(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("generalCloudInstance",
-            zone="ap-guangzhou-6",
+        zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[4].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example = tencentcloud.sqlserver.GeneralCloudInstance("example",
+            zone=zones.zones[4].name,
             memory=4,
-            storage=20,
+            storage=100,
             cpu=2,
             machine_type="CLOUD_HSSD",
             instance_charge_type="POSTPAID",
             project_id=0,
-            subnet_id=local["subnet_id"],
-            vpc_id=local["vpc_id"],
+            subnet_id=subnet.id,
+            vpc_id=vpc.id,
             db_version="2008R2",
-            security_group_lists=[local["sg_id"]],
+            security_group_lists=[security_group.id],
             weeklies=[
                 1,
                 2,
@@ -849,7 +867,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         sqlserver general_cloud_instance can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance general_cloud_instance general_cloud_instance_id
+         $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
         ```
 
         :param str resource_name: The name of the resource.

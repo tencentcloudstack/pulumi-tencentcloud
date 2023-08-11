@@ -148,22 +148,14 @@ func (o ApplicationProxyIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRule struct {
-	// DDoS ACL rule configuration.
-	Acl *DdosPolicyDdosRuleAcl `pulumi:"acl"`
-	// DDoS black-white list.
-	AllowBlock *DdosPolicyDdosRuleAllowBlock `pulumi:"allowBlock"`
-	// DDoS protocol and connection protection.
-	AntiPly *DdosPolicyDdosRuleAntiPly `pulumi:"antiPly"`
-	// DDoS Protection by Geo Info.
-	GeoIp *DdosPolicyDdosRuleGeoIp `pulumi:"geoIp"`
-	// DDoS feature filtering configuration.
+	Acl          *DdosPolicyDdosRuleAcl          `pulumi:"acl"`
+	AllowBlock   *DdosPolicyDdosRuleAllowBlock   `pulumi:"allowBlock"`
+	AntiPly      *DdosPolicyDdosRuleAntiPly      `pulumi:"antiPly"`
+	GeoIp        *DdosPolicyDdosRuleGeoIp        `pulumi:"geoIp"`
 	PacketFilter *DdosPolicyDdosRulePacketFilter `pulumi:"packetFilter"`
-	// DDoS access origin site speed limit configuration.
-	SpeedLimit *DdosPolicyDdosRuleSpeedLimit `pulumi:"speedLimit"`
-	// DDoS protection level.
-	StatusInfo *DdosPolicyDdosRuleStatusInfo `pulumi:"statusInfo"`
-	// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	SpeedLimit   *DdosPolicyDdosRuleSpeedLimit   `pulumi:"speedLimit"`
+	StatusInfo   *DdosPolicyDdosRuleStatusInfo   `pulumi:"statusInfo"`
+	Switch       *string                         `pulumi:"switch"`
 }
 
 // DdosPolicyDdosRuleInput is an input type that accepts DdosPolicyDdosRuleArgs and DdosPolicyDdosRuleOutput values.
@@ -178,22 +170,14 @@ type DdosPolicyDdosRuleInput interface {
 }
 
 type DdosPolicyDdosRuleArgs struct {
-	// DDoS ACL rule configuration.
-	Acl DdosPolicyDdosRuleAclPtrInput `pulumi:"acl"`
-	// DDoS black-white list.
-	AllowBlock DdosPolicyDdosRuleAllowBlockPtrInput `pulumi:"allowBlock"`
-	// DDoS protocol and connection protection.
-	AntiPly DdosPolicyDdosRuleAntiPlyPtrInput `pulumi:"antiPly"`
-	// DDoS Protection by Geo Info.
-	GeoIp DdosPolicyDdosRuleGeoIpPtrInput `pulumi:"geoIp"`
-	// DDoS feature filtering configuration.
+	Acl          DdosPolicyDdosRuleAclPtrInput          `pulumi:"acl"`
+	AllowBlock   DdosPolicyDdosRuleAllowBlockPtrInput   `pulumi:"allowBlock"`
+	AntiPly      DdosPolicyDdosRuleAntiPlyPtrInput      `pulumi:"antiPly"`
+	GeoIp        DdosPolicyDdosRuleGeoIpPtrInput        `pulumi:"geoIp"`
 	PacketFilter DdosPolicyDdosRulePacketFilterPtrInput `pulumi:"packetFilter"`
-	// DDoS access origin site speed limit configuration.
-	SpeedLimit DdosPolicyDdosRuleSpeedLimitPtrInput `pulumi:"speedLimit"`
-	// DDoS protection level.
-	StatusInfo DdosPolicyDdosRuleStatusInfoPtrInput `pulumi:"statusInfo"`
-	// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	SpeedLimit   DdosPolicyDdosRuleSpeedLimitPtrInput   `pulumi:"speedLimit"`
+	StatusInfo   DdosPolicyDdosRuleStatusInfoPtrInput   `pulumi:"statusInfo"`
+	Switch       pulumi.StringPtrInput                  `pulumi:"switch"`
 }
 
 func (DdosPolicyDdosRuleArgs) ElementType() reflect.Type {
@@ -273,42 +257,34 @@ func (o DdosPolicyDdosRuleOutput) ToDdosPolicyDdosRulePtrOutputWithContext(ctx c
 	}).(DdosPolicyDdosRulePtrOutput)
 }
 
-// DDoS ACL rule configuration.
 func (o DdosPolicyDdosRuleOutput) Acl() DdosPolicyDdosRuleAclPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAcl { return v.Acl }).(DdosPolicyDdosRuleAclPtrOutput)
 }
 
-// DDoS black-white list.
 func (o DdosPolicyDdosRuleOutput) AllowBlock() DdosPolicyDdosRuleAllowBlockPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAllowBlock { return v.AllowBlock }).(DdosPolicyDdosRuleAllowBlockPtrOutput)
 }
 
-// DDoS protocol and connection protection.
 func (o DdosPolicyDdosRuleOutput) AntiPly() DdosPolicyDdosRuleAntiPlyPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAntiPly { return v.AntiPly }).(DdosPolicyDdosRuleAntiPlyPtrOutput)
 }
 
-// DDoS Protection by Geo Info.
 func (o DdosPolicyDdosRuleOutput) GeoIp() DdosPolicyDdosRuleGeoIpPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleGeoIp { return v.GeoIp }).(DdosPolicyDdosRuleGeoIpPtrOutput)
 }
 
-// DDoS feature filtering configuration.
 func (o DdosPolicyDdosRuleOutput) PacketFilter() DdosPolicyDdosRulePacketFilterPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRulePacketFilter { return v.PacketFilter }).(DdosPolicyDdosRulePacketFilterPtrOutput)
 }
 
-// DDoS access origin site speed limit configuration.
 func (o DdosPolicyDdosRuleOutput) SpeedLimit() DdosPolicyDdosRuleSpeedLimitPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleSpeedLimit { return v.SpeedLimit }).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
 }
 
-// DDoS protection level.
 func (o DdosPolicyDdosRuleOutput) StatusInfo() DdosPolicyDdosRuleStatusInfoPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleStatusInfo { return v.StatusInfo }).(DdosPolicyDdosRuleStatusInfoPtrOutput)
 }
 
-// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o DdosPolicyDdosRuleOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -337,7 +313,6 @@ func (o DdosPolicyDdosRulePtrOutput) Elem() DdosPolicyDdosRuleOutput {
 	}).(DdosPolicyDdosRuleOutput)
 }
 
-// DDoS ACL rule configuration.
 func (o DdosPolicyDdosRulePtrOutput) Acl() DdosPolicyDdosRuleAclPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAcl {
 		if v == nil {
@@ -347,7 +322,6 @@ func (o DdosPolicyDdosRulePtrOutput) Acl() DdosPolicyDdosRuleAclPtrOutput {
 	}).(DdosPolicyDdosRuleAclPtrOutput)
 }
 
-// DDoS black-white list.
 func (o DdosPolicyDdosRulePtrOutput) AllowBlock() DdosPolicyDdosRuleAllowBlockPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAllowBlock {
 		if v == nil {
@@ -357,7 +331,6 @@ func (o DdosPolicyDdosRulePtrOutput) AllowBlock() DdosPolicyDdosRuleAllowBlockPt
 	}).(DdosPolicyDdosRuleAllowBlockPtrOutput)
 }
 
-// DDoS protocol and connection protection.
 func (o DdosPolicyDdosRulePtrOutput) AntiPly() DdosPolicyDdosRuleAntiPlyPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAntiPly {
 		if v == nil {
@@ -367,7 +340,6 @@ func (o DdosPolicyDdosRulePtrOutput) AntiPly() DdosPolicyDdosRuleAntiPlyPtrOutpu
 	}).(DdosPolicyDdosRuleAntiPlyPtrOutput)
 }
 
-// DDoS Protection by Geo Info.
 func (o DdosPolicyDdosRulePtrOutput) GeoIp() DdosPolicyDdosRuleGeoIpPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleGeoIp {
 		if v == nil {
@@ -377,7 +349,6 @@ func (o DdosPolicyDdosRulePtrOutput) GeoIp() DdosPolicyDdosRuleGeoIpPtrOutput {
 	}).(DdosPolicyDdosRuleGeoIpPtrOutput)
 }
 
-// DDoS feature filtering configuration.
 func (o DdosPolicyDdosRulePtrOutput) PacketFilter() DdosPolicyDdosRulePacketFilterPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRulePacketFilter {
 		if v == nil {
@@ -387,7 +358,6 @@ func (o DdosPolicyDdosRulePtrOutput) PacketFilter() DdosPolicyDdosRulePacketFilt
 	}).(DdosPolicyDdosRulePacketFilterPtrOutput)
 }
 
-// DDoS access origin site speed limit configuration.
 func (o DdosPolicyDdosRulePtrOutput) SpeedLimit() DdosPolicyDdosRuleSpeedLimitPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleSpeedLimit {
 		if v == nil {
@@ -397,7 +367,6 @@ func (o DdosPolicyDdosRulePtrOutput) SpeedLimit() DdosPolicyDdosRuleSpeedLimitPt
 	}).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
 }
 
-// DDoS protection level.
 func (o DdosPolicyDdosRulePtrOutput) StatusInfo() DdosPolicyDdosRuleStatusInfoPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleStatusInfo {
 		if v == nil {
@@ -407,7 +376,6 @@ func (o DdosPolicyDdosRulePtrOutput) StatusInfo() DdosPolicyDdosRuleStatusInfoPt
 	}).(DdosPolicyDdosRuleStatusInfoPtrOutput)
 }
 
-// DDoS protection switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o DdosPolicyDdosRulePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRule) *string {
 		if v == nil {
@@ -418,10 +386,8 @@ func (o DdosPolicyDdosRulePtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRuleAcl struct {
-	// DDoS ACL rule configuration detail.
-	Acls []DdosPolicyDdosRuleAclAcl `pulumi:"acls"`
-	// - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Acls   []DdosPolicyDdosRuleAclAcl `pulumi:"acls"`
+	Switch *string                    `pulumi:"switch"`
 }
 
 // DdosPolicyDdosRuleAclInput is an input type that accepts DdosPolicyDdosRuleAclArgs and DdosPolicyDdosRuleAclOutput values.
@@ -436,10 +402,8 @@ type DdosPolicyDdosRuleAclInput interface {
 }
 
 type DdosPolicyDdosRuleAclArgs struct {
-	// DDoS ACL rule configuration detail.
-	Acls DdosPolicyDdosRuleAclAclArrayInput `pulumi:"acls"`
-	// - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Acls   DdosPolicyDdosRuleAclAclArrayInput `pulumi:"acls"`
+	Switch pulumi.StringPtrInput              `pulumi:"switch"`
 }
 
 func (DdosPolicyDdosRuleAclArgs) ElementType() reflect.Type {
@@ -519,12 +483,10 @@ func (o DdosPolicyDdosRuleAclOutput) ToDdosPolicyDdosRuleAclPtrOutputWithContext
 	}).(DdosPolicyDdosRuleAclPtrOutput)
 }
 
-// DDoS ACL rule configuration detail.
 func (o DdosPolicyDdosRuleAclOutput) Acls() DdosPolicyDdosRuleAclAclArrayOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAcl) []DdosPolicyDdosRuleAclAcl { return v.Acls }).(DdosPolicyDdosRuleAclAclArrayOutput)
 }
 
-// - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
 func (o DdosPolicyDdosRuleAclOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAcl) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -553,7 +515,6 @@ func (o DdosPolicyDdosRuleAclPtrOutput) Elem() DdosPolicyDdosRuleAclOutput {
 	}).(DdosPolicyDdosRuleAclOutput)
 }
 
-// DDoS ACL rule configuration detail.
 func (o DdosPolicyDdosRuleAclPtrOutput) Acls() DdosPolicyDdosRuleAclAclArrayOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAcl) []DdosPolicyDdosRuleAclAcl {
 		if v == nil {
@@ -563,7 +524,6 @@ func (o DdosPolicyDdosRuleAclPtrOutput) Acls() DdosPolicyDdosRuleAclAclArrayOutp
 	}).(DdosPolicyDdosRuleAclAclArrayOutput)
 }
 
-// - `on`: Enable. `Acl` parameter is require.- `off`: Disable.
 func (o DdosPolicyDdosRuleAclPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAcl) *string {
 		if v == nil {
@@ -574,18 +534,12 @@ func (o DdosPolicyDdosRuleAclPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRuleAclAcl struct {
-	// Action to take. Valid values: `drop`, `transmit`, `forward`.
-	Action *string `pulumi:"action"`
-	// End of the dest port range. Valid value range: 0-65535.
-	DportEnd *int `pulumi:"dportEnd"`
-	// Start of the dest port range. Valid value range: 0-65535.
-	DportStart *int `pulumi:"dportStart"`
-	// Valid values: `tcp`, `udp`, `all`.
-	Protocol *string `pulumi:"protocol"`
-	// End of the source port range. Valid value range: 0-65535.
-	SportEnd *int `pulumi:"sportEnd"`
-	// Start of the source port range. Valid value range: 0-65535.
-	SportStart *int `pulumi:"sportStart"`
+	Action     *string `pulumi:"action"`
+	DportEnd   *int    `pulumi:"dportEnd"`
+	DportStart *int    `pulumi:"dportStart"`
+	Protocol   *string `pulumi:"protocol"`
+	SportEnd   *int    `pulumi:"sportEnd"`
+	SportStart *int    `pulumi:"sportStart"`
 }
 
 // DdosPolicyDdosRuleAclAclInput is an input type that accepts DdosPolicyDdosRuleAclAclArgs and DdosPolicyDdosRuleAclAclOutput values.
@@ -600,18 +554,12 @@ type DdosPolicyDdosRuleAclAclInput interface {
 }
 
 type DdosPolicyDdosRuleAclAclArgs struct {
-	// Action to take. Valid values: `drop`, `transmit`, `forward`.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// End of the dest port range. Valid value range: 0-65535.
-	DportEnd pulumi.IntPtrInput `pulumi:"dportEnd"`
-	// Start of the dest port range. Valid value range: 0-65535.
-	DportStart pulumi.IntPtrInput `pulumi:"dportStart"`
-	// Valid values: `tcp`, `udp`, `all`.
-	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
-	// End of the source port range. Valid value range: 0-65535.
-	SportEnd pulumi.IntPtrInput `pulumi:"sportEnd"`
-	// Start of the source port range. Valid value range: 0-65535.
-	SportStart pulumi.IntPtrInput `pulumi:"sportStart"`
+	Action     pulumi.StringPtrInput `pulumi:"action"`
+	DportEnd   pulumi.IntPtrInput    `pulumi:"dportEnd"`
+	DportStart pulumi.IntPtrInput    `pulumi:"dportStart"`
+	Protocol   pulumi.StringPtrInput `pulumi:"protocol"`
+	SportEnd   pulumi.IntPtrInput    `pulumi:"sportEnd"`
+	SportStart pulumi.IntPtrInput    `pulumi:"sportStart"`
 }
 
 func (DdosPolicyDdosRuleAclAclArgs) ElementType() reflect.Type {
@@ -665,32 +613,26 @@ func (o DdosPolicyDdosRuleAclAclOutput) ToDdosPolicyDdosRuleAclAclOutputWithCont
 	return o
 }
 
-// Action to take. Valid values: `drop`, `transmit`, `forward`.
 func (o DdosPolicyDdosRuleAclAclOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// End of the dest port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAclAclOutput) DportEnd() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.DportEnd }).(pulumi.IntPtrOutput)
 }
 
-// Start of the dest port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAclAclOutput) DportStart() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.DportStart }).(pulumi.IntPtrOutput)
 }
 
-// Valid values: `tcp`, `udp`, `all`.
 func (o DdosPolicyDdosRuleAclAclOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-// End of the source port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAclAclOutput) SportEnd() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.SportEnd }).(pulumi.IntPtrOutput)
 }
 
-// Start of the source port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAclAclOutput) SportStart() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.SportStart }).(pulumi.IntPtrOutput)
 }
@@ -716,10 +658,8 @@ func (o DdosPolicyDdosRuleAclAclArrayOutput) Index(i pulumi.IntInput) DdosPolicy
 }
 
 type DdosPolicyDdosRuleAllowBlock struct {
-	// DDoS black-white list detail.
 	AllowBlockIps []DdosPolicyDdosRuleAllowBlockAllowBlockIp `pulumi:"allowBlockIps"`
-	// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Switch        *string                                    `pulumi:"switch"`
 }
 
 // DdosPolicyDdosRuleAllowBlockInput is an input type that accepts DdosPolicyDdosRuleAllowBlockArgs and DdosPolicyDdosRuleAllowBlockOutput values.
@@ -734,10 +674,8 @@ type DdosPolicyDdosRuleAllowBlockInput interface {
 }
 
 type DdosPolicyDdosRuleAllowBlockArgs struct {
-	// DDoS black-white list detail.
 	AllowBlockIps DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput `pulumi:"allowBlockIps"`
-	// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Switch        pulumi.StringPtrInput                              `pulumi:"switch"`
 }
 
 func (DdosPolicyDdosRuleAllowBlockArgs) ElementType() reflect.Type {
@@ -817,14 +755,12 @@ func (o DdosPolicyDdosRuleAllowBlockOutput) ToDdosPolicyDdosRuleAllowBlockPtrOut
 	}).(DdosPolicyDdosRuleAllowBlockPtrOutput)
 }
 
-// DDoS black-white list detail.
 func (o DdosPolicyDdosRuleAllowBlockOutput) AllowBlockIps() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlock) []DdosPolicyDdosRuleAllowBlockAllowBlockIp {
 		return v.AllowBlockIps
 	}).(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput)
 }
 
-// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
 func (o DdosPolicyDdosRuleAllowBlockOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlock) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -853,7 +789,6 @@ func (o DdosPolicyDdosRuleAllowBlockPtrOutput) Elem() DdosPolicyDdosRuleAllowBlo
 	}).(DdosPolicyDdosRuleAllowBlockOutput)
 }
 
-// DDoS black-white list detail.
 func (o DdosPolicyDdosRuleAllowBlockPtrOutput) AllowBlockIps() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAllowBlock) []DdosPolicyDdosRuleAllowBlockAllowBlockIp {
 		if v == nil {
@@ -863,7 +798,6 @@ func (o DdosPolicyDdosRuleAllowBlockPtrOutput) AllowBlockIps() DdosPolicyDdosRul
 	}).(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput)
 }
 
-// - `on`: Enable. `AllowBlockIps` parameter is required.- `off`: Disable.
 func (o DdosPolicyDdosRuleAllowBlockPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAllowBlock) *string {
 		if v == nil {
@@ -874,11 +808,9 @@ func (o DdosPolicyDdosRuleAllowBlockPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRuleAllowBlockAllowBlockIp struct {
-	// Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-	Ip *string `pulumi:"ip"`
-	// Valid values: `block`, `allow`.
-	Type       string `pulumi:"type"`
-	UpdateTime *int   `pulumi:"updateTime"`
+	Ip         *string `pulumi:"ip"`
+	Type       string  `pulumi:"type"`
+	UpdateTime *int    `pulumi:"updateTime"`
 }
 
 // DdosPolicyDdosRuleAllowBlockAllowBlockIpInput is an input type that accepts DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs and DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput values.
@@ -893,11 +825,9 @@ type DdosPolicyDdosRuleAllowBlockAllowBlockIpInput interface {
 }
 
 type DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs struct {
-	// Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
-	Ip pulumi.StringPtrInput `pulumi:"ip"`
-	// Valid values: `block`, `allow`.
-	Type       pulumi.StringInput `pulumi:"type"`
-	UpdateTime pulumi.IntPtrInput `pulumi:"updateTime"`
+	Ip         pulumi.StringPtrInput `pulumi:"ip"`
+	Type       pulumi.StringInput    `pulumi:"type"`
+	UpdateTime pulumi.IntPtrInput    `pulumi:"updateTime"`
 }
 
 func (DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs) ElementType() reflect.Type {
@@ -951,12 +881,10 @@ func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) ToDdosPolicyDdosRuleAllo
 	return o
 }
 
-// Valid value format:- ip, for example 1.1.1.1- ip range, for example 1.1.1.2-1.1.1.3- network segment, for example 1.2.1.0/24- network segment range, for example 1.2.1.0/24-1.2.2.0/24.
 func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlockAllowBlockIp) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
-// Valid values: `block`, `allow`.
 func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlockAllowBlockIp) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -986,34 +914,20 @@ func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput) Index(i pulumi.IntI
 }
 
 type DdosPolicyDdosRuleAntiPly struct {
-	// Abnormal connections threshold. Valid value range: 0-4294967295.
-	AbnormalConnectNum int `pulumi:"abnormalConnectNum"`
-	// Abnormal syn packet number threshold. Valid value range: 0-65535.
-	AbnormalSynNum int `pulumi:"abnormalSynNum"`
-	// Abnormal syn packet ratio threshold. Valid value range: 0-100.
-	AbnormalSynRatio int `pulumi:"abnormalSynRatio"`
-	// Connection timeout detection per second. Valid value range: 0-65535.
-	ConnectTimeout int `pulumi:"connectTimeout"`
-	// Limitation of connections to dest port. Valid value range: 0-4294967295.
-	DestinationConnectLimit int `pulumi:"destinationConnectLimit"`
-	// Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-	DestinationCreateLimit int `pulumi:"destinationCreateLimit"`
-	// Block ICMP protocol. Valid values: `on`, `off`.
-	DropIcmp string `pulumi:"dropIcmp"`
-	// Block other protocols. Valid values: `on`, `off`.
-	DropOther string `pulumi:"dropOther"`
-	// Block TCP protocol. Valid values: `on`, `off`.
-	DropTcp string `pulumi:"dropTcp"`
-	// Block UDP protocol. Valid values: `on`, `off`.
-	DropUdp string `pulumi:"dropUdp"`
-	// Empty connection protection switch. Valid values: `on`, `off`.
-	EmptyConnectProtect string `pulumi:"emptyConnectProtect"`
-	// Limitation of connections to origin site. Valid value range: 0-4294967295.
-	SourceConnectLimit int `pulumi:"sourceConnectLimit"`
-	// Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-	SourceCreateLimit int `pulumi:"sourceCreateLimit"`
-	// UDP shard protection switch. Valid values: `on`, `off`.
-	UdpShard *string `pulumi:"udpShard"`
+	AbnormalConnectNum      int     `pulumi:"abnormalConnectNum"`
+	AbnormalSynNum          int     `pulumi:"abnormalSynNum"`
+	AbnormalSynRatio        int     `pulumi:"abnormalSynRatio"`
+	ConnectTimeout          int     `pulumi:"connectTimeout"`
+	DestinationConnectLimit int     `pulumi:"destinationConnectLimit"`
+	DestinationCreateLimit  int     `pulumi:"destinationCreateLimit"`
+	DropIcmp                string  `pulumi:"dropIcmp"`
+	DropOther               string  `pulumi:"dropOther"`
+	DropTcp                 string  `pulumi:"dropTcp"`
+	DropUdp                 string  `pulumi:"dropUdp"`
+	EmptyConnectProtect     string  `pulumi:"emptyConnectProtect"`
+	SourceConnectLimit      int     `pulumi:"sourceConnectLimit"`
+	SourceCreateLimit       int     `pulumi:"sourceCreateLimit"`
+	UdpShard                *string `pulumi:"udpShard"`
 }
 
 // DdosPolicyDdosRuleAntiPlyInput is an input type that accepts DdosPolicyDdosRuleAntiPlyArgs and DdosPolicyDdosRuleAntiPlyOutput values.
@@ -1028,34 +942,20 @@ type DdosPolicyDdosRuleAntiPlyInput interface {
 }
 
 type DdosPolicyDdosRuleAntiPlyArgs struct {
-	// Abnormal connections threshold. Valid value range: 0-4294967295.
-	AbnormalConnectNum pulumi.IntInput `pulumi:"abnormalConnectNum"`
-	// Abnormal syn packet number threshold. Valid value range: 0-65535.
-	AbnormalSynNum pulumi.IntInput `pulumi:"abnormalSynNum"`
-	// Abnormal syn packet ratio threshold. Valid value range: 0-100.
-	AbnormalSynRatio pulumi.IntInput `pulumi:"abnormalSynRatio"`
-	// Connection timeout detection per second. Valid value range: 0-65535.
-	ConnectTimeout pulumi.IntInput `pulumi:"connectTimeout"`
-	// Limitation of connections to dest port. Valid value range: 0-4294967295.
-	DestinationConnectLimit pulumi.IntInput `pulumi:"destinationConnectLimit"`
-	// Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
-	DestinationCreateLimit pulumi.IntInput `pulumi:"destinationCreateLimit"`
-	// Block ICMP protocol. Valid values: `on`, `off`.
-	DropIcmp pulumi.StringInput `pulumi:"dropIcmp"`
-	// Block other protocols. Valid values: `on`, `off`.
-	DropOther pulumi.StringInput `pulumi:"dropOther"`
-	// Block TCP protocol. Valid values: `on`, `off`.
-	DropTcp pulumi.StringInput `pulumi:"dropTcp"`
-	// Block UDP protocol. Valid values: `on`, `off`.
-	DropUdp pulumi.StringInput `pulumi:"dropUdp"`
-	// Empty connection protection switch. Valid values: `on`, `off`.
-	EmptyConnectProtect pulumi.StringInput `pulumi:"emptyConnectProtect"`
-	// Limitation of connections to origin site. Valid value range: 0-4294967295.
-	SourceConnectLimit pulumi.IntInput `pulumi:"sourceConnectLimit"`
-	// Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
-	SourceCreateLimit pulumi.IntInput `pulumi:"sourceCreateLimit"`
-	// UDP shard protection switch. Valid values: `on`, `off`.
-	UdpShard pulumi.StringPtrInput `pulumi:"udpShard"`
+	AbnormalConnectNum      pulumi.IntInput       `pulumi:"abnormalConnectNum"`
+	AbnormalSynNum          pulumi.IntInput       `pulumi:"abnormalSynNum"`
+	AbnormalSynRatio        pulumi.IntInput       `pulumi:"abnormalSynRatio"`
+	ConnectTimeout          pulumi.IntInput       `pulumi:"connectTimeout"`
+	DestinationConnectLimit pulumi.IntInput       `pulumi:"destinationConnectLimit"`
+	DestinationCreateLimit  pulumi.IntInput       `pulumi:"destinationCreateLimit"`
+	DropIcmp                pulumi.StringInput    `pulumi:"dropIcmp"`
+	DropOther               pulumi.StringInput    `pulumi:"dropOther"`
+	DropTcp                 pulumi.StringInput    `pulumi:"dropTcp"`
+	DropUdp                 pulumi.StringInput    `pulumi:"dropUdp"`
+	EmptyConnectProtect     pulumi.StringInput    `pulumi:"emptyConnectProtect"`
+	SourceConnectLimit      pulumi.IntInput       `pulumi:"sourceConnectLimit"`
+	SourceCreateLimit       pulumi.IntInput       `pulumi:"sourceCreateLimit"`
+	UdpShard                pulumi.StringPtrInput `pulumi:"udpShard"`
 }
 
 func (DdosPolicyDdosRuleAntiPlyArgs) ElementType() reflect.Type {
@@ -1135,72 +1035,58 @@ func (o DdosPolicyDdosRuleAntiPlyOutput) ToDdosPolicyDdosRuleAntiPlyPtrOutputWit
 	}).(DdosPolicyDdosRuleAntiPlyPtrOutput)
 }
 
-// Abnormal connections threshold. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalConnectNum() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalConnectNum }).(pulumi.IntOutput)
 }
 
-// Abnormal syn packet number threshold. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalSynNum() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalSynNum }).(pulumi.IntOutput)
 }
 
-// Abnormal syn packet ratio threshold. Valid value range: 0-100.
 func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalSynRatio() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalSynRatio }).(pulumi.IntOutput)
 }
 
-// Connection timeout detection per second. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAntiPlyOutput) ConnectTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.ConnectTimeout }).(pulumi.IntOutput)
 }
 
-// Limitation of connections to dest port. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DestinationConnectLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.DestinationConnectLimit }).(pulumi.IntOutput)
 }
 
-// Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DestinationCreateLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.DestinationCreateLimit }).(pulumi.IntOutput)
 }
 
-// Block ICMP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DropIcmp() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropIcmp }).(pulumi.StringOutput)
 }
 
-// Block other protocols. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DropOther() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropOther }).(pulumi.StringOutput)
 }
 
-// Block TCP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DropTcp() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropTcp }).(pulumi.StringOutput)
 }
 
-// Block UDP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) DropUdp() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropUdp }).(pulumi.StringOutput)
 }
 
-// Empty connection protection switch. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) EmptyConnectProtect() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.EmptyConnectProtect }).(pulumi.StringOutput)
 }
 
-// Limitation of connections to origin site. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyOutput) SourceConnectLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.SourceConnectLimit }).(pulumi.IntOutput)
 }
 
-// Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyOutput) SourceCreateLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.SourceCreateLimit }).(pulumi.IntOutput)
 }
 
-// UDP shard protection switch. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyOutput) UdpShard() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) *string { return v.UdpShard }).(pulumi.StringPtrOutput)
 }
@@ -1229,7 +1115,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) Elem() DdosPolicyDdosRuleAntiPlyOutp
 	}).(DdosPolicyDdosRuleAntiPlyOutput)
 }
 
-// Abnormal connections threshold. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalConnectNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1239,7 +1124,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalConnectNum() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
-// Abnormal syn packet number threshold. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1249,7 +1133,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynNum() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
-// Abnormal syn packet ratio threshold. Valid value range: 0-100.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynRatio() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1259,7 +1142,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynRatio() pulumi.IntPtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
-// Connection timeout detection per second. Valid value range: 0-65535.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) ConnectTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1269,7 +1151,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) ConnectTimeout() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
-// Limitation of connections to dest port. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationConnectLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1279,7 +1160,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationConnectLimit() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
-// Limitation of new connection to dest port per second. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationCreateLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1289,7 +1169,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationCreateLimit() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
-// Block ICMP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropIcmp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1299,7 +1178,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropIcmp() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Block other protocols. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropOther() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1309,7 +1187,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropOther() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Block TCP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropTcp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1319,7 +1196,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropTcp() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Block UDP protocol. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropUdp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1329,7 +1205,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropUdp() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Empty connection protection switch. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) EmptyConnectProtect() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1339,7 +1214,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) EmptyConnectProtect() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
-// Limitation of connections to origin site. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceConnectLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1349,7 +1223,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceConnectLimit() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
-// Limitation of new connection to origin site per second. Valid value range: 0-4294967295.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceCreateLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
 		if v == nil {
@@ -1359,7 +1232,6 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceCreateLimit() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
-// UDP shard protection switch. Valid values: `on`, `off`.
 func (o DdosPolicyDdosRuleAntiPlyPtrOutput) UdpShard() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
 		if v == nil {
@@ -1370,10 +1242,8 @@ func (o DdosPolicyDdosRuleAntiPlyPtrOutput) UdpShard() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRuleGeoIp struct {
-	// Region ID. See details in data source `securityPolicyRegions`.
-	RegionIds []int `pulumi:"regionIds"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	RegionIds []int   `pulumi:"regionIds"`
+	Switch    *string `pulumi:"switch"`
 }
 
 // DdosPolicyDdosRuleGeoIpInput is an input type that accepts DdosPolicyDdosRuleGeoIpArgs and DdosPolicyDdosRuleGeoIpOutput values.
@@ -1388,10 +1258,8 @@ type DdosPolicyDdosRuleGeoIpInput interface {
 }
 
 type DdosPolicyDdosRuleGeoIpArgs struct {
-	// Region ID. See details in data source `securityPolicyRegions`.
-	RegionIds pulumi.IntArrayInput `pulumi:"regionIds"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	RegionIds pulumi.IntArrayInput  `pulumi:"regionIds"`
+	Switch    pulumi.StringPtrInput `pulumi:"switch"`
 }
 
 func (DdosPolicyDdosRuleGeoIpArgs) ElementType() reflect.Type {
@@ -1471,12 +1339,10 @@ func (o DdosPolicyDdosRuleGeoIpOutput) ToDdosPolicyDdosRuleGeoIpPtrOutputWithCon
 	}).(DdosPolicyDdosRuleGeoIpPtrOutput)
 }
 
-// Region ID. See details in data source `securityPolicyRegions`.
 func (o DdosPolicyDdosRuleGeoIpOutput) RegionIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleGeoIp) []int { return v.RegionIds }).(pulumi.IntArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o DdosPolicyDdosRuleGeoIpOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleGeoIp) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -1505,7 +1371,6 @@ func (o DdosPolicyDdosRuleGeoIpPtrOutput) Elem() DdosPolicyDdosRuleGeoIpOutput {
 	}).(DdosPolicyDdosRuleGeoIpOutput)
 }
 
-// Region ID. See details in data source `securityPolicyRegions`.
 func (o DdosPolicyDdosRuleGeoIpPtrOutput) RegionIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleGeoIp) []int {
 		if v == nil {
@@ -1515,7 +1380,6 @@ func (o DdosPolicyDdosRuleGeoIpPtrOutput) RegionIds() pulumi.IntArrayOutput {
 	}).(pulumi.IntArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o DdosPolicyDdosRuleGeoIpPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleGeoIp) *string {
 		if v == nil {
@@ -1526,10 +1390,8 @@ func (o DdosPolicyDdosRuleGeoIpPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DdosPolicyDdosRulePacketFilter struct {
-	// DDoS feature filtering configuration detail.
 	PacketFilters []DdosPolicyDdosRulePacketFilterPacketFilter `pulumi:"packetFilters"`
-	// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Switch        *string                                      `pulumi:"switch"`
 }
 
 // DdosPolicyDdosRulePacketFilterInput is an input type that accepts DdosPolicyDdosRulePacketFilterArgs and DdosPolicyDdosRulePacketFilterOutput values.
@@ -1544,10 +1406,8 @@ type DdosPolicyDdosRulePacketFilterInput interface {
 }
 
 type DdosPolicyDdosRulePacketFilterArgs struct {
-	// DDoS feature filtering configuration detail.
 	PacketFilters DdosPolicyDdosRulePacketFilterPacketFilterArrayInput `pulumi:"packetFilters"`
-	// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Switch        pulumi.StringPtrInput                                `pulumi:"switch"`
 }
 
 func (DdosPolicyDdosRulePacketFilterArgs) ElementType() reflect.Type {
@@ -1627,14 +1487,12 @@ func (o DdosPolicyDdosRulePacketFilterOutput) ToDdosPolicyDdosRulePacketFilterPt
 	}).(DdosPolicyDdosRulePacketFilterPtrOutput)
 }
 
-// DDoS feature filtering configuration detail.
 func (o DdosPolicyDdosRulePacketFilterOutput) PacketFilters() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilter) []DdosPolicyDdosRulePacketFilterPacketFilter {
 		return v.PacketFilters
 	}).(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput)
 }
 
-// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
 func (o DdosPolicyDdosRulePacketFilterOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilter) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -1663,7 +1521,6 @@ func (o DdosPolicyDdosRulePacketFilterPtrOutput) Elem() DdosPolicyDdosRulePacket
 	}).(DdosPolicyDdosRulePacketFilterOutput)
 }
 
-// DDoS feature filtering configuration detail.
 func (o DdosPolicyDdosRulePacketFilterPtrOutput) PacketFilters() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRulePacketFilter) []DdosPolicyDdosRulePacketFilterPacketFilter {
 		if v == nil {
@@ -1673,7 +1530,6 @@ func (o DdosPolicyDdosRulePacketFilterPtrOutput) PacketFilters() DdosPolicyDdosR
 	}).(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput)
 }
 
-// - `on`: Enable. `PacketFilters` parameter is required.- `off`: Disable.
 func (o DdosPolicyDdosRulePacketFilterPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRulePacketFilter) *string {
 		if v == nil {
@@ -1684,48 +1540,27 @@ func (o DdosPolicyDdosRulePacketFilterPtrOutput) Switch() pulumi.StringPtrOutput
 }
 
 type DdosPolicyDdosRulePacketFilterPacketFilter struct {
-	// Action to take. Valid values: `drop`, `transmit`, `dropBlock`, `forward`.
-	Action *string `pulumi:"action"`
-	// Packet character depth to check of feature 1. Valid value range: 1-1500.
-	Depth *int `pulumi:"depth"`
-	// Packet character depth to check of feature 2. Valid value range: 1-1500.
-	Depth2 *int `pulumi:"depth2"`
-	// End of the dest port range. Valid value range: 0-65535.
-	DportEnd *int `pulumi:"dportEnd"`
-	// Start of the dest port range. Valid value range: 0-65535.
-	DportStart *int `pulumi:"dportStart"`
-	// Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-	IsNot *int `pulumi:"isNot"`
-	// Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-	IsNot2 *int `pulumi:"isNot2"`
-	// Packet layer for matching begin of feature 1. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-	MatchBegin *string `pulumi:"matchBegin"`
-	// Packet layer for matching begin of feature 2. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
+	Action      *string `pulumi:"action"`
+	Depth       *int    `pulumi:"depth"`
+	Depth2      *int    `pulumi:"depth2"`
+	DportEnd    *int    `pulumi:"dportEnd"`
+	DportStart  *int    `pulumi:"dportStart"`
+	IsNot       *int    `pulumi:"isNot"`
+	IsNot2      *int    `pulumi:"isNot2"`
+	MatchBegin  *string `pulumi:"matchBegin"`
 	MatchBegin2 *string `pulumi:"matchBegin2"`
-	// Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-	MatchLogic *string `pulumi:"matchLogic"`
-	// Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-	MatchType *string `pulumi:"matchType"`
-	// Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-	MatchType2 *string `pulumi:"matchType2"`
-	// Offset of feature 1. Valid value range: 1-1500.
-	Offset *int `pulumi:"offset"`
-	// Offset of feature 2. Valid value range: 1-1500.
-	Offset2 *int `pulumi:"offset2"`
-	// Max packet size. Valid value range: 0-1500.
-	PacketMax *int `pulumi:"packetMax"`
-	// Min packet size. Valid value range: 0-1500.
-	PacketMin *int `pulumi:"packetMin"`
-	// Valid value: `tcp`, `udp`, `icmp`, `all`.
-	Protocol *string `pulumi:"protocol"`
-	// End of the source port range. Valid value range: 0-65535.
-	SportEnd *int `pulumi:"sportEnd"`
-	// Start of the source port range. Valid value range: 0-65535.
-	SportStart *int `pulumi:"sportStart"`
-	// Regex expression or string to match.
-	Str *string `pulumi:"str"`
-	// Regex expression or string to match.
-	Str2 *string `pulumi:"str2"`
+	MatchLogic  *string `pulumi:"matchLogic"`
+	MatchType   *string `pulumi:"matchType"`
+	MatchType2  *string `pulumi:"matchType2"`
+	Offset      *int    `pulumi:"offset"`
+	Offset2     *int    `pulumi:"offset2"`
+	PacketMax   *int    `pulumi:"packetMax"`
+	PacketMin   *int    `pulumi:"packetMin"`
+	Protocol    *string `pulumi:"protocol"`
+	SportEnd    *int    `pulumi:"sportEnd"`
+	SportStart  *int    `pulumi:"sportStart"`
+	Str         *string `pulumi:"str"`
+	Str2        *string `pulumi:"str2"`
 }
 
 // DdosPolicyDdosRulePacketFilterPacketFilterInput is an input type that accepts DdosPolicyDdosRulePacketFilterPacketFilterArgs and DdosPolicyDdosRulePacketFilterPacketFilterOutput values.
@@ -1740,48 +1575,27 @@ type DdosPolicyDdosRulePacketFilterPacketFilterInput interface {
 }
 
 type DdosPolicyDdosRulePacketFilterPacketFilterArgs struct {
-	// Action to take. Valid values: `drop`, `transmit`, `dropBlock`, `forward`.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Packet character depth to check of feature 1. Valid value range: 1-1500.
-	Depth pulumi.IntPtrInput `pulumi:"depth"`
-	// Packet character depth to check of feature 2. Valid value range: 1-1500.
-	Depth2 pulumi.IntPtrInput `pulumi:"depth2"`
-	// End of the dest port range. Valid value range: 0-65535.
-	DportEnd pulumi.IntPtrInput `pulumi:"dportEnd"`
-	// Start of the dest port range. Valid value range: 0-65535.
-	DportStart pulumi.IntPtrInput `pulumi:"dportStart"`
-	// Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
-	IsNot pulumi.IntPtrInput `pulumi:"isNot"`
-	// Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
-	IsNot2 pulumi.IntPtrInput `pulumi:"isNot2"`
-	// Packet layer for matching begin of feature 1. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
-	MatchBegin pulumi.StringPtrInput `pulumi:"matchBegin"`
-	// Packet layer for matching begin of feature 2. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
+	Action      pulumi.StringPtrInput `pulumi:"action"`
+	Depth       pulumi.IntPtrInput    `pulumi:"depth"`
+	Depth2      pulumi.IntPtrInput    `pulumi:"depth2"`
+	DportEnd    pulumi.IntPtrInput    `pulumi:"dportEnd"`
+	DportStart  pulumi.IntPtrInput    `pulumi:"dportStart"`
+	IsNot       pulumi.IntPtrInput    `pulumi:"isNot"`
+	IsNot2      pulumi.IntPtrInput    `pulumi:"isNot2"`
+	MatchBegin  pulumi.StringPtrInput `pulumi:"matchBegin"`
 	MatchBegin2 pulumi.StringPtrInput `pulumi:"matchBegin2"`
-	// Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
-	MatchLogic pulumi.StringPtrInput `pulumi:"matchLogic"`
-	// Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-	MatchType pulumi.StringPtrInput `pulumi:"matchType"`
-	// Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
-	MatchType2 pulumi.StringPtrInput `pulumi:"matchType2"`
-	// Offset of feature 1. Valid value range: 1-1500.
-	Offset pulumi.IntPtrInput `pulumi:"offset"`
-	// Offset of feature 2. Valid value range: 1-1500.
-	Offset2 pulumi.IntPtrInput `pulumi:"offset2"`
-	// Max packet size. Valid value range: 0-1500.
-	PacketMax pulumi.IntPtrInput `pulumi:"packetMax"`
-	// Min packet size. Valid value range: 0-1500.
-	PacketMin pulumi.IntPtrInput `pulumi:"packetMin"`
-	// Valid value: `tcp`, `udp`, `icmp`, `all`.
-	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
-	// End of the source port range. Valid value range: 0-65535.
-	SportEnd pulumi.IntPtrInput `pulumi:"sportEnd"`
-	// Start of the source port range. Valid value range: 0-65535.
-	SportStart pulumi.IntPtrInput `pulumi:"sportStart"`
-	// Regex expression or string to match.
-	Str pulumi.StringPtrInput `pulumi:"str"`
-	// Regex expression or string to match.
-	Str2 pulumi.StringPtrInput `pulumi:"str2"`
+	MatchLogic  pulumi.StringPtrInput `pulumi:"matchLogic"`
+	MatchType   pulumi.StringPtrInput `pulumi:"matchType"`
+	MatchType2  pulumi.StringPtrInput `pulumi:"matchType2"`
+	Offset      pulumi.IntPtrInput    `pulumi:"offset"`
+	Offset2     pulumi.IntPtrInput    `pulumi:"offset2"`
+	PacketMax   pulumi.IntPtrInput    `pulumi:"packetMax"`
+	PacketMin   pulumi.IntPtrInput    `pulumi:"packetMin"`
+	Protocol    pulumi.StringPtrInput `pulumi:"protocol"`
+	SportEnd    pulumi.IntPtrInput    `pulumi:"sportEnd"`
+	SportStart  pulumi.IntPtrInput    `pulumi:"sportStart"`
+	Str         pulumi.StringPtrInput `pulumi:"str"`
+	Str2        pulumi.StringPtrInput `pulumi:"str2"`
 }
 
 func (DdosPolicyDdosRulePacketFilterPacketFilterArgs) ElementType() reflect.Type {
@@ -1835,107 +1649,86 @@ func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) ToDdosPolicyDdosRulePa
 	return o
 }
 
-// Action to take. Valid values: `drop`, `transmit`, `dropBlock`, `forward`.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Packet character depth to check of feature 1. Valid value range: 1-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Depth() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Depth }).(pulumi.IntPtrOutput)
 }
 
-// Packet character depth to check of feature 2. Valid value range: 1-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Depth2() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Depth2 }).(pulumi.IntPtrOutput)
 }
 
-// End of the dest port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) DportEnd() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.DportEnd }).(pulumi.IntPtrOutput)
 }
 
-// Start of the dest port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) DportStart() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.DportStart }).(pulumi.IntPtrOutput)
 }
 
-// Negate the match condition of feature 1. Valid values:- `0`: match.- `1`: not match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) IsNot() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.IsNot }).(pulumi.IntPtrOutput)
 }
 
-// Negate the match condition of feature 2. Valid values:- `0`: match.- `1`: not match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) IsNot2() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.IsNot2 }).(pulumi.IntPtrOutput)
 }
 
-// Packet layer for matching begin of feature 1. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchBegin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchBegin }).(pulumi.StringPtrOutput)
 }
 
-// Packet layer for matching begin of feature 2. Valid values:- `beginL5`: matching from packet payload.- `beginL4`: matching from TCP/UDP header.- `beginL3`: matching from IP header.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchBegin2() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchBegin2 }).(pulumi.StringPtrOutput)
 }
 
-// Relation between multi features. Valid values: `and`, `or`, `none` (only feature 1 is used).
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchLogic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchLogic }).(pulumi.StringPtrOutput)
 }
 
-// Match type of feature 1. Valid values:- `pcre`: regex expression.- `sunday`: string match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchType }).(pulumi.StringPtrOutput)
 }
 
-// Match type of feature 2. Valid values:- `pcre`: regex expression.- `sunday`: string match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchType2() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchType2 }).(pulumi.StringPtrOutput)
 }
 
-// Offset of feature 1. Valid value range: 1-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Offset() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Offset }).(pulumi.IntPtrOutput)
 }
 
-// Offset of feature 2. Valid value range: 1-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Offset2() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Offset2 }).(pulumi.IntPtrOutput)
 }
 
-// Max packet size. Valid value range: 0-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) PacketMax() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.PacketMax }).(pulumi.IntPtrOutput)
 }
 
-// Min packet size. Valid value range: 0-1500.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) PacketMin() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.PacketMin }).(pulumi.IntPtrOutput)
 }
 
-// Valid value: `tcp`, `udp`, `icmp`, `all`.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-// End of the source port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) SportEnd() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.SportEnd }).(pulumi.IntPtrOutput)
 }
 
-// Start of the source port range. Valid value range: 0-65535.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) SportStart() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.SportStart }).(pulumi.IntPtrOutput)
 }
 
-// Regex expression or string to match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Str() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Str }).(pulumi.StringPtrOutput)
 }
 
-// Regex expression or string to match.
 func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Str2() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Str2 }).(pulumi.StringPtrOutput)
 }
@@ -1961,9 +1754,7 @@ func (o DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput) Index(i pulumi.In
 }
 
 type DdosPolicyDdosRuleSpeedLimit struct {
-	// Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-	FluxLimit *string `pulumi:"fluxLimit"`
-	// Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
+	FluxLimit    *string `pulumi:"fluxLimit"`
 	PackageLimit *string `pulumi:"packageLimit"`
 }
 
@@ -1979,9 +1770,7 @@ type DdosPolicyDdosRuleSpeedLimitInput interface {
 }
 
 type DdosPolicyDdosRuleSpeedLimitArgs struct {
-	// Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
-	FluxLimit pulumi.StringPtrInput `pulumi:"fluxLimit"`
-	// Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
+	FluxLimit    pulumi.StringPtrInput `pulumi:"fluxLimit"`
 	PackageLimit pulumi.StringPtrInput `pulumi:"packageLimit"`
 }
 
@@ -2062,12 +1851,10 @@ func (o DdosPolicyDdosRuleSpeedLimitOutput) ToDdosPolicyDdosRuleSpeedLimitPtrOut
 	}).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
 }
 
-// Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
 func (o DdosPolicyDdosRuleSpeedLimitOutput) FluxLimit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleSpeedLimit) *string { return v.FluxLimit }).(pulumi.StringPtrOutput)
 }
 
-// Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
 func (o DdosPolicyDdosRuleSpeedLimitOutput) PackageLimit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleSpeedLimit) *string { return v.PackageLimit }).(pulumi.StringPtrOutput)
 }
@@ -2096,7 +1883,6 @@ func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) Elem() DdosPolicyDdosRuleSpeedLim
 	}).(DdosPolicyDdosRuleSpeedLimitOutput)
 }
 
-// Limit the number of fluxes. Valid range: 1 bps-10000 Gbps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
 func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) FluxLimit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleSpeedLimit) *string {
 		if v == nil {
@@ -2106,7 +1892,6 @@ func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) FluxLimit() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Limit the number of packages. Valid range: 1 pps-10000 Gpps, 0 means no limitation, supported units: `pps`,`Kpps`,`Mpps`,`Gpps`.
 func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) PackageLimit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleSpeedLimit) *string {
 		if v == nil {
@@ -2117,7 +1902,6 @@ func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) PackageLimit() pulumi.StringPtrOu
 }
 
 type DdosPolicyDdosRuleStatusInfo struct {
-	// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
 	PlyLevel string `pulumi:"plyLevel"`
 }
 
@@ -2133,7 +1917,6 @@ type DdosPolicyDdosRuleStatusInfoInput interface {
 }
 
 type DdosPolicyDdosRuleStatusInfoArgs struct {
-	// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
 	PlyLevel pulumi.StringInput `pulumi:"plyLevel"`
 }
 
@@ -2214,7 +1997,6 @@ func (o DdosPolicyDdosRuleStatusInfoOutput) ToDdosPolicyDdosRuleStatusInfoPtrOut
 	}).(DdosPolicyDdosRuleStatusInfoPtrOutput)
 }
 
-// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
 func (o DdosPolicyDdosRuleStatusInfoOutput) PlyLevel() pulumi.StringOutput {
 	return o.ApplyT(func(v DdosPolicyDdosRuleStatusInfo) string { return v.PlyLevel }).(pulumi.StringOutput)
 }
@@ -2243,7 +2025,6 @@ func (o DdosPolicyDdosRuleStatusInfoPtrOutput) Elem() DdosPolicyDdosRuleStatusIn
 	}).(DdosPolicyDdosRuleStatusInfoOutput)
 }
 
-// Policy level. Valid values:- `low`: loose.- `middle`: moderate.- `high`: strict.
 func (o DdosPolicyDdosRuleStatusInfoPtrOutput) PlyLevel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DdosPolicyDdosRuleStatusInfo) *string {
 		if v == nil {
@@ -5508,22 +5289,14 @@ func (o RuleEngineRuleSubRuleRuleOrAndArrayOutput) Index(i pulumi.IntInput) Rule
 }
 
 type SecurityPolicyConfig struct {
-	// ACL configuration.
-	AclConfig *SecurityPolicyConfigAclConfig `pulumi:"aclConfig"`
-	// Bot Configuration.
-	BotConfig *SecurityPolicyConfigBotConfig `pulumi:"botConfig"`
-	// Custom drop page configuration.
-	DropPageConfig *SecurityPolicyConfigDropPageConfig `pulumi:"dropPageConfig"`
-	// Exception rule configuration.
-	ExceptConfig *SecurityPolicyConfigExceptConfig `pulumi:"exceptConfig"`
-	// Basic access control.
-	IpTableConfig *SecurityPolicyConfigIpTableConfig `pulumi:"ipTableConfig"`
-	// RateLimit Configuration.
+	AclConfig       *SecurityPolicyConfigAclConfig       `pulumi:"aclConfig"`
+	BotConfig       *SecurityPolicyConfigBotConfig       `pulumi:"botConfig"`
+	DropPageConfig  *SecurityPolicyConfigDropPageConfig  `pulumi:"dropPageConfig"`
+	ExceptConfig    *SecurityPolicyConfigExceptConfig    `pulumi:"exceptConfig"`
+	IpTableConfig   *SecurityPolicyConfigIpTableConfig   `pulumi:"ipTableConfig"`
 	RateLimitConfig *SecurityPolicyConfigRateLimitConfig `pulumi:"rateLimitConfig"`
-	// Main switch of 7-layer security.
-	SwitchConfig *SecurityPolicyConfigSwitchConfig `pulumi:"switchConfig"`
-	// WAF (Web Application Firewall) Configuration.
-	WafConfig *SecurityPolicyConfigWafConfig `pulumi:"wafConfig"`
+	SwitchConfig    *SecurityPolicyConfigSwitchConfig    `pulumi:"switchConfig"`
+	WafConfig       *SecurityPolicyConfigWafConfig       `pulumi:"wafConfig"`
 }
 
 // SecurityPolicyConfigInput is an input type that accepts SecurityPolicyConfigArgs and SecurityPolicyConfigOutput values.
@@ -5538,22 +5311,14 @@ type SecurityPolicyConfigInput interface {
 }
 
 type SecurityPolicyConfigArgs struct {
-	// ACL configuration.
-	AclConfig SecurityPolicyConfigAclConfigPtrInput `pulumi:"aclConfig"`
-	// Bot Configuration.
-	BotConfig SecurityPolicyConfigBotConfigPtrInput `pulumi:"botConfig"`
-	// Custom drop page configuration.
-	DropPageConfig SecurityPolicyConfigDropPageConfigPtrInput `pulumi:"dropPageConfig"`
-	// Exception rule configuration.
-	ExceptConfig SecurityPolicyConfigExceptConfigPtrInput `pulumi:"exceptConfig"`
-	// Basic access control.
-	IpTableConfig SecurityPolicyConfigIpTableConfigPtrInput `pulumi:"ipTableConfig"`
-	// RateLimit Configuration.
+	AclConfig       SecurityPolicyConfigAclConfigPtrInput       `pulumi:"aclConfig"`
+	BotConfig       SecurityPolicyConfigBotConfigPtrInput       `pulumi:"botConfig"`
+	DropPageConfig  SecurityPolicyConfigDropPageConfigPtrInput  `pulumi:"dropPageConfig"`
+	ExceptConfig    SecurityPolicyConfigExceptConfigPtrInput    `pulumi:"exceptConfig"`
+	IpTableConfig   SecurityPolicyConfigIpTableConfigPtrInput   `pulumi:"ipTableConfig"`
 	RateLimitConfig SecurityPolicyConfigRateLimitConfigPtrInput `pulumi:"rateLimitConfig"`
-	// Main switch of 7-layer security.
-	SwitchConfig SecurityPolicyConfigSwitchConfigPtrInput `pulumi:"switchConfig"`
-	// WAF (Web Application Firewall) Configuration.
-	WafConfig SecurityPolicyConfigWafConfigPtrInput `pulumi:"wafConfig"`
+	SwitchConfig    SecurityPolicyConfigSwitchConfigPtrInput    `pulumi:"switchConfig"`
+	WafConfig       SecurityPolicyConfigWafConfigPtrInput       `pulumi:"wafConfig"`
 }
 
 func (SecurityPolicyConfigArgs) ElementType() reflect.Type {
@@ -5633,42 +5398,34 @@ func (o SecurityPolicyConfigOutput) ToSecurityPolicyConfigPtrOutputWithContext(c
 	}).(SecurityPolicyConfigPtrOutput)
 }
 
-// ACL configuration.
 func (o SecurityPolicyConfigOutput) AclConfig() SecurityPolicyConfigAclConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigAclConfig { return v.AclConfig }).(SecurityPolicyConfigAclConfigPtrOutput)
 }
 
-// Bot Configuration.
 func (o SecurityPolicyConfigOutput) BotConfig() SecurityPolicyConfigBotConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigBotConfig { return v.BotConfig }).(SecurityPolicyConfigBotConfigPtrOutput)
 }
 
-// Custom drop page configuration.
 func (o SecurityPolicyConfigOutput) DropPageConfig() SecurityPolicyConfigDropPageConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigDropPageConfig { return v.DropPageConfig }).(SecurityPolicyConfigDropPageConfigPtrOutput)
 }
 
-// Exception rule configuration.
 func (o SecurityPolicyConfigOutput) ExceptConfig() SecurityPolicyConfigExceptConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigExceptConfig { return v.ExceptConfig }).(SecurityPolicyConfigExceptConfigPtrOutput)
 }
 
-// Basic access control.
 func (o SecurityPolicyConfigOutput) IpTableConfig() SecurityPolicyConfigIpTableConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigIpTableConfig { return v.IpTableConfig }).(SecurityPolicyConfigIpTableConfigPtrOutput)
 }
 
-// RateLimit Configuration.
 func (o SecurityPolicyConfigOutput) RateLimitConfig() SecurityPolicyConfigRateLimitConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigRateLimitConfig { return v.RateLimitConfig }).(SecurityPolicyConfigRateLimitConfigPtrOutput)
 }
 
-// Main switch of 7-layer security.
 func (o SecurityPolicyConfigOutput) SwitchConfig() SecurityPolicyConfigSwitchConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigSwitchConfig { return v.SwitchConfig }).(SecurityPolicyConfigSwitchConfigPtrOutput)
 }
 
-// WAF (Web Application Firewall) Configuration.
 func (o SecurityPolicyConfigOutput) WafConfig() SecurityPolicyConfigWafConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigWafConfig { return v.WafConfig }).(SecurityPolicyConfigWafConfigPtrOutput)
 }
@@ -5697,7 +5454,6 @@ func (o SecurityPolicyConfigPtrOutput) Elem() SecurityPolicyConfigOutput {
 	}).(SecurityPolicyConfigOutput)
 }
 
-// ACL configuration.
 func (o SecurityPolicyConfigPtrOutput) AclConfig() SecurityPolicyConfigAclConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigAclConfig {
 		if v == nil {
@@ -5707,7 +5463,6 @@ func (o SecurityPolicyConfigPtrOutput) AclConfig() SecurityPolicyConfigAclConfig
 	}).(SecurityPolicyConfigAclConfigPtrOutput)
 }
 
-// Bot Configuration.
 func (o SecurityPolicyConfigPtrOutput) BotConfig() SecurityPolicyConfigBotConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigBotConfig {
 		if v == nil {
@@ -5717,7 +5472,6 @@ func (o SecurityPolicyConfigPtrOutput) BotConfig() SecurityPolicyConfigBotConfig
 	}).(SecurityPolicyConfigBotConfigPtrOutput)
 }
 
-// Custom drop page configuration.
 func (o SecurityPolicyConfigPtrOutput) DropPageConfig() SecurityPolicyConfigDropPageConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigDropPageConfig {
 		if v == nil {
@@ -5727,7 +5481,6 @@ func (o SecurityPolicyConfigPtrOutput) DropPageConfig() SecurityPolicyConfigDrop
 	}).(SecurityPolicyConfigDropPageConfigPtrOutput)
 }
 
-// Exception rule configuration.
 func (o SecurityPolicyConfigPtrOutput) ExceptConfig() SecurityPolicyConfigExceptConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigExceptConfig {
 		if v == nil {
@@ -5737,7 +5490,6 @@ func (o SecurityPolicyConfigPtrOutput) ExceptConfig() SecurityPolicyConfigExcept
 	}).(SecurityPolicyConfigExceptConfigPtrOutput)
 }
 
-// Basic access control.
 func (o SecurityPolicyConfigPtrOutput) IpTableConfig() SecurityPolicyConfigIpTableConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigIpTableConfig {
 		if v == nil {
@@ -5747,7 +5499,6 @@ func (o SecurityPolicyConfigPtrOutput) IpTableConfig() SecurityPolicyConfigIpTab
 	}).(SecurityPolicyConfigIpTableConfigPtrOutput)
 }
 
-// RateLimit Configuration.
 func (o SecurityPolicyConfigPtrOutput) RateLimitConfig() SecurityPolicyConfigRateLimitConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigRateLimitConfig {
 		if v == nil {
@@ -5757,7 +5508,6 @@ func (o SecurityPolicyConfigPtrOutput) RateLimitConfig() SecurityPolicyConfigRat
 	}).(SecurityPolicyConfigRateLimitConfigPtrOutput)
 }
 
-// Main switch of 7-layer security.
 func (o SecurityPolicyConfigPtrOutput) SwitchConfig() SecurityPolicyConfigSwitchConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigSwitchConfig {
 		if v == nil {
@@ -5767,7 +5517,6 @@ func (o SecurityPolicyConfigPtrOutput) SwitchConfig() SecurityPolicyConfigSwitch
 	}).(SecurityPolicyConfigSwitchConfigPtrOutput)
 }
 
-// WAF (Web Application Firewall) Configuration.
 func (o SecurityPolicyConfigPtrOutput) WafConfig() SecurityPolicyConfigWafConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigWafConfig {
 		if v == nil {
@@ -5778,9 +5527,7 @@ func (o SecurityPolicyConfigPtrOutput) WafConfig() SecurityPolicyConfigWafConfig
 }
 
 type SecurityPolicyConfigAclConfig struct {
-	// - `on`: Enable.- `off`: Disable.
-	Switch string `pulumi:"switch"`
-	// Custom configuration.
+	Switch    string                                  `pulumi:"switch"`
 	UserRules []SecurityPolicyConfigAclConfigUserRule `pulumi:"userRules"`
 }
 
@@ -5796,9 +5543,7 @@ type SecurityPolicyConfigAclConfigInput interface {
 }
 
 type SecurityPolicyConfigAclConfigArgs struct {
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringInput `pulumi:"switch"`
-	// Custom configuration.
+	Switch    pulumi.StringInput                              `pulumi:"switch"`
 	UserRules SecurityPolicyConfigAclConfigUserRuleArrayInput `pulumi:"userRules"`
 }
 
@@ -5879,12 +5624,10 @@ func (o SecurityPolicyConfigAclConfigOutput) ToSecurityPolicyConfigAclConfigPtrO
 	}).(SecurityPolicyConfigAclConfigPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigAclConfigOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfig) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-// Custom configuration.
 func (o SecurityPolicyConfigAclConfigOutput) UserRules() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfig) []SecurityPolicyConfigAclConfigUserRule { return v.UserRules }).(SecurityPolicyConfigAclConfigUserRuleArrayOutput)
 }
@@ -5913,7 +5656,6 @@ func (o SecurityPolicyConfigAclConfigPtrOutput) Elem() SecurityPolicyConfigAclCo
 	}).(SecurityPolicyConfigAclConfigOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigAclConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigAclConfig) *string {
 		if v == nil {
@@ -5923,7 +5665,6 @@ func (o SecurityPolicyConfigAclConfigPtrOutput) Switch() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-// Custom configuration.
 func (o SecurityPolicyConfigAclConfigPtrOutput) UserRules() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigAclConfig) []SecurityPolicyConfigAclConfigUserRule {
 		if v == nil {
@@ -5934,30 +5675,19 @@ func (o SecurityPolicyConfigAclConfigPtrOutput) UserRules() SecurityPolicyConfig
 }
 
 type SecurityPolicyConfigAclConfigUserRule struct {
-	// Valid values: `monitor`, `drop`.
-	Action string `pulumi:"action"`
-	// Conditions of the rule.
-	Conditions []SecurityPolicyConfigAclConfigUserRuleCondition `pulumi:"conditions"`
-	// Name of the custom response page.
-	Name *string `pulumi:"name"`
-	// ID of the custom response page.
-	PageId *int `pulumi:"pageId"`
-	// Punish time, Valid value range: 0-2 days.
-	PunishTime *int `pulumi:"punishTime"`
-	// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-	PunishTimeUnit *string `pulumi:"punishTimeUnit"`
-	// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-	RedirectUrl *string `pulumi:"redirectUrl"`
-	// Response code to use when redirecting.
-	ResponseCode *int `pulumi:"responseCode"`
-	RuleId       *int `pulumi:"ruleId"`
-	// Rule Name.
-	RuleName string `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 1-100.
-	RulePriority int `pulumi:"rulePriority"`
-	// Status of the rule. Valid values: `on`, `off`, `hour`.
-	RuleStatus string  `pulumi:"ruleStatus"`
-	UpdateTime *string `pulumi:"updateTime"`
+	Action         string                                           `pulumi:"action"`
+	Conditions     []SecurityPolicyConfigAclConfigUserRuleCondition `pulumi:"conditions"`
+	Name           *string                                          `pulumi:"name"`
+	PageId         *int                                             `pulumi:"pageId"`
+	PunishTime     *int                                             `pulumi:"punishTime"`
+	PunishTimeUnit *string                                          `pulumi:"punishTimeUnit"`
+	RedirectUrl    *string                                          `pulumi:"redirectUrl"`
+	ResponseCode   *int                                             `pulumi:"responseCode"`
+	RuleId         *int                                             `pulumi:"ruleId"`
+	RuleName       string                                           `pulumi:"ruleName"`
+	RulePriority   int                                              `pulumi:"rulePriority"`
+	RuleStatus     string                                           `pulumi:"ruleStatus"`
+	UpdateTime     *string                                          `pulumi:"updateTime"`
 }
 
 // SecurityPolicyConfigAclConfigUserRuleInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleArgs and SecurityPolicyConfigAclConfigUserRuleOutput values.
@@ -5972,30 +5702,19 @@ type SecurityPolicyConfigAclConfigUserRuleInput interface {
 }
 
 type SecurityPolicyConfigAclConfigUserRuleArgs struct {
-	// Valid values: `monitor`, `drop`.
-	Action pulumi.StringInput `pulumi:"action"`
-	// Conditions of the rule.
-	Conditions SecurityPolicyConfigAclConfigUserRuleConditionArrayInput `pulumi:"conditions"`
-	// Name of the custom response page.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// ID of the custom response page.
-	PageId pulumi.IntPtrInput `pulumi:"pageId"`
-	// Punish time, Valid value range: 0-2 days.
-	PunishTime pulumi.IntPtrInput `pulumi:"punishTime"`
-	// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-	PunishTimeUnit pulumi.StringPtrInput `pulumi:"punishTimeUnit"`
-	// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
-	// Response code to use when redirecting.
-	ResponseCode pulumi.IntPtrInput `pulumi:"responseCode"`
-	RuleId       pulumi.IntPtrInput `pulumi:"ruleId"`
-	// Rule Name.
-	RuleName pulumi.StringInput `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 1-100.
-	RulePriority pulumi.IntInput `pulumi:"rulePriority"`
-	// Status of the rule. Valid values: `on`, `off`, `hour`.
-	RuleStatus pulumi.StringInput    `pulumi:"ruleStatus"`
-	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	Action         pulumi.StringInput                                       `pulumi:"action"`
+	Conditions     SecurityPolicyConfigAclConfigUserRuleConditionArrayInput `pulumi:"conditions"`
+	Name           pulumi.StringPtrInput                                    `pulumi:"name"`
+	PageId         pulumi.IntPtrInput                                       `pulumi:"pageId"`
+	PunishTime     pulumi.IntPtrInput                                       `pulumi:"punishTime"`
+	PunishTimeUnit pulumi.StringPtrInput                                    `pulumi:"punishTimeUnit"`
+	RedirectUrl    pulumi.StringPtrInput                                    `pulumi:"redirectUrl"`
+	ResponseCode   pulumi.IntPtrInput                                       `pulumi:"responseCode"`
+	RuleId         pulumi.IntPtrInput                                       `pulumi:"ruleId"`
+	RuleName       pulumi.StringInput                                       `pulumi:"ruleName"`
+	RulePriority   pulumi.IntInput                                          `pulumi:"rulePriority"`
+	RuleStatus     pulumi.StringInput                                       `pulumi:"ruleStatus"`
+	UpdateTime     pulumi.StringPtrInput                                    `pulumi:"updateTime"`
 }
 
 func (SecurityPolicyConfigAclConfigUserRuleArgs) ElementType() reflect.Type {
@@ -6049,44 +5768,36 @@ func (o SecurityPolicyConfigAclConfigUserRuleOutput) ToSecurityPolicyConfigAclCo
 	return o
 }
 
-// Valid values: `monitor`, `drop`.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Conditions of the rule.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) Conditions() SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) []SecurityPolicyConfigAclConfigUserRuleCondition {
 		return v.Conditions
 	}).(SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput)
 }
 
-// Name of the custom response page.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom response page.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.PageId }).(pulumi.IntPtrOutput)
 }
 
-// Punish time, Valid value range: 0-2 days.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) PunishTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
 }
 
-// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) PunishTimeUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.PunishTimeUnit }).(pulumi.StringPtrOutput)
 }
 
-// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
 }
 
-// Response code to use when redirecting.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) ResponseCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.ResponseCode }).(pulumi.IntPtrOutput)
 }
@@ -6095,17 +5806,14 @@ func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleId() pulumi.IntPtrOutpu
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
 }
 
-// Rule Name.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.RuleName }).(pulumi.StringOutput)
 }
 
-// Priority of the rule. Valid value range: 1-100.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) RulePriority() pulumi.IntOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) int { return v.RulePriority }).(pulumi.IntOutput)
 }
 
-// Status of the rule. Valid values: `on`, `off`, `hour`.
 func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.RuleStatus }).(pulumi.StringOutput)
 }
@@ -6135,14 +5843,10 @@ func (o SecurityPolicyConfigAclConfigUserRuleArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SecurityPolicyConfigAclConfigUserRuleCondition struct {
-	// Content to match.
 	MatchContent string `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom string `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam string `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator string `pulumi:"operator"`
+	MatchFrom    string `pulumi:"matchFrom"`
+	MatchParam   string `pulumi:"matchParam"`
+	Operator     string `pulumi:"operator"`
 }
 
 // SecurityPolicyConfigAclConfigUserRuleConditionInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleConditionArgs and SecurityPolicyConfigAclConfigUserRuleConditionOutput values.
@@ -6157,14 +5861,10 @@ type SecurityPolicyConfigAclConfigUserRuleConditionInput interface {
 }
 
 type SecurityPolicyConfigAclConfigUserRuleConditionArgs struct {
-	// Content to match.
 	MatchContent pulumi.StringInput `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom pulumi.StringInput `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam pulumi.StringInput `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator pulumi.StringInput `pulumi:"operator"`
+	MatchFrom    pulumi.StringInput `pulumi:"matchFrom"`
+	MatchParam   pulumi.StringInput `pulumi:"matchParam"`
+	Operator     pulumi.StringInput `pulumi:"operator"`
 }
 
 func (SecurityPolicyConfigAclConfigUserRuleConditionArgs) ElementType() reflect.Type {
@@ -6218,22 +5918,18 @@ func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) ToSecurityPolicyCo
 	return o
 }
 
-// Content to match.
 func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchContent() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchContent }).(pulumi.StringOutput)
 }
 
-// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
 func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchFrom() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchFrom }).(pulumi.StringOutput)
 }
 
-// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
 func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchParam() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchParam }).(pulumi.StringOutput)
 }
 
-// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
 func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
 }
@@ -6259,14 +5955,10 @@ func (o SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput) Index(i pulum
 }
 
 type SecurityPolicyConfigBotConfig struct {
-	// Bot intelligent rule configuration.
 	IntelligenceRule *SecurityPolicyConfigBotConfigIntelligenceRule `pulumi:"intelligenceRule"`
-	// Preset rules.
-	ManagedRule *SecurityPolicyConfigBotConfigManagedRule `pulumi:"managedRule"`
-	// Portrait rule.
-	PortraitRule *SecurityPolicyConfigBotConfigPortraitRule `pulumi:"portraitRule"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	ManagedRule      *SecurityPolicyConfigBotConfigManagedRule      `pulumi:"managedRule"`
+	PortraitRule     *SecurityPolicyConfigBotConfigPortraitRule     `pulumi:"portraitRule"`
+	Switch           *string                                        `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigBotConfigInput is an input type that accepts SecurityPolicyConfigBotConfigArgs and SecurityPolicyConfigBotConfigOutput values.
@@ -6281,14 +5973,10 @@ type SecurityPolicyConfigBotConfigInput interface {
 }
 
 type SecurityPolicyConfigBotConfigArgs struct {
-	// Bot intelligent rule configuration.
 	IntelligenceRule SecurityPolicyConfigBotConfigIntelligenceRulePtrInput `pulumi:"intelligenceRule"`
-	// Preset rules.
-	ManagedRule SecurityPolicyConfigBotConfigManagedRulePtrInput `pulumi:"managedRule"`
-	// Portrait rule.
-	PortraitRule SecurityPolicyConfigBotConfigPortraitRulePtrInput `pulumi:"portraitRule"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	ManagedRule      SecurityPolicyConfigBotConfigManagedRulePtrInput      `pulumi:"managedRule"`
+	PortraitRule     SecurityPolicyConfigBotConfigPortraitRulePtrInput     `pulumi:"portraitRule"`
+	Switch           pulumi.StringPtrInput                                 `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigBotConfigArgs) ElementType() reflect.Type {
@@ -6368,26 +6056,22 @@ func (o SecurityPolicyConfigBotConfigOutput) ToSecurityPolicyConfigBotConfigPtrO
 	}).(SecurityPolicyConfigBotConfigPtrOutput)
 }
 
-// Bot intelligent rule configuration.
 func (o SecurityPolicyConfigBotConfigOutput) IntelligenceRule() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigIntelligenceRule {
 		return v.IntelligenceRule
 	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
 }
 
-// Preset rules.
 func (o SecurityPolicyConfigBotConfigOutput) ManagedRule() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigManagedRule { return v.ManagedRule }).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
 }
 
-// Portrait rule.
 func (o SecurityPolicyConfigBotConfigOutput) PortraitRule() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigPortraitRule {
 		return v.PortraitRule
 	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -6416,7 +6100,6 @@ func (o SecurityPolicyConfigBotConfigPtrOutput) Elem() SecurityPolicyConfigBotCo
 	}).(SecurityPolicyConfigBotConfigOutput)
 }
 
-// Bot intelligent rule configuration.
 func (o SecurityPolicyConfigBotConfigPtrOutput) IntelligenceRule() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigIntelligenceRule {
 		if v == nil {
@@ -6426,7 +6109,6 @@ func (o SecurityPolicyConfigBotConfigPtrOutput) IntelligenceRule() SecurityPolic
 	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
 }
 
-// Preset rules.
 func (o SecurityPolicyConfigBotConfigPtrOutput) ManagedRule() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigManagedRule {
 		if v == nil {
@@ -6436,7 +6118,6 @@ func (o SecurityPolicyConfigBotConfigPtrOutput) ManagedRule() SecurityPolicyConf
 	}).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
 }
 
-// Portrait rule.
 func (o SecurityPolicyConfigBotConfigPtrOutput) PortraitRule() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigPortraitRule {
 		if v == nil {
@@ -6446,7 +6127,6 @@ func (o SecurityPolicyConfigBotConfigPtrOutput) PortraitRule() SecurityPolicyCon
 	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *string {
 		if v == nil {
@@ -6457,10 +6137,8 @@ func (o SecurityPolicyConfigBotConfigPtrOutput) Switch() pulumi.StringPtrOutput 
 }
 
 type SecurityPolicyConfigBotConfigIntelligenceRule struct {
-	// Configuration detail.
-	Items []SecurityPolicyConfigBotConfigIntelligenceRuleItem `pulumi:"items"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Items  []SecurityPolicyConfigBotConfigIntelligenceRuleItem `pulumi:"items"`
+	Switch *string                                             `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigBotConfigIntelligenceRuleInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleArgs and SecurityPolicyConfigBotConfigIntelligenceRuleOutput values.
@@ -6475,10 +6153,8 @@ type SecurityPolicyConfigBotConfigIntelligenceRuleInput interface {
 }
 
 type SecurityPolicyConfigBotConfigIntelligenceRuleArgs struct {
-	// Configuration detail.
-	Items SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput `pulumi:"items"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Items  SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput `pulumi:"items"`
+	Switch pulumi.StringPtrInput                                       `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ElementType() reflect.Type {
@@ -6558,14 +6234,12 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ToSecurityPolicyCon
 	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
 }
 
-// Configuration detail.
 func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) Items() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRule) []SecurityPolicyConfigBotConfigIntelligenceRuleItem {
 		return v.Items
 	}).(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -6594,7 +6268,6 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Elem() SecurityP
 	}).(SecurityPolicyConfigBotConfigIntelligenceRuleOutput)
 }
 
-// Configuration detail.
 func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Items() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigIntelligenceRule) []SecurityPolicyConfigBotConfigIntelligenceRuleItem {
 		if v == nil {
@@ -6604,7 +6277,6 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Items() Security
 	}).(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigIntelligenceRule) *string {
 		if v == nil {
@@ -6615,10 +6287,8 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Switch() pulumi.
 }
 
 type SecurityPolicyConfigBotConfigIntelligenceRuleItem struct {
-	// Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
 	Action *string `pulumi:"action"`
-	// Bot label, valid values: `evilBot`, `suspectBot`, `goodBot`, `normal`.
-	Label *string `pulumi:"label"`
+	Label  *string `pulumi:"label"`
 }
 
 // SecurityPolicyConfigBotConfigIntelligenceRuleItemInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs and SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput values.
@@ -6633,10 +6303,8 @@ type SecurityPolicyConfigBotConfigIntelligenceRuleItemInput interface {
 }
 
 type SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs struct {
-	// Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
 	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Bot label, valid values: `evilBot`, `suspectBot`, `goodBot`, `normal`.
-	Label pulumi.StringPtrInput `pulumi:"label"`
+	Label  pulumi.StringPtrInput `pulumi:"label"`
 }
 
 func (SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs) ElementType() reflect.Type {
@@ -6690,12 +6358,10 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) ToSecurityPolic
 	return o
 }
 
-// Action to take. Valid values: `trans`, `monitor`, `alg`, `captcha`, `drop`.
 func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRuleItem) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Bot label, valid values: `evilBot`, `suspectBot`, `goodBot`, `normal`.
 func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) Label() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRuleItem) *string { return v.Label }).(pulumi.StringPtrOutput)
 }
@@ -6721,31 +6387,19 @@ func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput) Index(i pu
 }
 
 type SecurityPolicyConfigBotConfigManagedRule struct {
-	// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-	Action *string `pulumi:"action"`
-	// Rules to enable when action is `alg`. See details in data source `botManagedRules`.
-	AlgManagedIds []int `pulumi:"algManagedIds"`
-	// Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
-	CapManagedIds []int `pulumi:"capManagedIds"`
-	// Rules to enable when action is `drop`. See details in data source `botManagedRules`.
-	DropManagedIds []int `pulumi:"dropManagedIds"`
-	// Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
-	MonManagedIds []int `pulumi:"monManagedIds"`
-	// Name of the custom response page.
-	Name *string `pulumi:"name"`
-	// ID of the custom response page.
-	PageId *int `pulumi:"pageId"`
-	// Punish time.
-	PunishTime *int `pulumi:"punishTime"`
-	// Time unit of the punish time.
-	PunishTimeUnit *string `pulumi:"punishTimeUnit"`
-	// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-	RedirectUrl *string `pulumi:"redirectUrl"`
-	// Response code to use when redirecting.
-	ResponseCode *int `pulumi:"responseCode"`
-	RuleId       *int `pulumi:"ruleId"`
-	// Rules to enable when action is `trans`. See details in data source `botManagedRules`.
-	TransManagedIds []int `pulumi:"transManagedIds"`
+	Action          *string `pulumi:"action"`
+	AlgManagedIds   []int   `pulumi:"algManagedIds"`
+	CapManagedIds   []int   `pulumi:"capManagedIds"`
+	DropManagedIds  []int   `pulumi:"dropManagedIds"`
+	MonManagedIds   []int   `pulumi:"monManagedIds"`
+	Name            *string `pulumi:"name"`
+	PageId          *int    `pulumi:"pageId"`
+	PunishTime      *int    `pulumi:"punishTime"`
+	PunishTimeUnit  *string `pulumi:"punishTimeUnit"`
+	RedirectUrl     *string `pulumi:"redirectUrl"`
+	ResponseCode    *int    `pulumi:"responseCode"`
+	RuleId          *int    `pulumi:"ruleId"`
+	TransManagedIds []int   `pulumi:"transManagedIds"`
 }
 
 // SecurityPolicyConfigBotConfigManagedRuleInput is an input type that accepts SecurityPolicyConfigBotConfigManagedRuleArgs and SecurityPolicyConfigBotConfigManagedRuleOutput values.
@@ -6760,31 +6414,19 @@ type SecurityPolicyConfigBotConfigManagedRuleInput interface {
 }
 
 type SecurityPolicyConfigBotConfigManagedRuleArgs struct {
-	// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Rules to enable when action is `alg`. See details in data source `botManagedRules`.
-	AlgManagedIds pulumi.IntArrayInput `pulumi:"algManagedIds"`
-	// Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
-	CapManagedIds pulumi.IntArrayInput `pulumi:"capManagedIds"`
-	// Rules to enable when action is `drop`. See details in data source `botManagedRules`.
-	DropManagedIds pulumi.IntArrayInput `pulumi:"dropManagedIds"`
-	// Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
-	MonManagedIds pulumi.IntArrayInput `pulumi:"monManagedIds"`
-	// Name of the custom response page.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// ID of the custom response page.
-	PageId pulumi.IntPtrInput `pulumi:"pageId"`
-	// Punish time.
-	PunishTime pulumi.IntPtrInput `pulumi:"punishTime"`
-	// Time unit of the punish time.
-	PunishTimeUnit pulumi.StringPtrInput `pulumi:"punishTimeUnit"`
-	// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
-	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
-	// Response code to use when redirecting.
-	ResponseCode pulumi.IntPtrInput `pulumi:"responseCode"`
-	RuleId       pulumi.IntPtrInput `pulumi:"ruleId"`
-	// Rules to enable when action is `trans`. See details in data source `botManagedRules`.
-	TransManagedIds pulumi.IntArrayInput `pulumi:"transManagedIds"`
+	Action          pulumi.StringPtrInput `pulumi:"action"`
+	AlgManagedIds   pulumi.IntArrayInput  `pulumi:"algManagedIds"`
+	CapManagedIds   pulumi.IntArrayInput  `pulumi:"capManagedIds"`
+	DropManagedIds  pulumi.IntArrayInput  `pulumi:"dropManagedIds"`
+	MonManagedIds   pulumi.IntArrayInput  `pulumi:"monManagedIds"`
+	Name            pulumi.StringPtrInput `pulumi:"name"`
+	PageId          pulumi.IntPtrInput    `pulumi:"pageId"`
+	PunishTime      pulumi.IntPtrInput    `pulumi:"punishTime"`
+	PunishTimeUnit  pulumi.StringPtrInput `pulumi:"punishTimeUnit"`
+	RedirectUrl     pulumi.StringPtrInput `pulumi:"redirectUrl"`
+	ResponseCode    pulumi.IntPtrInput    `pulumi:"responseCode"`
+	RuleId          pulumi.IntPtrInput    `pulumi:"ruleId"`
+	TransManagedIds pulumi.IntArrayInput  `pulumi:"transManagedIds"`
 }
 
 func (SecurityPolicyConfigBotConfigManagedRuleArgs) ElementType() reflect.Type {
@@ -6864,57 +6506,46 @@ func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ToSecurityPolicyConfigBo
 	}).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
 }
 
-// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Rules to enable when action is `alg`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) AlgManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.AlgManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) CapManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.CapManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `drop`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) DropManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.DropManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) MonManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.MonManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Name of the custom response page.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom response page.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.PageId }).(pulumi.IntPtrOutput)
 }
 
-// Punish time.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PunishTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
 }
 
-// Time unit of the punish time.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PunishTimeUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.PunishTimeUnit }).(pulumi.StringPtrOutput)
 }
 
-// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
 }
 
-// Response code to use when redirecting.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ResponseCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.ResponseCode }).(pulumi.IntPtrOutput)
 }
@@ -6923,7 +6554,6 @@ func (o SecurityPolicyConfigBotConfigManagedRuleOutput) RuleId() pulumi.IntPtrOu
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
 }
 
-// Rules to enable when action is `trans`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRuleOutput) TransManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.TransManagedIds }).(pulumi.IntArrayOutput)
 }
@@ -6952,7 +6582,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Elem() SecurityPolicy
 	}).(SecurityPolicyConfigBotConfigManagedRuleOutput)
 }
 
-// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
 		if v == nil {
@@ -6962,7 +6591,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Action() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
-// Rules to enable when action is `alg`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) AlgManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
 		if v == nil {
@@ -6972,7 +6600,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) AlgManagedIds() pulum
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `captcha`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) CapManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
 		if v == nil {
@@ -6982,7 +6609,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) CapManagedIds() pulum
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `drop`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) DropManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
 		if v == nil {
@@ -6992,7 +6618,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) DropManagedIds() pulu
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `monitor`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) MonManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
 		if v == nil {
@@ -7002,7 +6627,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) MonManagedIds() pulum
 	}).(pulumi.IntArrayOutput)
 }
 
-// Name of the custom response page.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
 		if v == nil {
@@ -7012,7 +6636,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Name() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom response page.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
 		if v == nil {
@@ -7022,7 +6645,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PageId() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-// Punish time.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
 		if v == nil {
@@ -7032,7 +6654,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTime() pulumi.I
 	}).(pulumi.IntPtrOutput)
 }
 
-// Time unit of the punish time.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTimeUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
 		if v == nil {
@@ -7042,7 +6663,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTimeUnit() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Redirect target URL, must be an sub-domain from one of the account&#39;s site.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
 		if v == nil {
@@ -7052,7 +6672,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) RedirectUrl() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
-// Response code to use when redirecting.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) ResponseCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
 		if v == nil {
@@ -7071,7 +6690,6 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) RuleId() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-// Rules to enable when action is `trans`. See details in data source `botManagedRules`.
 func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) TransManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
 		if v == nil {
@@ -7082,17 +6700,12 @@ func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) TransManagedIds() pul
 }
 
 type SecurityPolicyConfigBotConfigPortraitRule struct {
-	// Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
-	AlgManagedIds []int `pulumi:"algManagedIds"`
-	// Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
-	CapManagedIds []int `pulumi:"capManagedIds"`
-	// Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
-	DropManagedIds []int `pulumi:"dropManagedIds"`
-	// Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
-	MonManagedIds []int `pulumi:"monManagedIds"`
-	RuleId        *int  `pulumi:"ruleId"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	AlgManagedIds  []int   `pulumi:"algManagedIds"`
+	CapManagedIds  []int   `pulumi:"capManagedIds"`
+	DropManagedIds []int   `pulumi:"dropManagedIds"`
+	MonManagedIds  []int   `pulumi:"monManagedIds"`
+	RuleId         *int    `pulumi:"ruleId"`
+	Switch         *string `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigBotConfigPortraitRuleInput is an input type that accepts SecurityPolicyConfigBotConfigPortraitRuleArgs and SecurityPolicyConfigBotConfigPortraitRuleOutput values.
@@ -7107,17 +6720,12 @@ type SecurityPolicyConfigBotConfigPortraitRuleInput interface {
 }
 
 type SecurityPolicyConfigBotConfigPortraitRuleArgs struct {
-	// Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
-	AlgManagedIds pulumi.IntArrayInput `pulumi:"algManagedIds"`
-	// Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
-	CapManagedIds pulumi.IntArrayInput `pulumi:"capManagedIds"`
-	// Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
-	DropManagedIds pulumi.IntArrayInput `pulumi:"dropManagedIds"`
-	// Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
-	MonManagedIds pulumi.IntArrayInput `pulumi:"monManagedIds"`
-	RuleId        pulumi.IntPtrInput   `pulumi:"ruleId"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	AlgManagedIds  pulumi.IntArrayInput  `pulumi:"algManagedIds"`
+	CapManagedIds  pulumi.IntArrayInput  `pulumi:"capManagedIds"`
+	DropManagedIds pulumi.IntArrayInput  `pulumi:"dropManagedIds"`
+	MonManagedIds  pulumi.IntArrayInput  `pulumi:"monManagedIds"`
+	RuleId         pulumi.IntPtrInput    `pulumi:"ruleId"`
+	Switch         pulumi.StringPtrInput `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigBotConfigPortraitRuleArgs) ElementType() reflect.Type {
@@ -7197,22 +6805,18 @@ func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) ToSecurityPolicyConfigB
 	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
 }
 
-// Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) AlgManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.AlgManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) CapManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.CapManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) DropManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.DropManagedIds }).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) MonManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.MonManagedIds }).(pulumi.IntArrayOutput)
 }
@@ -7221,7 +6825,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) RuleId() pulumi.IntPtrO
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -7250,7 +6853,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) Elem() SecurityPolic
 	}).(SecurityPolicyConfigBotConfigPortraitRuleOutput)
 }
 
-// Rules to enable when action is `alg`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) AlgManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
 		if v == nil {
@@ -7260,7 +6862,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) AlgManagedIds() pulu
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `captcha`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) CapManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
 		if v == nil {
@@ -7270,7 +6871,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) CapManagedIds() pulu
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `drop`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) DropManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
 		if v == nil {
@@ -7280,7 +6880,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) DropManagedIds() pul
 	}).(pulumi.IntArrayOutput)
 }
 
-// Rules to enable when action is `monitor`. See details in data source `botPortraitRules`.
 func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) MonManagedIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
 		if v == nil {
@@ -7299,7 +6898,6 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) RuleId() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) *string {
 		if v == nil {
@@ -7310,11 +6908,8 @@ func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) Switch() pulumi.Stri
 }
 
 type SecurityPolicyConfigDropPageConfig struct {
-	// Custom error page of ACL rules.
 	AclDropPageDetail *SecurityPolicyConfigDropPageConfigAclDropPageDetail `pulumi:"aclDropPageDetail"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
-	// Custom error page of WAF rules.
+	Switch            *string                                              `pulumi:"switch"`
 	WafDropPageDetail *SecurityPolicyConfigDropPageConfigWafDropPageDetail `pulumi:"wafDropPageDetail"`
 }
 
@@ -7330,11 +6925,8 @@ type SecurityPolicyConfigDropPageConfigInput interface {
 }
 
 type SecurityPolicyConfigDropPageConfigArgs struct {
-	// Custom error page of ACL rules.
 	AclDropPageDetail SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput `pulumi:"aclDropPageDetail"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
-	// Custom error page of WAF rules.
+	Switch            pulumi.StringPtrInput                                       `pulumi:"switch"`
 	WafDropPageDetail SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput `pulumi:"wafDropPageDetail"`
 }
 
@@ -7415,19 +7007,16 @@ func (o SecurityPolicyConfigDropPageConfigOutput) ToSecurityPolicyConfigDropPage
 	}).(SecurityPolicyConfigDropPageConfigPtrOutput)
 }
 
-// Custom error page of ACL rules.
 func (o SecurityPolicyConfigDropPageConfigOutput) AclDropPageDetail() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigAclDropPageDetail {
 		return v.AclDropPageDetail
 	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigDropPageConfigOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-// Custom error page of WAF rules.
 func (o SecurityPolicyConfigDropPageConfigOutput) WafDropPageDetail() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigWafDropPageDetail {
 		return v.WafDropPageDetail
@@ -7458,7 +7047,6 @@ func (o SecurityPolicyConfigDropPageConfigPtrOutput) Elem() SecurityPolicyConfig
 	}).(SecurityPolicyConfigDropPageConfigOutput)
 }
 
-// Custom error page of ACL rules.
 func (o SecurityPolicyConfigDropPageConfigPtrOutput) AclDropPageDetail() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigAclDropPageDetail {
 		if v == nil {
@@ -7468,7 +7056,6 @@ func (o SecurityPolicyConfigDropPageConfigPtrOutput) AclDropPageDetail() Securit
 	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigDropPageConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *string {
 		if v == nil {
@@ -7478,7 +7065,6 @@ func (o SecurityPolicyConfigDropPageConfigPtrOutput) Switch() pulumi.StringPtrOu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Custom error page of WAF rules.
 func (o SecurityPolicyConfigDropPageConfigPtrOutput) WafDropPageDetail() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigWafDropPageDetail {
 		if v == nil {
@@ -7489,14 +7075,10 @@ func (o SecurityPolicyConfigDropPageConfigPtrOutput) WafDropPageDetail() Securit
 }
 
 type SecurityPolicyConfigDropPageConfigAclDropPageDetail struct {
-	// File name or URL.
-	Name *string `pulumi:"name"`
-	// ID of the custom error page. when set to 0, use system default error page.
-	PageId *int `pulumi:"pageId"`
-	// HTTP status code to use. Valid range: 100-600.
-	StatusCode *int `pulumi:"statusCode"`
-	// Type of the custom error page. Valid values: `file`, `url`.
-	Type *string `pulumi:"type"`
+	Name       *string `pulumi:"name"`
+	PageId     *int    `pulumi:"pageId"`
+	StatusCode *int    `pulumi:"statusCode"`
+	Type       *string `pulumi:"type"`
 }
 
 // SecurityPolicyConfigDropPageConfigAclDropPageDetailInput is an input type that accepts SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs and SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput values.
@@ -7511,14 +7093,10 @@ type SecurityPolicyConfigDropPageConfigAclDropPageDetailInput interface {
 }
 
 type SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs struct {
-	// File name or URL.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// ID of the custom error page. when set to 0, use system default error page.
-	PageId pulumi.IntPtrInput `pulumi:"pageId"`
-	// HTTP status code to use. Valid range: 100-600.
-	StatusCode pulumi.IntPtrInput `pulumi:"statusCode"`
-	// Type of the custom error page. Valid values: `file`, `url`.
-	Type pulumi.StringPtrInput `pulumi:"type"`
+	Name       pulumi.StringPtrInput `pulumi:"name"`
+	PageId     pulumi.IntPtrInput    `pulumi:"pageId"`
+	StatusCode pulumi.IntPtrInput    `pulumi:"statusCode"`
+	Type       pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ElementType() reflect.Type {
@@ -7598,22 +7176,18 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ToSecurityPol
 	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
 }
 
-// File name or URL.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom error page. when set to 0, use system default error page.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int { return v.PageId }).(pulumi.IntPtrOutput)
 }
 
-// HTTP status code to use. Valid range: 100-600.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) StatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int { return v.StatusCode }).(pulumi.IntPtrOutput)
 }
 
-// Type of the custom error page. Valid values: `file`, `url`.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -7642,7 +7216,6 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Elem() Sec
 	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput)
 }
 
-// File name or URL.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string {
 		if v == nil {
@@ -7652,7 +7225,6 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Name() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom error page. when set to 0, use system default error page.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int {
 		if v == nil {
@@ -7662,7 +7234,6 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) PageId() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// HTTP status code to use. Valid range: 100-600.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) StatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int {
 		if v == nil {
@@ -7672,7 +7243,6 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) StatusCode
 	}).(pulumi.IntPtrOutput)
 }
 
-// Type of the custom error page. Valid values: `file`, `url`.
 func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string {
 		if v == nil {
@@ -7683,14 +7253,10 @@ func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Type() pul
 }
 
 type SecurityPolicyConfigDropPageConfigWafDropPageDetail struct {
-	// File name or URL.
-	Name *string `pulumi:"name"`
-	// ID of the custom error page. when set to 0, use system default error page.
-	PageId *int `pulumi:"pageId"`
-	// HTTP status code to use. Valid range: 100-600.
-	StatusCode *int `pulumi:"statusCode"`
-	// Type of the custom error page. Valid values: `file`, `url`.
-	Type *string `pulumi:"type"`
+	Name       *string `pulumi:"name"`
+	PageId     *int    `pulumi:"pageId"`
+	StatusCode *int    `pulumi:"statusCode"`
+	Type       *string `pulumi:"type"`
 }
 
 // SecurityPolicyConfigDropPageConfigWafDropPageDetailInput is an input type that accepts SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs and SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput values.
@@ -7705,14 +7271,10 @@ type SecurityPolicyConfigDropPageConfigWafDropPageDetailInput interface {
 }
 
 type SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs struct {
-	// File name or URL.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// ID of the custom error page. when set to 0, use system default error page.
-	PageId pulumi.IntPtrInput `pulumi:"pageId"`
-	// HTTP status code to use. Valid range: 100-600.
-	StatusCode pulumi.IntPtrInput `pulumi:"statusCode"`
-	// Type of the custom error page. Valid values: `file`, `url`.
-	Type pulumi.StringPtrInput `pulumi:"type"`
+	Name       pulumi.StringPtrInput `pulumi:"name"`
+	PageId     pulumi.IntPtrInput    `pulumi:"pageId"`
+	StatusCode pulumi.IntPtrInput    `pulumi:"statusCode"`
+	Type       pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ElementType() reflect.Type {
@@ -7792,22 +7354,18 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ToSecurityPol
 	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput)
 }
 
-// File name or URL.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom error page. when set to 0, use system default error page.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int { return v.PageId }).(pulumi.IntPtrOutput)
 }
 
-// HTTP status code to use. Valid range: 100-600.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) StatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int { return v.StatusCode }).(pulumi.IntPtrOutput)
 }
 
-// Type of the custom error page. Valid values: `file`, `url`.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -7836,7 +7394,6 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Elem() Sec
 	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput)
 }
 
-// File name or URL.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string {
 		if v == nil {
@@ -7846,7 +7403,6 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Name() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the custom error page. when set to 0, use system default error page.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) PageId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int {
 		if v == nil {
@@ -7856,7 +7412,6 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) PageId() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// HTTP status code to use. Valid range: 100-600.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) StatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int {
 		if v == nil {
@@ -7866,7 +7421,6 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) StatusCode
 	}).(pulumi.IntPtrOutput)
 }
 
-// Type of the custom error page. Valid values: `file`, `url`.
 func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string {
 		if v == nil {
@@ -7877,10 +7431,8 @@ func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Type() pul
 }
 
 type SecurityPolicyConfigExceptConfig struct {
-	// Exception rules.
 	ExceptUserRules []SecurityPolicyConfigExceptConfigExceptUserRule `pulumi:"exceptUserRules"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Switch          *string                                          `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigExceptConfigInput is an input type that accepts SecurityPolicyConfigExceptConfigArgs and SecurityPolicyConfigExceptConfigOutput values.
@@ -7895,10 +7447,8 @@ type SecurityPolicyConfigExceptConfigInput interface {
 }
 
 type SecurityPolicyConfigExceptConfigArgs struct {
-	// Exception rules.
 	ExceptUserRules SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput `pulumi:"exceptUserRules"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Switch          pulumi.StringPtrInput                                    `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigExceptConfigArgs) ElementType() reflect.Type {
@@ -7978,14 +7528,12 @@ func (o SecurityPolicyConfigExceptConfigOutput) ToSecurityPolicyConfigExceptConf
 	}).(SecurityPolicyConfigExceptConfigPtrOutput)
 }
 
-// Exception rules.
 func (o SecurityPolicyConfigExceptConfigOutput) ExceptUserRules() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfig) []SecurityPolicyConfigExceptConfigExceptUserRule {
 		return v.ExceptUserRules
 	}).(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigExceptConfigOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -8014,7 +7562,6 @@ func (o SecurityPolicyConfigExceptConfigPtrOutput) Elem() SecurityPolicyConfigEx
 	}).(SecurityPolicyConfigExceptConfigOutput)
 }
 
-// Exception rules.
 func (o SecurityPolicyConfigExceptConfigPtrOutput) ExceptUserRules() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfig) []SecurityPolicyConfigExceptConfigExceptUserRule {
 		if v == nil {
@@ -8024,7 +7571,6 @@ func (o SecurityPolicyConfigExceptConfigPtrOutput) ExceptUserRules() SecurityPol
 	}).(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigExceptConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfig) *string {
 		if v == nil {
@@ -8035,20 +7581,14 @@ func (o SecurityPolicyConfigExceptConfigPtrOutput) Switch() pulumi.StringPtrOutp
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRule struct {
-	// Action to take. Valid values: `skip`.
-	Action *string `pulumi:"action"`
-	// Conditions of the rule.
+	Action                   *string                                                                 `pulumi:"action"`
 	ExceptUserRuleConditions []SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition `pulumi:"exceptUserRuleConditions"`
-	// Scope of the rule in effect.
-	ExceptUserRuleScope *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope `pulumi:"exceptUserRuleScope"`
-	RuleId              *int                                                               `pulumi:"ruleId"`
-	// Rule name.
-	RuleName *string `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 0-100.
-	RulePriority *int `pulumi:"rulePriority"`
-	// Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-	RuleStatus *string `pulumi:"ruleStatus"`
-	UpdateTime *string `pulumi:"updateTime"`
+	ExceptUserRuleScope      *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope      `pulumi:"exceptUserRuleScope"`
+	RuleId                   *int                                                                    `pulumi:"ruleId"`
+	RuleName                 *string                                                                 `pulumi:"ruleName"`
+	RulePriority             *int                                                                    `pulumi:"rulePriority"`
+	RuleStatus               *string                                                                 `pulumi:"ruleStatus"`
+	UpdateTime               *string                                                                 `pulumi:"updateTime"`
 }
 
 // SecurityPolicyConfigExceptConfigExceptUserRuleInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleArgs and SecurityPolicyConfigExceptConfigExceptUserRuleOutput values.
@@ -8063,20 +7603,14 @@ type SecurityPolicyConfigExceptConfigExceptUserRuleInput interface {
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRuleArgs struct {
-	// Action to take. Valid values: `skip`.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Conditions of the rule.
+	Action                   pulumi.StringPtrInput                                                           `pulumi:"action"`
 	ExceptUserRuleConditions SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput `pulumi:"exceptUserRuleConditions"`
-	// Scope of the rule in effect.
-	ExceptUserRuleScope SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput `pulumi:"exceptUserRuleScope"`
-	RuleId              pulumi.IntPtrInput                                                        `pulumi:"ruleId"`
-	// Rule name.
-	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 0-100.
-	RulePriority pulumi.IntPtrInput `pulumi:"rulePriority"`
-	// Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
-	RuleStatus pulumi.StringPtrInput `pulumi:"ruleStatus"`
-	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	ExceptUserRuleScope      SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput       `pulumi:"exceptUserRuleScope"`
+	RuleId                   pulumi.IntPtrInput                                                              `pulumi:"ruleId"`
+	RuleName                 pulumi.StringPtrInput                                                           `pulumi:"ruleName"`
+	RulePriority             pulumi.IntPtrInput                                                              `pulumi:"rulePriority"`
+	RuleStatus               pulumi.StringPtrInput                                                           `pulumi:"ruleStatus"`
+	UpdateTime               pulumi.StringPtrInput                                                           `pulumi:"updateTime"`
 }
 
 func (SecurityPolicyConfigExceptConfigExceptUserRuleArgs) ElementType() reflect.Type {
@@ -8130,19 +7664,16 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ToSecurityPolicyCo
 	return o
 }
 
-// Action to take. Valid values: `skip`.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Conditions of the rule.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ExceptUserRuleConditions() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) []SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
 		return v.ExceptUserRuleConditions
 	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput)
 }
 
-// Scope of the rule in effect.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ExceptUserRuleScope() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
 		return v.ExceptUserRuleScope
@@ -8153,17 +7684,14 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleId() pulumi.In
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
 }
 
-// Rule name.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.RuleName }).(pulumi.StringPtrOutput)
 }
 
-// Priority of the rule. Valid value range: 0-100.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RulePriority() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *int { return v.RulePriority }).(pulumi.IntPtrOutput)
 }
 
-// Status of the rule. Valid values:- `on`: Enabled.- `off`: Disabled.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleStatus() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.RuleStatus }).(pulumi.StringPtrOutput)
 }
@@ -8193,14 +7721,10 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput) Index(i pulum
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition struct {
-	// Content to match.
 	MatchContent *string `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom *string `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam *string `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator *string `pulumi:"operator"`
+	MatchFrom    *string `pulumi:"matchFrom"`
+	MatchParam   *string `pulumi:"matchParam"`
+	Operator     *string `pulumi:"operator"`
 }
 
 // SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs and SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput values.
@@ -8215,14 +7739,10 @@ type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput 
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs struct {
-	// Content to match.
 	MatchContent pulumi.StringPtrInput `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom pulumi.StringPtrInput `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam pulumi.StringPtrInput `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	MatchFrom    pulumi.StringPtrInput `pulumi:"matchFrom"`
+	MatchParam   pulumi.StringPtrInput `pulumi:"matchParam"`
+	Operator     pulumi.StringPtrInput `pulumi:"operator"`
 }
 
 func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs) ElementType() reflect.Type {
@@ -8276,28 +7796,24 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOut
 	return o
 }
 
-// Content to match.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
 		return v.MatchContent
 	}).(pulumi.StringPtrOutput)
 }
 
-// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchFrom() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
 		return v.MatchFrom
 	}).(pulumi.StringPtrOutput)
 }
 
-// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchParam() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
 		return v.MatchParam
 	}).(pulumi.StringPtrOutput)
 }
 
-// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
 		return v.Operator
@@ -8325,7 +7841,6 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArr
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope struct {
-	// Modules in which the rule take effect. Valid values: `waf`.
 	Modules []string `pulumi:"modules"`
 }
 
@@ -8341,7 +7856,6 @@ type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeInput inte
 }
 
 type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs struct {
-	// Modules in which the rule take effect. Valid values: `waf`.
 	Modules pulumi.StringArrayInput `pulumi:"modules"`
 }
 
@@ -8422,7 +7936,6 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput)
 	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput)
 }
 
-// Modules in which the rule take effect. Valid values: `waf`.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) Modules() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) []string { return v.Modules }).(pulumi.StringArrayOutput)
 }
@@ -8451,7 +7964,6 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutp
 	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput)
 }
 
-// Modules in which the rule take effect. Valid values: `waf`.
 func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) Modules() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) []string {
 		if v == nil {
@@ -8462,10 +7974,8 @@ func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutp
 }
 
 type SecurityPolicyConfigIpTableConfig struct {
-	// Rules list.
-	Rules []SecurityPolicyConfigIpTableConfigRule `pulumi:"rules"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
+	Rules  []SecurityPolicyConfigIpTableConfigRule `pulumi:"rules"`
+	Switch *string                                 `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigIpTableConfigInput is an input type that accepts SecurityPolicyConfigIpTableConfigArgs and SecurityPolicyConfigIpTableConfigOutput values.
@@ -8480,10 +7990,8 @@ type SecurityPolicyConfigIpTableConfigInput interface {
 }
 
 type SecurityPolicyConfigIpTableConfigArgs struct {
-	// Rules list.
-	Rules SecurityPolicyConfigIpTableConfigRuleArrayInput `pulumi:"rules"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
+	Rules  SecurityPolicyConfigIpTableConfigRuleArrayInput `pulumi:"rules"`
+	Switch pulumi.StringPtrInput                           `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigIpTableConfigArgs) ElementType() reflect.Type {
@@ -8563,12 +8071,10 @@ func (o SecurityPolicyConfigIpTableConfigOutput) ToSecurityPolicyConfigIpTableCo
 	}).(SecurityPolicyConfigIpTableConfigPtrOutput)
 }
 
-// Rules list.
 func (o SecurityPolicyConfigIpTableConfigOutput) Rules() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfig) []SecurityPolicyConfigIpTableConfigRule { return v.Rules }).(SecurityPolicyConfigIpTableConfigRuleArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigIpTableConfigOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -8597,7 +8103,6 @@ func (o SecurityPolicyConfigIpTableConfigPtrOutput) Elem() SecurityPolicyConfigI
 	}).(SecurityPolicyConfigIpTableConfigOutput)
 }
 
-// Rules list.
 func (o SecurityPolicyConfigIpTableConfigPtrOutput) Rules() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigIpTableConfig) []SecurityPolicyConfigIpTableConfigRule {
 		if v == nil {
@@ -8607,7 +8112,6 @@ func (o SecurityPolicyConfigIpTableConfigPtrOutput) Rules() SecurityPolicyConfig
 	}).(SecurityPolicyConfigIpTableConfigRuleArrayOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigIpTableConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigIpTableConfig) *string {
 		if v == nil {
@@ -8618,14 +8122,11 @@ func (o SecurityPolicyConfigIpTableConfigPtrOutput) Switch() pulumi.StringPtrOut
 }
 
 type SecurityPolicyConfigIpTableConfigRule struct {
-	// Actions to take. Valid values: `drop`, `trans`, `monitor`.
-	Action *string `pulumi:"action"`
-	// Matching content.
+	Action       *string `pulumi:"action"`
 	MatchContent *string `pulumi:"matchContent"`
-	// Matching type. Valid values: `ip`, `area`.
-	MatchFrom  *string `pulumi:"matchFrom"`
-	RuleId     *int    `pulumi:"ruleId"`
-	UpdateTime *string `pulumi:"updateTime"`
+	MatchFrom    *string `pulumi:"matchFrom"`
+	RuleId       *int    `pulumi:"ruleId"`
+	UpdateTime   *string `pulumi:"updateTime"`
 }
 
 // SecurityPolicyConfigIpTableConfigRuleInput is an input type that accepts SecurityPolicyConfigIpTableConfigRuleArgs and SecurityPolicyConfigIpTableConfigRuleOutput values.
@@ -8640,14 +8141,11 @@ type SecurityPolicyConfigIpTableConfigRuleInput interface {
 }
 
 type SecurityPolicyConfigIpTableConfigRuleArgs struct {
-	// Actions to take. Valid values: `drop`, `trans`, `monitor`.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Matching content.
+	Action       pulumi.StringPtrInput `pulumi:"action"`
 	MatchContent pulumi.StringPtrInput `pulumi:"matchContent"`
-	// Matching type. Valid values: `ip`, `area`.
-	MatchFrom  pulumi.StringPtrInput `pulumi:"matchFrom"`
-	RuleId     pulumi.IntPtrInput    `pulumi:"ruleId"`
-	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	MatchFrom    pulumi.StringPtrInput `pulumi:"matchFrom"`
+	RuleId       pulumi.IntPtrInput    `pulumi:"ruleId"`
+	UpdateTime   pulumi.StringPtrInput `pulumi:"updateTime"`
 }
 
 func (SecurityPolicyConfigIpTableConfigRuleArgs) ElementType() reflect.Type {
@@ -8701,17 +8199,14 @@ func (o SecurityPolicyConfigIpTableConfigRuleOutput) ToSecurityPolicyConfigIpTab
 	return o
 }
 
-// Actions to take. Valid values: `drop`, `trans`, `monitor`.
 func (o SecurityPolicyConfigIpTableConfigRuleOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Matching content.
 func (o SecurityPolicyConfigIpTableConfigRuleOutput) MatchContent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.MatchContent }).(pulumi.StringPtrOutput)
 }
 
-// Matching type. Valid values: `ip`, `area`.
 func (o SecurityPolicyConfigIpTableConfigRuleOutput) MatchFrom() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.MatchFrom }).(pulumi.StringPtrOutput)
 }
@@ -8745,14 +8240,10 @@ func (o SecurityPolicyConfigIpTableConfigRuleArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SecurityPolicyConfigRateLimitConfig struct {
-	// Intelligent client filter.
 	Intelligence *SecurityPolicyConfigRateLimitConfigIntelligence `pulumi:"intelligence"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch *string `pulumi:"switch"`
-	// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-	Template *SecurityPolicyConfigRateLimitConfigTemplate `pulumi:"template"`
-	// Custom configuration.
-	UserRules []SecurityPolicyConfigRateLimitConfigUserRule `pulumi:"userRules"`
+	Switch       *string                                          `pulumi:"switch"`
+	Template     *SecurityPolicyConfigRateLimitConfigTemplate     `pulumi:"template"`
+	UserRules    []SecurityPolicyConfigRateLimitConfigUserRule    `pulumi:"userRules"`
 }
 
 // SecurityPolicyConfigRateLimitConfigInput is an input type that accepts SecurityPolicyConfigRateLimitConfigArgs and SecurityPolicyConfigRateLimitConfigOutput values.
@@ -8767,14 +8258,10 @@ type SecurityPolicyConfigRateLimitConfigInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigArgs struct {
-	// Intelligent client filter.
 	Intelligence SecurityPolicyConfigRateLimitConfigIntelligencePtrInput `pulumi:"intelligence"`
-	// - `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
-	// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
-	Template SecurityPolicyConfigRateLimitConfigTemplatePtrInput `pulumi:"template"`
-	// Custom configuration.
-	UserRules SecurityPolicyConfigRateLimitConfigUserRuleArrayInput `pulumi:"userRules"`
+	Switch       pulumi.StringPtrInput                                   `pulumi:"switch"`
+	Template     SecurityPolicyConfigRateLimitConfigTemplatePtrInput     `pulumi:"template"`
+	UserRules    SecurityPolicyConfigRateLimitConfigUserRuleArrayInput   `pulumi:"userRules"`
 }
 
 func (SecurityPolicyConfigRateLimitConfigArgs) ElementType() reflect.Type {
@@ -8854,26 +8341,22 @@ func (o SecurityPolicyConfigRateLimitConfigOutput) ToSecurityPolicyConfigRateLim
 	}).(SecurityPolicyConfigRateLimitConfigPtrOutput)
 }
 
-// Intelligent client filter.
 func (o SecurityPolicyConfigRateLimitConfigOutput) Intelligence() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigIntelligence {
 		return v.Intelligence
 	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigRateLimitConfigOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigOutput) Template() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigTemplate {
 		return v.Template
 	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
 }
 
-// Custom configuration.
 func (o SecurityPolicyConfigRateLimitConfigOutput) UserRules() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) []SecurityPolicyConfigRateLimitConfigUserRule {
 		return v.UserRules
@@ -8904,7 +8387,6 @@ func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Elem() SecurityPolicyConfi
 	}).(SecurityPolicyConfigRateLimitConfigOutput)
 }
 
-// Intelligent client filter.
 func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Intelligence() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigIntelligence {
 		if v == nil {
@@ -8914,7 +8396,6 @@ func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Intelligence() SecurityPol
 	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *string {
 		if v == nil {
@@ -8924,7 +8405,6 @@ func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Switch() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
-// Default Template. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Template() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigTemplate {
 		if v == nil {
@@ -8934,7 +8414,6 @@ func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Template() SecurityPolicyC
 	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
 }
 
-// Custom configuration.
 func (o SecurityPolicyConfigRateLimitConfigPtrOutput) UserRules() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) []SecurityPolicyConfigRateLimitConfigUserRule {
 		if v == nil {
@@ -8945,9 +8424,7 @@ func (o SecurityPolicyConfigRateLimitConfigPtrOutput) UserRules() SecurityPolicy
 }
 
 type SecurityPolicyConfigRateLimitConfigIntelligence struct {
-	// Action to take. Valid values: `monitor`, `alg`.
 	Action *string `pulumi:"action"`
-	// - `on`: Enable.- `off`: Disable.
 	Switch *string `pulumi:"switch"`
 }
 
@@ -8963,9 +8440,7 @@ type SecurityPolicyConfigRateLimitConfigIntelligenceInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigIntelligenceArgs struct {
-	// Action to take. Valid values: `monitor`, `alg`.
 	Action pulumi.StringPtrInput `pulumi:"action"`
-	// - `on`: Enable.- `off`: Disable.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -9046,12 +8521,10 @@ func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ToSecurityPolicyC
 	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
 }
 
-// Action to take. Valid values: `monitor`, `alg`.
 func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigIntelligence) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigIntelligence) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -9080,7 +8553,6 @@ func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Elem() Securit
 	}).(SecurityPolicyConfigRateLimitConfigIntelligenceOutput)
 }
 
-// Action to take. Valid values: `monitor`, `alg`.
 func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigIntelligence) *string {
 		if v == nil {
@@ -9090,7 +8562,6 @@ func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Action() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigIntelligence) *string {
 		if v == nil {
@@ -9101,10 +8572,8 @@ func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Switch() pulum
 }
 
 type SecurityPolicyConfigRateLimitConfigTemplate struct {
-	// Detail of the template.
 	Detail *SecurityPolicyConfigRateLimitConfigTemplateDetail `pulumi:"detail"`
-	// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-	Mode *string `pulumi:"mode"`
+	Mode   *string                                            `pulumi:"mode"`
 }
 
 // SecurityPolicyConfigRateLimitConfigTemplateInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateArgs and SecurityPolicyConfigRateLimitConfigTemplateOutput values.
@@ -9119,10 +8588,8 @@ type SecurityPolicyConfigRateLimitConfigTemplateInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigTemplateArgs struct {
-	// Detail of the template.
 	Detail SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput `pulumi:"detail"`
-	// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	Mode   pulumi.StringPtrInput                                     `pulumi:"mode"`
 }
 
 func (SecurityPolicyConfigRateLimitConfigTemplateArgs) ElementType() reflect.Type {
@@ -9202,14 +8669,12 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) ToSecurityPolicyConfi
 	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
 }
 
-// Detail of the template.
 func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) Detail() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplate) *SecurityPolicyConfigRateLimitConfigTemplateDetail {
 		return v.Detail
 	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
 }
 
-// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplate) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
@@ -9238,7 +8703,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Elem() SecurityPol
 	}).(SecurityPolicyConfigRateLimitConfigTemplateOutput)
 }
 
-// Detail of the template.
 func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Detail() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplate) *SecurityPolicyConfigRateLimitConfigTemplateDetail {
 		if v == nil {
@@ -9248,7 +8712,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Detail() SecurityP
 	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
 }
 
-// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplate) *string {
 		if v == nil {
@@ -9259,18 +8722,12 @@ func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Mode() pulumi.Stri
 }
 
 type SecurityPolicyConfigRateLimitConfigTemplateDetail struct {
-	// Action to take.
-	Action *string `pulumi:"action"`
-	// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-	Id *int `pulumi:"id"`
-	// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-	Mode *string `pulumi:"mode"`
-	// Period.
-	Period *int `pulumi:"period"`
-	// Punish time.
-	PunishTime *int `pulumi:"punishTime"`
-	// Threshold.
-	Threshold *int `pulumi:"threshold"`
+	Action     *string `pulumi:"action"`
+	Id         *int    `pulumi:"id"`
+	Mode       *string `pulumi:"mode"`
+	Period     *int    `pulumi:"period"`
+	PunishTime *int    `pulumi:"punishTime"`
+	Threshold  *int    `pulumi:"threshold"`
 }
 
 // SecurityPolicyConfigRateLimitConfigTemplateDetailInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateDetailArgs and SecurityPolicyConfigRateLimitConfigTemplateDetailOutput values.
@@ -9285,18 +8742,12 @@ type SecurityPolicyConfigRateLimitConfigTemplateDetailInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigTemplateDetailArgs struct {
-	// Action to take.
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
-	Id pulumi.IntPtrInput `pulumi:"id"`
-	// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
-	Mode pulumi.StringPtrInput `pulumi:"mode"`
-	// Period.
-	Period pulumi.IntPtrInput `pulumi:"period"`
-	// Punish time.
-	PunishTime pulumi.IntPtrInput `pulumi:"punishTime"`
-	// Threshold.
-	Threshold pulumi.IntPtrInput `pulumi:"threshold"`
+	Action     pulumi.StringPtrInput `pulumi:"action"`
+	Id         pulumi.IntPtrInput    `pulumi:"id"`
+	Mode       pulumi.StringPtrInput `pulumi:"mode"`
+	Period     pulumi.IntPtrInput    `pulumi:"period"`
+	PunishTime pulumi.IntPtrInput    `pulumi:"punishTime"`
+	Threshold  pulumi.IntPtrInput    `pulumi:"threshold"`
 }
 
 func (SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ElementType() reflect.Type {
@@ -9376,32 +8827,26 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ToSecurityPolic
 	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
 }
 
-// Action to take.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
-// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
-// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
-// Period.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Period }).(pulumi.IntPtrOutput)
 }
 
-// Punish time.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) PunishTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
 }
 
-// Threshold.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Threshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Threshold }).(pulumi.IntPtrOutput)
 }
@@ -9430,7 +8875,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Elem() Secur
 	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailOutput)
 }
 
-// Action to take.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *string {
 		if v == nil {
@@ -9440,7 +8884,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Action() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// Template ID. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
 		if v == nil {
@@ -9450,7 +8893,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Id() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-// Template Name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *string {
 		if v == nil {
@@ -9460,7 +8902,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Mode() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-// Period.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
 		if v == nil {
@@ -9470,7 +8911,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Period() pul
 	}).(pulumi.IntPtrOutput)
 }
 
-// Punish time.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) PunishTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
 		if v == nil {
@@ -9480,7 +8920,6 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) PunishTime()
 	}).(pulumi.IntPtrOutput)
 }
 
-// Threshold.
 func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Threshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
 		if v == nil {
@@ -9491,28 +8930,18 @@ func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Threshold() 
 }
 
 type SecurityPolicyConfigRateLimitConfigUserRule struct {
-	// Valid values: `monitor`, `drop`.
-	Action string `pulumi:"action"`
-	// Conditions of the rule.
-	Conditions []SecurityPolicyConfigRateLimitConfigUserRuleCondition `pulumi:"conditions"`
-	// Filter words.
-	FreqFields []string `pulumi:"freqFields"`
-	// Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-	Period int `pulumi:"period"`
-	// Punish time, Valid value range: 0-2 days.
-	PunishTime int `pulumi:"punishTime"`
-	// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-	PunishTimeUnit string `pulumi:"punishTimeUnit"`
-	RuleId         *int   `pulumi:"ruleId"`
-	// Rule Name.
-	RuleName string `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 1-100.
-	RulePriority int `pulumi:"rulePriority"`
-	// Status of the rule. Valid values: `on`, `off`, `hour`.
-	RuleStatus *string `pulumi:"ruleStatus"`
-	// Threshold of the rate limit. Valid value range: 0-4294967294.
-	Threshold  int     `pulumi:"threshold"`
-	UpdateTime *string `pulumi:"updateTime"`
+	Action         string                                                 `pulumi:"action"`
+	Conditions     []SecurityPolicyConfigRateLimitConfigUserRuleCondition `pulumi:"conditions"`
+	FreqFields     []string                                               `pulumi:"freqFields"`
+	Period         int                                                    `pulumi:"period"`
+	PunishTime     int                                                    `pulumi:"punishTime"`
+	PunishTimeUnit string                                                 `pulumi:"punishTimeUnit"`
+	RuleId         *int                                                   `pulumi:"ruleId"`
+	RuleName       string                                                 `pulumi:"ruleName"`
+	RulePriority   int                                                    `pulumi:"rulePriority"`
+	RuleStatus     *string                                                `pulumi:"ruleStatus"`
+	Threshold      int                                                    `pulumi:"threshold"`
+	UpdateTime     *string                                                `pulumi:"updateTime"`
 }
 
 // SecurityPolicyConfigRateLimitConfigUserRuleInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleArgs and SecurityPolicyConfigRateLimitConfigUserRuleOutput values.
@@ -9527,28 +8956,18 @@ type SecurityPolicyConfigRateLimitConfigUserRuleInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigUserRuleArgs struct {
-	// Valid values: `monitor`, `drop`.
-	Action pulumi.StringInput `pulumi:"action"`
-	// Conditions of the rule.
-	Conditions SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput `pulumi:"conditions"`
-	// Filter words.
-	FreqFields pulumi.StringArrayInput `pulumi:"freqFields"`
-	// Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
-	Period pulumi.IntInput `pulumi:"period"`
-	// Punish time, Valid value range: 0-2 days.
-	PunishTime pulumi.IntInput `pulumi:"punishTime"`
-	// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
-	PunishTimeUnit pulumi.StringInput `pulumi:"punishTimeUnit"`
-	RuleId         pulumi.IntPtrInput `pulumi:"ruleId"`
-	// Rule Name.
-	RuleName pulumi.StringInput `pulumi:"ruleName"`
-	// Priority of the rule. Valid value range: 1-100.
-	RulePriority pulumi.IntInput `pulumi:"rulePriority"`
-	// Status of the rule. Valid values: `on`, `off`, `hour`.
-	RuleStatus pulumi.StringPtrInput `pulumi:"ruleStatus"`
-	// Threshold of the rate limit. Valid value range: 0-4294967294.
-	Threshold  pulumi.IntInput       `pulumi:"threshold"`
-	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	Action         pulumi.StringInput                                             `pulumi:"action"`
+	Conditions     SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput `pulumi:"conditions"`
+	FreqFields     pulumi.StringArrayInput                                        `pulumi:"freqFields"`
+	Period         pulumi.IntInput                                                `pulumi:"period"`
+	PunishTime     pulumi.IntInput                                                `pulumi:"punishTime"`
+	PunishTimeUnit pulumi.StringInput                                             `pulumi:"punishTimeUnit"`
+	RuleId         pulumi.IntPtrInput                                             `pulumi:"ruleId"`
+	RuleName       pulumi.StringInput                                             `pulumi:"ruleName"`
+	RulePriority   pulumi.IntInput                                                `pulumi:"rulePriority"`
+	RuleStatus     pulumi.StringPtrInput                                          `pulumi:"ruleStatus"`
+	Threshold      pulumi.IntInput                                                `pulumi:"threshold"`
+	UpdateTime     pulumi.StringPtrInput                                          `pulumi:"updateTime"`
 }
 
 func (SecurityPolicyConfigRateLimitConfigUserRuleArgs) ElementType() reflect.Type {
@@ -9602,34 +9021,28 @@ func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) ToSecurityPolicyConfi
 	return o
 }
 
-// Valid values: `monitor`, `drop`.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Conditions of the rule.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Conditions() SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) []SecurityPolicyConfigRateLimitConfigUserRuleCondition {
 		return v.Conditions
 	}).(SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput)
 }
 
-// Filter words.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) FreqFields() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) []string { return v.FreqFields }).(pulumi.StringArrayOutput)
 }
 
-// Period of the rate limit. Valid values: 10, 20, 30, 40, 50, 60 (in seconds).
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.Period }).(pulumi.IntOutput)
 }
 
-// Punish time, Valid value range: 0-2 days.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) PunishTime() pulumi.IntOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.PunishTime }).(pulumi.IntOutput)
 }
 
-// Time unit of the punish time. Valid values: `second`, `minutes`, `hour`.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) PunishTimeUnit() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.PunishTimeUnit }).(pulumi.StringOutput)
 }
@@ -9638,22 +9051,18 @@ func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleId() pulumi.IntPt
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
 }
 
-// Rule Name.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.RuleName }).(pulumi.StringOutput)
 }
 
-// Priority of the rule. Valid value range: 1-100.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RulePriority() pulumi.IntOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.RulePriority }).(pulumi.IntOutput)
 }
 
-// Status of the rule. Valid values: `on`, `off`, `hour`.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleStatus() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) *string { return v.RuleStatus }).(pulumi.StringPtrOutput)
 }
 
-// Threshold of the rate limit. Valid value range: 0-4294967294.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Threshold() pulumi.IntOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.Threshold }).(pulumi.IntOutput)
 }
@@ -9683,14 +9092,10 @@ func (o SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput) Index(i pulumi.I
 }
 
 type SecurityPolicyConfigRateLimitConfigUserRuleCondition struct {
-	// Content to match.
 	MatchContent string `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom string `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam string `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator string `pulumi:"operator"`
+	MatchFrom    string `pulumi:"matchFrom"`
+	MatchParam   string `pulumi:"matchParam"`
+	Operator     string `pulumi:"operator"`
 }
 
 // SecurityPolicyConfigRateLimitConfigUserRuleConditionInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs and SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput values.
@@ -9705,14 +9110,10 @@ type SecurityPolicyConfigRateLimitConfigUserRuleConditionInput interface {
 }
 
 type SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs struct {
-	// Content to match.
 	MatchContent pulumi.StringInput `pulumi:"matchContent"`
-	// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
-	MatchFrom pulumi.StringInput `pulumi:"matchFrom"`
-	// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
-	MatchParam pulumi.StringInput `pulumi:"matchParam"`
-	// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
-	Operator pulumi.StringInput `pulumi:"operator"`
+	MatchFrom    pulumi.StringInput `pulumi:"matchFrom"`
+	MatchParam   pulumi.StringInput `pulumi:"matchParam"`
+	Operator     pulumi.StringInput `pulumi:"operator"`
 }
 
 func (SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs) ElementType() reflect.Type {
@@ -9766,22 +9167,18 @@ func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) ToSecurityPo
 	return o
 }
 
-// Content to match.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchContent() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchContent }).(pulumi.StringOutput)
 }
 
-// Items to match. Valid values:- `host`: Host of the request.- `sip`: Client IP.- `ua`: User-Agent.- `cookie`: Session cookie.- `cgi`: CGI script.- `xff`: XFF extension header.- `url`: URL of the request.- `accept`: Accept encoding of the request.- `method`: HTTP method of the request.- `header`: HTTP header of the request.- `sipProto`: Network protocol of the request.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchFrom() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchFrom }).(pulumi.StringOutput)
 }
 
-// Parameter for match item. For example, when match from header, match parameter can be set to a header key.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchParam() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchParam }).(pulumi.StringOutput)
 }
 
-// Valid values:- `equal`: string equal.- `notEqual`: string not equal.- `include`: string include.- `notInclude`: string not include.- `match`: ip match.- `notMatch`: ip not match.- `includeArea`: area include.- `isEmpty`: field existed but empty.- `notExists`: field is not existed.- `regexp`: regex match.- `lenGt`: value greater than.- `lenLt`: value less than.- `lenEq`: value equal.- `matchPrefix`: string prefix match.- `matchSuffix`: string suffix match.- `wildcard`: wildcard match.
 func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
 }
@@ -9807,7 +9204,6 @@ func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput) Index(i
 }
 
 type SecurityPolicyConfigSwitchConfig struct {
-	// - `on`: Enable.- `off`: Disable.
 	WebSwitch *string `pulumi:"webSwitch"`
 }
 
@@ -9823,7 +9219,6 @@ type SecurityPolicyConfigSwitchConfigInput interface {
 }
 
 type SecurityPolicyConfigSwitchConfigArgs struct {
-	// - `on`: Enable.- `off`: Disable.
 	WebSwitch pulumi.StringPtrInput `pulumi:"webSwitch"`
 }
 
@@ -9904,7 +9299,6 @@ func (o SecurityPolicyConfigSwitchConfigOutput) ToSecurityPolicyConfigSwitchConf
 	}).(SecurityPolicyConfigSwitchConfigPtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigSwitchConfigOutput) WebSwitch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSwitchConfig) *string { return v.WebSwitch }).(pulumi.StringPtrOutput)
 }
@@ -9933,7 +9327,6 @@ func (o SecurityPolicyConfigSwitchConfigPtrOutput) Elem() SecurityPolicyConfigSw
 	}).(SecurityPolicyConfigSwitchConfigOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigSwitchConfigPtrOutput) WebSwitch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigSwitchConfig) *string {
 		if v == nil {
@@ -9944,15 +9337,10 @@ func (o SecurityPolicyConfigSwitchConfigPtrOutput) WebSwitch() pulumi.StringPtrO
 }
 
 type SecurityPolicyConfigWafConfig struct {
-	// AI based rules configuration.
-	AiRule *SecurityPolicyConfigWafConfigAiRule `pulumi:"aiRule"`
-	// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-	Level string `pulumi:"level"`
-	// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-	Mode string `pulumi:"mode"`
-	// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-	Switch string `pulumi:"switch"`
-	// WAF Rules Configuration.
+	AiRule   *SecurityPolicyConfigWafConfigAiRule  `pulumi:"aiRule"`
+	Level    string                                `pulumi:"level"`
+	Mode     string                                `pulumi:"mode"`
+	Switch   string                                `pulumi:"switch"`
 	WafRules SecurityPolicyConfigWafConfigWafRules `pulumi:"wafRules"`
 }
 
@@ -9968,16 +9356,11 @@ type SecurityPolicyConfigWafConfigInput interface {
 }
 
 type SecurityPolicyConfigWafConfigArgs struct {
-	// AI based rules configuration.
-	AiRule SecurityPolicyConfigWafConfigAiRulePtrInput `pulumi:"aiRule"`
-	// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
-	Level pulumi.StringInput `pulumi:"level"`
-	// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
-	Mode pulumi.StringInput `pulumi:"mode"`
-	// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringInput `pulumi:"switch"`
-	// WAF Rules Configuration.
-	WafRules SecurityPolicyConfigWafConfigWafRulesInput `pulumi:"wafRules"`
+	AiRule   SecurityPolicyConfigWafConfigAiRulePtrInput `pulumi:"aiRule"`
+	Level    pulumi.StringInput                          `pulumi:"level"`
+	Mode     pulumi.StringInput                          `pulumi:"mode"`
+	Switch   pulumi.StringInput                          `pulumi:"switch"`
+	WafRules SecurityPolicyConfigWafConfigWafRulesInput  `pulumi:"wafRules"`
 }
 
 func (SecurityPolicyConfigWafConfigArgs) ElementType() reflect.Type {
@@ -10057,27 +9440,22 @@ func (o SecurityPolicyConfigWafConfigOutput) ToSecurityPolicyConfigWafConfigPtrO
 	}).(SecurityPolicyConfigWafConfigPtrOutput)
 }
 
-// AI based rules configuration.
 func (o SecurityPolicyConfigWafConfigOutput) AiRule() SecurityPolicyConfigWafConfigAiRulePtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigAiRule { return v.AiRule }).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
 }
 
-// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
 func (o SecurityPolicyConfigWafConfigOutput) Level() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Level }).(pulumi.StringOutput)
 }
 
-// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
 func (o SecurityPolicyConfigWafConfigOutput) Mode() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Mode }).(pulumi.StringOutput)
 }
 
-// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigWafConfigOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Switch }).(pulumi.StringOutput)
 }
 
-// WAF Rules Configuration.
 func (o SecurityPolicyConfigWafConfigOutput) WafRules() SecurityPolicyConfigWafConfigWafRulesOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) SecurityPolicyConfigWafConfigWafRules { return v.WafRules }).(SecurityPolicyConfigWafConfigWafRulesOutput)
 }
@@ -10106,7 +9484,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) Elem() SecurityPolicyConfigWafCo
 	}).(SecurityPolicyConfigWafConfigOutput)
 }
 
-// AI based rules configuration.
 func (o SecurityPolicyConfigWafConfigPtrOutput) AiRule() SecurityPolicyConfigWafConfigAiRulePtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigAiRule {
 		if v == nil {
@@ -10116,7 +9493,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) AiRule() SecurityPolicyConfigWaf
 	}).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
 }
 
-// Protection level. Valid values: `loose`, `normal`, `strict`, `stricter`, `custom`.
 func (o SecurityPolicyConfigWafConfigPtrOutput) Level() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
 		if v == nil {
@@ -10126,7 +9502,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) Level() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Protection mode. Valid values:- `block`: use block mode globally, you still can set a group of rules to use observe mode.- `observe`: use observe mode globally.
 func (o SecurityPolicyConfigWafConfigPtrOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
 		if v == nil {
@@ -10136,7 +9511,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) Mode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to enable WAF rules. Valid values:- `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigWafConfigPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
 		if v == nil {
@@ -10146,7 +9520,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) Switch() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-// WAF Rules Configuration.
 func (o SecurityPolicyConfigWafConfigPtrOutput) WafRules() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigWafRules {
 		if v == nil {
@@ -10157,7 +9530,6 @@ func (o SecurityPolicyConfigWafConfigPtrOutput) WafRules() SecurityPolicyConfigW
 }
 
 type SecurityPolicyConfigWafConfigAiRule struct {
-	// Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
 	Mode *string `pulumi:"mode"`
 }
 
@@ -10173,7 +9545,6 @@ type SecurityPolicyConfigWafConfigAiRuleInput interface {
 }
 
 type SecurityPolicyConfigWafConfigAiRuleArgs struct {
-	// Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
 	Mode pulumi.StringPtrInput `pulumi:"mode"`
 }
 
@@ -10254,7 +9625,6 @@ func (o SecurityPolicyConfigWafConfigAiRuleOutput) ToSecurityPolicyConfigWafConf
 	}).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
 }
 
-// Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
 func (o SecurityPolicyConfigWafConfigAiRuleOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfigAiRule) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
@@ -10283,7 +9653,6 @@ func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) Elem() SecurityPolicyConfi
 	}).(SecurityPolicyConfigWafConfigAiRuleOutput)
 }
 
-// Valid values:- `smartStatusClose`: disabled.- `smartStatusOpen`: blocked.- `smartStatusObserve`: observed.
 func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigAiRule) *string {
 		if v == nil {
@@ -10294,12 +9663,9 @@ func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) Mode() pulumi.StringPtrOut
 }
 
 type SecurityPolicyConfigWafConfigWafRules struct {
-	// Block mode rules list. See details in data source `wafManagedRules`.
-	BlockRuleIds []int `pulumi:"blockRuleIds"`
-	// Observe rules list. See details in data source `wafManagedRules`.
-	ObserveRuleIds []int `pulumi:"observeRuleIds"`
-	// Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-	Switch string `pulumi:"switch"`
+	BlockRuleIds   []int  `pulumi:"blockRuleIds"`
+	ObserveRuleIds []int  `pulumi:"observeRuleIds"`
+	Switch         string `pulumi:"switch"`
 }
 
 // SecurityPolicyConfigWafConfigWafRulesInput is an input type that accepts SecurityPolicyConfigWafConfigWafRulesArgs and SecurityPolicyConfigWafConfigWafRulesOutput values.
@@ -10314,12 +9680,9 @@ type SecurityPolicyConfigWafConfigWafRulesInput interface {
 }
 
 type SecurityPolicyConfigWafConfigWafRulesArgs struct {
-	// Block mode rules list. See details in data source `wafManagedRules`.
-	BlockRuleIds pulumi.IntArrayInput `pulumi:"blockRuleIds"`
-	// Observe rules list. See details in data source `wafManagedRules`.
+	BlockRuleIds   pulumi.IntArrayInput `pulumi:"blockRuleIds"`
 	ObserveRuleIds pulumi.IntArrayInput `pulumi:"observeRuleIds"`
-	// Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringInput `pulumi:"switch"`
+	Switch         pulumi.StringInput   `pulumi:"switch"`
 }
 
 func (SecurityPolicyConfigWafConfigWafRulesArgs) ElementType() reflect.Type {
@@ -10399,17 +9762,14 @@ func (o SecurityPolicyConfigWafConfigWafRulesOutput) ToSecurityPolicyConfigWafCo
 	}).(SecurityPolicyConfigWafConfigWafRulesPtrOutput)
 }
 
-// Block mode rules list. See details in data source `wafManagedRules`.
 func (o SecurityPolicyConfigWafConfigWafRulesOutput) BlockRuleIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) []int { return v.BlockRuleIds }).(pulumi.IntArrayOutput)
 }
 
-// Observe rules list. See details in data source `wafManagedRules`.
 func (o SecurityPolicyConfigWafConfigWafRulesOutput) ObserveRuleIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) []int { return v.ObserveRuleIds }).(pulumi.IntArrayOutput)
 }
 
-// Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigWafConfigWafRulesOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -10438,7 +9798,6 @@ func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) Elem() SecurityPolicyCon
 	}).(SecurityPolicyConfigWafConfigWafRulesOutput)
 }
 
-// Block mode rules list. See details in data source `wafManagedRules`.
 func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) BlockRuleIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) []int {
 		if v == nil {
@@ -10448,7 +9807,6 @@ func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) BlockRuleIds() pulumi.In
 	}).(pulumi.IntArrayOutput)
 }
 
-// Observe rules list. See details in data source `wafManagedRules`.
 func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) ObserveRuleIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) []int {
 		if v == nil {
@@ -10458,7 +9816,6 @@ func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) ObserveRuleIds() pulumi.
 	}).(pulumi.IntArrayOutput)
 }
 
-// Whether to host the rules&#39; configuration.- `on`: Enable.- `off`: Disable.
 func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) *string {
 		if v == nil {
@@ -14348,14 +13705,10 @@ func (o ZoneVanityNameServersIpArrayOutput) Index(i pulumi.IntInput) ZoneVanityN
 }
 
 type GetBotManagedRulesRule struct {
-	// Description of the rule.
-	Description string `pulumi:"description"`
-	// Rule ID.
-	RuleId int `pulumi:"ruleId"`
-	// Type of the rule.
+	Description  string `pulumi:"description"`
+	RuleId       int    `pulumi:"ruleId"`
 	RuleTypeName string `pulumi:"ruleTypeName"`
-	// Status of the rule.
-	Status string `pulumi:"status"`
+	Status       string `pulumi:"status"`
 }
 
 // GetBotManagedRulesRuleInput is an input type that accepts GetBotManagedRulesRuleArgs and GetBotManagedRulesRuleOutput values.
@@ -14370,14 +13723,10 @@ type GetBotManagedRulesRuleInput interface {
 }
 
 type GetBotManagedRulesRuleArgs struct {
-	// Description of the rule.
-	Description pulumi.StringInput `pulumi:"description"`
-	// Rule ID.
-	RuleId pulumi.IntInput `pulumi:"ruleId"`
-	// Type of the rule.
+	Description  pulumi.StringInput `pulumi:"description"`
+	RuleId       pulumi.IntInput    `pulumi:"ruleId"`
 	RuleTypeName pulumi.StringInput `pulumi:"ruleTypeName"`
-	// Status of the rule.
-	Status pulumi.StringInput `pulumi:"status"`
+	Status       pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetBotManagedRulesRuleArgs) ElementType() reflect.Type {
@@ -14431,22 +13780,18 @@ func (o GetBotManagedRulesRuleOutput) ToGetBotManagedRulesRuleOutputWithContext(
 	return o
 }
 
-// Description of the rule.
 func (o GetBotManagedRulesRuleOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// Rule ID.
 func (o GetBotManagedRulesRuleOutput) RuleId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetBotManagedRulesRule) int { return v.RuleId }).(pulumi.IntOutput)
 }
 
-// Type of the rule.
 func (o GetBotManagedRulesRuleOutput) RuleTypeName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.RuleTypeName }).(pulumi.StringOutput)
 }
 
-// Status of the rule.
 func (o GetBotManagedRulesRuleOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -14472,16 +13817,11 @@ func (o GetBotManagedRulesRuleArrayOutput) Index(i pulumi.IntInput) GetBotManage
 }
 
 type GetBotPortraitRulesRule struct {
-	// Classification of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	ClassificationId int `pulumi:"classificationId"`
-	// Description of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	Description string `pulumi:"description"`
-	// Rule ID.
-	RuleId int `pulumi:"ruleId"`
-	// Type of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	RuleTypeName string `pulumi:"ruleTypeName"`
-	// Status of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	Status string `pulumi:"status"`
+	ClassificationId int    `pulumi:"classificationId"`
+	Description      string `pulumi:"description"`
+	RuleId           int    `pulumi:"ruleId"`
+	RuleTypeName     string `pulumi:"ruleTypeName"`
+	Status           string `pulumi:"status"`
 }
 
 // GetBotPortraitRulesRuleInput is an input type that accepts GetBotPortraitRulesRuleArgs and GetBotPortraitRulesRuleOutput values.
@@ -14496,16 +13836,11 @@ type GetBotPortraitRulesRuleInput interface {
 }
 
 type GetBotPortraitRulesRuleArgs struct {
-	// Classification of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	ClassificationId pulumi.IntInput `pulumi:"classificationId"`
-	// Description of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	Description pulumi.StringInput `pulumi:"description"`
-	// Rule ID.
-	RuleId pulumi.IntInput `pulumi:"ruleId"`
-	// Type of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	RuleTypeName pulumi.StringInput `pulumi:"ruleTypeName"`
-	// Status of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	Status pulumi.StringInput `pulumi:"status"`
+	ClassificationId pulumi.IntInput    `pulumi:"classificationId"`
+	Description      pulumi.StringInput `pulumi:"description"`
+	RuleId           pulumi.IntInput    `pulumi:"ruleId"`
+	RuleTypeName     pulumi.StringInput `pulumi:"ruleTypeName"`
+	Status           pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetBotPortraitRulesRuleArgs) ElementType() reflect.Type {
@@ -14559,27 +13894,22 @@ func (o GetBotPortraitRulesRuleOutput) ToGetBotPortraitRulesRuleOutputWithContex
 	return o
 }
 
-// Classification of the rule. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetBotPortraitRulesRuleOutput) ClassificationId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetBotPortraitRulesRule) int { return v.ClassificationId }).(pulumi.IntOutput)
 }
 
-// Description of the rule. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetBotPortraitRulesRuleOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// Rule ID.
 func (o GetBotPortraitRulesRuleOutput) RuleId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetBotPortraitRulesRule) int { return v.RuleId }).(pulumi.IntOutput)
 }
 
-// Type of the rule. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetBotPortraitRulesRuleOutput) RuleTypeName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.RuleTypeName }).(pulumi.StringOutput)
 }
 
-// Status of the rule. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetBotPortraitRulesRuleOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -15276,14 +14606,10 @@ func (o GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput) Index(i pu
 }
 
 type GetSecurityPolicyRegionsGeoIp struct {
-	// Name of the continent.
 	Continent string `pulumi:"continent"`
-	// Name of the country.
-	Country string `pulumi:"country"`
-	// Province of the region. Note: This field may return null, indicating that no valid value can be obtained.
-	Province string `pulumi:"province"`
-	// Region ID.
-	RegionId int `pulumi:"regionId"`
+	Country   string `pulumi:"country"`
+	Province  string `pulumi:"province"`
+	RegionId  int    `pulumi:"regionId"`
 }
 
 // GetSecurityPolicyRegionsGeoIpInput is an input type that accepts GetSecurityPolicyRegionsGeoIpArgs and GetSecurityPolicyRegionsGeoIpOutput values.
@@ -15298,14 +14624,10 @@ type GetSecurityPolicyRegionsGeoIpInput interface {
 }
 
 type GetSecurityPolicyRegionsGeoIpArgs struct {
-	// Name of the continent.
 	Continent pulumi.StringInput `pulumi:"continent"`
-	// Name of the country.
-	Country pulumi.StringInput `pulumi:"country"`
-	// Province of the region. Note: This field may return null, indicating that no valid value can be obtained.
-	Province pulumi.StringInput `pulumi:"province"`
-	// Region ID.
-	RegionId pulumi.IntInput `pulumi:"regionId"`
+	Country   pulumi.StringInput `pulumi:"country"`
+	Province  pulumi.StringInput `pulumi:"province"`
+	RegionId  pulumi.IntInput    `pulumi:"regionId"`
 }
 
 func (GetSecurityPolicyRegionsGeoIpArgs) ElementType() reflect.Type {
@@ -15359,22 +14681,18 @@ func (o GetSecurityPolicyRegionsGeoIpOutput) ToGetSecurityPolicyRegionsGeoIpOutp
 	return o
 }
 
-// Name of the continent.
 func (o GetSecurityPolicyRegionsGeoIpOutput) Continent() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Continent }).(pulumi.StringOutput)
 }
 
-// Name of the country.
 func (o GetSecurityPolicyRegionsGeoIpOutput) Country() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Country }).(pulumi.StringOutput)
 }
 
-// Province of the region. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetSecurityPolicyRegionsGeoIpOutput) Province() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Province }).(pulumi.StringOutput)
 }
 
-// Region ID.
 func (o GetSecurityPolicyRegionsGeoIpOutput) RegionId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) int { return v.RegionId }).(pulumi.IntOutput)
 }
@@ -15400,14 +14718,10 @@ func (o GetSecurityPolicyRegionsGeoIpArrayOutput) Index(i pulumi.IntInput) GetSe
 }
 
 type GetWafRuleGroupsWafRuleGroup struct {
-	// Description of rule type in this group.
-	RuleTypeDesc string `pulumi:"ruleTypeDesc"`
-	// Type id of rules in this group.
-	RuleTypeId int `pulumi:"ruleTypeId"`
-	// Type name of rules in this group.
-	RuleTypeName string `pulumi:"ruleTypeName"`
-	// Rules detail.
-	Rules []GetWafRuleGroupsWafRuleGroupRule `pulumi:"rules"`
+	RuleTypeDesc string                             `pulumi:"ruleTypeDesc"`
+	RuleTypeId   int                                `pulumi:"ruleTypeId"`
+	RuleTypeName string                             `pulumi:"ruleTypeName"`
+	Rules        []GetWafRuleGroupsWafRuleGroupRule `pulumi:"rules"`
 }
 
 // GetWafRuleGroupsWafRuleGroupInput is an input type that accepts GetWafRuleGroupsWafRuleGroupArgs and GetWafRuleGroupsWafRuleGroupOutput values.
@@ -15422,14 +14736,10 @@ type GetWafRuleGroupsWafRuleGroupInput interface {
 }
 
 type GetWafRuleGroupsWafRuleGroupArgs struct {
-	// Description of rule type in this group.
-	RuleTypeDesc pulumi.StringInput `pulumi:"ruleTypeDesc"`
-	// Type id of rules in this group.
-	RuleTypeId pulumi.IntInput `pulumi:"ruleTypeId"`
-	// Type name of rules in this group.
-	RuleTypeName pulumi.StringInput `pulumi:"ruleTypeName"`
-	// Rules detail.
-	Rules GetWafRuleGroupsWafRuleGroupRuleArrayInput `pulumi:"rules"`
+	RuleTypeDesc pulumi.StringInput                         `pulumi:"ruleTypeDesc"`
+	RuleTypeId   pulumi.IntInput                            `pulumi:"ruleTypeId"`
+	RuleTypeName pulumi.StringInput                         `pulumi:"ruleTypeName"`
+	Rules        GetWafRuleGroupsWafRuleGroupRuleArrayInput `pulumi:"rules"`
 }
 
 func (GetWafRuleGroupsWafRuleGroupArgs) ElementType() reflect.Type {
@@ -15483,22 +14793,18 @@ func (o GetWafRuleGroupsWafRuleGroupOutput) ToGetWafRuleGroupsWafRuleGroupOutput
 	return o
 }
 
-// Description of rule type in this group.
 func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) string { return v.RuleTypeDesc }).(pulumi.StringOutput)
 }
 
-// Type id of rules in this group.
 func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) int { return v.RuleTypeId }).(pulumi.IntOutput)
 }
 
-// Type name of rules in this group.
 func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) string { return v.RuleTypeName }).(pulumi.StringOutput)
 }
 
-// Rules detail.
 func (o GetWafRuleGroupsWafRuleGroupOutput) Rules() GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) []GetWafRuleGroupsWafRuleGroupRule { return v.Rules }).(GetWafRuleGroupsWafRuleGroupRuleArrayOutput)
 }
@@ -15524,14 +14830,10 @@ func (o GetWafRuleGroupsWafRuleGroupArrayOutput) Index(i pulumi.IntInput) GetWaf
 }
 
 type GetWafRuleGroupsWafRuleGroupRule struct {
-	// Description of the rule.
-	Description string `pulumi:"description"`
-	// WAF managed rule id.
-	RuleId int `pulumi:"ruleId"`
-	// System default level of the rule.
-	RuleLevelDesc string `pulumi:"ruleLevelDesc"`
-	// Tags of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	RuleTags []string `pulumi:"ruleTags"`
+	Description   string   `pulumi:"description"`
+	RuleId        int      `pulumi:"ruleId"`
+	RuleLevelDesc string   `pulumi:"ruleLevelDesc"`
+	RuleTags      []string `pulumi:"ruleTags"`
 }
 
 // GetWafRuleGroupsWafRuleGroupRuleInput is an input type that accepts GetWafRuleGroupsWafRuleGroupRuleArgs and GetWafRuleGroupsWafRuleGroupRuleOutput values.
@@ -15546,14 +14848,10 @@ type GetWafRuleGroupsWafRuleGroupRuleInput interface {
 }
 
 type GetWafRuleGroupsWafRuleGroupRuleArgs struct {
-	// Description of the rule.
-	Description pulumi.StringInput `pulumi:"description"`
-	// WAF managed rule id.
-	RuleId pulumi.IntInput `pulumi:"ruleId"`
-	// System default level of the rule.
-	RuleLevelDesc pulumi.StringInput `pulumi:"ruleLevelDesc"`
-	// Tags of the rule. Note: This field may return null, indicating that no valid value can be obtained.
-	RuleTags pulumi.StringArrayInput `pulumi:"ruleTags"`
+	Description   pulumi.StringInput      `pulumi:"description"`
+	RuleId        pulumi.IntInput         `pulumi:"ruleId"`
+	RuleLevelDesc pulumi.StringInput      `pulumi:"ruleLevelDesc"`
+	RuleTags      pulumi.StringArrayInput `pulumi:"ruleTags"`
 }
 
 func (GetWafRuleGroupsWafRuleGroupRuleArgs) ElementType() reflect.Type {
@@ -15607,22 +14905,18 @@ func (o GetWafRuleGroupsWafRuleGroupRuleOutput) ToGetWafRuleGroupsWafRuleGroupRu
 	return o
 }
 
-// Description of the rule.
 func (o GetWafRuleGroupsWafRuleGroupRuleOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// WAF managed rule id.
 func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) int { return v.RuleId }).(pulumi.IntOutput)
 }
 
-// System default level of the rule.
 func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleLevelDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) string { return v.RuleLevelDesc }).(pulumi.StringOutput)
 }
 
-// Tags of the rule. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleTags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) []string { return v.RuleTags }).(pulumi.StringArrayOutput)
 }
@@ -15808,14 +15102,10 @@ func (o GetZoneAvailablePlansPlanInfoListArrayOutput) Index(i pulumi.IntInput) G
 }
 
 type GetZoneDdosPolicyDomain struct {
-	// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 	AccelerateType string `pulumi:"accelerateType"`
-	// Subdomain.
-	Host string `pulumi:"host"`
-	// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-	SecurityType string `pulumi:"securityType"`
-	// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-	Status string `pulumi:"status"`
+	Host           string `pulumi:"host"`
+	SecurityType   string `pulumi:"securityType"`
+	Status         string `pulumi:"status"`
 }
 
 // GetZoneDdosPolicyDomainInput is an input type that accepts GetZoneDdosPolicyDomainArgs and GetZoneDdosPolicyDomainOutput values.
@@ -15830,14 +15120,10 @@ type GetZoneDdosPolicyDomainInput interface {
 }
 
 type GetZoneDdosPolicyDomainArgs struct {
-	// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 	AccelerateType pulumi.StringInput `pulumi:"accelerateType"`
-	// Subdomain.
-	Host pulumi.StringInput `pulumi:"host"`
-	// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-	SecurityType pulumi.StringInput `pulumi:"securityType"`
-	// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-	Status pulumi.StringInput `pulumi:"status"`
+	Host           pulumi.StringInput `pulumi:"host"`
+	SecurityType   pulumi.StringInput `pulumi:"securityType"`
+	Status         pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetZoneDdosPolicyDomainArgs) ElementType() reflect.Type {
@@ -15891,22 +15177,18 @@ func (o GetZoneDdosPolicyDomainOutput) ToGetZoneDdosPolicyDomainOutputWithContex
 	return o
 }
 
-// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o GetZoneDdosPolicyDomainOutput) AccelerateType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.AccelerateType }).(pulumi.StringOutput)
 }
 
-// Subdomain.
 func (o GetZoneDdosPolicyDomainOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.Host }).(pulumi.StringOutput)
 }
 
-// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o GetZoneDdosPolicyDomainOutput) SecurityType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.SecurityType }).(pulumi.StringOutput)
 }
 
-// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetZoneDdosPolicyDomainOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -15932,22 +15214,14 @@ func (o GetZoneDdosPolicyDomainArrayOutput) Index(i pulumi.IntInput) GetZoneDdos
 }
 
 type GetZoneDdosPolicyShieldArea struct {
-	// DDoS layer 7 application.
 	Applications []GetZoneDdosPolicyShieldAreaApplication `pulumi:"applications"`
-	// When `Type` is `domain`, this field is `ZoneId`. When `Type` is `application`, this field is `ProxyId`. Note: This field may return null, indicating that no valid value can be obtained.
-	Entity string `pulumi:"entity"`
-	// When `Type` is `domain`, this field is `ZoneName`. When `Type` is `application`, this field is `ProxyName`. Note: This field may return null, indicating that no valid value can be obtained.
-	EntityName string `pulumi:"entityName"`
-	// Policy ID.
-	PolicyId int `pulumi:"policyId"`
-	// TCP forwarding rule number of layer 4 application.
-	TcpNum int `pulumi:"tcpNum"`
-	// Valid values: `domain`, `application`.
-	Type string `pulumi:"type"`
-	// UDP forwarding rule number of layer 4 application.
-	UdpNum int `pulumi:"udpNum"`
-	// Site ID.
-	ZoneId string `pulumi:"zoneId"`
+	Entity       string                                   `pulumi:"entity"`
+	EntityName   string                                   `pulumi:"entityName"`
+	PolicyId     int                                      `pulumi:"policyId"`
+	TcpNum       int                                      `pulumi:"tcpNum"`
+	Type         string                                   `pulumi:"type"`
+	UdpNum       int                                      `pulumi:"udpNum"`
+	ZoneId       string                                   `pulumi:"zoneId"`
 }
 
 // GetZoneDdosPolicyShieldAreaInput is an input type that accepts GetZoneDdosPolicyShieldAreaArgs and GetZoneDdosPolicyShieldAreaOutput values.
@@ -15962,22 +15236,14 @@ type GetZoneDdosPolicyShieldAreaInput interface {
 }
 
 type GetZoneDdosPolicyShieldAreaArgs struct {
-	// DDoS layer 7 application.
 	Applications GetZoneDdosPolicyShieldAreaApplicationArrayInput `pulumi:"applications"`
-	// When `Type` is `domain`, this field is `ZoneId`. When `Type` is `application`, this field is `ProxyId`. Note: This field may return null, indicating that no valid value can be obtained.
-	Entity pulumi.StringInput `pulumi:"entity"`
-	// When `Type` is `domain`, this field is `ZoneName`. When `Type` is `application`, this field is `ProxyName`. Note: This field may return null, indicating that no valid value can be obtained.
-	EntityName pulumi.StringInput `pulumi:"entityName"`
-	// Policy ID.
-	PolicyId pulumi.IntInput `pulumi:"policyId"`
-	// TCP forwarding rule number of layer 4 application.
-	TcpNum pulumi.IntInput `pulumi:"tcpNum"`
-	// Valid values: `domain`, `application`.
-	Type pulumi.StringInput `pulumi:"type"`
-	// UDP forwarding rule number of layer 4 application.
-	UdpNum pulumi.IntInput `pulumi:"udpNum"`
-	// Site ID.
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	Entity       pulumi.StringInput                               `pulumi:"entity"`
+	EntityName   pulumi.StringInput                               `pulumi:"entityName"`
+	PolicyId     pulumi.IntInput                                  `pulumi:"policyId"`
+	TcpNum       pulumi.IntInput                                  `pulumi:"tcpNum"`
+	Type         pulumi.StringInput                               `pulumi:"type"`
+	UdpNum       pulumi.IntInput                                  `pulumi:"udpNum"`
+	ZoneId       pulumi.StringInput                               `pulumi:"zoneId"`
 }
 
 func (GetZoneDdosPolicyShieldAreaArgs) ElementType() reflect.Type {
@@ -16031,42 +15297,34 @@ func (o GetZoneDdosPolicyShieldAreaOutput) ToGetZoneDdosPolicyShieldAreaOutputWi
 	return o
 }
 
-// DDoS layer 7 application.
 func (o GetZoneDdosPolicyShieldAreaOutput) Applications() GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) []GetZoneDdosPolicyShieldAreaApplication { return v.Applications }).(GetZoneDdosPolicyShieldAreaApplicationArrayOutput)
 }
 
-// When `Type` is `domain`, this field is `ZoneId`. When `Type` is `application`, this field is `ProxyId`. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetZoneDdosPolicyShieldAreaOutput) Entity() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.Entity }).(pulumi.StringOutput)
 }
 
-// When `Type` is `domain`, this field is `ZoneName`. When `Type` is `application`, this field is `ProxyName`. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetZoneDdosPolicyShieldAreaOutput) EntityName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.EntityName }).(pulumi.StringOutput)
 }
 
-// Policy ID.
 func (o GetZoneDdosPolicyShieldAreaOutput) PolicyId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.PolicyId }).(pulumi.IntOutput)
 }
 
-// TCP forwarding rule number of layer 4 application.
 func (o GetZoneDdosPolicyShieldAreaOutput) TcpNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.TcpNum }).(pulumi.IntOutput)
 }
 
-// Valid values: `domain`, `application`.
 func (o GetZoneDdosPolicyShieldAreaOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.Type }).(pulumi.StringOutput)
 }
 
-// UDP forwarding rule number of layer 4 application.
 func (o GetZoneDdosPolicyShieldAreaOutput) UdpNum() pulumi.IntOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.UdpNum }).(pulumi.IntOutput)
 }
 
-// Site ID.
 func (o GetZoneDdosPolicyShieldAreaOutput) ZoneId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.ZoneId }).(pulumi.StringOutput)
 }
@@ -16092,14 +15350,10 @@ func (o GetZoneDdosPolicyShieldAreaArrayOutput) Index(i pulumi.IntInput) GetZone
 }
 
 type GetZoneDdosPolicyShieldAreaApplication struct {
-	// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 	AccelerateType string `pulumi:"accelerateType"`
-	// Subdomain.
-	Host string `pulumi:"host"`
-	// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-	SecurityType string `pulumi:"securityType"`
-	// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-	Status string `pulumi:"status"`
+	Host           string `pulumi:"host"`
+	SecurityType   string `pulumi:"securityType"`
+	Status         string `pulumi:"status"`
 }
 
 // GetZoneDdosPolicyShieldAreaApplicationInput is an input type that accepts GetZoneDdosPolicyShieldAreaApplicationArgs and GetZoneDdosPolicyShieldAreaApplicationOutput values.
@@ -16114,14 +15368,10 @@ type GetZoneDdosPolicyShieldAreaApplicationInput interface {
 }
 
 type GetZoneDdosPolicyShieldAreaApplicationArgs struct {
-	// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 	AccelerateType pulumi.StringInput `pulumi:"accelerateType"`
-	// Subdomain.
-	Host pulumi.StringInput `pulumi:"host"`
-	// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
-	SecurityType pulumi.StringInput `pulumi:"securityType"`
-	// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
-	Status pulumi.StringInput `pulumi:"status"`
+	Host           pulumi.StringInput `pulumi:"host"`
+	SecurityType   pulumi.StringInput `pulumi:"securityType"`
+	Status         pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetZoneDdosPolicyShieldAreaApplicationArgs) ElementType() reflect.Type {
@@ -16175,22 +15425,18 @@ func (o GetZoneDdosPolicyShieldAreaApplicationOutput) ToGetZoneDdosPolicyShieldA
 	return o
 }
 
-// Acceleration function switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o GetZoneDdosPolicyShieldAreaApplicationOutput) AccelerateType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.AccelerateType }).(pulumi.StringOutput)
 }
 
-// Subdomain.
 func (o GetZoneDdosPolicyShieldAreaApplicationOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.Host }).(pulumi.StringOutput)
 }
 
-// Security function switch. Valid values:- `on`: Enable.- `off`: Disable.
 func (o GetZoneDdosPolicyShieldAreaApplicationOutput) SecurityType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.SecurityType }).(pulumi.StringOutput)
 }
 
-// Status of the subdomain. Valid values:- `init`: waiting to config NS.- `offline`: need to enable site accelerating.- `process`: processing the config deployment.- `online`: normal status. Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetZoneDdosPolicyShieldAreaApplicationOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.Status }).(pulumi.StringOutput)
 }

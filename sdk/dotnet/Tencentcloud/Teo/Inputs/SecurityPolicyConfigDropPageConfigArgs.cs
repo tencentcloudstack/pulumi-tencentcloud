@@ -13,21 +13,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class SecurityPolicyConfigDropPageConfigArgs : Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Custom error page of ACL rules.
-        /// </summary>
         [Input("aclDropPageDetail")]
         public Input<Inputs.SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs>? AclDropPageDetail { get; set; }
 
-        /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
-        /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }
 
-        /// <summary>
-        /// Custom error page of WAF rules.
-        /// </summary>
         [Input("wafDropPageDetail")]
         public Input<Inputs.SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs>? WafDropPageDetail { get; set; }
 

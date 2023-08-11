@@ -264,22 +264,6 @@ class NetDetect(pulumi.CustomResource):
 
         ## Example Usage
 
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        net_detect = tencentcloud.vpc.NetDetect("netDetect",
-            detect_destination_ips=[
-                "10.0.0.1",
-                "10.0.0.2",
-            ],
-            net_detect_name="terrform-test",
-            next_hop_destination="172.16.128.57",
-            next_hop_type="NORMAL_CVM",
-            subnet_id="subnet-c1l35990",
-            vpc_id="vpc-4owdpnwr")
-        ```
-
         ## Import
 
         vpc net_detect can be imported using the id, e.g.
@@ -308,22 +292,6 @@ class NetDetect(pulumi.CustomResource):
         Provides a resource to create a vpc net_detect
 
         ## Example Usage
-
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        net_detect = tencentcloud.vpc.NetDetect("netDetect",
-            detect_destination_ips=[
-                "10.0.0.1",
-                "10.0.0.2",
-            ],
-            net_detect_name="terrform-test",
-            next_hop_destination="172.16.128.57",
-            next_hop_type="NORMAL_CVM",
-            subnet_id="subnet-c1l35990",
-            vpc_id="vpc-4owdpnwr")
-        ```
 
         ## Import
 

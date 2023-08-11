@@ -103,13 +103,38 @@ class SgAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="vpc")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example1 = tencentcloud.security.Group("example1",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example2 = tencentcloud.security.Group("example2",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example = tencentcloud.eni.Instance("example",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            description="eni desc.",
+            ipv4_count=1)
         eni_sg_attachment = tencentcloud.eni.SgAttachment("eniSgAttachment",
-            network_interface_ids="eni-p0hkgx8p",
+            network_interface_ids=[example.id],
             security_group_ids=[
-                "sg-902tl7t7",
-                "sg-edmur627",
+                example1.id,
+                example2.id,
             ])
         ```
 
@@ -139,13 +164,38 @@ class SgAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
+        zones = tencentcloud.Availability.get_zones_by_product(product="vpc")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        example1 = tencentcloud.security.Group("example1",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example2 = tencentcloud.security.Group("example2",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example = tencentcloud.eni.Instance("example",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            description="eni desc.",
+            ipv4_count=1)
         eni_sg_attachment = tencentcloud.eni.SgAttachment("eniSgAttachment",
-            network_interface_ids="eni-p0hkgx8p",
+            network_interface_ids=[example.id],
             security_group_ids=[
-                "sg-902tl7t7",
-                "sg-edmur627",
+                example1.id,
+                example2.id,
             ])
         ```
 

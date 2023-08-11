@@ -202,12 +202,13 @@ class BackupDownloadRestriction(pulumi.CustomResource):
         Provides a resource to create a redis backup_download_restriction
 
         ## Example Usage
+        ### Modify the network information and address of the current region backup file download
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_download_restriction = tencentcloud.redis.BackupDownloadRestriction("backupDownloadRestriction",
+        foo = tencentcloud.redis.BackupDownloadRestriction("foo",
             limit_type="Customize",
             vpc_comparison_symbol="In",
             ip_comparison_symbol="In",
@@ -223,10 +224,10 @@ class BackupDownloadRestriction(pulumi.CustomResource):
 
         ## Import
 
-        redis backup_download_restriction can be imported using the id, e.g.
+        redis backup_download_restriction can be imported using the region, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction backup_download_restriction_id
+         $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
         ```
 
         :param str resource_name: The name of the resource.
@@ -247,12 +248,13 @@ class BackupDownloadRestriction(pulumi.CustomResource):
         Provides a resource to create a redis backup_download_restriction
 
         ## Example Usage
+        ### Modify the network information and address of the current region backup file download
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        backup_download_restriction = tencentcloud.redis.BackupDownloadRestriction("backupDownloadRestriction",
+        foo = tencentcloud.redis.BackupDownloadRestriction("foo",
             limit_type="Customize",
             vpc_comparison_symbol="In",
             ip_comparison_symbol="In",
@@ -268,10 +270,10 @@ class BackupDownloadRestriction(pulumi.CustomResource):
 
         ## Import
 
-        redis backup_download_restriction can be imported using the id, e.g.
+        redis backup_download_restriction can be imported using the region, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction backup_download_restriction_id
+         $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
         ```
 
         :param str resource_name: The name of the resource.

@@ -9,9 +9,1346 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'CngwCanaryRuleCanaryRuleArgs',
+    'CngwCanaryRuleCanaryRuleBalancedServiceListArgs',
+    'CngwCanaryRuleCanaryRuleConditionListArgs',
+    'CngwRouteHeaderArgs',
+    'CngwRouteRateLimitLimitDetailArgs',
+    'CngwRouteRateLimitLimitDetailExternalRedisArgs',
+    'CngwRouteRateLimitLimitDetailQpsThresholdArgs',
+    'CngwRouteRateLimitLimitDetailRateLimitResponseArgs',
+    'CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs',
+    'CngwServiceRateLimitLimitDetailArgs',
+    'CngwServiceRateLimitLimitDetailExternalRedisArgs',
+    'CngwServiceRateLimitLimitDetailQpsThresholdArgs',
+    'CngwServiceRateLimitLimitDetailRateLimitResponseArgs',
+    'CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs',
+    'CngwServiceUpstreamInfoArgs',
+    'CngwServiceUpstreamInfoTargetArgs',
     'InstanceEngineRegionInfoArgs',
     'InstanceEngineRegionInfoVpcInfoArgs',
+    'GetGatewayServicesFilterArgs',
 ]
+
+@pulumi.input_type
+class CngwCanaryRuleCanaryRuleArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 priority: pulumi.Input[int],
+                 balanced_service_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleBalancedServiceListArgs']]]] = None,
+                 condition_lists: Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleConditionListArgs']]]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 service_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: the status of canary rule.
+        :param pulumi.Input[int] priority: priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleBalancedServiceListArgs']]] balanced_service_lists: service weight configuration.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleConditionListArgs']]] condition_lists: parameter matching condition list.
+        :param pulumi.Input[str] service_id: service ID.
+        :param pulumi.Input[str] service_name: service name.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "priority", priority)
+        if balanced_service_lists is not None:
+            pulumi.set(__self__, "balanced_service_lists", balanced_service_lists)
+        if condition_lists is not None:
+            pulumi.set(__self__, "condition_lists", condition_lists)
+        if service_id is not None:
+            pulumi.set(__self__, "service_id", service_id)
+        if service_name is not None:
+            pulumi.set(__self__, "service_name", service_name)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        the status of canary rule.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def priority(self) -> pulumi.Input[int]:
+        """
+        priority. The value ranges from 0 to 100; the larger the value, the higher the priority; the priority cannot be repeated between different rules.
+        """
+        return pulumi.get(self, "priority")
+
+    @priority.setter
+    def priority(self, value: pulumi.Input[int]):
+        pulumi.set(self, "priority", value)
+
+    @property
+    @pulumi.getter(name="balancedServiceLists")
+    def balanced_service_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleBalancedServiceListArgs']]]]:
+        """
+        service weight configuration.
+        """
+        return pulumi.get(self, "balanced_service_lists")
+
+    @balanced_service_lists.setter
+    def balanced_service_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleBalancedServiceListArgs']]]]):
+        pulumi.set(self, "balanced_service_lists", value)
+
+    @property
+    @pulumi.getter(name="conditionLists")
+    def condition_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleConditionListArgs']]]]:
+        """
+        parameter matching condition list.
+        """
+        return pulumi.get(self, "condition_lists")
+
+    @condition_lists.setter
+    def condition_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CngwCanaryRuleCanaryRuleConditionListArgs']]]]):
+        pulumi.set(self, "condition_lists", value)
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        service ID.
+        """
+        return pulumi.get(self, "service_id")
+
+    @service_id.setter
+    def service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        service name.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_name", value)
+
+
+@pulumi.input_type
+class CngwCanaryRuleCanaryRuleBalancedServiceListArgs:
+    def __init__(__self__, *,
+                 percent: Optional[pulumi.Input[float]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 service_name: Optional[pulumi.Input[str]] = None,
+                 upstream_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[float] percent: percent, 10 is 10%, valid values:0 to 100.
+        :param pulumi.Input[str] service_id: service ID, required when used as an input parameter.
+        :param pulumi.Input[str] service_name: service name, meaningless when used as an input parameter.
+        """
+        if percent is not None:
+            pulumi.set(__self__, "percent", percent)
+        if service_id is not None:
+            pulumi.set(__self__, "service_id", service_id)
+        if service_name is not None:
+            pulumi.set(__self__, "service_name", service_name)
+        if upstream_name is not None:
+            pulumi.set(__self__, "upstream_name", upstream_name)
+
+    @property
+    @pulumi.getter
+    def percent(self) -> Optional[pulumi.Input[float]]:
+        """
+        percent, 10 is 10%, valid values:0 to 100.
+        """
+        return pulumi.get(self, "percent")
+
+    @percent.setter
+    def percent(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "percent", value)
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        service ID, required when used as an input parameter.
+        """
+        return pulumi.get(self, "service_id")
+
+    @service_id.setter
+    def service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        service name, meaningless when used as an input parameter.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_name", value)
+
+    @property
+    @pulumi.getter(name="upstreamName")
+    def upstream_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "upstream_name")
+
+    @upstream_name.setter
+    def upstream_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "upstream_name", value)
+
+
+@pulumi.input_type
+class CngwCanaryRuleCanaryRuleConditionListArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 delimiter: Optional[pulumi.Input[str]] = None,
+                 global_config_id: Optional[pulumi.Input[str]] = None,
+                 global_config_name: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 operator: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+        :param pulumi.Input[str] delimiter: delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+        :param pulumi.Input[str] global_config_id: global configuration ID.
+        :param pulumi.Input[str] global_config_name: global configuration name.
+        :param pulumi.Input[str] key: parameter name.
+        :param pulumi.Input[str] operator: operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+        :param pulumi.Input[str] value: parameter value.
+        """
+        pulumi.set(__self__, "type", type)
+        if delimiter is not None:
+            pulumi.set(__self__, "delimiter", delimiter)
+        if global_config_id is not None:
+            pulumi.set(__self__, "global_config_id", global_config_id)
+        if global_config_name is not None:
+            pulumi.set(__self__, "global_config_name", global_config_name)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if operator is not None:
+            pulumi.set(__self__, "operator", operator)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        type.Reference value:`path`,`method`,`query`,`header`,`cookie`,`body`,`system`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @delimiter.setter
+    def delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "delimiter", value)
+
+    @property
+    @pulumi.getter(name="globalConfigId")
+    def global_config_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        global configuration ID.
+        """
+        return pulumi.get(self, "global_config_id")
+
+    @global_config_id.setter
+    def global_config_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "global_config_id", value)
+
+    @property
+    @pulumi.getter(name="globalConfigName")
+    def global_config_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        global configuration name.
+        """
+        return pulumi.get(self, "global_config_name")
+
+    @global_config_name.setter
+    def global_config_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "global_config_name", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        parameter name.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> Optional[pulumi.Input[str]]:
+        """
+        operator.Reference value:`le`,`eq`,`lt`,`ne`,`ge`,`gt`,`regex`,`exists`,`in`,`not in`,`prefix`,`exact`,`regex`.
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operator", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        parameter value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class CngwRouteHeaderArgs:
+    def __init__(__self__, *,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class CngwRouteRateLimitLimitDetailArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 hide_client_headers: pulumi.Input[bool],
+                 is_delay: pulumi.Input[bool],
+                 limit_by: pulumi.Input[str],
+                 qps_thresholds: pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailQpsThresholdArgs']]],
+                 response_type: pulumi.Input[str],
+                 external_redis: Optional[pulumi.Input['CngwRouteRateLimitLimitDetailExternalRedisArgs']] = None,
+                 header: Optional[pulumi.Input[str]] = None,
+                 line_up_time: Optional[pulumi.Input[int]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 policy: Optional[pulumi.Input[str]] = None,
+                 rate_limit_response: Optional[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs']] = None,
+                 rate_limit_response_url: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "hide_client_headers", hide_client_headers)
+        pulumi.set(__self__, "is_delay", is_delay)
+        pulumi.set(__self__, "limit_by", limit_by)
+        pulumi.set(__self__, "qps_thresholds", qps_thresholds)
+        pulumi.set(__self__, "response_type", response_type)
+        if external_redis is not None:
+            pulumi.set(__self__, "external_redis", external_redis)
+        if header is not None:
+            pulumi.set(__self__, "header", header)
+        if line_up_time is not None:
+            pulumi.set(__self__, "line_up_time", line_up_time)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if policy is not None:
+            pulumi.set(__self__, "policy", policy)
+        if rate_limit_response is not None:
+            pulumi.set(__self__, "rate_limit_response", rate_limit_response)
+        if rate_limit_response_url is not None:
+            pulumi.set(__self__, "rate_limit_response_url", rate_limit_response_url)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="hideClientHeaders")
+    def hide_client_headers(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "hide_client_headers")
+
+    @hide_client_headers.setter
+    def hide_client_headers(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "hide_client_headers", value)
+
+    @property
+    @pulumi.getter(name="isDelay")
+    def is_delay(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "is_delay")
+
+    @is_delay.setter
+    def is_delay(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "is_delay", value)
+
+    @property
+    @pulumi.getter(name="limitBy")
+    def limit_by(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "limit_by")
+
+    @limit_by.setter
+    def limit_by(self, value: pulumi.Input[str]):
+        pulumi.set(self, "limit_by", value)
+
+    @property
+    @pulumi.getter(name="qpsThresholds")
+    def qps_thresholds(self) -> pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailQpsThresholdArgs']]]:
+        return pulumi.get(self, "qps_thresholds")
+
+    @qps_thresholds.setter
+    def qps_thresholds(self, value: pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailQpsThresholdArgs']]]):
+        pulumi.set(self, "qps_thresholds", value)
+
+    @property
+    @pulumi.getter(name="responseType")
+    def response_type(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "response_type")
+
+    @response_type.setter
+    def response_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "response_type", value)
+
+    @property
+    @pulumi.getter(name="externalRedis")
+    def external_redis(self) -> Optional[pulumi.Input['CngwRouteRateLimitLimitDetailExternalRedisArgs']]:
+        return pulumi.get(self, "external_redis")
+
+    @external_redis.setter
+    def external_redis(self, value: Optional[pulumi.Input['CngwRouteRateLimitLimitDetailExternalRedisArgs']]):
+        pulumi.set(self, "external_redis", value)
+
+    @property
+    @pulumi.getter
+    def header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "header")
+
+    @header.setter
+    def header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "header", value)
+
+    @property
+    @pulumi.getter(name="lineUpTime")
+    def line_up_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "line_up_time")
+
+    @line_up_time.setter
+    def line_up_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "line_up_time", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def policy(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "policy")
+
+    @policy.setter
+    def policy(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "policy", value)
+
+    @property
+    @pulumi.getter(name="rateLimitResponse")
+    def rate_limit_response(self) -> Optional[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs']]:
+        return pulumi.get(self, "rate_limit_response")
+
+    @rate_limit_response.setter
+    def rate_limit_response(self, value: Optional[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs']]):
+        pulumi.set(self, "rate_limit_response", value)
+
+    @property
+    @pulumi.getter(name="rateLimitResponseUrl")
+    def rate_limit_response_url(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "rate_limit_response_url")
+
+    @rate_limit_response_url.setter
+    def rate_limit_response_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "rate_limit_response_url", value)
+
+
+@pulumi.input_type
+class CngwRouteRateLimitLimitDetailExternalRedisArgs:
+    def __init__(__self__, *,
+                 redis_host: pulumi.Input[str],
+                 redis_password: pulumi.Input[str],
+                 redis_port: pulumi.Input[int],
+                 redis_timeout: pulumi.Input[int]):
+        pulumi.set(__self__, "redis_host", redis_host)
+        pulumi.set(__self__, "redis_password", redis_password)
+        pulumi.set(__self__, "redis_port", redis_port)
+        pulumi.set(__self__, "redis_timeout", redis_timeout)
+
+    @property
+    @pulumi.getter(name="redisHost")
+    def redis_host(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "redis_host")
+
+    @redis_host.setter
+    def redis_host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "redis_host", value)
+
+    @property
+    @pulumi.getter(name="redisPassword")
+    def redis_password(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "redis_password")
+
+    @redis_password.setter
+    def redis_password(self, value: pulumi.Input[str]):
+        pulumi.set(self, "redis_password", value)
+
+    @property
+    @pulumi.getter(name="redisPort")
+    def redis_port(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "redis_port")
+
+    @redis_port.setter
+    def redis_port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "redis_port", value)
+
+    @property
+    @pulumi.getter(name="redisTimeout")
+    def redis_timeout(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "redis_timeout")
+
+    @redis_timeout.setter
+    def redis_timeout(self, value: pulumi.Input[int]):
+        pulumi.set(self, "redis_timeout", value)
+
+
+@pulumi.input_type
+class CngwRouteRateLimitLimitDetailQpsThresholdArgs:
+    def __init__(__self__, *,
+                 max: pulumi.Input[int],
+                 unit: pulumi.Input[str]):
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "unit", unit)
+
+    @property
+    @pulumi.getter
+    def max(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "max")
+
+    @max.setter
+    def max(self, value: pulumi.Input[int]):
+        pulumi.set(self, "max", value)
+
+    @property
+    @pulumi.getter
+    def unit(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "unit")
+
+    @unit.setter
+    def unit(self, value: pulumi.Input[str]):
+        pulumi.set(self, "unit", value)
+
+
+@pulumi.input_type
+class CngwRouteRateLimitLimitDetailRateLimitResponseArgs:
+    def __init__(__self__, *,
+                 body: Optional[pulumi.Input[str]] = None,
+                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]]] = None,
+                 http_status: Optional[pulumi.Input[int]] = None):
+        if body is not None:
+            pulumi.set(__self__, "body", body)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if http_status is not None:
+            pulumi.set(__self__, "http_status", http_status)
+
+    @property
+    @pulumi.getter
+    def body(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "body")
+
+    @body.setter
+    def body(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "body", value)
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]:
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]):
+        pulumi.set(self, "headers", value)
+
+    @property
+    @pulumi.getter(name="httpStatus")
+    def http_status(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "http_status")
+
+    @http_status.setter
+    def http_status(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "http_status", value)
+
+
+@pulumi.input_type
+class CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs:
+    def __init__(__self__, *,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class CngwServiceRateLimitLimitDetailArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 hide_client_headers: pulumi.Input[bool],
+                 is_delay: pulumi.Input[bool],
+                 limit_by: pulumi.Input[str],
+                 qps_thresholds: pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailQpsThresholdArgs']]],
+                 response_type: pulumi.Input[str],
+                 external_redis: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailExternalRedisArgs']] = None,
+                 header: Optional[pulumi.Input[str]] = None,
+                 line_up_time: Optional[pulumi.Input[int]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 policy: Optional[pulumi.Input[str]] = None,
+                 rate_limit_response: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs']] = None,
+                 rate_limit_response_url: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "hide_client_headers", hide_client_headers)
+        pulumi.set(__self__, "is_delay", is_delay)
+        pulumi.set(__self__, "limit_by", limit_by)
+        pulumi.set(__self__, "qps_thresholds", qps_thresholds)
+        pulumi.set(__self__, "response_type", response_type)
+        if external_redis is not None:
+            pulumi.set(__self__, "external_redis", external_redis)
+        if header is not None:
+            pulumi.set(__self__, "header", header)
+        if line_up_time is not None:
+            pulumi.set(__self__, "line_up_time", line_up_time)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if policy is not None:
+            pulumi.set(__self__, "policy", policy)
+        if rate_limit_response is not None:
+            pulumi.set(__self__, "rate_limit_response", rate_limit_response)
+        if rate_limit_response_url is not None:
+            pulumi.set(__self__, "rate_limit_response_url", rate_limit_response_url)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="hideClientHeaders")
+    def hide_client_headers(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "hide_client_headers")
+
+    @hide_client_headers.setter
+    def hide_client_headers(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "hide_client_headers", value)
+
+    @property
+    @pulumi.getter(name="isDelay")
+    def is_delay(self) -> pulumi.Input[bool]:
+        return pulumi.get(self, "is_delay")
+
+    @is_delay.setter
+    def is_delay(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "is_delay", value)
+
+    @property
+    @pulumi.getter(name="limitBy")
+    def limit_by(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "limit_by")
+
+    @limit_by.setter
+    def limit_by(self, value: pulumi.Input[str]):
+        pulumi.set(self, "limit_by", value)
+
+    @property
+    @pulumi.getter(name="qpsThresholds")
+    def qps_thresholds(self) -> pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailQpsThresholdArgs']]]:
+        return pulumi.get(self, "qps_thresholds")
+
+    @qps_thresholds.setter
+    def qps_thresholds(self, value: pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailQpsThresholdArgs']]]):
+        pulumi.set(self, "qps_thresholds", value)
+
+    @property
+    @pulumi.getter(name="responseType")
+    def response_type(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "response_type")
+
+    @response_type.setter
+    def response_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "response_type", value)
+
+    @property
+    @pulumi.getter(name="externalRedis")
+    def external_redis(self) -> Optional[pulumi.Input['CngwServiceRateLimitLimitDetailExternalRedisArgs']]:
+        return pulumi.get(self, "external_redis")
+
+    @external_redis.setter
+    def external_redis(self, value: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailExternalRedisArgs']]):
+        pulumi.set(self, "external_redis", value)
+
+    @property
+    @pulumi.getter
+    def header(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "header")
+
+    @header.setter
+    def header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "header", value)
+
+    @property
+    @pulumi.getter(name="lineUpTime")
+    def line_up_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "line_up_time")
+
+    @line_up_time.setter
+    def line_up_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "line_up_time", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def policy(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "policy")
+
+    @policy.setter
+    def policy(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "policy", value)
+
+    @property
+    @pulumi.getter(name="rateLimitResponse")
+    def rate_limit_response(self) -> Optional[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs']]:
+        return pulumi.get(self, "rate_limit_response")
+
+    @rate_limit_response.setter
+    def rate_limit_response(self, value: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs']]):
+        pulumi.set(self, "rate_limit_response", value)
+
+    @property
+    @pulumi.getter(name="rateLimitResponseUrl")
+    def rate_limit_response_url(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "rate_limit_response_url")
+
+    @rate_limit_response_url.setter
+    def rate_limit_response_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "rate_limit_response_url", value)
+
+
+@pulumi.input_type
+class CngwServiceRateLimitLimitDetailExternalRedisArgs:
+    def __init__(__self__, *,
+                 redis_host: pulumi.Input[str],
+                 redis_password: pulumi.Input[str],
+                 redis_port: pulumi.Input[int],
+                 redis_timeout: pulumi.Input[int]):
+        pulumi.set(__self__, "redis_host", redis_host)
+        pulumi.set(__self__, "redis_password", redis_password)
+        pulumi.set(__self__, "redis_port", redis_port)
+        pulumi.set(__self__, "redis_timeout", redis_timeout)
+
+    @property
+    @pulumi.getter(name="redisHost")
+    def redis_host(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "redis_host")
+
+    @redis_host.setter
+    def redis_host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "redis_host", value)
+
+    @property
+    @pulumi.getter(name="redisPassword")
+    def redis_password(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "redis_password")
+
+    @redis_password.setter
+    def redis_password(self, value: pulumi.Input[str]):
+        pulumi.set(self, "redis_password", value)
+
+    @property
+    @pulumi.getter(name="redisPort")
+    def redis_port(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "redis_port")
+
+    @redis_port.setter
+    def redis_port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "redis_port", value)
+
+    @property
+    @pulumi.getter(name="redisTimeout")
+    def redis_timeout(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "redis_timeout")
+
+    @redis_timeout.setter
+    def redis_timeout(self, value: pulumi.Input[int]):
+        pulumi.set(self, "redis_timeout", value)
+
+
+@pulumi.input_type
+class CngwServiceRateLimitLimitDetailQpsThresholdArgs:
+    def __init__(__self__, *,
+                 max: pulumi.Input[int],
+                 unit: pulumi.Input[str]):
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "unit", unit)
+
+    @property
+    @pulumi.getter
+    def max(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "max")
+
+    @max.setter
+    def max(self, value: pulumi.Input[int]):
+        pulumi.set(self, "max", value)
+
+    @property
+    @pulumi.getter
+    def unit(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "unit")
+
+    @unit.setter
+    def unit(self, value: pulumi.Input[str]):
+        pulumi.set(self, "unit", value)
+
+
+@pulumi.input_type
+class CngwServiceRateLimitLimitDetailRateLimitResponseArgs:
+    def __init__(__self__, *,
+                 body: Optional[pulumi.Input[str]] = None,
+                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]]] = None,
+                 http_status: Optional[pulumi.Input[int]] = None):
+        if body is not None:
+            pulumi.set(__self__, "body", body)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if http_status is not None:
+            pulumi.set(__self__, "http_status", http_status)
+
+    @property
+    @pulumi.getter
+    def body(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "body")
+
+    @body.setter
+    def body(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "body", value)
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]:
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]):
+        pulumi.set(self, "headers", value)
+
+    @property
+    @pulumi.getter(name="httpStatus")
+    def http_status(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "http_status")
+
+    @http_status.setter
+    def http_status(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "http_status", value)
+
+
+@pulumi.input_type
+class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs:
+    def __init__(__self__, *,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class CngwServiceUpstreamInfoArgs:
+    def __init__(__self__, *,
+                 algorithm: Optional[pulumi.Input[str]] = None,
+                 auto_scaling_cvm_port: Optional[pulumi.Input[int]] = None,
+                 auto_scaling_group_id: Optional[pulumi.Input[str]] = None,
+                 auto_scaling_hook_status: Optional[pulumi.Input[str]] = None,
+                 auto_scaling_tat_cmd_status: Optional[pulumi.Input[str]] = None,
+                 host: Optional[pulumi.Input[str]] = None,
+                 namespace: Optional[pulumi.Input[str]] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 real_source_type: Optional[pulumi.Input[str]] = None,
+                 scf_lambda_name: Optional[pulumi.Input[str]] = None,
+                 scf_lambda_qualifier: Optional[pulumi.Input[str]] = None,
+                 scf_namespace: Optional[pulumi.Input[str]] = None,
+                 scf_type: Optional[pulumi.Input[str]] = None,
+                 service_name: Optional[pulumi.Input[str]] = None,
+                 slow_start: Optional[pulumi.Input[int]] = None,
+                 source_id: Optional[pulumi.Input[str]] = None,
+                 source_name: Optional[pulumi.Input[str]] = None,
+                 source_type: Optional[pulumi.Input[str]] = None,
+                 targets: Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceUpstreamInfoTargetArgs']]]] = None):
+        """
+        :param pulumi.Input[str] algorithm: load balance algorithm,default: `round-robin`, `least-connections` and `consisten_hashing` also support.
+        :param pulumi.Input[int] auto_scaling_cvm_port: auto scaling group port of cvm.
+        :param pulumi.Input[str] auto_scaling_group_id: auto scaling group ID of cvm.
+        :param pulumi.Input[str] auto_scaling_hook_status: hook status in auto scaling group of cvm.
+        :param pulumi.Input[str] auto_scaling_tat_cmd_status: tat cmd status in auto scaling group of cvm.
+        :param pulumi.Input[str] host: an IP address or domain name.
+        :param pulumi.Input[str] namespace: namespace.
+        :param pulumi.Input[int] port: backend service port.valid values: `1` to `65535`.
+        :param pulumi.Input[str] real_source_type: exact source service type.
+        :param pulumi.Input[str] scf_lambda_name: scf lambda name.
+        :param pulumi.Input[str] scf_lambda_qualifier: scf lambda version.
+        :param pulumi.Input[str] scf_namespace: scf lambda namespace.
+        :param pulumi.Input[str] scf_type: scf lambda type.
+        :param pulumi.Input[str] service_name: the name of the service in registry or kubernetes.
+        :param pulumi.Input[int] slow_start: slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+        :param pulumi.Input[str] source_id: service source ID.
+        :param pulumi.Input[str] source_name: the name of source service.
+        :param pulumi.Input[str] source_type: source service type.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwServiceUpstreamInfoTargetArgs']]] targets: provided when service type is IPList.
+        """
+        if algorithm is not None:
+            pulumi.set(__self__, "algorithm", algorithm)
+        if auto_scaling_cvm_port is not None:
+            pulumi.set(__self__, "auto_scaling_cvm_port", auto_scaling_cvm_port)
+        if auto_scaling_group_id is not None:
+            pulumi.set(__self__, "auto_scaling_group_id", auto_scaling_group_id)
+        if auto_scaling_hook_status is not None:
+            pulumi.set(__self__, "auto_scaling_hook_status", auto_scaling_hook_status)
+        if auto_scaling_tat_cmd_status is not None:
+            pulumi.set(__self__, "auto_scaling_tat_cmd_status", auto_scaling_tat_cmd_status)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+        if namespace is not None:
+            pulumi.set(__self__, "namespace", namespace)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if real_source_type is not None:
+            pulumi.set(__self__, "real_source_type", real_source_type)
+        if scf_lambda_name is not None:
+            pulumi.set(__self__, "scf_lambda_name", scf_lambda_name)
+        if scf_lambda_qualifier is not None:
+            pulumi.set(__self__, "scf_lambda_qualifier", scf_lambda_qualifier)
+        if scf_namespace is not None:
+            pulumi.set(__self__, "scf_namespace", scf_namespace)
+        if scf_type is not None:
+            pulumi.set(__self__, "scf_type", scf_type)
+        if service_name is not None:
+            pulumi.set(__self__, "service_name", service_name)
+        if slow_start is not None:
+            pulumi.set(__self__, "slow_start", slow_start)
+        if source_id is not None:
+            pulumi.set(__self__, "source_id", source_id)
+        if source_name is not None:
+            pulumi.set(__self__, "source_name", source_name)
+        if source_type is not None:
+            pulumi.set(__self__, "source_type", source_type)
+        if targets is not None:
+            pulumi.set(__self__, "targets", targets)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> Optional[pulumi.Input[str]]:
+        """
+        load balance algorithm,default: `round-robin`, `least-connections` and `consisten_hashing` also support.
+        """
+        return pulumi.get(self, "algorithm")
+
+    @algorithm.setter
+    def algorithm(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "algorithm", value)
+
+    @property
+    @pulumi.getter(name="autoScalingCvmPort")
+    def auto_scaling_cvm_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        auto scaling group port of cvm.
+        """
+        return pulumi.get(self, "auto_scaling_cvm_port")
+
+    @auto_scaling_cvm_port.setter
+    def auto_scaling_cvm_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_scaling_cvm_port", value)
+
+    @property
+    @pulumi.getter(name="autoScalingGroupId")
+    def auto_scaling_group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        auto scaling group ID of cvm.
+        """
+        return pulumi.get(self, "auto_scaling_group_id")
+
+    @auto_scaling_group_id.setter
+    def auto_scaling_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auto_scaling_group_id", value)
+
+    @property
+    @pulumi.getter(name="autoScalingHookStatus")
+    def auto_scaling_hook_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        hook status in auto scaling group of cvm.
+        """
+        return pulumi.get(self, "auto_scaling_hook_status")
+
+    @auto_scaling_hook_status.setter
+    def auto_scaling_hook_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auto_scaling_hook_status", value)
+
+    @property
+    @pulumi.getter(name="autoScalingTatCmdStatus")
+    def auto_scaling_tat_cmd_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        tat cmd status in auto scaling group of cvm.
+        """
+        return pulumi.get(self, "auto_scaling_tat_cmd_status")
+
+    @auto_scaling_tat_cmd_status.setter
+    def auto_scaling_tat_cmd_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auto_scaling_tat_cmd_status", value)
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[pulumi.Input[str]]:
+        """
+        an IP address or domain name.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        backend service port.valid values: `1` to `65535`.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="realSourceType")
+    def real_source_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        exact source service type.
+        """
+        return pulumi.get(self, "real_source_type")
+
+    @real_source_type.setter
+    def real_source_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "real_source_type", value)
+
+    @property
+    @pulumi.getter(name="scfLambdaName")
+    def scf_lambda_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        scf lambda name.
+        """
+        return pulumi.get(self, "scf_lambda_name")
+
+    @scf_lambda_name.setter
+    def scf_lambda_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scf_lambda_name", value)
+
+    @property
+    @pulumi.getter(name="scfLambdaQualifier")
+    def scf_lambda_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        scf lambda version.
+        """
+        return pulumi.get(self, "scf_lambda_qualifier")
+
+    @scf_lambda_qualifier.setter
+    def scf_lambda_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scf_lambda_qualifier", value)
+
+    @property
+    @pulumi.getter(name="scfNamespace")
+    def scf_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        scf lambda namespace.
+        """
+        return pulumi.get(self, "scf_namespace")
+
+    @scf_namespace.setter
+    def scf_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scf_namespace", value)
+
+    @property
+    @pulumi.getter(name="scfType")
+    def scf_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        scf lambda type.
+        """
+        return pulumi.get(self, "scf_type")
+
+    @scf_type.setter
+    def scf_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "scf_type", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        the name of the service in registry or kubernetes.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_name", value)
+
+    @property
+    @pulumi.getter(name="slowStart")
+    def slow_start(self) -> Optional[pulumi.Input[int]]:
+        """
+        slow start time, unit: `second`, when it is enabled, weight of the node is increased from 1 to the target value gradually.
+        """
+        return pulumi.get(self, "slow_start")
+
+    @slow_start.setter
+    def slow_start(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "slow_start", value)
+
+    @property
+    @pulumi.getter(name="sourceId")
+    def source_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        service source ID.
+        """
+        return pulumi.get(self, "source_id")
+
+    @source_id.setter
+    def source_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_id", value)
+
+    @property
+    @pulumi.getter(name="sourceName")
+    def source_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        the name of source service.
+        """
+        return pulumi.get(self, "source_name")
+
+    @source_name.setter
+    def source_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_name", value)
+
+    @property
+    @pulumi.getter(name="sourceType")
+    def source_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        source service type.
+        """
+        return pulumi.get(self, "source_type")
+
+    @source_type.setter
+    def source_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_type", value)
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceUpstreamInfoTargetArgs']]]]:
+        """
+        provided when service type is IPList.
+        """
+        return pulumi.get(self, "targets")
+
+    @targets.setter
+    def targets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceUpstreamInfoTargetArgs']]]]):
+        pulumi.set(self, "targets", value)
+
+
+@pulumi.input_type
+class CngwServiceUpstreamInfoTargetArgs:
+    def __init__(__self__, *,
+                 host: pulumi.Input[str],
+                 port: pulumi.Input[int],
+                 weight: pulumi.Input[int],
+                 created_time: Optional[pulumi.Input[str]] = None,
+                 health: Optional[pulumi.Input[str]] = None,
+                 source: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] host: host.
+        :param pulumi.Input[int] port: port.
+        :param pulumi.Input[int] weight: weight.
+        :param pulumi.Input[str] source: source of target.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "weight", weight)
+        if created_time is not None:
+            pulumi.set(__self__, "created_time", created_time)
+        if health is not None:
+            pulumi.set(__self__, "health", health)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def host(self) -> pulumi.Input[str]:
+        """
+        host.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        """
+        weight.
+        """
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "created_time")
+
+    @created_time.setter
+    def created_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "created_time", value)
+
+    @property
+    @pulumi.getter
+    def health(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "health")
+
+    @health.setter
+    def health(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "health", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[str]]:
+        """
+        source of target.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source", value)
+
 
 @pulumi.input_type
 class InstanceEngineRegionInfoArgs:
@@ -116,5 +1453,44 @@ class InstanceEngineRegionInfoVpcInfoArgs:
     @intranet_address.setter
     def intranet_address(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "intranet_address", value)
+
+
+@pulumi.input_type
+class GetGatewayServicesFilterArgs:
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: filter name.
+        :param str value: filter value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        filter value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[str]):
+        pulumi.set(self, "value", value)
 
 

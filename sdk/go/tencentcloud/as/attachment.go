@@ -12,33 +12,6 @@ import (
 )
 
 // Provides a resource to attach or detach CVM instances to a specified scaling group.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewAttachment(ctx, "attachment", &As.AttachmentArgs{
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String("ins-01"),
-// 				pulumi.String("ins-02"),
-// 			},
-// 			ScalingGroupId: pulumi.String("sg-afasfa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 type Attachment struct {
 	pulumi.CustomResourceState
 

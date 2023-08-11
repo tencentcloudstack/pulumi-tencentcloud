@@ -167,11 +167,21 @@ class GroupPolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.GroupPolicyAttachment("foo",
-            group_id=tencentcloud_cam_group["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_group_basic = config.get("camGroupBasic")
+        if cam_group_basic is None:
+            cam_group_basic = "keep-cam-group"
+        groups = tencentcloud.Cam.get_groups(name=cam_group_basic)
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        group_policy_attachment_basic = tencentcloud.cam.GroupPolicyAttachment("groupPolicyAttachmentBasic",
+            group_id=groups.group_lists[0].group_id,
+            policy_id=policy.policy_lists[0].policy_id)
         ```
 
         ## Import
@@ -200,11 +210,21 @@ class GroupPolicyAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.cam.GroupPolicyAttachment("foo",
-            group_id=tencentcloud_cam_group["foo"]["id"],
-            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        config = pulumi.Config()
+        cam_policy_basic = config.get("camPolicyBasic")
+        if cam_policy_basic is None:
+            cam_policy_basic = "keep-cam-policy"
+        cam_group_basic = config.get("camGroupBasic")
+        if cam_group_basic is None:
+            cam_group_basic = "keep-cam-group"
+        groups = tencentcloud.Cam.get_groups(name=cam_group_basic)
+        policy = tencentcloud.Cam.get_policies(name=cam_policy_basic)
+        group_policy_attachment_basic = tencentcloud.cam.GroupPolicyAttachment("groupPolicyAttachmentBasic",
+            group_id=groups.group_lists[0].group_id,
+            policy_id=policy.policy_lists[0].policy_id)
         ```
 
         ## Import

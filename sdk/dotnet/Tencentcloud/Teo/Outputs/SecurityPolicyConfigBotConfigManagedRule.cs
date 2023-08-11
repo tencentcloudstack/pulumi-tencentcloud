@@ -14,54 +14,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class SecurityPolicyConfigBotConfigManagedRule
     {
-        /// <summary>
-        /// Action to take. Valid values: `drop`, `trans`, `monitor`, `alg`.
-        /// </summary>
         public readonly string? Action;
-        /// <summary>
-        /// Rules to enable when action is `alg`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> AlgManagedIds;
-        /// <summary>
-        /// Rules to enable when action is `captcha`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> CapManagedIds;
-        /// <summary>
-        /// Rules to enable when action is `drop`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> DropManagedIds;
-        /// <summary>
-        /// Rules to enable when action is `monitor`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> MonManagedIds;
-        /// <summary>
-        /// Name of the custom response page.
-        /// </summary>
         public readonly string? Name;
-        /// <summary>
-        /// ID of the custom response page.
-        /// </summary>
         public readonly int? PageId;
-        /// <summary>
-        /// Punish time.
-        /// </summary>
         public readonly int? PunishTime;
-        /// <summary>
-        /// Time unit of the punish time.
-        /// </summary>
         public readonly string? PunishTimeUnit;
-        /// <summary>
-        /// Redirect target URL, must be an sub-domain from one of the account&amp;#39;s site.
-        /// </summary>
         public readonly string? RedirectUrl;
-        /// <summary>
-        /// Response code to use when redirecting.
-        /// </summary>
         public readonly int? ResponseCode;
         public readonly int? RuleId;
-        /// <summary>
-        /// Rules to enable when action is `trans`. See details in data source `bot_managed_rules`.
-        /// </summary>
         public readonly ImmutableArray<int> TransManagedIds;
 
         [OutputConstructor]

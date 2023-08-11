@@ -26,7 +26,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
+// 		_, err := Monitor.NewAlarmNotice(ctx, "foo", &Monitor.AlarmNoticeArgs{
 // 			NoticeLanguage: pulumi.String("zh-CN"),
 // 			NoticeType:     pulumi.String("ALL"),
 // 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
@@ -96,6 +96,8 @@ import (
 type AlarmNotice struct {
 	pulumi.CustomResourceState
 
+	// Amp consumer ID.
+	AmpConsumerId pulumi.StringOutput `pulumi:"ampConsumerId"`
 	// A maximum of one alarm notification can be pushed to the CLS service.
 	ClsNotices AlarmNoticeClsNoticeArrayOutput `pulumi:"clsNotices"`
 	// Whether it is the system default notification template 0=No 1=Yes.
@@ -154,6 +156,8 @@ func GetAlarmNotice(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AlarmNotice resources.
 type alarmNoticeState struct {
+	// Amp consumer ID.
+	AmpConsumerId *string `pulumi:"ampConsumerId"`
 	// A maximum of one alarm notification can be pushed to the CLS service.
 	ClsNotices []AlarmNoticeClsNotice `pulumi:"clsNotices"`
 	// Whether it is the system default notification template 0=No 1=Yes.
@@ -177,6 +181,8 @@ type alarmNoticeState struct {
 }
 
 type AlarmNoticeState struct {
+	// Amp consumer ID.
+	AmpConsumerId pulumi.StringPtrInput
 	// A maximum of one alarm notification can be pushed to the CLS service.
 	ClsNotices AlarmNoticeClsNoticeArrayInput
 	// Whether it is the system default notification template 0=No 1=Yes.
@@ -319,6 +325,11 @@ func (o AlarmNoticeOutput) ToAlarmNoticeOutput() AlarmNoticeOutput {
 
 func (o AlarmNoticeOutput) ToAlarmNoticeOutputWithContext(ctx context.Context) AlarmNoticeOutput {
 	return o
+}
+
+// Amp consumer ID.
+func (o AlarmNoticeOutput) AmpConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.StringOutput { return v.AmpConsumerId }).(pulumi.StringOutput)
 }
 
 // A maximum of one alarm notification can be pushed to the CLS service.

@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     public partial class Acl : Pulumi.CustomResource
     {
         /// <summary>
-        /// IP address allowed to access. The default value is `*`, which means that any host can access.
+        /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         /// </summary>
         [Output("host")]
         public Output<string?> Host { get; private set; } = null!;
@@ -75,7 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<string?> PermissionType { get; private set; } = null!;
 
         /// <summary>
-        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         /// </summary>
         [Output("principal")]
         public Output<string?> Principal { get; private set; } = null!;
@@ -140,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     public sealed class AclArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// IP address allowed to access. The default value is `*`, which means that any host can access.
+        /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
@@ -164,7 +164,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? PermissionType { get; set; }
 
         /// <summary>
-        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         /// </summary>
         [Input("principal")]
         public Input<string>? Principal { get; set; }
@@ -189,7 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     public sealed class AclState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// IP address allowed to access. The default value is `*`, which means that any host can access.
+        /// The default is *, which means that any host can access it. Support filling in IP or network segment, and support `;`separation.
         /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
@@ -213,7 +213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<string>? PermissionType { get; set; }
 
         /// <summary>
-        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        /// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list. For example: `root` meaning user root can access.
         /// </summary>
         [Input("principal")]
         public Input<string>? Principal { get; set; }

@@ -9,13 +9,54 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'NamespaceRetentionPolicyArgs',
     'RocketmqClusterVpcArgs',
+    'RocketmqVipInstanceVpcInfoArgs',
     'GetProInstancesFilterArgs',
     'GetPublishersFilterArgs',
     'GetPublishersSortArgs',
     'GetRabbitmqNodeListFilterArgs',
     'GetRabbitmqVipInstanceFilterArgs',
 ]
+
+@pulumi.input_type
+class NamespaceRetentionPolicyArgs:
+    def __init__(__self__, *,
+                 size_in_mb: Optional[pulumi.Input[int]] = None,
+                 time_in_minutes: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] size_in_mb: the size of message to retain.
+        :param pulumi.Input[int] time_in_minutes: the time of message to retain.
+        """
+        if size_in_mb is not None:
+            pulumi.set(__self__, "size_in_mb", size_in_mb)
+        if time_in_minutes is not None:
+            pulumi.set(__self__, "time_in_minutes", time_in_minutes)
+
+    @property
+    @pulumi.getter(name="sizeInMb")
+    def size_in_mb(self) -> Optional[pulumi.Input[int]]:
+        """
+        the size of message to retain.
+        """
+        return pulumi.get(self, "size_in_mb")
+
+    @size_in_mb.setter
+    def size_in_mb(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "size_in_mb", value)
+
+    @property
+    @pulumi.getter(name="timeInMinutes")
+    def time_in_minutes(self) -> Optional[pulumi.Input[int]]:
+        """
+        the time of message to retain.
+        """
+        return pulumi.get(self, "time_in_minutes")
+
+    @time_in_minutes.setter
+    def time_in_minutes(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "time_in_minutes", value)
+
 
 @pulumi.input_type
 class RocketmqClusterVpcArgs:
@@ -53,6 +94,43 @@ class RocketmqClusterVpcArgs:
 
     @vpc_id.setter
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class RocketmqVipInstanceVpcInfoArgs:
+    def __init__(__self__, *,
+                 subnet_id: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] subnet_id: Subnet ID.
+        :param pulumi.Input[str] vpc_id: VPC ID.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        Subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "vpc_id", value)
 
 

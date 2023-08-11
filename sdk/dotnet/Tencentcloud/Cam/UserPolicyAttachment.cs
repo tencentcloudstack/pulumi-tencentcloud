@@ -16,17 +16,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.UserPolicyAttachment("foo", new Tencentcloud.Cam.UserPolicyAttachmentArgs
+    ///         var config = new Config();
+    ///         var camUserBasic = config.Get("camUserBasic") ?? "keep-cam-user";
+    ///         var policyBasic = new Tencentcloud.Cam.Policy("policyBasic", new Tencentcloud.Cam.PolicyArgs
     ///         {
-    ///             UserId = tencentcloud_cam_user.Foo.Id,
-    ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
+    ///             Document = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 { "version", "2.0" },
+    ///                 { "statement", new[]
+    ///                     {
+    ///                         new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             { "action", new[]
+    ///                                 {
+    ///                                     "cos:*",
+    ///                                 }
+    ///                              },
+    ///                             { "resource", new[]
+    ///                                 {
+    ///                                     "*",
+    ///                                 }
+    ///                              },
+    ///                             { "effect", "allow" },
+    ///                         },
+    ///                         new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             { "effect", "allow" },
+    ///                             { "action", new[]
+    ///                                 {
+    ///                                     "monitor:*",
+    ///                                     "cam:ListUsersForGroup",
+    ///                                     "cam:ListGroups",
+    ///                                     "cam:GetGroup",
+    ///                                 }
+    ///                              },
+    ///                             { "resource", new[]
+    ///                                 {
+    ///                                     "*",
+    ///                                 }
+    ///                              },
+    ///                         },
+    ///                     }
+    ///                  },
+    ///             }),
+    ///             Description = "tf_test",
+    ///         });
+    ///         var users = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
+    ///         {
+    ///             Name = camUserBasic,
+    ///         }));
+    ///         var userPolicyAttachmentBasic = new Tencentcloud.Cam.UserPolicyAttachment("userPolicyAttachmentBasic", new Tencentcloud.Cam.UserPolicyAttachmentArgs
+    ///         {
+    ///             UserName = users.Apply(users =&gt; users.UserLists?[0]?.UserId),
+    ///             PolicyId = policyBasic.Id,
     ///         });
     ///     }
     /// 
