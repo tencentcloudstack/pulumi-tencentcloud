@@ -56,21 +56,6 @@ func Provider() tfbridge.ProviderInfo {
 					EnvVars: []string{"TENCENTCLOUD_REGION"},
 				},
 			},
-			"secret_id": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"TENCENTCLOUD_SECRET_ID"},
-				},
-			},
-			"secret_key": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"TENCENTCLOUD_SECRET_KEY"},
-				},
-			},
-			"security_token": {
-				Default: &tfbridge.DefaultInfo{
-					EnvVars: []string{"TENCENTCLOUD_SECURITY_TOKEN"},
-				},
-			},
 		},
 		Resources:   info.GetResourceInfo(mainPkg),
 		DataSources: info.GetDataSourceInfo(mainPkg),
