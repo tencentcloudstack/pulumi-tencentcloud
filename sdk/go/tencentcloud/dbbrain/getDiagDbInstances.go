@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetDiagDbInstances(ctx, &dbbrain.GetDiagDbInstancesArgs{
-// 			InstanceNames: []string{
-// 				"keep_preset_mysql",
-// 			},
-// 			IsSupported: true,
-// 			Product:     "mysql",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetDiagDbInstances(ctx, &dbbrain.GetDiagDbInstancesArgs{
+//				InstanceNames: []string{
+//					"keep_preset_mysql",
+//				},
+//				IsSupported: true,
+//				Product:     "mysql",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDiagDbInstances(ctx *pulumi.Context, args *GetDiagDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetDiagDbInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

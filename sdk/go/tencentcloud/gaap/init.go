@@ -23,8 +23,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Gaap/certificate:Certificate":
 		r = &Certificate{}
+	case "tencentcloud:Gaap/customHeader:CustomHeader":
+		r = &CustomHeader{}
 	case "tencentcloud:Gaap/domainErrorPage:DomainErrorPage":
 		r = &DomainErrorPage{}
+	case "tencentcloud:Gaap/globalDomain:GlobalDomain":
+		r = &GlobalDomain{}
+	case "tencentcloud:Gaap/globalDomainDns:GlobalDomainDns":
+		r = &GlobalDomainDns{}
 	case "tencentcloud:Gaap/httpDomain:HttpDomain":
 		r = &HttpDomain{}
 	case "tencentcloud:Gaap/httpRule:HttpRule":
@@ -35,6 +41,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Layer7Listener{}
 	case "tencentcloud:Gaap/proxy:Proxy":
 		r = &Proxy{}
+	case "tencentcloud:Gaap/proxyGroup:ProxyGroup":
+		r = &ProxyGroup{}
 	case "tencentcloud:Gaap/realserver:Realserver":
 		r = &Realserver{}
 	case "tencentcloud:Gaap/securityPolicy:SecurityPolicy":
@@ -61,7 +69,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Gaap/customHeader",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Gaap/domainErrorPage",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Gaap/globalDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Gaap/globalDomainDns",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -87,6 +110,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Gaap/proxy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Gaap/proxyGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

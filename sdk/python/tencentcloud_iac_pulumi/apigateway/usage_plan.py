@@ -238,11 +238,11 @@ class UsagePlan(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plan = tencentcloud.api_gateway.UsagePlan("plan",
+        example = tencentcloud.api_gateway.UsagePlan("example",
             max_request_num=100,
             max_request_num_pre_sec=10,
-            usage_plan_desc="nice plan",
-            usage_plan_name="my_plan")
+            usage_plan_desc="desc.",
+            usage_plan_name="tf_example")
         ```
 
         ## Import
@@ -275,11 +275,11 @@ class UsagePlan(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plan = tencentcloud.api_gateway.UsagePlan("plan",
+        example = tencentcloud.api_gateway.UsagePlan("example",
             max_request_num=100,
             max_request_num_pre_sec=10,
-            usage_plan_desc="nice plan",
-            usage_plan_name="my_plan")
+            usage_plan_desc="desc.",
+            usage_plan_name="tf_example")
         ```
 
         ## Import

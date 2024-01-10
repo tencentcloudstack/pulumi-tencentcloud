@@ -85,6 +85,16 @@ import * as utilities from "../utilities";
  *         dropUdp: 0,
  *     }],
  *     resourceId: "bgpip-000004xf",
+ *     waterPrintConfigs: [{
+ *         listeners: [{
+ *             forwardProtocol: "TCP",
+ *             frontendPort: 90,
+ *             frontendPortEnd: 90,
+ *         }],
+ *         offset: 1,
+ *         openStatus: 1,
+ *         verify: "checkall",
+ *     }],
  * });
  * ```
  */
@@ -164,6 +174,10 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
      * The ID of the resource instance.
      */
     public readonly resourceId!: pulumi.Output<string>;
+    /**
+     * Water print config.
+     */
+    public readonly waterPrintConfigs!: pulumi.Output<outputs.Dayu.DdosPolicyV2WaterPrintConfig[] | undefined>;
 
     /**
      * Create a DdosPolicyV2 resource with the given unique name, arguments, and options.
@@ -190,6 +204,7 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
             resourceInputs["packetFilters"] = state ? state.packetFilters : undefined;
             resourceInputs["protocolBlockConfigs"] = state ? state.protocolBlockConfigs : undefined;
             resourceInputs["resourceId"] = state ? state.resourceId : undefined;
+            resourceInputs["waterPrintConfigs"] = state ? state.waterPrintConfigs : undefined;
         } else {
             const args = argsOrState as DdosPolicyV2Args | undefined;
             if ((!args || args.resourceId === undefined) && !opts.urn) {
@@ -207,6 +222,7 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
             resourceInputs["packetFilters"] = args ? args.packetFilters : undefined;
             resourceInputs["protocolBlockConfigs"] = args ? args.protocolBlockConfigs : undefined;
             resourceInputs["resourceId"] = args ? args.resourceId : undefined;
+            resourceInputs["waterPrintConfigs"] = args ? args.waterPrintConfigs : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DdosPolicyV2.__pulumiType, name, resourceInputs, opts);
@@ -265,6 +281,10 @@ export interface DdosPolicyV2State {
      * The ID of the resource instance.
      */
     resourceId?: pulumi.Input<string>;
+    /**
+     * Water print config.
+     */
+    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[]>;
 }
 
 /**
@@ -319,4 +339,8 @@ export interface DdosPolicyV2Args {
      * The ID of the resource instance.
      */
     resourceId: pulumi.Input<string>;
+    /**
+     * Water print config.
+     */
+    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[]>;
 }

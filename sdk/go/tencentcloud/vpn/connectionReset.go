@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewConnectionReset(ctx, "vpnConnectionReset", &Vpn.ConnectionResetArgs{
-// 			VpnConnectionId: pulumi.String("vpnx-kme2tx8m"),
-// 			VpnGatewayId:    pulumi.String("vpngw-gt8bianl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewConnectionReset(ctx, "vpnConnectionReset", &Vpn.ConnectionResetArgs{
+//				VpnConnectionId: pulumi.String("vpnx-kme2tx8m"),
+//				VpnGatewayId:    pulumi.String("vpngw-gt8bianl"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConnectionReset struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *ConnectionReset) ToConnectionResetOutputWithContext(ctx context.Context
 // ConnectionResetArrayInput is an input type that accepts ConnectionResetArray and ConnectionResetArrayOutput values.
 // You can construct a concrete instance of `ConnectionResetArrayInput` via:
 //
-//          ConnectionResetArray{ ConnectionResetArgs{...} }
+//	ConnectionResetArray{ ConnectionResetArgs{...} }
 type ConnectionResetArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i ConnectionResetArray) ToConnectionResetArrayOutputWithContext(ctx contex
 // ConnectionResetMapInput is an input type that accepts ConnectionResetMap and ConnectionResetMapOutput values.
 // You can construct a concrete instance of `ConnectionResetMapInput` via:
 //
-//          ConnectionResetMap{ "key": ConnectionResetArgs{...} }
+//	ConnectionResetMap{ "key": ConnectionResetArgs{...} }
 type ConnectionResetMapInput interface {
 	pulumi.Input
 

@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewTawInstance(ctx, "tawInstance", &Rum.TawInstanceArgs{
-// 			AreaId:            pulumi.Int(1),
-// 			ChargeType:        pulumi.Int(1),
-// 			DataRetentionDays: pulumi.Int(30),
-// 			InstanceDesc:      pulumi.String("instanceDesc-1"),
-// 			InstanceName:      pulumi.String("instanceName-1"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewTawInstance(ctx, "tawInstance", &Rum.TawInstanceArgs{
+//				AreaId:            pulumi.Int(1),
+//				ChargeType:        pulumi.Int(1),
+//				DataRetentionDays: pulumi.Int(30),
+//				InstanceDesc:      pulumi.String("instanceDesc-1"),
+//				InstanceName:      pulumi.String("instanceName-1"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // rum taw_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+//
+//	$ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+//
 // ```
 type TawInstance struct {
 	pulumi.CustomResourceState
@@ -229,7 +234,7 @@ func (i *TawInstance) ToTawInstanceOutputWithContext(ctx context.Context) TawIns
 // TawInstanceArrayInput is an input type that accepts TawInstanceArray and TawInstanceArrayOutput values.
 // You can construct a concrete instance of `TawInstanceArrayInput` via:
 //
-//          TawInstanceArray{ TawInstanceArgs{...} }
+//	TawInstanceArray{ TawInstanceArgs{...} }
 type TawInstanceArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +259,7 @@ func (i TawInstanceArray) ToTawInstanceArrayOutputWithContext(ctx context.Contex
 // TawInstanceMapInput is an input type that accepts TawInstanceMap and TawInstanceMapOutput values.
 // You can construct a concrete instance of `TawInstanceMapInput` via:
 //
-//          TawInstanceMap{ "key": TawInstanceArgs{...} }
+//	TawInstanceMap{ "key": TawInstanceArgs{...} }
 type TawInstanceMapInput interface {
 	pulumi.Input
 

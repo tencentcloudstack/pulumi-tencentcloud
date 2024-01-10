@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewRestoreInstance(ctx, "restoreInstance", &Sqlserver.RestoreInstanceArgs{
-// 			BackupId:   pulumi.Int(3482091273),
-// 			InstanceId: pulumi.String("mssql-qelbzgwf"),
-// 			RenameRestores: sqlserver.RestoreInstanceRenameRestoreArray{
-// 				&sqlserver.RestoreInstanceRenameRestoreArgs{
-// 					NewName: pulumi.String("restore_keep_pubsub_db2"),
-// 					OldName: pulumi.String("keep_pubsub_db2"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewRestoreInstance(ctx, "restoreInstance", &Sqlserver.RestoreInstanceArgs{
+//				BackupId:   pulumi.Int(3482091273),
+//				InstanceId: pulumi.String("mssql-qelbzgwf"),
+//				RenameRestores: sqlserver.RestoreInstanceRenameRestoreArray{
+//					&sqlserver.RestoreInstanceRenameRestoreArgs{
+//						NewName: pulumi.String("restore_keep_pubsub_db2"),
+//						OldName: pulumi.String("keep_pubsub_db2"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // sqlserver restore_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
+//
+//	$ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
+//
 // ```
 type RestoreInstance struct {
 	pulumi.CustomResourceState
@@ -173,7 +178,7 @@ func (i *RestoreInstance) ToRestoreInstanceOutputWithContext(ctx context.Context
 // RestoreInstanceArrayInput is an input type that accepts RestoreInstanceArray and RestoreInstanceArrayOutput values.
 // You can construct a concrete instance of `RestoreInstanceArrayInput` via:
 //
-//          RestoreInstanceArray{ RestoreInstanceArgs{...} }
+//	RestoreInstanceArray{ RestoreInstanceArgs{...} }
 type RestoreInstanceArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +203,7 @@ func (i RestoreInstanceArray) ToRestoreInstanceArrayOutputWithContext(ctx contex
 // RestoreInstanceMapInput is an input type that accepts RestoreInstanceMap and RestoreInstanceMapOutput values.
 // You can construct a concrete instance of `RestoreInstanceMapInput` via:
 //
-//          RestoreInstanceMap{ "key": RestoreInstanceArgs{...} }
+//	RestoreInstanceMap{ "key": RestoreInstanceArgs{...} }
 type RestoreInstanceMapInput interface {
 	pulumi.Input
 

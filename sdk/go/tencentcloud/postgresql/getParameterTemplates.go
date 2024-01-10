@@ -18,37 +18,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.GetParameterTemplates(ctx, &postgresql.GetParameterTemplatesArgs{
-// 			Filters: []postgresql.GetParameterTemplatesFilter{
-// 				postgresql.GetParameterTemplatesFilter{
-// 					Name: pulumi.StringRef("TemplateName"),
-// 					Values: []string{
-// 						"temp_name",
-// 					},
-// 				},
-// 				postgresql.GetParameterTemplatesFilter{
-// 					Name: pulumi.StringRef("DBEngine"),
-// 					Values: []string{
-// 						"postgresql",
-// 					},
-// 				},
-// 			},
-// 			OrderBy:     pulumi.StringRef("CreateTime"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.GetParameterTemplates(ctx, &postgresql.GetParameterTemplatesArgs{
+//				Filters: []postgresql.GetParameterTemplatesFilter{
+//					postgresql.GetParameterTemplatesFilter{
+//						Name: pulumi.StringRef("TemplateName"),
+//						Values: []string{
+//							"temp_name",
+//						},
+//					},
+//					postgresql.GetParameterTemplatesFilter{
+//						Name: pulumi.StringRef("DBEngine"),
+//						Values: []string{
+//							"postgresql",
+//						},
+//					},
+//				},
+//				OrderBy:     pulumi.StringRef("CreateTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetParameterTemplates(ctx *pulumi.Context, args *GetParameterTemplatesArgs, opts ...pulumi.InvokeOption) (*GetParameterTemplatesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

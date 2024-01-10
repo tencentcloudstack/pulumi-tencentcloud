@@ -14,12 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Monitor.AlarmNotice("foo", {
+ * const example = new tencentcloud.Monitor.AlarmNotice("example", {
  *     noticeLanguage: "zh-CN",
  *     noticeType: "ALL",
  *     urlNotices: [{
- *         endTime: 0,
- *         startTime: 1,
+ *         endTime: 86399,
+ *         isValid: 0,
+ *         startTime: 0,
  *         url: "https://www.mytest.com/validate",
  *         weekdays: [
  *             1,
@@ -32,21 +33,24 @@ import * as utilities from "../utilities";
  *         ],
  *     }],
  *     userNotices: [{
- *         endTime: 1,
+ *         endTime: 86399,
  *         groupIds: [],
  *         needPhoneArriveNotice: 1,
  *         noticeWays: [
- *             "SMS",
  *             "EMAIL",
+ *             "SMS",
  *         ],
  *         phoneCallType: "CIRCLE",
- *         phoneCircleInterval: 50,
+ *         phoneCircleInterval: 180,
  *         phoneCircleTimes: 2,
- *         phoneInnerInterval: 60,
- *         phoneOrders: [10001],
+ *         phoneInnerInterval: 180,
+ *         phoneOrders: [],
  *         receiverType: "USER",
  *         startTime: 0,
- *         userIds: [10001],
+ *         userIds: [
+ *             11082189,
+ *             11082190,
+ *         ],
  *         weekdays: [
  *             1,
  *             2,

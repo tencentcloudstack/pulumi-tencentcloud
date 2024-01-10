@@ -22,12 +22,14 @@ import (
 // vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+//
+//	$ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+//
 // ```
 type FlowLog struct {
 	pulumi.CustomResourceState
 
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrOutput `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringOutput `pulumi:"cloudLogRegion"`
@@ -93,7 +95,7 @@ func GetFlowLog(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FlowLog resources.
 type flowLogState struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId *string `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion *string `pulumi:"cloudLogRegion"`
@@ -118,7 +120,7 @@ type flowLogState struct {
 }
 
 type FlowLogState struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrInput
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringPtrInput
@@ -147,7 +149,7 @@ func (FlowLogState) ElementType() reflect.Type {
 }
 
 type flowLogArgs struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId *string `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion *string `pulumi:"cloudLogRegion"`
@@ -173,7 +175,7 @@ type flowLogArgs struct {
 
 // The set of arguments for constructing a FlowLog resource.
 type FlowLogArgs struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrInput
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringPtrInput
@@ -223,7 +225,7 @@ func (i *FlowLog) ToFlowLogOutputWithContext(ctx context.Context) FlowLogOutput 
 // FlowLogArrayInput is an input type that accepts FlowLogArray and FlowLogArrayOutput values.
 // You can construct a concrete instance of `FlowLogArrayInput` via:
 //
-//          FlowLogArray{ FlowLogArgs{...} }
+//	FlowLogArray{ FlowLogArgs{...} }
 type FlowLogArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +250,7 @@ func (i FlowLogArray) ToFlowLogArrayOutputWithContext(ctx context.Context) FlowL
 // FlowLogMapInput is an input type that accepts FlowLogMap and FlowLogMapOutput values.
 // You can construct a concrete instance of `FlowLogMapInput` via:
 //
-//          FlowLogMap{ "key": FlowLogArgs{...} }
+//	FlowLogMap{ "key": FlowLogArgs{...} }
 type FlowLogMapInput interface {
 	pulumi.Input
 
@@ -284,7 +286,7 @@ func (o FlowLogOutput) ToFlowLogOutputWithContext(ctx context.Context) FlowLogOu
 	return o
 }
 
-// Specify flow log storage id.
+// Specify flow log storage id, just set cls topic id.
 func (o FlowLogOutput) CloudLogId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringPtrOutput { return v.CloudLogId }).(pulumi.StringPtrOutput)
 }

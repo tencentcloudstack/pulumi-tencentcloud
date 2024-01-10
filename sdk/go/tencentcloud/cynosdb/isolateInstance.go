@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
-// 			AccountName:        pulumi.String("terraform_test"),
-// 			AccountPassword:    pulumi.String("Password@1234"),
-// 			ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-// 			Description:        pulumi.String("testx"),
-// 			Host:               pulumi.String("%"),
-// 			MaxUserConnections: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
+//				AccountName:        pulumi.String("terraform_test"),
+//				AccountPassword:    pulumi.String("Password@1234"),
+//				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
+//				Description:        pulumi.String("testx"),
+//				Host:               pulumi.String("%"),
+//				MaxUserConnections: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type IsolateInstance struct {
 	pulumi.CustomResourceState
@@ -156,7 +159,7 @@ func (i *IsolateInstance) ToIsolateInstanceOutputWithContext(ctx context.Context
 // IsolateInstanceArrayInput is an input type that accepts IsolateInstanceArray and IsolateInstanceArrayOutput values.
 // You can construct a concrete instance of `IsolateInstanceArrayInput` via:
 //
-//          IsolateInstanceArray{ IsolateInstanceArgs{...} }
+//	IsolateInstanceArray{ IsolateInstanceArgs{...} }
 type IsolateInstanceArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +184,7 @@ func (i IsolateInstanceArray) ToIsolateInstanceArrayOutputWithContext(ctx contex
 // IsolateInstanceMapInput is an input type that accepts IsolateInstanceMap and IsolateInstanceMapOutput values.
 // You can construct a concrete instance of `IsolateInstanceMapInput` via:
 //
-//          IsolateInstanceMap{ "key": IsolateInstanceArgs{...} }
+//	IsolateInstanceMap{ "key": IsolateInstanceArgs{...} }
 type IsolateInstanceMapInput interface {
 	pulumi.Input
 

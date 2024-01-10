@@ -18,7 +18,9 @@ import (
 // sqlserver config_instance_ro_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
+//
+//	$ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
+//
 // ```
 type ConfigInstanceRoGroup struct {
 	pulumi.CustomResourceState
@@ -193,7 +195,7 @@ func (i *ConfigInstanceRoGroup) ToConfigInstanceRoGroupOutputWithContext(ctx con
 // ConfigInstanceRoGroupArrayInput is an input type that accepts ConfigInstanceRoGroupArray and ConfigInstanceRoGroupArrayOutput values.
 // You can construct a concrete instance of `ConfigInstanceRoGroupArrayInput` via:
 //
-//          ConfigInstanceRoGroupArray{ ConfigInstanceRoGroupArgs{...} }
+//	ConfigInstanceRoGroupArray{ ConfigInstanceRoGroupArgs{...} }
 type ConfigInstanceRoGroupArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +220,7 @@ func (i ConfigInstanceRoGroupArray) ToConfigInstanceRoGroupArrayOutputWithContex
 // ConfigInstanceRoGroupMapInput is an input type that accepts ConfigInstanceRoGroupMap and ConfigInstanceRoGroupMapOutput values.
 // You can construct a concrete instance of `ConfigInstanceRoGroupMapInput` via:
 //
-//          ConfigInstanceRoGroupMap{ "key": ConfigInstanceRoGroupArgs{...} }
+//	ConfigInstanceRoGroupMap{ "key": ConfigInstanceRoGroupArgs{...} }
 type ConfigInstanceRoGroupMapInput interface {
 	pulumi.Input
 

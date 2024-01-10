@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewEndPoint(ctx, "endPoint", &Vpc.EndPointArgs{
-// 			EndPointName:      pulumi.String("terraform-test"),
-// 			EndPointServiceId: pulumi.String("vpcsvc-69y13tdb"),
-// 			EndPointVip:       pulumi.String("10.0.2.1"),
-// 			SubnetId:          pulumi.String("subnet-ljyn7h30"),
-// 			VpcId:             pulumi.String("vpc-391sv4w3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewEndPoint(ctx, "endPoint", &Vpc.EndPointArgs{
+//				EndPointName:      pulumi.String("terraform-test"),
+//				EndPointServiceId: pulumi.String("vpcsvc-69y13tdb"),
+//				EndPointVip:       pulumi.String("10.0.2.1"),
+//				SubnetId:          pulumi.String("subnet-ljyn7h30"),
+//				VpcId:             pulumi.String("vpc-391sv4w3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // vpc end_point can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
+//
+//	$ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
+//
 // ```
 type EndPoint struct {
 	pulumi.CustomResourceState
@@ -204,7 +209,7 @@ func (i *EndPoint) ToEndPointOutputWithContext(ctx context.Context) EndPointOutp
 // EndPointArrayInput is an input type that accepts EndPointArray and EndPointArrayOutput values.
 // You can construct a concrete instance of `EndPointArrayInput` via:
 //
-//          EndPointArray{ EndPointArgs{...} }
+//	EndPointArray{ EndPointArgs{...} }
 type EndPointArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +234,7 @@ func (i EndPointArray) ToEndPointArrayOutputWithContext(ctx context.Context) End
 // EndPointMapInput is an input type that accepts EndPointMap and EndPointMapOutput values.
 // You can construct a concrete instance of `EndPointMapInput` via:
 //
-//          EndPointMap{ "key": EndPointArgs{...} }
+//	EndPointMap{ "key": EndPointArgs{...} }
 type EndPointMapInput interface {
 	pulumi.Input
 

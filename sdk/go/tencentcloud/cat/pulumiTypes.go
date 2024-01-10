@@ -20,7 +20,7 @@ type TaskSetBatchTasks struct {
 // TaskSetBatchTasksInput is an input type that accepts TaskSetBatchTasksArgs and TaskSetBatchTasksOutput values.
 // You can construct a concrete instance of `TaskSetBatchTasksInput` via:
 //
-//          TaskSetBatchTasksArgs{...}
+//	TaskSetBatchTasksArgs{...}
 type TaskSetBatchTasksInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i TaskSetBatchTasksArgs) ToTaskSetBatchTasksPtrOutputWithContext(ctx conte
 // TaskSetBatchTasksPtrInput is an input type that accepts TaskSetBatchTasksArgs, TaskSetBatchTasksPtr and TaskSetBatchTasksPtrOutput values.
 // You can construct a concrete instance of `TaskSetBatchTasksPtrInput` via:
 //
-//          TaskSetBatchTasksArgs{...}
+//	        TaskSetBatchTasksArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TaskSetBatchTasksPtrInput interface {
 	pulumi.Input
 
@@ -185,6 +185,8 @@ type GetNodeNodeDefine struct {
 	NetService string `pulumi:"netService"`
 	// Node status: 1=running, 2=offline.
 	NodeDefineStatus int `pulumi:"nodeDefineStatus"`
+	// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+	TaskTypes []int `pulumi:"taskTypes"`
 	// Node Type;1 = IDC,2 = LastMile,3 = Mobile.
 	Type int `pulumi:"type"`
 }
@@ -192,7 +194,7 @@ type GetNodeNodeDefine struct {
 // GetNodeNodeDefineInput is an input type that accepts GetNodeNodeDefineArgs and GetNodeNodeDefineOutput values.
 // You can construct a concrete instance of `GetNodeNodeDefineInput` via:
 //
-//          GetNodeNodeDefineArgs{...}
+//	GetNodeNodeDefineArgs{...}
 type GetNodeNodeDefineInput interface {
 	pulumi.Input
 
@@ -219,6 +221,8 @@ type GetNodeNodeDefineArgs struct {
 	NetService pulumi.StringInput `pulumi:"netService"`
 	// Node status: 1=running, 2=offline.
 	NodeDefineStatus pulumi.IntInput `pulumi:"nodeDefineStatus"`
+	// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+	TaskTypes pulumi.IntArrayInput `pulumi:"taskTypes"`
 	// Node Type;1 = IDC,2 = LastMile,3 = Mobile.
 	Type pulumi.IntInput `pulumi:"type"`
 }
@@ -238,7 +242,7 @@ func (i GetNodeNodeDefineArgs) ToGetNodeNodeDefineOutputWithContext(ctx context.
 // GetNodeNodeDefineArrayInput is an input type that accepts GetNodeNodeDefineArray and GetNodeNodeDefineArrayOutput values.
 // You can construct a concrete instance of `GetNodeNodeDefineArrayInput` via:
 //
-//          GetNodeNodeDefineArray{ GetNodeNodeDefineArgs{...} }
+//	GetNodeNodeDefineArray{ GetNodeNodeDefineArgs{...} }
 type GetNodeNodeDefineArrayInput interface {
 	pulumi.Input
 
@@ -319,6 +323,11 @@ func (o GetNodeNodeDefineOutput) NodeDefineStatus() pulumi.IntOutput {
 	return o.ApplyT(func(v GetNodeNodeDefine) int { return v.NodeDefineStatus }).(pulumi.IntOutput)
 }
 
+// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+func (o GetNodeNodeDefineOutput) TaskTypes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetNodeNodeDefine) []int { return v.TaskTypes }).(pulumi.IntArrayOutput)
+}
+
 // Node Type;1 = IDC,2 = LastMile,3 = Mobile.
 func (o GetNodeNodeDefineOutput) Type() pulumi.IntOutput {
 	return o.ApplyT(func(v GetNodeNodeDefine) int { return v.Type }).(pulumi.IntOutput)
@@ -356,7 +365,7 @@ type GetProbeDataDetailedSingleDataDefine struct {
 // GetProbeDataDetailedSingleDataDefineInput is an input type that accepts GetProbeDataDetailedSingleDataDefineArgs and GetProbeDataDetailedSingleDataDefineOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineArgs{...}
+//	GetProbeDataDetailedSingleDataDefineArgs{...}
 type GetProbeDataDetailedSingleDataDefineInput interface {
 	pulumi.Input
 
@@ -388,7 +397,7 @@ func (i GetProbeDataDetailedSingleDataDefineArgs) ToGetProbeDataDetailedSingleDa
 // GetProbeDataDetailedSingleDataDefineArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineArray and GetProbeDataDetailedSingleDataDefineArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineArray{ GetProbeDataDetailedSingleDataDefineArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineArray{ GetProbeDataDetailedSingleDataDefineArgs{...} }
 type GetProbeDataDetailedSingleDataDefineArrayInput interface {
 	pulumi.Input
 
@@ -475,7 +484,7 @@ type GetProbeDataDetailedSingleDataDefineField struct {
 // GetProbeDataDetailedSingleDataDefineFieldInput is an input type that accepts GetProbeDataDetailedSingleDataDefineFieldArgs and GetProbeDataDetailedSingleDataDefineFieldOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineFieldInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineFieldArgs{...}
+//	GetProbeDataDetailedSingleDataDefineFieldArgs{...}
 type GetProbeDataDetailedSingleDataDefineFieldInput interface {
 	pulumi.Input
 
@@ -507,7 +516,7 @@ func (i GetProbeDataDetailedSingleDataDefineFieldArgs) ToGetProbeDataDetailedSin
 // GetProbeDataDetailedSingleDataDefineFieldArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineFieldArray and GetProbeDataDetailedSingleDataDefineFieldArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineFieldArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineFieldArray{ GetProbeDataDetailedSingleDataDefineFieldArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineFieldArray{ GetProbeDataDetailedSingleDataDefineFieldArgs{...} }
 type GetProbeDataDetailedSingleDataDefineFieldArrayInput interface {
 	pulumi.Input
 
@@ -590,7 +599,7 @@ type GetProbeDataDetailedSingleDataDefineLabel struct {
 // GetProbeDataDetailedSingleDataDefineLabelInput is an input type that accepts GetProbeDataDetailedSingleDataDefineLabelArgs and GetProbeDataDetailedSingleDataDefineLabelOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineLabelInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineLabelArgs{...}
+//	GetProbeDataDetailedSingleDataDefineLabelArgs{...}
 type GetProbeDataDetailedSingleDataDefineLabelInput interface {
 	pulumi.Input
 
@@ -622,7 +631,7 @@ func (i GetProbeDataDetailedSingleDataDefineLabelArgs) ToGetProbeDataDetailedSin
 // GetProbeDataDetailedSingleDataDefineLabelArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineLabelArray and GetProbeDataDetailedSingleDataDefineLabelArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineLabelArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineLabelArray{ GetProbeDataDetailedSingleDataDefineLabelArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineLabelArray{ GetProbeDataDetailedSingleDataDefineLabelArgs{...} }
 type GetProbeDataDetailedSingleDataDefineLabelArrayInput interface {
 	pulumi.Input
 

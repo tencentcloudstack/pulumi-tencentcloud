@@ -14,27 +14,60 @@ import (
 // Use this resource to create API gateway access key.
 //
 // ## Example Usage
+// ### Automatically generate key for API gateway access key.
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiKey(ctx, "test", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("my_api_key"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiKey(ctx, "exampleAuto", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("tf_example_auto"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Manually generate a secret key for API gateway access key.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiKey(ctx, "exampleManual", &ApiGateway.ApiKeyArgs{
+//				AccessKeyId:     pulumi.String("28e287e340507fa147b2c8284dab542f"),
+//				AccessKeySecret: pulumi.String("0198a4b8c3105080f4acd9e507599eff"),
+//				AccessKeyType:   pulumi.String("manual"),
+//				SecretName:      pulumi.String("tf_example_manual"),
+//				Status:          pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,13 +75,19 @@ import (
 // API gateway access key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
 // ```
 type ApiKey struct {
 	pulumi.CustomResourceState
 
-	// Created API key.
+	// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeyId pulumi.StringOutput `pulumi:"accessKeyId"`
+	// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
 	AccessKeySecret pulumi.StringOutput `pulumi:"accessKeySecret"`
+	// Key type, supports both auto and manual (custom keys), defaults to auto.
+	AccessKeyType pulumi.StringPtrOutput `pulumi:"accessKeyType"`
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -92,8 +131,12 @@ func GetApiKey(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ApiKey resources.
 type apiKeyState struct {
-	// Created API key.
+	// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeyId *string `pulumi:"accessKeyId"`
+	// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
 	AccessKeySecret *string `pulumi:"accessKeySecret"`
+	// Key type, supports both auto and manual (custom keys), defaults to auto.
+	AccessKeyType *string `pulumi:"accessKeyType"`
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime *string `pulumi:"createTime"`
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -105,8 +148,12 @@ type apiKeyState struct {
 }
 
 type ApiKeyState struct {
-	// Created API key.
+	// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeyId pulumi.StringPtrInput
+	// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
 	AccessKeySecret pulumi.StringPtrInput
+	// Key type, supports both auto and manual (custom keys), defaults to auto.
+	AccessKeyType pulumi.StringPtrInput
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	CreateTime pulumi.StringPtrInput
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -122,6 +169,12 @@ func (ApiKeyState) ElementType() reflect.Type {
 }
 
 type apiKeyArgs struct {
+	// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeyId *string `pulumi:"accessKeyId"`
+	// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeySecret *string `pulumi:"accessKeySecret"`
+	// Key type, supports both auto and manual (custom keys), defaults to auto.
+	AccessKeyType *string `pulumi:"accessKeyType"`
 	// Custom key name.
 	SecretName string `pulumi:"secretName"`
 	// Key status. Valid values: `on`, `off`.
@@ -130,6 +183,12 @@ type apiKeyArgs struct {
 
 // The set of arguments for constructing a ApiKey resource.
 type ApiKeyArgs struct {
+	// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeyId pulumi.StringPtrInput
+	// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+	AccessKeySecret pulumi.StringPtrInput
+	// Key type, supports both auto and manual (custom keys), defaults to auto.
+	AccessKeyType pulumi.StringPtrInput
 	// Custom key name.
 	SecretName pulumi.StringInput
 	// Key status. Valid values: `on`, `off`.
@@ -162,7 +221,7 @@ func (i *ApiKey) ToApiKeyOutputWithContext(ctx context.Context) ApiKeyOutput {
 // ApiKeyArrayInput is an input type that accepts ApiKeyArray and ApiKeyArrayOutput values.
 // You can construct a concrete instance of `ApiKeyArrayInput` via:
 //
-//          ApiKeyArray{ ApiKeyArgs{...} }
+//	ApiKeyArray{ ApiKeyArgs{...} }
 type ApiKeyArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +246,7 @@ func (i ApiKeyArray) ToApiKeyArrayOutputWithContext(ctx context.Context) ApiKeyA
 // ApiKeyMapInput is an input type that accepts ApiKeyMap and ApiKeyMapOutput values.
 // You can construct a concrete instance of `ApiKeyMapInput` via:
 //
-//          ApiKeyMap{ "key": ApiKeyArgs{...} }
+//	ApiKeyMap{ "key": ApiKeyArgs{...} }
 type ApiKeyMapInput interface {
 	pulumi.Input
 
@@ -223,9 +282,19 @@ func (o ApiKeyOutput) ToApiKeyOutputWithContext(ctx context.Context) ApiKeyOutpu
 	return o
 }
 
-// Created API key.
+// User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+func (o ApiKeyOutput) AccessKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApiKey) pulumi.StringOutput { return v.AccessKeyId }).(pulumi.StringOutput)
+}
+
+// The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
 func (o ApiKeyOutput) AccessKeySecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApiKey) pulumi.StringOutput { return v.AccessKeySecret }).(pulumi.StringOutput)
+}
+
+// Key type, supports both auto and manual (custom keys), defaults to auto.
+func (o ApiKeyOutput) AccessKeyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApiKey) pulumi.StringPtrOutput { return v.AccessKeyType }).(pulumi.StringPtrOutput)
 }
 
 // Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.

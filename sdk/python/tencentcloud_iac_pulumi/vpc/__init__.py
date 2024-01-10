@@ -52,6 +52,9 @@ from .local_gateway import *
 from .net_detect import *
 from .network_acl_quintuple import *
 from .notify_routes import *
+from .peer_connect_accept_operation import *
+from .peer_connect_manager import *
+from .peer_connect_reject_operation import *
 from .resume_snapshot_instance import *
 from .snapshot_policy import *
 from .snapshot_policy_attachment import *

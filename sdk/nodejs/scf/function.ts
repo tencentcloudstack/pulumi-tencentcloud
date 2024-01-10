@@ -22,6 +22,28 @@ import * as utilities from "../utilities";
  *     runtime: "Python3.6",
  * });
  * ```
+ * ### Using Zip file
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Scf.Function("foo", {
+ *     dnsCache: true,
+ *     enablePublicNet: true,
+ *     handler: "first.do_it_first",
+ *     intranetConfig: {
+ *         ipFixed: "ENABLE",
+ *     },
+ *     runtime: "Python3.6",
+ *     subnetId: "subnet-ljyn7h30",
+ *     tags: {
+ *         env: "test",
+ *     },
+ *     vpcId: "vpc-391sv4w3",
+ *     zipFile: "/scf/first.zip",
+ * });
+ * ```
  * ### Using CFS config
  *
  * ```typescript
@@ -39,6 +61,32 @@ import * as utilities from "../utilities";
  *     }],
  *     handler: "main.do_it",
  *     runtime: "Python3.6",
+ * });
+ * ```
+ * ### Using triggers
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Scf.Function("foo", {
+ *     enablePublicNet: true,
+ *     handler: "first.do_it_first",
+ *     runtime: "Python3.6",
+ *     triggers: [
+ *         {
+ *             name: "tf-test-fn-trigger",
+ *             triggerDesc: "*&#47;5 * * * * * *",
+ *             type: "timer",
+ *         },
+ *         {
+ *             cosRegion: "ap-guangzhou",
+ *             name: "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+ *             triggerDesc: "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+ *             type: "cos",
+ *         },
+ *     ],
+ *     zipFile: "/scf/first.zip",
  * });
  * ```
  *
@@ -78,6 +126,10 @@ export class Function extends pulumi.CustomResource {
         return obj['__pulumiType'] === Function.__pulumiType;
     }
 
+    /**
+     * Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+     */
+    public readonly asyncRunEnable!: pulumi.Output<string>;
     /**
      * List of CFS configurations.
      */
@@ -119,6 +171,10 @@ export class Function extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
+     * Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+     */
+    public readonly dnsCache!: pulumi.Output<boolean | undefined>;
+    /**
      * Whether EIP is a fixed IP.
      */
     public /*out*/ readonly eipFixed!: pulumi.Output<boolean>;
@@ -145,23 +201,27 @@ export class Function extends pulumi.CustomResource {
     /**
      * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
      */
-    public readonly funcType!: pulumi.Output<string>;
+    public readonly funcType!: pulumi.Output<string | undefined>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    public readonly handler!: pulumi.Output<string>;
+    public readonly handler!: pulumi.Output<string | undefined>;
     /**
      * SCF function domain name.
      */
     public /*out*/ readonly host!: pulumi.Output<string>;
     /**
-     * Image of the SCF function, conflict with ``.
+     * Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
      */
     public readonly imageConfigs!: pulumi.Output<outputs.Scf.FunctionImageConfig[] | undefined>;
     /**
      * Whether to automatically install dependencies.
      */
     public /*out*/ readonly installDependency!: pulumi.Output<boolean>;
+    /**
+     * Intranet access configuration.
+     */
+    public readonly intranetConfig!: pulumi.Output<outputs.Scf.FunctionIntranetConfig>;
     /**
      * Enable L5 for SCF function, default is `false`.
      */
@@ -191,9 +251,9 @@ export class Function extends pulumi.CustomResource {
      */
     public readonly role!: pulumi.Output<string | undefined>;
     /**
-     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
      */
-    public readonly runtime!: pulumi.Output<string>;
+    public readonly runtime!: pulumi.Output<string | undefined>;
     /**
      * SCF function status.
      */
@@ -242,12 +302,13 @@ export class Function extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: FunctionArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: FunctionArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: FunctionArgs | FunctionState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as FunctionState | undefined;
+            resourceInputs["asyncRunEnable"] = state ? state.asyncRunEnable : undefined;
             resourceInputs["cfsConfigs"] = state ? state.cfsConfigs : undefined;
             resourceInputs["clsLogsetId"] = state ? state.clsLogsetId : undefined;
             resourceInputs["clsTopicId"] = state ? state.clsTopicId : undefined;
@@ -258,6 +319,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["cosBucketRegion"] = state ? state.cosBucketRegion : undefined;
             resourceInputs["cosObjectName"] = state ? state.cosObjectName : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["dnsCache"] = state ? state.dnsCache : undefined;
             resourceInputs["eipFixed"] = state ? state.eipFixed : undefined;
             resourceInputs["eips"] = state ? state.eips : undefined;
             resourceInputs["enableEipConfig"] = state ? state.enableEipConfig : undefined;
@@ -269,6 +331,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["imageConfigs"] = state ? state.imageConfigs : undefined;
             resourceInputs["installDependency"] = state ? state.installDependency : undefined;
+            resourceInputs["intranetConfig"] = state ? state.intranetConfig : undefined;
             resourceInputs["l5Enable"] = state ? state.l5Enable : undefined;
             resourceInputs["layers"] = state ? state.layers : undefined;
             resourceInputs["memSize"] = state ? state.memSize : undefined;
@@ -289,12 +352,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["zipFile"] = state ? state.zipFile : undefined;
         } else {
             const args = argsOrState as FunctionArgs | undefined;
-            if ((!args || args.handler === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'handler'");
-            }
-            if ((!args || args.runtime === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'runtime'");
-            }
+            resourceInputs["asyncRunEnable"] = args ? args.asyncRunEnable : undefined;
             resourceInputs["cfsConfigs"] = args ? args.cfsConfigs : undefined;
             resourceInputs["clsLogsetId"] = args ? args.clsLogsetId : undefined;
             resourceInputs["clsTopicId"] = args ? args.clsTopicId : undefined;
@@ -302,12 +360,14 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["cosBucketRegion"] = args ? args.cosBucketRegion : undefined;
             resourceInputs["cosObjectName"] = args ? args.cosObjectName : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["dnsCache"] = args ? args.dnsCache : undefined;
             resourceInputs["enableEipConfig"] = args ? args.enableEipConfig : undefined;
             resourceInputs["enablePublicNet"] = args ? args.enablePublicNet : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
             resourceInputs["funcType"] = args ? args.funcType : undefined;
             resourceInputs["handler"] = args ? args.handler : undefined;
             resourceInputs["imageConfigs"] = args ? args.imageConfigs : undefined;
+            resourceInputs["intranetConfig"] = args ? args.intranetConfig : undefined;
             resourceInputs["l5Enable"] = args ? args.l5Enable : undefined;
             resourceInputs["layers"] = args ? args.layers : undefined;
             resourceInputs["memSize"] = args ? args.memSize : undefined;
@@ -344,6 +404,10 @@ export class Function extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Function resources.
  */
 export interface FunctionState {
+    /**
+     * Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+     */
+    asyncRunEnable?: pulumi.Input<string>;
     /**
      * List of CFS configurations.
      */
@@ -385,6 +449,10 @@ export interface FunctionState {
      */
     description?: pulumi.Input<string>;
     /**
+     * Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+     */
+    dnsCache?: pulumi.Input<boolean>;
+    /**
      * Whether EIP is a fixed IP.
      */
     eipFixed?: pulumi.Input<boolean>;
@@ -421,13 +489,17 @@ export interface FunctionState {
      */
     host?: pulumi.Input<string>;
     /**
-     * Image of the SCF function, conflict with ``.
+     * Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
      */
     imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[]>;
     /**
      * Whether to automatically install dependencies.
      */
     installDependency?: pulumi.Input<boolean>;
+    /**
+     * Intranet access configuration.
+     */
+    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig>;
     /**
      * Enable L5 for SCF function, default is `false`.
      */
@@ -457,7 +529,7 @@ export interface FunctionState {
      */
     role?: pulumi.Input<string>;
     /**
-     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
      */
     runtime?: pulumi.Input<string>;
     /**
@@ -507,6 +579,10 @@ export interface FunctionState {
  */
 export interface FunctionArgs {
     /**
+     * Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+     */
+    asyncRunEnable?: pulumi.Input<string>;
+    /**
      * List of CFS configurations.
      */
     cfsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionCfsConfig>[]>;
@@ -535,6 +611,10 @@ export interface FunctionArgs {
      */
     description?: pulumi.Input<string>;
     /**
+     * Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+     */
+    dnsCache?: pulumi.Input<boolean>;
+    /**
      * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
     enableEipConfig?: pulumi.Input<boolean>;
@@ -553,11 +633,15 @@ export interface FunctionArgs {
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    handler: pulumi.Input<string>;
+    handler?: pulumi.Input<string>;
     /**
-     * Image of the SCF function, conflict with ``.
+     * Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
      */
     imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[]>;
+    /**
+     * Intranet access configuration.
+     */
+    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig>;
     /**
      * Enable L5 for SCF function, default is `false`.
      */
@@ -583,9 +667,9 @@ export interface FunctionArgs {
      */
     role?: pulumi.Input<string>;
     /**
-     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+     * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
      */
-    runtime: pulumi.Input<string>;
+    runtime?: pulumi.Input<string>;
     /**
      * Subnet ID of the SCF function.
      */

@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaPicProcessTemplate(ctx, "mediaPicProcessTemplate", &Ci.MediaPicProcessTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			PicProcess: &ci.MediaPicProcessTemplatePicProcessArgs{
-// 				IsPicInfo:   pulumi.String("true"),
-// 				ProcessRule: pulumi.String("imageMogr2/rotate/90"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaPicProcessTemplate(ctx, "mediaPicProcessTemplate", &Ci.MediaPicProcessTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				PicProcess: &ci.MediaPicProcessTemplatePicProcessArgs{
+//					IsPicInfo:   pulumi.String("true"),
+//					ProcessRule: pulumi.String("imageMogr2/rotate/90"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // ci media_pic_process_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate media_pic_process_template terraform-ci-xxxxx#t184a8a26da4674c80bf260c1e34131a65
+//
+//	$ pulumi import tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate media_pic_process_template terraform-ci-xxxxx#t184a8a26da4674c80bf260c1e34131a65
+//
 // ```
 type MediaPicProcessTemplate struct {
 	pulumi.CustomResourceState
@@ -158,7 +163,7 @@ func (i *MediaPicProcessTemplate) ToMediaPicProcessTemplateOutputWithContext(ctx
 // MediaPicProcessTemplateArrayInput is an input type that accepts MediaPicProcessTemplateArray and MediaPicProcessTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaPicProcessTemplateArrayInput` via:
 //
-//          MediaPicProcessTemplateArray{ MediaPicProcessTemplateArgs{...} }
+//	MediaPicProcessTemplateArray{ MediaPicProcessTemplateArgs{...} }
 type MediaPicProcessTemplateArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +188,7 @@ func (i MediaPicProcessTemplateArray) ToMediaPicProcessTemplateArrayOutputWithCo
 // MediaPicProcessTemplateMapInput is an input type that accepts MediaPicProcessTemplateMap and MediaPicProcessTemplateMapOutput values.
 // You can construct a concrete instance of `MediaPicProcessTemplateMapInput` via:
 //
-//          MediaPicProcessTemplateMap{ "key": MediaPicProcessTemplateArgs{...} }
+//	MediaPicProcessTemplateMap{ "key": MediaPicProcessTemplateArgs{...} }
 type MediaPicProcessTemplateMapInput interface {
 	pulumi.Input
 

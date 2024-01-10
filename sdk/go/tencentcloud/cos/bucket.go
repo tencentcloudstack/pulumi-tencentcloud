@@ -20,31 +20,34 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		_, err = Cos.NewBucket(ctx, "privateSbucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "private-bucket-", appId)),
-// 			Acl:    pulumi.String("private"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "privateSbucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "private-bucket-", appId)),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Creation of multiple available zone bucket
 //
@@ -52,34 +55,37 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		_, err = Cos.NewBucket(ctx, "multiZoneBucket", &Cos.BucketArgs{
-// 			Bucket:           pulumi.String(fmt.Sprintf("%v%v", "multi-zone-bucket-", appId)),
-// 			Acl:              pulumi.String("private"),
-// 			MultiAz:          pulumi.Bool(true),
-// 			VersioningEnable: pulumi.Bool(true),
-// 			ForceClean:       pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "multiZoneBucket", &Cos.BucketArgs{
+//				Bucket:           pulumi.String(fmt.Sprintf("%v%v", "multi-zone-bucket-", appId)),
+//				Acl:              pulumi.String("private"),
+//				MultiAz:          pulumi.Bool(true),
+//				VersioningEnable: pulumi.Bool(true),
+//				ForceClean:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using verbose acl
 //
@@ -87,31 +93,34 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		_, err = Cos.NewBucket(ctx, "bucketWithAcl", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucketwith-acl-", appId)),
-// 			AclBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "<AccessControlPolicy>\n", "	<Owner>\n", "		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "	</Owner>\n", "	<AccessControlList>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "	</AccessControlList>\n", "</AccessControlPolicy>\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "bucketWithAcl", &Cos.BucketArgs{
+//				Bucket:  pulumi.String(fmt.Sprintf("%v%v", "bucketwith-acl-", appId)),
+//				AclBody: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "<AccessControlPolicy>\n", "	<Owner>\n", "		<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "		<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "	</Owner>\n", "	<AccessControlList>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>READ_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>WRITE_ACP</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>READ</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n", "				<ID>qcs::cam::uin/100022975249:uin/100022975249</ID>\n", "				<DisplayName>qcs::cam::uin/100022975249:uin/100022975249</DisplayName>\n", "			</Grantee>\n", "			<Permission>WRITE</Permission>\n", "		</Grant>\n", "		<Grant>\n", "			<Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n", "				<URI>http://cam.qcloud.com/groups/global/AllUsers</URI>\n", "			</Grantee>\n", "			<Permission>FULL_CONTROL</Permission>\n", "		</Grant>\n", "	</AccessControlList>\n", "</AccessControlPolicy>\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Static Website
 //
@@ -119,38 +128,41 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		bucketWithStaticWebsite, err := Cos.NewBucket(ctx, "bucketWithStaticWebsite", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-static-website-", appId)),
-// 			Website: &cos.BucketWebsiteArgs{
-// 				IndexDocument: pulumi.String("index.html"),
-// 				ErrorDocument: pulumi.String("error.html"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("endpointTest", bucketWithStaticWebsite.Website.ApplyT(func(website cos.BucketWebsite) (string, error) {
-// 			return website.Endpoint, nil
-// 		}).(pulumi.StringOutput))
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			bucketWithStaticWebsite, err := Cos.NewBucket(ctx, "bucketWithStaticWebsite", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-static-website-", appId)),
+//				Website: &cos.BucketWebsiteArgs{
+//					IndexDocument: pulumi.String("index.html"),
+//					ErrorDocument: pulumi.String("error.html"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("endpointTest", bucketWithStaticWebsite.Website.ApplyT(func(website cos.BucketWebsite) (string, error) {
+//				return website.Endpoint, nil
+//			}).(pulumi.StringOutput))
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using CORS
 //
@@ -158,50 +170,53 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		_, err = Cos.NewBucket(ctx, "bucketWithCors", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-cors-", appId)),
-// 			Acl:    pulumi.String("public-read-write"),
-// 			CorsRules: cos.BucketCorsRuleArray{
-// 				&cos.BucketCorsRuleArgs{
-// 					AllowedOrigins: pulumi.StringArray{
-// 						pulumi.String("http://*.abc.com"),
-// 					},
-// 					AllowedMethods: pulumi.StringArray{
-// 						pulumi.String("PUT"),
-// 						pulumi.String("POST"),
-// 					},
-// 					AllowedHeaders: pulumi.StringArray{
-// 						pulumi.String("*"),
-// 					},
-// 					MaxAgeSeconds: pulumi.Int(300),
-// 					ExposeHeaders: pulumi.StringArray{
-// 						pulumi.String("Etag"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "bucketWithCors", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-cors-", appId)),
+//				Acl:    pulumi.String("public-read-write"),
+//				CorsRules: cos.BucketCorsRuleArray{
+//					&cos.BucketCorsRuleArgs{
+//						AllowedOrigins: pulumi.StringArray{
+//							pulumi.String("http://*.abc.com"),
+//						},
+//						AllowedMethods: pulumi.StringArray{
+//							pulumi.String("PUT"),
+//							pulumi.String("POST"),
+//						},
+//						AllowedHeaders: pulumi.StringArray{
+//							pulumi.String("*"),
+//						},
+//						MaxAgeSeconds: pulumi.Int(300),
+//						ExposeHeaders: pulumi.StringArray{
+//							pulumi.String("Etag"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using object lifecycle
 //
@@ -209,46 +224,49 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		_, err = Cos.NewBucket(ctx, "bucketWithLifecycle", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-lifecycle-", appId)),
-// 			Acl:    pulumi.String("public-read-write"),
-// 			LifecycleRules: cos.BucketLifecycleRuleArray{
-// 				&cos.BucketLifecycleRuleArgs{
-// 					FilterPrefix: pulumi.String("path1/"),
-// 					Transitions: cos.BucketLifecycleRuleTransitionArray{
-// 						&cos.BucketLifecycleRuleTransitionArgs{
-// 							Days:         pulumi.Int(30),
-// 							StorageClass: pulumi.String("STANDARD_IA"),
-// 						},
-// 					},
-// 					Expiration: &cos.BucketLifecycleRuleExpirationArgs{
-// 						Days: pulumi.Int(90),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "bucketWithLifecycle", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "bucket-with-lifecycle-", appId)),
+//				Acl:    pulumi.String("public-read-write"),
+//				LifecycleRules: cos.BucketLifecycleRuleArray{
+//					&cos.BucketLifecycleRuleArgs{
+//						FilterPrefix: pulumi.String("path1/"),
+//						Transitions: cos.BucketLifecycleRuleTransitionArray{
+//							&cos.BucketLifecycleRuleTransitionArgs{
+//								Days:         pulumi.Int(30),
+//								StorageClass: pulumi.String("STANDARD_IA"),
+//							},
+//						},
+//						Expiration: &cos.BucketLifecycleRuleExpirationArgs{
+//							Days: pulumi.Int(90),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using replication
 //
@@ -256,55 +274,58 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		appId := info.AppId
-// 		uin := info.Uin
-// 		ownerUin := info.OwnerUin
-// 		region := "ap-guangzhou"
-// 		bucketReplicate, err := Cos.NewBucket(ctx, "bucketReplicate", &Cos.BucketArgs{
-// 			Bucket:           pulumi.String(fmt.Sprintf("%v%v", "bucket-replicate-", appId)),
-// 			Acl:              pulumi.String("private"),
-// 			VersioningEnable: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cos.NewBucket(ctx, "bucketWithReplication", &Cos.BucketArgs{
-// 			Bucket:           pulumi.String(fmt.Sprintf("%v%v", "bucket-with-replication-", appId)),
-// 			Acl:              pulumi.String("private"),
-// 			VersioningEnable: pulumi.Bool(true),
-// 			ReplicaRole:      pulumi.String(fmt.Sprintf("%v%v%v%v", "qcs::cam::uin/", ownerUin, ":uin/", uin)),
-// 			ReplicaRules: cos.BucketReplicaRuleArray{
-// 				&cos.BucketReplicaRuleArgs{
-// 					Id:     pulumi.String("test-rep1"),
-// 					Status: pulumi.String("Enabled"),
-// 					Prefix: pulumi.String("dist"),
-// 					DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
-// 						return fmt.Sprintf("%v%v%v%v", "qcs::cos:", region, "::", bucket), nil
-// 					}).(pulumi.StringOutput),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			uin := info.Uin
+//			ownerUin := info.OwnerUin
+//			region := "ap-guangzhou"
+//			bucketReplicate, err := Cos.NewBucket(ctx, "bucketReplicate", &Cos.BucketArgs{
+//				Bucket:           pulumi.String(fmt.Sprintf("%v%v", "bucket-replicate-", appId)),
+//				Acl:              pulumi.String("private"),
+//				VersioningEnable: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cos.NewBucket(ctx, "bucketWithReplication", &Cos.BucketArgs{
+//				Bucket:           pulumi.String(fmt.Sprintf("%v%v", "bucket-with-replication-", appId)),
+//				Acl:              pulumi.String("private"),
+//				VersioningEnable: pulumi.Bool(true),
+//				ReplicaRole:      pulumi.String(fmt.Sprintf("%v%v%v%v", "qcs::cam::uin/", ownerUin, ":uin/", uin)),
+//				ReplicaRules: cos.BucketReplicaRuleArray{
+//					&cos.BucketReplicaRuleArgs{
+//						Id:     pulumi.String("test-rep1"),
+//						Status: pulumi.String("Enabled"),
+//						Prefix: pulumi.String("dist"),
+//						DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
+//							return fmt.Sprintf("%v%v%v%v", "qcs::cos:", region, "::", bucket), nil
+//						}).(pulumi.StringOutput),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -312,7 +333,9 @@ import (
 // COS bucket can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
+//
+//	$ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
+//
 // ```
 type Bucket struct {
 	pulumi.CustomResourceState
@@ -322,7 +345,7 @@ type Bucket struct {
 	// The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
 	Acl pulumi.StringPtrOutput `pulumi:"acl"`
 	// ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
-	AclBody pulumi.StringPtrOutput `pulumi:"aclBody"`
+	AclBody pulumi.StringOutput `pulumi:"aclBody"`
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringOutput `pulumi:"bucket"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
@@ -620,7 +643,7 @@ func (i *Bucket) ToBucketOutputWithContext(ctx context.Context) BucketOutput {
 // BucketArrayInput is an input type that accepts BucketArray and BucketArrayOutput values.
 // You can construct a concrete instance of `BucketArrayInput` via:
 //
-//          BucketArray{ BucketArgs{...} }
+//	BucketArray{ BucketArgs{...} }
 type BucketArrayInput interface {
 	pulumi.Input
 
@@ -645,7 +668,7 @@ func (i BucketArray) ToBucketArrayOutputWithContext(ctx context.Context) BucketA
 // BucketMapInput is an input type that accepts BucketMap and BucketMapOutput values.
 // You can construct a concrete instance of `BucketMapInput` via:
 //
-//          BucketMap{ "key": BucketArgs{...} }
+//	BucketMap{ "key": BucketArgs{...} }
 type BucketMapInput interface {
 	pulumi.Input
 
@@ -692,8 +715,8 @@ func (o BucketOutput) Acl() pulumi.StringPtrOutput {
 }
 
 // ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
-func (o BucketOutput) AclBody() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.AclBody }).(pulumi.StringPtrOutput)
+func (o BucketOutput) AclBody() pulumi.StringOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.AclBody }).(pulumi.StringOutput)
 }
 
 // The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.

@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     public partial class BandwidthLimit : Pulumi.CustomResource
     {
         /// <summary>
-        /// Limitation of bandwidth.
+        /// Limitation of bandwidth. Default is `0`.
         /// </summary>
         [Output("bandwidthLimit")]
         public Output<int> CcnBandwidthLimit { get; private set; } = null!;
@@ -147,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     public sealed class BandwidthLimitArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Limitation of bandwidth.
+        /// Limitation of bandwidth. Default is `0`.
         /// </summary>
         [Input("bandwidthLimit")]
         public Input<int>? CcnBandwidthLimit { get; set; }
@@ -178,7 +178,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     public sealed class BandwidthLimitState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Limitation of bandwidth.
+        /// Limitation of bandwidth. Default is `0`.
         /// </summary>
         [Input("bandwidthLimit")]
         public Input<int>? CcnBandwidthLimit { get; set; }

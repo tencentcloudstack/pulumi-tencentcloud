@@ -20,60 +20,63 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewConnectionConfig(ctx, "connectionConfig", &Redis.ConnectionConfigArgs{
-// 			InstanceId:   pulumi.String("crs-fhm9fnv1"),
-// 			ClientLimit:  pulumi.Int(20000),
-// 			AddBandwidth: pulumi.Int(30),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewConnectionConfig(ctx, "connectionConfig", &Redis.ConnectionConfigArgs{
+//				InstanceId:   pulumi.String("crs-fhm9fnv1"),
+//				ClientLimit:  pulumi.Int(20000),
+//				AddBandwidth: pulumi.Int(30),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -81,7 +84,9 @@ import (
 // Redis connectionConfig can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/connectionConfig:ConnectionConfig connection_config instance_id
+//
+//	$ pulumi import tencentcloud:Redis/connectionConfig:ConnectionConfig connection_config instance_id
+//
 // ```
 type ConnectionConfig struct {
 	pulumi.CustomResourceState
@@ -217,7 +222,7 @@ func (i *ConnectionConfig) ToConnectionConfigOutputWithContext(ctx context.Conte
 // ConnectionConfigArrayInput is an input type that accepts ConnectionConfigArray and ConnectionConfigArrayOutput values.
 // You can construct a concrete instance of `ConnectionConfigArrayInput` via:
 //
-//          ConnectionConfigArray{ ConnectionConfigArgs{...} }
+//	ConnectionConfigArray{ ConnectionConfigArgs{...} }
 type ConnectionConfigArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +247,7 @@ func (i ConnectionConfigArray) ToConnectionConfigArrayOutputWithContext(ctx cont
 // ConnectionConfigMapInput is an input type that accepts ConnectionConfigMap and ConnectionConfigMapOutput values.
 // You can construct a concrete instance of `ConnectionConfigMapInput` via:
 //
-//          ConnectionConfigMap{ "key": ConnectionConfigArgs{...} }
+//	ConnectionConfigMap{ "key": ConnectionConfigArgs{...} }
 type ConnectionConfigMapInput interface {
 	pulumi.Input
 

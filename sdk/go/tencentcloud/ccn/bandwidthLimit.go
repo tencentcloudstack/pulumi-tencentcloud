@@ -20,36 +20,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		otherRegion1 := "ap-shanghai"
-// 		if param := cfg.Get("otherRegion1"); param != "" {
-// 			otherRegion1 = param
-// 		}
-// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			Description: pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:         pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
-// 			CcnId:          main.ID(),
-// 			Region:         pulumi.String(otherRegion1),
-// 			BandwidthLimit: pulumi.Int(500),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			otherRegion1 := "ap-shanghai"
+//			if param := cfg.Get("otherRegion1"); param != "" {
+//				otherRegion1 = param
+//			}
+//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				Description: pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:         pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
+//				CcnId:          main.ID(),
+//				Region:         pulumi.String(otherRegion1),
+//				BandwidthLimit: pulumi.Int(500),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Set the upper limit between regions
 //
@@ -57,47 +60,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		otherRegion1 := "ap-shanghai"
-// 		if param := cfg.Get("otherRegion1"); param != "" {
-// 			otherRegion1 = param
-// 		}
-// 		otherRegion2 := "ap-nanjing"
-// 		if param := cfg.Get("otherRegion2"); param != "" {
-// 			otherRegion2 = param
-// 		}
-// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			Description:        pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:                pulumi.String("AG"),
-// 			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
-// 			CcnId:          main.ID(),
-// 			Region:         pulumi.String(otherRegion1),
-// 			DstRegion:      pulumi.String(otherRegion2),
-// 			BandwidthLimit: pulumi.Int(100),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			otherRegion1 := "ap-shanghai"
+//			if param := cfg.Get("otherRegion1"); param != "" {
+//				otherRegion1 = param
+//			}
+//			otherRegion2 := "ap-nanjing"
+//			if param := cfg.Get("otherRegion2"); param != "" {
+//				otherRegion2 = param
+//			}
+//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:                pulumi.String("AG"),
+//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
+//				CcnId:          main.ID(),
+//				Region:         pulumi.String(otherRegion1),
+//				DstRegion:      pulumi.String(otherRegion2),
+//				BandwidthLimit: pulumi.Int(100),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BandwidthLimit struct {
 	pulumi.CustomResourceState
 
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntOutput `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId pulumi.StringOutput `pulumi:"ccnId"`
@@ -143,7 +149,7 @@ func GetBandwidthLimit(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BandwidthLimit resources.
 type bandwidthLimitState struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit *int `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId *string `pulumi:"ccnId"`
@@ -154,7 +160,7 @@ type bandwidthLimitState struct {
 }
 
 type BandwidthLimitState struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntPtrInput
 	// ID of the CCN.
 	CcnId pulumi.StringPtrInput
@@ -169,7 +175,7 @@ func (BandwidthLimitState) ElementType() reflect.Type {
 }
 
 type bandwidthLimitArgs struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit *int `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId string `pulumi:"ccnId"`
@@ -181,7 +187,7 @@ type bandwidthLimitArgs struct {
 
 // The set of arguments for constructing a BandwidthLimit resource.
 type BandwidthLimitArgs struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntPtrInput
 	// ID of the CCN.
 	CcnId pulumi.StringInput
@@ -217,7 +223,7 @@ func (i *BandwidthLimit) ToBandwidthLimitOutputWithContext(ctx context.Context) 
 // BandwidthLimitArrayInput is an input type that accepts BandwidthLimitArray and BandwidthLimitArrayOutput values.
 // You can construct a concrete instance of `BandwidthLimitArrayInput` via:
 //
-//          BandwidthLimitArray{ BandwidthLimitArgs{...} }
+//	BandwidthLimitArray{ BandwidthLimitArgs{...} }
 type BandwidthLimitArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +248,7 @@ func (i BandwidthLimitArray) ToBandwidthLimitArrayOutputWithContext(ctx context.
 // BandwidthLimitMapInput is an input type that accepts BandwidthLimitMap and BandwidthLimitMapOutput values.
 // You can construct a concrete instance of `BandwidthLimitMapInput` via:
 //
-//          BandwidthLimitMap{ "key": BandwidthLimitArgs{...} }
+//	BandwidthLimitMap{ "key": BandwidthLimitArgs{...} }
 type BandwidthLimitMapInput interface {
 	pulumi.Input
 
@@ -278,7 +284,7 @@ func (o BandwidthLimitOutput) ToBandwidthLimitOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Limitation of bandwidth.
+// Limitation of bandwidth. Default is `0`.
 func (o BandwidthLimitOutput) BandwidthLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v *BandwidthLimit) pulumi.IntOutput { return v.BandwidthLimit }).(pulumi.IntOutput)
 }

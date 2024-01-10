@@ -22,6 +22,7 @@ export * from "./getVipInstance";
 export * from "./instance";
 export * from "./namespace";
 export * from "./namespaceRoleAttachment";
+export * from "./professionalCluster";
 export * from "./rabbitmqUser";
 export * from "./rabbitmqVipInstance";
 export * from "./rabbitmqVirtualHost";
@@ -34,13 +35,14 @@ export * from "./rocketmqTopic";
 export * from "./rocketmqVipInstance";
 export * from "./role";
 export * from "./sendRocketmqMessage";
-export * from "./subscriptionAttachment";
+export * from "./subscription";
 export * from "./topic";
 
 // Import resources to register:
 import { Instance } from "./instance";
 import { Namespace } from "./namespace";
 import { NamespaceRoleAttachment } from "./namespaceRoleAttachment";
+import { ProfessionalCluster } from "./professionalCluster";
 import { RabbitmqUser } from "./rabbitmqUser";
 import { RabbitmqVipInstance } from "./rabbitmqVipInstance";
 import { RabbitmqVirtualHost } from "./rabbitmqVirtualHost";
@@ -53,7 +55,7 @@ import { RocketmqTopic } from "./rocketmqTopic";
 import { RocketmqVipInstance } from "./rocketmqVipInstance";
 import { Role } from "./role";
 import { SendRocketmqMessage } from "./sendRocketmqMessage";
-import { SubscriptionAttachment } from "./subscriptionAttachment";
+import { Subscription } from "./subscription";
 import { Topic } from "./topic";
 
 const _module = {
@@ -66,6 +68,8 @@ const _module = {
                 return new Namespace(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment":
                 return new NamespaceRoleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/professionalCluster:ProfessionalCluster":
+                return new ProfessionalCluster(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser":
                 return new RabbitmqUser(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance":
@@ -90,8 +94,8 @@ const _module = {
                 return new Role(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/sendRocketmqMessage:SendRocketmqMessage":
                 return new SendRocketmqMessage(name, <any>undefined, { urn })
-            case "tencentcloud:Tdmq/subscriptionAttachment:SubscriptionAttachment":
-                return new SubscriptionAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Tdmq/subscription:Subscription":
+                return new Subscription(name, <any>undefined, { urn })
             case "tencentcloud:Tdmq/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             default:
@@ -102,6 +106,7 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/namespaceRoleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/professionalCluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqUser", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqVipInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rabbitmqVirtualHost", _module)
@@ -114,5 +119,5 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqTopic", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/rocketmqVipInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/role", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/sendRocketmqMessage", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/subscriptionAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/subscription", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tdmq/topic", _module)

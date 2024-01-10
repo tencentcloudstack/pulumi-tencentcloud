@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.GetBackupDownloadInfo(ctx, &redis.GetBackupDownloadInfoArgs{
-// 			BackupId:   "641186639-8362913-1516672770",
-// 			InstanceId: "crs-iw7d9wdd",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.GetBackupDownloadInfo(ctx, &redis.GetBackupDownloadInfoArgs{
+//				BackupId:   "641186639-8362913-1516672770",
+//				InstanceId: "crs-iw7d9wdd",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBackupDownloadInfo(ctx *pulumi.Context, args *GetBackupDownloadInfoArgs, opts ...pulumi.InvokeOption) (*GetBackupDownloadInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

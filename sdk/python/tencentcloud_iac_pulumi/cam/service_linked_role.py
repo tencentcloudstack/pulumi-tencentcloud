@@ -20,7 +20,7 @@ class ServiceLinkedRoleArgs:
         """
         The set of arguments for constructing a ServiceLinkedRole resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] qcs_service_names: Authorization service, the Tencent Cloud service principal with this role attached.
-        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         :param pulumi.Input[str] description: role description.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
@@ -48,7 +48,7 @@ class ServiceLinkedRoleArgs:
     @pulumi.getter(name="customSuffix")
     def custom_suffix(self) -> Optional[pulumi.Input[str]]:
         """
-        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         """
         return pulumi.get(self, "custom_suffix")
 
@@ -90,7 +90,7 @@ class _ServiceLinkedRoleState:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering ServiceLinkedRole resources.
-        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         :param pulumi.Input[str] description: role description.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] qcs_service_names: Authorization service, the Tencent Cloud service principal with this role attached.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -108,7 +108,7 @@ class _ServiceLinkedRoleState:
     @pulumi.getter(name="customSuffix")
     def custom_suffix(self) -> Optional[pulumi.Input[str]]:
         """
-        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         """
         return pulumi.get(self, "custom_suffix")
 
@@ -173,7 +173,7 @@ class ServiceLinkedRole(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         service_linked_role = tencentcloud.cam.ServiceLinkedRole("serviceLinkedRole",
-            custom_suffix="x-1",
+            custom_suffix="tf",
             description="desc cam",
             qcs_service_names=[
                 "cvm.qcloud.com",
@@ -186,7 +186,7 @@ class ServiceLinkedRole(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         :param pulumi.Input[str] description: role description.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] qcs_service_names: Authorization service, the Tencent Cloud service principal with this role attached.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -207,7 +207,7 @@ class ServiceLinkedRole(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         service_linked_role = tencentcloud.cam.ServiceLinkedRole("serviceLinkedRole",
-            custom_suffix="x-1",
+            custom_suffix="tf",
             description="desc cam",
             qcs_service_names=[
                 "cvm.qcloud.com",
@@ -278,7 +278,7 @@ class ServiceLinkedRole(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        :param pulumi.Input[str] custom_suffix: The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         :param pulumi.Input[str] description: role description.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] qcs_service_names: Authorization service, the Tencent Cloud service principal with this role attached.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -295,9 +295,9 @@ class ServiceLinkedRole(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="customSuffix")
-    def custom_suffix(self) -> pulumi.Output[Optional[str]]:
+    def custom_suffix(self) -> pulumi.Output[str]:
         """
-        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         """
         return pulumi.get(self, "custom_suffix")
 

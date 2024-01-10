@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewDbDiagReportTask(ctx, "dbDiagReportTask", &Dbbrain.DbDiagReportTaskArgs{
-// 			EndTime:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			InstanceId:   pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Product:      pulumi.String("mysql"),
-// 			SendMailFlag: pulumi.Int(0),
-// 			StartTime:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewDbDiagReportTask(ctx, "dbDiagReportTask", &Dbbrain.DbDiagReportTaskArgs{
+//				EndTime:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				InstanceId:   pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				Product:      pulumi.String("mysql"),
+//				SendMailFlag: pulumi.Int(0),
+//				StartTime:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DbDiagReportTask struct {
 	pulumi.CustomResourceState
@@ -203,7 +206,7 @@ func (i *DbDiagReportTask) ToDbDiagReportTaskOutputWithContext(ctx context.Conte
 // DbDiagReportTaskArrayInput is an input type that accepts DbDiagReportTaskArray and DbDiagReportTaskArrayOutput values.
 // You can construct a concrete instance of `DbDiagReportTaskArrayInput` via:
 //
-//          DbDiagReportTaskArray{ DbDiagReportTaskArgs{...} }
+//	DbDiagReportTaskArray{ DbDiagReportTaskArgs{...} }
 type DbDiagReportTaskArrayInput interface {
 	pulumi.Input
 
@@ -228,7 +231,7 @@ func (i DbDiagReportTaskArray) ToDbDiagReportTaskArrayOutputWithContext(ctx cont
 // DbDiagReportTaskMapInput is an input type that accepts DbDiagReportTaskMap and DbDiagReportTaskMapOutput values.
 // You can construct a concrete instance of `DbDiagReportTaskMapInput` via:
 //
-//          DbDiagReportTaskMap{ "key": DbDiagReportTaskArgs{...} }
+//	DbDiagReportTaskMap{ "key": DbDiagReportTaskArgs{...} }
 type DbDiagReportTaskMapInput interface {
 	pulumi.Input
 

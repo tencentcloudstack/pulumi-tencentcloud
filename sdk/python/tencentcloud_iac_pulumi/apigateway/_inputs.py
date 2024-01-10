@@ -9,12 +9,212 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ApiConstantParameterArgs',
+    'ApiMicroServiceArgs',
+    'ApiOauthConfigArgs',
     'ApiRequestParameterArgs',
     'ApiResponseErrorCodeArgs',
+    'ApiServiceConfigCosConfigArgs',
+    'ApiServiceParameterArgs',
+    'ApiServiceTsfHealthCheckConfArgs',
+    'ApiServiceTsfLoadBalanceConfArgs',
+    'ApiTargetServiceArgs',
+    'ApiTargetServicesHealthCheckConfArgs',
+    'ImportOpenApiConstantParameterArgs',
+    'ImportOpenApiMicroServiceArgs',
+    'ImportOpenApiOauthConfigArgs',
+    'ImportOpenApiRequestParameterArgs',
+    'ImportOpenApiResponseErrorCodeArgs',
+    'ImportOpenApiServiceConfigCosConfigArgs',
+    'ImportOpenApiServiceParameterArgs',
+    'ImportOpenApiServiceTsfHealthCheckConfArgs',
+    'ImportOpenApiServiceTsfLoadBalanceConfArgs',
     'ServiceApiListArgs',
     'ServiceUsagePlanListArgs',
+    'UpstreamHealthCheckerArgs',
+    'UpstreamK8sServiceArgs',
+    'UpstreamK8sServiceExtraLabelArgs',
+    'UpstreamNodeArgs',
     'UsagePlanAttachListArgs',
+    'GetBindApiAppsStatusFilterArgs',
+    'GetUpstreamsFilterArgs',
 ]
+
+@pulumi.input_type
+class ApiConstantParameterArgs:
+    def __init__(__self__, *,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 desc: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 position: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] default_value: Default value for constant parameters. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] desc: Constant parameter description. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] name: Constant parameter name. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] position: Constant parameter position. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if desc is not None:
+            pulumi.set(__self__, "desc", desc)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Default value for constant parameters. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter
+    def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Constant parameter description. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "desc")
+
+    @desc.setter
+    def desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "desc", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Constant parameter name. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[str]]:
+        """
+        Constant parameter position. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "position", value)
+
+
+@pulumi.input_type
+class ApiMicroServiceArgs:
+    def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
+                 micro_service_name: pulumi.Input[str],
+                 namespace_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] cluster_id: Micro service cluster.
+        :param pulumi.Input[str] micro_service_name: Microservice name.
+        :param pulumi.Input[str] namespace_id: Microservice namespace.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "micro_service_name", micro_service_name)
+        pulumi.set(__self__, "namespace_id", namespace_id)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Micro service cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="microServiceName")
+    def micro_service_name(self) -> pulumi.Input[str]:
+        """
+        Microservice name.
+        """
+        return pulumi.get(self, "micro_service_name")
+
+    @micro_service_name.setter
+    def micro_service_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "micro_service_name", value)
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> pulumi.Input[str]:
+        """
+        Microservice namespace.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @namespace_id.setter
+    def namespace_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "namespace_id", value)
+
+
+@pulumi.input_type
+class ApiOauthConfigArgs:
+    def __init__(__self__, *,
+                 public_key: pulumi.Input[str],
+                 token_location: pulumi.Input[str],
+                 login_redirect_url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] public_key: Public key, used to verify user tokens.
+        :param pulumi.Input[str] token_location: Token passes the position.
+        :param pulumi.Input[str] login_redirect_url: Redirect address, used to guide users in login operations.
+        """
+        pulumi.set(__self__, "public_key", public_key)
+        pulumi.set(__self__, "token_location", token_location)
+        if login_redirect_url is not None:
+            pulumi.set(__self__, "login_redirect_url", login_redirect_url)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> pulumi.Input[str]:
+        """
+        Public key, used to verify user tokens.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter(name="tokenLocation")
+    def token_location(self) -> pulumi.Input[str]:
+        """
+        Token passes the position.
+        """
+        return pulumi.get(self, "token_location")
+
+    @token_location.setter
+    def token_location(self, value: pulumi.Input[str]):
+        pulumi.set(self, "token_location", value)
+
+    @property
+    @pulumi.getter(name="loginRedirectUrl")
+    def login_redirect_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Redirect address, used to guide users in login operations.
+        """
+        return pulumi.get(self, "login_redirect_url")
+
+    @login_redirect_url.setter
+    def login_redirect_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "login_redirect_url", value)
+
 
 @pulumi.input_type
 class ApiRequestParameterArgs:
@@ -202,6 +402,1193 @@ class ApiResponseErrorCodeArgs:
 
 
 @pulumi.input_type
+class ApiServiceConfigCosConfigArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 bucket_name: pulumi.Input[str],
+                 authorization: Optional[pulumi.Input[bool]] = None,
+                 path_match_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] bucket_name: The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] authorization: The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] path_match_mode: Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "bucket_name", bucket_name)
+        if authorization is not None:
+            pulumi.set(__self__, "authorization", authorization)
+        if path_match_mode is not None:
+            pulumi.set(__self__, "path_match_mode", path_match_mode)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        """
+        The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> pulumi.Input[str]:
+        """
+        The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bucket_name")
+
+    @bucket_name.setter
+    def bucket_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket_name", value)
+
+    @property
+    @pulumi.getter
+    def authorization(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "authorization")
+
+    @authorization.setter
+    def authorization(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "authorization", value)
+
+    @property
+    @pulumi.getter(name="pathMatchMode")
+    def path_match_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "path_match_mode")
+
+    @path_match_mode.setter
+    def path_match_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path_match_mode", value)
+
+
+@pulumi.input_type
+class ApiServiceParameterArgs:
+    def __init__(__self__, *,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 position: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_desc: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_name: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_position: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] default_value: The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] name: The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] position: The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_desc: Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_name: The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_position: The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_type: The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
+        if relevant_request_parameter_desc is not None:
+            pulumi.set(__self__, "relevant_request_parameter_desc", relevant_request_parameter_desc)
+        if relevant_request_parameter_name is not None:
+            pulumi.set(__self__, "relevant_request_parameter_name", relevant_request_parameter_name)
+        if relevant_request_parameter_position is not None:
+            pulumi.set(__self__, "relevant_request_parameter_position", relevant_request_parameter_position)
+        if relevant_request_parameter_type is not None:
+            pulumi.set(__self__, "relevant_request_parameter_type", relevant_request_parameter_type)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "position", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterDesc")
+    def relevant_request_parameter_desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_desc")
+
+    @relevant_request_parameter_desc.setter
+    def relevant_request_parameter_desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_desc", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterName")
+    def relevant_request_parameter_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_name")
+
+    @relevant_request_parameter_name.setter
+    def relevant_request_parameter_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_name", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterPosition")
+    def relevant_request_parameter_position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_position")
+
+    @relevant_request_parameter_position.setter
+    def relevant_request_parameter_position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_position", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterType")
+    def relevant_request_parameter_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_type")
+
+    @relevant_request_parameter_type.setter
+    def relevant_request_parameter_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_type", value)
+
+
+@pulumi.input_type
+class ApiServiceTsfHealthCheckConfArgs:
+    def __init__(__self__, *,
+                 error_threshold_percentage: Optional[pulumi.Input[int]] = None,
+                 is_health_check: Optional[pulumi.Input[bool]] = None,
+                 request_volume_threshold: Optional[pulumi.Input[int]] = None,
+                 sleep_window_in_milliseconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] error_threshold_percentage: Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] is_health_check: Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] request_volume_threshold: Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] sleep_window_in_milliseconds: Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if error_threshold_percentage is not None:
+            pulumi.set(__self__, "error_threshold_percentage", error_threshold_percentage)
+        if is_health_check is not None:
+            pulumi.set(__self__, "is_health_check", is_health_check)
+        if request_volume_threshold is not None:
+            pulumi.set(__self__, "request_volume_threshold", request_volume_threshold)
+        if sleep_window_in_milliseconds is not None:
+            pulumi.set(__self__, "sleep_window_in_milliseconds", sleep_window_in_milliseconds)
+
+    @property
+    @pulumi.getter(name="errorThresholdPercentage")
+    def error_threshold_percentage(self) -> Optional[pulumi.Input[int]]:
+        """
+        Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "error_threshold_percentage")
+
+    @error_threshold_percentage.setter
+    def error_threshold_percentage(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "error_threshold_percentage", value)
+
+    @property
+    @pulumi.getter(name="isHealthCheck")
+    def is_health_check(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_health_check")
+
+    @is_health_check.setter
+    def is_health_check(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_health_check", value)
+
+    @property
+    @pulumi.getter(name="requestVolumeThreshold")
+    def request_volume_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "request_volume_threshold")
+
+    @request_volume_threshold.setter
+    def request_volume_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "request_volume_threshold", value)
+
+    @property
+    @pulumi.getter(name="sleepWindowInMilliseconds")
+    def sleep_window_in_milliseconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "sleep_window_in_milliseconds")
+
+    @sleep_window_in_milliseconds.setter
+    def sleep_window_in_milliseconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sleep_window_in_milliseconds", value)
+
+
+@pulumi.input_type
+class ApiServiceTsfLoadBalanceConfArgs:
+    def __init__(__self__, *,
+                 is_load_balance: Optional[pulumi.Input[bool]] = None,
+                 method: Optional[pulumi.Input[str]] = None,
+                 session_stick_required: Optional[pulumi.Input[bool]] = None,
+                 session_stick_timeout: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[bool] is_load_balance: Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] method: Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] session_stick_required: Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] session_stick_timeout: Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if is_load_balance is not None:
+            pulumi.set(__self__, "is_load_balance", is_load_balance)
+        if method is not None:
+            pulumi.set(__self__, "method", method)
+        if session_stick_required is not None:
+            pulumi.set(__self__, "session_stick_required", session_stick_required)
+        if session_stick_timeout is not None:
+            pulumi.set(__self__, "session_stick_timeout", session_stick_timeout)
+
+    @property
+    @pulumi.getter(name="isLoadBalance")
+    def is_load_balance(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_load_balance")
+
+    @is_load_balance.setter
+    def is_load_balance(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_load_balance", value)
+
+    @property
+    @pulumi.getter
+    def method(self) -> Optional[pulumi.Input[str]]:
+        """
+        Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "method")
+
+    @method.setter
+    def method(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "method", value)
+
+    @property
+    @pulumi.getter(name="sessionStickRequired")
+    def session_stick_required(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "session_stick_required")
+
+    @session_stick_required.setter
+    def session_stick_required(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "session_stick_required", value)
+
+    @property
+    @pulumi.getter(name="sessionStickTimeout")
+    def session_stick_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "session_stick_timeout")
+
+    @session_stick_timeout.setter
+    def session_stick_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "session_stick_timeout", value)
+
+
+@pulumi.input_type
+class ApiTargetServiceArgs:
+    def __init__(__self__, *,
+                 host_ip: pulumi.Input[str],
+                 vm_ip: pulumi.Input[str],
+                 vm_port: pulumi.Input[int],
+                 vpc_id: pulumi.Input[str],
+                 docker_ip: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] host_ip: Host IP of the CVM.
+        :param pulumi.Input[str] vm_ip: vm ip.
+        :param pulumi.Input[int] vm_port: vm port.
+        :param pulumi.Input[str] vpc_id: vpc id.
+        :param pulumi.Input[str] docker_ip: docker ip.
+        """
+        pulumi.set(__self__, "host_ip", host_ip)
+        pulumi.set(__self__, "vm_ip", vm_ip)
+        pulumi.set(__self__, "vm_port", vm_port)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        if docker_ip is not None:
+            pulumi.set(__self__, "docker_ip", docker_ip)
+
+    @property
+    @pulumi.getter(name="hostIp")
+    def host_ip(self) -> pulumi.Input[str]:
+        """
+        Host IP of the CVM.
+        """
+        return pulumi.get(self, "host_ip")
+
+    @host_ip.setter
+    def host_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host_ip", value)
+
+    @property
+    @pulumi.getter(name="vmIp")
+    def vm_ip(self) -> pulumi.Input[str]:
+        """
+        vm ip.
+        """
+        return pulumi.get(self, "vm_ip")
+
+    @vm_ip.setter
+    def vm_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vm_ip", value)
+
+    @property
+    @pulumi.getter(name="vmPort")
+    def vm_port(self) -> pulumi.Input[int]:
+        """
+        vm port.
+        """
+        return pulumi.get(self, "vm_port")
+
+    @vm_port.setter
+    def vm_port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "vm_port", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        """
+        vpc id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
+
+    @property
+    @pulumi.getter(name="dockerIp")
+    def docker_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        docker ip.
+        """
+        return pulumi.get(self, "docker_ip")
+
+    @docker_ip.setter
+    def docker_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_ip", value)
+
+
+@pulumi.input_type
+class ApiTargetServicesHealthCheckConfArgs:
+    def __init__(__self__, *,
+                 error_threshold_percentage: Optional[pulumi.Input[int]] = None,
+                 is_health_check: Optional[pulumi.Input[bool]] = None,
+                 request_volume_threshold: Optional[pulumi.Input[int]] = None,
+                 sleep_window_in_milliseconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] error_threshold_percentage: Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] is_health_check: Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] request_volume_threshold: Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] sleep_window_in_milliseconds: Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if error_threshold_percentage is not None:
+            pulumi.set(__self__, "error_threshold_percentage", error_threshold_percentage)
+        if is_health_check is not None:
+            pulumi.set(__self__, "is_health_check", is_health_check)
+        if request_volume_threshold is not None:
+            pulumi.set(__self__, "request_volume_threshold", request_volume_threshold)
+        if sleep_window_in_milliseconds is not None:
+            pulumi.set(__self__, "sleep_window_in_milliseconds", sleep_window_in_milliseconds)
+
+    @property
+    @pulumi.getter(name="errorThresholdPercentage")
+    def error_threshold_percentage(self) -> Optional[pulumi.Input[int]]:
+        """
+        Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "error_threshold_percentage")
+
+    @error_threshold_percentage.setter
+    def error_threshold_percentage(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "error_threshold_percentage", value)
+
+    @property
+    @pulumi.getter(name="isHealthCheck")
+    def is_health_check(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_health_check")
+
+    @is_health_check.setter
+    def is_health_check(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_health_check", value)
+
+    @property
+    @pulumi.getter(name="requestVolumeThreshold")
+    def request_volume_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "request_volume_threshold")
+
+    @request_volume_threshold.setter
+    def request_volume_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "request_volume_threshold", value)
+
+    @property
+    @pulumi.getter(name="sleepWindowInMilliseconds")
+    def sleep_window_in_milliseconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "sleep_window_in_milliseconds")
+
+    @sleep_window_in_milliseconds.setter
+    def sleep_window_in_milliseconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sleep_window_in_milliseconds", value)
+
+
+@pulumi.input_type
+class ImportOpenApiConstantParameterArgs:
+    def __init__(__self__, *,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 desc: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 position: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] default_value: The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] desc: Parameter description.
+        :param pulumi.Input[str] name: The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] position: The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if desc is not None:
+            pulumi.set(__self__, "desc", desc)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter
+    def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter description.
+        """
+        return pulumi.get(self, "desc")
+
+    @desc.setter
+    def desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "desc", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "position", value)
+
+
+@pulumi.input_type
+class ImportOpenApiMicroServiceArgs:
+    def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 micro_service_name: Optional[pulumi.Input[str]] = None,
+                 namespace_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cluster_id: Micro service cluster.
+        :param pulumi.Input[str] micro_service_name: Microservice name.
+        :param pulumi.Input[str] namespace_id: Microservice namespace.
+        """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if micro_service_name is not None:
+            pulumi.set(__self__, "micro_service_name", micro_service_name)
+        if namespace_id is not None:
+            pulumi.set(__self__, "namespace_id", namespace_id)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Micro service cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="microServiceName")
+    def micro_service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Microservice name.
+        """
+        return pulumi.get(self, "micro_service_name")
+
+    @micro_service_name.setter
+    def micro_service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "micro_service_name", value)
+
+    @property
+    @pulumi.getter(name="namespaceId")
+    def namespace_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Microservice namespace.
+        """
+        return pulumi.get(self, "namespace_id")
+
+    @namespace_id.setter
+    def namespace_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "namespace_id", value)
+
+
+@pulumi.input_type
+class ImportOpenApiOauthConfigArgs:
+    def __init__(__self__, *,
+                 login_redirect_url: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 token_location: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] login_redirect_url: Redirect address, used to guide users in login operations.
+        :param pulumi.Input[str] public_key: Public key, used to verify user tokens.
+        :param pulumi.Input[str] token_location: Token passes the position.
+        """
+        if login_redirect_url is not None:
+            pulumi.set(__self__, "login_redirect_url", login_redirect_url)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+        if token_location is not None:
+            pulumi.set(__self__, "token_location", token_location)
+
+    @property
+    @pulumi.getter(name="loginRedirectUrl")
+    def login_redirect_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Redirect address, used to guide users in login operations.
+        """
+        return pulumi.get(self, "login_redirect_url")
+
+    @login_redirect_url.setter
+    def login_redirect_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "login_redirect_url", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Public key, used to verify user tokens.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter(name="tokenLocation")
+    def token_location(self) -> Optional[pulumi.Input[str]]:
+        """
+        Token passes the position.
+        """
+        return pulumi.get(self, "token_location")
+
+    @token_location.setter
+    def token_location(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "token_location", value)
+
+
+@pulumi.input_type
+class ImportOpenApiRequestParameterArgs:
+    def __init__(__self__, *,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 desc: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 position: Optional[pulumi.Input[str]] = None,
+                 required: Optional[pulumi.Input[bool]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] default_value: The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] desc: Parameter description.
+        :param pulumi.Input[str] name: The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] position: The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] required: If this parameter required. Default value: `false`.
+        :param pulumi.Input[str] type: Parameter type.
+        """
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if desc is not None:
+            pulumi.set(__self__, "desc", desc)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
+        if required is not None:
+            pulumi.set(__self__, "required", required)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter
+    def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter description.
+        """
+        return pulumi.get(self, "desc")
+
+    @desc.setter
+    def desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "desc", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "position", value)
+
+    @property
+    @pulumi.getter
+    def required(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If this parameter required. Default value: `false`.
+        """
+        return pulumi.get(self, "required")
+
+    @required.setter
+    def required(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "required", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ImportOpenApiResponseErrorCodeArgs:
+    def __init__(__self__, *,
+                 code: Optional[pulumi.Input[int]] = None,
+                 converted_code: Optional[pulumi.Input[int]] = None,
+                 desc: Optional[pulumi.Input[str]] = None,
+                 msg: Optional[pulumi.Input[str]] = None,
+                 need_convert: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] code: Custom response configuration error code.
+        :param pulumi.Input[int] converted_code: Custom error code conversion.
+        :param pulumi.Input[str] desc: Parameter description.
+        :param pulumi.Input[str] msg: Custom response configuration error message.
+        :param pulumi.Input[bool] need_convert: Whether to enable error code conversion. Default value: `false`.
+        """
+        if code is not None:
+            pulumi.set(__self__, "code", code)
+        if converted_code is not None:
+            pulumi.set(__self__, "converted_code", converted_code)
+        if desc is not None:
+            pulumi.set(__self__, "desc", desc)
+        if msg is not None:
+            pulumi.set(__self__, "msg", msg)
+        if need_convert is not None:
+            pulumi.set(__self__, "need_convert", need_convert)
+
+    @property
+    @pulumi.getter
+    def code(self) -> Optional[pulumi.Input[int]]:
+        """
+        Custom response configuration error code.
+        """
+        return pulumi.get(self, "code")
+
+    @code.setter
+    def code(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "code", value)
+
+    @property
+    @pulumi.getter(name="convertedCode")
+    def converted_code(self) -> Optional[pulumi.Input[int]]:
+        """
+        Custom error code conversion.
+        """
+        return pulumi.get(self, "converted_code")
+
+    @converted_code.setter
+    def converted_code(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "converted_code", value)
+
+    @property
+    @pulumi.getter
+    def desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter description.
+        """
+        return pulumi.get(self, "desc")
+
+    @desc.setter
+    def desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "desc", value)
+
+    @property
+    @pulumi.getter
+    def msg(self) -> Optional[pulumi.Input[str]]:
+        """
+        Custom response configuration error message.
+        """
+        return pulumi.get(self, "msg")
+
+    @msg.setter
+    def msg(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "msg", value)
+
+    @property
+    @pulumi.getter(name="needConvert")
+    def need_convert(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable error code conversion. Default value: `false`.
+        """
+        return pulumi.get(self, "need_convert")
+
+    @need_convert.setter
+    def need_convert(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "need_convert", value)
+
+
+@pulumi.input_type
+class ImportOpenApiServiceConfigCosConfigArgs:
+    def __init__(__self__, *,
+                 action: Optional[pulumi.Input[str]] = None,
+                 authorization: Optional[pulumi.Input[bool]] = None,
+                 bucket_name: Optional[pulumi.Input[str]] = None,
+                 path_match_mode: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action: The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] authorization: The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] bucket_name: The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] path_match_mode: Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if authorization is not None:
+            pulumi.set(__self__, "authorization", authorization)
+        if bucket_name is not None:
+            pulumi.set(__self__, "bucket_name", bucket_name)
+        if path_match_mode is not None:
+            pulumi.set(__self__, "path_match_mode", path_match_mode)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter
+    def authorization(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "authorization")
+
+    @authorization.setter
+    def authorization(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "authorization", value)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bucket_name")
+
+    @bucket_name.setter
+    def bucket_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket_name", value)
+
+    @property
+    @pulumi.getter(name="pathMatchMode")
+    def path_match_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "path_match_mode")
+
+    @path_match_mode.setter
+    def path_match_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path_match_mode", value)
+
+
+@pulumi.input_type
+class ImportOpenApiServiceParameterArgs:
+    def __init__(__self__, *,
+                 default_value: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 position: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_desc: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_name: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_position: Optional[pulumi.Input[str]] = None,
+                 relevant_request_parameter_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] default_value: The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] name: The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] position: The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_desc: Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_name: The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_position: The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] relevant_request_parameter_type: The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if default_value is not None:
+            pulumi.set(__self__, "default_value", default_value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if position is not None:
+            pulumi.set(__self__, "position", position)
+        if relevant_request_parameter_desc is not None:
+            pulumi.set(__self__, "relevant_request_parameter_desc", relevant_request_parameter_desc)
+        if relevant_request_parameter_name is not None:
+            pulumi.set(__self__, "relevant_request_parameter_name", relevant_request_parameter_name)
+        if relevant_request_parameter_position is not None:
+            pulumi.set(__self__, "relevant_request_parameter_position", relevant_request_parameter_position)
+        if relevant_request_parameter_type is not None:
+            pulumi.set(__self__, "relevant_request_parameter_type", relevant_request_parameter_type)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "default_value")
+
+    @default_value.setter
+    def default_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "position")
+
+    @position.setter
+    def position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "position", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterDesc")
+    def relevant_request_parameter_desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_desc")
+
+    @relevant_request_parameter_desc.setter
+    def relevant_request_parameter_desc(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_desc", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterName")
+    def relevant_request_parameter_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_name")
+
+    @relevant_request_parameter_name.setter
+    def relevant_request_parameter_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_name", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterPosition")
+    def relevant_request_parameter_position(self) -> Optional[pulumi.Input[str]]:
+        """
+        The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_position")
+
+    @relevant_request_parameter_position.setter
+    def relevant_request_parameter_position(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_position", value)
+
+    @property
+    @pulumi.getter(name="relevantRequestParameterType")
+    def relevant_request_parameter_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "relevant_request_parameter_type")
+
+    @relevant_request_parameter_type.setter
+    def relevant_request_parameter_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "relevant_request_parameter_type", value)
+
+
+@pulumi.input_type
+class ImportOpenApiServiceTsfHealthCheckConfArgs:
+    def __init__(__self__, *,
+                 error_threshold_percentage: Optional[pulumi.Input[int]] = None,
+                 is_health_check: Optional[pulumi.Input[bool]] = None,
+                 request_volume_threshold: Optional[pulumi.Input[int]] = None,
+                 sleep_window_in_milliseconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] error_threshold_percentage: Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] is_health_check: Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] request_volume_threshold: Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] sleep_window_in_milliseconds: Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if error_threshold_percentage is not None:
+            pulumi.set(__self__, "error_threshold_percentage", error_threshold_percentage)
+        if is_health_check is not None:
+            pulumi.set(__self__, "is_health_check", is_health_check)
+        if request_volume_threshold is not None:
+            pulumi.set(__self__, "request_volume_threshold", request_volume_threshold)
+        if sleep_window_in_milliseconds is not None:
+            pulumi.set(__self__, "sleep_window_in_milliseconds", sleep_window_in_milliseconds)
+
+    @property
+    @pulumi.getter(name="errorThresholdPercentage")
+    def error_threshold_percentage(self) -> Optional[pulumi.Input[int]]:
+        """
+        Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "error_threshold_percentage")
+
+    @error_threshold_percentage.setter
+    def error_threshold_percentage(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "error_threshold_percentage", value)
+
+    @property
+    @pulumi.getter(name="isHealthCheck")
+    def is_health_check(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_health_check")
+
+    @is_health_check.setter
+    def is_health_check(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_health_check", value)
+
+    @property
+    @pulumi.getter(name="requestVolumeThreshold")
+    def request_volume_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "request_volume_threshold")
+
+    @request_volume_threshold.setter
+    def request_volume_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "request_volume_threshold", value)
+
+    @property
+    @pulumi.getter(name="sleepWindowInMilliseconds")
+    def sleep_window_in_milliseconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "sleep_window_in_milliseconds")
+
+    @sleep_window_in_milliseconds.setter
+    def sleep_window_in_milliseconds(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sleep_window_in_milliseconds", value)
+
+
+@pulumi.input_type
+class ImportOpenApiServiceTsfLoadBalanceConfArgs:
+    def __init__(__self__, *,
+                 is_load_balance: Optional[pulumi.Input[bool]] = None,
+                 method: Optional[pulumi.Input[str]] = None,
+                 session_stick_required: Optional[pulumi.Input[bool]] = None,
+                 session_stick_timeout: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[bool] is_load_balance: Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] method: Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[bool] session_stick_required: Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[int] session_stick_timeout: Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        if is_load_balance is not None:
+            pulumi.set(__self__, "is_load_balance", is_load_balance)
+        if method is not None:
+            pulumi.set(__self__, "method", method)
+        if session_stick_required is not None:
+            pulumi.set(__self__, "session_stick_required", session_stick_required)
+        if session_stick_timeout is not None:
+            pulumi.set(__self__, "session_stick_timeout", session_stick_timeout)
+
+    @property
+    @pulumi.getter(name="isLoadBalance")
+    def is_load_balance(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_load_balance")
+
+    @is_load_balance.setter
+    def is_load_balance(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_load_balance", value)
+
+    @property
+    @pulumi.getter
+    def method(self) -> Optional[pulumi.Input[str]]:
+        """
+        Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "method")
+
+    @method.setter
+    def method(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "method", value)
+
+    @property
+    @pulumi.getter(name="sessionStickRequired")
+    def session_stick_required(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "session_stick_required")
+
+    @session_stick_required.setter
+    def session_stick_required(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "session_stick_required", value)
+
+    @property
+    @pulumi.getter(name="sessionStickTimeout")
+    def session_stick_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "session_stick_timeout")
+
+    @session_stick_timeout.setter
+    def session_stick_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "session_stick_timeout", value)
+
+
+@pulumi.input_type
 class ServiceApiListArgs:
     def __init__(__self__, *,
                  api_desc: Optional[pulumi.Input[str]] = None,
@@ -360,6 +1747,492 @@ class ServiceUsagePlanListArgs:
 
 
 @pulumi.input_type
+class UpstreamHealthCheckerArgs:
+    def __init__(__self__, *,
+                 enable_active_check: pulumi.Input[bool],
+                 enable_passive_check: pulumi.Input[bool],
+                 healthy_http_status: pulumi.Input[str],
+                 http_failure_threshold: pulumi.Input[int],
+                 tcp_failure_threshold: pulumi.Input[int],
+                 timeout_threshold: pulumi.Input[int],
+                 unhealthy_http_status: pulumi.Input[str],
+                 active_check_http_path: Optional[pulumi.Input[str]] = None,
+                 active_check_interval: Optional[pulumi.Input[int]] = None,
+                 active_check_timeout: Optional[pulumi.Input[int]] = None,
+                 unhealthy_timeout: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[bool] enable_active_check: Identify whether active health checks are enabled.
+        :param pulumi.Input[bool] enable_passive_check: Identify whether passive health checks are enabled.
+        :param pulumi.Input[str] healthy_http_status: The HTTP status code that determines a successful request during a health check.
+        :param pulumi.Input[int] http_failure_threshold: HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].
+        :param pulumi.Input[int] tcp_failure_threshold: TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].
+        :param pulumi.Input[int] timeout_threshold: Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].
+        :param pulumi.Input[str] unhealthy_http_status: The HTTP status code that determines a failed request during a health check.
+        :param pulumi.Input[str] active_check_http_path: Detect the requested path during active health checks. The default is&#39;/&#39;.
+        :param pulumi.Input[int] active_check_interval: The time interval for active health checks is 5 seconds by default.
+        :param pulumi.Input[int] active_check_timeout: The detection request for active health check timed out in seconds. The default is 5 seconds.
+        :param pulumi.Input[int] unhealthy_timeout: The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+        """
+        pulumi.set(__self__, "enable_active_check", enable_active_check)
+        pulumi.set(__self__, "enable_passive_check", enable_passive_check)
+        pulumi.set(__self__, "healthy_http_status", healthy_http_status)
+        pulumi.set(__self__, "http_failure_threshold", http_failure_threshold)
+        pulumi.set(__self__, "tcp_failure_threshold", tcp_failure_threshold)
+        pulumi.set(__self__, "timeout_threshold", timeout_threshold)
+        pulumi.set(__self__, "unhealthy_http_status", unhealthy_http_status)
+        if active_check_http_path is not None:
+            pulumi.set(__self__, "active_check_http_path", active_check_http_path)
+        if active_check_interval is not None:
+            pulumi.set(__self__, "active_check_interval", active_check_interval)
+        if active_check_timeout is not None:
+            pulumi.set(__self__, "active_check_timeout", active_check_timeout)
+        if unhealthy_timeout is not None:
+            pulumi.set(__self__, "unhealthy_timeout", unhealthy_timeout)
+
+    @property
+    @pulumi.getter(name="enableActiveCheck")
+    def enable_active_check(self) -> pulumi.Input[bool]:
+        """
+        Identify whether active health checks are enabled.
+        """
+        return pulumi.get(self, "enable_active_check")
+
+    @enable_active_check.setter
+    def enable_active_check(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enable_active_check", value)
+
+    @property
+    @pulumi.getter(name="enablePassiveCheck")
+    def enable_passive_check(self) -> pulumi.Input[bool]:
+        """
+        Identify whether passive health checks are enabled.
+        """
+        return pulumi.get(self, "enable_passive_check")
+
+    @enable_passive_check.setter
+    def enable_passive_check(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enable_passive_check", value)
+
+    @property
+    @pulumi.getter(name="healthyHttpStatus")
+    def healthy_http_status(self) -> pulumi.Input[str]:
+        """
+        The HTTP status code that determines a successful request during a health check.
+        """
+        return pulumi.get(self, "healthy_http_status")
+
+    @healthy_http_status.setter
+    def healthy_http_status(self, value: pulumi.Input[str]):
+        pulumi.set(self, "healthy_http_status", value)
+
+    @property
+    @pulumi.getter(name="httpFailureThreshold")
+    def http_failure_threshold(self) -> pulumi.Input[int]:
+        """
+        HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].
+        """
+        return pulumi.get(self, "http_failure_threshold")
+
+    @http_failure_threshold.setter
+    def http_failure_threshold(self, value: pulumi.Input[int]):
+        pulumi.set(self, "http_failure_threshold", value)
+
+    @property
+    @pulumi.getter(name="tcpFailureThreshold")
+    def tcp_failure_threshold(self) -> pulumi.Input[int]:
+        """
+        TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].
+        """
+        return pulumi.get(self, "tcp_failure_threshold")
+
+    @tcp_failure_threshold.setter
+    def tcp_failure_threshold(self, value: pulumi.Input[int]):
+        pulumi.set(self, "tcp_failure_threshold", value)
+
+    @property
+    @pulumi.getter(name="timeoutThreshold")
+    def timeout_threshold(self) -> pulumi.Input[int]:
+        """
+        Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].
+        """
+        return pulumi.get(self, "timeout_threshold")
+
+    @timeout_threshold.setter
+    def timeout_threshold(self, value: pulumi.Input[int]):
+        pulumi.set(self, "timeout_threshold", value)
+
+    @property
+    @pulumi.getter(name="unhealthyHttpStatus")
+    def unhealthy_http_status(self) -> pulumi.Input[str]:
+        """
+        The HTTP status code that determines a failed request during a health check.
+        """
+        return pulumi.get(self, "unhealthy_http_status")
+
+    @unhealthy_http_status.setter
+    def unhealthy_http_status(self, value: pulumi.Input[str]):
+        pulumi.set(self, "unhealthy_http_status", value)
+
+    @property
+    @pulumi.getter(name="activeCheckHttpPath")
+    def active_check_http_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Detect the requested path during active health checks. The default is&#39;/&#39;.
+        """
+        return pulumi.get(self, "active_check_http_path")
+
+    @active_check_http_path.setter
+    def active_check_http_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "active_check_http_path", value)
+
+    @property
+    @pulumi.getter(name="activeCheckInterval")
+    def active_check_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        The time interval for active health checks is 5 seconds by default.
+        """
+        return pulumi.get(self, "active_check_interval")
+
+    @active_check_interval.setter
+    def active_check_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "active_check_interval", value)
+
+    @property
+    @pulumi.getter(name="activeCheckTimeout")
+    def active_check_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The detection request for active health check timed out in seconds. The default is 5 seconds.
+        """
+        return pulumi.get(self, "active_check_timeout")
+
+    @active_check_timeout.setter
+    def active_check_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "active_check_timeout", value)
+
+    @property
+    @pulumi.getter(name="unhealthyTimeout")
+    def unhealthy_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+        """
+        return pulumi.get(self, "unhealthy_timeout")
+
+    @unhealthy_timeout.setter
+    def unhealthy_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unhealthy_timeout", value)
+
+
+@pulumi.input_type
+class UpstreamK8sServiceArgs:
+    def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
+                 extra_labels: pulumi.Input[Sequence[pulumi.Input['UpstreamK8sServiceExtraLabelArgs']]],
+                 namespace: pulumi.Input[str],
+                 port: pulumi.Input[int],
+                 service_name: pulumi.Input[str],
+                 weight: pulumi.Input[int],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cluster_id: K8s cluster ID.
+        :param pulumi.Input[str] namespace: Container namespace.
+        :param pulumi.Input[int] port: Port of service.
+        :param pulumi.Input[str] service_name: The name of the container service.
+        :param pulumi.Input[int] weight: weight.
+        :param pulumi.Input[str] name: Customized service name, optional.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "extra_labels", extra_labels)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "service_name", service_name)
+        pulumi.set(__self__, "weight", weight)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        K8s cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="extraLabels")
+    def extra_labels(self) -> pulumi.Input[Sequence[pulumi.Input['UpstreamK8sServiceExtraLabelArgs']]]:
+        return pulumi.get(self, "extra_labels")
+
+    @extra_labels.setter
+    def extra_labels(self, value: pulumi.Input[Sequence[pulumi.Input['UpstreamK8sServiceExtraLabelArgs']]]):
+        pulumi.set(self, "extra_labels", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> pulumi.Input[str]:
+        """
+        Container namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: pulumi.Input[str]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        Port of service.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> pulumi.Input[str]:
+        """
+        The name of the container service.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "service_name", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        """
+        weight.
+        """
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Customized service name, optional.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class UpstreamK8sServiceExtraLabelArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: Key of Label.
+        :param pulumi.Input[str] value: Value of Label.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        Key of Label.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value of Label.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class UpstreamNodeArgs:
+    def __init__(__self__, *,
+                 host: pulumi.Input[str],
+                 port: pulumi.Input[int],
+                 weight: pulumi.Input[int],
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 name_space: Optional[pulumi.Input[str]] = None,
+                 service_name: Optional[pulumi.Input[str]] = None,
+                 source: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 unique_service_name: Optional[pulumi.Input[str]] = None,
+                 vm_instance_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] host: IP or domain name.
+        :param pulumi.Input[int] port: Port [0, 65535].
+        :param pulumi.Input[int] weight: Weight [0, 100], 0 is disabled.
+        :param pulumi.Input[str] cluster_id: The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] name_space: K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] service_name: K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] source: Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] unique_service_name: Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] vm_instance_id: CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "weight", weight)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if name_space is not None:
+            pulumi.set(__self__, "name_space", name_space)
+        if service_name is not None:
+            pulumi.set(__self__, "service_name", service_name)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if unique_service_name is not None:
+            pulumi.set(__self__, "unique_service_name", unique_service_name)
+        if vm_instance_id is not None:
+            pulumi.set(__self__, "vm_instance_id", vm_instance_id)
+
+    @property
+    @pulumi.getter
+    def host(self) -> pulumi.Input[str]:
+        """
+        IP or domain name.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        Port [0, 65535].
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def weight(self) -> pulumi.Input[int]:
+        """
+        Weight [0, 100], 0 is disabled.
+        """
+        return pulumi.get(self, "weight")
+
+    @weight.setter
+    def weight(self, value: pulumi.Input[int]):
+        pulumi.set(self, "weight", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="nameSpace")
+    def name_space(self) -> Optional[pulumi.Input[str]]:
+        """
+        K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name_space")
+
+    @name_space.setter
+    def name_space(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name_space", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_name", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[str]]:
+        """
+        Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="uniqueServiceName")
+    def unique_service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "unique_service_name")
+
+    @unique_service_name.setter
+    def unique_service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "unique_service_name", value)
+
+    @property
+    @pulumi.getter(name="vmInstanceId")
+    def vm_instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "vm_instance_id")
+
+    @vm_instance_id.setter
+    def vm_instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vm_instance_id", value)
+
+
+@pulumi.input_type
 class UsagePlanAttachListArgs:
     def __init__(__self__, *,
                  api_id: Optional[pulumi.Input[str]] = None,
@@ -508,5 +2381,79 @@ class UsagePlanAttachListArgs:
     @service_name.setter
     def service_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "service_name", value)
+
+
+@pulumi.input_type
+class GetBindApiAppsStatusFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered.
+        :param Sequence[str] values: Filter value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetUpstreamsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Fields that need to be filtered.
+        :param Sequence[str] values: The filtering value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Fields that need to be filtered.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The filtering value of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

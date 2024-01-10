@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cat.GetNode(ctx, &cat.GetNodeArgs{
-// 			IsIpv6:   pulumi.BoolRef(false),
-// 			Location: pulumi.IntRef(2),
-// 			NodeType: pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cat.GetNode(ctx, &cat.GetNodeArgs{
+//				IsIpv6:   pulumi.BoolRef(false),
+//				Location: pulumi.IntRef(2),
+//				NodeType: pulumi.IntRef(1),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetNode(ctx *pulumi.Context, args *GetNodeArgs, opts ...pulumi.InvokeOption) (*GetNodeResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

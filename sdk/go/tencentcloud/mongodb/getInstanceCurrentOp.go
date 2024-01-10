@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.GetInstanceCurrentOp(ctx, &mongodb.GetInstanceCurrentOpArgs{
-// 			InstanceId:  "cmgo-b43i3wkj",
-// 			Op:          pulumi.StringRef("command"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.GetInstanceCurrentOp(ctx, &mongodb.GetInstanceCurrentOpArgs{
+//				InstanceId:  "cmgo-b43i3wkj",
+//				Op:          pulumi.StringRef("command"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceCurrentOp(ctx *pulumi.Context, args *GetInstanceCurrentOpArgs, opts ...pulumi.InvokeOption) (*GetInstanceCurrentOpResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

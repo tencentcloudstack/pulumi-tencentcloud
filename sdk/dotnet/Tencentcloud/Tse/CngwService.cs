@@ -23,37 +23,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// {
     ///     public MyStack()
     ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
+    ///         {
+    ///             Description = "terraform test1",
+    ///             EnableCls = true,
+    ///             EngineRegion = "ap-guangzhou",
+    ///             FeatureVersion = "STANDARD",
+    ///             GatewayVersion = "2.5.1",
+    ///             IngressClassName = "tse-nginx-ingress",
+    ///             InternetMaxBandwidthOut = 0,
+    ///             TradeType = 0,
+    ///             Type = "kong",
+    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///             {
+    ///                 Number = 2,
+    ///                 Specification = "1c2g",
+    ///             },
+    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///             {
+    ///                 SubnetId = subnet.Id,
+    ///                 VpcId = vpc.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
     ///         var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new Tencentcloud.Tse.CngwServiceArgs
     ///         {
-    ///             GatewayId = "gateway-ddbb709b",
+    ///             GatewayId = cngwGateway.Id,
     ///             Path = "/test",
     ///             Protocol = "http",
     ///             Retries = 5,
-    ///             Tags = 
-    ///             {
-    ///                 { "created", "terraform" },
-    ///             },
-    ///             Timeout = 6000,
+    ///             Timeout = 60000,
+    ///             UpstreamType = "HostIP",
     ///             UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
     ///             {
     ///                 Algorithm = "round-robin",
-    ///                 AutoScalingCvmPort = 80,
-    ///                 AutoScalingGroupId = "asg-519acdug",
-    ///                 AutoScalingHookStatus = "Normal",
-    ///                 AutoScalingTatCmdStatus = "Normal",
-    ///                 Port = 0,
-    ///                 SlowStart = 20,
-    ///                 Targets = 
-    ///                 {
-    ///                     new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoTargetArgs
-    ///                     {
-    ///                         Host = "192.168.0.1",
-    ///                         Port = 80,
-    ///                         Weight = 100,
-    ///                     },
-    ///                 },
+    ///                 AutoScalingCvmPort = 0,
+    ///                 Host = "arunma.cn",
+    ///                 Port = 8012,
+    ///                 SlowStart = 0,
     ///             },
-    ///             UpstreamType = "IPList",
     ///         });
     ///     }
     /// 
@@ -65,7 +88,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// tse cngw_service can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service cngw_service_id
+    ///  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwService:CngwService")]
@@ -108,7 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public Output<string> ServiceId { get; private set; } = null!;
 
         /// <summary>
-        /// Tag description list.
+        /// Deprecate ineffective tags Tag description list.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
@@ -212,8 +235,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// Deprecate ineffective tags Tag description list.
         /// </summary>
+        [Obsolete(@"Deprecate ineffective tags")]
         public InputMap<object> Tags
         {
             get => _tags ?? (_tags = new InputMap<object>());
@@ -285,8 +309,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         private InputMap<object>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// Deprecate ineffective tags Tag description list.
         /// </summary>
+        [Obsolete(@"Deprecate ineffective tags")]
         public InputMap<object> Tags
         {
             get => _tags ?? (_tags = new InputMap<object>());

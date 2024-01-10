@@ -55,7 +55,7 @@ import * as utilities from "../utilities";
  *         instanceType: defaultInstanceType,
  *         systemDiskType: "CLOUD_PREMIUM",
  *         systemDiskSize: 50,
- *         securityGroupIds: ["sg-24vswocp"],
+ *         orderlySecurityGroupIds: ["sg-24vswocp"],
  *         dataDisks: [{
  *             diskType: "CLOUD_PREMIUM",
  *             diskSize: 50,
@@ -110,7 +110,11 @@ import * as utilities from "../utilities";
  *         instanceType: _var.default_instance_type,
  *         systemDiskType: "CLOUD_PREMIUM",
  *         systemDiskSize: 50,
- *         securityGroupIds: ["sg-24vswocp"],
+ *         orderlySecurityGroupIds: [
+ *             "sg-24vswocp",
+ *             "sg-3qntci2v",
+ *             "sg-7y1t2wax",
+ *         ],
  *         instanceChargeType: "SPOTPAID",
  *         spotInstanceType: "one-time",
  *         spotMaxPrice: "1000",
@@ -185,7 +189,11 @@ export class NodePool extends pulumi.CustomResource {
      */
     public readonly deleteKeepInstance!: pulumi.Output<boolean | undefined>;
     /**
-     * Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+     * Indicates whether the node pool deletion protection is enabled.
+     */
+    public readonly deletionProtection!: pulumi.Output<boolean>;
+    /**
+     * Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
      */
     public readonly desiredCapacity!: pulumi.Output<number>;
     /**
@@ -304,6 +312,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["defaultCooldown"] = state ? state.defaultCooldown : undefined;
             resourceInputs["deleteKeepInstance"] = state ? state.deleteKeepInstance : undefined;
+            resourceInputs["deletionProtection"] = state ? state.deletionProtection : undefined;
             resourceInputs["desiredCapacity"] = state ? state.desiredCapacity : undefined;
             resourceInputs["enableAutoScale"] = state ? state.enableAutoScale : undefined;
             resourceInputs["labels"] = state ? state.labels : undefined;
@@ -350,6 +359,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["defaultCooldown"] = args ? args.defaultCooldown : undefined;
             resourceInputs["deleteKeepInstance"] = args ? args.deleteKeepInstance : undefined;
+            resourceInputs["deletionProtection"] = args ? args.deletionProtection : undefined;
             resourceInputs["desiredCapacity"] = args ? args.desiredCapacity : undefined;
             resourceInputs["enableAutoScale"] = args ? args.enableAutoScale : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
@@ -412,7 +422,11 @@ export interface NodePoolState {
      */
     deleteKeepInstance?: pulumi.Input<boolean>;
     /**
-     * Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+     * Indicates whether the node pool deletion protection is enabled.
+     */
+    deletionProtection?: pulumi.Input<boolean>;
+    /**
+     * Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
      */
     desiredCapacity?: pulumi.Input<number>;
     /**
@@ -534,7 +548,11 @@ export interface NodePoolArgs {
      */
     deleteKeepInstance?: pulumi.Input<boolean>;
     /**
-     * Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+     * Indicates whether the node pool deletion protection is enabled.
+     */
+    deletionProtection?: pulumi.Input<boolean>;
+    /**
+     * Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
      */
     desiredCapacity?: pulumi.Input<number>;
     /**

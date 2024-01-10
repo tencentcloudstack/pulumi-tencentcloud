@@ -22,7 +22,7 @@ type DiskAutoMountConfiguration struct {
 // DiskAutoMountConfigurationInput is an input type that accepts DiskAutoMountConfigurationArgs and DiskAutoMountConfigurationOutput values.
 // You can construct a concrete instance of `DiskAutoMountConfigurationInput` via:
 //
-//          DiskAutoMountConfigurationArgs{...}
+//	DiskAutoMountConfigurationArgs{...}
 type DiskAutoMountConfigurationInput interface {
 	pulumi.Input
 
@@ -62,11 +62,11 @@ func (i DiskAutoMountConfigurationArgs) ToDiskAutoMountConfigurationPtrOutputWit
 // DiskAutoMountConfigurationPtrInput is an input type that accepts DiskAutoMountConfigurationArgs, DiskAutoMountConfigurationPtr and DiskAutoMountConfigurationPtrOutput values.
 // You can construct a concrete instance of `DiskAutoMountConfigurationPtrInput` via:
 //
-//          DiskAutoMountConfigurationArgs{...}
+//	        DiskAutoMountConfigurationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DiskAutoMountConfigurationPtrInput interface {
 	pulumi.Input
 
@@ -197,7 +197,7 @@ type DiskDiskChargePrepaid struct {
 // DiskDiskChargePrepaidInput is an input type that accepts DiskDiskChargePrepaidArgs and DiskDiskChargePrepaidOutput values.
 // You can construct a concrete instance of `DiskDiskChargePrepaidInput` via:
 //
-//          DiskDiskChargePrepaidArgs{...}
+//	DiskDiskChargePrepaidArgs{...}
 type DiskDiskChargePrepaidInput interface {
 	pulumi.Input
 
@@ -237,11 +237,11 @@ func (i DiskDiskChargePrepaidArgs) ToDiskDiskChargePrepaidPtrOutputWithContext(c
 // DiskDiskChargePrepaidPtrInput is an input type that accepts DiskDiskChargePrepaidArgs, DiskDiskChargePrepaidPtr and DiskDiskChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `DiskDiskChargePrepaidPtrInput` via:
 //
-//          DiskDiskChargePrepaidArgs{...}
+//	        DiskDiskChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DiskDiskChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -376,7 +376,7 @@ type FirewallRuleFirewallRule struct {
 // FirewallRuleFirewallRuleInput is an input type that accepts FirewallRuleFirewallRuleArgs and FirewallRuleFirewallRuleOutput values.
 // You can construct a concrete instance of `FirewallRuleFirewallRuleInput` via:
 //
-//          FirewallRuleFirewallRuleArgs{...}
+//	FirewallRuleFirewallRuleArgs{...}
 type FirewallRuleFirewallRuleInput interface {
 	pulumi.Input
 
@@ -412,7 +412,7 @@ func (i FirewallRuleFirewallRuleArgs) ToFirewallRuleFirewallRuleOutputWithContex
 // FirewallRuleFirewallRuleArrayInput is an input type that accepts FirewallRuleFirewallRuleArray and FirewallRuleFirewallRuleArrayOutput values.
 // You can construct a concrete instance of `FirewallRuleFirewallRuleArrayInput` via:
 //
-//          FirewallRuleFirewallRuleArray{ FirewallRuleFirewallRuleArgs{...} }
+//	FirewallRuleFirewallRuleArray{ FirewallRuleFirewallRuleArgs{...} }
 type FirewallRuleFirewallRuleArrayInput interface {
 	pulumi.Input
 
@@ -493,6 +493,139 @@ func (o FirewallRuleFirewallRuleArrayOutput) Index(i pulumi.IntInput) FirewallRu
 	}).(FirewallRuleFirewallRuleOutput)
 }
 
+type FirewallTemplateTemplateRule struct {
+	// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+	Action *string `pulumi:"action"`
+	// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription *string `pulumi:"firewallRuleDescription"`
+	// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+	Port *string `pulumi:"port"`
+	// Protocol. Values: TCP, UDP, ICMP, ALL.
+	Protocol string `pulumi:"protocol"`
+}
+
+// FirewallTemplateTemplateRuleInput is an input type that accepts FirewallTemplateTemplateRuleArgs and FirewallTemplateTemplateRuleOutput values.
+// You can construct a concrete instance of `FirewallTemplateTemplateRuleInput` via:
+//
+//	FirewallTemplateTemplateRuleArgs{...}
+type FirewallTemplateTemplateRuleInput interface {
+	pulumi.Input
+
+	ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput
+	ToFirewallTemplateTemplateRuleOutputWithContext(context.Context) FirewallTemplateTemplateRuleOutput
+}
+
+type FirewallTemplateTemplateRuleArgs struct {
+	// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription pulumi.StringPtrInput `pulumi:"firewallRuleDescription"`
+	// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+	Port pulumi.StringPtrInput `pulumi:"port"`
+	// Protocol. Values: TCP, UDP, ICMP, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (FirewallTemplateTemplateRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (i FirewallTemplateTemplateRuleArgs) ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput {
+	return i.ToFirewallTemplateTemplateRuleOutputWithContext(context.Background())
+}
+
+func (i FirewallTemplateTemplateRuleArgs) ToFirewallTemplateTemplateRuleOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallTemplateTemplateRuleOutput)
+}
+
+// FirewallTemplateTemplateRuleArrayInput is an input type that accepts FirewallTemplateTemplateRuleArray and FirewallTemplateTemplateRuleArrayOutput values.
+// You can construct a concrete instance of `FirewallTemplateTemplateRuleArrayInput` via:
+//
+//	FirewallTemplateTemplateRuleArray{ FirewallTemplateTemplateRuleArgs{...} }
+type FirewallTemplateTemplateRuleArrayInput interface {
+	pulumi.Input
+
+	ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput
+	ToFirewallTemplateTemplateRuleArrayOutputWithContext(context.Context) FirewallTemplateTemplateRuleArrayOutput
+}
+
+type FirewallTemplateTemplateRuleArray []FirewallTemplateTemplateRuleInput
+
+func (FirewallTemplateTemplateRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (i FirewallTemplateTemplateRuleArray) ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput {
+	return i.ToFirewallTemplateTemplateRuleArrayOutputWithContext(context.Background())
+}
+
+func (i FirewallTemplateTemplateRuleArray) ToFirewallTemplateTemplateRuleArrayOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallTemplateTemplateRuleArrayOutput)
+}
+
+type FirewallTemplateTemplateRuleOutput struct{ *pulumi.OutputState }
+
+func (FirewallTemplateTemplateRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (o FirewallTemplateTemplateRuleOutput) ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleOutput) ToFirewallTemplateTemplateRuleOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleOutput {
+	return o
+}
+
+// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+func (o FirewallTemplateTemplateRuleOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+func (o FirewallTemplateTemplateRuleOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Firewall rule description.
+func (o FirewallTemplateTemplateRuleOutput) FirewallRuleDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.FirewallRuleDescription }).(pulumi.StringPtrOutput)
+}
+
+// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+func (o FirewallTemplateTemplateRuleOutput) Port() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.Port }).(pulumi.StringPtrOutput)
+}
+
+// Protocol. Values: TCP, UDP, ICMP, ALL.
+func (o FirewallTemplateTemplateRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type FirewallTemplateTemplateRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (FirewallTemplateTemplateRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) ToFirewallTemplateTemplateRuleArrayOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleArrayOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) Index(i pulumi.IntInput) FirewallTemplateTemplateRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FirewallTemplateTemplateRule {
+		return vs[0].([]FirewallTemplateTemplateRule)[vs[1].(int)]
+	}).(FirewallTemplateTemplateRuleOutput)
+}
+
 type InstanceContainer struct {
 	// The command to run.
 	Command *string `pulumi:"command"`
@@ -511,7 +644,7 @@ type InstanceContainer struct {
 // InstanceContainerInput is an input type that accepts InstanceContainerArgs and InstanceContainerOutput values.
 // You can construct a concrete instance of `InstanceContainerInput` via:
 //
-//          InstanceContainerArgs{...}
+//	InstanceContainerArgs{...}
 type InstanceContainerInput interface {
 	pulumi.Input
 
@@ -549,7 +682,7 @@ func (i InstanceContainerArgs) ToInstanceContainerOutputWithContext(ctx context.
 // InstanceContainerArrayInput is an input type that accepts InstanceContainerArray and InstanceContainerArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerArrayInput` via:
 //
-//          InstanceContainerArray{ InstanceContainerArgs{...} }
+//	InstanceContainerArray{ InstanceContainerArgs{...} }
 type InstanceContainerArrayInput interface {
 	pulumi.Input
 
@@ -645,7 +778,7 @@ type InstanceContainerEnv struct {
 // InstanceContainerEnvInput is an input type that accepts InstanceContainerEnvArgs and InstanceContainerEnvOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvInput` via:
 //
-//          InstanceContainerEnvArgs{...}
+//	InstanceContainerEnvArgs{...}
 type InstanceContainerEnvInput interface {
 	pulumi.Input
 
@@ -675,7 +808,7 @@ func (i InstanceContainerEnvArgs) ToInstanceContainerEnvOutputWithContext(ctx co
 // InstanceContainerEnvArrayInput is an input type that accepts InstanceContainerEnvArray and InstanceContainerEnvArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerEnvArrayInput` via:
 //
-//          InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
+//	InstanceContainerEnvArray{ InstanceContainerEnvArgs{...} }
 type InstanceContainerEnvArrayInput interface {
 	pulumi.Input
 
@@ -755,7 +888,7 @@ type InstanceContainerPublishPort struct {
 // InstanceContainerPublishPortInput is an input type that accepts InstanceContainerPublishPortArgs and InstanceContainerPublishPortOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortInput` via:
 //
-//          InstanceContainerPublishPortArgs{...}
+//	InstanceContainerPublishPortArgs{...}
 type InstanceContainerPublishPortInput interface {
 	pulumi.Input
 
@@ -789,7 +922,7 @@ func (i InstanceContainerPublishPortArgs) ToInstanceContainerPublishPortOutputWi
 // InstanceContainerPublishPortArrayInput is an input type that accepts InstanceContainerPublishPortArray and InstanceContainerPublishPortArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerPublishPortArrayInput` via:
 //
-//          InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
+//	InstanceContainerPublishPortArray{ InstanceContainerPublishPortArgs{...} }
 type InstanceContainerPublishPortArrayInput interface {
 	pulumi.Input
 
@@ -875,7 +1008,7 @@ type InstanceContainerVolume struct {
 // InstanceContainerVolumeInput is an input type that accepts InstanceContainerVolumeArgs and InstanceContainerVolumeOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeInput` via:
 //
-//          InstanceContainerVolumeArgs{...}
+//	InstanceContainerVolumeArgs{...}
 type InstanceContainerVolumeInput interface {
 	pulumi.Input
 
@@ -905,7 +1038,7 @@ func (i InstanceContainerVolumeArgs) ToInstanceContainerVolumeOutputWithContext(
 // InstanceContainerVolumeArrayInput is an input type that accepts InstanceContainerVolumeArray and InstanceContainerVolumeArrayOutput values.
 // You can construct a concrete instance of `InstanceContainerVolumeArrayInput` via:
 //
-//          InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
+//	InstanceContainerVolumeArray{ InstanceContainerVolumeArgs{...} }
 type InstanceContainerVolumeArrayInput interface {
 	pulumi.Input
 
@@ -981,7 +1114,7 @@ type InstanceLoginConfiguration struct {
 // InstanceLoginConfigurationInput is an input type that accepts InstanceLoginConfigurationArgs and InstanceLoginConfigurationOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationInput` via:
 //
-//          InstanceLoginConfigurationArgs{...}
+//	InstanceLoginConfigurationArgs{...}
 type InstanceLoginConfigurationInput interface {
 	pulumi.Input
 
@@ -1019,11 +1152,11 @@ func (i InstanceLoginConfigurationArgs) ToInstanceLoginConfigurationPtrOutputWit
 // InstanceLoginConfigurationPtrInput is an input type that accepts InstanceLoginConfigurationArgs, InstanceLoginConfigurationPtr and InstanceLoginConfigurationPtrOutput values.
 // You can construct a concrete instance of `InstanceLoginConfigurationPtrInput` via:
 //
-//          InstanceLoginConfigurationArgs{...}
+//	        InstanceLoginConfigurationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceLoginConfigurationPtrInput interface {
 	pulumi.Input
 
@@ -1141,7 +1274,7 @@ type RenewDiskRenewDiskChargePrepaid struct {
 // RenewDiskRenewDiskChargePrepaidInput is an input type that accepts RenewDiskRenewDiskChargePrepaidArgs and RenewDiskRenewDiskChargePrepaidOutput values.
 // You can construct a concrete instance of `RenewDiskRenewDiskChargePrepaidInput` via:
 //
-//          RenewDiskRenewDiskChargePrepaidArgs{...}
+//	RenewDiskRenewDiskChargePrepaidArgs{...}
 type RenewDiskRenewDiskChargePrepaidInput interface {
 	pulumi.Input
 
@@ -1183,11 +1316,11 @@ func (i RenewDiskRenewDiskChargePrepaidArgs) ToRenewDiskRenewDiskChargePrepaidPt
 // RenewDiskRenewDiskChargePrepaidPtrInput is an input type that accepts RenewDiskRenewDiskChargePrepaidArgs, RenewDiskRenewDiskChargePrepaidPtr and RenewDiskRenewDiskChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `RenewDiskRenewDiskChargePrepaidPtrInput` via:
 //
-//          RenewDiskRenewDiskChargePrepaidArgs{...}
+//	        RenewDiskRenewDiskChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RenewDiskRenewDiskChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -1335,7 +1468,7 @@ type RenewInstanceInstanceChargePrepaid struct {
 // RenewInstanceInstanceChargePrepaidInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs and RenewInstanceInstanceChargePrepaidOutput values.
 // You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidInput` via:
 //
-//          RenewInstanceInstanceChargePrepaidArgs{...}
+//	RenewInstanceInstanceChargePrepaidArgs{...}
 type RenewInstanceInstanceChargePrepaidInput interface {
 	pulumi.Input
 
@@ -1377,11 +1510,11 @@ func (i RenewInstanceInstanceChargePrepaidArgs) ToRenewInstanceInstanceChargePre
 // RenewInstanceInstanceChargePrepaidPtrInput is an input type that accepts RenewInstanceInstanceChargePrepaidArgs, RenewInstanceInstanceChargePrepaidPtr and RenewInstanceInstanceChargePrepaidPtrOutput values.
 // You can construct a concrete instance of `RenewInstanceInstanceChargePrepaidPtrInput` via:
 //
-//          RenewInstanceInstanceChargePrepaidArgs{...}
+//	        RenewInstanceInstanceChargePrepaidArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RenewInstanceInstanceChargePrepaidPtrInput interface {
 	pulumi.Input
 
@@ -1437,10 +1570,10 @@ func (o RenewInstanceInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
 }
 
 // Automatic renewal logo. Values:
-// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
-// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
-// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
-//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+//   - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+//   - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+//   - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+//     Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
 func (o RenewInstanceInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RenewInstanceInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
 }
@@ -1480,10 +1613,10 @@ func (o RenewInstanceInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutpu
 }
 
 // Automatic renewal logo. Values:
-// - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
-// - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
-// - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
-//   Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
+//   - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
+//   - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
+//   - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
+//     Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
 func (o RenewInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RenewInstanceInstanceChargePrepaid) *string {
 		if v == nil {
@@ -1505,7 +1638,7 @@ type GetAllSceneSceneSet struct {
 // GetAllSceneSceneSetInput is an input type that accepts GetAllSceneSceneSetArgs and GetAllSceneSceneSetOutput values.
 // You can construct a concrete instance of `GetAllSceneSceneSetInput` via:
 //
-//          GetAllSceneSceneSetArgs{...}
+//	GetAllSceneSceneSetArgs{...}
 type GetAllSceneSceneSetInput interface {
 	pulumi.Input
 
@@ -1537,7 +1670,7 @@ func (i GetAllSceneSceneSetArgs) ToGetAllSceneSceneSetOutputWithContext(ctx cont
 // GetAllSceneSceneSetArrayInput is an input type that accepts GetAllSceneSceneSetArray and GetAllSceneSceneSetArrayOutput values.
 // You can construct a concrete instance of `GetAllSceneSceneSetArrayInput` via:
 //
-//          GetAllSceneSceneSetArray{ GetAllSceneSceneSetArgs{...} }
+//	GetAllSceneSceneSetArray{ GetAllSceneSceneSetArgs{...} }
 type GetAllSceneSceneSetArrayInput interface {
 	pulumi.Input
 
@@ -1642,7 +1775,7 @@ type GetBundleBundleSet struct {
 // GetBundleBundleSetInput is an input type that accepts GetBundleBundleSetArgs and GetBundleBundleSetOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetInput` via:
 //
-//          GetBundleBundleSetArgs{...}
+//	GetBundleBundleSetArgs{...}
 type GetBundleBundleSetInput interface {
 	pulumi.Input
 
@@ -1696,7 +1829,7 @@ func (i GetBundleBundleSetArgs) ToGetBundleBundleSetOutputWithContext(ctx contex
 // GetBundleBundleSetArrayInput is an input type that accepts GetBundleBundleSetArray and GetBundleBundleSetArrayOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetArrayInput` via:
 //
-//          GetBundleBundleSetArray{ GetBundleBundleSetArgs{...} }
+//	GetBundleBundleSetArray{ GetBundleBundleSetArgs{...} }
 type GetBundleBundleSetArrayInput interface {
 	pulumi.Input
 
@@ -1830,7 +1963,7 @@ type GetBundleBundleSetPrice struct {
 // GetBundleBundleSetPriceInput is an input type that accepts GetBundleBundleSetPriceArgs and GetBundleBundleSetPriceOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetPriceInput` via:
 //
-//          GetBundleBundleSetPriceArgs{...}
+//	GetBundleBundleSetPriceArgs{...}
 type GetBundleBundleSetPriceInput interface {
 	pulumi.Input
 
@@ -1858,7 +1991,7 @@ func (i GetBundleBundleSetPriceArgs) ToGetBundleBundleSetPriceOutputWithContext(
 // GetBundleBundleSetPriceArrayInput is an input type that accepts GetBundleBundleSetPriceArray and GetBundleBundleSetPriceArrayOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetPriceArrayInput` via:
 //
-//          GetBundleBundleSetPriceArray{ GetBundleBundleSetPriceArgs{...} }
+//	GetBundleBundleSetPriceArray{ GetBundleBundleSetPriceArgs{...} }
 type GetBundleBundleSetPriceArrayInput interface {
 	pulumi.Input
 
@@ -1935,7 +2068,7 @@ type GetBundleBundleSetPriceInstancePrice struct {
 // GetBundleBundleSetPriceInstancePriceInput is an input type that accepts GetBundleBundleSetPriceInstancePriceArgs and GetBundleBundleSetPriceInstancePriceOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetPriceInstancePriceInput` via:
 //
-//          GetBundleBundleSetPriceInstancePriceArgs{...}
+//	GetBundleBundleSetPriceInstancePriceArgs{...}
 type GetBundleBundleSetPriceInstancePriceInput interface {
 	pulumi.Input
 
@@ -1971,7 +2104,7 @@ func (i GetBundleBundleSetPriceInstancePriceArgs) ToGetBundleBundleSetPriceInsta
 // GetBundleBundleSetPriceInstancePriceArrayInput is an input type that accepts GetBundleBundleSetPriceInstancePriceArray and GetBundleBundleSetPriceInstancePriceArrayOutput values.
 // You can construct a concrete instance of `GetBundleBundleSetPriceInstancePriceArrayInput` via:
 //
-//          GetBundleBundleSetPriceInstancePriceArray{ GetBundleBundleSetPriceInstancePriceArgs{...} }
+//	GetBundleBundleSetPriceInstancePriceArray{ GetBundleBundleSetPriceInstancePriceArgs{...} }
 type GetBundleBundleSetPriceInstancePriceArrayInput interface {
 	pulumi.Input
 
@@ -2062,7 +2195,7 @@ type GetBundleFilter struct {
 // GetBundleFilterInput is an input type that accepts GetBundleFilterArgs and GetBundleFilterOutput values.
 // You can construct a concrete instance of `GetBundleFilterInput` via:
 //
-//          GetBundleFilterArgs{...}
+//	GetBundleFilterArgs{...}
 type GetBundleFilterInput interface {
 	pulumi.Input
 
@@ -2092,7 +2225,7 @@ func (i GetBundleFilterArgs) ToGetBundleFilterOutputWithContext(ctx context.Cont
 // GetBundleFilterArrayInput is an input type that accepts GetBundleFilterArray and GetBundleFilterArrayOutput values.
 // You can construct a concrete instance of `GetBundleFilterArrayInput` via:
 //
-//          GetBundleFilterArray{ GetBundleFilterArgs{...} }
+//	GetBundleFilterArray{ GetBundleFilterArgs{...} }
 type GetBundleFilterArrayInput interface {
 	pulumi.Input
 
@@ -2176,7 +2309,7 @@ type GetDiskConfigDiskConfigSet struct {
 // GetDiskConfigDiskConfigSetInput is an input type that accepts GetDiskConfigDiskConfigSetArgs and GetDiskConfigDiskConfigSetOutput values.
 // You can construct a concrete instance of `GetDiskConfigDiskConfigSetInput` via:
 //
-//          GetDiskConfigDiskConfigSetArgs{...}
+//	GetDiskConfigDiskConfigSetArgs{...}
 type GetDiskConfigDiskConfigSetInput interface {
 	pulumi.Input
 
@@ -2214,7 +2347,7 @@ func (i GetDiskConfigDiskConfigSetArgs) ToGetDiskConfigDiskConfigSetOutputWithCo
 // GetDiskConfigDiskConfigSetArrayInput is an input type that accepts GetDiskConfigDiskConfigSetArray and GetDiskConfigDiskConfigSetArrayOutput values.
 // You can construct a concrete instance of `GetDiskConfigDiskConfigSetArrayInput` via:
 //
-//          GetDiskConfigDiskConfigSetArray{ GetDiskConfigDiskConfigSetArgs{...} }
+//	GetDiskConfigDiskConfigSetArray{ GetDiskConfigDiskConfigSetArgs{...} }
 type GetDiskConfigDiskConfigSetArrayInput interface {
 	pulumi.Input
 
@@ -2310,7 +2443,7 @@ type GetDiskConfigFilter struct {
 // GetDiskConfigFilterInput is an input type that accepts GetDiskConfigFilterArgs and GetDiskConfigFilterOutput values.
 // You can construct a concrete instance of `GetDiskConfigFilterInput` via:
 //
-//          GetDiskConfigFilterArgs{...}
+//	GetDiskConfigFilterArgs{...}
 type GetDiskConfigFilterInput interface {
 	pulumi.Input
 
@@ -2340,7 +2473,7 @@ func (i GetDiskConfigFilterArgs) ToGetDiskConfigFilterOutputWithContext(ctx cont
 // GetDiskConfigFilterArrayInput is an input type that accepts GetDiskConfigFilterArray and GetDiskConfigFilterArrayOutput values.
 // You can construct a concrete instance of `GetDiskConfigFilterArrayInput` via:
 //
-//          GetDiskConfigFilterArray{ GetDiskConfigFilterArgs{...} }
+//	GetDiskConfigFilterArray{ GetDiskConfigFilterArgs{...} }
 type GetDiskConfigFilterArrayInput interface {
 	pulumi.Input
 
@@ -2452,7 +2585,7 @@ type GetDisksDiskList struct {
 // GetDisksDiskListInput is an input type that accepts GetDisksDiskListArgs and GetDisksDiskListOutput values.
 // You can construct a concrete instance of `GetDisksDiskListInput` via:
 //
-//          GetDisksDiskListArgs{...}
+//	GetDisksDiskListArgs{...}
 type GetDisksDiskListInput interface {
 	pulumi.Input
 
@@ -2518,7 +2651,7 @@ func (i GetDisksDiskListArgs) ToGetDisksDiskListOutputWithContext(ctx context.Co
 // GetDisksDiskListArrayInput is an input type that accepts GetDisksDiskListArray and GetDisksDiskListArrayOutput values.
 // You can construct a concrete instance of `GetDisksDiskListArrayInput` via:
 //
-//          GetDisksDiskListArray{ GetDisksDiskListArgs{...} }
+//	GetDisksDiskListArray{ GetDisksDiskListArgs{...} }
 type GetDisksDiskListArrayInput interface {
 	pulumi.Input
 
@@ -2684,7 +2817,7 @@ type GetDisksFilter struct {
 // GetDisksFilterInput is an input type that accepts GetDisksFilterArgs and GetDisksFilterOutput values.
 // You can construct a concrete instance of `GetDisksFilterInput` via:
 //
-//          GetDisksFilterArgs{...}
+//	GetDisksFilterArgs{...}
 type GetDisksFilterInput interface {
 	pulumi.Input
 
@@ -2714,7 +2847,7 @@ func (i GetDisksFilterArgs) ToGetDisksFilterOutputWithContext(ctx context.Contex
 // GetDisksFilterArrayInput is an input type that accepts GetDisksFilterArray and GetDisksFilterArrayOutput values.
 // You can construct a concrete instance of `GetDisksFilterArrayInput` via:
 //
-//          GetDisksFilterArray{ GetDisksFilterArgs{...} }
+//	GetDisksFilterArray{ GetDisksFilterArgs{...} }
 type GetDisksFilterArrayInput interface {
 	pulumi.Input
 
@@ -2798,7 +2931,7 @@ type GetFirewallRulesTemplateFirewallRuleSet struct {
 // GetFirewallRulesTemplateFirewallRuleSetInput is an input type that accepts GetFirewallRulesTemplateFirewallRuleSetArgs and GetFirewallRulesTemplateFirewallRuleSetOutput values.
 // You can construct a concrete instance of `GetFirewallRulesTemplateFirewallRuleSetInput` via:
 //
-//          GetFirewallRulesTemplateFirewallRuleSetArgs{...}
+//	GetFirewallRulesTemplateFirewallRuleSetArgs{...}
 type GetFirewallRulesTemplateFirewallRuleSetInput interface {
 	pulumi.Input
 
@@ -2836,7 +2969,7 @@ func (i GetFirewallRulesTemplateFirewallRuleSetArgs) ToGetFirewallRulesTemplateF
 // GetFirewallRulesTemplateFirewallRuleSetArrayInput is an input type that accepts GetFirewallRulesTemplateFirewallRuleSetArray and GetFirewallRulesTemplateFirewallRuleSetArrayOutput values.
 // You can construct a concrete instance of `GetFirewallRulesTemplateFirewallRuleSetArrayInput` via:
 //
-//          GetFirewallRulesTemplateFirewallRuleSetArray{ GetFirewallRulesTemplateFirewallRuleSetArgs{...} }
+//	GetFirewallRulesTemplateFirewallRuleSetArray{ GetFirewallRulesTemplateFirewallRuleSetArgs{...} }
 type GetFirewallRulesTemplateFirewallRuleSetArrayInput interface {
 	pulumi.Input
 
@@ -2934,7 +3067,7 @@ type GetInstanceBlueprintBlueprintInstanceSet struct {
 // GetInstanceBlueprintBlueprintInstanceSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetArgs and GetInstanceBlueprintBlueprintInstanceSetOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetArgs{...}
+//	GetInstanceBlueprintBlueprintInstanceSetArgs{...}
 type GetInstanceBlueprintBlueprintInstanceSetInput interface {
 	pulumi.Input
 
@@ -2966,7 +3099,7 @@ func (i GetInstanceBlueprintBlueprintInstanceSetArgs) ToGetInstanceBlueprintBlue
 // GetInstanceBlueprintBlueprintInstanceSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetArray and GetInstanceBlueprintBlueprintInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetArrayInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetArray{ GetInstanceBlueprintBlueprintInstanceSetArgs{...} }
+//	GetInstanceBlueprintBlueprintInstanceSetArray{ GetInstanceBlueprintBlueprintInstanceSetArgs{...} }
 type GetInstanceBlueprintBlueprintInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -3087,7 +3220,7 @@ type GetInstanceBlueprintBlueprintInstanceSetBlueprint struct {
 // GetInstanceBlueprintBlueprintInstanceSetBlueprintInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs and GetInstanceBlueprintBlueprintInstanceSetBlueprintOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetBlueprintInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...}
+//	GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...}
 type GetInstanceBlueprintBlueprintInstanceSetBlueprintInput interface {
 	pulumi.Input
 
@@ -3153,7 +3286,7 @@ func (i GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs) ToGetInstanceBlue
 // GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetBlueprintArray and GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetBlueprintArray{ GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...} }
+//	GetInstanceBlueprintBlueprintInstanceSetBlueprintArray{ GetInstanceBlueprintBlueprintInstanceSetBlueprintArgs{...} }
 type GetInstanceBlueprintBlueprintInstanceSetBlueprintArrayInput interface {
 	pulumi.Input
 
@@ -3325,7 +3458,7 @@ type GetInstanceBlueprintBlueprintInstanceSetSoftwareSet struct {
 // GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...}
+//	GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...}
 type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetInput interface {
 	pulumi.Input
 
@@ -3361,7 +3494,7 @@ func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs) ToGetInstanceBl
 // GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...} }
+//	GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArgs{...} }
 type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetArrayInput interface {
 	pulumi.Input
 
@@ -3456,7 +3589,7 @@ type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSet struct {
 // GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...}
+//	GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...}
 type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetInput interface {
 	pulumi.Input
 
@@ -3488,7 +3621,7 @@ func (i GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs) ToGetI
 // GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput is an input type that accepts GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray and GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput` via:
 //
-//          GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...} }
+//	GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArray{ GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArgs{...} }
 type GetInstanceBlueprintBlueprintInstanceSetSoftwareSetDetailSetArrayInput interface {
 	pulumi.Input
 
@@ -3571,7 +3704,7 @@ type GetInstanceDiskNumAttachDetailSet struct {
 // GetInstanceDiskNumAttachDetailSetInput is an input type that accepts GetInstanceDiskNumAttachDetailSetArgs and GetInstanceDiskNumAttachDetailSetOutput values.
 // You can construct a concrete instance of `GetInstanceDiskNumAttachDetailSetInput` via:
 //
-//          GetInstanceDiskNumAttachDetailSetArgs{...}
+//	GetInstanceDiskNumAttachDetailSetArgs{...}
 type GetInstanceDiskNumAttachDetailSetInput interface {
 	pulumi.Input
 
@@ -3603,7 +3736,7 @@ func (i GetInstanceDiskNumAttachDetailSetArgs) ToGetInstanceDiskNumAttachDetailS
 // GetInstanceDiskNumAttachDetailSetArrayInput is an input type that accepts GetInstanceDiskNumAttachDetailSetArray and GetInstanceDiskNumAttachDetailSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceDiskNumAttachDetailSetArrayInput` via:
 //
-//          GetInstanceDiskNumAttachDetailSetArray{ GetInstanceDiskNumAttachDetailSetArgs{...} }
+//	GetInstanceDiskNumAttachDetailSetArray{ GetInstanceDiskNumAttachDetailSetArgs{...} }
 type GetInstanceDiskNumAttachDetailSetArrayInput interface {
 	pulumi.Input
 
@@ -3684,7 +3817,7 @@ type GetInstanceTrafficPackageInstanceTrafficPackageSet struct {
 // GetInstanceTrafficPackageInstanceTrafficPackageSetInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetArgs and GetInstanceTrafficPackageInstanceTrafficPackageSetOutput values.
 // You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetInput` via:
 //
-//          GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...}
+//	GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...}
 type GetInstanceTrafficPackageInstanceTrafficPackageSetInput interface {
 	pulumi.Input
 
@@ -3714,7 +3847,7 @@ func (i GetInstanceTrafficPackageInstanceTrafficPackageSetArgs) ToGetInstanceTra
 // GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetArray and GetInstanceTrafficPackageInstanceTrafficPackageSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput` via:
 //
-//          GetInstanceTrafficPackageInstanceTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...} }
+//	GetInstanceTrafficPackageInstanceTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetArgs{...} }
 type GetInstanceTrafficPackageInstanceTrafficPackageSetArrayInput interface {
 	pulumi.Input
 
@@ -3806,7 +3939,7 @@ type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSet struct 
 // GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs and GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetOutput values.
 // You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput` via:
 //
-//          GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...}
+//	GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...}
 type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetInput interface {
 	pulumi.Input
 
@@ -3850,7 +3983,7 @@ func (i GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs)
 // GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput is an input type that accepts GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray and GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayOutput values.
 // You can construct a concrete instance of `GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput` via:
 //
-//          GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...} }
+//	GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArray{ GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArgs{...} }
 type GetInstanceTrafficPackageInstanceTrafficPackageSetTrafficPackageSetArrayInput interface {
 	pulumi.Input
 
@@ -3969,7 +4102,7 @@ type GetModifyInstanceBundleFilter struct {
 // GetModifyInstanceBundleFilterInput is an input type that accepts GetModifyInstanceBundleFilterArgs and GetModifyInstanceBundleFilterOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleFilterInput` via:
 //
-//          GetModifyInstanceBundleFilterArgs{...}
+//	GetModifyInstanceBundleFilterArgs{...}
 type GetModifyInstanceBundleFilterInput interface {
 	pulumi.Input
 
@@ -3999,7 +4132,7 @@ func (i GetModifyInstanceBundleFilterArgs) ToGetModifyInstanceBundleFilterOutput
 // GetModifyInstanceBundleFilterArrayInput is an input type that accepts GetModifyInstanceBundleFilterArray and GetModifyInstanceBundleFilterArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleFilterArrayInput` via:
 //
-//          GetModifyInstanceBundleFilterArray{ GetModifyInstanceBundleFilterArgs{...} }
+//	GetModifyInstanceBundleFilterArray{ GetModifyInstanceBundleFilterArgs{...} }
 type GetModifyInstanceBundleFilterArrayInput interface {
 	pulumi.Input
 
@@ -4082,7 +4215,7 @@ type GetModifyInstanceBundleModifyBundleSet struct {
 // GetModifyInstanceBundleModifyBundleSetInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetArgs and GetModifyInstanceBundleModifyBundleSetOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetArgs{...}
 type GetModifyInstanceBundleModifyBundleSetInput interface {
 	pulumi.Input
 
@@ -4119,7 +4252,7 @@ func (i GetModifyInstanceBundleModifyBundleSetArgs) ToGetModifyInstanceBundleMod
 // GetModifyInstanceBundleModifyBundleSetArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetArray and GetModifyInstanceBundleModifyBundleSetArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetArray{ GetModifyInstanceBundleModifyBundleSetArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetArray{ GetModifyInstanceBundleModifyBundleSetArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetArrayInput interface {
 	pulumi.Input
 
@@ -4238,7 +4371,7 @@ type GetModifyInstanceBundleModifyBundleSetBundle struct {
 // GetModifyInstanceBundleModifyBundleSetBundleInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundleArgs and GetModifyInstanceBundleModifyBundleSetBundleOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundleInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundleArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetBundleArgs{...}
 type GetModifyInstanceBundleModifyBundleSetBundleInput interface {
 	pulumi.Input
 
@@ -4294,7 +4427,7 @@ func (i GetModifyInstanceBundleModifyBundleSetBundleArgs) ToGetModifyInstanceBun
 // GetModifyInstanceBundleModifyBundleSetBundleArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundleArray and GetModifyInstanceBundleModifyBundleSetBundleArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundleArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundleArray{ GetModifyInstanceBundleModifyBundleSetBundleArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetBundleArray{ GetModifyInstanceBundleModifyBundleSetBundleArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetBundleArrayInput interface {
 	pulumi.Input
 
@@ -4435,7 +4568,7 @@ type GetModifyInstanceBundleModifyBundleSetBundlePrice struct {
 // GetModifyInstanceBundleModifyBundleSetBundlePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceArgs and GetModifyInstanceBundleModifyBundleSetBundlePriceOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...}
 type GetModifyInstanceBundleModifyBundleSetBundlePriceInput interface {
 	pulumi.Input
 
@@ -4463,7 +4596,7 @@ func (i GetModifyInstanceBundleModifyBundleSetBundlePriceArgs) ToGetModifyInstan
 // GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceArray and GetModifyInstanceBundleModifyBundleSetBundlePriceArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundlePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetBundlePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetBundlePriceArrayInput interface {
 	pulumi.Input
 
@@ -4542,7 +4675,7 @@ type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePrice struct {
 // GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs and GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...}
 type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceInput interface {
 	pulumi.Input
 
@@ -4578,7 +4711,7 @@ func (i GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs) ToGe
 // GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray and GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetBundlePriceInstancePriceArrayInput interface {
 	pulumi.Input
 
@@ -4669,7 +4802,7 @@ type GetModifyInstanceBundleModifyBundleSetModifyPrice struct {
 // GetModifyInstanceBundleModifyBundleSetModifyPriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceArgs and GetModifyInstanceBundleModifyBundleSetModifyPriceOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...}
 type GetModifyInstanceBundleModifyBundleSetModifyPriceInput interface {
 	pulumi.Input
 
@@ -4697,7 +4830,7 @@ func (i GetModifyInstanceBundleModifyBundleSetModifyPriceArgs) ToGetModifyInstan
 // GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceArray and GetModifyInstanceBundleModifyBundleSetModifyPriceArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetModifyPriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetModifyPriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetModifyPriceArrayInput interface {
 	pulumi.Input
 
@@ -4776,7 +4909,7 @@ type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePrice struct {
 // GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs and GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...}
+//	GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...}
 type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceInput interface {
 	pulumi.Input
 
@@ -4812,7 +4945,7 @@ func (i GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs) ToGe
 // GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput is an input type that accepts GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray and GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayOutput values.
 // You can construct a concrete instance of `GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput` via:
 //
-//          GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...} }
+//	GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArray{ GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArgs{...} }
 type GetModifyInstanceBundleModifyBundleSetModifyPriceInstancePriceArrayInput interface {
 	pulumi.Input
 
@@ -4909,7 +5042,7 @@ type GetRegionRegionSet struct {
 // GetRegionRegionSetInput is an input type that accepts GetRegionRegionSetArgs and GetRegionRegionSetOutput values.
 // You can construct a concrete instance of `GetRegionRegionSetInput` via:
 //
-//          GetRegionRegionSetArgs{...}
+//	GetRegionRegionSetArgs{...}
 type GetRegionRegionSetInput interface {
 	pulumi.Input
 
@@ -4943,7 +5076,7 @@ func (i GetRegionRegionSetArgs) ToGetRegionRegionSetOutputWithContext(ctx contex
 // GetRegionRegionSetArrayInput is an input type that accepts GetRegionRegionSetArray and GetRegionRegionSetArrayOutput values.
 // You can construct a concrete instance of `GetRegionRegionSetArrayInput` via:
 //
-//          GetRegionRegionSetArray{ GetRegionRegionSetArgs{...} }
+//	GetRegionRegionSetArray{ GetRegionRegionSetArgs{...} }
 type GetRegionRegionSetArrayInput interface {
 	pulumi.Input
 
@@ -5029,7 +5162,7 @@ type GetResetInstanceBlueprintFilter struct {
 // GetResetInstanceBlueprintFilterInput is an input type that accepts GetResetInstanceBlueprintFilterArgs and GetResetInstanceBlueprintFilterOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintFilterInput` via:
 //
-//          GetResetInstanceBlueprintFilterArgs{...}
+//	GetResetInstanceBlueprintFilterArgs{...}
 type GetResetInstanceBlueprintFilterInput interface {
 	pulumi.Input
 
@@ -5059,7 +5192,7 @@ func (i GetResetInstanceBlueprintFilterArgs) ToGetResetInstanceBlueprintFilterOu
 // GetResetInstanceBlueprintFilterArrayInput is an input type that accepts GetResetInstanceBlueprintFilterArray and GetResetInstanceBlueprintFilterArrayOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintFilterArrayInput` via:
 //
-//          GetResetInstanceBlueprintFilterArray{ GetResetInstanceBlueprintFilterArgs{...} }
+//	GetResetInstanceBlueprintFilterArray{ GetResetInstanceBlueprintFilterArgs{...} }
 type GetResetInstanceBlueprintFilterArrayInput interface {
 	pulumi.Input
 
@@ -5137,7 +5270,7 @@ type GetResetInstanceBlueprintResetInstanceBlueprintSet struct {
 // GetResetInstanceBlueprintResetInstanceBlueprintSetInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetArgs and GetResetInstanceBlueprintResetInstanceBlueprintSetOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetInput` via:
 //
-//          GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...}
+//	GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...}
 type GetResetInstanceBlueprintResetInstanceBlueprintSetInput interface {
 	pulumi.Input
 
@@ -5169,7 +5302,7 @@ func (i GetResetInstanceBlueprintResetInstanceBlueprintSetArgs) ToGetResetInstan
 // GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetArray and GetResetInstanceBlueprintResetInstanceBlueprintSetArrayOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput` via:
 //
-//          GetResetInstanceBlueprintResetInstanceBlueprintSetArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...} }
+//	GetResetInstanceBlueprintResetInstanceBlueprintSetArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetArgs{...} }
 type GetResetInstanceBlueprintResetInstanceBlueprintSetArrayInput interface {
 	pulumi.Input
 
@@ -5217,7 +5350,7 @@ func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) IsResettable()
 	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSet) bool { return v.IsResettable }).(pulumi.BoolOutput)
 }
 
-// The information cannot be reset. when the mirror can be reset ''.
+// The information cannot be reset. when the mirror can be reset ”.
 func (o GetResetInstanceBlueprintResetInstanceBlueprintSetOutput) NonResettableMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v GetResetInstanceBlueprintResetInstanceBlueprintSet) string { return v.NonResettableMessage }).(pulumi.StringOutput)
 }
@@ -5288,7 +5421,7 @@ type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfo struct {
 // GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs and GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput` via:
 //
-//          GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...}
+//	GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...}
 type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoInput interface {
 	pulumi.Input
 
@@ -5354,7 +5487,7 @@ func (i GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs) ToG
 // GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput is an input type that accepts GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray and GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayOutput values.
 // You can construct a concrete instance of `GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput` via:
 //
-//          GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...} }
+//	GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArray{ GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArgs{...} }
 type GetResetInstanceBlueprintResetInstanceBlueprintSetBlueprintInfoArrayInput interface {
 	pulumi.Input
 
@@ -5532,7 +5665,7 @@ type GetSceneSceneSet struct {
 // GetSceneSceneSetInput is an input type that accepts GetSceneSceneSetArgs and GetSceneSceneSetOutput values.
 // You can construct a concrete instance of `GetSceneSceneSetInput` via:
 //
-//          GetSceneSceneSetArgs{...}
+//	GetSceneSceneSetArgs{...}
 type GetSceneSceneSetInput interface {
 	pulumi.Input
 
@@ -5564,7 +5697,7 @@ func (i GetSceneSceneSetArgs) ToGetSceneSceneSetOutputWithContext(ctx context.Co
 // GetSceneSceneSetArrayInput is an input type that accepts GetSceneSceneSetArray and GetSceneSceneSetArrayOutput values.
 // You can construct a concrete instance of `GetSceneSceneSetArrayInput` via:
 //
-//          GetSceneSceneSetArray{ GetSceneSceneSetArgs{...} }
+//	GetSceneSceneSetArray{ GetSceneSceneSetArgs{...} }
 type GetSceneSceneSetArrayInput interface {
 	pulumi.Input
 
@@ -5647,7 +5780,7 @@ type GetZoneZoneInfoSet struct {
 // GetZoneZoneInfoSetInput is an input type that accepts GetZoneZoneInfoSetArgs and GetZoneZoneInfoSetOutput values.
 // You can construct a concrete instance of `GetZoneZoneInfoSetInput` via:
 //
-//          GetZoneZoneInfoSetArgs{...}
+//	GetZoneZoneInfoSetArgs{...}
 type GetZoneZoneInfoSetInput interface {
 	pulumi.Input
 
@@ -5679,7 +5812,7 @@ func (i GetZoneZoneInfoSetArgs) ToGetZoneZoneInfoSetOutputWithContext(ctx contex
 // GetZoneZoneInfoSetArrayInput is an input type that accepts GetZoneZoneInfoSetArray and GetZoneZoneInfoSetArrayOutput values.
 // You can construct a concrete instance of `GetZoneZoneInfoSetArrayInput` via:
 //
-//          GetZoneZoneInfoSetArray{ GetZoneZoneInfoSetArgs{...} }
+//	GetZoneZoneInfoSetArray{ GetZoneZoneInfoSetArgs{...} }
 type GetZoneZoneInfoSetArrayInput interface {
 	pulumi.Input
 
@@ -5757,6 +5890,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DiskDiskChargePrepaidPtrInput)(nil)).Elem(), DiskDiskChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleInput)(nil)).Elem(), FirewallRuleFirewallRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleArrayInput)(nil)).Elem(), FirewallRuleFirewallRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallTemplateTemplateRuleInput)(nil)).Elem(), FirewallTemplateTemplateRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallTemplateTemplateRuleArrayInput)(nil)).Elem(), FirewallTemplateTemplateRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerInput)(nil)).Elem(), InstanceContainerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerArrayInput)(nil)).Elem(), InstanceContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerEnvInput)(nil)).Elem(), InstanceContainerEnvArgs{})
@@ -5837,6 +5972,8 @@ func init() {
 	pulumi.RegisterOutputType(DiskDiskChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleArrayOutput{})
+	pulumi.RegisterOutputType(FirewallTemplateTemplateRuleOutput{})
+	pulumi.RegisterOutputType(FirewallTemplateTemplateRuleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerOutput{})
 	pulumi.RegisterOutputType(InstanceContainerArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerEnvOutput{})

@@ -42,6 +42,14 @@ import * as utilities from "../utilities";
  *     customerAddress: "100.93.46.2/30",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * DCX instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+ * ```
  */
 export class Instance extends pulumi.CustomResource {
     /**
@@ -108,6 +116,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Network region.
+     */
+    public readonly networkRegion!: pulumi.Output<string | undefined>;
+    /**
      * Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
      */
     public readonly networkType!: pulumi.Output<string | undefined>;
@@ -158,6 +170,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dcOwnerAccount"] = state ? state.dcOwnerAccount : undefined;
             resourceInputs["dcgId"] = state ? state.dcgId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["networkRegion"] = state ? state.networkRegion : undefined;
             resourceInputs["networkType"] = state ? state.networkType : undefined;
             resourceInputs["routeFilterPrefixes"] = state ? state.routeFilterPrefixes : undefined;
             resourceInputs["routeType"] = state ? state.routeType : undefined;
@@ -181,6 +194,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dcOwnerAccount"] = args ? args.dcOwnerAccount : undefined;
             resourceInputs["dcgId"] = args ? args.dcgId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["networkRegion"] = args ? args.networkRegion : undefined;
             resourceInputs["networkType"] = args ? args.networkType : undefined;
             resourceInputs["routeFilterPrefixes"] = args ? args.routeFilterPrefixes : undefined;
             resourceInputs["routeType"] = args ? args.routeType : undefined;
@@ -235,6 +249,10 @@ export interface InstanceState {
      * Name of the dedicated tunnel.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Network region.
+     */
+    networkRegion?: pulumi.Input<string>;
     /**
      * Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
      */
@@ -301,6 +319,10 @@ export interface InstanceArgs {
      * Name of the dedicated tunnel.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Network region.
+     */
+    networkRegion?: pulumi.Input<string>;
     /**
      * Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
      */

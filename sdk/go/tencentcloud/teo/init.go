@@ -21,28 +21,20 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Teo/accelerationDomain:AccelerationDomain":
+		r = &AccelerationDomain{}
 	case "tencentcloud:Teo/applicationProxy:ApplicationProxy":
 		r = &ApplicationProxy{}
 	case "tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule":
 		r = &ApplicationProxyRule{}
-	case "tencentcloud:Teo/customErrorPage:CustomErrorPage":
-		r = &CustomErrorPage{}
-	case "tencentcloud:Teo/ddosPolicy:DdosPolicy":
-		r = &DdosPolicy{}
-	case "tencentcloud:Teo/dnsRecord:DnsRecord":
-		r = &DnsRecord{}
-	case "tencentcloud:Teo/dnsSec:DnsSec":
-		r = &DnsSec{}
-	case "tencentcloud:Teo/loadBalancing:LoadBalancing":
-		r = &LoadBalancing{}
+	case "tencentcloud:Teo/certificateConfig:CertificateConfig":
+		r = &CertificateConfig{}
 	case "tencentcloud:Teo/originGroup:OriginGroup":
 		r = &OriginGroup{}
+	case "tencentcloud:Teo/ownershipVerify:OwnershipVerify":
+		r = &OwnershipVerify{}
 	case "tencentcloud:Teo/ruleEngine:RuleEngine":
 		r = &RuleEngine{}
-	case "tencentcloud:Teo/ruleEnginePriority:RuleEnginePriority":
-		r = &RuleEnginePriority{}
-	case "tencentcloud:Teo/securityPolicy:SecurityPolicy":
-		r = &SecurityPolicy{}
 	case "tencentcloud:Teo/zone:Zone":
 		r = &Zone{}
 	case "tencentcloud:Teo/zoneSetting:ZoneSetting":
@@ -62,6 +54,11 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/accelerationDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/applicationProxy",
 		&module{version},
 	)
@@ -72,27 +69,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Teo/customErrorPage",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/ddosPolicy",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/dnsRecord",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/dnsSec",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/loadBalancing",
+		"Teo/certificateConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -102,17 +79,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/ownershipVerify",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/ruleEngine",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/ruleEnginePriority",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Teo/securityPolicy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -155,10 +155,10 @@ def get_keys(key_state: Optional[int] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Kms.get_keys(key_state=0,
+    example = tencentcloud.Kms.get_keys(key_state=0,
         key_usage="ALL",
         origin="TENCENT_KMS",
-        search_key_alias="test")
+        search_key_alias="tf_example")
     ```
 
 
@@ -220,10 +220,10 @@ def get_keys_output(key_state: Optional[pulumi.Input[Optional[int]]] = None,
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Kms.get_keys(key_state=0,
+    example = tencentcloud.Kms.get_keys(key_state=0,
         key_usage="ALL",
         origin="TENCENT_KMS",
-        search_key_alias="test")
+        search_key_alias="tf_example")
     ```
 
 

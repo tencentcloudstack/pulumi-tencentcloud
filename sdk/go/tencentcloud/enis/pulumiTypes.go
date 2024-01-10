@@ -42,7 +42,7 @@ type GetInstanceEni struct {
 // GetInstanceEniInput is an input type that accepts GetInstanceEniArgs and GetInstanceEniOutput values.
 // You can construct a concrete instance of `GetInstanceEniInput` via:
 //
-//          GetInstanceEniArgs{...}
+//	GetInstanceEniArgs{...}
 type GetInstanceEniInput interface {
 	pulumi.Input
 
@@ -94,7 +94,7 @@ func (i GetInstanceEniArgs) ToGetInstanceEniOutputWithContext(ctx context.Contex
 // GetInstanceEniArrayInput is an input type that accepts GetInstanceEniArray and GetInstanceEniArrayOutput values.
 // You can construct a concrete instance of `GetInstanceEniArrayInput` via:
 //
-//          GetInstanceEniArray{ GetInstanceEniArgs{...} }
+//	GetInstanceEniArray{ GetInstanceEniArgs{...} }
 type GetInstanceEniArrayInput interface {
 	pulumi.Input
 
@@ -227,7 +227,7 @@ type GetInstanceEniIpv4 struct {
 // GetInstanceEniIpv4Input is an input type that accepts GetInstanceEniIpv4Args and GetInstanceEniIpv4Output values.
 // You can construct a concrete instance of `GetInstanceEniIpv4Input` via:
 //
-//          GetInstanceEniIpv4Args{...}
+//	GetInstanceEniIpv4Args{...}
 type GetInstanceEniIpv4Input interface {
 	pulumi.Input
 
@@ -259,7 +259,7 @@ func (i GetInstanceEniIpv4Args) ToGetInstanceEniIpv4OutputWithContext(ctx contex
 // GetInstanceEniIpv4ArrayInput is an input type that accepts GetInstanceEniIpv4Array and GetInstanceEniIpv4ArrayOutput values.
 // You can construct a concrete instance of `GetInstanceEniIpv4ArrayInput` via:
 //
-//          GetInstanceEniIpv4Array{ GetInstanceEniIpv4Args{...} }
+//	GetInstanceEniIpv4Array{ GetInstanceEniIpv4Args{...} }
 type GetInstanceEniIpv4ArrayInput interface {
 	pulumi.Input
 

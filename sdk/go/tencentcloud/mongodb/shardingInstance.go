@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
-// 			AvailableZone: pulumi.String("ap-guangzhou-3"),
-// 			EngineVersion: pulumi.String("MONGO_36_WT"),
-// 			InstanceName:  pulumi.String("mongodb"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			Memory:        pulumi.Int(4),
-// 			MongosCpu:     pulumi.Int(1),
-// 			MongosMemory:  pulumi.Int(2),
-// 			MongosNodeNum: pulumi.Int(3),
-// 			NodesPerShard: pulumi.Int(3),
-// 			Password:      pulumi.String("password1234"),
-// 			ProjectId:     pulumi.Int(0),
-// 			ShardQuantity: pulumi.Int(2),
-// 			SubnetId:      pulumi.String("subnet-lk0svi3p"),
-// 			Volume:        pulumi.Int(100),
-// 			VpcId:         pulumi.String("vpc-mz3efvbw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewShardingInstance(ctx, "mongodb", &Mongodb.ShardingInstanceArgs{
+//				AvailableZone: pulumi.String("ap-guangzhou-3"),
+//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				InstanceName:  pulumi.String("mongodb"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				Memory:        pulumi.Int(4),
+//				MongosCpu:     pulumi.Int(1),
+//				MongosMemory:  pulumi.Int(2),
+//				MongosNodeNum: pulumi.Int(3),
+//				NodesPerShard: pulumi.Int(3),
+//				Password:      pulumi.String("password1234"),
+//				ProjectId:     pulumi.Int(0),
+//				ShardQuantity: pulumi.Int(2),
+//				SubnetId:      pulumi.String("subnet-lk0svi3p"),
+//				Volume:        pulumi.Int(100),
+//				VpcId:         pulumi.String("vpc-mz3efvbw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // Mongodb sharding instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+//
+//	$ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+//
 // ```
 type ShardingInstance struct {
 	pulumi.CustomResourceState
@@ -98,7 +103,7 @@ type ShardingInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity pulumi.IntOutput `pulumi:"shardQuantity"`
@@ -210,7 +215,7 @@ type shardingInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity *int `pulumi:"shardQuantity"`
@@ -269,7 +274,7 @@ type ShardingInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
 	ShardQuantity pulumi.IntPtrInput
@@ -330,7 +335,7 @@ type shardingInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity int `pulumi:"shardQuantity"`
@@ -382,7 +387,7 @@ type ShardingInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
 	ShardQuantity pulumi.IntInput
@@ -422,7 +427,7 @@ func (i *ShardingInstance) ToShardingInstanceOutputWithContext(ctx context.Conte
 // ShardingInstanceArrayInput is an input type that accepts ShardingInstanceArray and ShardingInstanceArrayOutput values.
 // You can construct a concrete instance of `ShardingInstanceArrayInput` via:
 //
-//          ShardingInstanceArray{ ShardingInstanceArgs{...} }
+//	ShardingInstanceArray{ ShardingInstanceArgs{...} }
 type ShardingInstanceArrayInput interface {
 	pulumi.Input
 
@@ -447,7 +452,7 @@ func (i ShardingInstanceArray) ToShardingInstanceArrayOutputWithContext(ctx cont
 // ShardingInstanceMapInput is an input type that accepts ShardingInstanceMap and ShardingInstanceMapOutput values.
 // You can construct a concrete instance of `ShardingInstanceMapInput` via:
 //
-//          ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
+//	ShardingInstanceMap{ "key": ShardingInstanceArgs{...} }
 type ShardingInstanceMapInput interface {
 	pulumi.Input
 
@@ -572,7 +577,7 @@ func (o ShardingInstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+// ID of the security group.
 func (o ShardingInstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }

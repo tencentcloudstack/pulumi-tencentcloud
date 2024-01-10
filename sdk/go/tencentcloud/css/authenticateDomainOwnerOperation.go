@@ -20,22 +20,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-// 			DomainName: pulumi.String("your_domain_name"),
-// 			VerifyType: pulumi.String("dnsCheck"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &Css.AuthenticateDomainOwnerOperationArgs{
+//				DomainName: pulumi.String("your_domain_name"),
+//				VerifyType: pulumi.String("dnsCheck"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### fileCheck way:
 //
@@ -43,22 +46,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-// 			DomainName: pulumi.String("your_domain_name"),
-// 			VerifyType: pulumi.String("fileCheck"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &Css.AuthenticateDomainOwnerOperationArgs{
+//				DomainName: pulumi.String("your_domain_name"),
+//				VerifyType: pulumi.String("fileCheck"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type AuthenticateDomainOwnerOperation struct {
 	pulumi.CustomResourceState
@@ -160,7 +166,7 @@ func (i *AuthenticateDomainOwnerOperation) ToAuthenticateDomainOwnerOperationOut
 // AuthenticateDomainOwnerOperationArrayInput is an input type that accepts AuthenticateDomainOwnerOperationArray and AuthenticateDomainOwnerOperationArrayOutput values.
 // You can construct a concrete instance of `AuthenticateDomainOwnerOperationArrayInput` via:
 //
-//          AuthenticateDomainOwnerOperationArray{ AuthenticateDomainOwnerOperationArgs{...} }
+//	AuthenticateDomainOwnerOperationArray{ AuthenticateDomainOwnerOperationArgs{...} }
 type AuthenticateDomainOwnerOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +191,7 @@ func (i AuthenticateDomainOwnerOperationArray) ToAuthenticateDomainOwnerOperatio
 // AuthenticateDomainOwnerOperationMapInput is an input type that accepts AuthenticateDomainOwnerOperationMap and AuthenticateDomainOwnerOperationMapOutput values.
 // You can construct a concrete instance of `AuthenticateDomainOwnerOperationMapInput` via:
 //
-//          AuthenticateDomainOwnerOperationMap{ "key": AuthenticateDomainOwnerOperationArgs{...} }
+//	AuthenticateDomainOwnerOperationMap{ "key": AuthenticateDomainOwnerOperationArgs{...} }
 type AuthenticateDomainOwnerOperationMapInput interface {
 	pulumi.Input
 

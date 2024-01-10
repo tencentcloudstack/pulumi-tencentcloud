@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Record{}
 	case "tencentcloud:PrivateDns/zone:Zone":
 		r = &Zone{}
+	case "tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment":
+		r = &ZoneVpcAttachment{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -46,6 +48,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"PrivateDns/zone",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"PrivateDns/zoneVpcAttachment",
 		&module{version},
 	)
 }

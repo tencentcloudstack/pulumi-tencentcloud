@@ -19,45 +19,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		camPolicyBasic := "keep-cam-policy"
-// 		if param := cfg.Get("camPolicyBasic"); param != "" {
-// 			camPolicyBasic = param
-// 		}
-// 		camGroupBasic := "keep-cam-group"
-// 		if param := cfg.Get("camGroupBasic"); param != "" {
-// 			camGroupBasic = param
-// 		}
-// 		groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
-// 			Name: pulumi.StringRef(camGroupBasic),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		policy, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			Name: pulumi.StringRef(camPolicyBasic),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.NewGroupPolicyAttachment(ctx, "groupPolicyAttachmentBasic", &Cam.GroupPolicyAttachmentArgs{
-// 			GroupId:  pulumi.String(groups.GroupLists[0].GroupId),
-// 			PolicyId: pulumi.String(policy.PolicyLists[0].PolicyId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			camPolicyBasic := "keep-cam-policy"
+//			if param := cfg.Get("camPolicyBasic"); param != "" {
+//				camPolicyBasic = param
+//			}
+//			camGroupBasic := "keep-cam-group"
+//			if param := cfg.Get("camGroupBasic"); param != "" {
+//				camGroupBasic = param
+//			}
+//			groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+//				Name: pulumi.StringRef(camGroupBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			policy, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				Name: pulumi.StringRef(camPolicyBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.NewGroupPolicyAttachment(ctx, "groupPolicyAttachmentBasic", &Cam.GroupPolicyAttachmentArgs{
+//				GroupId:  pulumi.String(groups.GroupLists[0].GroupId),
+//				PolicyId: pulumi.String(policy.PolicyLists[0].PolicyId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -65,7 +68,9 @@ import (
 // CAM group policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+//
+//	$ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+//
 // ```
 type GroupPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -194,7 +199,7 @@ func (i *GroupPolicyAttachment) ToGroupPolicyAttachmentOutputWithContext(ctx con
 // GroupPolicyAttachmentArrayInput is an input type that accepts GroupPolicyAttachmentArray and GroupPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `GroupPolicyAttachmentArrayInput` via:
 //
-//          GroupPolicyAttachmentArray{ GroupPolicyAttachmentArgs{...} }
+//	GroupPolicyAttachmentArray{ GroupPolicyAttachmentArgs{...} }
 type GroupPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +224,7 @@ func (i GroupPolicyAttachmentArray) ToGroupPolicyAttachmentArrayOutputWithContex
 // GroupPolicyAttachmentMapInput is an input type that accepts GroupPolicyAttachmentMap and GroupPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `GroupPolicyAttachmentMapInput` via:
 //
-//          GroupPolicyAttachmentMap{ "key": GroupPolicyAttachmentArgs{...} }
+//	GroupPolicyAttachmentMap{ "key": GroupPolicyAttachmentArgs{...} }
 type GroupPolicyAttachmentMapInput interface {
 	pulumi.Input
 

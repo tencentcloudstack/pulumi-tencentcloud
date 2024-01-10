@@ -20,22 +20,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewFlowLogConfig(ctx, "config", &Vpc.FlowLogConfigArgs{
-// 			FlowLogId: pulumi.Any(tencentcloud_vpc_flow_log.Example.Id),
-// 			Enable:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewFlowLogConfig(ctx, "config", &Vpc.FlowLogConfigArgs{
+//				FlowLogId: pulumi.Any(tencentcloud_vpc_flow_log.Example.Id),
+//				Enable:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // vpc flow_log_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
+//
+//	$ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
+//
 // ```
 type FlowLogConfig struct {
 	pulumi.CustomResourceState
@@ -148,7 +153,7 @@ func (i *FlowLogConfig) ToFlowLogConfigOutputWithContext(ctx context.Context) Fl
 // FlowLogConfigArrayInput is an input type that accepts FlowLogConfigArray and FlowLogConfigArrayOutput values.
 // You can construct a concrete instance of `FlowLogConfigArrayInput` via:
 //
-//          FlowLogConfigArray{ FlowLogConfigArgs{...} }
+//	FlowLogConfigArray{ FlowLogConfigArgs{...} }
 type FlowLogConfigArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +178,7 @@ func (i FlowLogConfigArray) ToFlowLogConfigArrayOutputWithContext(ctx context.Co
 // FlowLogConfigMapInput is an input type that accepts FlowLogConfigMap and FlowLogConfigMapOutput values.
 // You can construct a concrete instance of `FlowLogConfigMapInput` via:
 //
-//          FlowLogConfigMap{ "key": FlowLogConfigArgs{...} }
+//	FlowLogConfigMap{ "key": FlowLogConfigArgs{...} }
 type FlowLogConfigMapInput interface {
 	pulumi.Input
 

@@ -39,6 +39,23 @@ import * as utilities from "../utilities";
  *     timeSpan: 3,
  * });
  * ```
+ * ### Bandwidth Package With Egress
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.Vpc.BandwidthPackage("example", {
+ *     bandwidthPackageName: "tf-example",
+ *     chargeType: "ENHANCED95_POSTPAID_BY_MONTH",
+ *     egress: "center_egress2",
+ *     internetMaxBandwidth: 400,
+ *     networkType: "SINGLEISP_CMCC",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
  *
  * ## Import
  *
@@ -81,15 +98,19 @@ export class BandwidthPackage extends pulumi.CustomResource {
      */
     public readonly bandwidthPackageName!: pulumi.Output<string | undefined>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+     * Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
+    /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    public readonly egress!: pulumi.Output<string>;
     /**
      * Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
      */
     public readonly internetMaxBandwidth!: pulumi.Output<number | undefined>;
     /**
-     * Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+     * Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
      */
     public readonly networkType!: pulumi.Output<string | undefined>;
     /**
@@ -116,6 +137,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             const state = argsOrState as BandwidthPackageState | undefined;
             resourceInputs["bandwidthPackageName"] = state ? state.bandwidthPackageName : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
+            resourceInputs["egress"] = state ? state.egress : undefined;
             resourceInputs["internetMaxBandwidth"] = state ? state.internetMaxBandwidth : undefined;
             resourceInputs["networkType"] = state ? state.networkType : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -124,6 +146,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             const args = argsOrState as BandwidthPackageArgs | undefined;
             resourceInputs["bandwidthPackageName"] = args ? args.bandwidthPackageName : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
+            resourceInputs["egress"] = args ? args.egress : undefined;
             resourceInputs["internetMaxBandwidth"] = args ? args.internetMaxBandwidth : undefined;
             resourceInputs["networkType"] = args ? args.networkType : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -143,15 +166,19 @@ export interface BandwidthPackageState {
      */
     bandwidthPackageName?: pulumi.Input<string>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+     * Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    egress?: pulumi.Input<string>;
     /**
      * Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
      */
     internetMaxBandwidth?: pulumi.Input<number>;
     /**
-     * Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+     * Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
      */
     networkType?: pulumi.Input<string>;
     /**
@@ -173,15 +200,19 @@ export interface BandwidthPackageArgs {
      */
     bandwidthPackageName?: pulumi.Input<string>;
     /**
-     * Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+     * Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    egress?: pulumi.Input<string>;
     /**
      * Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
      */
     internetMaxBandwidth?: pulumi.Input<number>;
     /**
-     * Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+     * Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
      */
     networkType?: pulumi.Input<string>;
     /**

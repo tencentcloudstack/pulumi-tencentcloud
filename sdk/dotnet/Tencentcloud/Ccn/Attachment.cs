@@ -114,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Output<string> InstanceType { get; private set; } = null!;
 
         /// <summary>
+        /// Route id list.
+        /// </summary>
+        [Output("routeIds")]
+        public Output<ImmutableArray<string>> RouteIds { get; private set; } = null!;
+
+        /// <summary>
         /// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         /// </summary>
         [Output("state")]
@@ -262,6 +268,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// </summary>
         [Input("instanceType")]
         public Input<string>? InstanceType { get; set; }
+
+        [Input("routeIds")]
+        private InputList<string>? _routeIds;
+
+        /// <summary>
+        /// Route id list.
+        /// </summary>
+        public InputList<string> RouteIds
+        {
+            get => _routeIds ?? (_routeIds = new InputList<string>());
+            set => _routeIds = value;
+        }
 
         /// <summary>
         /// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.

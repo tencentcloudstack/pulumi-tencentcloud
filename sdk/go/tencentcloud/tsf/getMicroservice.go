@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetMicroservice(ctx, &tsf.GetMicroserviceArgs{
-// 			NamespaceId: _var.Namespace_id,
-// 			MicroserviceIdLists: []string{
-// 				"ms-yq3jo6jd",
-// 			},
-// 			MicroserviceNameLists: []string{
-// 				"provider-demo",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetMicroservice(ctx, &tsf.GetMicroserviceArgs{
+//				NamespaceId: _var.Namespace_id,
+//				MicroserviceIdLists: []string{
+//					"ms-yq3jo6jd",
+//				},
+//				MicroserviceNameLists: []string{
+//					"provider-demo",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupMicroservice(ctx *pulumi.Context, args *LookupMicroserviceArgs, opts ...pulumi.InvokeOption) (*LookupMicroserviceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

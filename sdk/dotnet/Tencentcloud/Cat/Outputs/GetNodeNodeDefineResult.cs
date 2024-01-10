@@ -51,6 +51,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat.Outputs
         /// </summary>
         public readonly int NodeDefineStatus;
         /// <summary>
+        /// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+        /// </summary>
+        public readonly ImmutableArray<int> TaskTypes;
+        /// <summary>
         /// Node Type;1 = IDC,2 = LastMile,3 = Mobile.
         /// </summary>
         public readonly int Type;
@@ -75,6 +79,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat.Outputs
 
             int nodeDefineStatus,
 
+            ImmutableArray<int> taskTypes,
+
             int type)
         {
             City = city;
@@ -86,6 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat.Outputs
             Name = name;
             NetService = netService;
             NodeDefineStatus = nodeDefineStatus;
+            TaskTypes = taskTypes;
             Type = type;
         }
     }

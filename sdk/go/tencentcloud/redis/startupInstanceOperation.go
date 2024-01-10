@@ -20,21 +20,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewStartupInstanceOperation(ctx, "foo", &Redis.StartupInstanceOperationArgs{
-// 			InstanceId: pulumi.String("crs-c1nl9rpv"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewStartupInstanceOperation(ctx, "foo", &Redis.StartupInstanceOperationArgs{
+//				InstanceId: pulumi.String("crs-c1nl9rpv"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StartupInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -126,7 +129,7 @@ func (i *StartupInstanceOperation) ToStartupInstanceOperationOutputWithContext(c
 // StartupInstanceOperationArrayInput is an input type that accepts StartupInstanceOperationArray and StartupInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `StartupInstanceOperationArrayInput` via:
 //
-//          StartupInstanceOperationArray{ StartupInstanceOperationArgs{...} }
+//	StartupInstanceOperationArray{ StartupInstanceOperationArgs{...} }
 type StartupInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -151,7 +154,7 @@ func (i StartupInstanceOperationArray) ToStartupInstanceOperationArrayOutputWith
 // StartupInstanceOperationMapInput is an input type that accepts StartupInstanceOperationMap and StartupInstanceOperationMapOutput values.
 // You can construct a concrete instance of `StartupInstanceOperationMapInput` via:
 //
-//          StartupInstanceOperationMap{ "key": StartupInstanceOperationArgs{...} }
+//	StartupInstanceOperationMap{ "key": StartupInstanceOperationArgs{...} }
 type StartupInstanceOperationMapInput interface {
 	pulumi.Input
 

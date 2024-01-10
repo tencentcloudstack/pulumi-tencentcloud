@@ -17,6 +17,7 @@ class ZoneArgs:
     def __init__(__self__, *,
                  domain: pulumi.Input[str],
                  account_vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]]] = None,
+                 cname_speedup_status: Optional[pulumi.Input[str]] = None,
                  dns_forward_status: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
                  tag_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]]] = None,
@@ -26,6 +27,7 @@ class ZoneArgs:
         The set of arguments for constructing a Zone resource.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
+        :param pulumi.Input[str] cname_speedup_status: CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] remark: Remarks.
         :param pulumi.Input[Sequence[pulumi.Input['ZoneTagSetArgs']]] tag_sets: It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
@@ -35,6 +37,8 @@ class ZoneArgs:
         pulumi.set(__self__, "domain", domain)
         if account_vpc_sets is not None:
             pulumi.set(__self__, "account_vpc_sets", account_vpc_sets)
+        if cname_speedup_status is not None:
+            pulumi.set(__self__, "cname_speedup_status", cname_speedup_status)
         if dns_forward_status is not None:
             pulumi.set(__self__, "dns_forward_status", dns_forward_status)
         if remark is not None:
@@ -72,6 +76,18 @@ class ZoneArgs:
     @account_vpc_sets.setter
     def account_vpc_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]]]):
         pulumi.set(self, "account_vpc_sets", value)
+
+    @property
+    @pulumi.getter(name="cnameSpeedupStatus")
+    def cname_speedup_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+        """
+        return pulumi.get(self, "cname_speedup_status")
+
+    @cname_speedup_status.setter
+    def cname_speedup_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cname_speedup_status", value)
 
     @property
     @pulumi.getter(name="dnsForwardStatus")
@@ -138,6 +154,7 @@ class ZoneArgs:
 class _ZoneState:
     def __init__(__self__, *,
                  account_vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]]] = None,
+                 cname_speedup_status: Optional[pulumi.Input[str]] = None,
                  dns_forward_status: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
@@ -147,6 +164,7 @@ class _ZoneState:
         """
         Input properties used for looking up and filtering Zone resources.
         :param pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
+        :param pulumi.Input[str] cname_speedup_status: CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
@@ -156,6 +174,8 @@ class _ZoneState:
         """
         if account_vpc_sets is not None:
             pulumi.set(__self__, "account_vpc_sets", account_vpc_sets)
+        if cname_speedup_status is not None:
+            pulumi.set(__self__, "cname_speedup_status", cname_speedup_status)
         if dns_forward_status is not None:
             pulumi.set(__self__, "dns_forward_status", dns_forward_status)
         if domain is not None:
@@ -183,6 +203,18 @@ class _ZoneState:
     @account_vpc_sets.setter
     def account_vpc_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneAccountVpcSetArgs']]]]):
         pulumi.set(self, "account_vpc_sets", value)
+
+    @property
+    @pulumi.getter(name="cnameSpeedupStatus")
+    def cname_speedup_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+        """
+        return pulumi.get(self, "cname_speedup_status")
+
+    @cname_speedup_status.setter
+    def cname_speedup_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cname_speedup_status", value)
 
     @property
     @pulumi.getter(name="dnsForwardStatus")
@@ -263,6 +295,7 @@ class Zone(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  account_vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]]] = None,
+                 cname_speedup_status: Optional[pulumi.Input[str]] = None,
                  dns_forward_status: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
@@ -274,29 +307,50 @@ class Zone(pulumi.CustomResource):
         Provide a resource to create a Private Dns Zone.
 
         ## Example Usage
+        ### Create a basic Private Dns Zone
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.private_dns.Zone("foo",
-            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
-                region="ap-guangzhou",
-                uin="454xxxxxxx",
-                uniq_vpc_id="vpc-xxxxx",
-                vpc_name="test-redis",
-            )],
-            dns_forward_status="DISABLED",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.private_dns.Zone("example",
             domain="domain.com",
-            remark="test",
-            tags={
-                "created_by": [{}],
-                "terraform": [{}],
-            },
+            remark="remark.",
             vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
                 region="ap-guangzhou",
-                uniq_vpc_id="vpc-xxxxx",
-            )])
+                uniq_vpc_id=vpc.id,
+            )],
+            dns_forward_status="DISABLED",
+            cname_speedup_status="ENABLED",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Create a Private Dns Zone domain and bind associated accounts'VPC
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.private_dns.Zone("example",
+            domain="domain.com",
+            remark="remark.",
+            vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
+                region="ap-guangzhou",
+                uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+            )],
+            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
+                uin="123456789",
+                uniq_vpc_id="vpc-adsebmya",
+                region="ap-guangzhou",
+                vpc_name="vpc-name",
+            )],
+            dns_forward_status="DISABLED",
+            cname_speedup_status="ENABLED",
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         ## Import
@@ -310,6 +364,7 @@ class Zone(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
+        :param pulumi.Input[str] cname_speedup_status: CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
@@ -327,29 +382,50 @@ class Zone(pulumi.CustomResource):
         Provide a resource to create a Private Dns Zone.
 
         ## Example Usage
+        ### Create a basic Private Dns Zone
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.private_dns.Zone("foo",
-            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
-                region="ap-guangzhou",
-                uin="454xxxxxxx",
-                uniq_vpc_id="vpc-xxxxx",
-                vpc_name="test-redis",
-            )],
-            dns_forward_status="DISABLED",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.private_dns.Zone("example",
             domain="domain.com",
-            remark="test",
-            tags={
-                "created_by": [{}],
-                "terraform": [{}],
-            },
+            remark="remark.",
             vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
                 region="ap-guangzhou",
-                uniq_vpc_id="vpc-xxxxx",
-            )])
+                uniq_vpc_id=vpc.id,
+            )],
+            dns_forward_status="DISABLED",
+            cname_speedup_status="ENABLED",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Create a Private Dns Zone domain and bind associated accounts'VPC
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.private_dns.Zone("example",
+            domain="domain.com",
+            remark="remark.",
+            vpc_sets=[tencentcloud.private.dns.ZoneVpcSetArgs(
+                region="ap-guangzhou",
+                uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+            )],
+            account_vpc_sets=[tencentcloud.private.dns.ZoneAccountVpcSetArgs(
+                uin="123456789",
+                uniq_vpc_id="vpc-adsebmya",
+                region="ap-guangzhou",
+                vpc_name="vpc-name",
+            )],
+            dns_forward_status="DISABLED",
+            cname_speedup_status="ENABLED",
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         ## Import
@@ -376,6 +452,7 @@ class Zone(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  account_vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]]] = None,
+                 cname_speedup_status: Optional[pulumi.Input[str]] = None,
                  dns_forward_status: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
@@ -397,6 +474,7 @@ class Zone(pulumi.CustomResource):
             __props__ = ZoneArgs.__new__(ZoneArgs)
 
             __props__.__dict__["account_vpc_sets"] = account_vpc_sets
+            __props__.__dict__["cname_speedup_status"] = cname_speedup_status
             __props__.__dict__["dns_forward_status"] = dns_forward_status
             if domain is None and not opts.urn:
                 raise TypeError("Missing required property 'domain'")
@@ -419,6 +497,7 @@ class Zone(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             account_vpc_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]]] = None,
+            cname_speedup_status: Optional[pulumi.Input[str]] = None,
             dns_forward_status: Optional[pulumi.Input[str]] = None,
             domain: Optional[pulumi.Input[str]] = None,
             remark: Optional[pulumi.Input[str]] = None,
@@ -433,6 +512,7 @@ class Zone(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneAccountVpcSetArgs']]]] account_vpc_sets: List of authorized accounts' VPCs to associate with the private domain.
+        :param pulumi.Input[str] cname_speedup_status: CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
         :param pulumi.Input[str] dns_forward_status: Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
         :param pulumi.Input[str] domain: Domain name, which must be in the format of standard TLD.
         :param pulumi.Input[str] remark: Remarks.
@@ -445,6 +525,7 @@ class Zone(pulumi.CustomResource):
         __props__ = _ZoneState.__new__(_ZoneState)
 
         __props__.__dict__["account_vpc_sets"] = account_vpc_sets
+        __props__.__dict__["cname_speedup_status"] = cname_speedup_status
         __props__.__dict__["dns_forward_status"] = dns_forward_status
         __props__.__dict__["domain"] = domain
         __props__.__dict__["remark"] = remark
@@ -460,6 +541,14 @@ class Zone(pulumi.CustomResource):
         List of authorized accounts' VPCs to associate with the private domain.
         """
         return pulumi.get(self, "account_vpc_sets")
+
+    @property
+    @pulumi.getter(name="cnameSpeedupStatus")
+    def cname_speedup_status(self) -> pulumi.Output[Optional[str]]:
+        """
+        CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+        """
+        return pulumi.get(self, "cname_speedup_status")
 
     @property
     @pulumi.getter(name="dnsForwardStatus")
@@ -503,7 +592,7 @@ class Zone(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="vpcSets")
-    def vpc_sets(self) -> pulumi.Output[Optional[Sequence['outputs.ZoneVpcSet']]]:
+    def vpc_sets(self) -> pulumi.Output[Sequence['outputs.ZoneVpcSet']]:
         """
         Associates the private domain to a VPC when it is created.
         """

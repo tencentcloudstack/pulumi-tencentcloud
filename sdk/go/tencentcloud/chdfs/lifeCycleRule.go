@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewLifeCycleRule(ctx, "lifeCycleRule", &Chdfs.LifeCycleRuleArgs{
-// 			FileSystemId: pulumi.String("f14mpfy5lh4e"),
-// 			LifeCycleRule: &chdfs.LifeCycleRuleLifeCycleRuleArgs{
-// 				LifeCycleRuleName: pulumi.String("terraform-test"),
-// 				Path:              pulumi.String("/test"),
-// 				Status:            pulumi.Int(1),
-// 				Transitions: chdfs.LifeCycleRuleLifeCycleRuleTransitionArray{
-// 					&chdfs.LifeCycleRuleLifeCycleRuleTransitionArgs{
-// 						Days: pulumi.Int(30),
-// 						Type: pulumi.Int(1),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewLifeCycleRule(ctx, "lifeCycleRule", &Chdfs.LifeCycleRuleArgs{
+//				FileSystemId: pulumi.String("f14mpfy5lh4e"),
+//				LifeCycleRule: &chdfs.LifeCycleRuleLifeCycleRuleArgs{
+//					LifeCycleRuleName: pulumi.String("terraform-test"),
+//					Path:              pulumi.String("/test"),
+//					Status:            pulumi.Int(1),
+//					Transitions: chdfs.LifeCycleRuleLifeCycleRuleTransitionArray{
+//						&chdfs.LifeCycleRuleLifeCycleRuleTransitionArgs{
+//							Days: pulumi.Int(30),
+//							Type: pulumi.Int(1),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -53,7 +56,9 @@ import (
 // chdfs life_cycle_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
+//
+//	$ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
+//
 // ```
 type LifeCycleRule struct {
 	pulumi.CustomResourceState
@@ -158,7 +163,7 @@ func (i *LifeCycleRule) ToLifeCycleRuleOutputWithContext(ctx context.Context) Li
 // LifeCycleRuleArrayInput is an input type that accepts LifeCycleRuleArray and LifeCycleRuleArrayOutput values.
 // You can construct a concrete instance of `LifeCycleRuleArrayInput` via:
 //
-//          LifeCycleRuleArray{ LifeCycleRuleArgs{...} }
+//	LifeCycleRuleArray{ LifeCycleRuleArgs{...} }
 type LifeCycleRuleArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +188,7 @@ func (i LifeCycleRuleArray) ToLifeCycleRuleArrayOutputWithContext(ctx context.Co
 // LifeCycleRuleMapInput is an input type that accepts LifeCycleRuleMap and LifeCycleRuleMapOutput values.
 // You can construct a concrete instance of `LifeCycleRuleMapInput` via:
 //
-//          LifeCycleRuleMap{ "key": LifeCycleRuleArgs{...} }
+//	LifeCycleRuleMap{ "key": LifeCycleRuleArgs{...} }
 type LifeCycleRuleMapInput interface {
 	pulumi.Input
 

@@ -438,7 +438,7 @@ class ServiceAccountPermissionArgs:
                  actions: pulumi.Input[Sequence[pulumi.Input[str]]],
                  resource: pulumi.Input[str]):
         """
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] actions: Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] actions: Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] resource: resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
         """
         pulumi.set(__self__, "actions", actions)
@@ -448,7 +448,7 @@ class ServiceAccountPermissionArgs:
     @pulumi.getter
     def actions(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
         """
         return pulumi.get(self, "actions")
 

@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewModifyAccountRemarkOperation(ctx, "modifyAccountRemarkOperation", &Postgresql.ModifyAccountRemarkOperationArgs{
-// 			DbInstanceId: pulumi.Any(local.Pgsql_id),
-// 			UserName:     pulumi.String("root"),
-// 			Remark:       pulumi.String("hello_world"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewModifyAccountRemarkOperation(ctx, "modifyAccountRemarkOperation", &Postgresql.ModifyAccountRemarkOperationArgs{
+//				DbInstanceId: pulumi.Any(local.Pgsql_id),
+//				UserName:     pulumi.String("root"),
+//				Remark:       pulumi.String("hello_world"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ModifyAccountRemarkOperation struct {
 	pulumi.CustomResourceState
@@ -153,7 +156,7 @@ func (i *ModifyAccountRemarkOperation) ToModifyAccountRemarkOperationOutputWithC
 // ModifyAccountRemarkOperationArrayInput is an input type that accepts ModifyAccountRemarkOperationArray and ModifyAccountRemarkOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyAccountRemarkOperationArrayInput` via:
 //
-//          ModifyAccountRemarkOperationArray{ ModifyAccountRemarkOperationArgs{...} }
+//	ModifyAccountRemarkOperationArray{ ModifyAccountRemarkOperationArgs{...} }
 type ModifyAccountRemarkOperationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +181,7 @@ func (i ModifyAccountRemarkOperationArray) ToModifyAccountRemarkOperationArrayOu
 // ModifyAccountRemarkOperationMapInput is an input type that accepts ModifyAccountRemarkOperationMap and ModifyAccountRemarkOperationMapOutput values.
 // You can construct a concrete instance of `ModifyAccountRemarkOperationMapInput` via:
 //
-//          ModifyAccountRemarkOperationMap{ "key": ModifyAccountRemarkOperationArgs{...} }
+//	ModifyAccountRemarkOperationMap{ "key": ModifyAccountRemarkOperationArgs{...} }
 type ModifyAccountRemarkOperationMapInput interface {
 	pulumi.Input
 

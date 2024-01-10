@@ -14,51 +14,96 @@ import (
 // Provide a resource to create a Private Dns Zone.
 //
 // ## Example Usage
+// ### Create a basic Private Dns Zone
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := PrivateDns.NewZone(ctx, "foo", &PrivateDns.ZoneArgs{
-// 			AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
-// 				&privatedns.ZoneAccountVpcSetArgs{
-// 					Region:    pulumi.String("ap-guangzhou"),
-// 					Uin:       pulumi.String("454xxxxxxx"),
-// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
-// 					VpcName:   pulumi.String("test-redis"),
-// 				},
-// 			},
-// 			DnsForwardStatus: pulumi.String("DISABLED"),
-// 			Domain:           pulumi.String("domain.com"),
-// 			Remark:           pulumi.String("test"),
-// 			Tags: pulumi.AnyMap{
-// 				"created_by": pulumi.Any{
-// 					nil,
-// 				},
-// 				"terraform": pulumi.Any{
-// 					nil,
-// 				},
-// 			},
-// 			VpcSets: privatedns.ZoneVpcSetArray{
-// 				&privatedns.ZoneVpcSetArgs{
-// 					Region:    pulumi.String("ap-guangzhou"),
-// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = PrivateDns.NewZone(ctx, "example", &PrivateDns.ZoneArgs{
+//				Domain: pulumi.String("domain.com"),
+//				Remark: pulumi.String("remark."),
+//				VpcSets: privatedns.ZoneVpcSetArray{
+//					&privatedns.ZoneVpcSetArgs{
+//						Region:    pulumi.String("ap-guangzhou"),
+//						UniqVpcId: vpc.ID(),
+//					},
+//				},
+//				DnsForwardStatus:   pulumi.String("DISABLED"),
+//				CnameSpeedupStatus: pulumi.String("ENABLED"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Create a Private Dns Zone domain and bind associated accounts'VPC
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := PrivateDns.NewZone(ctx, "example", &PrivateDns.ZoneArgs{
+//				Domain: pulumi.String("domain.com"),
+//				Remark: pulumi.String("remark."),
+//				VpcSets: privatedns.ZoneVpcSetArray{
+//					&privatedns.ZoneVpcSetArgs{
+//						Region:    pulumi.String("ap-guangzhou"),
+//						UniqVpcId: pulumi.Any(tencentcloud_vpc.Vpc.Id),
+//					},
+//				},
+//				AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
+//					&privatedns.ZoneAccountVpcSetArgs{
+//						Uin:       pulumi.String("123456789"),
+//						UniqVpcId: pulumi.String("vpc-adsebmya"),
+//						Region:    pulumi.String("ap-guangzhou"),
+//						VpcName:   pulumi.String("vpc-name"),
+//					},
+//				},
+//				DnsForwardStatus:   pulumi.String("DISABLED"),
+//				CnameSpeedupStatus: pulumi.String("ENABLED"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -66,13 +111,17 @@ import (
 // Private Dns Zone can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+//
+//	$ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+//
 // ```
 type Zone struct {
 	pulumi.CustomResourceState
 
 	// List of authorized accounts' VPCs to associate with the private domain.
 	AccountVpcSets ZoneAccountVpcSetArrayOutput `pulumi:"accountVpcSets"`
+	// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+	CnameSpeedupStatus pulumi.StringPtrOutput `pulumi:"cnameSpeedupStatus"`
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
 	DnsForwardStatus pulumi.StringPtrOutput `pulumi:"dnsForwardStatus"`
 	// Domain name, which must be in the format of standard TLD.
@@ -124,6 +173,8 @@ func GetZone(ctx *pulumi.Context,
 type zoneState struct {
 	// List of authorized accounts' VPCs to associate with the private domain.
 	AccountVpcSets []ZoneAccountVpcSet `pulumi:"accountVpcSets"`
+	// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+	CnameSpeedupStatus *string `pulumi:"cnameSpeedupStatus"`
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
 	DnsForwardStatus *string `pulumi:"dnsForwardStatus"`
 	// Domain name, which must be in the format of standard TLD.
@@ -143,6 +194,8 @@ type zoneState struct {
 type ZoneState struct {
 	// List of authorized accounts' VPCs to associate with the private domain.
 	AccountVpcSets ZoneAccountVpcSetArrayInput
+	// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+	CnameSpeedupStatus pulumi.StringPtrInput
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
 	DnsForwardStatus pulumi.StringPtrInput
 	// Domain name, which must be in the format of standard TLD.
@@ -166,6 +219,8 @@ func (ZoneState) ElementType() reflect.Type {
 type zoneArgs struct {
 	// List of authorized accounts' VPCs to associate with the private domain.
 	AccountVpcSets []ZoneAccountVpcSet `pulumi:"accountVpcSets"`
+	// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+	CnameSpeedupStatus *string `pulumi:"cnameSpeedupStatus"`
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
 	DnsForwardStatus *string `pulumi:"dnsForwardStatus"`
 	// Domain name, which must be in the format of standard TLD.
@@ -186,6 +241,8 @@ type zoneArgs struct {
 type ZoneArgs struct {
 	// List of authorized accounts' VPCs to associate with the private domain.
 	AccountVpcSets ZoneAccountVpcSetArrayInput
+	// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+	CnameSpeedupStatus pulumi.StringPtrInput
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
 	DnsForwardStatus pulumi.StringPtrInput
 	// Domain name, which must be in the format of standard TLD.
@@ -228,7 +285,7 @@ func (i *Zone) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 // ZoneArrayInput is an input type that accepts ZoneArray and ZoneArrayOutput values.
 // You can construct a concrete instance of `ZoneArrayInput` via:
 //
-//          ZoneArray{ ZoneArgs{...} }
+//	ZoneArray{ ZoneArgs{...} }
 type ZoneArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +310,7 @@ func (i ZoneArray) ToZoneArrayOutputWithContext(ctx context.Context) ZoneArrayOu
 // ZoneMapInput is an input type that accepts ZoneMap and ZoneMapOutput values.
 // You can construct a concrete instance of `ZoneMapInput` via:
 //
-//          ZoneMap{ "key": ZoneArgs{...} }
+//	ZoneMap{ "key": ZoneArgs{...} }
 type ZoneMapInput interface {
 	pulumi.Input
 
@@ -292,6 +349,11 @@ func (o ZoneOutput) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 // List of authorized accounts' VPCs to associate with the private domain.
 func (o ZoneOutput) AccountVpcSets() ZoneAccountVpcSetArrayOutput {
 	return o.ApplyT(func(v *Zone) ZoneAccountVpcSetArrayOutput { return v.AccountVpcSets }).(ZoneAccountVpcSetArrayOutput)
+}
+
+// CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+func (o ZoneOutput) CnameSpeedupStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Zone) pulumi.StringPtrOutput { return v.CnameSpeedupStatus }).(pulumi.StringPtrOutput)
 }
 
 // Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.

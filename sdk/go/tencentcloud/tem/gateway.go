@@ -18,60 +18,63 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewGateway(ctx, "gateway", &Tem.GatewayArgs{
-// 			Ingress: &tem.GatewayIngressArgs{
-// 				AddressIpVersion: pulumi.String("IPV4"),
-// 				EnvironmentId:    pulumi.String("en-853mggjm"),
-// 				IngressName:      pulumi.String("demo"),
-// 				Mixed:            pulumi.Bool(false),
-// 				RewriteType:      pulumi.String("NONE"),
-// 				Rules: tem.GatewayIngressRuleArray{
-// 					&tem.GatewayIngressRuleArgs{
-// 						Host: pulumi.String("test.com"),
-// 						Http: &tem.GatewayIngressRuleHttpArgs{
-// 							Paths: tem.GatewayIngressRuleHttpPathArray{
-// 								&tem.GatewayIngressRuleHttpPathArgs{
-// 									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
-// 										ServiceName: pulumi.String("demo"),
-// 										ServicePort: pulumi.Int(80),
-// 									},
-// 									Path: pulumi.String("/"),
-// 								},
-// 							},
-// 						},
-// 						Protocol: pulumi.String("http"),
-// 					},
-// 					&tem.GatewayIngressRuleArgs{
-// 						Host: pulumi.String("hello.com"),
-// 						Http: &tem.GatewayIngressRuleHttpArgs{
-// 							Paths: tem.GatewayIngressRuleHttpPathArray{
-// 								&tem.GatewayIngressRuleHttpPathArgs{
-// 									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
-// 										ServiceName: pulumi.String("hello"),
-// 										ServicePort: pulumi.Int(36000),
-// 									},
-// 									Path: pulumi.String("/"),
-// 								},
-// 							},
-// 						},
-// 						Protocol: pulumi.String("http"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewGateway(ctx, "gateway", &Tem.GatewayArgs{
+//				Ingress: &tem.GatewayIngressArgs{
+//					AddressIpVersion: pulumi.String("IPV4"),
+//					EnvironmentId:    pulumi.String("en-853mggjm"),
+//					IngressName:      pulumi.String("demo"),
+//					Mixed:            pulumi.Bool(false),
+//					RewriteType:      pulumi.String("NONE"),
+//					Rules: tem.GatewayIngressRuleArray{
+//						&tem.GatewayIngressRuleArgs{
+//							Host: pulumi.String("test.com"),
+//							Http: &tem.GatewayIngressRuleHttpArgs{
+//								Paths: tem.GatewayIngressRuleHttpPathArray{
+//									&tem.GatewayIngressRuleHttpPathArgs{
+//										Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
+//											ServiceName: pulumi.String("demo"),
+//											ServicePort: pulumi.Int(80),
+//										},
+//										Path: pulumi.String("/"),
+//									},
+//								},
+//							},
+//							Protocol: pulumi.String("http"),
+//						},
+//						&tem.GatewayIngressRuleArgs{
+//							Host: pulumi.String("hello.com"),
+//							Http: &tem.GatewayIngressRuleHttpArgs{
+//								Paths: tem.GatewayIngressRuleHttpPathArray{
+//									&tem.GatewayIngressRuleHttpPathArgs{
+//										Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
+//											ServiceName: pulumi.String("hello"),
+//											ServicePort: pulumi.Int(36000),
+//										},
+//										Path: pulumi.String("/"),
+//									},
+//								},
+//							},
+//							Protocol: pulumi.String("http"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -79,7 +82,9 @@ import (
 // tem gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
+//
+//	$ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
+//
 // ```
 type Gateway struct {
 	pulumi.CustomResourceState
@@ -168,7 +173,7 @@ func (i *Gateway) ToGatewayOutputWithContext(ctx context.Context) GatewayOutput 
 // GatewayArrayInput is an input type that accepts GatewayArray and GatewayArrayOutput values.
 // You can construct a concrete instance of `GatewayArrayInput` via:
 //
-//          GatewayArray{ GatewayArgs{...} }
+//	GatewayArray{ GatewayArgs{...} }
 type GatewayArrayInput interface {
 	pulumi.Input
 
@@ -193,7 +198,7 @@ func (i GatewayArray) ToGatewayArrayOutputWithContext(ctx context.Context) Gatew
 // GatewayMapInput is an input type that accepts GatewayMap and GatewayMapOutput values.
 // You can construct a concrete instance of `GatewayMapInput` via:
 //
-//          GatewayMap{ "key": GatewayArgs{...} }
+//	GatewayMap{ "key": GatewayArgs{...} }
 type GatewayMapInput interface {
 	pulumi.Input
 

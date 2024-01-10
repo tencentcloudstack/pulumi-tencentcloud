@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewSecurityGroupAttachment(ctx, "securityGroupAttachment", &Cvm.SecurityGroupAttachmentArgs{
-// 			InstanceId:      pulumi.String("ins-xxxxxxxx"),
-// 			SecurityGroupId: pulumi.String("sg-xxxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewSecurityGroupAttachment(ctx, "securityGroupAttachment", &Cvm.SecurityGroupAttachmentArgs{
+//				InstanceId:      pulumi.String("ins-xxxxxxxx"),
+//				SecurityGroupId: pulumi.String("sg-xxxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cvm security_group_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+//
+//	$ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+//
 // ```
 type SecurityGroupAttachment struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *SecurityGroupAttachment) ToSecurityGroupAttachmentOutputWithContext(ctx
 // SecurityGroupAttachmentArrayInput is an input type that accepts SecurityGroupAttachmentArray and SecurityGroupAttachmentArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentArrayInput` via:
 //
-//          SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i SecurityGroupAttachmentArray) ToSecurityGroupAttachmentArrayOutputWithCo
 // SecurityGroupAttachmentMapInput is an input type that accepts SecurityGroupAttachmentMap and SecurityGroupAttachmentMapOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentMapInput` via:
 //
-//          SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentMapInput interface {
 	pulumi.Input
 

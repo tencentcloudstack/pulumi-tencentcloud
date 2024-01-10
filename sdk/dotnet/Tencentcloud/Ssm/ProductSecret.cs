@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// Provides a resource to create a ssm product_secret
     /// 
     /// ## Example Usage
+    /// ### Ssm secret for mysql
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -24,20 +25,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// {
     ///     public MyStack()
     ///     {
-    ///         var kms = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
+    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
     ///         {
-    ///             KeyState = 1,
+    ///             Product = "cdb",
     ///         }));
-    ///         var mysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             MysqlId = "cdb-fitq5t9h",
-    ///         }));
-    ///         var productSecret = new Tencentcloud.Ssm.ProductSecret("productSecret", new Tencentcloud.Ssm.ProductSecretArgs
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
     ///         {
-    ///             SecretName = "tf-product-ssm-test",
-    ///             UserNamePrefix = "test",
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             InternetService = 1,
+    ///             EngineVersion = "5.7",
+    ///             ChargeType = "POSTPAID",
+    ///             RootPassword = "PassWord123",
+    ///             SlaveDeployMode = 0,
+    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
+    ///             SlaveSyncMode = 1,
+    ///             InstanceName = "tf-example",
+    ///             MemSize = 4000,
+    ///             VolumeSize = 200,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             IntranetPort = 3306,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 securityGroup.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "createBy", "terraform" },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "character_set_server", "utf8" },
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///         });
+    ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-key",
+    ///             Description = "example of kms key",
+    ///             KeyRotationEnabled = false,
+    ///             IsEnabled = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleProductSecret = new Tencentcloud.Ssm.ProductSecret("exampleProductSecret", new Tencentcloud.Ssm.ProductSecretArgs
+    ///         {
+    ///             SecretName = "tf-example",
+    ///             UserNamePrefix = "prefix",
     ///             ProductName = "Mysql",
-    ///             InstanceId = mysql.Apply(mysql =&gt; mysql.InstanceLists?[0]?.MysqlId),
+    ///             InstanceId = exampleInstance.Id,
     ///             Domains = 
     ///             {
     ///                 "10.0.0.0",
@@ -54,11 +106,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     ///                 },
     ///             },
     ///             Description = "for ssm product test",
-    ///             KmsKeyId = kms.Apply(kms =&gt; kms.KeyLists?[0]?.KeyId),
+    ///             KmsKeyId = exampleKey.Id,
     ///             Status = "Enabled",
     ///             EnableRotation = true,
     ///             RotationBeginTime = "2023-08-05 20:54:33",
     ///             RotationFrequency = 30,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Ssm secret for tdsql-c-mysql
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Ssm.ProductSecret("example", new Tencentcloud.Ssm.ProductSecretArgs
+    ///         {
+    ///             SecretName = "tf-tdsql-c-example",
+    ///             UserNamePrefix = "prefix",
+    ///             ProductName = "Tdsql_C_Mysql",
+    ///             InstanceId = "cynosdbmysql-xxxxxx",
+    ///             Domains = 
+    ///             {
+    ///                 "%",
+    ///             },
+    ///             PrivilegesLists = 
+    ///             {
+    ///                 new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///                 {
+    ///                     PrivilegeName = "GlobalPrivileges",
+    ///                     Privileges = 
+    ///                     {
+    ///                         "ALTER",
+    ///                         "CREATE",
+    ///                         "DELETE",
+    ///                     },
+    ///                 },
+    ///                 new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///                 {
+    ///                     PrivilegeName = "DatabasePrivileges",
+    ///                     Database = "test",
+    ///                     Privileges = 
+    ///                     {
+    ///                         "ALTER",
+    ///                         "CREATE",
+    ///                         "DELETE",
+    ///                         "SELECT",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Description = "test tdsql-c",
+    ///             KmsKeyId = null,
+    ///             Status = "Enabled",
+    ///             EnableRotation = false,
+    ///             RotationBeginTime = "2023-08-05 20:54:33",
+    ///             RotationFrequency = 30,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -111,7 +227,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Output<ImmutableArray<Outputs.ProductSecretPrivilegesList>> PrivilegesLists { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
         /// </summary>
         [Output("productName")]
         public Output<string> ProductName { get; private set; } = null!;
@@ -145,6 +261,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
@@ -248,7 +370,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
 
         /// <summary>
-        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
         /// </summary>
         [Input("productName", required: true)]
         public Input<string> ProductName { get; set; } = null!;
@@ -276,6 +398,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
@@ -345,7 +479,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
 
         /// <summary>
-        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+        /// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
         /// </summary>
         [Input("productName")]
         public Input<string>? ProductName { get; set; }
@@ -379,6 +513,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.

@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwRouteRateLimitLimitDetailRateLimitResponseHeader
     {
+        /// <summary>
+        /// key of header.
+        /// </summary>
         public readonly string? Key;
+        /// <summary>
+        /// value of header.
+        /// </summary>
         public readonly string? Value;
 
         [OutputConstructor]

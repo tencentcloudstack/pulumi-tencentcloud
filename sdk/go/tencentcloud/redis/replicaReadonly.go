@@ -19,86 +19,89 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewReplicaReadonly(ctx, "replicaReadonly", &Redis.ReplicaReadonlyArgs{
-// 			InstanceId: fooInstance.ID(),
-// 			ReadonlyPolicies: pulumi.StringArray{
-// 				pulumi.String("master"),
-// 			},
-// 			Operate: pulumi.String("enable"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+//				SecurityGroupId: fooGroup.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+//					pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+//					pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+//					pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+//					pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewReplicaReadonly(ctx, "replicaReadonly", &Redis.ReplicaReadonlyArgs{
+//				InstanceId: fooInstance.ID(),
+//				ReadonlyPolicies: pulumi.StringArray{
+//					pulumi.String("master"),
+//				},
+//				Operate: pulumi.String("enable"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ReplicaReadonly struct {
 	pulumi.CustomResourceState
@@ -213,7 +216,7 @@ func (i *ReplicaReadonly) ToReplicaReadonlyOutputWithContext(ctx context.Context
 // ReplicaReadonlyArrayInput is an input type that accepts ReplicaReadonlyArray and ReplicaReadonlyArrayOutput values.
 // You can construct a concrete instance of `ReplicaReadonlyArrayInput` via:
 //
-//          ReplicaReadonlyArray{ ReplicaReadonlyArgs{...} }
+//	ReplicaReadonlyArray{ ReplicaReadonlyArgs{...} }
 type ReplicaReadonlyArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +241,7 @@ func (i ReplicaReadonlyArray) ToReplicaReadonlyArrayOutputWithContext(ctx contex
 // ReplicaReadonlyMapInput is an input type that accepts ReplicaReadonlyMap and ReplicaReadonlyMapOutput values.
 // You can construct a concrete instance of `ReplicaReadonlyMapInput` via:
 //
-//          ReplicaReadonlyMap{ "key": ReplicaReadonlyArgs{...} }
+//	ReplicaReadonlyMap{ "key": ReplicaReadonlyArgs{...} }
 type ReplicaReadonlyMapInput interface {
 	pulumi.Input
 

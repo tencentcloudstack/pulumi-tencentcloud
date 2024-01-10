@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Outputs
         /// </summary>
         public readonly string? CompressionType;
         /// <summary>
-        /// Enable the fault-tolerant instance and enable the dead-letter queue.
+        /// enable dead letter queue.
         /// </summary>
         public readonly bool? EnableToleration;
         /// <summary>
@@ -27,51 +27,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Outputs
         /// </summary>
         public readonly int? MsgMultiple;
         /// <summary>
-        /// Offset type, initial position earliest, latest position latest, time point position timestamp.
+        /// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         /// </summary>
         public readonly string? OffsetType;
         /// <summary>
-        /// Partition num.
+        /// the partition num of the topic.
         /// </summary>
         public readonly int? PartitionNum;
         /// <summary>
-        /// Qps limit.
+        /// Qps(query per seconds) limit.
         /// </summary>
         public readonly int? QpsLimit;
         /// <summary>
-        /// resource id.
+        /// instance resource.
         /// </summary>
         public readonly string Resource;
         /// <summary>
-        /// resource id name.
+        /// instance name.
         /// </summary>
         public readonly string? ResourceName;
         /// <summary>
-        /// Whether it is a self-built cluster.
+        /// whether the cluster is built by yourself instead of cloud product.
         /// </summary>
         public readonly bool SelfBuilt;
         /// <summary>
-        /// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        /// when Offset type timestamp is required.
         /// </summary>
         public readonly int? StartTime;
         /// <summary>
-        /// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        /// maps of table to topic, required when multi topic is selected.
         /// </summary>
         public readonly ImmutableArray<Outputs.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping> TableMappings;
         /// <summary>
-        /// Topic name, multiple separated by,.
+        /// Topic name, use `,` when more than 1 topic.
         /// </summary>
         public readonly string? Topic;
         /// <summary>
-        /// Topic Id.
+        /// Topic id.
         /// </summary>
         public readonly string? TopicId;
         /// <summary>
-        /// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        /// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         /// </summary>
         public readonly bool? UseAutoCreateTopic;
         /// <summary>
-        /// Distribute to multiple topics switch, the default is false.
+        /// whether to use multi table.
         /// </summary>
         public readonly bool? UseTableMapping;
         /// <summary>

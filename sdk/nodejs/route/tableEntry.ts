@@ -81,7 +81,7 @@ export class TableEntry extends pulumi.CustomResource {
      */
     public readonly disabled!: pulumi.Output<boolean | undefined>;
     /**
-     * ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+     * ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
      */
     public readonly nextHub!: pulumi.Output<string>;
     /**
@@ -155,7 +155,7 @@ export interface TableEntryState {
      */
     disabled?: pulumi.Input<boolean>;
     /**
-     * ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+     * ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
      */
     nextHub?: pulumi.Input<string>;
     /**
@@ -185,7 +185,7 @@ export interface TableEntryArgs {
      */
     disabled?: pulumi.Input<boolean>;
     /**
-     * ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+     * ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
      */
     nextHub: pulumi.Input<string>;
     /**

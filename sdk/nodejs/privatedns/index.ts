@@ -5,12 +5,15 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getRecords";
 export * from "./record";
 export * from "./zone";
+export * from "./zoneVpcAttachment";
 
 // Import resources to register:
 import { Record } from "./record";
 import { Zone } from "./zone";
+import { ZoneVpcAttachment } from "./zoneVpcAttachment";
 
 const _module = {
     version: utilities.getVersion(),
@@ -20,6 +23,8 @@ const _module = {
                 return new Record(name, <any>undefined, { urn })
             case "tencentcloud:PrivateDns/zone:Zone":
                 return new Zone(name, <any>undefined, { urn })
+            case "tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment":
+                return new ZoneVpcAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -27,3 +32,4 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/record", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/zone", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/zoneVpcAttachment", _module)

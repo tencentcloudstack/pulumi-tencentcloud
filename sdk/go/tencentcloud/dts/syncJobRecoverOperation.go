@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobRecoverOperation(ctx, "syncJobRecoverOperation", &Dts.SyncJobRecoverOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobRecoverOperation(ctx, "syncJobRecoverOperation", &Dts.SyncJobRecoverOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobRecoverOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *SyncJobRecoverOperation) ToSyncJobRecoverOperationOutputWithContext(ctx
 // SyncJobRecoverOperationArrayInput is an input type that accepts SyncJobRecoverOperationArray and SyncJobRecoverOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobRecoverOperationArrayInput` via:
 //
-//          SyncJobRecoverOperationArray{ SyncJobRecoverOperationArgs{...} }
+//	SyncJobRecoverOperationArray{ SyncJobRecoverOperationArgs{...} }
 type SyncJobRecoverOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i SyncJobRecoverOperationArray) ToSyncJobRecoverOperationArrayOutputWithCo
 // SyncJobRecoverOperationMapInput is an input type that accepts SyncJobRecoverOperationMap and SyncJobRecoverOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobRecoverOperationMapInput` via:
 //
-//          SyncJobRecoverOperationMap{ "key": SyncJobRecoverOperationArgs{...} }
+//	SyncJobRecoverOperationMap{ "key": SyncJobRecoverOperationArgs{...} }
 type SyncJobRecoverOperationMapInput interface {
 	pulumi.Input
 

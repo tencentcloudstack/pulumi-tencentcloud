@@ -5,6 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getMetricData";
 export * from "./getNode";
 export * from "./getProbeData";
 export * from "./taskSet";

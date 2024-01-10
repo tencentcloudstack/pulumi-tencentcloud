@@ -26,15 +26,15 @@ class ApplicationProxyRuleArgs:
         """
         The set of arguments for constructing a ApplicationProxyRule resource.
         :param pulumi.Input[str] origin_port: Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
-        :param pulumi.Input[str] origin_type: Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        :param pulumi.Input[str] origin_type: Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values: `80` means port 80; `81-90` means port range 81-90.
         :param pulumi.Input[str] proto: Protocol. Valid values: `TCP`, `UDP`.
         :param pulumi.Input[str] proxy_id: Proxy ID.
         :param pulumi.Input[str] zone_id: Site ID.
-        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         :param pulumi.Input[bool] session_persist: Specifies whether to enable session persistence. Default value is false.
-        :param pulumi.Input[str] status: Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        :param pulumi.Input[str] status: Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         """
         pulumi.set(__self__, "origin_port", origin_port)
         pulumi.set(__self__, "origin_type", origin_type)
@@ -66,7 +66,7 @@ class ApplicationProxyRuleArgs:
     @pulumi.getter(name="originType")
     def origin_type(self) -> pulumi.Input[str]:
         """
-        Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         """
         return pulumi.get(self, "origin_type")
 
@@ -78,7 +78,7 @@ class ApplicationProxyRuleArgs:
     @pulumi.getter(name="originValues")
     def origin_values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         """
         return pulumi.get(self, "origin_values")
 
@@ -90,7 +90,7 @@ class ApplicationProxyRuleArgs:
     @pulumi.getter
     def ports(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        Valid values: `80` means port 80; `81-90` means port range 81-90.
         """
         return pulumi.get(self, "ports")
 
@@ -138,7 +138,7 @@ class ApplicationProxyRuleArgs:
     @pulumi.getter(name="forwardClientIp")
     def forward_client_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         """
         return pulumi.get(self, "forward_client_ip")
 
@@ -162,7 +162,7 @@ class ApplicationProxyRuleArgs:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         """
         return pulumi.get(self, "status")
 
@@ -187,16 +187,16 @@ class _ApplicationProxyRuleState:
                  zone_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ApplicationProxyRule resources.
-        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         :param pulumi.Input[str] origin_port: Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
-        :param pulumi.Input[str] origin_type: Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        :param pulumi.Input[str] origin_type: Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values: `80` means port 80; `81-90` means port range 81-90.
         :param pulumi.Input[str] proto: Protocol. Valid values: `TCP`, `UDP`.
         :param pulumi.Input[str] proxy_id: Proxy ID.
         :param pulumi.Input[str] rule_id: Rule ID.
         :param pulumi.Input[bool] session_persist: Specifies whether to enable session persistence. Default value is false.
-        :param pulumi.Input[str] status: Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        :param pulumi.Input[str] status: Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         if forward_client_ip is not None:
@@ -226,7 +226,7 @@ class _ApplicationProxyRuleState:
     @pulumi.getter(name="forwardClientIp")
     def forward_client_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         """
         return pulumi.get(self, "forward_client_ip")
 
@@ -250,7 +250,7 @@ class _ApplicationProxyRuleState:
     @pulumi.getter(name="originType")
     def origin_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         """
         return pulumi.get(self, "origin_type")
 
@@ -262,7 +262,7 @@ class _ApplicationProxyRuleState:
     @pulumi.getter(name="originValues")
     def origin_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         """
         return pulumi.get(self, "origin_values")
 
@@ -274,7 +274,7 @@ class _ApplicationProxyRuleState:
     @pulumi.getter
     def ports(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        Valid values: `80` means port 80; `81-90` means port range 81-90.
         """
         return pulumi.get(self, "ports")
 
@@ -334,7 +334,7 @@ class _ApplicationProxyRuleState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         """
         return pulumi.get(self, "status")
 
@@ -403,15 +403,15 @@ class ApplicationProxyRule(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         :param pulumi.Input[str] origin_port: Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
-        :param pulumi.Input[str] origin_type: Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        :param pulumi.Input[str] origin_type: Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values: `80` means port 80; `81-90` means port range 81-90.
         :param pulumi.Input[str] proto: Protocol. Valid values: `TCP`, `UDP`.
         :param pulumi.Input[str] proxy_id: Proxy ID.
         :param pulumi.Input[bool] session_persist: Specifies whether to enable session persistence. Default value is false.
-        :param pulumi.Input[str] status: Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        :param pulumi.Input[str] status: Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         ...
@@ -542,16 +542,16 @@ class ApplicationProxyRule(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        :param pulumi.Input[str] forward_client_ip: Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         :param pulumi.Input[str] origin_port: Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
-        :param pulumi.Input[str] origin_type: Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        :param pulumi.Input[str] origin_type: Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] origin_values: Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: Valid values: `80` means port 80; `81-90` means port range 81-90.
         :param pulumi.Input[str] proto: Protocol. Valid values: `TCP`, `UDP`.
         :param pulumi.Input[str] proxy_id: Proxy ID.
         :param pulumi.Input[str] rule_id: Rule ID.
         :param pulumi.Input[bool] session_persist: Specifies whether to enable session persistence. Default value is false.
-        :param pulumi.Input[str] status: Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        :param pulumi.Input[str] status: Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -575,7 +575,7 @@ class ApplicationProxyRule(pulumi.CustomResource):
     @pulumi.getter(name="forwardClientIp")
     def forward_client_ip(self) -> pulumi.Output[str]:
         """
-        Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         """
         return pulumi.get(self, "forward_client_ip")
 
@@ -591,7 +591,7 @@ class ApplicationProxyRule(pulumi.CustomResource):
     @pulumi.getter(name="originType")
     def origin_type(self) -> pulumi.Output[str]:
         """
-        Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         """
         return pulumi.get(self, "origin_type")
 
@@ -599,7 +599,7 @@ class ApplicationProxyRule(pulumi.CustomResource):
     @pulumi.getter(name="originValues")
     def origin_values(self) -> pulumi.Output[Sequence[str]]:
         """
-        Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         """
         return pulumi.get(self, "origin_values")
 
@@ -607,7 +607,7 @@ class ApplicationProxyRule(pulumi.CustomResource):
     @pulumi.getter
     def ports(self) -> pulumi.Output[Sequence[str]]:
         """
-        Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        Valid values: `80` means port 80; `81-90` means port range 81-90.
         """
         return pulumi.get(self, "ports")
 
@@ -647,7 +647,7 @@ class ApplicationProxyRule(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         """
         return pulumi.get(self, "status")
 

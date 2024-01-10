@@ -18,19 +18,22 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewSignUpCfsService(ctx, "signUpCfsService", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewSignUpCfsService(ctx, "signUpCfsService", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SignUpCfsService struct {
 	pulumi.CustomResourceState
@@ -115,7 +118,7 @@ func (i *SignUpCfsService) ToSignUpCfsServiceOutputWithContext(ctx context.Conte
 // SignUpCfsServiceArrayInput is an input type that accepts SignUpCfsServiceArray and SignUpCfsServiceArrayOutput values.
 // You can construct a concrete instance of `SignUpCfsServiceArrayInput` via:
 //
-//          SignUpCfsServiceArray{ SignUpCfsServiceArgs{...} }
+//	SignUpCfsServiceArray{ SignUpCfsServiceArgs{...} }
 type SignUpCfsServiceArrayInput interface {
 	pulumi.Input
 
@@ -140,7 +143,7 @@ func (i SignUpCfsServiceArray) ToSignUpCfsServiceArrayOutputWithContext(ctx cont
 // SignUpCfsServiceMapInput is an input type that accepts SignUpCfsServiceMap and SignUpCfsServiceMapOutput values.
 // You can construct a concrete instance of `SignUpCfsServiceMapInput` via:
 //
-//          SignUpCfsServiceMap{ "key": SignUpCfsServiceArgs{...} }
+//	SignUpCfsServiceMap{ "key": SignUpCfsServiceArgs{...} }
 type SignUpCfsServiceMapInput interface {
 	pulumi.Input
 

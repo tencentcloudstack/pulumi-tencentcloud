@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewCustomerGatewayConfigurationDownload(ctx, "vpnCustomerGatewayConfigurationDownload", &Vpn.CustomerGatewayConfigurationDownloadArgs{
-// 			CustomerGatewayVendor: &vpn.CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{
-// 				Platform:        pulumi.String("comware"),
-// 				SoftwareVersion: pulumi.String("V1.0"),
-// 				VendorName:      pulumi.String("h3c"),
-// 			},
-// 			InterfaceName:   pulumi.String("test"),
-// 			VpnConnectionId: pulumi.String("vpnx-kme2tx8m"),
-// 			VpnGatewayId:    pulumi.String("vpngw-gt8bianl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewCustomerGatewayConfigurationDownload(ctx, "vpnCustomerGatewayConfigurationDownload", &Vpn.CustomerGatewayConfigurationDownloadArgs{
+//				CustomerGatewayVendor: &vpn.CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{
+//					Platform:        pulumi.String("comware"),
+//					SoftwareVersion: pulumi.String("V1.0"),
+//					VendorName:      pulumi.String("h3c"),
+//				},
+//				InterfaceName:   pulumi.String("test"),
+//				VpnConnectionId: pulumi.String("vpnx-kme2tx8m"),
+//				VpnGatewayId:    pulumi.String("vpngw-gt8bianl"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type CustomerGatewayConfigurationDownload struct {
 	pulumi.CustomResourceState
@@ -178,7 +181,7 @@ func (i *CustomerGatewayConfigurationDownload) ToCustomerGatewayConfigurationDow
 // CustomerGatewayConfigurationDownloadArrayInput is an input type that accepts CustomerGatewayConfigurationDownloadArray and CustomerGatewayConfigurationDownloadArrayOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadArrayInput` via:
 //
-//          CustomerGatewayConfigurationDownloadArray{ CustomerGatewayConfigurationDownloadArgs{...} }
+//	CustomerGatewayConfigurationDownloadArray{ CustomerGatewayConfigurationDownloadArgs{...} }
 type CustomerGatewayConfigurationDownloadArrayInput interface {
 	pulumi.Input
 
@@ -203,7 +206,7 @@ func (i CustomerGatewayConfigurationDownloadArray) ToCustomerGatewayConfiguratio
 // CustomerGatewayConfigurationDownloadMapInput is an input type that accepts CustomerGatewayConfigurationDownloadMap and CustomerGatewayConfigurationDownloadMapOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadMapInput` via:
 //
-//          CustomerGatewayConfigurationDownloadMap{ "key": CustomerGatewayConfigurationDownloadArgs{...} }
+//	CustomerGatewayConfigurationDownloadMap{ "key": CustomerGatewayConfigurationDownloadArgs{...} }
 type CustomerGatewayConfigurationDownloadMapInput interface {
 	pulumi.Input
 

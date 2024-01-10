@@ -7,19 +7,38 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./alarmNotice";
 export * from "./alarmPolicy";
+export * from "./alarmPolicySetDefault";
 export * from "./bindingReceiver";
+export * from "./getAlarmAllNamespaces";
+export * from "./getAlarmBasicAlarms";
+export * from "./getAlarmBasicMetric";
+export * from "./getAlarmConditionsTemplate";
+export * from "./getAlarmHistory";
+export * from "./getAlarmMetric";
+export * from "./getAlarmMonitorType";
+export * from "./getAlarmNoticeCallbacks";
 export * from "./getAlarmNotices";
+export * from "./getAlarmPolicy";
 export * from "./getBindingObjects";
 export * from "./getData";
+export * from "./getGrafanaPluginOverviews";
 export * from "./getPolicyConditions";
 export * from "./getPolicyGroups";
 export * from "./getProductEvent";
 export * from "./getProductNamespace";
+export * from "./getStatisticData";
+export * from "./getTmpRegions";
+export * from "./grafanaDnsConfig";
+export * from "./grafanaEnvConfig";
 export * from "./grafanaInstance";
 export * from "./grafanaIntegration";
 export * from "./grafanaNotificationChannel";
 export * from "./grafanaPlugin";
 export * from "./grafanaSsoAccount";
+export * from "./grafanaSsoCamConfig";
+export * from "./grafanaSsoConfig";
+export * from "./grafanaVersionUpgrade";
+export * from "./grafanaWhitelistConfig";
 export * from "./policyBindingObject";
 export * from "./tmpAlertRule";
 export * from "./tmpCvmAgent";
@@ -41,12 +60,19 @@ export * from "./tmpTkeTemplateAttachment";
 // Import resources to register:
 import { AlarmNotice } from "./alarmNotice";
 import { AlarmPolicy } from "./alarmPolicy";
+import { AlarmPolicySetDefault } from "./alarmPolicySetDefault";
 import { BindingReceiver } from "./bindingReceiver";
+import { GrafanaDnsConfig } from "./grafanaDnsConfig";
+import { GrafanaEnvConfig } from "./grafanaEnvConfig";
 import { GrafanaInstance } from "./grafanaInstance";
 import { GrafanaIntegration } from "./grafanaIntegration";
 import { GrafanaNotificationChannel } from "./grafanaNotificationChannel";
 import { GrafanaPlugin } from "./grafanaPlugin";
 import { GrafanaSsoAccount } from "./grafanaSsoAccount";
+import { GrafanaSsoCamConfig } from "./grafanaSsoCamConfig";
+import { GrafanaSsoConfig } from "./grafanaSsoConfig";
+import { GrafanaVersionUpgrade } from "./grafanaVersionUpgrade";
+import { GrafanaWhitelistConfig } from "./grafanaWhitelistConfig";
 import { PolicyBindingObject } from "./policyBindingObject";
 import { TmpAlertRule } from "./tmpAlertRule";
 import { TmpCvmAgent } from "./tmpCvmAgent";
@@ -73,8 +99,14 @@ const _module = {
                 return new AlarmNotice(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/alarmPolicy:AlarmPolicy":
                 return new AlarmPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/alarmPolicySetDefault:AlarmPolicySetDefault":
+                return new AlarmPolicySetDefault(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
                 return new BindingReceiver(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig":
+                return new GrafanaDnsConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig":
+                return new GrafanaEnvConfig(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaInstance:GrafanaInstance":
                 return new GrafanaInstance(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaIntegration:GrafanaIntegration":
@@ -85,6 +117,14 @@ const _module = {
                 return new GrafanaPlugin(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount":
                 return new GrafanaSsoAccount(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig":
+                return new GrafanaSsoCamConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig":
+                return new GrafanaSsoConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade":
+                return new GrafanaVersionUpgrade(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig":
+                return new GrafanaWhitelistConfig(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
                 return new PolicyBindingObject(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
@@ -126,12 +166,19 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmNotice", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmPolicySetDefault", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/bindingReceiver", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaDnsConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaEnvConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaIntegration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaNotificationChannel", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaPlugin", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoAccount", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoCamConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaVersionUpgrade", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaWhitelistConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/policyBindingObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpCvmAgent", _module)

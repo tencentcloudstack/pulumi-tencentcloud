@@ -20,35 +20,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetCrossBorderRegionBandwidthLimits(ctx, &ccn.GetCrossBorderRegionBandwidthLimitsArgs{
-// 			Filters: []ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 				ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 					Name: "source-region",
-// 					Values: []string{
-// 						"ap-guangzhou",
-// 					},
-// 				},
-// 				ccn.GetCrossBorderRegionBandwidthLimitsFilter{
-// 					Name: "destination-region",
-// 					Values: []string{
-// 						"ap-shanghai",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetCrossBorderRegionBandwidthLimits(ctx, &ccn.GetCrossBorderRegionBandwidthLimitsArgs{
+//				Filters: []ccn.GetCrossBorderRegionBandwidthLimitsFilter{
+//					ccn.GetCrossBorderRegionBandwidthLimitsFilter{
+//						Name: "source-region",
+//						Values: []string{
+//							"ap-guangzhou",
+//						},
+//					},
+//					ccn.GetCrossBorderRegionBandwidthLimitsFilter{
+//						Name: "destination-region",
+//						Values: []string{
+//							"ap-shanghai",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCrossBorderRegionBandwidthLimits(ctx *pulumi.Context, args *GetCrossBorderRegionBandwidthLimitsArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderRegionBandwidthLimitsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

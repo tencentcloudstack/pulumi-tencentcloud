@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> LoadBalancerId { get; private set; } = null!;
 
         /// <summary>
-        /// To upgrade to LCU-supported CLB instances. It must be SLA.
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         /// </summary>
         [Output("slaType")]
         public Output<string> SlaType { get; private set; } = null!;
@@ -110,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> LoadBalancerId { get; set; } = null!;
 
         /// <summary>
-        /// To upgrade to LCU-supported CLB instances. It must be SLA.
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         /// </summary>
         [Input("slaType", required: true)]
         public Input<string> SlaType { get; set; } = null!;
@@ -129,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? LoadBalancerId { get; set; }
 
         /// <summary>
-        /// To upgrade to LCU-supported CLB instances. It must be SLA.
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         /// </summary>
         [Input("slaType")]
         public Input<string>? SlaType { get; set; }

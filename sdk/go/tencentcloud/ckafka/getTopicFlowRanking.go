@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.GetTopicFlowRanking(ctx, &ckafka.GetTopicFlowRankingArgs{
-// 			BeginDate:   pulumi.StringRef("2023-05-29T00:00:00+08:00"),
-// 			EndDate:     pulumi.StringRef("2021-05-29T23:59:59+08:00"),
-// 			InstanceId:  "ckafka-xxxxxx",
-// 			RankingType: "PRO",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.GetTopicFlowRanking(ctx, &ckafka.GetTopicFlowRankingArgs{
+//				BeginDate:   pulumi.StringRef("2023-05-29T00:00:00+08:00"),
+//				EndDate:     pulumi.StringRef("2021-05-29T23:59:59+08:00"),
+//				InstanceId:  "ckafka-xxxxxx",
+//				RankingType: "PRO",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupTopicFlowRanking(ctx *pulumi.Context, args *LookupTopicFlowRankingArgs, opts ...pulumi.InvokeOption) (*LookupTopicFlowRankingResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

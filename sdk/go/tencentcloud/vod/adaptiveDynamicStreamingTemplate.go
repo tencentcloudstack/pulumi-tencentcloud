@@ -19,59 +19,62 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "foo", &Vod.AdaptiveDynamicStreamingTemplateArgs{
-// 			Comment:                      pulumi.String("test"),
-// 			DisableHigherVideoBitrate:    pulumi.Bool(false),
-// 			DisableHigherVideoResolution: pulumi.Bool(false),
-// 			DrmType:                      pulumi.String("SimpleAES"),
-// 			Format:                       pulumi.String("HLS"),
-// 			StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
-// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						AudioChannel: pulumi.String("dual"),
-// 						Bitrate:      pulumi.Int(129),
-// 						Codec:        pulumi.String("libmp3lame"),
-// 						SampleRate:   pulumi.Int(44100),
-// 					},
-// 					RemoveAudio: pulumi.Bool(false),
-// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Bitrate:            pulumi.Int(129),
-// 						Codec:              pulumi.String("libx265"),
-// 						FillType:           pulumi.String("stretch"),
-// 						Fps:                pulumi.Int(4),
-// 						Height:             pulumi.Int(128),
-// 						ResolutionAdaptive: pulumi.Bool(false),
-// 						Width:              pulumi.Int(128),
-// 					},
-// 				},
-// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						Bitrate:    pulumi.Int(256),
-// 						Codec:      pulumi.String("libfdk_aac"),
-// 						SampleRate: pulumi.Int(44100),
-// 					},
-// 					RemoveAudio: pulumi.Bool(true),
-// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Bitrate: pulumi.Int(256),
-// 						Codec:   pulumi.String("libx264"),
-// 						Fps:     pulumi.Int(4),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "foo", &Vod.AdaptiveDynamicStreamingTemplateArgs{
+//				Comment:                      pulumi.String("test"),
+//				DisableHigherVideoBitrate:    pulumi.Bool(false),
+//				DisableHigherVideoResolution: pulumi.Bool(false),
+//				DrmType:                      pulumi.String("SimpleAES"),
+//				Format:                       pulumi.String("HLS"),
+//				StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							AudioChannel: pulumi.String("dual"),
+//							Bitrate:      pulumi.Int(129),
+//							Codec:        pulumi.String("libmp3lame"),
+//							SampleRate:   pulumi.Int(44100),
+//						},
+//						RemoveAudio: pulumi.Bool(false),
+//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Bitrate:            pulumi.Int(129),
+//							Codec:              pulumi.String("libx265"),
+//							FillType:           pulumi.String("stretch"),
+//							Fps:                pulumi.Int(4),
+//							Height:             pulumi.Int(128),
+//							ResolutionAdaptive: pulumi.Bool(false),
+//							Width:              pulumi.Int(128),
+//						},
+//					},
+//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							Bitrate:    pulumi.Int(256),
+//							Codec:      pulumi.String("libfdk_aac"),
+//							SampleRate: pulumi.Int(44100),
+//						},
+//						RemoveAudio: pulumi.Bool(true),
+//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Bitrate: pulumi.Int(256),
+//							Codec:   pulumi.String("libx264"),
+//							Fps:     pulumi.Int(4),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -79,7 +82,9 @@ import (
 // VOD adaptive dynamic streaming template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+//
+//	$ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+//
 // ```
 type AdaptiveDynamicStreamingTemplate struct {
 	pulumi.CustomResourceState
@@ -256,7 +261,7 @@ func (i *AdaptiveDynamicStreamingTemplate) ToAdaptiveDynamicStreamingTemplateOut
 // AdaptiveDynamicStreamingTemplateArrayInput is an input type that accepts AdaptiveDynamicStreamingTemplateArray and AdaptiveDynamicStreamingTemplateArrayOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateArrayInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateArray{ AdaptiveDynamicStreamingTemplateArgs{...} }
+//	AdaptiveDynamicStreamingTemplateArray{ AdaptiveDynamicStreamingTemplateArgs{...} }
 type AdaptiveDynamicStreamingTemplateArrayInput interface {
 	pulumi.Input
 
@@ -281,7 +286,7 @@ func (i AdaptiveDynamicStreamingTemplateArray) ToAdaptiveDynamicStreamingTemplat
 // AdaptiveDynamicStreamingTemplateMapInput is an input type that accepts AdaptiveDynamicStreamingTemplateMap and AdaptiveDynamicStreamingTemplateMapOutput values.
 // You can construct a concrete instance of `AdaptiveDynamicStreamingTemplateMapInput` via:
 //
-//          AdaptiveDynamicStreamingTemplateMap{ "key": AdaptiveDynamicStreamingTemplateArgs{...} }
+//	AdaptiveDynamicStreamingTemplateMap{ "key": AdaptiveDynamicStreamingTemplateArgs{...} }
 type AdaptiveDynamicStreamingTemplateMapInput interface {
 	pulumi.Input
 

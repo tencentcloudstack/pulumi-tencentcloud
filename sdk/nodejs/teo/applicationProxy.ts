@@ -5,39 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a teo applicationProxy
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const applicationProxy = new tencentcloud.Teo.ApplicationProxy("application_proxy", {
- *     accelerateType: 1,
- *     ipv6: {
- *         switch: "off",
- *     },
- *     platType: "domain",
- *     proxyName: "applicationProxies-test-1",
- *     proxyType: "instance",
- *     securityType: 1,
- *     sessionPersistTime: 2400,
- *     status: "online",
- *     tags: [{}],
- *     zoneId: "zone-2983wizgxqvm",
- * });
- * ```
- *
- * ## Import
- *
- * teo application_proxy can be imported using the zoneId#proxyId, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Teo/applicationProxy:ApplicationProxy application_proxy zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456
- * ```
- */
 export class ApplicationProxy extends pulumi.CustomResource {
     /**
      * Get an existing ApplicationProxy resource's state with the given name, ID, and optional extra
@@ -95,7 +62,8 @@ export class ApplicationProxy extends pulumi.CustomResource {
      */
     public /*out*/ readonly proxyId!: pulumi.Output<string>;
     /**
-     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+     * the name of proxy application.
      */
     public readonly proxyName!: pulumi.Output<string>;
     /**
@@ -115,7 +83,8 @@ export class ApplicationProxy extends pulumi.CustomResource {
      */
     public readonly sessionPersistTime!: pulumi.Output<number>;
     /**
-     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+     * Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
      */
     public readonly status!: pulumi.Output<string>;
     /**
@@ -226,7 +195,8 @@ export interface ApplicationProxyState {
      */
     proxyId?: pulumi.Input<string>;
     /**
-     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+     * the name of proxy application.
      */
     proxyName?: pulumi.Input<string>;
     /**
@@ -246,7 +216,8 @@ export interface ApplicationProxyState {
      */
     sessionPersistTime?: pulumi.Input<number>;
     /**
-     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+     * Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
      */
     status?: pulumi.Input<string>;
     /**
@@ -276,7 +247,8 @@ export interface ApplicationProxyArgs {
      */
     platType: pulumi.Input<string>;
     /**
-     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+     * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+     * the name of proxy application.
      */
     proxyName: pulumi.Input<string>;
     /**
@@ -292,7 +264,8 @@ export interface ApplicationProxyArgs {
      */
     sessionPersistTime?: pulumi.Input<number>;
     /**
-     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+     * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+     * Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
      */
     status?: pulumi.Input<string>;
     /**

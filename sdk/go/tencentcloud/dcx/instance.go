@@ -21,59 +21,72 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcx"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		dcId := "dc-kax48sg7"
-// 		if param := cfg.Get("dcId"); param != "" {
-// 			dcId = param
-// 		}
-// 		dcgId := "dcg-dmbhf7jf"
-// 		if param := cfg.Get("dcgId"); param != "" {
-// 			dcgId = param
-// 		}
-// 		vpcId := "vpc-4h9v4mo3"
-// 		if param := cfg.Get("vpcId"); param != "" {
-// 			vpcId = param
-// 		}
-// 		_, err := Dcx.NewInstance(ctx, "bgpMain", &Dcx.InstanceArgs{
-// 			Bandwidth:   pulumi.Int(900),
-// 			DcId:        pulumi.String(dcId),
-// 			DcgId:       pulumi.String(dcgId),
-// 			NetworkType: pulumi.String("VPC"),
-// 			RouteType:   pulumi.String("BGP"),
-// 			Vlan:        pulumi.Int(306),
-// 			VpcId:       pulumi.String(vpcId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dcx.NewInstance(ctx, "staticMain", &Dcx.InstanceArgs{
-// 			Bandwidth:      pulumi.Int(900),
-// 			DcId:           pulumi.String(dcId),
-// 			DcgId:          pulumi.String(dcgId),
-// 			DcOwnerAccount: pulumi.String("xxxxxxxx"),
-// 			NetworkType:    pulumi.String("VPC"),
-// 			RouteType:      pulumi.String("STATIC"),
-// 			Vlan:           pulumi.Int(301),
-// 			VpcId:          pulumi.String(vpcId),
-// 			RouteFilterPrefixes: pulumi.StringArray{
-// 				pulumi.String("10.10.10.101/32"),
-// 			},
-// 			TencentAddress:  pulumi.String("100.93.46.1/30"),
-// 			CustomerAddress: pulumi.String("100.93.46.2/30"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			dcId := "dc-kax48sg7"
+//			if param := cfg.Get("dcId"); param != "" {
+//				dcId = param
+//			}
+//			dcgId := "dcg-dmbhf7jf"
+//			if param := cfg.Get("dcgId"); param != "" {
+//				dcgId = param
+//			}
+//			vpcId := "vpc-4h9v4mo3"
+//			if param := cfg.Get("vpcId"); param != "" {
+//				vpcId = param
+//			}
+//			_, err := Dcx.NewInstance(ctx, "bgpMain", &Dcx.InstanceArgs{
+//				Bandwidth:   pulumi.Int(900),
+//				DcId:        pulumi.String(dcId),
+//				DcgId:       pulumi.String(dcgId),
+//				NetworkType: pulumi.String("VPC"),
+//				RouteType:   pulumi.String("BGP"),
+//				Vlan:        pulumi.Int(306),
+//				VpcId:       pulumi.String(vpcId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dcx.NewInstance(ctx, "staticMain", &Dcx.InstanceArgs{
+//				Bandwidth:      pulumi.Int(900),
+//				DcId:           pulumi.String(dcId),
+//				DcgId:          pulumi.String(dcgId),
+//				DcOwnerAccount: pulumi.String("xxxxxxxx"),
+//				NetworkType:    pulumi.String("VPC"),
+//				RouteType:      pulumi.String("STATIC"),
+//				Vlan:           pulumi.Int(301),
+//				VpcId:          pulumi.String(vpcId),
+//				RouteFilterPrefixes: pulumi.StringArray{
+//					pulumi.String("10.10.10.101/32"),
+//				},
+//				TencentAddress:  pulumi.String("100.93.46.1/30"),
+//				CustomerAddress: pulumi.String("100.93.46.2/30"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// DCX instance can be imported using the id, e.g.
+//
+// ```sh
+//
+//	$ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -96,6 +109,8 @@ type Instance struct {
 	DcgId pulumi.StringOutput `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Network region.
+	NetworkRegion pulumi.StringPtrOutput `pulumi:"networkRegion"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrOutput `pulumi:"networkType"`
 	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
@@ -166,6 +181,8 @@ type instanceState struct {
 	DcgId *string `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
 	Name *string `pulumi:"name"`
+	// Network region.
+	NetworkRegion *string `pulumi:"networkRegion"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType *string `pulumi:"networkType"`
 	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
@@ -201,6 +218,8 @@ type InstanceState struct {
 	DcgId pulumi.StringPtrInput
 	// Name of the dedicated tunnel.
 	Name pulumi.StringPtrInput
+	// Network region.
+	NetworkRegion pulumi.StringPtrInput
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrInput
 	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
@@ -238,6 +257,8 @@ type instanceArgs struct {
 	DcgId string `pulumi:"dcgId"`
 	// Name of the dedicated tunnel.
 	Name *string `pulumi:"name"`
+	// Network region.
+	NetworkRegion *string `pulumi:"networkRegion"`
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType *string `pulumi:"networkType"`
 	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
@@ -270,6 +291,8 @@ type InstanceArgs struct {
 	DcgId pulumi.StringInput
 	// Name of the dedicated tunnel.
 	Name pulumi.StringPtrInput
+	// Network region.
+	NetworkRegion pulumi.StringPtrInput
 	// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
 	NetworkType pulumi.StringPtrInput
 	// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
@@ -310,7 +333,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -335,7 +358,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -414,6 +437,11 @@ func (o InstanceOutput) DcgId() pulumi.StringOutput {
 // Name of the dedicated tunnel.
 func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Network region.
+func (o InstanceOutput) NetworkRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.NetworkRegion }).(pulumi.StringPtrOutput)
 }
 
 // Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.

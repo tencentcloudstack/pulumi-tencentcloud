@@ -6,15 +6,21 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./getProducts";
+export * from "./getRotationDetail";
+export * from "./getRotationHistory";
 export * from "./getSecretVersions";
 export * from "./getSecrets";
+export * from "./getServiceStatus";
+export * from "./getSshKeyPairValue";
 export * from "./productSecret";
+export * from "./rotateProductSecret";
 export * from "./secret";
 export * from "./secretVersion";
 export * from "./sshKeyPairSecret";
 
 // Import resources to register:
 import { ProductSecret } from "./productSecret";
+import { RotateProductSecret } from "./rotateProductSecret";
 import { Secret } from "./secret";
 import { SecretVersion } from "./secretVersion";
 import { SshKeyPairSecret } from "./sshKeyPairSecret";
@@ -25,6 +31,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Ssm/productSecret:ProductSecret":
                 return new ProductSecret(name, <any>undefined, { urn })
+            case "tencentcloud:Ssm/rotateProductSecret:RotateProductSecret":
+                return new RotateProductSecret(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/secret:Secret":
                 return new Secret(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/secretVersion:SecretVersion":
@@ -37,6 +45,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/productSecret", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/rotateProductSecret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secretVersion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/sshKeyPairSecret", _module)

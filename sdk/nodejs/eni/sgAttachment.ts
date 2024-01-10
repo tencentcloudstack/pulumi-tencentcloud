@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a eniSgAttachment
  *
+ * > **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloudEni` binding security group for simultaneous use.
+ *
  * ## Example Usage
  *
  * ```typescript

@@ -26,6 +26,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Output<string?> Domain { get; private set; } = null!;
 
         /// <summary>
+        /// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        /// variable. If not set, the default profile created with `tccli configure` will be used.
+        /// </summary>
+        [Output("profile")]
+        public Output<string?> Profile { get; private set; } = null!;
+
+        /// <summary>
         /// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
         /// </summary>
         [Output("protocol")]
@@ -59,6 +66,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         /// </summary>
         [Output("securityToken")]
         public Output<string?> SecurityToken { get; private set; } = null!;
+
+        /// <summary>
+        /// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        /// environment variable. If not set this defaults to ~/.tccli.
+        /// </summary>
+        [Output("sharedCredentialsDir")]
+        public Output<string?> SharedCredentialsDir { get; private set; } = null!;
 
 
         /// <summary>
@@ -102,6 +116,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Input<string>? Domain { get; set; }
 
         /// <summary>
+        /// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        /// variable. If not set, the default profile created with `tccli configure` will be used.
+        /// </summary>
+        [Input("profile")]
+        public Input<string>? Profile { get; set; }
+
+        /// <summary>
         /// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
         /// </summary>
         [Input("protocol")]
@@ -135,6 +156,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         /// </summary>
         [Input("securityToken")]
         public Input<string>? SecurityToken { get; set; }
+
+        /// <summary>
+        /// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        /// environment variable. If not set this defaults to ~/.tccli.
+        /// </summary>
+        [Input("sharedCredentialsDir")]
+        public Input<string>? SharedCredentialsDir { get; set; }
 
         public ProviderArgs()
         {

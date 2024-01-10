@@ -9,6 +9,9 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'EventConnectorConnectionDescriptionArgs',
+    'EventConnectorConnectionDescriptionApiGwParamsArgs',
+    'EventConnectorConnectionDescriptionCkafkaParamsArgs',
     'EventTargetTargetDescriptionArgs',
     'EventTargetTargetDescriptionCkafkaTargetParamsArgs',
     'EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs',
@@ -25,6 +28,134 @@ __all__ = [
     'GetSearchFilterArgs',
     'GetSearchFilterFilterArgs',
 ]
+
+@pulumi.input_type
+class EventConnectorConnectionDescriptionArgs:
+    def __init__(__self__, *,
+                 resource_description: pulumi.Input[str],
+                 api_gw_params: Optional[pulumi.Input['EventConnectorConnectionDescriptionApiGwParamsArgs']] = None,
+                 ckafka_params: Optional[pulumi.Input['EventConnectorConnectionDescriptionCkafkaParamsArgs']] = None):
+        """
+        :param pulumi.Input[str] resource_description: Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+        :param pulumi.Input['EventConnectorConnectionDescriptionApiGwParamsArgs'] api_gw_params: apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['EventConnectorConnectionDescriptionCkafkaParamsArgs'] ckafka_params: ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "resource_description", resource_description)
+        if api_gw_params is not None:
+            pulumi.set(__self__, "api_gw_params", api_gw_params)
+        if ckafka_params is not None:
+            pulumi.set(__self__, "ckafka_params", ckafka_params)
+
+    @property
+    @pulumi.getter(name="resourceDescription")
+    def resource_description(self) -> pulumi.Input[str]:
+        """
+        Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+        """
+        return pulumi.get(self, "resource_description")
+
+    @resource_description.setter
+    def resource_description(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource_description", value)
+
+    @property
+    @pulumi.getter(name="apiGwParams")
+    def api_gw_params(self) -> Optional[pulumi.Input['EventConnectorConnectionDescriptionApiGwParamsArgs']]:
+        """
+        apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "api_gw_params")
+
+    @api_gw_params.setter
+    def api_gw_params(self, value: Optional[pulumi.Input['EventConnectorConnectionDescriptionApiGwParamsArgs']]):
+        pulumi.set(self, "api_gw_params", value)
+
+    @property
+    @pulumi.getter(name="ckafkaParams")
+    def ckafka_params(self) -> Optional[pulumi.Input['EventConnectorConnectionDescriptionCkafkaParamsArgs']]:
+        """
+        ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ckafka_params")
+
+    @ckafka_params.setter
+    def ckafka_params(self, value: Optional[pulumi.Input['EventConnectorConnectionDescriptionCkafkaParamsArgs']]):
+        pulumi.set(self, "ckafka_params", value)
+
+
+@pulumi.input_type
+class EventConnectorConnectionDescriptionApiGwParamsArgs:
+    def __init__(__self__, *,
+                 method: pulumi.Input[str],
+                 protocol: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] method: POST.
+        :param pulumi.Input[str] protocol: HTTPS.
+        """
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter
+    def method(self) -> pulumi.Input[str]:
+        """
+        POST.
+        """
+        return pulumi.get(self, "method")
+
+    @method.setter
+    def method(self, value: pulumi.Input[str]):
+        pulumi.set(self, "method", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        """
+        HTTPS.
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+
+@pulumi.input_type
+class EventConnectorConnectionDescriptionCkafkaParamsArgs:
+    def __init__(__self__, *,
+                 offset: pulumi.Input[str],
+                 topic_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] offset: kafka offset.
+        :param pulumi.Input[str] topic_name: ckafka  topic.
+        """
+        pulumi.set(__self__, "offset", offset)
+        pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter
+    def offset(self) -> pulumi.Input[str]:
+        """
+        kafka offset.
+        """
+        return pulumi.get(self, "offset")
+
+    @offset.setter
+    def offset(self, value: pulumi.Input[str]):
+        pulumi.set(self, "offset", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> pulumi.Input[str]:
+        """
+        ckafka  topic.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_name", value)
+
 
 @pulumi.input_type
 class EventTargetTargetDescriptionArgs:

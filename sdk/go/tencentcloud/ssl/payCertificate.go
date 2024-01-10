@@ -17,7 +17,10 @@ import (
 // currently, it does not support re-issuing certificates, revoking certificates, and deleting certificates; the certificate remarks
 // and belonging items can be updated. The Destroy operation will only cancel the certificate order, and will not delete the
 // certificate and refund the fee. If you need a refund, you need to check the current certificate status in the console
-// as `Review Cancel`, and then you can click `Request a refund` to refund the fee.
+// as `Review Cancel`, and then you can click `Request a refund` to refund the fee. To update the information of a certificate,
+// we will automatically roll back your certificate if this certificate is already in the validation stage. This process may take
+// some time because the CA callback is time-consuming. Please be patient and follow the prompt message. Or, feel free to contact
+// Tencent Cloud Support.
 //
 // ## Example Usage
 //
@@ -25,49 +28,52 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewPayCertificate(ctx, "example", &Ssl.PayCertificateArgs{
-// 			Alias:     pulumi.String("ssl desc."),
-// 			DomainNum: pulumi.Int(1),
-// 			Information: &ssl.PayCertificateInformationArgs{
-// 				AdminEmail:           pulumi.String("test@tencent.com"),
-// 				AdminFirstName:       pulumi.String("test"),
-// 				AdminLastName:        pulumi.String("test"),
-// 				AdminPhoneNum:        pulumi.String("12345678901"),
-// 				AdminPosition:        pulumi.String("developer"),
-// 				CertificateDomain:    pulumi.String("www.example.com"),
-// 				ContactEmail:         pulumi.String("test@tencent.com"),
-// 				ContactFirstName:     pulumi.String("test"),
-// 				ContactLastName:      pulumi.String("test"),
-// 				ContactNumber:        pulumi.String("12345678901"),
-// 				ContactPosition:      pulumi.String("developer"),
-// 				CsrType:              pulumi.String("online"),
-// 				OrganizationAddress:  pulumi.String("广东省深圳市南山区腾讯大厦1000号"),
-// 				OrganizationCity:     pulumi.String("深圳市"),
-// 				OrganizationCountry:  pulumi.String("CN"),
-// 				OrganizationDivision: pulumi.String("Qcloud"),
-// 				OrganizationName:     pulumi.String("Tencent"),
-// 				OrganizationRegion:   pulumi.String("广东省"),
-// 				PhoneAreaCode:        pulumi.String("0755"),
-// 				PhoneNumber:          pulumi.String("86013388"),
-// 				PostalCode:           pulumi.String("0755"),
-// 				VerifyType:           pulumi.String("DNS"),
-// 			},
-// 			ProductId: pulumi.Int(33),
-// 			ProjectId: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewPayCertificate(ctx, "example", &Ssl.PayCertificateArgs{
+//				Alias:     pulumi.String("ssl desc."),
+//				DomainNum: pulumi.Int(1),
+//				Information: &ssl.PayCertificateInformationArgs{
+//					AdminEmail:           pulumi.String("test@tencent.com"),
+//					AdminFirstName:       pulumi.String("test"),
+//					AdminLastName:        pulumi.String("test"),
+//					AdminPhoneNum:        pulumi.String("12345678901"),
+//					AdminPosition:        pulumi.String("developer"),
+//					CertificateDomain:    pulumi.String("www.example.com"),
+//					ContactEmail:         pulumi.String("test@tencent.com"),
+//					ContactFirstName:     pulumi.String("test"),
+//					ContactLastName:      pulumi.String("test"),
+//					ContactNumber:        pulumi.String("12345678901"),
+//					ContactPosition:      pulumi.String("developer"),
+//					CsrType:              pulumi.String("online"),
+//					OrganizationAddress:  pulumi.String("广东省深圳市南山区腾讯大厦1000号"),
+//					OrganizationCity:     pulumi.String("深圳市"),
+//					OrganizationCountry:  pulumi.String("CN"),
+//					OrganizationDivision: pulumi.String("Qcloud"),
+//					OrganizationName:     pulumi.String("Tencent"),
+//					OrganizationRegion:   pulumi.String("广东省"),
+//					PhoneAreaCode:        pulumi.String("0755"),
+//					PhoneNumber:          pulumi.String("86013388"),
+//					PostalCode:           pulumi.String("0755"),
+//					VerifyType:           pulumi.String("DNS"),
+//				},
+//				ProductId: pulumi.Int(33),
+//				ProjectId: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -75,7 +81,9 @@ import (
 // payment SSL instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+//
+//	$ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+//
 // ```
 type PayCertificate struct {
 	pulumi.CustomResourceState
@@ -203,6 +211,8 @@ type payCertificateArgs struct {
 	ConfirmLetter *string `pulumi:"confirmLetter"`
 	// Number of domain names included in the certificate.
 	DomainNum int `pulumi:"domainNum"`
+	// DV certification information.
+	DvAuths []PayCertificateDvAuth `pulumi:"dvAuths"`
 	// Certificate information.
 	Information PayCertificateInformation `pulumi:"information"`
 	// Certificate commodity ID. Valid value ranges: (3~42). `3` means SecureSite enhanced Enterprise Edition (EV Pro), `4` means SecureSite enhanced (EV), `5` means SecureSite Enterprise Professional Edition (OV Pro), `6` means SecureSite Enterprise (OV), `7` means SecureSite Enterprise Type (OV) wildcard, `8` means Geotrust enhanced (EV), `9` means Geotrust enterprise (OV), `10` means Geotrust enterprise (OV) wildcard, `11` means TrustAsia domain type multi-domain SSL certificate, `12` means TrustAsia domain type ( DV) wildcard, `13` means TrustAsia enterprise wildcard (OV) SSL certificate (D3), `14` means TrustAsia enterprise (OV) SSL certificate (D3), `15` means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), `16` means TrustAsia Enhanced (EV) SSL Certificate (D3), `17` means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), `18` means GlobalSign Enterprise (OV) SSL Certificate, `19` means GlobalSign Enterprise Wildcard (OV) SSL Certificate, `20` means GlobalSign Enhanced (EV) SSL Certificate, `21` means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), `22` means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, `23` means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, `24` means GlobalSign enhanced multi-domain (EV) SSL certificate, `25` means Wotrus domain type certificate, `26` means Wotrus domain type multi-domain certificate, `27` means Wotrus domain type wildcard certificate, `28` means Wotrus enterprise type certificate, `29` means Wotrus enterprise multi-domain certificate, `30` means Wotrus enterprise wildcard certificate, `31` means Wotrus enhanced certificate, `32` means Wotrus enhanced multi-domain certificate, `33` means WoTrus National Secret Domain name Certificate, `34` means WoTrus National Secret Domain name Certificate (multiple domain names), `35` WoTrus National Secret Domain name Certificate (wildcard), `37` means WoTrus State Secret Enterprise Certificate, `38` means WoTrus State Secret Enterprise Certificate (multiple domain names), `39` means WoTrus State Secret Enterprise Certificate (wildcard), `40` means WoTrus National secret enhanced certificate, `41` means WoTrus National Secret enhanced Certificate (multiple domain names), `42` means TrustAsia- Domain name Certificate (wildcard multiple domain names), `43` means DNSPod Enterprise (OV) SSL Certificate, `44` means DNSPod- Enterprise (OV) wildcard SSL certificate, `45` means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, `46` means DNSPod enhanced (EV) SSL certificate, `47` means DNSPod enhanced (EV) multi-domain name SSL certificate, `48` means DNSPod Domain name Type (DV) SSL Certificate, `49` means DNSPod Domain name Type (DV) wildcard SSL certificate, `50` means DNSPod domain name type (DV) multi-domain name SSL certificate, `51` means DNSPod (State Secret) Enterprise (OV) SSL certificate, `52` DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, `53` means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, `54` means DNSPod (National Secret) Domain Name (DV) SSL certificate, `55` means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, `56` means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.
@@ -221,6 +231,8 @@ type PayCertificateArgs struct {
 	ConfirmLetter pulumi.StringPtrInput
 	// Number of domain names included in the certificate.
 	DomainNum pulumi.IntInput
+	// DV certification information.
+	DvAuths PayCertificateDvAuthArrayInput
 	// Certificate information.
 	Information PayCertificateInformationInput
 	// Certificate commodity ID. Valid value ranges: (3~42). `3` means SecureSite enhanced Enterprise Edition (EV Pro), `4` means SecureSite enhanced (EV), `5` means SecureSite Enterprise Professional Edition (OV Pro), `6` means SecureSite Enterprise (OV), `7` means SecureSite Enterprise Type (OV) wildcard, `8` means Geotrust enhanced (EV), `9` means Geotrust enterprise (OV), `10` means Geotrust enterprise (OV) wildcard, `11` means TrustAsia domain type multi-domain SSL certificate, `12` means TrustAsia domain type ( DV) wildcard, `13` means TrustAsia enterprise wildcard (OV) SSL certificate (D3), `14` means TrustAsia enterprise (OV) SSL certificate (D3), `15` means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), `16` means TrustAsia Enhanced (EV) SSL Certificate (D3), `17` means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), `18` means GlobalSign Enterprise (OV) SSL Certificate, `19` means GlobalSign Enterprise Wildcard (OV) SSL Certificate, `20` means GlobalSign Enhanced (EV) SSL Certificate, `21` means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), `22` means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, `23` means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, `24` means GlobalSign enhanced multi-domain (EV) SSL certificate, `25` means Wotrus domain type certificate, `26` means Wotrus domain type multi-domain certificate, `27` means Wotrus domain type wildcard certificate, `28` means Wotrus enterprise type certificate, `29` means Wotrus enterprise multi-domain certificate, `30` means Wotrus enterprise wildcard certificate, `31` means Wotrus enhanced certificate, `32` means Wotrus enhanced multi-domain certificate, `33` means WoTrus National Secret Domain name Certificate, `34` means WoTrus National Secret Domain name Certificate (multiple domain names), `35` WoTrus National Secret Domain name Certificate (wildcard), `37` means WoTrus State Secret Enterprise Certificate, `38` means WoTrus State Secret Enterprise Certificate (multiple domain names), `39` means WoTrus State Secret Enterprise Certificate (wildcard), `40` means WoTrus National secret enhanced certificate, `41` means WoTrus National Secret enhanced Certificate (multiple domain names), `42` means TrustAsia- Domain name Certificate (wildcard multiple domain names), `43` means DNSPod Enterprise (OV) SSL Certificate, `44` means DNSPod- Enterprise (OV) wildcard SSL certificate, `45` means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, `46` means DNSPod enhanced (EV) SSL certificate, `47` means DNSPod enhanced (EV) multi-domain name SSL certificate, `48` means DNSPod Domain name Type (DV) SSL Certificate, `49` means DNSPod Domain name Type (DV) wildcard SSL certificate, `50` means DNSPod domain name type (DV) multi-domain name SSL certificate, `51` means DNSPod (State Secret) Enterprise (OV) SSL certificate, `52` DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, `53` means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, `54` means DNSPod (National Secret) Domain Name (DV) SSL certificate, `55` means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, `56` means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.
@@ -257,7 +269,7 @@ func (i *PayCertificate) ToPayCertificateOutputWithContext(ctx context.Context) 
 // PayCertificateArrayInput is an input type that accepts PayCertificateArray and PayCertificateArrayOutput values.
 // You can construct a concrete instance of `PayCertificateArrayInput` via:
 //
-//          PayCertificateArray{ PayCertificateArgs{...} }
+//	PayCertificateArray{ PayCertificateArgs{...} }
 type PayCertificateArrayInput interface {
 	pulumi.Input
 
@@ -282,7 +294,7 @@ func (i PayCertificateArray) ToPayCertificateArrayOutputWithContext(ctx context.
 // PayCertificateMapInput is an input type that accepts PayCertificateMap and PayCertificateMapOutput values.
 // You can construct a concrete instance of `PayCertificateMapInput` via:
 //
-//          PayCertificateMap{ "key": PayCertificateArgs{...} }
+//	PayCertificateMap{ "key": PayCertificateArgs{...} }
 type PayCertificateMapInput interface {
 	pulumi.Input
 

@@ -19,6 +19,12 @@ domain: Optional[str]
 The root domain of the API request, Default is `tencentcloudapi.com`.
 """
 
+profile: Optional[str]
+"""
+The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+variable. If not set, the default profile created with `tccli configure` will be used.
+"""
+
 protocol: Optional[str]
 """
 The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
@@ -47,5 +53,11 @@ securityToken: Optional[str]
 TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
 environment variable. Notice: for supported products, please refer to: [temporary key supported
 products](https://intl.cloud.tencent.com/document/product/598/10588).
+"""
+
+sharedCredentialsDir: Optional[str]
+"""
+The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+environment variable. If not set this defaults to ~/.tccli.
 """
 

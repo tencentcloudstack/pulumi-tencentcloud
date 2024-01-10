@@ -109,10 +109,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public Output<int> Interval { get; private set; } = null!;
 
         /// <summary>
+        /// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        /// </summary>
+        [Output("nodeIpType")]
+        public Output<int> NodeIpType { get; private set; } = null!;
+
+        /// <summary>
         /// Task Nodes.
         /// </summary>
         [Output("nodes")]
         public Output<ImmutableArray<string>> Nodes { get; private set; } = null!;
+
+        /// <summary>
+        /// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        /// </summary>
+        [Output("operate")]
+        public Output<string?> Operate { get; private set; } = null!;
 
         /// <summary>
         /// tasks parameters.
@@ -215,6 +227,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         [Input("interval", required: true)]
         public Input<int> Interval { get; set; } = null!;
 
+        /// <summary>
+        /// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        /// </summary>
+        [Input("nodeIpType")]
+        public Input<int>? NodeIpType { get; set; }
+
         [Input("nodes", required: true)]
         private InputList<string>? _nodes;
 
@@ -226,6 +244,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
             get => _nodes ?? (_nodes = new InputList<string>());
             set => _nodes = value;
         }
+
+        /// <summary>
+        /// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        /// </summary>
+        [Input("operate")]
+        public Input<string>? Operate { get; set; }
 
         /// <summary>
         /// tasks parameters.
@@ -282,6 +306,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         [Input("interval")]
         public Input<int>? Interval { get; set; }
 
+        /// <summary>
+        /// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        /// </summary>
+        [Input("nodeIpType")]
+        public Input<int>? NodeIpType { get; set; }
+
         [Input("nodes")]
         private InputList<string>? _nodes;
 
@@ -293,6 +323,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
             get => _nodes ?? (_nodes = new InputList<string>());
             set => _nodes = value;
         }
+
+        /// <summary>
+        /// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        /// </summary>
+        [Input("operate")]
+        public Input<string>? Operate { get; set; }
 
         /// <summary>
         /// tasks parameters.

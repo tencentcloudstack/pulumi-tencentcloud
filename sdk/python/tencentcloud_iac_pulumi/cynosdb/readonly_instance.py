@@ -20,7 +20,9 @@ class ReadonlyInstanceArgs:
                  instance_maintain_duration: Optional[pulumi.Input[int]] = None,
                  instance_maintain_start_time: Optional[pulumi.Input[int]] = None,
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 instance_memory_size: Optional[pulumi.Input[int]] = None):
+                 instance_memory_size: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
@@ -31,6 +33,8 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[int] instance_maintain_start_time: Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
         :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+        :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "instance_name", instance_name)
@@ -46,6 +50,10 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "instance_maintain_weekdays", instance_maintain_weekdays)
         if instance_memory_size is not None:
             pulumi.set(__self__, "instance_memory_size", instance_memory_size)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -143,6 +151,30 @@ class ReadonlyInstanceArgs:
     def instance_memory_size(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "instance_memory_size", value)
 
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the subnet within this VPC.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the VPC.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
 
 @pulumi.input_type
 class _ReadonlyInstanceState:
@@ -156,7 +188,9 @@ class _ReadonlyInstanceState:
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  instance_status: Optional[pulumi.Input[str]] = None,
-                 instance_storage_size: Optional[pulumi.Input[int]] = None):
+                 instance_storage_size: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ReadonlyInstance resources.
         :param pulumi.Input[str] cluster_id: Cluster ID which the readonly instance belongs to.
@@ -169,6 +203,8 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
+        :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -190,6 +226,10 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "instance_status", instance_status)
         if instance_storage_size is not None:
             pulumi.set(__self__, "instance_storage_size", instance_storage_size)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -311,6 +351,30 @@ class _ReadonlyInstanceState:
     def instance_storage_size(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "instance_storage_size", value)
 
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the subnet within this VPC.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the VPC.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
 
 class ReadonlyInstance(pulumi.CustomResource):
     @overload
@@ -325,6 +389,8 @@ class ReadonlyInstance(pulumi.CustomResource):
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Provide a resource to create a CynosDB readonly instance.
@@ -372,6 +438,8 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_maintain_weekdays: Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
         :param pulumi.Input[int] instance_memory_size: Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_name: Name of instance.
+        :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC.
         """
         ...
     @overload
@@ -438,6 +506,8 @@ class ReadonlyInstance(pulumi.CustomResource):
                  instance_maintain_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  instance_memory_size: Optional[pulumi.Input[int]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -464,6 +534,8 @@ class ReadonlyInstance(pulumi.CustomResource):
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
+            __props__.__dict__["subnet_id"] = subnet_id
+            __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["instance_status"] = None
             __props__.__dict__["instance_storage_size"] = None
         super(ReadonlyInstance, __self__).__init__(
@@ -485,7 +557,9 @@ class ReadonlyInstance(pulumi.CustomResource):
             instance_memory_size: Optional[pulumi.Input[int]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             instance_status: Optional[pulumi.Input[str]] = None,
-            instance_storage_size: Optional[pulumi.Input[int]] = None) -> 'ReadonlyInstance':
+            instance_storage_size: Optional[pulumi.Input[int]] = None,
+            subnet_id: Optional[pulumi.Input[str]] = None,
+            vpc_id: Optional[pulumi.Input[str]] = None) -> 'ReadonlyInstance':
         """
         Get an existing ReadonlyInstance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -503,6 +577,8 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: Name of instance.
         :param pulumi.Input[str] instance_status: Status of the instance.
         :param pulumi.Input[int] instance_storage_size: Storage size of the instance, unit in GB.
+        :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
+        :param pulumi.Input[str] vpc_id: ID of the VPC.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -518,6 +594,8 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["instance_status"] = instance_status
         __props__.__dict__["instance_storage_size"] = instance_storage_size
+        __props__.__dict__["subnet_id"] = subnet_id
+        __props__.__dict__["vpc_id"] = vpc_id
         return ReadonlyInstance(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -599,4 +677,20 @@ class ReadonlyInstance(pulumi.CustomResource):
         Storage size of the instance, unit in GB.
         """
         return pulumi.get(self, "instance_storage_size")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Output[str]:
+        """
+        ID of the subnet within this VPC.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Output[str]:
+        """
+        ID of the VPC.
+        """
+        return pulumi.get(self, "vpc_id")
 

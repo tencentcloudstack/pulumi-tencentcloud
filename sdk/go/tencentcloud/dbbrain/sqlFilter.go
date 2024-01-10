@@ -19,49 +19,52 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		region := "ap-guangzhou"
-// 		if param := cfg.Get("region"); param != "" {
-// 			region = param
-// 		}
-// 		mysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-// 			InstanceName: pulumi.StringRef("instance_name"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		mysqlId := mysql.InstanceLists[0].MysqlId
-// 		_, err = Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
-// 			InstanceId: pulumi.String(mysqlId),
-// 			SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
-// 				User:     pulumi.String("test"),
-// 				Password: pulumi.String("===password==="),
-// 			},
-// 			SqlType:        pulumi.String("SELECT"),
-// 			FilterKey:      pulumi.String("filter_key"),
-// 			MaxConcurrency: pulumi.Int(10),
-// 			Duration:       pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			region := "ap-guangzhou"
+//			if param := cfg.Get("region"); param != "" {
+//				region = param
+//			}
+//			mysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+//				InstanceName: pulumi.StringRef("instance_name"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			mysqlId := mysql.InstanceLists[0].MysqlId
+//			_, err = Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
+//				InstanceId: pulumi.String(mysqlId),
+//				SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
+//					User:     pulumi.String("test"),
+//					Password: pulumi.String("===password==="),
+//				},
+//				SqlType:        pulumi.String("SELECT"),
+//				FilterKey:      pulumi.String("filter_key"),
+//				MaxConcurrency: pulumi.Int(10),
+//				Duration:       pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SqlFilter struct {
 	pulumi.CustomResourceState
@@ -244,7 +247,7 @@ func (i *SqlFilter) ToSqlFilterOutputWithContext(ctx context.Context) SqlFilterO
 // SqlFilterArrayInput is an input type that accepts SqlFilterArray and SqlFilterArrayOutput values.
 // You can construct a concrete instance of `SqlFilterArrayInput` via:
 //
-//          SqlFilterArray{ SqlFilterArgs{...} }
+//	SqlFilterArray{ SqlFilterArgs{...} }
 type SqlFilterArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +272,7 @@ func (i SqlFilterArray) ToSqlFilterArrayOutputWithContext(ctx context.Context) S
 // SqlFilterMapInput is an input type that accepts SqlFilterMap and SqlFilterMapOutput values.
 // You can construct a concrete instance of `SqlFilterMapInput` via:
 //
-//          SqlFilterMap{ "key": SqlFilterArgs{...} }
+//	SqlFilterMap{ "key": SqlFilterArgs{...} }
 type SqlFilterMapInput interface {
 	pulumi.Input
 

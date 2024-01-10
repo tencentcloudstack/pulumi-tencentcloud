@@ -151,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Output<string> Region { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;#39;PullLivePushLive&amp;amp;#39;: SourceUrls live type, &amp;amp;#39;PullVodPushLive&amp;amp;#39;: SourceUrls vod type.
+        /// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         /// </summary>
         [Output("sourceType")]
         public Output<string> SourceType { get; private set; } = null!;
@@ -205,7 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Output<int> VodLoopTimes { get; private set; } = null!;
 
         /// <summary>
-        /// vod refresh method. &amp;amp;#39;ImmediateNewSource&amp;amp;#39;: switch to new source at once, &amp;amp;#39;ContinueBreakPoint&amp;amp;#39;: switch to new source while old source finish.
+        /// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         /// </summary>
         [Output("vodRefreshType")]
         public Output<string> VodRefreshType { get; private set; } = null!;
@@ -348,7 +348,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Input<string>? PushArgs { get; set; }
 
         /// <summary>
-        /// &amp;amp;#39;PullLivePushLive&amp;amp;#39;: SourceUrls live type, &amp;amp;#39;PullVodPushLive&amp;amp;#39;: SourceUrls vod type.
+        /// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         /// </summary>
         [Input("sourceType", required: true)]
         public Input<string> SourceType { get; set; } = null!;
@@ -396,7 +396,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Input<int>? VodLoopTimes { get; set; }
 
         /// <summary>
-        /// vod refresh method. &amp;amp;#39;ImmediateNewSource&amp;amp;#39;: switch to new source at once, &amp;amp;#39;ContinueBreakPoint&amp;amp;#39;: switch to new source while old source finish.
+        /// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         /// </summary>
         [Input("vodRefreshType")]
         public Input<string>? VodRefreshType { get; set; }
@@ -523,7 +523,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// &amp;amp;#39;PullLivePushLive&amp;amp;#39;: SourceUrls live type, &amp;amp;#39;PullVodPushLive&amp;amp;#39;: SourceUrls vod type.
+        /// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         /// </summary>
         [Input("sourceType")]
         public Input<string>? SourceType { get; set; }
@@ -583,7 +583,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public Input<int>? VodLoopTimes { get; set; }
 
         /// <summary>
-        /// vod refresh method. &amp;amp;#39;ImmediateNewSource&amp;amp;#39;: switch to new source at once, &amp;amp;#39;ContinueBreakPoint&amp;amp;#39;: switch to new source while old source finish.
+        /// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         /// </summary>
         [Input("vodRefreshType")]
         public Input<string>? VodRefreshType { get; set; }

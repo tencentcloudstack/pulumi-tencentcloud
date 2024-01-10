@@ -5,18 +5,46 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getCustomUrl";
+export * from "./getEventUrl";
+export * from "./getFetchUrl";
+export * from "./getFetchUrlInfo";
+export * from "./getGroupLog";
+export * from "./getLogExport";
+export * from "./getLogExportList";
+export * from "./getLogList";
+export * from "./getLogStatsLogList";
+export * from "./getLogUrlStatistics";
 export * from "./getOfflineLogConfig";
+export * from "./getPerformancePage";
 export * from "./getProject";
+export * from "./getPvUrlInfo";
+export * from "./getPvUrlStatistics";
+export * from "./getReportCount";
+export * from "./getScores";
+export * from "./getSetUrlStatistics";
+export * from "./getSign";
+export * from "./getStaticProject";
+export * from "./getStaticResource";
+export * from "./getStaticUrl";
+export * from "./getTawArea";
 export * from "./getTawInstance";
+export * from "./getWebVitalsPage";
 export * from "./getWhitelist";
+export * from "./instanceStatusConfig";
 export * from "./offlineLogConfigAttachment";
 export * from "./project";
+export * from "./projectStatusConfig";
+export * from "./releaseFile";
 export * from "./tawInstance";
 export * from "./whitelist";
 
 // Import resources to register:
+import { InstanceStatusConfig } from "./instanceStatusConfig";
 import { OfflineLogConfigAttachment } from "./offlineLogConfigAttachment";
 import { Project } from "./project";
+import { ProjectStatusConfig } from "./projectStatusConfig";
+import { ReleaseFile } from "./releaseFile";
 import { TawInstance } from "./tawInstance";
 import { Whitelist } from "./whitelist";
 
@@ -24,10 +52,16 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig":
+                return new InstanceStatusConfig(name, <any>undefined, { urn })
             case "tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment":
                 return new OfflineLogConfigAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Rum/project:Project":
                 return new Project(name, <any>undefined, { urn })
+            case "tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig":
+                return new ProjectStatusConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Rum/releaseFile:ReleaseFile":
+                return new ReleaseFile(name, <any>undefined, { urn })
             case "tencentcloud:Rum/tawInstance:TawInstance":
                 return new TawInstance(name, <any>undefined, { urn })
             case "tencentcloud:Rum/whitelist:Whitelist":
@@ -37,7 +71,10 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Rum/instanceStatusConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Rum/offlineLogConfigAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Rum/project", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Rum/projectStatusConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Rum/releaseFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Rum/tawInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Rum/whitelist", _module)

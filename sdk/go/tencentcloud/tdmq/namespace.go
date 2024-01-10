@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
-// 			EnvironName: pulumi.String("tf_example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			ClusterId:   exampleInstance.ID(),
-// 			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
-// 				TimeInMinutes: pulumi.Int(60),
-// 				SizeInMb:      pulumi.Int(10),
-// 			},
-// 			Remark: pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+//				EnvironName: pulumi.String("tf_example"),
+//				MsgTtl:      pulumi.Int(300),
+//				ClusterId:   exampleInstance.ID(),
+//				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
+//					TimeInMinutes: pulumi.Int(60),
+//					SizeInMb:      pulumi.Int(10),
+//				},
+//				Remark: pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // Tdmq namespace can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+//
+//	$ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+//
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState
@@ -197,7 +202,7 @@ func (i *Namespace) ToNamespaceOutputWithContext(ctx context.Context) NamespaceO
 // NamespaceArrayInput is an input type that accepts NamespaceArray and NamespaceArrayOutput values.
 // You can construct a concrete instance of `NamespaceArrayInput` via:
 //
-//          NamespaceArray{ NamespaceArgs{...} }
+//	NamespaceArray{ NamespaceArgs{...} }
 type NamespaceArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +227,7 @@ func (i NamespaceArray) ToNamespaceArrayOutputWithContext(ctx context.Context) N
 // NamespaceMapInput is an input type that accepts NamespaceMap and NamespaceMapOutput values.
 // You can construct a concrete instance of `NamespaceMapInput` via:
 //
-//          NamespaceMap{ "key": NamespaceArgs{...} }
+//	NamespaceMap{ "key": NamespaceArgs{...} }
 type NamespaceMapInput interface {
 	pulumi.Input
 

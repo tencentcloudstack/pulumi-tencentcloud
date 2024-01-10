@@ -5,7 +5,23 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .custom_line import *
+from .domain_alias import *
 from .domain_instance import *
+from .domain_lock import *
+from .download_snapshot_operation import *
+from .get_domain_analytics import *
+from .get_domain_list import *
+from .get_domain_log_list import *
+from .get_record_analytics import *
+from .get_record_line_list import *
+from .get_record_list import *
+from .get_record_type import *
 from .get_records import *
+from .modify_domain_owner_operation import *
+from .modify_record_group_operation import *
 from .record import *
+from .record_group import *
+from .snapshot_config import *
+from ._inputs import *
 from . import outputs

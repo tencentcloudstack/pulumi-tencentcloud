@@ -20,6 +20,7 @@ class PayCertificateArgs:
                  product_id: pulumi.Input[int],
                  alias: Optional[pulumi.Input[str]] = None,
                  confirm_letter: Optional[pulumi.Input[str]] = None,
+                 dv_auths: Optional[pulumi.Input[Sequence[pulumi.Input['PayCertificateDvAuthArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  time_span: Optional[pulumi.Input[int]] = None):
         """
@@ -29,6 +30,7 @@ class PayCertificateArgs:
         :param pulumi.Input[int] product_id: Certificate commodity ID. Valid value ranges: (3~42). `3` means SecureSite enhanced Enterprise Edition (EV Pro), `4` means SecureSite enhanced (EV), `5` means SecureSite Enterprise Professional Edition (OV Pro), `6` means SecureSite Enterprise (OV), `7` means SecureSite Enterprise Type (OV) wildcard, `8` means Geotrust enhanced (EV), `9` means Geotrust enterprise (OV), `10` means Geotrust enterprise (OV) wildcard, `11` means TrustAsia domain type multi-domain SSL certificate, `12` means TrustAsia domain type ( DV) wildcard, `13` means TrustAsia enterprise wildcard (OV) SSL certificate (D3), `14` means TrustAsia enterprise (OV) SSL certificate (D3), `15` means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), `16` means TrustAsia Enhanced (EV) SSL Certificate (D3), `17` means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), `18` means GlobalSign Enterprise (OV) SSL Certificate, `19` means GlobalSign Enterprise Wildcard (OV) SSL Certificate, `20` means GlobalSign Enhanced (EV) SSL Certificate, `21` means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), `22` means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, `23` means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, `24` means GlobalSign enhanced multi-domain (EV) SSL certificate, `25` means Wotrus domain type certificate, `26` means Wotrus domain type multi-domain certificate, `27` means Wotrus domain type wildcard certificate, `28` means Wotrus enterprise type certificate, `29` means Wotrus enterprise multi-domain certificate, `30` means Wotrus enterprise wildcard certificate, `31` means Wotrus enhanced certificate, `32` means Wotrus enhanced multi-domain certificate, `33` means WoTrus National Secret Domain name Certificate, `34` means WoTrus National Secret Domain name Certificate (multiple domain names), `35` WoTrus National Secret Domain name Certificate (wildcard), `37` means WoTrus State Secret Enterprise Certificate, `38` means WoTrus State Secret Enterprise Certificate (multiple domain names), `39` means WoTrus State Secret Enterprise Certificate (wildcard), `40` means WoTrus National secret enhanced certificate, `41` means WoTrus National Secret enhanced Certificate (multiple domain names), `42` means TrustAsia- Domain name Certificate (wildcard multiple domain names), `43` means DNSPod Enterprise (OV) SSL Certificate, `44` means DNSPod- Enterprise (OV) wildcard SSL certificate, `45` means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, `46` means DNSPod enhanced (EV) SSL certificate, `47` means DNSPod enhanced (EV) multi-domain name SSL certificate, `48` means DNSPod Domain name Type (DV) SSL Certificate, `49` means DNSPod Domain name Type (DV) wildcard SSL certificate, `50` means DNSPod domain name type (DV) multi-domain name SSL certificate, `51` means DNSPod (State Secret) Enterprise (OV) SSL certificate, `52` DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, `53` means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, `54` means DNSPod (National Secret) Domain Name (DV) SSL certificate, `55` means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, `56` means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.
         :param pulumi.Input[str] alias: Remark name.
         :param pulumi.Input[str] confirm_letter: The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.
+        :param pulumi.Input[Sequence[pulumi.Input['PayCertificateDvAuthArgs']]] dv_auths: DV certification information.
         :param pulumi.Input[int] project_id: The ID of project.
         :param pulumi.Input[int] time_span: Certificate period, currently only supports 1 year certificate purchase.
         """
@@ -39,6 +41,8 @@ class PayCertificateArgs:
             pulumi.set(__self__, "alias", alias)
         if confirm_letter is not None:
             pulumi.set(__self__, "confirm_letter", confirm_letter)
+        if dv_auths is not None:
+            pulumi.set(__self__, "dv_auths", dv_auths)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if time_span is not None:
@@ -103,6 +107,18 @@ class PayCertificateArgs:
     @confirm_letter.setter
     def confirm_letter(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "confirm_letter", value)
+
+    @property
+    @pulumi.getter(name="dvAuths")
+    def dv_auths(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['PayCertificateDvAuthArgs']]]]:
+        """
+        DV certification information.
+        """
+        return pulumi.get(self, "dv_auths")
+
+    @dv_auths.setter
+    def dv_auths(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['PayCertificateDvAuthArgs']]]]):
+        pulumi.set(self, "dv_auths", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -321,6 +337,7 @@ class PayCertificate(pulumi.CustomResource):
                  alias: Optional[pulumi.Input[str]] = None,
                  confirm_letter: Optional[pulumi.Input[str]] = None,
                  domain_num: Optional[pulumi.Input[int]] = None,
+                 dv_auths: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PayCertificateDvAuthArgs']]]]] = None,
                  information: Optional[pulumi.Input[pulumi.InputType['PayCertificateInformationArgs']]] = None,
                  product_id: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -333,7 +350,10 @@ class PayCertificate(pulumi.CustomResource):
         currently, it does not support re-issuing certificates, revoking certificates, and deleting certificates; the certificate remarks
         and belonging items can be updated. The Destroy operation will only cancel the certificate order, and will not delete the
         certificate and refund the fee. If you need a refund, you need to check the current certificate status in the console
-        as `Review Cancel`, and then you can click `Request a refund` to refund the fee.
+        as `Review Cancel`, and then you can click `Request a refund` to refund the fee. To update the information of a certificate,
+        we will automatically roll back your certificate if this certificate is already in the validation stage. This process may take
+        some time because the CA callback is time-consuming. Please be patient and follow the prompt message. Or, feel free to contact
+        Tencent Cloud Support.
 
         ## Example Usage
 
@@ -385,6 +405,7 @@ class PayCertificate(pulumi.CustomResource):
         :param pulumi.Input[str] alias: Remark name.
         :param pulumi.Input[str] confirm_letter: The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when product_id is set to 8, 9 or 10.
         :param pulumi.Input[int] domain_num: Number of domain names included in the certificate.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PayCertificateDvAuthArgs']]]] dv_auths: DV certification information.
         :param pulumi.Input[pulumi.InputType['PayCertificateInformationArgs']] information: Certificate information.
         :param pulumi.Input[int] product_id: Certificate commodity ID. Valid value ranges: (3~42). `3` means SecureSite enhanced Enterprise Edition (EV Pro), `4` means SecureSite enhanced (EV), `5` means SecureSite Enterprise Professional Edition (OV Pro), `6` means SecureSite Enterprise (OV), `7` means SecureSite Enterprise Type (OV) wildcard, `8` means Geotrust enhanced (EV), `9` means Geotrust enterprise (OV), `10` means Geotrust enterprise (OV) wildcard, `11` means TrustAsia domain type multi-domain SSL certificate, `12` means TrustAsia domain type ( DV) wildcard, `13` means TrustAsia enterprise wildcard (OV) SSL certificate (D3), `14` means TrustAsia enterprise (OV) SSL certificate (D3), `15` means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), `16` means TrustAsia Enhanced (EV) SSL Certificate (D3), `17` means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), `18` means GlobalSign Enterprise (OV) SSL Certificate, `19` means GlobalSign Enterprise Wildcard (OV) SSL Certificate, `20` means GlobalSign Enhanced (EV) SSL Certificate, `21` means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), `22` means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, `23` means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, `24` means GlobalSign enhanced multi-domain (EV) SSL certificate, `25` means Wotrus domain type certificate, `26` means Wotrus domain type multi-domain certificate, `27` means Wotrus domain type wildcard certificate, `28` means Wotrus enterprise type certificate, `29` means Wotrus enterprise multi-domain certificate, `30` means Wotrus enterprise wildcard certificate, `31` means Wotrus enhanced certificate, `32` means Wotrus enhanced multi-domain certificate, `33` means WoTrus National Secret Domain name Certificate, `34` means WoTrus National Secret Domain name Certificate (multiple domain names), `35` WoTrus National Secret Domain name Certificate (wildcard), `37` means WoTrus State Secret Enterprise Certificate, `38` means WoTrus State Secret Enterprise Certificate (multiple domain names), `39` means WoTrus State Secret Enterprise Certificate (wildcard), `40` means WoTrus National secret enhanced certificate, `41` means WoTrus National Secret enhanced Certificate (multiple domain names), `42` means TrustAsia- Domain name Certificate (wildcard multiple domain names), `43` means DNSPod Enterprise (OV) SSL Certificate, `44` means DNSPod- Enterprise (OV) wildcard SSL certificate, `45` means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, `46` means DNSPod enhanced (EV) SSL certificate, `47` means DNSPod enhanced (EV) multi-domain name SSL certificate, `48` means DNSPod Domain name Type (DV) SSL Certificate, `49` means DNSPod Domain name Type (DV) wildcard SSL certificate, `50` means DNSPod domain name type (DV) multi-domain name SSL certificate, `51` means DNSPod (State Secret) Enterprise (OV) SSL certificate, `52` DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, `53` means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, `54` means DNSPod (National Secret) Domain Name (DV) SSL certificate, `55` means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, `56` means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.
         :param pulumi.Input[int] project_id: The ID of project.
@@ -403,7 +424,10 @@ class PayCertificate(pulumi.CustomResource):
         currently, it does not support re-issuing certificates, revoking certificates, and deleting certificates; the certificate remarks
         and belonging items can be updated. The Destroy operation will only cancel the certificate order, and will not delete the
         certificate and refund the fee. If you need a refund, you need to check the current certificate status in the console
-        as `Review Cancel`, and then you can click `Request a refund` to refund the fee.
+        as `Review Cancel`, and then you can click `Request a refund` to refund the fee. To update the information of a certificate,
+        we will automatically roll back your certificate if this certificate is already in the validation stage. This process may take
+        some time because the CA callback is time-consuming. Please be patient and follow the prompt message. Or, feel free to contact
+        Tencent Cloud Support.
 
         ## Example Usage
 
@@ -468,6 +492,7 @@ class PayCertificate(pulumi.CustomResource):
                  alias: Optional[pulumi.Input[str]] = None,
                  confirm_letter: Optional[pulumi.Input[str]] = None,
                  domain_num: Optional[pulumi.Input[int]] = None,
+                 dv_auths: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PayCertificateDvAuthArgs']]]]] = None,
                  information: Optional[pulumi.Input[pulumi.InputType['PayCertificateInformationArgs']]] = None,
                  product_id: Optional[pulumi.Input[int]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -491,6 +516,7 @@ class PayCertificate(pulumi.CustomResource):
             if domain_num is None and not opts.urn:
                 raise TypeError("Missing required property 'domain_num'")
             __props__.__dict__["domain_num"] = domain_num
+            __props__.__dict__["dv_auths"] = dv_auths
             if information is None and not opts.urn:
                 raise TypeError("Missing required property 'information'")
             __props__.__dict__["information"] = information
@@ -500,7 +526,6 @@ class PayCertificate(pulumi.CustomResource):
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["time_span"] = time_span
             __props__.__dict__["certificate_id"] = None
-            __props__.__dict__["dv_auths"] = None
             __props__.__dict__["order_id"] = None
             __props__.__dict__["status"] = None
         super(PayCertificate, __self__).__init__(

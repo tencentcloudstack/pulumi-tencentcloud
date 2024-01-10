@@ -83,7 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Output<bool?> Disabled { get; private set; } = null!;
 
         /// <summary>
-        /// ID of next-hop gateway. Note: when `next_type` is EIP, GatewayId should be `0`.
+        /// ID of next-hop gateway. Note: when `next_type` is EIP, `next_hub` should be `0`.
         /// </summary>
         [Output("nextHub")]
         public Output<string> NextHub { get; private set; } = null!;
@@ -166,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
-        /// ID of next-hop gateway. Note: when `next_type` is EIP, GatewayId should be `0`.
+        /// ID of next-hop gateway. Note: when `next_type` is EIP, `next_hub` should be `0`.
         /// </summary>
         [Input("nextHub", required: true)]
         public Input<string> NextHub { get; set; } = null!;
@@ -209,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
-        /// ID of next-hop gateway. Note: when `next_type` is EIP, GatewayId should be `0`.
+        /// ID of next-hop gateway. Note: when `next_type` is EIP, `next_hub` should be `0`.
         /// </summary>
         [Input("nextHub")]
         public Input<string>? NextHub { get; set; }

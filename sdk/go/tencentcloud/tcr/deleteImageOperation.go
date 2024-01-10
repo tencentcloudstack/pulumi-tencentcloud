@@ -20,49 +20,52 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewDeleteImageOperation(ctx, "exampleDeleteImageOperation", &Tcr.DeleteImageOperationArgs{
-// 			RegistryId:     exampleInstance.ID(),
-// 			RepositoryName: pulumi.String("repo"),
-// 			ImageVersion:   pulumi.String("v1"),
-// 			NamespaceName:  exampleNamespace.Name,
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewDeleteImageOperation(ctx, "exampleDeleteImageOperation", &Tcr.DeleteImageOperationArgs{
+//				RegistryId:     exampleInstance.ID(),
+//				RepositoryName: pulumi.String("repo"),
+//				ImageVersion:   pulumi.String("v1"),
+//				NamespaceName:  exampleNamespace.Name,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DeleteImageOperation struct {
 	pulumi.CustomResourceState
@@ -193,7 +196,7 @@ func (i *DeleteImageOperation) ToDeleteImageOperationOutputWithContext(ctx conte
 // DeleteImageOperationArrayInput is an input type that accepts DeleteImageOperationArray and DeleteImageOperationArrayOutput values.
 // You can construct a concrete instance of `DeleteImageOperationArrayInput` via:
 //
-//          DeleteImageOperationArray{ DeleteImageOperationArgs{...} }
+//	DeleteImageOperationArray{ DeleteImageOperationArgs{...} }
 type DeleteImageOperationArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +221,7 @@ func (i DeleteImageOperationArray) ToDeleteImageOperationArrayOutputWithContext(
 // DeleteImageOperationMapInput is an input type that accepts DeleteImageOperationMap and DeleteImageOperationMapOutput values.
 // You can construct a concrete instance of `DeleteImageOperationMapInput` via:
 //
-//          DeleteImageOperationMap{ "key": DeleteImageOperationArgs{...} }
+//	DeleteImageOperationMap{ "key": DeleteImageOperationArgs{...} }
 type DeleteImageOperationMapInput interface {
 	pulumi.Input
 

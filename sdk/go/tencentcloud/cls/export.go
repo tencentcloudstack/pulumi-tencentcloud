@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewExport(ctx, "export", &Cls.ExportArgs{
-// 			Format:   pulumi.String("json"),
-// 			From:     pulumi.Int(1607499107000),
-// 			LogCount: pulumi.Int(2),
-// 			Order:    pulumi.String("desc"),
-// 			Query:    pulumi.String("select count(*) as count"),
-// 			To:       pulumi.Int(1607499108000),
-// 			TopicId:  pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewExport(ctx, "export", &Cls.ExportArgs{
+//				Format:   pulumi.String("json"),
+//				From:     pulumi.Int(1607499107000),
+//				LogCount: pulumi.Int(2),
+//				Order:    pulumi.String("desc"),
+//				Query:    pulumi.String("select count(*) as count"),
+//				To:       pulumi.Int(1607499108000),
+//				TopicId:  pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // cls export can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
+//
+//	$ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
+//
 // ```
 type Export struct {
 	pulumi.CustomResourceState
@@ -211,7 +216,7 @@ func (i *Export) ToExportOutputWithContext(ctx context.Context) ExportOutput {
 // ExportArrayInput is an input type that accepts ExportArray and ExportArrayOutput values.
 // You can construct a concrete instance of `ExportArrayInput` via:
 //
-//          ExportArray{ ExportArgs{...} }
+//	ExportArray{ ExportArgs{...} }
 type ExportArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +241,7 @@ func (i ExportArray) ToExportArrayOutputWithContext(ctx context.Context) ExportA
 // ExportMapInput is an input type that accepts ExportMap and ExportMapOutput values.
 // You can construct a concrete instance of `ExportMapInput` via:
 //
-//          ExportMap{ "key": ExportArgs{...} }
+//	ExportMap{ "key": ExportArgs{...} }
 type ExportMapInput interface {
 	pulumi.Input
 

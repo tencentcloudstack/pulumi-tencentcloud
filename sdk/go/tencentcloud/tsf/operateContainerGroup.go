@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewOperateContainerGroup(ctx, "operateContainerGroup", &Tsf.OperateContainerGroupArgs{
-// 			GroupId: pulumi.String("group-ynd95rea"),
-// 			Operate: pulumi.String("stop"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewOperateContainerGroup(ctx, "operateContainerGroup", &Tsf.OperateContainerGroupArgs{
+//				GroupId: pulumi.String("group-ynd95rea"),
+//				Operate: pulumi.String("stop"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OperateContainerGroup struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *OperateContainerGroup) ToOperateContainerGroupOutputWithContext(ctx con
 // OperateContainerGroupArrayInput is an input type that accepts OperateContainerGroupArray and OperateContainerGroupArrayOutput values.
 // You can construct a concrete instance of `OperateContainerGroupArrayInput` via:
 //
-//          OperateContainerGroupArray{ OperateContainerGroupArgs{...} }
+//	OperateContainerGroupArray{ OperateContainerGroupArgs{...} }
 type OperateContainerGroupArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i OperateContainerGroupArray) ToOperateContainerGroupArrayOutputWithContex
 // OperateContainerGroupMapInput is an input type that accepts OperateContainerGroupMap and OperateContainerGroupMapOutput values.
 // You can construct a concrete instance of `OperateContainerGroupMapInput` via:
 //
-//          OperateContainerGroupMap{ "key": OperateContainerGroupArgs{...} }
+//	OperateContainerGroupMap{ "key": OperateContainerGroupArgs{...} }
 type OperateContainerGroupMapInput interface {
 	pulumi.Input
 

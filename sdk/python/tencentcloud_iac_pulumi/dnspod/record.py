@@ -18,6 +18,7 @@ class RecordArgs:
                  record_type: pulumi.Input[str],
                  value: pulumi.Input[str],
                  mx: Optional[pulumi.Input[int]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  sub_domain: Optional[pulumi.Input[str]] = None,
                  ttl: Optional[pulumi.Input[int]] = None,
@@ -29,6 +30,7 @@ class RecordArgs:
         :param pulumi.Input[str] record_type: The record type.
         :param pulumi.Input[str] value: The record value.
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
+        :param pulumi.Input[str] remark: The Remark of record.
         :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
@@ -40,6 +42,8 @@ class RecordArgs:
         pulumi.set(__self__, "value", value)
         if mx is not None:
             pulumi.set(__self__, "mx", mx)
+        if remark is not None:
+            pulumi.set(__self__, "remark", remark)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if sub_domain is not None:
@@ -111,6 +115,18 @@ class RecordArgs:
 
     @property
     @pulumi.getter
+    def remark(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Remark of record.
+        """
+        return pulumi.get(self, "remark")
+
+    @remark.setter
+    def remark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "remark", value)
+
+    @property
+    @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
         Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
@@ -166,6 +182,7 @@ class _RecordState:
                  mx: Optional[pulumi.Input[int]] = None,
                  record_line: Optional[pulumi.Input[str]] = None,
                  record_type: Optional[pulumi.Input[str]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  sub_domain: Optional[pulumi.Input[str]] = None,
                  ttl: Optional[pulumi.Input[int]] = None,
@@ -174,10 +191,11 @@ class _RecordState:
         """
         Input properties used for looking up and filtering Record resources.
         :param pulumi.Input[str] domain: The Domain.
-        :param pulumi.Input[str] monitor_status: The D monitoring status of the record.
+        :param pulumi.Input[str] monitor_status: The monitoring status of the record.
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
+        :param pulumi.Input[str] remark: The Remark of record.
         :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
@@ -194,6 +212,8 @@ class _RecordState:
             pulumi.set(__self__, "record_line", record_line)
         if record_type is not None:
             pulumi.set(__self__, "record_type", record_type)
+        if remark is not None:
+            pulumi.set(__self__, "remark", remark)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if sub_domain is not None:
@@ -221,7 +241,7 @@ class _RecordState:
     @pulumi.getter(name="monitorStatus")
     def monitor_status(self) -> Optional[pulumi.Input[str]]:
         """
-        The D monitoring status of the record.
+        The monitoring status of the record.
         """
         return pulumi.get(self, "monitor_status")
 
@@ -264,6 +284,18 @@ class _RecordState:
     @record_type.setter
     def record_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "record_type", value)
+
+    @property
+    @pulumi.getter
+    def remark(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Remark of record.
+        """
+        return pulumi.get(self, "remark")
+
+    @remark.setter
+    def remark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "remark", value)
 
     @property
     @pulumi.getter
@@ -335,6 +367,7 @@ class Record(pulumi.CustomResource):
                  mx: Optional[pulumi.Input[int]] = None,
                  record_line: Optional[pulumi.Input[str]] = None,
                  record_type: Optional[pulumi.Input[str]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  sub_domain: Optional[pulumi.Input[str]] = None,
                  ttl: Optional[pulumi.Input[int]] = None,
@@ -343,6 +376,8 @@ class Record(pulumi.CustomResource):
                  __props__=None):
         """
         Provide a resource to create a DnsPod record.
+
+        > **NOTE:** Versions before v1.81.43 (including v1.81.43) do not support modifying remark or modifying remark has bug.
 
         ## Example Usage
 
@@ -372,6 +407,7 @@ class Record(pulumi.CustomResource):
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
+        :param pulumi.Input[str] remark: The Remark of record.
         :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
@@ -386,6 +422,8 @@ class Record(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a DnsPod record.
+
+        > **NOTE:** Versions before v1.81.43 (including v1.81.43) do not support modifying remark or modifying remark has bug.
 
         ## Example Usage
 
@@ -428,6 +466,7 @@ class Record(pulumi.CustomResource):
                  mx: Optional[pulumi.Input[int]] = None,
                  record_line: Optional[pulumi.Input[str]] = None,
                  record_type: Optional[pulumi.Input[str]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  sub_domain: Optional[pulumi.Input[str]] = None,
                  ttl: Optional[pulumi.Input[int]] = None,
@@ -457,6 +496,7 @@ class Record(pulumi.CustomResource):
             if record_type is None and not opts.urn:
                 raise TypeError("Missing required property 'record_type'")
             __props__.__dict__["record_type"] = record_type
+            __props__.__dict__["remark"] = remark
             __props__.__dict__["status"] = status
             __props__.__dict__["sub_domain"] = sub_domain
             __props__.__dict__["ttl"] = ttl
@@ -480,6 +520,7 @@ class Record(pulumi.CustomResource):
             mx: Optional[pulumi.Input[int]] = None,
             record_line: Optional[pulumi.Input[str]] = None,
             record_type: Optional[pulumi.Input[str]] = None,
+            remark: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             sub_domain: Optional[pulumi.Input[str]] = None,
             ttl: Optional[pulumi.Input[int]] = None,
@@ -493,10 +534,11 @@ class Record(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: The Domain.
-        :param pulumi.Input[str] monitor_status: The D monitoring status of the record.
+        :param pulumi.Input[str] monitor_status: The monitoring status of the record.
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
+        :param pulumi.Input[str] remark: The Remark of record.
         :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
@@ -512,6 +554,7 @@ class Record(pulumi.CustomResource):
         __props__.__dict__["mx"] = mx
         __props__.__dict__["record_line"] = record_line
         __props__.__dict__["record_type"] = record_type
+        __props__.__dict__["remark"] = remark
         __props__.__dict__["status"] = status
         __props__.__dict__["sub_domain"] = sub_domain
         __props__.__dict__["ttl"] = ttl
@@ -531,7 +574,7 @@ class Record(pulumi.CustomResource):
     @pulumi.getter(name="monitorStatus")
     def monitor_status(self) -> pulumi.Output[str]:
         """
-        The D monitoring status of the record.
+        The monitoring status of the record.
         """
         return pulumi.get(self, "monitor_status")
 
@@ -558,6 +601,14 @@ class Record(pulumi.CustomResource):
         The record type.
         """
         return pulumi.get(self, "record_type")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> pulumi.Output[Optional[str]]:
+        """
+        The Remark of record.
+        """
+        return pulumi.get(self, "remark")
 
     @property
     @pulumi.getter

@@ -114,7 +114,7 @@ func (i *DhcpAssociateAddress) ToDhcpAssociateAddressOutputWithContext(ctx conte
 // DhcpAssociateAddressArrayInput is an input type that accepts DhcpAssociateAddressArray and DhcpAssociateAddressArrayOutput values.
 // You can construct a concrete instance of `DhcpAssociateAddressArrayInput` via:
 //
-//          DhcpAssociateAddressArray{ DhcpAssociateAddressArgs{...} }
+//	DhcpAssociateAddressArray{ DhcpAssociateAddressArgs{...} }
 type DhcpAssociateAddressArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ func (i DhcpAssociateAddressArray) ToDhcpAssociateAddressArrayOutputWithContext(
 // DhcpAssociateAddressMapInput is an input type that accepts DhcpAssociateAddressMap and DhcpAssociateAddressMapOutput values.
 // You can construct a concrete instance of `DhcpAssociateAddressMapInput` via:
 //
-//          DhcpAssociateAddressMap{ "key": DhcpAssociateAddressArgs{...} }
+//	DhcpAssociateAddressMap{ "key": DhcpAssociateAddressArgs{...} }
 type DhcpAssociateAddressMapInput interface {
 	pulumi.Input
 

@@ -14,27 +14,70 @@ import (
 // Provides a resource to create a APIGateway ApiApp
 //
 // ## Example Usage
+// ### Create a basic apigateway apiApp
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiApp(ctx, "myApiApp", &ApiGateway.ApiAppArgs{
-// 			ApiAppDesc: pulumi.String("app desc."),
-// 			ApiAppName: pulumi.String("app_test1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
+//				ApiAppDesc: pulumi.String("app desc."),
+//				ApiAppName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Bind Tag
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
+//				ApiAppDesc: pulumi.String("app desc."),
+//				ApiAppName: pulumi.String("tf_example"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// apigateway api_app can be imported using the id, e.g.
+//
+// ```sh
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
+//
 // ```
 type ApiApp struct {
 	pulumi.CustomResourceState
@@ -53,6 +96,8 @@ type ApiApp struct {
 	CreatedTime pulumi.StringOutput `pulumi:"createdTime"`
 	// Api app modified time.
 	ModifiedTime pulumi.StringOutput `pulumi:"modifiedTime"`
+	// Tag description list.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewApiApp registers a new resource with the given unique name, arguments, and options.
@@ -102,6 +147,8 @@ type apiAppState struct {
 	CreatedTime *string `pulumi:"createdTime"`
 	// Api app modified time.
 	ModifiedTime *string `pulumi:"modifiedTime"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type ApiAppState struct {
@@ -119,6 +166,8 @@ type ApiAppState struct {
 	CreatedTime pulumi.StringPtrInput
 	// Api app modified time.
 	ModifiedTime pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 }
 
 func (ApiAppState) ElementType() reflect.Type {
@@ -130,6 +179,8 @@ type apiAppArgs struct {
 	ApiAppDesc *string `pulumi:"apiAppDesc"`
 	// Api app name.
 	ApiAppName string `pulumi:"apiAppName"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a ApiApp resource.
@@ -138,6 +189,8 @@ type ApiAppArgs struct {
 	ApiAppDesc pulumi.StringPtrInput
 	// Api app name.
 	ApiAppName pulumi.StringInput
+	// Tag description list.
+	Tags pulumi.MapInput
 }
 
 func (ApiAppArgs) ElementType() reflect.Type {
@@ -166,7 +219,7 @@ func (i *ApiApp) ToApiAppOutputWithContext(ctx context.Context) ApiAppOutput {
 // ApiAppArrayInput is an input type that accepts ApiAppArray and ApiAppArrayOutput values.
 // You can construct a concrete instance of `ApiAppArrayInput` via:
 //
-//          ApiAppArray{ ApiAppArgs{...} }
+//	ApiAppArray{ ApiAppArgs{...} }
 type ApiAppArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +244,7 @@ func (i ApiAppArray) ToApiAppArrayOutputWithContext(ctx context.Context) ApiAppA
 // ApiAppMapInput is an input type that accepts ApiAppMap and ApiAppMapOutput values.
 // You can construct a concrete instance of `ApiAppMapInput` via:
 //
-//          ApiAppMap{ "key": ApiAppArgs{...} }
+//	ApiAppMap{ "key": ApiAppArgs{...} }
 type ApiAppMapInput interface {
 	pulumi.Input
 
@@ -260,6 +313,11 @@ func (o ApiAppOutput) CreatedTime() pulumi.StringOutput {
 // Api app modified time.
 func (o ApiAppOutput) ModifiedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApiApp) pulumi.StringOutput { return v.ModifiedTime }).(pulumi.StringOutput)
+}
+
+// Tag description list.
+func (o ApiAppOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *ApiApp) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type ApiAppArrayOutput struct{ *pulumi.OutputState }

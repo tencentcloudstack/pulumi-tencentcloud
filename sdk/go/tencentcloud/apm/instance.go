@@ -12,32 +12,37 @@ import (
 
 // Provides a resource to create a apm instance
 //
+// > **NOTE:** To use the field `payMode`, you need to contact official customer service to join the whitelist.
+//
 // ## Example Usage
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Apm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Apm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Apm.NewInstance(ctx, "instance", &Apm.InstanceArgs{
-// 			Description:       pulumi.String("for terraform test"),
-// 			SpanDailyCounters: pulumi.Int(20),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TraceDuration: pulumi.Int(15),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Apm.NewInstance(ctx, "instance", &Apm.InstanceArgs{
+//				Description:       pulumi.String("for terraform test"),
+//				SpanDailyCounters: pulumi.Int(20),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TraceDuration: pulumi.Int(15),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +50,9 @@ import (
 // apm instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+//
+//	$ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -54,6 +61,8 @@ type Instance struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Name Of Instance.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrOutput `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrOutput `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -96,6 +105,8 @@ type instanceState struct {
 	Description *string `pulumi:"description"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode *int `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -109,6 +120,8 @@ type InstanceState struct {
 	Description pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
@@ -126,6 +139,8 @@ type instanceArgs struct {
 	Description *string `pulumi:"description"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode *int `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -140,6 +155,8 @@ type InstanceArgs struct {
 	Description pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
@@ -174,7 +191,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +216,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -243,6 +260,11 @@ func (o InstanceOutput) Description() pulumi.StringPtrOutput {
 // Name Of Instance.
 func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+func (o InstanceOutput) PayMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PayMode }).(pulumi.IntPtrOutput)
 }
 
 // Quota Of Instance Reporting.

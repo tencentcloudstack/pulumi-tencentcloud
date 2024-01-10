@@ -242,11 +242,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly recycle!: pulumi.Output<number | undefined>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
     public readonly redisReplicasNum!: pulumi.Output<number | undefined>;
     /**
-     * The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
     public readonly redisShardNum!: pulumi.Output<number>;
     /**
@@ -287,6 +287,10 @@ export class Instance extends pulumi.CustomResource {
      * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     public readonly vpcId!: pulumi.Output<string>;
+    /**
+     * Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+     */
+    public readonly waitSwitch!: pulumi.Output<number | undefined>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -329,6 +333,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["typeId"] = state ? state.typeId : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["waitSwitch"] = state ? state.waitSwitch : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
             if ((!args || args.availabilityZone === undefined) && !opts.urn) {
@@ -362,6 +367,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["typeId"] = args ? args.typeId : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["waitSwitch"] = args ? args.waitSwitch : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["nodeInfos"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
@@ -444,11 +450,11 @@ export interface InstanceState {
      */
     recycle?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**
-     * The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
     redisShardNum?: pulumi.Input<number>;
     /**
@@ -489,6 +495,10 @@ export interface InstanceState {
      * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }
 
 /**
@@ -556,11 +566,11 @@ export interface InstanceArgs {
      */
     recycle?: pulumi.Input<number>;
     /**
-     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+     * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
     redisReplicasNum?: pulumi.Input<number>;
     /**
-     * The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
     redisShardNum?: pulumi.Input<number>;
     /**
@@ -597,4 +607,8 @@ export interface InstanceArgs {
      * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }

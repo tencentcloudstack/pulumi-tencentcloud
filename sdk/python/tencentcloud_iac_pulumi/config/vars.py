@@ -30,6 +30,14 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('domain')
 
     @property
+    def profile(self) -> Optional[str]:
+        """
+        The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        variable. If not set, the default profile created with `tccli configure` will be used.
+        """
+        return __config__.get('profile')
+
+    @property
     def protocol(self) -> Optional[str]:
         """
         The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
@@ -68,4 +76,12 @@ class _ExportableConfig(types.ModuleType):
         products](https://intl.cloud.tencent.com/document/product/598/10588).
         """
         return __config__.get('securityToken') or _utilities.get_env('TENCENTCLOUD_SECURITY_TOKEN')
+
+    @property
+    def shared_credentials_dir(self) -> Optional[str]:
+        """
+        The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        environment variable. If not set this defaults to ~/.tccli.
+        """
+        return __config__.get('sharedCredentialsDir')
 

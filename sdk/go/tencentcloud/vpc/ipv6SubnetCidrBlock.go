@@ -18,7 +18,9 @@ import (
 // vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
+//
+//	$ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
+//
 // ```
 type Ipv6SubnetCidrBlock struct {
 	pulumi.CustomResourceState
@@ -123,7 +125,7 @@ func (i *Ipv6SubnetCidrBlock) ToIpv6SubnetCidrBlockOutputWithContext(ctx context
 // Ipv6SubnetCidrBlockArrayInput is an input type that accepts Ipv6SubnetCidrBlockArray and Ipv6SubnetCidrBlockArrayOutput values.
 // You can construct a concrete instance of `Ipv6SubnetCidrBlockArrayInput` via:
 //
-//          Ipv6SubnetCidrBlockArray{ Ipv6SubnetCidrBlockArgs{...} }
+//	Ipv6SubnetCidrBlockArray{ Ipv6SubnetCidrBlockArgs{...} }
 type Ipv6SubnetCidrBlockArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +150,7 @@ func (i Ipv6SubnetCidrBlockArray) ToIpv6SubnetCidrBlockArrayOutputWithContext(ct
 // Ipv6SubnetCidrBlockMapInput is an input type that accepts Ipv6SubnetCidrBlockMap and Ipv6SubnetCidrBlockMapOutput values.
 // You can construct a concrete instance of `Ipv6SubnetCidrBlockMapInput` via:
 //
-//          Ipv6SubnetCidrBlockMap{ "key": Ipv6SubnetCidrBlockArgs{...} }
+//	Ipv6SubnetCidrBlockMap{ "key": Ipv6SubnetCidrBlockArgs{...} }
 type Ipv6SubnetCidrBlockMapInput interface {
 	pulumi.Input
 

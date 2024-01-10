@@ -13,31 +13,36 @@ import (
 
 // Provide a resource to create a DnsPod record.
 //
+// > **NOTE:** Versions before v1.81.43 (including v1.81.43) do not support modifying remark or modifying remark has bug.
+//
 // ## Example Usage
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewRecord(ctx, "demo", &Dnspod.RecordArgs{
-// 			Domain:     pulumi.String("mikatong.com"),
-// 			RecordLine: pulumi.String("默认"),
-// 			RecordType: pulumi.String("A"),
-// 			SubDomain:  pulumi.String("demo"),
-// 			Value:      pulumi.String("1.2.3.9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewRecord(ctx, "demo", &Dnspod.RecordArgs{
+//				Domain:     pulumi.String("mikatong.com"),
+//				RecordLine: pulumi.String("默认"),
+//				RecordType: pulumi.String("A"),
+//				SubDomain:  pulumi.String("demo"),
+//				Value:      pulumi.String("1.2.3.9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,14 +50,16 @@ import (
 // DnsPod Domain record can be imported using the Domain#RecordId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+//
+//	$ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+//
 // ```
 type Record struct {
 	pulumi.CustomResourceState
 
 	// The Domain.
 	Domain pulumi.StringOutput `pulumi:"domain"`
-	// The D monitoring status of the record.
+	// The monitoring status of the record.
 	MonitorStatus pulumi.StringOutput `pulumi:"monitorStatus"`
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx pulumi.IntPtrOutput `pulumi:"mx"`
@@ -60,6 +67,8 @@ type Record struct {
 	RecordLine pulumi.StringOutput `pulumi:"recordLine"`
 	// The record type.
 	RecordType pulumi.StringOutput `pulumi:"recordType"`
+	// The Remark of record.
+	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
 	// The host records, default value is `@`.
@@ -116,7 +125,7 @@ func GetRecord(ctx *pulumi.Context,
 type recordState struct {
 	// The Domain.
 	Domain *string `pulumi:"domain"`
-	// The D monitoring status of the record.
+	// The monitoring status of the record.
 	MonitorStatus *string `pulumi:"monitorStatus"`
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx *int `pulumi:"mx"`
@@ -124,6 +133,8 @@ type recordState struct {
 	RecordLine *string `pulumi:"recordLine"`
 	// The record type.
 	RecordType *string `pulumi:"recordType"`
+	// The Remark of record.
+	Remark *string `pulumi:"remark"`
 	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status *string `pulumi:"status"`
 	// The host records, default value is `@`.
@@ -139,7 +150,7 @@ type recordState struct {
 type RecordState struct {
 	// The Domain.
 	Domain pulumi.StringPtrInput
-	// The D monitoring status of the record.
+	// The monitoring status of the record.
 	MonitorStatus pulumi.StringPtrInput
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx pulumi.IntPtrInput
@@ -147,6 +158,8 @@ type RecordState struct {
 	RecordLine pulumi.StringPtrInput
 	// The record type.
 	RecordType pulumi.StringPtrInput
+	// The Remark of record.
+	Remark pulumi.StringPtrInput
 	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrInput
 	// The host records, default value is `@`.
@@ -172,6 +185,8 @@ type recordArgs struct {
 	RecordLine string `pulumi:"recordLine"`
 	// The record type.
 	RecordType string `pulumi:"recordType"`
+	// The Remark of record.
+	Remark *string `pulumi:"remark"`
 	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status *string `pulumi:"status"`
 	// The host records, default value is `@`.
@@ -194,6 +209,8 @@ type RecordArgs struct {
 	RecordLine pulumi.StringInput
 	// The record type.
 	RecordType pulumi.StringInput
+	// The Remark of record.
+	Remark pulumi.StringPtrInput
 	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrInput
 	// The host records, default value is `@`.
@@ -232,7 +249,7 @@ func (i *Record) ToRecordOutputWithContext(ctx context.Context) RecordOutput {
 // RecordArrayInput is an input type that accepts RecordArray and RecordArrayOutput values.
 // You can construct a concrete instance of `RecordArrayInput` via:
 //
-//          RecordArray{ RecordArgs{...} }
+//	RecordArray{ RecordArgs{...} }
 type RecordArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +274,7 @@ func (i RecordArray) ToRecordArrayOutputWithContext(ctx context.Context) RecordA
 // RecordMapInput is an input type that accepts RecordMap and RecordMapOutput values.
 // You can construct a concrete instance of `RecordMapInput` via:
 //
-//          RecordMap{ "key": RecordArgs{...} }
+//	RecordMap{ "key": RecordArgs{...} }
 type RecordMapInput interface {
 	pulumi.Input
 
@@ -298,7 +315,7 @@ func (o RecordOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
-// The D monitoring status of the record.
+// The monitoring status of the record.
 func (o RecordOutput) MonitorStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.MonitorStatus }).(pulumi.StringOutput)
 }
@@ -316,6 +333,11 @@ func (o RecordOutput) RecordLine() pulumi.StringOutput {
 // The record type.
 func (o RecordOutput) RecordType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordType }).(pulumi.StringOutput)
+}
+
+// The Remark of record.
+func (o RecordOutput) Remark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Record) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
 // Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.

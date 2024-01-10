@@ -15,53 +15,75 @@ __all__ = ['ZoneArgs', 'Zone']
 @pulumi.input_type
 class ZoneArgs:
     def __init__(__self__, *,
-                 plan_type: pulumi.Input[str],
+                 area: pulumi.Input[str],
+                 plan_id: pulumi.Input[str],
+                 type: pulumi.Input[str],
                  zone_name: pulumi.Input[str],
-                 cname_speed_up: Optional[pulumi.Input[str]] = None,
+                 alias_zone_name: Optional[pulumi.Input[str]] = None,
                  paused: Optional[pulumi.Input[bool]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
-                 type: Optional[pulumi.Input[str]] = None,
-                 vanity_name_servers: Optional[pulumi.Input['ZoneVanityNameServersArgs']] = None):
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Zone resource.
-        :param pulumi.Input[str] plan_type: Plan type of the zone. See details in data source `zone_available_plans`.
-        :param pulumi.Input[str] zone_name: Site name.
-        :param pulumi.Input[str] cname_speed_up: Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+        :param pulumi.Input[str] area: When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        :param pulumi.Input[str] plan_id: The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+        :param pulumi.Input[str] type: Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        :param pulumi.Input[str] zone_name: Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
+        :param pulumi.Input[str] alias_zone_name: Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
         :param pulumi.Input[bool] paused: Indicates whether the site is disabled.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
-        :param pulumi.Input[str] type: Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-        :param pulumi.Input['ZoneVanityNameServersArgs'] vanity_name_servers: User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
         """
-        pulumi.set(__self__, "plan_type", plan_type)
+        pulumi.set(__self__, "area", area)
+        pulumi.set(__self__, "plan_id", plan_id)
+        pulumi.set(__self__, "type", type)
         pulumi.set(__self__, "zone_name", zone_name)
-        if cname_speed_up is not None:
-            pulumi.set(__self__, "cname_speed_up", cname_speed_up)
+        if alias_zone_name is not None:
+            pulumi.set(__self__, "alias_zone_name", alias_zone_name)
         if paused is not None:
             pulumi.set(__self__, "paused", paused)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
-        if type is not None:
-            pulumi.set(__self__, "type", type)
-        if vanity_name_servers is not None:
-            pulumi.set(__self__, "vanity_name_servers", vanity_name_servers)
 
     @property
-    @pulumi.getter(name="planType")
-    def plan_type(self) -> pulumi.Input[str]:
+    @pulumi.getter
+    def area(self) -> pulumi.Input[str]:
         """
-        Plan type of the zone. See details in data source `zone_available_plans`.
+        When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         """
-        return pulumi.get(self, "plan_type")
+        return pulumi.get(self, "area")
 
-    @plan_type.setter
-    def plan_type(self, value: pulumi.Input[str]):
-        pulumi.set(self, "plan_type", value)
+    @area.setter
+    def area(self, value: pulumi.Input[str]):
+        pulumi.set(self, "area", value)
+
+    @property
+    @pulumi.getter(name="planId")
+    def plan_id(self) -> pulumi.Input[str]:
+        """
+        The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+        """
+        return pulumi.get(self, "plan_id")
+
+    @plan_id.setter
+    def plan_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "plan_id", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
 
     @property
     @pulumi.getter(name="zoneName")
     def zone_name(self) -> pulumi.Input[str]:
         """
-        Site name.
+        Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
         return pulumi.get(self, "zone_name")
 
@@ -70,16 +92,16 @@ class ZoneArgs:
         pulumi.set(self, "zone_name", value)
 
     @property
-    @pulumi.getter(name="cnameSpeedUp")
-    def cname_speed_up(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="aliasZoneName")
+    def alias_zone_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+        Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
         """
-        return pulumi.get(self, "cname_speed_up")
+        return pulumi.get(self, "alias_zone_name")
 
-    @cname_speed_up.setter
-    def cname_speed_up(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cname_speed_up", value)
+    @alias_zone_name.setter
+    def alias_zone_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "alias_zone_name", value)
 
     @property
     @pulumi.getter
@@ -105,111 +127,71 @@ class ZoneArgs:
     def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
         pulumi.set(self, "tags", value)
 
-    @property
-    @pulumi.getter
-    def type(self) -> Optional[pulumi.Input[str]]:
-        """
-        Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-        """
-        return pulumi.get(self, "type")
-
-    @type.setter
-    def type(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "type", value)
-
-    @property
-    @pulumi.getter(name="vanityNameServers")
-    def vanity_name_servers(self) -> Optional[pulumi.Input['ZoneVanityNameServersArgs']]:
-        """
-        User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        """
-        return pulumi.get(self, "vanity_name_servers")
-
-    @vanity_name_servers.setter
-    def vanity_name_servers(self, value: Optional[pulumi.Input['ZoneVanityNameServersArgs']]):
-        pulumi.set(self, "vanity_name_servers", value)
-
 
 @pulumi.input_type
 class _ZoneState:
     def __init__(__self__, *,
+                 alias_zone_name: Optional[pulumi.Input[str]] = None,
                  area: Optional[pulumi.Input[str]] = None,
-                 cname_speed_up: Optional[pulumi.Input[str]] = None,
-                 cname_status: Optional[pulumi.Input[str]] = None,
-                 created_on: Optional[pulumi.Input[str]] = None,
-                 modified_on: Optional[pulumi.Input[str]] = None,
                  name_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 original_name_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 ownership_verifications: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneOwnershipVerificationArgs']]]] = None,
                  paused: Optional[pulumi.Input[bool]] = None,
-                 plan_type: Optional[pulumi.Input[str]] = None,
-                 resources: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneResourceArgs']]]] = None,
+                 plan_id: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
-                 vanity_name_servers: Optional[pulumi.Input['ZoneVanityNameServersArgs']] = None,
-                 vanity_name_servers_ips: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneVanityNameServersIpArgs']]]] = None,
-                 zone_id: Optional[pulumi.Input[str]] = None,
                  zone_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Zone resources.
-        :param pulumi.Input[str] area: Valid values: `mainland`, `overseas`.
-        :param pulumi.Input[str] cname_speed_up: Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        :param pulumi.Input[str] cname_status: Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        :param pulumi.Input[str] created_on: Site creation date.
-        :param pulumi.Input[str] modified_on: Site modification date.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] name_servers: List of name servers assigned by Tencent Cloud.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] original_name_servers: Name server used by the site.
+        :param pulumi.Input[str] alias_zone_name: Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        :param pulumi.Input[str] area: When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] name_servers: NS list allocated by Tencent Cloud.
+        :param pulumi.Input[Sequence[pulumi.Input['ZoneOwnershipVerificationArgs']]] ownership_verifications: Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[bool] paused: Indicates whether the site is disabled.
-        :param pulumi.Input[str] plan_type: Plan type of the zone. See details in data source `zone_available_plans`.
-        :param pulumi.Input[Sequence[pulumi.Input['ZoneResourceArgs']]] resources: Billing resources of the zone.
-        :param pulumi.Input[str] status: Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        :param pulumi.Input[str] plan_id: The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+        :param pulumi.Input[str] status: Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
-        :param pulumi.Input[str] type: Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-        :param pulumi.Input['ZoneVanityNameServersArgs'] vanity_name_servers: User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[Sequence[pulumi.Input['ZoneVanityNameServersIpArgs']]] vanity_name_servers_ips: User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[str] zone_id: Site ID.
-        :param pulumi.Input[str] zone_name: Site name.
+        :param pulumi.Input[str] type: Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        :param pulumi.Input[str] zone_name: Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
+        if alias_zone_name is not None:
+            pulumi.set(__self__, "alias_zone_name", alias_zone_name)
         if area is not None:
             pulumi.set(__self__, "area", area)
-        if cname_speed_up is not None:
-            pulumi.set(__self__, "cname_speed_up", cname_speed_up)
-        if cname_status is not None:
-            pulumi.set(__self__, "cname_status", cname_status)
-        if created_on is not None:
-            pulumi.set(__self__, "created_on", created_on)
-        if modified_on is not None:
-            pulumi.set(__self__, "modified_on", modified_on)
         if name_servers is not None:
             pulumi.set(__self__, "name_servers", name_servers)
-        if original_name_servers is not None:
-            pulumi.set(__self__, "original_name_servers", original_name_servers)
+        if ownership_verifications is not None:
+            pulumi.set(__self__, "ownership_verifications", ownership_verifications)
         if paused is not None:
             pulumi.set(__self__, "paused", paused)
-        if plan_type is not None:
-            pulumi.set(__self__, "plan_type", plan_type)
-        if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+        if plan_id is not None:
+            pulumi.set(__self__, "plan_id", plan_id)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
             pulumi.set(__self__, "type", type)
-        if vanity_name_servers is not None:
-            pulumi.set(__self__, "vanity_name_servers", vanity_name_servers)
-        if vanity_name_servers_ips is not None:
-            pulumi.set(__self__, "vanity_name_servers_ips", vanity_name_servers_ips)
-        if zone_id is not None:
-            pulumi.set(__self__, "zone_id", zone_id)
         if zone_name is not None:
             pulumi.set(__self__, "zone_name", zone_name)
+
+    @property
+    @pulumi.getter(name="aliasZoneName")
+    def alias_zone_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        """
+        return pulumi.get(self, "alias_zone_name")
+
+    @alias_zone_name.setter
+    def alias_zone_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "alias_zone_name", value)
 
     @property
     @pulumi.getter
     def area(self) -> Optional[pulumi.Input[str]]:
         """
-        Valid values: `mainland`, `overseas`.
+        When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         """
         return pulumi.get(self, "area")
 
@@ -218,58 +200,10 @@ class _ZoneState:
         pulumi.set(self, "area", value)
 
     @property
-    @pulumi.getter(name="cnameSpeedUp")
-    def cname_speed_up(self) -> Optional[pulumi.Input[str]]:
-        """
-        Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        """
-        return pulumi.get(self, "cname_speed_up")
-
-    @cname_speed_up.setter
-    def cname_speed_up(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cname_speed_up", value)
-
-    @property
-    @pulumi.getter(name="cnameStatus")
-    def cname_status(self) -> Optional[pulumi.Input[str]]:
-        """
-        Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        """
-        return pulumi.get(self, "cname_status")
-
-    @cname_status.setter
-    def cname_status(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cname_status", value)
-
-    @property
-    @pulumi.getter(name="createdOn")
-    def created_on(self) -> Optional[pulumi.Input[str]]:
-        """
-        Site creation date.
-        """
-        return pulumi.get(self, "created_on")
-
-    @created_on.setter
-    def created_on(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "created_on", value)
-
-    @property
-    @pulumi.getter(name="modifiedOn")
-    def modified_on(self) -> Optional[pulumi.Input[str]]:
-        """
-        Site modification date.
-        """
-        return pulumi.get(self, "modified_on")
-
-    @modified_on.setter
-    def modified_on(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "modified_on", value)
-
-    @property
     @pulumi.getter(name="nameServers")
     def name_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of name servers assigned by Tencent Cloud.
+        NS list allocated by Tencent Cloud.
         """
         return pulumi.get(self, "name_servers")
 
@@ -278,16 +212,16 @@ class _ZoneState:
         pulumi.set(self, "name_servers", value)
 
     @property
-    @pulumi.getter(name="originalNameServers")
-    def original_name_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+    @pulumi.getter(name="ownershipVerifications")
+    def ownership_verifications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ZoneOwnershipVerificationArgs']]]]:
         """
-        Name server used by the site.
+        Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         """
-        return pulumi.get(self, "original_name_servers")
+        return pulumi.get(self, "ownership_verifications")
 
-    @original_name_servers.setter
-    def original_name_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "original_name_servers", value)
+    @ownership_verifications.setter
+    def ownership_verifications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneOwnershipVerificationArgs']]]]):
+        pulumi.set(self, "ownership_verifications", value)
 
     @property
     @pulumi.getter
@@ -302,34 +236,22 @@ class _ZoneState:
         pulumi.set(self, "paused", value)
 
     @property
-    @pulumi.getter(name="planType")
-    def plan_type(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="planId")
+    def plan_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Plan type of the zone. See details in data source `zone_available_plans`.
+        The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         """
-        return pulumi.get(self, "plan_type")
+        return pulumi.get(self, "plan_id")
 
-    @plan_type.setter
-    def plan_type(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "plan_type", value)
-
-    @property
-    @pulumi.getter
-    def resources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ZoneResourceArgs']]]]:
-        """
-        Billing resources of the zone.
-        """
-        return pulumi.get(self, "resources")
-
-    @resources.setter
-    def resources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneResourceArgs']]]]):
-        pulumi.set(self, "resources", value)
+    @plan_id.setter
+    def plan_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "plan_id", value)
 
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         """
         return pulumi.get(self, "status")
 
@@ -353,7 +275,7 @@ class _ZoneState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+        Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
         """
         return pulumi.get(self, "type")
 
@@ -362,46 +284,10 @@ class _ZoneState:
         pulumi.set(self, "type", value)
 
     @property
-    @pulumi.getter(name="vanityNameServers")
-    def vanity_name_servers(self) -> Optional[pulumi.Input['ZoneVanityNameServersArgs']]:
-        """
-        User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        """
-        return pulumi.get(self, "vanity_name_servers")
-
-    @vanity_name_servers.setter
-    def vanity_name_servers(self, value: Optional[pulumi.Input['ZoneVanityNameServersArgs']]):
-        pulumi.set(self, "vanity_name_servers", value)
-
-    @property
-    @pulumi.getter(name="vanityNameServersIps")
-    def vanity_name_servers_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ZoneVanityNameServersIpArgs']]]]:
-        """
-        User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        """
-        return pulumi.get(self, "vanity_name_servers_ips")
-
-    @vanity_name_servers_ips.setter
-    def vanity_name_servers_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ZoneVanityNameServersIpArgs']]]]):
-        pulumi.set(self, "vanity_name_servers_ips", value)
-
-    @property
-    @pulumi.getter(name="zoneId")
-    def zone_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Site ID.
-        """
-        return pulumi.get(self, "zone_id")
-
-    @zone_id.setter
-    def zone_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "zone_id", value)
-
-    @property
     @pulumi.getter(name="zoneName")
     def zone_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Site name.
+        Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
         return pulumi.get(self, "zone_name")
 
@@ -415,12 +301,12 @@ class Zone(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 cname_speed_up: Optional[pulumi.Input[str]] = None,
+                 alias_zone_name: Optional[pulumi.Input[str]] = None,
+                 area: Optional[pulumi.Input[str]] = None,
                  paused: Optional[pulumi.Input[bool]] = None,
-                 plan_type: Optional[pulumi.Input[str]] = None,
+                 plan_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
-                 vanity_name_servers: Optional[pulumi.Input[pulumi.InputType['ZoneVanityNameServersArgs']]] = None,
                  zone_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -433,14 +319,15 @@ class Zone(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         zone = tencentcloud.teo.Zone("zone",
-            cname_speed_up="enabled",
+            alias_zone_name="teo-test",
+            area="overseas",
             paused=False,
-            plan_type="sta",
+            plan_id="edgeone-2kfv1h391n6w",
             tags={
                 "createdBy": "terraform",
             },
-            type="full",
-            zone_name="toutiao2.com")
+            type="partial",
+            zone_name="tf-teo.com")
         ```
 
         ## Import
@@ -453,13 +340,13 @@ class Zone(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cname_speed_up: Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+        :param pulumi.Input[str] alias_zone_name: Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        :param pulumi.Input[str] area: When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         :param pulumi.Input[bool] paused: Indicates whether the site is disabled.
-        :param pulumi.Input[str] plan_type: Plan type of the zone. See details in data source `zone_available_plans`.
+        :param pulumi.Input[str] plan_id: The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
-        :param pulumi.Input[str] type: Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-        :param pulumi.Input[pulumi.InputType['ZoneVanityNameServersArgs']] vanity_name_servers: User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[str] zone_name: Site name.
+        :param pulumi.Input[str] type: Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        :param pulumi.Input[str] zone_name: Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
         ...
     @overload
@@ -477,14 +364,15 @@ class Zone(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         zone = tencentcloud.teo.Zone("zone",
-            cname_speed_up="enabled",
+            alias_zone_name="teo-test",
+            area="overseas",
             paused=False,
-            plan_type="sta",
+            plan_id="edgeone-2kfv1h391n6w",
             tags={
                 "createdBy": "terraform",
             },
-            type="full",
-            zone_name="toutiao2.com")
+            type="partial",
+            zone_name="tf-teo.com")
         ```
 
         ## Import
@@ -510,12 +398,12 @@ class Zone(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 cname_speed_up: Optional[pulumi.Input[str]] = None,
+                 alias_zone_name: Optional[pulumi.Input[str]] = None,
+                 area: Optional[pulumi.Input[str]] = None,
                  paused: Optional[pulumi.Input[bool]] = None,
-                 plan_type: Optional[pulumi.Input[str]] = None,
+                 plan_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
-                 vanity_name_servers: Optional[pulumi.Input[pulumi.InputType['ZoneVanityNameServersArgs']]] = None,
                  zone_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -531,27 +419,24 @@ class Zone(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ZoneArgs.__new__(ZoneArgs)
 
-            __props__.__dict__["cname_speed_up"] = cname_speed_up
+            __props__.__dict__["alias_zone_name"] = alias_zone_name
+            if area is None and not opts.urn:
+                raise TypeError("Missing required property 'area'")
+            __props__.__dict__["area"] = area
             __props__.__dict__["paused"] = paused
-            if plan_type is None and not opts.urn:
-                raise TypeError("Missing required property 'plan_type'")
-            __props__.__dict__["plan_type"] = plan_type
+            if plan_id is None and not opts.urn:
+                raise TypeError("Missing required property 'plan_id'")
+            __props__.__dict__["plan_id"] = plan_id
             __props__.__dict__["tags"] = tags
+            if type is None and not opts.urn:
+                raise TypeError("Missing required property 'type'")
             __props__.__dict__["type"] = type
-            __props__.__dict__["vanity_name_servers"] = vanity_name_servers
             if zone_name is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_name'")
             __props__.__dict__["zone_name"] = zone_name
-            __props__.__dict__["area"] = None
-            __props__.__dict__["cname_status"] = None
-            __props__.__dict__["created_on"] = None
-            __props__.__dict__["modified_on"] = None
             __props__.__dict__["name_servers"] = None
-            __props__.__dict__["original_name_servers"] = None
-            __props__.__dict__["resources"] = None
+            __props__.__dict__["ownership_verifications"] = None
             __props__.__dict__["status"] = None
-            __props__.__dict__["vanity_name_servers_ips"] = None
-            __props__.__dict__["zone_id"] = None
         super(Zone, __self__).__init__(
             'tencentcloud:Teo/zone:Zone',
             resource_name,
@@ -562,22 +447,15 @@ class Zone(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            alias_zone_name: Optional[pulumi.Input[str]] = None,
             area: Optional[pulumi.Input[str]] = None,
-            cname_speed_up: Optional[pulumi.Input[str]] = None,
-            cname_status: Optional[pulumi.Input[str]] = None,
-            created_on: Optional[pulumi.Input[str]] = None,
-            modified_on: Optional[pulumi.Input[str]] = None,
             name_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            original_name_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            ownership_verifications: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneOwnershipVerificationArgs']]]]] = None,
             paused: Optional[pulumi.Input[bool]] = None,
-            plan_type: Optional[pulumi.Input[str]] = None,
-            resources: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneResourceArgs']]]]] = None,
+            plan_id: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             type: Optional[pulumi.Input[str]] = None,
-            vanity_name_servers: Optional[pulumi.Input[pulumi.InputType['ZoneVanityNameServersArgs']]] = None,
-            vanity_name_servers_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneVanityNameServersIpArgs']]]]] = None,
-            zone_id: Optional[pulumi.Input[str]] = None,
             zone_name: Optional[pulumi.Input[str]] = None) -> 'Zone':
         """
         Get an existing Zone resource's state with the given name, id, and optional extra
@@ -586,102 +464,64 @@ class Zone(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] area: Valid values: `mainland`, `overseas`.
-        :param pulumi.Input[str] cname_speed_up: Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        :param pulumi.Input[str] cname_status: Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        :param pulumi.Input[str] created_on: Site creation date.
-        :param pulumi.Input[str] modified_on: Site modification date.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] name_servers: List of name servers assigned by Tencent Cloud.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] original_name_servers: Name server used by the site.
+        :param pulumi.Input[str] alias_zone_name: Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        :param pulumi.Input[str] area: When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] name_servers: NS list allocated by Tencent Cloud.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneOwnershipVerificationArgs']]]] ownership_verifications: Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[bool] paused: Indicates whether the site is disabled.
-        :param pulumi.Input[str] plan_type: Plan type of the zone. See details in data source `zone_available_plans`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneResourceArgs']]]] resources: Billing resources of the zone.
-        :param pulumi.Input[str] status: Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        :param pulumi.Input[str] plan_id: The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+        :param pulumi.Input[str] status: Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
-        :param pulumi.Input[str] type: Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-        :param pulumi.Input[pulumi.InputType['ZoneVanityNameServersArgs']] vanity_name_servers: User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ZoneVanityNameServersIpArgs']]]] vanity_name_servers_ips: User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        :param pulumi.Input[str] zone_id: Site ID.
-        :param pulumi.Input[str] zone_name: Site name.
+        :param pulumi.Input[str] type: Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+        :param pulumi.Input[str] zone_name: Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ZoneState.__new__(_ZoneState)
 
+        __props__.__dict__["alias_zone_name"] = alias_zone_name
         __props__.__dict__["area"] = area
-        __props__.__dict__["cname_speed_up"] = cname_speed_up
-        __props__.__dict__["cname_status"] = cname_status
-        __props__.__dict__["created_on"] = created_on
-        __props__.__dict__["modified_on"] = modified_on
         __props__.__dict__["name_servers"] = name_servers
-        __props__.__dict__["original_name_servers"] = original_name_servers
+        __props__.__dict__["ownership_verifications"] = ownership_verifications
         __props__.__dict__["paused"] = paused
-        __props__.__dict__["plan_type"] = plan_type
-        __props__.__dict__["resources"] = resources
+        __props__.__dict__["plan_id"] = plan_id
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
         __props__.__dict__["type"] = type
-        __props__.__dict__["vanity_name_servers"] = vanity_name_servers
-        __props__.__dict__["vanity_name_servers_ips"] = vanity_name_servers_ips
-        __props__.__dict__["zone_id"] = zone_id
         __props__.__dict__["zone_name"] = zone_name
         return Zone(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="aliasZoneName")
+    def alias_zone_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        """
+        return pulumi.get(self, "alias_zone_name")
 
     @property
     @pulumi.getter
     def area(self) -> pulumi.Output[str]:
         """
-        Valid values: `mainland`, `overseas`.
+        When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         """
         return pulumi.get(self, "area")
-
-    @property
-    @pulumi.getter(name="cnameSpeedUp")
-    def cname_speed_up(self) -> pulumi.Output[str]:
-        """
-        Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        """
-        return pulumi.get(self, "cname_speed_up")
-
-    @property
-    @pulumi.getter(name="cnameStatus")
-    def cname_status(self) -> pulumi.Output[str]:
-        """
-        Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        """
-        return pulumi.get(self, "cname_status")
-
-    @property
-    @pulumi.getter(name="createdOn")
-    def created_on(self) -> pulumi.Output[str]:
-        """
-        Site creation date.
-        """
-        return pulumi.get(self, "created_on")
-
-    @property
-    @pulumi.getter(name="modifiedOn")
-    def modified_on(self) -> pulumi.Output[str]:
-        """
-        Site modification date.
-        """
-        return pulumi.get(self, "modified_on")
 
     @property
     @pulumi.getter(name="nameServers")
     def name_servers(self) -> pulumi.Output[Sequence[str]]:
         """
-        List of name servers assigned by Tencent Cloud.
+        NS list allocated by Tencent Cloud.
         """
         return pulumi.get(self, "name_servers")
 
     @property
-    @pulumi.getter(name="originalNameServers")
-    def original_name_servers(self) -> pulumi.Output[Sequence[str]]:
+    @pulumi.getter(name="ownershipVerifications")
+    def ownership_verifications(self) -> pulumi.Output[Sequence['outputs.ZoneOwnershipVerification']]:
         """
-        Name server used by the site.
+        Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         """
-        return pulumi.get(self, "original_name_servers")
+        return pulumi.get(self, "ownership_verifications")
 
     @property
     @pulumi.getter
@@ -692,26 +532,18 @@ class Zone(pulumi.CustomResource):
         return pulumi.get(self, "paused")
 
     @property
-    @pulumi.getter(name="planType")
-    def plan_type(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="planId")
+    def plan_id(self) -> pulumi.Output[str]:
         """
-        Plan type of the zone. See details in data source `zone_available_plans`.
+        The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         """
-        return pulumi.get(self, "plan_type")
-
-    @property
-    @pulumi.getter
-    def resources(self) -> pulumi.Output[Sequence['outputs.ZoneResource']]:
-        """
-        Billing resources of the zone.
-        """
-        return pulumi.get(self, "resources")
+        return pulumi.get(self, "plan_id")
 
     @property
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         """
         return pulumi.get(self, "status")
 
@@ -727,39 +559,15 @@ class Zone(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+        Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
         """
         return pulumi.get(self, "type")
-
-    @property
-    @pulumi.getter(name="vanityNameServers")
-    def vanity_name_servers(self) -> pulumi.Output[Optional['outputs.ZoneVanityNameServers']]:
-        """
-        User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        """
-        return pulumi.get(self, "vanity_name_servers")
-
-    @property
-    @pulumi.getter(name="vanityNameServersIps")
-    def vanity_name_servers_ips(self) -> pulumi.Output[Sequence['outputs.ZoneVanityNameServersIp']]:
-        """
-        User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        """
-        return pulumi.get(self, "vanity_name_servers_ips")
-
-    @property
-    @pulumi.getter(name="zoneId")
-    def zone_id(self) -> pulumi.Output[str]:
-        """
-        Site ID.
-        """
-        return pulumi.get(self, "zone_id")
 
     @property
     @pulumi.getter(name="zoneName")
     def zone_name(self) -> pulumi.Output[str]:
         """
-        Site name.
+        Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         """
         return pulumi.get(self, "zone_name")
 

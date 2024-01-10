@@ -47,7 +47,7 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
      */
     public readonly nodeCount!: pulumi.Output<number>;
     /**
-     * Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     public readonly spec!: pulumi.Output<string>;
     /**
@@ -133,7 +133,7 @@ export interface RocketmqVipInstanceState {
      */
     nodeCount?: pulumi.Input<number>;
     /**
-     * Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     spec?: pulumi.Input<string>;
     /**
@@ -167,7 +167,7 @@ export interface RocketmqVipInstanceArgs {
      */
     nodeCount: pulumi.Input<number>;
     /**
-     * Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     spec: pulumi.Input<string>;
     /**

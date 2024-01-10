@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Eb/eventBus:EventBus":
 		r = &EventBus{}
+	case "tencentcloud:Eb/eventConnector:EventConnector":
+		r = &EventConnector{}
 	case "tencentcloud:Eb/eventRule:EventRule":
 		r = &EventRule{}
 	case "tencentcloud:Eb/eventTarget:EventTarget":
@@ -47,6 +49,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Eb/eventBus",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Eb/eventConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -48,7 +48,7 @@ type GetProjectProjectSet struct {
 // GetProjectProjectSetInput is an input type that accepts GetProjectProjectSetArgs and GetProjectProjectSetOutput values.
 // You can construct a concrete instance of `GetProjectProjectSetInput` via:
 //
-//          GetProjectProjectSetArgs{...}
+//	GetProjectProjectSetArgs{...}
 type GetProjectProjectSetInput interface {
 	pulumi.Input
 
@@ -106,7 +106,7 @@ func (i GetProjectProjectSetArgs) ToGetProjectProjectSetOutputWithContext(ctx co
 // GetProjectProjectSetArrayInput is an input type that accepts GetProjectProjectSetArray and GetProjectProjectSetArrayOutput values.
 // You can construct a concrete instance of `GetProjectProjectSetArrayInput` via:
 //
-//          GetProjectProjectSetArray{ GetProjectProjectSetArgs{...} }
+//	GetProjectProjectSetArray{ GetProjectProjectSetArgs{...} }
 type GetProjectProjectSetArrayInput interface {
 	pulumi.Input
 
@@ -242,6 +242,350 @@ func (o GetProjectProjectSetArrayOutput) Index(i pulumi.IntInput) GetProjectProj
 	}).(GetProjectProjectSetOutput)
 }
 
+type GetScoresScoreSet struct {
+	// The mean duration of api request.
+	ApiDuration string `pulumi:"apiDuration"`
+	// The number of failed api.
+	ApiFail string `pulumi:"apiFail"`
+	// The number of all request api.
+	ApiNum string `pulumi:"apiNum"`
+	// Project record created time.
+	CreateTime string `pulumi:"createTime"`
+	// The duration of page load.
+	PageDuration string `pulumi:"pageDuration"`
+	// The number of exception which happened on page.
+	PageError string `pulumi:"pageError"`
+	// Pv.
+	PagePv string `pulumi:"pagePv"`
+	// User view.
+	PageUv string `pulumi:"pageUv"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// The number of record.
+	RecordNum int `pulumi:"recordNum"`
+	// The score of project.
+	Score string `pulumi:"score"`
+	// Duration.
+	StaticDuration string `pulumi:"staticDuration"`
+	// The number of failed request static resource.
+	StaticFail string `pulumi:"staticFail"`
+	// The number of static resource on page.
+	StaticNum string `pulumi:"staticNum"`
+}
+
+// GetScoresScoreSetInput is an input type that accepts GetScoresScoreSetArgs and GetScoresScoreSetOutput values.
+// You can construct a concrete instance of `GetScoresScoreSetInput` via:
+//
+//	GetScoresScoreSetArgs{...}
+type GetScoresScoreSetInput interface {
+	pulumi.Input
+
+	ToGetScoresScoreSetOutput() GetScoresScoreSetOutput
+	ToGetScoresScoreSetOutputWithContext(context.Context) GetScoresScoreSetOutput
+}
+
+type GetScoresScoreSetArgs struct {
+	// The mean duration of api request.
+	ApiDuration pulumi.StringInput `pulumi:"apiDuration"`
+	// The number of failed api.
+	ApiFail pulumi.StringInput `pulumi:"apiFail"`
+	// The number of all request api.
+	ApiNum pulumi.StringInput `pulumi:"apiNum"`
+	// Project record created time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The duration of page load.
+	PageDuration pulumi.StringInput `pulumi:"pageDuration"`
+	// The number of exception which happened on page.
+	PageError pulumi.StringInput `pulumi:"pageError"`
+	// Pv.
+	PagePv pulumi.StringInput `pulumi:"pagePv"`
+	// User view.
+	PageUv pulumi.StringInput `pulumi:"pageUv"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// The number of record.
+	RecordNum pulumi.IntInput `pulumi:"recordNum"`
+	// The score of project.
+	Score pulumi.StringInput `pulumi:"score"`
+	// Duration.
+	StaticDuration pulumi.StringInput `pulumi:"staticDuration"`
+	// The number of failed request static resource.
+	StaticFail pulumi.StringInput `pulumi:"staticFail"`
+	// The number of static resource on page.
+	StaticNum pulumi.StringInput `pulumi:"staticNum"`
+}
+
+func (GetScoresScoreSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScoresScoreSet)(nil)).Elem()
+}
+
+func (i GetScoresScoreSetArgs) ToGetScoresScoreSetOutput() GetScoresScoreSetOutput {
+	return i.ToGetScoresScoreSetOutputWithContext(context.Background())
+}
+
+func (i GetScoresScoreSetArgs) ToGetScoresScoreSetOutputWithContext(ctx context.Context) GetScoresScoreSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScoresScoreSetOutput)
+}
+
+// GetScoresScoreSetArrayInput is an input type that accepts GetScoresScoreSetArray and GetScoresScoreSetArrayOutput values.
+// You can construct a concrete instance of `GetScoresScoreSetArrayInput` via:
+//
+//	GetScoresScoreSetArray{ GetScoresScoreSetArgs{...} }
+type GetScoresScoreSetArrayInput interface {
+	pulumi.Input
+
+	ToGetScoresScoreSetArrayOutput() GetScoresScoreSetArrayOutput
+	ToGetScoresScoreSetArrayOutputWithContext(context.Context) GetScoresScoreSetArrayOutput
+}
+
+type GetScoresScoreSetArray []GetScoresScoreSetInput
+
+func (GetScoresScoreSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScoresScoreSet)(nil)).Elem()
+}
+
+func (i GetScoresScoreSetArray) ToGetScoresScoreSetArrayOutput() GetScoresScoreSetArrayOutput {
+	return i.ToGetScoresScoreSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetScoresScoreSetArray) ToGetScoresScoreSetArrayOutputWithContext(ctx context.Context) GetScoresScoreSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScoresScoreSetArrayOutput)
+}
+
+type GetScoresScoreSetOutput struct{ *pulumi.OutputState }
+
+func (GetScoresScoreSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScoresScoreSet)(nil)).Elem()
+}
+
+func (o GetScoresScoreSetOutput) ToGetScoresScoreSetOutput() GetScoresScoreSetOutput {
+	return o
+}
+
+func (o GetScoresScoreSetOutput) ToGetScoresScoreSetOutputWithContext(ctx context.Context) GetScoresScoreSetOutput {
+	return o
+}
+
+// The mean duration of api request.
+func (o GetScoresScoreSetOutput) ApiDuration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.ApiDuration }).(pulumi.StringOutput)
+}
+
+// The number of failed api.
+func (o GetScoresScoreSetOutput) ApiFail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.ApiFail }).(pulumi.StringOutput)
+}
+
+// The number of all request api.
+func (o GetScoresScoreSetOutput) ApiNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.ApiNum }).(pulumi.StringOutput)
+}
+
+// Project record created time.
+func (o GetScoresScoreSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// The duration of page load.
+func (o GetScoresScoreSetOutput) PageDuration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.PageDuration }).(pulumi.StringOutput)
+}
+
+// The number of exception which happened on page.
+func (o GetScoresScoreSetOutput) PageError() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.PageError }).(pulumi.StringOutput)
+}
+
+// Pv.
+func (o GetScoresScoreSetOutput) PagePv() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.PagePv }).(pulumi.StringOutput)
+}
+
+// User view.
+func (o GetScoresScoreSetOutput) PageUv() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.PageUv }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetScoresScoreSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// The number of record.
+func (o GetScoresScoreSetOutput) RecordNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) int { return v.RecordNum }).(pulumi.IntOutput)
+}
+
+// The score of project.
+func (o GetScoresScoreSetOutput) Score() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.Score }).(pulumi.StringOutput)
+}
+
+// Duration.
+func (o GetScoresScoreSetOutput) StaticDuration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.StaticDuration }).(pulumi.StringOutput)
+}
+
+// The number of failed request static resource.
+func (o GetScoresScoreSetOutput) StaticFail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.StaticFail }).(pulumi.StringOutput)
+}
+
+// The number of static resource on page.
+func (o GetScoresScoreSetOutput) StaticNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScoresScoreSet) string { return v.StaticNum }).(pulumi.StringOutput)
+}
+
+type GetScoresScoreSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScoresScoreSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScoresScoreSet)(nil)).Elem()
+}
+
+func (o GetScoresScoreSetArrayOutput) ToGetScoresScoreSetArrayOutput() GetScoresScoreSetArrayOutput {
+	return o
+}
+
+func (o GetScoresScoreSetArrayOutput) ToGetScoresScoreSetArrayOutputWithContext(ctx context.Context) GetScoresScoreSetArrayOutput {
+	return o
+}
+
+func (o GetScoresScoreSetArrayOutput) Index(i pulumi.IntInput) GetScoresScoreSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScoresScoreSet {
+		return vs[0].([]GetScoresScoreSet)[vs[1].(int)]
+	}).(GetScoresScoreSetOutput)
+}
+
+type GetTawAreaAreaSet struct {
+	AreaAbbr       string `pulumi:"areaAbbr"`
+	AreaId         int    `pulumi:"areaId"`
+	AreaKey        string `pulumi:"areaKey"`
+	AreaName       string `pulumi:"areaName"`
+	AreaRegionCode string `pulumi:"areaRegionCode"`
+	AreaRegionId   string `pulumi:"areaRegionId"`
+	AreaStatus     int    `pulumi:"areaStatus"`
+}
+
+// GetTawAreaAreaSetInput is an input type that accepts GetTawAreaAreaSetArgs and GetTawAreaAreaSetOutput values.
+// You can construct a concrete instance of `GetTawAreaAreaSetInput` via:
+//
+//	GetTawAreaAreaSetArgs{...}
+type GetTawAreaAreaSetInput interface {
+	pulumi.Input
+
+	ToGetTawAreaAreaSetOutput() GetTawAreaAreaSetOutput
+	ToGetTawAreaAreaSetOutputWithContext(context.Context) GetTawAreaAreaSetOutput
+}
+
+type GetTawAreaAreaSetArgs struct {
+	AreaAbbr       pulumi.StringInput `pulumi:"areaAbbr"`
+	AreaId         pulumi.IntInput    `pulumi:"areaId"`
+	AreaKey        pulumi.StringInput `pulumi:"areaKey"`
+	AreaName       pulumi.StringInput `pulumi:"areaName"`
+	AreaRegionCode pulumi.StringInput `pulumi:"areaRegionCode"`
+	AreaRegionId   pulumi.StringInput `pulumi:"areaRegionId"`
+	AreaStatus     pulumi.IntInput    `pulumi:"areaStatus"`
+}
+
+func (GetTawAreaAreaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTawAreaAreaSet)(nil)).Elem()
+}
+
+func (i GetTawAreaAreaSetArgs) ToGetTawAreaAreaSetOutput() GetTawAreaAreaSetOutput {
+	return i.ToGetTawAreaAreaSetOutputWithContext(context.Background())
+}
+
+func (i GetTawAreaAreaSetArgs) ToGetTawAreaAreaSetOutputWithContext(ctx context.Context) GetTawAreaAreaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTawAreaAreaSetOutput)
+}
+
+// GetTawAreaAreaSetArrayInput is an input type that accepts GetTawAreaAreaSetArray and GetTawAreaAreaSetArrayOutput values.
+// You can construct a concrete instance of `GetTawAreaAreaSetArrayInput` via:
+//
+//	GetTawAreaAreaSetArray{ GetTawAreaAreaSetArgs{...} }
+type GetTawAreaAreaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetTawAreaAreaSetArrayOutput() GetTawAreaAreaSetArrayOutput
+	ToGetTawAreaAreaSetArrayOutputWithContext(context.Context) GetTawAreaAreaSetArrayOutput
+}
+
+type GetTawAreaAreaSetArray []GetTawAreaAreaSetInput
+
+func (GetTawAreaAreaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTawAreaAreaSet)(nil)).Elem()
+}
+
+func (i GetTawAreaAreaSetArray) ToGetTawAreaAreaSetArrayOutput() GetTawAreaAreaSetArrayOutput {
+	return i.ToGetTawAreaAreaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetTawAreaAreaSetArray) ToGetTawAreaAreaSetArrayOutputWithContext(ctx context.Context) GetTawAreaAreaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTawAreaAreaSetArrayOutput)
+}
+
+type GetTawAreaAreaSetOutput struct{ *pulumi.OutputState }
+
+func (GetTawAreaAreaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTawAreaAreaSet)(nil)).Elem()
+}
+
+func (o GetTawAreaAreaSetOutput) ToGetTawAreaAreaSetOutput() GetTawAreaAreaSetOutput {
+	return o
+}
+
+func (o GetTawAreaAreaSetOutput) ToGetTawAreaAreaSetOutputWithContext(ctx context.Context) GetTawAreaAreaSetOutput {
+	return o
+}
+
+func (o GetTawAreaAreaSetOutput) AreaAbbr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) string { return v.AreaAbbr }).(pulumi.StringOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) int { return v.AreaId }).(pulumi.IntOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) string { return v.AreaKey }).(pulumi.StringOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) string { return v.AreaName }).(pulumi.StringOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaRegionCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) string { return v.AreaRegionCode }).(pulumi.StringOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaRegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) string { return v.AreaRegionId }).(pulumi.StringOutput)
+}
+
+func (o GetTawAreaAreaSetOutput) AreaStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTawAreaAreaSet) int { return v.AreaStatus }).(pulumi.IntOutput)
+}
+
+type GetTawAreaAreaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTawAreaAreaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTawAreaAreaSet)(nil)).Elem()
+}
+
+func (o GetTawAreaAreaSetArrayOutput) ToGetTawAreaAreaSetArrayOutput() GetTawAreaAreaSetArrayOutput {
+	return o
+}
+
+func (o GetTawAreaAreaSetArrayOutput) ToGetTawAreaAreaSetArrayOutputWithContext(ctx context.Context) GetTawAreaAreaSetArrayOutput {
+	return o
+}
+
+func (o GetTawAreaAreaSetArrayOutput) Index(i pulumi.IntInput) GetTawAreaAreaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTawAreaAreaSet {
+		return vs[0].([]GetTawAreaAreaSet)[vs[1].(int)]
+	}).(GetTawAreaAreaSetOutput)
+}
+
 type GetTawInstanceInstanceSet struct {
 	// Area ID.
 	AreaId int `pulumi:"areaId"`
@@ -272,7 +616,7 @@ type GetTawInstanceInstanceSet struct {
 // GetTawInstanceInstanceSetInput is an input type that accepts GetTawInstanceInstanceSetArgs and GetTawInstanceInstanceSetOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetInput` via:
 //
-//          GetTawInstanceInstanceSetArgs{...}
+//	GetTawInstanceInstanceSetArgs{...}
 type GetTawInstanceInstanceSetInput interface {
 	pulumi.Input
 
@@ -322,7 +666,7 @@ func (i GetTawInstanceInstanceSetArgs) ToGetTawInstanceInstanceSetOutputWithCont
 // GetTawInstanceInstanceSetArrayInput is an input type that accepts GetTawInstanceInstanceSetArray and GetTawInstanceInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetArrayInput` via:
 //
-//          GetTawInstanceInstanceSetArray{ GetTawInstanceInstanceSetArgs{...} }
+//	GetTawInstanceInstanceSetArray{ GetTawInstanceInstanceSetArgs{...} }
 type GetTawInstanceInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -448,7 +792,7 @@ type GetTawInstanceInstanceSetTag struct {
 // GetTawInstanceInstanceSetTagInput is an input type that accepts GetTawInstanceInstanceSetTagArgs and GetTawInstanceInstanceSetTagOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetTagInput` via:
 //
-//          GetTawInstanceInstanceSetTagArgs{...}
+//	GetTawInstanceInstanceSetTagArgs{...}
 type GetTawInstanceInstanceSetTagInput interface {
 	pulumi.Input
 
@@ -478,7 +822,7 @@ func (i GetTawInstanceInstanceSetTagArgs) ToGetTawInstanceInstanceSetTagOutputWi
 // GetTawInstanceInstanceSetTagArrayInput is an input type that accepts GetTawInstanceInstanceSetTagArray and GetTawInstanceInstanceSetTagArrayOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetTagArrayInput` via:
 //
-//          GetTawInstanceInstanceSetTagArray{ GetTawInstanceInstanceSetTagArgs{...} }
+//	GetTawInstanceInstanceSetTagArray{ GetTawInstanceInstanceSetTagArgs{...} }
 type GetTawInstanceInstanceSetTagArrayInput interface {
 	pulumi.Input
 
@@ -564,7 +908,7 @@ type GetWhitelistWhitelistSet struct {
 // GetWhitelistWhitelistSetInput is an input type that accepts GetWhitelistWhitelistSetArgs and GetWhitelistWhitelistSetOutput values.
 // You can construct a concrete instance of `GetWhitelistWhitelistSetInput` via:
 //
-//          GetWhitelistWhitelistSetArgs{...}
+//	GetWhitelistWhitelistSetArgs{...}
 type GetWhitelistWhitelistSetInput interface {
 	pulumi.Input
 
@@ -604,7 +948,7 @@ func (i GetWhitelistWhitelistSetArgs) ToGetWhitelistWhitelistSetOutputWithContex
 // GetWhitelistWhitelistSetArrayInput is an input type that accepts GetWhitelistWhitelistSetArray and GetWhitelistWhitelistSetArrayOutput values.
 // You can construct a concrete instance of `GetWhitelistWhitelistSetArrayInput` via:
 //
-//          GetWhitelistWhitelistSetArray{ GetWhitelistWhitelistSetArgs{...} }
+//	GetWhitelistWhitelistSetArray{ GetWhitelistWhitelistSetArgs{...} }
 type GetWhitelistWhitelistSetArrayInput interface {
 	pulumi.Input
 
@@ -698,6 +1042,10 @@ func (o GetWhitelistWhitelistSetArrayOutput) Index(i pulumi.IntInput) GetWhiteli
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectProjectSetInput)(nil)).Elem(), GetProjectProjectSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectProjectSetArrayInput)(nil)).Elem(), GetProjectProjectSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScoresScoreSetInput)(nil)).Elem(), GetScoresScoreSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScoresScoreSetArrayInput)(nil)).Elem(), GetScoresScoreSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTawAreaAreaSetInput)(nil)).Elem(), GetTawAreaAreaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTawAreaAreaSetArrayInput)(nil)).Elem(), GetTawAreaAreaSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTawInstanceInstanceSetInput)(nil)).Elem(), GetTawInstanceInstanceSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTawInstanceInstanceSetArrayInput)(nil)).Elem(), GetTawInstanceInstanceSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTawInstanceInstanceSetTagInput)(nil)).Elem(), GetTawInstanceInstanceSetTagArgs{})
@@ -706,6 +1054,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWhitelistWhitelistSetArrayInput)(nil)).Elem(), GetWhitelistWhitelistSetArray{})
 	pulumi.RegisterOutputType(GetProjectProjectSetOutput{})
 	pulumi.RegisterOutputType(GetProjectProjectSetArrayOutput{})
+	pulumi.RegisterOutputType(GetScoresScoreSetOutput{})
+	pulumi.RegisterOutputType(GetScoresScoreSetArrayOutput{})
+	pulumi.RegisterOutputType(GetTawAreaAreaSetOutput{})
+	pulumi.RegisterOutputType(GetTawAreaAreaSetArrayOutput{})
 	pulumi.RegisterOutputType(GetTawInstanceInstanceSetOutput{})
 	pulumi.RegisterOutputType(GetTawInstanceInstanceSetArrayOutput{})
 	pulumi.RegisterOutputType(GetTawInstanceInstanceSetTagOutput{})

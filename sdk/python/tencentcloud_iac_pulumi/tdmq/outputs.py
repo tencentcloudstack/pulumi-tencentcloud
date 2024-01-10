@@ -11,6 +11,7 @@ from . import outputs
 
 __all__ = [
     'NamespaceRetentionPolicy',
+    'ProfessionalClusterVpc',
     'RocketmqClusterVpc',
     'RocketmqVipInstanceVpcInfo',
     'GetProInstanceDetailClusterInfoResult',
@@ -19,6 +20,7 @@ __all__ = [
     'GetProInstanceDetailNetworkAccessPointInfoResult',
     'GetProInstancesFilterResult',
     'GetProInstancesInstanceResult',
+    'GetProInstancesInstanceTagResult',
     'GetPublishersFilterResult',
     'GetPublishersPublisherResult',
     'GetPublishersSortResult',
@@ -90,6 +92,54 @@ class NamespaceRetentionPolicy(dict):
         the time of message to retain.
         """
         return pulumi.get(self, "time_in_minutes")
+
+
+@pulumi.output_type
+class ProfessionalClusterVpc(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProfessionalClusterVpc. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProfessionalClusterVpc.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProfessionalClusterVpc.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str subnet_id: Id of Subnet.
+        :param str vpc_id: Id of VPC.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Id of Subnet.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        Id of VPC.
+        """
+        return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
@@ -507,6 +557,7 @@ class GetProInstancesInstanceResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
                  config_display: str,
+                 create_time: str,
                  expire_time: int,
                  instance_id: str,
                  instance_name: str,
@@ -520,10 +571,12 @@ class GetProInstancesInstanceResult(dict):
                  spec_name: str,
                  status: int,
                  subnet_id: str,
+                 tags: Sequence['outputs.GetProInstancesInstanceTagResult'],
                  vpc_id: str):
         """
         :param int auto_renew_flag: Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
         :param str config_display: Instance configuration specification name.
+        :param str create_time: Create time.
         :param int expire_time: Instance expiration time, in milliseconds.
         :param str instance_id: Instance ID.
         :param str instance_name: Instance name.
@@ -537,10 +590,12 @@ class GetProInstancesInstanceResult(dict):
         :param str spec_name: Instance Configuration ID.
         :param int status: Instance status, 0-creating, 1-normal, 2-isolating, 3-destroyed, 4-abnormal, 5-delivery failure, 6-allocation change, 7-allocation failure.
         :param str subnet_id: Subnet idNote: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['GetProInstancesInstanceTagArgs'] tags: Tag list.
         :param str vpc_id: Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
         """
         pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         pulumi.set(__self__, "config_display", config_display)
+        pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "expire_time", expire_time)
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "instance_name", instance_name)
@@ -554,6 +609,7 @@ class GetProInstancesInstanceResult(dict):
         pulumi.set(__self__, "spec_name", spec_name)
         pulumi.set(__self__, "status", status)
         pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "tags", tags)
         pulumi.set(__self__, "vpc_id", vpc_id)
 
     @property
@@ -571,6 +627,14 @@ class GetProInstancesInstanceResult(dict):
         Instance configuration specification name.
         """
         return pulumi.get(self, "config_display")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="expireTime")
@@ -677,12 +741,49 @@ class GetProInstancesInstanceResult(dict):
         return pulumi.get(self, "subnet_id")
 
     @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetProInstancesInstanceTagResult']:
+        """
+        Tag list.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
         """
         Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetProInstancesInstanceTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
 
 
 @pulumi.output_type

@@ -115,7 +115,7 @@ func (i *StartInstances) ToStartInstancesOutputWithContext(ctx context.Context) 
 // StartInstancesArrayInput is an input type that accepts StartInstancesArray and StartInstancesArrayOutput values.
 // You can construct a concrete instance of `StartInstancesArrayInput` via:
 //
-//          StartInstancesArray{ StartInstancesArgs{...} }
+//	StartInstancesArray{ StartInstancesArgs{...} }
 type StartInstancesArrayInput interface {
 	pulumi.Input
 
@@ -140,7 +140,7 @@ func (i StartInstancesArray) ToStartInstancesArrayOutputWithContext(ctx context.
 // StartInstancesMapInput is an input type that accepts StartInstancesMap and StartInstancesMapOutput values.
 // You can construct a concrete instance of `StartInstancesMapInput` via:
 //
-//          StartInstancesMap{ "key": StartInstancesArgs{...} }
+//	StartInstancesMap{ "key": StartInstancesArgs{...} }
 type StartInstancesMapInput interface {
 	pulumi.Input
 

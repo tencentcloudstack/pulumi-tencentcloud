@@ -19,36 +19,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
-// 			ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
-// 			InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
-// 			ForceDelete:               pulumi.Bool(true),
-// 			InstanceCpuCore:           pulumi.Int(2),
-// 			InstanceMemorySize:        pulumi.Int(4),
-// 			InstanceMaintainDuration:  pulumi.Int(7200),
-// 			InstanceMaintainStartTime: pulumi.Int(21600),
-// 			InstanceMaintainWeekdays: pulumi.StringArray{
-// 				pulumi.String("Fri"),
-// 				pulumi.String("Mon"),
-// 				pulumi.String("Sat"),
-// 				pulumi.String("Sun"),
-// 				pulumi.String("Thu"),
-// 				pulumi.String("Wed"),
-// 				pulumi.String("Tue"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
+//				ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
+//				InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
+//				ForceDelete:               pulumi.Bool(true),
+//				InstanceCpuCore:           pulumi.Int(2),
+//				InstanceMemorySize:        pulumi.Int(4),
+//				InstanceMaintainDuration:  pulumi.Int(7200),
+//				InstanceMaintainStartTime: pulumi.Int(21600),
+//				InstanceMaintainWeekdays: pulumi.StringArray{
+//					pulumi.String("Fri"),
+//					pulumi.String("Mon"),
+//					pulumi.String("Sat"),
+//					pulumi.String("Sun"),
+//					pulumi.String("Thu"),
+//					pulumi.String("Wed"),
+//					pulumi.String("Tue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -56,7 +59,9 @@ import (
 // CynosDB readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+//
+//	$ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+//
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -81,6 +86,10 @@ type ReadonlyInstance struct {
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize pulumi.IntOutput `pulumi:"instanceStorageSize"`
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
 // NewReadonlyInstance registers a new resource with the given unique name, arguments, and options.
@@ -139,6 +148,10 @@ type readonlyInstanceState struct {
 	InstanceStatus *string `pulumi:"instanceStatus"`
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize *int `pulumi:"instanceStorageSize"`
+	// ID of the subnet within this VPC.
+	SubnetId *string `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId *string `pulumi:"vpcId"`
 }
 
 type ReadonlyInstanceState struct {
@@ -162,6 +175,10 @@ type ReadonlyInstanceState struct {
 	InstanceStatus pulumi.StringPtrInput
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize pulumi.IntPtrInput
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringPtrInput
+	// ID of the VPC.
+	VpcId pulumi.StringPtrInput
 }
 
 func (ReadonlyInstanceState) ElementType() reflect.Type {
@@ -185,6 +202,10 @@ type readonlyInstanceArgs struct {
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
 	// Name of instance.
 	InstanceName string `pulumi:"instanceName"`
+	// ID of the subnet within this VPC.
+	SubnetId *string `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a ReadonlyInstance resource.
@@ -205,6 +226,10 @@ type ReadonlyInstanceArgs struct {
 	InstanceMemorySize pulumi.IntPtrInput
 	// Name of instance.
 	InstanceName pulumi.StringInput
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringPtrInput
+	// ID of the VPC.
+	VpcId pulumi.StringPtrInput
 }
 
 func (ReadonlyInstanceArgs) ElementType() reflect.Type {
@@ -233,7 +258,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +283,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -342,6 +367,16 @@ func (o ReadonlyInstanceOutput) InstanceStatus() pulumi.StringOutput {
 // Storage size of the instance, unit in GB.
 func (o ReadonlyInstanceOutput) InstanceStorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.InstanceStorageSize }).(pulumi.IntOutput)
+}
+
+// ID of the subnet within this VPC.
+func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// ID of the VPC.
+func (o ReadonlyInstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
 type ReadonlyInstanceArrayOutput struct{ *pulumi.OutputState }

@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewParamTemplate(ctx, "paramTemplate", &Cynosdb.ParamTemplateArgs{
-// 			DbMode:        pulumi.String("SERVERLESS"),
-// 			EngineVersion: pulumi.String("5.7"),
-// 			ParamLists: cynosdb.ParamTemplateParamListArray{
-// 				&cynosdb.ParamTemplateParamListArgs{
-// 					CurrentValue: pulumi.String("-1"),
-// 					ParamName:    pulumi.String("optimizer_trace_offset"),
-// 				},
-// 			},
-// 			TemplateDescription: pulumi.String("terraform-template"),
-// 			TemplateName:        pulumi.String("terraform-template"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewParamTemplate(ctx, "paramTemplate", &Cynosdb.ParamTemplateArgs{
+//				DbMode:        pulumi.String("SERVERLESS"),
+//				EngineVersion: pulumi.String("5.7"),
+//				ParamLists: cynosdb.ParamTemplateParamListArray{
+//					&cynosdb.ParamTemplateParamListArgs{
+//						CurrentValue: pulumi.String("-1"),
+//						ParamName:    pulumi.String("optimizer_trace_offset"),
+//					},
+//				},
+//				TemplateDescription: pulumi.String("terraform-template"),
+//				TemplateName:        pulumi.String("terraform-template"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ParamTemplate struct {
 	pulumi.CustomResourceState
@@ -188,7 +191,7 @@ func (i *ParamTemplate) ToParamTemplateOutputWithContext(ctx context.Context) Pa
 // ParamTemplateArrayInput is an input type that accepts ParamTemplateArray and ParamTemplateArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateArrayInput` via:
 //
-//          ParamTemplateArray{ ParamTemplateArgs{...} }
+//	ParamTemplateArray{ ParamTemplateArgs{...} }
 type ParamTemplateArrayInput interface {
 	pulumi.Input
 
@@ -213,7 +216,7 @@ func (i ParamTemplateArray) ToParamTemplateArrayOutputWithContext(ctx context.Co
 // ParamTemplateMapInput is an input type that accepts ParamTemplateMap and ParamTemplateMapOutput values.
 // You can construct a concrete instance of `ParamTemplateMapInput` via:
 //
-//          ParamTemplateMap{ "key": ParamTemplateArgs{...} }
+//	ParamTemplateMap{ "key": ParamTemplateArgs{...} }
 type ParamTemplateMapInput interface {
 	pulumi.Input
 

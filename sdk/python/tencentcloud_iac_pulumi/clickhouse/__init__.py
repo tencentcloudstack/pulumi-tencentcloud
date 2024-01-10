@@ -5,6 +5,19 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .account import *
+from .account_permission import *
+from .backup import *
+from .backup_strategy import *
+from .delete_backup_data import *
+from .get_backup_job_detail import *
+from .get_backup_jobs import *
+from .get_backup_tables import *
+from .get_instance_shards import *
+from .get_spec import *
 from .instance import *
+from .keyval_config import *
+from .recover_backup_job import *
+from .xml_config import *
 from ._inputs import *
 from . import outputs

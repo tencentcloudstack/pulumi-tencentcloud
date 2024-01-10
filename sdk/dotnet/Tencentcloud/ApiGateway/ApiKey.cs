@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Use this resource to create API gateway access key.
     /// 
     /// ## Example Usage
+    /// ### Automatically generate key for API gateway access key.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,9 +24,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var test = new Tencentcloud.ApiGateway.ApiKey("test", new Tencentcloud.ApiGateway.ApiKeyArgs
+    ///         var exampleAuto = new Tencentcloud.ApiGateway.ApiKey("exampleAuto", new Tencentcloud.ApiGateway.ApiKeyArgs
     ///         {
-    ///             SecretName = "my_api_key",
+    ///             SecretName = "tf_example_auto",
+    ///             Status = "on",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Manually generate a secret key for API gateway access key.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleManual = new Tencentcloud.ApiGateway.ApiKey("exampleManual", new Tencentcloud.ApiGateway.ApiKeyArgs
+    ///         {
+    ///             AccessKeyId = "28e287e340507fa147b2c8284dab542f",
+    ///             AccessKeySecret = "0198a4b8c3105080f4acd9e507599eff",
+    ///             AccessKeyType = "manual",
+    ///             SecretName = "tf_example_manual",
     ///             Status = "on",
     ///         });
     ///     }
@@ -45,10 +68,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     public partial class ApiKey : Pulumi.CustomResource
     {
         /// <summary>
-        /// Created API key.
+        /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        /// </summary>
+        [Output("accessKeyId")]
+        public Output<string> AccessKeyId { get; private set; } = null!;
+
+        /// <summary>
+        /// The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
         /// </summary>
         [Output("accessKeySecret")]
         public Output<string> AccessKeySecret { get; private set; } = null!;
+
+        /// <summary>
+        /// Key type, supports both auto and manual (custom keys), defaults to auto.
+        /// </summary>
+        [Output("accessKeyType")]
+        public Output<string?> AccessKeyType { get; private set; } = null!;
 
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -122,6 +157,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     public sealed class ApiKeyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        /// </summary>
+        [Input("accessKeyId")]
+        public Input<string>? AccessKeyId { get; set; }
+
+        /// <summary>
+        /// The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        /// </summary>
+        [Input("accessKeySecret")]
+        public Input<string>? AccessKeySecret { get; set; }
+
+        /// <summary>
+        /// Key type, supports both auto and manual (custom keys), defaults to auto.
+        /// </summary>
+        [Input("accessKeyType")]
+        public Input<string>? AccessKeyType { get; set; }
+
+        /// <summary>
         /// Custom key name.
         /// </summary>
         [Input("secretName", required: true)]
@@ -141,10 +194,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     public sealed class ApiKeyState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Created API key.
+        /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        /// </summary>
+        [Input("accessKeyId")]
+        public Input<string>? AccessKeyId { get; set; }
+
+        /// <summary>
+        /// The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
         /// </summary>
         [Input("accessKeySecret")]
         public Input<string>? AccessKeySecret { get; set; }
+
+        /// <summary>
+        /// Key type, supports both auto and manual (custom keys), defaults to auto.
+        /// </summary>
+        [Input("accessKeyType")]
+        public Input<string>? AccessKeyType { get; set; }
 
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.

@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewDeployGroup(ctx, "example", &Mysql.DeployGroupArgs{
-// 			DeployGroupName: pulumi.String("tf-example"),
-// 			Description:     pulumi.String("desc."),
-// 			DevClasses: pulumi.StringArray{
-// 				pulumi.String("TS85"),
-// 			},
-// 			LimitNum: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewDeployGroup(ctx, "example", &Mysql.DeployGroupArgs{
+//				DeployGroupName: pulumi.String("tf-example"),
+//				Description:     pulumi.String("desc."),
+//				DevClasses: pulumi.StringArray{
+//					pulumi.String("TS85"),
+//				},
+//				LimitNum: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // mysql deploy_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
+//
+//	$ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
+//
 // ```
 type DeployGroup struct {
 	pulumi.CustomResourceState
@@ -168,7 +173,7 @@ func (i *DeployGroup) ToDeployGroupOutputWithContext(ctx context.Context) Deploy
 // DeployGroupArrayInput is an input type that accepts DeployGroupArray and DeployGroupArrayOutput values.
 // You can construct a concrete instance of `DeployGroupArrayInput` via:
 //
-//          DeployGroupArray{ DeployGroupArgs{...} }
+//	DeployGroupArray{ DeployGroupArgs{...} }
 type DeployGroupArrayInput interface {
 	pulumi.Input
 
@@ -193,7 +198,7 @@ func (i DeployGroupArray) ToDeployGroupArrayOutputWithContext(ctx context.Contex
 // DeployGroupMapInput is an input type that accepts DeployGroupMap and DeployGroupMapOutput values.
 // You can construct a concrete instance of `DeployGroupMapInput` via:
 //
-//          DeployGroupMap{ "key": DeployGroupArgs{...} }
+//	DeployGroupMap{ "key": DeployGroupArgs{...} }
 type DeployGroupMapInput interface {
 	pulumi.Input
 

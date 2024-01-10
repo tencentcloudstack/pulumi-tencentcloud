@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetInsAttribute(ctx, &sqlserver.GetInsAttributeArgs{
-// 			InstanceId: "mssql-gyg9xycl",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetInsAttribute(ctx, &sqlserver.GetInsAttributeArgs{
+//				InstanceId: "mssql-gyg9xycl",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInsAttribute(ctx *pulumi.Context, args *GetInsAttributeArgs, opts ...pulumi.InvokeOption) (*GetInsAttributeResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
@@ -73,6 +76,8 @@ type GetInsAttributeResult struct {
 	// Archive backup policy. Valid values: years (yearly); quarters (quarterly);months` (monthly).
 	RegularBackupStrategy string  `pulumi:"regularBackupStrategy"`
 	ResultOutputFile      *string `pulumi:"resultOutputFile"`
+	// SSL encryption.
+	SslConfigs []GetInsAttributeSslConfig `pulumi:"sslConfigs"`
 	// TDE Transparent Data Encryption Configuration.
 	TdeConfigs []GetInsAttributeTdeConfig `pulumi:"tdeConfigs"`
 }
@@ -163,6 +168,11 @@ func (o GetInsAttributeResultOutput) RegularBackupStrategy() pulumi.StringOutput
 
 func (o GetInsAttributeResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetInsAttributeResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+// SSL encryption.
+func (o GetInsAttributeResultOutput) SslConfigs() GetInsAttributeSslConfigArrayOutput {
+	return o.ApplyT(func(v GetInsAttributeResult) []GetInsAttributeSslConfig { return v.SslConfigs }).(GetInsAttributeSslConfigArrayOutput)
 }
 
 // TDE Transparent Data Encryption Configuration.

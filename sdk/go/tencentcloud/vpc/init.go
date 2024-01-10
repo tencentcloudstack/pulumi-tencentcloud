@@ -63,6 +63,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NetworkAclQuintuple{}
 	case "tencentcloud:Vpc/notifyRoutes:NotifyRoutes":
 		r = &NotifyRoutes{}
+	case "tencentcloud:Vpc/peerConnectAcceptOperation:PeerConnectAcceptOperation":
+		r = &PeerConnectAcceptOperation{}
+	case "tencentcloud:Vpc/peerConnectManager:PeerConnectManager":
+		r = &PeerConnectManager{}
+	case "tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation":
+		r = &PeerConnectRejectOperation{}
 	case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
 		r = &ResumeSnapshotInstance{}
 	case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
@@ -189,6 +195,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vpc/notifyRoutes",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/peerConnectAcceptOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/peerConnectManager",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/peerConnectRejectOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

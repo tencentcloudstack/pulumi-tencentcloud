@@ -11,15 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Provides a resource to create a teo applicationProxy
-//
-// ## Import
-//
-// teo application_proxy can be imported using the zoneId#proxyId, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Teo/applicationProxy:ApplicationProxy application_proxy zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456
-// ```
 type ApplicationProxy struct {
 	pulumi.CustomResourceState
 
@@ -37,7 +28,8 @@ type ApplicationProxy struct {
 	PlatType pulumi.StringOutput `pulumi:"platType"`
 	// Proxy ID.
 	ProxyId pulumi.StringOutput `pulumi:"proxyId"`
-	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+	// the name of proxy application.
 	ProxyName pulumi.StringOutput `pulumi:"proxyName"`
 	// Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
 	ProxyType pulumi.StringOutput `pulumi:"proxyType"`
@@ -47,7 +39,8 @@ type ApplicationProxy struct {
 	SecurityType pulumi.IntOutput `pulumi:"securityType"`
 	// Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
 	SessionPersistTime pulumi.IntOutput `pulumi:"sessionPersistTime"`
-	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+	// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Last modification date.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -114,7 +107,8 @@ type applicationProxyState struct {
 	PlatType *string `pulumi:"platType"`
 	// Proxy ID.
 	ProxyId *string `pulumi:"proxyId"`
-	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+	// the name of proxy application.
 	ProxyName *string `pulumi:"proxyName"`
 	// Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
 	ProxyType *string `pulumi:"proxyType"`
@@ -124,7 +118,8 @@ type applicationProxyState struct {
 	SecurityType *int `pulumi:"securityType"`
 	// Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
 	SessionPersistTime *int `pulumi:"sessionPersistTime"`
-	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+	// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 	Status *string `pulumi:"status"`
 	// Last modification date.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -147,7 +142,8 @@ type ApplicationProxyState struct {
 	PlatType pulumi.StringPtrInput
 	// Proxy ID.
 	ProxyId pulumi.StringPtrInput
-	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+	// the name of proxy application.
 	ProxyName pulumi.StringPtrInput
 	// Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
 	ProxyType pulumi.StringPtrInput
@@ -157,7 +153,8 @@ type ApplicationProxyState struct {
 	SecurityType pulumi.IntPtrInput
 	// Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
 	SessionPersistTime pulumi.IntPtrInput
-	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+	// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 	Status pulumi.StringPtrInput
 	// Last modification date.
 	UpdateTime pulumi.StringPtrInput
@@ -176,7 +173,8 @@ type applicationProxyArgs struct {
 	Ipv6 *ApplicationProxyIpv6 `pulumi:"ipv6"`
 	// Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
 	PlatType string `pulumi:"platType"`
-	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+	// the name of proxy application.
 	ProxyName string `pulumi:"proxyName"`
 	// Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
 	ProxyType *string `pulumi:"proxyType"`
@@ -184,7 +182,8 @@ type applicationProxyArgs struct {
 	SecurityType int `pulumi:"securityType"`
 	// Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
 	SessionPersistTime *int `pulumi:"sessionPersistTime"`
-	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+	// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 	Status *string `pulumi:"status"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
@@ -198,7 +197,8 @@ type ApplicationProxyArgs struct {
 	Ipv6 ApplicationProxyIpv6PtrInput
 	// Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
 	PlatType pulumi.StringInput
-	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+	// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+	// the name of proxy application.
 	ProxyName pulumi.StringInput
 	// Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
 	ProxyType pulumi.StringPtrInput
@@ -206,7 +206,8 @@ type ApplicationProxyArgs struct {
 	SecurityType pulumi.IntInput
 	// Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
 	SessionPersistTime pulumi.IntPtrInput
-	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+	// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+	// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 	Status pulumi.StringPtrInput
 	// Site ID.
 	ZoneId pulumi.StringInput
@@ -238,7 +239,7 @@ func (i *ApplicationProxy) ToApplicationProxyOutputWithContext(ctx context.Conte
 // ApplicationProxyArrayInput is an input type that accepts ApplicationProxyArray and ApplicationProxyArrayOutput values.
 // You can construct a concrete instance of `ApplicationProxyArrayInput` via:
 //
-//          ApplicationProxyArray{ ApplicationProxyArgs{...} }
+//	ApplicationProxyArray{ ApplicationProxyArgs{...} }
 type ApplicationProxyArrayInput interface {
 	pulumi.Input
 
@@ -263,7 +264,7 @@ func (i ApplicationProxyArray) ToApplicationProxyArrayOutputWithContext(ctx cont
 // ApplicationProxyMapInput is an input type that accepts ApplicationProxyMap and ApplicationProxyMapOutput values.
 // You can construct a concrete instance of `ApplicationProxyMapInput` via:
 //
-//          ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
+//	ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
 type ApplicationProxyMapInput interface {
 	pulumi.Input
 
@@ -334,7 +335,8 @@ func (o ApplicationProxyOutput) ProxyId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxy) pulumi.StringOutput { return v.ProxyId }).(pulumi.StringOutput)
 }
 
-// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+// the name of proxy application.
 func (o ApplicationProxyOutput) ProxyName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxy) pulumi.StringOutput { return v.ProxyName }).(pulumi.StringOutput)
 }
@@ -359,7 +361,8 @@ func (o ApplicationProxyOutput) SessionPersistTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *ApplicationProxy) pulumi.IntOutput { return v.SessionPersistTime }).(pulumi.IntOutput)
 }
 
-// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
 func (o ApplicationProxyOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxy) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

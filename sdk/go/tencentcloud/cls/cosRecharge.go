@@ -17,41 +17,44 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewCosRecharge(ctx, "cosRecharge", &Cls.CosRechargeArgs{
-// 			Bucket:       pulumi.String("cos-lock-1308919341"),
-// 			BucketRegion: pulumi.String("ap-guangzhou"),
-// 			ExtractRuleInfo: &cls.CosRechargeExtractRuleInfoArgs{
-// 				Backtracking: pulumi.Int(0),
-// 				FilterKeyRegexes: cls.CosRechargeExtractRuleInfoFilterKeyRegexArray{
-// 					&cls.CosRechargeExtractRuleInfoFilterKeyRegexArgs{
-// 						Key:   pulumi.String("__CONTENT__"),
-// 						Regex: pulumi.String("dasd"),
-// 					},
-// 				},
-// 				IsGbk:               pulumi.Int(0),
-// 				JsonStandard:        pulumi.Int(0),
-// 				Keys:                pulumi.StringArray{},
-// 				MetadataType:        pulumi.Int(0),
-// 				UnMatchUpLoadSwitch: pulumi.Bool(false),
-// 			},
-// 			LogType:  pulumi.String("minimalist_log"),
-// 			LogsetId: pulumi.String("dd426d1a-95bc-4bca-b8c2-baa169261812"),
-// 			Prefix:   pulumi.String("test"),
-// 			TopicId:  pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewCosRecharge(ctx, "cosRecharge", &Cls.CosRechargeArgs{
+//				Bucket:       pulumi.String("cos-lock-1308919341"),
+//				BucketRegion: pulumi.String("ap-guangzhou"),
+//				ExtractRuleInfo: &cls.CosRechargeExtractRuleInfoArgs{
+//					Backtracking: pulumi.Int(0),
+//					FilterKeyRegexes: cls.CosRechargeExtractRuleInfoFilterKeyRegexArray{
+//						&cls.CosRechargeExtractRuleInfoFilterKeyRegexArgs{
+//							Key:   pulumi.String("__CONTENT__"),
+//							Regex: pulumi.String("dasd"),
+//						},
+//					},
+//					IsGbk:               pulumi.Int(0),
+//					JsonStandard:        pulumi.Int(0),
+//					Keys:                pulumi.StringArray{},
+//					MetadataType:        pulumi.Int(0),
+//					UnMatchUpLoadSwitch: pulumi.Bool(false),
+//				},
+//				LogType:  pulumi.String("minimalist_log"),
+//				LogsetId: pulumi.String("dd426d1a-95bc-4bca-b8c2-baa169261812"),
+//				Prefix:   pulumi.String("test"),
+//				TopicId:  pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // cls cos_recharge can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id
+//
+//	$ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id
+//
 // ```
 type CosRecharge struct {
 	pulumi.CustomResourceState
@@ -246,7 +251,7 @@ func (i *CosRecharge) ToCosRechargeOutputWithContext(ctx context.Context) CosRec
 // CosRechargeArrayInput is an input type that accepts CosRechargeArray and CosRechargeArrayOutput values.
 // You can construct a concrete instance of `CosRechargeArrayInput` via:
 //
-//          CosRechargeArray{ CosRechargeArgs{...} }
+//	CosRechargeArray{ CosRechargeArgs{...} }
 type CosRechargeArrayInput interface {
 	pulumi.Input
 
@@ -271,7 +276,7 @@ func (i CosRechargeArray) ToCosRechargeArrayOutputWithContext(ctx context.Contex
 // CosRechargeMapInput is an input type that accepts CosRechargeMap and CosRechargeMapOutput values.
 // You can construct a concrete instance of `CosRechargeMapInput` via:
 //
-//          CosRechargeMap{ "key": CosRechargeArgs{...} }
+//	CosRechargeMap{ "key": CosRechargeArgs{...} }
 type CosRechargeMapInput interface {
 	pulumi.Input
 

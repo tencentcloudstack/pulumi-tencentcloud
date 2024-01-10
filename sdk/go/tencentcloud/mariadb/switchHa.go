@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewSwitchHa(ctx, "switchHa", &Mariadb.SwitchHaArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 			Zone:       pulumi.String("ap-guangzhou-2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewSwitchHa(ctx, "switchHa", &Mariadb.SwitchHaArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//				Zone:       pulumi.String("ap-guangzhou-2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SwitchHa struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *SwitchHa) ToSwitchHaOutputWithContext(ctx context.Context) SwitchHaOutp
 // SwitchHaArrayInput is an input type that accepts SwitchHaArray and SwitchHaArrayOutput values.
 // You can construct a concrete instance of `SwitchHaArrayInput` via:
 //
-//          SwitchHaArray{ SwitchHaArgs{...} }
+//	SwitchHaArray{ SwitchHaArgs{...} }
 type SwitchHaArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i SwitchHaArray) ToSwitchHaArrayOutputWithContext(ctx context.Context) Swi
 // SwitchHaMapInput is an input type that accepts SwitchHaMap and SwitchHaMapOutput values.
 // You can construct a concrete instance of `SwitchHaMapInput` via:
 //
-//          SwitchHaMap{ "key": SwitchHaArgs{...} }
+//	SwitchHaMap{ "key": SwitchHaArgs{...} }
 type SwitchHaMapInput interface {
 	pulumi.Input
 

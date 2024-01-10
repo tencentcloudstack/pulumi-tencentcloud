@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewStartBackupIncrementalMigration(ctx, "startBackupIncrementalMigration", &Sqlserver.StartBackupIncrementalMigrationArgs{
-// 			BackupMigrationId:      pulumi.String("mssql-backup-migration-cg0ffgqt"),
-// 			IncrementalMigrationId: pulumi.String("mssql-incremental-migration-kp7bgv8p"),
-// 			InstanceId:             pulumi.String("mssql-i1z41iwd"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewStartBackupIncrementalMigration(ctx, "startBackupIncrementalMigration", &Sqlserver.StartBackupIncrementalMigrationArgs{
+//				BackupMigrationId:      pulumi.String("mssql-backup-migration-cg0ffgqt"),
+//				IncrementalMigrationId: pulumi.String("mssql-incremental-migration-kp7bgv8p"),
+//				InstanceId:             pulumi.String("mssql-i1z41iwd"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StartBackupIncrementalMigration struct {
 	pulumi.CustomResourceState
@@ -153,7 +156,7 @@ func (i *StartBackupIncrementalMigration) ToStartBackupIncrementalMigrationOutpu
 // StartBackupIncrementalMigrationArrayInput is an input type that accepts StartBackupIncrementalMigrationArray and StartBackupIncrementalMigrationArrayOutput values.
 // You can construct a concrete instance of `StartBackupIncrementalMigrationArrayInput` via:
 //
-//          StartBackupIncrementalMigrationArray{ StartBackupIncrementalMigrationArgs{...} }
+//	StartBackupIncrementalMigrationArray{ StartBackupIncrementalMigrationArgs{...} }
 type StartBackupIncrementalMigrationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +181,7 @@ func (i StartBackupIncrementalMigrationArray) ToStartBackupIncrementalMigrationA
 // StartBackupIncrementalMigrationMapInput is an input type that accepts StartBackupIncrementalMigrationMap and StartBackupIncrementalMigrationMapOutput values.
 // You can construct a concrete instance of `StartBackupIncrementalMigrationMapInput` via:
 //
-//          StartBackupIncrementalMigrationMap{ "key": StartBackupIncrementalMigrationArgs{...} }
+//	StartBackupIncrementalMigrationMap{ "key": StartBackupIncrementalMigrationArgs{...} }
 type StartBackupIncrementalMigrationMapInput interface {
 	pulumi.Input
 

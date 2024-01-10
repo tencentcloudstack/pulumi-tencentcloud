@@ -19,50 +19,53 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
-// 			CustomerGatewayId:       pulumi.String("cgw-xfqag"),
-// 			IkeDhGroupName:          pulumi.String("GROUP2"),
-// 			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
-// 			IkeLocalAddress:         pulumi.String("1.1.1.1"),
-// 			IkeLocalIdentity:        pulumi.String("ADDRESS"),
-// 			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
-// 			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
-// 			IkeRemoteAddress:        pulumi.String("2.2.2.2"),
-// 			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
-// 			IkeSaLifetimeSeconds:    pulumi.Int(86401),
-// 			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
-// 			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
-// 			IpsecPfsDhGroup:         pulumi.String("NULL"),
-// 			IpsecSaLifetimeSeconds:  pulumi.Int(7200),
-// 			IpsecSaLifetimeTraffic:  pulumi.Int(2570),
-// 			PreShareKey:             pulumi.String("testt"),
-// 			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
-// 				&vpn.ConnectionSecurityGroupPolicyArgs{
-// 					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
-// 					RemoteCidrBlocks: pulumi.StringArray{
-// 						pulumi.String("2.2.2.0/26"),
-// 					},
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("testt"),
-// 			},
-// 			VpcId:        pulumi.String("vpc-dk8zmwuf"),
-// 			VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
+//				CustomerGatewayId:       pulumi.String("cgw-xfqag"),
+//				IkeDhGroupName:          pulumi.String("GROUP2"),
+//				IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
+//				IkeLocalAddress:         pulumi.String("1.1.1.1"),
+//				IkeLocalIdentity:        pulumi.String("ADDRESS"),
+//				IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
+//				IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
+//				IkeRemoteAddress:        pulumi.String("2.2.2.2"),
+//				IkeRemoteIdentity:       pulumi.String("ADDRESS"),
+//				IkeSaLifetimeSeconds:    pulumi.Int(86401),
+//				IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
+//				IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
+//				IpsecPfsDhGroup:         pulumi.String("NULL"),
+//				IpsecSaLifetimeSeconds:  pulumi.Int(7200),
+//				IpsecSaLifetimeTraffic:  pulumi.Int(2570),
+//				PreShareKey:             pulumi.String("testt"),
+//				SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
+//					&vpn.ConnectionSecurityGroupPolicyArgs{
+//						LocalCidrBlock: pulumi.String("172.16.0.0/16"),
+//						RemoteCidrBlocks: pulumi.StringArray{
+//							pulumi.String("2.2.2.0/26"),
+//						},
+//					},
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("testt"),
+//				},
+//				VpcId:        pulumi.String("vpc-dk8zmwuf"),
+//				VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -70,7 +73,9 @@ import (
 // VPN connection can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+//
+//	$ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+//
 // ```
 type Connection struct {
 	pulumi.CustomResourceState
@@ -135,9 +140,9 @@ type Connection struct {
 	NetStatus pulumi.StringOutput `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringOutput `pulumi:"preShareKey"`
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType pulumi.StringOutput `pulumi:"routeType"`
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayOutput `pulumi:"securityGroupPolicies"`
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State pulumi.StringOutput `pulumi:"state"`
@@ -163,9 +168,6 @@ func NewConnection(ctx *pulumi.Context,
 	}
 	if args.PreShareKey == nil {
 		return nil, errors.New("invalid value for required argument 'PreShareKey'")
-	}
-	if args.SecurityGroupPolicies == nil {
-		return nil, errors.New("invalid value for required argument 'SecurityGroupPolicies'")
 	}
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
@@ -253,9 +255,9 @@ type connectionState struct {
 	NetStatus *string `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey *string `pulumi:"preShareKey"`
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType *string `pulumi:"routeType"`
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State *string `pulumi:"state"`
@@ -330,9 +332,9 @@ type ConnectionState struct {
 	NetStatus pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringPtrInput
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType pulumi.StringPtrInput
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State pulumi.StringPtrInput
@@ -403,7 +405,9 @@ type connectionArgs struct {
 	Name *string `pulumi:"name"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey string `pulumi:"preShareKey"`
-	// Security group policy of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	RouteType *string `pulumi:"routeType"`
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -467,7 +471,9 @@ type ConnectionArgs struct {
 	Name pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringInput
-	// Security group policy of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	RouteType pulumi.StringPtrInput
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
@@ -503,7 +509,7 @@ func (i *Connection) ToConnectionOutputWithContext(ctx context.Context) Connecti
 // ConnectionArrayInput is an input type that accepts ConnectionArray and ConnectionArrayOutput values.
 // You can construct a concrete instance of `ConnectionArrayInput` via:
 //
-//          ConnectionArray{ ConnectionArgs{...} }
+//	ConnectionArray{ ConnectionArgs{...} }
 type ConnectionArrayInput interface {
 	pulumi.Input
 
@@ -528,7 +534,7 @@ func (i ConnectionArray) ToConnectionArrayOutputWithContext(ctx context.Context)
 // ConnectionMapInput is an input type that accepts ConnectionMap and ConnectionMapOutput values.
 // You can construct a concrete instance of `ConnectionMapInput` via:
 //
-//          ConnectionMap{ "key": ConnectionArgs{...} }
+//	ConnectionMap{ "key": ConnectionArgs{...} }
 type ConnectionMapInput interface {
 	pulumi.Input
 
@@ -714,12 +720,12 @@ func (o ConnectionOutput) PreShareKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.PreShareKey }).(pulumi.StringOutput)
 }
 
-// Route type of the VPN connection.
+// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 func (o ConnectionOutput) RouteType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.RouteType }).(pulumi.StringOutput)
 }
 
-// Security group policy of the VPN connection.
+// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 func (o ConnectionOutput) SecurityGroupPolicies() ConnectionSecurityGroupPolicyArrayOutput {
 	return o.ApplyT(func(v *Connection) ConnectionSecurityGroupPolicyArrayOutput { return v.SecurityGroupPolicies }).(ConnectionSecurityGroupPolicyArrayOutput)
 }

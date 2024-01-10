@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewClusterResourcePackagesAttachment(ctx, "clusterResourcePackagesAttachment", &Cynosdb.ClusterResourcePackagesAttachmentArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-q1d8151n"),
-// 			PackageIds: pulumi.StringArray{
-// 				pulumi.String("package-hy4d2ppl"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewClusterResourcePackagesAttachment(ctx, "clusterResourcePackagesAttachment", &Cynosdb.ClusterResourcePackagesAttachmentArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-q1d8151n"),
+//				PackageIds: pulumi.StringArray{
+//					pulumi.String("package-hy4d2ppl"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
+//
+//	$ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
+//
 // ```
 type ClusterResourcePackagesAttachment struct {
 	pulumi.CustomResourceState
@@ -149,7 +154,7 @@ func (i *ClusterResourcePackagesAttachment) ToClusterResourcePackagesAttachmentO
 // ClusterResourcePackagesAttachmentArrayInput is an input type that accepts ClusterResourcePackagesAttachmentArray and ClusterResourcePackagesAttachmentArrayOutput values.
 // You can construct a concrete instance of `ClusterResourcePackagesAttachmentArrayInput` via:
 //
-//          ClusterResourcePackagesAttachmentArray{ ClusterResourcePackagesAttachmentArgs{...} }
+//	ClusterResourcePackagesAttachmentArray{ ClusterResourcePackagesAttachmentArgs{...} }
 type ClusterResourcePackagesAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +179,7 @@ func (i ClusterResourcePackagesAttachmentArray) ToClusterResourcePackagesAttachm
 // ClusterResourcePackagesAttachmentMapInput is an input type that accepts ClusterResourcePackagesAttachmentMap and ClusterResourcePackagesAttachmentMapOutput values.
 // You can construct a concrete instance of `ClusterResourcePackagesAttachmentMapInput` via:
 //
-//          ClusterResourcePackagesAttachmentMap{ "key": ClusterResourcePackagesAttachmentArgs{...} }
+//	ClusterResourcePackagesAttachmentMap{ "key": ClusterResourcePackagesAttachmentArgs{...} }
 type ClusterResourcePackagesAttachmentMapInput interface {
 	pulumi.Input
 

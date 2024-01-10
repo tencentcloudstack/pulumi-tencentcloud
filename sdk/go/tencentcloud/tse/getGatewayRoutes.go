@@ -10,6 +10,36 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this data source to query detailed information of tse gatewayRoutes
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayRoutes(ctx, &tse.GetGatewayRoutesArgs{
+//				GatewayId:   "gateway-ddbb709b",
+//				RouteName:   pulumi.StringRef("keep-routes"),
+//				ServiceName: pulumi.StringRef("test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupGatewayRoutes(ctx *pulumi.Context, args *LookupGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayRoutesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupGatewayRoutesResult
@@ -22,21 +52,27 @@ func LookupGatewayRoutes(ctx *pulumi.Context, args *LookupGatewayRoutesArgs, opt
 
 // A collection of arguments for invoking getGatewayRoutes.
 type LookupGatewayRoutesArgs struct {
-	GatewayId        string  `pulumi:"gatewayId"`
+	// gateway ID.
+	GatewayId string `pulumi:"gatewayId"`
+	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	RouteName        *string `pulumi:"routeName"`
-	ServiceName      *string `pulumi:"serviceName"`
+	// route name.
+	RouteName *string `pulumi:"routeName"`
+	// service name.
+	ServiceName *string `pulumi:"serviceName"`
 }
 
 // A collection of values returned by getGatewayRoutes.
 type LookupGatewayRoutesResult struct {
 	GatewayId string `pulumi:"gatewayId"`
 	// The provider-assigned unique ID for this managed resource.
-	Id               string                   `pulumi:"id"`
-	ResultOutputFile *string                  `pulumi:"resultOutputFile"`
-	Results          []GetGatewayRoutesResult `pulumi:"results"`
-	RouteName        *string                  `pulumi:"routeName"`
-	ServiceName      *string                  `pulumi:"serviceName"`
+	Id               string  `pulumi:"id"`
+	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	// result.
+	Results   []GetGatewayRoutesResult `pulumi:"results"`
+	RouteName *string                  `pulumi:"routeName"`
+	// service name.
+	ServiceName *string `pulumi:"serviceName"`
 }
 
 func LookupGatewayRoutesOutput(ctx *pulumi.Context, args LookupGatewayRoutesOutputArgs, opts ...pulumi.InvokeOption) LookupGatewayRoutesResultOutput {
@@ -54,10 +90,14 @@ func LookupGatewayRoutesOutput(ctx *pulumi.Context, args LookupGatewayRoutesOutp
 
 // A collection of arguments for invoking getGatewayRoutes.
 type LookupGatewayRoutesOutputArgs struct {
-	GatewayId        pulumi.StringInput    `pulumi:"gatewayId"`
+	// gateway ID.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	RouteName        pulumi.StringPtrInput `pulumi:"routeName"`
-	ServiceName      pulumi.StringPtrInput `pulumi:"serviceName"`
+	// route name.
+	RouteName pulumi.StringPtrInput `pulumi:"routeName"`
+	// service name.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
 }
 
 func (LookupGatewayRoutesOutputArgs) ElementType() reflect.Type {
@@ -92,6 +132,7 @@ func (o LookupGatewayRoutesResultOutput) ResultOutputFile() pulumi.StringPtrOutp
 	return o.ApplyT(func(v LookupGatewayRoutesResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
+// result.
 func (o LookupGatewayRoutesResultOutput) Results() GetGatewayRoutesResultArrayOutput {
 	return o.ApplyT(func(v LookupGatewayRoutesResult) []GetGatewayRoutesResult { return v.Results }).(GetGatewayRoutesResultArrayOutput)
 }
@@ -100,6 +141,7 @@ func (o LookupGatewayRoutesResultOutput) RouteName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupGatewayRoutesResult) *string { return v.RouteName }).(pulumi.StringPtrOutput)
 }
 
+// service name.
 func (o LookupGatewayRoutesResultOutput) ServiceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupGatewayRoutesResult) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
 }

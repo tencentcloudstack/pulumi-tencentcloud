@@ -16,6 +16,7 @@ class UsagePlanAttachmentArgs:
                  environment: pulumi.Input[str],
                  service_id: pulumi.Input[str],
                  usage_plan_id: pulumi.Input[str],
+                 access_key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  api_id: Optional[pulumi.Input[str]] = None,
                  bind_type: Optional[pulumi.Input[str]] = None):
         """
@@ -23,12 +24,15 @@ class UsagePlanAttachmentArgs:
         :param pulumi.Input[str] environment: The environment to be bound. Valid values: `test`, `prepub`, `release`.
         :param pulumi.Input[str] service_id: ID of the service.
         :param pulumi.Input[str] usage_plan_id: ID of the usage plan.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] access_key_ids: Array of key IDs to be bound.
         :param pulumi.Input[str] api_id: ID of the API. This parameter will be required when `bind_type` is `API`.
         :param pulumi.Input[str] bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
         """
         pulumi.set(__self__, "environment", environment)
         pulumi.set(__self__, "service_id", service_id)
         pulumi.set(__self__, "usage_plan_id", usage_plan_id)
+        if access_key_ids is not None:
+            pulumi.set(__self__, "access_key_ids", access_key_ids)
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if bind_type is not None:
@@ -71,6 +75,18 @@ class UsagePlanAttachmentArgs:
         pulumi.set(self, "usage_plan_id", value)
 
     @property
+    @pulumi.getter(name="accessKeyIds")
+    def access_key_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Array of key IDs to be bound.
+        """
+        return pulumi.get(self, "access_key_ids")
+
+    @access_key_ids.setter
+    def access_key_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "access_key_ids", value)
+
+    @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -98,6 +114,7 @@ class UsagePlanAttachmentArgs:
 @pulumi.input_type
 class _UsagePlanAttachmentState:
     def __init__(__self__, *,
+                 access_key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  api_id: Optional[pulumi.Input[str]] = None,
                  bind_type: Optional[pulumi.Input[str]] = None,
                  environment: Optional[pulumi.Input[str]] = None,
@@ -105,12 +122,15 @@ class _UsagePlanAttachmentState:
                  usage_plan_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering UsagePlanAttachment resources.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] access_key_ids: Array of key IDs to be bound.
         :param pulumi.Input[str] api_id: ID of the API. This parameter will be required when `bind_type` is `API`.
         :param pulumi.Input[str] bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
         :param pulumi.Input[str] environment: The environment to be bound. Valid values: `test`, `prepub`, `release`.
         :param pulumi.Input[str] service_id: ID of the service.
         :param pulumi.Input[str] usage_plan_id: ID of the usage plan.
         """
+        if access_key_ids is not None:
+            pulumi.set(__self__, "access_key_ids", access_key_ids)
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if bind_type is not None:
@@ -121,6 +141,18 @@ class _UsagePlanAttachmentState:
             pulumi.set(__self__, "service_id", service_id)
         if usage_plan_id is not None:
             pulumi.set(__self__, "usage_plan_id", usage_plan_id)
+
+    @property
+    @pulumi.getter(name="accessKeyIds")
+    def access_key_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Array of key IDs to be bound.
+        """
+        return pulumi.get(self, "access_key_ids")
+
+    @access_key_ids.setter
+    def access_key_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "access_key_ids", value)
 
     @property
     @pulumi.getter(name="apiId")
@@ -188,6 +220,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 access_key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  api_id: Optional[pulumi.Input[str]] = None,
                  bind_type: Optional[pulumi.Input[str]] = None,
                  environment: Optional[pulumi.Input[str]] = None,
@@ -197,29 +230,32 @@ class UsagePlanAttachment(pulumi.CustomResource):
         """
         Use this resource to attach API gateway usage plan to service.
 
+        > **NOTE:** If the `auth_type` parameter of API is not `SECRET`, it cannot be bound access key.
+
         ## Example Usage
+        ### Normal creation
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plan = tencentcloud.api_gateway.UsagePlan("plan",
-            usage_plan_name="my_plan",
-            usage_plan_desc="nice plan",
+        example_usage_plan = tencentcloud.api_gateway.UsagePlan("exampleUsagePlan",
+            usage_plan_name="tf_example",
+            usage_plan_desc="desc.",
             max_request_num=100,
             max_request_num_pre_sec=10)
-        service = tencentcloud.api_gateway.Service("service",
-            service_name="niceservice",
+        example_service = tencentcloud.api_gateway.Service("exampleService",
+            service_name="tf_example",
             protocol="http&https",
-            service_desc="your nice service",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
             ip_version="IPv4")
-        api = tencentcloud.api_gateway.Api("api",
-            service_id=service.id,
-            api_name="hello_update",
+        example_api = tencentcloud.api_gateway.Api("exampleApi",
+            service_id=example_service.id,
+            api_name="tf_example",
             api_desc="my hello api update",
             auth_type="SECRET",
             protocol="HTTP",
@@ -230,8 +266,8 @@ class UsagePlanAttachment(pulumi.CustomResource):
                 name="email",
                 position="QUERY",
                 type="string",
-                desc="your email please?",
-                default_value="tom@qq.com",
+                desc="desc.",
+                default_value="test@qq.com",
                 required=True,
             )],
             service_config_type="HTTP",
@@ -243,18 +279,35 @@ class UsagePlanAttachment(pulumi.CustomResource):
             response_success_example="<note>success</note>",
             response_fail_example="<note>fail</note>",
             response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
-                code=10,
+                code=500,
                 msg="system error",
                 desc="system error code",
-                converted_code=-10,
+                converted_code=5000,
                 need_convert=True,
             )])
-        attach_service = tencentcloud.api_gateway.UsagePlanAttachment("attachService",
-            usage_plan_id=plan.id,
-            service_id=service.id,
+        example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
+            usage_plan_id=example_usage_plan.id,
+            service_id=example_service.id,
             environment="release",
             bind_type="API",
-            api_id=api.id)
+            api_id=example_api.id)
+        ```
+        ### Bind the key to a usage plan
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_api_key = tencentcloud.api_gateway.ApiKey("exampleApiKey",
+            secret_name="tf_example",
+            status="on")
+        example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
+            usage_plan_id=tencentcloud_api_gateway_usage_plan["example"]["id"],
+            service_id=tencentcloud_api_gateway_service["example"]["id"],
+            environment="release",
+            bind_type="API",
+            api_id=tencentcloud_api_gateway_api["example"]["id"],
+            access_key_ids=[example_api_key.id])
         ```
 
         ## Import
@@ -267,6 +320,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] access_key_ids: Array of key IDs to be bound.
         :param pulumi.Input[str] api_id: ID of the API. This parameter will be required when `bind_type` is `API`.
         :param pulumi.Input[str] bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
         :param pulumi.Input[str] environment: The environment to be bound. Valid values: `test`, `prepub`, `release`.
@@ -282,29 +336,32 @@ class UsagePlanAttachment(pulumi.CustomResource):
         """
         Use this resource to attach API gateway usage plan to service.
 
+        > **NOTE:** If the `auth_type` parameter of API is not `SECRET`, it cannot be bound access key.
+
         ## Example Usage
+        ### Normal creation
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plan = tencentcloud.api_gateway.UsagePlan("plan",
-            usage_plan_name="my_plan",
-            usage_plan_desc="nice plan",
+        example_usage_plan = tencentcloud.api_gateway.UsagePlan("exampleUsagePlan",
+            usage_plan_name="tf_example",
+            usage_plan_desc="desc.",
             max_request_num=100,
             max_request_num_pre_sec=10)
-        service = tencentcloud.api_gateway.Service("service",
-            service_name="niceservice",
+        example_service = tencentcloud.api_gateway.Service("exampleService",
+            service_name="tf_example",
             protocol="http&https",
-            service_desc="your nice service",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
             ip_version="IPv4")
-        api = tencentcloud.api_gateway.Api("api",
-            service_id=service.id,
-            api_name="hello_update",
+        example_api = tencentcloud.api_gateway.Api("exampleApi",
+            service_id=example_service.id,
+            api_name="tf_example",
             api_desc="my hello api update",
             auth_type="SECRET",
             protocol="HTTP",
@@ -315,8 +372,8 @@ class UsagePlanAttachment(pulumi.CustomResource):
                 name="email",
                 position="QUERY",
                 type="string",
-                desc="your email please?",
-                default_value="tom@qq.com",
+                desc="desc.",
+                default_value="test@qq.com",
                 required=True,
             )],
             service_config_type="HTTP",
@@ -328,18 +385,35 @@ class UsagePlanAttachment(pulumi.CustomResource):
             response_success_example="<note>success</note>",
             response_fail_example="<note>fail</note>",
             response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
-                code=10,
+                code=500,
                 msg="system error",
                 desc="system error code",
-                converted_code=-10,
+                converted_code=5000,
                 need_convert=True,
             )])
-        attach_service = tencentcloud.api_gateway.UsagePlanAttachment("attachService",
-            usage_plan_id=plan.id,
-            service_id=service.id,
+        example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
+            usage_plan_id=example_usage_plan.id,
+            service_id=example_service.id,
             environment="release",
             bind_type="API",
-            api_id=api.id)
+            api_id=example_api.id)
+        ```
+        ### Bind the key to a usage plan
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_api_key = tencentcloud.api_gateway.ApiKey("exampleApiKey",
+            secret_name="tf_example",
+            status="on")
+        example_usage_plan_attachment = tencentcloud.api_gateway.UsagePlanAttachment("exampleUsagePlanAttachment",
+            usage_plan_id=tencentcloud_api_gateway_usage_plan["example"]["id"],
+            service_id=tencentcloud_api_gateway_service["example"]["id"],
+            environment="release",
+            bind_type="API",
+            api_id=tencentcloud_api_gateway_api["example"]["id"],
+            access_key_ids=[example_api_key.id])
         ```
 
         ## Import
@@ -365,6 +439,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 access_key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  api_id: Optional[pulumi.Input[str]] = None,
                  bind_type: Optional[pulumi.Input[str]] = None,
                  environment: Optional[pulumi.Input[str]] = None,
@@ -384,6 +459,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = UsagePlanAttachmentArgs.__new__(UsagePlanAttachmentArgs)
 
+            __props__.__dict__["access_key_ids"] = access_key_ids
             __props__.__dict__["api_id"] = api_id
             __props__.__dict__["bind_type"] = bind_type
             if environment is None and not opts.urn:
@@ -405,6 +481,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            access_key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             api_id: Optional[pulumi.Input[str]] = None,
             bind_type: Optional[pulumi.Input[str]] = None,
             environment: Optional[pulumi.Input[str]] = None,
@@ -417,6 +494,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] access_key_ids: Array of key IDs to be bound.
         :param pulumi.Input[str] api_id: ID of the API. This parameter will be required when `bind_type` is `API`.
         :param pulumi.Input[str] bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
         :param pulumi.Input[str] environment: The environment to be bound. Valid values: `test`, `prepub`, `release`.
@@ -427,12 +505,21 @@ class UsagePlanAttachment(pulumi.CustomResource):
 
         __props__ = _UsagePlanAttachmentState.__new__(_UsagePlanAttachmentState)
 
+        __props__.__dict__["access_key_ids"] = access_key_ids
         __props__.__dict__["api_id"] = api_id
         __props__.__dict__["bind_type"] = bind_type
         __props__.__dict__["environment"] = environment
         __props__.__dict__["service_id"] = service_id
         __props__.__dict__["usage_plan_id"] = usage_plan_id
         return UsagePlanAttachment(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="accessKeyIds")
+    def access_key_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Array of key IDs to be bound.
+        """
+        return pulumi.get(self, "access_key_ids")
 
     @property
     @pulumi.getter(name="apiId")

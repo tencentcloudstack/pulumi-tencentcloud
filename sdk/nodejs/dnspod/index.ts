@@ -5,26 +5,73 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./customLine";
+export * from "./domainAlias";
 export * from "./domainInstance";
+export * from "./domainLock";
+export * from "./downloadSnapshotOperation";
+export * from "./getDomainAnalytics";
+export * from "./getDomainList";
+export * from "./getDomainLogList";
+export * from "./getRecordAnalytics";
+export * from "./getRecordLineList";
+export * from "./getRecordList";
+export * from "./getRecordType";
 export * from "./getRecords";
+export * from "./modifyDomainOwnerOperation";
+export * from "./modifyRecordGroupOperation";
 export * from "./record";
+export * from "./recordGroup";
+export * from "./snapshotConfig";
 
 // Import resources to register:
+import { CustomLine } from "./customLine";
+import { DomainAlias } from "./domainAlias";
 import { DomainInstance } from "./domainInstance";
+import { DomainLock } from "./domainLock";
+import { DownloadSnapshotOperation } from "./downloadSnapshotOperation";
+import { ModifyDomainOwnerOperation } from "./modifyDomainOwnerOperation";
+import { ModifyRecordGroupOperation } from "./modifyRecordGroupOperation";
 import { Record } from "./record";
+import { RecordGroup } from "./recordGroup";
+import { SnapshotConfig } from "./snapshotConfig";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Dnspod/customLine:CustomLine":
+                return new CustomLine(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/domainAlias:DomainAlias":
+                return new DomainAlias(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/domainInstance:DomainInstance":
                 return new DomainInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/domainLock:DomainLock":
+                return new DomainLock(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation":
+                return new DownloadSnapshotOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation":
+                return new ModifyDomainOwnerOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation":
+                return new ModifyRecordGroupOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/record:Record":
                 return new Record(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/recordGroup:RecordGroup":
+                return new RecordGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/snapshotConfig:SnapshotConfig":
+                return new SnapshotConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/customLine", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainAlias", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainLock", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/downloadSnapshotOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/modifyDomainOwnerOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/modifyRecordGroupOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/record", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/recordGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/snapshotConfig", _module)

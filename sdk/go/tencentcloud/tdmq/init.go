@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Namespace{}
 	case "tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment":
 		r = &NamespaceRoleAttachment{}
+	case "tencentcloud:Tdmq/professionalCluster:ProfessionalCluster":
+		r = &ProfessionalCluster{}
 	case "tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser":
 		r = &RabbitmqUser{}
 	case "tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance":
@@ -51,8 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Role{}
 	case "tencentcloud:Tdmq/sendRocketmqMessage:SendRocketmqMessage":
 		r = &SendRocketmqMessage{}
-	case "tencentcloud:Tdmq/subscriptionAttachment:SubscriptionAttachment":
-		r = &SubscriptionAttachment{}
+	case "tencentcloud:Tdmq/subscription:Subscription":
+		r = &Subscription{}
 	case "tencentcloud:Tdmq/topic:Topic":
 		r = &Topic{}
 	default:
@@ -81,6 +83,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tdmq/namespaceRoleAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tdmq/professionalCluster",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -145,7 +152,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tdmq/subscriptionAttachment",
+		"Tdmq/subscription",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

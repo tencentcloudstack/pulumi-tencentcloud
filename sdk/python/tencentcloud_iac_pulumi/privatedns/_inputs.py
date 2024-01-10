@@ -11,7 +11,10 @@ from .. import _utilities
 __all__ = [
     'ZoneAccountVpcSetArgs',
     'ZoneTagSetArgs',
+    'ZoneVpcAttachmentAccountVpcSetArgs',
+    'ZoneVpcAttachmentVpcSetArgs',
     'ZoneVpcSetArgs',
+    'GetRecordsFilterArgs',
 ]
 
 @pulumi.input_type
@@ -119,6 +122,95 @@ class ZoneTagSetArgs:
 
 
 @pulumi.input_type
+class ZoneVpcAttachmentAccountVpcSetArgs:
+    def __init__(__self__, *,
+                 region: pulumi.Input[str],
+                 uin: pulumi.Input[str],
+                 uniq_vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] region: Vpc region.
+        :param pulumi.Input[str] uin: Vpc owner uin. To grant role authorization to this account.
+        :param pulumi.Input[str] uniq_vpc_id: Uniq Vpc Id.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Vpc region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter
+    def uin(self) -> pulumi.Input[str]:
+        """
+        Vpc owner uin. To grant role authorization to this account.
+        """
+        return pulumi.get(self, "uin")
+
+    @uin.setter
+    def uin(self, value: pulumi.Input[str]):
+        pulumi.set(self, "uin", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> pulumi.Input[str]:
+        """
+        Uniq Vpc Id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+
+@pulumi.input_type
+class ZoneVpcAttachmentVpcSetArgs:
+    def __init__(__self__, *,
+                 region: pulumi.Input[str],
+                 uniq_vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] region: Vpc region.
+        :param pulumi.Input[str] uniq_vpc_id: Uniq Vpc Id.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Vpc region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> pulumi.Input[str]:
+        """
+        Uniq Vpc Id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+
+@pulumi.input_type
 class ZoneVpcSetArgs:
     def __init__(__self__, *,
                  region: pulumi.Input[str],
@@ -153,5 +245,42 @@ class ZoneVpcSetArgs:
     @uniq_vpc_id.setter
     def uniq_vpc_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "uniq_vpc_id", value)
+
+
+@pulumi.input_type
+class GetRecordsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Parameter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

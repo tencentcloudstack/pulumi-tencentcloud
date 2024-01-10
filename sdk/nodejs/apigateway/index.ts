@@ -7,43 +7,60 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./api";
 export * from "./apiApp";
+export * from "./apiAppAttachment";
 export * from "./apiDoc";
 export * from "./apiKey";
 export * from "./apiKeyAttachment";
 export * from "./customDomain";
+export * from "./getApiAppApi";
+export * from "./getApiAppService";
 export * from "./getApiApps";
 export * from "./getApiDocs";
 export * from "./getApiKeys";
+export * from "./getApiPlugins";
+export * from "./getApiUsagePlans";
 export * from "./getApis";
+export * from "./getBindApiAppsStatus";
 export * from "./getCustomerDomains";
 export * from "./getIpStrategies";
+export * from "./getPlugins";
+export * from "./getServiceEnvironmentList";
+export * from "./getServiceReleaseVersions";
 export * from "./getServices";
 export * from "./getThrottlingApis";
 export * from "./getThrottlingServices";
+export * from "./getUpstreams";
 export * from "./getUsagePlanEnvironments";
 export * from "./getUsagePlans";
+export * from "./importOpenApi";
 export * from "./ipStrategy";
 export * from "./plugin";
 export * from "./pluginAttachment";
 export * from "./service";
 export * from "./serviceRelease";
 export * from "./strategyAttachment";
+export * from "./updateApiAppKey";
+export * from "./upstream";
 export * from "./usagePlan";
 export * from "./usagePlanAttachment";
 
 // Import resources to register:
 import { Api } from "./api";
 import { ApiApp } from "./apiApp";
+import { ApiAppAttachment } from "./apiAppAttachment";
 import { ApiDoc } from "./apiDoc";
 import { ApiKey } from "./apiKey";
 import { ApiKeyAttachment } from "./apiKeyAttachment";
 import { CustomDomain } from "./customDomain";
+import { ImportOpenApi } from "./importOpenApi";
 import { IpStrategy } from "./ipStrategy";
 import { Plugin } from "./plugin";
 import { PluginAttachment } from "./pluginAttachment";
 import { Service } from "./service";
 import { ServiceRelease } from "./serviceRelease";
 import { StrategyAttachment } from "./strategyAttachment";
+import { UpdateApiAppKey } from "./updateApiAppKey";
+import { Upstream } from "./upstream";
 import { UsagePlan } from "./usagePlan";
 import { UsagePlanAttachment } from "./usagePlanAttachment";
 
@@ -55,6 +72,8 @@ const _module = {
                 return new Api(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/apiApp:ApiApp":
                 return new ApiApp(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment":
+                return new ApiAppAttachment(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/apiDoc:ApiDoc":
                 return new ApiDoc(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/apiKey:ApiKey":
@@ -63,6 +82,8 @@ const _module = {
                 return new ApiKeyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/customDomain:CustomDomain":
                 return new CustomDomain(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/importOpenApi:ImportOpenApi":
+                return new ImportOpenApi(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
                 return new IpStrategy(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/plugin:Plugin":
@@ -75,6 +96,10 @@ const _module = {
                 return new ServiceRelease(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment":
                 return new StrategyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey":
+                return new UpdateApiAppKey(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/upstream:Upstream":
+                return new Upstream(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
                 return new UsagePlan(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment":
@@ -86,15 +111,19 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/api", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiApp", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiAppAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiDoc", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKey", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKeyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/customDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/importOpenApi", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/ipStrategy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/plugin", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/pluginAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/service", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/serviceRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/strategyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/updateApiAppKey", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/upstream", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlan", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlanAttachment", _module)

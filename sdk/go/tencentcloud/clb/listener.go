@@ -20,24 +20,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "hTTPListener", &Clb.ListenerArgs{
-// 			ClbId:        pulumi.String("lb-0lh5au7v"),
-// 			ListenerName: pulumi.String("test_listener"),
-// 			Port:         pulumi.Int(80),
-// 			Protocol:     pulumi.String("HTTP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "hTTPListener", &Clb.ListenerArgs{
+//				ClbId:        pulumi.String("lb-0lh5au7v"),
+//				ListenerName: pulumi.String("test_listener"),
+//				Port:         pulumi.Int(80),
+//				Protocol:     pulumi.String("HTTP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### TCP/UDP Listener
 //
@@ -45,36 +48,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "tCPListener", &Clb.ListenerArgs{
-// 			ClbId:                   pulumi.String("lb-0lh5au7v"),
-// 			HealthCheckHealthNum:    pulumi.Int(3),
-// 			HealthCheckHttpCode:     pulumi.Int(2),
-// 			HealthCheckHttpMethod:   pulumi.String("GET"),
-// 			HealthCheckHttpVersion:  pulumi.String("HTTP/1.0"),
-// 			HealthCheckIntervalTime: pulumi.Int(5),
-// 			HealthCheckPort:         pulumi.Int(200),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckTimeOut:      pulumi.Int(2),
-// 			HealthCheckType:         pulumi.String("HTTP"),
-// 			HealthCheckUnhealthNum:  pulumi.Int(3),
-// 			ListenerName:            pulumi.String("test_listener"),
-// 			Port:                    pulumi.Int(80),
-// 			Protocol:                pulumi.String("TCP"),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			SessionExpireTime:       pulumi.Int(30),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "tCPListener", &Clb.ListenerArgs{
+//				ClbId:                   pulumi.String("lb-0lh5au7v"),
+//				HealthCheckHealthNum:    pulumi.Int(3),
+//				HealthCheckHttpCode:     pulumi.Int(2),
+//				HealthCheckHttpMethod:   pulumi.String("GET"),
+//				HealthCheckHttpVersion:  pulumi.String("HTTP/1.0"),
+//				HealthCheckIntervalTime: pulumi.Int(5),
+//				HealthCheckPort:         pulumi.Int(200),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckTimeOut:      pulumi.Int(2),
+//				HealthCheckType:         pulumi.String("HTTP"),
+//				HealthCheckUnhealthNum:  pulumi.Int(3),
+//				ListenerName:            pulumi.String("test_listener"),
+//				Port:                    pulumi.Int(80),
+//				Protocol:                pulumi.String("TCP"),
+//				Scheduler:               pulumi.String("WRR"),
+//				SessionExpireTime:       pulumi.Int(30),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### TCP/UDP Listener with tcp health check
 //
@@ -82,33 +88,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-// 			ListenerName:            pulumi.String("listener_tcp"),
-// 			Port:                    pulumi.Int(44),
-// 			Protocol:                pulumi.String("TCP"),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckTimeOut:      pulumi.Int(30),
-// 			HealthCheckIntervalTime: pulumi.Int(100),
-// 			HealthCheckHealthNum:    pulumi.Int(2),
-// 			HealthCheckUnhealthNum:  pulumi.Int(2),
-// 			SessionExpireTime:       pulumi.Int(30),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			HealthCheckType:         pulumi.String("TCP"),
-// 			HealthCheckPort:         pulumi.Int(200),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+//				ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+//				ListenerName:            pulumi.String("listener_tcp"),
+//				Port:                    pulumi.Int(44),
+//				Protocol:                pulumi.String("TCP"),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckTimeOut:      pulumi.Int(30),
+//				HealthCheckIntervalTime: pulumi.Int(100),
+//				HealthCheckHealthNum:    pulumi.Int(2),
+//				HealthCheckUnhealthNum:  pulumi.Int(2),
+//				SessionExpireTime:       pulumi.Int(30),
+//				Scheduler:               pulumi.String("WRR"),
+//				HealthCheckType:         pulumi.String("TCP"),
+//				HealthCheckPort:         pulumi.Int(200),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### TCP/UDP Listener with http health check
 //
@@ -116,37 +125,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-// 			ListenerName:            pulumi.String("listener_tcp"),
-// 			Port:                    pulumi.Int(44),
-// 			Protocol:                pulumi.String("TCP"),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckTimeOut:      pulumi.Int(30),
-// 			HealthCheckIntervalTime: pulumi.Int(100),
-// 			HealthCheckHealthNum:    pulumi.Int(2),
-// 			HealthCheckUnhealthNum:  pulumi.Int(2),
-// 			SessionExpireTime:       pulumi.Int(30),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			HealthCheckType:         pulumi.String("HTTP"),
-// 			HealthCheckHttpDomain:   pulumi.String("www.tencent.com"),
-// 			HealthCheckHttpCode:     pulumi.Int(16),
-// 			HealthCheckHttpVersion:  pulumi.String("HTTP/1.1"),
-// 			HealthCheckHttpMethod:   pulumi.String("HEAD"),
-// 			HealthCheckHttpPath:     pulumi.String("/"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+//				ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+//				ListenerName:            pulumi.String("listener_tcp"),
+//				Port:                    pulumi.Int(44),
+//				Protocol:                pulumi.String("TCP"),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckTimeOut:      pulumi.Int(30),
+//				HealthCheckIntervalTime: pulumi.Int(100),
+//				HealthCheckHealthNum:    pulumi.Int(2),
+//				HealthCheckUnhealthNum:  pulumi.Int(2),
+//				SessionExpireTime:       pulumi.Int(30),
+//				Scheduler:               pulumi.String("WRR"),
+//				HealthCheckType:         pulumi.String("HTTP"),
+//				HealthCheckHttpDomain:   pulumi.String("www.tencent.com"),
+//				HealthCheckHttpCode:     pulumi.Int(16),
+//				HealthCheckHttpVersion:  pulumi.String("HTTP/1.1"),
+//				HealthCheckHttpMethod:   pulumi.String("HEAD"),
+//				HealthCheckHttpPath:     pulumi.String("/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### TCP/UDP Listener with customer health check
 //
@@ -154,36 +166,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-// 			ListenerName:            pulumi.String("listener_tcp"),
-// 			Port:                    pulumi.Int(44),
-// 			Protocol:                pulumi.String("TCP"),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckTimeOut:      pulumi.Int(30),
-// 			HealthCheckIntervalTime: pulumi.Int(100),
-// 			HealthCheckHealthNum:    pulumi.Int(2),
-// 			HealthCheckUnhealthNum:  pulumi.Int(2),
-// 			SessionExpireTime:       pulumi.Int(30),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			HealthCheckType:         pulumi.String("CUSTOM"),
-// 			HealthCheckContextType:  pulumi.String("HEX"),
-// 			HealthCheckSendContext:  pulumi.String("0123456789ABCDEF"),
-// 			HealthCheckRecvContext:  pulumi.String("ABCD"),
-// 			TargetType:              pulumi.String("TARGETGROUP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+//				ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+//				ListenerName:            pulumi.String("listener_tcp"),
+//				Port:                    pulumi.Int(44),
+//				Protocol:                pulumi.String("TCP"),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckTimeOut:      pulumi.Int(30),
+//				HealthCheckIntervalTime: pulumi.Int(100),
+//				HealthCheckHealthNum:    pulumi.Int(2),
+//				HealthCheckUnhealthNum:  pulumi.Int(2),
+//				SessionExpireTime:       pulumi.Int(30),
+//				Scheduler:               pulumi.String("WRR"),
+//				HealthCheckType:         pulumi.String("CUSTOM"),
+//				HealthCheckContextType:  pulumi.String("HEX"),
+//				HealthCheckSendContext:  pulumi.String("0123456789ABCDEF"),
+//				HealthCheckRecvContext:  pulumi.String("ABCD"),
+//				TargetType:              pulumi.String("TARGETGROUP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### HTTPS Listener
 //
@@ -191,28 +206,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "hTTPSListener", &Clb.ListenerArgs{
-// 			CertificateCaId:    pulumi.String("VfqO4zkB"),
-// 			CertificateId:      pulumi.String("VjANRdz8"),
-// 			CertificateSslMode: pulumi.String("MUTUAL"),
-// 			ClbId:              pulumi.String("lb-0lh5au7v"),
-// 			ListenerName:       pulumi.String("test_listener"),
-// 			Port:               pulumi.Int(80),
-// 			Protocol:           pulumi.String("HTTPS"),
-// 			SniSwitch:          pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "hTTPSListener", &Clb.ListenerArgs{
+//				CertificateCaId:    pulumi.String("VfqO4zkB"),
+//				CertificateId:      pulumi.String("VjANRdz8"),
+//				CertificateSslMode: pulumi.String("MUTUAL"),
+//				ClbId:              pulumi.String("lb-0lh5au7v"),
+//				ListenerName:       pulumi.String("test_listener"),
+//				Port:               pulumi.Int(80),
+//				Protocol:           pulumi.String("HTTPS"),
+//				SniSwitch:          pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### TCP SSL Listener
 //
@@ -220,34 +238,76 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListener(ctx, "tCPSSLListener", &Clb.ListenerArgs{
-// 			CertificateCaId:         pulumi.String("VfqO4zkB"),
-// 			CertificateId:           pulumi.String("VjANRdz8"),
-// 			CertificateSslMode:      pulumi.String("MUTUAL"),
-// 			ClbId:                   pulumi.String("lb-0lh5au7v"),
-// 			HealthCheckHealthNum:    pulumi.Int(3),
-// 			HealthCheckIntervalTime: pulumi.Int(5),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckTimeOut:      pulumi.Int(2),
-// 			HealthCheckUnhealthNum:  pulumi.Int(3),
-// 			ListenerName:            pulumi.String("test_listener"),
-// 			Port:                    pulumi.Int(80),
-// 			Protocol:                pulumi.String("TCP_SSL"),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			TargetType:              pulumi.String("TARGETGROUP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListener(ctx, "tCPSSLListener", &Clb.ListenerArgs{
+//				CertificateCaId:         pulumi.String("VfqO4zkB"),
+//				CertificateId:           pulumi.String("VjANRdz8"),
+//				CertificateSslMode:      pulumi.String("MUTUAL"),
+//				ClbId:                   pulumi.String("lb-0lh5au7v"),
+//				HealthCheckHealthNum:    pulumi.Int(3),
+//				HealthCheckIntervalTime: pulumi.Int(5),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckTimeOut:      pulumi.Int(2),
+//				HealthCheckUnhealthNum:  pulumi.Int(3),
+//				ListenerName:            pulumi.String("test_listener"),
+//				Port:                    pulumi.Int(80),
+//				Protocol:                pulumi.String("TCP_SSL"),
+//				Scheduler:               pulumi.String("WRR"),
+//				TargetType:              pulumi.String("TARGETGROUP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Port Range Listener
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
+//				NetworkType: pulumi.String("OPEN"),
+//				ClbName:     pulumi.String("tf-listener-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
+//				ClbId:             clbBasic.ID(),
+//				Port:              pulumi.Int(1),
+//				EndPort:           pulumi.Int(6),
+//				Protocol:          pulumi.String("TCP"),
+//				ListenerName:      pulumi.String("listener_basic"),
+//				SessionExpireTime: pulumi.Int(30),
+//				Scheduler:         pulumi.String("WRR"),
+//				TargetType:        pulumi.String("NODE"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -255,7 +315,9 @@ import (
 // CLB listener can be imported using the id (version >= 1.47.0), e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+//
+//	$ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+//
 // ```
 type Listener struct {
 	pulumi.CustomResourceState
@@ -268,6 +330,8 @@ type Listener struct {
 	CertificateSslMode pulumi.StringPtrOutput `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
+	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	EndPort pulumi.IntOutput `pulumi:"endPort"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrOutput `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -298,6 +362,10 @@ type Listener struct {
 	HealthCheckType pulumi.StringOutput `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	HealthSourceIpType pulumi.IntOutput `pulumi:"healthSourceIpType"`
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+	KeepaliveEnable pulumi.IntOutput `pulumi:"keepaliveEnable"`
 	// ID of this CLB listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
 	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -310,6 +378,8 @@ type Listener struct {
 	Scheduler pulumi.StringPtrOutput `pulumi:"scheduler"`
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrOutput `pulumi:"sessionExpireTime"`
+	// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType pulumi.StringOutput `pulumi:"sessionType"`
 	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrOutput `pulumi:"sniSwitch"`
 	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -363,6 +433,8 @@ type listenerState struct {
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId *string `pulumi:"clbId"`
+	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	EndPort *int `pulumi:"endPort"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -393,6 +465,10 @@ type listenerState struct {
 	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	HealthSourceIpType *int `pulumi:"healthSourceIpType"`
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+	KeepaliveEnable *int `pulumi:"keepaliveEnable"`
 	// ID of this CLB listener.
 	ListenerId *string `pulumi:"listenerId"`
 	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -405,6 +481,8 @@ type listenerState struct {
 	Scheduler *string `pulumi:"scheduler"`
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
+	// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType *string `pulumi:"sessionType"`
 	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch *bool `pulumi:"sniSwitch"`
 	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -420,6 +498,8 @@ type ListenerState struct {
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of the CLB.
 	ClbId pulumi.StringPtrInput
+	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	EndPort pulumi.IntPtrInput
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -450,6 +530,10 @@ type ListenerState struct {
 	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	HealthSourceIpType pulumi.IntPtrInput
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+	KeepaliveEnable pulumi.IntPtrInput
 	// ID of this CLB listener.
 	ListenerId pulumi.StringPtrInput
 	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -462,6 +546,8 @@ type ListenerState struct {
 	Scheduler pulumi.StringPtrInput
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrInput
+	// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType pulumi.StringPtrInput
 	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrInput
 	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -481,6 +567,8 @@ type listenerArgs struct {
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId string `pulumi:"clbId"`
+	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	EndPort *int `pulumi:"endPort"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -511,6 +599,10 @@ type listenerArgs struct {
 	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	HealthSourceIpType *int `pulumi:"healthSourceIpType"`
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+	KeepaliveEnable *int `pulumi:"keepaliveEnable"`
 	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName string `pulumi:"listenerName"`
 	// Port of the CLB listener.
@@ -521,6 +613,8 @@ type listenerArgs struct {
 	Scheduler *string `pulumi:"scheduler"`
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
+	// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType *string `pulumi:"sessionType"`
 	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch *bool `pulumi:"sniSwitch"`
 	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -537,6 +631,8 @@ type ListenerArgs struct {
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of the CLB.
 	ClbId pulumi.StringInput
+	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	EndPort pulumi.IntPtrInput
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -567,6 +663,10 @@ type ListenerArgs struct {
 	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	HealthSourceIpType pulumi.IntPtrInput
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+	KeepaliveEnable pulumi.IntPtrInput
 	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName pulumi.StringInput
 	// Port of the CLB listener.
@@ -577,6 +677,8 @@ type ListenerArgs struct {
 	Scheduler pulumi.StringPtrInput
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrInput
+	// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType pulumi.StringPtrInput
 	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrInput
 	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -609,7 +711,7 @@ func (i *Listener) ToListenerOutputWithContext(ctx context.Context) ListenerOutp
 // ListenerArrayInput is an input type that accepts ListenerArray and ListenerArrayOutput values.
 // You can construct a concrete instance of `ListenerArrayInput` via:
 //
-//          ListenerArray{ ListenerArgs{...} }
+//	ListenerArray{ ListenerArgs{...} }
 type ListenerArrayInput interface {
 	pulumi.Input
 
@@ -634,7 +736,7 @@ func (i ListenerArray) ToListenerArrayOutputWithContext(ctx context.Context) Lis
 // ListenerMapInput is an input type that accepts ListenerMap and ListenerMapOutput values.
 // You can construct a concrete instance of `ListenerMapInput` via:
 //
-//          ListenerMap{ "key": ListenerArgs{...} }
+//	ListenerMap{ "key": ListenerArgs{...} }
 type ListenerMapInput interface {
 	pulumi.Input
 
@@ -688,6 +790,11 @@ func (o ListenerOutput) CertificateSslMode() pulumi.StringPtrOutput {
 // ID of the CLB.
 func (o ListenerOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.ClbId }).(pulumi.StringOutput)
+}
+
+// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+func (o ListenerOutput) EndPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.EndPort }).(pulumi.IntOutput)
 }
 
 // Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
@@ -765,6 +872,16 @@ func (o ListenerOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
 }
 
+// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+func (o ListenerOutput) HealthSourceIpType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthSourceIpType }).(pulumi.IntOutput)
+}
+
+// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+func (o ListenerOutput) KeepaliveEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.KeepaliveEnable }).(pulumi.IntOutput)
+}
+
 // ID of this CLB listener.
 func (o ListenerOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.ListenerId }).(pulumi.StringOutput)
@@ -793,6 +910,11 @@ func (o ListenerOutput) Scheduler() pulumi.StringPtrOutput {
 // Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) SessionExpireTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.SessionExpireTime }).(pulumi.IntPtrOutput)
+}
+
+// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+func (o ListenerOutput) SessionType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.SessionType }).(pulumi.StringOutput)
 }
 
 // Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.

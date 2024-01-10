@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// &gt; **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
     /// 
+    /// &gt; **NOTE:** Import Node: Currently, only one node can be imported at a time.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

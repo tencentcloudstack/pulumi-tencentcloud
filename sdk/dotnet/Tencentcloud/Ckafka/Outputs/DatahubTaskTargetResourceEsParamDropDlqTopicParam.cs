@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Outputs
         /// </summary>
         public readonly int? StartTime;
         /// <summary>
-        /// TopicId.
+        /// Topic TopicId.
         /// </summary>
         public readonly string? TopicId;
         /// <summary>

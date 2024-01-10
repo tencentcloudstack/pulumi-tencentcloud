@@ -13,7 +13,282 @@ export interface ProviderAssumeRole {
 export namespace Address {
 }
 
+export namespace Antiddos {
+    export interface CcBlackWhiteIpBlackWhiteIp {
+        /**
+         * ip address.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * ip mask.
+         */
+        mask: pulumi.Input<number>;
+    }
+
+    export interface CcPrecisionPolicyPolicyList {
+        /**
+         * Configuration fields can take values of cgi, ua, cookie, referer, accept, srcip.
+         */
+        fieldName: pulumi.Input<string>;
+        /**
+         * field type.
+         */
+        fieldType: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        value: pulumi.Input<string>;
+        /**
+         * Configuration item value comparison method, can take values of equal, not_ Equal, include.
+         */
+        valueOperator: pulumi.Input<string>;
+    }
+
+    export interface DdosGeoIpBlockConfigDdosGeoIpBlockConfig {
+        /**
+         * Blocking action, value [drop (intercept) trans (release)].
+         */
+        action: pulumi.Input<string>;
+        /**
+         * When RegionType is customized, an AreaList must be filled in, with a maximum of 128 entries;.
+         */
+        areaLists?: pulumi.Input<pulumi.Input<number>[]>;
+        /**
+         * Region type, value [oversea (overseas) China (domestic) customized (custom region)].
+         */
+        regionType: pulumi.Input<string>;
+    }
+
+    export interface DdosSpeedLimitConfigDdosSpeedLimitConfig {
+        /**
+         * List of port ranges, up to 8, multiple; Separate and indicate the range with -; This port range must be filled in; Fill in style 1:0-65535, style 2: 80; 443; 1000-2000.
+         */
+        dstPortList?: pulumi.Input<string>;
+        /**
+         * This field has been deprecated. Please fill in the new field DstPortList.
+         */
+        dstPortScopes?: pulumi.Input<pulumi.Input<inputs.Antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScope>[]>;
+        /**
+         * Speed limit mode, value [1 (based on source IP speed limit) 2 (based on destination port speed limit)].
+         */
+        mode: pulumi.Input<number>;
+        /**
+         * IP protocol numbers, values [ALL (all protocols) TCP (tcp protocol) UDP (udp protocol) SMP (smp protocol) 1; 2-100 (custom protocol number range, up to 8)] Note: When customizing the protocol number range, only the protocol number can be filled in, multiple ranges; Separation; When filling in ALL, no other agreements or agreements can be filled inNumber.
+         */
+        protocolList?: pulumi.Input<string>;
+        /**
+         * Speed limit values, each type of speed limit value can support up to 1; This field array has at least one speed limit value.
+         */
+        speedValues: pulumi.Input<pulumi.Input<inputs.Antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValue>[]>;
+    }
+
+    export interface DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScope {
+        /**
+         * Starting port, ranging from 1 to 65535.
+         */
+        beginPort: pulumi.Input<number>;
+        /**
+         * end  port, ranging from 1 to 65535.
+         */
+        endPort: pulumi.Input<number>;
+    }
+
+    export interface DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValue {
+        /**
+         * Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].
+         */
+        type: pulumi.Input<number>;
+        /**
+         * value.
+         */
+        value: pulumi.Input<number>;
+    }
+
+    export interface DefaultAlarmThresholdDefaultAlarmConfig {
+        /**
+         * Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
+         */
+        alarmThreshold?: pulumi.Input<number>;
+        /**
+         * Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].
+         */
+        alarmType?: pulumi.Input<number>;
+    }
+
+    export interface PacketFilterConfigPacketFilterConfig {
+        /**
+         * Action, value [drop (discard) transmit (release) dropBlack (discard and pull black) dropRst (intercept) dropBlackRst (intercept and pull black) forward (continue protection)].
+         */
+        action: pulumi.Input<string>;
+        /**
+         * The detection depth starting from the detection position, with a value of [0-1500].
+         */
+        depth?: pulumi.Input<number>;
+        /**
+         * The second detection depth starting from the second detection position, with a value of [01500].
+         */
+        depth2?: pulumi.Input<number>;
+        /**
+         * end destination port, ranging from 0 to 65535.
+         */
+        dportEnd: pulumi.Input<number>;
+        /**
+         * Starting destination port, ranging from 0 to 65535.
+         */
+        dportStart: pulumi.Input<number>;
+        /**
+         * Whether to include detection values, with a value of [0 (inclusive) and 1 (exclusive)].
+         */
+        isNot?: pulumi.Input<number>;
+        /**
+         * Whether the second detection includes detection values, with a value of [0 (inclusive) and 1 (exclusive)].
+         */
+        isNot2?: pulumi.Input<number>;
+        /**
+         * Detection position, value [beginL3 (IP header) beginL4 (TCP/UDP header) beginL5 (T payload) noMatch (mismatch)].
+         */
+        matchBegin?: pulumi.Input<string>;
+        /**
+         * Second detection position, value [beginL5 (load) noMatch (mismatch)].
+         */
+        matchBegin2?: pulumi.Input<string>;
+        /**
+         * When there is a second detection condition, the AND or relationship with the first detection condition, with the value [and (and relationship) none (fill in this value when there is no second detection condition)].
+         */
+        matchLogic?: pulumi.Input<string>;
+        /**
+         * Detection type, value [Sunday (keyword) pcre (regular expression)].
+         */
+        matchType?: pulumi.Input<string>;
+        /**
+         * The second detection type, with a value of [Sunday (keyword) pcre (regular expression)].
+         */
+        matchType2?: pulumi.Input<string>;
+        /**
+         * The offset from the detection position, with a value range of [0, Depth].
+         */
+        offset?: pulumi.Input<number>;
+        /**
+         * The offset from the second detection position, with a value range of [0, Depth2].
+         */
+        offset2?: pulumi.Input<number>;
+        /**
+         * Greater than message length, value 1+.
+         */
+        pktLenGt?: pulumi.Input<number>;
+        /**
+         * The maximum message length, ranging from 1 to 1500, must be greater than or equal to the minimum message length.
+         */
+        pktlenMax: pulumi.Input<number>;
+        /**
+         * Minimum message length, ranging from 1 to 1500.
+         */
+        pktlenMin: pulumi.Input<number>;
+        /**
+         * Protocol, value [TCP udp icmp all].
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * End source port, values range from 1 to 65535, must be greater than or equal to the start source port.
+         */
+        sportEnd: pulumi.Input<number>;
+        /**
+         * Starting source port, ranging from 0 to 65535.
+         */
+        sportStart: pulumi.Input<number>;
+        /**
+         * Detection value, key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string &#39;123&#39;; when the detection type is pcre, please fill in the regular expression character string;].
+         */
+        str?: pulumi.Input<string>;
+        /**
+         * key string or regular expression, value [When the detection type is Sunday, please fill in the string or hexadecimal bytecode, for example, x313233 corresponds to the hexadecimal word&gt;section code of the string &#39;123&#39;; when the detection type is pcre, please fill in the regular expression character string;].
+         */
+        str2?: pulumi.Input<string>;
+    }
+
+    export interface PortAclConfigAclConfig {
+        /**
+         * Action, can take values: drop, transmit, forward.
+         */
+        action: pulumi.Input<string>;
+        /**
+         * end from port, with a range of 0~65535 values.
+         */
+        dPortEnd: pulumi.Input<number>;
+        /**
+         * Starting from port, with a range of 0~65535 values.
+         */
+        dPortStart: pulumi.Input<number>;
+        /**
+         * Protocol type, can take TCP, udp, all values.
+         */
+        forwardProtocol: pulumi.Input<string>;
+        /**
+         * The policy priority, the smaller the number, the higher the level, and the higher the matching of the rule, with values ranging from 1 to 1000. Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        priority?: pulumi.Input<number>;
+        /**
+         * end from the source port, with a value range of 0~65535.
+         */
+        sPortEnd: pulumi.Input<number>;
+        /**
+         * Starting from the source port, with a value range of 0~65535.
+         */
+        sPortStart: pulumi.Input<number>;
+    }
+
+}
+
 export namespace ApiGateway {
+    export interface ApiConstantParameter {
+        /**
+         * Default value for constant parameters. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Constant parameter description. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        desc?: pulumi.Input<string>;
+        /**
+         * Constant parameter name. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Constant parameter position. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        position?: pulumi.Input<string>;
+    }
+
+    export interface ApiMicroService {
+        /**
+         * Micro service cluster.
+         */
+        clusterId: pulumi.Input<string>;
+        /**
+         * Microservice name.
+         */
+        microServiceName: pulumi.Input<string>;
+        /**
+         * Microservice namespace.
+         */
+        namespaceId: pulumi.Input<string>;
+    }
+
+    export interface ApiOauthConfig {
+        /**
+         * Redirect address, used to guide users in login operations.
+         */
+        loginRedirectUrl?: pulumi.Input<string>;
+        /**
+         * Public key, used to verify user tokens.
+         */
+        publicKey: pulumi.Input<string>;
+        /**
+         * Token passes the position.
+         */
+        tokenLocation: pulumi.Input<string>;
+    }
+
     export interface ApiRequestParameter {
         /**
          * Parameter default value.
@@ -64,6 +339,367 @@ export namespace ApiGateway {
         needConvert?: pulumi.Input<boolean>;
     }
 
+    export interface ApiServiceConfigCosConfig {
+        /**
+         * The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        action: pulumi.Input<string>;
+        /**
+         * The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        authorization?: pulumi.Input<boolean>;
+        /**
+         * The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        bucketName: pulumi.Input<string>;
+        /**
+         * Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        pathMatchMode?: pulumi.Input<string>;
+    }
+
+    export interface ApiServiceParameter {
+        /**
+         * The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        position?: pulumi.Input<string>;
+        /**
+         * Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterDesc?: pulumi.Input<string>;
+        /**
+         * The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterName?: pulumi.Input<string>;
+        /**
+         * The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterPosition?: pulumi.Input<string>;
+        /**
+         * The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterType?: pulumi.Input<string>;
+    }
+
+    export interface ApiServiceTsfHealthCheckConf {
+        /**
+         * Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        errorThresholdPercentage?: pulumi.Input<number>;
+        /**
+         * Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        isHealthCheck?: pulumi.Input<boolean>;
+        /**
+         * Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        requestVolumeThreshold?: pulumi.Input<number>;
+        /**
+         * Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sleepWindowInMilliseconds?: pulumi.Input<number>;
+    }
+
+    export interface ApiServiceTsfLoadBalanceConf {
+        /**
+         * Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        isLoadBalance?: pulumi.Input<boolean>;
+        /**
+         * Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        method?: pulumi.Input<string>;
+        /**
+         * Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sessionStickRequired?: pulumi.Input<boolean>;
+        /**
+         * Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sessionStickTimeout?: pulumi.Input<number>;
+    }
+
+    export interface ApiTargetService {
+        /**
+         * docker ip.
+         */
+        dockerIp?: pulumi.Input<string>;
+        /**
+         * Host IP of the CVM.
+         */
+        hostIp: pulumi.Input<string>;
+        /**
+         * vm ip.
+         */
+        vmIp: pulumi.Input<string>;
+        /**
+         * vm port.
+         */
+        vmPort: pulumi.Input<number>;
+        /**
+         * vpc id.
+         */
+        vpcId: pulumi.Input<string>;
+    }
+
+    export interface ApiTargetServicesHealthCheckConf {
+        /**
+         * Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        errorThresholdPercentage?: pulumi.Input<number>;
+        /**
+         * Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        isHealthCheck?: pulumi.Input<boolean>;
+        /**
+         * Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        requestVolumeThreshold?: pulumi.Input<number>;
+        /**
+         * Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sleepWindowInMilliseconds?: pulumi.Input<number>;
+    }
+
+    export interface GetBindApiAppsStatusFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetBindApiAppsStatusFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetUpstreamsFilterArgs {
+        /**
+         * Fields that need to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The filtering value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetUpstreamsFilter {
+        /**
+         * Fields that need to be filtered.
+         */
+        name: string;
+        /**
+         * The filtering value of the field.
+         */
+        values: string[];
+    }
+
+    export interface ImportOpenApiConstantParameter {
+        /**
+         * The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Parameter description.
+         */
+        desc?: pulumi.Input<string>;
+        /**
+         * The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        position?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiMicroService {
+        /**
+         * Micro service cluster.
+         */
+        clusterId?: pulumi.Input<string>;
+        /**
+         * Microservice name.
+         */
+        microServiceName?: pulumi.Input<string>;
+        /**
+         * Microservice namespace.
+         */
+        namespaceId?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiOauthConfig {
+        /**
+         * Redirect address, used to guide users in login operations.
+         */
+        loginRedirectUrl?: pulumi.Input<string>;
+        /**
+         * Public key, used to verify user tokens.
+         */
+        publicKey?: pulumi.Input<string>;
+        /**
+         * Token passes the position.
+         */
+        tokenLocation?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiRequestParameter {
+        /**
+         * The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * Parameter description.
+         */
+        desc?: pulumi.Input<string>;
+        /**
+         * The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        position?: pulumi.Input<string>;
+        /**
+         * If this parameter required. Default value: `false`.
+         */
+        required?: pulumi.Input<boolean>;
+        /**
+         * Parameter type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiResponseErrorCode {
+        /**
+         * Custom response configuration error code.
+         */
+        code?: pulumi.Input<number>;
+        /**
+         * Custom error code conversion.
+         */
+        convertedCode?: pulumi.Input<number>;
+        /**
+         * Parameter description.
+         */
+        desc?: pulumi.Input<string>;
+        /**
+         * Custom response configuration error message.
+         */
+        msg?: pulumi.Input<string>;
+        /**
+         * Whether to enable error code conversion. Default value: `false`.
+         */
+        needConvert?: pulumi.Input<boolean>;
+    }
+
+    export interface ImportOpenApiServiceConfigCosConfig {
+        /**
+         * The API calls the backend COS method, and the optional values for the front-end request method and Action are:GET: GetObjectPUT: PutObjectPOST: PostObject, AppendObjectHEAD: HeadObjectDELETE: DeleteObject.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        action?: pulumi.Input<string>;
+        /**
+         * The API calls the signature switch of the backend COS, which defaults to false.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        authorization?: pulumi.Input<boolean>;
+        /**
+         * The bucket name of the API backend COS.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        bucketName?: pulumi.Input<string>;
+        /**
+         * Path matching mode for API backend COS, optional values:BackEndPath: Backend path matchingFullPath: Full Path MatchingThe default value is: BackEndPathNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        pathMatchMode?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiServiceParameter {
+        /**
+         * The default value for the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        defaultValue?: pulumi.Input<string>;
+        /**
+         * The backend service parameter name of the API. This parameter is only used when ServiceType is HTTP. The front and rear parameter names can be different.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * The backend service parameter location of the API, such as head. This parameter is only used when ServiceType is HTTP. The parameter positions at the front and rear ends can be configured differently.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        position?: pulumi.Input<string>;
+        /**
+         * Remarks on the backend service parameters of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterDesc?: pulumi.Input<string>;
+        /**
+         * The name of the front-end parameter corresponding to the backend service parameter of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterName?: pulumi.Input<string>;
+        /**
+         * The location of the front-end parameters corresponding to the backend service parameters of the API, such as head. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterPosition?: pulumi.Input<string>;
+        /**
+         * The backend service parameter type of the API. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        relevantRequestParameterType?: pulumi.Input<string>;
+    }
+
+    export interface ImportOpenApiServiceTsfHealthCheckConf {
+        /**
+         * Threshold percentage.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        errorThresholdPercentage?: pulumi.Input<number>;
+        /**
+         * Whether to initiate a health check.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        isHealthCheck?: pulumi.Input<boolean>;
+        /**
+         * Health check threshold.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        requestVolumeThreshold?: pulumi.Input<number>;
+        /**
+         * Window size.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sleepWindowInMilliseconds?: pulumi.Input<number>;
+    }
+
+    export interface ImportOpenApiServiceTsfLoadBalanceConf {
+        /**
+         * Is load balancing enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        isLoadBalance?: pulumi.Input<boolean>;
+        /**
+         * Load balancing method.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        method?: pulumi.Input<string>;
+        /**
+         * Whether to enable session persistence.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sessionStickRequired?: pulumi.Input<boolean>;
+        /**
+         * Session hold timeout.Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        sessionStickTimeout?: pulumi.Input<number>;
+    }
+
     export interface ServiceApiList {
         /**
          * Description of the API.
@@ -106,6 +742,135 @@ export namespace ApiGateway {
         usagePlanName?: pulumi.Input<string>;
     }
 
+    export interface UpstreamHealthChecker {
+        /**
+         * Detect the requested path during active health checks. The default is&#39;/&#39;.
+         */
+        activeCheckHttpPath?: pulumi.Input<string>;
+        /**
+         * The time interval for active health checks is 5 seconds by default.
+         */
+        activeCheckInterval?: pulumi.Input<number>;
+        /**
+         * The detection request for active health check timed out in seconds. The default is 5 seconds.
+         */
+        activeCheckTimeout?: pulumi.Input<number>;
+        /**
+         * Identify whether active health checks are enabled.
+         */
+        enableActiveCheck: pulumi.Input<boolean>;
+        /**
+         * Identify whether passive health checks are enabled.
+         */
+        enablePassiveCheck: pulumi.Input<boolean>;
+        /**
+         * The HTTP status code that determines a successful request during a health check.
+         */
+        healthyHttpStatus: pulumi.Input<string>;
+        /**
+         * HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].
+         */
+        httpFailureThreshold: pulumi.Input<number>;
+        /**
+         * TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].
+         */
+        tcpFailureThreshold: pulumi.Input<number>;
+        /**
+         * Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].
+         */
+        timeoutThreshold: pulumi.Input<number>;
+        /**
+         * The HTTP status code that determines a failed request during a health check.
+         */
+        unhealthyHttpStatus: pulumi.Input<string>;
+        /**
+         * The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+         */
+        unhealthyTimeout?: pulumi.Input<number>;
+    }
+
+    export interface UpstreamK8sService {
+        /**
+         * K8s cluster ID.
+         */
+        clusterId: pulumi.Input<string>;
+        extraLabels: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sServiceExtraLabel>[]>;
+        /**
+         * Customized service name, optional.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Container namespace.
+         */
+        namespace: pulumi.Input<string>;
+        /**
+         * Port of service.
+         */
+        port: pulumi.Input<number>;
+        /**
+         * The name of the container service.
+         */
+        serviceName: pulumi.Input<string>;
+        /**
+         * weight.
+         */
+        weight: pulumi.Input<number>;
+    }
+
+    export interface UpstreamK8sServiceExtraLabel {
+        /**
+         * Key of Label.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Value of Label.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface UpstreamNode {
+        /**
+         * The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        clusterId?: pulumi.Input<string>;
+        /**
+         * IP or domain name.
+         */
+        host: pulumi.Input<string>;
+        /**
+         * K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        nameSpace?: pulumi.Input<string>;
+        /**
+         * Port [0, 65535].
+         */
+        port: pulumi.Input<number>;
+        /**
+         * K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        serviceName?: pulumi.Input<string>;
+        /**
+         * Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        source?: pulumi.Input<string>;
+        /**
+         * Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tags?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        uniqueServiceName?: pulumi.Input<string>;
+        /**
+         * CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        vmInstanceId?: pulumi.Input<string>;
+        /**
+         * Weight [0, 100], 0 is disabled.
+         */
+        weight: pulumi.Input<number>;
+    }
+
     export interface UsagePlanAttachList {
         /**
          * The API ID, this value is empty if attach service.
@@ -144,6 +909,7 @@ export namespace ApiGateway {
          */
         serviceName?: pulumi.Input<string>;
     }
+
 }
 
 export namespace As {
@@ -201,6 +967,17 @@ export namespace As {
         snapshotId?: pulumi.Input<string>;
     }
 
+    export interface ScalingConfigHostNameSettings {
+        /**
+         * The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+         */
+        hostName: pulumi.Input<string>;
+        /**
+         * The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+         */
+        hostNameStyle?: pulumi.Input<string>;
+    }
+
     export interface ScalingConfigInstanceNameSettings {
         /**
          * CVM instance name.
@@ -241,6 +1018,7 @@ export namespace As {
          */
         weight: pulumi.Input<number>;
     }
+
 }
 
 export namespace Audit {
@@ -270,7 +1048,73 @@ export namespace Audits {
 export namespace Availability {
 }
 
+export namespace Bi {
+    export interface DatasourceCloudServiceType {
+        /**
+         * Instance Id.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Region.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Service type, Cloud.
+         */
+        type: pulumi.Input<string>;
+    }
+
+}
+
 export namespace Cam {
+    export interface MfaFlagActionFlag {
+        /**
+         * Phone.
+         */
+        phone?: pulumi.Input<number>;
+        /**
+         * Soft token.
+         */
+        stoken?: pulumi.Input<number>;
+        /**
+         * Wechat.
+         */
+        wechat?: pulumi.Input<number>;
+    }
+
+    export interface MfaFlagLoginFlag {
+        /**
+         * Phone.
+         */
+        phone?: pulumi.Input<number>;
+        /**
+         * Soft token.
+         */
+        stoken?: pulumi.Input<number>;
+        /**
+         * Wechat.
+         */
+        wechat?: pulumi.Input<number>;
+    }
+
+    export interface PolicyVersionPolicyVersion {
+        createDate?: pulumi.Input<string>;
+        document?: pulumi.Input<string>;
+        isDefaultVersion?: pulumi.Input<number>;
+        versionId?: pulumi.Input<number>;
+    }
+
+    export interface TagRoleAttachmentTag {
+        /**
+         * Label.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Label.
+         */
+        value: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Cat {
@@ -290,17 +1134,6 @@ export namespace Cbs {
 }
 
 export namespace Ccn {
-    export interface GetCrossBorderRegionBandwidthLimitsFilter {
-        /**
-         * attribute name.
-         */
-        name: string;
-        /**
-         * Value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetCrossBorderRegionBandwidthLimitsFilterArgs {
         /**
          * attribute name.
@@ -310,6 +1143,17 @@ export namespace Ccn {
          * Value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCrossBorderRegionBandwidthLimitsFilter {
+        /**
+         * attribute name.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
     }
 
     export interface InstancesAcceptAttachInstance {
@@ -1355,7 +2199,110 @@ export namespace Cdn {
     }
 }
 
+export namespace Cdwpg {
+    export interface InstanceChargeProperties {
+        /**
+         * Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.
+         */
+        chargeType?: pulumi.Input<string>;
+        /**
+         * 0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        renewFlag: pulumi.Input<number>;
+        /**
+         * Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        timeSpan: pulumi.Input<number>;
+        /**
+         * Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        timeUnit: pulumi.Input<string>;
+    }
+
+    export interface InstanceResource {
+        /**
+         * resource count.
+         */
+        count: pulumi.Input<number>;
+        /**
+         * disk Information.
+         */
+        diskSpec: pulumi.Input<inputs.Cdwpg.InstanceResourceDiskSpec>;
+        /**
+         * resource name.
+         */
+        specName: pulumi.Input<string>;
+        /**
+         * resource type.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface InstanceResourceDiskSpec {
+        /**
+         * disk count.
+         */
+        diskCount: pulumi.Input<number>;
+        /**
+         * disk size.
+         */
+        diskSize: pulumi.Input<number>;
+        /**
+         * disk type.
+         */
+        diskType: pulumi.Input<string>;
+    }
+}
+
 export namespace Cfs {
+}
+
+export namespace Cfw {
+    export interface NatInstanceNewModeItems {
+        /**
+         * List of egress elastic public network IPs bound in the new mode.
+         */
+        eips: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * List of vpcs connected in new mode.
+         */
+        vpcLists: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface VpcInstanceVpcFwInstance {
+        /**
+         * Deploy regional information.
+         */
+        fwDeploy: pulumi.Input<inputs.Cfw.VpcInstanceVpcFwInstanceFwDeploy>;
+        fwInsId?: pulumi.Input<string>;
+        /**
+         * Firewall instance name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * List of VpcIds accessed in private network mode; only used in private network mode.
+         */
+        vpcIds?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface VpcInstanceVpcFwInstanceFwDeploy {
+        /**
+         * Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if it is empty, off-site disaster recovery will not be used by default.
+         */
+        crossAZone?: pulumi.Input<number>;
+        /**
+         * Firewall Deployment Region.
+         */
+        deployRegion: pulumi.Input<string>;
+        /**
+         * Bandwidth, unit: Mbps.
+         */
+        width: pulumi.Input<number>;
+        /**
+         * Zone list.
+         */
+        zoneSets: pulumi.Input<pulumi.Input<string>[]>;
+    }
 }
 
 export namespace Chdfs {
@@ -2352,7 +3299,6 @@ export namespace Ci {
          */
         transparency: pulumi.Input<string>;
     }
-
 }
 
 export namespace Ckafka {
@@ -2849,11 +3795,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskSourceResourceClickHouseParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -2861,7 +3807,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -3066,11 +4012,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskSourceResourceEsParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -3078,7 +4024,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -3120,7 +4066,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -3128,51 +4074,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -3222,7 +4168,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -3264,7 +4210,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -3272,51 +4218,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskSourceResourceKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -3551,15 +4497,15 @@ export namespace Ckafka {
          */
         autoIncrement?: pulumi.Input<boolean>;
         /**
-         * Corresponding mapping column name.
+         * Column Name.
          */
         columnName?: pulumi.Input<string>;
         /**
-         * current column size.
+         * current ColumnSize.
          */
         columnSize?: pulumi.Input<string>;
         /**
-         * current column precision.
+         * current Column DecimalDigits.
          */
         decimalDigits?: pulumi.Input<string>;
         /**
@@ -3582,11 +4528,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskSourceResourceMySqlParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -3594,7 +4540,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -3668,15 +4614,15 @@ export namespace Ckafka {
          */
         autoIncrement?: pulumi.Input<boolean>;
         /**
-         * Corresponding mapping column name.
+         * Column Name.
          */
         columnName?: pulumi.Input<string>;
         /**
-         * current column size.
+         * current ColumnSize.
          */
         columnSize?: pulumi.Input<string>;
         /**
-         * current column precision.
+         * current Column DecimalDigits.
          */
         decimalDigits?: pulumi.Input<string>;
         /**
@@ -3784,7 +4730,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -3929,11 +4875,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskTargetResourceClickHouseParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -3941,7 +4887,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -4146,11 +5092,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskTargetResourceEsParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -4158,7 +5104,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -4200,7 +5146,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -4208,51 +5154,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -4302,7 +5248,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -4344,7 +5290,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -4352,51 +5298,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTargetResourceKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -4631,15 +5577,15 @@ export namespace Ckafka {
          */
         autoIncrement?: pulumi.Input<boolean>;
         /**
-         * Corresponding mapping column name.
+         * Column Name.
          */
         columnName?: pulumi.Input<string>;
         /**
-         * current column size.
+         * current ColumnSize.
          */
         columnSize?: pulumi.Input<string>;
         /**
-         * current column precision.
+         * current Column DecimalDigits.
          */
         decimalDigits?: pulumi.Input<string>;
         /**
@@ -4662,11 +5608,11 @@ export namespace Ckafka {
 
     export interface DatahubTaskTargetResourceMySqlParamDropCls {
         /**
-         * cls log set.
+         * cls LogSet id.
          */
         dropClsLogSet?: pulumi.Input<string>;
         /**
-         * Delivery account of cls.
+         * account.
          */
         dropClsOwneruin?: pulumi.Input<string>;
         /**
@@ -4674,7 +5620,7 @@ export namespace Ckafka {
          */
         dropClsRegion?: pulumi.Input<string>;
         /**
-         * topic of cls.
+         * cls topic.
          */
         dropClsTopicId?: pulumi.Input<string>;
         /**
@@ -4748,15 +5694,15 @@ export namespace Ckafka {
          */
         autoIncrement?: pulumi.Input<boolean>;
         /**
-         * Corresponding mapping column name.
+         * Column Name.
          */
         columnName?: pulumi.Input<string>;
         /**
-         * current column size.
+         * current ColumnSize.
          */
         columnSize?: pulumi.Input<string>;
         /**
-         * current column precision.
+         * current Column DecimalDigits.
          */
         decimalDigits?: pulumi.Input<string>;
         /**
@@ -4864,7 +5810,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -4968,7 +5914,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -4976,51 +5922,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformParamFailureParamKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -5070,7 +6016,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -5196,7 +6142,7 @@ export namespace Ckafka {
          */
         compressionType?: pulumi.Input<string>;
         /**
-         * Enable the fault-tolerant instance and enable the dead-letter queue.
+         * enable dead letter queue.
          */
         enableToleration?: pulumi.Input<boolean>;
         /**
@@ -5204,51 +6150,51 @@ export namespace Ckafka {
          */
         msgMultiple?: pulumi.Input<number>;
         /**
-         * Offset type, initial position earliest, latest position latest, time point position timestamp.
+         * Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
          */
         offsetType?: pulumi.Input<string>;
         /**
-         * Partition num.
+         * the partition num of the topic.
          */
         partitionNum?: pulumi.Input<number>;
         /**
-         * Qps limit.
+         * Qps(query per seconds) limit.
          */
         qpsLimit?: pulumi.Input<number>;
         /**
-         * resource id.
+         * instance resource.
          */
         resource: pulumi.Input<string>;
         /**
-         * resource id name.
+         * instance name.
          */
         resourceName?: pulumi.Input<string>;
         /**
-         * Whether it is a self-built cluster.
+         * whether the cluster is built by yourself instead of cloud product.
          */
         selfBuilt: pulumi.Input<boolean>;
         /**
-         * It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+         * when Offset type timestamp is required.
          */
         startTime?: pulumi.Input<number>;
         /**
-         * The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+         * maps of table to topic, required when multi topic is selected.
          */
         tableMappings?: pulumi.Input<pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParamFailureParamKafkaParamTableMapping>[]>;
         /**
-         * Topic name, multiple separated by,.
+         * Topic name, use `,` when more than 1 topic.
          */
         topic?: pulumi.Input<string>;
         /**
-         * Topic Id.
+         * Topic id.
          */
         topicId?: pulumi.Input<string>;
         /**
-         * whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+         * Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
          */
         useAutoCreateTopic?: pulumi.Input<boolean>;
         /**
-         * Distribute to multiple topics switch, the default is false.
+         * whether to use multi table.
          */
         useTableMapping?: pulumi.Input<boolean>;
         /**
@@ -5298,7 +6244,7 @@ export namespace Ckafka {
          */
         startTime?: pulumi.Input<number>;
         /**
-         * TopicId.
+         * Topic TopicId.
          */
         topicId?: pulumi.Input<string>;
         /**
@@ -5888,17 +6834,6 @@ export namespace Ckafka {
         rowContent: pulumi.Input<string>;
     }
 
-    export interface GetInstancesFilter {
-        /**
-         * The field that needs to be filtered.
-         */
-        name: string;
-        /**
-         * The filtered value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetInstancesFilterArgs {
         /**
          * The field that needs to be filtered.
@@ -5908,6 +6843,17 @@ export namespace Ckafka {
          * The filtered value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstancesFilter {
+        /**
+         * The field that needs to be filtered.
+         */
+        name: string;
+        /**
+         * The filtered value of the field.
+         */
+        values: string[];
     }
 
     export interface InstanceConfig {
@@ -6072,17 +7018,6 @@ export namespace Clb {
         values: string[];
     }
 
-    export interface GetExclusiveClustersFilter {
-        /**
-         * Filter name.
-         */
-        name: string;
-        /**
-         * Filter value array.
-         */
-        values: string[];
-    }
-
     export interface GetExclusiveClustersFilterArgs {
         /**
          * Filter name.
@@ -6092,6 +7027,17 @@ export namespace Clb {
          * Filter value array.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetExclusiveClustersFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
     }
 
     export interface GetInstanceDetailFilterArgs {
@@ -6160,17 +7106,6 @@ export namespace Clb {
         values: string[];
     }
 
-    export interface GetTargetGroupListFilterArgs {
-        /**
-         * Filter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter value array.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetTargetGroupListFilter {
         /**
          * Filter name.
@@ -6180,6 +7115,17 @@ export namespace Clb {
          * Filter value array.
          */
         values: string[];
+    }
+
+    export interface GetTargetGroupListFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceSnatIp {
@@ -6239,6 +7185,25 @@ export namespace Clb {
         subnetId: pulumi.Input<string>;
     }
 
+    export interface TargetGroupAttachmentsAssociation {
+        /**
+         * Listener ID.
+         */
+        listenerId?: pulumi.Input<string>;
+        /**
+         * CLB instance ID, when the binding target is target group, loadBalancerId in associations is required.
+         */
+        loadBalancerId?: pulumi.Input<string>;
+        /**
+         * Forwarding rule ID.
+         */
+        locationId?: pulumi.Input<string>;
+        /**
+         * Target group ID, when the binding target is clb, the targetGroupId in associations is required.
+         */
+        targetGroupId?: pulumi.Input<string>;
+    }
+
     export interface TargetGroupTargetGroupInstance {
         /**
          * The internal ip of target group instance.
@@ -6260,6 +7225,97 @@ export namespace Clb {
 }
 
 export namespace Clickhouse {
+    export interface AccountPermissionDatabasePrivilegeList {
+        /**
+         * Database name.
+         */
+        databaseName: pulumi.Input<string>;
+        /**
+         * Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+         */
+        databasePrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table privilege list.
+         */
+        tablePrivilegeLists?: pulumi.Input<pulumi.Input<inputs.Clickhouse.AccountPermissionDatabasePrivilegeListTablePrivilegeList>[]>;
+    }
+
+    export interface AccountPermissionDatabasePrivilegeListTablePrivilegeList {
+        /**
+         * Table name.
+         */
+        tableName: pulumi.Input<string>;
+        /**
+         * Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+         */
+        tablePrivileges: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface BackupStrategyDataBackupStrategy {
+        /**
+         * Back up the list of tables.
+         */
+        backUpTables: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyDataBackupStrategyBackUpTable>[]>;
+        /**
+         * Execution hour.
+         */
+        executeHour: pulumi.Input<number>;
+        /**
+         * Retention days.
+         */
+        retainDays: pulumi.Input<number>;
+        /**
+         * The day of the week is separated by commas. For example: 2 represents Tuesday.
+         */
+        weekDays: pulumi.Input<string>;
+    }
+
+    export interface BackupStrategyDataBackupStrategyBackUpTable {
+        /**
+         * Database.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * Table ip.
+         */
+        ips?: pulumi.Input<string>;
+        /**
+         * Ip address of cvm.
+         */
+        rip?: pulumi.Input<string>;
+        /**
+         * Table.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * Back up the list of tables.
+         */
+        totalBytes: pulumi.Input<number>;
+        /**
+         * Virtual clusters.
+         */
+        vCluster?: pulumi.Input<string>;
+        /**
+         * ZK path.
+         */
+        zooPath?: pulumi.Input<string>;
+    }
+
+    export interface BackupStrategyMetaBackupStrategy {
+        /**
+         * Execution hour.
+         */
+        executeHour?: pulumi.Input<number>;
+        /**
+         * Retention days.
+         */
+        retainDays?: pulumi.Input<number>;
+        /**
+         * The day of the week is separated by commas. For example: 2 represents Tuesday.
+         */
+        weekDays?: pulumi.Input<string>;
+    }
+
     export interface InstanceCommonSpec {
         /**
          * Node count. NOTE: Only support value 3.
@@ -6288,6 +7344,32 @@ export namespace Clickhouse {
          * Spec name.
          */
         specName: pulumi.Input<string>;
+    }
+
+    export interface KeyvalConfigItems {
+        /**
+         * Instance config key.
+         */
+        confKey: pulumi.Input<string>;
+        /**
+         * Instance config value.
+         */
+        confValue: pulumi.Input<string>;
+    }
+
+    export interface XmlConfigModifyConfContext {
+        /**
+         * Configuration file name.
+         */
+        fileName: pulumi.Input<string>;
+        /**
+         * Path to save configuration file.
+         */
+        filePath?: pulumi.Input<string>;
+        /**
+         * New content of configuration file, base64 encoded.
+         */
+        newConfValue: pulumi.Input<string>;
     }
 }
 
@@ -7501,6 +8583,10 @@ export namespace Cos {
 
     export interface BucketLifecycleRule {
         /**
+         * Set the maximum time a multipart upload is allowed to remain running.
+         */
+        abortIncompleteMultipartUpload?: pulumi.Input<inputs.Cos.BucketLifecycleRuleAbortIncompleteMultipartUpload>;
+        /**
          * Specifies a period in the object's expire (documented below).
          */
         expiration?: pulumi.Input<inputs.Cos.BucketLifecycleRuleExpiration>;
@@ -7524,6 +8610,13 @@ export namespace Cos {
          * Specifies a period in the object's transitions (documented below).
          */
         transitions?: pulumi.Input<pulumi.Input<inputs.Cos.BucketLifecycleRuleTransition>[]>;
+    }
+
+    export interface BucketLifecycleRuleAbortIncompleteMultipartUpload {
+        /**
+         * Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+         */
+        daysAfterInitiation: pulumi.Input<number>;
     }
 
     export interface BucketLifecycleRuleExpiration {
@@ -7703,6 +8796,127 @@ export namespace Css {
          */
         yPosition: pulumi.Input<number>;
     }
+
+    export interface RecordTemplateAacParam {
+        classId?: pulumi.Input<number>;
+        enable?: pulumi.Input<number>;
+        procedure?: pulumi.Input<string>;
+        recordInterval?: pulumi.Input<number>;
+        storageMode?: pulumi.Input<string>;
+        storageTime?: pulumi.Input<number>;
+        vodFileName?: pulumi.Input<string>;
+        vodSubAppId?: pulumi.Input<number>;
+    }
+
+    export interface RecordTemplateFlvParam {
+        classId?: pulumi.Input<number>;
+        enable?: pulumi.Input<number>;
+        procedure?: pulumi.Input<string>;
+        recordInterval?: pulumi.Input<number>;
+        storageMode?: pulumi.Input<string>;
+        storageTime?: pulumi.Input<number>;
+        vodFileName?: pulumi.Input<string>;
+        vodSubAppId?: pulumi.Input<number>;
+    }
+
+    export interface RecordTemplateFlvSpecialParam {
+        uploadInRecording?: pulumi.Input<boolean>;
+    }
+
+    export interface RecordTemplateHlsParam {
+        classId?: pulumi.Input<number>;
+        enable?: pulumi.Input<number>;
+        procedure?: pulumi.Input<string>;
+        recordInterval?: pulumi.Input<number>;
+        storageMode?: pulumi.Input<string>;
+        storageTime?: pulumi.Input<number>;
+        vodFileName?: pulumi.Input<string>;
+        vodSubAppId?: pulumi.Input<number>;
+    }
+
+    export interface RecordTemplateHlsSpecialParam {
+        flowContinueDuration?: pulumi.Input<number>;
+    }
+
+    export interface RecordTemplateMp3Param {
+        classId?: pulumi.Input<number>;
+        enable?: pulumi.Input<number>;
+        procedure?: pulumi.Input<string>;
+        recordInterval?: pulumi.Input<number>;
+        storageMode?: pulumi.Input<string>;
+        storageTime?: pulumi.Input<number>;
+        vodFileName?: pulumi.Input<string>;
+        vodSubAppId?: pulumi.Input<number>;
+    }
+
+    export interface RecordTemplateMp4Param {
+        classId?: pulumi.Input<number>;
+        enable?: pulumi.Input<number>;
+        procedure?: pulumi.Input<string>;
+        recordInterval?: pulumi.Input<number>;
+        storageMode?: pulumi.Input<string>;
+        storageTime?: pulumi.Input<number>;
+        vodFileName?: pulumi.Input<string>;
+        vodSubAppId?: pulumi.Input<number>;
+    }
+
+    export interface StreamMonitorInputList {
+        /**
+         * Description content.limit 256 bytes.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Wait monitor input push path.limit 32 bytes.
+         */
+        inputApp?: pulumi.Input<string>;
+        /**
+         * Wait monitor input push domain.limit 128 bytes.
+         */
+        inputDomain?: pulumi.Input<string>;
+        /**
+         * Wait monitor input stream name.limit 256 bytes.
+         */
+        inputStreamName: pulumi.Input<string>;
+        /**
+         * Wait monitor input stream push url.
+         */
+        inputUrl?: pulumi.Input<string>;
+    }
+
+    export interface StreamMonitorNotifyPolicy {
+        /**
+         * Callback url.limit [0,512].only http or https.
+         */
+        callbackUrl?: pulumi.Input<string>;
+        /**
+         * Notify policy type.0: not notify.1: use global policy.
+         */
+        notifyPolicyType?: pulumi.Input<number>;
+    }
+
+    export interface StreamMonitorOutputInfo {
+        /**
+         * Monitor task play path.limit 32 bytes.
+         */
+        outputApp?: pulumi.Input<string>;
+        /**
+         * Monitor task output play domain.limit 128 bytes.
+         */
+        outputDomain?: pulumi.Input<string>;
+        /**
+         * Monitor task output height, limit[1, 1080].
+         */
+        outputStreamHeight: pulumi.Input<number>;
+        /**
+         * Monitor task output stream name.limit 256 bytes.
+         */
+        outputStreamName?: pulumi.Input<string>;
+        /**
+         * Output stream width, limit[1, 1920].
+         */
+        outputStreamWidth: pulumi.Input<number>;
+    }
+
 }
 
 export namespace Cvm {
@@ -8384,6 +9598,38 @@ export namespace Cvm {
          */
         renewFlag?: pulumi.Input<string>;
     }
+}
+
+export namespace Cwp {
+    export interface GetMachinesSimpleFilter {
+        /**
+         * exact match. true or false.
+         */
+        exactMatch?: boolean;
+        /**
+         * Only supported Keywords, Version and TagId.
+         */
+        name: string;
+        /**
+         * If `name` is `Keywords`: enter keyword query; If `name` is `Version`: enter PRO_VERSION: Professional Edition | BASIC_VERSION: Basic | Flagship: Flagship | ProtectedMachines: Professional+Flagship | UnFlagship: Non Flagship | PRO_POST_PAY: Professional Edition Pay by Volume | PRO_PRE_PAY: Professional Edition Monthly Package query; If `name` is `TagId`: enter tag ID query.
+         */
+        values: string[];
+    }
+
+    export interface GetMachinesSimpleFilterArgs {
+        /**
+         * exact match. true or false.
+         */
+        exactMatch?: pulumi.Input<boolean>;
+        /**
+         * Only supported Keywords, Version and TagId.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * If `name` is `Keywords`: enter keyword query; If `name` is `Version`: enter PRO_VERSION: Professional Edition | BASIC_VERSION: Basic | Flagship: Flagship | ProtectedMachines: Professional+Flagship | UnFlagship: Non Flagship | PRO_POST_PAY: Professional Edition Pay by Volume | PRO_PRE_PAY: Professional Edition Monthly Package query; If `name` is `TagId`: enter tag ID query.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
 
 }
 
@@ -8558,17 +9804,6 @@ export namespace Cynosdb {
         timestamp?: pulumi.Input<string>;
     }
 
-    export interface GetAccountAllGrantPrivilegesAccountArgs {
-        /**
-         * Account.
-         */
-        accountName: pulumi.Input<string>;
-        /**
-         * Host, default `%`.
-         */
-        host?: pulumi.Input<string>;
-    }
-
     export interface GetAccountAllGrantPrivilegesAccount {
         /**
          * Account.
@@ -8580,59 +9815,15 @@ export namespace Cynosdb {
         host?: string;
     }
 
-    export interface GetAuditLogsFilterArgs {
+    export interface GetAccountAllGrantPrivilegesAccountArgs {
         /**
-         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         * Account.
          */
-        affectRows?: pulumi.Input<number>;
+        accountName: pulumi.Input<string>;
         /**
-         * Database name.
+         * Host, default `%`.
          */
-        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
-         */
-        execTime?: pulumi.Input<number>;
-        /**
-         * Client address.
-         */
-        hosts?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Audit policy name.
-         */
-        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Returns the number of rows.
-         */
-        sentRows?: pulumi.Input<number>;
-        /**
-         * SQL statement. Supports fuzzy matching.
-         */
-        sql?: pulumi.Input<string>;
-        /**
-         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlType?: pulumi.Input<string>;
-        /**
-         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * SQL statement. Supports passing multiple SQL statements.
-         */
-        sqls?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Table name.
-         */
-        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Thread ID.
-         */
-        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * User name.
-         */
-        users?: pulumi.Input<pulumi.Input<string>[]>;
+        host?: pulumi.Input<string>;
     }
 
     export interface GetAuditLogsFilter {
@@ -8690,27 +9881,59 @@ export namespace Cynosdb {
         users?: string[];
     }
 
-    export interface GetProxyNodeFilter {
+    export interface GetAuditLogsFilterArgs {
         /**
-         * Exact match or not.
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
          */
-        exactMatch?: boolean;
+        affectRows?: pulumi.Input<number>;
         /**
-         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         * Database name.
          */
-        name?: string;
+        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Search String.
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
          */
-        names: string[];
+        execTime?: pulumi.Input<number>;
         /**
-         * Operator.
+         * Client address.
          */
-        operator?: string;
+        hosts?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Search String.
+         * Audit policy name.
          */
-        values: string[];
+        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: pulumi.Input<number>;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: pulumi.Input<string>;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: pulumi.Input<string>;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Thread ID.
+         */
+        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * User name.
+         */
+        users?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetProxyNodeFilterArgs {
@@ -8734,6 +9957,29 @@ export namespace Cynosdb {
          * Search String.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetProxyNodeFilter {
+        /**
+         * Exact match or not.
+         */
+        exactMatch?: boolean;
+        /**
+         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         */
+        name?: string;
+        /**
+         * Search String.
+         */
+        names: string[];
+        /**
+         * Operator.
+         */
+        operator?: string;
+        /**
+         * Search String.
+         */
+        values: string[];
     }
 
     export interface InstanceParamInstanceParamList {
@@ -8817,6 +10063,7 @@ export namespace Cynosdb {
          */
         oldTable: pulumi.Input<string>;
     }
+
 }
 
 export namespace Dayu {
@@ -9426,6 +10673,40 @@ export namespace Dayu {
         dropUdp: pulumi.Input<number>;
     }
 
+    export interface DdosPolicyV2WaterPrintConfig {
+        /**
+         * List of forwarding listeners to which the watermark belongs.
+         */
+        listeners: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfigListener>[]>;
+        /**
+         * Watermark offset, value range: [0-100].
+         */
+        offset: pulumi.Input<number>;
+        /**
+         * Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+         */
+        openStatus: pulumi.Input<number>;
+        /**
+         * Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+         */
+        verify: pulumi.Input<string>;
+    }
+
+    export interface DdosPolicyV2WaterPrintConfigListener {
+        /**
+         * Forwarding protocol, value [TCP, UDP].
+         */
+        forwardProtocol: pulumi.Input<string>;
+        /**
+         * Lower limit of forwarding listening port. Values: [1-65535].
+         */
+        frontendPort: pulumi.Input<number>;
+        /**
+         * Upper limit of forwarding listening port. Values: [1-65535].
+         */
+        frontendPortEnd: pulumi.Input<number>;
+    }
+
     export interface DdosPolicyWatermarkFilter {
         /**
          * Indicate whether to auto-remove the watermark or not.
@@ -9546,21 +10827,22 @@ export namespace Dayu {
         source: pulumi.Input<string>;
         weight: pulumi.Input<number>;
     }
+
 }
 
 export namespace Dbbrain {
-    export interface GetSlowLogTopSqlsSchemaList {
-        /**
-         * DB name.
-         */
-        schema: string;
-    }
-
     export interface GetSlowLogTopSqlsSchemaListArgs {
         /**
          * DB name.
          */
         schema: pulumi.Input<string>;
+    }
+
+    export interface GetSlowLogTopSqlsSchemaList {
+        /**
+         * DB name.
+         */
+        schema: string;
     }
 
     export interface ModifyDiagDbInstanceOperationInstanceConfs {
@@ -9743,21 +11025,6 @@ export namespace Dcdb {
         value: pulumi.Input<string>;
     }
 
-    export interface GetUpgradePriceAddShardConfigArgs {
-        /**
-         * The number of new shards.
-         */
-        shardCount: pulumi.Input<number>;
-        /**
-         * Shard memory size in GB.
-         */
-        shardMemory: pulumi.Input<number>;
-        /**
-         * Shard storage capacity in GB.
-         */
-        shardStorage: pulumi.Input<number>;
-    }
-
     export interface GetUpgradePriceAddShardConfig {
         /**
          * The number of new shards.
@@ -9771,6 +11038,21 @@ export namespace Dcdb {
          * Shard storage capacity in GB.
          */
         shardStorage: number;
+    }
+
+    export interface GetUpgradePriceAddShardConfigArgs {
+        /**
+         * The number of new shards.
+         */
+        shardCount: pulumi.Input<number>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
     }
 
     export interface GetUpgradePriceExpandShardConfig {
@@ -9908,10 +11190,349 @@ export namespace Dcx {
 
 }
 
+export namespace Dlc {
+    export interface AddUsersToWorkGroupAttachmentAddInfo {
+        /**
+         * User id set, matched with CAM side uin.
+         */
+        userIds: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Work group id.
+         */
+        workGroupId: pulumi.Input<number>;
+    }
+
+    export interface AttachUserPolicyOperationPolicySet {
+        catalog: pulumi.Input<string>;
+        column?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        dataEngine?: pulumi.Input<string>;
+        database: pulumi.Input<string>;
+        function?: pulumi.Input<string>;
+        id?: pulumi.Input<number>;
+        mode?: pulumi.Input<string>;
+        operation: pulumi.Input<string>;
+        operator?: pulumi.Input<string>;
+        policyType?: pulumi.Input<string>;
+        reAuth?: pulumi.Input<boolean>;
+        source?: pulumi.Input<string>;
+        sourceId?: pulumi.Input<number>;
+        sourceName?: pulumi.Input<string>;
+        table: pulumi.Input<string>;
+        view?: pulumi.Input<string>;
+    }
+
+    export interface AttachWorkGroupPolicyOperationPolicySet {
+        catalog: pulumi.Input<string>;
+        column?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        dataEngine?: pulumi.Input<string>;
+        database: pulumi.Input<string>;
+        function?: pulumi.Input<string>;
+        id?: pulumi.Input<number>;
+        mode?: pulumi.Input<string>;
+        operation: pulumi.Input<string>;
+        operator?: pulumi.Input<string>;
+        policyType?: pulumi.Input<string>;
+        reAuth?: pulumi.Input<boolean>;
+        source?: pulumi.Input<string>;
+        sourceId?: pulumi.Input<number>;
+        sourceName?: pulumi.Input<string>;
+        table: pulumi.Input<string>;
+        view?: pulumi.Input<string>;
+    }
+
+    export interface BindWorkGroupsToUserAttachmentAddInfo {
+        /**
+         * User id, matched with CAM side uin.
+         */
+        userId: pulumi.Input<string>;
+        /**
+         * Work group id set.
+         */
+        workGroupIds: pulumi.Input<pulumi.Input<number>[]>;
+    }
+
+    export interface DataEngineCrontabResumeSuspendStrategy {
+        /**
+         * Scheduled pull-up time: For example: 8 o&amp;#39;clock on Monday is expressed as 1000000-08:00:00.
+         */
+        resumeTime?: pulumi.Input<string>;
+        /**
+         * Suspend configuration: 0 (default): wait for the task to end before suspending, 1: force suspend.
+         */
+        suspendStrategy?: pulumi.Input<number>;
+        /**
+         * Scheduled suspension time: For example: 20 o&amp;#39;clock on Monday is expressed as 1000000-20:00:00.
+         */
+        suspendTime?: pulumi.Input<string>;
+    }
+
+    export interface DataEngineDataEngineConfigPair {
+        /**
+         * Configuration items.
+         */
+        configItem: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        configValue: pulumi.Input<string>;
+    }
+
+    export interface DataEngineSessionResourceTemplate {
+        /**
+         * Engine driver size specification only supports: small/medium/large/xlarge/m.small/m.medium/m.large/m.xlarge.
+         */
+        driverSize?: pulumi.Input<string>;
+        /**
+         * Specify the executor max number (in a dynamic configuration scenario), the minimum value is 1, and the maximum value is less than the cluster specification (when ExecutorMaxNumbers is less than ExecutorNums, the value is set to ExecutorNums).
+         */
+        executorMaxNumbers?: pulumi.Input<number>;
+        /**
+         * Specify the number of executors. The minimum value is 1 and the maximum value is less than the cluster specification.
+         */
+        executorNums?: pulumi.Input<number>;
+        /**
+         * Engine executor size specification only supports: small/medium/large/xlarge/m.small/m.medium/m.large/m.xlarge.
+         */
+        executorSize?: pulumi.Input<string>;
+    }
+
+    export interface DetachUserPolicyOperationPolicySet {
+        catalog: pulumi.Input<string>;
+        column?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        dataEngine?: pulumi.Input<string>;
+        database: pulumi.Input<string>;
+        function?: pulumi.Input<string>;
+        id?: pulumi.Input<number>;
+        mode?: pulumi.Input<string>;
+        operation: pulumi.Input<string>;
+        operator?: pulumi.Input<string>;
+        policyType?: pulumi.Input<string>;
+        reAuth?: pulumi.Input<boolean>;
+        source?: pulumi.Input<string>;
+        sourceId?: pulumi.Input<number>;
+        sourceName?: pulumi.Input<string>;
+        table: pulumi.Input<string>;
+        view?: pulumi.Input<string>;
+    }
+
+    export interface DetachWorkGroupPolicyOperationPolicySet {
+        catalog: pulumi.Input<string>;
+        column?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        dataEngine?: pulumi.Input<string>;
+        database: pulumi.Input<string>;
+        function?: pulumi.Input<string>;
+        id?: pulumi.Input<number>;
+        mode?: pulumi.Input<string>;
+        operation: pulumi.Input<string>;
+        operator?: pulumi.Input<string>;
+        policyType?: pulumi.Input<string>;
+        reAuth?: pulumi.Input<boolean>;
+        source?: pulumi.Input<string>;
+        sourceId?: pulumi.Input<number>;
+        sourceName?: pulumi.Input<string>;
+        table: pulumi.Input<string>;
+        view?: pulumi.Input<string>;
+    }
+
+    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPair {
+        /**
+         * Configuration item.
+         */
+        configItem: string;
+        /**
+         * Configuration value.
+         */
+        configValue: string;
+    }
+
+    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs {
+        /**
+         * Configuration item.
+         */
+        configItem: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        configValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeUserInfoFilter {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
+         */
+        name: string;
+        /**
+         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: string[];
+    }
+
+    export interface GetDescribeUserInfoFilterArgs {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDescribeWorkGroupInfoFilterArgs {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between filters is a logical or (OR) relationship.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute value, if there are multiple values in the same filter, the relationship between values under the same filter is a logical or relationship.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDescribeWorkGroupInfoFilter {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between filters is a logical or (OR) relationship.
+         */
+        name: string;
+        /**
+         * Attribute value, if there are multiple values in the same filter, the relationship between values under the same filter is a logical or relationship.
+         */
+        values: string[];
+    }
+
+    export interface UpdateRowFilterOperationPolicy {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
+        catalog: pulumi.Input<string>;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
+        column?: pulumi.Input<string>;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
+        createTime?: pulumi.Input<string>;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
+        dataEngine?: pulumi.Input<string>;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
+        database: pulumi.Input<string>;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
+        function?: pulumi.Input<string>;
+        /**
+         * Policy id.
+         */
+        id?: pulumi.Input<number>;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
+        mode?: pulumi.Input<string>;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
+        operation: pulumi.Input<string>;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
+        operator?: pulumi.Input<string>;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
+        policyType?: pulumi.Input<string>;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
+        reAuth?: pulumi.Input<boolean>;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
+        source?: pulumi.Input<string>;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
+        sourceId?: pulumi.Input<number>;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
+        sourceName?: pulumi.Input<string>;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
+        table: pulumi.Input<string>;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
+        view?: pulumi.Input<string>;
+    }
+
+    export interface UserDataEngineConfigDataEngineConfigPair {
+        /**
+         * Config key.
+         */
+        configItem: pulumi.Input<string>;
+        /**
+         * Config value.
+         */
+        configValue: pulumi.Input<string>;
+    }
+
+    export interface UserDataEngineConfigSessionResourceTemplate {
+        /**
+         * Engine driver size specification only supports: small/medium/large/xlarge/m.small/m.medium/m.large/m.xlarge.
+         */
+        driverSize?: pulumi.Input<string>;
+        /**
+         * Specify the executor max number (in a dynamic configuration scenario), the minimum value is 1, and the maximum value is less than the cluster specification (when ExecutorMaxNumbers is less than ExecutorNums, the value is set to ExecutorNums).
+         */
+        executorMaxNumbers?: pulumi.Input<number>;
+        /**
+         * Specify the number of executors. The minimum value is 1 and the maximum value is less than the cluster specification.
+         */
+        executorNums?: pulumi.Input<number>;
+        /**
+         * Engine executor size specification only supports: small/medium/large/xlarge/m.small/m.medium/m.large/m.xlarge.
+         */
+        executorSize?: pulumi.Input<string>;
+    }
+
+}
+
 export namespace Dnats {
 }
 
 export namespace Dnspod {
+    export interface GetDomainListTag {
+        /**
+         * Field to be filtered.
+         */
+        tagKey: string;
+        /**
+         * Filter value of the field.
+         */
+        tagValues: string[];
+    }
+
+    export interface GetDomainListTagArgs {
+        /**
+         * Field to be filtered.
+         */
+        tagKey: pulumi.Input<string>;
+        /**
+         * Filter value of the field.
+         */
+        tagValues: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
 }
 
 export namespace Domains {
@@ -10489,6 +12110,10 @@ export namespace Dts {
          */
         cvmInstanceId?: pulumi.Input<string>;
         /**
+         * The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databaseNetEnv?: pulumi.Input<string>;
+        /**
          * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
          */
         dbKernel?: pulumi.Input<string>;
@@ -10772,6 +12397,10 @@ export namespace Dts {
          */
         cvmInstanceId?: pulumi.Input<string>;
         /**
+         * The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databaseNetEnv?: pulumi.Input<string>;
+        /**
          * Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
          */
         dbKernel?: pulumi.Input<string>;
@@ -10863,9 +12492,47 @@ export namespace Dts {
          */
         tagValue?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Eb {
+    export interface EventConnectorConnectionDescription {
+        /**
+         * apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        apiGwParams?: pulumi.Input<inputs.Eb.EventConnectorConnectionDescriptionApiGwParams>;
+        /**
+         * ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+         */
+        ckafkaParams?: pulumi.Input<inputs.Eb.EventConnectorConnectionDescriptionCkafkaParams>;
+        /**
+         * Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+         */
+        resourceDescription: pulumi.Input<string>;
+    }
+
+    export interface EventConnectorConnectionDescriptionApiGwParams {
+        /**
+         * POST.
+         */
+        method: pulumi.Input<string>;
+        /**
+         * HTTPS.
+         */
+        protocol: pulumi.Input<string>;
+    }
+
+    export interface EventConnectorConnectionDescriptionCkafkaParams {
+        /**
+         * kafka offset.
+         */
+        offset: pulumi.Input<string>;
+        /**
+         * ckafka  topic.
+         */
+        topicName: pulumi.Input<string>;
+    }
+
     export interface EventTargetTargetDescription {
         /**
          * Ckafka parameters.
@@ -11091,7 +12758,6 @@ export namespace Eb {
          */
         type: pulumi.Input<string>;
     }
-
 }
 
 export namespace Eip {
@@ -11101,6 +12767,21 @@ export namespace Eips {
 }
 
 export namespace Elasticsearch {
+    export interface DiagnoseDiagnoseJobMeta {
+        /**
+         * Intelligent operation and maintenance diagnostic item description.
+         */
+        jobDescription?: pulumi.Input<string>;
+        /**
+         * English name of diagnosis item for intelligent operation and maintenance.
+         */
+        jobName?: pulumi.Input<string>;
+        /**
+         * Chinese name of intelligent operation and maintenance diagnosis item.
+         */
+        jobZhName?: pulumi.Input<string>;
+    }
+
     export interface InstanceEsAcl {
         /**
          * Blacklist of kibana access.
@@ -11160,9 +12841,78 @@ export namespace Elasticsearch {
          */
         nodeType: pulumi.Input<string>;
     }
+
+    export interface LogstashOperationDuration {
+        /**
+         * day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+         */
+        periods: pulumi.Input<pulumi.Input<number>[]>;
+        /**
+         * operation end time.
+         */
+        timeEnd: pulumi.Input<string>;
+        /**
+         * operation start time.
+         */
+        timeStart: pulumi.Input<string>;
+        /**
+         * time zone, for example: UTC+8.
+         */
+        timeZone: pulumi.Input<string>;
+    }
+
+    export interface LogstashPipelinePipeline {
+        /**
+         * Pipeline batch processing delay.
+         */
+        batchDelay: pulumi.Input<number>;
+        /**
+         * Pipe batch size.
+         */
+        batchSize: pulumi.Input<number>;
+        /**
+         * Pipeline configuration content.
+         */
+        config: pulumi.Input<string>;
+        /**
+         * Pipeline description information.
+         */
+        pipelineDesc: pulumi.Input<string>;
+        /**
+         * Pipeline id.
+         */
+        pipelineId: pulumi.Input<string>;
+        /**
+         * Number of pipeline buffer queue checkpoint writes.
+         */
+        queueCheckPointWrites: pulumi.Input<number>;
+        /**
+         * Pipeline buffer queue size.
+         */
+        queueMaxBytes: pulumi.Input<string>;
+        /**
+         * Pipeline buffer queue type.
+         */
+        queueType: pulumi.Input<string>;
+        /**
+         * Number of Worker of pipe.
+         */
+        workers: pulumi.Input<number>;
+    }
 }
 
 export namespace Emr {
+    export interface ClusterPlacementInfo {
+        /**
+         * Project id.
+         */
+        projectId?: pulumi.Input<number>;
+        /**
+         * Zone.
+         */
+        zone: pulumi.Input<string>;
+    }
+
     export interface ClusterResourceSpec {
         /**
          * The number of common node.
@@ -11226,6 +12976,28 @@ export namespace Emr {
         storageType?: pulumi.Input<number>;
     }
 
+    export interface GetAutoScaleRecordsFilter {
+        /**
+         * Key. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        key: string;
+        /**
+         * Value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        value: string;
+    }
+
+    export interface GetAutoScaleRecordsFilterArgs {
+        /**
+         * Key. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        value: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Eni {
@@ -11264,6 +13036,61 @@ export namespace Enis {
 }
 
 export namespace Gaap {
+    export interface CustomHeaderHeader {
+        /**
+         * Header name.
+         */
+        headerName: pulumi.Input<string>;
+        /**
+         * Header value.
+         */
+        headerValue: pulumi.Input<string>;
+    }
+
+    export interface GetProxyGroupsFilter {
+        /**
+         * Filter conditions.
+         */
+        name: string;
+        /**
+         * filtering value.
+         */
+        values: string[];
+    }
+
+    export interface GetProxyGroupsFilterArgs {
+        /**
+         * Filter conditions.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filtering value.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetProxyGroupsTagSet {
+        /**
+         * Tag Key.
+         */
+        tagKey: string;
+        /**
+         * Tag Value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetProxyGroupsTagSetArgs {
+        /**
+         * Tag Key.
+         */
+        tagKey: pulumi.Input<string>;
+        /**
+         * Tag Value.
+         */
+        tagValue: pulumi.Input<string>;
+    }
+
     export interface HttpRuleRealserver {
         /**
          * ID of the GAAP realserver.
@@ -11301,7 +13128,6 @@ export namespace Gaap {
          */
         weight?: pulumi.Input<number>;
     }
-
 }
 
 export namespace Ha {
@@ -11396,6 +13222,17 @@ export namespace Key {
 }
 
 export namespace Kms {
+    export interface OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint {
+        /**
+         * Description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * identity.
+         */
+        identity: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Kubernetes {
@@ -12058,6 +13895,50 @@ export namespace Kubernetes {
         kmsRegion?: pulumi.Input<string>;
     }
 
+    export interface GetClusterInstancesFilter {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: string[];
+    }
+
+    export interface GetClusterInstancesFilterArgs {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetClusterNodePoolsFilter {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: string[];
+    }
+
+    export interface GetClusterNodePoolsFilterArgs {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface NodePoolAutoScalingConfig {
         /**
          * Backup CVM instance types if specified instance type sold out or mismatch.
@@ -12112,7 +13993,7 @@ export namespace Kubernetes {
          */
         instanceType: pulumi.Input<string>;
         /**
-         * Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+         * Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
          */
         internetChargeType?: pulumi.Input<string>;
         /**
@@ -12124,6 +14005,10 @@ export namespace Kubernetes {
          */
         keyIds?: pulumi.Input<pulumi.Input<string>[]>;
         /**
+         * Ordered security groups to which a CVM instance belongs.
+         */
+        orderlySecurityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
          * Password to access.
          */
         password?: pulumi.Input<string>;
@@ -12132,7 +14017,9 @@ export namespace Kubernetes {
          */
         publicIpAssigned?: pulumi.Input<boolean>;
         /**
-         * Security groups to which a CVM instance belongs.
+         * The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
+         *
+         * @deprecated The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
          */
         securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
         /**
@@ -12163,7 +14050,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -12229,7 +14116,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -12524,7 +14411,6 @@ export namespace Kubernetes {
          */
         value: pulumi.Input<string>;
     }
-
 }
 
 export namespace Lighthouse {
@@ -12581,6 +14467,29 @@ export namespace Lighthouse {
         protocol: pulumi.Input<string>;
     }
 
+    export interface FirewallTemplateTemplateRule {
+        /**
+         * Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+         */
+        action?: pulumi.Input<string>;
+        /**
+         * Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+         */
+        cidrBlock?: pulumi.Input<string>;
+        /**
+         * Firewall rule description.
+         */
+        firewallRuleDescription?: pulumi.Input<string>;
+        /**
+         * Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+         */
+        port?: pulumi.Input<string>;
+        /**
+         * Protocol. Values: TCP, UDP, ICMP, ALL.
+         */
+        protocol: pulumi.Input<string>;
+    }
+
     export interface GetBundleFilter {
         /**
          * Field to be filtered.
@@ -12625,17 +14534,6 @@ export namespace Lighthouse {
         values: string[];
     }
 
-    export interface GetDisksFilter {
-        /**
-         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
-         */
-        name: string;
-        /**
-         * Value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetDisksFilterArgs {
         /**
          * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
@@ -12645,6 +14543,17 @@ export namespace Lighthouse {
          * Value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDisksFilter {
+        /**
+         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
     }
 
     export interface GetModifyInstanceBundleFilterArgs {
@@ -12803,6 +14712,7 @@ export namespace Lighthouse {
          */
         renewFlag?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Mariadb {
@@ -12997,7 +14907,6 @@ export namespace Mongodb {
          */
         standbyInstanceRegion?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Monitor {
@@ -13026,6 +14935,10 @@ export namespace Monitor {
          */
         endTime?: pulumi.Input<number>;
         /**
+         * If passed verification `0` is no, `1` is yes. Default `0`.
+         */
+        isValid?: pulumi.Input<number>;
+        /**
          * Notification Start Time Number of seconds at the start of a day.
          */
         startTime?: pulumi.Input<number>;
@@ -13033,6 +14946,10 @@ export namespace Monitor {
          * Callback URL (limited to 256 characters).
          */
         url: pulumi.Input<string>;
+        /**
+         * Verification code.
+         */
+        validationCode?: pulumi.Input<string>;
         /**
          * Notification period 1-7 indicates Monday to Sunday.
          */
@@ -13221,6 +15138,17 @@ export namespace Monitor {
         type?: pulumi.Input<string>;
     }
 
+    export interface AlarmPolicyFilter {
+        /**
+         * JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+         */
+        dimensions?: pulumi.Input<string>;
+        /**
+         * Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+         */
+        type: pulumi.Input<string>;
+    }
+
     export interface AlarmPolicyPolicyTag {
         /**
          * Tag key.
@@ -13274,6 +15202,50 @@ export namespace Monitor {
         startTime?: pulumi.Input<number>;
     }
 
+    export interface GetAlarmHistoryNamespace {
+        /**
+         * Monitor type.
+         */
+        monitorType: string;
+        /**
+         * Policy type.
+         */
+        namespace: string;
+    }
+
+    export interface GetAlarmHistoryNamespaceArgs {
+        /**
+         * Monitor type.
+         */
+        monitorType: pulumi.Input<string>;
+        /**
+         * Policy type.
+         */
+        namespace: pulumi.Input<string>;
+    }
+
+    export interface GetAlarmPolicyTriggerTask {
+        /**
+         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        taskConfig: string;
+        /**
+         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        type: string;
+    }
+
+    export interface GetAlarmPolicyTriggerTaskArgs {
+        /**
+         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        taskConfig: pulumi.Input<string>;
+        /**
+         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        type: pulumi.Input<string>;
+    }
+
     export interface GetDataDimension {
         /**
          * Instance dimension name, eg: `InstanceId` for cvm.
@@ -13316,6 +15288,18 @@ export namespace Monitor {
          * Instance dimension value, eg: `119.119.119.119` for internet ip.
          */
         value?: string;
+    }
+
+    export interface GetStatisticDataCondition {
+        key: string;
+        operator: string;
+        values: string[];
+    }
+
+    export interface GetStatisticDataConditionArgs {
+        key: pulumi.Input<string>;
+        operator: pulumi.Input<string>;
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GrafanaSsoAccountRole {
@@ -13870,7 +15854,6 @@ export namespace Monitor {
          */
         templateId?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Mps {
@@ -14040,6 +16023,5042 @@ export namespace Mps {
          * Ocr words recognition task switch, optional value:ON/OFF.
          */
         switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePoliticalConfigure {
+        /**
+         * Political asr control parameters.
+         */
+        asrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigureAsrReviewInfo>;
+        /**
+         * Political image control parameters.
+         */
+        imgReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigureImgReviewInfo>;
+        /**
+         * Political ocr control parameters.
+         */
+        ocrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigureOcrReviewInfo>;
+    }
+
+    export interface ContentReviewTemplatePoliticalConfigureAsrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined asr review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePoliticalConfigureImgReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePoliticalConfigureOcrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr text review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePornConfigure {
+        /**
+         * Voice pornography control parameters.
+         */
+        asrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigureAsrReviewInfo>;
+        /**
+         * Porn image Identification Control Parameters.
+         */
+        imgReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigureImgReviewInfo>;
+        /**
+         * Ocr pornography control parameters.
+         */
+        ocrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigureOcrReviewInfo>;
+    }
+
+    export interface ContentReviewTemplatePornConfigureAsrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined asr review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePornConfigureImgReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplatePornConfigureOcrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr text review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateProhibitedConfigure {
+        /**
+         * Voice Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        asrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigureAsrReviewInfo>;
+        /**
+         * Ocr Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ocrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigureOcrReviewInfo>;
+    }
+
+    export interface ContentReviewTemplateProhibitedConfigureAsrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined asr review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateProhibitedConfigureOcrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr text review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateTerrorismConfigure {
+        /**
+         * Terrorism image task control parameters.
+         */
+        imgReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigureImgReviewInfo>;
+        /**
+         * Ocr terrorism task Control Parameters.
+         */
+        ocrReviewInfo: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigureOcrReviewInfo>;
+    }
+
+    export interface ContentReviewTemplateTerrorismConfigureImgReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * Terrorism image task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateTerrorismConfigureOcrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr text review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateUserDefineConfigure {
+        /**
+         * User-defined asr text review control parameters.
+         */
+        asrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigureAsrReviewInfo>;
+        /**
+         * User-defined face review control parameters.
+         */
+        faceReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigureFaceReviewInfo>;
+        /**
+         * User-defined ocr text review control parameters.
+         */
+        ocrReviewInfo?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigureOcrReviewInfo>;
+    }
+
+    export interface ContentReviewTemplateUserDefineConfigureAsrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined asr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a asr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined asr review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateUserDefineConfigureFaceReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined face review tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a face library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined face review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface ContentReviewTemplateUserDefineConfigureOcrReviewInfo {
+        /**
+         * The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+         */
+        blockConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a ocr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+         */
+        labelSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+         */
+        reviewConfidence?: pulumi.Input<number>;
+        /**
+         * User-defined ocr text review task switch, optional value:ON/OFF.
+         */
+        switch: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationFileInfo {
+        /**
+         * End time offset of video clipping in seconds.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Video input information.
+         */
+        inputInfo: pulumi.Input<inputs.Mps.EditMediaOperationFileInfoInputInfo>;
+        /**
+         * Start time offset of video clipping in seconds.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+    }
+
+    export interface EditMediaOperationFileInfoInputInfo {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.EditMediaOperationFileInfoInputInfoCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.EditMediaOperationFileInfoInputInfoS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.EditMediaOperationFileInfoInputInfoUrlInputInfo>;
+    }
+
+    export interface EditMediaOperationFileInfoInputInfoCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationFileInfoInputInfoS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationFileInfoInputInfoUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationOutputConfig {
+        /**
+         * Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
+         */
+        container?: pulumi.Input<string>;
+        /**
+         * The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.EditMediaOperationOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.EditMediaOperationOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS. `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationTaskNotifyConfig {
+        /**
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsSqs?: pulumi.Input<inputs.Mps.EditMediaOperationTaskNotifyConfigAwsSqs>;
+        /**
+         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+         */
+        cmqModel?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+         */
+        cmqRegion?: pulumi.Input<string>;
+        /**
+         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         */
+        notifyMode?: pulumi.Input<string>;
+        /**
+         * The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue. `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+         */
+        notifyType?: pulumi.Input<string>;
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`.
+         */
+        notifyUrl?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         */
+        queueName?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+         */
+        topicName?: pulumi.Input<string>;
+    }
+
+    export interface EditMediaOperationTaskNotifyConfigAwsSqs {
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+        /**
+         * The name of the SQS queue.
+         */
+        sqsQueueName: pulumi.Input<string>;
+        /**
+         * The region of the SQS queue.
+         */
+        sqsRegion: pulumi.Input<string>;
+    }
+
+    export interface FlowInputGroup {
+        /**
+         * The input IP whitelist, the format is CIDR.
+         */
+        allowIpLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Input description with a length of [0, 255].
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+         */
+        failOver?: pulumi.Input<string>;
+        /**
+         * Input HLS_PULL configuration information.
+         */
+        hlsPullSettings?: pulumi.Input<inputs.Mps.FlowInputGroupHlsPullSettings>;
+        /**
+         * Input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+         */
+        inputName: pulumi.Input<string>;
+        /**
+         * Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * Delay broadcast smooth streaming configuration information.
+         */
+        resilientStream?: pulumi.Input<inputs.Mps.FlowInputGroupResilientStream>;
+        /**
+         * Input RTMP_PULL configuration information.
+         */
+        rtmpPullSettings?: pulumi.Input<inputs.Mps.FlowInputGroupRtmpPullSettings>;
+        /**
+         * RTP configuration information.
+         */
+        rtpSettings?: pulumi.Input<inputs.Mps.FlowInputGroupRtpSettings>;
+        /**
+         * Input RTSP_PULL configuration information.
+         */
+        rtspPullSettings?: pulumi.Input<inputs.Mps.FlowInputGroupRtspPullSettings>;
+        /**
+         * The input SRT configuration information.
+         */
+        srtSettings?: pulumi.Input<inputs.Mps.FlowInputGroupSrtSettings>;
+    }
+
+    export interface FlowInputGroupHlsPullSettings {
+        /**
+         * There is only one origin address of the HLS origin station.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroupHlsPullSettingsSourceAddress>[]>;
+    }
+
+    export interface FlowInputGroupHlsPullSettingsSourceAddress {
+        /**
+         * The URL address of the RTSP source site.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface FlowInputGroupResilientStream {
+        /**
+         * Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        bufferTime?: pulumi.Input<number>;
+        /**
+         * Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        enable?: pulumi.Input<boolean>;
+    }
+
+    export interface FlowInputGroupRtmpPullSettings {
+        /**
+         * The source site address of the RTMP source site, there can only be one.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroupRtmpPullSettingsSourceAddress>[]>;
+    }
+
+    export interface FlowInputGroupRtmpPullSettingsSourceAddress {
+        /**
+         * StreamKey information of the RTMP source site.
+         */
+        streamKey: pulumi.Input<string>;
+        /**
+         * TcUrl address of the RTMP source server.
+         */
+        tcUrl: pulumi.Input<string>;
+    }
+
+    export interface FlowInputGroupRtpSettings {
+        /**
+         * Defaults to none, optional values[none].
+         */
+        fec?: pulumi.Input<string>;
+        /**
+         * Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+         */
+        idleTimeout?: pulumi.Input<number>;
+    }
+
+    export interface FlowInputGroupRtspPullSettings {
+        /**
+         * The source site address of the RTSP source site, there can only be one.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroupRtspPullSettingsSourceAddress>[]>;
+    }
+
+    export interface FlowInputGroupRtspPullSettingsSourceAddress {
+        /**
+         * The URL address of the RTSP source site.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface FlowInputGroupSrtSettings {
+        /**
+         * Delay, default 0, unit ms, range [0, 3000].
+         */
+        latency?: pulumi.Input<number>;
+        /**
+         * SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+         */
+        mode?: pulumi.Input<string>;
+        /**
+         * The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+         */
+        passphrase?: pulumi.Input<string>;
+        /**
+         * Key length, default is 0, optional [0|16|24|32].
+         */
+        pbKeyLen?: pulumi.Input<number>;
+        /**
+         * Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+         */
+        peerIdleTimeout?: pulumi.Input<number>;
+        /**
+         * Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+         */
+        peerLatency?: pulumi.Input<number>;
+        /**
+         * Receiving delay, default is 120, unit ms, range is [0, 3000].
+         */
+        recvLatency?: pulumi.Input<number>;
+        /**
+         * SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+         */
+        sourceAddresses?: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroupSrtSettingsSourceAddress>[]>;
+        /**
+         * Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. For specific format, please refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+         */
+        streamId?: pulumi.Input<string>;
+    }
+
+    export interface FlowInputGroupSrtSettingsSourceAddress {
+        /**
+         * Peer IP.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * Peer port.
+         */
+        port: pulumi.Input<number>;
+    }
+
+    export interface GetMediaMetaDataInputInfoArgs {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoCosInputInfoArgs>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoS3InputInfoArgs>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfoArgs>;
+    }
+
+    export interface GetMediaMetaDataInputInfo {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: inputs.Mps.GetMediaMetaDataInputInfoCosInputInfo;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: inputs.Mps.GetMediaMetaDataInputInfoS3InputInfo;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: string;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfo;
+    }
+
+    export interface GetMediaMetaDataInputInfoCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: string;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: string;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: string;
+    }
+
+    export interface GetMediaMetaDataInputInfoCosInputInfoArgs {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface GetMediaMetaDataInputInfoS3InputInfoArgs {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to access the AWS S3 object.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to access the AWS S3 object.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface GetMediaMetaDataInputInfoS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: string;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: string;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: string;
+        /**
+         * The key ID required to access the AWS S3 object.
+         */
+        s3SecretId?: string;
+        /**
+         * The key required to access the AWS S3 object.
+         */
+        s3SecretKey?: string;
+    }
+
+    export interface GetMediaMetaDataInputInfoUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: string;
+    }
+
+    export interface GetMediaMetaDataInputInfoUrlInputInfoArgs {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface InputInputGroup {
+        /**
+         * The input IP whitelist, the format is CIDR.
+         */
+        allowIpLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The input description with a length of [0, 255].
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+         */
+        failOver?: pulumi.Input<string>;
+        /**
+         * Input HLS_PULL configuration information.
+         */
+        hlsPullSettings?: pulumi.Input<inputs.Mps.InputInputGroupHlsPullSettings>;
+        /**
+         * The input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+         */
+        inputName: pulumi.Input<string>;
+        /**
+         * Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * Delay broadcast smooth streaming configuration information.
+         */
+        resilientStream?: pulumi.Input<inputs.Mps.InputInputGroupResilientStream>;
+        /**
+         * Input RTMP_PULL configuration information.
+         */
+        rtmpPullSettings?: pulumi.Input<inputs.Mps.InputInputGroupRtmpPullSettings>;
+        /**
+         * Input RTP configuration information.
+         */
+        rtpSettings?: pulumi.Input<inputs.Mps.InputInputGroupRtpSettings>;
+        /**
+         * Input RTSP_PULL configuration information.
+         */
+        rtspPullSettings?: pulumi.Input<inputs.Mps.InputInputGroupRtspPullSettings>;
+        /**
+         * The input SRT configuration information.
+         */
+        srtSettings?: pulumi.Input<inputs.Mps.InputInputGroupSrtSettings>;
+    }
+
+    export interface InputInputGroupHlsPullSettings {
+        /**
+         * There is only one origin address of the HLS origin station.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.InputInputGroupHlsPullSettingsSourceAddress>[]>;
+    }
+
+    export interface InputInputGroupHlsPullSettingsSourceAddress {
+        /**
+         * The URL address of the RTSP source site.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface InputInputGroupResilientStream {
+        /**
+         * Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        bufferTime?: pulumi.Input<number>;
+        /**
+         * Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        enable?: pulumi.Input<boolean>;
+    }
+
+    export interface InputInputGroupRtmpPullSettings {
+        /**
+         * The source site address of the RTMP source site, there can only be one.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.InputInputGroupRtmpPullSettingsSourceAddress>[]>;
+    }
+
+    export interface InputInputGroupRtmpPullSettingsSourceAddress {
+        /**
+         * StreamKey information of the RTMP source site.
+         */
+        streamKey: pulumi.Input<string>;
+        /**
+         * TcUrl address of the RTMP source server.
+         */
+        tcUrl: pulumi.Input<string>;
+    }
+
+    export interface InputInputGroupRtpSettings {
+        /**
+         * Defaults to &#39;none&#39;, optional values[&#39;none&#39;].
+         */
+        fec?: pulumi.Input<string>;
+        /**
+         * Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+         */
+        idleTimeout?: pulumi.Input<number>;
+    }
+
+    export interface InputInputGroupRtspPullSettings {
+        /**
+         * The source site address of the RTSP source site, there can only be one.
+         */
+        sourceAddresses: pulumi.Input<pulumi.Input<inputs.Mps.InputInputGroupRtspPullSettingsSourceAddress>[]>;
+    }
+
+    export interface InputInputGroupRtspPullSettingsSourceAddress {
+        /**
+         * The URL address of the RTSP source site.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface InputInputGroupSrtSettings {
+        /**
+         * Delay, default 0, unit ms, range [0, 3000].
+         */
+        latency?: pulumi.Input<number>;
+        /**
+         * SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+         */
+        mode?: pulumi.Input<string>;
+        /**
+         * The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+         */
+        passphrase?: pulumi.Input<string>;
+        /**
+         * Key length, default is 0, optional [0|16|24|32].
+         */
+        pbKeyLen?: pulumi.Input<number>;
+        /**
+         * Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+         */
+        peerIdleTimeout?: pulumi.Input<number>;
+        /**
+         * Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+         */
+        peerLatency?: pulumi.Input<number>;
+        /**
+         * Receiving delay, default is 120, unit ms, range is [0, 3000].
+         */
+        recvLatency?: pulumi.Input<number>;
+        /**
+         * SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+         */
+        sourceAddresses?: pulumi.Input<pulumi.Input<inputs.Mps.InputInputGroupSrtSettingsSourceAddress>[]>;
+        /**
+         * Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. Specific format can refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+         */
+        streamId?: pulumi.Input<string>;
+    }
+
+    export interface InputInputGroupSrtSettingsSourceAddress {
+        /**
+         * Peer IP.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * Peer port.
+         */
+        port: pulumi.Input<number>;
+    }
+
+    export interface OutputOutput {
+        /**
+         * IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.
+         */
+        allowIpLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Output description.
+         */
+        description: pulumi.Input<string>;
+        /**
+         * The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.
+         */
+        maxConcurrent?: pulumi.Input<number>;
+        /**
+         * The name of the output.
+         */
+        outputName: pulumi.Input<string>;
+        /**
+         * Output region.
+         */
+        outputRegion: pulumi.Input<string>;
+        /**
+         * Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * Output RTMP configuration.
+         */
+        rtmpSettings?: pulumi.Input<inputs.Mps.OutputOutputRtmpSettings>;
+        /**
+         * Output RTP configuration.
+         */
+        rtpSettings?: pulumi.Input<inputs.Mps.OutputOutputRtpSettings>;
+        /**
+         * configuration of the output SRT.
+         */
+        srtSettings?: pulumi.Input<inputs.Mps.OutputOutputSrtSettings>;
+    }
+
+    export interface OutputOutputRtmpSettings {
+        /**
+         * RTMP Chunk size, range is [4096, 40960].
+         */
+        chunkSize?: pulumi.Input<number>;
+        /**
+         * The target address of the relay can be filled in 1~2.
+         */
+        destinations: pulumi.Input<pulumi.Input<inputs.Mps.OutputOutputRtmpSettingsDestination>[]>;
+    }
+
+    export interface OutputOutputRtmpSettingsDestination {
+        /**
+         * relayed StreamKey, in the format: stream?key=value.
+         */
+        streamKey: pulumi.Input<string>;
+        /**
+         * relayed URL, the format is: rtmp://domain/live.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface OutputOutputRtpSettings {
+        /**
+         * The target address of the relay can be filled in 1~2.
+         */
+        destinations: pulumi.Input<pulumi.Input<inputs.Mps.OutputOutputRtpSettingsDestination>[]>;
+        /**
+         * You can only fill in none.
+         */
+        fec: pulumi.Input<string>;
+        /**
+         * Idle timeout, unit ms.
+         */
+        idleTimeout: pulumi.Input<number>;
+    }
+
+    export interface OutputOutputRtpSettingsDestination {
+        /**
+         * Output IP.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * output port.
+         */
+        port: pulumi.Input<number>;
+    }
+
+    export interface OutputOutputSrtSettings {
+        /**
+         * The target address of the relay is required when Mode is CALLER, and only one group can be filled in.
+         */
+        destinations: pulumi.Input<pulumi.Input<inputs.Mps.OutputOutputSrtSettingsDestination>[]>;
+        /**
+         * The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+         */
+        latency?: pulumi.Input<number>;
+        /**
+         * SRT mode, optional [LISTENER|CALLER], default is CALLER.
+         */
+        mode?: pulumi.Input<string>;
+        /**
+         * The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+         */
+        passphrase?: pulumi.Input<string>;
+        /**
+         * The key length of relay SRT, the default is 0, optional [0|16|24|32].
+         */
+        pbKeyLen?: pulumi.Input<number>;
+        /**
+         * The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].
+         */
+        peerIdleTimeout?: pulumi.Input<number>;
+        /**
+         * The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+         */
+        peerLatency?: pulumi.Input<number>;
+        /**
+         * The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].
+         */
+        recvLatency?: pulumi.Input<number>;
+        /**
+         * relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.
+         */
+        streamId?: pulumi.Input<string>;
+    }
+
+    export interface OutputOutputSrtSettingsDestination {
+        /**
+         * Output IP.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * output port.
+         */
+        port: pulumi.Input<number>;
+    }
+
+    export interface ProcessLiveStreamOperationAiAnalysisTask {
+        /**
+         * Video content analysis template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        extendedParameter?: pulumi.Input<string>;
+    }
+
+    export interface ProcessLiveStreamOperationAiContentReviewTask {
+        /**
+         * Video content audit template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ProcessLiveStreamOperationAiQualityControlTask {
+        /**
+         * The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        channelExtPara?: pulumi.Input<string>;
+        /**
+         * The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        definition?: pulumi.Input<number>;
+    }
+
+    export interface ProcessLiveStreamOperationAiRecognitionTask {
+        /**
+         * Intelligent video recognition template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ProcessLiveStreamOperationOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS.`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessLiveStreamOperationOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessLiveStreamOperationOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to upload files to the AWS S3 object.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to upload files to the AWS S3 object.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessLiveStreamOperationTaskNotifyConfig {
+        /**
+         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         */
+        cmqModel?: pulumi.Input<string>;
+        /**
+         * CMQ region, such as `sh` and `bj`.
+         */
+        cmqRegion?: pulumi.Input<string>;
+        /**
+         * The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+         */
+        notifyType?: pulumi.Input<string>;
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`.
+         */
+        notifyUrl?: pulumi.Input<string>;
+        /**
+         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+         */
+        queueName?: pulumi.Input<string>;
+        /**
+         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+         */
+        topicName?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationAiAnalysisTask {
+        /**
+         * Video content analysis template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        extendedParameter?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationAiContentReviewTask {
+        /**
+         * Video content audit template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationAiQualityControlTask {
+        /**
+         * The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        channelExtPara?: pulumi.Input<string>;
+        /**
+         * The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        definition?: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationAiRecognitionTask {
+        /**
+         * Intelligent video recognition template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationInputInfo {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationInputInfoCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationInputInfoS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationInputInfoUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationInputInfoCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationInputInfoS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationInputInfoUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTask {
+        /**
+         * List of adaptive bitrate streaming tasks.
+         */
+        adaptiveDynamicStreamingTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSet>[]>;
+        /**
+         * List of animated image generating tasks.
+         */
+        animatedGraphicTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSet>[]>;
+        /**
+         * List of image sprite generating tasks.
+         */
+        imageSpriteTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskImageSpriteTaskSet>[]>;
+        /**
+         * List of sampled screencapturing tasks.
+         */
+        sampleSnapshotTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSet>[]>;
+        /**
+         * List of time point screencapturing tasks.
+         */
+        snapshotByTimeOffsetTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSet>[]>;
+        /**
+         * List of transcoding tasks.
+         */
+        transcodeTaskSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSet {
+        /**
+         * The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        addOnSubtitles?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitle>[]>;
+        /**
+         * Adaptive bitrate streaming template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorage>;
+        /**
+         * The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+         */
+        segmentObjectName?: pulumi.Input<string>;
+        /**
+         * The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+         */
+        subStreamObjectName?: pulumi.Input<string>;
+        /**
+         * List of up to 10 image or text watermarks.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitle {
+        /**
+         * The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subtitle?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitle>;
+        /**
+         * The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitle {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values:image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeatLastFrame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSet {
+        /**
+         * Animated image generating template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time of an animated image in a video in seconds.
+         */
+        endTimeOffset: pulumi.Input<number>;
+        /**
+         * Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorage>;
+        /**
+         * Start time of an animated image in a video in seconds.
+         */
+        startTimeOffset: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskImageSpriteTaskSet {
+        /**
+         * ID of an image sprite generating template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormat>;
+        /**
+         * Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorage>;
+        /**
+         * Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+         */
+        webVttObjectName?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSet {
+        /**
+         * Sampled screencapturing template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormat>;
+        /**
+         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorage>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values:image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeatLastFrame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSet {
+        /**
+         * ID of a time point screencapturing template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * List of screenshot time points in the format of `s` or `%`:If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+         */
+        extTimeOffsetSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormat>;
+        /**
+         * Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorage>;
+        /**
+         * List of time points of screenshots in &lt;font color=red&gt;seconds&lt;/font&gt;.
+         */
+        timeOffsetSets?: pulumi.Input<pulumi.Input<number>[]>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values:image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeatLastFrame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSet {
+        /**
+         * ID of a video transcoding template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+         */
+        headTailParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameter>;
+        /**
+         * List of blurs. Up to 10 ones can be supported.
+         */
+        mosaicSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSet>[]>;
+        /**
+         * Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormat>;
+        /**
+         * Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorage>;
+        /**
+         * Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+         */
+        overrideParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameter>;
+        /**
+         * Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameter>;
+        /**
+         * Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+         */
+        segmentObjectName?: pulumi.Input<string>;
+        /**
+         * Start time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameter {
+        /**
+         * Opening credits list.
+         */
+        headSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSet>[]>;
+        /**
+         * Closing credits list.
+         */
+        tailSets?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSet>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSet {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSet {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSet {
+        /**
+         * Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * End time offset of blur in seconds.If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;If this value is greater than 0 (e.g., n), the blur will exist till second n;If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Blur height. % and px formats are supported:If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * Blur width. % and px formats are supported:If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameter {
+        /**
+         * The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        addOnSubtitles?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitle>[]>;
+        /**
+         * The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        addonAudioStreams?: pulumi.Input<pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStream>[]>;
+        /**
+         * Audio stream configuration parameter.
+         */
+        audioTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplate>;
+        /**
+         * Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+         */
+        container?: pulumi.Input<string>;
+        /**
+         * Whether to remove audio data. Valid values:0: retain1: remove.
+         */
+        removeAudio?: pulumi.Input<number>;
+        /**
+         * Whether to remove video data. Valid values:0: retain1: remove.
+         */
+        removeVideo?: pulumi.Input<number>;
+        /**
+         * An extended field for transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        stdExtInfo?: pulumi.Input<string>;
+        /**
+         * The subtitle settings.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subtitleTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplate>;
+        /**
+         * The TSC transcoding parameters.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        tehdConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfig>;
+        /**
+         * Video stream configuration parameter.
+         */
+        videoTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitle {
+        /**
+         * The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subtitle?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitle>;
+        /**
+         * The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitle {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStream {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplate {
+        /**
+         * Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+         */
+        audioChannel?: pulumi.Input<number>;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate?: pulumi.Input<number>;
+        /**
+         * Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+         */
+        codec?: pulumi.Input<string>;
+        /**
+         * Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+         */
+        sampleRate?: pulumi.Input<number>;
+        /**
+         * The audio tracks to retain. All audio tracks are retained by default.
+         */
+        streamSelects?: pulumi.Input<pulumi.Input<number>[]>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplate {
+        /**
+         * The text transparency. Value range: 0-1.`0`: Fully transparent.`1`: Fully opaque.Default value: 1.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        fontAlpha?: pulumi.Input<number>;
+        /**
+         * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        fontColor?: pulumi.Input<string>;
+        /**
+         * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        fontSize?: pulumi.Input<string>;
+        /**
+         * The font. Valid values:`hei.ttf`: Heiti.`song.ttf`: Songti.`simkai.ttf`: Kaiti.`arial.ttf`: Arial.The default is `hei.ttf`.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        fontType?: pulumi.Input<string>;
+        /**
+         * The URL of the subtitles to add to the video.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        path?: pulumi.Input<string>;
+        /**
+         * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        streamIndex?: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate {
+        /**
+         * The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate?: pulumi.Input<number>;
+        /**
+         * The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+         */
+        codec?: pulumi.Input<string>;
+        /**
+         * Whether to enable adaptive encoding. Valid values:0: Disable1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+         */
+        contentAdaptStream?: pulumi.Input<number>;
+        /**
+         * The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+         */
+        fillType?: pulumi.Input<string>;
+        /**
+         * The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+         */
+        fps?: pulumi.Input<number>;
+        /**
+         * Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+         */
+        gop?: pulumi.Input<number>;
+        /**
+         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        height?: pulumi.Input<number>;
+        /**
+         * Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+         */
+        resolutionAdaptive?: pulumi.Input<string>;
+        /**
+         * The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
+         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        width?: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameter {
+        /**
+         * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+         */
+        audioTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplate>;
+        /**
+         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+         */
+        container: pulumi.Input<string>;
+        /**
+         * Whether to remove audio data. Valid values:0: retain;1: remove.Default value: 0.
+         */
+        removeAudio?: pulumi.Input<number>;
+        /**
+         * Whether to remove video data. Valid values:0: retain;1: remove.Default value: 0.
+         */
+        removeVideo?: pulumi.Input<number>;
+        /**
+         * TESHD transcoding parameter.
+         */
+        tehdConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfig>;
+        /**
+         * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+         */
+        videoTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplate {
+        /**
+         * Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+         */
+        audioChannel?: pulumi.Input<number>;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+         */
+        sampleRate: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate {
+        /**
+         * The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+         */
+        fillType?: pulumi.Input<string>;
+        /**
+         * The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+         */
+        fps: pulumi.Input<number>;
+        /**
+         * Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+         */
+        gop?: pulumi.Input<number>;
+        /**
+         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        height?: pulumi.Input<number>;
+        /**
+         * Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+         */
+        resolutionAdaptive?: pulumi.Input<string>;
+        /**
+         * The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
+         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        width?: pulumi.Input<number>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values:image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeatLastFrame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationTaskNotifyConfig {
+        /**
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsSqa?: pulumi.Input<inputs.Mps.ProcessMediaOperationTaskNotifyConfigAwsSqa>;
+        /**
+         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+         */
+        cmqModel?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+         */
+        cmqRegion?: pulumi.Input<string>;
+        /**
+         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         */
+        notifyMode?: pulumi.Input<string>;
+        /**
+         * The notification type. Valid values:`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.`TDMQ-CMQ`: Message queue`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.`SCF`: This notification type is not recommended. You need to configure it in the SCF console.`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.&lt;font color=red&gt;Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.&lt;/font&gt;.
+         */
+        notifyType?: pulumi.Input<string>;
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`.
+         */
+        notifyUrl?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         */
+        queueName?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+         */
+        topicName?: pulumi.Input<string>;
+    }
+
+    export interface ProcessMediaOperationTaskNotifyConfigAwsSqa {
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+        /**
+         * The name of the SQS queue.
+         */
+        sqaQueueName: pulumi.Input<string>;
+        /**
+         * The region of the SQS queue.
+         */
+        sqaRegion: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivity {
+        /**
+         * The parameters of a subtask.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        activityPara?: pulumi.Input<inputs.Mps.ScheduleActivityActivityPara>;
+        /**
+         * The subtask type. `input`: The start. `output`: The end. `action-trans`: Transcoding. `action-samplesnapshot`: Sampled screencapturing. `action-AIAnalysis`: Content analysis. `action-AIRecognition`: Content recognition. `action-aiReview`: Content moderation. `action-animated-graphics`: Animated screenshot generation. `action-image-sprite`: Image sprite generation. `action-snapshotByTimeOffset`: Time point screencapturing. `action-adaptive-substream`: Adaptive bitrate streaming.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        activityType: pulumi.Input<string>;
+        /**
+         * The indexes of the subsequent actions. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        reardriveIndices?: pulumi.Input<pulumi.Input<number>[]>;
+    }
+
+    export interface ScheduleActivityActivityPara {
+        /**
+         * An adaptive bitrate streaming task.
+         */
+        adaptiveDynamicStreamingTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTask>;
+        /**
+         * A content analysis task.
+         */
+        aiAnalysisTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAiAnalysisTask>;
+        /**
+         * A content moderation task.
+         */
+        aiContentReviewTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAiContentReviewTask>;
+        /**
+         * A content recognition task.
+         */
+        aiRecognitionTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAiRecognitionTask>;
+        /**
+         * An animated screenshot generation task.
+         */
+        animatedGraphicTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAnimatedGraphicTask>;
+        /**
+         * An image sprite generation task.
+         */
+        imageSpriteTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaImageSpriteTask>;
+        /**
+         * A sampled screencapturing task.
+         */
+        sampleSnapshotTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTask>;
+        /**
+         * A time point screencapturing task.
+         */
+        snapshotByTimeOffsetTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTask>;
+        /**
+         * A transcoding task.
+         */
+        transcodeTask?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTask>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTask {
+        /**
+         * Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        addOnSubtitles?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitle>[]>;
+        /**
+         * Adaptive bitrate streaming template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorage>;
+        /**
+         * The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+         */
+        segmentObjectName?: pulumi.Input<string>;
+        /**
+         * The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+         */
+        subStreamObjectName?: pulumi.Input<string>;
+        /**
+         * List of up to 10 image or text watermarks.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSet>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitle {
+        /**
+         * Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subtitle?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitle>;
+        /**
+         * The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitle {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when Type is COS.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfo>;
+        /**
+         * The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values: image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeatLastFrame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAiAnalysisTask {
+        /**
+         * Video content analysis template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        extendedParameter?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAiContentReviewTask {
+        /**
+         * Video content audit template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaAiRecognitionTask {
+        /**
+         * Intelligent video recognition template ID.
+         */
+        definition: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaAnimatedGraphicTask {
+        /**
+         * Animated image generating template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time of an animated image in a video in seconds.
+         */
+        endTimeOffset: pulumi.Input<number>;
+        /**
+         * Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorage>;
+        /**
+         * Start time of an animated image in a video in seconds.
+         */
+        startTimeOffset: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaImageSpriteTask {
+        /**
+         * ID of an image sprite generating template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormat>;
+        /**
+         * Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaImageSpriteTaskOutputStorage>;
+        /**
+         * Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+         */
+        webVttObjectName?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaImageSpriteTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTask {
+        /**
+         * Sampled screencapturing template ID.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormat>;
+        /**
+         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskOutputStorage>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSet>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values: image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeatLastFrame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTask {
+        /**
+         * ID of a time point screencapturing template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * List of screenshot time points in the format of `s` or `%`: If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second; If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+         */
+        extTimeOffsetSets?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormat>;
+        /**
+         * Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorage>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSet>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values: image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeatLastFrame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTask {
+        /**
+         * ID of a video transcoding template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+         */
+        headTailParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameter>;
+        /**
+         * List of blurs. Up to 10 ones can be supported.
+         */
+        mosaicSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskMosaicSet>[]>;
+        /**
+         * Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        objectNumberFormat?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskObjectNumberFormat>;
+        /**
+         * Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+         */
+        outputObjectPath?: pulumi.Input<string>;
+        /**
+         * Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        outputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOutputStorage>;
+        /**
+         * Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+         */
+        overrideParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameter>;
+        /**
+         * Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskRawParameter>;
+        /**
+         * Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+         */
+        segmentObjectName?: pulumi.Input<string>;
+        /**
+         * Start time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        watermarkSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSet>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameter {
+        /**
+         * Opening credits list.
+         */
+        headSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSet>[]>;
+        /**
+         * Closing credits list.
+         */
+        tailSets?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSet>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSet {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSet {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskMosaicSet {
+        /**
+         * Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * End time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will exist till the last video frame; If this value is greater than 0 (e.g., n), the blur will exist till second n; If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Blur height. % and px formats are supported: If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame; If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * Blur width. % and px formats are supported: If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported: If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskObjectNumberFormat {
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         */
+        increment?: pulumi.Input<number>;
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         */
+        initialValue?: pulumi.Input<number>;
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         */
+        minLength?: pulumi.Input<number>;
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         */
+        placeHolder?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameter {
+        /**
+         * Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        addOnSubtitles?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitle>[]>;
+        /**
+         * The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        addonAudioStreams?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStream>[]>;
+        /**
+         * Audio stream configuration parameter.
+         */
+        audioTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplate>;
+        /**
+         * Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+         */
+        container?: pulumi.Input<string>;
+        /**
+         * Whether to remove audio data. Valid values: 0: retain 1: remove.
+         */
+        removeAudio?: pulumi.Input<number>;
+        /**
+         * Whether to remove video data. Valid values: 0: retain 1: remove.
+         */
+        removeVideo?: pulumi.Input<number>;
+        /**
+         * Transcoding extension field.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        stdExtInfo?: pulumi.Input<string>;
+        /**
+         * The subtitle settings.
+         */
+        subtitleTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplate>;
+        /**
+         * TESHD transcoding parameter.
+         */
+        tehdConfig?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfig>;
+        /**
+         * Video stream configuration parameter.
+         */
+        videoTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplate>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitle {
+        /**
+         * Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        subtitle?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitle>;
+        /**
+         * The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitle {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when Type is COS.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfo>;
+        /**
+         * The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStream {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplate {
+        /**
+         * Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+         */
+        audioChannel?: pulumi.Input<number>;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate?: pulumi.Input<number>;
+        /**
+         * Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+         */
+        codec?: pulumi.Input<string>;
+        /**
+         * Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+         */
+        sampleRate?: pulumi.Input<number>;
+        /**
+         * The audio tracks to retain. All audio tracks are retained by default.
+         */
+        streamSelects?: pulumi.Input<pulumi.Input<number>[]>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplate {
+        /**
+         * The text transparency. Value range: 0-1. 0: Completely transparent 1: Completely opaqueDefault value: 1.
+         */
+        fontAlpha?: pulumi.Input<number>;
+        /**
+         * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         */
+        fontColor?: pulumi.Input<string>;
+        /**
+         * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+         */
+        fontSize?: pulumi.Input<string>;
+        /**
+         * The font type. Valid values: `hei.ttf` `song.ttf` `simkai.ttf` `arial.ttf` (for English only). The default is `hei.ttf`.
+         */
+        fontType?: pulumi.Input<string>;
+        /**
+         * The URL of the subtitles to add to the video.
+         */
+        path?: pulumi.Input<string>;
+        /**
+         * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+         */
+        streamIndex?: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplate {
+        /**
+         * The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate?: pulumi.Input<number>;
+        /**
+         * The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+         */
+        codec?: pulumi.Input<string>;
+        /**
+         * Whether to enable adaptive encoding. Valid values: 0: Disable 1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+         */
+        contentAdaptStream?: pulumi.Input<number>;
+        /**
+         * The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+         */
+        fillType?: pulumi.Input<string>;
+        /**
+         * The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+         */
+        fps?: pulumi.Input<number>;
+        /**
+         * Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+         */
+        gop?: pulumi.Input<number>;
+        /**
+         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        height?: pulumi.Input<number>;
+        /**
+         * Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+         */
+        resolutionAdaptive?: pulumi.Input<string>;
+        /**
+         * The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
+         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        width?: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskRawParameter {
+        /**
+         * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+         */
+        audioTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplate>;
+        /**
+         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+         */
+        container: pulumi.Input<string>;
+        /**
+         * Whether to remove audio data. Valid values: 0: retain; 1: remove.Default value: 0.
+         */
+        removeAudio?: pulumi.Input<number>;
+        /**
+         * Whether to remove video data. Valid values: 0: retain; 1: remove.Default value: 0.
+         */
+        removeVideo?: pulumi.Input<number>;
+        /**
+         * TESHD transcoding parameter.
+         */
+        tehdConfig?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfig>;
+        /**
+         * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+         */
+        videoTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplate>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplate {
+        /**
+         * Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+         */
+        audioChannel?: pulumi.Input<number>;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+         */
+        sampleRate: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplate {
+        /**
+         * The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+         */
+        fillType?: pulumi.Input<string>;
+        /**
+         * The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+         */
+        fps: pulumi.Input<number>;
+        /**
+         * Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+         */
+        gop?: pulumi.Input<number>;
+        /**
+         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        height?: pulumi.Input<number>;
+        /**
+         * Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+         */
+        resolutionAdaptive?: pulumi.Input<string>;
+        /**
+         * The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
+         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+         */
+        width?: pulumi.Input<number>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSet {
+        /**
+         * ID of a watermarking template.
+         */
+        definition: pulumi.Input<number>;
+        /**
+         * End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+         */
+        rawParameter?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameter>;
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+         */
+        svgContent?: pulumi.Input<string>;
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+         */
+        textContent?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameter {
+        /**
+         * Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+         */
+        coordinateOrigin?: pulumi.Input<string>;
+        /**
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+         */
+        imageTemplate?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplate>;
+        /**
+         * Watermark type. Valid values: image: image watermark.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+         */
+        xPos?: pulumi.Input<string>;
+        /**
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+         */
+        yPos?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Input content of watermark image. JPEG and PNG images are supported.
+         */
+        imageContent: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContent>;
+        /**
+         * Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeatLastFrame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContent {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface ScheduleOutputStorage {
+        /**
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cosOutputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorageCosOutputStorage>;
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3OutputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorageS3OutputStorage>;
+        /**
+         * The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleOutputStorageCosOutputStorage {
+        /**
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        bucket?: pulumi.Input<string>;
+        /**
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleOutputStorageS3OutputStorage {
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTaskNotifyConfig {
+        /**
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsSqs?: pulumi.Input<inputs.Mps.ScheduleTaskNotifyConfigAwsSqs>;
+        /**
+         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+         */
+        cmqModel?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+         */
+        cmqRegion?: pulumi.Input<string>;
+        /**
+         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         */
+        notifyMode?: pulumi.Input<string>;
+        /**
+         * The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+         */
+        notifyType?: pulumi.Input<string>;
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`.
+         */
+        notifyUrl?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         */
+        queueName?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+         */
+        topicName?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTaskNotifyConfigAwsSqs {
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+        /**
+         * The name of the SQS queue.
+         */
+        sqsQueueName: pulumi.Input<string>;
+        /**
+         * The region of the SQS queue.
+         */
+        sqsRegion: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTrigger {
+        /**
+         * The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsS3FileUploadTrigger?: pulumi.Input<inputs.Mps.ScheduleTriggerAwsS3FileUploadTrigger>;
+        /**
+         * This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        cosFileUploadTrigger?: pulumi.Input<inputs.Mps.ScheduleTriggerCosFileUploadTrigger>;
+        /**
+         * The trigger type. Valid values: `CosFileUpload`: Tencent Cloud COS trigger. `AwsS3FileUpload`: AWS S3 trigger. Currently, this type is only supported for transcoding tasks and schemes (not supported for workflows).
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTriggerAwsS3FileUploadTrigger {
+        /**
+         * The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsSqs?: pulumi.Input<inputs.Mps.ScheduleTriggerAwsS3FileUploadTriggerAwsSqs>;
+        /**
+         * The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+         */
+        dir?: pulumi.Input<string>;
+        /**
+         * The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+         */
+        formats?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTriggerAwsS3FileUploadTriggerAwsSqs {
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+        /**
+         * The name of the SQS queue.
+         */
+        sqsQueueName: pulumi.Input<string>;
+        /**
+         * The region of the SQS queue.
+         */
+        sqsRegion: pulumi.Input<string>;
+    }
+
+    export interface ScheduleTriggerCosFileUploadTrigger {
+        /**
+         * Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
+         */
+        dir?: pulumi.Input<string>;
+        /**
+         * Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
+         */
+        formats?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Region of the COS bucket bound to a workflow, such as `ap-chongiqng`.
+         */
+        region: pulumi.Input<string>;
     }
 
     export interface TranscodeTemplateAudioTemplate {
@@ -14337,6 +21356,124 @@ export namespace Mps {
          * Font type, currently supports two:simkai.ttf: can support Chinese and English.arial.ttf: English only.
          */
         fontType: pulumi.Input<string>;
+    }
+
+    export interface WithdrawsWatermarkOperationInputInfo {
+        /**
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+         */
+        cosInputInfo?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationInputInfoCosInputInfo>;
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        s3InputInfo?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationInputInfoS3InputInfo>;
+        /**
+         * The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks..
+         */
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationInputInfoUrlInputInfo>;
+    }
+
+    export interface WithdrawsWatermarkOperationInputInfoCosInputInfo {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
+    }
+
+    export interface WithdrawsWatermarkOperationInputInfoS3InputInfo {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+    }
+
+    export interface WithdrawsWatermarkOperationInputInfoUrlInputInfo {
+        /**
+         * URL of a video.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface WithdrawsWatermarkOperationTaskNotifyConfig {
+        /**
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        awsSqs?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationTaskNotifyConfigAwsSqs>;
+        /**
+         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+         */
+        cmqModel?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+         */
+        cmqRegion?: pulumi.Input<string>;
+        /**
+         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         */
+        notifyMode?: pulumi.Input<string>;
+        /**
+         * The notification type. Valid values:  `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.  `TDMQ-CMQ`: Message queue  `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.  `SCF`: This notification type is not recommended. You need to configure it in the SCF console.  `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+         */
+        notifyType?: pulumi.Input<string>;
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`.
+         */
+        notifyUrl?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         */
+        queueName?: pulumi.Input<string>;
+        /**
+         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+         */
+        topicName?: pulumi.Input<string>;
+    }
+
+    export interface WithdrawsWatermarkOperationTaskNotifyConfigAwsSqs {
+        /**
+         * The key ID required to read from/write to the SQS queue.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to read from/write to the SQS queue.
+         */
+        s3SecretKey?: pulumi.Input<string>;
+        /**
+         * The name of the SQS queue.
+         */
+        sqsQueueName: pulumi.Input<string>;
+        /**
+         * The region of the SQS queue.
+         */
+        sqsRegion: pulumi.Input<string>;
     }
 
     export interface WorkflowAiAnalysisTask {
@@ -15630,7 +22767,6 @@ export namespace Mps {
          */
         region: pulumi.Input<string>;
     }
-
 }
 
 export namespace Mysql {
@@ -15852,12 +22988,393 @@ export namespace Mysql {
          */
         tableName: pulumi.Input<string>;
     }
+
 }
 
 export namespace Nat {
 }
 
+export namespace Oceanus {
+    export interface GetClustersFilter {
+        /**
+         * The field to be filtered.
+         */
+        name: string;
+        /**
+         * The filtering values of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetClustersFilterArgs {
+        /**
+         * The field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The filtering values of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetSystemResourceFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter values for the field.
+         */
+        values: string[];
+    }
+
+    export interface GetSystemResourceFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values for the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetTreeJobsFilter {
+        /**
+         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
+         */
+        name: string;
+        /**
+         * Filter values for the field.
+         */
+        values: string[];
+    }
+
+    export interface GetTreeJobsFilterArgs {
+        /**
+         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values for the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetWorkSpacesFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values for the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetWorkSpacesFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter values for the field.
+         */
+        values: string[];
+    }
+
+    export interface JobConfigClazzLevel {
+        /**
+         * Java class full pathNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        clazz: pulumi.Input<string>;
+        /**
+         * Log level TRACE, DEBUG, INFO, WARN, ERRORNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        level: pulumi.Input<string>;
+    }
+
+    export interface JobConfigExpertModeConfiguration {
+        /**
+         * Job graphNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        jobGraph?: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationJobGraph>;
+        /**
+         * Node configurationNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        nodeConfigs?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationNodeConfig>[]>;
+        /**
+         * Slot sharing groupsNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        slotSharingGroups?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationSlotSharingGroup>[]>;
+    }
+
+    export interface JobConfigExpertModeConfigurationJobGraph {
+        /**
+         * Edge set of the running graphNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        edges?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationJobGraphEdge>[]>;
+        /**
+         * Point set of the running graphNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        nodes?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationJobGraphNode>[]>;
+    }
+
+    export interface JobConfigExpertModeConfigurationJobGraphEdge {
+        /**
+         * Starting node ID of the edgeNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        source: pulumi.Input<number>;
+        /**
+         * Target node ID of the edgeNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        target: pulumi.Input<number>;
+    }
+
+    export interface JobConfigExpertModeConfigurationJobGraphNode {
+        /**
+         * Node descriptionNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        description: pulumi.Input<string>;
+        /**
+         * Node IDNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        id: pulumi.Input<number>;
+        /**
+         * Node nameNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Node parallelismNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        parallelism: pulumi.Input<number>;
+    }
+
+    export interface JobConfigExpertModeConfigurationNodeConfig {
+        /**
+         * Configuration propertiesNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        configurations?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationNodeConfigConfiguration>[]>;
+        /**
+         * Node IDNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        id: pulumi.Input<number>;
+        /**
+         * Node parallelismNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        parallelism?: pulumi.Input<number>;
+        /**
+         * Slot sharing groupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        slotSharingGroup?: pulumi.Input<string>;
+        /**
+         * State TTL configuration of the node, separated by semicolonsNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        stateTtl?: pulumi.Input<string>;
+    }
+
+    export interface JobConfigExpertModeConfigurationNodeConfigConfiguration {
+        /**
+         * System configuration key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * System configuration value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface JobConfigExpertModeConfigurationSlotSharingGroup {
+        /**
+         * Description of the SlotSharingGroupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Name of the SlotSharingGroupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Specification of the SlotSharingGroupNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        spec: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfigurationSlotSharingGroupSpec>;
+    }
+
+    export interface JobConfigExpertModeConfigurationSlotSharingGroupSpec {
+        /**
+         * Applicable CPUNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        cpu: pulumi.Input<number>;
+        /**
+         * Default is b, supporting units are b, kb, mb, gbNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        heapMemory: pulumi.Input<string>;
+        /**
+         * Default is b, supporting units are b, kb, mb, gbNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        managedMemory?: pulumi.Input<string>;
+        /**
+         * Default is b, supporting units are b, kb, mb, gbNote: This field may return null, indicating that no valid value can be obtained.
+         */
+        offHeapMemory?: pulumi.Input<string>;
+    }
+
+    export interface JobConfigProperty {
+        /**
+         * System configuration key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * System configuration value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface JobConfigResourceRef {
+        /**
+         * Resource ID.
+         */
+        resourceId: pulumi.Input<string>;
+        /**
+         * Reference resource type, for example, setting the main resource to 1 represents the jar package where the main class is located.
+         */
+        type: pulumi.Input<number>;
+        /**
+         * Resource version ID, -1 indicates the latest version.
+         */
+        version: pulumi.Input<number>;
+    }
+
+    export interface ResourceConfigResourceLoc {
+        /**
+         * Json to describe resource location.
+         */
+        param: pulumi.Input<inputs.Oceanus.ResourceConfigResourceLocParam>;
+        /**
+         * The available storage types for resource location are currently limited to 1:COS.
+         */
+        storageType: pulumi.Input<number>;
+    }
+
+    export interface ResourceConfigResourceLocParam {
+        /**
+         * Resource bucket.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * Resource path.
+         */
+        path: pulumi.Input<string>;
+        /**
+         * Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface ResourceResourceLoc {
+        /**
+         * Json to describe resource location.
+         */
+        param: pulumi.Input<inputs.Oceanus.ResourceResourceLocParam>;
+        /**
+         * The available storage types for resource location are currently limited to 1:COS.
+         */
+        storageType: pulumi.Input<number>;
+    }
+
+    export interface ResourceResourceLocParam {
+        /**
+         * Resource bucket.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * Resource path.
+         */
+        path: pulumi.Input<string>;
+        /**
+         * Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface RunJobRunJobDescription {
+        /**
+         * Custom timestamp.
+         */
+        customTimestamp?: pulumi.Input<number>;
+        /**
+         * A certain version of the current job(Not passed by default as a non-draft job version).
+         */
+        jobConfigVersion?: pulumi.Input<number>;
+        /**
+         * Job ID.
+         */
+        jobId: pulumi.Input<string>;
+        /**
+         * The type of the run. 1 indicates start, and 2 indicates resume.
+         */
+        runType: pulumi.Input<number>;
+        /**
+         * Savepoint ID.
+         */
+        savepointId?: pulumi.Input<string>;
+        /**
+         * Savepoint path.
+         */
+        savepointPath?: pulumi.Input<string>;
+        /**
+         * Compatible with the startup parameters of the old SQL type job: specify the start time point of data source consumption (recommended to pass the value)Ensure that the parameter is LATEST, EARLIEST, T+Timestamp (example: T1557394288000).
+         */
+        startMode?: pulumi.Input<string>;
+        /**
+         * Use the historical version of the system dependency.
+         */
+        useOldSystemConnector?: pulumi.Input<boolean>;
+    }
+
+    export interface StopJobStopJobDescription {
+        /**
+         * Job Id.
+         */
+        jobId: pulumi.Input<string>;
+        /**
+         * Stop type,1 stopped 2 paused.
+         */
+        stopType: pulumi.Input<number>;
+    }
+
+}
+
 export namespace Organization {
+    export interface InstanceOrgPermission {
+        /**
+         * Permissions ID.
+         */
+        id?: pulumi.Input<number>;
+        /**
+         * Permission name.
+         */
+        name?: pulumi.Input<string>;
+    }
+
+    export interface OrgIdentityIdentityPolicy {
+        /**
+         * Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+         */
+        policyDocument?: pulumi.Input<string>;
+        /**
+         * CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+         */
+        policyId?: pulumi.Input<number>;
+        /**
+         * CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+         */
+        policyName?: pulumi.Input<string>;
+        /**
+         * Policy type. Value 1-custom policy 2-preset policy; default value 2.
+         */
+        policyType?: pulumi.Input<number>;
+    }
+
     export interface OrgMemberOrgPermission {
         /**
          * Permissions ID.
@@ -15868,35 +23385,13 @@ export namespace Organization {
          */
         name?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Placement {
 }
 
 export namespace Postgresql {
-    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
-        /**
-         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
-         */
-        ipRestrictionEffect?: string;
-        /**
-         * Whether it is allowed to download IP list of the backup files.
-         */
-        ipSets?: string[];
-        /**
-         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
-         */
-        restrictionType?: string;
-        /**
-         * Whether it is allowed to download the VPC ID list of the backup files.
-         */
-        vpcIdSets?: string[];
-        /**
-         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
-         */
-        vpcRestrictionEffect?: string;
-    }
-
     export interface GetBackupDownloadUrlsBackupDownloadRestrictionArgs {
         /**
          * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
@@ -15920,15 +23415,27 @@ export namespace Postgresql {
         vpcRestrictionEffect?: pulumi.Input<string>;
     }
 
-    export interface GetBaseBackupsFilterArgs {
+    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
         /**
-         * Filter name.
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
          */
-        name?: pulumi.Input<string>;
+        ipRestrictionEffect?: string;
         /**
-         * One or more filter values.
+         * Whether it is allowed to download IP list of the backup files.
          */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
+        ipSets?: string[];
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         */
+        restrictionType?: string;
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         */
+        vpcIdSets?: string[];
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        vpcRestrictionEffect?: string;
     }
 
     export interface GetBaseBackupsFilter {
@@ -15940,6 +23447,17 @@ export namespace Postgresql {
          * One or more filter values.
          */
         values?: string[];
+    }
+
+    export interface GetBaseBackupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetLogBackupsFilter {
@@ -16051,6 +23569,28 @@ export namespace Postgresql {
 }
 
 export namespace PrivateDns {
+    export interface GetRecordsFilter {
+        /**
+         * Parameter name.
+         */
+        name: string;
+        /**
+         * Parameter values.
+         */
+        values: string[];
+    }
+
+    export interface GetRecordsFilterArgs {
+        /**
+         * Parameter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Parameter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface ZoneAccountVpcSet {
         /**
          * Region.
@@ -16081,6 +23621,32 @@ export namespace PrivateDns {
         tagValue: pulumi.Input<string>;
     }
 
+    export interface ZoneVpcAttachmentAccountVpcSet {
+        /**
+         * Vpc region.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Vpc owner uin. To grant role authorization to this account.
+         */
+        uin: pulumi.Input<string>;
+        /**
+         * Uniq Vpc Id.
+         */
+        uniqVpcId: pulumi.Input<string>;
+    }
+
+    export interface ZoneVpcAttachmentVpcSet {
+        /**
+         * Vpc region.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Uniq Vpc Id.
+         */
+        uniqVpcId: pulumi.Input<string>;
+    }
+
     export interface ZoneVpcSet {
         /**
          * VPC REGION.
@@ -16091,6 +23657,7 @@ export namespace PrivateDns {
          */
         uniqVpcId: pulumi.Input<string>;
     }
+
 }
 
 export namespace Projects {
@@ -16648,6 +24215,20 @@ export namespace Pts {
         updatedAt?: pulumi.Input<string>;
     }
 
+    export interface TmpKeyGenerateCredential {
+        /**
+         * Temporary secret ID.
+         */
+        tmpSecretId?: pulumi.Input<string>;
+        /**
+         * Temporary secret key.
+         */
+        tmpSecretKey?: pulumi.Input<string>;
+        /**
+         * Temporary token.
+         */
+        token?: pulumi.Input<string>;
+    }
 }
 
 export namespace Redis {
@@ -16856,9 +24437,17 @@ export namespace Scf {
          */
         command?: pulumi.Input<string>;
         /**
+         * Image accelerate switch.
+         */
+        containerImageAccelerate?: pulumi.Input<boolean>;
+        /**
          * The entrypoint of app.
          */
         entryPoint?: pulumi.Input<string>;
+        /**
+         * Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+         */
+        imagePort?: pulumi.Input<number>;
         /**
          * The image type. personal or enterprise.
          */
@@ -16871,6 +24460,14 @@ export namespace Scf {
          * The registry id of TCR. When image type is enterprise, it must be set.
          */
         registryId?: pulumi.Input<string>;
+    }
+
+    export interface FunctionIntranetConfig {
+        ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+         */
+        ipFixed: pulumi.Input<string>;
     }
 
     export interface FunctionLayer {
@@ -17094,6 +24691,98 @@ export namespace Security {
 }
 
 export namespace Ses {
+    export interface BatchSendEmailAttachment {
+        /**
+         * Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+         */
+        fileName: pulumi.Input<string>;
+    }
+
+    export interface BatchSendEmailCycleParam {
+        /**
+         * Start time of the task.
+         */
+        beginTime: pulumi.Input<string>;
+        /**
+         * Task recurrence in hours.
+         */
+        intervalTime: pulumi.Input<number>;
+        /**
+         * Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+         */
+        termCycle?: pulumi.Input<number>;
+    }
+
+    export interface BatchSendEmailTemplate {
+        /**
+         * Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+         */
+        templateData: pulumi.Input<string>;
+        /**
+         * Template ID. If you do not have any template, please create one.
+         */
+        templateId: pulumi.Input<number>;
+    }
+
+    export interface BatchSendEmailTimedParam {
+        /**
+         * Start time of a scheduled sending task.
+         */
+        beginTime: pulumi.Input<string>;
+    }
+
+    export interface DomainAttribute {
+        /**
+         * Values that need to be configured.
+         */
+        expectedValue?: pulumi.Input<string>;
+        /**
+         * Domain name.
+         */
+        sendDomain?: pulumi.Input<string>;
+        /**
+         * Record Type CNAME | A | TXT | MX.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface ReceiverData {
+        /**
+         * Recipient email addresses.
+         */
+        email: pulumi.Input<string>;
+        /**
+         * Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+         */
+        templateData?: pulumi.Input<string>;
+    }
+
+    export interface SendEmailAttachment {
+        /**
+         * Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+         */
+        fileName: pulumi.Input<string>;
+    }
+
+    export interface SendEmailTemplate {
+        /**
+         * Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+         */
+        templateData: pulumi.Input<string>;
+        /**
+         * Template ID. If you do not have any template, please create one.
+         */
+        templateId: pulumi.Input<number>;
+    }
+
     export interface TemplateTemplateContent {
         /**
          * Html code after base64.
@@ -17311,18 +25000,251 @@ export namespace Ssl {
         dvAuthVerifyType?: pulumi.Input<string>;
     }
 
+    export interface GetDescribeHostApiGatewayInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostApiGatewayInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostCdnInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostCdnInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostClbInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostClbInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostCosInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostCosInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostDdosInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostDdosInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostLighthouseInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostLighthouseInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostLiveInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostLiveInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostTeoInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostTeoInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostTkeInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostTkeInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostVodInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostVodInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostWafInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
+    }
+
+    export interface GetDescribeHostWafInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
+    }
+
     export interface PayCertificateDvAuth {
-        /**
-         * DV authentication key.
-         */
         dvAuthKey?: pulumi.Input<string>;
-        /**
-         * DV authentication value.
-         */
         dvAuthValue?: pulumi.Input<string>;
-        /**
-         * DV authentication type.
-         */
         dvAuthVerifyType?: pulumi.Input<string>;
     }
 
@@ -17427,6 +25349,17 @@ export namespace Ssl {
          * Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
          */
         verifyType: pulumi.Input<string>;
+    }
+
+    export interface UpdateCertificateInstanceOperationResourceTypesRegion {
+        /**
+         * Region list.
+         */
+        regions?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Cloud resource type.
+         */
+        resourceType?: pulumi.Input<string>;
     }
 }
 
@@ -17952,21 +25885,9 @@ export namespace Tcm {
          */
         address: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tcmq {
-    export interface GetQueueFilterArgs {
-        /**
-         * Filter parameter name.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * Value.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetQueueFilter {
         /**
          * Filter parameter name.
@@ -17976,6 +25897,17 @@ export namespace Tcmq {
          * Value.
          */
         values?: string[];
+    }
+
+    export interface GetQueueFilterArgs {
+        /**
+         * Filter parameter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetTopicFilter {
@@ -18113,7 +26045,7 @@ export namespace Tcr {
 
     export interface ServiceAccountPermission {
         /**
-         * Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+         * Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
          */
         actions: pulumi.Input<pulumi.Input<string>[]>;
         /**
@@ -18189,23 +26121,13 @@ export namespace Tcr {
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
+
 }
 
 export namespace Tdcpg {
 }
 
 export namespace Tdmq {
-    export interface GetProInstancesFilter {
-        /**
-         * The name of the filter parameter.
-         */
-        name?: string;
-        /**
-         * value.
-         */
-        values?: string[];
-    }
-
     export interface GetProInstancesFilterArgs {
         /**
          * The name of the filter parameter.
@@ -18215,6 +26137,17 @@ export namespace Tdmq {
          * value.
          */
         values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetProInstancesFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
     }
 
     export interface GetPublishersFilterArgs {
@@ -18261,24 +26194,24 @@ export namespace Tdmq {
         order: pulumi.Input<string>;
     }
 
-    export interface GetRabbitmqNodeListFilterArgs {
-        name?: pulumi.Input<string>;
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetRabbitmqNodeListFilter {
         name?: string;
         values?: string[];
     }
 
-    export interface GetRabbitmqVipInstanceFilter {
-        name?: string;
-        values?: string[];
+    export interface GetRabbitmqNodeListFilterArgs {
+        name?: pulumi.Input<string>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetRabbitmqVipInstanceFilterArgs {
         name?: pulumi.Input<string>;
         values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetRabbitmqVipInstanceFilter {
+        name?: string;
+        values?: string[];
     }
 
     export interface NamespaceRetentionPolicy {
@@ -18290,6 +26223,17 @@ export namespace Tdmq {
          * the time of message to retain.
          */
         timeInMinutes?: pulumi.Input<number>;
+    }
+
+    export interface ProfessionalClusterVpc {
+        /**
+         * Id of Subnet.
+         */
+        subnetId: pulumi.Input<string>;
+        /**
+         * Id of VPC.
+         */
+        vpcId: pulumi.Input<string>;
     }
 
     export interface RocketmqClusterVpc {
@@ -18733,124 +26677,78 @@ export namespace Tem {
 }
 
 export namespace Teo {
-    export interface ApplicationProxyIpv6 {
+    export interface AccelerationDomainOriginInfo {
         /**
-         * - `on`: Enable.- `off`: Disable.
+         * ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
          */
+        backupOrigin?: pulumi.Input<string>;
+        /**
+         * The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+         */
+        origin: pulumi.Input<string>;
+        /**
+         * The origin type. Values: `IP_DOMAIN`: IPv4/IPv6 address or domain name; `COS`: COS bucket address; `ORIGIN_GROUP`: Origin group; `AWS_S3`: AWS S3 bucket address; `SPACE`: EdgeOne Shield Space.
+         */
+        originType: pulumi.Input<string>;
+        /**
+         * Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: `on`: Enable private authentication; `off`: Disable private authentication. If this field is not specified, the default value `off` is used.
+         */
+        privateAccess?: pulumi.Input<string>;
+        /**
+         * The private authentication parameters. This field is valid when `PrivateAccess=on`.
+         */
+        privateParameters?: pulumi.Input<pulumi.Input<inputs.Teo.AccelerationDomainOriginInfoPrivateParameter>[]>;
+    }
+
+    export interface AccelerationDomainOriginInfoPrivateParameter {
+        /**
+         * The parameter name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The parameter value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface ApplicationProxyIpv6 {
         switch: pulumi.Input<string>;
     }
 
-    export interface DdosPolicyDdosRule {
-        acl?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAcl>;
-        allowBlock?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAllowBlock>;
-        antiPly?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAntiPly>;
-        geoIp?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleGeoIp>;
-        packetFilter?: pulumi.Input<inputs.Teo.DdosPolicyDdosRulePacketFilter>;
-        speedLimit?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleSpeedLimit>;
-        statusInfo?: pulumi.Input<inputs.Teo.DdosPolicyDdosRuleStatusInfo>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleAcl {
-        acls?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAclAcl>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleAclAcl {
-        action?: pulumi.Input<string>;
-        dportEnd?: pulumi.Input<number>;
-        dportStart?: pulumi.Input<number>;
-        protocol?: pulumi.Input<string>;
-        sportEnd?: pulumi.Input<number>;
-        sportStart?: pulumi.Input<number>;
-    }
-
-    export interface DdosPolicyDdosRuleAllowBlock {
-        allowBlockIps?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRuleAllowBlockAllowBlockIp>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-        ip?: pulumi.Input<string>;
-        type: pulumi.Input<string>;
-        updateTime?: pulumi.Input<number>;
-    }
-
-    export interface DdosPolicyDdosRuleAntiPly {
-        abnormalConnectNum: pulumi.Input<number>;
-        abnormalSynNum: pulumi.Input<number>;
-        abnormalSynRatio: pulumi.Input<number>;
-        connectTimeout: pulumi.Input<number>;
-        destinationConnectLimit: pulumi.Input<number>;
-        destinationCreateLimit: pulumi.Input<number>;
-        dropIcmp: pulumi.Input<string>;
-        dropOther: pulumi.Input<string>;
-        dropTcp: pulumi.Input<string>;
-        dropUdp: pulumi.Input<string>;
-        emptyConnectProtect: pulumi.Input<string>;
-        sourceConnectLimit: pulumi.Input<number>;
-        sourceCreateLimit: pulumi.Input<number>;
-        udpShard?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleGeoIp {
-        regionIds?: pulumi.Input<pulumi.Input<number>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRulePacketFilter {
-        packetFilters?: pulumi.Input<pulumi.Input<inputs.Teo.DdosPolicyDdosRulePacketFilterPacketFilter>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRulePacketFilterPacketFilter {
-        action?: pulumi.Input<string>;
-        depth?: pulumi.Input<number>;
-        depth2?: pulumi.Input<number>;
-        dportEnd?: pulumi.Input<number>;
-        dportStart?: pulumi.Input<number>;
-        isNot?: pulumi.Input<number>;
-        isNot2?: pulumi.Input<number>;
-        matchBegin?: pulumi.Input<string>;
-        matchBegin2?: pulumi.Input<string>;
-        matchLogic?: pulumi.Input<string>;
-        matchType?: pulumi.Input<string>;
-        matchType2?: pulumi.Input<string>;
-        offset?: pulumi.Input<number>;
-        offset2?: pulumi.Input<number>;
-        packetMax?: pulumi.Input<number>;
-        packetMin?: pulumi.Input<number>;
-        protocol?: pulumi.Input<string>;
-        sportEnd?: pulumi.Input<number>;
-        sportStart?: pulumi.Input<number>;
-        str?: pulumi.Input<string>;
-        str2?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleSpeedLimit {
-        fluxLimit?: pulumi.Input<string>;
-        packageLimit?: pulumi.Input<string>;
-    }
-
-    export interface DdosPolicyDdosRuleStatusInfo {
-        plyLevel: pulumi.Input<string>;
-    }
-
-    export interface DnsSecDnssec {
-        algorithm?: pulumi.Input<string>;
-        dS?: pulumi.Input<string>;
-        digest?: pulumi.Input<string>;
-        digestAlgorithm?: pulumi.Input<string>;
-        digestType?: pulumi.Input<string>;
-        flags?: pulumi.Input<number>;
-        keyTag?: pulumi.Input<number>;
-        keyType?: pulumi.Input<string>;
-        publicKey?: pulumi.Input<string>;
+    export interface CertificateConfigServerCertInfo {
+        /**
+         * Alias of the certificate.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * ID of the server certificate.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        certId: pulumi.Input<string>;
+        /**
+         * Domain name of the certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+         */
+        commonName?: pulumi.Input<string>;
+        /**
+         * Time when the certificate is deployed. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        deployTime?: pulumi.Input<string>;
+        /**
+         * Time when the certificate expires. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        expireTime?: pulumi.Input<string>;
+        /**
+         * Signature algorithm. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        signAlgo?: pulumi.Input<string>;
+        /**
+         * Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+         */
+        type?: pulumi.Input<string>;
     }
 
     export interface OriginGroupOriginRecord {
         /**
-         * Indicating origin site&#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+         * Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
          */
         areas?: pulumi.Input<pulumi.Input<string>[]>;
         /**
@@ -18871,31 +26769,20 @@ export namespace Teo {
         record: pulumi.Input<string>;
         recordId?: pulumi.Input<string>;
         /**
-         * Indicating origin site&#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+         * Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
          */
         weight?: pulumi.Input<number>;
     }
 
     export interface OriginGroupOriginRecordPrivateParameter {
         /**
-         * Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+         * Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
          */
         name: pulumi.Input<string>;
         /**
          * Parameter value.
          */
         value: pulumi.Input<string>;
-    }
-
-    export interface RuleEnginePriorityRulesPriority {
-        /**
-         * Priority order of rules.
-         */
-        index?: pulumi.Input<number>;
-        /**
-         * Priority of rules id.
-         */
-        value?: pulumi.Input<string>;
     }
 
     export interface RuleEngineRule {
@@ -18941,7 +26828,7 @@ export namespace Teo {
 
     export interface RuleEngineRuleActionCodeActionParameter {
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
@@ -18949,7 +26836,7 @@ export namespace Teo {
          */
         statusCode: pulumi.Input<number>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -18967,11 +26854,11 @@ export namespace Teo {
 
     export interface RuleEngineRuleActionNormalActionParameter {
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -18993,11 +26880,11 @@ export namespace Teo {
          */
         action: pulumi.Input<string>;
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -19015,7 +26902,7 @@ export namespace Teo {
          */
         ignoreCase?: pulumi.Input<boolean>;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
          */
         name?: pulumi.Input<string>;
         /**
@@ -19082,7 +26969,7 @@ export namespace Teo {
 
     export interface RuleEngineRuleSubRuleRuleActionCodeActionParameter {
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
@@ -19090,7 +26977,7 @@ export namespace Teo {
          */
         statusCode: pulumi.Input<number>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -19108,11 +26995,11 @@ export namespace Teo {
 
     export interface RuleEngineRuleSubRuleRuleActionNormalActionParameter {
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -19134,11 +27021,11 @@ export namespace Teo {
          */
         action: pulumi.Input<string>;
         /**
-         * Parameter Name.
+         * Target HEADER name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Values.
+         * Parameter Value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -19156,7 +27043,7 @@ export namespace Teo {
          */
         ignoreCase?: pulumi.Input<boolean>;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
          */
         name?: pulumi.Input<string>;
         /**
@@ -19173,269 +27060,26 @@ export namespace Teo {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface SecurityPolicyConfig {
-        aclConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfig>;
-        botConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfig>;
-        dropPageConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfig>;
-        exceptConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfig>;
-        ipTableConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigIpTableConfig>;
-        rateLimitConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfig>;
-        switchConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSwitchConfig>;
-        wafConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfig>;
-    }
-
-    export interface SecurityPolicyConfigAclConfig {
-        switch: pulumi.Input<string>;
-        userRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfigUserRule>[]>;
-    }
-
-    export interface SecurityPolicyConfigAclConfigUserRule {
-        action: pulumi.Input<string>;
-        conditions: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigAclConfigUserRuleCondition>[]>;
-        name?: pulumi.Input<string>;
-        pageId?: pulumi.Input<number>;
-        punishTime?: pulumi.Input<number>;
-        punishTimeUnit?: pulumi.Input<string>;
-        redirectUrl?: pulumi.Input<string>;
-        responseCode?: pulumi.Input<number>;
-        ruleId?: pulumi.Input<number>;
-        ruleName: pulumi.Input<string>;
-        rulePriority: pulumi.Input<number>;
-        ruleStatus: pulumi.Input<string>;
-        updateTime?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigAclConfigUserRuleCondition {
-        matchContent: pulumi.Input<string>;
-        matchFrom: pulumi.Input<string>;
-        matchParam: pulumi.Input<string>;
-        operator: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigBotConfig {
-        intelligenceRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRule>;
-        managedRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigManagedRule>;
-        portraitRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigPortraitRule>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigBotConfigIntelligenceRule {
-        items?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigBotConfigIntelligenceRuleItem>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-        action?: pulumi.Input<string>;
-        label?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigBotConfigManagedRule {
-        action?: pulumi.Input<string>;
-        algManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        capManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        dropManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        monManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        name?: pulumi.Input<string>;
-        pageId?: pulumi.Input<number>;
-        punishTime?: pulumi.Input<number>;
-        punishTimeUnit?: pulumi.Input<string>;
-        redirectUrl?: pulumi.Input<string>;
-        responseCode?: pulumi.Input<number>;
-        ruleId?: pulumi.Input<number>;
-        transManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-    }
-
-    export interface SecurityPolicyConfigBotConfigPortraitRule {
-        algManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        capManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        dropManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        monManagedIds?: pulumi.Input<pulumi.Input<number>[]>;
-        ruleId?: pulumi.Input<number>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigDropPageConfig {
-        aclDropPageDetail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfigAclDropPageDetail>;
-        switch?: pulumi.Input<string>;
-        wafDropPageDetail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigDropPageConfigWafDropPageDetail>;
-    }
-
-    export interface SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-        name?: pulumi.Input<string>;
-        pageId?: pulumi.Input<number>;
-        statusCode?: pulumi.Input<number>;
-        type?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-        name?: pulumi.Input<string>;
-        pageId?: pulumi.Input<number>;
-        statusCode?: pulumi.Input<number>;
-        type?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigExceptConfig {
-        exceptUserRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRule>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigExceptConfigExceptUserRule {
-        action?: pulumi.Input<string>;
-        exceptUserRuleConditions?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition>[]>;
-        exceptUserRuleScope?: pulumi.Input<inputs.Teo.SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope>;
-        ruleId?: pulumi.Input<number>;
-        ruleName?: pulumi.Input<string>;
-        rulePriority?: pulumi.Input<number>;
-        ruleStatus?: pulumi.Input<string>;
-        updateTime?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
-        matchContent?: pulumi.Input<string>;
-        matchFrom?: pulumi.Input<string>;
-        matchParam?: pulumi.Input<string>;
-        operator?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-        modules?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
-    export interface SecurityPolicyConfigIpTableConfig {
-        rules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigIpTableConfigRule>[]>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigIpTableConfigRule {
-        action?: pulumi.Input<string>;
-        matchContent?: pulumi.Input<string>;
-        matchFrom?: pulumi.Input<string>;
-        ruleId?: pulumi.Input<number>;
-        updateTime?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfig {
-        intelligence?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigIntelligence>;
-        switch?: pulumi.Input<string>;
-        template?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigTemplate>;
-        userRules?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigUserRule>[]>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfigIntelligence {
-        action?: pulumi.Input<string>;
-        switch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfigTemplate {
-        detail?: pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigTemplateDetail>;
-        mode?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfigTemplateDetail {
-        action?: pulumi.Input<string>;
-        id?: pulumi.Input<number>;
-        mode?: pulumi.Input<string>;
-        period?: pulumi.Input<number>;
-        punishTime?: pulumi.Input<number>;
-        threshold?: pulumi.Input<number>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfigUserRule {
-        action: pulumi.Input<string>;
-        conditions: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigRateLimitConfigUserRuleCondition>[]>;
-        freqFields?: pulumi.Input<pulumi.Input<string>[]>;
-        period: pulumi.Input<number>;
-        punishTime: pulumi.Input<number>;
-        punishTimeUnit: pulumi.Input<string>;
-        ruleId?: pulumi.Input<number>;
-        ruleName: pulumi.Input<string>;
-        rulePriority: pulumi.Input<number>;
-        ruleStatus?: pulumi.Input<string>;
-        threshold: pulumi.Input<number>;
-        updateTime?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigRateLimitConfigUserRuleCondition {
-        matchContent: pulumi.Input<string>;
-        matchFrom: pulumi.Input<string>;
-        matchParam: pulumi.Input<string>;
-        operator: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigSwitchConfig {
-        webSwitch?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigWafConfig {
-        aiRule?: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfigAiRule>;
-        level: pulumi.Input<string>;
-        mode: pulumi.Input<string>;
-        switch: pulumi.Input<string>;
-        wafRules: pulumi.Input<inputs.Teo.SecurityPolicyConfigWafConfigWafRules>;
-    }
-
-    export interface SecurityPolicyConfigWafConfigAiRule {
-        mode?: pulumi.Input<string>;
-    }
-
-    export interface SecurityPolicyConfigWafConfigWafRules {
-        blockRuleIds: pulumi.Input<pulumi.Input<number>[]>;
-        observeRuleIds?: pulumi.Input<pulumi.Input<number>[]>;
-        switch: pulumi.Input<string>;
-    }
-
-    export interface ZoneResource {
+    export interface ZoneOwnershipVerification {
         /**
-         * Valid values: `mainland`, `overseas`.
+         * CNAME access, using DNS to resolve the information required for authentication. For details, please refer to [Site/Domain Name Ownership Verification ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, indicating that no valid value can be obtained.
          */
-        area?: pulumi.Input<string>;
-        /**
-         * Whether to automatically renew. Valid values:- `0`: Default.- `1`: Enable automatic renewal.- `2`: Disable automatic renewal.
-         */
-        autoRenewFlag?: pulumi.Input<number>;
-        /**
-         * Resource creation date.
-         */
-        createTime?: pulumi.Input<string>;
-        /**
-         * Enable time of the resource.
-         */
-        enableTime?: pulumi.Input<string>;
-        /**
-         * Expire time of the resource.
-         */
-        expireTime?: pulumi.Input<string>;
-        /**
-         * Resource ID.
-         */
-        id?: pulumi.Input<string>;
-        /**
-         * Resource pay mode. Valid values:- `0`: post pay mode.
-         */
-        payMode?: pulumi.Input<number>;
-        /**
-         * Associated plan ID.
-         */
-        planId?: pulumi.Input<string>;
-        /**
-         * Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
-         */
-        status?: pulumi.Input<string>;
-        /**
-         * Price inquiry parameters.
-         */
-        svs?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneResourceSv>[]>;
+        dnsVerifications?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneOwnershipVerificationDnsVerification>[]>;
     }
 
-    export interface ZoneResourceSv {
+    export interface ZoneOwnershipVerificationDnsVerification {
         /**
-         * Parameter Key.
+         * Record type.
          */
-        key?: pulumi.Input<string>;
+        recordType?: pulumi.Input<string>;
         /**
-         * Parameter Value.
+         * Record the value.
          */
-        value?: pulumi.Input<string>;
+        recordValue?: pulumi.Input<string>;
+        /**
+         * Host record.
+         */
+        subdomain?: pulumi.Input<string>;
     }
 
     export interface ZoneSettingCache {
@@ -19455,15 +27099,15 @@ export namespace Teo {
 
     export interface ZoneSettingCacheCache {
         /**
-         * Cache expiration time settings.Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
          */
         cacheTime?: pulumi.Input<number>;
         /**
-         * Specifies whether to enable force cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
          */
         ignoreCacheControl?: pulumi.Input<string>;
         /**
-         * Cache configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
          */
         switch?: pulumi.Input<string>;
     }
@@ -19507,7 +27151,7 @@ export namespace Teo {
 
     export interface ZoneSettingCacheNoCache {
         /**
-         * Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
          */
         switch?: pulumi.Input<string>;
     }
@@ -19603,7 +27247,7 @@ export namespace Teo {
 
     export interface ZoneSettingMaxAge {
         /**
-         * Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
          */
         followOrigin?: pulumi.Input<string>;
         /**
@@ -19672,7 +27316,7 @@ export namespace Teo {
 
     export interface ZoneSettingWebSocket {
         /**
-         * Whether to enable custom WebSocket timeout setting. When it&#39;s off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+         * Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
          */
         switch: pulumi.Input<string>;
         /**
@@ -19680,27 +27324,22 @@ export namespace Teo {
          */
         timeout?: pulumi.Input<number>;
     }
+}
 
-    export interface ZoneVanityNameServers {
+export namespace Trocket {
+    export interface RocketmqInstanceIpRule {
         /**
-         * List of custom name servers.
+         * Whether to allow release or not.
          */
-        servers?: pulumi.Input<pulumi.Input<string>[]>;
+        allow: pulumi.Input<boolean>;
         /**
-         * Whether to enable the custom name server.- `on`: Enable.- `off`: Disable.
+         * IP.
          */
-        switch: pulumi.Input<string>;
-    }
-
-    export interface ZoneVanityNameServersIp {
+        ip: pulumi.Input<string>;
         /**
-         * IPv4 address of the custom name server.
+         * Remark.
          */
-        ipv4?: pulumi.Input<string>;
-        /**
-         * Name of the custom name server.
-         */
-        name?: pulumi.Input<string>;
+        remark: pulumi.Input<string>;
     }
 }
 
@@ -19779,86 +27418,358 @@ export namespace Tse {
         value?: pulumi.Input<string>;
     }
 
+    export interface CngwGatewayInstancePort {
+        /**
+         * Http port range.
+         */
+        httpPort?: pulumi.Input<string>;
+        /**
+         * Https port range.
+         */
+        httpsPort?: pulumi.Input<string>;
+        /**
+         * Tcp port range.
+         */
+        tcpPort?: pulumi.Input<string>;
+        /**
+         * Udp port range.
+         */
+        udpPort?: pulumi.Input<string>;
+    }
+
+    export interface CngwGatewayInternetConfig {
+        /**
+         * description of clb.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * internet type. Reference value: `IPV4`(default value), `IPV6`.
+         */
+        internetAddressVersion?: pulumi.Input<string>;
+        /**
+         * public network bandwidth.
+         */
+        internetMaxBandwidthOut?: pulumi.Input<number>;
+        /**
+         * trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+         */
+        internetPayMode?: pulumi.Input<string>;
+        /**
+         * primary availability zone.
+         */
+        masterZoneId?: pulumi.Input<string>;
+        /**
+         * Whether load balancing has multiple availability zones.
+         */
+        multiZoneFlag?: pulumi.Input<boolean>;
+        /**
+         * specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+         */
+        slaType?: pulumi.Input<string>;
+        /**
+         * alternate availability zone.
+         */
+        slaveZoneId?: pulumi.Input<string>;
+    }
+
+    export interface CngwGatewayNodeConfig {
+        /**
+         * node number, 2-50.
+         */
+        number: pulumi.Input<number>;
+        /**
+         * specification, 1c2g|2c4g|4c8g|8c16g.
+         */
+        specification: pulumi.Input<string>;
+    }
+
+    export interface CngwGatewayVpcConfig {
+        /**
+         * subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+         */
+        subnetId?: pulumi.Input<string>;
+        /**
+         * VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+         */
+        vpcId?: pulumi.Input<string>;
+    }
+
+    export interface CngwGroupInternetConfig {
+        /**
+         * description of clb.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * internet type. Reference value:- IPV4 (default value)- IPV6.
+         */
+        internetAddressVersion?: pulumi.Input<string>;
+        /**
+         * public network bandwidth.
+         */
+        internetMaxBandwidthOut?: pulumi.Input<number>;
+        /**
+         * trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+         */
+        internetPayMode?: pulumi.Input<string>;
+        /**
+         * primary availability zone.
+         */
+        masterZoneId?: pulumi.Input<string>;
+        /**
+         * Whether load balancing has multiple availability zones.
+         */
+        multiZoneFlag?: pulumi.Input<boolean>;
+        /**
+         * specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+         */
+        slaType?: pulumi.Input<string>;
+        /**
+         * alternate availability zone.
+         */
+        slaveZoneId?: pulumi.Input<string>;
+    }
+
+    export interface CngwGroupNodeConfig {
+        /**
+         * group node number, 2-50.
+         */
+        number: pulumi.Input<number>;
+        /**
+         * group specification, 1c2g|2c4g|4c8g|8c16g.
+         */
+        specification: pulumi.Input<string>;
+    }
+
     export interface CngwRouteHeader {
+        /**
+         * key of header.
+         */
         key?: pulumi.Input<string>;
+        /**
+         * value of header.
+         */
         value?: pulumi.Input<string>;
     }
 
     export interface CngwRouteRateLimitLimitDetail {
+        /**
+         * status of service rate limit.
+         */
         enabled: pulumi.Input<boolean>;
+        /**
+         * external redis information, maybe null.
+         */
         externalRedis?: pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailExternalRedis>;
+        /**
+         * request headers that require rate limit.
+         */
         header?: pulumi.Input<string>;
+        /**
+         * whether to hide the headers of client.
+         */
         hideClientHeaders: pulumi.Input<boolean>;
+        /**
+         * whether to enable request queuing.
+         */
         isDelay: pulumi.Input<boolean>;
+        /**
+         * basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+         */
         limitBy: pulumi.Input<string>;
+        /**
+         * queue time.
+         */
         lineUpTime?: pulumi.Input<number>;
+        /**
+         * request paths that require rate limit.
+         */
         path?: pulumi.Input<string>;
+        /**
+         * counter policy.Reference value:`local`,`redis`,`externalRedis`.
+         */
         policy?: pulumi.Input<string>;
+        /**
+         * qps threshold.
+         */
         qpsThresholds: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailQpsThreshold>[]>;
+        /**
+         * response configuration, the response strategy is text, maybe null.
+         */
         rateLimitResponse?: pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponse>;
+        /**
+         * request forwarding address, maybe null.
+         */
         rateLimitResponseUrl?: pulumi.Input<string>;
+        /**
+         * response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+         */
         responseType: pulumi.Input<string>;
     }
 
     export interface CngwRouteRateLimitLimitDetailExternalRedis {
+        /**
+         * redis ip, maybe null.
+         */
         redisHost: pulumi.Input<string>;
+        /**
+         * redis password, maybe null.
+         */
         redisPassword: pulumi.Input<string>;
+        /**
+         * redis port, maybe null.
+         */
         redisPort: pulumi.Input<number>;
+        /**
+         * redis timeout, unit: `ms`, maybe null.
+         */
         redisTimeout: pulumi.Input<number>;
     }
 
     export interface CngwRouteRateLimitLimitDetailQpsThreshold {
+        /**
+         * the max threshold.
+         */
         max: pulumi.Input<number>;
+        /**
+         * qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+         */
         unit: pulumi.Input<string>;
     }
 
     export interface CngwRouteRateLimitLimitDetailRateLimitResponse {
+        /**
+         * custom response body, maybe bull.
+         */
         body?: pulumi.Input<string>;
+        /**
+         * headrs.
+         */
         headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteRateLimitLimitDetailRateLimitResponseHeader>[]>;
+        /**
+         * http status code.
+         */
         httpStatus?: pulumi.Input<number>;
     }
 
     export interface CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
+        /**
+         * key of header.
+         */
         key?: pulumi.Input<string>;
+        /**
+         * value of header.
+         */
         value?: pulumi.Input<string>;
     }
 
     export interface CngwServiceRateLimitLimitDetail {
+        /**
+         * status of service rate limit.
+         */
         enabled: pulumi.Input<boolean>;
+        /**
+         * external redis information, maybe null.
+         */
         externalRedis?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailExternalRedis>;
+        /**
+         * request headers that require rate limit.
+         */
         header?: pulumi.Input<string>;
+        /**
+         * whether to hide the headers of client.
+         */
         hideClientHeaders: pulumi.Input<boolean>;
+        /**
+         * whether to enable request queuing.
+         */
         isDelay: pulumi.Input<boolean>;
+        /**
+         * basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+         */
         limitBy: pulumi.Input<string>;
+        /**
+         * queue time.
+         */
         lineUpTime?: pulumi.Input<number>;
+        /**
+         * request paths that require rate limit.
+         */
         path?: pulumi.Input<string>;
+        /**
+         * counter policy.Reference value: `local`, `redis`, `externalRedis`.
+         */
         policy?: pulumi.Input<string>;
+        /**
+         * qps threshold.
+         */
         qpsThresholds: pulumi.Input<pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailQpsThreshold>[]>;
+        /**
+         * response configuration, the response strategy is text, maybe null.
+         */
         rateLimitResponse?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponse>;
+        /**
+         * request forwarding address, maybe null.
+         */
         rateLimitResponseUrl?: pulumi.Input<string>;
+        /**
+         * response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+         */
         responseType: pulumi.Input<string>;
     }
 
     export interface CngwServiceRateLimitLimitDetailExternalRedis {
+        /**
+         * redis ip, maybe null.
+         */
         redisHost: pulumi.Input<string>;
+        /**
+         * redis password, maybe null.
+         */
         redisPassword: pulumi.Input<string>;
+        /**
+         * redis port, maybe null.
+         */
         redisPort: pulumi.Input<number>;
+        /**
+         * redis timeout, unit: `ms`, maybe null.
+         */
         redisTimeout: pulumi.Input<number>;
     }
 
     export interface CngwServiceRateLimitLimitDetailQpsThreshold {
+        /**
+         * the max threshold.
+         */
         max: pulumi.Input<number>;
+        /**
+         * qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+         */
         unit: pulumi.Input<string>;
     }
 
     export interface CngwServiceRateLimitLimitDetailRateLimitResponse {
+        /**
+         * custom response body, maybe bull.
+         */
         body?: pulumi.Input<string>;
+        /**
+         * headrs.
+         */
         headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetailRateLimitResponseHeader>[]>;
+        /**
+         * http status code.
+         */
         httpStatus?: pulumi.Input<number>;
     }
 
     export interface CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
+        /**
+         * key of header.
+         */
         key?: pulumi.Input<string>;
+        /**
+         * value of header.
+         */
         value?: pulumi.Input<string>;
     }
 
@@ -19962,6 +27873,28 @@ export namespace Tse {
         weight: pulumi.Input<number>;
     }
 
+    export interface GetGatewayCertificatesFilter {
+        /**
+         * Filter name.
+         */
+        key?: string;
+        /**
+         * Filter value.
+         */
+        value?: string;
+    }
+
+    export interface GetGatewayCertificatesFilterArgs {
+        /**
+         * Filter name.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * Filter value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
     export interface GetGatewayServicesFilter {
         /**
          * filter name.
@@ -19982,6 +27915,50 @@ export namespace Tse {
          * filter value.
          */
         value?: pulumi.Input<string>;
+    }
+
+    export interface GetGatewaysFilter {
+        /**
+         * filter name.
+         */
+        name: string;
+        /**
+         * filter value.
+         */
+        values: string[];
+    }
+
+    export interface GetGatewaysFilterArgs {
+        /**
+         * filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filter value.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetGroupsFilter {
+        /**
+         * filter name.
+         */
+        name: string;
+        /**
+         * filter values.
+         */
+        values: string[];
+    }
+
+    export interface GetGroupsFilterArgs {
+        /**
+         * filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceEngineRegionInfo {
@@ -20013,7 +27990,6 @@ export namespace Tse {
          */
         vpcId: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tsf {
@@ -21277,7 +29253,6 @@ export namespace Vpc {
          */
         backupTime: pulumi.Input<string>;
     }
-
 }
 
 export namespace Vpn {
@@ -21307,6 +29282,1509 @@ export namespace Vpn {
         vendorName: pulumi.Input<string>;
     }
 
+}
+
+export namespace Waf {
+    export interface AntiInfoLeakStrategy {
+        /**
+         * Matching Content. If field is returncode support: 400, 403, 404, 4xx, 500, 501, 502, 504, 5xx; If field is information support: idcard, phone, bankcard; If field is keywords users input matching content themselves.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Matching Fields. support: returncode, keywords, information.
+         */
+        field: pulumi.Input<string>;
+    }
+
+    export interface ClbDomainLoadBalancerSet {
+        /**
+         * Unique ID of listener in LB.
+         */
+        listenerId: pulumi.Input<string>;
+        /**
+         * Listener name.
+         */
+        listenerName: pulumi.Input<string>;
+        /**
+         * LoadBalancer unique ID.
+         */
+        loadBalancerId: pulumi.Input<string>;
+        /**
+         * LoadBalancer name.
+         */
+        loadBalancerName: pulumi.Input<string>;
+        /**
+         * Network type for load balancer.
+         */
+        loadBalancerType?: pulumi.Input<string>;
+        /**
+         * VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
+         */
+        numericalVpcId?: pulumi.Input<number>;
+        /**
+         * Protocol of listener, http or https.
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * LoadBalancer region.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * LoadBalancer IP.
+         */
+        vip: pulumi.Input<string>;
+        /**
+         * LoadBalancer port.
+         */
+        vport: pulumi.Input<number>;
+        /**
+         * LoadBalancer zone.
+         */
+        zone: pulumi.Input<string>;
+    }
+
+    export interface CustomRuleStrategy {
+        /**
+         * Matching parameters.
+         */
+        arg: pulumi.Input<string>;
+        /**
+         * Logical symbol.
+         */
+        compareFunc: pulumi.Input<string>;
+        /**
+         * Matching Content.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Matching Fields.
+         */
+        field: pulumi.Input<string>;
+    }
+
+    export interface CustomWhiteRuleStrategy {
+        /**
+         * Matching parameters.
+         */
+        arg: pulumi.Input<string>;
+        /**
+         * Logical symbol.
+         */
+        compareFunc: pulumi.Input<string>;
+        /**
+         * Matching Content.
+         */
+        content: pulumi.Input<string>;
+        /**
+         * Matching Fields.
+         */
+        field: pulumi.Input<string>;
+    }
+
+    export interface GetWafInfosParam {
+        domainId?: string;
+        listenerId?: string;
+        loadBalancerId: string;
+    }
+
+    export interface GetWafInfosParamArgs {
+        domainId?: pulumi.Input<string>;
+        listenerId?: pulumi.Input<string>;
+        loadBalancerId: pulumi.Input<string>;
+    }
+
+    export interface IpAccessControlItem {
+        /**
+         * Action value 40 is whitelist, 42 is blacklist.
+         */
+        action: pulumi.Input<number>;
+        /**
+         * ID of the resource.
+         */
+        id?: pulumi.Input<string>;
+        /**
+         * IP address.
+         */
+        ip: pulumi.Input<string>;
+        /**
+         * Note info.
+         */
+        note: pulumi.Input<string>;
+        source?: pulumi.Input<string>;
+        validStatus?: pulumi.Input<number>;
+        /**
+         * Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.
+         */
+        validTs: pulumi.Input<number>;
+    }
+
+    export interface SaasDomainPort {
+        nginxServerId?: pulumi.Input<string>;
+        /**
+         * Listening port.
+         */
+        port: pulumi.Input<string>;
+        /**
+         * The listening protocol of listening port.
+         */
+        protocol: pulumi.Input<string>;
+        /**
+         * The upstream port for listening port.
+         */
+        upstreamPort: pulumi.Input<string>;
+        /**
+         * The upstream protocol for listening port.
+         */
+        upstreamProtocol: pulumi.Input<string>;
+    }
+}
+
+export namespace Wedata {
+    export interface BaselineAlarmRuleDto {
+        /**
+         * Important;Urgent;Normal.
+         */
+        alarmLevelType?: pulumi.Input<string>;
+        /**
+         * Alarm Rule ID.
+         */
+        alarmRuleId?: pulumi.Input<string>;
+    }
+
+    export interface BaselineBaselineCreateAlarmRuleRequest {
+        /**
+         * Alarm Level, 1. Normal, 2. Important, 3. Urgent (default is 1. Normal)Note: This field may return null, indicating no valid value.
+         */
+        alarmLevel?: pulumi.Input<number>;
+        /**
+         * Alarm Recipient IDsNote: This field may return null, indicating no valid value.
+         */
+        alarmRecipientIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Alarm Recipient Type: 1. Specified Personnel, 2. Task Owner, 3. Duty Roster (default is 1. Specified Personnel)Note: This field may return null, indicating no valid value.
+         */
+        alarmRecipientType?: pulumi.Input<number>;
+        /**
+         * Alarm RecipientsNote: This field may return null, indicating no valid value.
+         */
+        alarmRecipients?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Alarm Types, 1. Failure Alarm, 2. Timeout Alarm, 3. Success Alarm, 4. Baseline Violation, 5. Baseline Warning, 6. Baseline Task Failure (default is 1. Failure Alarm)Note: This field may return null, indicating no valid value.
+         */
+        alarmTypes?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Alarm Methods, 1. Email, 2. SMS, 3. WeChat, 4. Voice, 5. Enterprise WeChat, 6. HTTP, 7. Enterprise WeChat Group; Alarm method code list (default is 1. Email)Note: This field may return null, indicating no valid value.
+         */
+        alarmWays?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Creator UINNote: This field may return null, indicating no valid value.
+         */
+        creator?: pulumi.Input<string>;
+        /**
+         * Creator NameNote: This field may return null, indicating no valid value.
+         */
+        creatorId?: pulumi.Input<string>;
+        /**
+         * Extended Information, 1. Estimated Runtime (default), 2. Estimated Completion Time, 3. Estimated Scheduling Time, 4. Incomplete within the Cycle; Value Types: 1. Specified Value, 2. Historical Average (default is 1. Specified Value)Note: This field may return null, indicating no valid value.
+         */
+        extInfo?: pulumi.Input<string>;
+        /**
+         * Monitoring ObjectsNote: This field may return null, indicating no valid value.
+         */
+        monitorObjectIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Monitoring Type, 1. Task, 2. Workflow, 3. Project, 4. Baseline (default is 1. Task)Note: This field may return null, indicating no valid value.
+         */
+        monitorType?: pulumi.Input<number>;
+        /**
+         * Project NameNote: This field may return null, indicating no valid value.
+         */
+        projectId?: pulumi.Input<string>;
+        /**
+         * Rule NameNote: This field may return null, indicating no valid value.
+         */
+        ruleName?: pulumi.Input<string>;
+    }
+
+    export interface BaselinePromiseTask {
+        /**
+         * Project ID.
+         */
+        projectId?: pulumi.Input<string>;
+        /**
+         * Task Scheduling Cycle.
+         */
+        taskCycle?: pulumi.Input<string>;
+        /**
+         * Task ID.
+         */
+        taskId?: pulumi.Input<string>;
+        /**
+         * Task Owner Name.
+         */
+        taskInChargeName?: pulumi.Input<string>;
+        /**
+         * Task Owner ID.
+         */
+        taskInChargeUin?: pulumi.Input<string>;
+        /**
+         * Task Name.
+         */
+        taskName?: pulumi.Input<string>;
+        /**
+         * Workflow ID.
+         */
+        workflowId?: pulumi.Input<string>;
+        /**
+         * Workflow Name.
+         */
+        workflowName?: pulumi.Input<string>;
+    }
+
+    export interface DqRuleCompareRule {
+        /**
+         * Periodic Indicates the default period of a template, in secondsNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        cycleStep?: pulumi.Input<number>;
+        /**
+         * Comparison condition listNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        items?: pulumi.Input<pulumi.Input<inputs.Wedata.DqRuleCompareRuleItem>[]>;
+    }
+
+    export interface DqRuleCompareRuleItem {
+        /**
+         * Comparison type 1. Fixed value 2. Fluctuating value 3. Comparison of value range 4. Enumeration range comparison 5. Do not compareNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        compareType?: pulumi.Input<number>;
+        /**
+         * Comparison operation type &amp;lt; &amp;lt;= == =&amp;gt; &amp;gt;Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        operator?: pulumi.Input<string>;
+        /**
+         * Quality statistics Type 1. Absolute value 2. Increase 3. Decrease 4. C contains 5. N C does not containNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        valueComputeType?: pulumi.Input<number>;
+        /**
+         * Compare the threshold listNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        valueLists?: pulumi.Input<pulumi.Input<inputs.Wedata.DqRuleCompareRuleItemValueList>[]>;
+    }
+
+    export interface DqRuleCompareRuleItemValueList {
+        /**
+         * Threshold valueNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        value?: pulumi.Input<string>;
+        /**
+         * Threshold type 1. Low threshold 2. High threshold 3. Common threshold 4. Enumerated valueNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        valueType?: pulumi.Input<number>;
+    }
+
+    export interface DqRuleFieldConfig {
+        /**
+         * Library table variableNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tableConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.DqRuleFieldConfigTableConfig>[]>;
+        /**
+         * Where variableNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        whereConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.DqRuleFieldConfigWhereConfig>[]>;
+    }
+
+    export interface DqRuleFieldConfigTableConfig {
+        /**
+         * Database idNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        databaseId?: pulumi.Input<string>;
+        /**
+         * Database nameNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        databaseName?: pulumi.Input<string>;
+        /**
+         * Field variableNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.DqRuleFieldConfigTableConfigFieldConfig>[]>;
+        /**
+         * Table idNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tableId?: pulumi.Input<string>;
+        /**
+         * Table keyNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tableKey?: pulumi.Input<string>;
+        /**
+         * Table nameNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        tableName?: pulumi.Input<string>;
+    }
+
+    export interface DqRuleFieldConfigTableConfigFieldConfig {
+        /**
+         * Field typeNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldDataType?: pulumi.Input<string>;
+        /**
+         * Field keyNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldKey?: pulumi.Input<string>;
+        /**
+         * Field valueNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldValue?: pulumi.Input<string>;
+    }
+
+    export interface DqRuleFieldConfigWhereConfig {
+        /**
+         * Field typeNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldDataType?: pulumi.Input<string>;
+        /**
+         * Field keyNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldKey?: pulumi.Input<string>;
+        /**
+         * Field valueNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        fieldValue?: pulumi.Input<string>;
+    }
+
+    export interface FunctionResourceList {
+        /**
+         * Resource ID.
+         */
+        id?: pulumi.Input<string>;
+        /**
+         * Resource MD5 Value.
+         */
+        md5?: pulumi.Input<string>;
+        /**
+         * Resource Name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Resource Path.
+         */
+        path: pulumi.Input<string>;
+        /**
+         * Resource Type.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface GetDataSourceListFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * Filter value.
+         */
+        values?: string[];
+    }
+
+    export interface GetDataSourceListFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Filter value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDataSourceListOrderField {
+        /**
+         * OrderFields rule.
+         */
+        direction: string;
+        /**
+         * OrderFields name.
+         */
+        name: string;
+    }
+
+    export interface GetDataSourceListOrderFieldArgs {
+        /**
+         * OrderFields rule.
+         */
+        direction: pulumi.Input<string>;
+        /**
+         * OrderFields name.
+         */
+        name: pulumi.Input<string>;
+    }
+
+    export interface GetDataSourceWithoutInfoFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * Filter value.
+         */
+        values?: string[];
+    }
+
+    export interface GetDataSourceWithoutInfoFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Filter value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDataSourceWithoutInfoOrderField {
+        /**
+         * OrderFields rule.
+         */
+        direction: string;
+        /**
+         * OrderFields name.
+         */
+        name: string;
+    }
+
+    export interface GetDataSourceWithoutInfoOrderFieldArgs {
+        /**
+         * OrderFields rule.
+         */
+        direction: pulumi.Input<string>;
+        /**
+         * OrderFields name.
+         */
+        name: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfo {
+        /**
+         * User App Id.
+         */
+        appId?: pulumi.Input<string>;
+        /**
+         * Task configuration.
+         */
+        configs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoConfig>[]>;
+        /**
+         * Create time.
+         */
+        createTime?: pulumi.Input<string>;
+        /**
+         * Creator User ID.
+         */
+        creatorUin?: pulumi.Input<string>;
+        /**
+         * Data proxy url.
+         */
+        dataProxyUrls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Execute context.
+         */
+        executeContexts?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoExecuteContext>[]>;
+        /**
+         * Executor group name.
+         */
+        executorGroupName?: pulumi.Input<string>;
+        /**
+         * Executor resource ID.
+         */
+        executorId?: pulumi.Input<string>;
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoExtConfig>[]>;
+        /**
+         * Whether the task been submitted.
+         */
+        hasVersion?: pulumi.Input<boolean>;
+        /**
+         * InLong manager url.
+         */
+        inLongManagerUrl?: pulumi.Input<string>;
+        /**
+         * InLong manager version.
+         */
+        inLongManagerVersion?: pulumi.Input<string>;
+        /**
+         * InLong stream id.
+         */
+        inLongStreamId?: pulumi.Input<string>;
+        /**
+         * Incharge user.
+         */
+        incharge?: pulumi.Input<string>;
+        /**
+         * Input datasource type.
+         */
+        inputDatasourceType?: pulumi.Input<string>;
+        /**
+         * Instance version.
+         */
+        instanceVersion?: pulumi.Input<number>;
+        /**
+         * The last time the task was run.
+         */
+        lastRunTime?: pulumi.Input<string>;
+        /**
+         * Whether the task been locked.
+         */
+        locked?: pulumi.Input<boolean>;
+        /**
+         * User locked task.
+         */
+        locker?: pulumi.Input<string>;
+        /**
+         * Node mapping.
+         */
+        mappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoMapping>[]>;
+        /**
+         * Number of reads.
+         */
+        numRecordsIn?: pulumi.Input<number>;
+        /**
+         * Number of writes.
+         */
+        numRecordsOut?: pulumi.Input<number>;
+        /**
+         * Times of restarts.
+         */
+        numRestarts?: pulumi.Input<number>;
+        /**
+         * Offline task scheduling configuration.
+         */
+        offlineTaskAddEntity?: pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoOfflineTaskAddEntity>;
+        /**
+         * Operator User ID.
+         */
+        operatorUin?: pulumi.Input<string>;
+        /**
+         * Output datasource type.
+         */
+        outputDatasourceType?: pulumi.Input<string>;
+        /**
+         * Owner User ID.
+         */
+        ownerUin?: pulumi.Input<string>;
+        /**
+         * Reading stage, 0: full amount, 1: partial full amount, 2: all incremental.
+         */
+        readPhase?: pulumi.Input<number>;
+        /**
+         * Read latency.
+         */
+        readerDelay?: pulumi.Input<number>;
+        /**
+         * The amount of resources consumed by real-time task.
+         */
+        runningCu?: pulumi.Input<number>;
+        /**
+         * Task scheduling id (job id such as oceanus or us).
+         */
+        scheduleTaskId?: pulumi.Input<string>;
+        /**
+         * Task status 1. Not started | Task initialization, 2. Task starting, 3. Running, 4. Paused, 5. Task stopping, 6. Stopped, 7. Execution failed, 8. deleted, 9. Locked, 404. unknown status.
+         */
+        status?: pulumi.Input<number>;
+        /**
+         * The time the task was stopped.
+         */
+        stopTime?: pulumi.Input<string>;
+        /**
+         * Whether the task version has been submitted for operation and maintenance.
+         */
+        submit?: pulumi.Input<boolean>;
+        /**
+         * Resource tiering status, 0: in progress, 1: successful, 2: failed.
+         */
+        switchResource?: pulumi.Input<number>;
+        /**
+         * Synchronization type: 1. Whole database synchronization, 2. Single table synchronization.
+         */
+        syncType?: pulumi.Input<number>;
+        /**
+         * Task alarm regular.
+         */
+        taskAlarmRegularLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Inlong Task Group ID.
+         */
+        taskGroupId?: pulumi.Input<string>;
+        /**
+         * Task display mode, 0: canvas mode, 1: form mode.
+         */
+        taskMode?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
+        updateTime?: pulumi.Input<string>;
+        /**
+         * The workflow id to which the task belongs.
+         */
+        workflowId?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoExecuteContext {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoMapping {
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoMappingExtConfig>[]>;
+        /**
+         * Schema mapping information.
+         */
+        schemaMappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoMappingSchemaMapping>[]>;
+        /**
+         * Sink node ID.
+         */
+        sinkId?: pulumi.Input<string>;
+        /**
+         * Source node ID.
+         */
+        sourceId?: pulumi.Input<string>;
+        /**
+         * Source node schema information.
+         */
+        sourceSchemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoMappingSourceSchema>[]>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoMappingExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoMappingSchemaMapping {
+        /**
+         * Schema ID from sink node.
+         */
+        sinkSchemaId: pulumi.Input<string>;
+        /**
+         * Schema ID from source node.
+         */
+        sourceSchemaId: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoMappingSourceSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfoMappingSourceSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoMappingSourceSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationOfflineTaskTaskInfoOfflineTaskAddEntity {
+        /**
+         * Crontab expression.
+         */
+        crontabExpression?: pulumi.Input<string>;
+        /**
+         * Scheduling type, 0: crontab type, 1: minutes, 2: hours, 3: days, 4: weeks, 5: months, 6: one-time, 7: user-driven, 10: elastic period (week), 11: elastic period (month), 12: year, 13: instant trigger.
+         */
+        cycleType?: pulumi.Input<number>;
+        /**
+         * Scheduling execution end time.
+         */
+        executionEndTime?: pulumi.Input<string>;
+        /**
+         * Scheduling execution start time.
+         */
+        executionStartTime?: pulumi.Input<string>;
+        /**
+         * Whether to retry.
+         */
+        retriable?: pulumi.Input<number>;
+        /**
+         * Retry waiting time, unit is minutes.
+         */
+        retryWait?: pulumi.Input<number>;
+        /**
+         * Self-dependent rules, 1: Ordered serial one at a time, queued execution, 2: Unordered serial one at a time, not queued execution, 3: Parallel, multiple at once.
+         */
+        selfDepend?: pulumi.Input<number>;
+        /**
+         * Number of retries.
+         */
+        tryLimit?: pulumi.Input<number>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfo {
+        /**
+         * User App Id.
+         */
+        appId?: pulumi.Input<string>;
+        /**
+         * Task configuration.
+         */
+        configs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoConfig>[]>;
+        /**
+         * Create time.
+         */
+        createTime?: pulumi.Input<string>;
+        /**
+         * Creator User ID.
+         */
+        creatorUin?: pulumi.Input<string>;
+        /**
+         * Data proxy url.
+         */
+        dataProxyUrls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Execute context.
+         */
+        executeContexts?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoExecuteContext>[]>;
+        /**
+         * Executor group name.
+         */
+        executorGroupName?: pulumi.Input<string>;
+        /**
+         * Executor resource ID.
+         */
+        executorId?: pulumi.Input<string>;
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoExtConfig>[]>;
+        /**
+         * Whether the task been submitted.
+         */
+        hasVersion?: pulumi.Input<boolean>;
+        /**
+         * InLong manager url.
+         */
+        inLongManagerUrl?: pulumi.Input<string>;
+        /**
+         * InLong manager version.
+         */
+        inLongManagerVersion?: pulumi.Input<string>;
+        /**
+         * InLong stream id.
+         */
+        inLongStreamId?: pulumi.Input<string>;
+        /**
+         * Incharge user.
+         */
+        incharge?: pulumi.Input<string>;
+        /**
+         * Input datasource type.
+         */
+        inputDatasourceType?: pulumi.Input<string>;
+        /**
+         * Instance version.
+         */
+        instanceVersion?: pulumi.Input<number>;
+        /**
+         * The last time the task was run.
+         */
+        lastRunTime?: pulumi.Input<string>;
+        /**
+         * Whether the task been locked.
+         */
+        locked?: pulumi.Input<boolean>;
+        /**
+         * User locked task.
+         */
+        locker?: pulumi.Input<string>;
+        /**
+         * Node mapping.
+         */
+        mappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoMapping>[]>;
+        /**
+         * Task Node Information.
+         */
+        nodes?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNode>[]>;
+        /**
+         * Number of reads.
+         */
+        numRecordsIn?: pulumi.Input<number>;
+        /**
+         * Number of writes.
+         */
+        numRecordsOut?: pulumi.Input<number>;
+        /**
+         * Times of restarts.
+         */
+        numRestarts?: pulumi.Input<number>;
+        /**
+         * Operator User ID.
+         */
+        operatorUin?: pulumi.Input<string>;
+        /**
+         * Output datasource type.
+         */
+        outputDatasourceType?: pulumi.Input<string>;
+        /**
+         * Owner User ID.
+         */
+        ownerUin?: pulumi.Input<string>;
+        /**
+         * Reading stage, 0: full amount, 1: partial full amount, 2: all incremental.
+         */
+        readPhase?: pulumi.Input<number>;
+        /**
+         * Read latency.
+         */
+        readerDelay?: pulumi.Input<number>;
+        /**
+         * The amount of resources consumed by real-time task.
+         */
+        runningCu?: pulumi.Input<number>;
+        /**
+         * Task scheduling id (job id such as oceanus or us).
+         */
+        scheduleTaskId?: pulumi.Input<string>;
+        /**
+         * Task status 1. Not started | Task initialization, 2. Task starting, 3. Running, 4. Paused, 5. Task stopping, 6. Stopped, 7. Execution failed, 8. deleted, 9. Locked, 404. unknown status.
+         */
+        status?: pulumi.Input<number>;
+        /**
+         * The time the task was stopped.
+         */
+        stopTime?: pulumi.Input<string>;
+        /**
+         * Whether the task version has been submitted for operation and maintenance.
+         */
+        submit?: pulumi.Input<boolean>;
+        /**
+         * Resource tiering status, 0: in progress, 1: successful, 2: failed.
+         */
+        switchResource?: pulumi.Input<number>;
+        /**
+         * Task alarm regular.
+         */
+        taskAlarmRegularLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Inlong Task Group ID.
+         */
+        taskGroupId?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
+        updateTime?: pulumi.Input<string>;
+        /**
+         * The workflow id to which the task belongs.
+         */
+        workflowId?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoExecuteContext {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoMapping {
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoMappingExtConfig>[]>;
+        /**
+         * Schema mapping information.
+         */
+        schemaMappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoMappingSchemaMapping>[]>;
+        /**
+         * Sink node ID.
+         */
+        sinkId?: pulumi.Input<string>;
+        /**
+         * Source node ID.
+         */
+        sourceId?: pulumi.Input<string>;
+        /**
+         * Source node schema information.
+         */
+        sourceSchemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoMappingSourceSchema>[]>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoMappingExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoMappingSchemaMapping {
+        /**
+         * Schema ID from sink node.
+         */
+        sinkSchemaId: pulumi.Input<string>;
+        /**
+         * Schema ID from source node.
+         */
+        sourceSchemaId: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoMappingSourceSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoMappingSourceSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoMappingSourceSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNode {
+        /**
+         * User App Id.
+         */
+        appId?: pulumi.Input<string>;
+        /**
+         * Node configuration information.
+         */
+        configs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeConfig>[]>;
+        /**
+         * Create time.
+         */
+        createTime?: pulumi.Input<string>;
+        /**
+         * Creator User ID.
+         */
+        creatorUin?: pulumi.Input<string>;
+        /**
+         * Data source type: MYSQL, POSTGRE, ORACLE, SQLSERVER, FTP, HIVE, HDFS, ICEBERG, KAFKA, HBASE, SPARK, TBASE, DB2, DM, GAUSSDB, GBASE, IMPALA, ES, S3_DATAINSIGHT, GREENPLUM, PHOENIX, SAP_HANA, SFTP, OCEANBASE, CLICKHOUSE, KUDU, VERTICA, REDIS, COS, DLC, DORIS, CKAFKA, DTS_KAFKA, S3, CDW, TDSQLC, TDSQL, MONGODB, SYBASE, REST_API, StarRocks, TCHOUSE_X.
+         */
+        dataSourceType?: pulumi.Input<string>;
+        /**
+         * Datasource ID.
+         */
+        datasourceId?: pulumi.Input<string>;
+        /**
+         * Node Description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeExtConfig>[]>;
+        /**
+         * Node ID.
+         */
+        id?: pulumi.Input<string>;
+        /**
+         * Node Name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Node mapping.
+         */
+        nodeMapping?: pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeNodeMapping>;
+        /**
+         * Node type: INPUT,OUTPUT,JOIN,FILTER,TRANSFORM.
+         */
+        nodeType?: pulumi.Input<string>;
+        /**
+         * Operator User ID.
+         */
+        operatorUin?: pulumi.Input<string>;
+        /**
+         * Owner User ID.
+         */
+        ownerUin?: pulumi.Input<string>;
+        /**
+         * Project ID.
+         */
+        projectId?: pulumi.Input<string>;
+        /**
+         * Schema information.
+         */
+        schemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeSchema>[]>;
+        /**
+         * The task id to which the node belongs.
+         */
+        taskId?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
+        updateTime?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeNodeMapping {
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfig>[]>;
+        /**
+         * Schema mapping information.
+         */
+        schemaMappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMapping>[]>;
+        /**
+         * Sink node ID.
+         */
+        sinkId?: pulumi.Input<string>;
+        /**
+         * Source node ID.
+         */
+        sourceId?: pulumi.Input<string>;
+        /**
+         * Source node schema information.
+         */
+        sourceSchemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchema>[]>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeNodeMappingExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeNodeMappingSchemaMapping {
+        /**
+         * Schema ID from sink node.
+         */
+        sinkSchemaId: pulumi.Input<string>;
+        /**
+         * Schema ID from source node.
+         */
+        sourceSchemaId: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeNodeMappingSourceSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfoNodeSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationRealtimeTaskTaskInfoNodeSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfo {
+        /**
+         * User App Id.
+         */
+        appId?: pulumi.Input<string>;
+        /**
+         * Node configuration information.
+         */
+        configs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoConfig>[]>;
+        /**
+         * Create time.
+         */
+        createTime?: pulumi.Input<string>;
+        /**
+         * Creator User ID.
+         */
+        creatorUin?: pulumi.Input<string>;
+        /**
+         * Datasource ID.
+         */
+        datasourceId?: pulumi.Input<string>;
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoExtConfig>[]>;
+        /**
+         * Node mapping.
+         */
+        nodeMapping?: pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoNodeMapping>;
+        /**
+         * Operator User ID.
+         */
+        operatorUin?: pulumi.Input<string>;
+        /**
+         * Owner User ID.
+         */
+        ownerUin?: pulumi.Input<string>;
+        /**
+         * Schema information.
+         */
+        schemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoSchema>[]>;
+        /**
+         * Update time.
+         */
+        updateTime?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoNodeMapping {
+        /**
+         * Node extension configuration information.
+         */
+        extConfigs?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoNodeMappingExtConfig>[]>;
+        /**
+         * Schema mapping information.
+         */
+        schemaMappings?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoNodeMappingSchemaMapping>[]>;
+        /**
+         * Sink node ID.
+         */
+        sinkId?: pulumi.Input<string>;
+        /**
+         * Source node ID.
+         */
+        sourceId?: pulumi.Input<string>;
+        /**
+         * Source node schema information.
+         */
+        sourceSchemas?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoNodeMappingSourceSchema>[]>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoNodeMappingExtConfig {
+        /**
+         * Configuration name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Configuration value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoNodeMappingSchemaMapping {
+        /**
+         * Schema ID from sink node.
+         */
+        sinkSchemaId: pulumi.Input<string>;
+        /**
+         * Schema ID from source node.
+         */
+        sourceSchemaId: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoNodeMappingSourceSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoNodeMappingSourceSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoSchema {
+        /**
+         * Schema alias.
+         */
+        alias?: pulumi.Input<string>;
+        /**
+         * Schema comment.
+         */
+        comment?: pulumi.Input<string>;
+        /**
+         * Schema ID.
+         */
+        id: pulumi.Input<string>;
+        /**
+         * Schema name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Schema extended attributes.
+         */
+        properties?: pulumi.Input<pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfoSchemaProperty>[]>;
+        /**
+         * Schema type.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Schema value.
+         */
+        value?: pulumi.Input<string>;
+    }
+
+    export interface IntegrationTaskNodeNodeInfoSchemaProperty {
+        /**
+         * Attributes name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Attributes value.
+         */
+        value?: pulumi.Input<string>;
+    }
 }
 
 export namespace config {

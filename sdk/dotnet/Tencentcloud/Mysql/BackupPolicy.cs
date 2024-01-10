@@ -75,7 +75,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     ///             MysqlId = exampleInstance.Id,
     ///             RetentionPeriod = 7,
     ///             BackupModel = "physical",
-    ///             BackupTime = "01:00-05:00",
+    ///             BackupTime = "22:00-02:00",
+    ///             BinlogPeriod = 32,
+    ///             EnableBinlogStandby = "off",
+    ///             BinlogStandbyDays = 31,
     ///         });
     ///     }
     /// 
@@ -98,10 +101,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<string?> BackupTime { get; private set; } = null!;
 
         /// <summary>
-        /// Retention period for binlog in days.
+        /// Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
         /// </summary>
         [Output("binlogPeriod")]
         public Output<int> BinlogPeriod { get; private set; } = null!;
+
+        /// <summary>
+        /// The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        /// </summary>
+        [Output("binlogStandbyDays")]
+        public Output<int> BinlogStandbyDays { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        /// </summary>
+        [Output("enableBinlogStandby")]
+        public Output<string?> EnableBinlogStandby { get; private set; } = null!;
 
         /// <summary>
         /// Instance ID to which policies will be applied.
@@ -110,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<string> MysqlId { get; private set; } = null!;
 
         /// <summary>
-        /// Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        /// The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         /// </summary>
         [Output("retentionPeriod")]
         public Output<int?> RetentionPeriod { get; private set; } = null!;
@@ -175,13 +190,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? BackupTime { get; set; }
 
         /// <summary>
+        /// Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        /// </summary>
+        [Input("binlogPeriod")]
+        public Input<int>? BinlogPeriod { get; set; }
+
+        /// <summary>
+        /// The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        /// </summary>
+        [Input("binlogStandbyDays")]
+        public Input<int>? BinlogStandbyDays { get; set; }
+
+        /// <summary>
+        /// Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        /// </summary>
+        [Input("enableBinlogStandby")]
+        public Input<string>? EnableBinlogStandby { get; set; }
+
+        /// <summary>
         /// Instance ID to which policies will be applied.
         /// </summary>
         [Input("mysqlId", required: true)]
         public Input<string> MysqlId { get; set; } = null!;
 
         /// <summary>
-        /// Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        /// The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         /// </summary>
         [Input("retentionPeriod")]
         public Input<int>? RetentionPeriod { get; set; }
@@ -206,10 +239,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? BackupTime { get; set; }
 
         /// <summary>
-        /// Retention period for binlog in days.
+        /// Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
         /// </summary>
         [Input("binlogPeriod")]
         public Input<int>? BinlogPeriod { get; set; }
+
+        /// <summary>
+        /// The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        /// </summary>
+        [Input("binlogStandbyDays")]
+        public Input<int>? BinlogStandbyDays { get; set; }
+
+        /// <summary>
+        /// Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        /// </summary>
+        [Input("enableBinlogStandby")]
+        public Input<string>? EnableBinlogStandby { get; set; }
 
         /// <summary>
         /// Instance ID to which policies will be applied.
@@ -218,7 +263,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? MysqlId { get; set; }
 
         /// <summary>
-        /// Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        /// The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         /// </summary>
         [Input("retentionPeriod")]
         public Input<int>? RetentionPeriod { get; set; }

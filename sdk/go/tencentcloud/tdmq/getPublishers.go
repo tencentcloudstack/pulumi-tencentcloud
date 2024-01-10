@@ -18,36 +18,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetPublishers(ctx, &tdmq.GetPublishersArgs{
-// 			ClusterId: "pulsar-9n95ax58b9vn",
-// 			Filters: []tdmq.GetPublishersFilter{
-// 				tdmq.GetPublishersFilter{
-// 					Name: pulumi.StringRef("ProducerName"),
-// 					Values: []string{
-// 						"test",
-// 					},
-// 				},
-// 			},
-// 			Namespace: "keep-ns",
-// 			Sort: tdmq.GetPublishersSort{
-// 				Name:  "ProducerName",
-// 				Order: "DESC",
-// 			},
-// 			Topic: "keep-topic",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetPublishers(ctx, &tdmq.GetPublishersArgs{
+//				ClusterId: "pulsar-9n95ax58b9vn",
+//				Filters: []tdmq.GetPublishersFilter{
+//					tdmq.GetPublishersFilter{
+//						Name: pulumi.StringRef("ProducerName"),
+//						Values: []string{
+//							"test",
+//						},
+//					},
+//				},
+//				Namespace: "keep-ns",
+//				Sort: tdmq.GetPublishersSort{
+//					Name:  "ProducerName",
+//					Order: "DESC",
+//				},
+//				Topic: "keep-topic",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPublishers(ctx *pulumi.Context, args *GetPublishersArgs, opts ...pulumi.InvokeOption) (*GetPublishersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

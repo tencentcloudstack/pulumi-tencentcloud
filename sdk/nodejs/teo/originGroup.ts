@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a teo originGroup
  *
  * ## Example Usage
+ * ### Self origin group
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -25,8 +26,27 @@ import * as utilities from "../utilities";
  *         weight: 100,
  *     }],
  *     originType: "self",
- *     tags: [{}],
  *     zoneId: "zone-297z8rf93cfw",
+ * });
+ * ```
+ * ### Cos origin group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const originGroup = new tencentcloud.Teo.OriginGroup("origin_group", {
+ *     configurationType: "weight",
+ *     originGroupName: "test",
+ *     originRecords: [{
+ *         areas: [],
+ *         port: 0,
+ *         private: true,
+ *         record: "test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
+ *         weight: 100,
+ *     }],
+ *     originType: "cos",
+ *     zoneId: "zone-2o3h21ed8bpu",
  * });
  * ```
  *
@@ -69,7 +89,7 @@ export class OriginGroup extends pulumi.CustomResource {
     }
 
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
      */
     public readonly configurationType!: pulumi.Output<string>;
     /**
@@ -85,7 +105,7 @@ export class OriginGroup extends pulumi.CustomResource {
      */
     public readonly originRecords!: pulumi.Output<outputs.Teo.OriginGroupOriginRecord[]>;
     /**
-     * Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
      */
     public readonly originType!: pulumi.Output<string>;
     /**
@@ -152,7 +172,7 @@ export class OriginGroup extends pulumi.CustomResource {
  */
 export interface OriginGroupState {
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
      */
     configurationType?: pulumi.Input<string>;
     /**
@@ -168,7 +188,7 @@ export interface OriginGroupState {
      */
     originRecords?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupOriginRecord>[]>;
     /**
-     * Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
      */
     originType?: pulumi.Input<string>;
     /**
@@ -186,7 +206,7 @@ export interface OriginGroupState {
  */
 export interface OriginGroupArgs {
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
      */
     configurationType: pulumi.Input<string>;
     /**
@@ -198,7 +218,7 @@ export interface OriginGroupArgs {
      */
     originRecords: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupOriginRecord>[]>;
     /**
-     * Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
      */
     originType: pulumi.Input<string>;
     /**

@@ -5,6 +5,22 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this data source to query detailed information of tse gatewayRoutes
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const gatewayRoutes = pulumi.output(tencentcloud.Tse.getGatewayRoutes({
+ *     gatewayId: "gateway-ddbb709b",
+ *     routeName: "keep-routes",
+ *     serviceName: "test",
+ * }));
+ * ```
+ */
 export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayRoutesResult> {
     if (!opts) {
         opts = {}
@@ -23,9 +39,21 @@ export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.Invok
  * A collection of arguments for invoking getGatewayRoutes.
  */
 export interface GetGatewayRoutesArgs {
+    /**
+     * gateway ID.
+     */
     gatewayId: string;
+    /**
+     * Used to save results.
+     */
     resultOutputFile?: string;
+    /**
+     * route name.
+     */
     routeName?: string;
+    /**
+     * service name.
+     */
     serviceName?: string;
 }
 
@@ -39,8 +67,14 @@ export interface GetGatewayRoutesResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
+    /**
+     * result.
+     */
     readonly results: outputs.Tse.GetGatewayRoutesResult[];
     readonly routeName?: string;
+    /**
+     * service name.
+     */
     readonly serviceName?: string;
 }
 
@@ -52,8 +86,20 @@ export function getGatewayRoutesOutput(args: GetGatewayRoutesOutputArgs, opts?: 
  * A collection of arguments for invoking getGatewayRoutes.
  */
 export interface GetGatewayRoutesOutputArgs {
+    /**
+     * gateway ID.
+     */
     gatewayId: pulumi.Input<string>;
+    /**
+     * Used to save results.
+     */
     resultOutputFile?: pulumi.Input<string>;
+    /**
+     * route name.
+     */
     routeName?: pulumi.Input<string>;
+    /**
+     * service name.
+     */
     serviceName?: pulumi.Input<string>;
 }

@@ -5,26 +5,94 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./diagnose";
+export * from "./diagnoseInstance";
+export * from "./getDescribeIndexList";
+export * from "./getDiagnose";
+export * from "./getInstanceLogs";
+export * from "./getInstanceOperations";
+export * from "./getInstancePluginList";
 export * from "./getInstances";
+export * from "./getLogstashInstanceLogs";
+export * from "./getLogstashInstanceOperations";
+export * from "./getViews";
+export * from "./index_";
 export * from "./instance";
+export * from "./logstash";
+export * from "./logstashPipeline";
+export * from "./restartInstanceOperation";
+export * from "./restartKibanaOperation";
+export * from "./restartLogstashInstanceOperation";
+export * from "./restartNodesOperation";
 export * from "./securityGroup";
+export * from "./startLogstashPipelineOperation";
+export * from "./stopLogstashPipelineOperation";
+export * from "./updatePluginsOperation";
 
 // Import resources to register:
+import { Diagnose } from "./diagnose";
+import { DiagnoseInstance } from "./diagnoseInstance";
+import { Index } from "./index_";
 import { Instance } from "./instance";
+import { Logstash } from "./logstash";
+import { LogstashPipeline } from "./logstashPipeline";
+import { RestartInstanceOperation } from "./restartInstanceOperation";
+import { RestartKibanaOperation } from "./restartKibanaOperation";
+import { RestartLogstashInstanceOperation } from "./restartLogstashInstanceOperation";
+import { RestartNodesOperation } from "./restartNodesOperation";
 import { SecurityGroup } from "./securityGroup";
+import { StartLogstashPipelineOperation } from "./startLogstashPipelineOperation";
+import { StopLogstashPipelineOperation } from "./stopLogstashPipelineOperation";
+import { UpdatePluginsOperation } from "./updatePluginsOperation";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Elasticsearch/diagnose:Diagnose":
+                return new Diagnose(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance":
+                return new DiagnoseInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/index:Index":
+                return new Index(name, <any>undefined, { urn })
             case "tencentcloud:Elasticsearch/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/logstash:Logstash":
+                return new Logstash(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline":
+                return new LogstashPipeline(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/restartInstanceOperation:RestartInstanceOperation":
+                return new RestartInstanceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/restartKibanaOperation:RestartKibanaOperation":
+                return new RestartKibanaOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation":
+                return new RestartLogstashInstanceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/restartNodesOperation:RestartNodesOperation":
+                return new RestartNodesOperation(name, <any>undefined, { urn })
             case "tencentcloud:Elasticsearch/securityGroup:SecurityGroup":
                 return new SecurityGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/startLogstashPipelineOperation:StartLogstashPipelineOperation":
+                return new StartLogstashPipelineOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/stopLogstashPipelineOperation:StopLogstashPipelineOperation":
+                return new StopLogstashPipelineOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Elasticsearch/updatePluginsOperation:UpdatePluginsOperation":
+                return new UpdatePluginsOperation(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/diagnose", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/diagnoseInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/index", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/logstash", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/logstashPipeline", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/restartInstanceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/restartKibanaOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/restartLogstashInstanceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/restartNodesOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/securityGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/startLogstashPipelineOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/stopLogstashPipelineOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Elasticsearch/updatePluginsOperation", _module)

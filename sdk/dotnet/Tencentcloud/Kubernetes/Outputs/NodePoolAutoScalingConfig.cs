@@ -67,7 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string InstanceType;
         /// <summary>
-        /// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         public readonly string? InternetChargeType;
         /// <summary>
@@ -79,6 +79,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly ImmutableArray<string> KeyIds;
         /// <summary>
+        /// Ordered security groups to which a CVM instance belongs.
+        /// </summary>
+        public readonly ImmutableArray<string> OrderlySecurityGroupIds;
+        /// <summary>
         /// Password to access.
         /// </summary>
         public readonly string? Password;
@@ -87,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? PublicIpAssigned;
         /// <summary>
-        /// Security groups to which a CVM instance belongs.
+        /// The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         /// </summary>
         public readonly ImmutableArray<string> SecurityGroupIds;
         /// <summary>
@@ -141,6 +145,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             ImmutableArray<string> keyIds,
 
+            ImmutableArray<string> orderlySecurityGroupIds,
+
             string? password,
 
             bool? publicIpAssigned,
@@ -171,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             InternetChargeType = internetChargeType;
             InternetMaxBandwidthOut = internetMaxBandwidthOut;
             KeyIds = keyIds;
+            OrderlySecurityGroupIds = orderlySecurityGroupIds;
             Password = password;
             PublicIpAssigned = publicIpAssigned;
             SecurityGroupIds = securityGroupIds;

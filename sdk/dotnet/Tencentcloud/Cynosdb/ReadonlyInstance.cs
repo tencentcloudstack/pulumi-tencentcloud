@@ -119,6 +119,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Output("instanceStorageSize")]
         public Output<int> InstanceStorageSize { get; private set; } = null!;
 
+        /// <summary>
+        /// ID of the subnet within this VPC.
+        /// </summary>
+        [Output("subnetId")]
+        public Output<string> SubnetId { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of the VPC.
+        /// </summary>
+        [Output("vpcId")]
+        public Output<string> VpcId { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a ReadonlyInstance resource with the given unique name, arguments, and options.
@@ -220,6 +232,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
 
+        /// <summary>
+        /// ID of the subnet within this VPC.
+        /// </summary>
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
+
+        /// <summary>
+        /// ID of the VPC.
+        /// </summary>
+        [Input("vpcId")]
+        public Input<string>? VpcId { get; set; }
+
         public ReadonlyInstanceArgs()
         {
         }
@@ -292,6 +316,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("instanceStorageSize")]
         public Input<int>? InstanceStorageSize { get; set; }
+
+        /// <summary>
+        /// ID of the subnet within this VPC.
+        /// </summary>
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
+
+        /// <summary>
+        /// ID of the VPC.
+        /// </summary>
+        [Input("vpcId")]
+        public Input<string>? VpcId { get; set; }
 
         public ReadonlyInstanceState()
         {

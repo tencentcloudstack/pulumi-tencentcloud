@@ -23,10 +23,34 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ssl/certificate:Certificate":
 		r = &Certificate{}
+	case "tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation":
+		r = &CheckCertificateChainOperation{}
+	case "tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation":
+		r = &CompleteCertificateOperation{}
+	case "tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation":
+		r = &DeployCertificateInstanceOperation{}
+	case "tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation":
+		r = &DeployCertificateRecordRetryOperation{}
+	case "tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation":
+		r = &DeployCertificateRecordRollbackOperation{}
+	case "tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation":
+		r = &DownloadCertificateOperation{}
 	case "tencentcloud:Ssl/freeCertificate:FreeCertificate":
 		r = &FreeCertificate{}
 	case "tencentcloud:Ssl/payCertificate:PayCertificate":
 		r = &PayCertificate{}
+	case "tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation":
+		r = &ReplaceCertificateOperation{}
+	case "tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation":
+		r = &RevokeCertificateOperation{}
+	case "tencentcloud:Ssl/updateCertificateInstanceOperation:UpdateCertificateInstanceOperation":
+		r = &UpdateCertificateInstanceOperation{}
+	case "tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation":
+		r = &UpdateCertificateRecordRetryOperation{}
+	case "tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation":
+		r = &UpdateCertificateRecordRollbackOperation{}
+	case "tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation":
+		r = &UploadRevokeLetterOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -47,12 +71,72 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Ssl/checkCertificateChainOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/completeCertificateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/deployCertificateInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/deployCertificateRecordRetryOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/deployCertificateRecordRollbackOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/downloadCertificateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Ssl/freeCertificate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ssl/payCertificate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/replaceCertificateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/revokeCertificateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/updateCertificateInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/updateCertificateRecordRetryOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/updateCertificateRecordRollbackOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/uploadRevokeLetterOperation",
 		&module{version},
 	)
 }

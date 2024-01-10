@@ -10,17 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
-    /// <summary>
-    /// Provides a resource to create a teo application_proxy
-    /// 
-    /// ## Import
-    /// 
-    /// teo application_proxy can be imported using the zoneId#proxyId, e.g.
-    /// 
-    /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/applicationProxy:ApplicationProxy application_proxy zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/applicationProxy:ApplicationProxy")]
     public partial class ApplicationProxy : Pulumi.CustomResource
     {
@@ -67,7 +56,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> ProxyId { get; private set; } = null!;
 
         /// <summary>
-        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        /// the name of proxy application.
         /// </summary>
         [Output("proxyName")]
         public Output<string> ProxyName { get; private set; } = null!;
@@ -97,7 +87,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<int> SessionPersistTime { get; private set; } = null!;
 
         /// <summary>
-        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        /// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -180,7 +171,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> PlatType { get; set; } = null!;
 
         /// <summary>
-        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        /// the name of proxy application.
         /// </summary>
         [Input("proxyName", required: true)]
         public Input<string> ProxyName { get; set; } = null!;
@@ -204,7 +196,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<int>? SessionPersistTime { get; set; }
 
         /// <summary>
-        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        /// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -265,7 +258,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? ProxyId { get; set; }
 
         /// <summary>
-        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        /// When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        /// the name of proxy application.
         /// </summary>
         [Input("proxyName")]
         public Input<string>? ProxyName { get; set; }
@@ -301,7 +295,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<int>? SessionPersistTime { get; set; }
 
         /// <summary>
-        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        /// Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        /// Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

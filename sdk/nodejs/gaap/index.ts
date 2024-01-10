@@ -6,34 +6,63 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./certificate";
+export * from "./customHeader";
 export * from "./domainErrorPage";
+export * from "./getAccessRegions";
+export * from "./getAccessRegionsByDestRegion";
+export * from "./getBlackHeader";
 export * from "./getCertificates";
+export * from "./getCheckProxyCreate";
+export * from "./getCountryAreaMapping";
+export * from "./getCustomHeader";
+export * from "./getDestRegions";
+export * from "./getDomainErrorPageInfos";
 export * from "./getDomainErrorPages";
+export * from "./getGroupAndStatisticsProxy";
 export * from "./getHttpDomains";
 export * from "./getHttpRules";
 export * from "./getLayer4Listeners";
 export * from "./getLayer7Listeners";
+export * from "./getListenerRealServers";
+export * from "./getListenerStatistics";
 export * from "./getProxies";
+export * from "./getProxiesStatus";
+export * from "./getProxyAndStatisticsListeners";
+export * from "./getProxyDetail";
+export * from "./getProxyGroupStatistics";
+export * from "./getProxyGroups";
+export * from "./getProxyStatistics";
+export * from "./getRealServersStatus";
 export * from "./getRealservers";
+export * from "./getRegionAndPrice";
+export * from "./getResourcesByTag";
+export * from "./getRuleRealServers";
 export * from "./getSecurityPolicies";
 export * from "./getSecurityRules";
+export * from "./globalDomain";
+export * from "./globalDomainDns";
 export * from "./httpDomain";
 export * from "./httpRule";
 export * from "./layer4Listener";
 export * from "./layer7Listener";
 export * from "./proxy";
+export * from "./proxyGroup";
 export * from "./realserver";
 export * from "./securityPolicy";
 export * from "./securityRule";
 
 // Import resources to register:
 import { Certificate } from "./certificate";
+import { CustomHeader } from "./customHeader";
 import { DomainErrorPage } from "./domainErrorPage";
+import { GlobalDomain } from "./globalDomain";
+import { GlobalDomainDns } from "./globalDomainDns";
 import { HttpDomain } from "./httpDomain";
 import { HttpRule } from "./httpRule";
 import { Layer4Listener } from "./layer4Listener";
 import { Layer7Listener } from "./layer7Listener";
 import { Proxy } from "./proxy";
+import { ProxyGroup } from "./proxyGroup";
 import { Realserver } from "./realserver";
 import { SecurityPolicy } from "./securityPolicy";
 import { SecurityRule } from "./securityRule";
@@ -44,8 +73,14 @@ const _module = {
         switch (type) {
             case "tencentcloud:Gaap/certificate:Certificate":
                 return new Certificate(name, <any>undefined, { urn })
+            case "tencentcloud:Gaap/customHeader:CustomHeader":
+                return new CustomHeader(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/domainErrorPage:DomainErrorPage":
                 return new DomainErrorPage(name, <any>undefined, { urn })
+            case "tencentcloud:Gaap/globalDomain:GlobalDomain":
+                return new GlobalDomain(name, <any>undefined, { urn })
+            case "tencentcloud:Gaap/globalDomainDns:GlobalDomainDns":
+                return new GlobalDomainDns(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/httpDomain:HttpDomain":
                 return new HttpDomain(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/httpRule:HttpRule":
@@ -56,6 +91,8 @@ const _module = {
                 return new Layer7Listener(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/proxy:Proxy":
                 return new Proxy(name, <any>undefined, { urn })
+            case "tencentcloud:Gaap/proxyGroup:ProxyGroup":
+                return new ProxyGroup(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/realserver:Realserver":
                 return new Realserver(name, <any>undefined, { urn })
             case "tencentcloud:Gaap/securityPolicy:SecurityPolicy":
@@ -68,12 +105,16 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/certificate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/customHeader", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/domainErrorPage", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/globalDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/globalDomainDns", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/httpDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/httpRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/layer4Listener", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/layer7Listener", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/proxy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/proxyGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/realserver", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/securityPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Gaap/securityRule", _module)

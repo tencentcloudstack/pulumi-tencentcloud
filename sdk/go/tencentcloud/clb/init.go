@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &TargetGroup{}
 	case "tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment":
 		r = &TargetGroupAttachment{}
+	case "tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments":
+		r = &TargetGroupAttachments{}
 	case "tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment":
 		r = &TargetGroupInstanceAttachment{}
 	default:
@@ -146,6 +148,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/targetGroupAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/targetGroupAttachments",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

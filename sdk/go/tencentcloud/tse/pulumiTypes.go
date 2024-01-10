@@ -28,7 +28,7 @@ type CngwCanaryRuleCanaryRule struct {
 // CngwCanaryRuleCanaryRuleInput is an input type that accepts CngwCanaryRuleCanaryRuleArgs and CngwCanaryRuleCanaryRuleOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRuleInput` via:
 //
-//          CngwCanaryRuleCanaryRuleArgs{...}
+//	CngwCanaryRuleCanaryRuleArgs{...}
 type CngwCanaryRuleCanaryRuleInput interface {
 	pulumi.Input
 
@@ -74,11 +74,11 @@ func (i CngwCanaryRuleCanaryRuleArgs) ToCngwCanaryRuleCanaryRulePtrOutputWithCon
 // CngwCanaryRuleCanaryRulePtrInput is an input type that accepts CngwCanaryRuleCanaryRuleArgs, CngwCanaryRuleCanaryRulePtr and CngwCanaryRuleCanaryRulePtrOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRulePtrInput` via:
 //
-//          CngwCanaryRuleCanaryRuleArgs{...}
+//	        CngwCanaryRuleCanaryRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwCanaryRuleCanaryRulePtrInput interface {
 	pulumi.Input
 
@@ -257,7 +257,7 @@ type CngwCanaryRuleCanaryRuleBalancedServiceList struct {
 // CngwCanaryRuleCanaryRuleBalancedServiceListInput is an input type that accepts CngwCanaryRuleCanaryRuleBalancedServiceListArgs and CngwCanaryRuleCanaryRuleBalancedServiceListOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRuleBalancedServiceListInput` via:
 //
-//          CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...}
+//	CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...}
 type CngwCanaryRuleCanaryRuleBalancedServiceListInput interface {
 	pulumi.Input
 
@@ -290,7 +290,7 @@ func (i CngwCanaryRuleCanaryRuleBalancedServiceListArgs) ToCngwCanaryRuleCanaryR
 // CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput is an input type that accepts CngwCanaryRuleCanaryRuleBalancedServiceListArray and CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput` via:
 //
-//          CngwCanaryRuleCanaryRuleBalancedServiceListArray{ CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...} }
+//	CngwCanaryRuleCanaryRuleBalancedServiceListArray{ CngwCanaryRuleCanaryRuleBalancedServiceListArgs{...} }
 type CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput interface {
 	pulumi.Input
 
@@ -385,7 +385,7 @@ type CngwCanaryRuleCanaryRuleConditionList struct {
 // CngwCanaryRuleCanaryRuleConditionListInput is an input type that accepts CngwCanaryRuleCanaryRuleConditionListArgs and CngwCanaryRuleCanaryRuleConditionListOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRuleConditionListInput` via:
 //
-//          CngwCanaryRuleCanaryRuleConditionListArgs{...}
+//	CngwCanaryRuleCanaryRuleConditionListArgs{...}
 type CngwCanaryRuleCanaryRuleConditionListInput interface {
 	pulumi.Input
 
@@ -425,7 +425,7 @@ func (i CngwCanaryRuleCanaryRuleConditionListArgs) ToCngwCanaryRuleCanaryRuleCon
 // CngwCanaryRuleCanaryRuleConditionListArrayInput is an input type that accepts CngwCanaryRuleCanaryRuleConditionListArray and CngwCanaryRuleCanaryRuleConditionListArrayOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleCanaryRuleConditionListArrayInput` via:
 //
-//          CngwCanaryRuleCanaryRuleConditionListArray{ CngwCanaryRuleCanaryRuleConditionListArgs{...} }
+//	CngwCanaryRuleCanaryRuleConditionListArray{ CngwCanaryRuleCanaryRuleConditionListArgs{...} }
 type CngwCanaryRuleCanaryRuleConditionListArrayInput interface {
 	pulumi.Input
 
@@ -516,15 +516,1149 @@ func (o CngwCanaryRuleCanaryRuleConditionListArrayOutput) Index(i pulumi.IntInpu
 	}).(CngwCanaryRuleCanaryRuleConditionListOutput)
 }
 
+type CngwGatewayInstancePort struct {
+	// Http port range.
+	HttpPort *string `pulumi:"httpPort"`
+	// Https port range.
+	HttpsPort *string `pulumi:"httpsPort"`
+	// Tcp port range.
+	TcpPort *string `pulumi:"tcpPort"`
+	// Udp port range.
+	UdpPort *string `pulumi:"udpPort"`
+}
+
+// CngwGatewayInstancePortInput is an input type that accepts CngwGatewayInstancePortArgs and CngwGatewayInstancePortOutput values.
+// You can construct a concrete instance of `CngwGatewayInstancePortInput` via:
+//
+//	CngwGatewayInstancePortArgs{...}
+type CngwGatewayInstancePortInput interface {
+	pulumi.Input
+
+	ToCngwGatewayInstancePortOutput() CngwGatewayInstancePortOutput
+	ToCngwGatewayInstancePortOutputWithContext(context.Context) CngwGatewayInstancePortOutput
+}
+
+type CngwGatewayInstancePortArgs struct {
+	// Http port range.
+	HttpPort pulumi.StringPtrInput `pulumi:"httpPort"`
+	// Https port range.
+	HttpsPort pulumi.StringPtrInput `pulumi:"httpsPort"`
+	// Tcp port range.
+	TcpPort pulumi.StringPtrInput `pulumi:"tcpPort"`
+	// Udp port range.
+	UdpPort pulumi.StringPtrInput `pulumi:"udpPort"`
+}
+
+func (CngwGatewayInstancePortArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayInstancePort)(nil)).Elem()
+}
+
+func (i CngwGatewayInstancePortArgs) ToCngwGatewayInstancePortOutput() CngwGatewayInstancePortOutput {
+	return i.ToCngwGatewayInstancePortOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayInstancePortArgs) ToCngwGatewayInstancePortOutputWithContext(ctx context.Context) CngwGatewayInstancePortOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayInstancePortOutput)
+}
+
+// CngwGatewayInstancePortArrayInput is an input type that accepts CngwGatewayInstancePortArray and CngwGatewayInstancePortArrayOutput values.
+// You can construct a concrete instance of `CngwGatewayInstancePortArrayInput` via:
+//
+//	CngwGatewayInstancePortArray{ CngwGatewayInstancePortArgs{...} }
+type CngwGatewayInstancePortArrayInput interface {
+	pulumi.Input
+
+	ToCngwGatewayInstancePortArrayOutput() CngwGatewayInstancePortArrayOutput
+	ToCngwGatewayInstancePortArrayOutputWithContext(context.Context) CngwGatewayInstancePortArrayOutput
+}
+
+type CngwGatewayInstancePortArray []CngwGatewayInstancePortInput
+
+func (CngwGatewayInstancePortArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwGatewayInstancePort)(nil)).Elem()
+}
+
+func (i CngwGatewayInstancePortArray) ToCngwGatewayInstancePortArrayOutput() CngwGatewayInstancePortArrayOutput {
+	return i.ToCngwGatewayInstancePortArrayOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayInstancePortArray) ToCngwGatewayInstancePortArrayOutputWithContext(ctx context.Context) CngwGatewayInstancePortArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayInstancePortArrayOutput)
+}
+
+type CngwGatewayInstancePortOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayInstancePortOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayInstancePort)(nil)).Elem()
+}
+
+func (o CngwGatewayInstancePortOutput) ToCngwGatewayInstancePortOutput() CngwGatewayInstancePortOutput {
+	return o
+}
+
+func (o CngwGatewayInstancePortOutput) ToCngwGatewayInstancePortOutputWithContext(ctx context.Context) CngwGatewayInstancePortOutput {
+	return o
+}
+
+// Http port range.
+func (o CngwGatewayInstancePortOutput) HttpPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInstancePort) *string { return v.HttpPort }).(pulumi.StringPtrOutput)
+}
+
+// Https port range.
+func (o CngwGatewayInstancePortOutput) HttpsPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInstancePort) *string { return v.HttpsPort }).(pulumi.StringPtrOutput)
+}
+
+// Tcp port range.
+func (o CngwGatewayInstancePortOutput) TcpPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInstancePort) *string { return v.TcpPort }).(pulumi.StringPtrOutput)
+}
+
+// Udp port range.
+func (o CngwGatewayInstancePortOutput) UdpPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInstancePort) *string { return v.UdpPort }).(pulumi.StringPtrOutput)
+}
+
+type CngwGatewayInstancePortArrayOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayInstancePortArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CngwGatewayInstancePort)(nil)).Elem()
+}
+
+func (o CngwGatewayInstancePortArrayOutput) ToCngwGatewayInstancePortArrayOutput() CngwGatewayInstancePortArrayOutput {
+	return o
+}
+
+func (o CngwGatewayInstancePortArrayOutput) ToCngwGatewayInstancePortArrayOutputWithContext(ctx context.Context) CngwGatewayInstancePortArrayOutput {
+	return o
+}
+
+func (o CngwGatewayInstancePortArrayOutput) Index(i pulumi.IntInput) CngwGatewayInstancePortOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CngwGatewayInstancePort {
+		return vs[0].([]CngwGatewayInstancePort)[vs[1].(int)]
+	}).(CngwGatewayInstancePortOutput)
+}
+
+type CngwGatewayInternetConfig struct {
+	// description of clb.
+	Description *string `pulumi:"description"`
+	// internet type. Reference value: `IPV4`(default value), `IPV6`.
+	InternetAddressVersion *string `pulumi:"internetAddressVersion"`
+	// public network bandwidth.
+	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+	InternetPayMode *string `pulumi:"internetPayMode"`
+	// primary availability zone.
+	MasterZoneId *string `pulumi:"masterZoneId"`
+	// Whether load balancing has multiple availability zones.
+	MultiZoneFlag *bool `pulumi:"multiZoneFlag"`
+	// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+	SlaType *string `pulumi:"slaType"`
+	// alternate availability zone.
+	SlaveZoneId *string `pulumi:"slaveZoneId"`
+}
+
+// CngwGatewayInternetConfigInput is an input type that accepts CngwGatewayInternetConfigArgs and CngwGatewayInternetConfigOutput values.
+// You can construct a concrete instance of `CngwGatewayInternetConfigInput` via:
+//
+//	CngwGatewayInternetConfigArgs{...}
+type CngwGatewayInternetConfigInput interface {
+	pulumi.Input
+
+	ToCngwGatewayInternetConfigOutput() CngwGatewayInternetConfigOutput
+	ToCngwGatewayInternetConfigOutputWithContext(context.Context) CngwGatewayInternetConfigOutput
+}
+
+type CngwGatewayInternetConfigArgs struct {
+	// description of clb.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// internet type. Reference value: `IPV4`(default value), `IPV6`.
+	InternetAddressVersion pulumi.StringPtrInput `pulumi:"internetAddressVersion"`
+	// public network bandwidth.
+	InternetMaxBandwidthOut pulumi.IntPtrInput `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+	InternetPayMode pulumi.StringPtrInput `pulumi:"internetPayMode"`
+	// primary availability zone.
+	MasterZoneId pulumi.StringPtrInput `pulumi:"masterZoneId"`
+	// Whether load balancing has multiple availability zones.
+	MultiZoneFlag pulumi.BoolPtrInput `pulumi:"multiZoneFlag"`
+	// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+	SlaType pulumi.StringPtrInput `pulumi:"slaType"`
+	// alternate availability zone.
+	SlaveZoneId pulumi.StringPtrInput `pulumi:"slaveZoneId"`
+}
+
+func (CngwGatewayInternetConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayInternetConfig)(nil)).Elem()
+}
+
+func (i CngwGatewayInternetConfigArgs) ToCngwGatewayInternetConfigOutput() CngwGatewayInternetConfigOutput {
+	return i.ToCngwGatewayInternetConfigOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayInternetConfigArgs) ToCngwGatewayInternetConfigOutputWithContext(ctx context.Context) CngwGatewayInternetConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayInternetConfigOutput)
+}
+
+func (i CngwGatewayInternetConfigArgs) ToCngwGatewayInternetConfigPtrOutput() CngwGatewayInternetConfigPtrOutput {
+	return i.ToCngwGatewayInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayInternetConfigArgs) ToCngwGatewayInternetConfigPtrOutputWithContext(ctx context.Context) CngwGatewayInternetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayInternetConfigOutput).ToCngwGatewayInternetConfigPtrOutputWithContext(ctx)
+}
+
+// CngwGatewayInternetConfigPtrInput is an input type that accepts CngwGatewayInternetConfigArgs, CngwGatewayInternetConfigPtr and CngwGatewayInternetConfigPtrOutput values.
+// You can construct a concrete instance of `CngwGatewayInternetConfigPtrInput` via:
+//
+//	        CngwGatewayInternetConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CngwGatewayInternetConfigPtrInput interface {
+	pulumi.Input
+
+	ToCngwGatewayInternetConfigPtrOutput() CngwGatewayInternetConfigPtrOutput
+	ToCngwGatewayInternetConfigPtrOutputWithContext(context.Context) CngwGatewayInternetConfigPtrOutput
+}
+
+type cngwGatewayInternetConfigPtrType CngwGatewayInternetConfigArgs
+
+func CngwGatewayInternetConfigPtr(v *CngwGatewayInternetConfigArgs) CngwGatewayInternetConfigPtrInput {
+	return (*cngwGatewayInternetConfigPtrType)(v)
+}
+
+func (*cngwGatewayInternetConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayInternetConfig)(nil)).Elem()
+}
+
+func (i *cngwGatewayInternetConfigPtrType) ToCngwGatewayInternetConfigPtrOutput() CngwGatewayInternetConfigPtrOutput {
+	return i.ToCngwGatewayInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwGatewayInternetConfigPtrType) ToCngwGatewayInternetConfigPtrOutputWithContext(ctx context.Context) CngwGatewayInternetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayInternetConfigPtrOutput)
+}
+
+type CngwGatewayInternetConfigOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayInternetConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayInternetConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayInternetConfigOutput) ToCngwGatewayInternetConfigOutput() CngwGatewayInternetConfigOutput {
+	return o
+}
+
+func (o CngwGatewayInternetConfigOutput) ToCngwGatewayInternetConfigOutputWithContext(ctx context.Context) CngwGatewayInternetConfigOutput {
+	return o
+}
+
+func (o CngwGatewayInternetConfigOutput) ToCngwGatewayInternetConfigPtrOutput() CngwGatewayInternetConfigPtrOutput {
+	return o.ToCngwGatewayInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CngwGatewayInternetConfigOutput) ToCngwGatewayInternetConfigPtrOutputWithContext(ctx context.Context) CngwGatewayInternetConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwGatewayInternetConfig) *CngwGatewayInternetConfig {
+		return &v
+	}).(CngwGatewayInternetConfigPtrOutput)
+}
+
+// description of clb.
+func (o CngwGatewayInternetConfigOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// internet type. Reference value: `IPV4`(default value), `IPV6`.
+func (o CngwGatewayInternetConfigOutput) InternetAddressVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.InternetAddressVersion }).(pulumi.StringPtrOutput)
+}
+
+// public network bandwidth.
+func (o CngwGatewayInternetConfigOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *int { return v.InternetMaxBandwidthOut }).(pulumi.IntPtrOutput)
+}
+
+// trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+func (o CngwGatewayInternetConfigOutput) InternetPayMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.InternetPayMode }).(pulumi.StringPtrOutput)
+}
+
+// primary availability zone.
+func (o CngwGatewayInternetConfigOutput) MasterZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.MasterZoneId }).(pulumi.StringPtrOutput)
+}
+
+// Whether load balancing has multiple availability zones.
+func (o CngwGatewayInternetConfigOutput) MultiZoneFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *bool { return v.MultiZoneFlag }).(pulumi.BoolPtrOutput)
+}
+
+// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+func (o CngwGatewayInternetConfigOutput) SlaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.SlaType }).(pulumi.StringPtrOutput)
+}
+
+// alternate availability zone.
+func (o CngwGatewayInternetConfigOutput) SlaveZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayInternetConfig) *string { return v.SlaveZoneId }).(pulumi.StringPtrOutput)
+}
+
+type CngwGatewayInternetConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayInternetConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayInternetConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayInternetConfigPtrOutput) ToCngwGatewayInternetConfigPtrOutput() CngwGatewayInternetConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayInternetConfigPtrOutput) ToCngwGatewayInternetConfigPtrOutputWithContext(ctx context.Context) CngwGatewayInternetConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayInternetConfigPtrOutput) Elem() CngwGatewayInternetConfigOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) CngwGatewayInternetConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CngwGatewayInternetConfig
+		return ret
+	}).(CngwGatewayInternetConfigOutput)
+}
+
+// description of clb.
+func (o CngwGatewayInternetConfigPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// internet type. Reference value: `IPV4`(default value), `IPV6`.
+func (o CngwGatewayInternetConfigPtrOutput) InternetAddressVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InternetAddressVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// public network bandwidth.
+func (o CngwGatewayInternetConfigPtrOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InternetMaxBandwidthOut
+	}).(pulumi.IntPtrOutput)
+}
+
+// trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+func (o CngwGatewayInternetConfigPtrOutput) InternetPayMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InternetPayMode
+	}).(pulumi.StringPtrOutput)
+}
+
+// primary availability zone.
+func (o CngwGatewayInternetConfigPtrOutput) MasterZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MasterZoneId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether load balancing has multiple availability zones.
+func (o CngwGatewayInternetConfigPtrOutput) MultiZoneFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MultiZoneFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+func (o CngwGatewayInternetConfigPtrOutput) SlaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SlaType
+	}).(pulumi.StringPtrOutput)
+}
+
+// alternate availability zone.
+func (o CngwGatewayInternetConfigPtrOutput) SlaveZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SlaveZoneId
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwGatewayNodeConfig struct {
+	// node number, 2-50.
+	Number int `pulumi:"number"`
+	// specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification string `pulumi:"specification"`
+}
+
+// CngwGatewayNodeConfigInput is an input type that accepts CngwGatewayNodeConfigArgs and CngwGatewayNodeConfigOutput values.
+// You can construct a concrete instance of `CngwGatewayNodeConfigInput` via:
+//
+//	CngwGatewayNodeConfigArgs{...}
+type CngwGatewayNodeConfigInput interface {
+	pulumi.Input
+
+	ToCngwGatewayNodeConfigOutput() CngwGatewayNodeConfigOutput
+	ToCngwGatewayNodeConfigOutputWithContext(context.Context) CngwGatewayNodeConfigOutput
+}
+
+type CngwGatewayNodeConfigArgs struct {
+	// node number, 2-50.
+	Number pulumi.IntInput `pulumi:"number"`
+	// specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification pulumi.StringInput `pulumi:"specification"`
+}
+
+func (CngwGatewayNodeConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayNodeConfig)(nil)).Elem()
+}
+
+func (i CngwGatewayNodeConfigArgs) ToCngwGatewayNodeConfigOutput() CngwGatewayNodeConfigOutput {
+	return i.ToCngwGatewayNodeConfigOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayNodeConfigArgs) ToCngwGatewayNodeConfigOutputWithContext(ctx context.Context) CngwGatewayNodeConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayNodeConfigOutput)
+}
+
+func (i CngwGatewayNodeConfigArgs) ToCngwGatewayNodeConfigPtrOutput() CngwGatewayNodeConfigPtrOutput {
+	return i.ToCngwGatewayNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayNodeConfigArgs) ToCngwGatewayNodeConfigPtrOutputWithContext(ctx context.Context) CngwGatewayNodeConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayNodeConfigOutput).ToCngwGatewayNodeConfigPtrOutputWithContext(ctx)
+}
+
+// CngwGatewayNodeConfigPtrInput is an input type that accepts CngwGatewayNodeConfigArgs, CngwGatewayNodeConfigPtr and CngwGatewayNodeConfigPtrOutput values.
+// You can construct a concrete instance of `CngwGatewayNodeConfigPtrInput` via:
+//
+//	        CngwGatewayNodeConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CngwGatewayNodeConfigPtrInput interface {
+	pulumi.Input
+
+	ToCngwGatewayNodeConfigPtrOutput() CngwGatewayNodeConfigPtrOutput
+	ToCngwGatewayNodeConfigPtrOutputWithContext(context.Context) CngwGatewayNodeConfigPtrOutput
+}
+
+type cngwGatewayNodeConfigPtrType CngwGatewayNodeConfigArgs
+
+func CngwGatewayNodeConfigPtr(v *CngwGatewayNodeConfigArgs) CngwGatewayNodeConfigPtrInput {
+	return (*cngwGatewayNodeConfigPtrType)(v)
+}
+
+func (*cngwGatewayNodeConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayNodeConfig)(nil)).Elem()
+}
+
+func (i *cngwGatewayNodeConfigPtrType) ToCngwGatewayNodeConfigPtrOutput() CngwGatewayNodeConfigPtrOutput {
+	return i.ToCngwGatewayNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwGatewayNodeConfigPtrType) ToCngwGatewayNodeConfigPtrOutputWithContext(ctx context.Context) CngwGatewayNodeConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayNodeConfigPtrOutput)
+}
+
+type CngwGatewayNodeConfigOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayNodeConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayNodeConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayNodeConfigOutput) ToCngwGatewayNodeConfigOutput() CngwGatewayNodeConfigOutput {
+	return o
+}
+
+func (o CngwGatewayNodeConfigOutput) ToCngwGatewayNodeConfigOutputWithContext(ctx context.Context) CngwGatewayNodeConfigOutput {
+	return o
+}
+
+func (o CngwGatewayNodeConfigOutput) ToCngwGatewayNodeConfigPtrOutput() CngwGatewayNodeConfigPtrOutput {
+	return o.ToCngwGatewayNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CngwGatewayNodeConfigOutput) ToCngwGatewayNodeConfigPtrOutputWithContext(ctx context.Context) CngwGatewayNodeConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwGatewayNodeConfig) *CngwGatewayNodeConfig {
+		return &v
+	}).(CngwGatewayNodeConfigPtrOutput)
+}
+
+// node number, 2-50.
+func (o CngwGatewayNodeConfigOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwGatewayNodeConfig) int { return v.Number }).(pulumi.IntOutput)
+}
+
+// specification, 1c2g|2c4g|4c8g|8c16g.
+func (o CngwGatewayNodeConfigOutput) Specification() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwGatewayNodeConfig) string { return v.Specification }).(pulumi.StringOutput)
+}
+
+type CngwGatewayNodeConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayNodeConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayNodeConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayNodeConfigPtrOutput) ToCngwGatewayNodeConfigPtrOutput() CngwGatewayNodeConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayNodeConfigPtrOutput) ToCngwGatewayNodeConfigPtrOutputWithContext(ctx context.Context) CngwGatewayNodeConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayNodeConfigPtrOutput) Elem() CngwGatewayNodeConfigOutput {
+	return o.ApplyT(func(v *CngwGatewayNodeConfig) CngwGatewayNodeConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CngwGatewayNodeConfig
+		return ret
+	}).(CngwGatewayNodeConfigOutput)
+}
+
+// node number, 2-50.
+func (o CngwGatewayNodeConfigPtrOutput) Number() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayNodeConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Number
+	}).(pulumi.IntPtrOutput)
+}
+
+// specification, 1c2g|2c4g|4c8g|8c16g.
+func (o CngwGatewayNodeConfigPtrOutput) Specification() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayNodeConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Specification
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwGatewayVpcConfig struct {
+	// subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+	SubnetId *string `pulumi:"subnetId"`
+	// VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// CngwGatewayVpcConfigInput is an input type that accepts CngwGatewayVpcConfigArgs and CngwGatewayVpcConfigOutput values.
+// You can construct a concrete instance of `CngwGatewayVpcConfigInput` via:
+//
+//	CngwGatewayVpcConfigArgs{...}
+type CngwGatewayVpcConfigInput interface {
+	pulumi.Input
+
+	ToCngwGatewayVpcConfigOutput() CngwGatewayVpcConfigOutput
+	ToCngwGatewayVpcConfigOutputWithContext(context.Context) CngwGatewayVpcConfigOutput
+}
+
+type CngwGatewayVpcConfigArgs struct {
+	// subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
+	// VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (CngwGatewayVpcConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayVpcConfig)(nil)).Elem()
+}
+
+func (i CngwGatewayVpcConfigArgs) ToCngwGatewayVpcConfigOutput() CngwGatewayVpcConfigOutput {
+	return i.ToCngwGatewayVpcConfigOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayVpcConfigArgs) ToCngwGatewayVpcConfigOutputWithContext(ctx context.Context) CngwGatewayVpcConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayVpcConfigOutput)
+}
+
+func (i CngwGatewayVpcConfigArgs) ToCngwGatewayVpcConfigPtrOutput() CngwGatewayVpcConfigPtrOutput {
+	return i.ToCngwGatewayVpcConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CngwGatewayVpcConfigArgs) ToCngwGatewayVpcConfigPtrOutputWithContext(ctx context.Context) CngwGatewayVpcConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayVpcConfigOutput).ToCngwGatewayVpcConfigPtrOutputWithContext(ctx)
+}
+
+// CngwGatewayVpcConfigPtrInput is an input type that accepts CngwGatewayVpcConfigArgs, CngwGatewayVpcConfigPtr and CngwGatewayVpcConfigPtrOutput values.
+// You can construct a concrete instance of `CngwGatewayVpcConfigPtrInput` via:
+//
+//	        CngwGatewayVpcConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CngwGatewayVpcConfigPtrInput interface {
+	pulumi.Input
+
+	ToCngwGatewayVpcConfigPtrOutput() CngwGatewayVpcConfigPtrOutput
+	ToCngwGatewayVpcConfigPtrOutputWithContext(context.Context) CngwGatewayVpcConfigPtrOutput
+}
+
+type cngwGatewayVpcConfigPtrType CngwGatewayVpcConfigArgs
+
+func CngwGatewayVpcConfigPtr(v *CngwGatewayVpcConfigArgs) CngwGatewayVpcConfigPtrInput {
+	return (*cngwGatewayVpcConfigPtrType)(v)
+}
+
+func (*cngwGatewayVpcConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayVpcConfig)(nil)).Elem()
+}
+
+func (i *cngwGatewayVpcConfigPtrType) ToCngwGatewayVpcConfigPtrOutput() CngwGatewayVpcConfigPtrOutput {
+	return i.ToCngwGatewayVpcConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwGatewayVpcConfigPtrType) ToCngwGatewayVpcConfigPtrOutputWithContext(ctx context.Context) CngwGatewayVpcConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGatewayVpcConfigPtrOutput)
+}
+
+type CngwGatewayVpcConfigOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayVpcConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGatewayVpcConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayVpcConfigOutput) ToCngwGatewayVpcConfigOutput() CngwGatewayVpcConfigOutput {
+	return o
+}
+
+func (o CngwGatewayVpcConfigOutput) ToCngwGatewayVpcConfigOutputWithContext(ctx context.Context) CngwGatewayVpcConfigOutput {
+	return o
+}
+
+func (o CngwGatewayVpcConfigOutput) ToCngwGatewayVpcConfigPtrOutput() CngwGatewayVpcConfigPtrOutput {
+	return o.ToCngwGatewayVpcConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CngwGatewayVpcConfigOutput) ToCngwGatewayVpcConfigPtrOutputWithContext(ctx context.Context) CngwGatewayVpcConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwGatewayVpcConfig) *CngwGatewayVpcConfig {
+		return &v
+	}).(CngwGatewayVpcConfigPtrOutput)
+}
+
+// subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+func (o CngwGatewayVpcConfigOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayVpcConfig) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+func (o CngwGatewayVpcConfigOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGatewayVpcConfig) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type CngwGatewayVpcConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwGatewayVpcConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGatewayVpcConfig)(nil)).Elem()
+}
+
+func (o CngwGatewayVpcConfigPtrOutput) ToCngwGatewayVpcConfigPtrOutput() CngwGatewayVpcConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayVpcConfigPtrOutput) ToCngwGatewayVpcConfigPtrOutputWithContext(ctx context.Context) CngwGatewayVpcConfigPtrOutput {
+	return o
+}
+
+func (o CngwGatewayVpcConfigPtrOutput) Elem() CngwGatewayVpcConfigOutput {
+	return o.ApplyT(func(v *CngwGatewayVpcConfig) CngwGatewayVpcConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CngwGatewayVpcConfig
+		return ret
+	}).(CngwGatewayVpcConfigOutput)
+}
+
+// subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+func (o CngwGatewayVpcConfigPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayVpcConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+func (o CngwGatewayVpcConfigPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGatewayVpcConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwGroupInternetConfig struct {
+	// description of clb.
+	Description *string `pulumi:"description"`
+	// internet type. Reference value:- IPV4 (default value)- IPV6.
+	InternetAddressVersion *string `pulumi:"internetAddressVersion"`
+	// public network bandwidth.
+	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+	InternetPayMode *string `pulumi:"internetPayMode"`
+	// primary availability zone.
+	MasterZoneId *string `pulumi:"masterZoneId"`
+	// Whether load balancing has multiple availability zones.
+	MultiZoneFlag *bool `pulumi:"multiZoneFlag"`
+	// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+	SlaType *string `pulumi:"slaType"`
+	// alternate availability zone.
+	SlaveZoneId *string `pulumi:"slaveZoneId"`
+}
+
+// CngwGroupInternetConfigInput is an input type that accepts CngwGroupInternetConfigArgs and CngwGroupInternetConfigOutput values.
+// You can construct a concrete instance of `CngwGroupInternetConfigInput` via:
+//
+//	CngwGroupInternetConfigArgs{...}
+type CngwGroupInternetConfigInput interface {
+	pulumi.Input
+
+	ToCngwGroupInternetConfigOutput() CngwGroupInternetConfigOutput
+	ToCngwGroupInternetConfigOutputWithContext(context.Context) CngwGroupInternetConfigOutput
+}
+
+type CngwGroupInternetConfigArgs struct {
+	// description of clb.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// internet type. Reference value:- IPV4 (default value)- IPV6.
+	InternetAddressVersion pulumi.StringPtrInput `pulumi:"internetAddressVersion"`
+	// public network bandwidth.
+	InternetMaxBandwidthOut pulumi.IntPtrInput `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+	InternetPayMode pulumi.StringPtrInput `pulumi:"internetPayMode"`
+	// primary availability zone.
+	MasterZoneId pulumi.StringPtrInput `pulumi:"masterZoneId"`
+	// Whether load balancing has multiple availability zones.
+	MultiZoneFlag pulumi.BoolPtrInput `pulumi:"multiZoneFlag"`
+	// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+	SlaType pulumi.StringPtrInput `pulumi:"slaType"`
+	// alternate availability zone.
+	SlaveZoneId pulumi.StringPtrInput `pulumi:"slaveZoneId"`
+}
+
+func (CngwGroupInternetConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGroupInternetConfig)(nil)).Elem()
+}
+
+func (i CngwGroupInternetConfigArgs) ToCngwGroupInternetConfigOutput() CngwGroupInternetConfigOutput {
+	return i.ToCngwGroupInternetConfigOutputWithContext(context.Background())
+}
+
+func (i CngwGroupInternetConfigArgs) ToCngwGroupInternetConfigOutputWithContext(ctx context.Context) CngwGroupInternetConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupInternetConfigOutput)
+}
+
+func (i CngwGroupInternetConfigArgs) ToCngwGroupInternetConfigPtrOutput() CngwGroupInternetConfigPtrOutput {
+	return i.ToCngwGroupInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CngwGroupInternetConfigArgs) ToCngwGroupInternetConfigPtrOutputWithContext(ctx context.Context) CngwGroupInternetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupInternetConfigOutput).ToCngwGroupInternetConfigPtrOutputWithContext(ctx)
+}
+
+// CngwGroupInternetConfigPtrInput is an input type that accepts CngwGroupInternetConfigArgs, CngwGroupInternetConfigPtr and CngwGroupInternetConfigPtrOutput values.
+// You can construct a concrete instance of `CngwGroupInternetConfigPtrInput` via:
+//
+//	        CngwGroupInternetConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CngwGroupInternetConfigPtrInput interface {
+	pulumi.Input
+
+	ToCngwGroupInternetConfigPtrOutput() CngwGroupInternetConfigPtrOutput
+	ToCngwGroupInternetConfigPtrOutputWithContext(context.Context) CngwGroupInternetConfigPtrOutput
+}
+
+type cngwGroupInternetConfigPtrType CngwGroupInternetConfigArgs
+
+func CngwGroupInternetConfigPtr(v *CngwGroupInternetConfigArgs) CngwGroupInternetConfigPtrInput {
+	return (*cngwGroupInternetConfigPtrType)(v)
+}
+
+func (*cngwGroupInternetConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGroupInternetConfig)(nil)).Elem()
+}
+
+func (i *cngwGroupInternetConfigPtrType) ToCngwGroupInternetConfigPtrOutput() CngwGroupInternetConfigPtrOutput {
+	return i.ToCngwGroupInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwGroupInternetConfigPtrType) ToCngwGroupInternetConfigPtrOutputWithContext(ctx context.Context) CngwGroupInternetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupInternetConfigPtrOutput)
+}
+
+type CngwGroupInternetConfigOutput struct{ *pulumi.OutputState }
+
+func (CngwGroupInternetConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGroupInternetConfig)(nil)).Elem()
+}
+
+func (o CngwGroupInternetConfigOutput) ToCngwGroupInternetConfigOutput() CngwGroupInternetConfigOutput {
+	return o
+}
+
+func (o CngwGroupInternetConfigOutput) ToCngwGroupInternetConfigOutputWithContext(ctx context.Context) CngwGroupInternetConfigOutput {
+	return o
+}
+
+func (o CngwGroupInternetConfigOutput) ToCngwGroupInternetConfigPtrOutput() CngwGroupInternetConfigPtrOutput {
+	return o.ToCngwGroupInternetConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CngwGroupInternetConfigOutput) ToCngwGroupInternetConfigPtrOutputWithContext(ctx context.Context) CngwGroupInternetConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwGroupInternetConfig) *CngwGroupInternetConfig {
+		return &v
+	}).(CngwGroupInternetConfigPtrOutput)
+}
+
+// description of clb.
+func (o CngwGroupInternetConfigOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// internet type. Reference value:- IPV4 (default value)- IPV6.
+func (o CngwGroupInternetConfigOutput) InternetAddressVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.InternetAddressVersion }).(pulumi.StringPtrOutput)
+}
+
+// public network bandwidth.
+func (o CngwGroupInternetConfigOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *int { return v.InternetMaxBandwidthOut }).(pulumi.IntPtrOutput)
+}
+
+// trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+func (o CngwGroupInternetConfigOutput) InternetPayMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.InternetPayMode }).(pulumi.StringPtrOutput)
+}
+
+// primary availability zone.
+func (o CngwGroupInternetConfigOutput) MasterZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.MasterZoneId }).(pulumi.StringPtrOutput)
+}
+
+// Whether load balancing has multiple availability zones.
+func (o CngwGroupInternetConfigOutput) MultiZoneFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *bool { return v.MultiZoneFlag }).(pulumi.BoolPtrOutput)
+}
+
+// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+func (o CngwGroupInternetConfigOutput) SlaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.SlaType }).(pulumi.StringPtrOutput)
+}
+
+// alternate availability zone.
+func (o CngwGroupInternetConfigOutput) SlaveZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CngwGroupInternetConfig) *string { return v.SlaveZoneId }).(pulumi.StringPtrOutput)
+}
+
+type CngwGroupInternetConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwGroupInternetConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGroupInternetConfig)(nil)).Elem()
+}
+
+func (o CngwGroupInternetConfigPtrOutput) ToCngwGroupInternetConfigPtrOutput() CngwGroupInternetConfigPtrOutput {
+	return o
+}
+
+func (o CngwGroupInternetConfigPtrOutput) ToCngwGroupInternetConfigPtrOutputWithContext(ctx context.Context) CngwGroupInternetConfigPtrOutput {
+	return o
+}
+
+func (o CngwGroupInternetConfigPtrOutput) Elem() CngwGroupInternetConfigOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) CngwGroupInternetConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CngwGroupInternetConfig
+		return ret
+	}).(CngwGroupInternetConfigOutput)
+}
+
+// description of clb.
+func (o CngwGroupInternetConfigPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// internet type. Reference value:- IPV4 (default value)- IPV6.
+func (o CngwGroupInternetConfigPtrOutput) InternetAddressVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InternetAddressVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// public network bandwidth.
+func (o CngwGroupInternetConfigPtrOutput) InternetMaxBandwidthOut() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InternetMaxBandwidthOut
+	}).(pulumi.IntPtrOutput)
+}
+
+// trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+func (o CngwGroupInternetConfigPtrOutput) InternetPayMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InternetPayMode
+	}).(pulumi.StringPtrOutput)
+}
+
+// primary availability zone.
+func (o CngwGroupInternetConfigPtrOutput) MasterZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MasterZoneId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether load balancing has multiple availability zones.
+func (o CngwGroupInternetConfigPtrOutput) MultiZoneFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MultiZoneFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+func (o CngwGroupInternetConfigPtrOutput) SlaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SlaType
+	}).(pulumi.StringPtrOutput)
+}
+
+// alternate availability zone.
+func (o CngwGroupInternetConfigPtrOutput) SlaveZoneId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupInternetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SlaveZoneId
+	}).(pulumi.StringPtrOutput)
+}
+
+type CngwGroupNodeConfig struct {
+	// group node number, 2-50.
+	Number int `pulumi:"number"`
+	// group specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification string `pulumi:"specification"`
+}
+
+// CngwGroupNodeConfigInput is an input type that accepts CngwGroupNodeConfigArgs and CngwGroupNodeConfigOutput values.
+// You can construct a concrete instance of `CngwGroupNodeConfigInput` via:
+//
+//	CngwGroupNodeConfigArgs{...}
+type CngwGroupNodeConfigInput interface {
+	pulumi.Input
+
+	ToCngwGroupNodeConfigOutput() CngwGroupNodeConfigOutput
+	ToCngwGroupNodeConfigOutputWithContext(context.Context) CngwGroupNodeConfigOutput
+}
+
+type CngwGroupNodeConfigArgs struct {
+	// group node number, 2-50.
+	Number pulumi.IntInput `pulumi:"number"`
+	// group specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification pulumi.StringInput `pulumi:"specification"`
+}
+
+func (CngwGroupNodeConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGroupNodeConfig)(nil)).Elem()
+}
+
+func (i CngwGroupNodeConfigArgs) ToCngwGroupNodeConfigOutput() CngwGroupNodeConfigOutput {
+	return i.ToCngwGroupNodeConfigOutputWithContext(context.Background())
+}
+
+func (i CngwGroupNodeConfigArgs) ToCngwGroupNodeConfigOutputWithContext(ctx context.Context) CngwGroupNodeConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupNodeConfigOutput)
+}
+
+func (i CngwGroupNodeConfigArgs) ToCngwGroupNodeConfigPtrOutput() CngwGroupNodeConfigPtrOutput {
+	return i.ToCngwGroupNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CngwGroupNodeConfigArgs) ToCngwGroupNodeConfigPtrOutputWithContext(ctx context.Context) CngwGroupNodeConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupNodeConfigOutput).ToCngwGroupNodeConfigPtrOutputWithContext(ctx)
+}
+
+// CngwGroupNodeConfigPtrInput is an input type that accepts CngwGroupNodeConfigArgs, CngwGroupNodeConfigPtr and CngwGroupNodeConfigPtrOutput values.
+// You can construct a concrete instance of `CngwGroupNodeConfigPtrInput` via:
+//
+//	        CngwGroupNodeConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CngwGroupNodeConfigPtrInput interface {
+	pulumi.Input
+
+	ToCngwGroupNodeConfigPtrOutput() CngwGroupNodeConfigPtrOutput
+	ToCngwGroupNodeConfigPtrOutputWithContext(context.Context) CngwGroupNodeConfigPtrOutput
+}
+
+type cngwGroupNodeConfigPtrType CngwGroupNodeConfigArgs
+
+func CngwGroupNodeConfigPtr(v *CngwGroupNodeConfigArgs) CngwGroupNodeConfigPtrInput {
+	return (*cngwGroupNodeConfigPtrType)(v)
+}
+
+func (*cngwGroupNodeConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGroupNodeConfig)(nil)).Elem()
+}
+
+func (i *cngwGroupNodeConfigPtrType) ToCngwGroupNodeConfigPtrOutput() CngwGroupNodeConfigPtrOutput {
+	return i.ToCngwGroupNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *cngwGroupNodeConfigPtrType) ToCngwGroupNodeConfigPtrOutputWithContext(ctx context.Context) CngwGroupNodeConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CngwGroupNodeConfigPtrOutput)
+}
+
+type CngwGroupNodeConfigOutput struct{ *pulumi.OutputState }
+
+func (CngwGroupNodeConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CngwGroupNodeConfig)(nil)).Elem()
+}
+
+func (o CngwGroupNodeConfigOutput) ToCngwGroupNodeConfigOutput() CngwGroupNodeConfigOutput {
+	return o
+}
+
+func (o CngwGroupNodeConfigOutput) ToCngwGroupNodeConfigOutputWithContext(ctx context.Context) CngwGroupNodeConfigOutput {
+	return o
+}
+
+func (o CngwGroupNodeConfigOutput) ToCngwGroupNodeConfigPtrOutput() CngwGroupNodeConfigPtrOutput {
+	return o.ToCngwGroupNodeConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CngwGroupNodeConfigOutput) ToCngwGroupNodeConfigPtrOutputWithContext(ctx context.Context) CngwGroupNodeConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CngwGroupNodeConfig) *CngwGroupNodeConfig {
+		return &v
+	}).(CngwGroupNodeConfigPtrOutput)
+}
+
+// group node number, 2-50.
+func (o CngwGroupNodeConfigOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v CngwGroupNodeConfig) int { return v.Number }).(pulumi.IntOutput)
+}
+
+// group specification, 1c2g|2c4g|4c8g|8c16g.
+func (o CngwGroupNodeConfigOutput) Specification() pulumi.StringOutput {
+	return o.ApplyT(func(v CngwGroupNodeConfig) string { return v.Specification }).(pulumi.StringOutput)
+}
+
+type CngwGroupNodeConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CngwGroupNodeConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CngwGroupNodeConfig)(nil)).Elem()
+}
+
+func (o CngwGroupNodeConfigPtrOutput) ToCngwGroupNodeConfigPtrOutput() CngwGroupNodeConfigPtrOutput {
+	return o
+}
+
+func (o CngwGroupNodeConfigPtrOutput) ToCngwGroupNodeConfigPtrOutputWithContext(ctx context.Context) CngwGroupNodeConfigPtrOutput {
+	return o
+}
+
+func (o CngwGroupNodeConfigPtrOutput) Elem() CngwGroupNodeConfigOutput {
+	return o.ApplyT(func(v *CngwGroupNodeConfig) CngwGroupNodeConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CngwGroupNodeConfig
+		return ret
+	}).(CngwGroupNodeConfigOutput)
+}
+
+// group node number, 2-50.
+func (o CngwGroupNodeConfigPtrOutput) Number() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CngwGroupNodeConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Number
+	}).(pulumi.IntPtrOutput)
+}
+
+// group specification, 1c2g|2c4g|4c8g|8c16g.
+func (o CngwGroupNodeConfigPtrOutput) Specification() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CngwGroupNodeConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Specification
+	}).(pulumi.StringPtrOutput)
+}
+
 type CngwRouteHeader struct {
-	Key   *string `pulumi:"key"`
+	// key of header.
+	Key *string `pulumi:"key"`
+	// value of header.
 	Value *string `pulumi:"value"`
 }
 
 // CngwRouteHeaderInput is an input type that accepts CngwRouteHeaderArgs and CngwRouteHeaderOutput values.
 // You can construct a concrete instance of `CngwRouteHeaderInput` via:
 //
-//          CngwRouteHeaderArgs{...}
+//	CngwRouteHeaderArgs{...}
 type CngwRouteHeaderInput interface {
 	pulumi.Input
 
@@ -533,7 +1667,9 @@ type CngwRouteHeaderInput interface {
 }
 
 type CngwRouteHeaderArgs struct {
-	Key   pulumi.StringPtrInput `pulumi:"key"`
+	// key of header.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// value of header.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
@@ -552,7 +1688,7 @@ func (i CngwRouteHeaderArgs) ToCngwRouteHeaderOutputWithContext(ctx context.Cont
 // CngwRouteHeaderArrayInput is an input type that accepts CngwRouteHeaderArray and CngwRouteHeaderArrayOutput values.
 // You can construct a concrete instance of `CngwRouteHeaderArrayInput` via:
 //
-//          CngwRouteHeaderArray{ CngwRouteHeaderArgs{...} }
+//	CngwRouteHeaderArray{ CngwRouteHeaderArgs{...} }
 type CngwRouteHeaderArrayInput interface {
 	pulumi.Input
 
@@ -588,10 +1724,12 @@ func (o CngwRouteHeaderOutput) ToCngwRouteHeaderOutputWithContext(ctx context.Co
 	return o
 }
 
+// key of header.
 func (o CngwRouteHeaderOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// value of header.
 func (o CngwRouteHeaderOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -617,25 +1755,38 @@ func (o CngwRouteHeaderArrayOutput) Index(i pulumi.IntInput) CngwRouteHeaderOutp
 }
 
 type CngwRouteRateLimitLimitDetail struct {
-	Enabled              bool                                            `pulumi:"enabled"`
-	ExternalRedis        *CngwRouteRateLimitLimitDetailExternalRedis     `pulumi:"externalRedis"`
-	Header               *string                                         `pulumi:"header"`
-	HideClientHeaders    bool                                            `pulumi:"hideClientHeaders"`
-	IsDelay              bool                                            `pulumi:"isDelay"`
-	LimitBy              string                                          `pulumi:"limitBy"`
-	LineUpTime           *int                                            `pulumi:"lineUpTime"`
-	Path                 *string                                         `pulumi:"path"`
-	Policy               *string                                         `pulumi:"policy"`
-	QpsThresholds        []CngwRouteRateLimitLimitDetailQpsThreshold     `pulumi:"qpsThresholds"`
-	RateLimitResponse    *CngwRouteRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
-	RateLimitResponseUrl *string                                         `pulumi:"rateLimitResponseUrl"`
-	ResponseType         string                                          `pulumi:"responseType"`
+	// status of service rate limit.
+	Enabled bool `pulumi:"enabled"`
+	// external redis information, maybe null.
+	ExternalRedis *CngwRouteRateLimitLimitDetailExternalRedis `pulumi:"externalRedis"`
+	// request headers that require rate limit.
+	Header *string `pulumi:"header"`
+	// whether to hide the headers of client.
+	HideClientHeaders bool `pulumi:"hideClientHeaders"`
+	// whether to enable request queuing.
+	IsDelay bool `pulumi:"isDelay"`
+	// basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+	LimitBy string `pulumi:"limitBy"`
+	// queue time.
+	LineUpTime *int `pulumi:"lineUpTime"`
+	// request paths that require rate limit.
+	Path *string `pulumi:"path"`
+	// counter policy.Reference value:`local`,`redis`,`externalRedis`.
+	Policy *string `pulumi:"policy"`
+	// qps threshold.
+	QpsThresholds []CngwRouteRateLimitLimitDetailQpsThreshold `pulumi:"qpsThresholds"`
+	// response configuration, the response strategy is text, maybe null.
+	RateLimitResponse *CngwRouteRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
+	// request forwarding address, maybe null.
+	RateLimitResponseUrl *string `pulumi:"rateLimitResponseUrl"`
+	// response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+	ResponseType string `pulumi:"responseType"`
 }
 
 // CngwRouteRateLimitLimitDetailInput is an input type that accepts CngwRouteRateLimitLimitDetailArgs and CngwRouteRateLimitLimitDetailOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailInput` via:
 //
-//          CngwRouteRateLimitLimitDetailArgs{...}
+//	CngwRouteRateLimitLimitDetailArgs{...}
 type CngwRouteRateLimitLimitDetailInput interface {
 	pulumi.Input
 
@@ -644,19 +1795,32 @@ type CngwRouteRateLimitLimitDetailInput interface {
 }
 
 type CngwRouteRateLimitLimitDetailArgs struct {
-	Enabled              pulumi.BoolInput                                       `pulumi:"enabled"`
-	ExternalRedis        CngwRouteRateLimitLimitDetailExternalRedisPtrInput     `pulumi:"externalRedis"`
-	Header               pulumi.StringPtrInput                                  `pulumi:"header"`
-	HideClientHeaders    pulumi.BoolInput                                       `pulumi:"hideClientHeaders"`
-	IsDelay              pulumi.BoolInput                                       `pulumi:"isDelay"`
-	LimitBy              pulumi.StringInput                                     `pulumi:"limitBy"`
-	LineUpTime           pulumi.IntPtrInput                                     `pulumi:"lineUpTime"`
-	Path                 pulumi.StringPtrInput                                  `pulumi:"path"`
-	Policy               pulumi.StringPtrInput                                  `pulumi:"policy"`
-	QpsThresholds        CngwRouteRateLimitLimitDetailQpsThresholdArrayInput    `pulumi:"qpsThresholds"`
-	RateLimitResponse    CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
-	RateLimitResponseUrl pulumi.StringPtrInput                                  `pulumi:"rateLimitResponseUrl"`
-	ResponseType         pulumi.StringInput                                     `pulumi:"responseType"`
+	// status of service rate limit.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// external redis information, maybe null.
+	ExternalRedis CngwRouteRateLimitLimitDetailExternalRedisPtrInput `pulumi:"externalRedis"`
+	// request headers that require rate limit.
+	Header pulumi.StringPtrInput `pulumi:"header"`
+	// whether to hide the headers of client.
+	HideClientHeaders pulumi.BoolInput `pulumi:"hideClientHeaders"`
+	// whether to enable request queuing.
+	IsDelay pulumi.BoolInput `pulumi:"isDelay"`
+	// basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+	LimitBy pulumi.StringInput `pulumi:"limitBy"`
+	// queue time.
+	LineUpTime pulumi.IntPtrInput `pulumi:"lineUpTime"`
+	// request paths that require rate limit.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// counter policy.Reference value:`local`,`redis`,`externalRedis`.
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
+	// qps threshold.
+	QpsThresholds CngwRouteRateLimitLimitDetailQpsThresholdArrayInput `pulumi:"qpsThresholds"`
+	// response configuration, the response strategy is text, maybe null.
+	RateLimitResponse CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
+	// request forwarding address, maybe null.
+	RateLimitResponseUrl pulumi.StringPtrInput `pulumi:"rateLimitResponseUrl"`
+	// response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+	ResponseType pulumi.StringInput `pulumi:"responseType"`
 }
 
 func (CngwRouteRateLimitLimitDetailArgs) ElementType() reflect.Type {
@@ -682,11 +1846,11 @@ func (i CngwRouteRateLimitLimitDetailArgs) ToCngwRouteRateLimitLimitDetailPtrOut
 // CngwRouteRateLimitLimitDetailPtrInput is an input type that accepts CngwRouteRateLimitLimitDetailArgs, CngwRouteRateLimitLimitDetailPtr and CngwRouteRateLimitLimitDetailPtrOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailPtrInput` via:
 //
-//          CngwRouteRateLimitLimitDetailArgs{...}
+//	        CngwRouteRateLimitLimitDetailArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwRouteRateLimitLimitDetailPtrInput interface {
 	pulumi.Input
 
@@ -736,60 +1900,73 @@ func (o CngwRouteRateLimitLimitDetailOutput) ToCngwRouteRateLimitLimitDetailPtrO
 	}).(CngwRouteRateLimitLimitDetailPtrOutput)
 }
 
+// status of service rate limit.
 func (o CngwRouteRateLimitLimitDetailOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
+// external redis information, maybe null.
 func (o CngwRouteRateLimitLimitDetailOutput) ExternalRedis() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailExternalRedis {
 		return v.ExternalRedis
 	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// request headers that require rate limit.
 func (o CngwRouteRateLimitLimitDetailOutput) Header() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Header }).(pulumi.StringPtrOutput)
 }
 
+// whether to hide the headers of client.
 func (o CngwRouteRateLimitLimitDetailOutput) HideClientHeaders() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.HideClientHeaders }).(pulumi.BoolOutput)
 }
 
+// whether to enable request queuing.
 func (o CngwRouteRateLimitLimitDetailOutput) IsDelay() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) bool { return v.IsDelay }).(pulumi.BoolOutput)
 }
 
+// basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
 func (o CngwRouteRateLimitLimitDetailOutput) LimitBy() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) string { return v.LimitBy }).(pulumi.StringOutput)
 }
 
+// queue time.
 func (o CngwRouteRateLimitLimitDetailOutput) LineUpTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *int { return v.LineUpTime }).(pulumi.IntPtrOutput)
 }
 
+// request paths that require rate limit.
 func (o CngwRouteRateLimitLimitDetailOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
+// counter policy.Reference value:`local`,`redis`,`externalRedis`.
 func (o CngwRouteRateLimitLimitDetailOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
+// qps threshold.
 func (o CngwRouteRateLimitLimitDetailOutput) QpsThresholds() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) []CngwRouteRateLimitLimitDetailQpsThreshold {
 		return v.QpsThresholds
 	}).(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput)
 }
 
+// response configuration, the response strategy is text, maybe null.
 func (o CngwRouteRateLimitLimitDetailOutput) RateLimitResponse() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailRateLimitResponse {
 		return v.RateLimitResponse
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// request forwarding address, maybe null.
 func (o CngwRouteRateLimitLimitDetailOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) *string { return v.RateLimitResponseUrl }).(pulumi.StringPtrOutput)
 }
 
+// response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
 func (o CngwRouteRateLimitLimitDetailOutput) ResponseType() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetail) string { return v.ResponseType }).(pulumi.StringOutput)
 }
@@ -818,6 +1995,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) Elem() CngwRouteRateLimitLimitDe
 	}).(CngwRouteRateLimitLimitDetailOutput)
 }
 
+// status of service rate limit.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -827,6 +2005,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// external redis information, maybe null.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) ExternalRedis() CngwRouteRateLimitLimitDetailExternalRedisPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailExternalRedis {
 		if v == nil {
@@ -836,6 +2015,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) ExternalRedis() CngwRouteRateLim
 	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// request headers that require rate limit.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -845,6 +2025,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// whether to hide the headers of client.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -854,6 +2035,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.BoolP
 	}).(pulumi.BoolPtrOutput)
 }
 
+// whether to enable request queuing.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -863,6 +2045,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -872,6 +2055,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// queue time.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *int {
 		if v == nil {
@@ -881,6 +2065,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutput
 	}).(pulumi.IntPtrOutput)
 }
 
+// request paths that require rate limit.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -890,6 +2075,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// counter policy.Reference value:`local`,`redis`,`externalRedis`.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -899,6 +2085,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// qps threshold.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) QpsThresholds() CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) []CngwRouteRateLimitLimitDetailQpsThreshold {
 		if v == nil {
@@ -908,6 +2095,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) QpsThresholds() CngwRouteRateLim
 	}).(CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput)
 }
 
+// response configuration, the response strategy is text, maybe null.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *CngwRouteRateLimitLimitDetailRateLimitResponse {
 		if v == nil {
@@ -917,6 +2105,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwRouteRat
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// request forwarding address, maybe null.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -926,6 +2115,7 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
 func (o CngwRouteRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetail) *string {
 		if v == nil {
@@ -936,16 +2126,20 @@ func (o CngwRouteRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPtrO
 }
 
 type CngwRouteRateLimitLimitDetailExternalRedis struct {
-	RedisHost     string `pulumi:"redisHost"`
+	// redis ip, maybe null.
+	RedisHost string `pulumi:"redisHost"`
+	// redis password, maybe null.
 	RedisPassword string `pulumi:"redisPassword"`
-	RedisPort     int    `pulumi:"redisPort"`
-	RedisTimeout  int    `pulumi:"redisTimeout"`
+	// redis port, maybe null.
+	RedisPort int `pulumi:"redisPort"`
+	// redis timeout, unit: `ms`, maybe null.
+	RedisTimeout int `pulumi:"redisTimeout"`
 }
 
 // CngwRouteRateLimitLimitDetailExternalRedisInput is an input type that accepts CngwRouteRateLimitLimitDetailExternalRedisArgs and CngwRouteRateLimitLimitDetailExternalRedisOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailExternalRedisInput` via:
 //
-//          CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
+//	CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
 type CngwRouteRateLimitLimitDetailExternalRedisInput interface {
 	pulumi.Input
 
@@ -954,10 +2148,14 @@ type CngwRouteRateLimitLimitDetailExternalRedisInput interface {
 }
 
 type CngwRouteRateLimitLimitDetailExternalRedisArgs struct {
-	RedisHost     pulumi.StringInput `pulumi:"redisHost"`
+	// redis ip, maybe null.
+	RedisHost pulumi.StringInput `pulumi:"redisHost"`
+	// redis password, maybe null.
 	RedisPassword pulumi.StringInput `pulumi:"redisPassword"`
-	RedisPort     pulumi.IntInput    `pulumi:"redisPort"`
-	RedisTimeout  pulumi.IntInput    `pulumi:"redisTimeout"`
+	// redis port, maybe null.
+	RedisPort pulumi.IntInput `pulumi:"redisPort"`
+	// redis timeout, unit: `ms`, maybe null.
+	RedisTimeout pulumi.IntInput `pulumi:"redisTimeout"`
 }
 
 func (CngwRouteRateLimitLimitDetailExternalRedisArgs) ElementType() reflect.Type {
@@ -983,11 +2181,11 @@ func (i CngwRouteRateLimitLimitDetailExternalRedisArgs) ToCngwRouteRateLimitLimi
 // CngwRouteRateLimitLimitDetailExternalRedisPtrInput is an input type that accepts CngwRouteRateLimitLimitDetailExternalRedisArgs, CngwRouteRateLimitLimitDetailExternalRedisPtr and CngwRouteRateLimitLimitDetailExternalRedisPtrOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailExternalRedisPtrInput` via:
 //
-//          CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
+//	        CngwRouteRateLimitLimitDetailExternalRedisArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwRouteRateLimitLimitDetailExternalRedisPtrInput interface {
 	pulumi.Input
 
@@ -1037,18 +2235,22 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) ToCngwRouteRateLimitLi
 	}).(CngwRouteRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// redis ip, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisHost() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) string { return v.RedisHost }).(pulumi.StringOutput)
 }
 
+// redis password, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisPassword() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) string { return v.RedisPassword }).(pulumi.StringOutput)
 }
 
+// redis port, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisPort() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) int { return v.RedisPort }).(pulumi.IntOutput)
 }
 
+// redis timeout, unit: `ms`, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisOutput) RedisTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailExternalRedis) int { return v.RedisTimeout }).(pulumi.IntOutput)
 }
@@ -1077,6 +2279,7 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) Elem() CngwRouteRat
 	}).(CngwRouteRateLimitLimitDetailExternalRedisOutput)
 }
 
+// redis ip, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *string {
 		if v == nil {
@@ -1086,6 +2289,7 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// redis password, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *string {
 		if v == nil {
@@ -1095,6 +2299,7 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() pul
 	}).(pulumi.StringPtrOutput)
 }
 
+// redis port, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *int {
 		if v == nil {
@@ -1104,6 +2309,7 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
+// redis timeout, unit: `ms`, maybe null.
 func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailExternalRedis) *int {
 		if v == nil {
@@ -1114,14 +2320,16 @@ func (o CngwRouteRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pulu
 }
 
 type CngwRouteRateLimitLimitDetailQpsThreshold struct {
-	Max  int    `pulumi:"max"`
+	// the max threshold.
+	Max int `pulumi:"max"`
+	// qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
 	Unit string `pulumi:"unit"`
 }
 
 // CngwRouteRateLimitLimitDetailQpsThresholdInput is an input type that accepts CngwRouteRateLimitLimitDetailQpsThresholdArgs and CngwRouteRateLimitLimitDetailQpsThresholdOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailQpsThresholdInput` via:
 //
-//          CngwRouteRateLimitLimitDetailQpsThresholdArgs{...}
+//	CngwRouteRateLimitLimitDetailQpsThresholdArgs{...}
 type CngwRouteRateLimitLimitDetailQpsThresholdInput interface {
 	pulumi.Input
 
@@ -1130,7 +2338,9 @@ type CngwRouteRateLimitLimitDetailQpsThresholdInput interface {
 }
 
 type CngwRouteRateLimitLimitDetailQpsThresholdArgs struct {
-	Max  pulumi.IntInput    `pulumi:"max"`
+	// the max threshold.
+	Max pulumi.IntInput `pulumi:"max"`
+	// qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
 	Unit pulumi.StringInput `pulumi:"unit"`
 }
 
@@ -1149,7 +2359,7 @@ func (i CngwRouteRateLimitLimitDetailQpsThresholdArgs) ToCngwRouteRateLimitLimit
 // CngwRouteRateLimitLimitDetailQpsThresholdArrayInput is an input type that accepts CngwRouteRateLimitLimitDetailQpsThresholdArray and CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailQpsThresholdArrayInput` via:
 //
-//          CngwRouteRateLimitLimitDetailQpsThresholdArray{ CngwRouteRateLimitLimitDetailQpsThresholdArgs{...} }
+//	CngwRouteRateLimitLimitDetailQpsThresholdArray{ CngwRouteRateLimitLimitDetailQpsThresholdArgs{...} }
 type CngwRouteRateLimitLimitDetailQpsThresholdArrayInput interface {
 	pulumi.Input
 
@@ -1185,10 +2395,12 @@ func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) ToCngwRouteRateLimitLim
 	return o
 }
 
+// the max threshold.
 func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) Max() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailQpsThreshold) int { return v.Max }).(pulumi.IntOutput)
 }
 
+// qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
 func (o CngwRouteRateLimitLimitDetailQpsThresholdOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailQpsThreshold) string { return v.Unit }).(pulumi.StringOutput)
 }
@@ -1214,15 +2426,18 @@ func (o CngwRouteRateLimitLimitDetailQpsThresholdArrayOutput) Index(i pulumi.Int
 }
 
 type CngwRouteRateLimitLimitDetailRateLimitResponse struct {
-	Body       *string                                                `pulumi:"body"`
-	Headers    []CngwRouteRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
-	HttpStatus *int                                                   `pulumi:"httpStatus"`
+	// custom response body, maybe bull.
+	Body *string `pulumi:"body"`
+	// headrs.
+	Headers []CngwRouteRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
+	// http status code.
+	HttpStatus *int `pulumi:"httpStatus"`
 }
 
 // CngwRouteRateLimitLimitDetailRateLimitResponseInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseArgs and CngwRouteRateLimitLimitDetailRateLimitResponseOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseInput` via:
 //
-//          CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
+//	CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
 type CngwRouteRateLimitLimitDetailRateLimitResponseInput interface {
 	pulumi.Input
 
@@ -1231,9 +2446,12 @@ type CngwRouteRateLimitLimitDetailRateLimitResponseInput interface {
 }
 
 type CngwRouteRateLimitLimitDetailRateLimitResponseArgs struct {
-	Body       pulumi.StringPtrInput                                          `pulumi:"body"`
-	Headers    CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
-	HttpStatus pulumi.IntPtrInput                                             `pulumi:"httpStatus"`
+	// custom response body, maybe bull.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// headrs.
+	Headers CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
+	// http status code.
+	HttpStatus pulumi.IntPtrInput `pulumi:"httpStatus"`
 }
 
 func (CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ElementType() reflect.Type {
@@ -1259,11 +2477,11 @@ func (i CngwRouteRateLimitLimitDetailRateLimitResponseArgs) ToCngwRouteRateLimit
 // CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseArgs, CngwRouteRateLimitLimitDetailRateLimitResponsePtr and CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput` via:
 //
-//          CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
+//	        CngwRouteRateLimitLimitDetailRateLimitResponseArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwRouteRateLimitLimitDetailRateLimitResponsePtrInput interface {
 	pulumi.Input
 
@@ -1313,16 +2531,19 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) ToCngwRouteRateLim
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// custom response body, maybe bull.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) *string { return v.Body }).(pulumi.StringPtrOutput)
 }
 
+// headrs.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) Headers() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) []CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
 		return v.Headers
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
 }
 
+// http status code.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponseOutput) HttpStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponse) *int { return v.HttpStatus }).(pulumi.IntPtrOutput)
 }
@@ -1351,6 +2572,7 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Elem() CngwRout
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponseOutput)
 }
 
+// custom response body, maybe bull.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) *string {
 		if v == nil {
@@ -1360,6 +2582,7 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// headrs.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) []CngwRouteRateLimitLimitDetailRateLimitResponseHeader {
 		if v == nil {
@@ -1369,6 +2592,7 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() CngwR
 	}).(CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
 }
 
+// http status code.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwRouteRateLimitLimitDetailRateLimitResponse) *int {
 		if v == nil {
@@ -1379,14 +2603,16 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() pu
 }
 
 type CngwRouteRateLimitLimitDetailRateLimitResponseHeader struct {
-	Key   *string `pulumi:"key"`
+	// key of header.
+	Key *string `pulumi:"key"`
+	// value of header.
 	Value *string `pulumi:"value"`
 }
 
 // CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs and CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput` via:
 //
-//          CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
+//	CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
 type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput interface {
 	pulumi.Input
 
@@ -1395,7 +2621,9 @@ type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderInput interface {
 }
 
 type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs struct {
-	Key   pulumi.StringPtrInput `pulumi:"key"`
+	// key of header.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// value of header.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
@@ -1414,7 +2642,7 @@ func (i CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwRouteRat
 // CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput is an input type that accepts CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray and CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput values.
 // You can construct a concrete instance of `CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput` via:
 //
-//          CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
+//	CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
 type CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayInput interface {
 	pulumi.Input
 
@@ -1450,10 +2678,12 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwRouteR
 	return o
 }
 
+// key of header.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// value of header.
 func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwRouteRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -1479,25 +2709,38 @@ func (o CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArrayOutput) Index(i
 }
 
 type CngwServiceRateLimitLimitDetail struct {
-	Enabled              bool                                              `pulumi:"enabled"`
-	ExternalRedis        *CngwServiceRateLimitLimitDetailExternalRedis     `pulumi:"externalRedis"`
-	Header               *string                                           `pulumi:"header"`
-	HideClientHeaders    bool                                              `pulumi:"hideClientHeaders"`
-	IsDelay              bool                                              `pulumi:"isDelay"`
-	LimitBy              string                                            `pulumi:"limitBy"`
-	LineUpTime           *int                                              `pulumi:"lineUpTime"`
-	Path                 *string                                           `pulumi:"path"`
-	Policy               *string                                           `pulumi:"policy"`
-	QpsThresholds        []CngwServiceRateLimitLimitDetailQpsThreshold     `pulumi:"qpsThresholds"`
-	RateLimitResponse    *CngwServiceRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
-	RateLimitResponseUrl *string                                           `pulumi:"rateLimitResponseUrl"`
-	ResponseType         string                                            `pulumi:"responseType"`
+	// status of service rate limit.
+	Enabled bool `pulumi:"enabled"`
+	// external redis information, maybe null.
+	ExternalRedis *CngwServiceRateLimitLimitDetailExternalRedis `pulumi:"externalRedis"`
+	// request headers that require rate limit.
+	Header *string `pulumi:"header"`
+	// whether to hide the headers of client.
+	HideClientHeaders bool `pulumi:"hideClientHeaders"`
+	// whether to enable request queuing.
+	IsDelay bool `pulumi:"isDelay"`
+	// basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+	LimitBy string `pulumi:"limitBy"`
+	// queue time.
+	LineUpTime *int `pulumi:"lineUpTime"`
+	// request paths that require rate limit.
+	Path *string `pulumi:"path"`
+	// counter policy.Reference value: `local`, `redis`, `externalRedis`.
+	Policy *string `pulumi:"policy"`
+	// qps threshold.
+	QpsThresholds []CngwServiceRateLimitLimitDetailQpsThreshold `pulumi:"qpsThresholds"`
+	// response configuration, the response strategy is text, maybe null.
+	RateLimitResponse *CngwServiceRateLimitLimitDetailRateLimitResponse `pulumi:"rateLimitResponse"`
+	// request forwarding address, maybe null.
+	RateLimitResponseUrl *string `pulumi:"rateLimitResponseUrl"`
+	// response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+	ResponseType string `pulumi:"responseType"`
 }
 
 // CngwServiceRateLimitLimitDetailInput is an input type that accepts CngwServiceRateLimitLimitDetailArgs and CngwServiceRateLimitLimitDetailOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailInput` via:
 //
-//          CngwServiceRateLimitLimitDetailArgs{...}
+//	CngwServiceRateLimitLimitDetailArgs{...}
 type CngwServiceRateLimitLimitDetailInput interface {
 	pulumi.Input
 
@@ -1506,19 +2749,32 @@ type CngwServiceRateLimitLimitDetailInput interface {
 }
 
 type CngwServiceRateLimitLimitDetailArgs struct {
-	Enabled              pulumi.BoolInput                                         `pulumi:"enabled"`
-	ExternalRedis        CngwServiceRateLimitLimitDetailExternalRedisPtrInput     `pulumi:"externalRedis"`
-	Header               pulumi.StringPtrInput                                    `pulumi:"header"`
-	HideClientHeaders    pulumi.BoolInput                                         `pulumi:"hideClientHeaders"`
-	IsDelay              pulumi.BoolInput                                         `pulumi:"isDelay"`
-	LimitBy              pulumi.StringInput                                       `pulumi:"limitBy"`
-	LineUpTime           pulumi.IntPtrInput                                       `pulumi:"lineUpTime"`
-	Path                 pulumi.StringPtrInput                                    `pulumi:"path"`
-	Policy               pulumi.StringPtrInput                                    `pulumi:"policy"`
-	QpsThresholds        CngwServiceRateLimitLimitDetailQpsThresholdArrayInput    `pulumi:"qpsThresholds"`
-	RateLimitResponse    CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
-	RateLimitResponseUrl pulumi.StringPtrInput                                    `pulumi:"rateLimitResponseUrl"`
-	ResponseType         pulumi.StringInput                                       `pulumi:"responseType"`
+	// status of service rate limit.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// external redis information, maybe null.
+	ExternalRedis CngwServiceRateLimitLimitDetailExternalRedisPtrInput `pulumi:"externalRedis"`
+	// request headers that require rate limit.
+	Header pulumi.StringPtrInput `pulumi:"header"`
+	// whether to hide the headers of client.
+	HideClientHeaders pulumi.BoolInput `pulumi:"hideClientHeaders"`
+	// whether to enable request queuing.
+	IsDelay pulumi.BoolInput `pulumi:"isDelay"`
+	// basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+	LimitBy pulumi.StringInput `pulumi:"limitBy"`
+	// queue time.
+	LineUpTime pulumi.IntPtrInput `pulumi:"lineUpTime"`
+	// request paths that require rate limit.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// counter policy.Reference value: `local`, `redis`, `externalRedis`.
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
+	// qps threshold.
+	QpsThresholds CngwServiceRateLimitLimitDetailQpsThresholdArrayInput `pulumi:"qpsThresholds"`
+	// response configuration, the response strategy is text, maybe null.
+	RateLimitResponse CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput `pulumi:"rateLimitResponse"`
+	// request forwarding address, maybe null.
+	RateLimitResponseUrl pulumi.StringPtrInput `pulumi:"rateLimitResponseUrl"`
+	// response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+	ResponseType pulumi.StringInput `pulumi:"responseType"`
 }
 
 func (CngwServiceRateLimitLimitDetailArgs) ElementType() reflect.Type {
@@ -1544,11 +2800,11 @@ func (i CngwServiceRateLimitLimitDetailArgs) ToCngwServiceRateLimitLimitDetailPt
 // CngwServiceRateLimitLimitDetailPtrInput is an input type that accepts CngwServiceRateLimitLimitDetailArgs, CngwServiceRateLimitLimitDetailPtr and CngwServiceRateLimitLimitDetailPtrOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailPtrInput` via:
 //
-//          CngwServiceRateLimitLimitDetailArgs{...}
+//	        CngwServiceRateLimitLimitDetailArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwServiceRateLimitLimitDetailPtrInput interface {
 	pulumi.Input
 
@@ -1598,60 +2854,73 @@ func (o CngwServiceRateLimitLimitDetailOutput) ToCngwServiceRateLimitLimitDetail
 	}).(CngwServiceRateLimitLimitDetailPtrOutput)
 }
 
+// status of service rate limit.
 func (o CngwServiceRateLimitLimitDetailOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
+// external redis information, maybe null.
 func (o CngwServiceRateLimitLimitDetailOutput) ExternalRedis() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailExternalRedis {
 		return v.ExternalRedis
 	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// request headers that require rate limit.
 func (o CngwServiceRateLimitLimitDetailOutput) Header() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Header }).(pulumi.StringPtrOutput)
 }
 
+// whether to hide the headers of client.
 func (o CngwServiceRateLimitLimitDetailOutput) HideClientHeaders() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.HideClientHeaders }).(pulumi.BoolOutput)
 }
 
+// whether to enable request queuing.
 func (o CngwServiceRateLimitLimitDetailOutput) IsDelay() pulumi.BoolOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) bool { return v.IsDelay }).(pulumi.BoolOutput)
 }
 
+// basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
 func (o CngwServiceRateLimitLimitDetailOutput) LimitBy() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) string { return v.LimitBy }).(pulumi.StringOutput)
 }
 
+// queue time.
 func (o CngwServiceRateLimitLimitDetailOutput) LineUpTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *int { return v.LineUpTime }).(pulumi.IntPtrOutput)
 }
 
+// request paths that require rate limit.
 func (o CngwServiceRateLimitLimitDetailOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
+// counter policy.Reference value: `local`, `redis`, `externalRedis`.
 func (o CngwServiceRateLimitLimitDetailOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
+// qps threshold.
 func (o CngwServiceRateLimitLimitDetailOutput) QpsThresholds() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) []CngwServiceRateLimitLimitDetailQpsThreshold {
 		return v.QpsThresholds
 	}).(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput)
 }
 
+// response configuration, the response strategy is text, maybe null.
 func (o CngwServiceRateLimitLimitDetailOutput) RateLimitResponse() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailRateLimitResponse {
 		return v.RateLimitResponse
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// request forwarding address, maybe null.
 func (o CngwServiceRateLimitLimitDetailOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) *string { return v.RateLimitResponseUrl }).(pulumi.StringPtrOutput)
 }
 
+// response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
 func (o CngwServiceRateLimitLimitDetailOutput) ResponseType() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetail) string { return v.ResponseType }).(pulumi.StringOutput)
 }
@@ -1680,6 +2949,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) Elem() CngwServiceRateLimitLim
 	}).(CngwServiceRateLimitLimitDetailOutput)
 }
 
+// status of service rate limit.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -1689,6 +2959,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) Enabled() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// external redis information, maybe null.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) ExternalRedis() CngwServiceRateLimitLimitDetailExternalRedisPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailExternalRedis {
 		if v == nil {
@@ -1698,6 +2969,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) ExternalRedis() CngwServiceRat
 	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// request headers that require rate limit.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1707,6 +2979,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) Header() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
+// whether to hide the headers of client.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -1716,6 +2989,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) HideClientHeaders() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// whether to enable request queuing.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *bool {
 		if v == nil {
@@ -1725,6 +2999,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) IsDelay() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1734,6 +3009,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) LimitBy() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
+// queue time.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *int {
 		if v == nil {
@@ -1743,6 +3019,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) LineUpTime() pulumi.IntPtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
+// request paths that require rate limit.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1752,6 +3029,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) Path() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// counter policy.Reference value: `local`, `redis`, `externalRedis`.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1761,6 +3039,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) Policy() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
+// qps threshold.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) QpsThresholds() CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) []CngwServiceRateLimitLimitDetailQpsThreshold {
 		if v == nil {
@@ -1770,6 +3049,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) QpsThresholds() CngwServiceRat
 	}).(CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput)
 }
 
+// response configuration, the response strategy is text, maybe null.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *CngwServiceRateLimitLimitDetailRateLimitResponse {
 		if v == nil {
@@ -1779,6 +3059,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponse() CngwServic
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// request forwarding address, maybe null.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1788,6 +3069,7 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) RateLimitResponseUrl() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
 func (o CngwServiceRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetail) *string {
 		if v == nil {
@@ -1798,16 +3080,20 @@ func (o CngwServiceRateLimitLimitDetailPtrOutput) ResponseType() pulumi.StringPt
 }
 
 type CngwServiceRateLimitLimitDetailExternalRedis struct {
-	RedisHost     string `pulumi:"redisHost"`
+	// redis ip, maybe null.
+	RedisHost string `pulumi:"redisHost"`
+	// redis password, maybe null.
 	RedisPassword string `pulumi:"redisPassword"`
-	RedisPort     int    `pulumi:"redisPort"`
-	RedisTimeout  int    `pulumi:"redisTimeout"`
+	// redis port, maybe null.
+	RedisPort int `pulumi:"redisPort"`
+	// redis timeout, unit: `ms`, maybe null.
+	RedisTimeout int `pulumi:"redisTimeout"`
 }
 
 // CngwServiceRateLimitLimitDetailExternalRedisInput is an input type that accepts CngwServiceRateLimitLimitDetailExternalRedisArgs and CngwServiceRateLimitLimitDetailExternalRedisOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailExternalRedisInput` via:
 //
-//          CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
+//	CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
 type CngwServiceRateLimitLimitDetailExternalRedisInput interface {
 	pulumi.Input
 
@@ -1816,10 +3102,14 @@ type CngwServiceRateLimitLimitDetailExternalRedisInput interface {
 }
 
 type CngwServiceRateLimitLimitDetailExternalRedisArgs struct {
-	RedisHost     pulumi.StringInput `pulumi:"redisHost"`
+	// redis ip, maybe null.
+	RedisHost pulumi.StringInput `pulumi:"redisHost"`
+	// redis password, maybe null.
 	RedisPassword pulumi.StringInput `pulumi:"redisPassword"`
-	RedisPort     pulumi.IntInput    `pulumi:"redisPort"`
-	RedisTimeout  pulumi.IntInput    `pulumi:"redisTimeout"`
+	// redis port, maybe null.
+	RedisPort pulumi.IntInput `pulumi:"redisPort"`
+	// redis timeout, unit: `ms`, maybe null.
+	RedisTimeout pulumi.IntInput `pulumi:"redisTimeout"`
 }
 
 func (CngwServiceRateLimitLimitDetailExternalRedisArgs) ElementType() reflect.Type {
@@ -1845,11 +3135,11 @@ func (i CngwServiceRateLimitLimitDetailExternalRedisArgs) ToCngwServiceRateLimit
 // CngwServiceRateLimitLimitDetailExternalRedisPtrInput is an input type that accepts CngwServiceRateLimitLimitDetailExternalRedisArgs, CngwServiceRateLimitLimitDetailExternalRedisPtr and CngwServiceRateLimitLimitDetailExternalRedisPtrOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailExternalRedisPtrInput` via:
 //
-//          CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
+//	        CngwServiceRateLimitLimitDetailExternalRedisArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwServiceRateLimitLimitDetailExternalRedisPtrInput interface {
 	pulumi.Input
 
@@ -1899,18 +3189,22 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) ToCngwServiceRateLim
 	}).(CngwServiceRateLimitLimitDetailExternalRedisPtrOutput)
 }
 
+// redis ip, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisHost() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) string { return v.RedisHost }).(pulumi.StringOutput)
 }
 
+// redis password, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisPassword() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) string { return v.RedisPassword }).(pulumi.StringOutput)
 }
 
+// redis port, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisPort() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) int { return v.RedisPort }).(pulumi.IntOutput)
 }
 
+// redis timeout, unit: `ms`, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisOutput) RedisTimeout() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailExternalRedis) int { return v.RedisTimeout }).(pulumi.IntOutput)
 }
@@ -1939,6 +3233,7 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) Elem() CngwServic
 	}).(CngwServiceRateLimitLimitDetailExternalRedisOutput)
 }
 
+// redis ip, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *string {
 		if v == nil {
@@ -1948,6 +3243,7 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisHost() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// redis password, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *string {
 		if v == nil {
@@ -1957,6 +3253,7 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPassword() p
 	}).(pulumi.StringPtrOutput)
 }
 
+// redis port, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *int {
 		if v == nil {
@@ -1966,6 +3263,7 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisPort() pulum
 	}).(pulumi.IntPtrOutput)
 }
 
+// redis timeout, unit: `ms`, maybe null.
 func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailExternalRedis) *int {
 		if v == nil {
@@ -1976,14 +3274,16 @@ func (o CngwServiceRateLimitLimitDetailExternalRedisPtrOutput) RedisTimeout() pu
 }
 
 type CngwServiceRateLimitLimitDetailQpsThreshold struct {
-	Max  int    `pulumi:"max"`
+	// the max threshold.
+	Max int `pulumi:"max"`
+	// qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
 	Unit string `pulumi:"unit"`
 }
 
 // CngwServiceRateLimitLimitDetailQpsThresholdInput is an input type that accepts CngwServiceRateLimitLimitDetailQpsThresholdArgs and CngwServiceRateLimitLimitDetailQpsThresholdOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailQpsThresholdInput` via:
 //
-//          CngwServiceRateLimitLimitDetailQpsThresholdArgs{...}
+//	CngwServiceRateLimitLimitDetailQpsThresholdArgs{...}
 type CngwServiceRateLimitLimitDetailQpsThresholdInput interface {
 	pulumi.Input
 
@@ -1992,7 +3292,9 @@ type CngwServiceRateLimitLimitDetailQpsThresholdInput interface {
 }
 
 type CngwServiceRateLimitLimitDetailQpsThresholdArgs struct {
-	Max  pulumi.IntInput    `pulumi:"max"`
+	// the max threshold.
+	Max pulumi.IntInput `pulumi:"max"`
+	// qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
 	Unit pulumi.StringInput `pulumi:"unit"`
 }
 
@@ -2011,7 +3313,7 @@ func (i CngwServiceRateLimitLimitDetailQpsThresholdArgs) ToCngwServiceRateLimitL
 // CngwServiceRateLimitLimitDetailQpsThresholdArrayInput is an input type that accepts CngwServiceRateLimitLimitDetailQpsThresholdArray and CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailQpsThresholdArrayInput` via:
 //
-//          CngwServiceRateLimitLimitDetailQpsThresholdArray{ CngwServiceRateLimitLimitDetailQpsThresholdArgs{...} }
+//	CngwServiceRateLimitLimitDetailQpsThresholdArray{ CngwServiceRateLimitLimitDetailQpsThresholdArgs{...} }
 type CngwServiceRateLimitLimitDetailQpsThresholdArrayInput interface {
 	pulumi.Input
 
@@ -2047,10 +3349,12 @@ func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) ToCngwServiceRateLimi
 	return o
 }
 
+// the max threshold.
 func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) Max() pulumi.IntOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailQpsThreshold) int { return v.Max }).(pulumi.IntOutput)
 }
 
+// qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
 func (o CngwServiceRateLimitLimitDetailQpsThresholdOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailQpsThreshold) string { return v.Unit }).(pulumi.StringOutput)
 }
@@ -2076,15 +3380,18 @@ func (o CngwServiceRateLimitLimitDetailQpsThresholdArrayOutput) Index(i pulumi.I
 }
 
 type CngwServiceRateLimitLimitDetailRateLimitResponse struct {
-	Body       *string                                                  `pulumi:"body"`
-	Headers    []CngwServiceRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
-	HttpStatus *int                                                     `pulumi:"httpStatus"`
+	// custom response body, maybe bull.
+	Body *string `pulumi:"body"`
+	// headrs.
+	Headers []CngwServiceRateLimitLimitDetailRateLimitResponseHeader `pulumi:"headers"`
+	// http status code.
+	HttpStatus *int `pulumi:"httpStatus"`
 }
 
 // CngwServiceRateLimitLimitDetailRateLimitResponseInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseArgs and CngwServiceRateLimitLimitDetailRateLimitResponseOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseInput` via:
 //
-//          CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
+//	CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
 type CngwServiceRateLimitLimitDetailRateLimitResponseInput interface {
 	pulumi.Input
 
@@ -2093,9 +3400,12 @@ type CngwServiceRateLimitLimitDetailRateLimitResponseInput interface {
 }
 
 type CngwServiceRateLimitLimitDetailRateLimitResponseArgs struct {
-	Body       pulumi.StringPtrInput                                            `pulumi:"body"`
-	Headers    CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
-	HttpStatus pulumi.IntPtrInput                                               `pulumi:"httpStatus"`
+	// custom response body, maybe bull.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// headrs.
+	Headers CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput `pulumi:"headers"`
+	// http status code.
+	HttpStatus pulumi.IntPtrInput `pulumi:"httpStatus"`
 }
 
 func (CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ElementType() reflect.Type {
@@ -2121,11 +3431,11 @@ func (i CngwServiceRateLimitLimitDetailRateLimitResponseArgs) ToCngwServiceRateL
 // CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseArgs, CngwServiceRateLimitLimitDetailRateLimitResponsePtr and CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput` via:
 //
-//          CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
+//	        CngwServiceRateLimitLimitDetailRateLimitResponseArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwServiceRateLimitLimitDetailRateLimitResponsePtrInput interface {
 	pulumi.Input
 
@@ -2175,16 +3485,19 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) ToCngwServiceRat
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput)
 }
 
+// custom response body, maybe bull.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) *string { return v.Body }).(pulumi.StringPtrOutput)
 }
 
+// headrs.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) Headers() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) []CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
 		return v.Headers
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
 }
 
+// http status code.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponseOutput) HttpStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponse) *int { return v.HttpStatus }).(pulumi.IntPtrOutput)
 }
@@ -2213,6 +3526,7 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Elem() CngwSe
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponseOutput)
 }
 
+// custom response body, maybe bull.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) *string {
 		if v == nil {
@@ -2222,6 +3536,7 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Body() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// headrs.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) []CngwServiceRateLimitLimitDetailRateLimitResponseHeader {
 		if v == nil {
@@ -2231,6 +3546,7 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) Headers() Cng
 	}).(CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput)
 }
 
+// http status code.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwServiceRateLimitLimitDetailRateLimitResponse) *int {
 		if v == nil {
@@ -2241,14 +3557,16 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponsePtrOutput) HttpStatus() 
 }
 
 type CngwServiceRateLimitLimitDetailRateLimitResponseHeader struct {
-	Key   *string `pulumi:"key"`
+	// key of header.
+	Key *string `pulumi:"key"`
+	// value of header.
 	Value *string `pulumi:"value"`
 }
 
 // CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs and CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput` via:
 //
-//          CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
+//	CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...}
 type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput interface {
 	pulumi.Input
 
@@ -2257,7 +3575,9 @@ type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderInput interface {
 }
 
 type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs struct {
-	Key   pulumi.StringPtrInput `pulumi:"key"`
+	// key of header.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// value of header.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
@@ -2276,7 +3596,7 @@ func (i CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs) ToCngwServic
 // CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput is an input type that accepts CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray and CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayOutput values.
 // You can construct a concrete instance of `CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput` via:
 //
-//          CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
+//	CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArray{ CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs{...} }
 type CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArrayInput interface {
 	pulumi.Input
 
@@ -2312,10 +3632,12 @@ func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) ToCngwServ
 	return o
 }
 
+// key of header.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// value of header.
 func (o CngwServiceRateLimitLimitDetailRateLimitResponseHeaderOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CngwServiceRateLimitLimitDetailRateLimitResponseHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -2384,7 +3706,7 @@ type CngwServiceUpstreamInfo struct {
 // CngwServiceUpstreamInfoInput is an input type that accepts CngwServiceUpstreamInfoArgs and CngwServiceUpstreamInfoOutput values.
 // You can construct a concrete instance of `CngwServiceUpstreamInfoInput` via:
 //
-//          CngwServiceUpstreamInfoArgs{...}
+//	CngwServiceUpstreamInfoArgs{...}
 type CngwServiceUpstreamInfoInput interface {
 	pulumi.Input
 
@@ -2456,11 +3778,11 @@ func (i CngwServiceUpstreamInfoArgs) ToCngwServiceUpstreamInfoPtrOutputWithConte
 // CngwServiceUpstreamInfoPtrInput is an input type that accepts CngwServiceUpstreamInfoArgs, CngwServiceUpstreamInfoPtr and CngwServiceUpstreamInfoPtrOutput values.
 // You can construct a concrete instance of `CngwServiceUpstreamInfoPtrInput` via:
 //
-//          CngwServiceUpstreamInfoArgs{...}
+//	        CngwServiceUpstreamInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CngwServiceUpstreamInfoPtrInput interface {
 	pulumi.Input
 
@@ -2835,7 +4157,7 @@ type CngwServiceUpstreamInfoTarget struct {
 // CngwServiceUpstreamInfoTargetInput is an input type that accepts CngwServiceUpstreamInfoTargetArgs and CngwServiceUpstreamInfoTargetOutput values.
 // You can construct a concrete instance of `CngwServiceUpstreamInfoTargetInput` via:
 //
-//          CngwServiceUpstreamInfoTargetArgs{...}
+//	CngwServiceUpstreamInfoTargetArgs{...}
 type CngwServiceUpstreamInfoTargetInput interface {
 	pulumi.Input
 
@@ -2871,7 +4193,7 @@ func (i CngwServiceUpstreamInfoTargetArgs) ToCngwServiceUpstreamInfoTargetOutput
 // CngwServiceUpstreamInfoTargetArrayInput is an input type that accepts CngwServiceUpstreamInfoTargetArray and CngwServiceUpstreamInfoTargetArrayOutput values.
 // You can construct a concrete instance of `CngwServiceUpstreamInfoTargetArrayInput` via:
 //
-//          CngwServiceUpstreamInfoTargetArray{ CngwServiceUpstreamInfoTargetArgs{...} }
+//	CngwServiceUpstreamInfoTargetArray{ CngwServiceUpstreamInfoTargetArgs{...} }
 type CngwServiceUpstreamInfoTargetArrayInput interface {
 	pulumi.Input
 
@@ -2967,7 +4289,7 @@ type InstanceEngineRegionInfo struct {
 // InstanceEngineRegionInfoInput is an input type that accepts InstanceEngineRegionInfoArgs and InstanceEngineRegionInfoOutput values.
 // You can construct a concrete instance of `InstanceEngineRegionInfoInput` via:
 //
-//          InstanceEngineRegionInfoArgs{...}
+//	InstanceEngineRegionInfoArgs{...}
 type InstanceEngineRegionInfoInput interface {
 	pulumi.Input
 
@@ -2999,7 +4321,7 @@ func (i InstanceEngineRegionInfoArgs) ToInstanceEngineRegionInfoOutputWithContex
 // InstanceEngineRegionInfoArrayInput is an input type that accepts InstanceEngineRegionInfoArray and InstanceEngineRegionInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceEngineRegionInfoArrayInput` via:
 //
-//          InstanceEngineRegionInfoArray{ InstanceEngineRegionInfoArgs{...} }
+//	InstanceEngineRegionInfoArray{ InstanceEngineRegionInfoArgs{...} }
 type InstanceEngineRegionInfoArrayInput interface {
 	pulumi.Input
 
@@ -3082,7 +4404,7 @@ type InstanceEngineRegionInfoVpcInfo struct {
 // InstanceEngineRegionInfoVpcInfoInput is an input type that accepts InstanceEngineRegionInfoVpcInfoArgs and InstanceEngineRegionInfoVpcInfoOutput values.
 // You can construct a concrete instance of `InstanceEngineRegionInfoVpcInfoInput` via:
 //
-//          InstanceEngineRegionInfoVpcInfoArgs{...}
+//	InstanceEngineRegionInfoVpcInfoArgs{...}
 type InstanceEngineRegionInfoVpcInfoInput interface {
 	pulumi.Input
 
@@ -3114,7 +4436,7 @@ func (i InstanceEngineRegionInfoVpcInfoArgs) ToInstanceEngineRegionInfoVpcInfoOu
 // InstanceEngineRegionInfoVpcInfoArrayInput is an input type that accepts InstanceEngineRegionInfoVpcInfoArray and InstanceEngineRegionInfoVpcInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceEngineRegionInfoVpcInfoArrayInput` via:
 //
-//          InstanceEngineRegionInfoVpcInfoArray{ InstanceEngineRegionInfoVpcInfoArgs{...} }
+//	InstanceEngineRegionInfoVpcInfoArray{ InstanceEngineRegionInfoVpcInfoArgs{...} }
 type InstanceEngineRegionInfoVpcInfoArrayInput interface {
 	pulumi.Input
 
@@ -3203,7 +4525,7 @@ type GetAccessAddressEnvAddressInfo struct {
 // GetAccessAddressEnvAddressInfoInput is an input type that accepts GetAccessAddressEnvAddressInfoArgs and GetAccessAddressEnvAddressInfoOutput values.
 // You can construct a concrete instance of `GetAccessAddressEnvAddressInfoInput` via:
 //
-//          GetAccessAddressEnvAddressInfoArgs{...}
+//	GetAccessAddressEnvAddressInfoArgs{...}
 type GetAccessAddressEnvAddressInfoInput interface {
 	pulumi.Input
 
@@ -3241,7 +4563,7 @@ func (i GetAccessAddressEnvAddressInfoArgs) ToGetAccessAddressEnvAddressInfoOutp
 // GetAccessAddressEnvAddressInfoArrayInput is an input type that accepts GetAccessAddressEnvAddressInfoArray and GetAccessAddressEnvAddressInfoArrayOutput values.
 // You can construct a concrete instance of `GetAccessAddressEnvAddressInfoArrayInput` via:
 //
-//          GetAccessAddressEnvAddressInfoArray{ GetAccessAddressEnvAddressInfoArgs{...} }
+//	GetAccessAddressEnvAddressInfoArray{ GetAccessAddressEnvAddressInfoArgs{...} }
 type GetAccessAddressEnvAddressInfoArrayInput interface {
 	pulumi.Input
 
@@ -3335,7 +4657,7 @@ type GetAccessAddressLimiterAddressInfo struct {
 // GetAccessAddressLimiterAddressInfoInput is an input type that accepts GetAccessAddressLimiterAddressInfoArgs and GetAccessAddressLimiterAddressInfoOutput values.
 // You can construct a concrete instance of `GetAccessAddressLimiterAddressInfoInput` via:
 //
-//          GetAccessAddressLimiterAddressInfoArgs{...}
+//	GetAccessAddressLimiterAddressInfoArgs{...}
 type GetAccessAddressLimiterAddressInfoInput interface {
 	pulumi.Input
 
@@ -3363,7 +4685,7 @@ func (i GetAccessAddressLimiterAddressInfoArgs) ToGetAccessAddressLimiterAddress
 // GetAccessAddressLimiterAddressInfoArrayInput is an input type that accepts GetAccessAddressLimiterAddressInfoArray and GetAccessAddressLimiterAddressInfoArrayOutput values.
 // You can construct a concrete instance of `GetAccessAddressLimiterAddressInfoArrayInput` via:
 //
-//          GetAccessAddressLimiterAddressInfoArray{ GetAccessAddressLimiterAddressInfoArgs{...} }
+//	GetAccessAddressLimiterAddressInfoArray{ GetAccessAddressLimiterAddressInfoArgs{...} }
 type GetAccessAddressLimiterAddressInfoArrayInput interface {
 	pulumi.Input
 
@@ -3434,7 +4756,7 @@ type GetGatewayCanaryRulesResult struct {
 // GetGatewayCanaryRulesResultInput is an input type that accepts GetGatewayCanaryRulesResultArgs and GetGatewayCanaryRulesResultOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultInput` via:
 //
-//          GetGatewayCanaryRulesResultArgs{...}
+//	GetGatewayCanaryRulesResultArgs{...}
 type GetGatewayCanaryRulesResultInput interface {
 	pulumi.Input
 
@@ -3464,7 +4786,7 @@ func (i GetGatewayCanaryRulesResultArgs) ToGetGatewayCanaryRulesResultOutputWith
 // GetGatewayCanaryRulesResultArrayInput is an input type that accepts GetGatewayCanaryRulesResultArray and GetGatewayCanaryRulesResultArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultArrayInput` via:
 //
-//          GetGatewayCanaryRulesResultArray{ GetGatewayCanaryRulesResultArgs{...} }
+//	GetGatewayCanaryRulesResultArray{ GetGatewayCanaryRulesResultArgs{...} }
 type GetGatewayCanaryRulesResultArrayInput interface {
 	pulumi.Input
 
@@ -3550,7 +4872,7 @@ type GetGatewayCanaryRulesResultCanaryRuleList struct {
 // GetGatewayCanaryRulesResultCanaryRuleListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListArgs and GetGatewayCanaryRulesResultCanaryRuleListOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListArgs{...}
+//	GetGatewayCanaryRulesResultCanaryRuleListArgs{...}
 type GetGatewayCanaryRulesResultCanaryRuleListInput interface {
 	pulumi.Input
 
@@ -3588,7 +4910,7 @@ func (i GetGatewayCanaryRulesResultCanaryRuleListArgs) ToGetGatewayCanaryRulesRe
 // GetGatewayCanaryRulesResultCanaryRuleListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListArray and GetGatewayCanaryRulesResultCanaryRuleListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListArrayInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListArray{ GetGatewayCanaryRulesResultCanaryRuleListArgs{...} }
+//	GetGatewayCanaryRulesResultCanaryRuleListArray{ GetGatewayCanaryRulesResultCanaryRuleListArgs{...} }
 type GetGatewayCanaryRulesResultCanaryRuleListArrayInput interface {
 	pulumi.Input
 
@@ -3692,7 +5014,7 @@ type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceList struct {
 // GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs and GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...}
+//	GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...}
 type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListInput interface {
 	pulumi.Input
 
@@ -3726,7 +5048,7 @@ func (i GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs) ToGetG
 // GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray and GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray{ GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...} }
+//	GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray{ GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArgs{...} }
 type GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput interface {
 	pulumi.Input
 
@@ -3822,7 +5144,7 @@ type GetGatewayCanaryRulesResultCanaryRuleListConditionList struct {
 // GetGatewayCanaryRulesResultCanaryRuleListConditionListInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs and GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListConditionListInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...}
+//	GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...}
 type GetGatewayCanaryRulesResultCanaryRuleListConditionListInput interface {
 	pulumi.Input
 
@@ -3862,7 +5184,7 @@ func (i GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs) ToGetGateway
 // GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput is an input type that accepts GetGatewayCanaryRulesResultCanaryRuleListConditionListArray and GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput` via:
 //
-//          GetGatewayCanaryRulesResultCanaryRuleListConditionListArray{ GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...} }
+//	GetGatewayCanaryRulesResultCanaryRuleListConditionListArray{ GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{...} }
 type GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput interface {
 	pulumi.Input
 
@@ -3953,6 +5275,407 @@ func (o GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput) Index
 	}).(GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput)
 }
 
+type GetGatewayCertificatesFilter struct {
+	// Filter name.
+	Key *string `pulumi:"key"`
+	// Filter value.
+	Value *string `pulumi:"value"`
+}
+
+// GetGatewayCertificatesFilterInput is an input type that accepts GetGatewayCertificatesFilterArgs and GetGatewayCertificatesFilterOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesFilterInput` via:
+//
+//	GetGatewayCertificatesFilterArgs{...}
+type GetGatewayCertificatesFilterInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesFilterOutput() GetGatewayCertificatesFilterOutput
+	ToGetGatewayCertificatesFilterOutputWithContext(context.Context) GetGatewayCertificatesFilterOutput
+}
+
+type GetGatewayCertificatesFilterArgs struct {
+	// Filter name.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Filter value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (GetGatewayCertificatesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesFilter)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesFilterArgs) ToGetGatewayCertificatesFilterOutput() GetGatewayCertificatesFilterOutput {
+	return i.ToGetGatewayCertificatesFilterOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesFilterArgs) ToGetGatewayCertificatesFilterOutputWithContext(ctx context.Context) GetGatewayCertificatesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesFilterOutput)
+}
+
+// GetGatewayCertificatesFilterArrayInput is an input type that accepts GetGatewayCertificatesFilterArray and GetGatewayCertificatesFilterArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesFilterArrayInput` via:
+//
+//	GetGatewayCertificatesFilterArray{ GetGatewayCertificatesFilterArgs{...} }
+type GetGatewayCertificatesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesFilterArrayOutput() GetGatewayCertificatesFilterArrayOutput
+	ToGetGatewayCertificatesFilterArrayOutputWithContext(context.Context) GetGatewayCertificatesFilterArrayOutput
+}
+
+type GetGatewayCertificatesFilterArray []GetGatewayCertificatesFilterInput
+
+func (GetGatewayCertificatesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesFilter)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesFilterArray) ToGetGatewayCertificatesFilterArrayOutput() GetGatewayCertificatesFilterArrayOutput {
+	return i.ToGetGatewayCertificatesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesFilterArray) ToGetGatewayCertificatesFilterArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesFilterArrayOutput)
+}
+
+type GetGatewayCertificatesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesFilter)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesFilterOutput) ToGetGatewayCertificatesFilterOutput() GetGatewayCertificatesFilterOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesFilterOutput) ToGetGatewayCertificatesFilterOutputWithContext(ctx context.Context) GetGatewayCertificatesFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetGatewayCertificatesFilterOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesFilter) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Filter value.
+func (o GetGatewayCertificatesFilterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type GetGatewayCertificatesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesFilter)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesFilterArrayOutput) ToGetGatewayCertificatesFilterArrayOutput() GetGatewayCertificatesFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesFilterArrayOutput) ToGetGatewayCertificatesFilterArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesFilterArrayOutput) Index(i pulumi.IntInput) GetGatewayCertificatesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCertificatesFilter {
+		return vs[0].([]GetGatewayCertificatesFilter)[vs[1].(int)]
+	}).(GetGatewayCertificatesFilterOutput)
+}
+
+type GetGatewayCertificatesResult struct {
+	// Certificate list of gateway. Note: This field may return null, indicating that a valid value is not available.
+	CertificatesLists []GetGatewayCertificatesResultCertificatesList `pulumi:"certificatesLists"`
+	// Total count. Note: This field may return null, indicating that a valid value is not available.
+	Total int `pulumi:"total"`
+}
+
+// GetGatewayCertificatesResultInput is an input type that accepts GetGatewayCertificatesResultArgs and GetGatewayCertificatesResultOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesResultInput` via:
+//
+//	GetGatewayCertificatesResultArgs{...}
+type GetGatewayCertificatesResultInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesResultOutput() GetGatewayCertificatesResultOutput
+	ToGetGatewayCertificatesResultOutputWithContext(context.Context) GetGatewayCertificatesResultOutput
+}
+
+type GetGatewayCertificatesResultArgs struct {
+	// Certificate list of gateway. Note: This field may return null, indicating that a valid value is not available.
+	CertificatesLists GetGatewayCertificatesResultCertificatesListArrayInput `pulumi:"certificatesLists"`
+	// Total count. Note: This field may return null, indicating that a valid value is not available.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetGatewayCertificatesResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesResult)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesResultArgs) ToGetGatewayCertificatesResultOutput() GetGatewayCertificatesResultOutput {
+	return i.ToGetGatewayCertificatesResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesResultArgs) ToGetGatewayCertificatesResultOutputWithContext(ctx context.Context) GetGatewayCertificatesResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesResultOutput)
+}
+
+// GetGatewayCertificatesResultArrayInput is an input type that accepts GetGatewayCertificatesResultArray and GetGatewayCertificatesResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesResultArrayInput` via:
+//
+//	GetGatewayCertificatesResultArray{ GetGatewayCertificatesResultArgs{...} }
+type GetGatewayCertificatesResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesResultArrayOutput() GetGatewayCertificatesResultArrayOutput
+	ToGetGatewayCertificatesResultArrayOutputWithContext(context.Context) GetGatewayCertificatesResultArrayOutput
+}
+
+type GetGatewayCertificatesResultArray []GetGatewayCertificatesResultInput
+
+func (GetGatewayCertificatesResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesResult)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesResultArray) ToGetGatewayCertificatesResultArrayOutput() GetGatewayCertificatesResultArrayOutput {
+	return i.ToGetGatewayCertificatesResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesResultArray) ToGetGatewayCertificatesResultArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesResultArrayOutput)
+}
+
+type GetGatewayCertificatesResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesResult)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesResultOutput) ToGetGatewayCertificatesResultOutput() GetGatewayCertificatesResultOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultOutput) ToGetGatewayCertificatesResultOutputWithContext(ctx context.Context) GetGatewayCertificatesResultOutput {
+	return o
+}
+
+// Certificate list of gateway. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultOutput) CertificatesLists() GetGatewayCertificatesResultCertificatesListArrayOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResult) []GetGatewayCertificatesResultCertificatesList {
+		return v.CertificatesLists
+	}).(GetGatewayCertificatesResultCertificatesListArrayOutput)
+}
+
+// Total count. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResult) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetGatewayCertificatesResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesResult)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesResultArrayOutput) ToGetGatewayCertificatesResultArrayOutput() GetGatewayCertificatesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultArrayOutput) ToGetGatewayCertificatesResultArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesResultArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultArrayOutput) Index(i pulumi.IntInput) GetGatewayCertificatesResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCertificatesResult {
+		return vs[0].([]GetGatewayCertificatesResult)[vs[1].(int)]
+	}).(GetGatewayCertificatesResultOutput)
+}
+
+type GetGatewayCertificatesResultCertificatesList struct {
+	// Domains of the binding. Note: This field may return null, indicating that a valid value is not available.
+	BindDomains []string `pulumi:"bindDomains"`
+	// Certificate ID of ssl platform. Note: This field may return null, indicating that a valid value is not available.
+	CertId string `pulumi:"certId"`
+	// Source of certificate. Reference value:- native. Source: konga- ssl. Source: ssl platform. Note: This field may return null, indicating that a valid value is not available.
+	CertSource string `pulumi:"certSource"`
+	// Upload time of certificate. Note: This field may return null, indicating that a valid value is not available.
+	CreateTime string `pulumi:"createTime"`
+	// Pem format of certificate. Note: This field may return null, indicating that a valid value is not available.
+	Crt string `pulumi:"crt"`
+	// Expiration time of certificate. Note: This field may return null, indicating that a valid value is not available.
+	ExpireTime string `pulumi:"expireTime"`
+	// Certificate ID. Note: This field may return null, indicating that a valid value is not available.
+	Id string `pulumi:"id"`
+	// Issuance time of certificateNote: This field may return null, indicating that a valid value is not available.
+	IssueTime string `pulumi:"issueTime"`
+	// Filter name.
+	Key string `pulumi:"key"`
+	// Certificate name. Note: This field may return null, indicating that a valid value is not available.
+	Name string `pulumi:"name"`
+	// Status of certificate. Reference value:- expired- active. Note: This field may return null, indicating that a valid value is not available.
+	Status string `pulumi:"status"`
+}
+
+// GetGatewayCertificatesResultCertificatesListInput is an input type that accepts GetGatewayCertificatesResultCertificatesListArgs and GetGatewayCertificatesResultCertificatesListOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesResultCertificatesListInput` via:
+//
+//	GetGatewayCertificatesResultCertificatesListArgs{...}
+type GetGatewayCertificatesResultCertificatesListInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesResultCertificatesListOutput() GetGatewayCertificatesResultCertificatesListOutput
+	ToGetGatewayCertificatesResultCertificatesListOutputWithContext(context.Context) GetGatewayCertificatesResultCertificatesListOutput
+}
+
+type GetGatewayCertificatesResultCertificatesListArgs struct {
+	// Domains of the binding. Note: This field may return null, indicating that a valid value is not available.
+	BindDomains pulumi.StringArrayInput `pulumi:"bindDomains"`
+	// Certificate ID of ssl platform. Note: This field may return null, indicating that a valid value is not available.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Source of certificate. Reference value:- native. Source: konga- ssl. Source: ssl platform. Note: This field may return null, indicating that a valid value is not available.
+	CertSource pulumi.StringInput `pulumi:"certSource"`
+	// Upload time of certificate. Note: This field may return null, indicating that a valid value is not available.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Pem format of certificate. Note: This field may return null, indicating that a valid value is not available.
+	Crt pulumi.StringInput `pulumi:"crt"`
+	// Expiration time of certificate. Note: This field may return null, indicating that a valid value is not available.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Certificate ID. Note: This field may return null, indicating that a valid value is not available.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Issuance time of certificateNote: This field may return null, indicating that a valid value is not available.
+	IssueTime pulumi.StringInput `pulumi:"issueTime"`
+	// Filter name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Certificate name. Note: This field may return null, indicating that a valid value is not available.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Status of certificate. Reference value:- expired- active. Note: This field may return null, indicating that a valid value is not available.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetGatewayCertificatesResultCertificatesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesResultCertificatesList)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesResultCertificatesListArgs) ToGetGatewayCertificatesResultCertificatesListOutput() GetGatewayCertificatesResultCertificatesListOutput {
+	return i.ToGetGatewayCertificatesResultCertificatesListOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesResultCertificatesListArgs) ToGetGatewayCertificatesResultCertificatesListOutputWithContext(ctx context.Context) GetGatewayCertificatesResultCertificatesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesResultCertificatesListOutput)
+}
+
+// GetGatewayCertificatesResultCertificatesListArrayInput is an input type that accepts GetGatewayCertificatesResultCertificatesListArray and GetGatewayCertificatesResultCertificatesListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayCertificatesResultCertificatesListArrayInput` via:
+//
+//	GetGatewayCertificatesResultCertificatesListArray{ GetGatewayCertificatesResultCertificatesListArgs{...} }
+type GetGatewayCertificatesResultCertificatesListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewayCertificatesResultCertificatesListArrayOutput() GetGatewayCertificatesResultCertificatesListArrayOutput
+	ToGetGatewayCertificatesResultCertificatesListArrayOutputWithContext(context.Context) GetGatewayCertificatesResultCertificatesListArrayOutput
+}
+
+type GetGatewayCertificatesResultCertificatesListArray []GetGatewayCertificatesResultCertificatesListInput
+
+func (GetGatewayCertificatesResultCertificatesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesResultCertificatesList)(nil)).Elem()
+}
+
+func (i GetGatewayCertificatesResultCertificatesListArray) ToGetGatewayCertificatesResultCertificatesListArrayOutput() GetGatewayCertificatesResultCertificatesListArrayOutput {
+	return i.ToGetGatewayCertificatesResultCertificatesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewayCertificatesResultCertificatesListArray) ToGetGatewayCertificatesResultCertificatesListArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesResultCertificatesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayCertificatesResultCertificatesListArrayOutput)
+}
+
+type GetGatewayCertificatesResultCertificatesListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesResultCertificatesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayCertificatesResultCertificatesList)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesResultCertificatesListOutput) ToGetGatewayCertificatesResultCertificatesListOutput() GetGatewayCertificatesResultCertificatesListOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultCertificatesListOutput) ToGetGatewayCertificatesResultCertificatesListOutputWithContext(ctx context.Context) GetGatewayCertificatesResultCertificatesListOutput {
+	return o
+}
+
+// Domains of the binding. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) BindDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) []string { return v.BindDomains }).(pulumi.StringArrayOutput)
+}
+
+// Certificate ID of ssl platform. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Source of certificate. Reference value:- native. Source: konga- ssl. Source: ssl platform. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) CertSource() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.CertSource }).(pulumi.StringOutput)
+}
+
+// Upload time of certificate. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Pem format of certificate. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) Crt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.Crt }).(pulumi.StringOutput)
+}
+
+// Expiration time of certificate. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Certificate ID. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Issuance time of certificateNote: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) IssueTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.IssueTime }).(pulumi.StringOutput)
+}
+
+// Filter name.
+func (o GetGatewayCertificatesResultCertificatesListOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Certificate name. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Status of certificate. Reference value:- expired- active. Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewayCertificatesResultCertificatesListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayCertificatesResultCertificatesList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetGatewayCertificatesResultCertificatesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewayCertificatesResultCertificatesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayCertificatesResultCertificatesList)(nil)).Elem()
+}
+
+func (o GetGatewayCertificatesResultCertificatesListArrayOutput) ToGetGatewayCertificatesResultCertificatesListArrayOutput() GetGatewayCertificatesResultCertificatesListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultCertificatesListArrayOutput) ToGetGatewayCertificatesResultCertificatesListArrayOutputWithContext(ctx context.Context) GetGatewayCertificatesResultCertificatesListArrayOutput {
+	return o
+}
+
+func (o GetGatewayCertificatesResultCertificatesListArrayOutput) Index(i pulumi.IntInput) GetGatewayCertificatesResultCertificatesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayCertificatesResultCertificatesList {
+		return vs[0].([]GetGatewayCertificatesResultCertificatesList)[vs[1].(int)]
+	}).(GetGatewayCertificatesResultCertificatesListOutput)
+}
+
 type GetGatewayNodesNodeList struct {
 	// gateway group ID.
 	GroupId string `pulumi:"groupId"`
@@ -3973,7 +5696,7 @@ type GetGatewayNodesNodeList struct {
 // GetGatewayNodesNodeListInput is an input type that accepts GetGatewayNodesNodeListArgs and GetGatewayNodesNodeListOutput values.
 // You can construct a concrete instance of `GetGatewayNodesNodeListInput` via:
 //
-//          GetGatewayNodesNodeListArgs{...}
+//	GetGatewayNodesNodeListArgs{...}
 type GetGatewayNodesNodeListInput interface {
 	pulumi.Input
 
@@ -4013,7 +5736,7 @@ func (i GetGatewayNodesNodeListArgs) ToGetGatewayNodesNodeListOutputWithContext(
 // GetGatewayNodesNodeListArrayInput is an input type that accepts GetGatewayNodesNodeListArray and GetGatewayNodesNodeListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayNodesNodeListArrayInput` via:
 //
-//          GetGatewayNodesNodeListArray{ GetGatewayNodesNodeListArgs{...} }
+//	GetGatewayNodesNodeListArray{ GetGatewayNodesNodeListArgs{...} }
 type GetGatewayNodesNodeListArrayInput interface {
 	pulumi.Input
 
@@ -4105,14 +5828,16 @@ func (o GetGatewayNodesNodeListArrayOutput) Index(i pulumi.IntInput) GetGatewayN
 }
 
 type GetGatewayRoutesResult struct {
+	// route list.
 	RouteLists []GetGatewayRoutesResultRouteList `pulumi:"routeLists"`
-	TotalCount int                               `pulumi:"totalCount"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
 }
 
 // GetGatewayRoutesResultInput is an input type that accepts GetGatewayRoutesResultArgs and GetGatewayRoutesResultOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultInput` via:
 //
-//          GetGatewayRoutesResultArgs{...}
+//	GetGatewayRoutesResultArgs{...}
 type GetGatewayRoutesResultInput interface {
 	pulumi.Input
 
@@ -4121,8 +5846,10 @@ type GetGatewayRoutesResultInput interface {
 }
 
 type GetGatewayRoutesResultArgs struct {
+	// route list.
 	RouteLists GetGatewayRoutesResultRouteListArrayInput `pulumi:"routeLists"`
-	TotalCount pulumi.IntInput                           `pulumi:"totalCount"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
 }
 
 func (GetGatewayRoutesResultArgs) ElementType() reflect.Type {
@@ -4140,7 +5867,7 @@ func (i GetGatewayRoutesResultArgs) ToGetGatewayRoutesResultOutputWithContext(ct
 // GetGatewayRoutesResultArrayInput is an input type that accepts GetGatewayRoutesResultArray and GetGatewayRoutesResultArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultArrayInput` via:
 //
-//          GetGatewayRoutesResultArray{ GetGatewayRoutesResultArgs{...} }
+//	GetGatewayRoutesResultArray{ GetGatewayRoutesResultArgs{...} }
 type GetGatewayRoutesResultArrayInput interface {
 	pulumi.Input
 
@@ -4176,10 +5903,12 @@ func (o GetGatewayRoutesResultOutput) ToGetGatewayRoutesResultOutputWithContext(
 	return o
 }
 
+// route list.
 func (o GetGatewayRoutesResultOutput) RouteLists() GetGatewayRoutesResultRouteListArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResult) []GetGatewayRoutesResultRouteList { return v.RouteLists }).(GetGatewayRoutesResultRouteListArrayOutput)
 }
 
+// total count.
 func (o GetGatewayRoutesResultOutput) TotalCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResult) int { return v.TotalCount }).(pulumi.IntOutput)
 }
@@ -4205,27 +5934,42 @@ func (o GetGatewayRoutesResultArrayOutput) Index(i pulumi.IntInput) GetGatewayRo
 }
 
 type GetGatewayRoutesResultRouteList struct {
-	CreatedTime             string                                  `pulumi:"createdTime"`
-	DestinationPorts        []int                                   `pulumi:"destinationPorts"`
-	ForceHttps              bool                                    `pulumi:"forceHttps"`
-	Headers                 []GetGatewayRoutesResultRouteListHeader `pulumi:"headers"`
-	Hosts                   []string                                `pulumi:"hosts"`
-	HttpsRedirectStatusCode int                                     `pulumi:"httpsRedirectStatusCode"`
-	Id                      string                                  `pulumi:"id"`
-	Methods                 []string                                `pulumi:"methods"`
-	Name                    string                                  `pulumi:"name"`
-	Paths                   []string                                `pulumi:"paths"`
-	PreserveHost            bool                                    `pulumi:"preserveHost"`
-	Protocols               []string                                `pulumi:"protocols"`
-	ServiceId               string                                  `pulumi:"serviceId"`
-	ServiceName             string                                  `pulumi:"serviceName"`
-	StripPath               bool                                    `pulumi:"stripPath"`
+	// created time.
+	CreatedTime string `pulumi:"createdTime"`
+	// destination port for Layer 4 matching.
+	DestinationPorts []int `pulumi:"destinationPorts"`
+	// whether to enable forced HTTPS, no longer use.
+	ForceHttps bool `pulumi:"forceHttps"`
+	// the headers of route.
+	Headers []GetGatewayRoutesResultRouteListHeader `pulumi:"headers"`
+	// host list.
+	Hosts []string `pulumi:"hosts"`
+	// https redirection status code.
+	HttpsRedirectStatusCode int `pulumi:"httpsRedirectStatusCode"`
+	// service ID.
+	Id string `pulumi:"id"`
+	// method list.
+	Methods []string `pulumi:"methods"`
+	// service name.
+	Name string `pulumi:"name"`
+	// path list.
+	Paths []string `pulumi:"paths"`
+	// whether to keep the host when forwarding to the backend.
+	PreserveHost bool `pulumi:"preserveHost"`
+	// protocol list.
+	Protocols []string `pulumi:"protocols"`
+	// service ID.
+	ServiceId string `pulumi:"serviceId"`
+	// service name.
+	ServiceName string `pulumi:"serviceName"`
+	// whether to strip path when forwarding to the backend.
+	StripPath bool `pulumi:"stripPath"`
 }
 
 // GetGatewayRoutesResultRouteListInput is an input type that accepts GetGatewayRoutesResultRouteListArgs and GetGatewayRoutesResultRouteListOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultRouteListInput` via:
 //
-//          GetGatewayRoutesResultRouteListArgs{...}
+//	GetGatewayRoutesResultRouteListArgs{...}
 type GetGatewayRoutesResultRouteListInput interface {
 	pulumi.Input
 
@@ -4234,21 +5978,36 @@ type GetGatewayRoutesResultRouteListInput interface {
 }
 
 type GetGatewayRoutesResultRouteListArgs struct {
-	CreatedTime             pulumi.StringInput                              `pulumi:"createdTime"`
-	DestinationPorts        pulumi.IntArrayInput                            `pulumi:"destinationPorts"`
-	ForceHttps              pulumi.BoolInput                                `pulumi:"forceHttps"`
-	Headers                 GetGatewayRoutesResultRouteListHeaderArrayInput `pulumi:"headers"`
-	Hosts                   pulumi.StringArrayInput                         `pulumi:"hosts"`
-	HttpsRedirectStatusCode pulumi.IntInput                                 `pulumi:"httpsRedirectStatusCode"`
-	Id                      pulumi.StringInput                              `pulumi:"id"`
-	Methods                 pulumi.StringArrayInput                         `pulumi:"methods"`
-	Name                    pulumi.StringInput                              `pulumi:"name"`
-	Paths                   pulumi.StringArrayInput                         `pulumi:"paths"`
-	PreserveHost            pulumi.BoolInput                                `pulumi:"preserveHost"`
-	Protocols               pulumi.StringArrayInput                         `pulumi:"protocols"`
-	ServiceId               pulumi.StringInput                              `pulumi:"serviceId"`
-	ServiceName             pulumi.StringInput                              `pulumi:"serviceName"`
-	StripPath               pulumi.BoolInput                                `pulumi:"stripPath"`
+	// created time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// destination port for Layer 4 matching.
+	DestinationPorts pulumi.IntArrayInput `pulumi:"destinationPorts"`
+	// whether to enable forced HTTPS, no longer use.
+	ForceHttps pulumi.BoolInput `pulumi:"forceHttps"`
+	// the headers of route.
+	Headers GetGatewayRoutesResultRouteListHeaderArrayInput `pulumi:"headers"`
+	// host list.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// https redirection status code.
+	HttpsRedirectStatusCode pulumi.IntInput `pulumi:"httpsRedirectStatusCode"`
+	// service ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// method list.
+	Methods pulumi.StringArrayInput `pulumi:"methods"`
+	// service name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// path list.
+	Paths pulumi.StringArrayInput `pulumi:"paths"`
+	// whether to keep the host when forwarding to the backend.
+	PreserveHost pulumi.BoolInput `pulumi:"preserveHost"`
+	// protocol list.
+	Protocols pulumi.StringArrayInput `pulumi:"protocols"`
+	// service ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// service name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+	// whether to strip path when forwarding to the backend.
+	StripPath pulumi.BoolInput `pulumi:"stripPath"`
 }
 
 func (GetGatewayRoutesResultRouteListArgs) ElementType() reflect.Type {
@@ -4266,7 +6025,7 @@ func (i GetGatewayRoutesResultRouteListArgs) ToGetGatewayRoutesResultRouteListOu
 // GetGatewayRoutesResultRouteListArrayInput is an input type that accepts GetGatewayRoutesResultRouteListArray and GetGatewayRoutesResultRouteListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultRouteListArrayInput` via:
 //
-//          GetGatewayRoutesResultRouteListArray{ GetGatewayRoutesResultRouteListArgs{...} }
+//	GetGatewayRoutesResultRouteListArray{ GetGatewayRoutesResultRouteListArgs{...} }
 type GetGatewayRoutesResultRouteListArrayInput interface {
 	pulumi.Input
 
@@ -4302,62 +6061,77 @@ func (o GetGatewayRoutesResultRouteListOutput) ToGetGatewayRoutesResultRouteList
 	return o
 }
 
+// created time.
 func (o GetGatewayRoutesResultRouteListOutput) CreatedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.CreatedTime }).(pulumi.StringOutput)
 }
 
+// destination port for Layer 4 matching.
 func (o GetGatewayRoutesResultRouteListOutput) DestinationPorts() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []int { return v.DestinationPorts }).(pulumi.IntArrayOutput)
 }
 
+// whether to enable forced HTTPS, no longer use.
 func (o GetGatewayRoutesResultRouteListOutput) ForceHttps() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.ForceHttps }).(pulumi.BoolOutput)
 }
 
+// the headers of route.
 func (o GetGatewayRoutesResultRouteListOutput) Headers() GetGatewayRoutesResultRouteListHeaderArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []GetGatewayRoutesResultRouteListHeader { return v.Headers }).(GetGatewayRoutesResultRouteListHeaderArrayOutput)
 }
 
+// host list.
 func (o GetGatewayRoutesResultRouteListOutput) Hosts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Hosts }).(pulumi.StringArrayOutput)
 }
 
+// https redirection status code.
 func (o GetGatewayRoutesResultRouteListOutput) HttpsRedirectStatusCode() pulumi.IntOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) int { return v.HttpsRedirectStatusCode }).(pulumi.IntOutput)
 }
 
+// service ID.
 func (o GetGatewayRoutesResultRouteListOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// method list.
 func (o GetGatewayRoutesResultRouteListOutput) Methods() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Methods }).(pulumi.StringArrayOutput)
 }
 
+// service name.
 func (o GetGatewayRoutesResultRouteListOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// path list.
 func (o GetGatewayRoutesResultRouteListOutput) Paths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Paths }).(pulumi.StringArrayOutput)
 }
 
+// whether to keep the host when forwarding to the backend.
 func (o GetGatewayRoutesResultRouteListOutput) PreserveHost() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.PreserveHost }).(pulumi.BoolOutput)
 }
 
+// protocol list.
 func (o GetGatewayRoutesResultRouteListOutput) Protocols() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) []string { return v.Protocols }).(pulumi.StringArrayOutput)
 }
 
+// service ID.
 func (o GetGatewayRoutesResultRouteListOutput) ServiceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.ServiceId }).(pulumi.StringOutput)
 }
 
+// service name.
 func (o GetGatewayRoutesResultRouteListOutput) ServiceName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) string { return v.ServiceName }).(pulumi.StringOutput)
 }
 
+// whether to strip path when forwarding to the backend.
 func (o GetGatewayRoutesResultRouteListOutput) StripPath() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteList) bool { return v.StripPath }).(pulumi.BoolOutput)
 }
@@ -4383,14 +6157,16 @@ func (o GetGatewayRoutesResultRouteListArrayOutput) Index(i pulumi.IntInput) Get
 }
 
 type GetGatewayRoutesResultRouteListHeader struct {
-	Key   string `pulumi:"key"`
+	// key of header.
+	Key string `pulumi:"key"`
+	// value of header.
 	Value string `pulumi:"value"`
 }
 
 // GetGatewayRoutesResultRouteListHeaderInput is an input type that accepts GetGatewayRoutesResultRouteListHeaderArgs and GetGatewayRoutesResultRouteListHeaderOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultRouteListHeaderInput` via:
 //
-//          GetGatewayRoutesResultRouteListHeaderArgs{...}
+//	GetGatewayRoutesResultRouteListHeaderArgs{...}
 type GetGatewayRoutesResultRouteListHeaderInput interface {
 	pulumi.Input
 
@@ -4399,7 +6175,9 @@ type GetGatewayRoutesResultRouteListHeaderInput interface {
 }
 
 type GetGatewayRoutesResultRouteListHeaderArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
+	// key of header.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value of header.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -4418,7 +6196,7 @@ func (i GetGatewayRoutesResultRouteListHeaderArgs) ToGetGatewayRoutesResultRoute
 // GetGatewayRoutesResultRouteListHeaderArrayInput is an input type that accepts GetGatewayRoutesResultRouteListHeaderArray and GetGatewayRoutesResultRouteListHeaderArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesResultRouteListHeaderArrayInput` via:
 //
-//          GetGatewayRoutesResultRouteListHeaderArray{ GetGatewayRoutesResultRouteListHeaderArgs{...} }
+//	GetGatewayRoutesResultRouteListHeaderArray{ GetGatewayRoutesResultRouteListHeaderArgs{...} }
 type GetGatewayRoutesResultRouteListHeaderArrayInput interface {
 	pulumi.Input
 
@@ -4454,10 +6232,12 @@ func (o GetGatewayRoutesResultRouteListHeaderOutput) ToGetGatewayRoutesResultRou
 	return o
 }
 
+// key of header.
 func (o GetGatewayRoutesResultRouteListHeaderOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteListHeader) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// value of header.
 func (o GetGatewayRoutesResultRouteListHeaderOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewayRoutesResultRouteListHeader) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -4492,7 +6272,7 @@ type GetGatewayServicesFilter struct {
 // GetGatewayServicesFilterInput is an input type that accepts GetGatewayServicesFilterArgs and GetGatewayServicesFilterOutput values.
 // You can construct a concrete instance of `GetGatewayServicesFilterInput` via:
 //
-//          GetGatewayServicesFilterArgs{...}
+//	GetGatewayServicesFilterArgs{...}
 type GetGatewayServicesFilterInput interface {
 	pulumi.Input
 
@@ -4522,7 +6302,7 @@ func (i GetGatewayServicesFilterArgs) ToGetGatewayServicesFilterOutputWithContex
 // GetGatewayServicesFilterArrayInput is an input type that accepts GetGatewayServicesFilterArray and GetGatewayServicesFilterArrayOutput values.
 // You can construct a concrete instance of `GetGatewayServicesFilterArrayInput` via:
 //
-//          GetGatewayServicesFilterArray{ GetGatewayServicesFilterArgs{...} }
+//	GetGatewayServicesFilterArray{ GetGatewayServicesFilterArgs{...} }
 type GetGatewayServicesFilterArrayInput interface {
 	pulumi.Input
 
@@ -4598,7 +6378,7 @@ type GetGatewayServicesResult struct {
 // GetGatewayServicesResultInput is an input type that accepts GetGatewayServicesResultArgs and GetGatewayServicesResultOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultInput` via:
 //
-//          GetGatewayServicesResultArgs{...}
+//	GetGatewayServicesResultArgs{...}
 type GetGatewayServicesResultInput interface {
 	pulumi.Input
 
@@ -4628,7 +6408,7 @@ func (i GetGatewayServicesResultArgs) ToGetGatewayServicesResultOutputWithContex
 // GetGatewayServicesResultArrayInput is an input type that accepts GetGatewayServicesResultArray and GetGatewayServicesResultArrayOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultArrayInput` via:
 //
-//          GetGatewayServicesResultArray{ GetGatewayServicesResultArgs{...} }
+//	GetGatewayServicesResultArray{ GetGatewayServicesResultArgs{...} }
 type GetGatewayServicesResultArrayInput interface {
 	pulumi.Input
 
@@ -4714,7 +6494,7 @@ type GetGatewayServicesResultServiceList struct {
 // GetGatewayServicesResultServiceListInput is an input type that accepts GetGatewayServicesResultServiceListArgs and GetGatewayServicesResultServiceListOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListInput` via:
 //
-//          GetGatewayServicesResultServiceListArgs{...}
+//	GetGatewayServicesResultServiceListArgs{...}
 type GetGatewayServicesResultServiceListInput interface {
 	pulumi.Input
 
@@ -4754,7 +6534,7 @@ func (i GetGatewayServicesResultServiceListArgs) ToGetGatewayServicesResultServi
 // GetGatewayServicesResultServiceListArrayInput is an input type that accepts GetGatewayServicesResultServiceListArray and GetGatewayServicesResultServiceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListArrayInput` via:
 //
-//          GetGatewayServicesResultServiceListArray{ GetGatewayServicesResultServiceListArgs{...} }
+//	GetGatewayServicesResultServiceListArray{ GetGatewayServicesResultServiceListArgs{...} }
 type GetGatewayServicesResultServiceListArrayInput interface {
 	pulumi.Input
 
@@ -4891,7 +6671,7 @@ type GetGatewayServicesResultServiceListUpstreamInfo struct {
 // GetGatewayServicesResultServiceListUpstreamInfoInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoArgs and GetGatewayServicesResultServiceListUpstreamInfoOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoInput` via:
 //
-//          GetGatewayServicesResultServiceListUpstreamInfoArgs{...}
+//	GetGatewayServicesResultServiceListUpstreamInfoArgs{...}
 type GetGatewayServicesResultServiceListUpstreamInfoInput interface {
 	pulumi.Input
 
@@ -4955,7 +6735,7 @@ func (i GetGatewayServicesResultServiceListUpstreamInfoArgs) ToGetGatewayService
 // GetGatewayServicesResultServiceListUpstreamInfoArrayInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoArray and GetGatewayServicesResultServiceListUpstreamInfoArrayOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoArrayInput` via:
 //
-//          GetGatewayServicesResultServiceListUpstreamInfoArray{ GetGatewayServicesResultServiceListUpstreamInfoArgs{...} }
+//	GetGatewayServicesResultServiceListUpstreamInfoArray{ GetGatewayServicesResultServiceListUpstreamInfoArgs{...} }
 type GetGatewayServicesResultServiceListUpstreamInfoArrayInput interface {
 	pulumi.Input
 
@@ -5126,7 +6906,7 @@ type GetGatewayServicesResultServiceListUpstreamInfoTarget struct {
 // GetGatewayServicesResultServiceListUpstreamInfoTargetInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoTargetArgs and GetGatewayServicesResultServiceListUpstreamInfoTargetOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoTargetInput` via:
 //
-//          GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...}
+//	GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...}
 type GetGatewayServicesResultServiceListUpstreamInfoTargetInput interface {
 	pulumi.Input
 
@@ -5164,7 +6944,7 @@ func (i GetGatewayServicesResultServiceListUpstreamInfoTargetArgs) ToGetGatewayS
 // GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput is an input type that accepts GetGatewayServicesResultServiceListUpstreamInfoTargetArray and GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput values.
 // You can construct a concrete instance of `GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput` via:
 //
-//          GetGatewayServicesResultServiceListUpstreamInfoTargetArray{ GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...} }
+//	GetGatewayServicesResultServiceListUpstreamInfoTargetArray{ GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{...} }
 type GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput interface {
 	pulumi.Input
 
@@ -5250,6 +7030,2184 @@ func (o GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput) Index(
 	}).(GetGatewayServicesResultServiceListUpstreamInfoTargetOutput)
 }
 
+type GetGatewaysFilter struct {
+	// filter name.
+	Name string `pulumi:"name"`
+	// filter value.
+	Values []string `pulumi:"values"`
+}
+
+// GetGatewaysFilterInput is an input type that accepts GetGatewaysFilterArgs and GetGatewaysFilterOutput values.
+// You can construct a concrete instance of `GetGatewaysFilterInput` via:
+//
+//	GetGatewaysFilterArgs{...}
+type GetGatewaysFilterInput interface {
+	pulumi.Input
+
+	ToGetGatewaysFilterOutput() GetGatewaysFilterOutput
+	ToGetGatewaysFilterOutputWithContext(context.Context) GetGatewaysFilterOutput
+}
+
+type GetGatewaysFilterArgs struct {
+	// filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// filter value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetGatewaysFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysFilter)(nil)).Elem()
+}
+
+func (i GetGatewaysFilterArgs) ToGetGatewaysFilterOutput() GetGatewaysFilterOutput {
+	return i.ToGetGatewaysFilterOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysFilterArgs) ToGetGatewaysFilterOutputWithContext(ctx context.Context) GetGatewaysFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysFilterOutput)
+}
+
+// GetGatewaysFilterArrayInput is an input type that accepts GetGatewaysFilterArray and GetGatewaysFilterArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysFilterArrayInput` via:
+//
+//	GetGatewaysFilterArray{ GetGatewaysFilterArgs{...} }
+type GetGatewaysFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysFilterArrayOutput() GetGatewaysFilterArrayOutput
+	ToGetGatewaysFilterArrayOutputWithContext(context.Context) GetGatewaysFilterArrayOutput
+}
+
+type GetGatewaysFilterArray []GetGatewaysFilterInput
+
+func (GetGatewaysFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysFilter)(nil)).Elem()
+}
+
+func (i GetGatewaysFilterArray) ToGetGatewaysFilterArrayOutput() GetGatewaysFilterArrayOutput {
+	return i.ToGetGatewaysFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysFilterArray) ToGetGatewaysFilterArrayOutputWithContext(ctx context.Context) GetGatewaysFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysFilterArrayOutput)
+}
+
+type GetGatewaysFilterOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysFilter)(nil)).Elem()
+}
+
+func (o GetGatewaysFilterOutput) ToGetGatewaysFilterOutput() GetGatewaysFilterOutput {
+	return o
+}
+
+func (o GetGatewaysFilterOutput) ToGetGatewaysFilterOutputWithContext(ctx context.Context) GetGatewaysFilterOutput {
+	return o
+}
+
+// filter name.
+func (o GetGatewaysFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// filter value.
+func (o GetGatewaysFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewaysFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetGatewaysFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysFilter)(nil)).Elem()
+}
+
+func (o GetGatewaysFilterArrayOutput) ToGetGatewaysFilterArrayOutput() GetGatewaysFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewaysFilterArrayOutput) ToGetGatewaysFilterArrayOutputWithContext(ctx context.Context) GetGatewaysFilterArrayOutput {
+	return o
+}
+
+func (o GetGatewaysFilterArrayOutput) Index(i pulumi.IntInput) GetGatewaysFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysFilter {
+		return vs[0].([]GetGatewaysFilter)[vs[1].(int)]
+	}).(GetGatewaysFilterOutput)
+}
+
+type GetGatewaysResult struct {
+	// gateway list.
+	GatewayLists []GetGatewaysResultGatewayList `pulumi:"gatewayLists"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGatewaysResultInput is an input type that accepts GetGatewaysResultArgs and GetGatewaysResultOutput values.
+// You can construct a concrete instance of `GetGatewaysResultInput` via:
+//
+//	GetGatewaysResultArgs{...}
+type GetGatewaysResultInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultOutput() GetGatewaysResultOutput
+	ToGetGatewaysResultOutputWithContext(context.Context) GetGatewaysResultOutput
+}
+
+type GetGatewaysResultArgs struct {
+	// gateway list.
+	GatewayLists GetGatewaysResultGatewayListArrayInput `pulumi:"gatewayLists"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGatewaysResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResult)(nil)).Elem()
+}
+
+func (i GetGatewaysResultArgs) ToGetGatewaysResultOutput() GetGatewaysResultOutput {
+	return i.ToGetGatewaysResultOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultArgs) ToGetGatewaysResultOutputWithContext(ctx context.Context) GetGatewaysResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultOutput)
+}
+
+// GetGatewaysResultArrayInput is an input type that accepts GetGatewaysResultArray and GetGatewaysResultArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultArrayInput` via:
+//
+//	GetGatewaysResultArray{ GetGatewaysResultArgs{...} }
+type GetGatewaysResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultArrayOutput() GetGatewaysResultArrayOutput
+	ToGetGatewaysResultArrayOutputWithContext(context.Context) GetGatewaysResultArrayOutput
+}
+
+type GetGatewaysResultArray []GetGatewaysResultInput
+
+func (GetGatewaysResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResult)(nil)).Elem()
+}
+
+func (i GetGatewaysResultArray) ToGetGatewaysResultArrayOutput() GetGatewaysResultArrayOutput {
+	return i.ToGetGatewaysResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultArray) ToGetGatewaysResultArrayOutputWithContext(ctx context.Context) GetGatewaysResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultArrayOutput)
+}
+
+type GetGatewaysResultOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResult)(nil)).Elem()
+}
+
+func (o GetGatewaysResultOutput) ToGetGatewaysResultOutput() GetGatewaysResultOutput {
+	return o
+}
+
+func (o GetGatewaysResultOutput) ToGetGatewaysResultOutputWithContext(ctx context.Context) GetGatewaysResultOutput {
+	return o
+}
+
+// gateway list.
+func (o GetGatewaysResultOutput) GatewayLists() GetGatewaysResultGatewayListArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResult) []GetGatewaysResultGatewayList { return v.GatewayLists }).(GetGatewaysResultGatewayListArrayOutput)
+}
+
+// total count.
+func (o GetGatewaysResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGatewaysResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResult)(nil)).Elem()
+}
+
+func (o GetGatewaysResultArrayOutput) ToGetGatewaysResultArrayOutput() GetGatewaysResultArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultArrayOutput) ToGetGatewaysResultArrayOutputWithContext(ctx context.Context) GetGatewaysResultArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResult {
+		return vs[0].([]GetGatewaysResult)[vs[1].(int)]
+	}).(GetGatewaysResultOutput)
+}
+
+type GetGatewaysResultGatewayList struct {
+	// auto renew flag, `0`: default status, `1`: auto renew, `2`: auto not renew.
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// create time.
+	CreateTime string `pulumi:"createTime"`
+	// expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.
+	CurDeadline string `pulumi:"curDeadline"`
+	// description of gateway.
+	Description string `pulumi:"description"`
+	// whether to enable CLS log.
+	EnableCls bool `pulumi:"enableCls"`
+	// whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.
+	EnableInternet bool `pulumi:"enableInternet"`
+	// engine region of gateway.
+	EngineRegion string `pulumi:"engineRegion"`
+	// product version. `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
+	FeatureVersion string `pulumi:"featureVersion"`
+	// gateway ID.
+	GatewayId string `pulumi:"gatewayId"`
+	// minor version of gateway.
+	GatewayMinorVersion string `pulumi:"gatewayMinorVersion"`
+	// gateway version. Reference value: `2.4.1`, `2.5.1`.
+	GatewayVersion string `pulumi:"gatewayVersion"`
+	// ingress class name.
+	IngressClassName string `pulumi:"ingressClassName"`
+	// the port information that the instance monitors.
+	InstancePorts []GetGatewaysResultGatewayListInstancePort `pulumi:"instancePorts"`
+	// public network outbound traffic bandwidth.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. `BANDWIDTH`, `TRAFFIC`.
+	InternetPayMode string `pulumi:"internetPayMode"`
+	// isolation time, used when the gateway is isolated.
+	IsolateTime string `pulumi:"isolateTime"`
+	// load balance type of public internet.
+	LoadBalancerType string `pulumi:"loadBalancerType"`
+	// filter name.
+	Name string `pulumi:"name"`
+	// original node config.
+	NodeConfigs []GetGatewaysResultGatewayListNodeConfig `pulumi:"nodeConfigs"`
+	// addresses of public internet.
+	PublicIpAddresses []string `pulumi:"publicIpAddresses"`
+	// status of gateway. May return values: `Creating`, `CreateFailed`, `Running`, `Modifying`, `UpdatingSpec`, `UpdateFailed`, `Deleting`, `DeleteFailed`, `Isolating`.
+	Status string `pulumi:"status"`
+	// tags information of gatewayNote: This field may return null, indicating that a valid value is not available.
+	Tags []GetGatewaysResultGatewayListTag `pulumi:"tags"`
+	// trade type. `0`: postpaid, `1`: Prepaid.
+	TradeType int `pulumi:"tradeType"`
+	// gateway type.
+	Type string `pulumi:"type"`
+	// vpc information.
+	VpcConfigs []GetGatewaysResultGatewayListVpcConfig `pulumi:"vpcConfigs"`
+}
+
+// GetGatewaysResultGatewayListInput is an input type that accepts GetGatewaysResultGatewayListArgs and GetGatewaysResultGatewayListOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListInput` via:
+//
+//	GetGatewaysResultGatewayListArgs{...}
+type GetGatewaysResultGatewayListInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListOutput() GetGatewaysResultGatewayListOutput
+	ToGetGatewaysResultGatewayListOutputWithContext(context.Context) GetGatewaysResultGatewayListOutput
+}
+
+type GetGatewaysResultGatewayListArgs struct {
+	// auto renew flag, `0`: default status, `1`: auto renew, `2`: auto not renew.
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.
+	CurDeadline pulumi.StringInput `pulumi:"curDeadline"`
+	// description of gateway.
+	Description pulumi.StringInput `pulumi:"description"`
+	// whether to enable CLS log.
+	EnableCls pulumi.BoolInput `pulumi:"enableCls"`
+	// whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.
+	EnableInternet pulumi.BoolInput `pulumi:"enableInternet"`
+	// engine region of gateway.
+	EngineRegion pulumi.StringInput `pulumi:"engineRegion"`
+	// product version. `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
+	FeatureVersion pulumi.StringInput `pulumi:"featureVersion"`
+	// gateway ID.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// minor version of gateway.
+	GatewayMinorVersion pulumi.StringInput `pulumi:"gatewayMinorVersion"`
+	// gateway version. Reference value: `2.4.1`, `2.5.1`.
+	GatewayVersion pulumi.StringInput `pulumi:"gatewayVersion"`
+	// ingress class name.
+	IngressClassName pulumi.StringInput `pulumi:"ingressClassName"`
+	// the port information that the instance monitors.
+	InstancePorts GetGatewaysResultGatewayListInstancePortArrayInput `pulumi:"instancePorts"`
+	// public network outbound traffic bandwidth.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+	// trade type of internet. `BANDWIDTH`, `TRAFFIC`.
+	InternetPayMode pulumi.StringInput `pulumi:"internetPayMode"`
+	// isolation time, used when the gateway is isolated.
+	IsolateTime pulumi.StringInput `pulumi:"isolateTime"`
+	// load balance type of public internet.
+	LoadBalancerType pulumi.StringInput `pulumi:"loadBalancerType"`
+	// filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// original node config.
+	NodeConfigs GetGatewaysResultGatewayListNodeConfigArrayInput `pulumi:"nodeConfigs"`
+	// addresses of public internet.
+	PublicIpAddresses pulumi.StringArrayInput `pulumi:"publicIpAddresses"`
+	// status of gateway. May return values: `Creating`, `CreateFailed`, `Running`, `Modifying`, `UpdatingSpec`, `UpdateFailed`, `Deleting`, `DeleteFailed`, `Isolating`.
+	Status pulumi.StringInput `pulumi:"status"`
+	// tags information of gatewayNote: This field may return null, indicating that a valid value is not available.
+	Tags GetGatewaysResultGatewayListTagArrayInput `pulumi:"tags"`
+	// trade type. `0`: postpaid, `1`: Prepaid.
+	TradeType pulumi.IntInput `pulumi:"tradeType"`
+	// gateway type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// vpc information.
+	VpcConfigs GetGatewaysResultGatewayListVpcConfigArrayInput `pulumi:"vpcConfigs"`
+}
+
+func (GetGatewaysResultGatewayListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayList)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListArgs) ToGetGatewaysResultGatewayListOutput() GetGatewaysResultGatewayListOutput {
+	return i.ToGetGatewaysResultGatewayListOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListArgs) ToGetGatewaysResultGatewayListOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListOutput)
+}
+
+// GetGatewaysResultGatewayListArrayInput is an input type that accepts GetGatewaysResultGatewayListArray and GetGatewaysResultGatewayListArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListArrayInput` via:
+//
+//	GetGatewaysResultGatewayListArray{ GetGatewaysResultGatewayListArgs{...} }
+type GetGatewaysResultGatewayListArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListArrayOutput() GetGatewaysResultGatewayListArrayOutput
+	ToGetGatewaysResultGatewayListArrayOutputWithContext(context.Context) GetGatewaysResultGatewayListArrayOutput
+}
+
+type GetGatewaysResultGatewayListArray []GetGatewaysResultGatewayListInput
+
+func (GetGatewaysResultGatewayListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayList)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListArray) ToGetGatewaysResultGatewayListArrayOutput() GetGatewaysResultGatewayListArrayOutput {
+	return i.ToGetGatewaysResultGatewayListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListArray) ToGetGatewaysResultGatewayListArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListArrayOutput)
+}
+
+type GetGatewaysResultGatewayListOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayList)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListOutput) ToGetGatewaysResultGatewayListOutput() GetGatewaysResultGatewayListOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListOutput) ToGetGatewaysResultGatewayListOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListOutput {
+	return o
+}
+
+// auto renew flag, `0`: default status, `1`: auto renew, `2`: auto not renew.
+func (o GetGatewaysResultGatewayListOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+}
+
+// create time.
+func (o GetGatewaysResultGatewayListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewaysResultGatewayListOutput) CurDeadline() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.CurDeadline }).(pulumi.StringOutput)
+}
+
+// description of gateway.
+func (o GetGatewaysResultGatewayListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// whether to enable CLS log.
+func (o GetGatewaysResultGatewayListOutput) EnableCls() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) bool { return v.EnableCls }).(pulumi.BoolOutput)
+}
+
+// whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.
+func (o GetGatewaysResultGatewayListOutput) EnableInternet() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) bool { return v.EnableInternet }).(pulumi.BoolOutput)
+}
+
+// engine region of gateway.
+func (o GetGatewaysResultGatewayListOutput) EngineRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.EngineRegion }).(pulumi.StringOutput)
+}
+
+// product version. `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
+func (o GetGatewaysResultGatewayListOutput) FeatureVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.FeatureVersion }).(pulumi.StringOutput)
+}
+
+// gateway ID.
+func (o GetGatewaysResultGatewayListOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// minor version of gateway.
+func (o GetGatewaysResultGatewayListOutput) GatewayMinorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.GatewayMinorVersion }).(pulumi.StringOutput)
+}
+
+// gateway version. Reference value: `2.4.1`, `2.5.1`.
+func (o GetGatewaysResultGatewayListOutput) GatewayVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.GatewayVersion }).(pulumi.StringOutput)
+}
+
+// ingress class name.
+func (o GetGatewaysResultGatewayListOutput) IngressClassName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.IngressClassName }).(pulumi.StringOutput)
+}
+
+// the port information that the instance monitors.
+func (o GetGatewaysResultGatewayListOutput) InstancePorts() GetGatewaysResultGatewayListInstancePortArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) []GetGatewaysResultGatewayListInstancePort {
+		return v.InstancePorts
+	}).(GetGatewaysResultGatewayListInstancePortArrayOutput)
+}
+
+// public network outbound traffic bandwidth.
+func (o GetGatewaysResultGatewayListOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+// trade type of internet. `BANDWIDTH`, `TRAFFIC`.
+func (o GetGatewaysResultGatewayListOutput) InternetPayMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.InternetPayMode }).(pulumi.StringOutput)
+}
+
+// isolation time, used when the gateway is isolated.
+func (o GetGatewaysResultGatewayListOutput) IsolateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.IsolateTime }).(pulumi.StringOutput)
+}
+
+// load balance type of public internet.
+func (o GetGatewaysResultGatewayListOutput) LoadBalancerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.LoadBalancerType }).(pulumi.StringOutput)
+}
+
+// filter name.
+func (o GetGatewaysResultGatewayListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// original node config.
+func (o GetGatewaysResultGatewayListOutput) NodeConfigs() GetGatewaysResultGatewayListNodeConfigArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) []GetGatewaysResultGatewayListNodeConfig { return v.NodeConfigs }).(GetGatewaysResultGatewayListNodeConfigArrayOutput)
+}
+
+// addresses of public internet.
+func (o GetGatewaysResultGatewayListOutput) PublicIpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) []string { return v.PublicIpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// status of gateway. May return values: `Creating`, `CreateFailed`, `Running`, `Modifying`, `UpdatingSpec`, `UpdateFailed`, `Deleting`, `DeleteFailed`, `Isolating`.
+func (o GetGatewaysResultGatewayListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// tags information of gatewayNote: This field may return null, indicating that a valid value is not available.
+func (o GetGatewaysResultGatewayListOutput) Tags() GetGatewaysResultGatewayListTagArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) []GetGatewaysResultGatewayListTag { return v.Tags }).(GetGatewaysResultGatewayListTagArrayOutput)
+}
+
+// trade type. `0`: postpaid, `1`: Prepaid.
+func (o GetGatewaysResultGatewayListOutput) TradeType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) int { return v.TradeType }).(pulumi.IntOutput)
+}
+
+// gateway type.
+func (o GetGatewaysResultGatewayListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// vpc information.
+func (o GetGatewaysResultGatewayListOutput) VpcConfigs() GetGatewaysResultGatewayListVpcConfigArrayOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayList) []GetGatewaysResultGatewayListVpcConfig { return v.VpcConfigs }).(GetGatewaysResultGatewayListVpcConfigArrayOutput)
+}
+
+type GetGatewaysResultGatewayListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayList)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListArrayOutput) ToGetGatewaysResultGatewayListArrayOutput() GetGatewaysResultGatewayListArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListArrayOutput) ToGetGatewaysResultGatewayListArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultGatewayListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResultGatewayList {
+		return vs[0].([]GetGatewaysResultGatewayList)[vs[1].(int)]
+	}).(GetGatewaysResultGatewayListOutput)
+}
+
+type GetGatewaysResultGatewayListInstancePort struct {
+	// http port.
+	HttpPort string `pulumi:"httpPort"`
+	// https port.
+	HttpsPort string `pulumi:"httpsPort"`
+}
+
+// GetGatewaysResultGatewayListInstancePortInput is an input type that accepts GetGatewaysResultGatewayListInstancePortArgs and GetGatewaysResultGatewayListInstancePortOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListInstancePortInput` via:
+//
+//	GetGatewaysResultGatewayListInstancePortArgs{...}
+type GetGatewaysResultGatewayListInstancePortInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListInstancePortOutput() GetGatewaysResultGatewayListInstancePortOutput
+	ToGetGatewaysResultGatewayListInstancePortOutputWithContext(context.Context) GetGatewaysResultGatewayListInstancePortOutput
+}
+
+type GetGatewaysResultGatewayListInstancePortArgs struct {
+	// http port.
+	HttpPort pulumi.StringInput `pulumi:"httpPort"`
+	// https port.
+	HttpsPort pulumi.StringInput `pulumi:"httpsPort"`
+}
+
+func (GetGatewaysResultGatewayListInstancePortArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListInstancePort)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListInstancePortArgs) ToGetGatewaysResultGatewayListInstancePortOutput() GetGatewaysResultGatewayListInstancePortOutput {
+	return i.ToGetGatewaysResultGatewayListInstancePortOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListInstancePortArgs) ToGetGatewaysResultGatewayListInstancePortOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListInstancePortOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListInstancePortOutput)
+}
+
+// GetGatewaysResultGatewayListInstancePortArrayInput is an input type that accepts GetGatewaysResultGatewayListInstancePortArray and GetGatewaysResultGatewayListInstancePortArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListInstancePortArrayInput` via:
+//
+//	GetGatewaysResultGatewayListInstancePortArray{ GetGatewaysResultGatewayListInstancePortArgs{...} }
+type GetGatewaysResultGatewayListInstancePortArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListInstancePortArrayOutput() GetGatewaysResultGatewayListInstancePortArrayOutput
+	ToGetGatewaysResultGatewayListInstancePortArrayOutputWithContext(context.Context) GetGatewaysResultGatewayListInstancePortArrayOutput
+}
+
+type GetGatewaysResultGatewayListInstancePortArray []GetGatewaysResultGatewayListInstancePortInput
+
+func (GetGatewaysResultGatewayListInstancePortArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListInstancePort)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListInstancePortArray) ToGetGatewaysResultGatewayListInstancePortArrayOutput() GetGatewaysResultGatewayListInstancePortArrayOutput {
+	return i.ToGetGatewaysResultGatewayListInstancePortArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListInstancePortArray) ToGetGatewaysResultGatewayListInstancePortArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListInstancePortArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListInstancePortArrayOutput)
+}
+
+type GetGatewaysResultGatewayListInstancePortOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListInstancePortOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListInstancePort)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListInstancePortOutput) ToGetGatewaysResultGatewayListInstancePortOutput() GetGatewaysResultGatewayListInstancePortOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListInstancePortOutput) ToGetGatewaysResultGatewayListInstancePortOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListInstancePortOutput {
+	return o
+}
+
+// http port.
+func (o GetGatewaysResultGatewayListInstancePortOutput) HttpPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListInstancePort) string { return v.HttpPort }).(pulumi.StringOutput)
+}
+
+// https port.
+func (o GetGatewaysResultGatewayListInstancePortOutput) HttpsPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListInstancePort) string { return v.HttpsPort }).(pulumi.StringOutput)
+}
+
+type GetGatewaysResultGatewayListInstancePortArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListInstancePortArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListInstancePort)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListInstancePortArrayOutput) ToGetGatewaysResultGatewayListInstancePortArrayOutput() GetGatewaysResultGatewayListInstancePortArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListInstancePortArrayOutput) ToGetGatewaysResultGatewayListInstancePortArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListInstancePortArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListInstancePortArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultGatewayListInstancePortOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResultGatewayListInstancePort {
+		return vs[0].([]GetGatewaysResultGatewayListInstancePort)[vs[1].(int)]
+	}).(GetGatewaysResultGatewayListInstancePortOutput)
+}
+
+type GetGatewaysResultGatewayListNodeConfig struct {
+	// node number, 2-50.
+	Number int `pulumi:"number"`
+	// specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification string `pulumi:"specification"`
+}
+
+// GetGatewaysResultGatewayListNodeConfigInput is an input type that accepts GetGatewaysResultGatewayListNodeConfigArgs and GetGatewaysResultGatewayListNodeConfigOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListNodeConfigInput` via:
+//
+//	GetGatewaysResultGatewayListNodeConfigArgs{...}
+type GetGatewaysResultGatewayListNodeConfigInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListNodeConfigOutput() GetGatewaysResultGatewayListNodeConfigOutput
+	ToGetGatewaysResultGatewayListNodeConfigOutputWithContext(context.Context) GetGatewaysResultGatewayListNodeConfigOutput
+}
+
+type GetGatewaysResultGatewayListNodeConfigArgs struct {
+	// node number, 2-50.
+	Number pulumi.IntInput `pulumi:"number"`
+	// specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification pulumi.StringInput `pulumi:"specification"`
+}
+
+func (GetGatewaysResultGatewayListNodeConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListNodeConfig)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListNodeConfigArgs) ToGetGatewaysResultGatewayListNodeConfigOutput() GetGatewaysResultGatewayListNodeConfigOutput {
+	return i.ToGetGatewaysResultGatewayListNodeConfigOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListNodeConfigArgs) ToGetGatewaysResultGatewayListNodeConfigOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListNodeConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListNodeConfigOutput)
+}
+
+// GetGatewaysResultGatewayListNodeConfigArrayInput is an input type that accepts GetGatewaysResultGatewayListNodeConfigArray and GetGatewaysResultGatewayListNodeConfigArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListNodeConfigArrayInput` via:
+//
+//	GetGatewaysResultGatewayListNodeConfigArray{ GetGatewaysResultGatewayListNodeConfigArgs{...} }
+type GetGatewaysResultGatewayListNodeConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListNodeConfigArrayOutput() GetGatewaysResultGatewayListNodeConfigArrayOutput
+	ToGetGatewaysResultGatewayListNodeConfigArrayOutputWithContext(context.Context) GetGatewaysResultGatewayListNodeConfigArrayOutput
+}
+
+type GetGatewaysResultGatewayListNodeConfigArray []GetGatewaysResultGatewayListNodeConfigInput
+
+func (GetGatewaysResultGatewayListNodeConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListNodeConfig)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListNodeConfigArray) ToGetGatewaysResultGatewayListNodeConfigArrayOutput() GetGatewaysResultGatewayListNodeConfigArrayOutput {
+	return i.ToGetGatewaysResultGatewayListNodeConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListNodeConfigArray) ToGetGatewaysResultGatewayListNodeConfigArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListNodeConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListNodeConfigArrayOutput)
+}
+
+type GetGatewaysResultGatewayListNodeConfigOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListNodeConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListNodeConfig)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListNodeConfigOutput) ToGetGatewaysResultGatewayListNodeConfigOutput() GetGatewaysResultGatewayListNodeConfigOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListNodeConfigOutput) ToGetGatewaysResultGatewayListNodeConfigOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListNodeConfigOutput {
+	return o
+}
+
+// node number, 2-50.
+func (o GetGatewaysResultGatewayListNodeConfigOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListNodeConfig) int { return v.Number }).(pulumi.IntOutput)
+}
+
+// specification, 1c2g|2c4g|4c8g|8c16g.
+func (o GetGatewaysResultGatewayListNodeConfigOutput) Specification() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListNodeConfig) string { return v.Specification }).(pulumi.StringOutput)
+}
+
+type GetGatewaysResultGatewayListNodeConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListNodeConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListNodeConfig)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListNodeConfigArrayOutput) ToGetGatewaysResultGatewayListNodeConfigArrayOutput() GetGatewaysResultGatewayListNodeConfigArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListNodeConfigArrayOutput) ToGetGatewaysResultGatewayListNodeConfigArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListNodeConfigArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListNodeConfigArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultGatewayListNodeConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResultGatewayListNodeConfig {
+		return vs[0].([]GetGatewaysResultGatewayListNodeConfig)[vs[1].(int)]
+	}).(GetGatewaysResultGatewayListNodeConfigOutput)
+}
+
+type GetGatewaysResultGatewayListTag struct {
+	// tag key.
+	TagKey string `pulumi:"tagKey"`
+	// tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetGatewaysResultGatewayListTagInput is an input type that accepts GetGatewaysResultGatewayListTagArgs and GetGatewaysResultGatewayListTagOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListTagInput` via:
+//
+//	GetGatewaysResultGatewayListTagArgs{...}
+type GetGatewaysResultGatewayListTagInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListTagOutput() GetGatewaysResultGatewayListTagOutput
+	ToGetGatewaysResultGatewayListTagOutputWithContext(context.Context) GetGatewaysResultGatewayListTagOutput
+}
+
+type GetGatewaysResultGatewayListTagArgs struct {
+	// tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetGatewaysResultGatewayListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListTag)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListTagArgs) ToGetGatewaysResultGatewayListTagOutput() GetGatewaysResultGatewayListTagOutput {
+	return i.ToGetGatewaysResultGatewayListTagOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListTagArgs) ToGetGatewaysResultGatewayListTagOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListTagOutput)
+}
+
+// GetGatewaysResultGatewayListTagArrayInput is an input type that accepts GetGatewaysResultGatewayListTagArray and GetGatewaysResultGatewayListTagArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListTagArrayInput` via:
+//
+//	GetGatewaysResultGatewayListTagArray{ GetGatewaysResultGatewayListTagArgs{...} }
+type GetGatewaysResultGatewayListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListTagArrayOutput() GetGatewaysResultGatewayListTagArrayOutput
+	ToGetGatewaysResultGatewayListTagArrayOutputWithContext(context.Context) GetGatewaysResultGatewayListTagArrayOutput
+}
+
+type GetGatewaysResultGatewayListTagArray []GetGatewaysResultGatewayListTagInput
+
+func (GetGatewaysResultGatewayListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListTag)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListTagArray) ToGetGatewaysResultGatewayListTagArrayOutput() GetGatewaysResultGatewayListTagArrayOutput {
+	return i.ToGetGatewaysResultGatewayListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListTagArray) ToGetGatewaysResultGatewayListTagArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListTagArrayOutput)
+}
+
+type GetGatewaysResultGatewayListTagOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListTag)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListTagOutput) ToGetGatewaysResultGatewayListTagOutput() GetGatewaysResultGatewayListTagOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListTagOutput) ToGetGatewaysResultGatewayListTagOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListTagOutput {
+	return o
+}
+
+// tag key.
+func (o GetGatewaysResultGatewayListTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// tag value.
+func (o GetGatewaysResultGatewayListTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetGatewaysResultGatewayListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListTag)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListTagArrayOutput) ToGetGatewaysResultGatewayListTagArrayOutput() GetGatewaysResultGatewayListTagArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListTagArrayOutput) ToGetGatewaysResultGatewayListTagArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListTagArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListTagArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultGatewayListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResultGatewayListTag {
+		return vs[0].([]GetGatewaysResultGatewayListTag)[vs[1].(int)]
+	}).(GetGatewaysResultGatewayListTagOutput)
+}
+
+type GetGatewaysResultGatewayListVpcConfig struct {
+	// subnet ID. Assign an IP address to the engine in the VPC subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// subnet ID. Assign an IP address to the engine in the VPC subnet.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetGatewaysResultGatewayListVpcConfigInput is an input type that accepts GetGatewaysResultGatewayListVpcConfigArgs and GetGatewaysResultGatewayListVpcConfigOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListVpcConfigInput` via:
+//
+//	GetGatewaysResultGatewayListVpcConfigArgs{...}
+type GetGatewaysResultGatewayListVpcConfigInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListVpcConfigOutput() GetGatewaysResultGatewayListVpcConfigOutput
+	ToGetGatewaysResultGatewayListVpcConfigOutputWithContext(context.Context) GetGatewaysResultGatewayListVpcConfigOutput
+}
+
+type GetGatewaysResultGatewayListVpcConfigArgs struct {
+	// subnet ID. Assign an IP address to the engine in the VPC subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// subnet ID. Assign an IP address to the engine in the VPC subnet.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetGatewaysResultGatewayListVpcConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListVpcConfig)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListVpcConfigArgs) ToGetGatewaysResultGatewayListVpcConfigOutput() GetGatewaysResultGatewayListVpcConfigOutput {
+	return i.ToGetGatewaysResultGatewayListVpcConfigOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListVpcConfigArgs) ToGetGatewaysResultGatewayListVpcConfigOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListVpcConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListVpcConfigOutput)
+}
+
+// GetGatewaysResultGatewayListVpcConfigArrayInput is an input type that accepts GetGatewaysResultGatewayListVpcConfigArray and GetGatewaysResultGatewayListVpcConfigArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysResultGatewayListVpcConfigArrayInput` via:
+//
+//	GetGatewaysResultGatewayListVpcConfigArray{ GetGatewaysResultGatewayListVpcConfigArgs{...} }
+type GetGatewaysResultGatewayListVpcConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetGatewaysResultGatewayListVpcConfigArrayOutput() GetGatewaysResultGatewayListVpcConfigArrayOutput
+	ToGetGatewaysResultGatewayListVpcConfigArrayOutputWithContext(context.Context) GetGatewaysResultGatewayListVpcConfigArrayOutput
+}
+
+type GetGatewaysResultGatewayListVpcConfigArray []GetGatewaysResultGatewayListVpcConfigInput
+
+func (GetGatewaysResultGatewayListVpcConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListVpcConfig)(nil)).Elem()
+}
+
+func (i GetGatewaysResultGatewayListVpcConfigArray) ToGetGatewaysResultGatewayListVpcConfigArrayOutput() GetGatewaysResultGatewayListVpcConfigArrayOutput {
+	return i.ToGetGatewaysResultGatewayListVpcConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetGatewaysResultGatewayListVpcConfigArray) ToGetGatewaysResultGatewayListVpcConfigArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListVpcConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysResultGatewayListVpcConfigArrayOutput)
+}
+
+type GetGatewaysResultGatewayListVpcConfigOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListVpcConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysResultGatewayListVpcConfig)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListVpcConfigOutput) ToGetGatewaysResultGatewayListVpcConfigOutput() GetGatewaysResultGatewayListVpcConfigOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListVpcConfigOutput) ToGetGatewaysResultGatewayListVpcConfigOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListVpcConfigOutput {
+	return o
+}
+
+// subnet ID. Assign an IP address to the engine in the VPC subnet.
+func (o GetGatewaysResultGatewayListVpcConfigOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListVpcConfig) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// subnet ID. Assign an IP address to the engine in the VPC subnet.
+func (o GetGatewaysResultGatewayListVpcConfigOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysResultGatewayListVpcConfig) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetGatewaysResultGatewayListVpcConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGatewaysResultGatewayListVpcConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysResultGatewayListVpcConfig)(nil)).Elem()
+}
+
+func (o GetGatewaysResultGatewayListVpcConfigArrayOutput) ToGetGatewaysResultGatewayListVpcConfigArrayOutput() GetGatewaysResultGatewayListVpcConfigArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListVpcConfigArrayOutput) ToGetGatewaysResultGatewayListVpcConfigArrayOutputWithContext(ctx context.Context) GetGatewaysResultGatewayListVpcConfigArrayOutput {
+	return o
+}
+
+func (o GetGatewaysResultGatewayListVpcConfigArrayOutput) Index(i pulumi.IntInput) GetGatewaysResultGatewayListVpcConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysResultGatewayListVpcConfig {
+		return vs[0].([]GetGatewaysResultGatewayListVpcConfig)[vs[1].(int)]
+	}).(GetGatewaysResultGatewayListVpcConfigOutput)
+}
+
+type GetGroupsFilter struct {
+	// filter name.
+	Name string `pulumi:"name"`
+	// filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetGroupsFilterInput is an input type that accepts GetGroupsFilterArgs and GetGroupsFilterOutput values.
+// You can construct a concrete instance of `GetGroupsFilterInput` via:
+//
+//	GetGroupsFilterArgs{...}
+type GetGroupsFilterInput interface {
+	pulumi.Input
+
+	ToGetGroupsFilterOutput() GetGroupsFilterOutput
+	ToGetGroupsFilterOutputWithContext(context.Context) GetGroupsFilterOutput
+}
+
+type GetGroupsFilterArgs struct {
+	// filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetGroupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsFilter)(nil)).Elem()
+}
+
+func (i GetGroupsFilterArgs) ToGetGroupsFilterOutput() GetGroupsFilterOutput {
+	return i.ToGetGroupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetGroupsFilterArgs) ToGetGroupsFilterOutputWithContext(ctx context.Context) GetGroupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsFilterOutput)
+}
+
+// GetGroupsFilterArrayInput is an input type that accepts GetGroupsFilterArray and GetGroupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetGroupsFilterArrayInput` via:
+//
+//	GetGroupsFilterArray{ GetGroupsFilterArgs{...} }
+type GetGroupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsFilterArrayOutput() GetGroupsFilterArrayOutput
+	ToGetGroupsFilterArrayOutputWithContext(context.Context) GetGroupsFilterArrayOutput
+}
+
+type GetGroupsFilterArray []GetGroupsFilterInput
+
+func (GetGroupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsFilter)(nil)).Elem()
+}
+
+func (i GetGroupsFilterArray) ToGetGroupsFilterArrayOutput() GetGroupsFilterArrayOutput {
+	return i.ToGetGroupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsFilterArray) ToGetGroupsFilterArrayOutputWithContext(ctx context.Context) GetGroupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsFilterArrayOutput)
+}
+
+type GetGroupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsFilter)(nil)).Elem()
+}
+
+func (o GetGroupsFilterOutput) ToGetGroupsFilterOutput() GetGroupsFilterOutput {
+	return o
+}
+
+func (o GetGroupsFilterOutput) ToGetGroupsFilterOutputWithContext(ctx context.Context) GetGroupsFilterOutput {
+	return o
+}
+
+// filter name.
+func (o GetGroupsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// filter values.
+func (o GetGroupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGroupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetGroupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsFilter)(nil)).Elem()
+}
+
+func (o GetGroupsFilterArrayOutput) ToGetGroupsFilterArrayOutput() GetGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetGroupsFilterArrayOutput) ToGetGroupsFilterArrayOutputWithContext(ctx context.Context) GetGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetGroupsFilterArrayOutput) Index(i pulumi.IntInput) GetGroupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsFilter {
+		return vs[0].([]GetGroupsFilter)[vs[1].(int)]
+	}).(GetGroupsFilterOutput)
+}
+
+type GetGroupsResult struct {
+	// group list of gateway.
+	GatewayGroupLists []GetGroupsResultGatewayGroupList `pulumi:"gatewayGroupLists"`
+	// total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetGroupsResultInput is an input type that accepts GetGroupsResultArgs and GetGroupsResultOutput values.
+// You can construct a concrete instance of `GetGroupsResultInput` via:
+//
+//	GetGroupsResultArgs{...}
+type GetGroupsResultInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultOutput() GetGroupsResultOutput
+	ToGetGroupsResultOutputWithContext(context.Context) GetGroupsResultOutput
+}
+
+type GetGroupsResultArgs struct {
+	// group list of gateway.
+	GatewayGroupLists GetGroupsResultGatewayGroupListArrayInput `pulumi:"gatewayGroupLists"`
+	// total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetGroupsResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResult)(nil)).Elem()
+}
+
+func (i GetGroupsResultArgs) ToGetGroupsResultOutput() GetGroupsResultOutput {
+	return i.ToGetGroupsResultOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultArgs) ToGetGroupsResultOutputWithContext(ctx context.Context) GetGroupsResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultOutput)
+}
+
+// GetGroupsResultArrayInput is an input type that accepts GetGroupsResultArray and GetGroupsResultArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultArrayInput` via:
+//
+//	GetGroupsResultArray{ GetGroupsResultArgs{...} }
+type GetGroupsResultArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput
+	ToGetGroupsResultArrayOutputWithContext(context.Context) GetGroupsResultArrayOutput
+}
+
+type GetGroupsResultArray []GetGroupsResultInput
+
+func (GetGroupsResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResult)(nil)).Elem()
+}
+
+func (i GetGroupsResultArray) ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput {
+	return i.ToGetGroupsResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultArray) ToGetGroupsResultArrayOutputWithContext(ctx context.Context) GetGroupsResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultArrayOutput)
+}
+
+type GetGroupsResultOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResult)(nil)).Elem()
+}
+
+func (o GetGroupsResultOutput) ToGetGroupsResultOutput() GetGroupsResultOutput {
+	return o
+}
+
+func (o GetGroupsResultOutput) ToGetGroupsResultOutputWithContext(ctx context.Context) GetGroupsResultOutput {
+	return o
+}
+
+// group list of gateway.
+func (o GetGroupsResultOutput) GatewayGroupLists() GetGroupsResultGatewayGroupListArrayOutput {
+	return o.ApplyT(func(v GetGroupsResult) []GetGroupsResultGatewayGroupList { return v.GatewayGroupLists }).(GetGroupsResultGatewayGroupListArrayOutput)
+}
+
+// total count.
+func (o GetGroupsResultOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResult) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetGroupsResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResult)(nil)).Elem()
+}
+
+func (o GetGroupsResultArrayOutput) ToGetGroupsResultArrayOutput() GetGroupsResultArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultArrayOutput) ToGetGroupsResultArrayOutputWithContext(ctx context.Context) GetGroupsResultArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultArrayOutput) Index(i pulumi.IntInput) GetGroupsResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResult {
+		return vs[0].([]GetGroupsResult)[vs[1].(int)]
+	}).(GetGroupsResultOutput)
+}
+
+type GetGroupsResultGatewayGroupList struct {
+	// associated strategy informationNote: This field may return null, indicating that a valid value is not available.
+	BindingStrategies []GetGroupsResultGatewayGroupListBindingStrategy `pulumi:"bindingStrategies"`
+	// group create time.
+	CreateTime string `pulumi:"createTime"`
+	// group description.
+	Description string `pulumi:"description"`
+	// gateway ID.
+	GatewayId string `pulumi:"gatewayId"`
+	// group Id.
+	GroupId string `pulumi:"groupId"`
+	// public network outbound traffic bandwidth.
+	InternetMaxBandwidthOut int `pulumi:"internetMaxBandwidthOut"`
+	// whether it is the default group- 0: false.- 1: yes.
+	IsFirstGroup int `pulumi:"isFirstGroup"`
+	// modify time.
+	ModifyTime string `pulumi:"modifyTime"`
+	// filter name.
+	Name string `pulumi:"name"`
+	// group node configration.
+	NodeConfigs []GetGroupsResultGatewayGroupListNodeConfig `pulumi:"nodeConfigs"`
+	// group status.
+	Status string `pulumi:"status"`
+	// subnet IDs.
+	SubnetIds string `pulumi:"subnetIds"`
+}
+
+// GetGroupsResultGatewayGroupListInput is an input type that accepts GetGroupsResultGatewayGroupListArgs and GetGroupsResultGatewayGroupListOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListInput` via:
+//
+//	GetGroupsResultGatewayGroupListArgs{...}
+type GetGroupsResultGatewayGroupListInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListOutput() GetGroupsResultGatewayGroupListOutput
+	ToGetGroupsResultGatewayGroupListOutputWithContext(context.Context) GetGroupsResultGatewayGroupListOutput
+}
+
+type GetGroupsResultGatewayGroupListArgs struct {
+	// associated strategy informationNote: This field may return null, indicating that a valid value is not available.
+	BindingStrategies GetGroupsResultGatewayGroupListBindingStrategyArrayInput `pulumi:"bindingStrategies"`
+	// group create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// group description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// gateway ID.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// group Id.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// public network outbound traffic bandwidth.
+	InternetMaxBandwidthOut pulumi.IntInput `pulumi:"internetMaxBandwidthOut"`
+	// whether it is the default group- 0: false.- 1: yes.
+	IsFirstGroup pulumi.IntInput `pulumi:"isFirstGroup"`
+	// modify time.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// filter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// group node configration.
+	NodeConfigs GetGroupsResultGatewayGroupListNodeConfigArrayInput `pulumi:"nodeConfigs"`
+	// group status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// subnet IDs.
+	SubnetIds pulumi.StringInput `pulumi:"subnetIds"`
+}
+
+func (GetGroupsResultGatewayGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupList)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListArgs) ToGetGroupsResultGatewayGroupListOutput() GetGroupsResultGatewayGroupListOutput {
+	return i.ToGetGroupsResultGatewayGroupListOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListArgs) ToGetGroupsResultGatewayGroupListOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListOutput)
+}
+
+// GetGroupsResultGatewayGroupListArrayInput is an input type that accepts GetGroupsResultGatewayGroupListArray and GetGroupsResultGatewayGroupListArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListArray{ GetGroupsResultGatewayGroupListArgs{...} }
+type GetGroupsResultGatewayGroupListArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListArrayOutput() GetGroupsResultGatewayGroupListArrayOutput
+	ToGetGroupsResultGatewayGroupListArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListArray []GetGroupsResultGatewayGroupListInput
+
+func (GetGroupsResultGatewayGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupList)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListArray) ToGetGroupsResultGatewayGroupListArrayOutput() GetGroupsResultGatewayGroupListArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListArray) ToGetGroupsResultGatewayGroupListArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupList)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListOutput) ToGetGroupsResultGatewayGroupListOutput() GetGroupsResultGatewayGroupListOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListOutput) ToGetGroupsResultGatewayGroupListOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListOutput {
+	return o
+}
+
+// associated strategy informationNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListOutput) BindingStrategies() GetGroupsResultGatewayGroupListBindingStrategyArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) []GetGroupsResultGatewayGroupListBindingStrategy {
+		return v.BindingStrategies
+	}).(GetGroupsResultGatewayGroupListBindingStrategyArrayOutput)
+}
+
+// group create time.
+func (o GetGroupsResultGatewayGroupListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// group description.
+func (o GetGroupsResultGatewayGroupListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// gateway ID.
+func (o GetGroupsResultGatewayGroupListOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// group Id.
+func (o GetGroupsResultGatewayGroupListOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// public network outbound traffic bandwidth.
+func (o GetGroupsResultGatewayGroupListOutput) InternetMaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) int { return v.InternetMaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+// whether it is the default group- 0: false.- 1: yes.
+func (o GetGroupsResultGatewayGroupListOutput) IsFirstGroup() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) int { return v.IsFirstGroup }).(pulumi.IntOutput)
+}
+
+// modify time.
+func (o GetGroupsResultGatewayGroupListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// filter name.
+func (o GetGroupsResultGatewayGroupListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// group node configration.
+func (o GetGroupsResultGatewayGroupListOutput) NodeConfigs() GetGroupsResultGatewayGroupListNodeConfigArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) []GetGroupsResultGatewayGroupListNodeConfig {
+		return v.NodeConfigs
+	}).(GetGroupsResultGatewayGroupListNodeConfigArrayOutput)
+}
+
+// group status.
+func (o GetGroupsResultGatewayGroupListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// subnet IDs.
+func (o GetGroupsResultGatewayGroupListOutput) SubnetIds() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupList) string { return v.SubnetIds }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupList)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListArrayOutput) ToGetGroupsResultGatewayGroupListArrayOutput() GetGroupsResultGatewayGroupListArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListArrayOutput) ToGetGroupsResultGatewayGroupListArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupList {
+		return vs[0].([]GetGroupsResultGatewayGroupList)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategy struct {
+	// auto scaling configurationNote: This field may return null, indicating that a valid value is not available.
+	Configs []GetGroupsResultGatewayGroupListBindingStrategyConfig `pulumi:"configs"`
+	// group create time.
+	CreateTime string `pulumi:"createTime"`
+	// timing scaling configurationNote: This field may return null, indicating that a valid value is not available.
+	CronConfigs []GetGroupsResultGatewayGroupListBindingStrategyCronConfig `pulumi:"cronConfigs"`
+	// group description.
+	Description string `pulumi:"description"`
+	// gateway ID.
+	GatewayId string `pulumi:"gatewayId"`
+	// maximum number of replicas.
+	MaxReplicas int `pulumi:"maxReplicas"`
+	// modify time.
+	ModifyTime string `pulumi:"modifyTime"`
+	// strategy ID.
+	StrategyId string `pulumi:"strategyId"`
+	// strategy nameNote: This field may return null, indicating that a valid value is not available.
+	StrategyName string `pulumi:"strategyName"`
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyArgs and GetGroupsResultGatewayGroupListBindingStrategyOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyArgs{...}
+type GetGroupsResultGatewayGroupListBindingStrategyInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyOutput() GetGroupsResultGatewayGroupListBindingStrategyOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyArgs struct {
+	// auto scaling configurationNote: This field may return null, indicating that a valid value is not available.
+	Configs GetGroupsResultGatewayGroupListBindingStrategyConfigArrayInput `pulumi:"configs"`
+	// group create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// timing scaling configurationNote: This field may return null, indicating that a valid value is not available.
+	CronConfigs GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayInput `pulumi:"cronConfigs"`
+	// group description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// gateway ID.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// maximum number of replicas.
+	MaxReplicas pulumi.IntInput `pulumi:"maxReplicas"`
+	// modify time.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// strategy ID.
+	StrategyId pulumi.StringInput `pulumi:"strategyId"`
+	// strategy nameNote: This field may return null, indicating that a valid value is not available.
+	StrategyName pulumi.StringInput `pulumi:"strategyName"`
+}
+
+func (GetGroupsResultGatewayGroupListBindingStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategy)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyArgs) ToGetGroupsResultGatewayGroupListBindingStrategyOutput() GetGroupsResultGatewayGroupListBindingStrategyOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyArgs) ToGetGroupsResultGatewayGroupListBindingStrategyOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyOutput)
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyArrayInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyArray and GetGroupsResultGatewayGroupListBindingStrategyArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyArray{ GetGroupsResultGatewayGroupListBindingStrategyArgs{...} }
+type GetGroupsResultGatewayGroupListBindingStrategyArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyArrayOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyArray []GetGroupsResultGatewayGroupListBindingStrategyInput
+
+func (GetGroupsResultGatewayGroupListBindingStrategyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategy)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyArray) ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyArray) ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategy)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) ToGetGroupsResultGatewayGroupListBindingStrategyOutput() GetGroupsResultGatewayGroupListBindingStrategyOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) ToGetGroupsResultGatewayGroupListBindingStrategyOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyOutput {
+	return o
+}
+
+// auto scaling configurationNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) Configs() GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) []GetGroupsResultGatewayGroupListBindingStrategyConfig {
+		return v.Configs
+	}).(GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput)
+}
+
+// group create time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// timing scaling configurationNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) CronConfigs() GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) []GetGroupsResultGatewayGroupListBindingStrategyCronConfig {
+		return v.CronConfigs
+	}).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput)
+}
+
+// group description.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// gateway ID.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// maximum number of replicas.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) MaxReplicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) int { return v.MaxReplicas }).(pulumi.IntOutput)
+}
+
+// modify time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// strategy ID.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) StrategyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.StrategyId }).(pulumi.StringOutput)
+}
+
+// strategy nameNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyOutput) StrategyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategy) string { return v.StrategyName }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategy)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListBindingStrategyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListBindingStrategy {
+		return vs[0].([]GetGroupsResultGatewayGroupListBindingStrategy)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListBindingStrategyOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfig struct {
+	// auto scaler IDNote: This field may return null, indicating that a valid value is not available.
+	AutoScalerId string `pulumi:"autoScalerId"`
+	// group create time.
+	CreateTime string `pulumi:"createTime"`
+	// whether to enable timing auto scaling.
+	Enabled bool `pulumi:"enabled"`
+	// maximum number of replicas.
+	MaxReplicas int `pulumi:"maxReplicas"`
+	// metric listNote: This field may return null, indicating that a valid value is not available.
+	Metrics []GetGroupsResultGatewayGroupListBindingStrategyConfigMetric `pulumi:"metrics"`
+	// modify time.
+	ModifyTime string `pulumi:"modifyTime"`
+	// strategy ID.
+	StrategyId string `pulumi:"strategyId"`
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyConfigInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyConfigArgs and GetGroupsResultGatewayGroupListBindingStrategyConfigOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyConfigInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyConfigArgs{...}
+type GetGroupsResultGatewayGroupListBindingStrategyConfigInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigArgs struct {
+	// auto scaler IDNote: This field may return null, indicating that a valid value is not available.
+	AutoScalerId pulumi.StringInput `pulumi:"autoScalerId"`
+	// group create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// whether to enable timing auto scaling.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// maximum number of replicas.
+	MaxReplicas pulumi.IntInput `pulumi:"maxReplicas"`
+	// metric listNote: This field may return null, indicating that a valid value is not available.
+	Metrics GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayInput `pulumi:"metrics"`
+	// modify time.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// strategy ID.
+	StrategyId pulumi.StringInput `pulumi:"strategyId"`
+}
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigArgs) ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigArgs) ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyConfigOutput)
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyConfigArrayInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyConfigArray and GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyConfigArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyConfigArray{ GetGroupsResultGatewayGroupListBindingStrategyConfigArgs{...} }
+type GetGroupsResultGatewayGroupListBindingStrategyConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigArray []GetGroupsResultGatewayGroupListBindingStrategyConfigInput
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigArray) ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigArray) ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigOutput {
+	return o
+}
+
+// auto scaler IDNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) AutoScalerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) string { return v.AutoScalerId }).(pulumi.StringOutput)
+}
+
+// group create time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// whether to enable timing auto scaling.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// maximum number of replicas.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) MaxReplicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) int { return v.MaxReplicas }).(pulumi.IntOutput)
+}
+
+// metric listNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) Metrics() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) []GetGroupsResultGatewayGroupListBindingStrategyConfigMetric {
+		return v.Metrics
+	}).(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput)
+}
+
+// modify time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// strategy ID.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigOutput) StrategyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfig) string { return v.StrategyId }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListBindingStrategyConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListBindingStrategyConfig {
+		return vs[0].([]GetGroupsResultGatewayGroupListBindingStrategyConfig)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListBindingStrategyConfigOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetric struct {
+	// metric resource nameNote: This field may return null, indicating that a valid value is not available.
+	ResourceName string `pulumi:"resourceName"`
+	// metric target typeNote: This field may return null, indicating that a valid value is not available.
+	TargetType string `pulumi:"targetType"`
+	// metric target valueNote: This field may return null, indicating that a valid value is not available.
+	TargetValue int `pulumi:"targetValue"`
+	// metric typeNote: This field may return null, indicating that a valid value is not available.
+	Type string `pulumi:"type"`
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyConfigMetricInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs and GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyConfigMetricInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs{...}
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs struct {
+	// metric resource nameNote: This field may return null, indicating that a valid value is not available.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// metric target typeNote: This field may return null, indicating that a valid value is not available.
+	TargetType pulumi.StringInput `pulumi:"targetType"`
+	// metric target valueNote: This field may return null, indicating that a valid value is not available.
+	TargetValue pulumi.IntInput `pulumi:"targetValue"`
+	// metric typeNote: This field may return null, indicating that a valid value is not available.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigMetric)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput)
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray and GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray{ GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs{...} }
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray []GetGroupsResultGatewayGroupListBindingStrategyConfigMetricInput
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyConfigMetric)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigMetric)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput {
+	return o
+}
+
+// metric resource nameNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfigMetric) string { return v.ResourceName }).(pulumi.StringOutput)
+}
+
+// metric target typeNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) TargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfigMetric) string { return v.TargetType }).(pulumi.StringOutput)
+}
+
+// metric target valueNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) TargetValue() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfigMetric) int { return v.TargetValue }).(pulumi.IntOutput)
+}
+
+// metric typeNote: This field may return null, indicating that a valid value is not available.
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyConfigMetric) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyConfigMetric)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListBindingStrategyConfigMetric {
+		return vs[0].([]GetGroupsResultGatewayGroupListBindingStrategyConfigMetric)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfig struct {
+	// group create time.
+	CreateTime string `pulumi:"createTime"`
+	// whether to enable timing auto scaling.
+	Enabled bool `pulumi:"enabled"`
+	// modify time.
+	ModifyTime string `pulumi:"modifyTime"`
+	// params of timing auto scaling.
+	Params []GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam `pulumi:"params"`
+	// strategy ID.
+	StrategyId string `pulumi:"strategyId"`
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyCronConfigInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs and GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyCronConfigInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs{...}
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs struct {
+	// group create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// whether to enable timing auto scaling.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// modify time.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// params of timing auto scaling.
+	Params GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayInput `pulumi:"params"`
+	// strategy ID.
+	StrategyId pulumi.StringInput `pulumi:"strategyId"`
+}
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput)
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray and GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray{ GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs{...} }
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray []GetGroupsResultGatewayGroupListBindingStrategyCronConfigInput
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyCronConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput {
+	return o
+}
+
+// group create time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfig) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// whether to enable timing auto scaling.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfig) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// modify time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfig) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// params of timing auto scaling.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) Params() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfig) []GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam {
+		return v.Params
+	}).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput)
+}
+
+// strategy ID.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput) StrategyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfig) string { return v.StrategyId }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyCronConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListBindingStrategyCronConfig {
+		return vs[0].([]GetGroupsResultGatewayGroupListBindingStrategyCronConfig)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam struct {
+	// cron expression.
+	Crontab string `pulumi:"crontab"`
+	// period of timing auto scaling.
+	Period string `pulumi:"period"`
+	// start time.
+	StartAt string `pulumi:"startAt"`
+	// target replicas.
+	TargetReplicas int `pulumi:"targetReplicas"`
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs and GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs{...}
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs struct {
+	// cron expression.
+	Crontab pulumi.StringInput `pulumi:"crontab"`
+	// period of timing auto scaling.
+	Period pulumi.StringInput `pulumi:"period"`
+	// start time.
+	StartAt pulumi.StringInput `pulumi:"startAt"`
+	// target replicas.
+	TargetReplicas pulumi.IntInput `pulumi:"targetReplicas"`
+}
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput)
+}
+
+// GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayInput is an input type that accepts GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray and GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray{ GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs{...} }
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput
+	ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray []GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamInput
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput {
+	return o
+}
+
+// cron expression.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) Crontab() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam) string { return v.Crontab }).(pulumi.StringOutput)
+}
+
+// period of timing auto scaling.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) Period() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam) string { return v.Period }).(pulumi.StringOutput)
+}
+
+// start time.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) StartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam) string { return v.StartAt }).(pulumi.StringOutput)
+}
+
+// target replicas.
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput) TargetReplicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam) int { return v.TargetReplicas }).(pulumi.IntOutput)
+}
+
+type GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput() GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput) ToGetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam {
+		return vs[0].([]GetGroupsResultGatewayGroupListBindingStrategyCronConfigParam)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput)
+}
+
+type GetGroupsResultGatewayGroupListNodeConfig struct {
+	// group node number, 2-50.
+	Number int `pulumi:"number"`
+	// group specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification string `pulumi:"specification"`
+}
+
+// GetGroupsResultGatewayGroupListNodeConfigInput is an input type that accepts GetGroupsResultGatewayGroupListNodeConfigArgs and GetGroupsResultGatewayGroupListNodeConfigOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListNodeConfigInput` via:
+//
+//	GetGroupsResultGatewayGroupListNodeConfigArgs{...}
+type GetGroupsResultGatewayGroupListNodeConfigInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListNodeConfigOutput() GetGroupsResultGatewayGroupListNodeConfigOutput
+	ToGetGroupsResultGatewayGroupListNodeConfigOutputWithContext(context.Context) GetGroupsResultGatewayGroupListNodeConfigOutput
+}
+
+type GetGroupsResultGatewayGroupListNodeConfigArgs struct {
+	// group node number, 2-50.
+	Number pulumi.IntInput `pulumi:"number"`
+	// group specification, 1c2g|2c4g|4c8g|8c16g.
+	Specification pulumi.StringInput `pulumi:"specification"`
+}
+
+func (GetGroupsResultGatewayGroupListNodeConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListNodeConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListNodeConfigArgs) ToGetGroupsResultGatewayGroupListNodeConfigOutput() GetGroupsResultGatewayGroupListNodeConfigOutput {
+	return i.ToGetGroupsResultGatewayGroupListNodeConfigOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListNodeConfigArgs) ToGetGroupsResultGatewayGroupListNodeConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListNodeConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListNodeConfigOutput)
+}
+
+// GetGroupsResultGatewayGroupListNodeConfigArrayInput is an input type that accepts GetGroupsResultGatewayGroupListNodeConfigArray and GetGroupsResultGatewayGroupListNodeConfigArrayOutput values.
+// You can construct a concrete instance of `GetGroupsResultGatewayGroupListNodeConfigArrayInput` via:
+//
+//	GetGroupsResultGatewayGroupListNodeConfigArray{ GetGroupsResultGatewayGroupListNodeConfigArgs{...} }
+type GetGroupsResultGatewayGroupListNodeConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsResultGatewayGroupListNodeConfigArrayOutput() GetGroupsResultGatewayGroupListNodeConfigArrayOutput
+	ToGetGroupsResultGatewayGroupListNodeConfigArrayOutputWithContext(context.Context) GetGroupsResultGatewayGroupListNodeConfigArrayOutput
+}
+
+type GetGroupsResultGatewayGroupListNodeConfigArray []GetGroupsResultGatewayGroupListNodeConfigInput
+
+func (GetGroupsResultGatewayGroupListNodeConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListNodeConfig)(nil)).Elem()
+}
+
+func (i GetGroupsResultGatewayGroupListNodeConfigArray) ToGetGroupsResultGatewayGroupListNodeConfigArrayOutput() GetGroupsResultGatewayGroupListNodeConfigArrayOutput {
+	return i.ToGetGroupsResultGatewayGroupListNodeConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsResultGatewayGroupListNodeConfigArray) ToGetGroupsResultGatewayGroupListNodeConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListNodeConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsResultGatewayGroupListNodeConfigArrayOutput)
+}
+
+type GetGroupsResultGatewayGroupListNodeConfigOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListNodeConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsResultGatewayGroupListNodeConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListNodeConfigOutput) ToGetGroupsResultGatewayGroupListNodeConfigOutput() GetGroupsResultGatewayGroupListNodeConfigOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListNodeConfigOutput) ToGetGroupsResultGatewayGroupListNodeConfigOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListNodeConfigOutput {
+	return o
+}
+
+// group node number, 2-50.
+func (o GetGroupsResultGatewayGroupListNodeConfigOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListNodeConfig) int { return v.Number }).(pulumi.IntOutput)
+}
+
+// group specification, 1c2g|2c4g|4c8g|8c16g.
+func (o GetGroupsResultGatewayGroupListNodeConfigOutput) Specification() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsResultGatewayGroupListNodeConfig) string { return v.Specification }).(pulumi.StringOutput)
+}
+
+type GetGroupsResultGatewayGroupListNodeConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsResultGatewayGroupListNodeConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsResultGatewayGroupListNodeConfig)(nil)).Elem()
+}
+
+func (o GetGroupsResultGatewayGroupListNodeConfigArrayOutput) ToGetGroupsResultGatewayGroupListNodeConfigArrayOutput() GetGroupsResultGatewayGroupListNodeConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListNodeConfigArrayOutput) ToGetGroupsResultGatewayGroupListNodeConfigArrayOutputWithContext(ctx context.Context) GetGroupsResultGatewayGroupListNodeConfigArrayOutput {
+	return o
+}
+
+func (o GetGroupsResultGatewayGroupListNodeConfigArrayOutput) Index(i pulumi.IntInput) GetGroupsResultGatewayGroupListNodeConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsResultGatewayGroupListNodeConfig {
+		return vs[0].([]GetGroupsResultGatewayGroupListNodeConfig)[vs[1].(int)]
+	}).(GetGroupsResultGatewayGroupListNodeConfigOutput)
+}
+
 type GetNacosReplicasReplica struct {
 	// name.
 	Name string `pulumi:"name"`
@@ -5270,7 +9228,7 @@ type GetNacosReplicasReplica struct {
 // GetNacosReplicasReplicaInput is an input type that accepts GetNacosReplicasReplicaArgs and GetNacosReplicasReplicaOutput values.
 // You can construct a concrete instance of `GetNacosReplicasReplicaInput` via:
 //
-//          GetNacosReplicasReplicaArgs{...}
+//	GetNacosReplicasReplicaArgs{...}
 type GetNacosReplicasReplicaInput interface {
 	pulumi.Input
 
@@ -5310,7 +9268,7 @@ func (i GetNacosReplicasReplicaArgs) ToGetNacosReplicasReplicaOutputWithContext(
 // GetNacosReplicasReplicaArrayInput is an input type that accepts GetNacosReplicasReplicaArray and GetNacosReplicasReplicaArrayOutput values.
 // You can construct a concrete instance of `GetNacosReplicasReplicaArrayInput` via:
 //
-//          GetNacosReplicasReplicaArray{ GetNacosReplicasReplicaArgs{...} }
+//	GetNacosReplicasReplicaArray{ GetNacosReplicasReplicaArgs{...} }
 type GetNacosReplicasReplicaArrayInput interface {
 	pulumi.Input
 
@@ -5409,7 +9367,7 @@ type GetNacosServerInterfacesContent struct {
 // GetNacosServerInterfacesContentInput is an input type that accepts GetNacosServerInterfacesContentArgs and GetNacosServerInterfacesContentOutput values.
 // You can construct a concrete instance of `GetNacosServerInterfacesContentInput` via:
 //
-//          GetNacosServerInterfacesContentArgs{...}
+//	GetNacosServerInterfacesContentArgs{...}
 type GetNacosServerInterfacesContentInput interface {
 	pulumi.Input
 
@@ -5437,7 +9395,7 @@ func (i GetNacosServerInterfacesContentArgs) ToGetNacosServerInterfacesContentOu
 // GetNacosServerInterfacesContentArrayInput is an input type that accepts GetNacosServerInterfacesContentArray and GetNacosServerInterfacesContentArrayOutput values.
 // You can construct a concrete instance of `GetNacosServerInterfacesContentArrayInput` via:
 //
-//          GetNacosServerInterfacesContentArray{ GetNacosServerInterfacesContentArgs{...} }
+//	GetNacosServerInterfacesContentArray{ GetNacosServerInterfacesContentArgs{...} }
 type GetNacosServerInterfacesContentArrayInput interface {
 	pulumi.Input
 
@@ -5520,7 +9478,7 @@ type GetZookeeperReplicasReplica struct {
 // GetZookeeperReplicasReplicaInput is an input type that accepts GetZookeeperReplicasReplicaArgs and GetZookeeperReplicasReplicaOutput values.
 // You can construct a concrete instance of `GetZookeeperReplicasReplicaInput` via:
 //
-//          GetZookeeperReplicasReplicaArgs{...}
+//	GetZookeeperReplicasReplicaArgs{...}
 type GetZookeeperReplicasReplicaInput interface {
 	pulumi.Input
 
@@ -5562,7 +9520,7 @@ func (i GetZookeeperReplicasReplicaArgs) ToGetZookeeperReplicasReplicaOutputWith
 // GetZookeeperReplicasReplicaArrayInput is an input type that accepts GetZookeeperReplicasReplicaArray and GetZookeeperReplicasReplicaArrayOutput values.
 // You can construct a concrete instance of `GetZookeeperReplicasReplicaArrayInput` via:
 //
-//          GetZookeeperReplicasReplicaArray{ GetZookeeperReplicasReplicaArgs{...} }
+//	GetZookeeperReplicasReplicaArray{ GetZookeeperReplicasReplicaArgs{...} }
 type GetZookeeperReplicasReplicaArrayInput interface {
 	pulumi.Input
 
@@ -5666,7 +9624,7 @@ type GetZookeeperServerInterfacesContent struct {
 // GetZookeeperServerInterfacesContentInput is an input type that accepts GetZookeeperServerInterfacesContentArgs and GetZookeeperServerInterfacesContentOutput values.
 // You can construct a concrete instance of `GetZookeeperServerInterfacesContentInput` via:
 //
-//          GetZookeeperServerInterfacesContentArgs{...}
+//	GetZookeeperServerInterfacesContentArgs{...}
 type GetZookeeperServerInterfacesContentInput interface {
 	pulumi.Input
 
@@ -5694,7 +9652,7 @@ func (i GetZookeeperServerInterfacesContentArgs) ToGetZookeeperServerInterfacesC
 // GetZookeeperServerInterfacesContentArrayInput is an input type that accepts GetZookeeperServerInterfacesContentArray and GetZookeeperServerInterfacesContentArrayOutput values.
 // You can construct a concrete instance of `GetZookeeperServerInterfacesContentArrayInput` via:
 //
-//          GetZookeeperServerInterfacesContentArray{ GetZookeeperServerInterfacesContentArgs{...} }
+//	GetZookeeperServerInterfacesContentArray{ GetZookeeperServerInterfacesContentArgs{...} }
 type GetZookeeperServerInterfacesContentArrayInput interface {
 	pulumi.Input
 
@@ -5762,6 +9720,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleBalancedServiceListArrayInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleBalancedServiceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionListInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleConditionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwCanaryRuleCanaryRuleConditionListArrayInput)(nil)).Elem(), CngwCanaryRuleCanaryRuleConditionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayInstancePortInput)(nil)).Elem(), CngwGatewayInstancePortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayInstancePortArrayInput)(nil)).Elem(), CngwGatewayInstancePortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayInternetConfigInput)(nil)).Elem(), CngwGatewayInternetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayInternetConfigPtrInput)(nil)).Elem(), CngwGatewayInternetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayNodeConfigInput)(nil)).Elem(), CngwGatewayNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayNodeConfigPtrInput)(nil)).Elem(), CngwGatewayNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayVpcConfigInput)(nil)).Elem(), CngwGatewayVpcConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGatewayVpcConfigPtrInput)(nil)).Elem(), CngwGatewayVpcConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGroupInternetConfigInput)(nil)).Elem(), CngwGroupInternetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGroupInternetConfigPtrInput)(nil)).Elem(), CngwGroupInternetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGroupNodeConfigInput)(nil)).Elem(), CngwGroupNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CngwGroupNodeConfigPtrInput)(nil)).Elem(), CngwGroupNodeConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteHeaderInput)(nil)).Elem(), CngwRouteHeaderArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteHeaderArrayInput)(nil)).Elem(), CngwRouteHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CngwRouteRateLimitLimitDetailInput)(nil)).Elem(), CngwRouteRateLimitLimitDetailArgs{})
@@ -5804,6 +9774,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionListInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListConditionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayInput)(nil)).Elem(), GetGatewayCanaryRulesResultCanaryRuleListConditionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesFilterInput)(nil)).Elem(), GetGatewayCertificatesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesFilterArrayInput)(nil)).Elem(), GetGatewayCertificatesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesResultInput)(nil)).Elem(), GetGatewayCertificatesResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesResultArrayInput)(nil)).Elem(), GetGatewayCertificatesResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesResultCertificatesListInput)(nil)).Elem(), GetGatewayCertificatesResultCertificatesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayCertificatesResultCertificatesListArrayInput)(nil)).Elem(), GetGatewayCertificatesResultCertificatesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayNodesNodeListInput)(nil)).Elem(), GetGatewayNodesNodeListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayNodesNodeListArrayInput)(nil)).Elem(), GetGatewayNodesNodeListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesResultInput)(nil)).Elem(), GetGatewayRoutesResultArgs{})
@@ -5822,6 +9798,38 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoArrayInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTargetInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoTargetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayServicesResultServiceListUpstreamInfoTargetArrayInput)(nil)).Elem(), GetGatewayServicesResultServiceListUpstreamInfoTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysFilterInput)(nil)).Elem(), GetGatewaysFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysFilterArrayInput)(nil)).Elem(), GetGatewaysFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultInput)(nil)).Elem(), GetGatewaysResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultArrayInput)(nil)).Elem(), GetGatewaysResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListInput)(nil)).Elem(), GetGatewaysResultGatewayListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListArrayInput)(nil)).Elem(), GetGatewaysResultGatewayListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListInstancePortInput)(nil)).Elem(), GetGatewaysResultGatewayListInstancePortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListInstancePortArrayInput)(nil)).Elem(), GetGatewaysResultGatewayListInstancePortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListNodeConfigInput)(nil)).Elem(), GetGatewaysResultGatewayListNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListNodeConfigArrayInput)(nil)).Elem(), GetGatewaysResultGatewayListNodeConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListTagInput)(nil)).Elem(), GetGatewaysResultGatewayListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListTagArrayInput)(nil)).Elem(), GetGatewaysResultGatewayListTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListVpcConfigInput)(nil)).Elem(), GetGatewaysResultGatewayListVpcConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysResultGatewayListVpcConfigArrayInput)(nil)).Elem(), GetGatewaysResultGatewayListVpcConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsFilterInput)(nil)).Elem(), GetGroupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsFilterArrayInput)(nil)).Elem(), GetGroupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultInput)(nil)).Elem(), GetGroupsResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultArrayInput)(nil)).Elem(), GetGroupsResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListInput)(nil)).Elem(), GetGroupsResultGatewayGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigMetricInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyCronConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListNodeConfigInput)(nil)).Elem(), GetGroupsResultGatewayGroupListNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsResultGatewayGroupListNodeConfigArrayInput)(nil)).Elem(), GetGroupsResultGatewayGroupListNodeConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosReplicasReplicaInput)(nil)).Elem(), GetNacosReplicasReplicaArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosReplicasReplicaArrayInput)(nil)).Elem(), GetNacosReplicasReplicaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNacosServerInterfacesContentInput)(nil)).Elem(), GetNacosServerInterfacesContentArgs{})
@@ -5836,6 +9844,18 @@ func init() {
 	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleBalancedServiceListArrayOutput{})
 	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleConditionListOutput{})
 	pulumi.RegisterOutputType(CngwCanaryRuleCanaryRuleConditionListArrayOutput{})
+	pulumi.RegisterOutputType(CngwGatewayInstancePortOutput{})
+	pulumi.RegisterOutputType(CngwGatewayInstancePortArrayOutput{})
+	pulumi.RegisterOutputType(CngwGatewayInternetConfigOutput{})
+	pulumi.RegisterOutputType(CngwGatewayInternetConfigPtrOutput{})
+	pulumi.RegisterOutputType(CngwGatewayNodeConfigOutput{})
+	pulumi.RegisterOutputType(CngwGatewayNodeConfigPtrOutput{})
+	pulumi.RegisterOutputType(CngwGatewayVpcConfigOutput{})
+	pulumi.RegisterOutputType(CngwGatewayVpcConfigPtrOutput{})
+	pulumi.RegisterOutputType(CngwGroupInternetConfigOutput{})
+	pulumi.RegisterOutputType(CngwGroupInternetConfigPtrOutput{})
+	pulumi.RegisterOutputType(CngwGroupNodeConfigOutput{})
+	pulumi.RegisterOutputType(CngwGroupNodeConfigPtrOutput{})
 	pulumi.RegisterOutputType(CngwRouteHeaderOutput{})
 	pulumi.RegisterOutputType(CngwRouteHeaderArrayOutput{})
 	pulumi.RegisterOutputType(CngwRouteRateLimitLimitDetailOutput{})
@@ -5878,6 +9898,12 @@ func init() {
 	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListConditionListOutput{})
 	pulumi.RegisterOutputType(GetGatewayCanaryRulesResultCanaryRuleListConditionListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesFilterOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesResultOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesResultCertificatesListOutput{})
+	pulumi.RegisterOutputType(GetGatewayCertificatesResultCertificatesListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayNodesNodeListOutput{})
 	pulumi.RegisterOutputType(GetGatewayNodesNodeListArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayRoutesResultOutput{})
@@ -5896,6 +9922,38 @@ func init() {
 	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoTargetOutput{})
 	pulumi.RegisterOutputType(GetGatewayServicesResultServiceListUpstreamInfoTargetArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysFilterOutput{})
+	pulumi.RegisterOutputType(GetGatewaysFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListInstancePortOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListInstancePortArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListNodeConfigOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListNodeConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListTagOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListTagArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListVpcConfigOutput{})
+	pulumi.RegisterOutputType(GetGatewaysResultGatewayListVpcConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsFilterOutput{})
+	pulumi.RegisterOutputType(GetGroupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyConfigOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyCronConfigOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyCronConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListNodeConfigOutput{})
+	pulumi.RegisterOutputType(GetGroupsResultGatewayGroupListNodeConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetNacosReplicasReplicaOutput{})
 	pulumi.RegisterOutputType(GetNacosReplicasReplicaArrayOutput{})
 	pulumi.RegisterOutputType(GetNacosServerInterfacesContentOutput{})

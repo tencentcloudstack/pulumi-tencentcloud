@@ -19,82 +19,85 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewDeployContainerGroup(ctx, "deployContainerGroup", &Tsf.DeployContainerGroupArgs{
-// 			AgentCpuLimit:   pulumi.String("0.2"),
-// 			AgentCpuRequest: pulumi.String("0.1"),
-// 			AgentMemLimit:   pulumi.String("400"),
-// 			AgentMemRequest: pulumi.String("125"),
-// 			CpuLimit:        pulumi.String("0.5"),
-// 			CpuRequest:      pulumi.String("0.25"),
-// 			DeployAgent:     pulumi.Bool(true),
-// 			DoNotStart:      pulumi.Bool(false),
-// 			GroupId:         pulumi.String("group-yqml6w3a"),
-// 			HealthCheckSettings: &tsf.DeployContainerGroupHealthCheckSettingsArgs{
-// 				ReadinessProbe: &tsf.DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{
-// 					ActionType:          pulumi.String("TCP"),
-// 					FailureThreshold:    pulumi.Int(3),
-// 					InitialDelaySeconds: pulumi.Int(0),
-// 					Path:                pulumi.String("/"),
-// 					PeriodSeconds:       pulumi.Int(30),
-// 					Port:                pulumi.Int(80),
-// 					Scheme:              pulumi.String("HTTP"),
-// 					SuccessThreshold:    pulumi.Int(1),
-// 					TimeoutSeconds:      pulumi.Int(3),
-// 					Type:                pulumi.String("TSF_DEFAULT"),
-// 				},
-// 			},
-// 			InstanceNum:    pulumi.Int(1),
-// 			JvmOpts:        pulumi.String("-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m"),
-// 			MaxSurge:       pulumi.String(fmt.Sprintf("%v%v", "25", "%")),
-// 			MaxUnavailable: pulumi.String("0"),
-// 			MemLimit:       pulumi.String("1280"),
-// 			MemRequest:     pulumi.String("640"),
-// 			RepoType:       pulumi.String("personal"),
-// 			Reponame:       pulumi.String("tsf_100011913960/terraform"),
-// 			SchedulingStrategy: &tsf.DeployContainerGroupSchedulingStrategyArgs{
-// 				Type: pulumi.String("NONE"),
-// 			},
-// 			Server: pulumi.String("ccr.ccs.tencentyun.com"),
-// 			ServiceSetting: &tsf.DeployContainerGroupServiceSettingArgs{
-// 				AccessType:          pulumi.Int(1),
-// 				AllowDeleteService:  pulumi.Bool(true),
-// 				DisableService:      pulumi.Bool(false),
-// 				HeadlessService:     pulumi.Bool(false),
-// 				OpenSessionAffinity: pulumi.Bool(false),
-// 				ProtocolPorts: tsf.DeployContainerGroupServiceSettingProtocolPortArray{
-// 					&tsf.DeployContainerGroupServiceSettingProtocolPortArgs{
-// 						NodePort:   pulumi.Int(30001),
-// 						Port:       pulumi.Int(18081),
-// 						Protocol:   pulumi.String("TCP"),
-// 						TargetPort: pulumi.Int(18081),
-// 					},
-// 				},
-// 				SessionAffinityTimeoutSeconds: pulumi.Int(10800),
-// 				SubnetId:                      pulumi.String(""),
-// 			},
-// 			TagName:     pulumi.String("terraform-only-1"),
-// 			UpdateIvl:   pulumi.Int(10),
-// 			UpdateType:  pulumi.Int(1),
-// 			VolumeClean: pulumi.Bool(false),
-// 			WarmupSetting: &tsf.DeployContainerGroupWarmupSettingArgs{
-// 				Enabled: pulumi.Bool(false),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewDeployContainerGroup(ctx, "deployContainerGroup", &Tsf.DeployContainerGroupArgs{
+//				AgentCpuLimit:   pulumi.String("0.2"),
+//				AgentCpuRequest: pulumi.String("0.1"),
+//				AgentMemLimit:   pulumi.String("400"),
+//				AgentMemRequest: pulumi.String("125"),
+//				CpuLimit:        pulumi.String("0.5"),
+//				CpuRequest:      pulumi.String("0.25"),
+//				DeployAgent:     pulumi.Bool(true),
+//				DoNotStart:      pulumi.Bool(false),
+//				GroupId:         pulumi.String("group-yqml6w3a"),
+//				HealthCheckSettings: &tsf.DeployContainerGroupHealthCheckSettingsArgs{
+//					ReadinessProbe: &tsf.DeployContainerGroupHealthCheckSettingsReadinessProbeArgs{
+//						ActionType:          pulumi.String("TCP"),
+//						FailureThreshold:    pulumi.Int(3),
+//						InitialDelaySeconds: pulumi.Int(0),
+//						Path:                pulumi.String("/"),
+//						PeriodSeconds:       pulumi.Int(30),
+//						Port:                pulumi.Int(80),
+//						Scheme:              pulumi.String("HTTP"),
+//						SuccessThreshold:    pulumi.Int(1),
+//						TimeoutSeconds:      pulumi.Int(3),
+//						Type:                pulumi.String("TSF_DEFAULT"),
+//					},
+//				},
+//				InstanceNum:    pulumi.Int(1),
+//				JvmOpts:        pulumi.String("-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m"),
+//				MaxSurge:       pulumi.String(fmt.Sprintf("%v%v", "25", "%")),
+//				MaxUnavailable: pulumi.String("0"),
+//				MemLimit:       pulumi.String("1280"),
+//				MemRequest:     pulumi.String("640"),
+//				RepoType:       pulumi.String("personal"),
+//				Reponame:       pulumi.String("tsf_100011913960/terraform"),
+//				SchedulingStrategy: &tsf.DeployContainerGroupSchedulingStrategyArgs{
+//					Type: pulumi.String("NONE"),
+//				},
+//				Server: pulumi.String("ccr.ccs.tencentyun.com"),
+//				ServiceSetting: &tsf.DeployContainerGroupServiceSettingArgs{
+//					AccessType:          pulumi.Int(1),
+//					AllowDeleteService:  pulumi.Bool(true),
+//					DisableService:      pulumi.Bool(false),
+//					HeadlessService:     pulumi.Bool(false),
+//					OpenSessionAffinity: pulumi.Bool(false),
+//					ProtocolPorts: tsf.DeployContainerGroupServiceSettingProtocolPortArray{
+//						&tsf.DeployContainerGroupServiceSettingProtocolPortArgs{
+//							NodePort:   pulumi.Int(30001),
+//							Port:       pulumi.Int(18081),
+//							Protocol:   pulumi.String("TCP"),
+//							TargetPort: pulumi.Int(18081),
+//						},
+//					},
+//					SessionAffinityTimeoutSeconds: pulumi.Int(10800),
+//					SubnetId:                      pulumi.String(""),
+//				},
+//				TagName:     pulumi.String("terraform-only-1"),
+//				UpdateIvl:   pulumi.Int(10),
+//				UpdateType:  pulumi.Int(1),
+//				VolumeClean: pulumi.Bool(false),
+//				WarmupSetting: &tsf.DeployContainerGroupWarmupSettingArgs{
+//					Enabled: pulumi.Bool(false),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DeployContainerGroup struct {
 	pulumi.CustomResourceState
@@ -542,7 +545,7 @@ func (i *DeployContainerGroup) ToDeployContainerGroupOutputWithContext(ctx conte
 // DeployContainerGroupArrayInput is an input type that accepts DeployContainerGroupArray and DeployContainerGroupArrayOutput values.
 // You can construct a concrete instance of `DeployContainerGroupArrayInput` via:
 //
-//          DeployContainerGroupArray{ DeployContainerGroupArgs{...} }
+//	DeployContainerGroupArray{ DeployContainerGroupArgs{...} }
 type DeployContainerGroupArrayInput interface {
 	pulumi.Input
 
@@ -567,7 +570,7 @@ func (i DeployContainerGroupArray) ToDeployContainerGroupArrayOutputWithContext(
 // DeployContainerGroupMapInput is an input type that accepts DeployContainerGroupMap and DeployContainerGroupMapOutput values.
 // You can construct a concrete instance of `DeployContainerGroupMapInput` via:
 //
-//          DeployContainerGroupMap{ "key": DeployContainerGroupArgs{...} }
+//	DeployContainerGroupMap{ "key": DeployContainerGroupArgs{...} }
 type DeployContainerGroupMapInput interface {
 	pulumi.Input
 

@@ -261,7 +261,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// List of parameters to use.
         /// </summary>
         [Output("parameters")]
-        public Output<ImmutableDictionary<string, object>?> Parameters { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, object>> Parameters { get; private set; } = null!;
 
         /// <summary>
         /// It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
@@ -358,6 +358,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Output("waitSwitch")]
+        public Output<int?> WaitSwitch { get; private set; } = null!;
 
 
         /// <summary>
@@ -603,6 +609,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         public InstanceArgs()
         {
@@ -850,6 +862,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         public InstanceState()
         {

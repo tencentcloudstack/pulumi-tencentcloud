@@ -13,12 +13,62 @@ import (
 
 // Provides a resource to create a ssm ssh key pair secret
 //
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				IsEnabled:          pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ssm.NewSshKeyPairSecret(ctx, "exampleSshKeyPairSecret", &Ssm.SshKeyPairSecretArgs{
+//				SecretName:  pulumi.String("tf-example"),
+//				ProjectId:   pulumi.Int(0),
+//				Description: pulumi.String("desc."),
+//				KmsKeyId:    exampleKey.ID(),
+//				SshKeyName:  pulumi.String("tf_example_ssh"),
+//				Status:      pulumi.String("Enabled"),
+//				CleanSshKey: pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // ssm ssh_key_pair_secret can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
+//
+//	$ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
+//
 // ```
 type SshKeyPairSecret struct {
 	pulumi.CustomResourceState
@@ -30,7 +80,7 @@ type SshKeyPairSecret struct {
 	// Description, such as what it is used for. It contains up to 2,048 bytes.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
-	KmsKeyId pulumi.StringPtrOutput `pulumi:"kmsKeyId"`
+	KmsKeyId pulumi.StringOutput `pulumi:"kmsKeyId"`
 	// ID of the project to which the created SSH key belongs.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
@@ -38,9 +88,11 @@ type SshKeyPairSecret struct {
 	// `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretType pulumi.IntOutput `pulumi:"secretType"`
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
-	SshKeyName pulumi.StringPtrOutput `pulumi:"sshKeyName"`
+	SshKeyName pulumi.StringOutput `pulumi:"sshKeyName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringOutput `pulumi:"status"`
+	// Tags of secret.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewSshKeyPairSecret registers a new resource with the given unique name, arguments, and options.
@@ -97,6 +149,8 @@ type sshKeyPairSecretState struct {
 	SshKeyName *string `pulumi:"sshKeyName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status *string `pulumi:"status"`
+	// Tags of secret.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type SshKeyPairSecretState struct {
@@ -118,6 +172,8 @@ type SshKeyPairSecretState struct {
 	SshKeyName pulumi.StringPtrInput
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringPtrInput
+	// Tags of secret.
+	Tags pulumi.MapInput
 }
 
 func (SshKeyPairSecretState) ElementType() reflect.Type {
@@ -139,6 +195,8 @@ type sshKeyPairSecretArgs struct {
 	SshKeyName *string `pulumi:"sshKeyName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status *string `pulumi:"status"`
+	// Tags of secret.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a SshKeyPairSecret resource.
@@ -157,6 +215,8 @@ type SshKeyPairSecretArgs struct {
 	SshKeyName pulumi.StringPtrInput
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringPtrInput
+	// Tags of secret.
+	Tags pulumi.MapInput
 }
 
 func (SshKeyPairSecretArgs) ElementType() reflect.Type {
@@ -185,7 +245,7 @@ func (i *SshKeyPairSecret) ToSshKeyPairSecretOutputWithContext(ctx context.Conte
 // SshKeyPairSecretArrayInput is an input type that accepts SshKeyPairSecretArray and SshKeyPairSecretArrayOutput values.
 // You can construct a concrete instance of `SshKeyPairSecretArrayInput` via:
 //
-//          SshKeyPairSecretArray{ SshKeyPairSecretArgs{...} }
+//	SshKeyPairSecretArray{ SshKeyPairSecretArgs{...} }
 type SshKeyPairSecretArrayInput interface {
 	pulumi.Input
 
@@ -210,7 +270,7 @@ func (i SshKeyPairSecretArray) ToSshKeyPairSecretArrayOutputWithContext(ctx cont
 // SshKeyPairSecretMapInput is an input type that accepts SshKeyPairSecretMap and SshKeyPairSecretMapOutput values.
 // You can construct a concrete instance of `SshKeyPairSecretMapInput` via:
 //
-//          SshKeyPairSecretMap{ "key": SshKeyPairSecretArgs{...} }
+//	SshKeyPairSecretMap{ "key": SshKeyPairSecretArgs{...} }
 type SshKeyPairSecretMapInput interface {
 	pulumi.Input
 
@@ -262,8 +322,8 @@ func (o SshKeyPairSecretOutput) Description() pulumi.StringPtrOutput {
 }
 
 // Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
-func (o SshKeyPairSecretOutput) KmsKeyId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringPtrOutput { return v.KmsKeyId }).(pulumi.StringPtrOutput)
+func (o SshKeyPairSecretOutput) KmsKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.KmsKeyId }).(pulumi.StringOutput)
 }
 
 // ID of the project to which the created SSH key belongs.
@@ -282,13 +342,18 @@ func (o SshKeyPairSecretOutput) SecretType() pulumi.IntOutput {
 }
 
 // Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
-func (o SshKeyPairSecretOutput) SshKeyName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringPtrOutput { return v.SshKeyName }).(pulumi.StringPtrOutput)
+func (o SshKeyPairSecretOutput) SshKeyName() pulumi.StringOutput {
+	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.SshKeyName }).(pulumi.StringOutput)
 }
 
 // Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 func (o SshKeyPairSecretOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tags of secret.
+func (o SshKeyPairSecretOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type SshKeyPairSecretArrayOutput struct{ *pulumi.OutputState }

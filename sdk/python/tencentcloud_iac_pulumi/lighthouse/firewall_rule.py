@@ -99,7 +99,9 @@ class FirewallRule(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a lighthouse firewall_rule
+        Provides a resource to create a lighthouse firewall rule
+
+        > **NOTE:**  Use an empty template to clean up the default rules before using this resource manage firewall rules.
 
         ## Example Usage
 
@@ -147,7 +149,9 @@ class FirewallRule(pulumi.CustomResource):
                  args: FirewallRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a lighthouse firewall_rule
+        Provides a resource to create a lighthouse firewall rule
+
+        > **NOTE:**  Use an empty template to clean up the default rules before using this resource manage firewall rules.
 
         ## Example Usage
 

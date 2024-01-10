@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myFavoriteImage, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			ImageNameRegex: pulumi.StringRef("Final"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cvm.NewLaunchTemplate(ctx, "demo", &Cvm.LaunchTemplateArgs{
-// 			LaunchTemplateName: pulumi.String("test"),
-// 			Placement: &cvm.LaunchTemplatePlacementArgs{
-// 				Zone:      pulumi.String("ap-guangzhou-6"),
-// 				ProjectId: pulumi.Int(0),
-// 			},
-// 			ImageId: pulumi.String(myFavoriteImage.Images[0].ImageId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myFavoriteImage, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				ImageNameRegex: pulumi.StringRef("Final"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cvm.NewLaunchTemplate(ctx, "demo", &Cvm.LaunchTemplateArgs{
+//				LaunchTemplateName: pulumi.String("test"),
+//				Placement: &cvm.LaunchTemplatePlacementArgs{
+//					Zone:      pulumi.String("ap-guangzhou-6"),
+//					ProjectId: pulumi.Int(0),
+//				},
+//				ImageId: pulumi.String(myFavoriteImage.Images[0].ImageId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type LaunchTemplate struct {
 	pulumi.CustomResourceState
@@ -418,7 +421,7 @@ func (i *LaunchTemplate) ToLaunchTemplateOutputWithContext(ctx context.Context) 
 // LaunchTemplateArrayInput is an input type that accepts LaunchTemplateArray and LaunchTemplateArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateArrayInput` via:
 //
-//          LaunchTemplateArray{ LaunchTemplateArgs{...} }
+//	LaunchTemplateArray{ LaunchTemplateArgs{...} }
 type LaunchTemplateArrayInput interface {
 	pulumi.Input
 
@@ -443,7 +446,7 @@ func (i LaunchTemplateArray) ToLaunchTemplateArrayOutputWithContext(ctx context.
 // LaunchTemplateMapInput is an input type that accepts LaunchTemplateMap and LaunchTemplateMapOutput values.
 // You can construct a concrete instance of `LaunchTemplateMapInput` via:
 //
-//          LaunchTemplateMap{ "key": LaunchTemplateArgs{...} }
+//	LaunchTemplateMap{ "key": LaunchTemplateArgs{...} }
 type LaunchTemplateMapInput interface {
 	pulumi.Input
 

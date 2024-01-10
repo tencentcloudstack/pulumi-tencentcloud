@@ -19,36 +19,39 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewFunctionTargetsAttachment(ctx, "functionTargets", &Clb.FunctionTargetsAttachmentArgs{
-// 			Domain: pulumi.String("xxx.com"),
-// 			FunctionTargets: &clb.FunctionTargetsAttachmentFunctionTargetsArgs{
-// 				Function: &clb.FunctionTargetsAttachmentFunctionTargetsFunctionArgs{
-// 					FunctionName:          pulumi.String("keep-tf-test-1675954233"),
-// 					FunctionNamespace:     pulumi.String("default"),
-// 					FunctionQualifier:     pulumi.String(fmt.Sprintf("%v%v", "$", "LATEST")),
-// 					FunctionQualifierType: pulumi.String("VERSION"),
-// 				},
-// 				Weight: pulumi.Int(10),
-// 			},
-// 			ListenerId:     pulumi.String("lbl-nonkgvc2"),
-// 			LoadBalancerId: pulumi.String("lb-5dnrkgry"),
-// 			Url:            pulumi.String("/"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewFunctionTargetsAttachment(ctx, "functionTargets", &Clb.FunctionTargetsAttachmentArgs{
+//				Domain: pulumi.String("xxx.com"),
+//				FunctionTargets: &clb.FunctionTargetsAttachmentFunctionTargetsArgs{
+//					Function: &clb.FunctionTargetsAttachmentFunctionTargetsFunctionArgs{
+//						FunctionName:          pulumi.String("keep-tf-test-1675954233"),
+//						FunctionNamespace:     pulumi.String("default"),
+//						FunctionQualifier:     pulumi.String(fmt.Sprintf("%v%v", "$", "LATEST")),
+//						FunctionQualifierType: pulumi.String("VERSION"),
+//					},
+//					Weight: pulumi.Int(10),
+//				},
+//				ListenerId:     pulumi.String("lbl-nonkgvc2"),
+//				LoadBalancerId: pulumi.String("lb-5dnrkgry"),
+//				Url:            pulumi.String("/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -56,7 +59,9 @@ import (
 // clb function_targets_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+//
+//	$ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+//
 // ```
 type FunctionTargetsAttachment struct {
 	pulumi.CustomResourceState
@@ -204,7 +209,7 @@ func (i *FunctionTargetsAttachment) ToFunctionTargetsAttachmentOutputWithContext
 // FunctionTargetsAttachmentArrayInput is an input type that accepts FunctionTargetsAttachmentArray and FunctionTargetsAttachmentArrayOutput values.
 // You can construct a concrete instance of `FunctionTargetsAttachmentArrayInput` via:
 //
-//          FunctionTargetsAttachmentArray{ FunctionTargetsAttachmentArgs{...} }
+//	FunctionTargetsAttachmentArray{ FunctionTargetsAttachmentArgs{...} }
 type FunctionTargetsAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +234,7 @@ func (i FunctionTargetsAttachmentArray) ToFunctionTargetsAttachmentArrayOutputWi
 // FunctionTargetsAttachmentMapInput is an input type that accepts FunctionTargetsAttachmentMap and FunctionTargetsAttachmentMapOutput values.
 // You can construct a concrete instance of `FunctionTargetsAttachmentMapInput` via:
 //
-//          FunctionTargetsAttachmentMap{ "key": FunctionTargetsAttachmentArgs{...} }
+//	FunctionTargetsAttachmentMap{ "key": FunctionTargetsAttachmentArgs{...} }
 type FunctionTargetsAttachmentMapInput interface {
 	pulumi.Input
 

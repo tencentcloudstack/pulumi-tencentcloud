@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a dts syncConfig
  *
  * ## Example Usage
+ * ### Sync mysql database to cynosdb through cdb access type
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -91,7 +92,7 @@ import * as utilities from "../utilities";
  *     srcInfo: {
  *         region: "ap-guangzhou",
  *         instanceId: "cdb-fitq5t9h",
- *         user: "keep_dts",
+ *         user: "your_user_name",
  *         password: "*",
  *         dbName: "tf_ci_test",
  *         vpcId: local.vpc_id,
@@ -105,6 +106,73 @@ import * as utilities from "../utilities";
  *         dbName: "tf_ci_test_new",
  *         vpcId: local.vpc_id,
  *         subnetId: local.subnet_id,
+ *     },
+ *     autoRetryTimeRangeMinutes: 0,
+ * });
+ * ```
+ * ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const vpcIdSh = "vpc-evtcyb3g";
+ * const subnetIdSh = "subnet-1t83cxkp";
+ * const srcMysql = tencentcloud.Mysql.getInstance({
+ *     instanceName: "your_user_name_mysql_src",
+ * });
+ * const srcIp = srcMysql.then(srcMysql => srcMysql.instanceLists?[0]?.intranetIp);
+ * const srcPort = srcMysql.then(srcMysql => srcMysql.instanceLists?[0]?.intranetPort);
+ * const ccns = tencentcloud.Ccn.getInstances({
+ *     name: "keep-ccn-dts-sh",
+ * });
+ * const ccnId = ccns.then(ccns => ccns.instanceLists?[0]?.ccnId);
+ * const dstMysql = tencentcloud.Mysql.getInstance({
+ *     instanceName: "your_user_name_mysql_src",
+ * });
+ * const dstMysqlId = dstMysql.then(dstMysql => dstMysql.instanceLists?[0]?.mysqlId);
+ * const config = new pulumi.Config();
+ * const srcAzSh = config.get("srcAzSh") || "ap-shanghai";
+ * const dstAzGz = config.get("dstAzGz") || "ap-guangzhou";
+ * const syncJobs = tencentcloud.Dts.getSyncJobs({
+ *     jobName: "keep_sync_config_ccn_2_cdb",
+ * });
+ * const syncConfig = new tencentcloud.dts.SyncConfig("syncConfig", {
+ *     jobId: syncJobs.then(syncJobs => syncJobs.lists?[0]?.jobId),
+ *     srcAccessType: "ccn",
+ *     dstAccessType: "cdb",
+ *     jobMode: "liteMode",
+ *     runMode: "Immediate",
+ *     objects: {
+ *         mode: "Partial",
+ *         databases: [{
+ *             dbName: "tf_ci_test",
+ *             newDbName: "tf_ci_test_new",
+ *             dbMode: "Partial",
+ *             tableMode: "All",
+ *             tables: [{
+ *                 tableName: "test",
+ *                 newTableName: "test_new",
+ *             }],
+ *         }],
+ *     },
+ *     srcInfo: {
+ *         region: srcAzSh,
+ *         user: "your_user_name",
+ *         password: "your_pass_word",
+ *         ip: srcIp,
+ *         port: srcPort,
+ *         vpcId: vpcIdSh,
+ *         subnetId: subnetIdSh,
+ *         ccnId: ccnId,
+ *         databaseNetEnv: "TencentVPC",
+ *     },
+ *     dstInfo: {
+ *         region: dstAzGz,
+ *         instanceId: dstMysqlId,
+ *         user: "your_user_name",
+ *         password: "your_pass_word",
  *     },
  *     autoRetryTimeRangeMinutes: 0,
  * });
@@ -173,7 +241,7 @@ export class SyncConfig extends pulumi.CustomResource {
     /**
      * Sync job name.
      */
-    public readonly jobName!: pulumi.Output<string | undefined>;
+    public readonly jobName!: pulumi.Output<string>;
     /**
      * Synchronize database table object information.
      */

@@ -15,8 +15,7 @@ __all__ = ['FunctionArgs', 'Function']
 @pulumi.input_type
 class FunctionArgs:
     def __init__(__self__, *,
-                 handler: pulumi.Input[str],
-                 runtime: pulumi.Input[str],
+                 async_run_enable: Optional[pulumi.Input[str]] = None,
                  cfs_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionCfsConfigArgs']]]] = None,
                  cls_logset_id: Optional[pulumi.Input[str]] = None,
                  cls_topic_id: Optional[pulumi.Input[str]] = None,
@@ -24,17 +23,21 @@ class FunctionArgs:
                  cos_bucket_region: Optional[pulumi.Input[str]] = None,
                  cos_object_name: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dns_cache: Optional[pulumi.Input[bool]] = None,
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  func_type: Optional[pulumi.Input[str]] = None,
+                 handler: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]] = None,
+                 intranet_config: Optional[pulumi.Input['FunctionIntranetConfigArgs']] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
                  layers: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  role: Optional[pulumi.Input[str]] = None,
+                 runtime: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  timeout: Optional[pulumi.Input[int]] = None,
@@ -43,8 +46,7 @@ class FunctionArgs:
                  zip_file: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Function resource.
-        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] async_run_enable: Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionCfsConfigArgs']]] cfs_configs: List of CFS configurations.
         :param pulumi.Input[str] cls_logset_id: cls logset id of the SCF function.
         :param pulumi.Input[str] cls_topic_id: cls topic id of the SCF function.
@@ -52,17 +54,21 @@ class FunctionArgs:
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
+        :param pulumi.Input[bool] dns_cache: Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
-        :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
+        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
+        :param pulumi.Input['FunctionIntranetConfigArgs'] intranet_config: Intranet access configuration.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
         :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
@@ -70,8 +76,8 @@ class FunctionArgs:
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
         """
-        pulumi.set(__self__, "handler", handler)
-        pulumi.set(__self__, "runtime", runtime)
+        if async_run_enable is not None:
+            pulumi.set(__self__, "async_run_enable", async_run_enable)
         if cfs_configs is not None:
             pulumi.set(__self__, "cfs_configs", cfs_configs)
         if cls_logset_id is not None:
@@ -86,6 +92,8 @@ class FunctionArgs:
             pulumi.set(__self__, "cos_object_name", cos_object_name)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if dns_cache is not None:
+            pulumi.set(__self__, "dns_cache", dns_cache)
         if enable_eip_config is not None:
             pulumi.set(__self__, "enable_eip_config", enable_eip_config)
         if enable_public_net is not None:
@@ -94,8 +102,12 @@ class FunctionArgs:
             pulumi.set(__self__, "environment", environment)
         if func_type is not None:
             pulumi.set(__self__, "func_type", func_type)
+        if handler is not None:
+            pulumi.set(__self__, "handler", handler)
         if image_configs is not None:
             pulumi.set(__self__, "image_configs", image_configs)
+        if intranet_config is not None:
+            pulumi.set(__self__, "intranet_config", intranet_config)
         if l5_enable is not None:
             pulumi.set(__self__, "l5_enable", l5_enable)
         if layers is not None:
@@ -108,6 +120,8 @@ class FunctionArgs:
             pulumi.set(__self__, "namespace", namespace)
         if role is not None:
             pulumi.set(__self__, "role", role)
+        if runtime is not None:
+            pulumi.set(__self__, "runtime", runtime)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
@@ -122,28 +136,16 @@ class FunctionArgs:
             pulumi.set(__self__, "zip_file", zip_file)
 
     @property
-    @pulumi.getter
-    def handler(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="asyncRunEnable")
+    def async_run_enable(self) -> Optional[pulumi.Input[str]]:
         """
-        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
         """
-        return pulumi.get(self, "handler")
+        return pulumi.get(self, "async_run_enable")
 
-    @handler.setter
-    def handler(self, value: pulumi.Input[str]):
-        pulumi.set(self, "handler", value)
-
-    @property
-    @pulumi.getter
-    def runtime(self) -> pulumi.Input[str]:
-        """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
-        """
-        return pulumi.get(self, "runtime")
-
-    @runtime.setter
-    def runtime(self, value: pulumi.Input[str]):
-        pulumi.set(self, "runtime", value)
+    @async_run_enable.setter
+    def async_run_enable(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "async_run_enable", value)
 
     @property
     @pulumi.getter(name="cfsConfigs")
@@ -230,6 +232,18 @@ class FunctionArgs:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter(name="dnsCache")
+    def dns_cache(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        """
+        return pulumi.get(self, "dns_cache")
+
+    @dns_cache.setter
+    def dns_cache(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "dns_cache", value)
+
+    @property
     @pulumi.getter(name="enableEipConfig")
     def enable_eip_config(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -278,16 +292,40 @@ class FunctionArgs:
         pulumi.set(self, "func_type", value)
 
     @property
+    @pulumi.getter
+    def handler(self) -> Optional[pulumi.Input[str]]:
+        """
+        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        """
+        return pulumi.get(self, "handler")
+
+    @handler.setter
+    def handler(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "handler", value)
+
+    @property
     @pulumi.getter(name="imageConfigs")
     def image_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]]:
         """
-        Image of the SCF function, conflict with ``.
+        Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         """
         return pulumi.get(self, "image_configs")
 
     @image_configs.setter
     def image_configs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]]):
         pulumi.set(self, "image_configs", value)
+
+    @property
+    @pulumi.getter(name="intranetConfig")
+    def intranet_config(self) -> Optional[pulumi.Input['FunctionIntranetConfigArgs']]:
+        """
+        Intranet access configuration.
+        """
+        return pulumi.get(self, "intranet_config")
+
+    @intranet_config.setter
+    def intranet_config(self, value: Optional[pulumi.Input['FunctionIntranetConfigArgs']]):
+        pulumi.set(self, "intranet_config", value)
 
     @property
     @pulumi.getter(name="l5Enable")
@@ -360,6 +398,18 @@ class FunctionArgs:
     @role.setter
     def role(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "role", value)
+
+    @property
+    @pulumi.getter
+    def runtime(self) -> Optional[pulumi.Input[str]]:
+        """
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        """
+        return pulumi.get(self, "runtime")
+
+    @runtime.setter
+    def runtime(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "runtime", value)
 
     @property
     @pulumi.getter(name="subnetId")
@@ -437,6 +487,7 @@ class FunctionArgs:
 @pulumi.input_type
 class _FunctionState:
     def __init__(__self__, *,
+                 async_run_enable: Optional[pulumi.Input[str]] = None,
                  cfs_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionCfsConfigArgs']]]] = None,
                  cls_logset_id: Optional[pulumi.Input[str]] = None,
                  cls_topic_id: Optional[pulumi.Input[str]] = None,
@@ -447,6 +498,7 @@ class _FunctionState:
                  cos_bucket_region: Optional[pulumi.Input[str]] = None,
                  cos_object_name: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dns_cache: Optional[pulumi.Input[bool]] = None,
                  eip_fixed: Optional[pulumi.Input[bool]] = None,
                  eips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
@@ -458,6 +510,7 @@ class _FunctionState:
                  host: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]] = None,
                  install_dependency: Optional[pulumi.Input[bool]] = None,
+                 intranet_config: Optional[pulumi.Input['FunctionIntranetConfigArgs']] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
                  layers: Optional[pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
@@ -478,6 +531,7 @@ class _FunctionState:
                  zip_file: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Function resources.
+        :param pulumi.Input[str] async_run_enable: Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionCfsConfigArgs']]] cfs_configs: List of CFS configurations.
         :param pulumi.Input[str] cls_logset_id: cls logset id of the SCF function.
         :param pulumi.Input[str] cls_topic_id: cls topic id of the SCF function.
@@ -488,6 +542,7 @@ class _FunctionState:
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
+        :param pulumi.Input[bool] dns_cache: Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
@@ -497,8 +552,9 @@ class _FunctionState:
         :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
-        :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
+        :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         :param pulumi.Input[bool] install_dependency: Whether to automatically install dependencies.
+        :param pulumi.Input['FunctionIntranetConfigArgs'] intranet_config: Intranet access configuration.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
@@ -506,7 +562,7 @@ class _FunctionState:
         :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         :param pulumi.Input[str] status: SCF function status.
         :param pulumi.Input[str] status_desc: SCF status description.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
@@ -518,6 +574,8 @@ class _FunctionState:
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
         """
+        if async_run_enable is not None:
+            pulumi.set(__self__, "async_run_enable", async_run_enable)
         if cfs_configs is not None:
             pulumi.set(__self__, "cfs_configs", cfs_configs)
         if cls_logset_id is not None:
@@ -538,6 +596,8 @@ class _FunctionState:
             pulumi.set(__self__, "cos_object_name", cos_object_name)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if dns_cache is not None:
+            pulumi.set(__self__, "dns_cache", dns_cache)
         if eip_fixed is not None:
             pulumi.set(__self__, "eip_fixed", eip_fixed)
         if eips is not None:
@@ -560,6 +620,8 @@ class _FunctionState:
             pulumi.set(__self__, "image_configs", image_configs)
         if install_dependency is not None:
             pulumi.set(__self__, "install_dependency", install_dependency)
+        if intranet_config is not None:
+            pulumi.set(__self__, "intranet_config", intranet_config)
         if l5_enable is not None:
             pulumi.set(__self__, "l5_enable", l5_enable)
         if layers is not None:
@@ -596,6 +658,18 @@ class _FunctionState:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zip_file is not None:
             pulumi.set(__self__, "zip_file", zip_file)
+
+    @property
+    @pulumi.getter(name="asyncRunEnable")
+    def async_run_enable(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+        """
+        return pulumi.get(self, "async_run_enable")
+
+    @async_run_enable.setter
+    def async_run_enable(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "async_run_enable", value)
 
     @property
     @pulumi.getter(name="cfsConfigs")
@@ -718,6 +792,18 @@ class _FunctionState:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter(name="dnsCache")
+    def dns_cache(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        """
+        return pulumi.get(self, "dns_cache")
+
+    @dns_cache.setter
+    def dns_cache(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "dns_cache", value)
+
+    @property
     @pulumi.getter(name="eipFixed")
     def eip_fixed(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -829,7 +915,7 @@ class _FunctionState:
     @pulumi.getter(name="imageConfigs")
     def image_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]]]:
         """
-        Image of the SCF function, conflict with ``.
+        Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         """
         return pulumi.get(self, "image_configs")
 
@@ -848,6 +934,18 @@ class _FunctionState:
     @install_dependency.setter
     def install_dependency(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "install_dependency", value)
+
+    @property
+    @pulumi.getter(name="intranetConfig")
+    def intranet_config(self) -> Optional[pulumi.Input['FunctionIntranetConfigArgs']]:
+        """
+        Intranet access configuration.
+        """
+        return pulumi.get(self, "intranet_config")
+
+    @intranet_config.setter
+    def intranet_config(self, value: Optional[pulumi.Input['FunctionIntranetConfigArgs']]):
+        pulumi.set(self, "intranet_config", value)
 
     @property
     @pulumi.getter(name="l5Enable")
@@ -937,7 +1035,7 @@ class _FunctionState:
     @pulumi.getter
     def runtime(self) -> Optional[pulumi.Input[str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         """
         return pulumi.get(self, "runtime")
 
@@ -1071,6 +1169,7 @@ class Function(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 async_run_enable: Optional[pulumi.Input[str]] = None,
                  cfs_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]]] = None,
                  cls_logset_id: Optional[pulumi.Input[str]] = None,
                  cls_topic_id: Optional[pulumi.Input[str]] = None,
@@ -1078,12 +1177,14 @@ class Function(pulumi.CustomResource):
                  cos_bucket_region: Optional[pulumi.Input[str]] = None,
                  cos_object_name: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dns_cache: Optional[pulumi.Input[bool]] = None,
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  func_type: Optional[pulumi.Input[str]] = None,
                  handler: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
+                 intranet_config: Optional[pulumi.Input[pulumi.InputType['FunctionIntranetConfigArgs']]] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
                  layers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
@@ -1114,6 +1215,27 @@ class Function(pulumi.CustomResource):
             handler="main.do_it",
             runtime="Python3.6")
         ```
+        ### Using Zip file
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            dns_cache=True,
+            enable_public_net=True,
+            handler="first.do_it_first",
+            intranet_config=tencentcloud.scf.FunctionIntranetConfigArgs(
+                ip_fixed="ENABLE",
+            ),
+            runtime="Python3.6",
+            subnet_id="subnet-ljyn7h30",
+            tags={
+                "env": "test",
+            },
+            vpc_id="vpc-391sv4w3",
+            zip_file="/scf/first.zip")
+        ```
         ### Using CFS config
 
         ```python
@@ -1132,6 +1254,31 @@ class Function(pulumi.CustomResource):
             handler="main.do_it",
             runtime="Python3.6")
         ```
+        ### Using triggers
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            enable_public_net=True,
+            handler="first.do_it_first",
+            runtime="Python3.6",
+            triggers=[
+                tencentcloud.scf.FunctionTriggerArgs(
+                    name="tf-test-fn-trigger",
+                    trigger_desc="*/5 * * * * * *",
+                    type="timer",
+                ),
+                tencentcloud.scf.FunctionTriggerArgs(
+                    cos_region="ap-guangzhou",
+                    name="scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+                    trigger_desc="{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+                    type="cos",
+                ),
+            ],
+            zip_file="/scf/first.zip")
+        ```
 
         ## Import
 
@@ -1143,6 +1290,7 @@ class Function(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] async_run_enable: Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]] cfs_configs: List of CFS configurations.
         :param pulumi.Input[str] cls_logset_id: cls logset id of the SCF function.
         :param pulumi.Input[str] cls_topic_id: cls topic id of the SCF function.
@@ -1150,19 +1298,21 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
+        :param pulumi.Input[bool] dns_cache: Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. Default `false`. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
+        :param pulumi.Input[pulumi.InputType['FunctionIntranetConfigArgs']] intranet_config: Intranet access configuration.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
         :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
@@ -1174,7 +1324,7 @@ class Function(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: FunctionArgs,
+                 args: Optional[FunctionArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a SCF function.
@@ -1192,6 +1342,27 @@ class Function(pulumi.CustomResource):
             handler="main.do_it",
             runtime="Python3.6")
         ```
+        ### Using Zip file
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            dns_cache=True,
+            enable_public_net=True,
+            handler="first.do_it_first",
+            intranet_config=tencentcloud.scf.FunctionIntranetConfigArgs(
+                ip_fixed="ENABLE",
+            ),
+            runtime="Python3.6",
+            subnet_id="subnet-ljyn7h30",
+            tags={
+                "env": "test",
+            },
+            vpc_id="vpc-391sv4w3",
+            zip_file="/scf/first.zip")
+        ```
         ### Using CFS config
 
         ```python
@@ -1209,6 +1380,31 @@ class Function(pulumi.CustomResource):
             )],
             handler="main.do_it",
             runtime="Python3.6")
+        ```
+        ### Using triggers
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            enable_public_net=True,
+            handler="first.do_it_first",
+            runtime="Python3.6",
+            triggers=[
+                tencentcloud.scf.FunctionTriggerArgs(
+                    name="tf-test-fn-trigger",
+                    trigger_desc="*/5 * * * * * *",
+                    type="timer",
+                ),
+                tencentcloud.scf.FunctionTriggerArgs(
+                    cos_region="ap-guangzhou",
+                    name="scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+                    trigger_desc="{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+                    type="cos",
+                ),
+            ],
+            zip_file="/scf/first.zip")
         ```
 
         ## Import
@@ -1234,6 +1430,7 @@ class Function(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 async_run_enable: Optional[pulumi.Input[str]] = None,
                  cfs_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]]] = None,
                  cls_logset_id: Optional[pulumi.Input[str]] = None,
                  cls_topic_id: Optional[pulumi.Input[str]] = None,
@@ -1241,12 +1438,14 @@ class Function(pulumi.CustomResource):
                  cos_bucket_region: Optional[pulumi.Input[str]] = None,
                  cos_object_name: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dns_cache: Optional[pulumi.Input[bool]] = None,
                  enable_eip_config: Optional[pulumi.Input[bool]] = None,
                  enable_public_net: Optional[pulumi.Input[bool]] = None,
                  environment: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  func_type: Optional[pulumi.Input[str]] = None,
                  handler: Optional[pulumi.Input[str]] = None,
                  image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
+                 intranet_config: Optional[pulumi.Input[pulumi.InputType['FunctionIntranetConfigArgs']]] = None,
                  l5_enable: Optional[pulumi.Input[bool]] = None,
                  layers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
@@ -1274,6 +1473,7 @@ class Function(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = FunctionArgs.__new__(FunctionArgs)
 
+            __props__.__dict__["async_run_enable"] = async_run_enable
             __props__.__dict__["cfs_configs"] = cfs_configs
             __props__.__dict__["cls_logset_id"] = cls_logset_id
             __props__.__dict__["cls_topic_id"] = cls_topic_id
@@ -1281,22 +1481,20 @@ class Function(pulumi.CustomResource):
             __props__.__dict__["cos_bucket_region"] = cos_bucket_region
             __props__.__dict__["cos_object_name"] = cos_object_name
             __props__.__dict__["description"] = description
+            __props__.__dict__["dns_cache"] = dns_cache
             __props__.__dict__["enable_eip_config"] = enable_eip_config
             __props__.__dict__["enable_public_net"] = enable_public_net
             __props__.__dict__["environment"] = environment
             __props__.__dict__["func_type"] = func_type
-            if handler is None and not opts.urn:
-                raise TypeError("Missing required property 'handler'")
             __props__.__dict__["handler"] = handler
             __props__.__dict__["image_configs"] = image_configs
+            __props__.__dict__["intranet_config"] = intranet_config
             __props__.__dict__["l5_enable"] = l5_enable
             __props__.__dict__["layers"] = layers
             __props__.__dict__["mem_size"] = mem_size
             __props__.__dict__["name"] = name
             __props__.__dict__["namespace"] = namespace
             __props__.__dict__["role"] = role
-            if runtime is None and not opts.urn:
-                raise TypeError("Missing required property 'runtime'")
             __props__.__dict__["runtime"] = runtime
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
@@ -1327,6 +1525,7 @@ class Function(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            async_run_enable: Optional[pulumi.Input[str]] = None,
             cfs_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]]] = None,
             cls_logset_id: Optional[pulumi.Input[str]] = None,
             cls_topic_id: Optional[pulumi.Input[str]] = None,
@@ -1337,6 +1536,7 @@ class Function(pulumi.CustomResource):
             cos_bucket_region: Optional[pulumi.Input[str]] = None,
             cos_object_name: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
+            dns_cache: Optional[pulumi.Input[bool]] = None,
             eip_fixed: Optional[pulumi.Input[bool]] = None,
             eips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             enable_eip_config: Optional[pulumi.Input[bool]] = None,
@@ -1348,6 +1548,7 @@ class Function(pulumi.CustomResource):
             host: Optional[pulumi.Input[str]] = None,
             image_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]]] = None,
             install_dependency: Optional[pulumi.Input[bool]] = None,
+            intranet_config: Optional[pulumi.Input[pulumi.InputType['FunctionIntranetConfigArgs']]] = None,
             l5_enable: Optional[pulumi.Input[bool]] = None,
             layers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]]] = None,
             mem_size: Optional[pulumi.Input[int]] = None,
@@ -1373,6 +1574,7 @@ class Function(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] async_run_enable: Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]] cfs_configs: List of CFS configurations.
         :param pulumi.Input[str] cls_logset_id: cls logset id of the SCF function.
         :param pulumi.Input[str] cls_topic_id: cls topic id of the SCF function.
@@ -1383,6 +1585,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
         :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
+        :param pulumi.Input[bool] dns_cache: Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
@@ -1392,8 +1595,9 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] func_type: Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         :param pulumi.Input[bool] install_dependency: Whether to automatically install dependencies.
+        :param pulumi.Input[pulumi.InputType['FunctionIntranetConfigArgs']] intranet_config: Intranet access configuration.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
@@ -1401,7 +1605,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         :param pulumi.Input[str] status: SCF function status.
         :param pulumi.Input[str] status_desc: SCF status description.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
@@ -1417,6 +1621,7 @@ class Function(pulumi.CustomResource):
 
         __props__ = _FunctionState.__new__(_FunctionState)
 
+        __props__.__dict__["async_run_enable"] = async_run_enable
         __props__.__dict__["cfs_configs"] = cfs_configs
         __props__.__dict__["cls_logset_id"] = cls_logset_id
         __props__.__dict__["cls_topic_id"] = cls_topic_id
@@ -1427,6 +1632,7 @@ class Function(pulumi.CustomResource):
         __props__.__dict__["cos_bucket_region"] = cos_bucket_region
         __props__.__dict__["cos_object_name"] = cos_object_name
         __props__.__dict__["description"] = description
+        __props__.__dict__["dns_cache"] = dns_cache
         __props__.__dict__["eip_fixed"] = eip_fixed
         __props__.__dict__["eips"] = eips
         __props__.__dict__["enable_eip_config"] = enable_eip_config
@@ -1438,6 +1644,7 @@ class Function(pulumi.CustomResource):
         __props__.__dict__["host"] = host
         __props__.__dict__["image_configs"] = image_configs
         __props__.__dict__["install_dependency"] = install_dependency
+        __props__.__dict__["intranet_config"] = intranet_config
         __props__.__dict__["l5_enable"] = l5_enable
         __props__.__dict__["layers"] = layers
         __props__.__dict__["mem_size"] = mem_size
@@ -1457,6 +1664,14 @@ class Function(pulumi.CustomResource):
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zip_file"] = zip_file
         return Function(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="asyncRunEnable")
+    def async_run_enable(self) -> pulumi.Output[str]:
+        """
+        Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+        """
+        return pulumi.get(self, "async_run_enable")
 
     @property
     @pulumi.getter(name="cfsConfigs")
@@ -1539,6 +1754,14 @@ class Function(pulumi.CustomResource):
         return pulumi.get(self, "description")
 
     @property
+    @pulumi.getter(name="dnsCache")
+    def dns_cache(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        """
+        return pulumi.get(self, "dns_cache")
+
+    @property
     @pulumi.getter(name="eipFixed")
     def eip_fixed(self) -> pulumi.Output[bool]:
         """
@@ -1588,7 +1811,7 @@ class Function(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="funcType")
-    def func_type(self) -> pulumi.Output[str]:
+    def func_type(self) -> pulumi.Output[Optional[str]]:
         """
         Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         """
@@ -1596,7 +1819,7 @@ class Function(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def handler(self) -> pulumi.Output[str]:
+    def handler(self) -> pulumi.Output[Optional[str]]:
         """
         Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
@@ -1614,7 +1837,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter(name="imageConfigs")
     def image_configs(self) -> pulumi.Output[Optional[Sequence['outputs.FunctionImageConfig']]]:
         """
-        Image of the SCF function, conflict with ``.
+        Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         """
         return pulumi.get(self, "image_configs")
 
@@ -1625,6 +1848,14 @@ class Function(pulumi.CustomResource):
         Whether to automatically install dependencies.
         """
         return pulumi.get(self, "install_dependency")
+
+    @property
+    @pulumi.getter(name="intranetConfig")
+    def intranet_config(self) -> pulumi.Output['outputs.FunctionIntranetConfig']:
+        """
+        Intranet access configuration.
+        """
+        return pulumi.get(self, "intranet_config")
 
     @property
     @pulumi.getter(name="l5Enable")
@@ -1684,9 +1915,9 @@ class Function(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def runtime(self) -> pulumi.Output[str]:
+    def runtime(self) -> pulumi.Output[Optional[str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         """
         return pulumi.get(self, "runtime")
 

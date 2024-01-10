@@ -27,30 +27,30 @@ class CngwRouteArgs:
                  preserve_host: Optional[pulumi.Input[bool]] = None,
                  protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_name: Optional[pulumi.Input[str]] = None,
-                 strip_path: Optional[pulumi.Input[bool]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 strip_path: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a CngwRoute resource.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[str] service_id: ID of the service which the route belongs to.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] destination_ports: destination port for Layer 4 matching.
-        :param pulumi.Input[bool] force_https: whether to enable forced HTTPS, no longer use.
+        :param pulumi.Input[bool] force_https: This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         :param pulumi.Input[Sequence[pulumi.Input['CngwRouteHeaderArgs']]] headers: the headers of route.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: host list.
         :param pulumi.Input[int] https_redirect_status_code: https redirection status code.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference
-               value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: path list.
         :param pulumi.Input[bool] preserve_host: whether to keep the host when forwarding to the backend.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: the protocol list of route.Reference value:`https`,`http`.
         :param pulumi.Input[str] route_name: the name of the route, unique in the instance.
         :param pulumi.Input[bool] strip_path: whether to strip path when forwarding to the backend.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "gateway_id", gateway_id)
         pulumi.set(__self__, "service_id", service_id)
         if destination_ports is not None:
             pulumi.set(__self__, "destination_ports", destination_ports)
+        if force_https is not None:
+            warnings.warn("""This field has been deprecated and will be deleted in subsequent versions.""", DeprecationWarning)
+            pulumi.log.warn("""force_https is deprecated: This field has been deprecated and will be deleted in subsequent versions.""")
         if force_https is not None:
             pulumi.set(__self__, "force_https", force_https)
         if headers is not None:
@@ -71,8 +71,6 @@ class CngwRouteArgs:
             pulumi.set(__self__, "route_name", route_name)
         if strip_path is not None:
             pulumi.set(__self__, "strip_path", strip_path)
-        if tags is not None:
-            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="gatewayId")
@@ -114,7 +112,7 @@ class CngwRouteArgs:
     @pulumi.getter(name="forceHttps")
     def force_https(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether to enable forced HTTPS, no longer use.
+        This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         """
         return pulumi.get(self, "force_https")
 
@@ -162,8 +160,7 @@ class CngwRouteArgs:
     @pulumi.getter
     def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        route methods. Reference
-        value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         """
         return pulumi.get(self, "methods")
 
@@ -231,18 +228,6 @@ class CngwRouteArgs:
     def strip_path(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "strip_path", value)
 
-    @property
-    @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
-
-    @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
-        pulumi.set(self, "tags", value)
-
 
 @pulumi.input_type
 class _CngwRouteState:
@@ -260,18 +245,16 @@ class _CngwRouteState:
                  route_id: Optional[pulumi.Input[str]] = None,
                  route_name: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
-                 strip_path: Optional[pulumi.Input[bool]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 strip_path: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering CngwRoute resources.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] destination_ports: destination port for Layer 4 matching.
-        :param pulumi.Input[bool] force_https: whether to enable forced HTTPS, no longer use.
+        :param pulumi.Input[bool] force_https: This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input['CngwRouteHeaderArgs']]] headers: the headers of route.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: host list.
         :param pulumi.Input[int] https_redirect_status_code: https redirection status code.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference
-               value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: path list.
         :param pulumi.Input[bool] preserve_host: whether to keep the host when forwarding to the backend.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: the protocol list of route.Reference value:`https`,`http`.
@@ -279,10 +262,12 @@ class _CngwRouteState:
         :param pulumi.Input[str] route_name: the name of the route, unique in the instance.
         :param pulumi.Input[str] service_id: ID of the service which the route belongs to.
         :param pulumi.Input[bool] strip_path: whether to strip path when forwarding to the backend.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         if destination_ports is not None:
             pulumi.set(__self__, "destination_ports", destination_ports)
+        if force_https is not None:
+            warnings.warn("""This field has been deprecated and will be deleted in subsequent versions.""", DeprecationWarning)
+            pulumi.log.warn("""force_https is deprecated: This field has been deprecated and will be deleted in subsequent versions.""")
         if force_https is not None:
             pulumi.set(__self__, "force_https", force_https)
         if gateway_id is not None:
@@ -309,8 +294,6 @@ class _CngwRouteState:
             pulumi.set(__self__, "service_id", service_id)
         if strip_path is not None:
             pulumi.set(__self__, "strip_path", strip_path)
-        if tags is not None:
-            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="destinationPorts")
@@ -328,7 +311,7 @@ class _CngwRouteState:
     @pulumi.getter(name="forceHttps")
     def force_https(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether to enable forced HTTPS, no longer use.
+        This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         """
         return pulumi.get(self, "force_https")
 
@@ -388,8 +371,7 @@ class _CngwRouteState:
     @pulumi.getter
     def methods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        route methods. Reference
-        value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         """
         return pulumi.get(self, "methods")
 
@@ -481,18 +463,6 @@ class _CngwRouteState:
     def strip_path(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "strip_path", value)
 
-    @property
-    @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
-
-    @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
-        pulumi.set(self, "tags", value)
-
 
 class CngwRoute(pulumi.CustomResource):
     @overload
@@ -512,27 +482,95 @@ class CngwRoute(pulumi.CustomResource):
                  route_name: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  strip_path: Optional[pulumi.Input[bool]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a CngwRoute resource with the given unique name, props, and options.
+        Provides a resource to create a tse cngw_route
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        cngw_service = tencentcloud.tse.CngwService("cngwService",
+            gateway_id=cngw_gateway.id,
+            path="/test",
+            protocol="http",
+            retries=5,
+            timeout=60000,
+            upstream_type="HostIP",
+            upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
+                algorithm="round-robin",
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
+        cngw_route = tencentcloud.tse.CngwRoute("cngwRoute",
+            destination_ports=[],
+            gateway_id=cngw_gateway.id,
+            hosts=["192.168.0.1:9090"],
+            https_redirect_status_code=426,
+            paths=["/user"],
+            headers=[tencentcloud.tse.CngwRouteHeaderArgs(
+                key="req",
+                value="terraform",
+            )],
+            preserve_host=False,
+            protocols=[
+                "http",
+                "https",
+            ],
+            route_name="terraform-route",
+            service_id=cngw_service.service_id,
+            strip_path=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] destination_ports: destination port for Layer 4 matching.
-        :param pulumi.Input[bool] force_https: whether to enable forced HTTPS, no longer use.
+        :param pulumi.Input[bool] force_https: This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CngwRouteHeaderArgs']]]] headers: the headers of route.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: host list.
         :param pulumi.Input[int] https_redirect_status_code: https redirection status code.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference
-               value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: path list.
         :param pulumi.Input[bool] preserve_host: whether to keep the host when forwarding to the backend.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: the protocol list of route.Reference value:`https`,`http`.
         :param pulumi.Input[str] route_name: the name of the route, unique in the instance.
         :param pulumi.Input[str] service_id: ID of the service which the route belongs to.
         :param pulumi.Input[bool] strip_path: whether to strip path when forwarding to the backend.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -541,7 +579,78 @@ class CngwRoute(pulumi.CustomResource):
                  args: CngwRouteArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CngwRoute resource with the given unique name, props, and options.
+        Provides a resource to create a tse cngw_route
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        cngw_service = tencentcloud.tse.CngwService("cngwService",
+            gateway_id=cngw_gateway.id,
+            path="/test",
+            protocol="http",
+            retries=5,
+            timeout=60000,
+            upstream_type="HostIP",
+            upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
+                algorithm="round-robin",
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
+        cngw_route = tencentcloud.tse.CngwRoute("cngwRoute",
+            destination_ports=[],
+            gateway_id=cngw_gateway.id,
+            hosts=["192.168.0.1:9090"],
+            https_redirect_status_code=426,
+            paths=["/user"],
+            headers=[tencentcloud.tse.CngwRouteHeaderArgs(
+                key="req",
+                value="terraform",
+            )],
+            preserve_host=False,
+            protocols=[
+                "http",
+                "https",
+            ],
+            route_name="terraform-route",
+            service_id=cngw_service.service_id,
+            strip_path=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param CngwRouteArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -570,7 +679,6 @@ class CngwRoute(pulumi.CustomResource):
                  route_name: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  strip_path: Optional[pulumi.Input[bool]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -586,6 +694,9 @@ class CngwRoute(pulumi.CustomResource):
             __props__ = CngwRouteArgs.__new__(CngwRouteArgs)
 
             __props__.__dict__["destination_ports"] = destination_ports
+            if force_https is not None and not opts.urn:
+                warnings.warn("""This field has been deprecated and will be deleted in subsequent versions.""", DeprecationWarning)
+                pulumi.log.warn("""force_https is deprecated: This field has been deprecated and will be deleted in subsequent versions.""")
             __props__.__dict__["force_https"] = force_https
             if gateway_id is None and not opts.urn:
                 raise TypeError("Missing required property 'gateway_id'")
@@ -602,7 +713,6 @@ class CngwRoute(pulumi.CustomResource):
                 raise TypeError("Missing required property 'service_id'")
             __props__.__dict__["service_id"] = service_id
             __props__.__dict__["strip_path"] = strip_path
-            __props__.__dict__["tags"] = tags
             __props__.__dict__["route_id"] = None
         super(CngwRoute, __self__).__init__(
             'tencentcloud:Tse/cngwRoute:CngwRoute',
@@ -627,8 +737,7 @@ class CngwRoute(pulumi.CustomResource):
             route_id: Optional[pulumi.Input[str]] = None,
             route_name: Optional[pulumi.Input[str]] = None,
             service_id: Optional[pulumi.Input[str]] = None,
-            strip_path: Optional[pulumi.Input[bool]] = None,
-            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'CngwRoute':
+            strip_path: Optional[pulumi.Input[bool]] = None) -> 'CngwRoute':
         """
         Get an existing CngwRoute resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -637,13 +746,12 @@ class CngwRoute(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] destination_ports: destination port for Layer 4 matching.
-        :param pulumi.Input[bool] force_https: whether to enable forced HTTPS, no longer use.
+        :param pulumi.Input[bool] force_https: This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CngwRouteHeaderArgs']]]] headers: the headers of route.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] hosts: host list.
         :param pulumi.Input[int] https_redirect_status_code: https redirection status code.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference
-               value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] methods: route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] paths: path list.
         :param pulumi.Input[bool] preserve_host: whether to keep the host when forwarding to the backend.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: the protocol list of route.Reference value:`https`,`http`.
@@ -651,7 +759,6 @@ class CngwRoute(pulumi.CustomResource):
         :param pulumi.Input[str] route_name: the name of the route, unique in the instance.
         :param pulumi.Input[str] service_id: ID of the service which the route belongs to.
         :param pulumi.Input[bool] strip_path: whether to strip path when forwarding to the backend.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -671,7 +778,6 @@ class CngwRoute(pulumi.CustomResource):
         __props__.__dict__["route_name"] = route_name
         __props__.__dict__["service_id"] = service_id
         __props__.__dict__["strip_path"] = strip_path
-        __props__.__dict__["tags"] = tags
         return CngwRoute(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -686,7 +792,7 @@ class CngwRoute(pulumi.CustomResource):
     @pulumi.getter(name="forceHttps")
     def force_https(self) -> pulumi.Output[Optional[bool]]:
         """
-        whether to enable forced HTTPS, no longer use.
+        This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         """
         return pulumi.get(self, "force_https")
 
@@ -726,8 +832,7 @@ class CngwRoute(pulumi.CustomResource):
     @pulumi.getter
     def methods(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        route methods. Reference
-        value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         """
         return pulumi.get(self, "methods")
 
@@ -786,12 +891,4 @@ class CngwRoute(pulumi.CustomResource):
         whether to strip path when forwarding to the backend.
         """
         return pulumi.get(self, "strip_path")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
 

@@ -15,6 +15,8 @@ class AddonAttachmentArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
                  name: Optional[pulumi.Input[str]] = None,
+                 raw_values: Optional[pulumi.Input[str]] = None,
+                 raw_values_type: Optional[pulumi.Input[str]] = None,
                  request_body: Optional[pulumi.Input[str]] = None,
                  values: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version: Optional[pulumi.Input[str]] = None):
@@ -22,6 +24,8 @@ class AddonAttachmentArgs:
         The set of arguments for constructing a AddonAttachment resource.
         :param pulumi.Input[str] cluster_id: ID of cluster.
         :param pulumi.Input[str] name: Name of addon.
+        :param pulumi.Input[str] raw_values: Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        :param pulumi.Input[str] raw_values_type: The type of raw Values. Required with `raw_values`.
         :param pulumi.Input[str] request_body: Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] values: Values the addon passthroughs. Conflict with `request_body`.
         :param pulumi.Input[str] version: Addon version, default latest version. Conflict with `request_body`.
@@ -29,6 +33,10 @@ class AddonAttachmentArgs:
         pulumi.set(__self__, "cluster_id", cluster_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if raw_values is not None:
+            pulumi.set(__self__, "raw_values", raw_values)
+        if raw_values_type is not None:
+            pulumi.set(__self__, "raw_values_type", raw_values_type)
         if request_body is not None:
             pulumi.set(__self__, "request_body", request_body)
         if values is not None:
@@ -59,6 +67,30 @@ class AddonAttachmentArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="rawValues")
+    def raw_values(self) -> Optional[pulumi.Input[str]]:
+        """
+        Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        """
+        return pulumi.get(self, "raw_values")
+
+    @raw_values.setter
+    def raw_values(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "raw_values", value)
+
+    @property
+    @pulumi.getter(name="rawValuesType")
+    def raw_values_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of raw Values. Required with `raw_values`.
+        """
+        return pulumi.get(self, "raw_values_type")
+
+    @raw_values_type.setter
+    def raw_values_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "raw_values_type", value)
 
     @property
     @pulumi.getter(name="requestBody")
@@ -102,6 +134,8 @@ class _AddonAttachmentState:
     def __init__(__self__, *,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 raw_values: Optional[pulumi.Input[str]] = None,
+                 raw_values_type: Optional[pulumi.Input[str]] = None,
                  request_body: Optional[pulumi.Input[str]] = None,
                  response_body: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -111,6 +145,8 @@ class _AddonAttachmentState:
         Input properties used for looking up and filtering AddonAttachment resources.
         :param pulumi.Input[str] cluster_id: ID of cluster.
         :param pulumi.Input[str] name: Name of addon.
+        :param pulumi.Input[str] raw_values: Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        :param pulumi.Input[str] raw_values_type: The type of raw Values. Required with `raw_values`.
         :param pulumi.Input[str] request_body: Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
         :param pulumi.Input[str] response_body: Addon response body.
         :param pulumi.Input[Mapping[str, Any]] status: Addon current status.
@@ -121,6 +157,10 @@ class _AddonAttachmentState:
             pulumi.set(__self__, "cluster_id", cluster_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if raw_values is not None:
+            pulumi.set(__self__, "raw_values", raw_values)
+        if raw_values_type is not None:
+            pulumi.set(__self__, "raw_values_type", raw_values_type)
         if request_body is not None:
             pulumi.set(__self__, "request_body", request_body)
         if response_body is not None:
@@ -155,6 +195,30 @@ class _AddonAttachmentState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="rawValues")
+    def raw_values(self) -> Optional[pulumi.Input[str]]:
+        """
+        Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        """
+        return pulumi.get(self, "raw_values")
+
+    @raw_values.setter
+    def raw_values(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "raw_values", value)
+
+    @property
+    @pulumi.getter(name="rawValuesType")
+    def raw_values_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of raw Values. Required with `raw_values`.
+        """
+        return pulumi.get(self, "raw_values_type")
+
+    @raw_values_type.setter
+    def raw_values_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "raw_values_type", value)
 
     @property
     @pulumi.getter(name="requestBody")
@@ -224,6 +288,8 @@ class AddonAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 raw_values: Optional[pulumi.Input[str]] = None,
+                 raw_values_type: Optional[pulumi.Input[str]] = None,
                  request_body: Optional[pulumi.Input[str]] = None,
                  values: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -293,13 +359,13 @@ class AddonAttachment(pulumi.CustomResource):
                 "global.imagePullSecretsCrs[1].type=docker",
                 user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[1].dockerUsername={user_name}"),
                 token.apply(lambda token: f"global.imagePullSecretsCrs[1].dockerPassword={token}"),
-                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}-tencentcloudcr.com"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}.tencentcloudcr.com"),
                 "global.cluster.region=gz",
                 "global.cluster.longregion=ap-guangzhou",
                 tcr_name.apply(lambda tcr_name: f"global.hosts[0].domain={tcr_name}-vpc.tencentcloudcr.com"),
                 end_point.apply(lambda end_point: f"global.hosts[0].ip={end_point}"),
                 "global.hosts[0].disabled=false",
-                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}-tencentcloudcr.com"),
+                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}.tencentcloudcr.com"),
                 end_point.apply(lambda end_point: f"global.hosts[1].ip={end_point}"),
                 "global.hosts[1].disabled=false",
             ])
@@ -342,6 +408,8 @@ class AddonAttachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of cluster.
         :param pulumi.Input[str] name: Name of addon.
+        :param pulumi.Input[str] raw_values: Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        :param pulumi.Input[str] raw_values_type: The type of raw Values. Required with `raw_values`.
         :param pulumi.Input[str] request_body: Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] values: Values the addon passthroughs. Conflict with `request_body`.
         :param pulumi.Input[str] version: Addon version, default latest version. Conflict with `request_body`.
@@ -417,13 +485,13 @@ class AddonAttachment(pulumi.CustomResource):
                 "global.imagePullSecretsCrs[1].type=docker",
                 user_name.apply(lambda user_name: f"global.imagePullSecretsCrs[1].dockerUsername={user_name}"),
                 token.apply(lambda token: f"global.imagePullSecretsCrs[1].dockerPassword={token}"),
-                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}-tencentcloudcr.com"),
+                tcr_name.apply(lambda tcr_name: f"global.imagePullSecretsCrs[1].dockerServer={tcr_name}.tencentcloudcr.com"),
                 "global.cluster.region=gz",
                 "global.cluster.longregion=ap-guangzhou",
                 tcr_name.apply(lambda tcr_name: f"global.hosts[0].domain={tcr_name}-vpc.tencentcloudcr.com"),
                 end_point.apply(lambda end_point: f"global.hosts[0].ip={end_point}"),
                 "global.hosts[0].disabled=false",
-                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}-tencentcloudcr.com"),
+                tcr_name.apply(lambda tcr_name: f"global.hosts[1].domain={tcr_name}.tencentcloudcr.com"),
                 end_point.apply(lambda end_point: f"global.hosts[1].ip={end_point}"),
                 "global.hosts[1].disabled=false",
             ])
@@ -479,6 +547,8 @@ class AddonAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 raw_values: Optional[pulumi.Input[str]] = None,
+                 raw_values_type: Optional[pulumi.Input[str]] = None,
                  request_body: Optional[pulumi.Input[str]] = None,
                  values: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -500,6 +570,8 @@ class AddonAttachment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["name"] = name
+            __props__.__dict__["raw_values"] = raw_values
+            __props__.__dict__["raw_values_type"] = raw_values_type
             __props__.__dict__["request_body"] = request_body
             __props__.__dict__["values"] = values
             __props__.__dict__["version"] = version
@@ -517,6 +589,8 @@ class AddonAttachment(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            raw_values: Optional[pulumi.Input[str]] = None,
+            raw_values_type: Optional[pulumi.Input[str]] = None,
             request_body: Optional[pulumi.Input[str]] = None,
             response_body: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -531,6 +605,8 @@ class AddonAttachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of cluster.
         :param pulumi.Input[str] name: Name of addon.
+        :param pulumi.Input[str] raw_values: Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        :param pulumi.Input[str] raw_values_type: The type of raw Values. Required with `raw_values`.
         :param pulumi.Input[str] request_body: Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
         :param pulumi.Input[str] response_body: Addon response body.
         :param pulumi.Input[Mapping[str, Any]] status: Addon current status.
@@ -543,6 +619,8 @@ class AddonAttachment(pulumi.CustomResource):
 
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["name"] = name
+        __props__.__dict__["raw_values"] = raw_values
+        __props__.__dict__["raw_values_type"] = raw_values_type
         __props__.__dict__["request_body"] = request_body
         __props__.__dict__["response_body"] = response_body
         __props__.__dict__["status"] = status
@@ -565,6 +643,22 @@ class AddonAttachment(pulumi.CustomResource):
         Name of addon.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="rawValues")
+    def raw_values(self) -> pulumi.Output[str]:
+        """
+        Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        """
+        return pulumi.get(self, "raw_values")
+
+    @property
+    @pulumi.getter(name="rawValuesType")
+    def raw_values_type(self) -> pulumi.Output[str]:
+        """
+        The type of raw Values. Required with `raw_values`.
+        """
+        return pulumi.get(self, "raw_values_type")
 
     @property
     @pulumi.getter(name="requestBody")

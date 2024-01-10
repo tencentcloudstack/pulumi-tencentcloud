@@ -194,7 +194,7 @@ func (i *ResourcePackage) ToResourcePackageOutputWithContext(ctx context.Context
 // ResourcePackageArrayInput is an input type that accepts ResourcePackageArray and ResourcePackageArrayOutput values.
 // You can construct a concrete instance of `ResourcePackageArrayInput` via:
 //
-//          ResourcePackageArray{ ResourcePackageArgs{...} }
+//	ResourcePackageArray{ ResourcePackageArgs{...} }
 type ResourcePackageArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +219,7 @@ func (i ResourcePackageArray) ToResourcePackageArrayOutputWithContext(ctx contex
 // ResourcePackageMapInput is an input type that accepts ResourcePackageMap and ResourcePackageMapOutput values.
 // You can construct a concrete instance of `ResourcePackageMapInput` via:
 //
-//          ResourcePackageMap{ "key": ResourcePackageArgs{...} }
+//	ResourcePackageMap{ "key": ResourcePackageArgs{...} }
 type ResourcePackageMapInput interface {
 	pulumi.Input
 

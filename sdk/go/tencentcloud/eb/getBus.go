@@ -18,43 +18,46 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Eb.GetBus(ctx, &eb.GetBusArgs{
-// 			OrderBy: pulumi.StringRef("AddTime"),
-// 			Order:   pulumi.StringRef("DESC"),
-// 			Filters: []eb.GetBusFilter{
-// 				eb.GetBusFilter{
-// 					Values: []string{
-// 						"Custom",
-// 					},
-// 					Name: "Type",
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Eb.GetBus(ctx, &eb.GetBusArgs{
+//				OrderBy: pulumi.StringRef("AddTime"),
+//				Order:   pulumi.StringRef("DESC"),
+//				Filters: []eb.GetBusFilter{
+//					eb.GetBusFilter{
+//						Values: []string{
+//							"Custom",
+//						},
+//						Name: "Type",
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBus(ctx *pulumi.Context, args *GetBusArgs, opts ...pulumi.InvokeOption) (*GetBusResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

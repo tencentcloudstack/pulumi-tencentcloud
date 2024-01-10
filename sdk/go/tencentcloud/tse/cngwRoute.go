@@ -11,12 +11,129 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a tse cngwRoute
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
+//				Description:             pulumi.String("terraform test1"),
+//				EnableCls:               pulumi.Bool(true),
+//				EngineRegion:            pulumi.String("ap-guangzhou"),
+//				FeatureVersion:          pulumi.String("STANDARD"),
+//				GatewayVersion:          pulumi.String("2.5.1"),
+//				IngressClassName:        pulumi.String("tse-nginx-ingress"),
+//				InternetMaxBandwidthOut: pulumi.Int(0),
+//				TradeType:               pulumi.Int(0),
+//				Type:                    pulumi.String("kong"),
+//				NodeConfig: &tse.CngwGatewayNodeConfigArgs{
+//					Number:        pulumi.Int(2),
+//					Specification: pulumi.String("1c2g"),
+//				},
+//				VpcConfig: &tse.CngwGatewayVpcConfigArgs{
+//					SubnetId: subnet.ID(),
+//					VpcId:    vpc.ID(),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cngwService, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
+//				GatewayId:    cngwGateway.ID(),
+//				Path:         pulumi.String("/test"),
+//				Protocol:     pulumi.String("http"),
+//				Retries:      pulumi.Int(5),
+//				Timeout:      pulumi.Int(60000),
+//				UpstreamType: pulumi.String("HostIP"),
+//				UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
+//					Algorithm:          pulumi.String("round-robin"),
+//					AutoScalingCvmPort: pulumi.Int(0),
+//					Host:               pulumi.String("arunma.cn"),
+//					Port:               pulumi.Int(8012),
+//					SlowStart:          pulumi.Int(0),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tse.NewCngwRoute(ctx, "cngwRoute", &Tse.CngwRouteArgs{
+//				DestinationPorts: pulumi.IntArray{},
+//				GatewayId:        cngwGateway.ID(),
+//				Hosts: pulumi.StringArray{
+//					pulumi.String("192.168.0.1:9090"),
+//				},
+//				HttpsRedirectStatusCode: pulumi.Int(426),
+//				Paths: pulumi.StringArray{
+//					pulumi.String("/user"),
+//				},
+//				Headers: tse.CngwRouteHeaderArray{
+//					&tse.CngwRouteHeaderArgs{
+//						Key:   pulumi.String("req"),
+//						Value: pulumi.String("terraform"),
+//					},
+//				},
+//				PreserveHost: pulumi.Bool(false),
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("http"),
+//					pulumi.String("https"),
+//				},
+//				RouteName: pulumi.String("terraform-route"),
+//				ServiceId: cngwService.ServiceId,
+//				StripPath: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type CngwRoute struct {
 	pulumi.CustomResourceState
 
 	// destination port for Layer 4 matching.
 	DestinationPorts pulumi.IntArrayOutput `pulumi:"destinationPorts"`
-	// whether to enable forced HTTPS, no longer use.
+	// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+	//
+	// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 	ForceHttps pulumi.BoolPtrOutput `pulumi:"forceHttps"`
 	// gateway ID.
 	GatewayId pulumi.StringOutput `pulumi:"gatewayId"`
@@ -26,8 +143,7 @@ type CngwRoute struct {
 	Hosts pulumi.StringArrayOutput `pulumi:"hosts"`
 	// https redirection status code.
 	HttpsRedirectStatusCode pulumi.IntPtrOutput `pulumi:"httpsRedirectStatusCode"`
-	// route methods. Reference
-	// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+	// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 	Methods pulumi.StringArrayOutput `pulumi:"methods"`
 	// path list.
 	Paths pulumi.StringArrayOutput `pulumi:"paths"`
@@ -43,8 +159,6 @@ type CngwRoute struct {
 	ServiceId pulumi.StringOutput `pulumi:"serviceId"`
 	// whether to strip path when forwarding to the backend.
 	StripPath pulumi.BoolPtrOutput `pulumi:"stripPath"`
-	// Tag description list.
-	Tags pulumi.MapOutput `pulumi:"tags"`
 }
 
 // NewCngwRoute registers a new resource with the given unique name, arguments, and options.
@@ -85,7 +199,9 @@ func GetCngwRoute(ctx *pulumi.Context,
 type cngwRouteState struct {
 	// destination port for Layer 4 matching.
 	DestinationPorts []int `pulumi:"destinationPorts"`
-	// whether to enable forced HTTPS, no longer use.
+	// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+	//
+	// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 	ForceHttps *bool `pulumi:"forceHttps"`
 	// gateway ID.
 	GatewayId *string `pulumi:"gatewayId"`
@@ -95,8 +211,7 @@ type cngwRouteState struct {
 	Hosts []string `pulumi:"hosts"`
 	// https redirection status code.
 	HttpsRedirectStatusCode *int `pulumi:"httpsRedirectStatusCode"`
-	// route methods. Reference
-	// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+	// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 	Methods []string `pulumi:"methods"`
 	// path list.
 	Paths []string `pulumi:"paths"`
@@ -112,14 +227,14 @@ type cngwRouteState struct {
 	ServiceId *string `pulumi:"serviceId"`
 	// whether to strip path when forwarding to the backend.
 	StripPath *bool `pulumi:"stripPath"`
-	// Tag description list.
-	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 type CngwRouteState struct {
 	// destination port for Layer 4 matching.
 	DestinationPorts pulumi.IntArrayInput
-	// whether to enable forced HTTPS, no longer use.
+	// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+	//
+	// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 	ForceHttps pulumi.BoolPtrInput
 	// gateway ID.
 	GatewayId pulumi.StringPtrInput
@@ -129,8 +244,7 @@ type CngwRouteState struct {
 	Hosts pulumi.StringArrayInput
 	// https redirection status code.
 	HttpsRedirectStatusCode pulumi.IntPtrInput
-	// route methods. Reference
-	// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+	// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 	Methods pulumi.StringArrayInput
 	// path list.
 	Paths pulumi.StringArrayInput
@@ -146,8 +260,6 @@ type CngwRouteState struct {
 	ServiceId pulumi.StringPtrInput
 	// whether to strip path when forwarding to the backend.
 	StripPath pulumi.BoolPtrInput
-	// Tag description list.
-	Tags pulumi.MapInput
 }
 
 func (CngwRouteState) ElementType() reflect.Type {
@@ -157,7 +269,9 @@ func (CngwRouteState) ElementType() reflect.Type {
 type cngwRouteArgs struct {
 	// destination port for Layer 4 matching.
 	DestinationPorts []int `pulumi:"destinationPorts"`
-	// whether to enable forced HTTPS, no longer use.
+	// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+	//
+	// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 	ForceHttps *bool `pulumi:"forceHttps"`
 	// gateway ID.
 	GatewayId string `pulumi:"gatewayId"`
@@ -167,8 +281,7 @@ type cngwRouteArgs struct {
 	Hosts []string `pulumi:"hosts"`
 	// https redirection status code.
 	HttpsRedirectStatusCode *int `pulumi:"httpsRedirectStatusCode"`
-	// route methods. Reference
-	// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+	// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 	Methods []string `pulumi:"methods"`
 	// path list.
 	Paths []string `pulumi:"paths"`
@@ -182,15 +295,15 @@ type cngwRouteArgs struct {
 	ServiceId string `pulumi:"serviceId"`
 	// whether to strip path when forwarding to the backend.
 	StripPath *bool `pulumi:"stripPath"`
-	// Tag description list.
-	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a CngwRoute resource.
 type CngwRouteArgs struct {
 	// destination port for Layer 4 matching.
 	DestinationPorts pulumi.IntArrayInput
-	// whether to enable forced HTTPS, no longer use.
+	// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+	//
+	// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 	ForceHttps pulumi.BoolPtrInput
 	// gateway ID.
 	GatewayId pulumi.StringInput
@@ -200,8 +313,7 @@ type CngwRouteArgs struct {
 	Hosts pulumi.StringArrayInput
 	// https redirection status code.
 	HttpsRedirectStatusCode pulumi.IntPtrInput
-	// route methods. Reference
-	// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+	// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 	Methods pulumi.StringArrayInput
 	// path list.
 	Paths pulumi.StringArrayInput
@@ -215,8 +327,6 @@ type CngwRouteArgs struct {
 	ServiceId pulumi.StringInput
 	// whether to strip path when forwarding to the backend.
 	StripPath pulumi.BoolPtrInput
-	// Tag description list.
-	Tags pulumi.MapInput
 }
 
 func (CngwRouteArgs) ElementType() reflect.Type {
@@ -245,7 +355,7 @@ func (i *CngwRoute) ToCngwRouteOutputWithContext(ctx context.Context) CngwRouteO
 // CngwRouteArrayInput is an input type that accepts CngwRouteArray and CngwRouteArrayOutput values.
 // You can construct a concrete instance of `CngwRouteArrayInput` via:
 //
-//          CngwRouteArray{ CngwRouteArgs{...} }
+//	CngwRouteArray{ CngwRouteArgs{...} }
 type CngwRouteArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +380,7 @@ func (i CngwRouteArray) ToCngwRouteArrayOutputWithContext(ctx context.Context) C
 // CngwRouteMapInput is an input type that accepts CngwRouteMap and CngwRouteMapOutput values.
 // You can construct a concrete instance of `CngwRouteMapInput` via:
 //
-//          CngwRouteMap{ "key": CngwRouteArgs{...} }
+//	CngwRouteMap{ "key": CngwRouteArgs{...} }
 type CngwRouteMapInput interface {
 	pulumi.Input
 
@@ -311,7 +421,9 @@ func (o CngwRouteOutput) DestinationPorts() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *CngwRoute) pulumi.IntArrayOutput { return v.DestinationPorts }).(pulumi.IntArrayOutput)
 }
 
-// whether to enable forced HTTPS, no longer use.
+// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+//
+// Deprecated: This field has been deprecated and will be deleted in subsequent versions.
 func (o CngwRouteOutput) ForceHttps() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwRoute) pulumi.BoolPtrOutput { return v.ForceHttps }).(pulumi.BoolPtrOutput)
 }
@@ -336,8 +448,7 @@ func (o CngwRouteOutput) HttpsRedirectStatusCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CngwRoute) pulumi.IntPtrOutput { return v.HttpsRedirectStatusCode }).(pulumi.IntPtrOutput)
 }
 
-// route methods. Reference
-// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
 func (o CngwRouteOutput) Methods() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CngwRoute) pulumi.StringArrayOutput { return v.Methods }).(pulumi.StringArrayOutput)
 }
@@ -375,11 +486,6 @@ func (o CngwRouteOutput) ServiceId() pulumi.StringOutput {
 // whether to strip path when forwarding to the backend.
 func (o CngwRouteOutput) StripPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CngwRoute) pulumi.BoolPtrOutput { return v.StripPath }).(pulumi.BoolPtrOutput)
-}
-
-// Tag description list.
-func (o CngwRouteOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v *CngwRoute) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 type CngwRouteArrayOutput struct{ *pulumi.OutputState }

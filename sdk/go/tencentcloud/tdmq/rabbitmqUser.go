@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewRabbitmqUser(ctx, "rabbitmqUser", &Tdmq.RabbitmqUserArgs{
-// 			Description:    pulumi.String("test user"),
-// 			InstanceId:     pulumi.String("amqp-kzbe8p3n"),
-// 			MaxChannels:    pulumi.Int(3),
-// 			MaxConnections: pulumi.Int(3),
-// 			Password:       pulumi.String("asdf1234"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("management"),
-// 				pulumi.String("monitoring"),
-// 			},
-// 			User: pulumi.String("keep-user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewRabbitmqUser(ctx, "rabbitmqUser", &Tdmq.RabbitmqUserArgs{
+//				Description:    pulumi.String("test user"),
+//				InstanceId:     pulumi.String("amqp-kzbe8p3n"),
+//				MaxChannels:    pulumi.Int(3),
+//				MaxConnections: pulumi.Int(3),
+//				Password:       pulumi.String("asdf1234"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("management"),
+//					pulumi.String("monitoring"),
+//				},
+//				User: pulumi.String("keep-user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RabbitmqUser struct {
 	pulumi.CustomResourceState
@@ -200,7 +203,7 @@ func (i *RabbitmqUser) ToRabbitmqUserOutputWithContext(ctx context.Context) Rabb
 // RabbitmqUserArrayInput is an input type that accepts RabbitmqUserArray and RabbitmqUserArrayOutput values.
 // You can construct a concrete instance of `RabbitmqUserArrayInput` via:
 //
-//          RabbitmqUserArray{ RabbitmqUserArgs{...} }
+//	RabbitmqUserArray{ RabbitmqUserArgs{...} }
 type RabbitmqUserArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +228,7 @@ func (i RabbitmqUserArray) ToRabbitmqUserArrayOutputWithContext(ctx context.Cont
 // RabbitmqUserMapInput is an input type that accepts RabbitmqUserMap and RabbitmqUserMapOutput values.
 // You can construct a concrete instance of `RabbitmqUserMapInput` via:
 //
-//          RabbitmqUserMap{ "key": RabbitmqUserArgs{...} }
+//	RabbitmqUserMap{ "key": RabbitmqUserArgs{...} }
 type RabbitmqUserMapInput interface {
 	pulumi.Input
 

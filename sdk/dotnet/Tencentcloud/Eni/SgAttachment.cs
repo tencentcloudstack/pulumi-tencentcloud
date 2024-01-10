@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// <summary>
     /// Provides a resource to create a eni_sg_attachment
     /// 
+    /// &gt; **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloud_eni` binding security group for simultaneous use.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

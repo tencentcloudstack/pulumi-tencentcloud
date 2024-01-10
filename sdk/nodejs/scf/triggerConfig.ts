@@ -14,10 +14,13 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const triggerConfig = new tencentcloud.Scf.TriggerConfig("trigger_config", {
+ *     customArgument: "Information",
+ *     description: "func",
  *     enable: "OPEN",
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$DEFAULT",
+ *     triggerDesc: "* 1 2 * * * *",
  *     triggerName: "SCF-timer-1685540160",
  *     type: "timer",
  * });
@@ -60,9 +63,17 @@ export class TriggerConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+     * User Additional Information.
      */
-    public readonly enable!: pulumi.Output<string>;
+    public readonly customArgument!: pulumi.Output<string | undefined>;
+    /**
+     * Trigger description.
+     */
+    public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+     */
+    public readonly enable!: pulumi.Output<string | undefined>;
     /**
      * Function name.
      */
@@ -76,15 +87,15 @@ export class TriggerConfig extends pulumi.CustomResource {
      */
     public readonly qualifier!: pulumi.Output<string | undefined>;
     /**
-     * To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+     * TriggerDesc parameter.
      */
     public readonly triggerDesc!: pulumi.Output<string>;
     /**
-     * Trigger name.
+     * Trigger Name.
      */
     public readonly triggerName!: pulumi.Output<string>;
     /**
-     * Trigger Type.
+     * Trigger type.
      */
     public readonly type!: pulumi.Output<string>;
 
@@ -101,6 +112,8 @@ export class TriggerConfig extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TriggerConfigState | undefined;
+            resourceInputs["customArgument"] = state ? state.customArgument : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["functionName"] = state ? state.functionName : undefined;
             resourceInputs["namespace"] = state ? state.namespace : undefined;
@@ -110,9 +123,6 @@ export class TriggerConfig extends pulumi.CustomResource {
             resourceInputs["type"] = state ? state.type : undefined;
         } else {
             const args = argsOrState as TriggerConfigArgs | undefined;
-            if ((!args || args.enable === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'enable'");
-            }
             if ((!args || args.functionName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'functionName'");
             }
@@ -122,6 +132,8 @@ export class TriggerConfig extends pulumi.CustomResource {
             if ((!args || args.type === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'type'");
             }
+            resourceInputs["customArgument"] = args ? args.customArgument : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["functionName"] = args ? args.functionName : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
@@ -140,7 +152,15 @@ export class TriggerConfig extends pulumi.CustomResource {
  */
 export interface TriggerConfigState {
     /**
-     * Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+     * User Additional Information.
+     */
+    customArgument?: pulumi.Input<string>;
+    /**
+     * Trigger description.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Status of trigger. Values: OPEN (enabled); CLOSE disabled).
      */
     enable?: pulumi.Input<string>;
     /**
@@ -156,15 +176,15 @@ export interface TriggerConfigState {
      */
     qualifier?: pulumi.Input<string>;
     /**
-     * To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+     * TriggerDesc parameter.
      */
     triggerDesc?: pulumi.Input<string>;
     /**
-     * Trigger name.
+     * Trigger Name.
      */
     triggerName?: pulumi.Input<string>;
     /**
-     * Trigger Type.
+     * Trigger type.
      */
     type?: pulumi.Input<string>;
 }
@@ -174,9 +194,17 @@ export interface TriggerConfigState {
  */
 export interface TriggerConfigArgs {
     /**
-     * Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+     * User Additional Information.
      */
-    enable: pulumi.Input<string>;
+    customArgument?: pulumi.Input<string>;
+    /**
+     * Trigger description.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+     */
+    enable?: pulumi.Input<string>;
     /**
      * Function name.
      */
@@ -190,15 +218,15 @@ export interface TriggerConfigArgs {
      */
     qualifier?: pulumi.Input<string>;
     /**
-     * To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+     * TriggerDesc parameter.
      */
     triggerDesc?: pulumi.Input<string>;
     /**
-     * Trigger name.
+     * Trigger Name.
      */
     triggerName: pulumi.Input<string>;
     /**
-     * Trigger Type.
+     * Trigger type.
      */
     type: pulumi.Input<string>;
 }

@@ -335,7 +335,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         /// </summary>
         [Output("aclBody")]
-        public Output<string?> AclBody { get; private set; } = null!;
+        public Output<string> AclBody { get; private set; } = null!;
 
         /// <summary>
         /// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.

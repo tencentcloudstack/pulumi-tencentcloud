@@ -13,15 +13,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 
     public sealed class CngwRouteRateLimitLimitDetailExternalRedisArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// redis ip, maybe null.
+        /// </summary>
         [Input("redisHost", required: true)]
         public Input<string> RedisHost { get; set; } = null!;
 
+        /// <summary>
+        /// redis password, maybe null.
+        /// </summary>
         [Input("redisPassword", required: true)]
         public Input<string> RedisPassword { get; set; } = null!;
 
+        /// <summary>
+        /// redis port, maybe null.
+        /// </summary>
         [Input("redisPort", required: true)]
         public Input<int> RedisPort { get; set; } = null!;
 
+        /// <summary>
+        /// redis timeout, unit: `ms`, maybe null.
+        /// </summary>
         [Input("redisTimeout", required: true)]
         public Input<int> RedisTimeout { get; set; } = null!;
 

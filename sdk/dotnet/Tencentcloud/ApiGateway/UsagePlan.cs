@@ -23,12 +23,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
+    ///         var example = new Tencentcloud.ApiGateway.UsagePlan("example", new Tencentcloud.ApiGateway.UsagePlanArgs
     ///         {
     ///             MaxRequestNum = 100,
     ///             MaxRequestNumPreSec = 10,
-    ///             UsagePlanDesc = "nice plan",
-    ///             UsagePlanName = "my_plan",
+    ///             UsagePlanDesc = "desc.",
+    ///             UsagePlanName = "tf_example",
     ///         });
     ///     }
     /// 

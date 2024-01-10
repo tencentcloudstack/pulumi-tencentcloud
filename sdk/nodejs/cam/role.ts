@@ -16,27 +16,22 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const info = tencentcloud.User.getInfo({});
- * const uin = info.then(info => info.uin);
+ * const myUin = info.then(info => info.ownerUin);
+ * export const uin = myUin;
  * const foo = new tencentcloud.cam.Role("foo", {
- *     document: Promise.all([uin, uin]).then(([uin, uin1]) => `{
- *   "version": "2.0",
- *   "statement": [
- *     {
- *       "action": [
- *         "name/sts:AssumeRole"
- *       ],
- *       "effect": "allow",
- *       "principal": {
- *         "qcs": [
- *           "qcs::cam::uin/${uin}:uin/${uin1}"
- *         ]
- *       }
- *     }
- *   ]
- * }
- * `),
- *     description: "test",
+ *     document: myUin.then(myUin => JSON.stringify({
+ *         statement: [{
+ *             action: "name/sts:AssumeRole",
+ *             effect: "allow",
+ *             principal: {
+ *                 qcs: [`qcs::cam::uin/${myUin}:root`],
+ *             },
+ *         }],
+ *         version: "2.0",
+ *     })),
  *     consoleLogin: true,
+ *     description: "test",
+ *     sessionDuration: 7200,
  *     tags: {
  *         test: "tf-cam-role",
  *     },
@@ -137,6 +132,10 @@ export class Role extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The maximum validity period of the temporary key for creating a role.
+     */
+    public readonly sessionDuration!: pulumi.Output<number | undefined>;
+    /**
      * A list of tags used to associate different resources.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
@@ -163,6 +162,7 @@ export class Role extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["document"] = state ? state.document : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["sessionDuration"] = state ? state.sessionDuration : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
         } else {
@@ -174,6 +174,7 @@ export class Role extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["document"] = args ? args.document : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["sessionDuration"] = args ? args.sessionDuration : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
@@ -211,6 +212,10 @@ export interface RoleState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The maximum validity period of the temporary key for creating a role.
+     */
+    sessionDuration?: pulumi.Input<number>;
+    /**
      * A list of tags used to associate different resources.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
@@ -243,6 +248,10 @@ export interface RoleArgs {
      * Name of CAM role.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The maximum validity period of the temporary key for creating a role.
+     */
+    sessionDuration?: pulumi.Input<number>;
     /**
      * A list of tags used to associate different resources.
      */

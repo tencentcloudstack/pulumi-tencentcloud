@@ -19,57 +19,60 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewInstance(ctx, "instance", &Mariadb.InstanceArgs{
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			DbVersionId:   pulumi.String("8.0"),
-// 			DcnInstanceId: pulumi.String(""),
-// 			DcnRegion:     pulumi.String(""),
-// 			InitParams: mariadb.InstanceInitParamArray{
-// 				&mariadb.InstanceInitParamArgs{
-// 					Param: pulumi.String("character_set_server"),
-// 					Value: pulumi.String("utf8mb4"),
-// 				},
-// 				&mariadb.InstanceInitParamArgs{
-// 					Param: pulumi.String("lower_case_table_names"),
-// 					Value: pulumi.String("0"),
-// 				},
-// 				&mariadb.InstanceInitParamArgs{
-// 					Param: pulumi.String("innodb_page_size"),
-// 					Value: pulumi.String("16384"),
-// 				},
-// 				&mariadb.InstanceInitParamArgs{
-// 					Param: pulumi.String("sync_mode"),
-// 					Value: pulumi.String("1"),
-// 				},
-// 			},
-// 			InstanceName: pulumi.String("terraform-test"),
-// 			Ipv6Flag:     pulumi.Int(0),
-// 			Memory:       pulumi.Int(8),
-// 			NodeCount:    pulumi.Int(2),
-// 			Period:       pulumi.Int(1),
-// 			Storage:      pulumi.Int(10),
-// 			SubnetId:     pulumi.String("subnet-3ku415by"),
-// 			Tags: pulumi.AnyMap{
-// 				"createby": pulumi.Any("terrafrom-2"),
-// 			},
-// 			VpcId: pulumi.String("vpc-ii1jfbhl"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-3"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewInstance(ctx, "instance", &Mariadb.InstanceArgs{
+//				AutoRenewFlag: pulumi.Int(1),
+//				DbVersionId:   pulumi.String("8.0"),
+//				DcnInstanceId: pulumi.String(""),
+//				DcnRegion:     pulumi.String(""),
+//				InitParams: mariadb.InstanceInitParamArray{
+//					&mariadb.InstanceInitParamArgs{
+//						Param: pulumi.String("character_set_server"),
+//						Value: pulumi.String("utf8mb4"),
+//					},
+//					&mariadb.InstanceInitParamArgs{
+//						Param: pulumi.String("lower_case_table_names"),
+//						Value: pulumi.String("0"),
+//					},
+//					&mariadb.InstanceInitParamArgs{
+//						Param: pulumi.String("innodb_page_size"),
+//						Value: pulumi.String("16384"),
+//					},
+//					&mariadb.InstanceInitParamArgs{
+//						Param: pulumi.String("sync_mode"),
+//						Value: pulumi.String("1"),
+//					},
+//				},
+//				InstanceName: pulumi.String("terraform-test"),
+//				Ipv6Flag:     pulumi.Int(0),
+//				Memory:       pulumi.Int(8),
+//				NodeCount:    pulumi.Int(2),
+//				Period:       pulumi.Int(1),
+//				Storage:      pulumi.Int(10),
+//				SubnetId:     pulumi.String("subnet-3ku415by"),
+//				Tags: pulumi.AnyMap{
+//					"createby": pulumi.Any("terrafrom-2"),
+//				},
+//				VpcId: pulumi.String("vpc-ii1jfbhl"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-3"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -77,7 +80,9 @@ import (
 // mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+//
+//	$ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -572,7 +577,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -597,7 +602,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

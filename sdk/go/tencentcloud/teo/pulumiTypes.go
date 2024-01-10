@@ -10,15 +10,335 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AccelerationDomainOriginInfo struct {
+	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
+	BackupOrigin *string `pulumi:"backupOrigin"`
+	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+	Origin string `pulumi:"origin"`
+	// The origin type. Values: `IP_DOMAIN`: IPv4/IPv6 address or domain name; `COS`: COS bucket address; `ORIGIN_GROUP`: Origin group; `AWS_S3`: AWS S3 bucket address; `SPACE`: EdgeOne Shield Space.
+	OriginType string `pulumi:"originType"`
+	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: `on`: Enable private authentication; `off`: Disable private authentication. If this field is not specified, the default value `off` is used.
+	PrivateAccess *string `pulumi:"privateAccess"`
+	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+	PrivateParameters []AccelerationDomainOriginInfoPrivateParameter `pulumi:"privateParameters"`
+}
+
+// AccelerationDomainOriginInfoInput is an input type that accepts AccelerationDomainOriginInfoArgs and AccelerationDomainOriginInfoOutput values.
+// You can construct a concrete instance of `AccelerationDomainOriginInfoInput` via:
+//
+//	AccelerationDomainOriginInfoArgs{...}
+type AccelerationDomainOriginInfoInput interface {
+	pulumi.Input
+
+	ToAccelerationDomainOriginInfoOutput() AccelerationDomainOriginInfoOutput
+	ToAccelerationDomainOriginInfoOutputWithContext(context.Context) AccelerationDomainOriginInfoOutput
+}
+
+type AccelerationDomainOriginInfoArgs struct {
+	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
+	BackupOrigin pulumi.StringPtrInput `pulumi:"backupOrigin"`
+	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+	Origin pulumi.StringInput `pulumi:"origin"`
+	// The origin type. Values: `IP_DOMAIN`: IPv4/IPv6 address or domain name; `COS`: COS bucket address; `ORIGIN_GROUP`: Origin group; `AWS_S3`: AWS S3 bucket address; `SPACE`: EdgeOne Shield Space.
+	OriginType pulumi.StringInput `pulumi:"originType"`
+	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: `on`: Enable private authentication; `off`: Disable private authentication. If this field is not specified, the default value `off` is used.
+	PrivateAccess pulumi.StringPtrInput `pulumi:"privateAccess"`
+	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+	PrivateParameters AccelerationDomainOriginInfoPrivateParameterArrayInput `pulumi:"privateParameters"`
+}
+
+func (AccelerationDomainOriginInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccelerationDomainOriginInfo)(nil)).Elem()
+}
+
+func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoOutput() AccelerationDomainOriginInfoOutput {
+	return i.ToAccelerationDomainOriginInfoOutputWithContext(context.Background())
+}
+
+func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccelerationDomainOriginInfoOutput)
+}
+
+func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoPtrOutput() AccelerationDomainOriginInfoPtrOutput {
+	return i.ToAccelerationDomainOriginInfoPtrOutputWithContext(context.Background())
+}
+
+func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoPtrOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccelerationDomainOriginInfoOutput).ToAccelerationDomainOriginInfoPtrOutputWithContext(ctx)
+}
+
+// AccelerationDomainOriginInfoPtrInput is an input type that accepts AccelerationDomainOriginInfoArgs, AccelerationDomainOriginInfoPtr and AccelerationDomainOriginInfoPtrOutput values.
+// You can construct a concrete instance of `AccelerationDomainOriginInfoPtrInput` via:
+//
+//	        AccelerationDomainOriginInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type AccelerationDomainOriginInfoPtrInput interface {
+	pulumi.Input
+
+	ToAccelerationDomainOriginInfoPtrOutput() AccelerationDomainOriginInfoPtrOutput
+	ToAccelerationDomainOriginInfoPtrOutputWithContext(context.Context) AccelerationDomainOriginInfoPtrOutput
+}
+
+type accelerationDomainOriginInfoPtrType AccelerationDomainOriginInfoArgs
+
+func AccelerationDomainOriginInfoPtr(v *AccelerationDomainOriginInfoArgs) AccelerationDomainOriginInfoPtrInput {
+	return (*accelerationDomainOriginInfoPtrType)(v)
+}
+
+func (*accelerationDomainOriginInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccelerationDomainOriginInfo)(nil)).Elem()
+}
+
+func (i *accelerationDomainOriginInfoPtrType) ToAccelerationDomainOriginInfoPtrOutput() AccelerationDomainOriginInfoPtrOutput {
+	return i.ToAccelerationDomainOriginInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *accelerationDomainOriginInfoPtrType) ToAccelerationDomainOriginInfoPtrOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccelerationDomainOriginInfoPtrOutput)
+}
+
+type AccelerationDomainOriginInfoOutput struct{ *pulumi.OutputState }
+
+func (AccelerationDomainOriginInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccelerationDomainOriginInfo)(nil)).Elem()
+}
+
+func (o AccelerationDomainOriginInfoOutput) ToAccelerationDomainOriginInfoOutput() AccelerationDomainOriginInfoOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoOutput) ToAccelerationDomainOriginInfoOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoOutput) ToAccelerationDomainOriginInfoPtrOutput() AccelerationDomainOriginInfoPtrOutput {
+	return o.ToAccelerationDomainOriginInfoPtrOutputWithContext(context.Background())
+}
+
+func (o AccelerationDomainOriginInfoOutput) ToAccelerationDomainOriginInfoPtrOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AccelerationDomainOriginInfo) *AccelerationDomainOriginInfo {
+		return &v
+	}).(AccelerationDomainOriginInfoPtrOutput)
+}
+
+// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
+func (o AccelerationDomainOriginInfoOutput) BackupOrigin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfo) *string { return v.BackupOrigin }).(pulumi.StringPtrOutput)
+}
+
+// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+func (o AccelerationDomainOriginInfoOutput) Origin() pulumi.StringOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfo) string { return v.Origin }).(pulumi.StringOutput)
+}
+
+// The origin type. Values: `IP_DOMAIN`: IPv4/IPv6 address or domain name; `COS`: COS bucket address; `ORIGIN_GROUP`: Origin group; `AWS_S3`: AWS S3 bucket address; `SPACE`: EdgeOne Shield Space.
+func (o AccelerationDomainOriginInfoOutput) OriginType() pulumi.StringOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfo) string { return v.OriginType }).(pulumi.StringOutput)
+}
+
+// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: `on`: Enable private authentication; `off`: Disable private authentication. If this field is not specified, the default value `off` is used.
+func (o AccelerationDomainOriginInfoOutput) PrivateAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfo) *string { return v.PrivateAccess }).(pulumi.StringPtrOutput)
+}
+
+// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+func (o AccelerationDomainOriginInfoOutput) PrivateParameters() AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfo) []AccelerationDomainOriginInfoPrivateParameter {
+		return v.PrivateParameters
+	}).(AccelerationDomainOriginInfoPrivateParameterArrayOutput)
+}
+
+type AccelerationDomainOriginInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (AccelerationDomainOriginInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccelerationDomainOriginInfo)(nil)).Elem()
+}
+
+func (o AccelerationDomainOriginInfoPtrOutput) ToAccelerationDomainOriginInfoPtrOutput() AccelerationDomainOriginInfoPtrOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoPtrOutput) ToAccelerationDomainOriginInfoPtrOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPtrOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoPtrOutput) Elem() AccelerationDomainOriginInfoOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) AccelerationDomainOriginInfo {
+		if v != nil {
+			return *v
+		}
+		var ret AccelerationDomainOriginInfo
+		return ret
+	}).(AccelerationDomainOriginInfoOutput)
+}
+
+// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it is not specified, it indicates that secondary origins are not used.
+func (o AccelerationDomainOriginInfoPtrOutput) BackupOrigin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BackupOrigin
+	}).(pulumi.StringPtrOutput)
+}
+
+// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+func (o AccelerationDomainOriginInfoPtrOutput) Origin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Origin
+	}).(pulumi.StringPtrOutput)
+}
+
+// The origin type. Values: `IP_DOMAIN`: IPv4/IPv6 address or domain name; `COS`: COS bucket address; `ORIGIN_GROUP`: Origin group; `AWS_S3`: AWS S3 bucket address; `SPACE`: EdgeOne Shield Space.
+func (o AccelerationDomainOriginInfoPtrOutput) OriginType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.OriginType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: `on`: Enable private authentication; `off`: Disable private authentication. If this field is not specified, the default value `off` is used.
+func (o AccelerationDomainOriginInfoPtrOutput) PrivateAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PrivateAccess
+	}).(pulumi.StringPtrOutput)
+}
+
+// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+func (o AccelerationDomainOriginInfoPtrOutput) PrivateParameters() AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return o.ApplyT(func(v *AccelerationDomainOriginInfo) []AccelerationDomainOriginInfoPrivateParameter {
+		if v == nil {
+			return nil
+		}
+		return v.PrivateParameters
+	}).(AccelerationDomainOriginInfoPrivateParameterArrayOutput)
+}
+
+type AccelerationDomainOriginInfoPrivateParameter struct {
+	// The parameter name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+	Name string `pulumi:"name"`
+	// The parameter value.
+	Value string `pulumi:"value"`
+}
+
+// AccelerationDomainOriginInfoPrivateParameterInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArgs and AccelerationDomainOriginInfoPrivateParameterOutput values.
+// You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterInput` via:
+//
+//	AccelerationDomainOriginInfoPrivateParameterArgs{...}
+type AccelerationDomainOriginInfoPrivateParameterInput interface {
+	pulumi.Input
+
+	ToAccelerationDomainOriginInfoPrivateParameterOutput() AccelerationDomainOriginInfoPrivateParameterOutput
+	ToAccelerationDomainOriginInfoPrivateParameterOutputWithContext(context.Context) AccelerationDomainOriginInfoPrivateParameterOutput
+}
+
+type AccelerationDomainOriginInfoPrivateParameterArgs struct {
+	// The parameter name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The parameter value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (AccelerationDomainOriginInfoPrivateParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccelerationDomainOriginInfoPrivateParameter)(nil)).Elem()
+}
+
+func (i AccelerationDomainOriginInfoPrivateParameterArgs) ToAccelerationDomainOriginInfoPrivateParameterOutput() AccelerationDomainOriginInfoPrivateParameterOutput {
+	return i.ToAccelerationDomainOriginInfoPrivateParameterOutputWithContext(context.Background())
+}
+
+func (i AccelerationDomainOriginInfoPrivateParameterArgs) ToAccelerationDomainOriginInfoPrivateParameterOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPrivateParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccelerationDomainOriginInfoPrivateParameterOutput)
+}
+
+// AccelerationDomainOriginInfoPrivateParameterArrayInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArray and AccelerationDomainOriginInfoPrivateParameterArrayOutput values.
+// You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterArrayInput` via:
+//
+//	AccelerationDomainOriginInfoPrivateParameterArray{ AccelerationDomainOriginInfoPrivateParameterArgs{...} }
+type AccelerationDomainOriginInfoPrivateParameterArrayInput interface {
+	pulumi.Input
+
+	ToAccelerationDomainOriginInfoPrivateParameterArrayOutput() AccelerationDomainOriginInfoPrivateParameterArrayOutput
+	ToAccelerationDomainOriginInfoPrivateParameterArrayOutputWithContext(context.Context) AccelerationDomainOriginInfoPrivateParameterArrayOutput
+}
+
+type AccelerationDomainOriginInfoPrivateParameterArray []AccelerationDomainOriginInfoPrivateParameterInput
+
+func (AccelerationDomainOriginInfoPrivateParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccelerationDomainOriginInfoPrivateParameter)(nil)).Elem()
+}
+
+func (i AccelerationDomainOriginInfoPrivateParameterArray) ToAccelerationDomainOriginInfoPrivateParameterArrayOutput() AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return i.ToAccelerationDomainOriginInfoPrivateParameterArrayOutputWithContext(context.Background())
+}
+
+func (i AccelerationDomainOriginInfoPrivateParameterArray) ToAccelerationDomainOriginInfoPrivateParameterArrayOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccelerationDomainOriginInfoPrivateParameterArrayOutput)
+}
+
+type AccelerationDomainOriginInfoPrivateParameterOutput struct{ *pulumi.OutputState }
+
+func (AccelerationDomainOriginInfoPrivateParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccelerationDomainOriginInfoPrivateParameter)(nil)).Elem()
+}
+
+func (o AccelerationDomainOriginInfoPrivateParameterOutput) ToAccelerationDomainOriginInfoPrivateParameterOutput() AccelerationDomainOriginInfoPrivateParameterOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoPrivateParameterOutput) ToAccelerationDomainOriginInfoPrivateParameterOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPrivateParameterOutput {
+	return o
+}
+
+// The parameter name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+func (o AccelerationDomainOriginInfoPrivateParameterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfoPrivateParameter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The parameter value.
+func (o AccelerationDomainOriginInfoPrivateParameterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v AccelerationDomainOriginInfoPrivateParameter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type AccelerationDomainOriginInfoPrivateParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (AccelerationDomainOriginInfoPrivateParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccelerationDomainOriginInfoPrivateParameter)(nil)).Elem()
+}
+
+func (o AccelerationDomainOriginInfoPrivateParameterArrayOutput) ToAccelerationDomainOriginInfoPrivateParameterArrayOutput() AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoPrivateParameterArrayOutput) ToAccelerationDomainOriginInfoPrivateParameterArrayOutputWithContext(ctx context.Context) AccelerationDomainOriginInfoPrivateParameterArrayOutput {
+	return o
+}
+
+func (o AccelerationDomainOriginInfoPrivateParameterArrayOutput) Index(i pulumi.IntInput) AccelerationDomainOriginInfoPrivateParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccelerationDomainOriginInfoPrivateParameter {
+		return vs[0].([]AccelerationDomainOriginInfoPrivateParameter)[vs[1].(int)]
+	}).(AccelerationDomainOriginInfoPrivateParameterOutput)
+}
+
 type ApplicationProxyIpv6 struct {
-	// - `on`: Enable.- `off`: Disable.
 	Switch string `pulumi:"switch"`
 }
 
 // ApplicationProxyIpv6Input is an input type that accepts ApplicationProxyIpv6Args and ApplicationProxyIpv6Output values.
 // You can construct a concrete instance of `ApplicationProxyIpv6Input` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	ApplicationProxyIpv6Args{...}
 type ApplicationProxyIpv6Input interface {
 	pulumi.Input
 
@@ -27,7 +347,6 @@ type ApplicationProxyIpv6Input interface {
 }
 
 type ApplicationProxyIpv6Args struct {
-	// - `on`: Enable.- `off`: Disable.
 	Switch pulumi.StringInput `pulumi:"switch"`
 }
 
@@ -54,11 +373,11 @@ func (i ApplicationProxyIpv6Args) ToApplicationProxyIpv6PtrOutputWithContext(ctx
 // ApplicationProxyIpv6PtrInput is an input type that accepts ApplicationProxyIpv6Args, ApplicationProxyIpv6Ptr and ApplicationProxyIpv6PtrOutput values.
 // You can construct a concrete instance of `ApplicationProxyIpv6PtrInput` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	        ApplicationProxyIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ApplicationProxyIpv6PtrInput interface {
 	pulumi.Input
 
@@ -108,7 +427,6 @@ func (o ApplicationProxyIpv6Output) ToApplicationProxyIpv6PtrOutputWithContext(c
 	}).(ApplicationProxyIpv6PtrOutput)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o ApplicationProxyIpv6Output) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ApplicationProxyIpv6) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -137,7 +455,6 @@ func (o ApplicationProxyIpv6PtrOutput) Elem() ApplicationProxyIpv6Output {
 	}).(ApplicationProxyIpv6Output)
 }
 
-// - `on`: Enable.- `off`: Disable.
 func (o ApplicationProxyIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationProxyIpv6) *string {
 		if v == nil {
@@ -147,2148 +464,159 @@ func (o ApplicationProxyIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type DdosPolicyDdosRule struct {
-	Acl          *DdosPolicyDdosRuleAcl          `pulumi:"acl"`
-	AllowBlock   *DdosPolicyDdosRuleAllowBlock   `pulumi:"allowBlock"`
-	AntiPly      *DdosPolicyDdosRuleAntiPly      `pulumi:"antiPly"`
-	GeoIp        *DdosPolicyDdosRuleGeoIp        `pulumi:"geoIp"`
-	PacketFilter *DdosPolicyDdosRulePacketFilter `pulumi:"packetFilter"`
-	SpeedLimit   *DdosPolicyDdosRuleSpeedLimit   `pulumi:"speedLimit"`
-	StatusInfo   *DdosPolicyDdosRuleStatusInfo   `pulumi:"statusInfo"`
-	Switch       *string                         `pulumi:"switch"`
+type CertificateConfigServerCertInfo struct {
+	// Alias of the certificate.Note: This field may return null, indicating that no valid values can be obtained.
+	Alias *string `pulumi:"alias"`
+	// ID of the server certificate.Note: This field may return null, indicating that no valid values can be obtained.
+	CertId string `pulumi:"certId"`
+	// Domain name of the certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+	CommonName *string `pulumi:"commonName"`
+	// Time when the certificate is deployed. Note: This field may return null, indicating that no valid values can be obtained.
+	DeployTime *string `pulumi:"deployTime"`
+	// Time when the certificate expires. Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `pulumi:"expireTime"`
+	// Signature algorithm. Note: This field may return null, indicating that no valid values can be obtained.
+	SignAlgo *string `pulumi:"signAlgo"`
+	// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+	Type *string `pulumi:"type"`
 }
 
-// DdosPolicyDdosRuleInput is an input type that accepts DdosPolicyDdosRuleArgs and DdosPolicyDdosRuleOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleInput` via:
+// CertificateConfigServerCertInfoInput is an input type that accepts CertificateConfigServerCertInfoArgs and CertificateConfigServerCertInfoOutput values.
+// You can construct a concrete instance of `CertificateConfigServerCertInfoInput` via:
 //
-//          DdosPolicyDdosRuleArgs{...}
-type DdosPolicyDdosRuleInput interface {
+//	CertificateConfigServerCertInfoArgs{...}
+type CertificateConfigServerCertInfoInput interface {
 	pulumi.Input
 
-	ToDdosPolicyDdosRuleOutput() DdosPolicyDdosRuleOutput
-	ToDdosPolicyDdosRuleOutputWithContext(context.Context) DdosPolicyDdosRuleOutput
+	ToCertificateConfigServerCertInfoOutput() CertificateConfigServerCertInfoOutput
+	ToCertificateConfigServerCertInfoOutputWithContext(context.Context) CertificateConfigServerCertInfoOutput
 }
 
-type DdosPolicyDdosRuleArgs struct {
-	Acl          DdosPolicyDdosRuleAclPtrInput          `pulumi:"acl"`
-	AllowBlock   DdosPolicyDdosRuleAllowBlockPtrInput   `pulumi:"allowBlock"`
-	AntiPly      DdosPolicyDdosRuleAntiPlyPtrInput      `pulumi:"antiPly"`
-	GeoIp        DdosPolicyDdosRuleGeoIpPtrInput        `pulumi:"geoIp"`
-	PacketFilter DdosPolicyDdosRulePacketFilterPtrInput `pulumi:"packetFilter"`
-	SpeedLimit   DdosPolicyDdosRuleSpeedLimitPtrInput   `pulumi:"speedLimit"`
-	StatusInfo   DdosPolicyDdosRuleStatusInfoPtrInput   `pulumi:"statusInfo"`
-	Switch       pulumi.StringPtrInput                  `pulumi:"switch"`
+type CertificateConfigServerCertInfoArgs struct {
+	// Alias of the certificate.Note: This field may return null, indicating that no valid values can be obtained.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// ID of the server certificate.Note: This field may return null, indicating that no valid values can be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name of the certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
+	// Time when the certificate is deployed. Note: This field may return null, indicating that no valid values can be obtained.
+	DeployTime pulumi.StringPtrInput `pulumi:"deployTime"`
+	// Time when the certificate expires. Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
+	// Signature algorithm. Note: This field may return null, indicating that no valid values can be obtained.
+	SignAlgo pulumi.StringPtrInput `pulumi:"signAlgo"`
+	// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
-func (DdosPolicyDdosRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRule)(nil)).Elem()
+func (CertificateConfigServerCertInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateConfigServerCertInfo)(nil)).Elem()
 }
 
-func (i DdosPolicyDdosRuleArgs) ToDdosPolicyDdosRuleOutput() DdosPolicyDdosRuleOutput {
-	return i.ToDdosPolicyDdosRuleOutputWithContext(context.Background())
+func (i CertificateConfigServerCertInfoArgs) ToCertificateConfigServerCertInfoOutput() CertificateConfigServerCertInfoOutput {
+	return i.ToCertificateConfigServerCertInfoOutputWithContext(context.Background())
 }
 
-func (i DdosPolicyDdosRuleArgs) ToDdosPolicyDdosRuleOutputWithContext(ctx context.Context) DdosPolicyDdosRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleOutput)
+func (i CertificateConfigServerCertInfoArgs) ToCertificateConfigServerCertInfoOutputWithContext(ctx context.Context) CertificateConfigServerCertInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateConfigServerCertInfoOutput)
 }
 
-func (i DdosPolicyDdosRuleArgs) ToDdosPolicyDdosRulePtrOutput() DdosPolicyDdosRulePtrOutput {
-	return i.ToDdosPolicyDdosRulePtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleArgs) ToDdosPolicyDdosRulePtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleOutput).ToDdosPolicyDdosRulePtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRulePtrInput is an input type that accepts DdosPolicyDdosRuleArgs, DdosPolicyDdosRulePtr and DdosPolicyDdosRulePtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRulePtrInput` via:
+// CertificateConfigServerCertInfoArrayInput is an input type that accepts CertificateConfigServerCertInfoArray and CertificateConfigServerCertInfoArrayOutput values.
+// You can construct a concrete instance of `CertificateConfigServerCertInfoArrayInput` via:
 //
-//          DdosPolicyDdosRuleArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRulePtrInput interface {
+//	CertificateConfigServerCertInfoArray{ CertificateConfigServerCertInfoArgs{...} }
+type CertificateConfigServerCertInfoArrayInput interface {
 	pulumi.Input
 
-	ToDdosPolicyDdosRulePtrOutput() DdosPolicyDdosRulePtrOutput
-	ToDdosPolicyDdosRulePtrOutputWithContext(context.Context) DdosPolicyDdosRulePtrOutput
+	ToCertificateConfigServerCertInfoArrayOutput() CertificateConfigServerCertInfoArrayOutput
+	ToCertificateConfigServerCertInfoArrayOutputWithContext(context.Context) CertificateConfigServerCertInfoArrayOutput
 }
 
-type ddosPolicyDdosRulePtrType DdosPolicyDdosRuleArgs
+type CertificateConfigServerCertInfoArray []CertificateConfigServerCertInfoInput
 
-func DdosPolicyDdosRulePtr(v *DdosPolicyDdosRuleArgs) DdosPolicyDdosRulePtrInput {
-	return (*ddosPolicyDdosRulePtrType)(v)
+func (CertificateConfigServerCertInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateConfigServerCertInfo)(nil)).Elem()
 }
 
-func (*ddosPolicyDdosRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRule)(nil)).Elem()
+func (i CertificateConfigServerCertInfoArray) ToCertificateConfigServerCertInfoArrayOutput() CertificateConfigServerCertInfoArrayOutput {
+	return i.ToCertificateConfigServerCertInfoArrayOutputWithContext(context.Background())
 }
 
-func (i *ddosPolicyDdosRulePtrType) ToDdosPolicyDdosRulePtrOutput() DdosPolicyDdosRulePtrOutput {
-	return i.ToDdosPolicyDdosRulePtrOutputWithContext(context.Background())
+func (i CertificateConfigServerCertInfoArray) ToCertificateConfigServerCertInfoArrayOutputWithContext(ctx context.Context) CertificateConfigServerCertInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateConfigServerCertInfoArrayOutput)
 }
 
-func (i *ddosPolicyDdosRulePtrType) ToDdosPolicyDdosRulePtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePtrOutput)
+type CertificateConfigServerCertInfoOutput struct{ *pulumi.OutputState }
+
+func (CertificateConfigServerCertInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateConfigServerCertInfo)(nil)).Elem()
 }
 
-type DdosPolicyDdosRuleOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRule)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleOutput) ToDdosPolicyDdosRuleOutput() DdosPolicyDdosRuleOutput {
+func (o CertificateConfigServerCertInfoOutput) ToCertificateConfigServerCertInfoOutput() CertificateConfigServerCertInfoOutput {
 	return o
 }
 
-func (o DdosPolicyDdosRuleOutput) ToDdosPolicyDdosRuleOutputWithContext(ctx context.Context) DdosPolicyDdosRuleOutput {
+func (o CertificateConfigServerCertInfoOutput) ToCertificateConfigServerCertInfoOutputWithContext(ctx context.Context) CertificateConfigServerCertInfoOutput {
 	return o
 }
 
-func (o DdosPolicyDdosRuleOutput) ToDdosPolicyDdosRulePtrOutput() DdosPolicyDdosRulePtrOutput {
-	return o.ToDdosPolicyDdosRulePtrOutputWithContext(context.Background())
+// Alias of the certificate.Note: This field may return null, indicating that no valid values can be obtained.
+func (o CertificateConfigServerCertInfoOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.Alias }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) ToDdosPolicyDdosRulePtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRule) *DdosPolicyDdosRule {
-		return &v
-	}).(DdosPolicyDdosRulePtrOutput)
+// ID of the server certificate.Note: This field may return null, indicating that no valid values can be obtained.
+func (o CertificateConfigServerCertInfoOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) string { return v.CertId }).(pulumi.StringOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) Acl() DdosPolicyDdosRuleAclPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAcl { return v.Acl }).(DdosPolicyDdosRuleAclPtrOutput)
+// Domain name of the certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+func (o CertificateConfigServerCertInfoOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) AllowBlock() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAllowBlock { return v.AllowBlock }).(DdosPolicyDdosRuleAllowBlockPtrOutput)
+// Time when the certificate is deployed. Note: This field may return null, indicating that no valid values can be obtained.
+func (o CertificateConfigServerCertInfoOutput) DeployTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) AntiPly() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleAntiPly { return v.AntiPly }).(DdosPolicyDdosRuleAntiPlyPtrOutput)
+// Time when the certificate expires. Note: This field may return null, indicating that no valid values can be obtained.
+func (o CertificateConfigServerCertInfoOutput) ExpireTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) GeoIp() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleGeoIp { return v.GeoIp }).(DdosPolicyDdosRuleGeoIpPtrOutput)
+// Signature algorithm. Note: This field may return null, indicating that no valid values can be obtained.
+func (o CertificateConfigServerCertInfoOutput) SignAlgo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.SignAlgo }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) PacketFilter() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRulePacketFilter { return v.PacketFilter }).(DdosPolicyDdosRulePacketFilterPtrOutput)
+// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
+func (o CertificateConfigServerCertInfoOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateConfigServerCertInfo) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-func (o DdosPolicyDdosRuleOutput) SpeedLimit() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleSpeedLimit { return v.SpeedLimit }).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
+type CertificateConfigServerCertInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (CertificateConfigServerCertInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateConfigServerCertInfo)(nil)).Elem()
 }
 
-func (o DdosPolicyDdosRuleOutput) StatusInfo() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *DdosPolicyDdosRuleStatusInfo { return v.StatusInfo }).(DdosPolicyDdosRuleStatusInfoPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRulePtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRule)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRulePtrOutput) ToDdosPolicyDdosRulePtrOutput() DdosPolicyDdosRulePtrOutput {
+func (o CertificateConfigServerCertInfoArrayOutput) ToCertificateConfigServerCertInfoArrayOutput() CertificateConfigServerCertInfoArrayOutput {
 	return o
 }
 
-func (o DdosPolicyDdosRulePtrOutput) ToDdosPolicyDdosRulePtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePtrOutput {
+func (o CertificateConfigServerCertInfoArrayOutput) ToCertificateConfigServerCertInfoArrayOutputWithContext(ctx context.Context) CertificateConfigServerCertInfoArrayOutput {
 	return o
 }
 
-func (o DdosPolicyDdosRulePtrOutput) Elem() DdosPolicyDdosRuleOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) DdosPolicyDdosRule {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRule
-		return ret
-	}).(DdosPolicyDdosRuleOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) Acl() DdosPolicyDdosRuleAclPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAcl {
-		if v == nil {
-			return nil
-		}
-		return v.Acl
-	}).(DdosPolicyDdosRuleAclPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) AllowBlock() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAllowBlock {
-		if v == nil {
-			return nil
-		}
-		return v.AllowBlock
-	}).(DdosPolicyDdosRuleAllowBlockPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) AntiPly() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleAntiPly {
-		if v == nil {
-			return nil
-		}
-		return v.AntiPly
-	}).(DdosPolicyDdosRuleAntiPlyPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) GeoIp() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleGeoIp {
-		if v == nil {
-			return nil
-		}
-		return v.GeoIp
-	}).(DdosPolicyDdosRuleGeoIpPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) PacketFilter() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRulePacketFilter {
-		if v == nil {
-			return nil
-		}
-		return v.PacketFilter
-	}).(DdosPolicyDdosRulePacketFilterPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) SpeedLimit() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleSpeedLimit {
-		if v == nil {
-			return nil
-		}
-		return v.SpeedLimit
-	}).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) StatusInfo() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *DdosPolicyDdosRuleStatusInfo {
-		if v == nil {
-			return nil
-		}
-		return v.StatusInfo
-	}).(DdosPolicyDdosRuleStatusInfoPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAcl struct {
-	Acls   []DdosPolicyDdosRuleAclAcl `pulumi:"acls"`
-	Switch *string                    `pulumi:"switch"`
-}
-
-// DdosPolicyDdosRuleAclInput is an input type that accepts DdosPolicyDdosRuleAclArgs and DdosPolicyDdosRuleAclOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAclInput` via:
-//
-//          DdosPolicyDdosRuleAclArgs{...}
-type DdosPolicyDdosRuleAclInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAclOutput() DdosPolicyDdosRuleAclOutput
-	ToDdosPolicyDdosRuleAclOutputWithContext(context.Context) DdosPolicyDdosRuleAclOutput
-}
-
-type DdosPolicyDdosRuleAclArgs struct {
-	Acls   DdosPolicyDdosRuleAclAclArrayInput `pulumi:"acls"`
-	Switch pulumi.StringPtrInput              `pulumi:"switch"`
-}
-
-func (DdosPolicyDdosRuleAclArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAcl)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAclArgs) ToDdosPolicyDdosRuleAclOutput() DdosPolicyDdosRuleAclOutput {
-	return i.ToDdosPolicyDdosRuleAclOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAclArgs) ToDdosPolicyDdosRuleAclOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAclOutput)
-}
-
-func (i DdosPolicyDdosRuleAclArgs) ToDdosPolicyDdosRuleAclPtrOutput() DdosPolicyDdosRuleAclPtrOutput {
-	return i.ToDdosPolicyDdosRuleAclPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAclArgs) ToDdosPolicyDdosRuleAclPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAclOutput).ToDdosPolicyDdosRuleAclPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleAclPtrInput is an input type that accepts DdosPolicyDdosRuleAclArgs, DdosPolicyDdosRuleAclPtr and DdosPolicyDdosRuleAclPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAclPtrInput` via:
-//
-//          DdosPolicyDdosRuleAclArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleAclPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAclPtrOutput() DdosPolicyDdosRuleAclPtrOutput
-	ToDdosPolicyDdosRuleAclPtrOutputWithContext(context.Context) DdosPolicyDdosRuleAclPtrOutput
-}
-
-type ddosPolicyDdosRuleAclPtrType DdosPolicyDdosRuleAclArgs
-
-func DdosPolicyDdosRuleAclPtr(v *DdosPolicyDdosRuleAclArgs) DdosPolicyDdosRuleAclPtrInput {
-	return (*ddosPolicyDdosRuleAclPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleAclPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAcl)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleAclPtrType) ToDdosPolicyDdosRuleAclPtrOutput() DdosPolicyDdosRuleAclPtrOutput {
-	return i.ToDdosPolicyDdosRuleAclPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleAclPtrType) ToDdosPolicyDdosRuleAclPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAclPtrOutput)
-}
-
-type DdosPolicyDdosRuleAclOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAclOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAcl)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAclOutput) ToDdosPolicyDdosRuleAclOutput() DdosPolicyDdosRuleAclOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclOutput) ToDdosPolicyDdosRuleAclOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclOutput) ToDdosPolicyDdosRuleAclPtrOutput() DdosPolicyDdosRuleAclPtrOutput {
-	return o.ToDdosPolicyDdosRuleAclPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleAclOutput) ToDdosPolicyDdosRuleAclPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleAcl) *DdosPolicyDdosRuleAcl {
-		return &v
-	}).(DdosPolicyDdosRuleAclPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclOutput) Acls() DdosPolicyDdosRuleAclAclArrayOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAcl) []DdosPolicyDdosRuleAclAcl { return v.Acls }).(DdosPolicyDdosRuleAclAclArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleAclOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAcl) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAclPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAclPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAcl)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAclPtrOutput) ToDdosPolicyDdosRuleAclPtrOutput() DdosPolicyDdosRuleAclPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclPtrOutput) ToDdosPolicyDdosRuleAclPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclPtrOutput) Elem() DdosPolicyDdosRuleAclOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAcl) DdosPolicyDdosRuleAcl {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleAcl
-		return ret
-	}).(DdosPolicyDdosRuleAclOutput)
-}
-
-func (o DdosPolicyDdosRuleAclPtrOutput) Acls() DdosPolicyDdosRuleAclAclArrayOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAcl) []DdosPolicyDdosRuleAclAcl {
-		if v == nil {
-			return nil
-		}
-		return v.Acls
-	}).(DdosPolicyDdosRuleAclAclArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleAclPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAcl) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAclAcl struct {
-	Action     *string `pulumi:"action"`
-	DportEnd   *int    `pulumi:"dportEnd"`
-	DportStart *int    `pulumi:"dportStart"`
-	Protocol   *string `pulumi:"protocol"`
-	SportEnd   *int    `pulumi:"sportEnd"`
-	SportStart *int    `pulumi:"sportStart"`
-}
-
-// DdosPolicyDdosRuleAclAclInput is an input type that accepts DdosPolicyDdosRuleAclAclArgs and DdosPolicyDdosRuleAclAclOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAclAclInput` via:
-//
-//          DdosPolicyDdosRuleAclAclArgs{...}
-type DdosPolicyDdosRuleAclAclInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAclAclOutput() DdosPolicyDdosRuleAclAclOutput
-	ToDdosPolicyDdosRuleAclAclOutputWithContext(context.Context) DdosPolicyDdosRuleAclAclOutput
-}
-
-type DdosPolicyDdosRuleAclAclArgs struct {
-	Action     pulumi.StringPtrInput `pulumi:"action"`
-	DportEnd   pulumi.IntPtrInput    `pulumi:"dportEnd"`
-	DportStart pulumi.IntPtrInput    `pulumi:"dportStart"`
-	Protocol   pulumi.StringPtrInput `pulumi:"protocol"`
-	SportEnd   pulumi.IntPtrInput    `pulumi:"sportEnd"`
-	SportStart pulumi.IntPtrInput    `pulumi:"sportStart"`
-}
-
-func (DdosPolicyDdosRuleAclAclArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAclAcl)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAclAclArgs) ToDdosPolicyDdosRuleAclAclOutput() DdosPolicyDdosRuleAclAclOutput {
-	return i.ToDdosPolicyDdosRuleAclAclOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAclAclArgs) ToDdosPolicyDdosRuleAclAclOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclAclOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAclAclOutput)
-}
-
-// DdosPolicyDdosRuleAclAclArrayInput is an input type that accepts DdosPolicyDdosRuleAclAclArray and DdosPolicyDdosRuleAclAclArrayOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAclAclArrayInput` via:
-//
-//          DdosPolicyDdosRuleAclAclArray{ DdosPolicyDdosRuleAclAclArgs{...} }
-type DdosPolicyDdosRuleAclAclArrayInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAclAclArrayOutput() DdosPolicyDdosRuleAclAclArrayOutput
-	ToDdosPolicyDdosRuleAclAclArrayOutputWithContext(context.Context) DdosPolicyDdosRuleAclAclArrayOutput
-}
-
-type DdosPolicyDdosRuleAclAclArray []DdosPolicyDdosRuleAclAclInput
-
-func (DdosPolicyDdosRuleAclAclArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRuleAclAcl)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAclAclArray) ToDdosPolicyDdosRuleAclAclArrayOutput() DdosPolicyDdosRuleAclAclArrayOutput {
-	return i.ToDdosPolicyDdosRuleAclAclArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAclAclArray) ToDdosPolicyDdosRuleAclAclArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclAclArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAclAclArrayOutput)
-}
-
-type DdosPolicyDdosRuleAclAclOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAclAclOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAclAcl)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) ToDdosPolicyDdosRuleAclAclOutput() DdosPolicyDdosRuleAclAclOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) ToDdosPolicyDdosRuleAclAclOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclAclOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) DportEnd() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.DportEnd }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) DportStart() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.DportStart }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) Protocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *string { return v.Protocol }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) SportEnd() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.SportEnd }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAclAclOutput) SportStart() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAclAcl) *int { return v.SportStart }).(pulumi.IntPtrOutput)
-}
-
-type DdosPolicyDdosRuleAclAclArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAclAclArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRuleAclAcl)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAclAclArrayOutput) ToDdosPolicyDdosRuleAclAclArrayOutput() DdosPolicyDdosRuleAclAclArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclAclArrayOutput) ToDdosPolicyDdosRuleAclAclArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAclAclArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAclAclArrayOutput) Index(i pulumi.IntInput) DdosPolicyDdosRuleAclAclOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyDdosRuleAclAcl {
-		return vs[0].([]DdosPolicyDdosRuleAclAcl)[vs[1].(int)]
-	}).(DdosPolicyDdosRuleAclAclOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlock struct {
-	AllowBlockIps []DdosPolicyDdosRuleAllowBlockAllowBlockIp `pulumi:"allowBlockIps"`
-	Switch        *string                                    `pulumi:"switch"`
-}
-
-// DdosPolicyDdosRuleAllowBlockInput is an input type that accepts DdosPolicyDdosRuleAllowBlockArgs and DdosPolicyDdosRuleAllowBlockOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAllowBlockInput` via:
-//
-//          DdosPolicyDdosRuleAllowBlockArgs{...}
-type DdosPolicyDdosRuleAllowBlockInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAllowBlockOutput() DdosPolicyDdosRuleAllowBlockOutput
-	ToDdosPolicyDdosRuleAllowBlockOutputWithContext(context.Context) DdosPolicyDdosRuleAllowBlockOutput
-}
-
-type DdosPolicyDdosRuleAllowBlockArgs struct {
-	AllowBlockIps DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput `pulumi:"allowBlockIps"`
-	Switch        pulumi.StringPtrInput                              `pulumi:"switch"`
-}
-
-func (DdosPolicyDdosRuleAllowBlockArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAllowBlock)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAllowBlockArgs) ToDdosPolicyDdosRuleAllowBlockOutput() DdosPolicyDdosRuleAllowBlockOutput {
-	return i.ToDdosPolicyDdosRuleAllowBlockOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAllowBlockArgs) ToDdosPolicyDdosRuleAllowBlockOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAllowBlockOutput)
-}
-
-func (i DdosPolicyDdosRuleAllowBlockArgs) ToDdosPolicyDdosRuleAllowBlockPtrOutput() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return i.ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAllowBlockArgs) ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAllowBlockOutput).ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleAllowBlockPtrInput is an input type that accepts DdosPolicyDdosRuleAllowBlockArgs, DdosPolicyDdosRuleAllowBlockPtr and DdosPolicyDdosRuleAllowBlockPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAllowBlockPtrInput` via:
-//
-//          DdosPolicyDdosRuleAllowBlockArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleAllowBlockPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAllowBlockPtrOutput() DdosPolicyDdosRuleAllowBlockPtrOutput
-	ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(context.Context) DdosPolicyDdosRuleAllowBlockPtrOutput
-}
-
-type ddosPolicyDdosRuleAllowBlockPtrType DdosPolicyDdosRuleAllowBlockArgs
-
-func DdosPolicyDdosRuleAllowBlockPtr(v *DdosPolicyDdosRuleAllowBlockArgs) DdosPolicyDdosRuleAllowBlockPtrInput {
-	return (*ddosPolicyDdosRuleAllowBlockPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleAllowBlockPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAllowBlock)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleAllowBlockPtrType) ToDdosPolicyDdosRuleAllowBlockPtrOutput() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return i.ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleAllowBlockPtrType) ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAllowBlockPtrOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlockOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAllowBlockOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAllowBlock)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) ToDdosPolicyDdosRuleAllowBlockOutput() DdosPolicyDdosRuleAllowBlockOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) ToDdosPolicyDdosRuleAllowBlockOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) ToDdosPolicyDdosRuleAllowBlockPtrOutput() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o.ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleAllowBlock) *DdosPolicyDdosRuleAllowBlock {
-		return &v
-	}).(DdosPolicyDdosRuleAllowBlockPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) AllowBlockIps() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlock) []DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-		return v.AllowBlockIps
-	}).(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlock) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlockPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAllowBlockPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAllowBlock)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAllowBlockPtrOutput) ToDdosPolicyDdosRuleAllowBlockPtrOutput() DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockPtrOutput) ToDdosPolicyDdosRuleAllowBlockPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockPtrOutput) Elem() DdosPolicyDdosRuleAllowBlockOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAllowBlock) DdosPolicyDdosRuleAllowBlock {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleAllowBlock
-		return ret
-	}).(DdosPolicyDdosRuleAllowBlockOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockPtrOutput) AllowBlockIps() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAllowBlock) []DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-		if v == nil {
-			return nil
-		}
-		return v.AllowBlockIps
-	}).(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAllowBlock) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlockAllowBlockIp struct {
-	Ip         *string `pulumi:"ip"`
-	Type       string  `pulumi:"type"`
-	UpdateTime *int    `pulumi:"updateTime"`
-}
-
-// DdosPolicyDdosRuleAllowBlockAllowBlockIpInput is an input type that accepts DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs and DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAllowBlockAllowBlockIpInput` via:
-//
-//          DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs{...}
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput
-	ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutputWithContext(context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput
-}
-
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs struct {
-	Ip         pulumi.StringPtrInput `pulumi:"ip"`
-	Type       pulumi.StringInput    `pulumi:"type"`
-	UpdateTime pulumi.IntPtrInput    `pulumi:"updateTime"`
-}
-
-func (DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockAllowBlockIp)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput {
-	return i.ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput)
-}
-
-// DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput is an input type that accepts DdosPolicyDdosRuleAllowBlockAllowBlockIpArray and DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput` via:
-//
-//          DdosPolicyDdosRuleAllowBlockAllowBlockIpArray{ DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs{...} }
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput
-	ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutputWithContext(context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput
-}
-
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpArray []DdosPolicyDdosRuleAllowBlockAllowBlockIpInput
-
-func (DdosPolicyDdosRuleAllowBlockAllowBlockIpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRuleAllowBlockAllowBlockIp)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAllowBlockAllowBlockIpArray) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return i.ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAllowBlockAllowBlockIpArray) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockAllowBlockIp)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) Ip() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlockAllowBlockIp) *string { return v.Ip }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlockAllowBlockIp) string { return v.Type }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput) UpdateTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAllowBlockAllowBlockIp) *int { return v.UpdateTime }).(pulumi.IntPtrOutput)
-}
-
-type DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRuleAllowBlockAllowBlockIp)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput() DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput) ToDdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput) Index(i pulumi.IntInput) DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyDdosRuleAllowBlockAllowBlockIp {
-		return vs[0].([]DdosPolicyDdosRuleAllowBlockAllowBlockIp)[vs[1].(int)]
-	}).(DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput)
-}
-
-type DdosPolicyDdosRuleAntiPly struct {
-	AbnormalConnectNum      int     `pulumi:"abnormalConnectNum"`
-	AbnormalSynNum          int     `pulumi:"abnormalSynNum"`
-	AbnormalSynRatio        int     `pulumi:"abnormalSynRatio"`
-	ConnectTimeout          int     `pulumi:"connectTimeout"`
-	DestinationConnectLimit int     `pulumi:"destinationConnectLimit"`
-	DestinationCreateLimit  int     `pulumi:"destinationCreateLimit"`
-	DropIcmp                string  `pulumi:"dropIcmp"`
-	DropOther               string  `pulumi:"dropOther"`
-	DropTcp                 string  `pulumi:"dropTcp"`
-	DropUdp                 string  `pulumi:"dropUdp"`
-	EmptyConnectProtect     string  `pulumi:"emptyConnectProtect"`
-	SourceConnectLimit      int     `pulumi:"sourceConnectLimit"`
-	SourceCreateLimit       int     `pulumi:"sourceCreateLimit"`
-	UdpShard                *string `pulumi:"udpShard"`
-}
-
-// DdosPolicyDdosRuleAntiPlyInput is an input type that accepts DdosPolicyDdosRuleAntiPlyArgs and DdosPolicyDdosRuleAntiPlyOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAntiPlyInput` via:
-//
-//          DdosPolicyDdosRuleAntiPlyArgs{...}
-type DdosPolicyDdosRuleAntiPlyInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAntiPlyOutput() DdosPolicyDdosRuleAntiPlyOutput
-	ToDdosPolicyDdosRuleAntiPlyOutputWithContext(context.Context) DdosPolicyDdosRuleAntiPlyOutput
-}
-
-type DdosPolicyDdosRuleAntiPlyArgs struct {
-	AbnormalConnectNum      pulumi.IntInput       `pulumi:"abnormalConnectNum"`
-	AbnormalSynNum          pulumi.IntInput       `pulumi:"abnormalSynNum"`
-	AbnormalSynRatio        pulumi.IntInput       `pulumi:"abnormalSynRatio"`
-	ConnectTimeout          pulumi.IntInput       `pulumi:"connectTimeout"`
-	DestinationConnectLimit pulumi.IntInput       `pulumi:"destinationConnectLimit"`
-	DestinationCreateLimit  pulumi.IntInput       `pulumi:"destinationCreateLimit"`
-	DropIcmp                pulumi.StringInput    `pulumi:"dropIcmp"`
-	DropOther               pulumi.StringInput    `pulumi:"dropOther"`
-	DropTcp                 pulumi.StringInput    `pulumi:"dropTcp"`
-	DropUdp                 pulumi.StringInput    `pulumi:"dropUdp"`
-	EmptyConnectProtect     pulumi.StringInput    `pulumi:"emptyConnectProtect"`
-	SourceConnectLimit      pulumi.IntInput       `pulumi:"sourceConnectLimit"`
-	SourceCreateLimit       pulumi.IntInput       `pulumi:"sourceCreateLimit"`
-	UdpShard                pulumi.StringPtrInput `pulumi:"udpShard"`
-}
-
-func (DdosPolicyDdosRuleAntiPlyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAntiPly)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleAntiPlyArgs) ToDdosPolicyDdosRuleAntiPlyOutput() DdosPolicyDdosRuleAntiPlyOutput {
-	return i.ToDdosPolicyDdosRuleAntiPlyOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAntiPlyArgs) ToDdosPolicyDdosRuleAntiPlyOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAntiPlyOutput)
-}
-
-func (i DdosPolicyDdosRuleAntiPlyArgs) ToDdosPolicyDdosRuleAntiPlyPtrOutput() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return i.ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleAntiPlyArgs) ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAntiPlyOutput).ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleAntiPlyPtrInput is an input type that accepts DdosPolicyDdosRuleAntiPlyArgs, DdosPolicyDdosRuleAntiPlyPtr and DdosPolicyDdosRuleAntiPlyPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleAntiPlyPtrInput` via:
-//
-//          DdosPolicyDdosRuleAntiPlyArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleAntiPlyPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleAntiPlyPtrOutput() DdosPolicyDdosRuleAntiPlyPtrOutput
-	ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(context.Context) DdosPolicyDdosRuleAntiPlyPtrOutput
-}
-
-type ddosPolicyDdosRuleAntiPlyPtrType DdosPolicyDdosRuleAntiPlyArgs
-
-func DdosPolicyDdosRuleAntiPlyPtr(v *DdosPolicyDdosRuleAntiPlyArgs) DdosPolicyDdosRuleAntiPlyPtrInput {
-	return (*ddosPolicyDdosRuleAntiPlyPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleAntiPlyPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAntiPly)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleAntiPlyPtrType) ToDdosPolicyDdosRuleAntiPlyPtrOutput() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return i.ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleAntiPlyPtrType) ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleAntiPlyPtrOutput)
-}
-
-type DdosPolicyDdosRuleAntiPlyOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAntiPlyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleAntiPly)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) ToDdosPolicyDdosRuleAntiPlyOutput() DdosPolicyDdosRuleAntiPlyOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) ToDdosPolicyDdosRuleAntiPlyOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) ToDdosPolicyDdosRuleAntiPlyPtrOutput() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o.ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleAntiPly) *DdosPolicyDdosRuleAntiPly {
-		return &v
-	}).(DdosPolicyDdosRuleAntiPlyPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalConnectNum() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalConnectNum }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalSynNum() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalSynNum }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) AbnormalSynRatio() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.AbnormalSynRatio }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) ConnectTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.ConnectTimeout }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DestinationConnectLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.DestinationConnectLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DestinationCreateLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.DestinationCreateLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DropIcmp() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropIcmp }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DropOther() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropOther }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DropTcp() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropTcp }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) DropUdp() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.DropUdp }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) EmptyConnectProtect() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) string { return v.EmptyConnectProtect }).(pulumi.StringOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) SourceConnectLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.SourceConnectLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) SourceCreateLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) int { return v.SourceCreateLimit }).(pulumi.IntOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyOutput) UdpShard() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleAntiPly) *string { return v.UdpShard }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleAntiPlyPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleAntiPlyPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleAntiPly)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) ToDdosPolicyDdosRuleAntiPlyPtrOutput() DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) ToDdosPolicyDdosRuleAntiPlyPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleAntiPlyPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) Elem() DdosPolicyDdosRuleAntiPlyOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) DdosPolicyDdosRuleAntiPly {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleAntiPly
-		return ret
-	}).(DdosPolicyDdosRuleAntiPlyOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalConnectNum() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.AbnormalConnectNum
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynNum() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.AbnormalSynNum
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) AbnormalSynRatio() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.AbnormalSynRatio
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) ConnectTimeout() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.ConnectTimeout
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationConnectLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.DestinationConnectLimit
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DestinationCreateLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.DestinationCreateLimit
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropIcmp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.DropIcmp
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropOther() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.DropOther
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropTcp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.DropTcp
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) DropUdp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.DropUdp
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) EmptyConnectProtect() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.EmptyConnectProtect
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceConnectLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.SourceConnectLimit
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) SourceCreateLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *int {
-		if v == nil {
-			return nil
-		}
-		return &v.SourceCreateLimit
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleAntiPlyPtrOutput) UdpShard() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleAntiPly) *string {
-		if v == nil {
-			return nil
-		}
-		return v.UdpShard
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleGeoIp struct {
-	RegionIds []int   `pulumi:"regionIds"`
-	Switch    *string `pulumi:"switch"`
-}
-
-// DdosPolicyDdosRuleGeoIpInput is an input type that accepts DdosPolicyDdosRuleGeoIpArgs and DdosPolicyDdosRuleGeoIpOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleGeoIpInput` via:
-//
-//          DdosPolicyDdosRuleGeoIpArgs{...}
-type DdosPolicyDdosRuleGeoIpInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleGeoIpOutput() DdosPolicyDdosRuleGeoIpOutput
-	ToDdosPolicyDdosRuleGeoIpOutputWithContext(context.Context) DdosPolicyDdosRuleGeoIpOutput
-}
-
-type DdosPolicyDdosRuleGeoIpArgs struct {
-	RegionIds pulumi.IntArrayInput  `pulumi:"regionIds"`
-	Switch    pulumi.StringPtrInput `pulumi:"switch"`
-}
-
-func (DdosPolicyDdosRuleGeoIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleGeoIp)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleGeoIpArgs) ToDdosPolicyDdosRuleGeoIpOutput() DdosPolicyDdosRuleGeoIpOutput {
-	return i.ToDdosPolicyDdosRuleGeoIpOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleGeoIpArgs) ToDdosPolicyDdosRuleGeoIpOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleGeoIpOutput)
-}
-
-func (i DdosPolicyDdosRuleGeoIpArgs) ToDdosPolicyDdosRuleGeoIpPtrOutput() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return i.ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleGeoIpArgs) ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleGeoIpOutput).ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleGeoIpPtrInput is an input type that accepts DdosPolicyDdosRuleGeoIpArgs, DdosPolicyDdosRuleGeoIpPtr and DdosPolicyDdosRuleGeoIpPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleGeoIpPtrInput` via:
-//
-//          DdosPolicyDdosRuleGeoIpArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleGeoIpPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleGeoIpPtrOutput() DdosPolicyDdosRuleGeoIpPtrOutput
-	ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(context.Context) DdosPolicyDdosRuleGeoIpPtrOutput
-}
-
-type ddosPolicyDdosRuleGeoIpPtrType DdosPolicyDdosRuleGeoIpArgs
-
-func DdosPolicyDdosRuleGeoIpPtr(v *DdosPolicyDdosRuleGeoIpArgs) DdosPolicyDdosRuleGeoIpPtrInput {
-	return (*ddosPolicyDdosRuleGeoIpPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleGeoIpPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleGeoIp)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleGeoIpPtrType) ToDdosPolicyDdosRuleGeoIpPtrOutput() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return i.ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleGeoIpPtrType) ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleGeoIpPtrOutput)
-}
-
-type DdosPolicyDdosRuleGeoIpOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleGeoIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleGeoIp)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) ToDdosPolicyDdosRuleGeoIpOutput() DdosPolicyDdosRuleGeoIpOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) ToDdosPolicyDdosRuleGeoIpOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) ToDdosPolicyDdosRuleGeoIpPtrOutput() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o.ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleGeoIp) *DdosPolicyDdosRuleGeoIp {
-		return &v
-	}).(DdosPolicyDdosRuleGeoIpPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) RegionIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleGeoIp) []int { return v.RegionIds }).(pulumi.IntArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleGeoIpOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleGeoIp) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleGeoIpPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleGeoIpPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleGeoIp)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleGeoIpPtrOutput) ToDdosPolicyDdosRuleGeoIpPtrOutput() DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleGeoIpPtrOutput) ToDdosPolicyDdosRuleGeoIpPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleGeoIpPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleGeoIpPtrOutput) Elem() DdosPolicyDdosRuleGeoIpOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleGeoIp) DdosPolicyDdosRuleGeoIp {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleGeoIp
-		return ret
-	}).(DdosPolicyDdosRuleGeoIpOutput)
-}
-
-func (o DdosPolicyDdosRuleGeoIpPtrOutput) RegionIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleGeoIp) []int {
-		if v == nil {
-			return nil
-		}
-		return v.RegionIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o DdosPolicyDdosRuleGeoIpPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleGeoIp) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRulePacketFilter struct {
-	PacketFilters []DdosPolicyDdosRulePacketFilterPacketFilter `pulumi:"packetFilters"`
-	Switch        *string                                      `pulumi:"switch"`
-}
-
-// DdosPolicyDdosRulePacketFilterInput is an input type that accepts DdosPolicyDdosRulePacketFilterArgs and DdosPolicyDdosRulePacketFilterOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRulePacketFilterInput` via:
-//
-//          DdosPolicyDdosRulePacketFilterArgs{...}
-type DdosPolicyDdosRulePacketFilterInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRulePacketFilterOutput() DdosPolicyDdosRulePacketFilterOutput
-	ToDdosPolicyDdosRulePacketFilterOutputWithContext(context.Context) DdosPolicyDdosRulePacketFilterOutput
-}
-
-type DdosPolicyDdosRulePacketFilterArgs struct {
-	PacketFilters DdosPolicyDdosRulePacketFilterPacketFilterArrayInput `pulumi:"packetFilters"`
-	Switch        pulumi.StringPtrInput                                `pulumi:"switch"`
-}
-
-func (DdosPolicyDdosRulePacketFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRulePacketFilter)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRulePacketFilterArgs) ToDdosPolicyDdosRulePacketFilterOutput() DdosPolicyDdosRulePacketFilterOutput {
-	return i.ToDdosPolicyDdosRulePacketFilterOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRulePacketFilterArgs) ToDdosPolicyDdosRulePacketFilterOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePacketFilterOutput)
-}
-
-func (i DdosPolicyDdosRulePacketFilterArgs) ToDdosPolicyDdosRulePacketFilterPtrOutput() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return i.ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRulePacketFilterArgs) ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePacketFilterOutput).ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRulePacketFilterPtrInput is an input type that accepts DdosPolicyDdosRulePacketFilterArgs, DdosPolicyDdosRulePacketFilterPtr and DdosPolicyDdosRulePacketFilterPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRulePacketFilterPtrInput` via:
-//
-//          DdosPolicyDdosRulePacketFilterArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRulePacketFilterPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRulePacketFilterPtrOutput() DdosPolicyDdosRulePacketFilterPtrOutput
-	ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(context.Context) DdosPolicyDdosRulePacketFilterPtrOutput
-}
-
-type ddosPolicyDdosRulePacketFilterPtrType DdosPolicyDdosRulePacketFilterArgs
-
-func DdosPolicyDdosRulePacketFilterPtr(v *DdosPolicyDdosRulePacketFilterArgs) DdosPolicyDdosRulePacketFilterPtrInput {
-	return (*ddosPolicyDdosRulePacketFilterPtrType)(v)
-}
-
-func (*ddosPolicyDdosRulePacketFilterPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRulePacketFilter)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRulePacketFilterPtrType) ToDdosPolicyDdosRulePacketFilterPtrOutput() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return i.ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRulePacketFilterPtrType) ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePacketFilterPtrOutput)
-}
-
-type DdosPolicyDdosRulePacketFilterOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRulePacketFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRulePacketFilter)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) ToDdosPolicyDdosRulePacketFilterOutput() DdosPolicyDdosRulePacketFilterOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) ToDdosPolicyDdosRulePacketFilterOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) ToDdosPolicyDdosRulePacketFilterPtrOutput() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o.ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRulePacketFilter) *DdosPolicyDdosRulePacketFilter {
-		return &v
-	}).(DdosPolicyDdosRulePacketFilterPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) PacketFilters() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilter) []DdosPolicyDdosRulePacketFilterPacketFilter {
-		return v.PacketFilters
-	}).(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilter) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRulePacketFilterPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRulePacketFilterPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRulePacketFilter)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRulePacketFilterPtrOutput) ToDdosPolicyDdosRulePacketFilterPtrOutput() DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPtrOutput) ToDdosPolicyDdosRulePacketFilterPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPtrOutput) Elem() DdosPolicyDdosRulePacketFilterOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRulePacketFilter) DdosPolicyDdosRulePacketFilter {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRulePacketFilter
-		return ret
-	}).(DdosPolicyDdosRulePacketFilterOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPtrOutput) PacketFilters() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRulePacketFilter) []DdosPolicyDdosRulePacketFilterPacketFilter {
-		if v == nil {
-			return nil
-		}
-		return v.PacketFilters
-	}).(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRulePacketFilter) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRulePacketFilterPacketFilter struct {
-	Action      *string `pulumi:"action"`
-	Depth       *int    `pulumi:"depth"`
-	Depth2      *int    `pulumi:"depth2"`
-	DportEnd    *int    `pulumi:"dportEnd"`
-	DportStart  *int    `pulumi:"dportStart"`
-	IsNot       *int    `pulumi:"isNot"`
-	IsNot2      *int    `pulumi:"isNot2"`
-	MatchBegin  *string `pulumi:"matchBegin"`
-	MatchBegin2 *string `pulumi:"matchBegin2"`
-	MatchLogic  *string `pulumi:"matchLogic"`
-	MatchType   *string `pulumi:"matchType"`
-	MatchType2  *string `pulumi:"matchType2"`
-	Offset      *int    `pulumi:"offset"`
-	Offset2     *int    `pulumi:"offset2"`
-	PacketMax   *int    `pulumi:"packetMax"`
-	PacketMin   *int    `pulumi:"packetMin"`
-	Protocol    *string `pulumi:"protocol"`
-	SportEnd    *int    `pulumi:"sportEnd"`
-	SportStart  *int    `pulumi:"sportStart"`
-	Str         *string `pulumi:"str"`
-	Str2        *string `pulumi:"str2"`
-}
-
-// DdosPolicyDdosRulePacketFilterPacketFilterInput is an input type that accepts DdosPolicyDdosRulePacketFilterPacketFilterArgs and DdosPolicyDdosRulePacketFilterPacketFilterOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRulePacketFilterPacketFilterInput` via:
-//
-//          DdosPolicyDdosRulePacketFilterPacketFilterArgs{...}
-type DdosPolicyDdosRulePacketFilterPacketFilterInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRulePacketFilterPacketFilterOutput() DdosPolicyDdosRulePacketFilterPacketFilterOutput
-	ToDdosPolicyDdosRulePacketFilterPacketFilterOutputWithContext(context.Context) DdosPolicyDdosRulePacketFilterPacketFilterOutput
-}
-
-type DdosPolicyDdosRulePacketFilterPacketFilterArgs struct {
-	Action      pulumi.StringPtrInput `pulumi:"action"`
-	Depth       pulumi.IntPtrInput    `pulumi:"depth"`
-	Depth2      pulumi.IntPtrInput    `pulumi:"depth2"`
-	DportEnd    pulumi.IntPtrInput    `pulumi:"dportEnd"`
-	DportStart  pulumi.IntPtrInput    `pulumi:"dportStart"`
-	IsNot       pulumi.IntPtrInput    `pulumi:"isNot"`
-	IsNot2      pulumi.IntPtrInput    `pulumi:"isNot2"`
-	MatchBegin  pulumi.StringPtrInput `pulumi:"matchBegin"`
-	MatchBegin2 pulumi.StringPtrInput `pulumi:"matchBegin2"`
-	MatchLogic  pulumi.StringPtrInput `pulumi:"matchLogic"`
-	MatchType   pulumi.StringPtrInput `pulumi:"matchType"`
-	MatchType2  pulumi.StringPtrInput `pulumi:"matchType2"`
-	Offset      pulumi.IntPtrInput    `pulumi:"offset"`
-	Offset2     pulumi.IntPtrInput    `pulumi:"offset2"`
-	PacketMax   pulumi.IntPtrInput    `pulumi:"packetMax"`
-	PacketMin   pulumi.IntPtrInput    `pulumi:"packetMin"`
-	Protocol    pulumi.StringPtrInput `pulumi:"protocol"`
-	SportEnd    pulumi.IntPtrInput    `pulumi:"sportEnd"`
-	SportStart  pulumi.IntPtrInput    `pulumi:"sportStart"`
-	Str         pulumi.StringPtrInput `pulumi:"str"`
-	Str2        pulumi.StringPtrInput `pulumi:"str2"`
-}
-
-func (DdosPolicyDdosRulePacketFilterPacketFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRulePacketFilterPacketFilter)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRulePacketFilterPacketFilterArgs) ToDdosPolicyDdosRulePacketFilterPacketFilterOutput() DdosPolicyDdosRulePacketFilterPacketFilterOutput {
-	return i.ToDdosPolicyDdosRulePacketFilterPacketFilterOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRulePacketFilterPacketFilterArgs) ToDdosPolicyDdosRulePacketFilterPacketFilterOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPacketFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePacketFilterPacketFilterOutput)
-}
-
-// DdosPolicyDdosRulePacketFilterPacketFilterArrayInput is an input type that accepts DdosPolicyDdosRulePacketFilterPacketFilterArray and DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRulePacketFilterPacketFilterArrayInput` via:
-//
-//          DdosPolicyDdosRulePacketFilterPacketFilterArray{ DdosPolicyDdosRulePacketFilterPacketFilterArgs{...} }
-type DdosPolicyDdosRulePacketFilterPacketFilterArrayInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutput() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput
-	ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutputWithContext(context.Context) DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput
-}
-
-type DdosPolicyDdosRulePacketFilterPacketFilterArray []DdosPolicyDdosRulePacketFilterPacketFilterInput
-
-func (DdosPolicyDdosRulePacketFilterPacketFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRulePacketFilterPacketFilter)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRulePacketFilterPacketFilterArray) ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutput() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return i.ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRulePacketFilterPacketFilterArray) ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput)
-}
-
-type DdosPolicyDdosRulePacketFilterPacketFilterOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRulePacketFilterPacketFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRulePacketFilterPacketFilter)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) ToDdosPolicyDdosRulePacketFilterPacketFilterOutput() DdosPolicyDdosRulePacketFilterPacketFilterOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) ToDdosPolicyDdosRulePacketFilterPacketFilterOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPacketFilterOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Depth() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Depth }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Depth2() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Depth2 }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) DportEnd() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.DportEnd }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) DportStart() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.DportStart }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) IsNot() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.IsNot }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) IsNot2() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.IsNot2 }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchBegin() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchBegin }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchBegin2() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchBegin2 }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchLogic() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchLogic }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchType }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) MatchType2() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.MatchType2 }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Offset() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Offset }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Offset2() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.Offset2 }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) PacketMax() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.PacketMax }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) PacketMin() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.PacketMin }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Protocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Protocol }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) SportEnd() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.SportEnd }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) SportStart() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *int { return v.SportStart }).(pulumi.IntPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Str() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Str }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterOutput) Str2() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRulePacketFilterPacketFilter) *string { return v.Str2 }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DdosPolicyDdosRulePacketFilterPacketFilter)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput) ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutput() DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput) ToDdosPolicyDdosRulePacketFilterPacketFilterArrayOutputWithContext(ctx context.Context) DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput) Index(i pulumi.IntInput) DdosPolicyDdosRulePacketFilterPacketFilterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyDdosRulePacketFilterPacketFilter {
-		return vs[0].([]DdosPolicyDdosRulePacketFilterPacketFilter)[vs[1].(int)]
-	}).(DdosPolicyDdosRulePacketFilterPacketFilterOutput)
-}
-
-type DdosPolicyDdosRuleSpeedLimit struct {
-	FluxLimit    *string `pulumi:"fluxLimit"`
-	PackageLimit *string `pulumi:"packageLimit"`
-}
-
-// DdosPolicyDdosRuleSpeedLimitInput is an input type that accepts DdosPolicyDdosRuleSpeedLimitArgs and DdosPolicyDdosRuleSpeedLimitOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleSpeedLimitInput` via:
-//
-//          DdosPolicyDdosRuleSpeedLimitArgs{...}
-type DdosPolicyDdosRuleSpeedLimitInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleSpeedLimitOutput() DdosPolicyDdosRuleSpeedLimitOutput
-	ToDdosPolicyDdosRuleSpeedLimitOutputWithContext(context.Context) DdosPolicyDdosRuleSpeedLimitOutput
-}
-
-type DdosPolicyDdosRuleSpeedLimitArgs struct {
-	FluxLimit    pulumi.StringPtrInput `pulumi:"fluxLimit"`
-	PackageLimit pulumi.StringPtrInput `pulumi:"packageLimit"`
-}
-
-func (DdosPolicyDdosRuleSpeedLimitArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleSpeedLimit)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleSpeedLimitArgs) ToDdosPolicyDdosRuleSpeedLimitOutput() DdosPolicyDdosRuleSpeedLimitOutput {
-	return i.ToDdosPolicyDdosRuleSpeedLimitOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleSpeedLimitArgs) ToDdosPolicyDdosRuleSpeedLimitOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleSpeedLimitOutput)
-}
-
-func (i DdosPolicyDdosRuleSpeedLimitArgs) ToDdosPolicyDdosRuleSpeedLimitPtrOutput() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return i.ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleSpeedLimitArgs) ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleSpeedLimitOutput).ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleSpeedLimitPtrInput is an input type that accepts DdosPolicyDdosRuleSpeedLimitArgs, DdosPolicyDdosRuleSpeedLimitPtr and DdosPolicyDdosRuleSpeedLimitPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleSpeedLimitPtrInput` via:
-//
-//          DdosPolicyDdosRuleSpeedLimitArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleSpeedLimitPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleSpeedLimitPtrOutput() DdosPolicyDdosRuleSpeedLimitPtrOutput
-	ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(context.Context) DdosPolicyDdosRuleSpeedLimitPtrOutput
-}
-
-type ddosPolicyDdosRuleSpeedLimitPtrType DdosPolicyDdosRuleSpeedLimitArgs
-
-func DdosPolicyDdosRuleSpeedLimitPtr(v *DdosPolicyDdosRuleSpeedLimitArgs) DdosPolicyDdosRuleSpeedLimitPtrInput {
-	return (*ddosPolicyDdosRuleSpeedLimitPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleSpeedLimitPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleSpeedLimit)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleSpeedLimitPtrType) ToDdosPolicyDdosRuleSpeedLimitPtrOutput() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return i.ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleSpeedLimitPtrType) ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
-}
-
-type DdosPolicyDdosRuleSpeedLimitOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleSpeedLimitOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleSpeedLimit)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) ToDdosPolicyDdosRuleSpeedLimitOutput() DdosPolicyDdosRuleSpeedLimitOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) ToDdosPolicyDdosRuleSpeedLimitOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) ToDdosPolicyDdosRuleSpeedLimitPtrOutput() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o.ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleSpeedLimit) *DdosPolicyDdosRuleSpeedLimit {
-		return &v
-	}).(DdosPolicyDdosRuleSpeedLimitPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) FluxLimit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleSpeedLimit) *string { return v.FluxLimit }).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitOutput) PackageLimit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleSpeedLimit) *string { return v.PackageLimit }).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleSpeedLimitPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleSpeedLimitPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleSpeedLimit)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) ToDdosPolicyDdosRuleSpeedLimitPtrOutput() DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) ToDdosPolicyDdosRuleSpeedLimitPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleSpeedLimitPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) Elem() DdosPolicyDdosRuleSpeedLimitOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleSpeedLimit) DdosPolicyDdosRuleSpeedLimit {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleSpeedLimit
-		return ret
-	}).(DdosPolicyDdosRuleSpeedLimitOutput)
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) FluxLimit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleSpeedLimit) *string {
-		if v == nil {
-			return nil
-		}
-		return v.FluxLimit
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleSpeedLimitPtrOutput) PackageLimit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleSpeedLimit) *string {
-		if v == nil {
-			return nil
-		}
-		return v.PackageLimit
-	}).(pulumi.StringPtrOutput)
-}
-
-type DdosPolicyDdosRuleStatusInfo struct {
-	PlyLevel string `pulumi:"plyLevel"`
-}
-
-// DdosPolicyDdosRuleStatusInfoInput is an input type that accepts DdosPolicyDdosRuleStatusInfoArgs and DdosPolicyDdosRuleStatusInfoOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleStatusInfoInput` via:
-//
-//          DdosPolicyDdosRuleStatusInfoArgs{...}
-type DdosPolicyDdosRuleStatusInfoInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleStatusInfoOutput() DdosPolicyDdosRuleStatusInfoOutput
-	ToDdosPolicyDdosRuleStatusInfoOutputWithContext(context.Context) DdosPolicyDdosRuleStatusInfoOutput
-}
-
-type DdosPolicyDdosRuleStatusInfoArgs struct {
-	PlyLevel pulumi.StringInput `pulumi:"plyLevel"`
-}
-
-func (DdosPolicyDdosRuleStatusInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleStatusInfo)(nil)).Elem()
-}
-
-func (i DdosPolicyDdosRuleStatusInfoArgs) ToDdosPolicyDdosRuleStatusInfoOutput() DdosPolicyDdosRuleStatusInfoOutput {
-	return i.ToDdosPolicyDdosRuleStatusInfoOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleStatusInfoArgs) ToDdosPolicyDdosRuleStatusInfoOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleStatusInfoOutput)
-}
-
-func (i DdosPolicyDdosRuleStatusInfoArgs) ToDdosPolicyDdosRuleStatusInfoPtrOutput() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return i.ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(context.Background())
-}
-
-func (i DdosPolicyDdosRuleStatusInfoArgs) ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleStatusInfoOutput).ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(ctx)
-}
-
-// DdosPolicyDdosRuleStatusInfoPtrInput is an input type that accepts DdosPolicyDdosRuleStatusInfoArgs, DdosPolicyDdosRuleStatusInfoPtr and DdosPolicyDdosRuleStatusInfoPtrOutput values.
-// You can construct a concrete instance of `DdosPolicyDdosRuleStatusInfoPtrInput` via:
-//
-//          DdosPolicyDdosRuleStatusInfoArgs{...}
-//
-//  or:
-//
-//          nil
-type DdosPolicyDdosRuleStatusInfoPtrInput interface {
-	pulumi.Input
-
-	ToDdosPolicyDdosRuleStatusInfoPtrOutput() DdosPolicyDdosRuleStatusInfoPtrOutput
-	ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(context.Context) DdosPolicyDdosRuleStatusInfoPtrOutput
-}
-
-type ddosPolicyDdosRuleStatusInfoPtrType DdosPolicyDdosRuleStatusInfoArgs
-
-func DdosPolicyDdosRuleStatusInfoPtr(v *DdosPolicyDdosRuleStatusInfoArgs) DdosPolicyDdosRuleStatusInfoPtrInput {
-	return (*ddosPolicyDdosRuleStatusInfoPtrType)(v)
-}
-
-func (*ddosPolicyDdosRuleStatusInfoPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleStatusInfo)(nil)).Elem()
-}
-
-func (i *ddosPolicyDdosRuleStatusInfoPtrType) ToDdosPolicyDdosRuleStatusInfoPtrOutput() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return i.ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(context.Background())
-}
-
-func (i *ddosPolicyDdosRuleStatusInfoPtrType) ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyDdosRuleStatusInfoPtrOutput)
-}
-
-type DdosPolicyDdosRuleStatusInfoOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleStatusInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DdosPolicyDdosRuleStatusInfo)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleStatusInfoOutput) ToDdosPolicyDdosRuleStatusInfoOutput() DdosPolicyDdosRuleStatusInfoOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleStatusInfoOutput) ToDdosPolicyDdosRuleStatusInfoOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleStatusInfoOutput) ToDdosPolicyDdosRuleStatusInfoPtrOutput() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o.ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(context.Background())
-}
-
-func (o DdosPolicyDdosRuleStatusInfoOutput) ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DdosPolicyDdosRuleStatusInfo) *DdosPolicyDdosRuleStatusInfo {
-		return &v
-	}).(DdosPolicyDdosRuleStatusInfoPtrOutput)
-}
-
-func (o DdosPolicyDdosRuleStatusInfoOutput) PlyLevel() pulumi.StringOutput {
-	return o.ApplyT(func(v DdosPolicyDdosRuleStatusInfo) string { return v.PlyLevel }).(pulumi.StringOutput)
-}
-
-type DdosPolicyDdosRuleStatusInfoPtrOutput struct{ *pulumi.OutputState }
-
-func (DdosPolicyDdosRuleStatusInfoPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DdosPolicyDdosRuleStatusInfo)(nil)).Elem()
-}
-
-func (o DdosPolicyDdosRuleStatusInfoPtrOutput) ToDdosPolicyDdosRuleStatusInfoPtrOutput() DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleStatusInfoPtrOutput) ToDdosPolicyDdosRuleStatusInfoPtrOutputWithContext(ctx context.Context) DdosPolicyDdosRuleStatusInfoPtrOutput {
-	return o
-}
-
-func (o DdosPolicyDdosRuleStatusInfoPtrOutput) Elem() DdosPolicyDdosRuleStatusInfoOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleStatusInfo) DdosPolicyDdosRuleStatusInfo {
-		if v != nil {
-			return *v
-		}
-		var ret DdosPolicyDdosRuleStatusInfo
-		return ret
-	}).(DdosPolicyDdosRuleStatusInfoOutput)
-}
-
-func (o DdosPolicyDdosRuleStatusInfoPtrOutput) PlyLevel() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DdosPolicyDdosRuleStatusInfo) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.PlyLevel
-	}).(pulumi.StringPtrOutput)
-}
-
-type DnsSecDnssec struct {
-	Algorithm       *string `pulumi:"algorithm"`
-	DS              *string `pulumi:"dS"`
-	Digest          *string `pulumi:"digest"`
-	DigestAlgorithm *string `pulumi:"digestAlgorithm"`
-	DigestType      *string `pulumi:"digestType"`
-	Flags           *int    `pulumi:"flags"`
-	KeyTag          *int    `pulumi:"keyTag"`
-	KeyType         *string `pulumi:"keyType"`
-	PublicKey       *string `pulumi:"publicKey"`
-}
-
-// DnsSecDnssecInput is an input type that accepts DnsSecDnssecArgs and DnsSecDnssecOutput values.
-// You can construct a concrete instance of `DnsSecDnssecInput` via:
-//
-//          DnsSecDnssecArgs{...}
-type DnsSecDnssecInput interface {
-	pulumi.Input
-
-	ToDnsSecDnssecOutput() DnsSecDnssecOutput
-	ToDnsSecDnssecOutputWithContext(context.Context) DnsSecDnssecOutput
-}
-
-type DnsSecDnssecArgs struct {
-	Algorithm       pulumi.StringPtrInput `pulumi:"algorithm"`
-	DS              pulumi.StringPtrInput `pulumi:"dS"`
-	Digest          pulumi.StringPtrInput `pulumi:"digest"`
-	DigestAlgorithm pulumi.StringPtrInput `pulumi:"digestAlgorithm"`
-	DigestType      pulumi.StringPtrInput `pulumi:"digestType"`
-	Flags           pulumi.IntPtrInput    `pulumi:"flags"`
-	KeyTag          pulumi.IntPtrInput    `pulumi:"keyTag"`
-	KeyType         pulumi.StringPtrInput `pulumi:"keyType"`
-	PublicKey       pulumi.StringPtrInput `pulumi:"publicKey"`
-}
-
-func (DnsSecDnssecArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DnsSecDnssec)(nil)).Elem()
-}
-
-func (i DnsSecDnssecArgs) ToDnsSecDnssecOutput() DnsSecDnssecOutput {
-	return i.ToDnsSecDnssecOutputWithContext(context.Background())
-}
-
-func (i DnsSecDnssecArgs) ToDnsSecDnssecOutputWithContext(ctx context.Context) DnsSecDnssecOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DnsSecDnssecOutput)
-}
-
-func (i DnsSecDnssecArgs) ToDnsSecDnssecPtrOutput() DnsSecDnssecPtrOutput {
-	return i.ToDnsSecDnssecPtrOutputWithContext(context.Background())
-}
-
-func (i DnsSecDnssecArgs) ToDnsSecDnssecPtrOutputWithContext(ctx context.Context) DnsSecDnssecPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DnsSecDnssecOutput).ToDnsSecDnssecPtrOutputWithContext(ctx)
-}
-
-// DnsSecDnssecPtrInput is an input type that accepts DnsSecDnssecArgs, DnsSecDnssecPtr and DnsSecDnssecPtrOutput values.
-// You can construct a concrete instance of `DnsSecDnssecPtrInput` via:
-//
-//          DnsSecDnssecArgs{...}
-//
-//  or:
-//
-//          nil
-type DnsSecDnssecPtrInput interface {
-	pulumi.Input
-
-	ToDnsSecDnssecPtrOutput() DnsSecDnssecPtrOutput
-	ToDnsSecDnssecPtrOutputWithContext(context.Context) DnsSecDnssecPtrOutput
-}
-
-type dnsSecDnssecPtrType DnsSecDnssecArgs
-
-func DnsSecDnssecPtr(v *DnsSecDnssecArgs) DnsSecDnssecPtrInput {
-	return (*dnsSecDnssecPtrType)(v)
-}
-
-func (*dnsSecDnssecPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DnsSecDnssec)(nil)).Elem()
-}
-
-func (i *dnsSecDnssecPtrType) ToDnsSecDnssecPtrOutput() DnsSecDnssecPtrOutput {
-	return i.ToDnsSecDnssecPtrOutputWithContext(context.Background())
-}
-
-func (i *dnsSecDnssecPtrType) ToDnsSecDnssecPtrOutputWithContext(ctx context.Context) DnsSecDnssecPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DnsSecDnssecPtrOutput)
-}
-
-type DnsSecDnssecOutput struct{ *pulumi.OutputState }
-
-func (DnsSecDnssecOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DnsSecDnssec)(nil)).Elem()
-}
-
-func (o DnsSecDnssecOutput) ToDnsSecDnssecOutput() DnsSecDnssecOutput {
-	return o
-}
-
-func (o DnsSecDnssecOutput) ToDnsSecDnssecOutputWithContext(ctx context.Context) DnsSecDnssecOutput {
-	return o
-}
-
-func (o DnsSecDnssecOutput) ToDnsSecDnssecPtrOutput() DnsSecDnssecPtrOutput {
-	return o.ToDnsSecDnssecPtrOutputWithContext(context.Background())
-}
-
-func (o DnsSecDnssecOutput) ToDnsSecDnssecPtrOutputWithContext(ctx context.Context) DnsSecDnssecPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DnsSecDnssec) *DnsSecDnssec {
-		return &v
-	}).(DnsSecDnssecPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) Algorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.Algorithm }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) DS() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.DS }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) Digest() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.Digest }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) DigestAlgorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.DigestAlgorithm }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) DigestType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.DigestType }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) Flags() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *int { return v.Flags }).(pulumi.IntPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) KeyTag() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *int { return v.KeyTag }).(pulumi.IntPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) KeyType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.KeyType }).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecOutput) PublicKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DnsSecDnssec) *string { return v.PublicKey }).(pulumi.StringPtrOutput)
-}
-
-type DnsSecDnssecPtrOutput struct{ *pulumi.OutputState }
-
-func (DnsSecDnssecPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DnsSecDnssec)(nil)).Elem()
-}
-
-func (o DnsSecDnssecPtrOutput) ToDnsSecDnssecPtrOutput() DnsSecDnssecPtrOutput {
-	return o
-}
-
-func (o DnsSecDnssecPtrOutput) ToDnsSecDnssecPtrOutputWithContext(ctx context.Context) DnsSecDnssecPtrOutput {
-	return o
-}
-
-func (o DnsSecDnssecPtrOutput) Elem() DnsSecDnssecOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) DnsSecDnssec {
-		if v != nil {
-			return *v
-		}
-		var ret DnsSecDnssec
-		return ret
-	}).(DnsSecDnssecOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) Algorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Algorithm
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) DS() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.DS
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) Digest() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Digest
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) DigestAlgorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.DigestAlgorithm
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) DigestType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.DigestType
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) Flags() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Flags
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) KeyTag() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *int {
-		if v == nil {
-			return nil
-		}
-		return v.KeyTag
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) KeyType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.KeyType
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o DnsSecDnssecPtrOutput) PublicKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DnsSecDnssec) *string {
-		if v == nil {
-			return nil
-		}
-		return v.PublicKey
-	}).(pulumi.StringPtrOutput)
+func (o CertificateConfigServerCertInfoArrayOutput) Index(i pulumi.IntInput) CertificateConfigServerCertInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertificateConfigServerCertInfo {
+		return vs[0].([]CertificateConfigServerCertInfo)[vs[1].(int)]
+	}).(CertificateConfigServerCertInfoOutput)
 }
 
 type OriginGroupOriginRecord struct {
-	// Indicating origin site&#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+	// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
 	Areas []string `pulumi:"areas"`
 	// Port of the origin site. Valid value range: 1-65535.
 	Port int `pulumi:"port"`
@@ -2299,14 +627,14 @@ type OriginGroupOriginRecord struct {
 	// Record value, which could be an IPv4/IPv6 address or a domain.
 	Record   string  `pulumi:"record"`
 	RecordId *string `pulumi:"recordId"`
-	// Indicating origin site&#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+	// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
 	Weight *int `pulumi:"weight"`
 }
 
 // OriginGroupOriginRecordInput is an input type that accepts OriginGroupOriginRecordArgs and OriginGroupOriginRecordOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordInput` via:
 //
-//          OriginGroupOriginRecordArgs{...}
+//	OriginGroupOriginRecordArgs{...}
 type OriginGroupOriginRecordInput interface {
 	pulumi.Input
 
@@ -2315,7 +643,7 @@ type OriginGroupOriginRecordInput interface {
 }
 
 type OriginGroupOriginRecordArgs struct {
-	// Indicating origin site&#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+	// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
 	Areas pulumi.StringArrayInput `pulumi:"areas"`
 	// Port of the origin site. Valid value range: 1-65535.
 	Port pulumi.IntInput `pulumi:"port"`
@@ -2326,7 +654,7 @@ type OriginGroupOriginRecordArgs struct {
 	// Record value, which could be an IPv4/IPv6 address or a domain.
 	Record   pulumi.StringInput    `pulumi:"record"`
 	RecordId pulumi.StringPtrInput `pulumi:"recordId"`
-	// Indicating origin site&#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+	// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
 	Weight pulumi.IntPtrInput `pulumi:"weight"`
 }
 
@@ -2345,7 +673,7 @@ func (i OriginGroupOriginRecordArgs) ToOriginGroupOriginRecordOutputWithContext(
 // OriginGroupOriginRecordArrayInput is an input type that accepts OriginGroupOriginRecordArray and OriginGroupOriginRecordArrayOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordArrayInput` via:
 //
-//          OriginGroupOriginRecordArray{ OriginGroupOriginRecordArgs{...} }
+//	OriginGroupOriginRecordArray{ OriginGroupOriginRecordArgs{...} }
 type OriginGroupOriginRecordArrayInput interface {
 	pulumi.Input
 
@@ -2381,7 +709,7 @@ func (o OriginGroupOriginRecordOutput) ToOriginGroupOriginRecordOutputWithContex
 	return o
 }
 
-// Indicating origin site&#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
 func (o OriginGroupOriginRecordOutput) Areas() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v OriginGroupOriginRecord) []string { return v.Areas }).(pulumi.StringArrayOutput)
 }
@@ -2410,7 +738,7 @@ func (o OriginGroupOriginRecordOutput) RecordId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v OriginGroupOriginRecord) *string { return v.RecordId }).(pulumi.StringPtrOutput)
 }
 
-// Indicating origin site&#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
 func (o OriginGroupOriginRecordOutput) Weight() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v OriginGroupOriginRecord) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
@@ -2436,7 +764,7 @@ func (o OriginGroupOriginRecordArrayOutput) Index(i pulumi.IntInput) OriginGroup
 }
 
 type OriginGroupOriginRecordPrivateParameter struct {
-	// Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+	// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
 	Name string `pulumi:"name"`
 	// Parameter value.
 	Value string `pulumi:"value"`
@@ -2445,7 +773,7 @@ type OriginGroupOriginRecordPrivateParameter struct {
 // OriginGroupOriginRecordPrivateParameterInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArgs and OriginGroupOriginRecordPrivateParameterOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArgs{...}
+//	OriginGroupOriginRecordPrivateParameterArgs{...}
 type OriginGroupOriginRecordPrivateParameterInput interface {
 	pulumi.Input
 
@@ -2454,7 +782,7 @@ type OriginGroupOriginRecordPrivateParameterInput interface {
 }
 
 type OriginGroupOriginRecordPrivateParameterArgs struct {
-	// Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+	// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Parameter value.
 	Value pulumi.StringInput `pulumi:"value"`
@@ -2475,7 +803,7 @@ func (i OriginGroupOriginRecordPrivateParameterArgs) ToOriginGroupOriginRecordPr
 // OriginGroupOriginRecordPrivateParameterArrayInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArray and OriginGroupOriginRecordPrivateParameterArrayOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterArrayInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArray{ OriginGroupOriginRecordPrivateParameterArgs{...} }
+//	OriginGroupOriginRecordPrivateParameterArray{ OriginGroupOriginRecordPrivateParameterArgs{...} }
 type OriginGroupOriginRecordPrivateParameterArrayInput interface {
 	pulumi.Input
 
@@ -2511,7 +839,7 @@ func (o OriginGroupOriginRecordPrivateParameterOutput) ToOriginGroupOriginRecord
 	return o
 }
 
-// Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
 func (o OriginGroupOriginRecordPrivateParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v OriginGroupOriginRecordPrivateParameter) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -2541,112 +869,6 @@ func (o OriginGroupOriginRecordPrivateParameterArrayOutput) Index(i pulumi.IntIn
 	}).(OriginGroupOriginRecordPrivateParameterOutput)
 }
 
-type RuleEnginePriorityRulesPriority struct {
-	// Priority order of rules.
-	Index *int `pulumi:"index"`
-	// Priority of rules id.
-	Value *string `pulumi:"value"`
-}
-
-// RuleEnginePriorityRulesPriorityInput is an input type that accepts RuleEnginePriorityRulesPriorityArgs and RuleEnginePriorityRulesPriorityOutput values.
-// You can construct a concrete instance of `RuleEnginePriorityRulesPriorityInput` via:
-//
-//          RuleEnginePriorityRulesPriorityArgs{...}
-type RuleEnginePriorityRulesPriorityInput interface {
-	pulumi.Input
-
-	ToRuleEnginePriorityRulesPriorityOutput() RuleEnginePriorityRulesPriorityOutput
-	ToRuleEnginePriorityRulesPriorityOutputWithContext(context.Context) RuleEnginePriorityRulesPriorityOutput
-}
-
-type RuleEnginePriorityRulesPriorityArgs struct {
-	// Priority order of rules.
-	Index pulumi.IntPtrInput `pulumi:"index"`
-	// Priority of rules id.
-	Value pulumi.StringPtrInput `pulumi:"value"`
-}
-
-func (RuleEnginePriorityRulesPriorityArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*RuleEnginePriorityRulesPriority)(nil)).Elem()
-}
-
-func (i RuleEnginePriorityRulesPriorityArgs) ToRuleEnginePriorityRulesPriorityOutput() RuleEnginePriorityRulesPriorityOutput {
-	return i.ToRuleEnginePriorityRulesPriorityOutputWithContext(context.Background())
-}
-
-func (i RuleEnginePriorityRulesPriorityArgs) ToRuleEnginePriorityRulesPriorityOutputWithContext(ctx context.Context) RuleEnginePriorityRulesPriorityOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RuleEnginePriorityRulesPriorityOutput)
-}
-
-// RuleEnginePriorityRulesPriorityArrayInput is an input type that accepts RuleEnginePriorityRulesPriorityArray and RuleEnginePriorityRulesPriorityArrayOutput values.
-// You can construct a concrete instance of `RuleEnginePriorityRulesPriorityArrayInput` via:
-//
-//          RuleEnginePriorityRulesPriorityArray{ RuleEnginePriorityRulesPriorityArgs{...} }
-type RuleEnginePriorityRulesPriorityArrayInput interface {
-	pulumi.Input
-
-	ToRuleEnginePriorityRulesPriorityArrayOutput() RuleEnginePriorityRulesPriorityArrayOutput
-	ToRuleEnginePriorityRulesPriorityArrayOutputWithContext(context.Context) RuleEnginePriorityRulesPriorityArrayOutput
-}
-
-type RuleEnginePriorityRulesPriorityArray []RuleEnginePriorityRulesPriorityInput
-
-func (RuleEnginePriorityRulesPriorityArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]RuleEnginePriorityRulesPriority)(nil)).Elem()
-}
-
-func (i RuleEnginePriorityRulesPriorityArray) ToRuleEnginePriorityRulesPriorityArrayOutput() RuleEnginePriorityRulesPriorityArrayOutput {
-	return i.ToRuleEnginePriorityRulesPriorityArrayOutputWithContext(context.Background())
-}
-
-func (i RuleEnginePriorityRulesPriorityArray) ToRuleEnginePriorityRulesPriorityArrayOutputWithContext(ctx context.Context) RuleEnginePriorityRulesPriorityArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RuleEnginePriorityRulesPriorityArrayOutput)
-}
-
-type RuleEnginePriorityRulesPriorityOutput struct{ *pulumi.OutputState }
-
-func (RuleEnginePriorityRulesPriorityOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*RuleEnginePriorityRulesPriority)(nil)).Elem()
-}
-
-func (o RuleEnginePriorityRulesPriorityOutput) ToRuleEnginePriorityRulesPriorityOutput() RuleEnginePriorityRulesPriorityOutput {
-	return o
-}
-
-func (o RuleEnginePriorityRulesPriorityOutput) ToRuleEnginePriorityRulesPriorityOutputWithContext(ctx context.Context) RuleEnginePriorityRulesPriorityOutput {
-	return o
-}
-
-// Priority order of rules.
-func (o RuleEnginePriorityRulesPriorityOutput) Index() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v RuleEnginePriorityRulesPriority) *int { return v.Index }).(pulumi.IntPtrOutput)
-}
-
-// Priority of rules id.
-func (o RuleEnginePriorityRulesPriorityOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v RuleEnginePriorityRulesPriority) *string { return v.Value }).(pulumi.StringPtrOutput)
-}
-
-type RuleEnginePriorityRulesPriorityArrayOutput struct{ *pulumi.OutputState }
-
-func (RuleEnginePriorityRulesPriorityArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]RuleEnginePriorityRulesPriority)(nil)).Elem()
-}
-
-func (o RuleEnginePriorityRulesPriorityArrayOutput) ToRuleEnginePriorityRulesPriorityArrayOutput() RuleEnginePriorityRulesPriorityArrayOutput {
-	return o
-}
-
-func (o RuleEnginePriorityRulesPriorityArrayOutput) ToRuleEnginePriorityRulesPriorityArrayOutputWithContext(ctx context.Context) RuleEnginePriorityRulesPriorityArrayOutput {
-	return o
-}
-
-func (o RuleEnginePriorityRulesPriorityArrayOutput) Index(i pulumi.IntInput) RuleEnginePriorityRulesPriorityOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RuleEnginePriorityRulesPriority {
-		return vs[0].([]RuleEnginePriorityRulesPriority)[vs[1].(int)]
-	}).(RuleEnginePriorityRulesPriorityOutput)
-}
-
 type RuleEngineRule struct {
 	// Actions list of the rule. See details in data source `ruleEngineSetting`.
 	Actions []RuleEngineRuleAction `pulumi:"actions"`
@@ -2659,7 +881,7 @@ type RuleEngineRule struct {
 // RuleEngineRuleInput is an input type that accepts RuleEngineRuleArgs and RuleEngineRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleInput` via:
 //
-//          RuleEngineRuleArgs{...}
+//	RuleEngineRuleArgs{...}
 type RuleEngineRuleInput interface {
 	pulumi.Input
 
@@ -2691,7 +913,7 @@ func (i RuleEngineRuleArgs) ToRuleEngineRuleOutputWithContext(ctx context.Contex
 // RuleEngineRuleArrayInput is an input type that accepts RuleEngineRuleArray and RuleEngineRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleArrayInput` via:
 //
-//          RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
+//	RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
 type RuleEngineRuleArrayInput interface {
 	pulumi.Input
 
@@ -2774,7 +996,7 @@ type RuleEngineRuleAction struct {
 // RuleEngineRuleActionInput is an input type that accepts RuleEngineRuleActionArgs and RuleEngineRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionInput` via:
 //
-//          RuleEngineRuleActionArgs{...}
+//	RuleEngineRuleActionArgs{...}
 type RuleEngineRuleActionInput interface {
 	pulumi.Input
 
@@ -2806,7 +1028,7 @@ func (i RuleEngineRuleActionArgs) ToRuleEngineRuleActionOutputWithContext(ctx co
 // RuleEngineRuleActionArrayInput is an input type that accepts RuleEngineRuleActionArray and RuleEngineRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionArrayInput` via:
 //
-//          RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
+//	RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
 type RuleEngineRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -2887,7 +1109,7 @@ type RuleEngineRuleActionCodeAction struct {
 // RuleEngineRuleActionCodeActionInput is an input type that accepts RuleEngineRuleActionCodeActionArgs and RuleEngineRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	RuleEngineRuleActionCodeActionArgs{...}
 type RuleEngineRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -2925,11 +1147,11 @@ func (i RuleEngineRuleActionCodeActionArgs) ToRuleEngineRuleActionCodeActionPtrO
 // RuleEngineRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleActionCodeActionArgs, RuleEngineRuleActionCodeActionPtr and RuleEngineRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -3034,18 +1256,18 @@ func (o RuleEngineRuleActionCodeActionPtrOutput) Parameters() RuleEngineRuleActi
 }
 
 type RuleEngineRuleActionCodeActionParameter struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
 	// HTTP status code to use.
 	StatusCode int `pulumi:"statusCode"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArgs and RuleEngineRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -3054,11 +1276,11 @@ type RuleEngineRuleActionCodeActionParameterInput interface {
 }
 
 type RuleEngineRuleActionCodeActionParameterArgs struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
 	// HTTP status code to use.
 	StatusCode pulumi.IntInput `pulumi:"statusCode"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -3077,7 +1299,7 @@ func (i RuleEngineRuleActionCodeActionParameterArgs) ToRuleEngineRuleActionCodeA
 // RuleEngineRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArray and RuleEngineRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3113,7 +1335,7 @@ func (o RuleEngineRuleActionCodeActionParameterOutput) ToRuleEngineRuleActionCod
 	return o
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleActionCodeActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -3123,7 +1345,7 @@ func (o RuleEngineRuleActionCodeActionParameterOutput) StatusCode() pulumi.IntOu
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) int { return v.StatusCode }).(pulumi.IntOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleActionCodeActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionCodeActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3158,7 +1380,7 @@ type RuleEngineRuleActionNormalAction struct {
 // RuleEngineRuleActionNormalActionInput is an input type that accepts RuleEngineRuleActionNormalActionArgs and RuleEngineRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	RuleEngineRuleActionNormalActionArgs{...}
 type RuleEngineRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -3196,11 +1418,11 @@ func (i RuleEngineRuleActionNormalActionArgs) ToRuleEngineRuleActionNormalAction
 // RuleEngineRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleActionNormalActionArgs, RuleEngineRuleActionNormalActionPtr and RuleEngineRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -3307,16 +1529,16 @@ func (o RuleEngineRuleActionNormalActionPtrOutput) Parameters() RuleEngineRuleAc
 }
 
 type RuleEngineRuleActionNormalActionParameter struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArgs and RuleEngineRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -3325,9 +1547,9 @@ type RuleEngineRuleActionNormalActionParameterInput interface {
 }
 
 type RuleEngineRuleActionNormalActionParameterArgs struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -3346,7 +1568,7 @@ func (i RuleEngineRuleActionNormalActionParameterArgs) ToRuleEngineRuleActionNor
 // RuleEngineRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArray and RuleEngineRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3382,12 +1604,12 @@ func (o RuleEngineRuleActionNormalActionParameterOutput) ToRuleEngineRuleActionN
 	return o
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleActionNormalActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleActionNormalActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionNormalActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3422,7 +1644,7 @@ type RuleEngineRuleActionRewriteAction struct {
 // RuleEngineRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs and RuleEngineRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleActionRewriteActionArgs{...}
 type RuleEngineRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -3460,11 +1682,11 @@ func (i RuleEngineRuleActionRewriteActionArgs) ToRuleEngineRuleActionRewriteActi
 // RuleEngineRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs, RuleEngineRuleActionRewriteActionPtr and RuleEngineRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -3573,16 +1795,16 @@ func (o RuleEngineRuleActionRewriteActionPtrOutput) Parameters() RuleEngineRuleA
 type RuleEngineRuleActionRewriteActionParameter struct {
 	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
 	Action string `pulumi:"action"`
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArgs and RuleEngineRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -3593,9 +1815,9 @@ type RuleEngineRuleActionRewriteActionParameterInput interface {
 type RuleEngineRuleActionRewriteActionParameterArgs struct {
 	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -3614,7 +1836,7 @@ func (i RuleEngineRuleActionRewriteActionParameterArgs) ToRuleEngineRuleActionRe
 // RuleEngineRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArray and RuleEngineRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3655,12 +1877,12 @@ func (o RuleEngineRuleActionRewriteActionParameterOutput) Action() pulumi.String
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleActionRewriteActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleActionRewriteActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleActionRewriteActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -3693,7 +1915,7 @@ type RuleEngineRuleOr struct {
 // RuleEngineRuleOrInput is an input type that accepts RuleEngineRuleOrArgs and RuleEngineRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrInput` via:
 //
-//          RuleEngineRuleOrArgs{...}
+//	RuleEngineRuleOrArgs{...}
 type RuleEngineRuleOrInput interface {
 	pulumi.Input
 
@@ -3721,7 +1943,7 @@ func (i RuleEngineRuleOrArgs) ToRuleEngineRuleOrOutputWithContext(ctx context.Co
 // RuleEngineRuleOrArrayInput is an input type that accepts RuleEngineRuleOrArray and RuleEngineRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrArrayInput` via:
 //
-//          RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
+//	RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
 type RuleEngineRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -3785,7 +2007,7 @@ func (o RuleEngineRuleOrArrayOutput) Index(i pulumi.IntInput) RuleEngineRuleOrOu
 type RuleEngineRuleOrAnd struct {
 	// Whether to ignore the case of the parameter value, the default value is false.
 	IgnoreCase *bool `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 	Name *string `pulumi:"name"`
 	// Condition operator. Valid values are `equal`, `notequal`.
 	Operator string `pulumi:"operator"`
@@ -3798,7 +2020,7 @@ type RuleEngineRuleOrAnd struct {
 // RuleEngineRuleOrAndInput is an input type that accepts RuleEngineRuleOrAndArgs and RuleEngineRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndInput` via:
 //
-//          RuleEngineRuleOrAndArgs{...}
+//	RuleEngineRuleOrAndArgs{...}
 type RuleEngineRuleOrAndInput interface {
 	pulumi.Input
 
@@ -3809,7 +2031,7 @@ type RuleEngineRuleOrAndInput interface {
 type RuleEngineRuleOrAndArgs struct {
 	// Whether to ignore the case of the parameter value, the default value is false.
 	IgnoreCase pulumi.BoolPtrInput `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// Condition operator. Valid values are `equal`, `notequal`.
 	Operator pulumi.StringInput `pulumi:"operator"`
@@ -3834,7 +2056,7 @@ func (i RuleEngineRuleOrAndArgs) ToRuleEngineRuleOrAndOutputWithContext(ctx cont
 // RuleEngineRuleOrAndArrayInput is an input type that accepts RuleEngineRuleOrAndArray and RuleEngineRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
+//	RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
 type RuleEngineRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -3875,7 +2097,7 @@ func (o RuleEngineRuleOrAndOutput) IgnoreCase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) *bool { return v.IgnoreCase }).(pulumi.BoolPtrOutput)
 }
 
-// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 func (o RuleEngineRuleOrAndOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleOrAnd) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
@@ -3925,7 +2147,7 @@ type RuleEngineRuleSubRule struct {
 // RuleEngineRuleSubRuleInput is an input type that accepts RuleEngineRuleSubRuleArgs and RuleEngineRuleSubRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleInput` via:
 //
-//          RuleEngineRuleSubRuleArgs{...}
+//	RuleEngineRuleSubRuleArgs{...}
 type RuleEngineRuleSubRuleInput interface {
 	pulumi.Input
 
@@ -3955,7 +2177,7 @@ func (i RuleEngineRuleSubRuleArgs) ToRuleEngineRuleSubRuleOutputWithContext(ctx 
 // RuleEngineRuleSubRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleArray and RuleEngineRuleSubRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
+//	RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
 type RuleEngineRuleSubRuleArrayInput interface {
 	pulumi.Input
 
@@ -4031,7 +2253,7 @@ type RuleEngineRuleSubRuleRule struct {
 // RuleEngineRuleSubRuleRuleInput is an input type that accepts RuleEngineRuleSubRuleRuleArgs and RuleEngineRuleSubRuleRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArgs{...}
+//	RuleEngineRuleSubRuleRuleArgs{...}
 type RuleEngineRuleSubRuleRuleInput interface {
 	pulumi.Input
 
@@ -4061,7 +2283,7 @@ func (i RuleEngineRuleSubRuleRuleArgs) ToRuleEngineRuleSubRuleRuleOutputWithCont
 // RuleEngineRuleSubRuleRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleArray and RuleEngineRuleSubRuleRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
+//	RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
 type RuleEngineRuleSubRuleRuleArrayInput interface {
 	pulumi.Input
 
@@ -4139,7 +2361,7 @@ type RuleEngineRuleSubRuleRuleAction struct {
 // RuleEngineRuleSubRuleRuleActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArgs and RuleEngineRuleSubRuleRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionInput interface {
 	pulumi.Input
 
@@ -4171,7 +2393,7 @@ func (i RuleEngineRuleSubRuleRuleActionArgs) ToRuleEngineRuleSubRuleRuleActionOu
 // RuleEngineRuleSubRuleRuleActionArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArray and RuleEngineRuleSubRuleRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
 type RuleEngineRuleSubRuleRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -4258,7 +2480,7 @@ type RuleEngineRuleSubRuleRuleActionCodeAction struct {
 // RuleEngineRuleSubRuleRuleActionCodeActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs and RuleEngineRuleSubRuleRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -4296,11 +2518,11 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionArgs) ToRuleEngineRuleSubRuleRu
 // RuleEngineRuleSubRuleRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs, RuleEngineRuleSubRuleRuleActionCodeActionPtr and RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -4407,18 +2629,18 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput) Parameters() RuleEng
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeActionParameter struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
 	// HTTP status code to use.
 	StatusCode int `pulumi:"statusCode"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs and RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -4427,11 +2649,11 @@ type RuleEngineRuleSubRuleRuleActionCodeActionParameterInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
 	// HTTP status code to use.
 	StatusCode pulumi.IntInput `pulumi:"statusCode"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -4450,7 +2672,7 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs) ToRuleEngineRule
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArray and RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -4486,7 +2708,7 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) ToRuleEngineRu
 	return o
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -4496,7 +2718,7 @@ func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) StatusCode() p
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) int { return v.StatusCode }).(pulumi.IntOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionCodeActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -4531,7 +2753,7 @@ type RuleEngineRuleSubRuleRuleActionNormalAction struct {
 // RuleEngineRuleSubRuleRuleActionNormalActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs and RuleEngineRuleSubRuleRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -4569,11 +2791,11 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionArgs) ToRuleEngineRuleSubRule
 // RuleEngineRuleSubRuleRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs, RuleEngineRuleSubRuleRuleActionNormalActionPtr and RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -4680,16 +2902,16 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput) Parameters() RuleE
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalActionParameter struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs and RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -4698,9 +2920,9 @@ type RuleEngineRuleSubRuleRuleActionNormalActionParameterInput interface {
 }
 
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs struct {
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -4719,7 +2941,7 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs) ToRuleEngineRu
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArray and RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -4755,12 +2977,12 @@ func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) ToRuleEngine
 	return o
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionNormalActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -4795,7 +3017,7 @@ type RuleEngineRuleSubRuleRuleActionRewriteAction struct {
 // RuleEngineRuleSubRuleRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs and RuleEngineRuleSubRuleRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -4833,11 +3055,11 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionArgs) ToRuleEngineRuleSubRul
 // RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs, RuleEngineRuleSubRuleRuleActionRewriteActionPtr and RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -4946,16 +3168,16 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput) Parameters() Rule
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameter struct {
 	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
 	Action string `pulumi:"action"`
-	// Parameter Name.
+	// Target HEADER name.
 	Name string `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values []string `pulumi:"values"`
 }
 
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs and RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -4966,9 +3188,9 @@ type RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput interface {
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs struct {
 	// Action to take on the HEADER. Valid values: `add`, `del`, `set`.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Parameter Name.
+	// Target HEADER name.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Parameter Values.
+	// Parameter Value.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -4987,7 +3209,7 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs) ToRuleEngineR
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray and RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -5028,12 +3250,12 @@ func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Action() pu
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Parameter Name.
+// Target HEADER name.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameter Values.
+// Parameter Value.
 func (o RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleActionRewriteActionParameter) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -5066,7 +3288,7 @@ type RuleEngineRuleSubRuleRuleOr struct {
 // RuleEngineRuleSubRuleRuleOrInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArgs and RuleEngineRuleSubRuleRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArgs{...}
+//	RuleEngineRuleSubRuleRuleOrArgs{...}
 type RuleEngineRuleSubRuleRuleOrInput interface {
 	pulumi.Input
 
@@ -5094,7 +3316,7 @@ func (i RuleEngineRuleSubRuleRuleOrArgs) ToRuleEngineRuleSubRuleRuleOrOutputWith
 // RuleEngineRuleSubRuleRuleOrArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArray and RuleEngineRuleSubRuleRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
 type RuleEngineRuleSubRuleRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -5158,7 +3380,7 @@ func (o RuleEngineRuleSubRuleRuleOrArrayOutput) Index(i pulumi.IntInput) RuleEng
 type RuleEngineRuleSubRuleRuleOrAnd struct {
 	// Whether to ignore the case of the parameter value, the default value is false.
 	IgnoreCase *bool `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 	Name *string `pulumi:"name"`
 	// Condition operator. Valid values are `equal`, `notequal`.
 	Operator string `pulumi:"operator"`
@@ -5171,7 +3393,7 @@ type RuleEngineRuleSubRuleRuleOrAnd struct {
 // RuleEngineRuleSubRuleRuleOrAndInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArgs and RuleEngineRuleSubRuleRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArgs{...}
+//	RuleEngineRuleSubRuleRuleOrAndArgs{...}
 type RuleEngineRuleSubRuleRuleOrAndInput interface {
 	pulumi.Input
 
@@ -5182,7 +3404,7 @@ type RuleEngineRuleSubRuleRuleOrAndInput interface {
 type RuleEngineRuleSubRuleRuleOrAndArgs struct {
 	// Whether to ignore the case of the parameter value, the default value is false.
 	IgnoreCase pulumi.BoolPtrInput `pulumi:"ignoreCase"`
-	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+	// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// Condition operator. Valid values are `equal`, `notequal`.
 	Operator pulumi.StringInput `pulumi:"operator"`
@@ -5207,7 +3429,7 @@ func (i RuleEngineRuleSubRuleRuleOrAndArgs) ToRuleEngineRuleSubRuleRuleOrAndOutp
 // RuleEngineRuleSubRuleRuleOrAndArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArray and RuleEngineRuleSubRuleRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
 type RuleEngineRuleSubRuleRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -5248,7 +3470,7 @@ func (o RuleEngineRuleSubRuleRuleOrAndOutput) IgnoreCase() pulumi.BoolPtrOutput 
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) *bool { return v.IgnoreCase }).(pulumi.BoolPtrOutput)
 }
 
-// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty: `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
 func (o RuleEngineRuleSubRuleRuleOrAndOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RuleEngineRuleSubRuleRuleOrAnd) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
@@ -5288,4825 +3510,218 @@ func (o RuleEngineRuleSubRuleRuleOrAndArrayOutput) Index(i pulumi.IntInput) Rule
 	}).(RuleEngineRuleSubRuleRuleOrAndOutput)
 }
 
-type SecurityPolicyConfig struct {
-	AclConfig       *SecurityPolicyConfigAclConfig       `pulumi:"aclConfig"`
-	BotConfig       *SecurityPolicyConfigBotConfig       `pulumi:"botConfig"`
-	DropPageConfig  *SecurityPolicyConfigDropPageConfig  `pulumi:"dropPageConfig"`
-	ExceptConfig    *SecurityPolicyConfigExceptConfig    `pulumi:"exceptConfig"`
-	IpTableConfig   *SecurityPolicyConfigIpTableConfig   `pulumi:"ipTableConfig"`
-	RateLimitConfig *SecurityPolicyConfigRateLimitConfig `pulumi:"rateLimitConfig"`
-	SwitchConfig    *SecurityPolicyConfigSwitchConfig    `pulumi:"switchConfig"`
-	WafConfig       *SecurityPolicyConfigWafConfig       `pulumi:"wafConfig"`
+type ZoneOwnershipVerification struct {
+	// CNAME access, using DNS to resolve the information required for authentication. For details, please refer to [Site/Domain Name Ownership Verification ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, indicating that no valid value can be obtained.
+	DnsVerifications []ZoneOwnershipVerificationDnsVerification `pulumi:"dnsVerifications"`
 }
 
-// SecurityPolicyConfigInput is an input type that accepts SecurityPolicyConfigArgs and SecurityPolicyConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigInput` via:
+// ZoneOwnershipVerificationInput is an input type that accepts ZoneOwnershipVerificationArgs and ZoneOwnershipVerificationOutput values.
+// You can construct a concrete instance of `ZoneOwnershipVerificationInput` via:
 //
-//          SecurityPolicyConfigArgs{...}
-type SecurityPolicyConfigInput interface {
+//	ZoneOwnershipVerificationArgs{...}
+type ZoneOwnershipVerificationInput interface {
 	pulumi.Input
 
-	ToSecurityPolicyConfigOutput() SecurityPolicyConfigOutput
-	ToSecurityPolicyConfigOutputWithContext(context.Context) SecurityPolicyConfigOutput
+	ToZoneOwnershipVerificationOutput() ZoneOwnershipVerificationOutput
+	ToZoneOwnershipVerificationOutputWithContext(context.Context) ZoneOwnershipVerificationOutput
 }
 
-type SecurityPolicyConfigArgs struct {
-	AclConfig       SecurityPolicyConfigAclConfigPtrInput       `pulumi:"aclConfig"`
-	BotConfig       SecurityPolicyConfigBotConfigPtrInput       `pulumi:"botConfig"`
-	DropPageConfig  SecurityPolicyConfigDropPageConfigPtrInput  `pulumi:"dropPageConfig"`
-	ExceptConfig    SecurityPolicyConfigExceptConfigPtrInput    `pulumi:"exceptConfig"`
-	IpTableConfig   SecurityPolicyConfigIpTableConfigPtrInput   `pulumi:"ipTableConfig"`
-	RateLimitConfig SecurityPolicyConfigRateLimitConfigPtrInput `pulumi:"rateLimitConfig"`
-	SwitchConfig    SecurityPolicyConfigSwitchConfigPtrInput    `pulumi:"switchConfig"`
-	WafConfig       SecurityPolicyConfigWafConfigPtrInput       `pulumi:"wafConfig"`
+type ZoneOwnershipVerificationArgs struct {
+	// CNAME access, using DNS to resolve the information required for authentication. For details, please refer to [Site/Domain Name Ownership Verification ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, indicating that no valid value can be obtained.
+	DnsVerifications ZoneOwnershipVerificationDnsVerificationArrayInput `pulumi:"dnsVerifications"`
 }
 
-func (SecurityPolicyConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfig)(nil)).Elem()
+func (ZoneOwnershipVerificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneOwnershipVerification)(nil)).Elem()
 }
 
-func (i SecurityPolicyConfigArgs) ToSecurityPolicyConfigOutput() SecurityPolicyConfigOutput {
-	return i.ToSecurityPolicyConfigOutputWithContext(context.Background())
+func (i ZoneOwnershipVerificationArgs) ToZoneOwnershipVerificationOutput() ZoneOwnershipVerificationOutput {
+	return i.ToZoneOwnershipVerificationOutputWithContext(context.Background())
 }
 
-func (i SecurityPolicyConfigArgs) ToSecurityPolicyConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigOutput)
+func (i ZoneOwnershipVerificationArgs) ToZoneOwnershipVerificationOutputWithContext(ctx context.Context) ZoneOwnershipVerificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneOwnershipVerificationOutput)
 }
 
-func (i SecurityPolicyConfigArgs) ToSecurityPolicyConfigPtrOutput() SecurityPolicyConfigPtrOutput {
-	return i.ToSecurityPolicyConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigArgs) ToSecurityPolicyConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigOutput).ToSecurityPolicyConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigPtrInput is an input type that accepts SecurityPolicyConfigArgs, SecurityPolicyConfigPtr and SecurityPolicyConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigPtrInput` via:
+// ZoneOwnershipVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationArray and ZoneOwnershipVerificationArrayOutput values.
+// You can construct a concrete instance of `ZoneOwnershipVerificationArrayInput` via:
 //
-//          SecurityPolicyConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigPtrInput interface {
+//	ZoneOwnershipVerificationArray{ ZoneOwnershipVerificationArgs{...} }
+type ZoneOwnershipVerificationArrayInput interface {
 	pulumi.Input
 
-	ToSecurityPolicyConfigPtrOutput() SecurityPolicyConfigPtrOutput
-	ToSecurityPolicyConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigPtrOutput
+	ToZoneOwnershipVerificationArrayOutput() ZoneOwnershipVerificationArrayOutput
+	ToZoneOwnershipVerificationArrayOutputWithContext(context.Context) ZoneOwnershipVerificationArrayOutput
 }
 
-type securityPolicyConfigPtrType SecurityPolicyConfigArgs
+type ZoneOwnershipVerificationArray []ZoneOwnershipVerificationInput
 
-func SecurityPolicyConfigPtr(v *SecurityPolicyConfigArgs) SecurityPolicyConfigPtrInput {
-	return (*securityPolicyConfigPtrType)(v)
+func (ZoneOwnershipVerificationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ZoneOwnershipVerification)(nil)).Elem()
 }
 
-func (*securityPolicyConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfig)(nil)).Elem()
+func (i ZoneOwnershipVerificationArray) ToZoneOwnershipVerificationArrayOutput() ZoneOwnershipVerificationArrayOutput {
+	return i.ToZoneOwnershipVerificationArrayOutputWithContext(context.Background())
 }
 
-func (i *securityPolicyConfigPtrType) ToSecurityPolicyConfigPtrOutput() SecurityPolicyConfigPtrOutput {
-	return i.ToSecurityPolicyConfigPtrOutputWithContext(context.Background())
+func (i ZoneOwnershipVerificationArray) ToZoneOwnershipVerificationArrayOutputWithContext(ctx context.Context) ZoneOwnershipVerificationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneOwnershipVerificationArrayOutput)
 }
 
-func (i *securityPolicyConfigPtrType) ToSecurityPolicyConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigPtrOutput)
+type ZoneOwnershipVerificationOutput struct{ *pulumi.OutputState }
+
+func (ZoneOwnershipVerificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneOwnershipVerification)(nil)).Elem()
 }
 
-type SecurityPolicyConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigOutput) ToSecurityPolicyConfigOutput() SecurityPolicyConfigOutput {
+func (o ZoneOwnershipVerificationOutput) ToZoneOwnershipVerificationOutput() ZoneOwnershipVerificationOutput {
 	return o
 }
 
-func (o SecurityPolicyConfigOutput) ToSecurityPolicyConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigOutput {
+func (o ZoneOwnershipVerificationOutput) ToZoneOwnershipVerificationOutputWithContext(ctx context.Context) ZoneOwnershipVerificationOutput {
 	return o
 }
 
-func (o SecurityPolicyConfigOutput) ToSecurityPolicyConfigPtrOutput() SecurityPolicyConfigPtrOutput {
-	return o.ToSecurityPolicyConfigPtrOutputWithContext(context.Background())
+// CNAME access, using DNS to resolve the information required for authentication. For details, please refer to [Site/Domain Name Ownership Verification ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, indicating that no valid value can be obtained.
+func (o ZoneOwnershipVerificationOutput) DnsVerifications() ZoneOwnershipVerificationDnsVerificationArrayOutput {
+	return o.ApplyT(func(v ZoneOwnershipVerification) []ZoneOwnershipVerificationDnsVerification {
+		return v.DnsVerifications
+	}).(ZoneOwnershipVerificationDnsVerificationArrayOutput)
 }
 
-func (o SecurityPolicyConfigOutput) ToSecurityPolicyConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfig) *SecurityPolicyConfig {
-		return &v
-	}).(SecurityPolicyConfigPtrOutput)
+type ZoneOwnershipVerificationArrayOutput struct{ *pulumi.OutputState }
+
+func (ZoneOwnershipVerificationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ZoneOwnershipVerification)(nil)).Elem()
 }
 
-func (o SecurityPolicyConfigOutput) AclConfig() SecurityPolicyConfigAclConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigAclConfig { return v.AclConfig }).(SecurityPolicyConfigAclConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) BotConfig() SecurityPolicyConfigBotConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigBotConfig { return v.BotConfig }).(SecurityPolicyConfigBotConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) DropPageConfig() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigDropPageConfig { return v.DropPageConfig }).(SecurityPolicyConfigDropPageConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) ExceptConfig() SecurityPolicyConfigExceptConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigExceptConfig { return v.ExceptConfig }).(SecurityPolicyConfigExceptConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) IpTableConfig() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigIpTableConfig { return v.IpTableConfig }).(SecurityPolicyConfigIpTableConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) RateLimitConfig() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigRateLimitConfig { return v.RateLimitConfig }).(SecurityPolicyConfigRateLimitConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) SwitchConfig() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigSwitchConfig { return v.SwitchConfig }).(SecurityPolicyConfigSwitchConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigOutput) WafConfig() SecurityPolicyConfigWafConfigPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfig) *SecurityPolicyConfigWafConfig { return v.WafConfig }).(SecurityPolicyConfigWafConfigPtrOutput)
-}
-
-type SecurityPolicyConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigPtrOutput) ToSecurityPolicyConfigPtrOutput() SecurityPolicyConfigPtrOutput {
+func (o ZoneOwnershipVerificationArrayOutput) ToZoneOwnershipVerificationArrayOutput() ZoneOwnershipVerificationArrayOutput {
 	return o
 }
 
-func (o SecurityPolicyConfigPtrOutput) ToSecurityPolicyConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigPtrOutput {
+func (o ZoneOwnershipVerificationArrayOutput) ToZoneOwnershipVerificationArrayOutputWithContext(ctx context.Context) ZoneOwnershipVerificationArrayOutput {
 	return o
 }
 
-func (o SecurityPolicyConfigPtrOutput) Elem() SecurityPolicyConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) SecurityPolicyConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfig
-		return ret
-	}).(SecurityPolicyConfigOutput)
+func (o ZoneOwnershipVerificationArrayOutput) Index(i pulumi.IntInput) ZoneOwnershipVerificationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneOwnershipVerification {
+		return vs[0].([]ZoneOwnershipVerification)[vs[1].(int)]
+	}).(ZoneOwnershipVerificationOutput)
 }
 
-func (o SecurityPolicyConfigPtrOutput) AclConfig() SecurityPolicyConfigAclConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigAclConfig {
-		if v == nil {
-			return nil
-		}
-		return v.AclConfig
-	}).(SecurityPolicyConfigAclConfigPtrOutput)
+type ZoneOwnershipVerificationDnsVerification struct {
+	// Record type.
+	RecordType *string `pulumi:"recordType"`
+	// Record the value.
+	RecordValue *string `pulumi:"recordValue"`
+	// Host record.
+	Subdomain *string `pulumi:"subdomain"`
 }
 
-func (o SecurityPolicyConfigPtrOutput) BotConfig() SecurityPolicyConfigBotConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigBotConfig {
-		if v == nil {
-			return nil
-		}
-		return v.BotConfig
-	}).(SecurityPolicyConfigBotConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) DropPageConfig() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigDropPageConfig {
-		if v == nil {
-			return nil
-		}
-		return v.DropPageConfig
-	}).(SecurityPolicyConfigDropPageConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) ExceptConfig() SecurityPolicyConfigExceptConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigExceptConfig {
-		if v == nil {
-			return nil
-		}
-		return v.ExceptConfig
-	}).(SecurityPolicyConfigExceptConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) IpTableConfig() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigIpTableConfig {
-		if v == nil {
-			return nil
-		}
-		return v.IpTableConfig
-	}).(SecurityPolicyConfigIpTableConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) RateLimitConfig() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigRateLimitConfig {
-		if v == nil {
-			return nil
-		}
-		return v.RateLimitConfig
-	}).(SecurityPolicyConfigRateLimitConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) SwitchConfig() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigSwitchConfig {
-		if v == nil {
-			return nil
-		}
-		return v.SwitchConfig
-	}).(SecurityPolicyConfigSwitchConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigPtrOutput) WafConfig() SecurityPolicyConfigWafConfigPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfig) *SecurityPolicyConfigWafConfig {
-		if v == nil {
-			return nil
-		}
-		return v.WafConfig
-	}).(SecurityPolicyConfigWafConfigPtrOutput)
-}
-
-type SecurityPolicyConfigAclConfig struct {
-	Switch    string                                  `pulumi:"switch"`
-	UserRules []SecurityPolicyConfigAclConfigUserRule `pulumi:"userRules"`
-}
-
-// SecurityPolicyConfigAclConfigInput is an input type that accepts SecurityPolicyConfigAclConfigArgs and SecurityPolicyConfigAclConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigInput` via:
+// ZoneOwnershipVerificationDnsVerificationInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArgs and ZoneOwnershipVerificationDnsVerificationOutput values.
+// You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationInput` via:
 //
-//          SecurityPolicyConfigAclConfigArgs{...}
-type SecurityPolicyConfigAclConfigInput interface {
+//	ZoneOwnershipVerificationDnsVerificationArgs{...}
+type ZoneOwnershipVerificationDnsVerificationInput interface {
 	pulumi.Input
 
-	ToSecurityPolicyConfigAclConfigOutput() SecurityPolicyConfigAclConfigOutput
-	ToSecurityPolicyConfigAclConfigOutputWithContext(context.Context) SecurityPolicyConfigAclConfigOutput
+	ToZoneOwnershipVerificationDnsVerificationOutput() ZoneOwnershipVerificationDnsVerificationOutput
+	ToZoneOwnershipVerificationDnsVerificationOutputWithContext(context.Context) ZoneOwnershipVerificationDnsVerificationOutput
 }
 
-type SecurityPolicyConfigAclConfigArgs struct {
-	Switch    pulumi.StringInput                              `pulumi:"switch"`
-	UserRules SecurityPolicyConfigAclConfigUserRuleArrayInput `pulumi:"userRules"`
+type ZoneOwnershipVerificationDnsVerificationArgs struct {
+	// Record type.
+	RecordType pulumi.StringPtrInput `pulumi:"recordType"`
+	// Record the value.
+	RecordValue pulumi.StringPtrInput `pulumi:"recordValue"`
+	// Host record.
+	Subdomain pulumi.StringPtrInput `pulumi:"subdomain"`
 }
 
-func (SecurityPolicyConfigAclConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfig)(nil)).Elem()
+func (ZoneOwnershipVerificationDnsVerificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneOwnershipVerificationDnsVerification)(nil)).Elem()
 }
 
-func (i SecurityPolicyConfigAclConfigArgs) ToSecurityPolicyConfigAclConfigOutput() SecurityPolicyConfigAclConfigOutput {
-	return i.ToSecurityPolicyConfigAclConfigOutputWithContext(context.Background())
+func (i ZoneOwnershipVerificationDnsVerificationArgs) ToZoneOwnershipVerificationDnsVerificationOutput() ZoneOwnershipVerificationDnsVerificationOutput {
+	return i.ToZoneOwnershipVerificationDnsVerificationOutputWithContext(context.Background())
 }
 
-func (i SecurityPolicyConfigAclConfigArgs) ToSecurityPolicyConfigAclConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigOutput)
+func (i ZoneOwnershipVerificationDnsVerificationArgs) ToZoneOwnershipVerificationDnsVerificationOutputWithContext(ctx context.Context) ZoneOwnershipVerificationDnsVerificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneOwnershipVerificationDnsVerificationOutput)
 }
 
-func (i SecurityPolicyConfigAclConfigArgs) ToSecurityPolicyConfigAclConfigPtrOutput() SecurityPolicyConfigAclConfigPtrOutput {
-	return i.ToSecurityPolicyConfigAclConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigAclConfigArgs) ToSecurityPolicyConfigAclConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigOutput).ToSecurityPolicyConfigAclConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigAclConfigPtrInput is an input type that accepts SecurityPolicyConfigAclConfigArgs, SecurityPolicyConfigAclConfigPtr and SecurityPolicyConfigAclConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigPtrInput` via:
+// ZoneOwnershipVerificationDnsVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArray and ZoneOwnershipVerificationDnsVerificationArrayOutput values.
+// You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationArrayInput` via:
 //
-//          SecurityPolicyConfigAclConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigAclConfigPtrInput interface {
+//	ZoneOwnershipVerificationDnsVerificationArray{ ZoneOwnershipVerificationDnsVerificationArgs{...} }
+type ZoneOwnershipVerificationDnsVerificationArrayInput interface {
 	pulumi.Input
 
-	ToSecurityPolicyConfigAclConfigPtrOutput() SecurityPolicyConfigAclConfigPtrOutput
-	ToSecurityPolicyConfigAclConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigAclConfigPtrOutput
+	ToZoneOwnershipVerificationDnsVerificationArrayOutput() ZoneOwnershipVerificationDnsVerificationArrayOutput
+	ToZoneOwnershipVerificationDnsVerificationArrayOutputWithContext(context.Context) ZoneOwnershipVerificationDnsVerificationArrayOutput
 }
 
-type securityPolicyConfigAclConfigPtrType SecurityPolicyConfigAclConfigArgs
+type ZoneOwnershipVerificationDnsVerificationArray []ZoneOwnershipVerificationDnsVerificationInput
 
-func SecurityPolicyConfigAclConfigPtr(v *SecurityPolicyConfigAclConfigArgs) SecurityPolicyConfigAclConfigPtrInput {
-	return (*securityPolicyConfigAclConfigPtrType)(v)
+func (ZoneOwnershipVerificationDnsVerificationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ZoneOwnershipVerificationDnsVerification)(nil)).Elem()
 }
 
-func (*securityPolicyConfigAclConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigAclConfig)(nil)).Elem()
+func (i ZoneOwnershipVerificationDnsVerificationArray) ToZoneOwnershipVerificationDnsVerificationArrayOutput() ZoneOwnershipVerificationDnsVerificationArrayOutput {
+	return i.ToZoneOwnershipVerificationDnsVerificationArrayOutputWithContext(context.Background())
 }
 
-func (i *securityPolicyConfigAclConfigPtrType) ToSecurityPolicyConfigAclConfigPtrOutput() SecurityPolicyConfigAclConfigPtrOutput {
-	return i.ToSecurityPolicyConfigAclConfigPtrOutputWithContext(context.Background())
+func (i ZoneOwnershipVerificationDnsVerificationArray) ToZoneOwnershipVerificationDnsVerificationArrayOutputWithContext(ctx context.Context) ZoneOwnershipVerificationDnsVerificationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneOwnershipVerificationDnsVerificationArrayOutput)
 }
 
-func (i *securityPolicyConfigAclConfigPtrType) ToSecurityPolicyConfigAclConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigPtrOutput)
-}
-
-type SecurityPolicyConfigAclConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) ToSecurityPolicyConfigAclConfigOutput() SecurityPolicyConfigAclConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) ToSecurityPolicyConfigAclConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) ToSecurityPolicyConfigAclConfigPtrOutput() SecurityPolicyConfigAclConfigPtrOutput {
-	return o.ToSecurityPolicyConfigAclConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) ToSecurityPolicyConfigAclConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigAclConfig) *SecurityPolicyConfigAclConfig {
-		return &v
-	}).(SecurityPolicyConfigAclConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfig) string { return v.Switch }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigOutput) UserRules() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfig) []SecurityPolicyConfigAclConfigUserRule { return v.UserRules }).(SecurityPolicyConfigAclConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigAclConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigAclConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigPtrOutput) ToSecurityPolicyConfigAclConfigPtrOutput() SecurityPolicyConfigAclConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigPtrOutput) ToSecurityPolicyConfigAclConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigPtrOutput) Elem() SecurityPolicyConfigAclConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigAclConfig) SecurityPolicyConfigAclConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigAclConfig
-		return ret
-	}).(SecurityPolicyConfigAclConfigOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigAclConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigPtrOutput) UserRules() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigAclConfig) []SecurityPolicyConfigAclConfigUserRule {
-		if v == nil {
-			return nil
-		}
-		return v.UserRules
-	}).(SecurityPolicyConfigAclConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRule struct {
-	Action         string                                           `pulumi:"action"`
-	Conditions     []SecurityPolicyConfigAclConfigUserRuleCondition `pulumi:"conditions"`
-	Name           *string                                          `pulumi:"name"`
-	PageId         *int                                             `pulumi:"pageId"`
-	PunishTime     *int                                             `pulumi:"punishTime"`
-	PunishTimeUnit *string                                          `pulumi:"punishTimeUnit"`
-	RedirectUrl    *string                                          `pulumi:"redirectUrl"`
-	ResponseCode   *int                                             `pulumi:"responseCode"`
-	RuleId         *int                                             `pulumi:"ruleId"`
-	RuleName       string                                           `pulumi:"ruleName"`
-	RulePriority   int                                              `pulumi:"rulePriority"`
-	RuleStatus     string                                           `pulumi:"ruleStatus"`
-	UpdateTime     *string                                          `pulumi:"updateTime"`
-}
-
-// SecurityPolicyConfigAclConfigUserRuleInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleArgs and SecurityPolicyConfigAclConfigUserRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigUserRuleInput` via:
-//
-//          SecurityPolicyConfigAclConfigUserRuleArgs{...}
-type SecurityPolicyConfigAclConfigUserRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigAclConfigUserRuleOutput() SecurityPolicyConfigAclConfigUserRuleOutput
-	ToSecurityPolicyConfigAclConfigUserRuleOutputWithContext(context.Context) SecurityPolicyConfigAclConfigUserRuleOutput
-}
-
-type SecurityPolicyConfigAclConfigUserRuleArgs struct {
-	Action         pulumi.StringInput                                       `pulumi:"action"`
-	Conditions     SecurityPolicyConfigAclConfigUserRuleConditionArrayInput `pulumi:"conditions"`
-	Name           pulumi.StringPtrInput                                    `pulumi:"name"`
-	PageId         pulumi.IntPtrInput                                       `pulumi:"pageId"`
-	PunishTime     pulumi.IntPtrInput                                       `pulumi:"punishTime"`
-	PunishTimeUnit pulumi.StringPtrInput                                    `pulumi:"punishTimeUnit"`
-	RedirectUrl    pulumi.StringPtrInput                                    `pulumi:"redirectUrl"`
-	ResponseCode   pulumi.IntPtrInput                                       `pulumi:"responseCode"`
-	RuleId         pulumi.IntPtrInput                                       `pulumi:"ruleId"`
-	RuleName       pulumi.StringInput                                       `pulumi:"ruleName"`
-	RulePriority   pulumi.IntInput                                          `pulumi:"rulePriority"`
-	RuleStatus     pulumi.StringInput                                       `pulumi:"ruleStatus"`
-	UpdateTime     pulumi.StringPtrInput                                    `pulumi:"updateTime"`
-}
-
-func (SecurityPolicyConfigAclConfigUserRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleArgs) ToSecurityPolicyConfigAclConfigUserRuleOutput() SecurityPolicyConfigAclConfigUserRuleOutput {
-	return i.ToSecurityPolicyConfigAclConfigUserRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleArgs) ToSecurityPolicyConfigAclConfigUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigUserRuleOutput)
-}
-
-// SecurityPolicyConfigAclConfigUserRuleArrayInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleArray and SecurityPolicyConfigAclConfigUserRuleArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigUserRuleArrayInput` via:
-//
-//          SecurityPolicyConfigAclConfigUserRuleArray{ SecurityPolicyConfigAclConfigUserRuleArgs{...} }
-type SecurityPolicyConfigAclConfigUserRuleArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigAclConfigUserRuleArrayOutput() SecurityPolicyConfigAclConfigUserRuleArrayOutput
-	ToSecurityPolicyConfigAclConfigUserRuleArrayOutputWithContext(context.Context) SecurityPolicyConfigAclConfigUserRuleArrayOutput
-}
-
-type SecurityPolicyConfigAclConfigUserRuleArray []SecurityPolicyConfigAclConfigUserRuleInput
-
-func (SecurityPolicyConfigAclConfigUserRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigAclConfigUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleArray) ToSecurityPolicyConfigAclConfigUserRuleArrayOutput() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return i.ToSecurityPolicyConfigAclConfigUserRuleArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleArray) ToSecurityPolicyConfigAclConfigUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigUserRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) ToSecurityPolicyConfigAclConfigUserRuleOutput() SecurityPolicyConfigAclConfigUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) ToSecurityPolicyConfigAclConfigUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) Conditions() SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) []SecurityPolicyConfigAclConfigUserRuleCondition {
-		return v.Conditions
-	}).(SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.PageId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) PunishTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) PunishTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.PunishTimeUnit }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) RedirectUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) ResponseCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.ResponseCode }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleName() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.RuleName }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) RulePriority() pulumi.IntOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) int { return v.RulePriority }).(pulumi.IntOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) RuleStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) string { return v.RuleStatus }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleOutput) UpdateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigUserRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigAclConfigUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleArrayOutput) ToSecurityPolicyConfigAclConfigUserRuleArrayOutput() SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleArrayOutput) ToSecurityPolicyConfigAclConfigUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigAclConfigUserRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigAclConfigUserRule {
-		return vs[0].([]SecurityPolicyConfigAclConfigUserRule)[vs[1].(int)]
-	}).(SecurityPolicyConfigAclConfigUserRuleOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRuleCondition struct {
-	MatchContent string `pulumi:"matchContent"`
-	MatchFrom    string `pulumi:"matchFrom"`
-	MatchParam   string `pulumi:"matchParam"`
-	Operator     string `pulumi:"operator"`
-}
-
-// SecurityPolicyConfigAclConfigUserRuleConditionInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleConditionArgs and SecurityPolicyConfigAclConfigUserRuleConditionOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigUserRuleConditionInput` via:
-//
-//          SecurityPolicyConfigAclConfigUserRuleConditionArgs{...}
-type SecurityPolicyConfigAclConfigUserRuleConditionInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigAclConfigUserRuleConditionOutput() SecurityPolicyConfigAclConfigUserRuleConditionOutput
-	ToSecurityPolicyConfigAclConfigUserRuleConditionOutputWithContext(context.Context) SecurityPolicyConfigAclConfigUserRuleConditionOutput
-}
-
-type SecurityPolicyConfigAclConfigUserRuleConditionArgs struct {
-	MatchContent pulumi.StringInput `pulumi:"matchContent"`
-	MatchFrom    pulumi.StringInput `pulumi:"matchFrom"`
-	MatchParam   pulumi.StringInput `pulumi:"matchParam"`
-	Operator     pulumi.StringInput `pulumi:"operator"`
-}
-
-func (SecurityPolicyConfigAclConfigUserRuleConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleConditionArgs) ToSecurityPolicyConfigAclConfigUserRuleConditionOutput() SecurityPolicyConfigAclConfigUserRuleConditionOutput {
-	return i.ToSecurityPolicyConfigAclConfigUserRuleConditionOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleConditionArgs) ToSecurityPolicyConfigAclConfigUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigUserRuleConditionOutput)
-}
-
-// SecurityPolicyConfigAclConfigUserRuleConditionArrayInput is an input type that accepts SecurityPolicyConfigAclConfigUserRuleConditionArray and SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigAclConfigUserRuleConditionArrayInput` via:
-//
-//          SecurityPolicyConfigAclConfigUserRuleConditionArray{ SecurityPolicyConfigAclConfigUserRuleConditionArgs{...} }
-type SecurityPolicyConfigAclConfigUserRuleConditionArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutput() SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput
-	ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutputWithContext(context.Context) SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput
-}
-
-type SecurityPolicyConfigAclConfigUserRuleConditionArray []SecurityPolicyConfigAclConfigUserRuleConditionInput
-
-func (SecurityPolicyConfigAclConfigUserRuleConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigAclConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleConditionArray) ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutput() SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
-	return i.ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigAclConfigUserRuleConditionArray) ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRuleConditionOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigUserRuleConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) ToSecurityPolicyConfigAclConfigUserRuleConditionOutput() SecurityPolicyConfigAclConfigUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) ToSecurityPolicyConfigAclConfigUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchContent() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchContent }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchFrom() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchFrom }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) MatchParam() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.MatchParam }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionOutput) Operator() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigAclConfigUserRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
-}
-
-type SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigAclConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput) ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutput() SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput) ToSecurityPolicyConfigAclConfigUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigAclConfigUserRuleConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigAclConfigUserRuleCondition {
-		return vs[0].([]SecurityPolicyConfigAclConfigUserRuleCondition)[vs[1].(int)]
-	}).(SecurityPolicyConfigAclConfigUserRuleConditionOutput)
-}
-
-type SecurityPolicyConfigBotConfig struct {
-	IntelligenceRule *SecurityPolicyConfigBotConfigIntelligenceRule `pulumi:"intelligenceRule"`
-	ManagedRule      *SecurityPolicyConfigBotConfigManagedRule      `pulumi:"managedRule"`
-	PortraitRule     *SecurityPolicyConfigBotConfigPortraitRule     `pulumi:"portraitRule"`
-	Switch           *string                                        `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigBotConfigInput is an input type that accepts SecurityPolicyConfigBotConfigArgs and SecurityPolicyConfigBotConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigInput` via:
-//
-//          SecurityPolicyConfigBotConfigArgs{...}
-type SecurityPolicyConfigBotConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigOutput() SecurityPolicyConfigBotConfigOutput
-	ToSecurityPolicyConfigBotConfigOutputWithContext(context.Context) SecurityPolicyConfigBotConfigOutput
-}
-
-type SecurityPolicyConfigBotConfigArgs struct {
-	IntelligenceRule SecurityPolicyConfigBotConfigIntelligenceRulePtrInput `pulumi:"intelligenceRule"`
-	ManagedRule      SecurityPolicyConfigBotConfigManagedRulePtrInput      `pulumi:"managedRule"`
-	PortraitRule     SecurityPolicyConfigBotConfigPortraitRulePtrInput     `pulumi:"portraitRule"`
-	Switch           pulumi.StringPtrInput                                 `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigBotConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigArgs) ToSecurityPolicyConfigBotConfigOutput() SecurityPolicyConfigBotConfigOutput {
-	return i.ToSecurityPolicyConfigBotConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigArgs) ToSecurityPolicyConfigBotConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigOutput)
-}
-
-func (i SecurityPolicyConfigBotConfigArgs) ToSecurityPolicyConfigBotConfigPtrOutput() SecurityPolicyConfigBotConfigPtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigArgs) ToSecurityPolicyConfigBotConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigOutput).ToSecurityPolicyConfigBotConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigBotConfigPtrInput is an input type that accepts SecurityPolicyConfigBotConfigArgs, SecurityPolicyConfigBotConfigPtr and SecurityPolicyConfigBotConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigPtrInput` via:
-//
-//          SecurityPolicyConfigBotConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigBotConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigPtrOutput() SecurityPolicyConfigBotConfigPtrOutput
-	ToSecurityPolicyConfigBotConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigBotConfigPtrOutput
-}
-
-type securityPolicyConfigBotConfigPtrType SecurityPolicyConfigBotConfigArgs
-
-func SecurityPolicyConfigBotConfigPtr(v *SecurityPolicyConfigBotConfigArgs) SecurityPolicyConfigBotConfigPtrInput {
-	return (*securityPolicyConfigBotConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigBotConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigBotConfigPtrType) ToSecurityPolicyConfigBotConfigPtrOutput() SecurityPolicyConfigBotConfigPtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigBotConfigPtrType) ToSecurityPolicyConfigBotConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) ToSecurityPolicyConfigBotConfigOutput() SecurityPolicyConfigBotConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) ToSecurityPolicyConfigBotConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) ToSecurityPolicyConfigBotConfigPtrOutput() SecurityPolicyConfigBotConfigPtrOutput {
-	return o.ToSecurityPolicyConfigBotConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) ToSecurityPolicyConfigBotConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfig {
-		return &v
-	}).(SecurityPolicyConfigBotConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) IntelligenceRule() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigIntelligenceRule {
-		return v.IntelligenceRule
-	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) ManagedRule() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigManagedRule { return v.ManagedRule }).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) PortraitRule() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigPortraitRule {
-		return v.PortraitRule
-	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) ToSecurityPolicyConfigBotConfigPtrOutput() SecurityPolicyConfigBotConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) ToSecurityPolicyConfigBotConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) Elem() SecurityPolicyConfigBotConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) SecurityPolicyConfigBotConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigBotConfig
-		return ret
-	}).(SecurityPolicyConfigBotConfigOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) IntelligenceRule() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigIntelligenceRule {
-		if v == nil {
-			return nil
-		}
-		return v.IntelligenceRule
-	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) ManagedRule() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigManagedRule {
-		if v == nil {
-			return nil
-		}
-		return v.ManagedRule
-	}).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) PortraitRule() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *SecurityPolicyConfigBotConfigPortraitRule {
-		if v == nil {
-			return nil
-		}
-		return v.PortraitRule
-	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRule struct {
-	Items  []SecurityPolicyConfigBotConfigIntelligenceRuleItem `pulumi:"items"`
-	Switch *string                                             `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigBotConfigIntelligenceRuleInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleArgs and SecurityPolicyConfigBotConfigIntelligenceRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigIntelligenceRuleInput` via:
-//
-//          SecurityPolicyConfigBotConfigIntelligenceRuleArgs{...}
-type SecurityPolicyConfigBotConfigIntelligenceRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleOutput() SecurityPolicyConfigBotConfigIntelligenceRuleOutput
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleOutputWithContext(context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleOutput
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleArgs struct {
-	Items  SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput `pulumi:"items"`
-	Switch pulumi.StringPtrInput                                       `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ToSecurityPolicyConfigBotConfigIntelligenceRuleOutput() SecurityPolicyConfigBotConfigIntelligenceRuleOutput {
-	return i.ToSecurityPolicyConfigBotConfigIntelligenceRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ToSecurityPolicyConfigBotConfigIntelligenceRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigIntelligenceRuleOutput)
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutput() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleArgs) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigIntelligenceRuleOutput).ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigBotConfigIntelligenceRulePtrInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleArgs, SecurityPolicyConfigBotConfigIntelligenceRulePtr and SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigIntelligenceRulePtrInput` via:
-//
-//          SecurityPolicyConfigBotConfigIntelligenceRuleArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigBotConfigIntelligenceRulePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutput() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput
-	ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(context.Context) SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput
-}
-
-type securityPolicyConfigBotConfigIntelligenceRulePtrType SecurityPolicyConfigBotConfigIntelligenceRuleArgs
-
-func SecurityPolicyConfigBotConfigIntelligenceRulePtr(v *SecurityPolicyConfigBotConfigIntelligenceRuleArgs) SecurityPolicyConfigBotConfigIntelligenceRulePtrInput {
-	return (*securityPolicyConfigBotConfigIntelligenceRulePtrType)(v)
-}
-
-func (*securityPolicyConfigBotConfigIntelligenceRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigIntelligenceRule)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigBotConfigIntelligenceRulePtrType) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutput() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigBotConfigIntelligenceRulePtrType) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleOutput() SecurityPolicyConfigBotConfigIntelligenceRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutput() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o.ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigBotConfigIntelligenceRule) *SecurityPolicyConfigBotConfigIntelligenceRule {
-		return &v
-	}).(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) Items() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRule) []SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-		return v.Items
-	}).(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigIntelligenceRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutput() SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) ToSecurityPolicyConfigBotConfigIntelligenceRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Elem() SecurityPolicyConfigBotConfigIntelligenceRuleOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigIntelligenceRule) SecurityPolicyConfigBotConfigIntelligenceRule {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigBotConfigIntelligenceRule
-		return ret
-	}).(SecurityPolicyConfigBotConfigIntelligenceRuleOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Items() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigIntelligenceRule) []SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-		if v == nil {
-			return nil
-		}
-		return v.Items
-	}).(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigIntelligenceRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleItem struct {
-	Action *string `pulumi:"action"`
-	Label  *string `pulumi:"label"`
-}
-
-// SecurityPolicyConfigBotConfigIntelligenceRuleItemInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs and SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigIntelligenceRuleItemInput` via:
-//
-//          SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs{...}
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutputWithContext(context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs struct {
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	Label  pulumi.StringPtrInput `pulumi:"label"`
-}
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRuleItem)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput {
-	return i.ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput)
-}
-
-// SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput is an input type that accepts SecurityPolicyConfigBotConfigIntelligenceRuleItemArray and SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput` via:
-//
-//          SecurityPolicyConfigBotConfigIntelligenceRuleItemArray{ SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs{...} }
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput
-	ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutputWithContext(context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemArray []SecurityPolicyConfigBotConfigIntelligenceRuleItemInput
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleItemArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigBotConfigIntelligenceRuleItem)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleItemArray) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return i.ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigIntelligenceRuleItemArray) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRuleItem)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRuleItem) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput) Label() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigIntelligenceRuleItem) *string { return v.Label }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigBotConfigIntelligenceRuleItem)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput() SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput) ToSecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigBotConfigIntelligenceRuleItem {
-		return vs[0].([]SecurityPolicyConfigBotConfigIntelligenceRuleItem)[vs[1].(int)]
-	}).(SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput)
-}
-
-type SecurityPolicyConfigBotConfigManagedRule struct {
-	Action          *string `pulumi:"action"`
-	AlgManagedIds   []int   `pulumi:"algManagedIds"`
-	CapManagedIds   []int   `pulumi:"capManagedIds"`
-	DropManagedIds  []int   `pulumi:"dropManagedIds"`
-	MonManagedIds   []int   `pulumi:"monManagedIds"`
-	Name            *string `pulumi:"name"`
-	PageId          *int    `pulumi:"pageId"`
-	PunishTime      *int    `pulumi:"punishTime"`
-	PunishTimeUnit  *string `pulumi:"punishTimeUnit"`
-	RedirectUrl     *string `pulumi:"redirectUrl"`
-	ResponseCode    *int    `pulumi:"responseCode"`
-	RuleId          *int    `pulumi:"ruleId"`
-	TransManagedIds []int   `pulumi:"transManagedIds"`
-}
-
-// SecurityPolicyConfigBotConfigManagedRuleInput is an input type that accepts SecurityPolicyConfigBotConfigManagedRuleArgs and SecurityPolicyConfigBotConfigManagedRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigManagedRuleInput` via:
-//
-//          SecurityPolicyConfigBotConfigManagedRuleArgs{...}
-type SecurityPolicyConfigBotConfigManagedRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigManagedRuleOutput() SecurityPolicyConfigBotConfigManagedRuleOutput
-	ToSecurityPolicyConfigBotConfigManagedRuleOutputWithContext(context.Context) SecurityPolicyConfigBotConfigManagedRuleOutput
-}
-
-type SecurityPolicyConfigBotConfigManagedRuleArgs struct {
-	Action          pulumi.StringPtrInput `pulumi:"action"`
-	AlgManagedIds   pulumi.IntArrayInput  `pulumi:"algManagedIds"`
-	CapManagedIds   pulumi.IntArrayInput  `pulumi:"capManagedIds"`
-	DropManagedIds  pulumi.IntArrayInput  `pulumi:"dropManagedIds"`
-	MonManagedIds   pulumi.IntArrayInput  `pulumi:"monManagedIds"`
-	Name            pulumi.StringPtrInput `pulumi:"name"`
-	PageId          pulumi.IntPtrInput    `pulumi:"pageId"`
-	PunishTime      pulumi.IntPtrInput    `pulumi:"punishTime"`
-	PunishTimeUnit  pulumi.StringPtrInput `pulumi:"punishTimeUnit"`
-	RedirectUrl     pulumi.StringPtrInput `pulumi:"redirectUrl"`
-	ResponseCode    pulumi.IntPtrInput    `pulumi:"responseCode"`
-	RuleId          pulumi.IntPtrInput    `pulumi:"ruleId"`
-	TransManagedIds pulumi.IntArrayInput  `pulumi:"transManagedIds"`
-}
-
-func (SecurityPolicyConfigBotConfigManagedRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigManagedRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigManagedRuleArgs) ToSecurityPolicyConfigBotConfigManagedRuleOutput() SecurityPolicyConfigBotConfigManagedRuleOutput {
-	return i.ToSecurityPolicyConfigBotConfigManagedRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigManagedRuleArgs) ToSecurityPolicyConfigBotConfigManagedRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigManagedRuleOutput)
-}
-
-func (i SecurityPolicyConfigBotConfigManagedRuleArgs) ToSecurityPolicyConfigBotConfigManagedRulePtrOutput() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigManagedRuleArgs) ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigManagedRuleOutput).ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigBotConfigManagedRulePtrInput is an input type that accepts SecurityPolicyConfigBotConfigManagedRuleArgs, SecurityPolicyConfigBotConfigManagedRulePtr and SecurityPolicyConfigBotConfigManagedRulePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigManagedRulePtrInput` via:
-//
-//          SecurityPolicyConfigBotConfigManagedRuleArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigBotConfigManagedRulePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigManagedRulePtrOutput() SecurityPolicyConfigBotConfigManagedRulePtrOutput
-	ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(context.Context) SecurityPolicyConfigBotConfigManagedRulePtrOutput
-}
-
-type securityPolicyConfigBotConfigManagedRulePtrType SecurityPolicyConfigBotConfigManagedRuleArgs
-
-func SecurityPolicyConfigBotConfigManagedRulePtr(v *SecurityPolicyConfigBotConfigManagedRuleArgs) SecurityPolicyConfigBotConfigManagedRulePtrInput {
-	return (*securityPolicyConfigBotConfigManagedRulePtrType)(v)
-}
-
-func (*securityPolicyConfigBotConfigManagedRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigManagedRule)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigBotConfigManagedRulePtrType) ToSecurityPolicyConfigBotConfigManagedRulePtrOutput() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigBotConfigManagedRulePtrType) ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigManagedRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigManagedRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigManagedRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ToSecurityPolicyConfigBotConfigManagedRuleOutput() SecurityPolicyConfigBotConfigManagedRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ToSecurityPolicyConfigBotConfigManagedRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ToSecurityPolicyConfigBotConfigManagedRulePtrOutput() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o.ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigBotConfigManagedRule) *SecurityPolicyConfigBotConfigManagedRule {
-		return &v
-	}).(SecurityPolicyConfigBotConfigManagedRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) AlgManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.AlgManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) CapManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.CapManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) DropManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.DropManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) MonManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.MonManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.PageId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PunishTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) PunishTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.PunishTimeUnit }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) RedirectUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) ResponseCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.ResponseCode }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRuleOutput) TransManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigManagedRule) []int { return v.TransManagedIds }).(pulumi.IntArrayOutput)
-}
-
-type SecurityPolicyConfigBotConfigManagedRulePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigManagedRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigManagedRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) ToSecurityPolicyConfigBotConfigManagedRulePtrOutput() SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) ToSecurityPolicyConfigBotConfigManagedRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigManagedRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Elem() SecurityPolicyConfigBotConfigManagedRuleOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) SecurityPolicyConfigBotConfigManagedRule {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigBotConfigManagedRule
-		return ret
-	}).(SecurityPolicyConfigBotConfigManagedRuleOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Action
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) AlgManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.AlgManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) CapManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.CapManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) DropManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.DropManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) MonManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.MonManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
-		if v == nil {
-			return nil
-		}
-		return v.PageId
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
-		if v == nil {
-			return nil
-		}
-		return v.PunishTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) PunishTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.PunishTimeUnit
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) RedirectUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.RedirectUrl
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) ResponseCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ResponseCode
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) *int {
-		if v == nil {
-			return nil
-		}
-		return v.RuleId
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigManagedRulePtrOutput) TransManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigManagedRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.TransManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-type SecurityPolicyConfigBotConfigPortraitRule struct {
-	AlgManagedIds  []int   `pulumi:"algManagedIds"`
-	CapManagedIds  []int   `pulumi:"capManagedIds"`
-	DropManagedIds []int   `pulumi:"dropManagedIds"`
-	MonManagedIds  []int   `pulumi:"monManagedIds"`
-	RuleId         *int    `pulumi:"ruleId"`
-	Switch         *string `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigBotConfigPortraitRuleInput is an input type that accepts SecurityPolicyConfigBotConfigPortraitRuleArgs and SecurityPolicyConfigBotConfigPortraitRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigPortraitRuleInput` via:
-//
-//          SecurityPolicyConfigBotConfigPortraitRuleArgs{...}
-type SecurityPolicyConfigBotConfigPortraitRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigPortraitRuleOutput() SecurityPolicyConfigBotConfigPortraitRuleOutput
-	ToSecurityPolicyConfigBotConfigPortraitRuleOutputWithContext(context.Context) SecurityPolicyConfigBotConfigPortraitRuleOutput
-}
-
-type SecurityPolicyConfigBotConfigPortraitRuleArgs struct {
-	AlgManagedIds  pulumi.IntArrayInput  `pulumi:"algManagedIds"`
-	CapManagedIds  pulumi.IntArrayInput  `pulumi:"capManagedIds"`
-	DropManagedIds pulumi.IntArrayInput  `pulumi:"dropManagedIds"`
-	MonManagedIds  pulumi.IntArrayInput  `pulumi:"monManagedIds"`
-	RuleId         pulumi.IntPtrInput    `pulumi:"ruleId"`
-	Switch         pulumi.StringPtrInput `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigBotConfigPortraitRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigPortraitRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigBotConfigPortraitRuleArgs) ToSecurityPolicyConfigBotConfigPortraitRuleOutput() SecurityPolicyConfigBotConfigPortraitRuleOutput {
-	return i.ToSecurityPolicyConfigBotConfigPortraitRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigPortraitRuleArgs) ToSecurityPolicyConfigBotConfigPortraitRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigPortraitRuleOutput)
-}
-
-func (i SecurityPolicyConfigBotConfigPortraitRuleArgs) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutput() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigBotConfigPortraitRuleArgs) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigPortraitRuleOutput).ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigBotConfigPortraitRulePtrInput is an input type that accepts SecurityPolicyConfigBotConfigPortraitRuleArgs, SecurityPolicyConfigBotConfigPortraitRulePtr and SecurityPolicyConfigBotConfigPortraitRulePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigBotConfigPortraitRulePtrInput` via:
-//
-//          SecurityPolicyConfigBotConfigPortraitRuleArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigBotConfigPortraitRulePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigBotConfigPortraitRulePtrOutput() SecurityPolicyConfigBotConfigPortraitRulePtrOutput
-	ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(context.Context) SecurityPolicyConfigBotConfigPortraitRulePtrOutput
-}
-
-type securityPolicyConfigBotConfigPortraitRulePtrType SecurityPolicyConfigBotConfigPortraitRuleArgs
-
-func SecurityPolicyConfigBotConfigPortraitRulePtr(v *SecurityPolicyConfigBotConfigPortraitRuleArgs) SecurityPolicyConfigBotConfigPortraitRulePtrInput {
-	return (*securityPolicyConfigBotConfigPortraitRulePtrType)(v)
-}
-
-func (*securityPolicyConfigBotConfigPortraitRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigPortraitRule)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigBotConfigPortraitRulePtrType) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutput() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return i.ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigBotConfigPortraitRulePtrType) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigPortraitRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigPortraitRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigBotConfigPortraitRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) ToSecurityPolicyConfigBotConfigPortraitRuleOutput() SecurityPolicyConfigBotConfigPortraitRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) ToSecurityPolicyConfigBotConfigPortraitRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutput() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o.ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigBotConfigPortraitRule) *SecurityPolicyConfigBotConfigPortraitRule {
-		return &v
-	}).(SecurityPolicyConfigBotConfigPortraitRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) AlgManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.AlgManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) CapManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.CapManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) DropManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.DropManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) MonManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) []int { return v.MonManagedIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRuleOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigBotConfigPortraitRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigBotConfigPortraitRulePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigBotConfigPortraitRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigBotConfigPortraitRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutput() SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) ToSecurityPolicyConfigBotConfigPortraitRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigBotConfigPortraitRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) Elem() SecurityPolicyConfigBotConfigPortraitRuleOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) SecurityPolicyConfigBotConfigPortraitRule {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigBotConfigPortraitRule
-		return ret
-	}).(SecurityPolicyConfigBotConfigPortraitRuleOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) AlgManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.AlgManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) CapManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.CapManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) DropManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.DropManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) MonManagedIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) []int {
-		if v == nil {
-			return nil
-		}
-		return v.MonManagedIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) *int {
-		if v == nil {
-			return nil
-		}
-		return v.RuleId
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigBotConfigPortraitRulePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigBotConfigPortraitRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfig struct {
-	AclDropPageDetail *SecurityPolicyConfigDropPageConfigAclDropPageDetail `pulumi:"aclDropPageDetail"`
-	Switch            *string                                              `pulumi:"switch"`
-	WafDropPageDetail *SecurityPolicyConfigDropPageConfigWafDropPageDetail `pulumi:"wafDropPageDetail"`
-}
-
-// SecurityPolicyConfigDropPageConfigInput is an input type that accepts SecurityPolicyConfigDropPageConfigArgs and SecurityPolicyConfigDropPageConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigArgs{...}
-type SecurityPolicyConfigDropPageConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigOutput() SecurityPolicyConfigDropPageConfigOutput
-	ToSecurityPolicyConfigDropPageConfigOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigOutput
-}
-
-type SecurityPolicyConfigDropPageConfigArgs struct {
-	AclDropPageDetail SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput `pulumi:"aclDropPageDetail"`
-	Switch            pulumi.StringPtrInput                                       `pulumi:"switch"`
-	WafDropPageDetail SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput `pulumi:"wafDropPageDetail"`
-}
-
-func (SecurityPolicyConfigDropPageConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigDropPageConfigArgs) ToSecurityPolicyConfigDropPageConfigOutput() SecurityPolicyConfigDropPageConfigOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigArgs) ToSecurityPolicyConfigDropPageConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigOutput)
-}
-
-func (i SecurityPolicyConfigDropPageConfigArgs) ToSecurityPolicyConfigDropPageConfigPtrOutput() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigArgs) ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigOutput).ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigDropPageConfigPtrInput is an input type that accepts SecurityPolicyConfigDropPageConfigArgs, SecurityPolicyConfigDropPageConfigPtr and SecurityPolicyConfigDropPageConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigPtrInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigDropPageConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigPtrOutput() SecurityPolicyConfigDropPageConfigPtrOutput
-	ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigPtrOutput
-}
-
-type securityPolicyConfigDropPageConfigPtrType SecurityPolicyConfigDropPageConfigArgs
-
-func SecurityPolicyConfigDropPageConfigPtr(v *SecurityPolicyConfigDropPageConfigArgs) SecurityPolicyConfigDropPageConfigPtrInput {
-	return (*securityPolicyConfigDropPageConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigDropPageConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigDropPageConfigPtrType) ToSecurityPolicyConfigDropPageConfigPtrOutput() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigDropPageConfigPtrType) ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) ToSecurityPolicyConfigDropPageConfigOutput() SecurityPolicyConfigDropPageConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) ToSecurityPolicyConfigDropPageConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) ToSecurityPolicyConfigDropPageConfigPtrOutput() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o.ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfig {
-		return &v
-	}).(SecurityPolicyConfigDropPageConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) AclDropPageDetail() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-		return v.AclDropPageDetail
-	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigOutput) WafDropPageDetail() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-		return v.WafDropPageDetail
-	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) ToSecurityPolicyConfigDropPageConfigPtrOutput() SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) ToSecurityPolicyConfigDropPageConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) Elem() SecurityPolicyConfigDropPageConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) SecurityPolicyConfigDropPageConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigDropPageConfig
-		return ret
-	}).(SecurityPolicyConfigDropPageConfigOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) AclDropPageDetail() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-		if v == nil {
-			return nil
-		}
-		return v.AclDropPageDetail
-	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigPtrOutput) WafDropPageDetail() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfig) *SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-		if v == nil {
-			return nil
-		}
-		return v.WafDropPageDetail
-	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigAclDropPageDetail struct {
-	Name       *string `pulumi:"name"`
-	PageId     *int    `pulumi:"pageId"`
-	StatusCode *int    `pulumi:"statusCode"`
-	Type       *string `pulumi:"type"`
-}
-
-// SecurityPolicyConfigDropPageConfigAclDropPageDetailInput is an input type that accepts SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs and SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigAclDropPageDetailInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs{...}
-type SecurityPolicyConfigDropPageConfigAclDropPageDetailInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput
-	ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput
-}
-
-type SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs struct {
-	Name       pulumi.StringPtrInput `pulumi:"name"`
-	PageId     pulumi.IntPtrInput    `pulumi:"pageId"`
-	StatusCode pulumi.IntPtrInput    `pulumi:"statusCode"`
-	Type       pulumi.StringPtrInput `pulumi:"type"`
-}
-
-func (SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfigAclDropPageDetail)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput)
-}
-
-func (i SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput).ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput is an input type that accepts SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs, SecurityPolicyConfigDropPageConfigAclDropPageDetailPtr and SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput
-	ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput
-}
-
-type securityPolicyConfigDropPageConfigAclDropPageDetailPtrType SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs
-
-func SecurityPolicyConfigDropPageConfigAclDropPageDetailPtr(v *SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput {
-	return (*securityPolicyConfigDropPageConfigAclDropPageDetailPtrType)(v)
-}
-
-func (*securityPolicyConfigDropPageConfigAclDropPageDetailPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfigAclDropPageDetail)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigDropPageConfigAclDropPageDetailPtrType) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigDropPageConfigAclDropPageDetailPtrType) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfigAclDropPageDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o.ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-		return &v
-	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int { return v.PageId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) StatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int { return v.StatusCode }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string { return v.Type }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfigAclDropPageDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) ToSecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Elem() SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) SecurityPolicyConfigDropPageConfigAclDropPageDetail {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigDropPageConfigAclDropPageDetail
-		return ret
-	}).(SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.PageId
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) StatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.StatusCode
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigAclDropPageDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Type
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigWafDropPageDetail struct {
-	Name       *string `pulumi:"name"`
-	PageId     *int    `pulumi:"pageId"`
-	StatusCode *int    `pulumi:"statusCode"`
-	Type       *string `pulumi:"type"`
-}
-
-// SecurityPolicyConfigDropPageConfigWafDropPageDetailInput is an input type that accepts SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs and SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigWafDropPageDetailInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs{...}
-type SecurityPolicyConfigDropPageConfigWafDropPageDetailInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput
-	ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput
-}
-
-type SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs struct {
-	Name       pulumi.StringPtrInput `pulumi:"name"`
-	PageId     pulumi.IntPtrInput    `pulumi:"pageId"`
-	StatusCode pulumi.IntPtrInput    `pulumi:"statusCode"`
-	Type       pulumi.StringPtrInput `pulumi:"type"`
-}
-
-func (SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfigWafDropPageDetail)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput)
-}
-
-func (i SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput).ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput is an input type that accepts SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs, SecurityPolicyConfigDropPageConfigWafDropPageDetailPtr and SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput` via:
-//
-//          SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput
-	ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput
-}
-
-type securityPolicyConfigDropPageConfigWafDropPageDetailPtrType SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs
-
-func SecurityPolicyConfigDropPageConfigWafDropPageDetailPtr(v *SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput {
-	return (*securityPolicyConfigDropPageConfigWafDropPageDetailPtrType)(v)
-}
-
-func (*securityPolicyConfigDropPageConfigWafDropPageDetailPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfigWafDropPageDetail)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigDropPageConfigWafDropPageDetailPtrType) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return i.ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigDropPageConfigWafDropPageDetailPtrType) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigDropPageConfigWafDropPageDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o.ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-		return &v
-	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int { return v.PageId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) StatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int { return v.StatusCode }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string { return v.Type }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigDropPageConfigWafDropPageDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput() SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) ToSecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Elem() SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) SecurityPolicyConfigDropPageConfigWafDropPageDetail {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigDropPageConfigWafDropPageDetail
-		return ret
-	}).(SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) PageId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.PageId
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) StatusCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.StatusCode
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigDropPageConfigWafDropPageDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Type
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfig struct {
-	ExceptUserRules []SecurityPolicyConfigExceptConfigExceptUserRule `pulumi:"exceptUserRules"`
-	Switch          *string                                          `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigExceptConfigInput is an input type that accepts SecurityPolicyConfigExceptConfigArgs and SecurityPolicyConfigExceptConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigInput` via:
-//
-//          SecurityPolicyConfigExceptConfigArgs{...}
-type SecurityPolicyConfigExceptConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigOutput() SecurityPolicyConfigExceptConfigOutput
-	ToSecurityPolicyConfigExceptConfigOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigOutput
-}
-
-type SecurityPolicyConfigExceptConfigArgs struct {
-	ExceptUserRules SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput `pulumi:"exceptUserRules"`
-	Switch          pulumi.StringPtrInput                                    `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigExceptConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigArgs) ToSecurityPolicyConfigExceptConfigOutput() SecurityPolicyConfigExceptConfigOutput {
-	return i.ToSecurityPolicyConfigExceptConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigArgs) ToSecurityPolicyConfigExceptConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigOutput)
-}
-
-func (i SecurityPolicyConfigExceptConfigArgs) ToSecurityPolicyConfigExceptConfigPtrOutput() SecurityPolicyConfigExceptConfigPtrOutput {
-	return i.ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigArgs) ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigOutput).ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigExceptConfigPtrInput is an input type that accepts SecurityPolicyConfigExceptConfigArgs, SecurityPolicyConfigExceptConfigPtr and SecurityPolicyConfigExceptConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigPtrInput` via:
-//
-//          SecurityPolicyConfigExceptConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigExceptConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigPtrOutput() SecurityPolicyConfigExceptConfigPtrOutput
-	ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigPtrOutput
-}
-
-type securityPolicyConfigExceptConfigPtrType SecurityPolicyConfigExceptConfigArgs
-
-func SecurityPolicyConfigExceptConfigPtr(v *SecurityPolicyConfigExceptConfigArgs) SecurityPolicyConfigExceptConfigPtrInput {
-	return (*securityPolicyConfigExceptConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigExceptConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigExceptConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigExceptConfigPtrType) ToSecurityPolicyConfigExceptConfigPtrOutput() SecurityPolicyConfigExceptConfigPtrOutput {
-	return i.ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigExceptConfigPtrType) ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) ToSecurityPolicyConfigExceptConfigOutput() SecurityPolicyConfigExceptConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) ToSecurityPolicyConfigExceptConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) ToSecurityPolicyConfigExceptConfigPtrOutput() SecurityPolicyConfigExceptConfigPtrOutput {
-	return o.ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigExceptConfig) *SecurityPolicyConfigExceptConfig {
-		return &v
-	}).(SecurityPolicyConfigExceptConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) ExceptUserRules() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfig) []SecurityPolicyConfigExceptConfigExceptUserRule {
-		return v.ExceptUserRules
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigExceptConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigPtrOutput) ToSecurityPolicyConfigExceptConfigPtrOutput() SecurityPolicyConfigExceptConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigPtrOutput) ToSecurityPolicyConfigExceptConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigPtrOutput) Elem() SecurityPolicyConfigExceptConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfig) SecurityPolicyConfigExceptConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigExceptConfig
-		return ret
-	}).(SecurityPolicyConfigExceptConfigOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigPtrOutput) ExceptUserRules() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfig) []SecurityPolicyConfigExceptConfigExceptUserRule {
-		if v == nil {
-			return nil
-		}
-		return v.ExceptUserRules
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRule struct {
-	Action                   *string                                                                 `pulumi:"action"`
-	ExceptUserRuleConditions []SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition `pulumi:"exceptUserRuleConditions"`
-	ExceptUserRuleScope      *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope      `pulumi:"exceptUserRuleScope"`
-	RuleId                   *int                                                                    `pulumi:"ruleId"`
-	RuleName                 *string                                                                 `pulumi:"ruleName"`
-	RulePriority             *int                                                                    `pulumi:"rulePriority"`
-	RuleStatus               *string                                                                 `pulumi:"ruleStatus"`
-	UpdateTime               *string                                                                 `pulumi:"updateTime"`
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleArgs and SecurityPolicyConfigExceptConfigExceptUserRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleArgs{...}
-type SecurityPolicyConfigExceptConfigExceptUserRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleOutput() SecurityPolicyConfigExceptConfigExceptUserRuleOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleOutput
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleArgs struct {
-	Action                   pulumi.StringPtrInput                                                           `pulumi:"action"`
-	ExceptUserRuleConditions SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput `pulumi:"exceptUserRuleConditions"`
-	ExceptUserRuleScope      SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput       `pulumi:"exceptUserRuleScope"`
-	RuleId                   pulumi.IntPtrInput                                                              `pulumi:"ruleId"`
-	RuleName                 pulumi.StringPtrInput                                                           `pulumi:"ruleName"`
-	RulePriority             pulumi.IntPtrInput                                                              `pulumi:"rulePriority"`
-	RuleStatus               pulumi.StringPtrInput                                                           `pulumi:"ruleStatus"`
-	UpdateTime               pulumi.StringPtrInput                                                           `pulumi:"updateTime"`
-}
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleOutput() SecurityPolicyConfigExceptConfigExceptUserRuleOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleOutput)
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleArray and SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleArray{ SecurityPolicyConfigExceptConfigExceptUserRuleArgs{...} }
-type SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleArray []SecurityPolicyConfigExceptConfigExceptUserRuleInput
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigExceptConfigExceptUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleArray) ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleArray) ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleOutput() SecurityPolicyConfigExceptConfigExceptUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ExceptUserRuleConditions() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) []SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
-		return v.ExceptUserRuleConditions
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) ExceptUserRuleScope() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-		return v.ExceptUserRuleScope
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.RuleName }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RulePriority() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *int { return v.RulePriority }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) RuleStatus() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.RuleStatus }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleOutput) UpdateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigExceptConfigExceptUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigExceptConfigExceptUserRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigExceptConfigExceptUserRule {
-		return vs[0].([]SecurityPolicyConfigExceptConfigExceptUserRule)[vs[1].(int)]
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition struct {
-	MatchContent *string `pulumi:"matchContent"`
-	MatchFrom    *string `pulumi:"matchFrom"`
-	MatchParam   *string `pulumi:"matchParam"`
-	Operator     *string `pulumi:"operator"`
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs and SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs{...}
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs struct {
-	MatchContent pulumi.StringPtrInput `pulumi:"matchContent"`
-	MatchFrom    pulumi.StringPtrInput `pulumi:"matchFrom"`
-	MatchParam   pulumi.StringPtrInput `pulumi:"matchParam"`
-	Operator     pulumi.StringPtrInput `pulumi:"operator"`
-}
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput)
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray and SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray{ SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs{...} }
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray []SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
-		return v.MatchContent
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchFrom() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
-		return v.MatchFrom
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) MatchParam() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
-		return v.MatchParam
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput) Operator() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition) *string {
-		return v.Operator
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition {
-		return vs[0].([]SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleCondition)[vs[1].(int)]
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope struct {
-	Modules []string `pulumi:"modules"`
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs and SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs{...}
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs struct {
-	Modules pulumi.StringArrayInput `pulumi:"modules"`
-}
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput)
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput).ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput is an input type that accepts SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs, SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtr and SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput` via:
-//
-//          SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput
-	ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput
-}
-
-type securityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrType SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs
-
-func SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtr(v *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput {
-	return (*securityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrType)(v)
-}
-
-func (*securityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrType) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return i.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrType) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return o.ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-		return &v
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput) Modules() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) []string { return v.Modules }).(pulumi.StringArrayOutput)
-}
-
-type SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) ToSecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) Elem() SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope
-		return ret
-	}).(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput)
-}
-
-func (o SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput) Modules() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScope) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Modules
-	}).(pulumi.StringArrayOutput)
-}
-
-type SecurityPolicyConfigIpTableConfig struct {
-	Rules  []SecurityPolicyConfigIpTableConfigRule `pulumi:"rules"`
-	Switch *string                                 `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigIpTableConfigInput is an input type that accepts SecurityPolicyConfigIpTableConfigArgs and SecurityPolicyConfigIpTableConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigIpTableConfigInput` via:
-//
-//          SecurityPolicyConfigIpTableConfigArgs{...}
-type SecurityPolicyConfigIpTableConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigIpTableConfigOutput() SecurityPolicyConfigIpTableConfigOutput
-	ToSecurityPolicyConfigIpTableConfigOutputWithContext(context.Context) SecurityPolicyConfigIpTableConfigOutput
-}
-
-type SecurityPolicyConfigIpTableConfigArgs struct {
-	Rules  SecurityPolicyConfigIpTableConfigRuleArrayInput `pulumi:"rules"`
-	Switch pulumi.StringPtrInput                           `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigIpTableConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigIpTableConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigIpTableConfigArgs) ToSecurityPolicyConfigIpTableConfigOutput() SecurityPolicyConfigIpTableConfigOutput {
-	return i.ToSecurityPolicyConfigIpTableConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigIpTableConfigArgs) ToSecurityPolicyConfigIpTableConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigIpTableConfigOutput)
-}
-
-func (i SecurityPolicyConfigIpTableConfigArgs) ToSecurityPolicyConfigIpTableConfigPtrOutput() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return i.ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigIpTableConfigArgs) ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigIpTableConfigOutput).ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigIpTableConfigPtrInput is an input type that accepts SecurityPolicyConfigIpTableConfigArgs, SecurityPolicyConfigIpTableConfigPtr and SecurityPolicyConfigIpTableConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigIpTableConfigPtrInput` via:
-//
-//          SecurityPolicyConfigIpTableConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigIpTableConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigIpTableConfigPtrOutput() SecurityPolicyConfigIpTableConfigPtrOutput
-	ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigIpTableConfigPtrOutput
-}
-
-type securityPolicyConfigIpTableConfigPtrType SecurityPolicyConfigIpTableConfigArgs
-
-func SecurityPolicyConfigIpTableConfigPtr(v *SecurityPolicyConfigIpTableConfigArgs) SecurityPolicyConfigIpTableConfigPtrInput {
-	return (*securityPolicyConfigIpTableConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigIpTableConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigIpTableConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigIpTableConfigPtrType) ToSecurityPolicyConfigIpTableConfigPtrOutput() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return i.ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigIpTableConfigPtrType) ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigIpTableConfigPtrOutput)
-}
-
-type SecurityPolicyConfigIpTableConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigIpTableConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigIpTableConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) ToSecurityPolicyConfigIpTableConfigOutput() SecurityPolicyConfigIpTableConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) ToSecurityPolicyConfigIpTableConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) ToSecurityPolicyConfigIpTableConfigPtrOutput() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o.ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigIpTableConfig) *SecurityPolicyConfigIpTableConfig {
-		return &v
-	}).(SecurityPolicyConfigIpTableConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) Rules() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfig) []SecurityPolicyConfigIpTableConfigRule { return v.Rules }).(SecurityPolicyConfigIpTableConfigRuleArrayOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigIpTableConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigIpTableConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigIpTableConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigIpTableConfigPtrOutput) ToSecurityPolicyConfigIpTableConfigPtrOutput() SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigPtrOutput) ToSecurityPolicyConfigIpTableConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigPtrOutput) Elem() SecurityPolicyConfigIpTableConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigIpTableConfig) SecurityPolicyConfigIpTableConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigIpTableConfig
-		return ret
-	}).(SecurityPolicyConfigIpTableConfigOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigPtrOutput) Rules() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigIpTableConfig) []SecurityPolicyConfigIpTableConfigRule {
-		if v == nil {
-			return nil
-		}
-		return v.Rules
-	}).(SecurityPolicyConfigIpTableConfigRuleArrayOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigIpTableConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigIpTableConfigRule struct {
-	Action       *string `pulumi:"action"`
-	MatchContent *string `pulumi:"matchContent"`
-	MatchFrom    *string `pulumi:"matchFrom"`
-	RuleId       *int    `pulumi:"ruleId"`
-	UpdateTime   *string `pulumi:"updateTime"`
-}
-
-// SecurityPolicyConfigIpTableConfigRuleInput is an input type that accepts SecurityPolicyConfigIpTableConfigRuleArgs and SecurityPolicyConfigIpTableConfigRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigIpTableConfigRuleInput` via:
-//
-//          SecurityPolicyConfigIpTableConfigRuleArgs{...}
-type SecurityPolicyConfigIpTableConfigRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigIpTableConfigRuleOutput() SecurityPolicyConfigIpTableConfigRuleOutput
-	ToSecurityPolicyConfigIpTableConfigRuleOutputWithContext(context.Context) SecurityPolicyConfigIpTableConfigRuleOutput
-}
-
-type SecurityPolicyConfigIpTableConfigRuleArgs struct {
-	Action       pulumi.StringPtrInput `pulumi:"action"`
-	MatchContent pulumi.StringPtrInput `pulumi:"matchContent"`
-	MatchFrom    pulumi.StringPtrInput `pulumi:"matchFrom"`
-	RuleId       pulumi.IntPtrInput    `pulumi:"ruleId"`
-	UpdateTime   pulumi.StringPtrInput `pulumi:"updateTime"`
-}
-
-func (SecurityPolicyConfigIpTableConfigRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigIpTableConfigRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigIpTableConfigRuleArgs) ToSecurityPolicyConfigIpTableConfigRuleOutput() SecurityPolicyConfigIpTableConfigRuleOutput {
-	return i.ToSecurityPolicyConfigIpTableConfigRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigIpTableConfigRuleArgs) ToSecurityPolicyConfigIpTableConfigRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigIpTableConfigRuleOutput)
-}
-
-// SecurityPolicyConfigIpTableConfigRuleArrayInput is an input type that accepts SecurityPolicyConfigIpTableConfigRuleArray and SecurityPolicyConfigIpTableConfigRuleArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigIpTableConfigRuleArrayInput` via:
-//
-//          SecurityPolicyConfigIpTableConfigRuleArray{ SecurityPolicyConfigIpTableConfigRuleArgs{...} }
-type SecurityPolicyConfigIpTableConfigRuleArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigIpTableConfigRuleArrayOutput() SecurityPolicyConfigIpTableConfigRuleArrayOutput
-	ToSecurityPolicyConfigIpTableConfigRuleArrayOutputWithContext(context.Context) SecurityPolicyConfigIpTableConfigRuleArrayOutput
-}
-
-type SecurityPolicyConfigIpTableConfigRuleArray []SecurityPolicyConfigIpTableConfigRuleInput
-
-func (SecurityPolicyConfigIpTableConfigRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigIpTableConfigRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigIpTableConfigRuleArray) ToSecurityPolicyConfigIpTableConfigRuleArrayOutput() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return i.ToSecurityPolicyConfigIpTableConfigRuleArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigIpTableConfigRuleArray) ToSecurityPolicyConfigIpTableConfigRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigIpTableConfigRuleArrayOutput)
-}
-
-type SecurityPolicyConfigIpTableConfigRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigIpTableConfigRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigIpTableConfigRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) ToSecurityPolicyConfigIpTableConfigRuleOutput() SecurityPolicyConfigIpTableConfigRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) ToSecurityPolicyConfigIpTableConfigRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) MatchContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.MatchContent }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) MatchFrom() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.MatchFrom }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleOutput) UpdateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigIpTableConfigRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigIpTableConfigRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigIpTableConfigRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigIpTableConfigRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleArrayOutput) ToSecurityPolicyConfigIpTableConfigRuleArrayOutput() SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleArrayOutput) ToSecurityPolicyConfigIpTableConfigRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigIpTableConfigRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigIpTableConfigRuleArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigIpTableConfigRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigIpTableConfigRule {
-		return vs[0].([]SecurityPolicyConfigIpTableConfigRule)[vs[1].(int)]
-	}).(SecurityPolicyConfigIpTableConfigRuleOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfig struct {
-	Intelligence *SecurityPolicyConfigRateLimitConfigIntelligence `pulumi:"intelligence"`
-	Switch       *string                                          `pulumi:"switch"`
-	Template     *SecurityPolicyConfigRateLimitConfigTemplate     `pulumi:"template"`
-	UserRules    []SecurityPolicyConfigRateLimitConfigUserRule    `pulumi:"userRules"`
-}
-
-// SecurityPolicyConfigRateLimitConfigInput is an input type that accepts SecurityPolicyConfigRateLimitConfigArgs and SecurityPolicyConfigRateLimitConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigArgs{...}
-type SecurityPolicyConfigRateLimitConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigOutput() SecurityPolicyConfigRateLimitConfigOutput
-	ToSecurityPolicyConfigRateLimitConfigOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigArgs struct {
-	Intelligence SecurityPolicyConfigRateLimitConfigIntelligencePtrInput `pulumi:"intelligence"`
-	Switch       pulumi.StringPtrInput                                   `pulumi:"switch"`
-	Template     SecurityPolicyConfigRateLimitConfigTemplatePtrInput     `pulumi:"template"`
-	UserRules    SecurityPolicyConfigRateLimitConfigUserRuleArrayInput   `pulumi:"userRules"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigArgs) ToSecurityPolicyConfigRateLimitConfigOutput() SecurityPolicyConfigRateLimitConfigOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigArgs) ToSecurityPolicyConfigRateLimitConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigOutput)
-}
-
-func (i SecurityPolicyConfigRateLimitConfigArgs) ToSecurityPolicyConfigRateLimitConfigPtrOutput() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigArgs) ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigOutput).ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigRateLimitConfigPtrInput is an input type that accepts SecurityPolicyConfigRateLimitConfigArgs, SecurityPolicyConfigRateLimitConfigPtr and SecurityPolicyConfigRateLimitConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigPtrInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigRateLimitConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigPtrOutput() SecurityPolicyConfigRateLimitConfigPtrOutput
-	ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigPtrOutput
-}
-
-type securityPolicyConfigRateLimitConfigPtrType SecurityPolicyConfigRateLimitConfigArgs
-
-func SecurityPolicyConfigRateLimitConfigPtr(v *SecurityPolicyConfigRateLimitConfigArgs) SecurityPolicyConfigRateLimitConfigPtrInput {
-	return (*securityPolicyConfigRateLimitConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigRateLimitConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigRateLimitConfigPtrType) ToSecurityPolicyConfigRateLimitConfigPtrOutput() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigRateLimitConfigPtrType) ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) ToSecurityPolicyConfigRateLimitConfigOutput() SecurityPolicyConfigRateLimitConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) ToSecurityPolicyConfigRateLimitConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) ToSecurityPolicyConfigRateLimitConfigPtrOutput() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o.ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfig {
-		return &v
-	}).(SecurityPolicyConfigRateLimitConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) Intelligence() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigIntelligence {
-		return v.Intelligence
-	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) Template() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigTemplate {
-		return v.Template
-	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigOutput) UserRules() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfig) []SecurityPolicyConfigRateLimitConfigUserRule {
-		return v.UserRules
-	}).(SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) ToSecurityPolicyConfigRateLimitConfigPtrOutput() SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) ToSecurityPolicyConfigRateLimitConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Elem() SecurityPolicyConfigRateLimitConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) SecurityPolicyConfigRateLimitConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigRateLimitConfig
-		return ret
-	}).(SecurityPolicyConfigRateLimitConfigOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Intelligence() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigIntelligence {
-		if v == nil {
-			return nil
-		}
-		return v.Intelligence
-	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) Template() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) *SecurityPolicyConfigRateLimitConfigTemplate {
-		if v == nil {
-			return nil
-		}
-		return v.Template
-	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigPtrOutput) UserRules() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfig) []SecurityPolicyConfigRateLimitConfigUserRule {
-		if v == nil {
-			return nil
-		}
-		return v.UserRules
-	}).(SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigIntelligence struct {
-	Action *string `pulumi:"action"`
-	Switch *string `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigRateLimitConfigIntelligenceInput is an input type that accepts SecurityPolicyConfigRateLimitConfigIntelligenceArgs and SecurityPolicyConfigRateLimitConfigIntelligenceOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigIntelligenceInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigIntelligenceArgs{...}
-type SecurityPolicyConfigRateLimitConfigIntelligenceInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigIntelligenceOutput() SecurityPolicyConfigRateLimitConfigIntelligenceOutput
-	ToSecurityPolicyConfigRateLimitConfigIntelligenceOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigIntelligenceOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigIntelligenceArgs struct {
-	Action pulumi.StringPtrInput `pulumi:"action"`
-	Switch pulumi.StringPtrInput `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigIntelligenceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigIntelligence)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigIntelligenceArgs) ToSecurityPolicyConfigRateLimitConfigIntelligenceOutput() SecurityPolicyConfigRateLimitConfigIntelligenceOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigIntelligenceOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigIntelligenceArgs) ToSecurityPolicyConfigRateLimitConfigIntelligenceOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligenceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigIntelligenceOutput)
-}
-
-func (i SecurityPolicyConfigRateLimitConfigIntelligenceArgs) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutput() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigIntelligenceArgs) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigIntelligenceOutput).ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigRateLimitConfigIntelligencePtrInput is an input type that accepts SecurityPolicyConfigRateLimitConfigIntelligenceArgs, SecurityPolicyConfigRateLimitConfigIntelligencePtr and SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigIntelligencePtrInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigIntelligenceArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigRateLimitConfigIntelligencePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutput() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput
-	ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput
-}
-
-type securityPolicyConfigRateLimitConfigIntelligencePtrType SecurityPolicyConfigRateLimitConfigIntelligenceArgs
-
-func SecurityPolicyConfigRateLimitConfigIntelligencePtr(v *SecurityPolicyConfigRateLimitConfigIntelligenceArgs) SecurityPolicyConfigRateLimitConfigIntelligencePtrInput {
-	return (*securityPolicyConfigRateLimitConfigIntelligencePtrType)(v)
-}
-
-func (*securityPolicyConfigRateLimitConfigIntelligencePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigIntelligence)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigRateLimitConfigIntelligencePtrType) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutput() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigRateLimitConfigIntelligencePtrType) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigIntelligenceOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigIntelligence)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ToSecurityPolicyConfigRateLimitConfigIntelligenceOutput() SecurityPolicyConfigRateLimitConfigIntelligenceOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ToSecurityPolicyConfigRateLimitConfigIntelligenceOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligenceOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutput() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o.ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigRateLimitConfigIntelligence) *SecurityPolicyConfigRateLimitConfigIntelligence {
-		return &v
-	}).(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigIntelligence) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligenceOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigIntelligence) *string { return v.Switch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigIntelligence)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutput() SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) ToSecurityPolicyConfigRateLimitConfigIntelligencePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Elem() SecurityPolicyConfigRateLimitConfigIntelligenceOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigIntelligence) SecurityPolicyConfigRateLimitConfigIntelligence {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigRateLimitConfigIntelligence
-		return ret
-	}).(SecurityPolicyConfigRateLimitConfigIntelligenceOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigIntelligence) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Action
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigIntelligence) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplate struct {
-	Detail *SecurityPolicyConfigRateLimitConfigTemplateDetail `pulumi:"detail"`
-	Mode   *string                                            `pulumi:"mode"`
-}
-
-// SecurityPolicyConfigRateLimitConfigTemplateInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateArgs and SecurityPolicyConfigRateLimitConfigTemplateOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigTemplateInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigTemplateArgs{...}
-type SecurityPolicyConfigRateLimitConfigTemplateInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigTemplateOutput() SecurityPolicyConfigRateLimitConfigTemplateOutput
-	ToSecurityPolicyConfigRateLimitConfigTemplateOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigTemplateOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateArgs struct {
-	Detail SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput `pulumi:"detail"`
-	Mode   pulumi.StringPtrInput                                     `pulumi:"mode"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigTemplateArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplate)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateArgs) ToSecurityPolicyConfigRateLimitConfigTemplateOutput() SecurityPolicyConfigRateLimitConfigTemplateOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplateOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateArgs) ToSecurityPolicyConfigRateLimitConfigTemplateOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplateOutput)
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateArgs) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutput() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateArgs) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplateOutput).ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigRateLimitConfigTemplatePtrInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateArgs, SecurityPolicyConfigRateLimitConfigTemplatePtr and SecurityPolicyConfigRateLimitConfigTemplatePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigTemplatePtrInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigTemplateArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigRateLimitConfigTemplatePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutput() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput
-	ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigTemplatePtrOutput
-}
-
-type securityPolicyConfigRateLimitConfigTemplatePtrType SecurityPolicyConfigRateLimitConfigTemplateArgs
-
-func SecurityPolicyConfigRateLimitConfigTemplatePtr(v *SecurityPolicyConfigRateLimitConfigTemplateArgs) SecurityPolicyConfigRateLimitConfigTemplatePtrInput {
-	return (*securityPolicyConfigRateLimitConfigTemplatePtrType)(v)
-}
-
-func (*securityPolicyConfigRateLimitConfigTemplatePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigTemplate)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigRateLimitConfigTemplatePtrType) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutput() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigRateLimitConfigTemplatePtrType) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigTemplateOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplate)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) ToSecurityPolicyConfigRateLimitConfigTemplateOutput() SecurityPolicyConfigRateLimitConfigTemplateOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) ToSecurityPolicyConfigRateLimitConfigTemplateOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutput() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o.ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigRateLimitConfigTemplate) *SecurityPolicyConfigRateLimitConfigTemplate {
-		return &v
-	}).(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) Detail() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplate) *SecurityPolicyConfigRateLimitConfigTemplateDetail {
-		return v.Detail
-	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplate) *string { return v.Mode }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplatePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigTemplate)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutput() SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) ToSecurityPolicyConfigRateLimitConfigTemplatePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplatePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Elem() SecurityPolicyConfigRateLimitConfigTemplateOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplate) SecurityPolicyConfigRateLimitConfigTemplate {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigRateLimitConfigTemplate
-		return ret
-	}).(SecurityPolicyConfigRateLimitConfigTemplateOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Detail() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplate) *SecurityPolicyConfigRateLimitConfigTemplateDetail {
-		if v == nil {
-			return nil
-		}
-		return v.Detail
-	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplatePtrOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplate) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Mode
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateDetail struct {
-	Action     *string `pulumi:"action"`
-	Id         *int    `pulumi:"id"`
-	Mode       *string `pulumi:"mode"`
-	Period     *int    `pulumi:"period"`
-	PunishTime *int    `pulumi:"punishTime"`
-	Threshold  *int    `pulumi:"threshold"`
-}
-
-// SecurityPolicyConfigRateLimitConfigTemplateDetailInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateDetailArgs and SecurityPolicyConfigRateLimitConfigTemplateDetailOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigTemplateDetailInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigTemplateDetailArgs{...}
-type SecurityPolicyConfigRateLimitConfigTemplateDetailInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailOutput
-	ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateDetailArgs struct {
-	Action     pulumi.StringPtrInput `pulumi:"action"`
-	Id         pulumi.IntPtrInput    `pulumi:"id"`
-	Mode       pulumi.StringPtrInput `pulumi:"mode"`
-	Period     pulumi.IntPtrInput    `pulumi:"period"`
-	PunishTime pulumi.IntPtrInput    `pulumi:"punishTime"`
-	Threshold  pulumi.IntPtrInput    `pulumi:"threshold"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplateDetail)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplateDetailOutput)
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplateDetailOutput).ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput is an input type that accepts SecurityPolicyConfigRateLimitConfigTemplateDetailArgs, SecurityPolicyConfigRateLimitConfigTemplateDetailPtr and SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigTemplateDetailArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput
-	ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput
-}
-
-type securityPolicyConfigRateLimitConfigTemplateDetailPtrType SecurityPolicyConfigRateLimitConfigTemplateDetailArgs
-
-func SecurityPolicyConfigRateLimitConfigTemplateDetailPtr(v *SecurityPolicyConfigRateLimitConfigTemplateDetailArgs) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput {
-	return (*securityPolicyConfigRateLimitConfigTemplateDetailPtrType)(v)
-}
-
-func (*securityPolicyConfigRateLimitConfigTemplateDetailPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigTemplateDetail)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigRateLimitConfigTemplateDetailPtrType) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigRateLimitConfigTemplateDetailPtrType) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateDetailOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplateDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o.ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigRateLimitConfigTemplateDetail) *SecurityPolicyConfigRateLimitConfigTemplateDetail {
-		return &v
-	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *string { return v.Action }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Id() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Id }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *string { return v.Mode }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Period() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Period }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) PunishTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.PunishTime }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailOutput) Threshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigTemplateDetail) *int { return v.Threshold }).(pulumi.IntPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigRateLimitConfigTemplateDetail)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput() SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) ToSecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Elem() SecurityPolicyConfigRateLimitConfigTemplateDetailOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) SecurityPolicyConfigRateLimitConfigTemplateDetail {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigRateLimitConfigTemplateDetail
-		return ret
-	}).(SecurityPolicyConfigRateLimitConfigTemplateDetailOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Action() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Action
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Id() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Id
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Mode
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Period() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Period
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) PunishTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.PunishTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput) Threshold() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigRateLimitConfigTemplateDetail) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Threshold
-	}).(pulumi.IntPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRule struct {
-	Action         string                                                 `pulumi:"action"`
-	Conditions     []SecurityPolicyConfigRateLimitConfigUserRuleCondition `pulumi:"conditions"`
-	FreqFields     []string                                               `pulumi:"freqFields"`
-	Period         int                                                    `pulumi:"period"`
-	PunishTime     int                                                    `pulumi:"punishTime"`
-	PunishTimeUnit string                                                 `pulumi:"punishTimeUnit"`
-	RuleId         *int                                                   `pulumi:"ruleId"`
-	RuleName       string                                                 `pulumi:"ruleName"`
-	RulePriority   int                                                    `pulumi:"rulePriority"`
-	RuleStatus     *string                                                `pulumi:"ruleStatus"`
-	Threshold      int                                                    `pulumi:"threshold"`
-	UpdateTime     *string                                                `pulumi:"updateTime"`
-}
-
-// SecurityPolicyConfigRateLimitConfigUserRuleInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleArgs and SecurityPolicyConfigRateLimitConfigUserRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigUserRuleInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigUserRuleArgs{...}
-type SecurityPolicyConfigRateLimitConfigUserRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigUserRuleOutput() SecurityPolicyConfigRateLimitConfigUserRuleOutput
-	ToSecurityPolicyConfigRateLimitConfigUserRuleOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigUserRuleOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleArgs struct {
-	Action         pulumi.StringInput                                             `pulumi:"action"`
-	Conditions     SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput `pulumi:"conditions"`
-	FreqFields     pulumi.StringArrayInput                                        `pulumi:"freqFields"`
-	Period         pulumi.IntInput                                                `pulumi:"period"`
-	PunishTime     pulumi.IntInput                                                `pulumi:"punishTime"`
-	PunishTimeUnit pulumi.StringInput                                             `pulumi:"punishTimeUnit"`
-	RuleId         pulumi.IntPtrInput                                             `pulumi:"ruleId"`
-	RuleName       pulumi.StringInput                                             `pulumi:"ruleName"`
-	RulePriority   pulumi.IntInput                                                `pulumi:"rulePriority"`
-	RuleStatus     pulumi.StringPtrInput                                          `pulumi:"ruleStatus"`
-	Threshold      pulumi.IntInput                                                `pulumi:"threshold"`
-	UpdateTime     pulumi.StringPtrInput                                          `pulumi:"updateTime"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleArgs) ToSecurityPolicyConfigRateLimitConfigUserRuleOutput() SecurityPolicyConfigRateLimitConfigUserRuleOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigUserRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleArgs) ToSecurityPolicyConfigRateLimitConfigUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigUserRuleOutput)
-}
-
-// SecurityPolicyConfigRateLimitConfigUserRuleArrayInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleArray and SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigUserRuleArrayInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigUserRuleArray{ SecurityPolicyConfigRateLimitConfigUserRuleArgs{...} }
-type SecurityPolicyConfigRateLimitConfigUserRuleArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput
-	ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleArray []SecurityPolicyConfigRateLimitConfigUserRuleInput
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigRateLimitConfigUserRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleArray) ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleArray) ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleOutput() SecurityPolicyConfigRateLimitConfigUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.Action }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Conditions() SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) []SecurityPolicyConfigRateLimitConfigUserRuleCondition {
-		return v.Conditions
-	}).(SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) FreqFields() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) []string { return v.FreqFields }).(pulumi.StringArrayOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Period() pulumi.IntOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.Period }).(pulumi.IntOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) PunishTime() pulumi.IntOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.PunishTime }).(pulumi.IntOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) PunishTimeUnit() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.PunishTimeUnit }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) *int { return v.RuleId }).(pulumi.IntPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleName() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) string { return v.RuleName }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RulePriority() pulumi.IntOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.RulePriority }).(pulumi.IntOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) RuleStatus() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) *string { return v.RuleStatus }).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) Threshold() pulumi.IntOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) int { return v.Threshold }).(pulumi.IntOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleOutput) UpdateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigRateLimitConfigUserRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigRateLimitConfigUserRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigRateLimitConfigUserRule {
-		return vs[0].([]SecurityPolicyConfigRateLimitConfigUserRule)[vs[1].(int)]
-	}).(SecurityPolicyConfigRateLimitConfigUserRuleOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleCondition struct {
-	MatchContent string `pulumi:"matchContent"`
-	MatchFrom    string `pulumi:"matchFrom"`
-	MatchParam   string `pulumi:"matchParam"`
-	Operator     string `pulumi:"operator"`
-}
-
-// SecurityPolicyConfigRateLimitConfigUserRuleConditionInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs and SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigUserRuleConditionInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs{...}
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput
-	ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs struct {
-	MatchContent pulumi.StringInput `pulumi:"matchContent"`
-	MatchFrom    pulumi.StringInput `pulumi:"matchFrom"`
-	MatchParam   pulumi.StringInput `pulumi:"matchParam"`
-	Operator     pulumi.StringInput `pulumi:"operator"`
-}
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput)
-}
-
-// SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput is an input type that accepts SecurityPolicyConfigRateLimitConfigUserRuleConditionArray and SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput` via:
-//
-//          SecurityPolicyConfigRateLimitConfigUserRuleConditionArray{ SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs{...} }
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput
-	ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutputWithContext(context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionArray []SecurityPolicyConfigRateLimitConfigUserRuleConditionInput
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigRateLimitConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleConditionArray) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
-	return i.ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigRateLimitConfigUserRuleConditionArray) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchContent() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchContent }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchFrom() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchFrom }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) MatchParam() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.MatchParam }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput) Operator() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigRateLimitConfigUserRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
-}
-
-type SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityPolicyConfigRateLimitConfigUserRuleCondition)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput() SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput) ToSecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigRateLimitConfigUserRuleCondition {
-		return vs[0].([]SecurityPolicyConfigRateLimitConfigUserRuleCondition)[vs[1].(int)]
-	}).(SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput)
-}
-
-type SecurityPolicyConfigSwitchConfig struct {
-	WebSwitch *string `pulumi:"webSwitch"`
-}
-
-// SecurityPolicyConfigSwitchConfigInput is an input type that accepts SecurityPolicyConfigSwitchConfigArgs and SecurityPolicyConfigSwitchConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigSwitchConfigInput` via:
-//
-//          SecurityPolicyConfigSwitchConfigArgs{...}
-type SecurityPolicyConfigSwitchConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigSwitchConfigOutput() SecurityPolicyConfigSwitchConfigOutput
-	ToSecurityPolicyConfigSwitchConfigOutputWithContext(context.Context) SecurityPolicyConfigSwitchConfigOutput
-}
-
-type SecurityPolicyConfigSwitchConfigArgs struct {
-	WebSwitch pulumi.StringPtrInput `pulumi:"webSwitch"`
-}
-
-func (SecurityPolicyConfigSwitchConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigSwitchConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigSwitchConfigArgs) ToSecurityPolicyConfigSwitchConfigOutput() SecurityPolicyConfigSwitchConfigOutput {
-	return i.ToSecurityPolicyConfigSwitchConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigSwitchConfigArgs) ToSecurityPolicyConfigSwitchConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSwitchConfigOutput)
-}
-
-func (i SecurityPolicyConfigSwitchConfigArgs) ToSecurityPolicyConfigSwitchConfigPtrOutput() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return i.ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigSwitchConfigArgs) ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSwitchConfigOutput).ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigSwitchConfigPtrInput is an input type that accepts SecurityPolicyConfigSwitchConfigArgs, SecurityPolicyConfigSwitchConfigPtr and SecurityPolicyConfigSwitchConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigSwitchConfigPtrInput` via:
-//
-//          SecurityPolicyConfigSwitchConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigSwitchConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigSwitchConfigPtrOutput() SecurityPolicyConfigSwitchConfigPtrOutput
-	ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigSwitchConfigPtrOutput
-}
-
-type securityPolicyConfigSwitchConfigPtrType SecurityPolicyConfigSwitchConfigArgs
-
-func SecurityPolicyConfigSwitchConfigPtr(v *SecurityPolicyConfigSwitchConfigArgs) SecurityPolicyConfigSwitchConfigPtrInput {
-	return (*securityPolicyConfigSwitchConfigPtrType)(v)
-}
-
-func (*securityPolicyConfigSwitchConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigSwitchConfig)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigSwitchConfigPtrType) ToSecurityPolicyConfigSwitchConfigPtrOutput() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return i.ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigSwitchConfigPtrType) ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSwitchConfigPtrOutput)
-}
-
-type SecurityPolicyConfigSwitchConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigSwitchConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigSwitchConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigSwitchConfigOutput) ToSecurityPolicyConfigSwitchConfigOutput() SecurityPolicyConfigSwitchConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigSwitchConfigOutput) ToSecurityPolicyConfigSwitchConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigSwitchConfigOutput) ToSecurityPolicyConfigSwitchConfigPtrOutput() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o.ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigSwitchConfigOutput) ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSwitchConfig) *SecurityPolicyConfigSwitchConfig {
-		return &v
-	}).(SecurityPolicyConfigSwitchConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigSwitchConfigOutput) WebSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigSwitchConfig) *string { return v.WebSwitch }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigSwitchConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigSwitchConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigSwitchConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigSwitchConfigPtrOutput) ToSecurityPolicyConfigSwitchConfigPtrOutput() SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigSwitchConfigPtrOutput) ToSecurityPolicyConfigSwitchConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSwitchConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigSwitchConfigPtrOutput) Elem() SecurityPolicyConfigSwitchConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigSwitchConfig) SecurityPolicyConfigSwitchConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigSwitchConfig
-		return ret
-	}).(SecurityPolicyConfigSwitchConfigOutput)
-}
-
-func (o SecurityPolicyConfigSwitchConfigPtrOutput) WebSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigSwitchConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return v.WebSwitch
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfig struct {
-	AiRule   *SecurityPolicyConfigWafConfigAiRule  `pulumi:"aiRule"`
-	Level    string                                `pulumi:"level"`
-	Mode     string                                `pulumi:"mode"`
-	Switch   string                                `pulumi:"switch"`
-	WafRules SecurityPolicyConfigWafConfigWafRules `pulumi:"wafRules"`
-}
-
-// SecurityPolicyConfigWafConfigInput is an input type that accepts SecurityPolicyConfigWafConfigArgs and SecurityPolicyConfigWafConfigOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigInput` via:
-//
-//          SecurityPolicyConfigWafConfigArgs{...}
-type SecurityPolicyConfigWafConfigInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigOutput() SecurityPolicyConfigWafConfigOutput
-	ToSecurityPolicyConfigWafConfigOutputWithContext(context.Context) SecurityPolicyConfigWafConfigOutput
-}
-
-type SecurityPolicyConfigWafConfigArgs struct {
-	AiRule   SecurityPolicyConfigWafConfigAiRulePtrInput `pulumi:"aiRule"`
-	Level    pulumi.StringInput                          `pulumi:"level"`
-	Mode     pulumi.StringInput                          `pulumi:"mode"`
-	Switch   pulumi.StringInput                          `pulumi:"switch"`
-	WafRules SecurityPolicyConfigWafConfigWafRulesInput  `pulumi:"wafRules"`
-}
-
-func (SecurityPolicyConfigWafConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfig)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigWafConfigArgs) ToSecurityPolicyConfigWafConfigOutput() SecurityPolicyConfigWafConfigOutput {
-	return i.ToSecurityPolicyConfigWafConfigOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigArgs) ToSecurityPolicyConfigWafConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigOutput)
-}
-
-func (i SecurityPolicyConfigWafConfigArgs) ToSecurityPolicyConfigWafConfigPtrOutput() SecurityPolicyConfigWafConfigPtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigArgs) ToSecurityPolicyConfigWafConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigOutput).ToSecurityPolicyConfigWafConfigPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigWafConfigPtrInput is an input type that accepts SecurityPolicyConfigWafConfigArgs, SecurityPolicyConfigWafConfigPtr and SecurityPolicyConfigWafConfigPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigPtrInput` via:
-//
-//          SecurityPolicyConfigWafConfigArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigWafConfigPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigPtrOutput() SecurityPolicyConfigWafConfigPtrOutput
-	ToSecurityPolicyConfigWafConfigPtrOutputWithContext(context.Context) SecurityPolicyConfigWafConfigPtrOutput
-}
-
-type securityPolicyConfigWafConfigPtrType SecurityPolicyConfigWafConfigArgs
-
-func SecurityPolicyConfigWafConfigPtr(v *SecurityPolicyConfigWafConfigArgs) SecurityPolicyConfigWafConfigPtrInput {
-	return (*securityPolicyConfigWafConfigPtrType)(v)
-}
+type ZoneOwnershipVerificationDnsVerificationOutput struct{ *pulumi.OutputState }
 
-func (*securityPolicyConfigWafConfigPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfig)(nil)).Elem()
+func (ZoneOwnershipVerificationDnsVerificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneOwnershipVerificationDnsVerification)(nil)).Elem()
 }
 
-func (i *securityPolicyConfigWafConfigPtrType) ToSecurityPolicyConfigWafConfigPtrOutput() SecurityPolicyConfigWafConfigPtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigWafConfigPtrType) ToSecurityPolicyConfigWafConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) ToSecurityPolicyConfigWafConfigOutput() SecurityPolicyConfigWafConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) ToSecurityPolicyConfigWafConfigOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) ToSecurityPolicyConfigWafConfigPtrOutput() SecurityPolicyConfigWafConfigPtrOutput {
-	return o.ToSecurityPolicyConfigWafConfigPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) ToSecurityPolicyConfigWafConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfig {
-		return &v
-	}).(SecurityPolicyConfigWafConfigPtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) AiRule() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigAiRule { return v.AiRule }).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) Level() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Level }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) Mode() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Mode }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) string { return v.Switch }).(pulumi.StringOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigOutput) WafRules() SecurityPolicyConfigWafConfigWafRulesOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfig) SecurityPolicyConfigWafConfigWafRules { return v.WafRules }).(SecurityPolicyConfigWafConfigWafRulesOutput)
-}
-
-type SecurityPolicyConfigWafConfigPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfig)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) ToSecurityPolicyConfigWafConfigPtrOutput() SecurityPolicyConfigWafConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) ToSecurityPolicyConfigWafConfigPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) Elem() SecurityPolicyConfigWafConfigOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) SecurityPolicyConfigWafConfig {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigWafConfig
-		return ret
-	}).(SecurityPolicyConfigWafConfigOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) AiRule() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigAiRule {
-		if v == nil {
-			return nil
-		}
-		return v.AiRule
-	}).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) Level() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Level
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Mode
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigPtrOutput) WafRules() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfig) *SecurityPolicyConfigWafConfigWafRules {
-		if v == nil {
-			return nil
-		}
-		return &v.WafRules
-	}).(SecurityPolicyConfigWafConfigWafRulesPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigAiRule struct {
-	Mode *string `pulumi:"mode"`
-}
-
-// SecurityPolicyConfigWafConfigAiRuleInput is an input type that accepts SecurityPolicyConfigWafConfigAiRuleArgs and SecurityPolicyConfigWafConfigAiRuleOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigAiRuleInput` via:
-//
-//          SecurityPolicyConfigWafConfigAiRuleArgs{...}
-type SecurityPolicyConfigWafConfigAiRuleInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigAiRuleOutput() SecurityPolicyConfigWafConfigAiRuleOutput
-	ToSecurityPolicyConfigWafConfigAiRuleOutputWithContext(context.Context) SecurityPolicyConfigWafConfigAiRuleOutput
-}
-
-type SecurityPolicyConfigWafConfigAiRuleArgs struct {
-	Mode pulumi.StringPtrInput `pulumi:"mode"`
-}
-
-func (SecurityPolicyConfigWafConfigAiRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfigAiRule)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigWafConfigAiRuleArgs) ToSecurityPolicyConfigWafConfigAiRuleOutput() SecurityPolicyConfigWafConfigAiRuleOutput {
-	return i.ToSecurityPolicyConfigWafConfigAiRuleOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigAiRuleArgs) ToSecurityPolicyConfigWafConfigAiRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigAiRuleOutput)
-}
-
-func (i SecurityPolicyConfigWafConfigAiRuleArgs) ToSecurityPolicyConfigWafConfigAiRulePtrOutput() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigAiRuleArgs) ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigAiRuleOutput).ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigWafConfigAiRulePtrInput is an input type that accepts SecurityPolicyConfigWafConfigAiRuleArgs, SecurityPolicyConfigWafConfigAiRulePtr and SecurityPolicyConfigWafConfigAiRulePtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigAiRulePtrInput` via:
-//
-//          SecurityPolicyConfigWafConfigAiRuleArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigWafConfigAiRulePtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigAiRulePtrOutput() SecurityPolicyConfigWafConfigAiRulePtrOutput
-	ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(context.Context) SecurityPolicyConfigWafConfigAiRulePtrOutput
-}
-
-type securityPolicyConfigWafConfigAiRulePtrType SecurityPolicyConfigWafConfigAiRuleArgs
-
-func SecurityPolicyConfigWafConfigAiRulePtr(v *SecurityPolicyConfigWafConfigAiRuleArgs) SecurityPolicyConfigWafConfigAiRulePtrInput {
-	return (*securityPolicyConfigWafConfigAiRulePtrType)(v)
-}
-
-func (*securityPolicyConfigWafConfigAiRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfigAiRule)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigWafConfigAiRulePtrType) ToSecurityPolicyConfigWafConfigAiRulePtrOutput() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigWafConfigAiRulePtrType) ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigAiRuleOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigAiRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfigAiRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigAiRuleOutput) ToSecurityPolicyConfigWafConfigAiRuleOutput() SecurityPolicyConfigWafConfigAiRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigAiRuleOutput) ToSecurityPolicyConfigWafConfigAiRuleOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRuleOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigAiRuleOutput) ToSecurityPolicyConfigWafConfigAiRulePtrOutput() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o.ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigWafConfigAiRuleOutput) ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigWafConfigAiRule) *SecurityPolicyConfigWafConfigAiRule {
-		return &v
-	}).(SecurityPolicyConfigWafConfigAiRulePtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigAiRuleOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfigAiRule) *string { return v.Mode }).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigAiRulePtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigAiRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfigAiRule)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) ToSecurityPolicyConfigWafConfigAiRulePtrOutput() SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) ToSecurityPolicyConfigWafConfigAiRulePtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigAiRulePtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) Elem() SecurityPolicyConfigWafConfigAiRuleOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigAiRule) SecurityPolicyConfigWafConfigAiRule {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigWafConfigAiRule
-		return ret
-	}).(SecurityPolicyConfigWafConfigAiRuleOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigAiRulePtrOutput) Mode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigAiRule) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Mode
-	}).(pulumi.StringPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigWafRules struct {
-	BlockRuleIds   []int  `pulumi:"blockRuleIds"`
-	ObserveRuleIds []int  `pulumi:"observeRuleIds"`
-	Switch         string `pulumi:"switch"`
-}
-
-// SecurityPolicyConfigWafConfigWafRulesInput is an input type that accepts SecurityPolicyConfigWafConfigWafRulesArgs and SecurityPolicyConfigWafConfigWafRulesOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigWafRulesInput` via:
-//
-//          SecurityPolicyConfigWafConfigWafRulesArgs{...}
-type SecurityPolicyConfigWafConfigWafRulesInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigWafRulesOutput() SecurityPolicyConfigWafConfigWafRulesOutput
-	ToSecurityPolicyConfigWafConfigWafRulesOutputWithContext(context.Context) SecurityPolicyConfigWafConfigWafRulesOutput
-}
-
-type SecurityPolicyConfigWafConfigWafRulesArgs struct {
-	BlockRuleIds   pulumi.IntArrayInput `pulumi:"blockRuleIds"`
-	ObserveRuleIds pulumi.IntArrayInput `pulumi:"observeRuleIds"`
-	Switch         pulumi.StringInput   `pulumi:"switch"`
-}
-
-func (SecurityPolicyConfigWafConfigWafRulesArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfigWafRules)(nil)).Elem()
-}
-
-func (i SecurityPolicyConfigWafConfigWafRulesArgs) ToSecurityPolicyConfigWafConfigWafRulesOutput() SecurityPolicyConfigWafConfigWafRulesOutput {
-	return i.ToSecurityPolicyConfigWafConfigWafRulesOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigWafRulesArgs) ToSecurityPolicyConfigWafConfigWafRulesOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigWafRulesOutput)
-}
-
-func (i SecurityPolicyConfigWafConfigWafRulesArgs) ToSecurityPolicyConfigWafConfigWafRulesPtrOutput() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(context.Background())
-}
-
-func (i SecurityPolicyConfigWafConfigWafRulesArgs) ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigWafRulesOutput).ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(ctx)
-}
-
-// SecurityPolicyConfigWafConfigWafRulesPtrInput is an input type that accepts SecurityPolicyConfigWafConfigWafRulesArgs, SecurityPolicyConfigWafConfigWafRulesPtr and SecurityPolicyConfigWafConfigWafRulesPtrOutput values.
-// You can construct a concrete instance of `SecurityPolicyConfigWafConfigWafRulesPtrInput` via:
-//
-//          SecurityPolicyConfigWafConfigWafRulesArgs{...}
-//
-//  or:
-//
-//          nil
-type SecurityPolicyConfigWafConfigWafRulesPtrInput interface {
-	pulumi.Input
-
-	ToSecurityPolicyConfigWafConfigWafRulesPtrOutput() SecurityPolicyConfigWafConfigWafRulesPtrOutput
-	ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(context.Context) SecurityPolicyConfigWafConfigWafRulesPtrOutput
-}
-
-type securityPolicyConfigWafConfigWafRulesPtrType SecurityPolicyConfigWafConfigWafRulesArgs
-
-func SecurityPolicyConfigWafConfigWafRulesPtr(v *SecurityPolicyConfigWafConfigWafRulesArgs) SecurityPolicyConfigWafConfigWafRulesPtrInput {
-	return (*securityPolicyConfigWafConfigWafRulesPtrType)(v)
-}
-
-func (*securityPolicyConfigWafConfigWafRulesPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfigWafRules)(nil)).Elem()
-}
-
-func (i *securityPolicyConfigWafConfigWafRulesPtrType) ToSecurityPolicyConfigWafConfigWafRulesPtrOutput() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return i.ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(context.Background())
-}
-
-func (i *securityPolicyConfigWafConfigWafRulesPtrType) ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigWafConfigWafRulesPtrOutput)
-}
-
-type SecurityPolicyConfigWafConfigWafRulesOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigWafRulesOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityPolicyConfigWafConfigWafRules)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) ToSecurityPolicyConfigWafConfigWafRulesOutput() SecurityPolicyConfigWafConfigWafRulesOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) ToSecurityPolicyConfigWafConfigWafRulesOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) ToSecurityPolicyConfigWafConfigWafRulesPtrOutput() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return o.ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(context.Background())
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigWafConfigWafRules) *SecurityPolicyConfigWafConfigWafRules {
-		return &v
-	}).(SecurityPolicyConfigWafConfigWafRulesPtrOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) BlockRuleIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) []int { return v.BlockRuleIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) ObserveRuleIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) []int { return v.ObserveRuleIds }).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigWafConfigWafRules) string { return v.Switch }).(pulumi.StringOutput)
-}
-
-type SecurityPolicyConfigWafConfigWafRulesPtrOutput struct{ *pulumi.OutputState }
-
-func (SecurityPolicyConfigWafConfigWafRulesPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SecurityPolicyConfigWafConfigWafRules)(nil)).Elem()
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) ToSecurityPolicyConfigWafConfigWafRulesPtrOutput() SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) ToSecurityPolicyConfigWafConfigWafRulesPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigWafConfigWafRulesPtrOutput {
-	return o
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) Elem() SecurityPolicyConfigWafConfigWafRulesOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) SecurityPolicyConfigWafConfigWafRules {
-		if v != nil {
-			return *v
-		}
-		var ret SecurityPolicyConfigWafConfigWafRules
-		return ret
-	}).(SecurityPolicyConfigWafConfigWafRulesOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) BlockRuleIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) []int {
-		if v == nil {
-			return nil
-		}
-		return v.BlockRuleIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) ObserveRuleIds() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) []int {
-		if v == nil {
-			return nil
-		}
-		return v.ObserveRuleIds
-	}).(pulumi.IntArrayOutput)
-}
-
-func (o SecurityPolicyConfigWafConfigWafRulesPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityPolicyConfigWafConfigWafRules) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type ZoneResource struct {
-	// Valid values: `mainland`, `overseas`.
-	Area *string `pulumi:"area"`
-	// Whether to automatically renew. Valid values:- `0`: Default.- `1`: Enable automatic renewal.- `2`: Disable automatic renewal.
-	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
-	// Resource creation date.
-	CreateTime *string `pulumi:"createTime"`
-	// Enable time of the resource.
-	EnableTime *string `pulumi:"enableTime"`
-	// Expire time of the resource.
-	ExpireTime *string `pulumi:"expireTime"`
-	// Resource ID.
-	Id *string `pulumi:"id"`
-	// Resource pay mode. Valid values:- `0`: post pay mode.
-	PayMode *int `pulumi:"payMode"`
-	// Associated plan ID.
-	PlanId *string `pulumi:"planId"`
-	// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
-	Status *string `pulumi:"status"`
-	// Price inquiry parameters.
-	Svs []ZoneResourceSv `pulumi:"svs"`
-}
-
-// ZoneResourceInput is an input type that accepts ZoneResourceArgs and ZoneResourceOutput values.
-// You can construct a concrete instance of `ZoneResourceInput` via:
-//
-//          ZoneResourceArgs{...}
-type ZoneResourceInput interface {
-	pulumi.Input
-
-	ToZoneResourceOutput() ZoneResourceOutput
-	ToZoneResourceOutputWithContext(context.Context) ZoneResourceOutput
-}
-
-type ZoneResourceArgs struct {
-	// Valid values: `mainland`, `overseas`.
-	Area pulumi.StringPtrInput `pulumi:"area"`
-	// Whether to automatically renew. Valid values:- `0`: Default.- `1`: Enable automatic renewal.- `2`: Disable automatic renewal.
-	AutoRenewFlag pulumi.IntPtrInput `pulumi:"autoRenewFlag"`
-	// Resource creation date.
-	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
-	// Enable time of the resource.
-	EnableTime pulumi.StringPtrInput `pulumi:"enableTime"`
-	// Expire time of the resource.
-	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
-	// Resource ID.
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	// Resource pay mode. Valid values:- `0`: post pay mode.
-	PayMode pulumi.IntPtrInput `pulumi:"payMode"`
-	// Associated plan ID.
-	PlanId pulumi.StringPtrInput `pulumi:"planId"`
-	// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
-	Status pulumi.StringPtrInput `pulumi:"status"`
-	// Price inquiry parameters.
-	Svs ZoneResourceSvArrayInput `pulumi:"svs"`
-}
-
-func (ZoneResourceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneResource)(nil)).Elem()
-}
-
-func (i ZoneResourceArgs) ToZoneResourceOutput() ZoneResourceOutput {
-	return i.ToZoneResourceOutputWithContext(context.Background())
-}
-
-func (i ZoneResourceArgs) ToZoneResourceOutputWithContext(ctx context.Context) ZoneResourceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneResourceOutput)
-}
-
-// ZoneResourceArrayInput is an input type that accepts ZoneResourceArray and ZoneResourceArrayOutput values.
-// You can construct a concrete instance of `ZoneResourceArrayInput` via:
-//
-//          ZoneResourceArray{ ZoneResourceArgs{...} }
-type ZoneResourceArrayInput interface {
-	pulumi.Input
-
-	ToZoneResourceArrayOutput() ZoneResourceArrayOutput
-	ToZoneResourceArrayOutputWithContext(context.Context) ZoneResourceArrayOutput
-}
-
-type ZoneResourceArray []ZoneResourceInput
-
-func (ZoneResourceArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneResource)(nil)).Elem()
-}
-
-func (i ZoneResourceArray) ToZoneResourceArrayOutput() ZoneResourceArrayOutput {
-	return i.ToZoneResourceArrayOutputWithContext(context.Background())
-}
-
-func (i ZoneResourceArray) ToZoneResourceArrayOutputWithContext(ctx context.Context) ZoneResourceArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneResourceArrayOutput)
-}
-
-type ZoneResourceOutput struct{ *pulumi.OutputState }
-
-func (ZoneResourceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneResource)(nil)).Elem()
-}
-
-func (o ZoneResourceOutput) ToZoneResourceOutput() ZoneResourceOutput {
-	return o
-}
-
-func (o ZoneResourceOutput) ToZoneResourceOutputWithContext(ctx context.Context) ZoneResourceOutput {
-	return o
-}
-
-// Valid values: `mainland`, `overseas`.
-func (o ZoneResourceOutput) Area() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.Area }).(pulumi.StringPtrOutput)
-}
-
-// Whether to automatically renew. Valid values:- `0`: Default.- `1`: Enable automatic renewal.- `2`: Disable automatic renewal.
-func (o ZoneResourceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *int { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
-}
-
-// Resource creation date.
-func (o ZoneResourceOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
-}
-
-// Enable time of the resource.
-func (o ZoneResourceOutput) EnableTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.EnableTime }).(pulumi.StringPtrOutput)
-}
-
-// Expire time of the resource.
-func (o ZoneResourceOutput) ExpireTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
-}
-
-// Resource ID.
-func (o ZoneResourceOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.Id }).(pulumi.StringPtrOutput)
-}
-
-// Resource pay mode. Valid values:- `0`: post pay mode.
-func (o ZoneResourceOutput) PayMode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *int { return v.PayMode }).(pulumi.IntPtrOutput)
-}
-
-// Associated plan ID.
-func (o ZoneResourceOutput) PlanId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.PlanId }).(pulumi.StringPtrOutput)
-}
-
-// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
-func (o ZoneResourceOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResource) *string { return v.Status }).(pulumi.StringPtrOutput)
-}
-
-// Price inquiry parameters.
-func (o ZoneResourceOutput) Svs() ZoneResourceSvArrayOutput {
-	return o.ApplyT(func(v ZoneResource) []ZoneResourceSv { return v.Svs }).(ZoneResourceSvArrayOutput)
-}
-
-type ZoneResourceArrayOutput struct{ *pulumi.OutputState }
-
-func (ZoneResourceArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneResource)(nil)).Elem()
-}
-
-func (o ZoneResourceArrayOutput) ToZoneResourceArrayOutput() ZoneResourceArrayOutput {
-	return o
-}
-
-func (o ZoneResourceArrayOutput) ToZoneResourceArrayOutputWithContext(ctx context.Context) ZoneResourceArrayOutput {
+func (o ZoneOwnershipVerificationDnsVerificationOutput) ToZoneOwnershipVerificationDnsVerificationOutput() ZoneOwnershipVerificationDnsVerificationOutput {
 	return o
-}
-
-func (o ZoneResourceArrayOutput) Index(i pulumi.IntInput) ZoneResourceOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneResource {
-		return vs[0].([]ZoneResource)[vs[1].(int)]
-	}).(ZoneResourceOutput)
-}
-
-type ZoneResourceSv struct {
-	// Parameter Key.
-	Key *string `pulumi:"key"`
-	// Parameter Value.
-	Value *string `pulumi:"value"`
-}
-
-// ZoneResourceSvInput is an input type that accepts ZoneResourceSvArgs and ZoneResourceSvOutput values.
-// You can construct a concrete instance of `ZoneResourceSvInput` via:
-//
-//          ZoneResourceSvArgs{...}
-type ZoneResourceSvInput interface {
-	pulumi.Input
-
-	ToZoneResourceSvOutput() ZoneResourceSvOutput
-	ToZoneResourceSvOutputWithContext(context.Context) ZoneResourceSvOutput
-}
-
-type ZoneResourceSvArgs struct {
-	// Parameter Key.
-	Key pulumi.StringPtrInput `pulumi:"key"`
-	// Parameter Value.
-	Value pulumi.StringPtrInput `pulumi:"value"`
-}
-
-func (ZoneResourceSvArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneResourceSv)(nil)).Elem()
-}
-
-func (i ZoneResourceSvArgs) ToZoneResourceSvOutput() ZoneResourceSvOutput {
-	return i.ToZoneResourceSvOutputWithContext(context.Background())
-}
-
-func (i ZoneResourceSvArgs) ToZoneResourceSvOutputWithContext(ctx context.Context) ZoneResourceSvOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneResourceSvOutput)
-}
-
-// ZoneResourceSvArrayInput is an input type that accepts ZoneResourceSvArray and ZoneResourceSvArrayOutput values.
-// You can construct a concrete instance of `ZoneResourceSvArrayInput` via:
-//
-//          ZoneResourceSvArray{ ZoneResourceSvArgs{...} }
-type ZoneResourceSvArrayInput interface {
-	pulumi.Input
-
-	ToZoneResourceSvArrayOutput() ZoneResourceSvArrayOutput
-	ToZoneResourceSvArrayOutputWithContext(context.Context) ZoneResourceSvArrayOutput
-}
-
-type ZoneResourceSvArray []ZoneResourceSvInput
-
-func (ZoneResourceSvArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneResourceSv)(nil)).Elem()
-}
-
-func (i ZoneResourceSvArray) ToZoneResourceSvArrayOutput() ZoneResourceSvArrayOutput {
-	return i.ToZoneResourceSvArrayOutputWithContext(context.Background())
-}
-
-func (i ZoneResourceSvArray) ToZoneResourceSvArrayOutputWithContext(ctx context.Context) ZoneResourceSvArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneResourceSvArrayOutput)
-}
-
-type ZoneResourceSvOutput struct{ *pulumi.OutputState }
-
-func (ZoneResourceSvOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneResourceSv)(nil)).Elem()
 }
 
-func (o ZoneResourceSvOutput) ToZoneResourceSvOutput() ZoneResourceSvOutput {
+func (o ZoneOwnershipVerificationDnsVerificationOutput) ToZoneOwnershipVerificationDnsVerificationOutputWithContext(ctx context.Context) ZoneOwnershipVerificationDnsVerificationOutput {
 	return o
 }
 
-func (o ZoneResourceSvOutput) ToZoneResourceSvOutputWithContext(ctx context.Context) ZoneResourceSvOutput {
-	return o
+// Record type.
+func (o ZoneOwnershipVerificationDnsVerificationOutput) RecordType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ZoneOwnershipVerificationDnsVerification) *string { return v.RecordType }).(pulumi.StringPtrOutput)
 }
 
-// Parameter Key.
-func (o ZoneResourceSvOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResourceSv) *string { return v.Key }).(pulumi.StringPtrOutput)
+// Record the value.
+func (o ZoneOwnershipVerificationDnsVerificationOutput) RecordValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ZoneOwnershipVerificationDnsVerification) *string { return v.RecordValue }).(pulumi.StringPtrOutput)
 }
 
-// Parameter Value.
-func (o ZoneResourceSvOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneResourceSv) *string { return v.Value }).(pulumi.StringPtrOutput)
+// Host record.
+func (o ZoneOwnershipVerificationDnsVerificationOutput) Subdomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ZoneOwnershipVerificationDnsVerification) *string { return v.Subdomain }).(pulumi.StringPtrOutput)
 }
 
-type ZoneResourceSvArrayOutput struct{ *pulumi.OutputState }
+type ZoneOwnershipVerificationDnsVerificationArrayOutput struct{ *pulumi.OutputState }
 
-func (ZoneResourceSvArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneResourceSv)(nil)).Elem()
+func (ZoneOwnershipVerificationDnsVerificationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ZoneOwnershipVerificationDnsVerification)(nil)).Elem()
 }
 
-func (o ZoneResourceSvArrayOutput) ToZoneResourceSvArrayOutput() ZoneResourceSvArrayOutput {
+func (o ZoneOwnershipVerificationDnsVerificationArrayOutput) ToZoneOwnershipVerificationDnsVerificationArrayOutput() ZoneOwnershipVerificationDnsVerificationArrayOutput {
 	return o
 }
 
-func (o ZoneResourceSvArrayOutput) ToZoneResourceSvArrayOutputWithContext(ctx context.Context) ZoneResourceSvArrayOutput {
+func (o ZoneOwnershipVerificationDnsVerificationArrayOutput) ToZoneOwnershipVerificationDnsVerificationArrayOutputWithContext(ctx context.Context) ZoneOwnershipVerificationDnsVerificationArrayOutput {
 	return o
 }
 
-func (o ZoneResourceSvArrayOutput) Index(i pulumi.IntInput) ZoneResourceSvOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneResourceSv {
-		return vs[0].([]ZoneResourceSv)[vs[1].(int)]
-	}).(ZoneResourceSvOutput)
+func (o ZoneOwnershipVerificationDnsVerificationArrayOutput) Index(i pulumi.IntInput) ZoneOwnershipVerificationDnsVerificationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneOwnershipVerificationDnsVerification {
+		return vs[0].([]ZoneOwnershipVerificationDnsVerification)[vs[1].(int)]
+	}).(ZoneOwnershipVerificationDnsVerificationOutput)
 }
 
 type ZoneSettingCache struct {
@@ -10121,7 +3736,7 @@ type ZoneSettingCache struct {
 // ZoneSettingCacheInput is an input type that accepts ZoneSettingCacheArgs and ZoneSettingCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	ZoneSettingCacheArgs{...}
 type ZoneSettingCacheInput interface {
 	pulumi.Input
 
@@ -10161,11 +3776,11 @@ func (i ZoneSettingCacheArgs) ToZoneSettingCachePtrOutputWithContext(ctx context
 // ZoneSettingCachePtrInput is an input type that accepts ZoneSettingCacheArgs, ZoneSettingCachePtr and ZoneSettingCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePtrInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	        ZoneSettingCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePtrInput interface {
 	pulumi.Input
 
@@ -10285,18 +3900,18 @@ func (o ZoneSettingCachePtrOutput) NoCache() ZoneSettingCacheNoCachePtrOutput {
 }
 
 type ZoneSettingCacheCache struct {
-	// Cache expiration time settings.Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 	CacheTime *int `pulumi:"cacheTime"`
-	// Specifies whether to enable force cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 	IgnoreCacheControl *string `pulumi:"ignoreCacheControl"`
-	// Cache configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 	Switch *string `pulumi:"switch"`
 }
 
 // ZoneSettingCacheCacheInput is an input type that accepts ZoneSettingCacheCacheArgs and ZoneSettingCacheCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCacheInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	ZoneSettingCacheCacheArgs{...}
 type ZoneSettingCacheCacheInput interface {
 	pulumi.Input
 
@@ -10305,11 +3920,11 @@ type ZoneSettingCacheCacheInput interface {
 }
 
 type ZoneSettingCacheCacheArgs struct {
-	// Cache expiration time settings.Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 	CacheTime pulumi.IntPtrInput `pulumi:"cacheTime"`
-	// Specifies whether to enable force cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 	IgnoreCacheControl pulumi.StringPtrInput `pulumi:"ignoreCacheControl"`
-	// Cache configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+	// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -10336,11 +3951,11 @@ func (i ZoneSettingCacheCacheArgs) ToZoneSettingCacheCachePtrOutputWithContext(c
 // ZoneSettingCacheCachePtrInput is an input type that accepts ZoneSettingCacheCacheArgs, ZoneSettingCacheCachePtr and ZoneSettingCacheCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCachePtrInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	        ZoneSettingCacheCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheCachePtrInput interface {
 	pulumi.Input
 
@@ -10390,17 +4005,17 @@ func (o ZoneSettingCacheCacheOutput) ToZoneSettingCacheCachePtrOutputWithContext
 	}).(ZoneSettingCacheCachePtrOutput)
 }
 
-// Cache expiration time settings.Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCacheOutput) CacheTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheCache) *int { return v.CacheTime }).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable force cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCacheOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheCache) *string { return v.IgnoreCacheControl }).(pulumi.StringPtrOutput)
 }
 
-// Cache configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCacheOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheCache) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -10429,7 +4044,7 @@ func (o ZoneSettingCacheCachePtrOutput) Elem() ZoneSettingCacheCacheOutput {
 	}).(ZoneSettingCacheCacheOutput)
 }
 
-// Cache expiration time settings.Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCachePtrOutput) CacheTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheCache) *int {
 		if v == nil {
@@ -10439,7 +4054,7 @@ func (o ZoneSettingCacheCachePtrOutput) CacheTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Specifies whether to enable force cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCachePtrOutput) IgnoreCacheControl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheCache) *string {
 		if v == nil {
@@ -10449,7 +4064,7 @@ func (o ZoneSettingCacheCachePtrOutput) IgnoreCacheControl() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-// Cache configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+// Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheCache) *string {
 		if v == nil {
@@ -10467,7 +4082,7 @@ type ZoneSettingCacheFollowOrigin struct {
 // ZoneSettingCacheFollowOriginInput is an input type that accepts ZoneSettingCacheFollowOriginArgs and ZoneSettingCacheFollowOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	ZoneSettingCacheFollowOriginArgs{...}
 type ZoneSettingCacheFollowOriginInput interface {
 	pulumi.Input
 
@@ -10503,11 +4118,11 @@ func (i ZoneSettingCacheFollowOriginArgs) ToZoneSettingCacheFollowOriginPtrOutpu
 // ZoneSettingCacheFollowOriginPtrInput is an input type that accepts ZoneSettingCacheFollowOriginArgs, ZoneSettingCacheFollowOriginPtr and ZoneSettingCacheFollowOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginPtrInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	        ZoneSettingCacheFollowOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheFollowOriginPtrInput interface {
 	pulumi.Input
 
@@ -10608,7 +4223,7 @@ type ZoneSettingCacheKey struct {
 // ZoneSettingCacheKeyInput is an input type that accepts ZoneSettingCacheKeyArgs and ZoneSettingCacheKeyOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	ZoneSettingCacheKeyArgs{...}
 type ZoneSettingCacheKeyInput interface {
 	pulumi.Input
 
@@ -10648,11 +4263,11 @@ func (i ZoneSettingCacheKeyArgs) ToZoneSettingCacheKeyPtrOutputWithContext(ctx c
 // ZoneSettingCacheKeyPtrInput is an input type that accepts ZoneSettingCacheKeyArgs, ZoneSettingCacheKeyPtr and ZoneSettingCacheKeyPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyPtrInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	        ZoneSettingCacheKeyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyPtrInput interface {
 	pulumi.Input
 
@@ -10783,7 +4398,7 @@ type ZoneSettingCacheKeyQueryString struct {
 // ZoneSettingCacheKeyQueryStringInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs and ZoneSettingCacheKeyQueryStringOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	ZoneSettingCacheKeyQueryStringArgs{...}
 type ZoneSettingCacheKeyQueryStringInput interface {
 	pulumi.Input
 
@@ -10823,11 +4438,11 @@ func (i ZoneSettingCacheKeyQueryStringArgs) ToZoneSettingCacheKeyQueryStringPtrO
 // ZoneSettingCacheKeyQueryStringPtrInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs, ZoneSettingCacheKeyQueryStringPtr and ZoneSettingCacheKeyQueryStringPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringPtrInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	        ZoneSettingCacheKeyQueryStringArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyQueryStringPtrInput interface {
 	pulumi.Input
 
@@ -10947,14 +4562,14 @@ func (o ZoneSettingCacheKeyQueryStringPtrOutput) Values() pulumi.StringArrayOutp
 }
 
 type ZoneSettingCacheNoCache struct {
-	// Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
 	Switch *string `pulumi:"switch"`
 }
 
 // ZoneSettingCacheNoCacheInput is an input type that accepts ZoneSettingCacheNoCacheArgs and ZoneSettingCacheNoCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCacheInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	ZoneSettingCacheNoCacheArgs{...}
 type ZoneSettingCacheNoCacheInput interface {
 	pulumi.Input
 
@@ -10963,7 +4578,7 @@ type ZoneSettingCacheNoCacheInput interface {
 }
 
 type ZoneSettingCacheNoCacheArgs struct {
-	// Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+	// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
 }
 
@@ -10990,11 +4605,11 @@ func (i ZoneSettingCacheNoCacheArgs) ToZoneSettingCacheNoCachePtrOutputWithConte
 // ZoneSettingCacheNoCachePtrInput is an input type that accepts ZoneSettingCacheNoCacheArgs, ZoneSettingCacheNoCachePtr and ZoneSettingCacheNoCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCachePtrInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	        ZoneSettingCacheNoCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheNoCachePtrInput interface {
 	pulumi.Input
 
@@ -11044,7 +4659,7 @@ func (o ZoneSettingCacheNoCacheOutput) ToZoneSettingCacheNoCachePtrOutputWithCon
 	}).(ZoneSettingCacheNoCachePtrOutput)
 }
 
-// Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheNoCacheOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingCacheNoCache) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
@@ -11073,7 +4688,7 @@ func (o ZoneSettingCacheNoCachePtrOutput) Elem() ZoneSettingCacheNoCacheOutput {
 	}).(ZoneSettingCacheNoCacheOutput)
 }
 
-// Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingCacheNoCachePtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingCacheNoCache) *string {
 		if v == nil {
@@ -11093,7 +4708,7 @@ type ZoneSettingCachePrefresh struct {
 // ZoneSettingCachePrefreshInput is an input type that accepts ZoneSettingCachePrefreshArgs and ZoneSettingCachePrefreshOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	ZoneSettingCachePrefreshArgs{...}
 type ZoneSettingCachePrefreshInput interface {
 	pulumi.Input
 
@@ -11131,11 +4746,11 @@ func (i ZoneSettingCachePrefreshArgs) ToZoneSettingCachePrefreshPtrOutputWithCon
 // ZoneSettingCachePrefreshPtrInput is an input type that accepts ZoneSettingCachePrefreshArgs, ZoneSettingCachePrefreshPtr and ZoneSettingCachePrefreshPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshPtrInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	        ZoneSettingCachePrefreshArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePrefreshPtrInput interface {
 	pulumi.Input
 
@@ -11249,7 +4864,7 @@ type ZoneSettingClientIpHeader struct {
 // ZoneSettingClientIpHeaderInput is an input type that accepts ZoneSettingClientIpHeaderArgs and ZoneSettingClientIpHeaderOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	ZoneSettingClientIpHeaderArgs{...}
 type ZoneSettingClientIpHeaderInput interface {
 	pulumi.Input
 
@@ -11287,11 +4902,11 @@ func (i ZoneSettingClientIpHeaderArgs) ToZoneSettingClientIpHeaderPtrOutputWithC
 // ZoneSettingClientIpHeaderPtrInput is an input type that accepts ZoneSettingClientIpHeaderArgs, ZoneSettingClientIpHeaderPtr and ZoneSettingClientIpHeaderPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderPtrInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	        ZoneSettingClientIpHeaderArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingClientIpHeaderPtrInput interface {
 	pulumi.Input
 
@@ -11405,7 +5020,7 @@ type ZoneSettingCompression struct {
 // ZoneSettingCompressionInput is an input type that accepts ZoneSettingCompressionArgs and ZoneSettingCompressionOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	ZoneSettingCompressionArgs{...}
 type ZoneSettingCompressionInput interface {
 	pulumi.Input
 
@@ -11443,11 +5058,11 @@ func (i ZoneSettingCompressionArgs) ToZoneSettingCompressionPtrOutputWithContext
 // ZoneSettingCompressionPtrInput is an input type that accepts ZoneSettingCompressionArgs, ZoneSettingCompressionPtr and ZoneSettingCompressionPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionPtrInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	        ZoneSettingCompressionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCompressionPtrInput interface {
 	pulumi.Input
 
@@ -11561,7 +5176,7 @@ type ZoneSettingForceRedirect struct {
 // ZoneSettingForceRedirectInput is an input type that accepts ZoneSettingForceRedirectArgs and ZoneSettingForceRedirectOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	ZoneSettingForceRedirectArgs{...}
 type ZoneSettingForceRedirectInput interface {
 	pulumi.Input
 
@@ -11599,11 +5214,11 @@ func (i ZoneSettingForceRedirectArgs) ToZoneSettingForceRedirectPtrOutputWithCon
 // ZoneSettingForceRedirectPtrInput is an input type that accepts ZoneSettingForceRedirectArgs, ZoneSettingForceRedirectPtr and ZoneSettingForceRedirectPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectPtrInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	        ZoneSettingForceRedirectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingForceRedirectPtrInput interface {
 	pulumi.Input
 
@@ -11721,7 +5336,7 @@ type ZoneSettingHttps struct {
 // ZoneSettingHttpsInput is an input type that accepts ZoneSettingHttpsArgs and ZoneSettingHttpsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	ZoneSettingHttpsArgs{...}
 type ZoneSettingHttpsInput interface {
 	pulumi.Input
 
@@ -11763,11 +5378,11 @@ func (i ZoneSettingHttpsArgs) ToZoneSettingHttpsPtrOutputWithContext(ctx context
 // ZoneSettingHttpsPtrInput is an input type that accepts ZoneSettingHttpsArgs, ZoneSettingHttpsPtr and ZoneSettingHttpsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsPtrInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	        ZoneSettingHttpsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsPtrInput interface {
 	pulumi.Input
 
@@ -11915,7 +5530,7 @@ type ZoneSettingHttpsHsts struct {
 // ZoneSettingHttpsHstsInput is an input type that accepts ZoneSettingHttpsHstsArgs and ZoneSettingHttpsHstsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	ZoneSettingHttpsHstsArgs{...}
 type ZoneSettingHttpsHstsInput interface {
 	pulumi.Input
 
@@ -11957,11 +5572,11 @@ func (i ZoneSettingHttpsHstsArgs) ToZoneSettingHttpsHstsPtrOutputWithContext(ctx
 // ZoneSettingHttpsHstsPtrInput is an input type that accepts ZoneSettingHttpsHstsArgs, ZoneSettingHttpsHstsPtr and ZoneSettingHttpsHstsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsPtrInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	        ZoneSettingHttpsHstsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsHstsPtrInput interface {
 	pulumi.Input
 
@@ -12103,7 +5718,7 @@ type ZoneSettingIpv6 struct {
 // ZoneSettingIpv6Input is an input type that accepts ZoneSettingIpv6Args and ZoneSettingIpv6Output values.
 // You can construct a concrete instance of `ZoneSettingIpv6Input` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	ZoneSettingIpv6Args{...}
 type ZoneSettingIpv6Input interface {
 	pulumi.Input
 
@@ -12139,11 +5754,11 @@ func (i ZoneSettingIpv6Args) ToZoneSettingIpv6PtrOutputWithContext(ctx context.C
 // ZoneSettingIpv6PtrInput is an input type that accepts ZoneSettingIpv6Args, ZoneSettingIpv6Ptr and ZoneSettingIpv6PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingIpv6PtrInput` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	        ZoneSettingIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingIpv6PtrInput interface {
 	pulumi.Input
 
@@ -12233,7 +5848,7 @@ func (o ZoneSettingIpv6PtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingMaxAge struct {
-	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
 	FollowOrigin *string `pulumi:"followOrigin"`
 	// Specifies the max age of the cache (in seconds). The maximum value is 365 days. Note: the value 0 means not to cache. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxAgeTime *int `pulumi:"maxAgeTime"`
@@ -12242,7 +5857,7 @@ type ZoneSettingMaxAge struct {
 // ZoneSettingMaxAgeInput is an input type that accepts ZoneSettingMaxAgeArgs and ZoneSettingMaxAgeOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgeInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	ZoneSettingMaxAgeArgs{...}
 type ZoneSettingMaxAgeInput interface {
 	pulumi.Input
 
@@ -12251,7 +5866,7 @@ type ZoneSettingMaxAgeInput interface {
 }
 
 type ZoneSettingMaxAgeArgs struct {
-	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
 	FollowOrigin pulumi.StringPtrInput `pulumi:"followOrigin"`
 	// Specifies the max age of the cache (in seconds). The maximum value is 365 days. Note: the value 0 means not to cache. Note: This field may return null, indicating that no valid value can be obtained.
 	MaxAgeTime pulumi.IntPtrInput `pulumi:"maxAgeTime"`
@@ -12280,11 +5895,11 @@ func (i ZoneSettingMaxAgeArgs) ToZoneSettingMaxAgePtrOutputWithContext(ctx conte
 // ZoneSettingMaxAgePtrInput is an input type that accepts ZoneSettingMaxAgeArgs, ZoneSettingMaxAgePtr and ZoneSettingMaxAgePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgePtrInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	        ZoneSettingMaxAgeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingMaxAgePtrInput interface {
 	pulumi.Input
 
@@ -12334,7 +5949,7 @@ func (o ZoneSettingMaxAgeOutput) ToZoneSettingMaxAgePtrOutputWithContext(ctx con
 	}).(ZoneSettingMaxAgePtrOutput)
 }
 
-// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingMaxAgeOutput) FollowOrigin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ZoneSettingMaxAge) *string { return v.FollowOrigin }).(pulumi.StringPtrOutput)
 }
@@ -12368,7 +5983,7 @@ func (o ZoneSettingMaxAgePtrOutput) Elem() ZoneSettingMaxAgeOutput {
 	}).(ZoneSettingMaxAgeOutput)
 }
 
-// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ZoneSettingMaxAgePtrOutput) FollowOrigin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingMaxAge) *string {
 		if v == nil {
@@ -12396,7 +6011,7 @@ type ZoneSettingOfflineCache struct {
 // ZoneSettingOfflineCacheInput is an input type that accepts ZoneSettingOfflineCacheArgs and ZoneSettingOfflineCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCacheInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	ZoneSettingOfflineCacheArgs{...}
 type ZoneSettingOfflineCacheInput interface {
 	pulumi.Input
 
@@ -12432,11 +6047,11 @@ func (i ZoneSettingOfflineCacheArgs) ToZoneSettingOfflineCachePtrOutputWithConte
 // ZoneSettingOfflineCachePtrInput is an input type that accepts ZoneSettingOfflineCacheArgs, ZoneSettingOfflineCachePtr and ZoneSettingOfflineCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCachePtrInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	        ZoneSettingOfflineCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOfflineCachePtrInput interface {
 	pulumi.Input
 
@@ -12539,7 +6154,7 @@ type ZoneSettingOrigin struct {
 // ZoneSettingOriginInput is an input type that accepts ZoneSettingOriginArgs and ZoneSettingOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	ZoneSettingOriginArgs{...}
 type ZoneSettingOriginInput interface {
 	pulumi.Input
 
@@ -12581,11 +6196,11 @@ func (i ZoneSettingOriginArgs) ToZoneSettingOriginPtrOutputWithContext(ctx conte
 // ZoneSettingOriginPtrInput is an input type that accepts ZoneSettingOriginArgs, ZoneSettingOriginPtr and ZoneSettingOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginPtrInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	        ZoneSettingOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOriginPtrInput interface {
 	pulumi.Input
 
@@ -12729,7 +6344,7 @@ type ZoneSettingPostMaxSize struct {
 // ZoneSettingPostMaxSizeInput is an input type that accepts ZoneSettingPostMaxSizeArgs and ZoneSettingPostMaxSizeOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizeInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	ZoneSettingPostMaxSizeArgs{...}
 type ZoneSettingPostMaxSizeInput interface {
 	pulumi.Input
 
@@ -12767,11 +6382,11 @@ func (i ZoneSettingPostMaxSizeArgs) ToZoneSettingPostMaxSizePtrOutputWithContext
 // ZoneSettingPostMaxSizePtrInput is an input type that accepts ZoneSettingPostMaxSizeArgs, ZoneSettingPostMaxSizePtr and ZoneSettingPostMaxSizePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizePtrInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	        ZoneSettingPostMaxSizeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingPostMaxSizePtrInput interface {
 	pulumi.Input
 
@@ -12883,7 +6498,7 @@ type ZoneSettingQuic struct {
 // ZoneSettingQuicInput is an input type that accepts ZoneSettingQuicArgs and ZoneSettingQuicOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	ZoneSettingQuicArgs{...}
 type ZoneSettingQuicInput interface {
 	pulumi.Input
 
@@ -12919,11 +6534,11 @@ func (i ZoneSettingQuicArgs) ToZoneSettingQuicPtrOutputWithContext(ctx context.C
 // ZoneSettingQuicPtrInput is an input type that accepts ZoneSettingQuicArgs, ZoneSettingQuicPtr and ZoneSettingQuicPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicPtrInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	        ZoneSettingQuicArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingQuicPtrInput interface {
 	pulumi.Input
 
@@ -13020,7 +6635,7 @@ type ZoneSettingSmartRouting struct {
 // ZoneSettingSmartRoutingInput is an input type that accepts ZoneSettingSmartRoutingArgs and ZoneSettingSmartRoutingOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	ZoneSettingSmartRoutingArgs{...}
 type ZoneSettingSmartRoutingInput interface {
 	pulumi.Input
 
@@ -13056,11 +6671,11 @@ func (i ZoneSettingSmartRoutingArgs) ToZoneSettingSmartRoutingPtrOutputWithConte
 // ZoneSettingSmartRoutingPtrInput is an input type that accepts ZoneSettingSmartRoutingArgs, ZoneSettingSmartRoutingPtr and ZoneSettingSmartRoutingPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingPtrInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	        ZoneSettingSmartRoutingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingSmartRoutingPtrInput interface {
 	pulumi.Input
 
@@ -13157,7 +6772,7 @@ type ZoneSettingUpstreamHttp2 struct {
 // ZoneSettingUpstreamHttp2Input is an input type that accepts ZoneSettingUpstreamHttp2Args and ZoneSettingUpstreamHttp2Output values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2Input` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	ZoneSettingUpstreamHttp2Args{...}
 type ZoneSettingUpstreamHttp2Input interface {
 	pulumi.Input
 
@@ -13193,11 +6808,11 @@ func (i ZoneSettingUpstreamHttp2Args) ToZoneSettingUpstreamHttp2PtrOutputWithCon
 // ZoneSettingUpstreamHttp2PtrInput is an input type that accepts ZoneSettingUpstreamHttp2Args, ZoneSettingUpstreamHttp2Ptr and ZoneSettingUpstreamHttp2PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2PtrInput` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	        ZoneSettingUpstreamHttp2Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingUpstreamHttp2PtrInput interface {
 	pulumi.Input
 
@@ -13287,7 +6902,7 @@ func (o ZoneSettingUpstreamHttp2PtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type ZoneSettingWebSocket struct {
-	// Whether to enable custom WebSocket timeout setting. When it&#39;s off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+	// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 	Switch string `pulumi:"switch"`
 	// Sets timeout period in seconds. Maximum value: 120.
 	Timeout *int `pulumi:"timeout"`
@@ -13296,7 +6911,7 @@ type ZoneSettingWebSocket struct {
 // ZoneSettingWebSocketInput is an input type that accepts ZoneSettingWebSocketArgs and ZoneSettingWebSocketOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	ZoneSettingWebSocketArgs{...}
 type ZoneSettingWebSocketInput interface {
 	pulumi.Input
 
@@ -13305,7 +6920,7 @@ type ZoneSettingWebSocketInput interface {
 }
 
 type ZoneSettingWebSocketArgs struct {
-	// Whether to enable custom WebSocket timeout setting. When it&#39;s off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+	// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 	Switch pulumi.StringInput `pulumi:"switch"`
 	// Sets timeout period in seconds. Maximum value: 120.
 	Timeout pulumi.IntPtrInput `pulumi:"timeout"`
@@ -13334,11 +6949,11 @@ func (i ZoneSettingWebSocketArgs) ToZoneSettingWebSocketPtrOutputWithContext(ctx
 // ZoneSettingWebSocketPtrInput is an input type that accepts ZoneSettingWebSocketArgs, ZoneSettingWebSocketPtr and ZoneSettingWebSocketPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketPtrInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	        ZoneSettingWebSocketArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingWebSocketPtrInput interface {
 	pulumi.Input
 
@@ -13388,7 +7003,7 @@ func (o ZoneSettingWebSocketOutput) ToZoneSettingWebSocketPtrOutputWithContext(c
 	}).(ZoneSettingWebSocketPtrOutput)
 }
 
-// Whether to enable custom WebSocket timeout setting. When it&#39;s off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 func (o ZoneSettingWebSocketOutput) Switch() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneSettingWebSocket) string { return v.Switch }).(pulumi.StringOutput)
 }
@@ -13422,7 +7037,7 @@ func (o ZoneSettingWebSocketPtrOutput) Elem() ZoneSettingWebSocketOutput {
 	}).(ZoneSettingWebSocketOutput)
 }
 
-// Whether to enable custom WebSocket timeout setting. When it&#39;s off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+// Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
 func (o ZoneSettingWebSocketPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ZoneSettingWebSocket) *string {
 		if v == nil {
@@ -13442,498 +7057,6 @@ func (o ZoneSettingWebSocketPtrOutput) Timeout() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-type ZoneVanityNameServers struct {
-	// List of custom name servers.
-	Servers []string `pulumi:"servers"`
-	// Whether to enable the custom name server.- `on`: Enable.- `off`: Disable.
-	Switch string `pulumi:"switch"`
-}
-
-// ZoneVanityNameServersInput is an input type that accepts ZoneVanityNameServersArgs and ZoneVanityNameServersOutput values.
-// You can construct a concrete instance of `ZoneVanityNameServersInput` via:
-//
-//          ZoneVanityNameServersArgs{...}
-type ZoneVanityNameServersInput interface {
-	pulumi.Input
-
-	ToZoneVanityNameServersOutput() ZoneVanityNameServersOutput
-	ToZoneVanityNameServersOutputWithContext(context.Context) ZoneVanityNameServersOutput
-}
-
-type ZoneVanityNameServersArgs struct {
-	// List of custom name servers.
-	Servers pulumi.StringArrayInput `pulumi:"servers"`
-	// Whether to enable the custom name server.- `on`: Enable.- `off`: Disable.
-	Switch pulumi.StringInput `pulumi:"switch"`
-}
-
-func (ZoneVanityNameServersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneVanityNameServers)(nil)).Elem()
-}
-
-func (i ZoneVanityNameServersArgs) ToZoneVanityNameServersOutput() ZoneVanityNameServersOutput {
-	return i.ToZoneVanityNameServersOutputWithContext(context.Background())
-}
-
-func (i ZoneVanityNameServersArgs) ToZoneVanityNameServersOutputWithContext(ctx context.Context) ZoneVanityNameServersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneVanityNameServersOutput)
-}
-
-func (i ZoneVanityNameServersArgs) ToZoneVanityNameServersPtrOutput() ZoneVanityNameServersPtrOutput {
-	return i.ToZoneVanityNameServersPtrOutputWithContext(context.Background())
-}
-
-func (i ZoneVanityNameServersArgs) ToZoneVanityNameServersPtrOutputWithContext(ctx context.Context) ZoneVanityNameServersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneVanityNameServersOutput).ToZoneVanityNameServersPtrOutputWithContext(ctx)
-}
-
-// ZoneVanityNameServersPtrInput is an input type that accepts ZoneVanityNameServersArgs, ZoneVanityNameServersPtr and ZoneVanityNameServersPtrOutput values.
-// You can construct a concrete instance of `ZoneVanityNameServersPtrInput` via:
-//
-//          ZoneVanityNameServersArgs{...}
-//
-//  or:
-//
-//          nil
-type ZoneVanityNameServersPtrInput interface {
-	pulumi.Input
-
-	ToZoneVanityNameServersPtrOutput() ZoneVanityNameServersPtrOutput
-	ToZoneVanityNameServersPtrOutputWithContext(context.Context) ZoneVanityNameServersPtrOutput
-}
-
-type zoneVanityNameServersPtrType ZoneVanityNameServersArgs
-
-func ZoneVanityNameServersPtr(v *ZoneVanityNameServersArgs) ZoneVanityNameServersPtrInput {
-	return (*zoneVanityNameServersPtrType)(v)
-}
-
-func (*zoneVanityNameServersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ZoneVanityNameServers)(nil)).Elem()
-}
-
-func (i *zoneVanityNameServersPtrType) ToZoneVanityNameServersPtrOutput() ZoneVanityNameServersPtrOutput {
-	return i.ToZoneVanityNameServersPtrOutputWithContext(context.Background())
-}
-
-func (i *zoneVanityNameServersPtrType) ToZoneVanityNameServersPtrOutputWithContext(ctx context.Context) ZoneVanityNameServersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneVanityNameServersPtrOutput)
-}
-
-type ZoneVanityNameServersOutput struct{ *pulumi.OutputState }
-
-func (ZoneVanityNameServersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneVanityNameServers)(nil)).Elem()
-}
-
-func (o ZoneVanityNameServersOutput) ToZoneVanityNameServersOutput() ZoneVanityNameServersOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersOutput) ToZoneVanityNameServersOutputWithContext(ctx context.Context) ZoneVanityNameServersOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersOutput) ToZoneVanityNameServersPtrOutput() ZoneVanityNameServersPtrOutput {
-	return o.ToZoneVanityNameServersPtrOutputWithContext(context.Background())
-}
-
-func (o ZoneVanityNameServersOutput) ToZoneVanityNameServersPtrOutputWithContext(ctx context.Context) ZoneVanityNameServersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ZoneVanityNameServers) *ZoneVanityNameServers {
-		return &v
-	}).(ZoneVanityNameServersPtrOutput)
-}
-
-// List of custom name servers.
-func (o ZoneVanityNameServersOutput) Servers() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ZoneVanityNameServers) []string { return v.Servers }).(pulumi.StringArrayOutput)
-}
-
-// Whether to enable the custom name server.- `on`: Enable.- `off`: Disable.
-func (o ZoneVanityNameServersOutput) Switch() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneVanityNameServers) string { return v.Switch }).(pulumi.StringOutput)
-}
-
-type ZoneVanityNameServersPtrOutput struct{ *pulumi.OutputState }
-
-func (ZoneVanityNameServersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ZoneVanityNameServers)(nil)).Elem()
-}
-
-func (o ZoneVanityNameServersPtrOutput) ToZoneVanityNameServersPtrOutput() ZoneVanityNameServersPtrOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersPtrOutput) ToZoneVanityNameServersPtrOutputWithContext(ctx context.Context) ZoneVanityNameServersPtrOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersPtrOutput) Elem() ZoneVanityNameServersOutput {
-	return o.ApplyT(func(v *ZoneVanityNameServers) ZoneVanityNameServers {
-		if v != nil {
-			return *v
-		}
-		var ret ZoneVanityNameServers
-		return ret
-	}).(ZoneVanityNameServersOutput)
-}
-
-// List of custom name servers.
-func (o ZoneVanityNameServersPtrOutput) Servers() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ZoneVanityNameServers) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Servers
-	}).(pulumi.StringArrayOutput)
-}
-
-// Whether to enable the custom name server.- `on`: Enable.- `off`: Disable.
-func (o ZoneVanityNameServersPtrOutput) Switch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ZoneVanityNameServers) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Switch
-	}).(pulumi.StringPtrOutput)
-}
-
-type ZoneVanityNameServersIp struct {
-	// IPv4 address of the custom name server.
-	Ipv4 *string `pulumi:"ipv4"`
-	// Name of the custom name server.
-	Name *string `pulumi:"name"`
-}
-
-// ZoneVanityNameServersIpInput is an input type that accepts ZoneVanityNameServersIpArgs and ZoneVanityNameServersIpOutput values.
-// You can construct a concrete instance of `ZoneVanityNameServersIpInput` via:
-//
-//          ZoneVanityNameServersIpArgs{...}
-type ZoneVanityNameServersIpInput interface {
-	pulumi.Input
-
-	ToZoneVanityNameServersIpOutput() ZoneVanityNameServersIpOutput
-	ToZoneVanityNameServersIpOutputWithContext(context.Context) ZoneVanityNameServersIpOutput
-}
-
-type ZoneVanityNameServersIpArgs struct {
-	// IPv4 address of the custom name server.
-	Ipv4 pulumi.StringPtrInput `pulumi:"ipv4"`
-	// Name of the custom name server.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-}
-
-func (ZoneVanityNameServersIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneVanityNameServersIp)(nil)).Elem()
-}
-
-func (i ZoneVanityNameServersIpArgs) ToZoneVanityNameServersIpOutput() ZoneVanityNameServersIpOutput {
-	return i.ToZoneVanityNameServersIpOutputWithContext(context.Background())
-}
-
-func (i ZoneVanityNameServersIpArgs) ToZoneVanityNameServersIpOutputWithContext(ctx context.Context) ZoneVanityNameServersIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneVanityNameServersIpOutput)
-}
-
-// ZoneVanityNameServersIpArrayInput is an input type that accepts ZoneVanityNameServersIpArray and ZoneVanityNameServersIpArrayOutput values.
-// You can construct a concrete instance of `ZoneVanityNameServersIpArrayInput` via:
-//
-//          ZoneVanityNameServersIpArray{ ZoneVanityNameServersIpArgs{...} }
-type ZoneVanityNameServersIpArrayInput interface {
-	pulumi.Input
-
-	ToZoneVanityNameServersIpArrayOutput() ZoneVanityNameServersIpArrayOutput
-	ToZoneVanityNameServersIpArrayOutputWithContext(context.Context) ZoneVanityNameServersIpArrayOutput
-}
-
-type ZoneVanityNameServersIpArray []ZoneVanityNameServersIpInput
-
-func (ZoneVanityNameServersIpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneVanityNameServersIp)(nil)).Elem()
-}
-
-func (i ZoneVanityNameServersIpArray) ToZoneVanityNameServersIpArrayOutput() ZoneVanityNameServersIpArrayOutput {
-	return i.ToZoneVanityNameServersIpArrayOutputWithContext(context.Background())
-}
-
-func (i ZoneVanityNameServersIpArray) ToZoneVanityNameServersIpArrayOutputWithContext(ctx context.Context) ZoneVanityNameServersIpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneVanityNameServersIpArrayOutput)
-}
-
-type ZoneVanityNameServersIpOutput struct{ *pulumi.OutputState }
-
-func (ZoneVanityNameServersIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneVanityNameServersIp)(nil)).Elem()
-}
-
-func (o ZoneVanityNameServersIpOutput) ToZoneVanityNameServersIpOutput() ZoneVanityNameServersIpOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersIpOutput) ToZoneVanityNameServersIpOutputWithContext(ctx context.Context) ZoneVanityNameServersIpOutput {
-	return o
-}
-
-// IPv4 address of the custom name server.
-func (o ZoneVanityNameServersIpOutput) Ipv4() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneVanityNameServersIp) *string { return v.Ipv4 }).(pulumi.StringPtrOutput)
-}
-
-// Name of the custom name server.
-func (o ZoneVanityNameServersIpOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ZoneVanityNameServersIp) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-type ZoneVanityNameServersIpArrayOutput struct{ *pulumi.OutputState }
-
-func (ZoneVanityNameServersIpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneVanityNameServersIp)(nil)).Elem()
-}
-
-func (o ZoneVanityNameServersIpArrayOutput) ToZoneVanityNameServersIpArrayOutput() ZoneVanityNameServersIpArrayOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersIpArrayOutput) ToZoneVanityNameServersIpArrayOutputWithContext(ctx context.Context) ZoneVanityNameServersIpArrayOutput {
-	return o
-}
-
-func (o ZoneVanityNameServersIpArrayOutput) Index(i pulumi.IntInput) ZoneVanityNameServersIpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneVanityNameServersIp {
-		return vs[0].([]ZoneVanityNameServersIp)[vs[1].(int)]
-	}).(ZoneVanityNameServersIpOutput)
-}
-
-type GetBotManagedRulesRule struct {
-	Description  string `pulumi:"description"`
-	RuleId       int    `pulumi:"ruleId"`
-	RuleTypeName string `pulumi:"ruleTypeName"`
-	Status       string `pulumi:"status"`
-}
-
-// GetBotManagedRulesRuleInput is an input type that accepts GetBotManagedRulesRuleArgs and GetBotManagedRulesRuleOutput values.
-// You can construct a concrete instance of `GetBotManagedRulesRuleInput` via:
-//
-//          GetBotManagedRulesRuleArgs{...}
-type GetBotManagedRulesRuleInput interface {
-	pulumi.Input
-
-	ToGetBotManagedRulesRuleOutput() GetBotManagedRulesRuleOutput
-	ToGetBotManagedRulesRuleOutputWithContext(context.Context) GetBotManagedRulesRuleOutput
-}
-
-type GetBotManagedRulesRuleArgs struct {
-	Description  pulumi.StringInput `pulumi:"description"`
-	RuleId       pulumi.IntInput    `pulumi:"ruleId"`
-	RuleTypeName pulumi.StringInput `pulumi:"ruleTypeName"`
-	Status       pulumi.StringInput `pulumi:"status"`
-}
-
-func (GetBotManagedRulesRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetBotManagedRulesRule)(nil)).Elem()
-}
-
-func (i GetBotManagedRulesRuleArgs) ToGetBotManagedRulesRuleOutput() GetBotManagedRulesRuleOutput {
-	return i.ToGetBotManagedRulesRuleOutputWithContext(context.Background())
-}
-
-func (i GetBotManagedRulesRuleArgs) ToGetBotManagedRulesRuleOutputWithContext(ctx context.Context) GetBotManagedRulesRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetBotManagedRulesRuleOutput)
-}
-
-// GetBotManagedRulesRuleArrayInput is an input type that accepts GetBotManagedRulesRuleArray and GetBotManagedRulesRuleArrayOutput values.
-// You can construct a concrete instance of `GetBotManagedRulesRuleArrayInput` via:
-//
-//          GetBotManagedRulesRuleArray{ GetBotManagedRulesRuleArgs{...} }
-type GetBotManagedRulesRuleArrayInput interface {
-	pulumi.Input
-
-	ToGetBotManagedRulesRuleArrayOutput() GetBotManagedRulesRuleArrayOutput
-	ToGetBotManagedRulesRuleArrayOutputWithContext(context.Context) GetBotManagedRulesRuleArrayOutput
-}
-
-type GetBotManagedRulesRuleArray []GetBotManagedRulesRuleInput
-
-func (GetBotManagedRulesRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetBotManagedRulesRule)(nil)).Elem()
-}
-
-func (i GetBotManagedRulesRuleArray) ToGetBotManagedRulesRuleArrayOutput() GetBotManagedRulesRuleArrayOutput {
-	return i.ToGetBotManagedRulesRuleArrayOutputWithContext(context.Background())
-}
-
-func (i GetBotManagedRulesRuleArray) ToGetBotManagedRulesRuleArrayOutputWithContext(ctx context.Context) GetBotManagedRulesRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetBotManagedRulesRuleArrayOutput)
-}
-
-type GetBotManagedRulesRuleOutput struct{ *pulumi.OutputState }
-
-func (GetBotManagedRulesRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetBotManagedRulesRule)(nil)).Elem()
-}
-
-func (o GetBotManagedRulesRuleOutput) ToGetBotManagedRulesRuleOutput() GetBotManagedRulesRuleOutput {
-	return o
-}
-
-func (o GetBotManagedRulesRuleOutput) ToGetBotManagedRulesRuleOutputWithContext(ctx context.Context) GetBotManagedRulesRuleOutput {
-	return o
-}
-
-func (o GetBotManagedRulesRuleOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o GetBotManagedRulesRuleOutput) RuleId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetBotManagedRulesRule) int { return v.RuleId }).(pulumi.IntOutput)
-}
-
-func (o GetBotManagedRulesRuleOutput) RuleTypeName() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.RuleTypeName }).(pulumi.StringOutput)
-}
-
-func (o GetBotManagedRulesRuleOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotManagedRulesRule) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type GetBotManagedRulesRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (GetBotManagedRulesRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetBotManagedRulesRule)(nil)).Elem()
-}
-
-func (o GetBotManagedRulesRuleArrayOutput) ToGetBotManagedRulesRuleArrayOutput() GetBotManagedRulesRuleArrayOutput {
-	return o
-}
-
-func (o GetBotManagedRulesRuleArrayOutput) ToGetBotManagedRulesRuleArrayOutputWithContext(ctx context.Context) GetBotManagedRulesRuleArrayOutput {
-	return o
-}
-
-func (o GetBotManagedRulesRuleArrayOutput) Index(i pulumi.IntInput) GetBotManagedRulesRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBotManagedRulesRule {
-		return vs[0].([]GetBotManagedRulesRule)[vs[1].(int)]
-	}).(GetBotManagedRulesRuleOutput)
-}
-
-type GetBotPortraitRulesRule struct {
-	ClassificationId int    `pulumi:"classificationId"`
-	Description      string `pulumi:"description"`
-	RuleId           int    `pulumi:"ruleId"`
-	RuleTypeName     string `pulumi:"ruleTypeName"`
-	Status           string `pulumi:"status"`
-}
-
-// GetBotPortraitRulesRuleInput is an input type that accepts GetBotPortraitRulesRuleArgs and GetBotPortraitRulesRuleOutput values.
-// You can construct a concrete instance of `GetBotPortraitRulesRuleInput` via:
-//
-//          GetBotPortraitRulesRuleArgs{...}
-type GetBotPortraitRulesRuleInput interface {
-	pulumi.Input
-
-	ToGetBotPortraitRulesRuleOutput() GetBotPortraitRulesRuleOutput
-	ToGetBotPortraitRulesRuleOutputWithContext(context.Context) GetBotPortraitRulesRuleOutput
-}
-
-type GetBotPortraitRulesRuleArgs struct {
-	ClassificationId pulumi.IntInput    `pulumi:"classificationId"`
-	Description      pulumi.StringInput `pulumi:"description"`
-	RuleId           pulumi.IntInput    `pulumi:"ruleId"`
-	RuleTypeName     pulumi.StringInput `pulumi:"ruleTypeName"`
-	Status           pulumi.StringInput `pulumi:"status"`
-}
-
-func (GetBotPortraitRulesRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetBotPortraitRulesRule)(nil)).Elem()
-}
-
-func (i GetBotPortraitRulesRuleArgs) ToGetBotPortraitRulesRuleOutput() GetBotPortraitRulesRuleOutput {
-	return i.ToGetBotPortraitRulesRuleOutputWithContext(context.Background())
-}
-
-func (i GetBotPortraitRulesRuleArgs) ToGetBotPortraitRulesRuleOutputWithContext(ctx context.Context) GetBotPortraitRulesRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetBotPortraitRulesRuleOutput)
-}
-
-// GetBotPortraitRulesRuleArrayInput is an input type that accepts GetBotPortraitRulesRuleArray and GetBotPortraitRulesRuleArrayOutput values.
-// You can construct a concrete instance of `GetBotPortraitRulesRuleArrayInput` via:
-//
-//          GetBotPortraitRulesRuleArray{ GetBotPortraitRulesRuleArgs{...} }
-type GetBotPortraitRulesRuleArrayInput interface {
-	pulumi.Input
-
-	ToGetBotPortraitRulesRuleArrayOutput() GetBotPortraitRulesRuleArrayOutput
-	ToGetBotPortraitRulesRuleArrayOutputWithContext(context.Context) GetBotPortraitRulesRuleArrayOutput
-}
-
-type GetBotPortraitRulesRuleArray []GetBotPortraitRulesRuleInput
-
-func (GetBotPortraitRulesRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetBotPortraitRulesRule)(nil)).Elem()
-}
-
-func (i GetBotPortraitRulesRuleArray) ToGetBotPortraitRulesRuleArrayOutput() GetBotPortraitRulesRuleArrayOutput {
-	return i.ToGetBotPortraitRulesRuleArrayOutputWithContext(context.Background())
-}
-
-func (i GetBotPortraitRulesRuleArray) ToGetBotPortraitRulesRuleArrayOutputWithContext(ctx context.Context) GetBotPortraitRulesRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetBotPortraitRulesRuleArrayOutput)
-}
-
-type GetBotPortraitRulesRuleOutput struct{ *pulumi.OutputState }
-
-func (GetBotPortraitRulesRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetBotPortraitRulesRule)(nil)).Elem()
-}
-
-func (o GetBotPortraitRulesRuleOutput) ToGetBotPortraitRulesRuleOutput() GetBotPortraitRulesRuleOutput {
-	return o
-}
-
-func (o GetBotPortraitRulesRuleOutput) ToGetBotPortraitRulesRuleOutputWithContext(ctx context.Context) GetBotPortraitRulesRuleOutput {
-	return o
-}
-
-func (o GetBotPortraitRulesRuleOutput) ClassificationId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetBotPortraitRulesRule) int { return v.ClassificationId }).(pulumi.IntOutput)
-}
-
-func (o GetBotPortraitRulesRuleOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o GetBotPortraitRulesRuleOutput) RuleId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetBotPortraitRulesRule) int { return v.RuleId }).(pulumi.IntOutput)
-}
-
-func (o GetBotPortraitRulesRuleOutput) RuleTypeName() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.RuleTypeName }).(pulumi.StringOutput)
-}
-
-func (o GetBotPortraitRulesRuleOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v GetBotPortraitRulesRule) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type GetBotPortraitRulesRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (GetBotPortraitRulesRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetBotPortraitRulesRule)(nil)).Elem()
-}
-
-func (o GetBotPortraitRulesRuleArrayOutput) ToGetBotPortraitRulesRuleArrayOutput() GetBotPortraitRulesRuleArrayOutput {
-	return o
-}
-
-func (o GetBotPortraitRulesRuleArrayOutput) ToGetBotPortraitRulesRuleArrayOutputWithContext(ctx context.Context) GetBotPortraitRulesRuleArrayOutput {
-	return o
-}
-
-func (o GetBotPortraitRulesRuleArrayOutput) Index(i pulumi.IntInput) GetBotPortraitRulesRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBotPortraitRulesRule {
-		return vs[0].([]GetBotPortraitRulesRule)[vs[1].(int)]
-	}).(GetBotPortraitRulesRuleOutput)
-}
-
 type GetRuleEngineSettingsAction struct {
 	// Action name.
 	Action string `pulumi:"action"`
@@ -13944,7 +7067,7 @@ type GetRuleEngineSettingsAction struct {
 // GetRuleEngineSettingsActionInput is an input type that accepts GetRuleEngineSettingsActionArgs and GetRuleEngineSettingsActionOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionInput` via:
 //
-//          GetRuleEngineSettingsActionArgs{...}
+//	GetRuleEngineSettingsActionArgs{...}
 type GetRuleEngineSettingsActionInput interface {
 	pulumi.Input
 
@@ -13974,7 +7097,7 @@ func (i GetRuleEngineSettingsActionArgs) ToGetRuleEngineSettingsActionOutputWith
 // GetRuleEngineSettingsActionArrayInput is an input type that accepts GetRuleEngineSettingsActionArray and GetRuleEngineSettingsActionArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionArrayInput` via:
 //
-//          GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
+//	GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
 type GetRuleEngineSettingsActionArrayInput interface {
 	pulumi.Input
 
@@ -14064,7 +7187,7 @@ type GetRuleEngineSettingsActionProperty struct {
 // GetRuleEngineSettingsActionPropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyArgs and GetRuleEngineSettingsActionPropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyInput interface {
 	pulumi.Input
 
@@ -14108,7 +7231,7 @@ func (i GetRuleEngineSettingsActionPropertyArgs) ToGetRuleEngineSettingsActionPr
 // GetRuleEngineSettingsActionPropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyArray and GetRuleEngineSettingsActionPropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyArrayInput interface {
 	pulumi.Input
 
@@ -14235,7 +7358,7 @@ type GetRuleEngineSettingsActionPropertyChoiceProperty struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArgs and GetRuleEngineSettingsActionPropertyChoicePropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyInput interface {
 	pulumi.Input
 
@@ -14277,7 +7400,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArray and GetRuleEngineSettingsActionPropertyChoicePropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput interface {
 	pulumi.Input
 
@@ -14387,7 +7510,7 @@ type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -14419,7 +7542,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs) ToG
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -14502,7 +7625,7 @@ type GetRuleEngineSettingsActionPropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -14534,7 +7657,7 @@ func (i GetRuleEngineSettingsActionPropertyExtraParameterArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -14605,342 +7728,6 @@ func (o GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput) Index(i pu
 	}).(GetRuleEngineSettingsActionPropertyExtraParameterOutput)
 }
 
-type GetSecurityPolicyRegionsGeoIp struct {
-	Continent string `pulumi:"continent"`
-	Country   string `pulumi:"country"`
-	Province  string `pulumi:"province"`
-	RegionId  int    `pulumi:"regionId"`
-}
-
-// GetSecurityPolicyRegionsGeoIpInput is an input type that accepts GetSecurityPolicyRegionsGeoIpArgs and GetSecurityPolicyRegionsGeoIpOutput values.
-// You can construct a concrete instance of `GetSecurityPolicyRegionsGeoIpInput` via:
-//
-//          GetSecurityPolicyRegionsGeoIpArgs{...}
-type GetSecurityPolicyRegionsGeoIpInput interface {
-	pulumi.Input
-
-	ToGetSecurityPolicyRegionsGeoIpOutput() GetSecurityPolicyRegionsGeoIpOutput
-	ToGetSecurityPolicyRegionsGeoIpOutputWithContext(context.Context) GetSecurityPolicyRegionsGeoIpOutput
-}
-
-type GetSecurityPolicyRegionsGeoIpArgs struct {
-	Continent pulumi.StringInput `pulumi:"continent"`
-	Country   pulumi.StringInput `pulumi:"country"`
-	Province  pulumi.StringInput `pulumi:"province"`
-	RegionId  pulumi.IntInput    `pulumi:"regionId"`
-}
-
-func (GetSecurityPolicyRegionsGeoIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetSecurityPolicyRegionsGeoIp)(nil)).Elem()
-}
-
-func (i GetSecurityPolicyRegionsGeoIpArgs) ToGetSecurityPolicyRegionsGeoIpOutput() GetSecurityPolicyRegionsGeoIpOutput {
-	return i.ToGetSecurityPolicyRegionsGeoIpOutputWithContext(context.Background())
-}
-
-func (i GetSecurityPolicyRegionsGeoIpArgs) ToGetSecurityPolicyRegionsGeoIpOutputWithContext(ctx context.Context) GetSecurityPolicyRegionsGeoIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityPolicyRegionsGeoIpOutput)
-}
-
-// GetSecurityPolicyRegionsGeoIpArrayInput is an input type that accepts GetSecurityPolicyRegionsGeoIpArray and GetSecurityPolicyRegionsGeoIpArrayOutput values.
-// You can construct a concrete instance of `GetSecurityPolicyRegionsGeoIpArrayInput` via:
-//
-//          GetSecurityPolicyRegionsGeoIpArray{ GetSecurityPolicyRegionsGeoIpArgs{...} }
-type GetSecurityPolicyRegionsGeoIpArrayInput interface {
-	pulumi.Input
-
-	ToGetSecurityPolicyRegionsGeoIpArrayOutput() GetSecurityPolicyRegionsGeoIpArrayOutput
-	ToGetSecurityPolicyRegionsGeoIpArrayOutputWithContext(context.Context) GetSecurityPolicyRegionsGeoIpArrayOutput
-}
-
-type GetSecurityPolicyRegionsGeoIpArray []GetSecurityPolicyRegionsGeoIpInput
-
-func (GetSecurityPolicyRegionsGeoIpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetSecurityPolicyRegionsGeoIp)(nil)).Elem()
-}
-
-func (i GetSecurityPolicyRegionsGeoIpArray) ToGetSecurityPolicyRegionsGeoIpArrayOutput() GetSecurityPolicyRegionsGeoIpArrayOutput {
-	return i.ToGetSecurityPolicyRegionsGeoIpArrayOutputWithContext(context.Background())
-}
-
-func (i GetSecurityPolicyRegionsGeoIpArray) ToGetSecurityPolicyRegionsGeoIpArrayOutputWithContext(ctx context.Context) GetSecurityPolicyRegionsGeoIpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityPolicyRegionsGeoIpArrayOutput)
-}
-
-type GetSecurityPolicyRegionsGeoIpOutput struct{ *pulumi.OutputState }
-
-func (GetSecurityPolicyRegionsGeoIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetSecurityPolicyRegionsGeoIp)(nil)).Elem()
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) ToGetSecurityPolicyRegionsGeoIpOutput() GetSecurityPolicyRegionsGeoIpOutput {
-	return o
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) ToGetSecurityPolicyRegionsGeoIpOutputWithContext(ctx context.Context) GetSecurityPolicyRegionsGeoIpOutput {
-	return o
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) Continent() pulumi.StringOutput {
-	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Continent }).(pulumi.StringOutput)
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) Country() pulumi.StringOutput {
-	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Country }).(pulumi.StringOutput)
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) Province() pulumi.StringOutput {
-	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) string { return v.Province }).(pulumi.StringOutput)
-}
-
-func (o GetSecurityPolicyRegionsGeoIpOutput) RegionId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetSecurityPolicyRegionsGeoIp) int { return v.RegionId }).(pulumi.IntOutput)
-}
-
-type GetSecurityPolicyRegionsGeoIpArrayOutput struct{ *pulumi.OutputState }
-
-func (GetSecurityPolicyRegionsGeoIpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetSecurityPolicyRegionsGeoIp)(nil)).Elem()
-}
-
-func (o GetSecurityPolicyRegionsGeoIpArrayOutput) ToGetSecurityPolicyRegionsGeoIpArrayOutput() GetSecurityPolicyRegionsGeoIpArrayOutput {
-	return o
-}
-
-func (o GetSecurityPolicyRegionsGeoIpArrayOutput) ToGetSecurityPolicyRegionsGeoIpArrayOutputWithContext(ctx context.Context) GetSecurityPolicyRegionsGeoIpArrayOutput {
-	return o
-}
-
-func (o GetSecurityPolicyRegionsGeoIpArrayOutput) Index(i pulumi.IntInput) GetSecurityPolicyRegionsGeoIpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecurityPolicyRegionsGeoIp {
-		return vs[0].([]GetSecurityPolicyRegionsGeoIp)[vs[1].(int)]
-	}).(GetSecurityPolicyRegionsGeoIpOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroup struct {
-	RuleTypeDesc string                             `pulumi:"ruleTypeDesc"`
-	RuleTypeId   int                                `pulumi:"ruleTypeId"`
-	RuleTypeName string                             `pulumi:"ruleTypeName"`
-	Rules        []GetWafRuleGroupsWafRuleGroupRule `pulumi:"rules"`
-}
-
-// GetWafRuleGroupsWafRuleGroupInput is an input type that accepts GetWafRuleGroupsWafRuleGroupArgs and GetWafRuleGroupsWafRuleGroupOutput values.
-// You can construct a concrete instance of `GetWafRuleGroupsWafRuleGroupInput` via:
-//
-//          GetWafRuleGroupsWafRuleGroupArgs{...}
-type GetWafRuleGroupsWafRuleGroupInput interface {
-	pulumi.Input
-
-	ToGetWafRuleGroupsWafRuleGroupOutput() GetWafRuleGroupsWafRuleGroupOutput
-	ToGetWafRuleGroupsWafRuleGroupOutputWithContext(context.Context) GetWafRuleGroupsWafRuleGroupOutput
-}
-
-type GetWafRuleGroupsWafRuleGroupArgs struct {
-	RuleTypeDesc pulumi.StringInput                         `pulumi:"ruleTypeDesc"`
-	RuleTypeId   pulumi.IntInput                            `pulumi:"ruleTypeId"`
-	RuleTypeName pulumi.StringInput                         `pulumi:"ruleTypeName"`
-	Rules        GetWafRuleGroupsWafRuleGroupRuleArrayInput `pulumi:"rules"`
-}
-
-func (GetWafRuleGroupsWafRuleGroupArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetWafRuleGroupsWafRuleGroup)(nil)).Elem()
-}
-
-func (i GetWafRuleGroupsWafRuleGroupArgs) ToGetWafRuleGroupsWafRuleGroupOutput() GetWafRuleGroupsWafRuleGroupOutput {
-	return i.ToGetWafRuleGroupsWafRuleGroupOutputWithContext(context.Background())
-}
-
-func (i GetWafRuleGroupsWafRuleGroupArgs) ToGetWafRuleGroupsWafRuleGroupOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetWafRuleGroupsWafRuleGroupOutput)
-}
-
-// GetWafRuleGroupsWafRuleGroupArrayInput is an input type that accepts GetWafRuleGroupsWafRuleGroupArray and GetWafRuleGroupsWafRuleGroupArrayOutput values.
-// You can construct a concrete instance of `GetWafRuleGroupsWafRuleGroupArrayInput` via:
-//
-//          GetWafRuleGroupsWafRuleGroupArray{ GetWafRuleGroupsWafRuleGroupArgs{...} }
-type GetWafRuleGroupsWafRuleGroupArrayInput interface {
-	pulumi.Input
-
-	ToGetWafRuleGroupsWafRuleGroupArrayOutput() GetWafRuleGroupsWafRuleGroupArrayOutput
-	ToGetWafRuleGroupsWafRuleGroupArrayOutputWithContext(context.Context) GetWafRuleGroupsWafRuleGroupArrayOutput
-}
-
-type GetWafRuleGroupsWafRuleGroupArray []GetWafRuleGroupsWafRuleGroupInput
-
-func (GetWafRuleGroupsWafRuleGroupArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetWafRuleGroupsWafRuleGroup)(nil)).Elem()
-}
-
-func (i GetWafRuleGroupsWafRuleGroupArray) ToGetWafRuleGroupsWafRuleGroupArrayOutput() GetWafRuleGroupsWafRuleGroupArrayOutput {
-	return i.ToGetWafRuleGroupsWafRuleGroupArrayOutputWithContext(context.Background())
-}
-
-func (i GetWafRuleGroupsWafRuleGroupArray) ToGetWafRuleGroupsWafRuleGroupArrayOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetWafRuleGroupsWafRuleGroupArrayOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroupOutput struct{ *pulumi.OutputState }
-
-func (GetWafRuleGroupsWafRuleGroupOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetWafRuleGroupsWafRuleGroup)(nil)).Elem()
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) ToGetWafRuleGroupsWafRuleGroupOutput() GetWafRuleGroupsWafRuleGroupOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) ToGetWafRuleGroupsWafRuleGroupOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) string { return v.RuleTypeDesc }).(pulumi.StringOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) int { return v.RuleTypeId }).(pulumi.IntOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) RuleTypeName() pulumi.StringOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) string { return v.RuleTypeName }).(pulumi.StringOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupOutput) Rules() GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroup) []GetWafRuleGroupsWafRuleGroupRule { return v.Rules }).(GetWafRuleGroupsWafRuleGroupRuleArrayOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroupArrayOutput struct{ *pulumi.OutputState }
-
-func (GetWafRuleGroupsWafRuleGroupArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetWafRuleGroupsWafRuleGroup)(nil)).Elem()
-}
-
-func (o GetWafRuleGroupsWafRuleGroupArrayOutput) ToGetWafRuleGroupsWafRuleGroupArrayOutput() GetWafRuleGroupsWafRuleGroupArrayOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupArrayOutput) ToGetWafRuleGroupsWafRuleGroupArrayOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupArrayOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupArrayOutput) Index(i pulumi.IntInput) GetWafRuleGroupsWafRuleGroupOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWafRuleGroupsWafRuleGroup {
-		return vs[0].([]GetWafRuleGroupsWafRuleGroup)[vs[1].(int)]
-	}).(GetWafRuleGroupsWafRuleGroupOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroupRule struct {
-	Description   string   `pulumi:"description"`
-	RuleId        int      `pulumi:"ruleId"`
-	RuleLevelDesc string   `pulumi:"ruleLevelDesc"`
-	RuleTags      []string `pulumi:"ruleTags"`
-}
-
-// GetWafRuleGroupsWafRuleGroupRuleInput is an input type that accepts GetWafRuleGroupsWafRuleGroupRuleArgs and GetWafRuleGroupsWafRuleGroupRuleOutput values.
-// You can construct a concrete instance of `GetWafRuleGroupsWafRuleGroupRuleInput` via:
-//
-//          GetWafRuleGroupsWafRuleGroupRuleArgs{...}
-type GetWafRuleGroupsWafRuleGroupRuleInput interface {
-	pulumi.Input
-
-	ToGetWafRuleGroupsWafRuleGroupRuleOutput() GetWafRuleGroupsWafRuleGroupRuleOutput
-	ToGetWafRuleGroupsWafRuleGroupRuleOutputWithContext(context.Context) GetWafRuleGroupsWafRuleGroupRuleOutput
-}
-
-type GetWafRuleGroupsWafRuleGroupRuleArgs struct {
-	Description   pulumi.StringInput      `pulumi:"description"`
-	RuleId        pulumi.IntInput         `pulumi:"ruleId"`
-	RuleLevelDesc pulumi.StringInput      `pulumi:"ruleLevelDesc"`
-	RuleTags      pulumi.StringArrayInput `pulumi:"ruleTags"`
-}
-
-func (GetWafRuleGroupsWafRuleGroupRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupRule)(nil)).Elem()
-}
-
-func (i GetWafRuleGroupsWafRuleGroupRuleArgs) ToGetWafRuleGroupsWafRuleGroupRuleOutput() GetWafRuleGroupsWafRuleGroupRuleOutput {
-	return i.ToGetWafRuleGroupsWafRuleGroupRuleOutputWithContext(context.Background())
-}
-
-func (i GetWafRuleGroupsWafRuleGroupRuleArgs) ToGetWafRuleGroupsWafRuleGroupRuleOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetWafRuleGroupsWafRuleGroupRuleOutput)
-}
-
-// GetWafRuleGroupsWafRuleGroupRuleArrayInput is an input type that accepts GetWafRuleGroupsWafRuleGroupRuleArray and GetWafRuleGroupsWafRuleGroupRuleArrayOutput values.
-// You can construct a concrete instance of `GetWafRuleGroupsWafRuleGroupRuleArrayInput` via:
-//
-//          GetWafRuleGroupsWafRuleGroupRuleArray{ GetWafRuleGroupsWafRuleGroupRuleArgs{...} }
-type GetWafRuleGroupsWafRuleGroupRuleArrayInput interface {
-	pulumi.Input
-
-	ToGetWafRuleGroupsWafRuleGroupRuleArrayOutput() GetWafRuleGroupsWafRuleGroupRuleArrayOutput
-	ToGetWafRuleGroupsWafRuleGroupRuleArrayOutputWithContext(context.Context) GetWafRuleGroupsWafRuleGroupRuleArrayOutput
-}
-
-type GetWafRuleGroupsWafRuleGroupRuleArray []GetWafRuleGroupsWafRuleGroupRuleInput
-
-func (GetWafRuleGroupsWafRuleGroupRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetWafRuleGroupsWafRuleGroupRule)(nil)).Elem()
-}
-
-func (i GetWafRuleGroupsWafRuleGroupRuleArray) ToGetWafRuleGroupsWafRuleGroupRuleArrayOutput() GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
-	return i.ToGetWafRuleGroupsWafRuleGroupRuleArrayOutputWithContext(context.Background())
-}
-
-func (i GetWafRuleGroupsWafRuleGroupRuleArray) ToGetWafRuleGroupsWafRuleGroupRuleArrayOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetWafRuleGroupsWafRuleGroupRuleArrayOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroupRuleOutput struct{ *pulumi.OutputState }
-
-func (GetWafRuleGroupsWafRuleGroupRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupRule)(nil)).Elem()
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) ToGetWafRuleGroupsWafRuleGroupRuleOutput() GetWafRuleGroupsWafRuleGroupRuleOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) ToGetWafRuleGroupsWafRuleGroupRuleOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupRuleOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) int { return v.RuleId }).(pulumi.IntOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleLevelDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) string { return v.RuleLevelDesc }).(pulumi.StringOutput)
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleOutput) RuleTags() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GetWafRuleGroupsWafRuleGroupRule) []string { return v.RuleTags }).(pulumi.StringArrayOutput)
-}
-
-type GetWafRuleGroupsWafRuleGroupRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (GetWafRuleGroupsWafRuleGroupRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetWafRuleGroupsWafRuleGroupRule)(nil)).Elem()
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleArrayOutput) ToGetWafRuleGroupsWafRuleGroupRuleArrayOutput() GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleArrayOutput) ToGetWafRuleGroupsWafRuleGroupRuleArrayOutputWithContext(ctx context.Context) GetWafRuleGroupsWafRuleGroupRuleArrayOutput {
-	return o
-}
-
-func (o GetWafRuleGroupsWafRuleGroupRuleArrayOutput) Index(i pulumi.IntInput) GetWafRuleGroupsWafRuleGroupRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWafRuleGroupsWafRuleGroupRule {
-		return vs[0].([]GetWafRuleGroupsWafRuleGroupRule)[vs[1].(int)]
-	}).(GetWafRuleGroupsWafRuleGroupRuleOutput)
-}
-
 type GetZoneAvailablePlansPlanInfoList struct {
 	// Acceleration area of the plan. Valid value: `mainland`, `overseas`.
 	Area string `pulumi:"area"`
@@ -14963,7 +7750,7 @@ type GetZoneAvailablePlansPlanInfoList struct {
 // GetZoneAvailablePlansPlanInfoListInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArgs and GetZoneAvailablePlansPlanInfoListOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArgs{...}
+//	GetZoneAvailablePlansPlanInfoListArgs{...}
 type GetZoneAvailablePlansPlanInfoListInput interface {
 	pulumi.Input
 
@@ -15005,7 +7792,7 @@ func (i GetZoneAvailablePlansPlanInfoListArgs) ToGetZoneAvailablePlansPlanInfoLi
 // GetZoneAvailablePlansPlanInfoListArrayInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArray and GetZoneAvailablePlansPlanInfoListArrayOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListArrayInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
+//	GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
 type GetZoneAvailablePlansPlanInfoListArrayInput interface {
 	pulumi.Input
 
@@ -15101,399 +7888,19 @@ func (o GetZoneAvailablePlansPlanInfoListArrayOutput) Index(i pulumi.IntInput) G
 	}).(GetZoneAvailablePlansPlanInfoListOutput)
 }
 
-type GetZoneDdosPolicyDomain struct {
-	AccelerateType string `pulumi:"accelerateType"`
-	Host           string `pulumi:"host"`
-	SecurityType   string `pulumi:"securityType"`
-	Status         string `pulumi:"status"`
-}
-
-// GetZoneDdosPolicyDomainInput is an input type that accepts GetZoneDdosPolicyDomainArgs and GetZoneDdosPolicyDomainOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyDomainInput` via:
-//
-//          GetZoneDdosPolicyDomainArgs{...}
-type GetZoneDdosPolicyDomainInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyDomainOutput() GetZoneDdosPolicyDomainOutput
-	ToGetZoneDdosPolicyDomainOutputWithContext(context.Context) GetZoneDdosPolicyDomainOutput
-}
-
-type GetZoneDdosPolicyDomainArgs struct {
-	AccelerateType pulumi.StringInput `pulumi:"accelerateType"`
-	Host           pulumi.StringInput `pulumi:"host"`
-	SecurityType   pulumi.StringInput `pulumi:"securityType"`
-	Status         pulumi.StringInput `pulumi:"status"`
-}
-
-func (GetZoneDdosPolicyDomainArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyDomain)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyDomainArgs) ToGetZoneDdosPolicyDomainOutput() GetZoneDdosPolicyDomainOutput {
-	return i.ToGetZoneDdosPolicyDomainOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyDomainArgs) ToGetZoneDdosPolicyDomainOutputWithContext(ctx context.Context) GetZoneDdosPolicyDomainOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyDomainOutput)
-}
-
-// GetZoneDdosPolicyDomainArrayInput is an input type that accepts GetZoneDdosPolicyDomainArray and GetZoneDdosPolicyDomainArrayOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyDomainArrayInput` via:
-//
-//          GetZoneDdosPolicyDomainArray{ GetZoneDdosPolicyDomainArgs{...} }
-type GetZoneDdosPolicyDomainArrayInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyDomainArrayOutput() GetZoneDdosPolicyDomainArrayOutput
-	ToGetZoneDdosPolicyDomainArrayOutputWithContext(context.Context) GetZoneDdosPolicyDomainArrayOutput
-}
-
-type GetZoneDdosPolicyDomainArray []GetZoneDdosPolicyDomainInput
-
-func (GetZoneDdosPolicyDomainArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyDomain)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyDomainArray) ToGetZoneDdosPolicyDomainArrayOutput() GetZoneDdosPolicyDomainArrayOutput {
-	return i.ToGetZoneDdosPolicyDomainArrayOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyDomainArray) ToGetZoneDdosPolicyDomainArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyDomainArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyDomainArrayOutput)
-}
-
-type GetZoneDdosPolicyDomainOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyDomainOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyDomain)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyDomainOutput) ToGetZoneDdosPolicyDomainOutput() GetZoneDdosPolicyDomainOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyDomainOutput) ToGetZoneDdosPolicyDomainOutputWithContext(ctx context.Context) GetZoneDdosPolicyDomainOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyDomainOutput) AccelerateType() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.AccelerateType }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyDomainOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.Host }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyDomainOutput) SecurityType() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.SecurityType }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyDomainOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyDomain) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type GetZoneDdosPolicyDomainArrayOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyDomainArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyDomain)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyDomainArrayOutput) ToGetZoneDdosPolicyDomainArrayOutput() GetZoneDdosPolicyDomainArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyDomainArrayOutput) ToGetZoneDdosPolicyDomainArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyDomainArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyDomainArrayOutput) Index(i pulumi.IntInput) GetZoneDdosPolicyDomainOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneDdosPolicyDomain {
-		return vs[0].([]GetZoneDdosPolicyDomain)[vs[1].(int)]
-	}).(GetZoneDdosPolicyDomainOutput)
-}
-
-type GetZoneDdosPolicyShieldArea struct {
-	Applications []GetZoneDdosPolicyShieldAreaApplication `pulumi:"applications"`
-	Entity       string                                   `pulumi:"entity"`
-	EntityName   string                                   `pulumi:"entityName"`
-	PolicyId     int                                      `pulumi:"policyId"`
-	TcpNum       int                                      `pulumi:"tcpNum"`
-	Type         string                                   `pulumi:"type"`
-	UdpNum       int                                      `pulumi:"udpNum"`
-	ZoneId       string                                   `pulumi:"zoneId"`
-}
-
-// GetZoneDdosPolicyShieldAreaInput is an input type that accepts GetZoneDdosPolicyShieldAreaArgs and GetZoneDdosPolicyShieldAreaOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyShieldAreaInput` via:
-//
-//          GetZoneDdosPolicyShieldAreaArgs{...}
-type GetZoneDdosPolicyShieldAreaInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyShieldAreaOutput() GetZoneDdosPolicyShieldAreaOutput
-	ToGetZoneDdosPolicyShieldAreaOutputWithContext(context.Context) GetZoneDdosPolicyShieldAreaOutput
-}
-
-type GetZoneDdosPolicyShieldAreaArgs struct {
-	Applications GetZoneDdosPolicyShieldAreaApplicationArrayInput `pulumi:"applications"`
-	Entity       pulumi.StringInput                               `pulumi:"entity"`
-	EntityName   pulumi.StringInput                               `pulumi:"entityName"`
-	PolicyId     pulumi.IntInput                                  `pulumi:"policyId"`
-	TcpNum       pulumi.IntInput                                  `pulumi:"tcpNum"`
-	Type         pulumi.StringInput                               `pulumi:"type"`
-	UdpNum       pulumi.IntInput                                  `pulumi:"udpNum"`
-	ZoneId       pulumi.StringInput                               `pulumi:"zoneId"`
-}
-
-func (GetZoneDdosPolicyShieldAreaArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyShieldArea)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyShieldAreaArgs) ToGetZoneDdosPolicyShieldAreaOutput() GetZoneDdosPolicyShieldAreaOutput {
-	return i.ToGetZoneDdosPolicyShieldAreaOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyShieldAreaArgs) ToGetZoneDdosPolicyShieldAreaOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyShieldAreaOutput)
-}
-
-// GetZoneDdosPolicyShieldAreaArrayInput is an input type that accepts GetZoneDdosPolicyShieldAreaArray and GetZoneDdosPolicyShieldAreaArrayOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyShieldAreaArrayInput` via:
-//
-//          GetZoneDdosPolicyShieldAreaArray{ GetZoneDdosPolicyShieldAreaArgs{...} }
-type GetZoneDdosPolicyShieldAreaArrayInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyShieldAreaArrayOutput() GetZoneDdosPolicyShieldAreaArrayOutput
-	ToGetZoneDdosPolicyShieldAreaArrayOutputWithContext(context.Context) GetZoneDdosPolicyShieldAreaArrayOutput
-}
-
-type GetZoneDdosPolicyShieldAreaArray []GetZoneDdosPolicyShieldAreaInput
-
-func (GetZoneDdosPolicyShieldAreaArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyShieldArea)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyShieldAreaArray) ToGetZoneDdosPolicyShieldAreaArrayOutput() GetZoneDdosPolicyShieldAreaArrayOutput {
-	return i.ToGetZoneDdosPolicyShieldAreaArrayOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyShieldAreaArray) ToGetZoneDdosPolicyShieldAreaArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyShieldAreaArrayOutput)
-}
-
-type GetZoneDdosPolicyShieldAreaOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyShieldAreaOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyShieldArea)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) ToGetZoneDdosPolicyShieldAreaOutput() GetZoneDdosPolicyShieldAreaOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) ToGetZoneDdosPolicyShieldAreaOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) Applications() GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) []GetZoneDdosPolicyShieldAreaApplication { return v.Applications }).(GetZoneDdosPolicyShieldAreaApplicationArrayOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) Entity() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.Entity }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) EntityName() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.EntityName }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) PolicyId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.PolicyId }).(pulumi.IntOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) TcpNum() pulumi.IntOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.TcpNum }).(pulumi.IntOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.Type }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) UdpNum() pulumi.IntOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) int { return v.UdpNum }).(pulumi.IntOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaOutput) ZoneId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldArea) string { return v.ZoneId }).(pulumi.StringOutput)
-}
-
-type GetZoneDdosPolicyShieldAreaArrayOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyShieldAreaArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyShieldArea)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyShieldAreaArrayOutput) ToGetZoneDdosPolicyShieldAreaArrayOutput() GetZoneDdosPolicyShieldAreaArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaArrayOutput) ToGetZoneDdosPolicyShieldAreaArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaArrayOutput) Index(i pulumi.IntInput) GetZoneDdosPolicyShieldAreaOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneDdosPolicyShieldArea {
-		return vs[0].([]GetZoneDdosPolicyShieldArea)[vs[1].(int)]
-	}).(GetZoneDdosPolicyShieldAreaOutput)
-}
-
-type GetZoneDdosPolicyShieldAreaApplication struct {
-	AccelerateType string `pulumi:"accelerateType"`
-	Host           string `pulumi:"host"`
-	SecurityType   string `pulumi:"securityType"`
-	Status         string `pulumi:"status"`
-}
-
-// GetZoneDdosPolicyShieldAreaApplicationInput is an input type that accepts GetZoneDdosPolicyShieldAreaApplicationArgs and GetZoneDdosPolicyShieldAreaApplicationOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyShieldAreaApplicationInput` via:
-//
-//          GetZoneDdosPolicyShieldAreaApplicationArgs{...}
-type GetZoneDdosPolicyShieldAreaApplicationInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyShieldAreaApplicationOutput() GetZoneDdosPolicyShieldAreaApplicationOutput
-	ToGetZoneDdosPolicyShieldAreaApplicationOutputWithContext(context.Context) GetZoneDdosPolicyShieldAreaApplicationOutput
-}
-
-type GetZoneDdosPolicyShieldAreaApplicationArgs struct {
-	AccelerateType pulumi.StringInput `pulumi:"accelerateType"`
-	Host           pulumi.StringInput `pulumi:"host"`
-	SecurityType   pulumi.StringInput `pulumi:"securityType"`
-	Status         pulumi.StringInput `pulumi:"status"`
-}
-
-func (GetZoneDdosPolicyShieldAreaApplicationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyShieldAreaApplication)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyShieldAreaApplicationArgs) ToGetZoneDdosPolicyShieldAreaApplicationOutput() GetZoneDdosPolicyShieldAreaApplicationOutput {
-	return i.ToGetZoneDdosPolicyShieldAreaApplicationOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyShieldAreaApplicationArgs) ToGetZoneDdosPolicyShieldAreaApplicationOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaApplicationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyShieldAreaApplicationOutput)
-}
-
-// GetZoneDdosPolicyShieldAreaApplicationArrayInput is an input type that accepts GetZoneDdosPolicyShieldAreaApplicationArray and GetZoneDdosPolicyShieldAreaApplicationArrayOutput values.
-// You can construct a concrete instance of `GetZoneDdosPolicyShieldAreaApplicationArrayInput` via:
-//
-//          GetZoneDdosPolicyShieldAreaApplicationArray{ GetZoneDdosPolicyShieldAreaApplicationArgs{...} }
-type GetZoneDdosPolicyShieldAreaApplicationArrayInput interface {
-	pulumi.Input
-
-	ToGetZoneDdosPolicyShieldAreaApplicationArrayOutput() GetZoneDdosPolicyShieldAreaApplicationArrayOutput
-	ToGetZoneDdosPolicyShieldAreaApplicationArrayOutputWithContext(context.Context) GetZoneDdosPolicyShieldAreaApplicationArrayOutput
-}
-
-type GetZoneDdosPolicyShieldAreaApplicationArray []GetZoneDdosPolicyShieldAreaApplicationInput
-
-func (GetZoneDdosPolicyShieldAreaApplicationArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyShieldAreaApplication)(nil)).Elem()
-}
-
-func (i GetZoneDdosPolicyShieldAreaApplicationArray) ToGetZoneDdosPolicyShieldAreaApplicationArrayOutput() GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
-	return i.ToGetZoneDdosPolicyShieldAreaApplicationArrayOutputWithContext(context.Background())
-}
-
-func (i GetZoneDdosPolicyShieldAreaApplicationArray) ToGetZoneDdosPolicyShieldAreaApplicationArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetZoneDdosPolicyShieldAreaApplicationArrayOutput)
-}
-
-type GetZoneDdosPolicyShieldAreaApplicationOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyShieldAreaApplicationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetZoneDdosPolicyShieldAreaApplication)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) ToGetZoneDdosPolicyShieldAreaApplicationOutput() GetZoneDdosPolicyShieldAreaApplicationOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) ToGetZoneDdosPolicyShieldAreaApplicationOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaApplicationOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) AccelerateType() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.AccelerateType }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.Host }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) SecurityType() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.SecurityType }).(pulumi.StringOutput)
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v GetZoneDdosPolicyShieldAreaApplication) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type GetZoneDdosPolicyShieldAreaApplicationArrayOutput struct{ *pulumi.OutputState }
-
-func (GetZoneDdosPolicyShieldAreaApplicationArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetZoneDdosPolicyShieldAreaApplication)(nil)).Elem()
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationArrayOutput) ToGetZoneDdosPolicyShieldAreaApplicationArrayOutput() GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationArrayOutput) ToGetZoneDdosPolicyShieldAreaApplicationArrayOutputWithContext(ctx context.Context) GetZoneDdosPolicyShieldAreaApplicationArrayOutput {
-	return o
-}
-
-func (o GetZoneDdosPolicyShieldAreaApplicationArrayOutput) Index(i pulumi.IntInput) GetZoneDdosPolicyShieldAreaApplicationOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneDdosPolicyShieldAreaApplication {
-		return vs[0].([]GetZoneDdosPolicyShieldAreaApplication)[vs[1].(int)]
-	}).(GetZoneDdosPolicyShieldAreaApplicationOutput)
-}
-
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AccelerationDomainOriginInfoInput)(nil)).Elem(), AccelerationDomainOriginInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccelerationDomainOriginInfoPtrInput)(nil)).Elem(), AccelerationDomainOriginInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccelerationDomainOriginInfoPrivateParameterInput)(nil)).Elem(), AccelerationDomainOriginInfoPrivateParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccelerationDomainOriginInfoPrivateParameterArrayInput)(nil)).Elem(), AccelerationDomainOriginInfoPrivateParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationProxyIpv6Input)(nil)).Elem(), ApplicationProxyIpv6Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationProxyIpv6PtrInput)(nil)).Elem(), ApplicationProxyIpv6Args{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleInput)(nil)).Elem(), DdosPolicyDdosRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRulePtrInput)(nil)).Elem(), DdosPolicyDdosRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAclInput)(nil)).Elem(), DdosPolicyDdosRuleAclArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAclPtrInput)(nil)).Elem(), DdosPolicyDdosRuleAclArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAclAclInput)(nil)).Elem(), DdosPolicyDdosRuleAclAclArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAclAclArrayInput)(nil)).Elem(), DdosPolicyDdosRuleAclAclArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockInput)(nil)).Elem(), DdosPolicyDdosRuleAllowBlockArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockPtrInput)(nil)).Elem(), DdosPolicyDdosRuleAllowBlockArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockAllowBlockIpInput)(nil)).Elem(), DdosPolicyDdosRuleAllowBlockAllowBlockIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayInput)(nil)).Elem(), DdosPolicyDdosRuleAllowBlockAllowBlockIpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAntiPlyInput)(nil)).Elem(), DdosPolicyDdosRuleAntiPlyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleAntiPlyPtrInput)(nil)).Elem(), DdosPolicyDdosRuleAntiPlyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleGeoIpInput)(nil)).Elem(), DdosPolicyDdosRuleGeoIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleGeoIpPtrInput)(nil)).Elem(), DdosPolicyDdosRuleGeoIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRulePacketFilterInput)(nil)).Elem(), DdosPolicyDdosRulePacketFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRulePacketFilterPtrInput)(nil)).Elem(), DdosPolicyDdosRulePacketFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRulePacketFilterPacketFilterInput)(nil)).Elem(), DdosPolicyDdosRulePacketFilterPacketFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRulePacketFilterPacketFilterArrayInput)(nil)).Elem(), DdosPolicyDdosRulePacketFilterPacketFilterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleSpeedLimitInput)(nil)).Elem(), DdosPolicyDdosRuleSpeedLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleSpeedLimitPtrInput)(nil)).Elem(), DdosPolicyDdosRuleSpeedLimitArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleStatusInfoInput)(nil)).Elem(), DdosPolicyDdosRuleStatusInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyDdosRuleStatusInfoPtrInput)(nil)).Elem(), DdosPolicyDdosRuleStatusInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DnsSecDnssecInput)(nil)).Elem(), DnsSecDnssecArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DnsSecDnssecPtrInput)(nil)).Elem(), DnsSecDnssecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoInput)(nil)).Elem(), CertificateConfigServerCertInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoArrayInput)(nil)).Elem(), CertificateConfigServerCertInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordInput)(nil)).Elem(), OriginGroupOriginRecordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordArrayInput)(nil)).Elem(), OriginGroupOriginRecordArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordPrivateParameterInput)(nil)).Elem(), OriginGroupOriginRecordPrivateParameterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupOriginRecordPrivateParameterArrayInput)(nil)).Elem(), OriginGroupOriginRecordPrivateParameterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RuleEnginePriorityRulesPriorityInput)(nil)).Elem(), RuleEnginePriorityRulesPriorityArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RuleEnginePriorityRulesPriorityArrayInput)(nil)).Elem(), RuleEnginePriorityRulesPriorityArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleInput)(nil)).Elem(), RuleEngineRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleArrayInput)(nil)).Elem(), RuleEngineRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleActionInput)(nil)).Elem(), RuleEngineRuleActionArgs{})
@@ -15536,66 +7943,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrArrayInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrAndInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrAndArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrAndArrayInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrAndArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigInput)(nil)).Elem(), SecurityPolicyConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigInput)(nil)).Elem(), SecurityPolicyConfigAclConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigAclConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleInput)(nil)).Elem(), SecurityPolicyConfigAclConfigUserRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleArrayInput)(nil)).Elem(), SecurityPolicyConfigAclConfigUserRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleConditionInput)(nil)).Elem(), SecurityPolicyConfigAclConfigUserRuleConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigAclConfigUserRuleConditionArrayInput)(nil)).Elem(), SecurityPolicyConfigAclConfigUserRuleConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigInput)(nil)).Elem(), SecurityPolicyConfigBotConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigBotConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRuleInput)(nil)).Elem(), SecurityPolicyConfigBotConfigIntelligenceRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRulePtrInput)(nil)).Elem(), SecurityPolicyConfigBotConfigIntelligenceRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRuleItemInput)(nil)).Elem(), SecurityPolicyConfigBotConfigIntelligenceRuleItemArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayInput)(nil)).Elem(), SecurityPolicyConfigBotConfigIntelligenceRuleItemArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigManagedRuleInput)(nil)).Elem(), SecurityPolicyConfigBotConfigManagedRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigManagedRulePtrInput)(nil)).Elem(), SecurityPolicyConfigBotConfigManagedRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigPortraitRuleInput)(nil)).Elem(), SecurityPolicyConfigBotConfigPortraitRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigBotConfigPortraitRulePtrInput)(nil)).Elem(), SecurityPolicyConfigBotConfigPortraitRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigAclDropPageDetailInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigAclDropPageDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigWafDropPageDetailInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrInput)(nil)).Elem(), SecurityPolicyConfigDropPageConfigWafDropPageDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleArrayInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrInput)(nil)).Elem(), SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigIpTableConfigInput)(nil)).Elem(), SecurityPolicyConfigIpTableConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigIpTableConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigIpTableConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigIpTableConfigRuleInput)(nil)).Elem(), SecurityPolicyConfigIpTableConfigRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigIpTableConfigRuleArrayInput)(nil)).Elem(), SecurityPolicyConfigIpTableConfigRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigIntelligenceInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigIntelligenceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigIntelligencePtrInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigIntelligenceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplateInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigTemplateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplatePtrInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigTemplateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplateDetailInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigTemplateDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigTemplateDetailPtrInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigTemplateDetailArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigUserRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleArrayInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigUserRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleConditionInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigUserRuleConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayInput)(nil)).Elem(), SecurityPolicyConfigRateLimitConfigUserRuleConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSwitchConfigInput)(nil)).Elem(), SecurityPolicyConfigSwitchConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSwitchConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigSwitchConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigInput)(nil)).Elem(), SecurityPolicyConfigWafConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigPtrInput)(nil)).Elem(), SecurityPolicyConfigWafConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigAiRuleInput)(nil)).Elem(), SecurityPolicyConfigWafConfigAiRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigAiRulePtrInput)(nil)).Elem(), SecurityPolicyConfigWafConfigAiRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigWafRulesInput)(nil)).Elem(), SecurityPolicyConfigWafConfigWafRulesArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigWafConfigWafRulesPtrInput)(nil)).Elem(), SecurityPolicyConfigWafConfigWafRulesArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneResourceInput)(nil)).Elem(), ZoneResourceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneResourceArrayInput)(nil)).Elem(), ZoneResourceArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneResourceSvInput)(nil)).Elem(), ZoneResourceSvArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneResourceSvArrayInput)(nil)).Elem(), ZoneResourceSvArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationInput)(nil)).Elem(), ZoneOwnershipVerificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationArrayInput)(nil)).Elem(), ZoneOwnershipVerificationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationDnsVerificationInput)(nil)).Elem(), ZoneOwnershipVerificationDnsVerificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationDnsVerificationArrayInput)(nil)).Elem(), ZoneOwnershipVerificationDnsVerificationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingCacheInput)(nil)).Elem(), ZoneSettingCacheArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingCachePtrInput)(nil)).Elem(), ZoneSettingCacheArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingCacheCacheInput)(nil)).Elem(), ZoneSettingCacheCacheArgs{})
@@ -15638,14 +7989,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingUpstreamHttp2PtrInput)(nil)).Elem(), ZoneSettingUpstreamHttp2Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingWebSocketInput)(nil)).Elem(), ZoneSettingWebSocketArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneSettingWebSocketPtrInput)(nil)).Elem(), ZoneSettingWebSocketArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVanityNameServersInput)(nil)).Elem(), ZoneVanityNameServersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVanityNameServersPtrInput)(nil)).Elem(), ZoneVanityNameServersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVanityNameServersIpInput)(nil)).Elem(), ZoneVanityNameServersIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVanityNameServersIpArrayInput)(nil)).Elem(), ZoneVanityNameServersIpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetBotManagedRulesRuleInput)(nil)).Elem(), GetBotManagedRulesRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetBotManagedRulesRuleArrayInput)(nil)).Elem(), GetBotManagedRulesRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetBotPortraitRulesRuleInput)(nil)).Elem(), GetBotPortraitRulesRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetBotPortraitRulesRuleArrayInput)(nil)).Elem(), GetBotPortraitRulesRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionInput)(nil)).Elem(), GetRuleEngineSettingsActionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionArrayInput)(nil)).Elem(), GetRuleEngineSettingsActionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionPropertyInput)(nil)).Elem(), GetRuleEngineSettingsActionPropertyArgs{})
@@ -15656,52 +7999,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput)(nil)).Elem(), GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionPropertyExtraParameterInput)(nil)).Elem(), GetRuleEngineSettingsActionPropertyExtraParameterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEngineSettingsActionPropertyExtraParameterArrayInput)(nil)).Elem(), GetRuleEngineSettingsActionPropertyExtraParameterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityPolicyRegionsGeoIpInput)(nil)).Elem(), GetSecurityPolicyRegionsGeoIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityPolicyRegionsGeoIpArrayInput)(nil)).Elem(), GetSecurityPolicyRegionsGeoIpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupInput)(nil)).Elem(), GetWafRuleGroupsWafRuleGroupArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupArrayInput)(nil)).Elem(), GetWafRuleGroupsWafRuleGroupArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupRuleInput)(nil)).Elem(), GetWafRuleGroupsWafRuleGroupRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetWafRuleGroupsWafRuleGroupRuleArrayInput)(nil)).Elem(), GetWafRuleGroupsWafRuleGroupRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneAvailablePlansPlanInfoListInput)(nil)).Elem(), GetZoneAvailablePlansPlanInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneAvailablePlansPlanInfoListArrayInput)(nil)).Elem(), GetZoneAvailablePlansPlanInfoListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyDomainInput)(nil)).Elem(), GetZoneDdosPolicyDomainArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyDomainArrayInput)(nil)).Elem(), GetZoneDdosPolicyDomainArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyShieldAreaInput)(nil)).Elem(), GetZoneDdosPolicyShieldAreaArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyShieldAreaArrayInput)(nil)).Elem(), GetZoneDdosPolicyShieldAreaArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyShieldAreaApplicationInput)(nil)).Elem(), GetZoneDdosPolicyShieldAreaApplicationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneDdosPolicyShieldAreaApplicationArrayInput)(nil)).Elem(), GetZoneDdosPolicyShieldAreaApplicationArray{})
+	pulumi.RegisterOutputType(AccelerationDomainOriginInfoOutput{})
+	pulumi.RegisterOutputType(AccelerationDomainOriginInfoPtrOutput{})
+	pulumi.RegisterOutputType(AccelerationDomainOriginInfoPrivateParameterOutput{})
+	pulumi.RegisterOutputType(AccelerationDomainOriginInfoPrivateParameterArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationProxyIpv6Output{})
 	pulumi.RegisterOutputType(ApplicationProxyIpv6PtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRulePtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAclOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAclPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAclAclOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAclAclArrayOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAllowBlockOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAllowBlockPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAllowBlockAllowBlockIpOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAllowBlockAllowBlockIpArrayOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAntiPlyOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleAntiPlyPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleGeoIpOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleGeoIpPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRulePacketFilterOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRulePacketFilterPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRulePacketFilterPacketFilterOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRulePacketFilterPacketFilterArrayOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleSpeedLimitOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleSpeedLimitPtrOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleStatusInfoOutput{})
-	pulumi.RegisterOutputType(DdosPolicyDdosRuleStatusInfoPtrOutput{})
-	pulumi.RegisterOutputType(DnsSecDnssecOutput{})
-	pulumi.RegisterOutputType(DnsSecDnssecPtrOutput{})
+	pulumi.RegisterOutputType(CertificateConfigServerCertInfoOutput{})
+	pulumi.RegisterOutputType(CertificateConfigServerCertInfoArrayOutput{})
 	pulumi.RegisterOutputType(OriginGroupOriginRecordOutput{})
 	pulumi.RegisterOutputType(OriginGroupOriginRecordArrayOutput{})
 	pulumi.RegisterOutputType(OriginGroupOriginRecordPrivateParameterOutput{})
 	pulumi.RegisterOutputType(OriginGroupOriginRecordPrivateParameterArrayOutput{})
-	pulumi.RegisterOutputType(RuleEnginePriorityRulesPriorityOutput{})
-	pulumi.RegisterOutputType(RuleEnginePriorityRulesPriorityArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleActionOutput{})
@@ -15744,66 +8055,10 @@ func init() {
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrAndOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrAndArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigUserRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigUserRuleArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigUserRuleConditionOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigAclConfigUserRuleConditionArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigIntelligenceRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigIntelligenceRulePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigIntelligenceRuleItemOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigIntelligenceRuleItemArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigManagedRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigManagedRulePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigPortraitRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigBotConfigPortraitRulePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigAclDropPageDetailOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigAclDropPageDetailPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigWafDropPageDetailOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigDropPageConfigWafDropPageDetailPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleConditionArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopeOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigExceptConfigExceptUserRuleExceptUserRuleScopePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigIpTableConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigIpTableConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigIpTableConfigRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigIpTableConfigRuleArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigIntelligenceOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigIntelligencePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigTemplateOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigTemplatePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigTemplateDetailOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigTemplateDetailPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigUserRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigUserRuleArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigUserRuleConditionOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigRateLimitConfigUserRuleConditionArrayOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigSwitchConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigSwitchConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigPtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigAiRuleOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigAiRulePtrOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigWafRulesOutput{})
-	pulumi.RegisterOutputType(SecurityPolicyConfigWafConfigWafRulesPtrOutput{})
-	pulumi.RegisterOutputType(ZoneResourceOutput{})
-	pulumi.RegisterOutputType(ZoneResourceArrayOutput{})
-	pulumi.RegisterOutputType(ZoneResourceSvOutput{})
-	pulumi.RegisterOutputType(ZoneResourceSvArrayOutput{})
+	pulumi.RegisterOutputType(ZoneOwnershipVerificationOutput{})
+	pulumi.RegisterOutputType(ZoneOwnershipVerificationArrayOutput{})
+	pulumi.RegisterOutputType(ZoneOwnershipVerificationDnsVerificationOutput{})
+	pulumi.RegisterOutputType(ZoneOwnershipVerificationDnsVerificationArrayOutput{})
 	pulumi.RegisterOutputType(ZoneSettingCacheOutput{})
 	pulumi.RegisterOutputType(ZoneSettingCachePtrOutput{})
 	pulumi.RegisterOutputType(ZoneSettingCacheCacheOutput{})
@@ -15846,14 +8101,6 @@ func init() {
 	pulumi.RegisterOutputType(ZoneSettingUpstreamHttp2PtrOutput{})
 	pulumi.RegisterOutputType(ZoneSettingWebSocketOutput{})
 	pulumi.RegisterOutputType(ZoneSettingWebSocketPtrOutput{})
-	pulumi.RegisterOutputType(ZoneVanityNameServersOutput{})
-	pulumi.RegisterOutputType(ZoneVanityNameServersPtrOutput{})
-	pulumi.RegisterOutputType(ZoneVanityNameServersIpOutput{})
-	pulumi.RegisterOutputType(ZoneVanityNameServersIpArrayOutput{})
-	pulumi.RegisterOutputType(GetBotManagedRulesRuleOutput{})
-	pulumi.RegisterOutputType(GetBotManagedRulesRuleArrayOutput{})
-	pulumi.RegisterOutputType(GetBotPortraitRulesRuleOutput{})
-	pulumi.RegisterOutputType(GetBotPortraitRulesRuleArrayOutput{})
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionOutput{})
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionArrayOutput{})
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionPropertyOutput{})
@@ -15864,18 +8111,6 @@ func init() {
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayOutput{})
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionPropertyExtraParameterOutput{})
 	pulumi.RegisterOutputType(GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput{})
-	pulumi.RegisterOutputType(GetSecurityPolicyRegionsGeoIpOutput{})
-	pulumi.RegisterOutputType(GetSecurityPolicyRegionsGeoIpArrayOutput{})
-	pulumi.RegisterOutputType(GetWafRuleGroupsWafRuleGroupOutput{})
-	pulumi.RegisterOutputType(GetWafRuleGroupsWafRuleGroupArrayOutput{})
-	pulumi.RegisterOutputType(GetWafRuleGroupsWafRuleGroupRuleOutput{})
-	pulumi.RegisterOutputType(GetWafRuleGroupsWafRuleGroupRuleArrayOutput{})
 	pulumi.RegisterOutputType(GetZoneAvailablePlansPlanInfoListOutput{})
 	pulumi.RegisterOutputType(GetZoneAvailablePlansPlanInfoListArrayOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyDomainOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyDomainArrayOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyShieldAreaOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyShieldAreaArrayOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyShieldAreaApplicationOutput{})
-	pulumi.RegisterOutputType(GetZoneDdosPolicyShieldAreaApplicationArrayOutput{})
 }

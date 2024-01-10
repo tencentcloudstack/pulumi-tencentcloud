@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.GetVipEipAttachments(ctx, &ha.GetVipEipAttachmentsArgs{
-// 			AddressIp: pulumi.StringRef("1.1.1.1"),
-// 			HavipId:   "havip-kjqwe4ba",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.GetVipEipAttachments(ctx, &ha.GetVipEipAttachmentsArgs{
+//				AddressIp: pulumi.StringRef("1.1.1.1"),
+//				HavipId:   "havip-kjqwe4ba",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetVipEipAttachments(ctx *pulumi.Context, args *GetVipEipAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVipEipAttachmentsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

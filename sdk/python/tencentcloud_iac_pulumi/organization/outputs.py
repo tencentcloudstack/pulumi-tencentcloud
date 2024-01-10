@@ -7,10 +7,130 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'InstanceOrgPermission',
+    'OrgIdentityIdentityPolicy',
     'OrgMemberOrgPermission',
+    'GetMembersItemResult',
+    'GetMembersItemOrgIdentityResult',
+    'GetMembersItemOrgPermissionResult',
+    'GetOrgAuthNodeItemResult',
+    'GetOrgAuthNodeItemManagerResult',
+    'GetOrgFinancialByMemberItemResult',
+    'GetOrgFinancialByMonthItemResult',
+    'GetOrgFinancialByProductItemResult',
 ]
+
+@pulumi.output_type
+class InstanceOrgPermission(dict):
+    def __init__(__self__, *,
+                 id: Optional[int] = None,
+                 name: Optional[str] = None):
+        """
+        :param int id: Permissions ID.
+        :param str name: Permission name.
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[int]:
+        """
+        Permissions ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Permission name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class OrgIdentityIdentityPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "policyDocument":
+            suggest = "policy_document"
+        elif key == "policyId":
+            suggest = "policy_id"
+        elif key == "policyName":
+            suggest = "policy_name"
+        elif key == "policyType":
+            suggest = "policy_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in OrgIdentityIdentityPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        OrgIdentityIdentityPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        OrgIdentityIdentityPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 policy_document: Optional[str] = None,
+                 policy_id: Optional[int] = None,
+                 policy_name: Optional[str] = None,
+                 policy_type: Optional[int] = None):
+        """
+        :param str policy_document: Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+        :param int policy_id: CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+        :param str policy_name: CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+        :param int policy_type: Policy type. Value 1-custom policy 2-preset policy; default value 2.
+        """
+        if policy_document is not None:
+            pulumi.set(__self__, "policy_document", policy_document)
+        if policy_id is not None:
+            pulumi.set(__self__, "policy_id", policy_id)
+        if policy_name is not None:
+            pulumi.set(__self__, "policy_name", policy_name)
+        if policy_type is not None:
+            pulumi.set(__self__, "policy_type", policy_type)
+
+    @property
+    @pulumi.getter(name="policyDocument")
+    def policy_document(self) -> Optional[str]:
+        """
+        Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+        """
+        return pulumi.get(self, "policy_document")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> Optional[int]:
+        """
+        CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> Optional[str]:
+        """
+        CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="policyType")
+    def policy_type(self) -> Optional[int]:
+        """
+        Policy type. Value 1-custom policy 2-preset policy; default value 2.
+        """
+        return pulumi.get(self, "policy_type")
+
 
 @pulumi.output_type
 class OrgMemberOrgPermission(dict):
@@ -41,5 +161,479 @@ class OrgMemberOrgPermission(dict):
         Member name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetMembersItemResult(dict):
+    def __init__(__self__, *,
+                 bind_status: str,
+                 create_time: str,
+                 is_allow_quit: str,
+                 member_type: str,
+                 member_uin: int,
+                 name: str,
+                 node_id: int,
+                 node_name: str,
+                 org_identities: Sequence['outputs.GetMembersItemOrgIdentityResult'],
+                 org_permissions: Sequence['outputs.GetMembersItemOrgPermissionResult'],
+                 org_policy_name: str,
+                 org_policy_type: str,
+                 pay_name: str,
+                 pay_uin: str,
+                 permission_status: str,
+                 remark: str,
+                 update_time: str):
+        """
+        :param str bind_status: Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str create_time: Creation timeNote: This field may return null, indicating that no valid values can be obtained.
+        :param str is_allow_quit: Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str member_type: Member type. Valid values: `Invite` (invited); `Create` (created).Note: This field may return null, indicating that no valid values can be obtained.
+        :param int member_uin: Member UINNote: This field may return null, indicating that no valid values can be obtained.
+        :param str name: Permission name.
+        :param int node_id: Node IDNote: This field may return null, indicating that no valid values can be obtained.
+        :param str node_name: Node nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetMembersItemOrgIdentityArgs'] org_identities: Management identityNote: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetMembersItemOrgPermissionArgs'] org_permissions: Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.
+        :param str org_policy_name: Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param str org_policy_type: Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.
+        :param str pay_name: Payer nameNote: This field may return null, indicating that no valid values can be obtained.
+        :param str pay_uin: Payer UINNote: This field may return null, indicating that no valid values can be obtained.
+        :param str permission_status: Member permission status. Valid values: `Confirmed`, `UnConfirmed`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str remark: RemarksNote: This field may return null, indicating that no valid values can be obtained.
+        :param str update_time: Update timeNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "bind_status", bind_status)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "is_allow_quit", is_allow_quit)
+        pulumi.set(__self__, "member_type", member_type)
+        pulumi.set(__self__, "member_uin", member_uin)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "node_name", node_name)
+        pulumi.set(__self__, "org_identities", org_identities)
+        pulumi.set(__self__, "org_permissions", org_permissions)
+        pulumi.set(__self__, "org_policy_name", org_policy_name)
+        pulumi.set(__self__, "org_policy_type", org_policy_type)
+        pulumi.set(__self__, "pay_name", pay_name)
+        pulumi.set(__self__, "pay_uin", pay_uin)
+        pulumi.set(__self__, "permission_status", permission_status)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="bindStatus")
+    def bind_status(self) -> str:
+        """
+        Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "bind_status")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation timeNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="isAllowQuit")
+    def is_allow_quit(self) -> str:
+        """
+        Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_allow_quit")
+
+    @property
+    @pulumi.getter(name="memberType")
+    def member_type(self) -> str:
+        """
+        Member type. Valid values: `Invite` (invited); `Create` (created).Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "member_type")
+
+    @property
+    @pulumi.getter(name="memberUin")
+    def member_uin(self) -> int:
+        """
+        Member UINNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "member_uin")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Permission name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> int:
+        """
+        Node IDNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter(name="nodeName")
+    def node_name(self) -> str:
+        """
+        Node nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "node_name")
+
+    @property
+    @pulumi.getter(name="orgIdentities")
+    def org_identities(self) -> Sequence['outputs.GetMembersItemOrgIdentityResult']:
+        """
+        Management identityNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "org_identities")
+
+    @property
+    @pulumi.getter(name="orgPermissions")
+    def org_permissions(self) -> Sequence['outputs.GetMembersItemOrgPermissionResult']:
+        """
+        Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "org_permissions")
+
+    @property
+    @pulumi.getter(name="orgPolicyName")
+    def org_policy_name(self) -> str:
+        """
+        Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "org_policy_name")
+
+    @property
+    @pulumi.getter(name="orgPolicyType")
+    def org_policy_type(self) -> str:
+        """
+        Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "org_policy_type")
+
+    @property
+    @pulumi.getter(name="payName")
+    def pay_name(self) -> str:
+        """
+        Payer nameNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "pay_name")
+
+    @property
+    @pulumi.getter(name="payUin")
+    def pay_uin(self) -> str:
+        """
+        Payer UINNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "pay_uin")
+
+    @property
+    @pulumi.getter(name="permissionStatus")
+    def permission_status(self) -> str:
+        """
+        Member permission status. Valid values: `Confirmed`, `UnConfirmed`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "permission_status")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        RemarksNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Update timeNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetMembersItemOrgIdentityResult(dict):
+    def __init__(__self__, *,
+                 identity_alias_name: str,
+                 identity_id: int):
+        """
+        :param str identity_alias_name: Identity name.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int identity_id: Identity ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "identity_alias_name", identity_alias_name)
+        pulumi.set(__self__, "identity_id", identity_id)
+
+    @property
+    @pulumi.getter(name="identityAliasName")
+    def identity_alias_name(self) -> str:
+        """
+        Identity name.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "identity_alias_name")
+
+    @property
+    @pulumi.getter(name="identityId")
+    def identity_id(self) -> int:
+        """
+        Identity ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "identity_id")
+
+
+@pulumi.output_type
+class GetMembersItemOrgPermissionResult(dict):
+    def __init__(__self__, *,
+                 id: int,
+                 name: str):
+        """
+        :param int id: Permission ID.
+        :param str name: Permission name.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Permission ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Permission name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetOrgAuthNodeItemResult(dict):
+    def __init__(__self__, *,
+                 auth_name: str,
+                 managers: Sequence['outputs.GetOrgAuthNodeItemManagerResult'],
+                 relation_id: int):
+        """
+        :param str auth_name: Verified company name.
+        :param Sequence['GetOrgAuthNodeItemManagerArgs'] managers: Organization auth manager.
+        :param int relation_id: Relationship Id.
+        """
+        pulumi.set(__self__, "auth_name", auth_name)
+        pulumi.set(__self__, "managers", managers)
+        pulumi.set(__self__, "relation_id", relation_id)
+
+    @property
+    @pulumi.getter(name="authName")
+    def auth_name(self) -> str:
+        """
+        Verified company name.
+        """
+        return pulumi.get(self, "auth_name")
+
+    @property
+    @pulumi.getter
+    def managers(self) -> Sequence['outputs.GetOrgAuthNodeItemManagerResult']:
+        """
+        Organization auth manager.
+        """
+        return pulumi.get(self, "managers")
+
+    @property
+    @pulumi.getter(name="relationId")
+    def relation_id(self) -> int:
+        """
+        Relationship Id.
+        """
+        return pulumi.get(self, "relation_id")
+
+
+@pulumi.output_type
+class GetOrgAuthNodeItemManagerResult(dict):
+    def __init__(__self__, *,
+                 member_name: str,
+                 member_uin: int):
+        """
+        :param str member_name: Member name.
+        :param int member_uin: Member uin.
+        """
+        pulumi.set(__self__, "member_name", member_name)
+        pulumi.set(__self__, "member_uin", member_uin)
+
+    @property
+    @pulumi.getter(name="memberName")
+    def member_name(self) -> str:
+        """
+        Member name.
+        """
+        return pulumi.get(self, "member_name")
+
+    @property
+    @pulumi.getter(name="memberUin")
+    def member_uin(self) -> int:
+        """
+        Member uin.
+        """
+        return pulumi.get(self, "member_uin")
+
+
+@pulumi.output_type
+class GetOrgFinancialByMemberItemResult(dict):
+    def __init__(__self__, *,
+                 member_name: str,
+                 member_uin: int,
+                 ratio: str,
+                 total_cost: float):
+        """
+        :param str member_name: Member name.
+        :param int member_uin: Member uin.
+        :param str ratio: The percentage of the organization total cost that is accounted for by the member.
+        :param float total_cost: Total cost of the member.
+        """
+        pulumi.set(__self__, "member_name", member_name)
+        pulumi.set(__self__, "member_uin", member_uin)
+        pulumi.set(__self__, "ratio", ratio)
+        pulumi.set(__self__, "total_cost", total_cost)
+
+    @property
+    @pulumi.getter(name="memberName")
+    def member_name(self) -> str:
+        """
+        Member name.
+        """
+        return pulumi.get(self, "member_name")
+
+    @property
+    @pulumi.getter(name="memberUin")
+    def member_uin(self) -> int:
+        """
+        Member uin.
+        """
+        return pulumi.get(self, "member_uin")
+
+    @property
+    @pulumi.getter
+    def ratio(self) -> str:
+        """
+        The percentage of the organization total cost that is accounted for by the member.
+        """
+        return pulumi.get(self, "ratio")
+
+    @property
+    @pulumi.getter(name="totalCost")
+    def total_cost(self) -> float:
+        """
+        Total cost of the member.
+        """
+        return pulumi.get(self, "total_cost")
+
+
+@pulumi.output_type
+class GetOrgFinancialByMonthItemResult(dict):
+    def __init__(__self__, *,
+                 growth_rate: str,
+                 id: int,
+                 month: str,
+                 total_cost: float):
+        """
+        :param str growth_rate: Growth rate compared to last month.
+        :param int id: Record ID.
+        :param str month: Month.
+        :param float total_cost: Total cost of the month.
+        """
+        pulumi.set(__self__, "growth_rate", growth_rate)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "month", month)
+        pulumi.set(__self__, "total_cost", total_cost)
+
+    @property
+    @pulumi.getter(name="growthRate")
+    def growth_rate(self) -> str:
+        """
+        Growth rate compared to last month.
+        """
+        return pulumi.get(self, "growth_rate")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Record ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def month(self) -> str:
+        """
+        Month.
+        """
+        return pulumi.get(self, "month")
+
+    @property
+    @pulumi.getter(name="totalCost")
+    def total_cost(self) -> float:
+        """
+        Total cost of the month.
+        """
+        return pulumi.get(self, "total_cost")
+
+
+@pulumi.output_type
+class GetOrgFinancialByProductItemResult(dict):
+    def __init__(__self__, *,
+                 product_code: str,
+                 product_name: str,
+                 ratio: str,
+                 total_cost: float):
+        """
+        :param str product_code: Product code.
+        :param str product_name: Product name.
+        :param str ratio: The percentage of the organization total cost that is accounted for by the product.
+        :param float total_cost: Total cost of the product.
+        """
+        pulumi.set(__self__, "product_code", product_code)
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "ratio", ratio)
+        pulumi.set(__self__, "total_cost", total_cost)
+
+    @property
+    @pulumi.getter(name="productCode")
+    def product_code(self) -> str:
+        """
+        Product code.
+        """
+        return pulumi.get(self, "product_code")
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        Product name.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter
+    def ratio(self) -> str:
+        """
+        The percentage of the organization total cost that is accounted for by the product.
+        """
+        return pulumi.get(self, "ratio")
+
+    @property
+    @pulumi.getter(name="totalCost")
+    def total_cost(self) -> float:
+        """
+        Total cost of the product.
+        """
+        return pulumi.get(self, "total_cost")
 
 

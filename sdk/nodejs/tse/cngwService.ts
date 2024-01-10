@@ -12,32 +12,52 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const cngwService = new tencentcloud.Tse.CngwService("cngw_service", {
- *     gatewayId: "gateway-ddbb709b",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const cngwGateway = new tencentcloud.tse.CngwGateway("cngwGateway", {
+ *     description: "terraform test1",
+ *     enableCls: true,
+ *     engineRegion: "ap-guangzhou",
+ *     featureVersion: "STANDARD",
+ *     gatewayVersion: "2.5.1",
+ *     ingressClassName: "tse-nginx-ingress",
+ *     internetMaxBandwidthOut: 0,
+ *     tradeType: 0,
+ *     type: "kong",
+ *     nodeConfig: {
+ *         number: 2,
+ *         specification: "1c2g",
+ *     },
+ *     vpcConfig: {
+ *         subnetId: subnet.id,
+ *         vpcId: vpc.id,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const cngwService = new tencentcloud.tse.CngwService("cngwService", {
+ *     gatewayId: cngwGateway.id,
  *     path: "/test",
  *     protocol: "http",
  *     retries: 5,
- *     tags: {
- *         created: "terraform",
- *     },
- *     timeout: 6000,
+ *     timeout: 60000,
+ *     upstreamType: "HostIP",
  *     upstreamInfo: {
  *         algorithm: "round-robin",
- *         autoScalingCvmPort: 80,
- *         autoScalingGroupId: "asg-519acdug",
- *         autoScalingHookStatus: "Normal",
- *         autoScalingTatCmdStatus: "Normal",
- *         port: 0,
- *         slowStart: 20,
- *         targets: [{
- *             host: "192.168.0.1",
- *             port: 80,
- *             weight: 100,
- *         }],
+ *         autoScalingCvmPort: 0,
+ *         host: "arunma.cn",
+ *         port: 8012,
+ *         slowStart: 0,
  *     },
- *     upstreamType: "IPList",
  * });
  * ```
  *
@@ -46,7 +66,7 @@ import * as utilities from "../utilities";
  * tse cngw_service can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service cngw_service_id
+ *  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
  * ```
  */
 export class CngwService extends pulumi.CustomResource {
@@ -102,7 +122,9 @@ export class CngwService extends pulumi.CustomResource {
      */
     public /*out*/ readonly serviceId!: pulumi.Output<string>;
     /**
-     * Tag description list.
+     * Deprecate ineffective tags Tag description list.
+     *
+     * @deprecated Deprecate ineffective tags
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
@@ -209,7 +231,9 @@ export interface CngwServiceState {
      */
     serviceId?: pulumi.Input<string>;
     /**
-     * Tag description list.
+     * Deprecate ineffective tags Tag description list.
+     *
+     * @deprecated Deprecate ineffective tags
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -251,7 +275,9 @@ export interface CngwServiceArgs {
      */
     retries: pulumi.Input<number>;
     /**
-     * Tag description list.
+     * Deprecate ineffective tags Tag description list.
+     *
+     * @deprecated Deprecate ineffective tags
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**

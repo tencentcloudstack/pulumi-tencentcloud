@@ -49,7 +49,34 @@ __all__ = [
     'GetClusterAuthenticationOptionsOidcConfigResult',
     'GetClusterAuthenticationOptionsServiceAccountResult',
     'GetClusterCommonNamesListResult',
+    'GetClusterInstancesFilterResult',
+    'GetClusterInstancesInstanceSetResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelResult',
+    'GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintResult',
     'GetClusterLevelsListResult',
+    'GetClusterNodePoolsFilterResult',
+    'GetClusterNodePoolsNodePoolSetResult',
+    'GetClusterNodePoolsNodePoolSetDataDiskResult',
+    'GetClusterNodePoolsNodePoolSetExtraArgResult',
+    'GetClusterNodePoolsNodePoolSetGpuArgResult',
+    'GetClusterNodePoolsNodePoolSetGpuArgCudaResult',
+    'GetClusterNodePoolsNodePoolSetGpuArgCudnnResult',
+    'GetClusterNodePoolsNodePoolSetGpuArgCustomDriverResult',
+    'GetClusterNodePoolsNodePoolSetGpuArgDriverResult',
+    'GetClusterNodePoolsNodePoolSetLabelResult',
+    'GetClusterNodePoolsNodePoolSetNodeCountSummaryResult',
+    'GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedResult',
+    'GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedResult',
+    'GetClusterNodePoolsNodePoolSetTagResult',
+    'GetClusterNodePoolsNodePoolSetTaintResult',
     'GetClustersListResult',
     'GetClustersListClusterExtraArgResult',
     'GetClustersListWorkerInstancesListResult',
@@ -2573,6 +2600,8 @@ class NodePoolAutoScalingConfig(dict):
             suggest = "internet_max_bandwidth_out"
         elif key == "keyIds":
             suggest = "key_ids"
+        elif key == "orderlySecurityGroupIds":
+            suggest = "orderly_security_group_ids"
         elif key == "publicIpAssigned":
             suggest = "public_ip_assigned"
         elif key == "securityGroupIds":
@@ -2614,6 +2643,7 @@ class NodePoolAutoScalingConfig(dict):
                  internet_charge_type: Optional[str] = None,
                  internet_max_bandwidth_out: Optional[int] = None,
                  key_ids: Optional[Sequence[str]] = None,
+                 orderly_security_group_ids: Optional[Sequence[str]] = None,
                  password: Optional[str] = None,
                  public_ip_assigned: Optional[bool] = None,
                  security_group_ids: Optional[Sequence[str]] = None,
@@ -2635,12 +2665,13 @@ class NodePoolAutoScalingConfig(dict):
         :param int instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param str instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param str instance_name: Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
-        :param str internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param str internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param int internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param Sequence[str] key_ids: ID list of keys.
+        :param Sequence[str] orderly_security_group_ids: Ordered security groups to which a CVM instance belongs.
         :param str password: Password to access.
         :param bool public_ip_assigned: Specify whether to assign an Internet IP address.
-        :param Sequence[str] security_group_ids: Security groups to which a CVM instance belongs.
+        :param Sequence[str] security_group_ids: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         :param str spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param str spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param int system_disk_size: Volume of system disk in GB. Default is `50`.
@@ -2677,6 +2708,8 @@ class NodePoolAutoScalingConfig(dict):
             pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
         if key_ids is not None:
             pulumi.set(__self__, "key_ids", key_ids)
+        if orderly_security_group_ids is not None:
+            pulumi.set(__self__, "orderly_security_group_ids", orderly_security_group_ids)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if public_ip_assigned is not None:
@@ -2800,7 +2833,7 @@ class NodePoolAutoScalingConfig(dict):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[str]:
         """
-        Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -2819,6 +2852,14 @@ class NodePoolAutoScalingConfig(dict):
         ID list of keys.
         """
         return pulumi.get(self, "key_ids")
+
+    @property
+    @pulumi.getter(name="orderlySecurityGroupIds")
+    def orderly_security_group_ids(self) -> Optional[Sequence[str]]:
+        """
+        Ordered security groups to which a CVM instance belongs.
+        """
+        return pulumi.get(self, "orderly_security_group_ids")
 
     @property
     @pulumi.getter
@@ -2840,7 +2881,7 @@ class NodePoolAutoScalingConfig(dict):
     @pulumi.getter(name="securityGroupIds")
     def security_group_ids(self) -> Optional[Sequence[str]]:
         """
-        Security groups to which a CVM instance belongs.
+        The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         """
         return pulumi.get(self, "security_group_ids")
 
@@ -2914,7 +2955,7 @@ class NodePoolAutoScalingConfigDataDisk(dict):
         """
         :param bool delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         :param bool encrypt: Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
         :param str snapshot_id: Data disk snapshot ID.
         :param int throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` > 460GB.
@@ -2952,7 +2993,7 @@ class NodePoolAutoScalingConfigDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -3155,7 +3196,7 @@ class NodePoolNodeConfigDataDisk(dict):
         :param bool auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
         :param str disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         :param str file_system: File system, e.g. `ext3/ext4/xfs`.
         :param str mount_target: Mount target.
         """
@@ -3200,7 +3241,7 @@ class NodePoolNodeConfigDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -4434,6 +4475,629 @@ class GetClusterCommonNamesListResult(dict):
 
 
 @pulumi.output_type
+class GetClusterInstancesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence[str] values: Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 autoscaling_group_id: str,
+                 created_time: str,
+                 drain_status: str,
+                 failed_reason: str,
+                 instance_advanced_settings: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingResult'],
+                 instance_id: str,
+                 instance_role: str,
+                 instance_state: str,
+                 lan_ip: str,
+                 node_pool_id: str):
+        """
+        :param str autoscaling_group_id: Auto scaling group ID.
+        :param str created_time: Add time.
+        :param str drain_status: Whether the instance is blocked.
+        :param str failed_reason: Reasons for instance exception (or being initialized).
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs'] instance_advanced_settings: Node configuration.
+        :param str instance_id: Instance ID.
+        :param str instance_role: Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
+        :param str instance_state: The status of the instance (running, initializing, failed).
+        :param str lan_ip: Node intranet IP.
+        :param str node_pool_id: Resource pool ID.
+        """
+        pulumi.set(__self__, "autoscaling_group_id", autoscaling_group_id)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "drain_status", drain_status)
+        pulumi.set(__self__, "failed_reason", failed_reason)
+        pulumi.set(__self__, "instance_advanced_settings", instance_advanced_settings)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_role", instance_role)
+        pulumi.set(__self__, "instance_state", instance_state)
+        pulumi.set(__self__, "lan_ip", lan_ip)
+        pulumi.set(__self__, "node_pool_id", node_pool_id)
+
+    @property
+    @pulumi.getter(name="autoscalingGroupId")
+    def autoscaling_group_id(self) -> str:
+        """
+        Auto scaling group ID.
+        """
+        return pulumi.get(self, "autoscaling_group_id")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Add time.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="drainStatus")
+    def drain_status(self) -> str:
+        """
+        Whether the instance is blocked.
+        """
+        return pulumi.get(self, "drain_status")
+
+    @property
+    @pulumi.getter(name="failedReason")
+    def failed_reason(self) -> str:
+        """
+        Reasons for instance exception (or being initialized).
+        """
+        return pulumi.get(self, "failed_reason")
+
+    @property
+    @pulumi.getter(name="instanceAdvancedSettings")
+    def instance_advanced_settings(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingResult']:
+        """
+        Node configuration.
+        """
+        return pulumi.get(self, "instance_advanced_settings")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceRole")
+    def instance_role(self) -> str:
+        """
+        Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
+        """
+        return pulumi.get(self, "instance_role")
+
+    @property
+    @pulumi.getter(name="instanceState")
+    def instance_state(self) -> str:
+        """
+        The status of the instance (running, initializing, failed).
+        """
+        return pulumi.get(self, "instance_state")
+
+    @property
+    @pulumi.getter(name="lanIp")
+    def lan_ip(self) -> str:
+        """
+        Node intranet IP.
+        """
+        return pulumi.get(self, "lan_ip")
+
+    @property
+    @pulumi.getter(name="nodePoolId")
+    def node_pool_id(self) -> str:
+        """
+        Resource pool ID.
+        """
+        return pulumi.get(self, "node_pool_id")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingResult(dict):
+    def __init__(__self__, *,
+                 data_disks: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskResult'],
+                 desired_pod_number: int,
+                 docker_graph_path: str,
+                 extra_args: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgResult'],
+                 gpu_args: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgResult'],
+                 labels: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelResult'],
+                 mount_target: str,
+                 pre_start_user_script: str,
+                 taints: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintResult'],
+                 unschedulable: int,
+                 user_script: str):
+        """
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs'] data_disks: Multi-disk data disk mounting information.
+        :param int desired_pod_number: When the node belongs to the podCIDR size customization mode, you can specify the upper limit of the number of pods running on the node.
+        :param str docker_graph_path: Dockerd --graph specifies the value, the default is /var/lib/docker.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs'] extra_args: Node-related custom parameter information.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs'] gpu_args: GPU driver related parameters, obtain related GPU parameters: https://cloud.tencent.com/document/api/213/15715.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs'] labels: Node Label array.
+        :param str mount_target: Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+        :param str pre_start_user_script: Base64 encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs'] taints: Node taint.
+        :param int unschedulable: Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
+        :param str user_script: Base64 encoded userscript.
+        """
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "desired_pod_number", desired_pod_number)
+        pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        pulumi.set(__self__, "extra_args", extra_args)
+        pulumi.set(__self__, "gpu_args", gpu_args)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "mount_target", mount_target)
+        pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        pulumi.set(__self__, "taints", taints)
+        pulumi.set(__self__, "unschedulable", unschedulable)
+        pulumi.set(__self__, "user_script", user_script)
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskResult']:
+        """
+        Multi-disk data disk mounting information.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="desiredPodNumber")
+    def desired_pod_number(self) -> int:
+        """
+        When the node belongs to the podCIDR size customization mode, you can specify the upper limit of the number of pods running on the node.
+        """
+        return pulumi.get(self, "desired_pod_number")
+
+    @property
+    @pulumi.getter(name="dockerGraphPath")
+    def docker_graph_path(self) -> str:
+        """
+        Dockerd --graph specifies the value, the default is /var/lib/docker.
+        """
+        return pulumi.get(self, "docker_graph_path")
+
+    @property
+    @pulumi.getter(name="extraArgs")
+    def extra_args(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgResult']:
+        """
+        Node-related custom parameter information.
+        """
+        return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgResult']:
+        """
+        GPU driver related parameters, obtain related GPU parameters: https://cloud.tencent.com/document/api/213/15715.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelResult']:
+        """
+        Node Label array.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> str:
+        """
+        Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @property
+    @pulumi.getter(name="preStartUserScript")
+    def pre_start_user_script(self) -> str:
+        """
+        Base64 encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        """
+        return pulumi.get(self, "pre_start_user_script")
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintResult']:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @property
+    @pulumi.getter
+    def unschedulable(self) -> int:
+        """
+        Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
+        """
+        return pulumi.get(self, "unschedulable")
+
+    @property
+    @pulumi.getter(name="userScript")
+    def user_script(self) -> str:
+        """
+        Base64 encoded userscript.
+        """
+        return pulumi.get(self, "user_script")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskResult(dict):
+    def __init__(__self__, *,
+                 auto_format_and_mount: bool,
+                 disk_partition: str,
+                 disk_size: int,
+                 disk_type: str,
+                 file_system: str,
+                 mount_target: str):
+        """
+        :param bool auto_format_and_mount: Whether to automatically format the disk and mount it.
+        :param str disk_partition: Mount device name or partition name, required when and only when adding an existing node.
+        :param int disk_size: Cloud disk size (G).
+        :param str disk_type: Cloud disk type.
+        :param str file_system: File system (ext3/ext4/xfs).
+        :param str mount_target: Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+        """
+        pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        pulumi.set(__self__, "disk_partition", disk_partition)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "file_system", file_system)
+        pulumi.set(__self__, "mount_target", mount_target)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> bool:
+        """
+        Whether to automatically format the disk and mount it.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> str:
+        """
+        Mount device name or partition name, required when and only when adding an existing node.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size (G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> str:
+        """
+        File system (ext3/ext4/xfs).
+        """
+        return pulumi.get(self, "file_system")
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> str:
+        """
+        Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+        """
+        return pulumi.get(self, "mount_target")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgResult(dict):
+    def __init__(__self__, *,
+                 kubelets: Sequence[str]):
+        """
+        :param Sequence[str] kubelets: Kubelet custom parameters.
+        """
+        pulumi.set(__self__, "kubelets", kubelets)
+
+    @property
+    @pulumi.getter
+    def kubelets(self) -> Sequence[str]:
+        """
+        Kubelet custom parameters.
+        """
+        return pulumi.get(self, "kubelets")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgResult(dict):
+    def __init__(__self__, *,
+                 cudas: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaResult'],
+                 cudnns: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnResult'],
+                 custom_drivers: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverResult'],
+                 drivers: Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverResult'],
+                 mig_enable: bool):
+        """
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs'] cudas: CUDA version information.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs'] cudnns: CuDNN version information.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs'] custom_drivers: Custom GPU driver information.
+        :param Sequence['GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs'] drivers: GPU driver version information.
+        :param bool mig_enable: Whether to enable MIG features.
+        """
+        pulumi.set(__self__, "cudas", cudas)
+        pulumi.set(__self__, "cudnns", cudnns)
+        pulumi.set(__self__, "custom_drivers", custom_drivers)
+        pulumi.set(__self__, "drivers", drivers)
+        pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cudas(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaResult']:
+        """
+        CUDA version information.
+        """
+        return pulumi.get(self, "cudas")
+
+    @property
+    @pulumi.getter
+    def cudnns(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnResult']:
+        """
+        CuDNN version information.
+        """
+        return pulumi.get(self, "cudnns")
+
+    @property
+    @pulumi.getter(name="customDrivers")
+    def custom_drivers(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverResult']:
+        """
+        Custom GPU driver information.
+        """
+        return pulumi.get(self, "custom_drivers")
+
+    @property
+    @pulumi.getter
+    def drivers(self) -> Sequence['outputs.GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverResult']:
+        """
+        GPU driver version information.
+        """
+        return pulumi.get(self, "drivers")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> bool:
+        """
+        Whether to enable MIG features.
+        """
+        return pulumi.get(self, "mig_enable")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnResult(dict):
+    def __init__(__self__, *,
+                 dev_name: str,
+                 doc_name: str,
+                 name: str,
+                 version: str):
+        """
+        :param str dev_name: Dev name of cuDNN.
+        :param str doc_name: Doc name of cuDNN.
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "dev_name", dev_name)
+        pulumi.set(__self__, "doc_name", doc_name)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="devName")
+    def dev_name(self) -> str:
+        """
+        Dev name of cuDNN.
+        """
+        return pulumi.get(self, "dev_name")
+
+    @property
+    @pulumi.getter(name="docName")
+    def doc_name(self) -> str:
+        """
+        Doc name of cuDNN.
+        """
+        return pulumi.get(self, "doc_name")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverResult(dict):
+    def __init__(__self__, *,
+                 address: str):
+        """
+        :param str address: Custom GPU driver address link.
+        """
+        pulumi.set(__self__, "address", address)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        Custom GPU driver address link.
+        """
+        return pulumi.get(self, "address")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str value: Value of taints mark.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of taints mark.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintResult(dict):
+    def __init__(__self__, *,
+                 effect: str,
+                 key: str,
+                 value: str):
+        """
+        :param str effect: Effect of taints mark.
+        :param str key: Key of taints mark.
+        :param str value: Value of taints mark.
+        """
+        pulumi.set(__self__, "effect", effect)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> str:
+        """
+        Effect of taints mark.
+        """
+        return pulumi.get(self, "effect")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of taints mark.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of taints mark.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
 class GetClusterLevelsListResult(dict):
     def __init__(__self__, *,
                  alias: str,
@@ -4529,6 +5193,837 @@ class GetClusterLevelsListResult(dict):
 
 
 @pulumi.output_type
+class GetClusterNodePoolsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence[str] values: Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetResult(dict):
+    def __init__(__self__, *,
+                 autoscaling_group_id: str,
+                 autoscaling_group_status: str,
+                 cluster_instance_id: str,
+                 data_disks: Sequence['outputs.GetClusterNodePoolsNodePoolSetDataDiskResult'],
+                 deletion_protection: bool,
+                 desired_nodes_num: int,
+                 desired_pod_num: int,
+                 docker_graph_path: str,
+                 extra_args: Sequence['outputs.GetClusterNodePoolsNodePoolSetExtraArgResult'],
+                 gpu_args: Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgResult'],
+                 image_id: str,
+                 labels: Sequence['outputs.GetClusterNodePoolsNodePoolSetLabelResult'],
+                 launch_configuration_id: str,
+                 life_state: str,
+                 max_nodes_num: int,
+                 min_nodes_num: int,
+                 name: str,
+                 node_count_summaries: Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryResult'],
+                 node_pool_id: str,
+                 node_pool_os: str,
+                 os_customize_type: str,
+                 pre_start_user_script: str,
+                 tags: Sequence['outputs.GetClusterNodePoolsNodePoolSetTagResult'],
+                 taints: Sequence['outputs.GetClusterNodePoolsNodePoolSetTaintResult'],
+                 unschedulable: int,
+                 user_script: str):
+        """
+        :param str autoscaling_group_id: ID of autoscaling group.
+        :param str autoscaling_group_status: Status information.
+        :param str cluster_instance_id: ID of the cluster.
+        :param Sequence['GetClusterNodePoolsNodePoolSetDataDiskArgs'] data_disks: Multi disk data disk mounting information.
+        :param bool deletion_protection: Remove protection switch.
+        :param int desired_nodes_num: Expected number of nodes.
+        :param int desired_pod_num: When the cluster belongs to the node podCIDR size customization mode, the node pool needs to have the pod number attribute.
+        :param str docker_graph_path: Dockerd --graph specified value, default to /var/lib/docker.
+        :param Sequence['GetClusterNodePoolsNodePoolSetExtraArgArgs'] extra_args: Node configuration.
+        :param Sequence['GetClusterNodePoolsNodePoolSetGpuArgArgs'] gpu_args: GPU driver related parameters.
+        :param str image_id: ID of image.
+        :param Sequence['GetClusterNodePoolsNodePoolSetLabelArgs'] labels: Labels of the node pool.
+        :param str launch_configuration_id: ID of launch configuration.
+        :param str life_state: Life cycle state of the node pool, include: creating, normal, updating, deleting, deleted.
+        :param int max_nodes_num: Maximum number of nodes.
+        :param int min_nodes_num: Minimum number of nodes.
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence['GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs'] node_count_summaries: Node List.
+        :param str node_pool_id: ID of the node pool.
+        :param str node_pool_os: Node Pool OS Name.
+        :param str os_customize_type: Mirror version of container.
+        :param str pre_start_user_script: User defined script, executed before User Script.
+        :param Sequence['GetClusterNodePoolsNodePoolSetTagArgs'] tags: Resource tags.
+        :param Sequence['GetClusterNodePoolsNodePoolSetTaintArgs'] taints: Labels of the node pool.
+        :param int unschedulable: Is it not schedulable.
+        :param str user_script: User defined scripts.
+        """
+        pulumi.set(__self__, "autoscaling_group_id", autoscaling_group_id)
+        pulumi.set(__self__, "autoscaling_group_status", autoscaling_group_status)
+        pulumi.set(__self__, "cluster_instance_id", cluster_instance_id)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "deletion_protection", deletion_protection)
+        pulumi.set(__self__, "desired_nodes_num", desired_nodes_num)
+        pulumi.set(__self__, "desired_pod_num", desired_pod_num)
+        pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        pulumi.set(__self__, "extra_args", extra_args)
+        pulumi.set(__self__, "gpu_args", gpu_args)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "launch_configuration_id", launch_configuration_id)
+        pulumi.set(__self__, "life_state", life_state)
+        pulumi.set(__self__, "max_nodes_num", max_nodes_num)
+        pulumi.set(__self__, "min_nodes_num", min_nodes_num)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "node_count_summaries", node_count_summaries)
+        pulumi.set(__self__, "node_pool_id", node_pool_id)
+        pulumi.set(__self__, "node_pool_os", node_pool_os)
+        pulumi.set(__self__, "os_customize_type", os_customize_type)
+        pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "taints", taints)
+        pulumi.set(__self__, "unschedulable", unschedulable)
+        pulumi.set(__self__, "user_script", user_script)
+
+    @property
+    @pulumi.getter(name="autoscalingGroupId")
+    def autoscaling_group_id(self) -> str:
+        """
+        ID of autoscaling group.
+        """
+        return pulumi.get(self, "autoscaling_group_id")
+
+    @property
+    @pulumi.getter(name="autoscalingGroupStatus")
+    def autoscaling_group_status(self) -> str:
+        """
+        Status information.
+        """
+        return pulumi.get(self, "autoscaling_group_status")
+
+    @property
+    @pulumi.getter(name="clusterInstanceId")
+    def cluster_instance_id(self) -> str:
+        """
+        ID of the cluster.
+        """
+        return pulumi.get(self, "cluster_instance_id")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetDataDiskResult']:
+        """
+        Multi disk data disk mounting information.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> bool:
+        """
+        Remove protection switch.
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @property
+    @pulumi.getter(name="desiredNodesNum")
+    def desired_nodes_num(self) -> int:
+        """
+        Expected number of nodes.
+        """
+        return pulumi.get(self, "desired_nodes_num")
+
+    @property
+    @pulumi.getter(name="desiredPodNum")
+    def desired_pod_num(self) -> int:
+        """
+        When the cluster belongs to the node podCIDR size customization mode, the node pool needs to have the pod number attribute.
+        """
+        return pulumi.get(self, "desired_pod_num")
+
+    @property
+    @pulumi.getter(name="dockerGraphPath")
+    def docker_graph_path(self) -> str:
+        """
+        Dockerd --graph specified value, default to /var/lib/docker.
+        """
+        return pulumi.get(self, "docker_graph_path")
+
+    @property
+    @pulumi.getter(name="extraArgs")
+    def extra_args(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetExtraArgResult']:
+        """
+        Node configuration.
+        """
+        return pulumi.get(self, "extra_args")
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgResult']:
+        """
+        GPU driver related parameters.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        ID of image.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetLabelResult']:
+        """
+        Labels of the node pool.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="launchConfigurationId")
+    def launch_configuration_id(self) -> str:
+        """
+        ID of launch configuration.
+        """
+        return pulumi.get(self, "launch_configuration_id")
+
+    @property
+    @pulumi.getter(name="lifeState")
+    def life_state(self) -> str:
+        """
+        Life cycle state of the node pool, include: creating, normal, updating, deleting, deleted.
+        """
+        return pulumi.get(self, "life_state")
+
+    @property
+    @pulumi.getter(name="maxNodesNum")
+    def max_nodes_num(self) -> int:
+        """
+        Maximum number of nodes.
+        """
+        return pulumi.get(self, "max_nodes_num")
+
+    @property
+    @pulumi.getter(name="minNodesNum")
+    def min_nodes_num(self) -> int:
+        """
+        Minimum number of nodes.
+        """
+        return pulumi.get(self, "min_nodes_num")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="nodeCountSummaries")
+    def node_count_summaries(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryResult']:
+        """
+        Node List.
+        """
+        return pulumi.get(self, "node_count_summaries")
+
+    @property
+    @pulumi.getter(name="nodePoolId")
+    def node_pool_id(self) -> str:
+        """
+        ID of the node pool.
+        """
+        return pulumi.get(self, "node_pool_id")
+
+    @property
+    @pulumi.getter(name="nodePoolOs")
+    def node_pool_os(self) -> str:
+        """
+        Node Pool OS Name.
+        """
+        return pulumi.get(self, "node_pool_os")
+
+    @property
+    @pulumi.getter(name="osCustomizeType")
+    def os_customize_type(self) -> str:
+        """
+        Mirror version of container.
+        """
+        return pulumi.get(self, "os_customize_type")
+
+    @property
+    @pulumi.getter(name="preStartUserScript")
+    def pre_start_user_script(self) -> str:
+        """
+        User defined script, executed before User Script.
+        """
+        return pulumi.get(self, "pre_start_user_script")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetTagResult']:
+        """
+        Resource tags.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetTaintResult']:
+        """
+        Labels of the node pool.
+        """
+        return pulumi.get(self, "taints")
+
+    @property
+    @pulumi.getter
+    def unschedulable(self) -> int:
+        """
+        Is it not schedulable.
+        """
+        return pulumi.get(self, "unschedulable")
+
+    @property
+    @pulumi.getter(name="userScript")
+    def user_script(self) -> str:
+        """
+        User defined scripts.
+        """
+        return pulumi.get(self, "user_script")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetDataDiskResult(dict):
+    def __init__(__self__, *,
+                 auto_format_and_mount: bool,
+                 disk_partition: str,
+                 disk_size: int,
+                 disk_type: str,
+                 file_system: str,
+                 mount_target: str):
+        """
+        :param bool auto_format_and_mount: Whether to automate the format disk and mount it.
+        :param str disk_partition: Mount device name or partition name.
+        :param int disk_size: Cloud disk size(G).
+        :param str disk_type: Cloud disk type.
+        :param str file_system: File system(ext3/ext4/xfs).
+        :param str mount_target: Mount directory.
+        """
+        pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        pulumi.set(__self__, "disk_partition", disk_partition)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "file_system", file_system)
+        pulumi.set(__self__, "mount_target", mount_target)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> bool:
+        """
+        Whether to automate the format disk and mount it.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> str:
+        """
+        Mount device name or partition name.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size(G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> str:
+        """
+        File system(ext3/ext4/xfs).
+        """
+        return pulumi.get(self, "file_system")
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> str:
+        """
+        Mount directory.
+        """
+        return pulumi.get(self, "mount_target")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetExtraArgResult(dict):
+    def __init__(__self__, *,
+                 kubelets: Sequence[str]):
+        """
+        :param Sequence[str] kubelets: Kubelet custom parameters.
+        """
+        pulumi.set(__self__, "kubelets", kubelets)
+
+    @property
+    @pulumi.getter
+    def kubelets(self) -> Sequence[str]:
+        """
+        Kubelet custom parameters.
+        """
+        return pulumi.get(self, "kubelets")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetGpuArgResult(dict):
+    def __init__(__self__, *,
+                 cudas: Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCudaResult'],
+                 cudnns: Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCudnnResult'],
+                 custom_drivers: Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCustomDriverResult'],
+                 drivers: Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgDriverResult'],
+                 mig_enable: bool):
+        """
+        :param Sequence['GetClusterNodePoolsNodePoolSetGpuArgCudaArgs'] cudas: CUDA version information.
+        :param Sequence['GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs'] cudnns: CuDNN version information.
+        :param Sequence['GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs'] custom_drivers: Custom GPU driver information.
+        :param Sequence['GetClusterNodePoolsNodePoolSetGpuArgDriverArgs'] drivers: GPU driver version information.
+        :param bool mig_enable: Is the MIG feature enabled.
+        """
+        pulumi.set(__self__, "cudas", cudas)
+        pulumi.set(__self__, "cudnns", cudnns)
+        pulumi.set(__self__, "custom_drivers", custom_drivers)
+        pulumi.set(__self__, "drivers", drivers)
+        pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cudas(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCudaResult']:
+        """
+        CUDA version information.
+        """
+        return pulumi.get(self, "cudas")
+
+    @property
+    @pulumi.getter
+    def cudnns(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCudnnResult']:
+        """
+        CuDNN version information.
+        """
+        return pulumi.get(self, "cudnns")
+
+    @property
+    @pulumi.getter(name="customDrivers")
+    def custom_drivers(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgCustomDriverResult']:
+        """
+        Custom GPU driver information.
+        """
+        return pulumi.get(self, "custom_drivers")
+
+    @property
+    @pulumi.getter
+    def drivers(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetGpuArgDriverResult']:
+        """
+        GPU driver version information.
+        """
+        return pulumi.get(self, "drivers")
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> bool:
+        """
+        Is the MIG feature enabled.
+        """
+        return pulumi.get(self, "mig_enable")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetGpuArgCudaResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetGpuArgCudnnResult(dict):
+    def __init__(__self__, *,
+                 dev_name: str,
+                 doc_name: str,
+                 name: str,
+                 version: str):
+        """
+        :param str dev_name: Dev name of cuDNN.
+        :param str doc_name: Doc name of cuDNN.
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "dev_name", dev_name)
+        pulumi.set(__self__, "doc_name", doc_name)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="devName")
+    def dev_name(self) -> str:
+        """
+        Dev name of cuDNN.
+        """
+        return pulumi.get(self, "dev_name")
+
+    @property
+    @pulumi.getter(name="docName")
+    def doc_name(self) -> str:
+        """
+        Doc name of cuDNN.
+        """
+        return pulumi.get(self, "doc_name")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetGpuArgCustomDriverResult(dict):
+    def __init__(__self__, *,
+                 address: str):
+        """
+        :param str address: Custom GPU driver address link.
+        """
+        pulumi.set(__self__, "address", address)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        """
+        Custom GPU driver address link.
+        """
+        return pulumi.get(self, "address")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetGpuArgDriverResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str version: GPU driver or CUDA version.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        GPU driver or CUDA version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetLabelResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str value: Value of taints mark.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of taints mark.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetNodeCountSummaryResult(dict):
+    def __init__(__self__, *,
+                 autoscaling_addeds: Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedResult'],
+                 manually_addeds: Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedResult']):
+        """
+        :param Sequence['GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs'] autoscaling_addeds: Automatically managed nodes.
+        :param Sequence['GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs'] manually_addeds: Manually managed nodes.
+        """
+        pulumi.set(__self__, "autoscaling_addeds", autoscaling_addeds)
+        pulumi.set(__self__, "manually_addeds", manually_addeds)
+
+    @property
+    @pulumi.getter(name="autoscalingAddeds")
+    def autoscaling_addeds(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedResult']:
+        """
+        Automatically managed nodes.
+        """
+        return pulumi.get(self, "autoscaling_addeds")
+
+    @property
+    @pulumi.getter(name="manuallyAddeds")
+    def manually_addeds(self) -> Sequence['outputs.GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedResult']:
+        """
+        Manually managed nodes.
+        """
+        return pulumi.get(self, "manually_addeds")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedResult(dict):
+    def __init__(__self__, *,
+                 initializing: int,
+                 joining: int,
+                 normal: int,
+                 total: int):
+        """
+        :param int initializing: Number of nodes in initialization.
+        :param int joining: Number of nodes joining.
+        :param int normal: Normal number of nodes.
+        :param int total: Total number of nodes.
+        """
+        pulumi.set(__self__, "initializing", initializing)
+        pulumi.set(__self__, "joining", joining)
+        pulumi.set(__self__, "normal", normal)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter
+    def initializing(self) -> int:
+        """
+        Number of nodes in initialization.
+        """
+        return pulumi.get(self, "initializing")
+
+    @property
+    @pulumi.getter
+    def joining(self) -> int:
+        """
+        Number of nodes joining.
+        """
+        return pulumi.get(self, "joining")
+
+    @property
+    @pulumi.getter
+    def normal(self) -> int:
+        """
+        Normal number of nodes.
+        """
+        return pulumi.get(self, "normal")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total number of nodes.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedResult(dict):
+    def __init__(__self__, *,
+                 initializing: int,
+                 joining: int,
+                 normal: int,
+                 total: int):
+        """
+        :param int initializing: Number of nodes in initialization.
+        :param int joining: Number of nodes joining.
+        :param int normal: Normal number of nodes.
+        :param int total: Total number of nodes.
+        """
+        pulumi.set(__self__, "initializing", initializing)
+        pulumi.set(__self__, "joining", joining)
+        pulumi.set(__self__, "normal", normal)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter
+    def initializing(self) -> int:
+        """
+        Number of nodes in initialization.
+        """
+        return pulumi.get(self, "initializing")
+
+    @property
+    @pulumi.getter
+    def joining(self) -> int:
+        """
+        Number of nodes joining.
+        """
+        return pulumi.get(self, "joining")
+
+    @property
+    @pulumi.getter
+    def normal(self) -> int:
+        """
+        Normal number of nodes.
+        """
+        return pulumi.get(self, "normal")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total number of nodes.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key of taints mark.
+        :param str value: Value of taints mark.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of taints mark.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of taints mark.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterNodePoolsNodePoolSetTaintResult(dict):
+    def __init__(__self__, *,
+                 effect: str,
+                 key: str,
+                 value: str):
+        """
+        :param str effect: Effect of taints mark.
+        :param str key: Key of taints mark.
+        :param str value: Value of taints mark.
+        """
+        pulumi.set(__self__, "effect", effect)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> str:
+        """
+        Effect of taints mark.
+        """
+        return pulumi.get(self, "effect")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of taints mark.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of taints mark.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
 class GetClustersListResult(dict):
     def __init__(__self__, *,
                  certification_authority: str,
@@ -4565,6 +6060,7 @@ class GetClustersListResult(dict):
                  service_cidr: str,
                  tags: Mapping[str, Any],
                  user_name: str,
+                 vpc_cni_type: str,
                  vpc_id: str,
                  worker_instances_lists: Sequence['outputs.GetClustersListWorkerInstancesListResult']):
         """
@@ -4602,6 +6098,7 @@ class GetClustersListResult(dict):
         :param str service_cidr: The network address block of the cluster.
         :param Mapping[str, Any] tags: Tags of the cluster.
         :param str user_name: User name of account.
+        :param str vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode.
         :param str vpc_id: Vpc ID of the cluster.
         :param Sequence['GetClustersListWorkerInstancesListArgs'] worker_instances_lists: An information list of cvm within the WORKER clusters. Each element contains the following attributes.
         """
@@ -4639,6 +6136,7 @@ class GetClustersListResult(dict):
         pulumi.set(__self__, "service_cidr", service_cidr)
         pulumi.set(__self__, "tags", tags)
         pulumi.set(__self__, "user_name", user_name)
+        pulumi.set(__self__, "vpc_cni_type", vpc_cni_type)
         pulumi.set(__self__, "vpc_id", vpc_id)
         pulumi.set(__self__, "worker_instances_lists", worker_instances_lists)
 
@@ -4913,6 +6411,14 @@ class GetClustersListResult(dict):
         User name of account.
         """
         return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="vpcCniType")
+    def vpc_cni_type(self) -> str:
+        """
+        Distinguish between shared network card multi-IP mode and independent network card mode.
+        """
+        return pulumi.get(self, "vpc_cni_type")
 
     @property
     @pulumi.getter(name="vpcId")

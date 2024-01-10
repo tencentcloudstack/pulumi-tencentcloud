@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,25 +18,66 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
-// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
-// 			CosObjectName:   pulumi.String("code.zip"),
-// 			Handler:         pulumi.String("main.do_it"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CosBucketName:   pulumi.String("scf-code-1234567890"),
+//				CosBucketRegion: pulumi.String("ap-guangzhou"),
+//				CosObjectName:   pulumi.String("code.zip"),
+//				Handler:         pulumi.String("main.do_it"),
+//				Runtime:         pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Using Zip file
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				DnsCache:        pulumi.Bool(true),
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				IntranetConfig: &scf.FunctionIntranetConfigArgs{
+//					IpFixed: pulumi.String("ENABLE"),
+//				},
+//				Runtime:  pulumi.String("Python3.6"),
+//				SubnetId: pulumi.String("subnet-ljyn7h30"),
+//				Tags: pulumi.AnyMap{
+//					"env": pulumi.Any("test"),
+//				},
+//				VpcId:   pulumi.String("vpc-391sv4w3"),
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using CFS config
 //
@@ -45,33 +85,78 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CfsConfigs: scf.FunctionCfsConfigArray{
-// 				&scf.FunctionCfsConfigArgs{
-// 					CfsId:          pulumi.String("cfs-xxxxxxxx"),
-// 					LocalMountDir:  pulumi.String("/mnt"),
-// 					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
-// 					RemoteMountDir: pulumi.String("/"),
-// 					UserGroupId:    pulumi.String("10000"),
-// 					UserId:         pulumi.String("10000"),
-// 				},
-// 			},
-// 			Handler: pulumi.String("main.do_it"),
-// 			Runtime: pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CfsConfigs: scf.FunctionCfsConfigArray{
+//					&scf.FunctionCfsConfigArgs{
+//						CfsId:          pulumi.String("cfs-xxxxxxxx"),
+//						LocalMountDir:  pulumi.String("/mnt"),
+//						MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+//						RemoteMountDir: pulumi.String("/"),
+//						UserGroupId:    pulumi.String("10000"),
+//						UserId:         pulumi.String("10000"),
+//					},
+//				},
+//				Handler: pulumi.String("main.do_it"),
+//				Runtime: pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Using triggers
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				Runtime:         pulumi.String("Python3.6"),
+//				Triggers: scf.FunctionTriggerArray{
+//					&scf.FunctionTriggerArgs{
+//						Name:        pulumi.String("tf-test-fn-trigger"),
+//						TriggerDesc: pulumi.String("*/5 * * * * * *"),
+//						Type:        pulumi.String("timer"),
+//					},
+//					&scf.FunctionTriggerArgs{
+//						CosRegion:   pulumi.String("ap-guangzhou"),
+//						Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
+//						TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+//						Type:        pulumi.String("cos"),
+//					},
+//				},
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -79,11 +164,15 @@ import (
 // SCF function can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/function:Function test default+test
+//
+//	$ pulumi import tencentcloud:Scf/function:Function test default+test
+//
 // ```
 type Function struct {
 	pulumi.CustomResourceState
 
+	// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+	AsyncRunEnable pulumi.StringOutput `pulumi:"asyncRunEnable"`
 	// List of CFS configurations.
 	CfsConfigs FunctionCfsConfigArrayOutput `pulumi:"cfsConfigs"`
 	// cls logset id of the SCF function.
@@ -104,6 +193,8 @@ type Function struct {
 	CosObjectName pulumi.StringPtrOutput `pulumi:"cosObjectName"`
 	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache pulumi.BoolPtrOutput `pulumi:"dnsCache"`
 	// Whether EIP is a fixed IP.
 	EipFixed pulumi.BoolOutput `pulumi:"eipFixed"`
 	// SCF function EIP list.
@@ -117,15 +208,17 @@ type Function struct {
 	// SCF function code error code.
 	ErrNo pulumi.IntOutput `pulumi:"errNo"`
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
-	FuncType pulumi.StringOutput `pulumi:"funcType"`
+	FuncType pulumi.StringPtrOutput `pulumi:"funcType"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-	Handler pulumi.StringOutput `pulumi:"handler"`
+	Handler pulumi.StringPtrOutput `pulumi:"handler"`
 	// SCF function domain name.
 	Host pulumi.StringOutput `pulumi:"host"`
-	// Image of the SCF function, conflict with ``.
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs FunctionImageConfigArrayOutput `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency pulumi.BoolOutput `pulumi:"installDependency"`
+	// Intranet access configuration.
+	IntranetConfig FunctionIntranetConfigOutput `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
 	L5Enable pulumi.BoolPtrOutput `pulumi:"l5Enable"`
 	// The list of association layers.
@@ -140,8 +233,8 @@ type Function struct {
 	Namespace pulumi.StringPtrOutput `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role pulumi.StringPtrOutput `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
-	Runtime pulumi.StringOutput `pulumi:"runtime"`
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	Runtime pulumi.StringPtrOutput `pulumi:"runtime"`
 	// SCF function status.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// SCF status description.
@@ -168,15 +261,9 @@ type Function struct {
 func NewFunction(ctx *pulumi.Context,
 	name string, args *FunctionArgs, opts ...pulumi.ResourceOption) (*Function, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &FunctionArgs{}
 	}
 
-	if args.Handler == nil {
-		return nil, errors.New("invalid value for required argument 'Handler'")
-	}
-	if args.Runtime == nil {
-		return nil, errors.New("invalid value for required argument 'Runtime'")
-	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Function
 	err := ctx.RegisterResource("tencentcloud:Scf/function:Function", name, args, &resource, opts...)
@@ -200,6 +287,8 @@ func GetFunction(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Function resources.
 type functionState struct {
+	// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+	AsyncRunEnable *string `pulumi:"asyncRunEnable"`
 	// List of CFS configurations.
 	CfsConfigs []FunctionCfsConfig `pulumi:"cfsConfigs"`
 	// cls logset id of the SCF function.
@@ -220,6 +309,8 @@ type functionState struct {
 	CosObjectName *string `pulumi:"cosObjectName"`
 	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description *string `pulumi:"description"`
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache *bool `pulumi:"dnsCache"`
 	// Whether EIP is a fixed IP.
 	EipFixed *bool `pulumi:"eipFixed"`
 	// SCF function EIP list.
@@ -238,10 +329,12 @@ type functionState struct {
 	Handler *string `pulumi:"handler"`
 	// SCF function domain name.
 	Host *string `pulumi:"host"`
-	// Image of the SCF function, conflict with ``.
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs []FunctionImageConfig `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency *bool `pulumi:"installDependency"`
+	// Intranet access configuration.
+	IntranetConfig *FunctionIntranetConfig `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
 	L5Enable *bool `pulumi:"l5Enable"`
 	// The list of association layers.
@@ -256,7 +349,7 @@ type functionState struct {
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
 	Runtime *string `pulumi:"runtime"`
 	// SCF function status.
 	Status *string `pulumi:"status"`
@@ -281,6 +374,8 @@ type functionState struct {
 }
 
 type FunctionState struct {
+	// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+	AsyncRunEnable pulumi.StringPtrInput
 	// List of CFS configurations.
 	CfsConfigs FunctionCfsConfigArrayInput
 	// cls logset id of the SCF function.
@@ -301,6 +396,8 @@ type FunctionState struct {
 	CosObjectName pulumi.StringPtrInput
 	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrInput
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache pulumi.BoolPtrInput
 	// Whether EIP is a fixed IP.
 	EipFixed pulumi.BoolPtrInput
 	// SCF function EIP list.
@@ -319,10 +416,12 @@ type FunctionState struct {
 	Handler pulumi.StringPtrInput
 	// SCF function domain name.
 	Host pulumi.StringPtrInput
-	// Image of the SCF function, conflict with ``.
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs FunctionImageConfigArrayInput
 	// Whether to automatically install dependencies.
 	InstallDependency pulumi.BoolPtrInput
+	// Intranet access configuration.
+	IntranetConfig FunctionIntranetConfigPtrInput
 	// Enable L5 for SCF function, default is `false`.
 	L5Enable pulumi.BoolPtrInput
 	// The list of association layers.
@@ -337,7 +436,7 @@ type FunctionState struct {
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
 	Runtime pulumi.StringPtrInput
 	// SCF function status.
 	Status pulumi.StringPtrInput
@@ -366,6 +465,8 @@ func (FunctionState) ElementType() reflect.Type {
 }
 
 type functionArgs struct {
+	// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+	AsyncRunEnable *string `pulumi:"asyncRunEnable"`
 	// List of CFS configurations.
 	CfsConfigs []FunctionCfsConfig `pulumi:"cfsConfigs"`
 	// cls logset id of the SCF function.
@@ -380,6 +481,8 @@ type functionArgs struct {
 	CosObjectName *string `pulumi:"cosObjectName"`
 	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description *string `pulumi:"description"`
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache *bool `pulumi:"dnsCache"`
 	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
 	EnableEipConfig *bool `pulumi:"enableEipConfig"`
 	// Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
@@ -389,9 +492,11 @@ type functionArgs struct {
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 	FuncType *string `pulumi:"funcType"`
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-	Handler string `pulumi:"handler"`
-	// Image of the SCF function, conflict with ``.
+	Handler *string `pulumi:"handler"`
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs []FunctionImageConfig `pulumi:"imageConfigs"`
+	// Intranet access configuration.
+	IntranetConfig *FunctionIntranetConfig `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
 	L5Enable *bool `pulumi:"l5Enable"`
 	// The list of association layers.
@@ -404,8 +509,8 @@ type functionArgs struct {
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
-	Runtime string `pulumi:"runtime"`
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	Runtime *string `pulumi:"runtime"`
 	// Subnet ID of the SCF function.
 	SubnetId *string `pulumi:"subnetId"`
 	// Tags of the SCF function.
@@ -422,6 +527,8 @@ type functionArgs struct {
 
 // The set of arguments for constructing a Function resource.
 type FunctionArgs struct {
+	// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+	AsyncRunEnable pulumi.StringPtrInput
 	// List of CFS configurations.
 	CfsConfigs FunctionCfsConfigArrayInput
 	// cls logset id of the SCF function.
@@ -436,6 +543,8 @@ type FunctionArgs struct {
 	CosObjectName pulumi.StringPtrInput
 	// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
 	Description pulumi.StringPtrInput
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache pulumi.BoolPtrInput
 	// Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
 	EnableEipConfig pulumi.BoolPtrInput
 	// Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
@@ -445,9 +554,11 @@ type FunctionArgs struct {
 	// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
 	FuncType pulumi.StringPtrInput
 	// Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-	Handler pulumi.StringInput
-	// Image of the SCF function, conflict with ``.
+	Handler pulumi.StringPtrInput
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs FunctionImageConfigArrayInput
+	// Intranet access configuration.
+	IntranetConfig FunctionIntranetConfigPtrInput
 	// Enable L5 for SCF function, default is `false`.
 	L5Enable pulumi.BoolPtrInput
 	// The list of association layers.
@@ -460,8 +571,8 @@ type FunctionArgs struct {
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
-	Runtime pulumi.StringInput
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	Runtime pulumi.StringPtrInput
 	// Subnet ID of the SCF function.
 	SubnetId pulumi.StringPtrInput
 	// Tags of the SCF function.
@@ -502,7 +613,7 @@ func (i *Function) ToFunctionOutputWithContext(ctx context.Context) FunctionOutp
 // FunctionArrayInput is an input type that accepts FunctionArray and FunctionArrayOutput values.
 // You can construct a concrete instance of `FunctionArrayInput` via:
 //
-//          FunctionArray{ FunctionArgs{...} }
+//	FunctionArray{ FunctionArgs{...} }
 type FunctionArrayInput interface {
 	pulumi.Input
 
@@ -527,7 +638,7 @@ func (i FunctionArray) ToFunctionArrayOutputWithContext(ctx context.Context) Fun
 // FunctionMapInput is an input type that accepts FunctionMap and FunctionMapOutput values.
 // You can construct a concrete instance of `FunctionMapInput` via:
 //
-//          FunctionMap{ "key": FunctionArgs{...} }
+//	FunctionMap{ "key": FunctionArgs{...} }
 type FunctionMapInput interface {
 	pulumi.Input
 
@@ -561,6 +672,11 @@ func (o FunctionOutput) ToFunctionOutput() FunctionOutput {
 
 func (o FunctionOutput) ToFunctionOutputWithContext(ctx context.Context) FunctionOutput {
 	return o
+}
+
+// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+func (o FunctionOutput) AsyncRunEnable() pulumi.StringOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.AsyncRunEnable }).(pulumi.StringOutput)
 }
 
 // List of CFS configurations.
@@ -613,6 +729,11 @@ func (o FunctionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+func (o FunctionOutput) DnsCache() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Function) pulumi.BoolPtrOutput { return v.DnsCache }).(pulumi.BoolPtrOutput)
+}
+
 // Whether EIP is a fixed IP.
 func (o FunctionOutput) EipFixed() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Function) pulumi.BoolOutput { return v.EipFixed }).(pulumi.BoolOutput)
@@ -644,13 +765,13 @@ func (o FunctionOutput) ErrNo() pulumi.IntOutput {
 }
 
 // Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
-func (o FunctionOutput) FuncType() pulumi.StringOutput {
-	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.FuncType }).(pulumi.StringOutput)
+func (o FunctionOutput) FuncType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.FuncType }).(pulumi.StringPtrOutput)
 }
 
 // Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
-func (o FunctionOutput) Handler() pulumi.StringOutput {
-	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Handler }).(pulumi.StringOutput)
+func (o FunctionOutput) Handler() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Handler }).(pulumi.StringPtrOutput)
 }
 
 // SCF function domain name.
@@ -658,7 +779,7 @@ func (o FunctionOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Host }).(pulumi.StringOutput)
 }
 
-// Image of the SCF function, conflict with ``.
+// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 func (o FunctionOutput) ImageConfigs() FunctionImageConfigArrayOutput {
 	return o.ApplyT(func(v *Function) FunctionImageConfigArrayOutput { return v.ImageConfigs }).(FunctionImageConfigArrayOutput)
 }
@@ -666,6 +787,11 @@ func (o FunctionOutput) ImageConfigs() FunctionImageConfigArrayOutput {
 // Whether to automatically install dependencies.
 func (o FunctionOutput) InstallDependency() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Function) pulumi.BoolOutput { return v.InstallDependency }).(pulumi.BoolOutput)
+}
+
+// Intranet access configuration.
+func (o FunctionOutput) IntranetConfig() FunctionIntranetConfigOutput {
+	return o.ApplyT(func(v *Function) FunctionIntranetConfigOutput { return v.IntranetConfig }).(FunctionIntranetConfigOutput)
 }
 
 // Enable L5 for SCF function, default is `false`.
@@ -703,9 +829,9 @@ func (o FunctionOutput) Role() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Role }).(pulumi.StringPtrOutput)
 }
 
-// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
-func (o FunctionOutput) Runtime() pulumi.StringOutput {
-	return o.ApplyT(func(v *Function) pulumi.StringOutput { return v.Runtime }).(pulumi.StringOutput)
+// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+func (o FunctionOutput) Runtime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Runtime }).(pulumi.StringPtrOutput)
 }
 
 // SCF function status.

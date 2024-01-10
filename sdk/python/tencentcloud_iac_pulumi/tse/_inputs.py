@@ -12,6 +12,12 @@ __all__ = [
     'CngwCanaryRuleCanaryRuleArgs',
     'CngwCanaryRuleCanaryRuleBalancedServiceListArgs',
     'CngwCanaryRuleCanaryRuleConditionListArgs',
+    'CngwGatewayInstancePortArgs',
+    'CngwGatewayInternetConfigArgs',
+    'CngwGatewayNodeConfigArgs',
+    'CngwGatewayVpcConfigArgs',
+    'CngwGroupInternetConfigArgs',
+    'CngwGroupNodeConfigArgs',
     'CngwRouteHeaderArgs',
     'CngwRouteRateLimitLimitDetailArgs',
     'CngwRouteRateLimitLimitDetailExternalRedisArgs',
@@ -27,7 +33,10 @@ __all__ = [
     'CngwServiceUpstreamInfoTargetArgs',
     'InstanceEngineRegionInfoArgs',
     'InstanceEngineRegionInfoVpcInfoArgs',
+    'GetGatewayCertificatesFilterArgs',
     'GetGatewayServicesFilterArgs',
+    'GetGatewaysFilterArgs',
+    'GetGroupsFilterArgs',
 ]
 
 @pulumi.input_type
@@ -317,10 +326,468 @@ class CngwCanaryRuleCanaryRuleConditionListArgs:
 
 
 @pulumi.input_type
+class CngwGatewayInstancePortArgs:
+    def __init__(__self__, *,
+                 http_port: Optional[pulumi.Input[str]] = None,
+                 https_port: Optional[pulumi.Input[str]] = None,
+                 tcp_port: Optional[pulumi.Input[str]] = None,
+                 udp_port: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] http_port: Http port range.
+        :param pulumi.Input[str] https_port: Https port range.
+        :param pulumi.Input[str] tcp_port: Tcp port range.
+        :param pulumi.Input[str] udp_port: Udp port range.
+        """
+        if http_port is not None:
+            pulumi.set(__self__, "http_port", http_port)
+        if https_port is not None:
+            pulumi.set(__self__, "https_port", https_port)
+        if tcp_port is not None:
+            pulumi.set(__self__, "tcp_port", tcp_port)
+        if udp_port is not None:
+            pulumi.set(__self__, "udp_port", udp_port)
+
+    @property
+    @pulumi.getter(name="httpPort")
+    def http_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        Http port range.
+        """
+        return pulumi.get(self, "http_port")
+
+    @http_port.setter
+    def http_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "http_port", value)
+
+    @property
+    @pulumi.getter(name="httpsPort")
+    def https_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        Https port range.
+        """
+        return pulumi.get(self, "https_port")
+
+    @https_port.setter
+    def https_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "https_port", value)
+
+    @property
+    @pulumi.getter(name="tcpPort")
+    def tcp_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        Tcp port range.
+        """
+        return pulumi.get(self, "tcp_port")
+
+    @tcp_port.setter
+    def tcp_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tcp_port", value)
+
+    @property
+    @pulumi.getter(name="udpPort")
+    def udp_port(self) -> Optional[pulumi.Input[str]]:
+        """
+        Udp port range.
+        """
+        return pulumi.get(self, "udp_port")
+
+    @udp_port.setter
+    def udp_port(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "udp_port", value)
+
+
+@pulumi.input_type
+class CngwGatewayInternetConfigArgs:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 internet_address_version: Optional[pulumi.Input[str]] = None,
+                 internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
+                 internet_pay_mode: Optional[pulumi.Input[str]] = None,
+                 master_zone_id: Optional[pulumi.Input[str]] = None,
+                 multi_zone_flag: Optional[pulumi.Input[bool]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
+                 slave_zone_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] description: description of clb.
+        :param pulumi.Input[str] internet_address_version: internet type. Reference value: `IPV4`(default value), `IPV6`.
+        :param pulumi.Input[int] internet_max_bandwidth_out: public network bandwidth.
+        :param pulumi.Input[str] internet_pay_mode: trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+        :param pulumi.Input[str] master_zone_id: primary availability zone.
+        :param pulumi.Input[bool] multi_zone_flag: Whether load balancing has multiple availability zones.
+        :param pulumi.Input[str] sla_type: specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        :param pulumi.Input[str] slave_zone_id: alternate availability zone.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if internet_address_version is not None:
+            pulumi.set(__self__, "internet_address_version", internet_address_version)
+        if internet_max_bandwidth_out is not None:
+            pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        if internet_pay_mode is not None:
+            pulumi.set(__self__, "internet_pay_mode", internet_pay_mode)
+        if master_zone_id is not None:
+            pulumi.set(__self__, "master_zone_id", master_zone_id)
+        if multi_zone_flag is not None:
+            pulumi.set(__self__, "multi_zone_flag", multi_zone_flag)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
+        if slave_zone_id is not None:
+            pulumi.set(__self__, "slave_zone_id", slave_zone_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        description of clb.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="internetAddressVersion")
+    def internet_address_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        internet type. Reference value: `IPV4`(default value), `IPV6`.
+        """
+        return pulumi.get(self, "internet_address_version")
+
+    @internet_address_version.setter
+    def internet_address_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internet_address_version", value)
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> Optional[pulumi.Input[int]]:
+        """
+        public network bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @internet_max_bandwidth_out.setter
+    def internet_max_bandwidth_out(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "internet_max_bandwidth_out", value)
+
+    @property
+    @pulumi.getter(name="internetPayMode")
+    def internet_pay_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+        """
+        return pulumi.get(self, "internet_pay_mode")
+
+    @internet_pay_mode.setter
+    def internet_pay_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internet_pay_mode", value)
+
+    @property
+    @pulumi.getter(name="masterZoneId")
+    def master_zone_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        primary availability zone.
+        """
+        return pulumi.get(self, "master_zone_id")
+
+    @master_zone_id.setter
+    def master_zone_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "master_zone_id", value)
+
+    @property
+    @pulumi.getter(name="multiZoneFlag")
+    def multi_zone_flag(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether load balancing has multiple availability zones.
+        """
+        return pulumi.get(self, "multi_zone_flag")
+
+    @multi_zone_flag.setter
+    def multi_zone_flag(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "multi_zone_flag", value)
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        """
+        return pulumi.get(self, "sla_type")
+
+    @sla_type.setter
+    def sla_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sla_type", value)
+
+    @property
+    @pulumi.getter(name="slaveZoneId")
+    def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        alternate availability zone.
+        """
+        return pulumi.get(self, "slave_zone_id")
+
+    @slave_zone_id.setter
+    def slave_zone_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "slave_zone_id", value)
+
+
+@pulumi.input_type
+class CngwGatewayNodeConfigArgs:
+    def __init__(__self__, *,
+                 number: pulumi.Input[int],
+                 specification: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] number: node number, 2-50.
+        :param pulumi.Input[str] specification: specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> pulumi.Input[int]:
+        """
+        node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @number.setter
+    def number(self, value: pulumi.Input[int]):
+        pulumi.set(self, "number", value)
+
+    @property
+    @pulumi.getter
+    def specification(self) -> pulumi.Input[str]:
+        """
+        specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
+
+    @specification.setter
+    def specification(self, value: pulumi.Input[str]):
+        pulumi.set(self, "specification", value)
+
+
+@pulumi.input_type
+class CngwGatewayVpcConfigArgs:
+    def __init__(__self__, *,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
+                 vpc_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] subnet_id: subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+        :param pulumi.Input[str] vpc_id: VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+        """
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_id", value)
+
+
+@pulumi.input_type
+class CngwGroupInternetConfigArgs:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 internet_address_version: Optional[pulumi.Input[str]] = None,
+                 internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
+                 internet_pay_mode: Optional[pulumi.Input[str]] = None,
+                 master_zone_id: Optional[pulumi.Input[str]] = None,
+                 multi_zone_flag: Optional[pulumi.Input[bool]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
+                 slave_zone_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] description: description of clb.
+        :param pulumi.Input[str] internet_address_version: internet type. Reference value:- IPV4 (default value)- IPV6.
+        :param pulumi.Input[int] internet_max_bandwidth_out: public network bandwidth.
+        :param pulumi.Input[str] internet_pay_mode: trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+        :param pulumi.Input[str] master_zone_id: primary availability zone.
+        :param pulumi.Input[bool] multi_zone_flag: Whether load balancing has multiple availability zones.
+        :param pulumi.Input[str] sla_type: specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        :param pulumi.Input[str] slave_zone_id: alternate availability zone.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if internet_address_version is not None:
+            pulumi.set(__self__, "internet_address_version", internet_address_version)
+        if internet_max_bandwidth_out is not None:
+            pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        if internet_pay_mode is not None:
+            pulumi.set(__self__, "internet_pay_mode", internet_pay_mode)
+        if master_zone_id is not None:
+            pulumi.set(__self__, "master_zone_id", master_zone_id)
+        if multi_zone_flag is not None:
+            pulumi.set(__self__, "multi_zone_flag", multi_zone_flag)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
+        if slave_zone_id is not None:
+            pulumi.set(__self__, "slave_zone_id", slave_zone_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        description of clb.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="internetAddressVersion")
+    def internet_address_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        internet type. Reference value:- IPV4 (default value)- IPV6.
+        """
+        return pulumi.get(self, "internet_address_version")
+
+    @internet_address_version.setter
+    def internet_address_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internet_address_version", value)
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> Optional[pulumi.Input[int]]:
+        """
+        public network bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @internet_max_bandwidth_out.setter
+    def internet_max_bandwidth_out(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "internet_max_bandwidth_out", value)
+
+    @property
+    @pulumi.getter(name="internetPayMode")
+    def internet_pay_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+        """
+        return pulumi.get(self, "internet_pay_mode")
+
+    @internet_pay_mode.setter
+    def internet_pay_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internet_pay_mode", value)
+
+    @property
+    @pulumi.getter(name="masterZoneId")
+    def master_zone_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        primary availability zone.
+        """
+        return pulumi.get(self, "master_zone_id")
+
+    @master_zone_id.setter
+    def master_zone_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "master_zone_id", value)
+
+    @property
+    @pulumi.getter(name="multiZoneFlag")
+    def multi_zone_flag(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether load balancing has multiple availability zones.
+        """
+        return pulumi.get(self, "multi_zone_flag")
+
+    @multi_zone_flag.setter
+    def multi_zone_flag(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "multi_zone_flag", value)
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        """
+        return pulumi.get(self, "sla_type")
+
+    @sla_type.setter
+    def sla_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sla_type", value)
+
+    @property
+    @pulumi.getter(name="slaveZoneId")
+    def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        alternate availability zone.
+        """
+        return pulumi.get(self, "slave_zone_id")
+
+    @slave_zone_id.setter
+    def slave_zone_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "slave_zone_id", value)
+
+
+@pulumi.input_type
+class CngwGroupNodeConfigArgs:
+    def __init__(__self__, *,
+                 number: pulumi.Input[int],
+                 specification: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] number: group node number, 2-50.
+        :param pulumi.Input[str] specification: group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> pulumi.Input[int]:
+        """
+        group node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @number.setter
+    def number(self, value: pulumi.Input[int]):
+        pulumi.set(self, "number", value)
+
+    @property
+    @pulumi.getter
+    def specification(self) -> pulumi.Input[str]:
+        """
+        group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
+
+    @specification.setter
+    def specification(self, value: pulumi.Input[str]):
+        pulumi.set(self, "specification", value)
+
+
+@pulumi.input_type
 class CngwRouteHeaderArgs:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key of header.
+        :param pulumi.Input[str] value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -329,6 +796,9 @@ class CngwRouteHeaderArgs:
     @property
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -338,6 +808,9 @@ class CngwRouteHeaderArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -361,6 +834,21 @@ class CngwRouteRateLimitLimitDetailArgs:
                  policy: Optional[pulumi.Input[str]] = None,
                  rate_limit_response: Optional[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs']] = None,
                  rate_limit_response_url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: status of service rate limit.
+        :param pulumi.Input[bool] hide_client_headers: whether to hide the headers of client.
+        :param pulumi.Input[bool] is_delay: whether to enable request queuing.
+        :param pulumi.Input[str] limit_by: basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailQpsThresholdArgs']]] qps_thresholds: qps threshold.
+        :param pulumi.Input[str] response_type: response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+        :param pulumi.Input['CngwRouteRateLimitLimitDetailExternalRedisArgs'] external_redis: external redis information, maybe null.
+        :param pulumi.Input[str] header: request headers that require rate limit.
+        :param pulumi.Input[int] line_up_time: queue time.
+        :param pulumi.Input[str] path: request paths that require rate limit.
+        :param pulumi.Input[str] policy: counter policy.Reference value:`local`,`redis`,`external_redis`.
+        :param pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs'] rate_limit_response: response configuration, the response strategy is text, maybe null.
+        :param pulumi.Input[str] rate_limit_response_url: request forwarding address, maybe null.
+        """
         pulumi.set(__self__, "enabled", enabled)
         pulumi.set(__self__, "hide_client_headers", hide_client_headers)
         pulumi.set(__self__, "is_delay", is_delay)
@@ -385,6 +873,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def enabled(self) -> pulumi.Input[bool]:
+        """
+        status of service rate limit.
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -394,6 +885,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="hideClientHeaders")
     def hide_client_headers(self) -> pulumi.Input[bool]:
+        """
+        whether to hide the headers of client.
+        """
         return pulumi.get(self, "hide_client_headers")
 
     @hide_client_headers.setter
@@ -403,6 +897,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="isDelay")
     def is_delay(self) -> pulumi.Input[bool]:
+        """
+        whether to enable request queuing.
+        """
         return pulumi.get(self, "is_delay")
 
     @is_delay.setter
@@ -412,6 +909,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="limitBy")
     def limit_by(self) -> pulumi.Input[str]:
+        """
+        basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+        """
         return pulumi.get(self, "limit_by")
 
     @limit_by.setter
@@ -421,6 +921,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="qpsThresholds")
     def qps_thresholds(self) -> pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailQpsThresholdArgs']]]:
+        """
+        qps threshold.
+        """
         return pulumi.get(self, "qps_thresholds")
 
     @qps_thresholds.setter
@@ -430,6 +933,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="responseType")
     def response_type(self) -> pulumi.Input[str]:
+        """
+        response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+        """
         return pulumi.get(self, "response_type")
 
     @response_type.setter
@@ -439,6 +945,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="externalRedis")
     def external_redis(self) -> Optional[pulumi.Input['CngwRouteRateLimitLimitDetailExternalRedisArgs']]:
+        """
+        external redis information, maybe null.
+        """
         return pulumi.get(self, "external_redis")
 
     @external_redis.setter
@@ -448,6 +957,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def header(self) -> Optional[pulumi.Input[str]]:
+        """
+        request headers that require rate limit.
+        """
         return pulumi.get(self, "header")
 
     @header.setter
@@ -457,6 +969,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="lineUpTime")
     def line_up_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        queue time.
+        """
         return pulumi.get(self, "line_up_time")
 
     @line_up_time.setter
@@ -466,6 +981,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        request paths that require rate limit.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -475,6 +993,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def policy(self) -> Optional[pulumi.Input[str]]:
+        """
+        counter policy.Reference value:`local`,`redis`,`external_redis`.
+        """
         return pulumi.get(self, "policy")
 
     @policy.setter
@@ -484,6 +1005,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="rateLimitResponse")
     def rate_limit_response(self) -> Optional[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseArgs']]:
+        """
+        response configuration, the response strategy is text, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response")
 
     @rate_limit_response.setter
@@ -493,6 +1017,9 @@ class CngwRouteRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="rateLimitResponseUrl")
     def rate_limit_response_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        request forwarding address, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response_url")
 
     @rate_limit_response_url.setter
@@ -507,6 +1034,12 @@ class CngwRouteRateLimitLimitDetailExternalRedisArgs:
                  redis_password: pulumi.Input[str],
                  redis_port: pulumi.Input[int],
                  redis_timeout: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] redis_host: redis ip, maybe null.
+        :param pulumi.Input[str] redis_password: redis password, maybe null.
+        :param pulumi.Input[int] redis_port: redis port, maybe null.
+        :param pulumi.Input[int] redis_timeout: redis timeout, unit: `ms`, maybe null.
+        """
         pulumi.set(__self__, "redis_host", redis_host)
         pulumi.set(__self__, "redis_password", redis_password)
         pulumi.set(__self__, "redis_port", redis_port)
@@ -515,6 +1048,9 @@ class CngwRouteRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisHost")
     def redis_host(self) -> pulumi.Input[str]:
+        """
+        redis ip, maybe null.
+        """
         return pulumi.get(self, "redis_host")
 
     @redis_host.setter
@@ -524,6 +1060,9 @@ class CngwRouteRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisPassword")
     def redis_password(self) -> pulumi.Input[str]:
+        """
+        redis password, maybe null.
+        """
         return pulumi.get(self, "redis_password")
 
     @redis_password.setter
@@ -533,6 +1072,9 @@ class CngwRouteRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisPort")
     def redis_port(self) -> pulumi.Input[int]:
+        """
+        redis port, maybe null.
+        """
         return pulumi.get(self, "redis_port")
 
     @redis_port.setter
@@ -542,6 +1084,9 @@ class CngwRouteRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisTimeout")
     def redis_timeout(self) -> pulumi.Input[int]:
+        """
+        redis timeout, unit: `ms`, maybe null.
+        """
         return pulumi.get(self, "redis_timeout")
 
     @redis_timeout.setter
@@ -554,12 +1099,19 @@ class CngwRouteRateLimitLimitDetailQpsThresholdArgs:
     def __init__(__self__, *,
                  max: pulumi.Input[int],
                  unit: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] max: the max threshold.
+        :param pulumi.Input[str] unit: qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+        """
         pulumi.set(__self__, "max", max)
         pulumi.set(__self__, "unit", unit)
 
     @property
     @pulumi.getter
     def max(self) -> pulumi.Input[int]:
+        """
+        the max threshold.
+        """
         return pulumi.get(self, "max")
 
     @max.setter
@@ -569,6 +1121,9 @@ class CngwRouteRateLimitLimitDetailQpsThresholdArgs:
     @property
     @pulumi.getter
     def unit(self) -> pulumi.Input[str]:
+        """
+        qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+        """
         return pulumi.get(self, "unit")
 
     @unit.setter
@@ -582,6 +1137,11 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseArgs:
                  body: Optional[pulumi.Input[str]] = None,
                  headers: Optional[pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]]] = None,
                  http_status: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] body: custom response body, maybe bull.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]] headers: headrs.
+        :param pulumi.Input[int] http_status: http status code.
+        """
         if body is not None:
             pulumi.set(__self__, "body", body)
         if headers is not None:
@@ -592,6 +1152,9 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter
     def body(self) -> Optional[pulumi.Input[str]]:
+        """
+        custom response body, maybe bull.
+        """
         return pulumi.get(self, "body")
 
     @body.setter
@@ -601,6 +1164,9 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter
     def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]:
+        """
+        headrs.
+        """
         return pulumi.get(self, "headers")
 
     @headers.setter
@@ -610,6 +1176,9 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter(name="httpStatus")
     def http_status(self) -> Optional[pulumi.Input[int]]:
+        """
+        http status code.
+        """
         return pulumi.get(self, "http_status")
 
     @http_status.setter
@@ -622,6 +1191,10 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key of header.
+        :param pulumi.Input[str] value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -630,6 +1203,9 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs:
     @property
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -639,6 +1215,9 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -662,6 +1241,21 @@ class CngwServiceRateLimitLimitDetailArgs:
                  policy: Optional[pulumi.Input[str]] = None,
                  rate_limit_response: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs']] = None,
                  rate_limit_response_url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: status of service rate limit.
+        :param pulumi.Input[bool] hide_client_headers: whether to hide the headers of client.
+        :param pulumi.Input[bool] is_delay: whether to enable request queuing.
+        :param pulumi.Input[str] limit_by: basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailQpsThresholdArgs']]] qps_thresholds: qps threshold.
+        :param pulumi.Input[str] response_type: response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+        :param pulumi.Input['CngwServiceRateLimitLimitDetailExternalRedisArgs'] external_redis: external redis information, maybe null.
+        :param pulumi.Input[str] header: request headers that require rate limit.
+        :param pulumi.Input[int] line_up_time: queue time.
+        :param pulumi.Input[str] path: request paths that require rate limit.
+        :param pulumi.Input[str] policy: counter policy.Reference value: `local`, `redis`, `external_redis`.
+        :param pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs'] rate_limit_response: response configuration, the response strategy is text, maybe null.
+        :param pulumi.Input[str] rate_limit_response_url: request forwarding address, maybe null.
+        """
         pulumi.set(__self__, "enabled", enabled)
         pulumi.set(__self__, "hide_client_headers", hide_client_headers)
         pulumi.set(__self__, "is_delay", is_delay)
@@ -686,6 +1280,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def enabled(self) -> pulumi.Input[bool]:
+        """
+        status of service rate limit.
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -695,6 +1292,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="hideClientHeaders")
     def hide_client_headers(self) -> pulumi.Input[bool]:
+        """
+        whether to hide the headers of client.
+        """
         return pulumi.get(self, "hide_client_headers")
 
     @hide_client_headers.setter
@@ -704,6 +1304,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="isDelay")
     def is_delay(self) -> pulumi.Input[bool]:
+        """
+        whether to enable request queuing.
+        """
         return pulumi.get(self, "is_delay")
 
     @is_delay.setter
@@ -713,6 +1316,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="limitBy")
     def limit_by(self) -> pulumi.Input[str]:
+        """
+        basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+        """
         return pulumi.get(self, "limit_by")
 
     @limit_by.setter
@@ -722,6 +1328,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="qpsThresholds")
     def qps_thresholds(self) -> pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailQpsThresholdArgs']]]:
+        """
+        qps threshold.
+        """
         return pulumi.get(self, "qps_thresholds")
 
     @qps_thresholds.setter
@@ -731,6 +1340,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="responseType")
     def response_type(self) -> pulumi.Input[str]:
+        """
+        response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+        """
         return pulumi.get(self, "response_type")
 
     @response_type.setter
@@ -740,6 +1352,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="externalRedis")
     def external_redis(self) -> Optional[pulumi.Input['CngwServiceRateLimitLimitDetailExternalRedisArgs']]:
+        """
+        external redis information, maybe null.
+        """
         return pulumi.get(self, "external_redis")
 
     @external_redis.setter
@@ -749,6 +1364,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def header(self) -> Optional[pulumi.Input[str]]:
+        """
+        request headers that require rate limit.
+        """
         return pulumi.get(self, "header")
 
     @header.setter
@@ -758,6 +1376,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="lineUpTime")
     def line_up_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        queue time.
+        """
         return pulumi.get(self, "line_up_time")
 
     @line_up_time.setter
@@ -767,6 +1388,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        request paths that require rate limit.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -776,6 +1400,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter
     def policy(self) -> Optional[pulumi.Input[str]]:
+        """
+        counter policy.Reference value: `local`, `redis`, `external_redis`.
+        """
         return pulumi.get(self, "policy")
 
     @policy.setter
@@ -785,6 +1412,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="rateLimitResponse")
     def rate_limit_response(self) -> Optional[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseArgs']]:
+        """
+        response configuration, the response strategy is text, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response")
 
     @rate_limit_response.setter
@@ -794,6 +1424,9 @@ class CngwServiceRateLimitLimitDetailArgs:
     @property
     @pulumi.getter(name="rateLimitResponseUrl")
     def rate_limit_response_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        request forwarding address, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response_url")
 
     @rate_limit_response_url.setter
@@ -808,6 +1441,12 @@ class CngwServiceRateLimitLimitDetailExternalRedisArgs:
                  redis_password: pulumi.Input[str],
                  redis_port: pulumi.Input[int],
                  redis_timeout: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] redis_host: redis ip, maybe null.
+        :param pulumi.Input[str] redis_password: redis password, maybe null.
+        :param pulumi.Input[int] redis_port: redis port, maybe null.
+        :param pulumi.Input[int] redis_timeout: redis timeout, unit: `ms`, maybe null.
+        """
         pulumi.set(__self__, "redis_host", redis_host)
         pulumi.set(__self__, "redis_password", redis_password)
         pulumi.set(__self__, "redis_port", redis_port)
@@ -816,6 +1455,9 @@ class CngwServiceRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisHost")
     def redis_host(self) -> pulumi.Input[str]:
+        """
+        redis ip, maybe null.
+        """
         return pulumi.get(self, "redis_host")
 
     @redis_host.setter
@@ -825,6 +1467,9 @@ class CngwServiceRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisPassword")
     def redis_password(self) -> pulumi.Input[str]:
+        """
+        redis password, maybe null.
+        """
         return pulumi.get(self, "redis_password")
 
     @redis_password.setter
@@ -834,6 +1479,9 @@ class CngwServiceRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisPort")
     def redis_port(self) -> pulumi.Input[int]:
+        """
+        redis port, maybe null.
+        """
         return pulumi.get(self, "redis_port")
 
     @redis_port.setter
@@ -843,6 +1491,9 @@ class CngwServiceRateLimitLimitDetailExternalRedisArgs:
     @property
     @pulumi.getter(name="redisTimeout")
     def redis_timeout(self) -> pulumi.Input[int]:
+        """
+        redis timeout, unit: `ms`, maybe null.
+        """
         return pulumi.get(self, "redis_timeout")
 
     @redis_timeout.setter
@@ -855,12 +1506,19 @@ class CngwServiceRateLimitLimitDetailQpsThresholdArgs:
     def __init__(__self__, *,
                  max: pulumi.Input[int],
                  unit: pulumi.Input[str]):
+        """
+        :param pulumi.Input[int] max: the max threshold.
+        :param pulumi.Input[str] unit: qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+        """
         pulumi.set(__self__, "max", max)
         pulumi.set(__self__, "unit", unit)
 
     @property
     @pulumi.getter
     def max(self) -> pulumi.Input[int]:
+        """
+        the max threshold.
+        """
         return pulumi.get(self, "max")
 
     @max.setter
@@ -870,6 +1528,9 @@ class CngwServiceRateLimitLimitDetailQpsThresholdArgs:
     @property
     @pulumi.getter
     def unit(self) -> pulumi.Input[str]:
+        """
+        qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+        """
         return pulumi.get(self, "unit")
 
     @unit.setter
@@ -883,6 +1544,11 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseArgs:
                  body: Optional[pulumi.Input[str]] = None,
                  headers: Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]]] = None,
                  http_status: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] body: custom response body, maybe bull.
+        :param pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]] headers: headrs.
+        :param pulumi.Input[int] http_status: http status code.
+        """
         if body is not None:
             pulumi.set(__self__, "body", body)
         if headers is not None:
@@ -893,6 +1559,9 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter
     def body(self) -> Optional[pulumi.Input[str]]:
+        """
+        custom response body, maybe bull.
+        """
         return pulumi.get(self, "body")
 
     @body.setter
@@ -902,6 +1571,9 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter
     def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs']]]]:
+        """
+        headrs.
+        """
         return pulumi.get(self, "headers")
 
     @headers.setter
@@ -911,6 +1583,9 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseArgs:
     @property
     @pulumi.getter(name="httpStatus")
     def http_status(self) -> Optional[pulumi.Input[int]]:
+        """
+        http status code.
+        """
         return pulumi.get(self, "http_status")
 
     @http_status.setter
@@ -923,6 +1598,10 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: key of header.
+        :param pulumi.Input[str] value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -931,6 +1610,9 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs:
     @property
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -940,6 +1622,9 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -1456,6 +2141,45 @@ class InstanceEngineRegionInfoVpcInfoArgs:
 
 
 @pulumi.input_type
+class GetGatewayCertificatesFilterArgs:
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: Filter name.
+        :param str value: Filter value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        Filter value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
 class GetGatewayServicesFilterArgs:
     def __init__(__self__, *,
                  key: Optional[str] = None,
@@ -1492,5 +2216,79 @@ class GetGatewayServicesFilterArgs:
     @value.setter
     def value(self, value: Optional[str]):
         pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class GetGatewaysFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: filter name.
+        :param Sequence[str] values: filter value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filter value.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetGroupsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: filter name.
+        :param Sequence[str] values: filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

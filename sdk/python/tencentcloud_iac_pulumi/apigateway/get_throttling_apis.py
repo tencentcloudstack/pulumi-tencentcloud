@@ -111,7 +111,7 @@ def get_throttling_apis(environment_names: Optional[Sequence[str]] = None,
         ip_version="IPv4")
     api = tencentcloud.api_gateway.Api("api",
         service_id=service.id,
-        api_name="hello_update",
+        api_name="tf_example",
         api_desc="my hello api update",
         auth_type="SECRET",
         protocol="HTTP",
@@ -203,7 +203,7 @@ def get_throttling_apis_output(environment_names: Optional[pulumi.Input[Optional
         ip_version="IPv4")
     api = tencentcloud.api_gateway.Api("api",
         service_id=service.id,
-        api_name="hello_update",
+        api_name="tf_example",
         api_desc="my hello api update",
         auth_type="SECRET",
         protocol="HTTP",

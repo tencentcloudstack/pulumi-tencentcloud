@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
     public sealed class BucketLifecycleRuleGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Set the maximum time a multipart upload is allowed to remain running.
+        /// </summary>
+        [Input("abortIncompleteMultipartUpload")]
+        public Input<Inputs.BucketLifecycleRuleAbortIncompleteMultipartUploadGetArgs>? AbortIncompleteMultipartUpload { get; set; }
+
+        /// <summary>
         /// Specifies a period in the object's expire (documented below).
         /// </summary>
         [Input("expiration")]

@@ -23,15 +23,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Outputs
         /// </summary>
         public readonly bool? AutoIncrement;
         /// <summary>
-        /// Corresponding mapping column name.
+        /// Column Name.
         /// </summary>
         public readonly string? ColumnName;
         /// <summary>
-        /// current column size.
+        /// current ColumnSize.
         /// </summary>
         public readonly string? ColumnSize;
         /// <summary>
-        /// current column precision.
+        /// current Column DecimalDigits.
         /// </summary>
         public readonly string? DecimalDigits;
         /// <summary>

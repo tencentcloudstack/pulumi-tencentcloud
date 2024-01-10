@@ -312,13 +312,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int?> Recycle { get; private set; } = null!;
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
         /// </summary>
         [Output("redisReplicasNum")]
         public Output<int?> RedisReplicasNum { get; private set; } = null!;
 
         /// <summary>
-        /// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+        /// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
         /// </summary>
         [Output("redisShardNum")]
         public Output<int> RedisShardNum { get; private set; } = null!;
@@ -376,6 +376,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+        /// </summary>
+        [Output("waitSwitch")]
+        public Output<int?> WaitSwitch { get; private set; } = null!;
 
 
         /// <summary>
@@ -515,13 +521,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? Recycle { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }
 
         /// <summary>
-        /// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+        /// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
         /// </summary>
         [Input("redisShardNum")]
         public Input<int>? RedisShardNum { get; set; }
@@ -591,6 +597,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         public InstanceArgs()
         {
@@ -708,13 +720,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? Recycle { get; set; }
 
         /// <summary>
-        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`.
+        /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
         /// </summary>
         [Input("redisReplicasNum")]
         public Input<int>? RedisReplicasNum { get; set; }
 
         /// <summary>
-        /// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+        /// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
         /// </summary>
         [Input("redisShardNum")]
         public Input<int>? RedisShardNum { get; set; }
@@ -790,6 +802,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         public InstanceState()
         {

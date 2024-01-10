@@ -165,23 +165,37 @@ class SecretVersion(pulumi.CustomResource):
         """
         Provide a resource to create a SSM secret version.
 
+        > **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
+
         ## Example Usage
+        ### Text type credential information plaintext
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssm.Secret("foo",
-            secret_name="test",
-            description="test secret",
+        example = tencentcloud.ssm.Secret("example",
+            secret_name="tf-example",
+            description="desc.",
             recovery_window_in_days=0,
             is_enabled=True,
             tags={
-                "test-tag": "test",
+                "createdBy": "terraform",
             })
         v1 = tencentcloud.ssm.SecretVersion("v1",
-            secret_name=foo.secret_name,
+            secret_name=example.secret_name,
             version_id="v1",
+            secret_string="this is secret string")
+        ```
+        ### Binary credential information, encoded using base64
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        v2 = tencentcloud.ssm.SecretVersion("v2",
+            secret_name=tencentcloud_ssm_secret["example"]["secret_name"],
+            version_id="v2",
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
 
@@ -209,23 +223,37 @@ class SecretVersion(pulumi.CustomResource):
         """
         Provide a resource to create a SSM secret version.
 
+        > **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
+
         ## Example Usage
+        ### Text type credential information plaintext
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssm.Secret("foo",
-            secret_name="test",
-            description="test secret",
+        example = tencentcloud.ssm.Secret("example",
+            secret_name="tf-example",
+            description="desc.",
             recovery_window_in_days=0,
             is_enabled=True,
             tags={
-                "test-tag": "test",
+                "createdBy": "terraform",
             })
         v1 = tencentcloud.ssm.SecretVersion("v1",
-            secret_name=foo.secret_name,
+            secret_name=example.secret_name,
             version_id="v1",
+            secret_string="this is secret string")
+        ```
+        ### Binary credential information, encoded using base64
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        v2 = tencentcloud.ssm.SecretVersion("v2",
+            secret_name=tencentcloud_ssm_secret["example"]["secret_name"],
+            version_id="v2",
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
 

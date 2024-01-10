@@ -21,37 +21,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewListenerRule(ctx, "foo", &Clb.ListenerRuleArgs{
-// 			CertificateCaId:         pulumi.String("VfqO4zkB"),
-// 			CertificateId:           pulumi.String("VjANRdz8"),
-// 			CertificateSslMode:      pulumi.String("MUTUAL"),
-// 			ClbId:                   pulumi.String("lb-k2zjp9lv"),
-// 			Domain:                  pulumi.String("foo.net"),
-// 			HealthCheckHealthNum:    pulumi.Int(3),
-// 			HealthCheckHttpCode:     pulumi.Int(2),
-// 			HealthCheckHttpDomain:   pulumi.String("Default Domain"),
-// 			HealthCheckHttpMethod:   pulumi.String("GET"),
-// 			HealthCheckHttpPath:     pulumi.String("Default Path"),
-// 			HealthCheckIntervalTime: pulumi.Int(5),
-// 			HealthCheckSwitch:       pulumi.Bool(true),
-// 			HealthCheckUnhealthNum:  pulumi.Int(3),
-// 			ListenerId:              pulumi.String("lbl-hh141sn9"),
-// 			Scheduler:               pulumi.String("WRR"),
-// 			SessionExpireTime:       pulumi.Int(30),
-// 			Url:                     pulumi.String("/bar"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListenerRule(ctx, "foo", &Clb.ListenerRuleArgs{
+//				CertificateCaId:         pulumi.String("VfqO4zkB"),
+//				CertificateId:           pulumi.String("VjANRdz8"),
+//				CertificateSslMode:      pulumi.String("MUTUAL"),
+//				ClbId:                   pulumi.String("lb-k2zjp9lv"),
+//				Domain:                  pulumi.String("foo.net"),
+//				HealthCheckHealthNum:    pulumi.Int(3),
+//				HealthCheckHttpCode:     pulumi.Int(2),
+//				HealthCheckHttpDomain:   pulumi.String("Default Domain"),
+//				HealthCheckHttpMethod:   pulumi.String("GET"),
+//				HealthCheckHttpPath:     pulumi.String("Default Path"),
+//				HealthCheckIntervalTime: pulumi.Int(5),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckUnhealthNum:  pulumi.Int(3),
+//				ListenerId:              pulumi.String("lbl-hh141sn9"),
+//				Scheduler:               pulumi.String("WRR"),
+//				SessionExpireTime:       pulumi.Int(30),
+//				Url:                     pulumi.String("/bar"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+//
+//	$ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+//
 // ```
 type ListenerRule struct {
 	pulumi.CustomResourceState
@@ -100,6 +105,8 @@ type ListenerRule struct {
 	Http2Switch pulumi.BoolOutput `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic pulumi.BoolOutput `pulumi:"quic"`
 	// ID of this CLB listener rule.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -190,6 +197,8 @@ type listenerRuleState struct {
 	Http2Switch *bool `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId *string `pulumi:"listenerId"`
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic *bool `pulumi:"quic"`
 	// ID of this CLB listener rule.
 	RuleId *string `pulumi:"ruleId"`
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -239,6 +248,8 @@ type ListenerRuleState struct {
 	Http2Switch pulumi.BoolPtrInput
 	// ID of CLB listener.
 	ListenerId pulumi.StringPtrInput
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic pulumi.BoolPtrInput
 	// ID of this CLB listener rule.
 	RuleId pulumi.StringPtrInput
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -292,6 +303,8 @@ type listenerRuleArgs struct {
 	Http2Switch *bool `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId string `pulumi:"listenerId"`
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic *bool `pulumi:"quic"`
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -340,6 +353,8 @@ type ListenerRuleArgs struct {
 	Http2Switch pulumi.BoolPtrInput
 	// ID of CLB listener.
 	ListenerId pulumi.StringInput
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic pulumi.BoolPtrInput
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
 	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -376,7 +391,7 @@ func (i *ListenerRule) ToListenerRuleOutputWithContext(ctx context.Context) List
 // ListenerRuleArrayInput is an input type that accepts ListenerRuleArray and ListenerRuleArrayOutput values.
 // You can construct a concrete instance of `ListenerRuleArrayInput` via:
 //
-//          ListenerRuleArray{ ListenerRuleArgs{...} }
+//	ListenerRuleArray{ ListenerRuleArgs{...} }
 type ListenerRuleArrayInput interface {
 	pulumi.Input
 
@@ -401,7 +416,7 @@ func (i ListenerRuleArray) ToListenerRuleArrayOutputWithContext(ctx context.Cont
 // ListenerRuleMapInput is an input type that accepts ListenerRuleMap and ListenerRuleMapOutput values.
 // You can construct a concrete instance of `ListenerRuleMapInput` via:
 //
-//          ListenerRuleMap{ "key": ListenerRuleArgs{...} }
+//	ListenerRuleMap{ "key": ListenerRuleArgs{...} }
 type ListenerRuleMapInput interface {
 	pulumi.Input
 
@@ -525,6 +540,11 @@ func (o ListenerRuleOutput) Http2Switch() pulumi.BoolOutput {
 // ID of CLB listener.
 func (o ListenerRuleOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+func (o ListenerRuleOutput) Quic() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ListenerRule) pulumi.BoolOutput { return v.Quic }).(pulumi.BoolOutput)
 }
 
 // ID of this CLB listener rule.

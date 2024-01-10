@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewDomain(ctx, "domain", &Ses.DomainArgs{
-// 			EmailIdentity: pulumi.String("iac.cloud"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewDomain(ctx, "domain", &Ses.DomainArgs{
+//				EmailIdentity: pulumi.String("iac.cloud"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,11 +44,15 @@ import (
 // ses domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
+//
+//	$ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
+//
 // ```
 type Domain struct {
 	pulumi.CustomResourceState
 
+	// DNS configuration details.
+	Attributes DomainAttributeArrayOutput `pulumi:"attributes"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringOutput `pulumi:"emailIdentity"`
 }
@@ -83,11 +90,15 @@ func GetDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Domain resources.
 type domainState struct {
+	// DNS configuration details.
+	Attributes []DomainAttribute `pulumi:"attributes"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity *string `pulumi:"emailIdentity"`
 }
 
 type DomainState struct {
+	// DNS configuration details.
+	Attributes DomainAttributeArrayInput
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringPtrInput
 }
@@ -133,7 +144,7 @@ func (i *Domain) ToDomainOutputWithContext(ctx context.Context) DomainOutput {
 // DomainArrayInput is an input type that accepts DomainArray and DomainArrayOutput values.
 // You can construct a concrete instance of `DomainArrayInput` via:
 //
-//          DomainArray{ DomainArgs{...} }
+//	DomainArray{ DomainArgs{...} }
 type DomainArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +169,7 @@ func (i DomainArray) ToDomainArrayOutputWithContext(ctx context.Context) DomainA
 // DomainMapInput is an input type that accepts DomainMap and DomainMapOutput values.
 // You can construct a concrete instance of `DomainMapInput` via:
 //
-//          DomainMap{ "key": DomainArgs{...} }
+//	DomainMap{ "key": DomainArgs{...} }
 type DomainMapInput interface {
 	pulumi.Input
 
@@ -192,6 +203,11 @@ func (o DomainOutput) ToDomainOutput() DomainOutput {
 
 func (o DomainOutput) ToDomainOutputWithContext(ctx context.Context) DomainOutput {
 	return o
+}
+
+// DNS configuration details.
+func (o DomainOutput) Attributes() DomainAttributeArrayOutput {
+	return o.ApplyT(func(v *Domain) DomainAttributeArrayOutput { return v.Attributes }).(DomainAttributeArrayOutput)
 }
 
 // Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.

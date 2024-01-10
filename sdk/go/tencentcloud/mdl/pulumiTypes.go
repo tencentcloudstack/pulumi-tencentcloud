@@ -34,7 +34,7 @@ type StreamLiveInputInputSetting struct {
 // StreamLiveInputInputSettingInput is an input type that accepts StreamLiveInputInputSettingArgs and StreamLiveInputInputSettingOutput values.
 // You can construct a concrete instance of `StreamLiveInputInputSettingInput` via:
 //
-//          StreamLiveInputInputSettingArgs{...}
+//	StreamLiveInputInputSettingArgs{...}
 type StreamLiveInputInputSettingInput interface {
 	pulumi.Input
 
@@ -78,7 +78,7 @@ func (i StreamLiveInputInputSettingArgs) ToStreamLiveInputInputSettingOutputWith
 // StreamLiveInputInputSettingArrayInput is an input type that accepts StreamLiveInputInputSettingArray and StreamLiveInputInputSettingArrayOutput values.
 // You can construct a concrete instance of `StreamLiveInputInputSettingArrayInput` via:
 //
-//          StreamLiveInputInputSettingArray{ StreamLiveInputInputSettingArgs{...} }
+//	StreamLiveInputInputSettingArray{ StreamLiveInputInputSettingArgs{...} }
 type StreamLiveInputInputSettingArrayInput interface {
 	pulumi.Input
 

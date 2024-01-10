@@ -19,28 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewZone(ctx, "zone", &Teo.ZoneArgs{
-// 			CnameSpeedUp: pulumi.String("enabled"),
-// 			Paused:       pulumi.Bool(false),
-// 			PlanType:     pulumi.String("sta"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			Type:     pulumi.String("full"),
-// 			ZoneName: pulumi.String("toutiao2.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewZone(ctx, "zone", &Teo.ZoneArgs{
+//				AliasZoneName: pulumi.String("teo-test"),
+//				Area:          pulumi.String("overseas"),
+//				Paused:        pulumi.Bool(false),
+//				PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				Type:     pulumi.String("partial"),
+//				ZoneName: pulumi.String("tf-teo.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,44 +52,32 @@ import (
 // teo zone can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+//
+//	$ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+//
 // ```
 type Zone struct {
 	pulumi.CustomResourceState
 
-	// Valid values: `mainland`, `overseas`.
+	// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+	AliasZoneName pulumi.StringPtrOutput `pulumi:"aliasZoneName"`
+	// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
 	Area pulumi.StringOutput `pulumi:"area"`
-	// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-	CnameSpeedUp pulumi.StringOutput `pulumi:"cnameSpeedUp"`
-	// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-	CnameStatus pulumi.StringOutput `pulumi:"cnameStatus"`
-	// Site creation date.
-	CreatedOn pulumi.StringOutput `pulumi:"createdOn"`
-	// Site modification date.
-	ModifiedOn pulumi.StringOutput `pulumi:"modifiedOn"`
-	// List of name servers assigned by Tencent Cloud.
+	// NS list allocated by Tencent Cloud.
 	NameServers pulumi.StringArrayOutput `pulumi:"nameServers"`
-	// Name server used by the site.
-	OriginalNameServers pulumi.StringArrayOutput `pulumi:"originalNameServers"`
+	// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
+	OwnershipVerifications ZoneOwnershipVerificationArrayOutput `pulumi:"ownershipVerifications"`
 	// Indicates whether the site is disabled.
 	Paused pulumi.BoolOutput `pulumi:"paused"`
-	// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-	PlanType pulumi.StringOutput `pulumi:"planType"`
-	// Billing resources of the zone.
-	Resources ZoneResourceArrayOutput `pulumi:"resources"`
-	// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+	// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+	PlanId pulumi.StringOutput `pulumi:"planId"`
+	// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+	// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
 	Type pulumi.StringOutput `pulumi:"type"`
-	// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServers ZoneVanityNameServersPtrOutput `pulumi:"vanityNameServers"`
-	// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServersIps ZoneVanityNameServersIpArrayOutput `pulumi:"vanityNameServersIps"`
-	// Site ID.
-	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
-	// Site name.
+	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringOutput `pulumi:"zoneName"`
 }
 
@@ -96,8 +88,14 @@ func NewZone(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.PlanType == nil {
-		return nil, errors.New("invalid value for required argument 'PlanType'")
+	if args.Area == nil {
+		return nil, errors.New("invalid value for required argument 'Area'")
+	}
+	if args.PlanId == nil {
+		return nil, errors.New("invalid value for required argument 'PlanId'")
+	}
+	if args.Type == nil {
+		return nil, errors.New("invalid value for required argument 'Type'")
 	}
 	if args.ZoneName == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneName'")
@@ -125,76 +123,48 @@ func GetZone(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Zone resources.
 type zoneState struct {
-	// Valid values: `mainland`, `overseas`.
+	// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+	AliasZoneName *string `pulumi:"aliasZoneName"`
+	// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
 	Area *string `pulumi:"area"`
-	// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-	CnameSpeedUp *string `pulumi:"cnameSpeedUp"`
-	// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-	CnameStatus *string `pulumi:"cnameStatus"`
-	// Site creation date.
-	CreatedOn *string `pulumi:"createdOn"`
-	// Site modification date.
-	ModifiedOn *string `pulumi:"modifiedOn"`
-	// List of name servers assigned by Tencent Cloud.
+	// NS list allocated by Tencent Cloud.
 	NameServers []string `pulumi:"nameServers"`
-	// Name server used by the site.
-	OriginalNameServers []string `pulumi:"originalNameServers"`
+	// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
+	OwnershipVerifications []ZoneOwnershipVerification `pulumi:"ownershipVerifications"`
 	// Indicates whether the site is disabled.
 	Paused *bool `pulumi:"paused"`
-	// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-	PlanType *string `pulumi:"planType"`
-	// Billing resources of the zone.
-	Resources []ZoneResource `pulumi:"resources"`
-	// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+	// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+	PlanId *string `pulumi:"planId"`
+	// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
 	Status *string `pulumi:"status"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+	// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
 	Type *string `pulumi:"type"`
-	// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServers *ZoneVanityNameServers `pulumi:"vanityNameServers"`
-	// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServersIps []ZoneVanityNameServersIp `pulumi:"vanityNameServersIps"`
-	// Site ID.
-	ZoneId *string `pulumi:"zoneId"`
-	// Site name.
+	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName *string `pulumi:"zoneName"`
 }
 
 type ZoneState struct {
-	// Valid values: `mainland`, `overseas`.
+	// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+	AliasZoneName pulumi.StringPtrInput
+	// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
 	Area pulumi.StringPtrInput
-	// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-	CnameSpeedUp pulumi.StringPtrInput
-	// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-	CnameStatus pulumi.StringPtrInput
-	// Site creation date.
-	CreatedOn pulumi.StringPtrInput
-	// Site modification date.
-	ModifiedOn pulumi.StringPtrInput
-	// List of name servers assigned by Tencent Cloud.
+	// NS list allocated by Tencent Cloud.
 	NameServers pulumi.StringArrayInput
-	// Name server used by the site.
-	OriginalNameServers pulumi.StringArrayInput
+	// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
+	OwnershipVerifications ZoneOwnershipVerificationArrayInput
 	// Indicates whether the site is disabled.
 	Paused pulumi.BoolPtrInput
-	// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-	PlanType pulumi.StringPtrInput
-	// Billing resources of the zone.
-	Resources ZoneResourceArrayInput
-	// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+	// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+	PlanId pulumi.StringPtrInput
+	// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
 	Status pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
-	// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+	// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
 	Type pulumi.StringPtrInput
-	// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServers ZoneVanityNameServersPtrInput
-	// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServersIps ZoneVanityNameServersIpArrayInput
-	// Site ID.
-	ZoneId pulumi.StringPtrInput
-	// Site name.
+	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringPtrInput
 }
 
@@ -203,37 +173,37 @@ func (ZoneState) ElementType() reflect.Type {
 }
 
 type zoneArgs struct {
-	// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-	CnameSpeedUp *string `pulumi:"cnameSpeedUp"`
+	// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+	AliasZoneName *string `pulumi:"aliasZoneName"`
+	// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+	Area string `pulumi:"area"`
 	// Indicates whether the site is disabled.
 	Paused *bool `pulumi:"paused"`
-	// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-	PlanType string `pulumi:"planType"`
+	// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+	PlanId string `pulumi:"planId"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-	Type *string `pulumi:"type"`
-	// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServers *ZoneVanityNameServers `pulumi:"vanityNameServers"`
-	// Site name.
+	// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+	Type string `pulumi:"type"`
+	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName string `pulumi:"zoneName"`
 }
 
 // The set of arguments for constructing a Zone resource.
 type ZoneArgs struct {
-	// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-	CnameSpeedUp pulumi.StringPtrInput
+	// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+	AliasZoneName pulumi.StringPtrInput
+	// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+	Area pulumi.StringInput
 	// Indicates whether the site is disabled.
 	Paused pulumi.BoolPtrInput
-	// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-	PlanType pulumi.StringInput
+	// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+	PlanId pulumi.StringInput
 	// Tag description list.
 	Tags pulumi.MapInput
-	// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
-	Type pulumi.StringPtrInput
-	// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-	VanityNameServers ZoneVanityNameServersPtrInput
-	// Site name.
+	// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+	Type pulumi.StringInput
+	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringInput
 }
 
@@ -263,7 +233,7 @@ func (i *Zone) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 // ZoneArrayInput is an input type that accepts ZoneArray and ZoneArrayOutput values.
 // You can construct a concrete instance of `ZoneArrayInput` via:
 //
-//          ZoneArray{ ZoneArgs{...} }
+//	ZoneArray{ ZoneArgs{...} }
 type ZoneArrayInput interface {
 	pulumi.Input
 
@@ -288,7 +258,7 @@ func (i ZoneArray) ToZoneArrayOutputWithContext(ctx context.Context) ZoneArrayOu
 // ZoneMapInput is an input type that accepts ZoneMap and ZoneMapOutput values.
 // You can construct a concrete instance of `ZoneMapInput` via:
 //
-//          ZoneMap{ "key": ZoneArgs{...} }
+//	ZoneMap{ "key": ZoneArgs{...} }
 type ZoneMapInput interface {
 	pulumi.Input
 
@@ -324,39 +294,24 @@ func (o ZoneOutput) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 	return o
 }
 
-// Valid values: `mainland`, `overseas`.
+// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+func (o ZoneOutput) AliasZoneName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Zone) pulumi.StringPtrOutput { return v.AliasZoneName }).(pulumi.StringPtrOutput)
+}
+
+// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
 func (o ZoneOutput) Area() pulumi.StringOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.Area }).(pulumi.StringOutput)
 }
 
-// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-func (o ZoneOutput) CnameSpeedUp() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.CnameSpeedUp }).(pulumi.StringOutput)
-}
-
-// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-func (o ZoneOutput) CnameStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.CnameStatus }).(pulumi.StringOutput)
-}
-
-// Site creation date.
-func (o ZoneOutput) CreatedOn() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.CreatedOn }).(pulumi.StringOutput)
-}
-
-// Site modification date.
-func (o ZoneOutput) ModifiedOn() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.ModifiedOn }).(pulumi.StringOutput)
-}
-
-// List of name servers assigned by Tencent Cloud.
+// NS list allocated by Tencent Cloud.
 func (o ZoneOutput) NameServers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringArrayOutput { return v.NameServers }).(pulumi.StringArrayOutput)
 }
 
-// Name server used by the site.
-func (o ZoneOutput) OriginalNameServers() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringArrayOutput { return v.OriginalNameServers }).(pulumi.StringArrayOutput)
+// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
+func (o ZoneOutput) OwnershipVerifications() ZoneOwnershipVerificationArrayOutput {
+	return o.ApplyT(func(v *Zone) ZoneOwnershipVerificationArrayOutput { return v.OwnershipVerifications }).(ZoneOwnershipVerificationArrayOutput)
 }
 
 // Indicates whether the site is disabled.
@@ -364,17 +319,12 @@ func (o ZoneOutput) Paused() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Zone) pulumi.BoolOutput { return v.Paused }).(pulumi.BoolOutput)
 }
 
-// Plan type of the zone. See details in data source `zoneAvailablePlans`.
-func (o ZoneOutput) PlanType() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.PlanType }).(pulumi.StringOutput)
+// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
+func (o ZoneOutput) PlanId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.PlanId }).(pulumi.StringOutput)
 }
 
-// Billing resources of the zone.
-func (o ZoneOutput) Resources() ZoneResourceArrayOutput {
-	return o.ApplyT(func(v *Zone) ZoneResourceArrayOutput { return v.Resources }).(ZoneResourceArrayOutput)
-}
-
-// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
 func (o ZoneOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
@@ -384,27 +334,12 @@ func (o ZoneOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Zone) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
 func (o ZoneOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
-// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneOutput) VanityNameServers() ZoneVanityNameServersPtrOutput {
-	return o.ApplyT(func(v *Zone) ZoneVanityNameServersPtrOutput { return v.VanityNameServers }).(ZoneVanityNameServersPtrOutput)
-}
-
-// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-func (o ZoneOutput) VanityNameServersIps() ZoneVanityNameServersIpArrayOutput {
-	return o.ApplyT(func(v *Zone) ZoneVanityNameServersIpArrayOutput { return v.VanityNameServersIps }).(ZoneVanityNameServersIpArrayOutput)
-}
-
-// Site ID.
-func (o ZoneOutput) ZoneId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.ZoneId }).(pulumi.StringOutput)
-}
-
-// Site name.
+// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 func (o ZoneOutput) ZoneName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.ZoneName }).(pulumi.StringOutput)
 }

@@ -10,6 +10,2294 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type GetDomainAnalyticsAliasData struct {
+	// Subtotal of resolution volume for the current statistical dimension.
+	Datas []GetDomainAnalyticsAliasDataData `pulumi:"datas"`
+	// Domain resolution volume statistics query information.
+	Infos []GetDomainAnalyticsAliasDataInfo `pulumi:"infos"`
+}
+
+// GetDomainAnalyticsAliasDataInput is an input type that accepts GetDomainAnalyticsAliasDataArgs and GetDomainAnalyticsAliasDataOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataInput` via:
+//
+//	GetDomainAnalyticsAliasDataArgs{...}
+type GetDomainAnalyticsAliasDataInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataOutput() GetDomainAnalyticsAliasDataOutput
+	ToGetDomainAnalyticsAliasDataOutputWithContext(context.Context) GetDomainAnalyticsAliasDataOutput
+}
+
+type GetDomainAnalyticsAliasDataArgs struct {
+	// Subtotal of resolution volume for the current statistical dimension.
+	Datas GetDomainAnalyticsAliasDataDataArrayInput `pulumi:"datas"`
+	// Domain resolution volume statistics query information.
+	Infos GetDomainAnalyticsAliasDataInfoArrayInput `pulumi:"infos"`
+}
+
+func (GetDomainAnalyticsAliasDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataArgs) ToGetDomainAnalyticsAliasDataOutput() GetDomainAnalyticsAliasDataOutput {
+	return i.ToGetDomainAnalyticsAliasDataOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataArgs) ToGetDomainAnalyticsAliasDataOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataOutput)
+}
+
+// GetDomainAnalyticsAliasDataArrayInput is an input type that accepts GetDomainAnalyticsAliasDataArray and GetDomainAnalyticsAliasDataArrayOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataArrayInput` via:
+//
+//	GetDomainAnalyticsAliasDataArray{ GetDomainAnalyticsAliasDataArgs{...} }
+type GetDomainAnalyticsAliasDataArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataArrayOutput() GetDomainAnalyticsAliasDataArrayOutput
+	ToGetDomainAnalyticsAliasDataArrayOutputWithContext(context.Context) GetDomainAnalyticsAliasDataArrayOutput
+}
+
+type GetDomainAnalyticsAliasDataArray []GetDomainAnalyticsAliasDataInput
+
+func (GetDomainAnalyticsAliasDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataArray) ToGetDomainAnalyticsAliasDataArrayOutput() GetDomainAnalyticsAliasDataArrayOutput {
+	return i.ToGetDomainAnalyticsAliasDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataArray) ToGetDomainAnalyticsAliasDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataArrayOutput)
+}
+
+type GetDomainAnalyticsAliasDataOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataOutput) ToGetDomainAnalyticsAliasDataOutput() GetDomainAnalyticsAliasDataOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataOutput) ToGetDomainAnalyticsAliasDataOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataOutput {
+	return o
+}
+
+// Subtotal of resolution volume for the current statistical dimension.
+func (o GetDomainAnalyticsAliasDataOutput) Datas() GetDomainAnalyticsAliasDataDataArrayOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasData) []GetDomainAnalyticsAliasDataData { return v.Datas }).(GetDomainAnalyticsAliasDataDataArrayOutput)
+}
+
+// Domain resolution volume statistics query information.
+func (o GetDomainAnalyticsAliasDataOutput) Infos() GetDomainAnalyticsAliasDataInfoArrayOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasData) []GetDomainAnalyticsAliasDataInfo { return v.Infos }).(GetDomainAnalyticsAliasDataInfoArrayOutput)
+}
+
+type GetDomainAnalyticsAliasDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataArrayOutput) ToGetDomainAnalyticsAliasDataArrayOutput() GetDomainAnalyticsAliasDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataArrayOutput) ToGetDomainAnalyticsAliasDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataArrayOutput) Index(i pulumi.IntInput) GetDomainAnalyticsAliasDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainAnalyticsAliasData {
+		return vs[0].([]GetDomainAnalyticsAliasData)[vs[1].(int)]
+	}).(GetDomainAnalyticsAliasDataOutput)
+}
+
+type GetDomainAnalyticsAliasDataData struct {
+	// For daily statistics, it is the statistical date.
+	DateKey string `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey int `pulumi:"hourKey"`
+	// Subtotal of resolution volume for the current statistical dimension.
+	Num int `pulumi:"num"`
+}
+
+// GetDomainAnalyticsAliasDataDataInput is an input type that accepts GetDomainAnalyticsAliasDataDataArgs and GetDomainAnalyticsAliasDataDataOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataDataInput` via:
+//
+//	GetDomainAnalyticsAliasDataDataArgs{...}
+type GetDomainAnalyticsAliasDataDataInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataDataOutput() GetDomainAnalyticsAliasDataDataOutput
+	ToGetDomainAnalyticsAliasDataDataOutputWithContext(context.Context) GetDomainAnalyticsAliasDataDataOutput
+}
+
+type GetDomainAnalyticsAliasDataDataArgs struct {
+	// For daily statistics, it is the statistical date.
+	DateKey pulumi.StringInput `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey pulumi.IntInput `pulumi:"hourKey"`
+	// Subtotal of resolution volume for the current statistical dimension.
+	Num pulumi.IntInput `pulumi:"num"`
+}
+
+func (GetDomainAnalyticsAliasDataDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataDataArgs) ToGetDomainAnalyticsAliasDataDataOutput() GetDomainAnalyticsAliasDataDataOutput {
+	return i.ToGetDomainAnalyticsAliasDataDataOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataDataArgs) ToGetDomainAnalyticsAliasDataDataOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataDataOutput)
+}
+
+// GetDomainAnalyticsAliasDataDataArrayInput is an input type that accepts GetDomainAnalyticsAliasDataDataArray and GetDomainAnalyticsAliasDataDataArrayOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataDataArrayInput` via:
+//
+//	GetDomainAnalyticsAliasDataDataArray{ GetDomainAnalyticsAliasDataDataArgs{...} }
+type GetDomainAnalyticsAliasDataDataArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataDataArrayOutput() GetDomainAnalyticsAliasDataDataArrayOutput
+	ToGetDomainAnalyticsAliasDataDataArrayOutputWithContext(context.Context) GetDomainAnalyticsAliasDataDataArrayOutput
+}
+
+type GetDomainAnalyticsAliasDataDataArray []GetDomainAnalyticsAliasDataDataInput
+
+func (GetDomainAnalyticsAliasDataDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataDataArray) ToGetDomainAnalyticsAliasDataDataArrayOutput() GetDomainAnalyticsAliasDataDataArrayOutput {
+	return i.ToGetDomainAnalyticsAliasDataDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataDataArray) ToGetDomainAnalyticsAliasDataDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataDataArrayOutput)
+}
+
+type GetDomainAnalyticsAliasDataDataOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataDataOutput) ToGetDomainAnalyticsAliasDataDataOutput() GetDomainAnalyticsAliasDataDataOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataDataOutput) ToGetDomainAnalyticsAliasDataDataOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataDataOutput {
+	return o
+}
+
+// For daily statistics, it is the statistical date.
+func (o GetDomainAnalyticsAliasDataDataOutput) DateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataData) string { return v.DateKey }).(pulumi.StringOutput)
+}
+
+// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetDomainAnalyticsAliasDataDataOutput) HourKey() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataData) int { return v.HourKey }).(pulumi.IntOutput)
+}
+
+// Subtotal of resolution volume for the current statistical dimension.
+func (o GetDomainAnalyticsAliasDataDataOutput) Num() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataData) int { return v.Num }).(pulumi.IntOutput)
+}
+
+type GetDomainAnalyticsAliasDataDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataDataArrayOutput) ToGetDomainAnalyticsAliasDataDataArrayOutput() GetDomainAnalyticsAliasDataDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataDataArrayOutput) ToGetDomainAnalyticsAliasDataDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataDataArrayOutput) Index(i pulumi.IntInput) GetDomainAnalyticsAliasDataDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainAnalyticsAliasDataData {
+		return vs[0].([]GetDomainAnalyticsAliasDataData)[vs[1].(int)]
+	}).(GetDomainAnalyticsAliasDataDataOutput)
+}
+
+type GetDomainAnalyticsAliasDataInfo struct {
+	// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+	DnsFormat string `pulumi:"dnsFormat"`
+	// Total resolution volume for the current statistical period.
+	DnsTotal int `pulumi:"dnsTotal"`
+	// The domain name to query for resolution volume.
+	Domain string `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate string `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate string `pulumi:"startDate"`
+}
+
+// GetDomainAnalyticsAliasDataInfoInput is an input type that accepts GetDomainAnalyticsAliasDataInfoArgs and GetDomainAnalyticsAliasDataInfoOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataInfoInput` via:
+//
+//	GetDomainAnalyticsAliasDataInfoArgs{...}
+type GetDomainAnalyticsAliasDataInfoInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataInfoOutput() GetDomainAnalyticsAliasDataInfoOutput
+	ToGetDomainAnalyticsAliasDataInfoOutputWithContext(context.Context) GetDomainAnalyticsAliasDataInfoOutput
+}
+
+type GetDomainAnalyticsAliasDataInfoArgs struct {
+	// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+	DnsFormat pulumi.StringInput `pulumi:"dnsFormat"`
+	// Total resolution volume for the current statistical period.
+	DnsTotal pulumi.IntInput `pulumi:"dnsTotal"`
+	// The domain name to query for resolution volume.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate pulumi.StringInput `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate pulumi.StringInput `pulumi:"startDate"`
+}
+
+func (GetDomainAnalyticsAliasDataInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataInfoArgs) ToGetDomainAnalyticsAliasDataInfoOutput() GetDomainAnalyticsAliasDataInfoOutput {
+	return i.ToGetDomainAnalyticsAliasDataInfoOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataInfoArgs) ToGetDomainAnalyticsAliasDataInfoOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataInfoOutput)
+}
+
+// GetDomainAnalyticsAliasDataInfoArrayInput is an input type that accepts GetDomainAnalyticsAliasDataInfoArray and GetDomainAnalyticsAliasDataInfoArrayOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsAliasDataInfoArrayInput` via:
+//
+//	GetDomainAnalyticsAliasDataInfoArray{ GetDomainAnalyticsAliasDataInfoArgs{...} }
+type GetDomainAnalyticsAliasDataInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsAliasDataInfoArrayOutput() GetDomainAnalyticsAliasDataInfoArrayOutput
+	ToGetDomainAnalyticsAliasDataInfoArrayOutputWithContext(context.Context) GetDomainAnalyticsAliasDataInfoArrayOutput
+}
+
+type GetDomainAnalyticsAliasDataInfoArray []GetDomainAnalyticsAliasDataInfoInput
+
+func (GetDomainAnalyticsAliasDataInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsAliasDataInfoArray) ToGetDomainAnalyticsAliasDataInfoArrayOutput() GetDomainAnalyticsAliasDataInfoArrayOutput {
+	return i.ToGetDomainAnalyticsAliasDataInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsAliasDataInfoArray) ToGetDomainAnalyticsAliasDataInfoArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsAliasDataInfoArrayOutput)
+}
+
+type GetDomainAnalyticsAliasDataInfoOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataInfoOutput) ToGetDomainAnalyticsAliasDataInfoOutput() GetDomainAnalyticsAliasDataInfoOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataInfoOutput) ToGetDomainAnalyticsAliasDataInfoOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataInfoOutput {
+	return o
+}
+
+// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+func (o GetDomainAnalyticsAliasDataInfoOutput) DnsFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataInfo) string { return v.DnsFormat }).(pulumi.StringOutput)
+}
+
+// Total resolution volume for the current statistical period.
+func (o GetDomainAnalyticsAliasDataInfoOutput) DnsTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataInfo) int { return v.DnsTotal }).(pulumi.IntOutput)
+}
+
+// The domain name to query for resolution volume.
+func (o GetDomainAnalyticsAliasDataInfoOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataInfo) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The end date of the query, format: YYYY-MM-DD.
+func (o GetDomainAnalyticsAliasDataInfoOutput) EndDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataInfo) string { return v.EndDate }).(pulumi.StringOutput)
+}
+
+// The start date of the query, format: YYYY-MM-DD.
+func (o GetDomainAnalyticsAliasDataInfoOutput) StartDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsAliasDataInfo) string { return v.StartDate }).(pulumi.StringOutput)
+}
+
+type GetDomainAnalyticsAliasDataInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsAliasDataInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsAliasDataInfoArrayOutput) ToGetDomainAnalyticsAliasDataInfoArrayOutput() GetDomainAnalyticsAliasDataInfoArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataInfoArrayOutput) ToGetDomainAnalyticsAliasDataInfoArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsAliasDataInfoArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsAliasDataInfoArrayOutput) Index(i pulumi.IntInput) GetDomainAnalyticsAliasDataInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainAnalyticsAliasDataInfo {
+		return vs[0].([]GetDomainAnalyticsAliasDataInfo)[vs[1].(int)]
+	}).(GetDomainAnalyticsAliasDataInfoOutput)
+}
+
+type GetDomainAnalyticsData struct {
+	// For daily statistics, it is the statistical date.
+	DateKey string `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey int `pulumi:"hourKey"`
+	// Subtotal of resolution volume for the current statistical dimension.
+	Num int `pulumi:"num"`
+}
+
+// GetDomainAnalyticsDataInput is an input type that accepts GetDomainAnalyticsDataArgs and GetDomainAnalyticsDataOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsDataInput` via:
+//
+//	GetDomainAnalyticsDataArgs{...}
+type GetDomainAnalyticsDataInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsDataOutput() GetDomainAnalyticsDataOutput
+	ToGetDomainAnalyticsDataOutputWithContext(context.Context) GetDomainAnalyticsDataOutput
+}
+
+type GetDomainAnalyticsDataArgs struct {
+	// For daily statistics, it is the statistical date.
+	DateKey pulumi.StringInput `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey pulumi.IntInput `pulumi:"hourKey"`
+	// Subtotal of resolution volume for the current statistical dimension.
+	Num pulumi.IntInput `pulumi:"num"`
+}
+
+func (GetDomainAnalyticsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsDataArgs) ToGetDomainAnalyticsDataOutput() GetDomainAnalyticsDataOutput {
+	return i.ToGetDomainAnalyticsDataOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsDataArgs) ToGetDomainAnalyticsDataOutputWithContext(ctx context.Context) GetDomainAnalyticsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsDataOutput)
+}
+
+// GetDomainAnalyticsDataArrayInput is an input type that accepts GetDomainAnalyticsDataArray and GetDomainAnalyticsDataArrayOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsDataArrayInput` via:
+//
+//	GetDomainAnalyticsDataArray{ GetDomainAnalyticsDataArgs{...} }
+type GetDomainAnalyticsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsDataArrayOutput() GetDomainAnalyticsDataArrayOutput
+	ToGetDomainAnalyticsDataArrayOutputWithContext(context.Context) GetDomainAnalyticsDataArrayOutput
+}
+
+type GetDomainAnalyticsDataArray []GetDomainAnalyticsDataInput
+
+func (GetDomainAnalyticsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsData)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsDataArray) ToGetDomainAnalyticsDataArrayOutput() GetDomainAnalyticsDataArrayOutput {
+	return i.ToGetDomainAnalyticsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsDataArray) ToGetDomainAnalyticsDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsDataArrayOutput)
+}
+
+type GetDomainAnalyticsDataOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsDataOutput) ToGetDomainAnalyticsDataOutput() GetDomainAnalyticsDataOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsDataOutput) ToGetDomainAnalyticsDataOutputWithContext(ctx context.Context) GetDomainAnalyticsDataOutput {
+	return o
+}
+
+// For daily statistics, it is the statistical date.
+func (o GetDomainAnalyticsDataOutput) DateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsData) string { return v.DateKey }).(pulumi.StringOutput)
+}
+
+// For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetDomainAnalyticsDataOutput) HourKey() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsData) int { return v.HourKey }).(pulumi.IntOutput)
+}
+
+// Subtotal of resolution volume for the current statistical dimension.
+func (o GetDomainAnalyticsDataOutput) Num() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsData) int { return v.Num }).(pulumi.IntOutput)
+}
+
+type GetDomainAnalyticsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsData)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsDataArrayOutput) ToGetDomainAnalyticsDataArrayOutput() GetDomainAnalyticsDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsDataArrayOutput) ToGetDomainAnalyticsDataArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsDataArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsDataArrayOutput) Index(i pulumi.IntInput) GetDomainAnalyticsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainAnalyticsData {
+		return vs[0].([]GetDomainAnalyticsData)[vs[1].(int)]
+	}).(GetDomainAnalyticsDataOutput)
+}
+
+type GetDomainAnalyticsInfo struct {
+	// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+	DnsFormat string `pulumi:"dnsFormat"`
+	// Total resolution volume for the current statistical period.
+	DnsTotal int `pulumi:"dnsTotal"`
+	// The domain name to query for resolution volume.
+	Domain string `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate string `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate string `pulumi:"startDate"`
+}
+
+// GetDomainAnalyticsInfoInput is an input type that accepts GetDomainAnalyticsInfoArgs and GetDomainAnalyticsInfoOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsInfoInput` via:
+//
+//	GetDomainAnalyticsInfoArgs{...}
+type GetDomainAnalyticsInfoInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsInfoOutput() GetDomainAnalyticsInfoOutput
+	ToGetDomainAnalyticsInfoOutputWithContext(context.Context) GetDomainAnalyticsInfoOutput
+}
+
+type GetDomainAnalyticsInfoArgs struct {
+	// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+	DnsFormat pulumi.StringInput `pulumi:"dnsFormat"`
+	// Total resolution volume for the current statistical period.
+	DnsTotal pulumi.IntInput `pulumi:"dnsTotal"`
+	// The domain name to query for resolution volume.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate pulumi.StringInput `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate pulumi.StringInput `pulumi:"startDate"`
+}
+
+func (GetDomainAnalyticsInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsInfo)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsInfoArgs) ToGetDomainAnalyticsInfoOutput() GetDomainAnalyticsInfoOutput {
+	return i.ToGetDomainAnalyticsInfoOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsInfoArgs) ToGetDomainAnalyticsInfoOutputWithContext(ctx context.Context) GetDomainAnalyticsInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsInfoOutput)
+}
+
+// GetDomainAnalyticsInfoArrayInput is an input type that accepts GetDomainAnalyticsInfoArray and GetDomainAnalyticsInfoArrayOutput values.
+// You can construct a concrete instance of `GetDomainAnalyticsInfoArrayInput` via:
+//
+//	GetDomainAnalyticsInfoArray{ GetDomainAnalyticsInfoArgs{...} }
+type GetDomainAnalyticsInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainAnalyticsInfoArrayOutput() GetDomainAnalyticsInfoArrayOutput
+	ToGetDomainAnalyticsInfoArrayOutputWithContext(context.Context) GetDomainAnalyticsInfoArrayOutput
+}
+
+type GetDomainAnalyticsInfoArray []GetDomainAnalyticsInfoInput
+
+func (GetDomainAnalyticsInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsInfo)(nil)).Elem()
+}
+
+func (i GetDomainAnalyticsInfoArray) ToGetDomainAnalyticsInfoArrayOutput() GetDomainAnalyticsInfoArrayOutput {
+	return i.ToGetDomainAnalyticsInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainAnalyticsInfoArray) ToGetDomainAnalyticsInfoArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainAnalyticsInfoArrayOutput)
+}
+
+type GetDomainAnalyticsInfoOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainAnalyticsInfo)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsInfoOutput) ToGetDomainAnalyticsInfoOutput() GetDomainAnalyticsInfoOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsInfoOutput) ToGetDomainAnalyticsInfoOutputWithContext(ctx context.Context) GetDomainAnalyticsInfoOutput {
+	return o
+}
+
+// DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+func (o GetDomainAnalyticsInfoOutput) DnsFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsInfo) string { return v.DnsFormat }).(pulumi.StringOutput)
+}
+
+// Total resolution volume for the current statistical period.
+func (o GetDomainAnalyticsInfoOutput) DnsTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsInfo) int { return v.DnsTotal }).(pulumi.IntOutput)
+}
+
+// The domain name to query for resolution volume.
+func (o GetDomainAnalyticsInfoOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsInfo) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The end date of the query, format: YYYY-MM-DD.
+func (o GetDomainAnalyticsInfoOutput) EndDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsInfo) string { return v.EndDate }).(pulumi.StringOutput)
+}
+
+// The start date of the query, format: YYYY-MM-DD.
+func (o GetDomainAnalyticsInfoOutput) StartDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainAnalyticsInfo) string { return v.StartDate }).(pulumi.StringOutput)
+}
+
+type GetDomainAnalyticsInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainAnalyticsInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainAnalyticsInfo)(nil)).Elem()
+}
+
+func (o GetDomainAnalyticsInfoArrayOutput) ToGetDomainAnalyticsInfoArrayOutput() GetDomainAnalyticsInfoArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsInfoArrayOutput) ToGetDomainAnalyticsInfoArrayOutputWithContext(ctx context.Context) GetDomainAnalyticsInfoArrayOutput {
+	return o
+}
+
+func (o GetDomainAnalyticsInfoArrayOutput) Index(i pulumi.IntInput) GetDomainAnalyticsInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainAnalyticsInfo {
+		return vs[0].([]GetDomainAnalyticsInfo)[vs[1].(int)]
+	}).(GetDomainAnalyticsInfoOutput)
+}
+
+type GetDomainListDomainList struct {
+	// Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
+	CnameSpeedup string `pulumi:"cnameSpeedup"`
+	// Domain addition time.
+	CreatedOn string `pulumi:"createdOn"`
+	// DNS settings status, error: DNSERROR, normal: empty string.
+	DnsStatus string `pulumi:"dnsStatus"`
+	// Unique identifier assigned to the domain by the system.
+	DomainId int `pulumi:"domainId"`
+	// Valid DNS assigned to the domain by the system.
+	EffectiveDns []string `pulumi:"effectiveDns"`
+	// Domain package level code.
+	Grade string `pulumi:"grade"`
+	// Sequence number corresponding to the domain package level.
+	GradeLevel int `pulumi:"gradeLevel"`
+	// Package name.
+	GradeTitle string `pulumi:"gradeTitle"`
+	// Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
+	GroupId int `pulumi:"groupId"`
+	// Whether it is a paid package.
+	IsVip string `pulumi:"isVip"`
+	// Original format of the domain.
+	Name string `pulumi:"name"`
+	// Domain owner account.
+	Owner string `pulumi:"owner"`
+	// Punycode encoded domain format.
+	Punycode string `pulumi:"punycode"`
+	// Number of records under the domain.
+	RecordCount int `pulumi:"recordCount"`
+	// Get domain names based on remark information.
+	Remark string `pulumi:"remark"`
+	// Whether to enable search engine push optimization, YES: YES, NO: NO.
+	SearchEnginePush string `pulumi:"searchEnginePush"`
+	// Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
+	Status string `pulumi:"status"`
+	// Domain-related tag list Note: This field may return null, indicating that no valid value can be obtained.
+	TagLists []GetDomainListDomainListTagList `pulumi:"tagLists"`
+	// Default TTL value for domain resolution records.
+	Ttl int `pulumi:"ttl"`
+	// Domain update time.
+	UpdatedOn string `pulumi:"updatedOn"`
+	// Whether the domain has VIP auto-renewal enabled, YES: YES, NO: NO, DEFAULT: DEFAULT.
+	VipAutoRenew string `pulumi:"vipAutoRenew"`
+	// Paid package expiration time.
+	VipEndAt string `pulumi:"vipEndAt"`
+	// Paid package activation time.
+	VipStartAt string `pulumi:"vipStartAt"`
+}
+
+// GetDomainListDomainListInput is an input type that accepts GetDomainListDomainListArgs and GetDomainListDomainListOutput values.
+// You can construct a concrete instance of `GetDomainListDomainListInput` via:
+//
+//	GetDomainListDomainListArgs{...}
+type GetDomainListDomainListInput interface {
+	pulumi.Input
+
+	ToGetDomainListDomainListOutput() GetDomainListDomainListOutput
+	ToGetDomainListDomainListOutputWithContext(context.Context) GetDomainListDomainListOutput
+}
+
+type GetDomainListDomainListArgs struct {
+	// Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
+	CnameSpeedup pulumi.StringInput `pulumi:"cnameSpeedup"`
+	// Domain addition time.
+	CreatedOn pulumi.StringInput `pulumi:"createdOn"`
+	// DNS settings status, error: DNSERROR, normal: empty string.
+	DnsStatus pulumi.StringInput `pulumi:"dnsStatus"`
+	// Unique identifier assigned to the domain by the system.
+	DomainId pulumi.IntInput `pulumi:"domainId"`
+	// Valid DNS assigned to the domain by the system.
+	EffectiveDns pulumi.StringArrayInput `pulumi:"effectiveDns"`
+	// Domain package level code.
+	Grade pulumi.StringInput `pulumi:"grade"`
+	// Sequence number corresponding to the domain package level.
+	GradeLevel pulumi.IntInput `pulumi:"gradeLevel"`
+	// Package name.
+	GradeTitle pulumi.StringInput `pulumi:"gradeTitle"`
+	// Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
+	GroupId pulumi.IntInput `pulumi:"groupId"`
+	// Whether it is a paid package.
+	IsVip pulumi.StringInput `pulumi:"isVip"`
+	// Original format of the domain.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Domain owner account.
+	Owner pulumi.StringInput `pulumi:"owner"`
+	// Punycode encoded domain format.
+	Punycode pulumi.StringInput `pulumi:"punycode"`
+	// Number of records under the domain.
+	RecordCount pulumi.IntInput `pulumi:"recordCount"`
+	// Get domain names based on remark information.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Whether to enable search engine push optimization, YES: YES, NO: NO.
+	SearchEnginePush pulumi.StringInput `pulumi:"searchEnginePush"`
+	// Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Domain-related tag list Note: This field may return null, indicating that no valid value can be obtained.
+	TagLists GetDomainListDomainListTagListArrayInput `pulumi:"tagLists"`
+	// Default TTL value for domain resolution records.
+	Ttl pulumi.IntInput `pulumi:"ttl"`
+	// Domain update time.
+	UpdatedOn pulumi.StringInput `pulumi:"updatedOn"`
+	// Whether the domain has VIP auto-renewal enabled, YES: YES, NO: NO, DEFAULT: DEFAULT.
+	VipAutoRenew pulumi.StringInput `pulumi:"vipAutoRenew"`
+	// Paid package expiration time.
+	VipEndAt pulumi.StringInput `pulumi:"vipEndAt"`
+	// Paid package activation time.
+	VipStartAt pulumi.StringInput `pulumi:"vipStartAt"`
+}
+
+func (GetDomainListDomainListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListDomainList)(nil)).Elem()
+}
+
+func (i GetDomainListDomainListArgs) ToGetDomainListDomainListOutput() GetDomainListDomainListOutput {
+	return i.ToGetDomainListDomainListOutputWithContext(context.Background())
+}
+
+func (i GetDomainListDomainListArgs) ToGetDomainListDomainListOutputWithContext(ctx context.Context) GetDomainListDomainListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListDomainListOutput)
+}
+
+// GetDomainListDomainListArrayInput is an input type that accepts GetDomainListDomainListArray and GetDomainListDomainListArrayOutput values.
+// You can construct a concrete instance of `GetDomainListDomainListArrayInput` via:
+//
+//	GetDomainListDomainListArray{ GetDomainListDomainListArgs{...} }
+type GetDomainListDomainListArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainListDomainListArrayOutput() GetDomainListDomainListArrayOutput
+	ToGetDomainListDomainListArrayOutputWithContext(context.Context) GetDomainListDomainListArrayOutput
+}
+
+type GetDomainListDomainListArray []GetDomainListDomainListInput
+
+func (GetDomainListDomainListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListDomainList)(nil)).Elem()
+}
+
+func (i GetDomainListDomainListArray) ToGetDomainListDomainListArrayOutput() GetDomainListDomainListArrayOutput {
+	return i.ToGetDomainListDomainListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainListDomainListArray) ToGetDomainListDomainListArrayOutputWithContext(ctx context.Context) GetDomainListDomainListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListDomainListArrayOutput)
+}
+
+type GetDomainListDomainListOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListDomainListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListDomainList)(nil)).Elem()
+}
+
+func (o GetDomainListDomainListOutput) ToGetDomainListDomainListOutput() GetDomainListDomainListOutput {
+	return o
+}
+
+func (o GetDomainListDomainListOutput) ToGetDomainListDomainListOutputWithContext(ctx context.Context) GetDomainListDomainListOutput {
+	return o
+}
+
+// Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
+func (o GetDomainListDomainListOutput) CnameSpeedup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.CnameSpeedup }).(pulumi.StringOutput)
+}
+
+// Domain addition time.
+func (o GetDomainListDomainListOutput) CreatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.CreatedOn }).(pulumi.StringOutput)
+}
+
+// DNS settings status, error: DNSERROR, normal: empty string.
+func (o GetDomainListDomainListOutput) DnsStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.DnsStatus }).(pulumi.StringOutput)
+}
+
+// Unique identifier assigned to the domain by the system.
+func (o GetDomainListDomainListOutput) DomainId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) int { return v.DomainId }).(pulumi.IntOutput)
+}
+
+// Valid DNS assigned to the domain by the system.
+func (o GetDomainListDomainListOutput) EffectiveDns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) []string { return v.EffectiveDns }).(pulumi.StringArrayOutput)
+}
+
+// Domain package level code.
+func (o GetDomainListDomainListOutput) Grade() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Grade }).(pulumi.StringOutput)
+}
+
+// Sequence number corresponding to the domain package level.
+func (o GetDomainListDomainListOutput) GradeLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) int { return v.GradeLevel }).(pulumi.IntOutput)
+}
+
+// Package name.
+func (o GetDomainListDomainListOutput) GradeTitle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.GradeTitle }).(pulumi.StringOutput)
+}
+
+// Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
+func (o GetDomainListDomainListOutput) GroupId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) int { return v.GroupId }).(pulumi.IntOutput)
+}
+
+// Whether it is a paid package.
+func (o GetDomainListDomainListOutput) IsVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.IsVip }).(pulumi.StringOutput)
+}
+
+// Original format of the domain.
+func (o GetDomainListDomainListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Domain owner account.
+func (o GetDomainListDomainListOutput) Owner() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Owner }).(pulumi.StringOutput)
+}
+
+// Punycode encoded domain format.
+func (o GetDomainListDomainListOutput) Punycode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Punycode }).(pulumi.StringOutput)
+}
+
+// Number of records under the domain.
+func (o GetDomainListDomainListOutput) RecordCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) int { return v.RecordCount }).(pulumi.IntOutput)
+}
+
+// Get domain names based on remark information.
+func (o GetDomainListDomainListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Whether to enable search engine push optimization, YES: YES, NO: NO.
+func (o GetDomainListDomainListOutput) SearchEnginePush() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.SearchEnginePush }).(pulumi.StringOutput)
+}
+
+// Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
+func (o GetDomainListDomainListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Domain-related tag list Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetDomainListDomainListOutput) TagLists() GetDomainListDomainListTagListArrayOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) []GetDomainListDomainListTagList { return v.TagLists }).(GetDomainListDomainListTagListArrayOutput)
+}
+
+// Default TTL value for domain resolution records.
+func (o GetDomainListDomainListOutput) Ttl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) int { return v.Ttl }).(pulumi.IntOutput)
+}
+
+// Domain update time.
+func (o GetDomainListDomainListOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.UpdatedOn }).(pulumi.StringOutput)
+}
+
+// Whether the domain has VIP auto-renewal enabled, YES: YES, NO: NO, DEFAULT: DEFAULT.
+func (o GetDomainListDomainListOutput) VipAutoRenew() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.VipAutoRenew }).(pulumi.StringOutput)
+}
+
+// Paid package expiration time.
+func (o GetDomainListDomainListOutput) VipEndAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.VipEndAt }).(pulumi.StringOutput)
+}
+
+// Paid package activation time.
+func (o GetDomainListDomainListOutput) VipStartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainList) string { return v.VipStartAt }).(pulumi.StringOutput)
+}
+
+type GetDomainListDomainListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListDomainListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListDomainList)(nil)).Elem()
+}
+
+func (o GetDomainListDomainListArrayOutput) ToGetDomainListDomainListArrayOutput() GetDomainListDomainListArrayOutput {
+	return o
+}
+
+func (o GetDomainListDomainListArrayOutput) ToGetDomainListDomainListArrayOutputWithContext(ctx context.Context) GetDomainListDomainListArrayOutput {
+	return o
+}
+
+func (o GetDomainListDomainListArrayOutput) Index(i pulumi.IntInput) GetDomainListDomainListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainListDomainList {
+		return vs[0].([]GetDomainListDomainList)[vs[1].(int)]
+	}).(GetDomainListDomainListOutput)
+}
+
+type GetDomainListDomainListTagList struct {
+	// Field to be filtered.
+	TagKey string `pulumi:"tagKey"`
+	// Filter value of the field.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetDomainListDomainListTagListInput is an input type that accepts GetDomainListDomainListTagListArgs and GetDomainListDomainListTagListOutput values.
+// You can construct a concrete instance of `GetDomainListDomainListTagListInput` via:
+//
+//	GetDomainListDomainListTagListArgs{...}
+type GetDomainListDomainListTagListInput interface {
+	pulumi.Input
+
+	ToGetDomainListDomainListTagListOutput() GetDomainListDomainListTagListOutput
+	ToGetDomainListDomainListTagListOutputWithContext(context.Context) GetDomainListDomainListTagListOutput
+}
+
+type GetDomainListDomainListTagListArgs struct {
+	// Field to be filtered.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Filter value of the field.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetDomainListDomainListTagListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListDomainListTagList)(nil)).Elem()
+}
+
+func (i GetDomainListDomainListTagListArgs) ToGetDomainListDomainListTagListOutput() GetDomainListDomainListTagListOutput {
+	return i.ToGetDomainListDomainListTagListOutputWithContext(context.Background())
+}
+
+func (i GetDomainListDomainListTagListArgs) ToGetDomainListDomainListTagListOutputWithContext(ctx context.Context) GetDomainListDomainListTagListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListDomainListTagListOutput)
+}
+
+// GetDomainListDomainListTagListArrayInput is an input type that accepts GetDomainListDomainListTagListArray and GetDomainListDomainListTagListArrayOutput values.
+// You can construct a concrete instance of `GetDomainListDomainListTagListArrayInput` via:
+//
+//	GetDomainListDomainListTagListArray{ GetDomainListDomainListTagListArgs{...} }
+type GetDomainListDomainListTagListArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainListDomainListTagListArrayOutput() GetDomainListDomainListTagListArrayOutput
+	ToGetDomainListDomainListTagListArrayOutputWithContext(context.Context) GetDomainListDomainListTagListArrayOutput
+}
+
+type GetDomainListDomainListTagListArray []GetDomainListDomainListTagListInput
+
+func (GetDomainListDomainListTagListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListDomainListTagList)(nil)).Elem()
+}
+
+func (i GetDomainListDomainListTagListArray) ToGetDomainListDomainListTagListArrayOutput() GetDomainListDomainListTagListArrayOutput {
+	return i.ToGetDomainListDomainListTagListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainListDomainListTagListArray) ToGetDomainListDomainListTagListArrayOutputWithContext(ctx context.Context) GetDomainListDomainListTagListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListDomainListTagListArrayOutput)
+}
+
+type GetDomainListDomainListTagListOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListDomainListTagListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListDomainListTagList)(nil)).Elem()
+}
+
+func (o GetDomainListDomainListTagListOutput) ToGetDomainListDomainListTagListOutput() GetDomainListDomainListTagListOutput {
+	return o
+}
+
+func (o GetDomainListDomainListTagListOutput) ToGetDomainListDomainListTagListOutputWithContext(ctx context.Context) GetDomainListDomainListTagListOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetDomainListDomainListTagListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainListTagList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Filter value of the field.
+func (o GetDomainListDomainListTagListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListDomainListTagList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetDomainListDomainListTagListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListDomainListTagListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListDomainListTagList)(nil)).Elem()
+}
+
+func (o GetDomainListDomainListTagListArrayOutput) ToGetDomainListDomainListTagListArrayOutput() GetDomainListDomainListTagListArrayOutput {
+	return o
+}
+
+func (o GetDomainListDomainListTagListArrayOutput) ToGetDomainListDomainListTagListArrayOutputWithContext(ctx context.Context) GetDomainListDomainListTagListArrayOutput {
+	return o
+}
+
+func (o GetDomainListDomainListTagListArrayOutput) Index(i pulumi.IntInput) GetDomainListDomainListTagListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainListDomainListTagList {
+		return vs[0].([]GetDomainListDomainListTagList)[vs[1].(int)]
+	}).(GetDomainListDomainListTagListOutput)
+}
+
+type GetDomainListTag struct {
+	// Field to be filtered.
+	TagKey string `pulumi:"tagKey"`
+	// Filter value of the field.
+	TagValues []string `pulumi:"tagValues"`
+}
+
+// GetDomainListTagInput is an input type that accepts GetDomainListTagArgs and GetDomainListTagOutput values.
+// You can construct a concrete instance of `GetDomainListTagInput` via:
+//
+//	GetDomainListTagArgs{...}
+type GetDomainListTagInput interface {
+	pulumi.Input
+
+	ToGetDomainListTagOutput() GetDomainListTagOutput
+	ToGetDomainListTagOutputWithContext(context.Context) GetDomainListTagOutput
+}
+
+type GetDomainListTagArgs struct {
+	// Field to be filtered.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Filter value of the field.
+	TagValues pulumi.StringArrayInput `pulumi:"tagValues"`
+}
+
+func (GetDomainListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListTag)(nil)).Elem()
+}
+
+func (i GetDomainListTagArgs) ToGetDomainListTagOutput() GetDomainListTagOutput {
+	return i.ToGetDomainListTagOutputWithContext(context.Background())
+}
+
+func (i GetDomainListTagArgs) ToGetDomainListTagOutputWithContext(ctx context.Context) GetDomainListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListTagOutput)
+}
+
+// GetDomainListTagArrayInput is an input type that accepts GetDomainListTagArray and GetDomainListTagArrayOutput values.
+// You can construct a concrete instance of `GetDomainListTagArrayInput` via:
+//
+//	GetDomainListTagArray{ GetDomainListTagArgs{...} }
+type GetDomainListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainListTagArrayOutput() GetDomainListTagArrayOutput
+	ToGetDomainListTagArrayOutputWithContext(context.Context) GetDomainListTagArrayOutput
+}
+
+type GetDomainListTagArray []GetDomainListTagInput
+
+func (GetDomainListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListTag)(nil)).Elem()
+}
+
+func (i GetDomainListTagArray) ToGetDomainListTagArrayOutput() GetDomainListTagArrayOutput {
+	return i.ToGetDomainListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainListTagArray) ToGetDomainListTagArrayOutputWithContext(ctx context.Context) GetDomainListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainListTagArrayOutput)
+}
+
+type GetDomainListTagOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainListTag)(nil)).Elem()
+}
+
+func (o GetDomainListTagOutput) ToGetDomainListTagOutput() GetDomainListTagOutput {
+	return o
+}
+
+func (o GetDomainListTagOutput) ToGetDomainListTagOutputWithContext(ctx context.Context) GetDomainListTagOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetDomainListTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainListTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Filter value of the field.
+func (o GetDomainListTagOutput) TagValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainListTag) []string { return v.TagValues }).(pulumi.StringArrayOutput)
+}
+
+type GetDomainListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainListTag)(nil)).Elem()
+}
+
+func (o GetDomainListTagArrayOutput) ToGetDomainListTagArrayOutput() GetDomainListTagArrayOutput {
+	return o
+}
+
+func (o GetDomainListTagArrayOutput) ToGetDomainListTagArrayOutputWithContext(ctx context.Context) GetDomainListTagArrayOutput {
+	return o
+}
+
+func (o GetDomainListTagArrayOutput) Index(i pulumi.IntInput) GetDomainListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainListTag {
+		return vs[0].([]GetDomainListTag)[vs[1].(int)]
+	}).(GetDomainListTagOutput)
+}
+
+type GetRecordAnalyticsAliasData struct {
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Datas []GetRecordAnalyticsAliasDataData `pulumi:"datas"`
+	// Subdomain resolution statistics query information.
+	Infos []GetRecordAnalyticsAliasDataInfo `pulumi:"infos"`
+}
+
+// GetRecordAnalyticsAliasDataInput is an input type that accepts GetRecordAnalyticsAliasDataArgs and GetRecordAnalyticsAliasDataOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataInput` via:
+//
+//	GetRecordAnalyticsAliasDataArgs{...}
+type GetRecordAnalyticsAliasDataInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataOutput() GetRecordAnalyticsAliasDataOutput
+	ToGetRecordAnalyticsAliasDataOutputWithContext(context.Context) GetRecordAnalyticsAliasDataOutput
+}
+
+type GetRecordAnalyticsAliasDataArgs struct {
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Datas GetRecordAnalyticsAliasDataDataArrayInput `pulumi:"datas"`
+	// Subdomain resolution statistics query information.
+	Infos GetRecordAnalyticsAliasDataInfoArrayInput `pulumi:"infos"`
+}
+
+func (GetRecordAnalyticsAliasDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataArgs) ToGetRecordAnalyticsAliasDataOutput() GetRecordAnalyticsAliasDataOutput {
+	return i.ToGetRecordAnalyticsAliasDataOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataArgs) ToGetRecordAnalyticsAliasDataOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataOutput)
+}
+
+// GetRecordAnalyticsAliasDataArrayInput is an input type that accepts GetRecordAnalyticsAliasDataArray and GetRecordAnalyticsAliasDataArrayOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataArrayInput` via:
+//
+//	GetRecordAnalyticsAliasDataArray{ GetRecordAnalyticsAliasDataArgs{...} }
+type GetRecordAnalyticsAliasDataArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataArrayOutput() GetRecordAnalyticsAliasDataArrayOutput
+	ToGetRecordAnalyticsAliasDataArrayOutputWithContext(context.Context) GetRecordAnalyticsAliasDataArrayOutput
+}
+
+type GetRecordAnalyticsAliasDataArray []GetRecordAnalyticsAliasDataInput
+
+func (GetRecordAnalyticsAliasDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataArray) ToGetRecordAnalyticsAliasDataArrayOutput() GetRecordAnalyticsAliasDataArrayOutput {
+	return i.ToGetRecordAnalyticsAliasDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataArray) ToGetRecordAnalyticsAliasDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataArrayOutput)
+}
+
+type GetRecordAnalyticsAliasDataOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataOutput) ToGetRecordAnalyticsAliasDataOutput() GetRecordAnalyticsAliasDataOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataOutput) ToGetRecordAnalyticsAliasDataOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataOutput {
+	return o
+}
+
+// The subtotal of the resolution volume for the current statistical dimension.
+func (o GetRecordAnalyticsAliasDataOutput) Datas() GetRecordAnalyticsAliasDataDataArrayOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasData) []GetRecordAnalyticsAliasDataData { return v.Datas }).(GetRecordAnalyticsAliasDataDataArrayOutput)
+}
+
+// Subdomain resolution statistics query information.
+func (o GetRecordAnalyticsAliasDataOutput) Infos() GetRecordAnalyticsAliasDataInfoArrayOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasData) []GetRecordAnalyticsAliasDataInfo { return v.Infos }).(GetRecordAnalyticsAliasDataInfoArrayOutput)
+}
+
+type GetRecordAnalyticsAliasDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataArrayOutput) ToGetRecordAnalyticsAliasDataArrayOutput() GetRecordAnalyticsAliasDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataArrayOutput) ToGetRecordAnalyticsAliasDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataArrayOutput) Index(i pulumi.IntInput) GetRecordAnalyticsAliasDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordAnalyticsAliasData {
+		return vs[0].([]GetRecordAnalyticsAliasData)[vs[1].(int)]
+	}).(GetRecordAnalyticsAliasDataOutput)
+}
+
+type GetRecordAnalyticsAliasDataData struct {
+	// For daily statistics, it is the statistical date.
+	DateKey string `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey int `pulumi:"hourKey"`
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Num int `pulumi:"num"`
+}
+
+// GetRecordAnalyticsAliasDataDataInput is an input type that accepts GetRecordAnalyticsAliasDataDataArgs and GetRecordAnalyticsAliasDataDataOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataDataInput` via:
+//
+//	GetRecordAnalyticsAliasDataDataArgs{...}
+type GetRecordAnalyticsAliasDataDataInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataDataOutput() GetRecordAnalyticsAliasDataDataOutput
+	ToGetRecordAnalyticsAliasDataDataOutputWithContext(context.Context) GetRecordAnalyticsAliasDataDataOutput
+}
+
+type GetRecordAnalyticsAliasDataDataArgs struct {
+	// For daily statistics, it is the statistical date.
+	DateKey pulumi.StringInput `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey pulumi.IntInput `pulumi:"hourKey"`
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Num pulumi.IntInput `pulumi:"num"`
+}
+
+func (GetRecordAnalyticsAliasDataDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataDataArgs) ToGetRecordAnalyticsAliasDataDataOutput() GetRecordAnalyticsAliasDataDataOutput {
+	return i.ToGetRecordAnalyticsAliasDataDataOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataDataArgs) ToGetRecordAnalyticsAliasDataDataOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataDataOutput)
+}
+
+// GetRecordAnalyticsAliasDataDataArrayInput is an input type that accepts GetRecordAnalyticsAliasDataDataArray and GetRecordAnalyticsAliasDataDataArrayOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataDataArrayInput` via:
+//
+//	GetRecordAnalyticsAliasDataDataArray{ GetRecordAnalyticsAliasDataDataArgs{...} }
+type GetRecordAnalyticsAliasDataDataArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataDataArrayOutput() GetRecordAnalyticsAliasDataDataArrayOutput
+	ToGetRecordAnalyticsAliasDataDataArrayOutputWithContext(context.Context) GetRecordAnalyticsAliasDataDataArrayOutput
+}
+
+type GetRecordAnalyticsAliasDataDataArray []GetRecordAnalyticsAliasDataDataInput
+
+func (GetRecordAnalyticsAliasDataDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataDataArray) ToGetRecordAnalyticsAliasDataDataArrayOutput() GetRecordAnalyticsAliasDataDataArrayOutput {
+	return i.ToGetRecordAnalyticsAliasDataDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataDataArray) ToGetRecordAnalyticsAliasDataDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataDataArrayOutput)
+}
+
+type GetRecordAnalyticsAliasDataDataOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataDataOutput) ToGetRecordAnalyticsAliasDataDataOutput() GetRecordAnalyticsAliasDataDataOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataDataOutput) ToGetRecordAnalyticsAliasDataDataOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataDataOutput {
+	return o
+}
+
+// For daily statistics, it is the statistical date.
+func (o GetRecordAnalyticsAliasDataDataOutput) DateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataData) string { return v.DateKey }).(pulumi.StringOutput)
+}
+
+// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRecordAnalyticsAliasDataDataOutput) HourKey() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataData) int { return v.HourKey }).(pulumi.IntOutput)
+}
+
+// The subtotal of the resolution volume for the current statistical dimension.
+func (o GetRecordAnalyticsAliasDataDataOutput) Num() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataData) int { return v.Num }).(pulumi.IntOutput)
+}
+
+type GetRecordAnalyticsAliasDataDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasDataData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataDataArrayOutput) ToGetRecordAnalyticsAliasDataDataArrayOutput() GetRecordAnalyticsAliasDataDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataDataArrayOutput) ToGetRecordAnalyticsAliasDataDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataDataArrayOutput) Index(i pulumi.IntInput) GetRecordAnalyticsAliasDataDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordAnalyticsAliasDataData {
+		return vs[0].([]GetRecordAnalyticsAliasDataData)[vs[1].(int)]
+	}).(GetRecordAnalyticsAliasDataDataOutput)
+}
+
+type GetRecordAnalyticsAliasDataInfo struct {
+	// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+	DnsFormat string `pulumi:"dnsFormat"`
+	// Total resolution count for the current statistical period.
+	DnsTotal int `pulumi:"dnsTotal"`
+	// The domain to query for resolution volume.
+	Domain string `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate string `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate string `pulumi:"startDate"`
+	// The subdomain to query for resolution volume.
+	Subdomain string `pulumi:"subdomain"`
+}
+
+// GetRecordAnalyticsAliasDataInfoInput is an input type that accepts GetRecordAnalyticsAliasDataInfoArgs and GetRecordAnalyticsAliasDataInfoOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataInfoInput` via:
+//
+//	GetRecordAnalyticsAliasDataInfoArgs{...}
+type GetRecordAnalyticsAliasDataInfoInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataInfoOutput() GetRecordAnalyticsAliasDataInfoOutput
+	ToGetRecordAnalyticsAliasDataInfoOutputWithContext(context.Context) GetRecordAnalyticsAliasDataInfoOutput
+}
+
+type GetRecordAnalyticsAliasDataInfoArgs struct {
+	// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+	DnsFormat pulumi.StringInput `pulumi:"dnsFormat"`
+	// Total resolution count for the current statistical period.
+	DnsTotal pulumi.IntInput `pulumi:"dnsTotal"`
+	// The domain to query for resolution volume.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate pulumi.StringInput `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate pulumi.StringInput `pulumi:"startDate"`
+	// The subdomain to query for resolution volume.
+	Subdomain pulumi.StringInput `pulumi:"subdomain"`
+}
+
+func (GetRecordAnalyticsAliasDataInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataInfoArgs) ToGetRecordAnalyticsAliasDataInfoOutput() GetRecordAnalyticsAliasDataInfoOutput {
+	return i.ToGetRecordAnalyticsAliasDataInfoOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataInfoArgs) ToGetRecordAnalyticsAliasDataInfoOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataInfoOutput)
+}
+
+// GetRecordAnalyticsAliasDataInfoArrayInput is an input type that accepts GetRecordAnalyticsAliasDataInfoArray and GetRecordAnalyticsAliasDataInfoArrayOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsAliasDataInfoArrayInput` via:
+//
+//	GetRecordAnalyticsAliasDataInfoArray{ GetRecordAnalyticsAliasDataInfoArgs{...} }
+type GetRecordAnalyticsAliasDataInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsAliasDataInfoArrayOutput() GetRecordAnalyticsAliasDataInfoArrayOutput
+	ToGetRecordAnalyticsAliasDataInfoArrayOutputWithContext(context.Context) GetRecordAnalyticsAliasDataInfoArrayOutput
+}
+
+type GetRecordAnalyticsAliasDataInfoArray []GetRecordAnalyticsAliasDataInfoInput
+
+func (GetRecordAnalyticsAliasDataInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsAliasDataInfoArray) ToGetRecordAnalyticsAliasDataInfoArrayOutput() GetRecordAnalyticsAliasDataInfoArrayOutput {
+	return i.ToGetRecordAnalyticsAliasDataInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsAliasDataInfoArray) ToGetRecordAnalyticsAliasDataInfoArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsAliasDataInfoArrayOutput)
+}
+
+type GetRecordAnalyticsAliasDataInfoOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataInfoOutput) ToGetRecordAnalyticsAliasDataInfoOutput() GetRecordAnalyticsAliasDataInfoOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataInfoOutput) ToGetRecordAnalyticsAliasDataInfoOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataInfoOutput {
+	return o
+}
+
+// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+func (o GetRecordAnalyticsAliasDataInfoOutput) DnsFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) string { return v.DnsFormat }).(pulumi.StringOutput)
+}
+
+// Total resolution count for the current statistical period.
+func (o GetRecordAnalyticsAliasDataInfoOutput) DnsTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) int { return v.DnsTotal }).(pulumi.IntOutput)
+}
+
+// The domain to query for resolution volume.
+func (o GetRecordAnalyticsAliasDataInfoOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The end date of the query, format: YYYY-MM-DD.
+func (o GetRecordAnalyticsAliasDataInfoOutput) EndDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) string { return v.EndDate }).(pulumi.StringOutput)
+}
+
+// The start date of the query, format: YYYY-MM-DD.
+func (o GetRecordAnalyticsAliasDataInfoOutput) StartDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) string { return v.StartDate }).(pulumi.StringOutput)
+}
+
+// The subdomain to query for resolution volume.
+func (o GetRecordAnalyticsAliasDataInfoOutput) Subdomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsAliasDataInfo) string { return v.Subdomain }).(pulumi.StringOutput)
+}
+
+type GetRecordAnalyticsAliasDataInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsAliasDataInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsAliasDataInfo)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsAliasDataInfoArrayOutput) ToGetRecordAnalyticsAliasDataInfoArrayOutput() GetRecordAnalyticsAliasDataInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataInfoArrayOutput) ToGetRecordAnalyticsAliasDataInfoArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsAliasDataInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsAliasDataInfoArrayOutput) Index(i pulumi.IntInput) GetRecordAnalyticsAliasDataInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordAnalyticsAliasDataInfo {
+		return vs[0].([]GetRecordAnalyticsAliasDataInfo)[vs[1].(int)]
+	}).(GetRecordAnalyticsAliasDataInfoOutput)
+}
+
+type GetRecordAnalyticsData struct {
+	// For daily statistics, it is the statistical date.
+	DateKey string `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey int `pulumi:"hourKey"`
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Num int `pulumi:"num"`
+}
+
+// GetRecordAnalyticsDataInput is an input type that accepts GetRecordAnalyticsDataArgs and GetRecordAnalyticsDataOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsDataInput` via:
+//
+//	GetRecordAnalyticsDataArgs{...}
+type GetRecordAnalyticsDataInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsDataOutput() GetRecordAnalyticsDataOutput
+	ToGetRecordAnalyticsDataOutputWithContext(context.Context) GetRecordAnalyticsDataOutput
+}
+
+type GetRecordAnalyticsDataArgs struct {
+	// For daily statistics, it is the statistical date.
+	DateKey pulumi.StringInput `pulumi:"dateKey"`
+	// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+	HourKey pulumi.IntInput `pulumi:"hourKey"`
+	// The subtotal of the resolution volume for the current statistical dimension.
+	Num pulumi.IntInput `pulumi:"num"`
+}
+
+func (GetRecordAnalyticsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsDataArgs) ToGetRecordAnalyticsDataOutput() GetRecordAnalyticsDataOutput {
+	return i.ToGetRecordAnalyticsDataOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsDataArgs) ToGetRecordAnalyticsDataOutputWithContext(ctx context.Context) GetRecordAnalyticsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsDataOutput)
+}
+
+// GetRecordAnalyticsDataArrayInput is an input type that accepts GetRecordAnalyticsDataArray and GetRecordAnalyticsDataArrayOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsDataArrayInput` via:
+//
+//	GetRecordAnalyticsDataArray{ GetRecordAnalyticsDataArgs{...} }
+type GetRecordAnalyticsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsDataArrayOutput() GetRecordAnalyticsDataArrayOutput
+	ToGetRecordAnalyticsDataArrayOutputWithContext(context.Context) GetRecordAnalyticsDataArrayOutput
+}
+
+type GetRecordAnalyticsDataArray []GetRecordAnalyticsDataInput
+
+func (GetRecordAnalyticsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsData)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsDataArray) ToGetRecordAnalyticsDataArrayOutput() GetRecordAnalyticsDataArrayOutput {
+	return i.ToGetRecordAnalyticsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsDataArray) ToGetRecordAnalyticsDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsDataArrayOutput)
+}
+
+type GetRecordAnalyticsDataOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsDataOutput) ToGetRecordAnalyticsDataOutput() GetRecordAnalyticsDataOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsDataOutput) ToGetRecordAnalyticsDataOutputWithContext(ctx context.Context) GetRecordAnalyticsDataOutput {
+	return o
+}
+
+// For daily statistics, it is the statistical date.
+func (o GetRecordAnalyticsDataOutput) DateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsData) string { return v.DateKey }).(pulumi.StringOutput)
+}
+
+// For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRecordAnalyticsDataOutput) HourKey() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsData) int { return v.HourKey }).(pulumi.IntOutput)
+}
+
+// The subtotal of the resolution volume for the current statistical dimension.
+func (o GetRecordAnalyticsDataOutput) Num() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsData) int { return v.Num }).(pulumi.IntOutput)
+}
+
+type GetRecordAnalyticsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsData)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsDataArrayOutput) ToGetRecordAnalyticsDataArrayOutput() GetRecordAnalyticsDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsDataArrayOutput) ToGetRecordAnalyticsDataArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsDataArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsDataArrayOutput) Index(i pulumi.IntInput) GetRecordAnalyticsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordAnalyticsData {
+		return vs[0].([]GetRecordAnalyticsData)[vs[1].(int)]
+	}).(GetRecordAnalyticsDataOutput)
+}
+
+type GetRecordAnalyticsInfo struct {
+	// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+	DnsFormat string `pulumi:"dnsFormat"`
+	// Total resolution count for the current statistical period.
+	DnsTotal int `pulumi:"dnsTotal"`
+	// The domain to query for resolution volume.
+	Domain string `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate string `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate string `pulumi:"startDate"`
+	// The subdomain to query for resolution volume.
+	Subdomain string `pulumi:"subdomain"`
+}
+
+// GetRecordAnalyticsInfoInput is an input type that accepts GetRecordAnalyticsInfoArgs and GetRecordAnalyticsInfoOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsInfoInput` via:
+//
+//	GetRecordAnalyticsInfoArgs{...}
+type GetRecordAnalyticsInfoInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsInfoOutput() GetRecordAnalyticsInfoOutput
+	ToGetRecordAnalyticsInfoOutputWithContext(context.Context) GetRecordAnalyticsInfoOutput
+}
+
+type GetRecordAnalyticsInfoArgs struct {
+	// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+	DnsFormat pulumi.StringInput `pulumi:"dnsFormat"`
+	// Total resolution count for the current statistical period.
+	DnsTotal pulumi.IntInput `pulumi:"dnsTotal"`
+	// The domain to query for resolution volume.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// The end date of the query, format: YYYY-MM-DD.
+	EndDate pulumi.StringInput `pulumi:"endDate"`
+	// The start date of the query, format: YYYY-MM-DD.
+	StartDate pulumi.StringInput `pulumi:"startDate"`
+	// The subdomain to query for resolution volume.
+	Subdomain pulumi.StringInput `pulumi:"subdomain"`
+}
+
+func (GetRecordAnalyticsInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsInfo)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsInfoArgs) ToGetRecordAnalyticsInfoOutput() GetRecordAnalyticsInfoOutput {
+	return i.ToGetRecordAnalyticsInfoOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsInfoArgs) ToGetRecordAnalyticsInfoOutputWithContext(ctx context.Context) GetRecordAnalyticsInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsInfoOutput)
+}
+
+// GetRecordAnalyticsInfoArrayInput is an input type that accepts GetRecordAnalyticsInfoArray and GetRecordAnalyticsInfoArrayOutput values.
+// You can construct a concrete instance of `GetRecordAnalyticsInfoArrayInput` via:
+//
+//	GetRecordAnalyticsInfoArray{ GetRecordAnalyticsInfoArgs{...} }
+type GetRecordAnalyticsInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordAnalyticsInfoArrayOutput() GetRecordAnalyticsInfoArrayOutput
+	ToGetRecordAnalyticsInfoArrayOutputWithContext(context.Context) GetRecordAnalyticsInfoArrayOutput
+}
+
+type GetRecordAnalyticsInfoArray []GetRecordAnalyticsInfoInput
+
+func (GetRecordAnalyticsInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsInfo)(nil)).Elem()
+}
+
+func (i GetRecordAnalyticsInfoArray) ToGetRecordAnalyticsInfoArrayOutput() GetRecordAnalyticsInfoArrayOutput {
+	return i.ToGetRecordAnalyticsInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordAnalyticsInfoArray) ToGetRecordAnalyticsInfoArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordAnalyticsInfoArrayOutput)
+}
+
+type GetRecordAnalyticsInfoOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordAnalyticsInfo)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsInfoOutput) ToGetRecordAnalyticsInfoOutput() GetRecordAnalyticsInfoOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsInfoOutput) ToGetRecordAnalyticsInfoOutputWithContext(ctx context.Context) GetRecordAnalyticsInfoOutput {
+	return o
+}
+
+// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+func (o GetRecordAnalyticsInfoOutput) DnsFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) string { return v.DnsFormat }).(pulumi.StringOutput)
+}
+
+// Total resolution count for the current statistical period.
+func (o GetRecordAnalyticsInfoOutput) DnsTotal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) int { return v.DnsTotal }).(pulumi.IntOutput)
+}
+
+// The domain to query for resolution volume.
+func (o GetRecordAnalyticsInfoOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The end date of the query, format: YYYY-MM-DD.
+func (o GetRecordAnalyticsInfoOutput) EndDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) string { return v.EndDate }).(pulumi.StringOutput)
+}
+
+// The start date of the query, format: YYYY-MM-DD.
+func (o GetRecordAnalyticsInfoOutput) StartDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) string { return v.StartDate }).(pulumi.StringOutput)
+}
+
+// The subdomain to query for resolution volume.
+func (o GetRecordAnalyticsInfoOutput) Subdomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordAnalyticsInfo) string { return v.Subdomain }).(pulumi.StringOutput)
+}
+
+type GetRecordAnalyticsInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordAnalyticsInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordAnalyticsInfo)(nil)).Elem()
+}
+
+func (o GetRecordAnalyticsInfoArrayOutput) ToGetRecordAnalyticsInfoArrayOutput() GetRecordAnalyticsInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsInfoArrayOutput) ToGetRecordAnalyticsInfoArrayOutputWithContext(ctx context.Context) GetRecordAnalyticsInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordAnalyticsInfoArrayOutput) Index(i pulumi.IntInput) GetRecordAnalyticsInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordAnalyticsInfo {
+		return vs[0].([]GetRecordAnalyticsInfo)[vs[1].(int)]
+	}).(GetRecordAnalyticsInfoOutput)
+}
+
+type GetRecordLineListLineGroupList struct {
+	// Line ID.
+	LineId string `pulumi:"lineId"`
+	// Line list.
+	LineLists []string `pulumi:"lineLists"`
+	// Line name.
+	Name string `pulumi:"name"`
+	// Group type.
+	Type string `pulumi:"type"`
+}
+
+// GetRecordLineListLineGroupListInput is an input type that accepts GetRecordLineListLineGroupListArgs and GetRecordLineListLineGroupListOutput values.
+// You can construct a concrete instance of `GetRecordLineListLineGroupListInput` via:
+//
+//	GetRecordLineListLineGroupListArgs{...}
+type GetRecordLineListLineGroupListInput interface {
+	pulumi.Input
+
+	ToGetRecordLineListLineGroupListOutput() GetRecordLineListLineGroupListOutput
+	ToGetRecordLineListLineGroupListOutputWithContext(context.Context) GetRecordLineListLineGroupListOutput
+}
+
+type GetRecordLineListLineGroupListArgs struct {
+	// Line ID.
+	LineId pulumi.StringInput `pulumi:"lineId"`
+	// Line list.
+	LineLists pulumi.StringArrayInput `pulumi:"lineLists"`
+	// Line name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Group type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetRecordLineListLineGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordLineListLineGroupList)(nil)).Elem()
+}
+
+func (i GetRecordLineListLineGroupListArgs) ToGetRecordLineListLineGroupListOutput() GetRecordLineListLineGroupListOutput {
+	return i.ToGetRecordLineListLineGroupListOutputWithContext(context.Background())
+}
+
+func (i GetRecordLineListLineGroupListArgs) ToGetRecordLineListLineGroupListOutputWithContext(ctx context.Context) GetRecordLineListLineGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordLineListLineGroupListOutput)
+}
+
+// GetRecordLineListLineGroupListArrayInput is an input type that accepts GetRecordLineListLineGroupListArray and GetRecordLineListLineGroupListArrayOutput values.
+// You can construct a concrete instance of `GetRecordLineListLineGroupListArrayInput` via:
+//
+//	GetRecordLineListLineGroupListArray{ GetRecordLineListLineGroupListArgs{...} }
+type GetRecordLineListLineGroupListArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordLineListLineGroupListArrayOutput() GetRecordLineListLineGroupListArrayOutput
+	ToGetRecordLineListLineGroupListArrayOutputWithContext(context.Context) GetRecordLineListLineGroupListArrayOutput
+}
+
+type GetRecordLineListLineGroupListArray []GetRecordLineListLineGroupListInput
+
+func (GetRecordLineListLineGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordLineListLineGroupList)(nil)).Elem()
+}
+
+func (i GetRecordLineListLineGroupListArray) ToGetRecordLineListLineGroupListArrayOutput() GetRecordLineListLineGroupListArrayOutput {
+	return i.ToGetRecordLineListLineGroupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordLineListLineGroupListArray) ToGetRecordLineListLineGroupListArrayOutputWithContext(ctx context.Context) GetRecordLineListLineGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordLineListLineGroupListArrayOutput)
+}
+
+type GetRecordLineListLineGroupListOutput struct{ *pulumi.OutputState }
+
+func (GetRecordLineListLineGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordLineListLineGroupList)(nil)).Elem()
+}
+
+func (o GetRecordLineListLineGroupListOutput) ToGetRecordLineListLineGroupListOutput() GetRecordLineListLineGroupListOutput {
+	return o
+}
+
+func (o GetRecordLineListLineGroupListOutput) ToGetRecordLineListLineGroupListOutputWithContext(ctx context.Context) GetRecordLineListLineGroupListOutput {
+	return o
+}
+
+// Line ID.
+func (o GetRecordLineListLineGroupListOutput) LineId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordLineListLineGroupList) string { return v.LineId }).(pulumi.StringOutput)
+}
+
+// Line list.
+func (o GetRecordLineListLineGroupListOutput) LineLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRecordLineListLineGroupList) []string { return v.LineLists }).(pulumi.StringArrayOutput)
+}
+
+// Line name.
+func (o GetRecordLineListLineGroupListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordLineListLineGroupList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Group type.
+func (o GetRecordLineListLineGroupListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordLineListLineGroupList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetRecordLineListLineGroupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordLineListLineGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordLineListLineGroupList)(nil)).Elem()
+}
+
+func (o GetRecordLineListLineGroupListArrayOutput) ToGetRecordLineListLineGroupListArrayOutput() GetRecordLineListLineGroupListArrayOutput {
+	return o
+}
+
+func (o GetRecordLineListLineGroupListArrayOutput) ToGetRecordLineListLineGroupListArrayOutputWithContext(ctx context.Context) GetRecordLineListLineGroupListArrayOutput {
+	return o
+}
+
+func (o GetRecordLineListLineGroupListArrayOutput) Index(i pulumi.IntInput) GetRecordLineListLineGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordLineListLineGroupList {
+		return vs[0].([]GetRecordLineListLineGroupList)[vs[1].(int)]
+	}).(GetRecordLineListLineGroupListOutput)
+}
+
+type GetRecordLineListLineList struct {
+	// Line ID.
+	LineId string `pulumi:"lineId"`
+	// Line name.
+	Name string `pulumi:"name"`
+}
+
+// GetRecordLineListLineListInput is an input type that accepts GetRecordLineListLineListArgs and GetRecordLineListLineListOutput values.
+// You can construct a concrete instance of `GetRecordLineListLineListInput` via:
+//
+//	GetRecordLineListLineListArgs{...}
+type GetRecordLineListLineListInput interface {
+	pulumi.Input
+
+	ToGetRecordLineListLineListOutput() GetRecordLineListLineListOutput
+	ToGetRecordLineListLineListOutputWithContext(context.Context) GetRecordLineListLineListOutput
+}
+
+type GetRecordLineListLineListArgs struct {
+	// Line ID.
+	LineId pulumi.StringInput `pulumi:"lineId"`
+	// Line name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetRecordLineListLineListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordLineListLineList)(nil)).Elem()
+}
+
+func (i GetRecordLineListLineListArgs) ToGetRecordLineListLineListOutput() GetRecordLineListLineListOutput {
+	return i.ToGetRecordLineListLineListOutputWithContext(context.Background())
+}
+
+func (i GetRecordLineListLineListArgs) ToGetRecordLineListLineListOutputWithContext(ctx context.Context) GetRecordLineListLineListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordLineListLineListOutput)
+}
+
+// GetRecordLineListLineListArrayInput is an input type that accepts GetRecordLineListLineListArray and GetRecordLineListLineListArrayOutput values.
+// You can construct a concrete instance of `GetRecordLineListLineListArrayInput` via:
+//
+//	GetRecordLineListLineListArray{ GetRecordLineListLineListArgs{...} }
+type GetRecordLineListLineListArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordLineListLineListArrayOutput() GetRecordLineListLineListArrayOutput
+	ToGetRecordLineListLineListArrayOutputWithContext(context.Context) GetRecordLineListLineListArrayOutput
+}
+
+type GetRecordLineListLineListArray []GetRecordLineListLineListInput
+
+func (GetRecordLineListLineListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordLineListLineList)(nil)).Elem()
+}
+
+func (i GetRecordLineListLineListArray) ToGetRecordLineListLineListArrayOutput() GetRecordLineListLineListArrayOutput {
+	return i.ToGetRecordLineListLineListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordLineListLineListArray) ToGetRecordLineListLineListArrayOutputWithContext(ctx context.Context) GetRecordLineListLineListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordLineListLineListArrayOutput)
+}
+
+type GetRecordLineListLineListOutput struct{ *pulumi.OutputState }
+
+func (GetRecordLineListLineListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordLineListLineList)(nil)).Elem()
+}
+
+func (o GetRecordLineListLineListOutput) ToGetRecordLineListLineListOutput() GetRecordLineListLineListOutput {
+	return o
+}
+
+func (o GetRecordLineListLineListOutput) ToGetRecordLineListLineListOutputWithContext(ctx context.Context) GetRecordLineListLineListOutput {
+	return o
+}
+
+// Line ID.
+func (o GetRecordLineListLineListOutput) LineId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordLineListLineList) string { return v.LineId }).(pulumi.StringOutput)
+}
+
+// Line name.
+func (o GetRecordLineListLineListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordLineListLineList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetRecordLineListLineListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordLineListLineListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordLineListLineList)(nil)).Elem()
+}
+
+func (o GetRecordLineListLineListArrayOutput) ToGetRecordLineListLineListArrayOutput() GetRecordLineListLineListArrayOutput {
+	return o
+}
+
+func (o GetRecordLineListLineListArrayOutput) ToGetRecordLineListLineListArrayOutputWithContext(ctx context.Context) GetRecordLineListLineListArrayOutput {
+	return o
+}
+
+func (o GetRecordLineListLineListArrayOutput) Index(i pulumi.IntInput) GetRecordLineListLineListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordLineListLineList {
+		return vs[0].([]GetRecordLineListLineList)[vs[1].(int)]
+	}).(GetRecordLineListLineListOutput)
+}
+
+type GetRecordListRecordCountInfo struct {
+	// Number of records returned in the list.
+	ListCount int `pulumi:"listCount"`
+	// Number of subdomains.
+	SubdomainCount int `pulumi:"subdomainCount"`
+	// Total number of records.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetRecordListRecordCountInfoInput is an input type that accepts GetRecordListRecordCountInfoArgs and GetRecordListRecordCountInfoOutput values.
+// You can construct a concrete instance of `GetRecordListRecordCountInfoInput` via:
+//
+//	GetRecordListRecordCountInfoArgs{...}
+type GetRecordListRecordCountInfoInput interface {
+	pulumi.Input
+
+	ToGetRecordListRecordCountInfoOutput() GetRecordListRecordCountInfoOutput
+	ToGetRecordListRecordCountInfoOutputWithContext(context.Context) GetRecordListRecordCountInfoOutput
+}
+
+type GetRecordListRecordCountInfoArgs struct {
+	// Number of records returned in the list.
+	ListCount pulumi.IntInput `pulumi:"listCount"`
+	// Number of subdomains.
+	SubdomainCount pulumi.IntInput `pulumi:"subdomainCount"`
+	// Total number of records.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetRecordListRecordCountInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordListRecordCountInfo)(nil)).Elem()
+}
+
+func (i GetRecordListRecordCountInfoArgs) ToGetRecordListRecordCountInfoOutput() GetRecordListRecordCountInfoOutput {
+	return i.ToGetRecordListRecordCountInfoOutputWithContext(context.Background())
+}
+
+func (i GetRecordListRecordCountInfoArgs) ToGetRecordListRecordCountInfoOutputWithContext(ctx context.Context) GetRecordListRecordCountInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordListRecordCountInfoOutput)
+}
+
+// GetRecordListRecordCountInfoArrayInput is an input type that accepts GetRecordListRecordCountInfoArray and GetRecordListRecordCountInfoArrayOutput values.
+// You can construct a concrete instance of `GetRecordListRecordCountInfoArrayInput` via:
+//
+//	GetRecordListRecordCountInfoArray{ GetRecordListRecordCountInfoArgs{...} }
+type GetRecordListRecordCountInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordListRecordCountInfoArrayOutput() GetRecordListRecordCountInfoArrayOutput
+	ToGetRecordListRecordCountInfoArrayOutputWithContext(context.Context) GetRecordListRecordCountInfoArrayOutput
+}
+
+type GetRecordListRecordCountInfoArray []GetRecordListRecordCountInfoInput
+
+func (GetRecordListRecordCountInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordListRecordCountInfo)(nil)).Elem()
+}
+
+func (i GetRecordListRecordCountInfoArray) ToGetRecordListRecordCountInfoArrayOutput() GetRecordListRecordCountInfoArrayOutput {
+	return i.ToGetRecordListRecordCountInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordListRecordCountInfoArray) ToGetRecordListRecordCountInfoArrayOutputWithContext(ctx context.Context) GetRecordListRecordCountInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordListRecordCountInfoArrayOutput)
+}
+
+type GetRecordListRecordCountInfoOutput struct{ *pulumi.OutputState }
+
+func (GetRecordListRecordCountInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordListRecordCountInfo)(nil)).Elem()
+}
+
+func (o GetRecordListRecordCountInfoOutput) ToGetRecordListRecordCountInfoOutput() GetRecordListRecordCountInfoOutput {
+	return o
+}
+
+func (o GetRecordListRecordCountInfoOutput) ToGetRecordListRecordCountInfoOutputWithContext(ctx context.Context) GetRecordListRecordCountInfoOutput {
+	return o
+}
+
+// Number of records returned in the list.
+func (o GetRecordListRecordCountInfoOutput) ListCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordCountInfo) int { return v.ListCount }).(pulumi.IntOutput)
+}
+
+// Number of subdomains.
+func (o GetRecordListRecordCountInfoOutput) SubdomainCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordCountInfo) int { return v.SubdomainCount }).(pulumi.IntOutput)
+}
+
+// Total number of records.
+func (o GetRecordListRecordCountInfoOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordCountInfo) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetRecordListRecordCountInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordListRecordCountInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordListRecordCountInfo)(nil)).Elem()
+}
+
+func (o GetRecordListRecordCountInfoArrayOutput) ToGetRecordListRecordCountInfoArrayOutput() GetRecordListRecordCountInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordListRecordCountInfoArrayOutput) ToGetRecordListRecordCountInfoArrayOutputWithContext(ctx context.Context) GetRecordListRecordCountInfoArrayOutput {
+	return o
+}
+
+func (o GetRecordListRecordCountInfoArrayOutput) Index(i pulumi.IntInput) GetRecordListRecordCountInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordListRecordCountInfo {
+		return vs[0].([]GetRecordListRecordCountInfo)[vs[1].(int)]
+	}).(GetRecordListRecordCountInfoOutput)
+}
+
+type GetRecordListRecordList struct {
+	// Whether it is the default NS record.
+	DefaultNs bool `pulumi:"defaultNs"`
+	// Record line.
+	Line string `pulumi:"line"`
+	// Line ID.
+	LineId string `pulumi:"lineId"`
+	// Record monitoring status, normal: OK, alarm: WARN, downtime: DOWN, empty if monitoring is not set or paused.
+	MonitorStatus string `pulumi:"monitorStatus"`
+	// MX value, only available for MX records Note: This field may return null, indicating that no valid value can be obtained.
+	Mx int `pulumi:"mx"`
+	// Host header.
+	Name string `pulumi:"name"`
+	// Record ID.
+	RecordId int `pulumi:"recordId"`
+	// Get the resolution record based on the resolution record remark.
+	Remark string `pulumi:"remark"`
+	// Record status, enabled: ENABLE, paused: DISABLE.
+	Status string `pulumi:"status"`
+	// Record cache time.
+	Ttl int `pulumi:"ttl"`
+	// Record type.
+	Type string `pulumi:"type"`
+	// Update time.
+	UpdatedOn string `pulumi:"updatedOn"`
+	// Record value.
+	Value string `pulumi:"value"`
+	// Record weight, used for load balancing records. Note: This field may return null, indicating that no valid value can be obtained.
+	Weight int `pulumi:"weight"`
+}
+
+// GetRecordListRecordListInput is an input type that accepts GetRecordListRecordListArgs and GetRecordListRecordListOutput values.
+// You can construct a concrete instance of `GetRecordListRecordListInput` via:
+//
+//	GetRecordListRecordListArgs{...}
+type GetRecordListRecordListInput interface {
+	pulumi.Input
+
+	ToGetRecordListRecordListOutput() GetRecordListRecordListOutput
+	ToGetRecordListRecordListOutputWithContext(context.Context) GetRecordListRecordListOutput
+}
+
+type GetRecordListRecordListArgs struct {
+	// Whether it is the default NS record.
+	DefaultNs pulumi.BoolInput `pulumi:"defaultNs"`
+	// Record line.
+	Line pulumi.StringInput `pulumi:"line"`
+	// Line ID.
+	LineId pulumi.StringInput `pulumi:"lineId"`
+	// Record monitoring status, normal: OK, alarm: WARN, downtime: DOWN, empty if monitoring is not set or paused.
+	MonitorStatus pulumi.StringInput `pulumi:"monitorStatus"`
+	// MX value, only available for MX records Note: This field may return null, indicating that no valid value can be obtained.
+	Mx pulumi.IntInput `pulumi:"mx"`
+	// Host header.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Record ID.
+	RecordId pulumi.IntInput `pulumi:"recordId"`
+	// Get the resolution record based on the resolution record remark.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Record status, enabled: ENABLE, paused: DISABLE.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Record cache time.
+	Ttl pulumi.IntInput `pulumi:"ttl"`
+	// Record type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Update time.
+	UpdatedOn pulumi.StringInput `pulumi:"updatedOn"`
+	// Record value.
+	Value pulumi.StringInput `pulumi:"value"`
+	// Record weight, used for load balancing records. Note: This field may return null, indicating that no valid value can be obtained.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetRecordListRecordListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordListRecordList)(nil)).Elem()
+}
+
+func (i GetRecordListRecordListArgs) ToGetRecordListRecordListOutput() GetRecordListRecordListOutput {
+	return i.ToGetRecordListRecordListOutputWithContext(context.Background())
+}
+
+func (i GetRecordListRecordListArgs) ToGetRecordListRecordListOutputWithContext(ctx context.Context) GetRecordListRecordListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordListRecordListOutput)
+}
+
+// GetRecordListRecordListArrayInput is an input type that accepts GetRecordListRecordListArray and GetRecordListRecordListArrayOutput values.
+// You can construct a concrete instance of `GetRecordListRecordListArrayInput` via:
+//
+//	GetRecordListRecordListArray{ GetRecordListRecordListArgs{...} }
+type GetRecordListRecordListArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordListRecordListArrayOutput() GetRecordListRecordListArrayOutput
+	ToGetRecordListRecordListArrayOutputWithContext(context.Context) GetRecordListRecordListArrayOutput
+}
+
+type GetRecordListRecordListArray []GetRecordListRecordListInput
+
+func (GetRecordListRecordListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordListRecordList)(nil)).Elem()
+}
+
+func (i GetRecordListRecordListArray) ToGetRecordListRecordListArrayOutput() GetRecordListRecordListArrayOutput {
+	return i.ToGetRecordListRecordListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordListRecordListArray) ToGetRecordListRecordListArrayOutputWithContext(ctx context.Context) GetRecordListRecordListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordListRecordListArrayOutput)
+}
+
+type GetRecordListRecordListOutput struct{ *pulumi.OutputState }
+
+func (GetRecordListRecordListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordListRecordList)(nil)).Elem()
+}
+
+func (o GetRecordListRecordListOutput) ToGetRecordListRecordListOutput() GetRecordListRecordListOutput {
+	return o
+}
+
+func (o GetRecordListRecordListOutput) ToGetRecordListRecordListOutputWithContext(ctx context.Context) GetRecordListRecordListOutput {
+	return o
+}
+
+// Whether it is the default NS record.
+func (o GetRecordListRecordListOutput) DefaultNs() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) bool { return v.DefaultNs }).(pulumi.BoolOutput)
+}
+
+// Record line.
+func (o GetRecordListRecordListOutput) Line() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Line }).(pulumi.StringOutput)
+}
+
+// Line ID.
+func (o GetRecordListRecordListOutput) LineId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.LineId }).(pulumi.StringOutput)
+}
+
+// Record monitoring status, normal: OK, alarm: WARN, downtime: DOWN, empty if monitoring is not set or paused.
+func (o GetRecordListRecordListOutput) MonitorStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.MonitorStatus }).(pulumi.StringOutput)
+}
+
+// MX value, only available for MX records Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRecordListRecordListOutput) Mx() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) int { return v.Mx }).(pulumi.IntOutput)
+}
+
+// Host header.
+func (o GetRecordListRecordListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Record ID.
+func (o GetRecordListRecordListOutput) RecordId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) int { return v.RecordId }).(pulumi.IntOutput)
+}
+
+// Get the resolution record based on the resolution record remark.
+func (o GetRecordListRecordListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Record status, enabled: ENABLE, paused: DISABLE.
+func (o GetRecordListRecordListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Record cache time.
+func (o GetRecordListRecordListOutput) Ttl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) int { return v.Ttl }).(pulumi.IntOutput)
+}
+
+// Record type.
+func (o GetRecordListRecordListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Update time.
+func (o GetRecordListRecordListOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.UpdatedOn }).(pulumi.StringOutput)
+}
+
+// Record value.
+func (o GetRecordListRecordListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) string { return v.Value }).(pulumi.StringOutput)
+}
+
+// Record weight, used for load balancing records. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetRecordListRecordListOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordListRecordList) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetRecordListRecordListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordListRecordListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordListRecordList)(nil)).Elem()
+}
+
+func (o GetRecordListRecordListArrayOutput) ToGetRecordListRecordListArrayOutput() GetRecordListRecordListArrayOutput {
+	return o
+}
+
+func (o GetRecordListRecordListArrayOutput) ToGetRecordListRecordListArrayOutputWithContext(ctx context.Context) GetRecordListRecordListArrayOutput {
+	return o
+}
+
+func (o GetRecordListRecordListArrayOutput) Index(i pulumi.IntInput) GetRecordListRecordListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordListRecordList {
+		return vs[0].([]GetRecordListRecordList)[vs[1].(int)]
+	}).(GetRecordListRecordListOutput)
+}
+
 type GetRecordsRecordCountInfo struct {
 	// The count of records returned in the list.
 	ListCount int `pulumi:"listCount"`
@@ -22,7 +2310,7 @@ type GetRecordsRecordCountInfo struct {
 // GetRecordsRecordCountInfoInput is an input type that accepts GetRecordsRecordCountInfoArgs and GetRecordsRecordCountInfoOutput values.
 // You can construct a concrete instance of `GetRecordsRecordCountInfoInput` via:
 //
-//          GetRecordsRecordCountInfoArgs{...}
+//	GetRecordsRecordCountInfoArgs{...}
 type GetRecordsRecordCountInfoInput interface {
 	pulumi.Input
 
@@ -54,7 +2342,7 @@ func (i GetRecordsRecordCountInfoArgs) ToGetRecordsRecordCountInfoOutputWithCont
 // GetRecordsRecordCountInfoArrayInput is an input type that accepts GetRecordsRecordCountInfoArray and GetRecordsRecordCountInfoArrayOutput values.
 // You can construct a concrete instance of `GetRecordsRecordCountInfoArrayInput` via:
 //
-//          GetRecordsRecordCountInfoArray{ GetRecordsRecordCountInfoArgs{...} }
+//	GetRecordsRecordCountInfoArray{ GetRecordsRecordCountInfoArgs{...} }
 type GetRecordsRecordCountInfoArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +2446,7 @@ type GetRecordsResult struct {
 // GetRecordsResultInput is an input type that accepts GetRecordsResultArgs and GetRecordsResultOutput values.
 // You can construct a concrete instance of `GetRecordsResultInput` via:
 //
-//          GetRecordsResultArgs{...}
+//	GetRecordsResultArgs{...}
 type GetRecordsResultInput interface {
 	pulumi.Input
 
@@ -211,7 +2499,7 @@ func (i GetRecordsResultArgs) ToGetRecordsResultOutputWithContext(ctx context.Co
 // GetRecordsResultArrayInput is an input type that accepts GetRecordsResultArray and GetRecordsResultArrayOutput values.
 // You can construct a concrete instance of `GetRecordsResultArrayInput` via:
 //
-//          GetRecordsResultArray{ GetRecordsResultArgs{...} }
+//	GetRecordsResultArray{ GetRecordsResultArgs{...} }
 type GetRecordsResultArrayInput interface {
 	pulumi.Input
 
@@ -334,10 +2622,78 @@ func (o GetRecordsResultArrayOutput) Index(i pulumi.IntInput) GetRecordsResultOu
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataInput)(nil)).Elem(), GetDomainAnalyticsAliasDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataArrayInput)(nil)).Elem(), GetDomainAnalyticsAliasDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataDataInput)(nil)).Elem(), GetDomainAnalyticsAliasDataDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataDataArrayInput)(nil)).Elem(), GetDomainAnalyticsAliasDataDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataInfoInput)(nil)).Elem(), GetDomainAnalyticsAliasDataInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsAliasDataInfoArrayInput)(nil)).Elem(), GetDomainAnalyticsAliasDataInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsDataInput)(nil)).Elem(), GetDomainAnalyticsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsDataArrayInput)(nil)).Elem(), GetDomainAnalyticsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsInfoInput)(nil)).Elem(), GetDomainAnalyticsInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsInfoArrayInput)(nil)).Elem(), GetDomainAnalyticsInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListInput)(nil)).Elem(), GetDomainListDomainListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListArrayInput)(nil)).Elem(), GetDomainListDomainListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListTagListInput)(nil)).Elem(), GetDomainListDomainListTagListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListTagListArrayInput)(nil)).Elem(), GetDomainListDomainListTagListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListTagInput)(nil)).Elem(), GetDomainListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListTagArrayInput)(nil)).Elem(), GetDomainListTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataInput)(nil)).Elem(), GetRecordAnalyticsAliasDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataArrayInput)(nil)).Elem(), GetRecordAnalyticsAliasDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataDataInput)(nil)).Elem(), GetRecordAnalyticsAliasDataDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataDataArrayInput)(nil)).Elem(), GetRecordAnalyticsAliasDataDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataInfoInput)(nil)).Elem(), GetRecordAnalyticsAliasDataInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsAliasDataInfoArrayInput)(nil)).Elem(), GetRecordAnalyticsAliasDataInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsDataInput)(nil)).Elem(), GetRecordAnalyticsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsDataArrayInput)(nil)).Elem(), GetRecordAnalyticsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsInfoInput)(nil)).Elem(), GetRecordAnalyticsInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordAnalyticsInfoArrayInput)(nil)).Elem(), GetRecordAnalyticsInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordLineListLineGroupListInput)(nil)).Elem(), GetRecordLineListLineGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordLineListLineGroupListArrayInput)(nil)).Elem(), GetRecordLineListLineGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordLineListLineListInput)(nil)).Elem(), GetRecordLineListLineListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordLineListLineListArrayInput)(nil)).Elem(), GetRecordLineListLineListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordListRecordCountInfoInput)(nil)).Elem(), GetRecordListRecordCountInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordListRecordCountInfoArrayInput)(nil)).Elem(), GetRecordListRecordCountInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordListRecordListInput)(nil)).Elem(), GetRecordListRecordListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordListRecordListArrayInput)(nil)).Elem(), GetRecordListRecordListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsRecordCountInfoInput)(nil)).Elem(), GetRecordsRecordCountInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsRecordCountInfoArrayInput)(nil)).Elem(), GetRecordsRecordCountInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsResultInput)(nil)).Elem(), GetRecordsResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsResultArrayInput)(nil)).Elem(), GetRecordsResultArray{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataDataOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataInfoOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsAliasDataInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsDataOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsInfoOutput{})
+	pulumi.RegisterOutputType(GetDomainAnalyticsInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainListDomainListOutput{})
+	pulumi.RegisterOutputType(GetDomainListDomainListArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainListDomainListTagListOutput{})
+	pulumi.RegisterOutputType(GetDomainListDomainListTagListArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainListTagOutput{})
+	pulumi.RegisterOutputType(GetDomainListTagArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataDataOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataDataArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataInfoOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsAliasDataInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsDataOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsInfoOutput{})
+	pulumi.RegisterOutputType(GetRecordAnalyticsInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordLineListLineGroupListOutput{})
+	pulumi.RegisterOutputType(GetRecordLineListLineGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordLineListLineListOutput{})
+	pulumi.RegisterOutputType(GetRecordLineListLineListArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordListRecordCountInfoOutput{})
+	pulumi.RegisterOutputType(GetRecordListRecordCountInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordListRecordListOutput{})
+	pulumi.RegisterOutputType(GetRecordListRecordListArrayOutput{})
 	pulumi.RegisterOutputType(GetRecordsRecordCountInfoOutput{})
 	pulumi.RegisterOutputType(GetRecordsRecordCountInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetRecordsResultOutput{})

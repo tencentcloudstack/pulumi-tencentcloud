@@ -19,45 +19,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		camPolicyBasic := "keep-cam-policy"
-// 		if param := cfg.Get("camPolicyBasic"); param != "" {
-// 			camPolicyBasic = param
-// 		}
-// 		camRoleBasic := "keep-cam-role"
-// 		if param := cfg.Get("camRoleBasic"); param != "" {
-// 			camRoleBasic = param
-// 		}
-// 		_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			Name: pulumi.StringRef(camPolicyBasic),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetRoles(ctx, &cam.GetRolesArgs{
-// 			Name: pulumi.StringRef(camRoleBasic),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.NewRolePolicyAttachmentByName(ctx, "rolePolicyAttachmentBasic", &Cam.RolePolicyAttachmentByNameArgs{
-// 			RoleName:   pulumi.String(camRoleBasic),
-// 			PolicyName: pulumi.String(camPolicyBasic),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			camPolicyBasic := "keep-cam-policy"
+//			if param := cfg.Get("camPolicyBasic"); param != "" {
+//				camPolicyBasic = param
+//			}
+//			camRoleBasic := "keep-cam-role"
+//			if param := cfg.Get("camRoleBasic"); param != "" {
+//				camRoleBasic = param
+//			}
+//			_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				Name: pulumi.StringRef(camPolicyBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetRoles(ctx, &cam.GetRolesArgs{
+//				Name: pulumi.StringRef(camRoleBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.NewRolePolicyAttachmentByName(ctx, "rolePolicyAttachmentBasic", &Cam.RolePolicyAttachmentByNameArgs{
+//				RoleName:   pulumi.String(camRoleBasic),
+//				PolicyName: pulumi.String(camPolicyBasic),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -65,7 +68,9 @@ import (
 // CAM role policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+//
+//	$ pulumi import tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName foo ${role_name}#${policy_name}
+//
 // ```
 type RolePolicyAttachmentByName struct {
 	pulumi.CustomResourceState
@@ -188,7 +193,7 @@ func (i *RolePolicyAttachmentByName) ToRolePolicyAttachmentByNameOutputWithConte
 // RolePolicyAttachmentByNameArrayInput is an input type that accepts RolePolicyAttachmentByNameArray and RolePolicyAttachmentByNameArrayOutput values.
 // You can construct a concrete instance of `RolePolicyAttachmentByNameArrayInput` via:
 //
-//          RolePolicyAttachmentByNameArray{ RolePolicyAttachmentByNameArgs{...} }
+//	RolePolicyAttachmentByNameArray{ RolePolicyAttachmentByNameArgs{...} }
 type RolePolicyAttachmentByNameArrayInput interface {
 	pulumi.Input
 
@@ -213,7 +218,7 @@ func (i RolePolicyAttachmentByNameArray) ToRolePolicyAttachmentByNameArrayOutput
 // RolePolicyAttachmentByNameMapInput is an input type that accepts RolePolicyAttachmentByNameMap and RolePolicyAttachmentByNameMapOutput values.
 // You can construct a concrete instance of `RolePolicyAttachmentByNameMapInput` via:
 //
-//          RolePolicyAttachmentByNameMap{ "key": RolePolicyAttachmentByNameArgs{...} }
+//	RolePolicyAttachmentByNameMap{ "key": RolePolicyAttachmentByNameArgs{...} }
 type RolePolicyAttachmentByNameMapInput interface {
 	pulumi.Input
 

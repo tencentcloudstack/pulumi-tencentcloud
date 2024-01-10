@@ -19,70 +19,73 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String("tf-example-1308919341"),
-// 			Acl:    pulumi.String("private"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
-// 			SnapshotPolicyName: pulumi.String("tf-example"),
-// 			BackupType:         pulumi.String("time"),
-// 			CosBucket:          exampleBucket.Bucket,
-// 			CosRegion:          pulumi.String("ap-guangzhou"),
-// 			CreateNewCos:       pulumi.Bool(false),
-// 			KeepTime:           pulumi.Int(2),
-// 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("monday"),
-// 					BackupTime: pulumi.String("00:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("tuesday"),
-// 					BackupTime: pulumi.String("01:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("wednesday"),
-// 					BackupTime: pulumi.String("02:00:00"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewSnapshotPolicyAttachment(ctx, "attachment", &Vpc.SnapshotPolicyAttachmentArgs{
-// 			SnapshotPolicyId: exampleSnapshotPolicy.ID(),
-// 			Instances: vpc.SnapshotPolicyAttachmentInstanceArray{
-// 				&vpc.SnapshotPolicyAttachmentInstanceArgs{
-// 					InstanceType:   pulumi.String("securitygroup"),
-// 					InstanceId:     exampleGroup.ID(),
-// 					InstanceName:   pulumi.String("tf-example"),
-// 					InstanceRegion: pulumi.String("ap-guangzhou"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String("tf-example-1308919341"),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+//				SnapshotPolicyName: pulumi.String("tf-example"),
+//				BackupType:         pulumi.String("time"),
+//				CosBucket:          exampleBucket.Bucket,
+//				CosRegion:          pulumi.String("ap-guangzhou"),
+//				CreateNewCos:       pulumi.Bool(false),
+//				KeepTime:           pulumi.Int(2),
+//				BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("monday"),
+//						BackupTime: pulumi.String("00:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("tuesday"),
+//						BackupTime: pulumi.String("01:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("wednesday"),
+//						BackupTime: pulumi.String("02:00:00"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewSnapshotPolicyAttachment(ctx, "attachment", &Vpc.SnapshotPolicyAttachmentArgs{
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				Instances: vpc.SnapshotPolicyAttachmentInstanceArray{
+//					&vpc.SnapshotPolicyAttachmentInstanceArgs{
+//						InstanceType:   pulumi.String("securitygroup"),
+//						InstanceId:     exampleGroup.ID(),
+//						InstanceName:   pulumi.String("tf-example"),
+//						InstanceRegion: pulumi.String("ap-guangzhou"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,7 +93,9 @@ import (
 // vpc snapshot_policy_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id
+//
+//	$ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id
+//
 // ```
 type SnapshotPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -195,7 +200,7 @@ func (i *SnapshotPolicyAttachment) ToSnapshotPolicyAttachmentOutputWithContext(c
 // SnapshotPolicyAttachmentArrayInput is an input type that accepts SnapshotPolicyAttachmentArray and SnapshotPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentArrayInput` via:
 //
-//          SnapshotPolicyAttachmentArray{ SnapshotPolicyAttachmentArgs{...} }
+//	SnapshotPolicyAttachmentArray{ SnapshotPolicyAttachmentArgs{...} }
 type SnapshotPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +225,7 @@ func (i SnapshotPolicyAttachmentArray) ToSnapshotPolicyAttachmentArrayOutputWith
 // SnapshotPolicyAttachmentMapInput is an input type that accepts SnapshotPolicyAttachmentMap and SnapshotPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentMapInput` via:
 //
-//          SnapshotPolicyAttachmentMap{ "key": SnapshotPolicyAttachmentArgs{...} }
+//	SnapshotPolicyAttachmentMap{ "key": SnapshotPolicyAttachmentArgs{...} }
 type SnapshotPolicyAttachmentMapInput interface {
 	pulumi.Input
 

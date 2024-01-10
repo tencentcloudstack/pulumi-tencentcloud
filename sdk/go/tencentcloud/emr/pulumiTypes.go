@@ -10,6 +10,162 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type ClusterPlacementInfo struct {
+	// Project id.
+	ProjectId *int `pulumi:"projectId"`
+	// Zone.
+	Zone string `pulumi:"zone"`
+}
+
+// ClusterPlacementInfoInput is an input type that accepts ClusterPlacementInfoArgs and ClusterPlacementInfoOutput values.
+// You can construct a concrete instance of `ClusterPlacementInfoInput` via:
+//
+//	ClusterPlacementInfoArgs{...}
+type ClusterPlacementInfoInput interface {
+	pulumi.Input
+
+	ToClusterPlacementInfoOutput() ClusterPlacementInfoOutput
+	ToClusterPlacementInfoOutputWithContext(context.Context) ClusterPlacementInfoOutput
+}
+
+type ClusterPlacementInfoArgs struct {
+	// Project id.
+	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
+	// Zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (ClusterPlacementInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterPlacementInfo)(nil)).Elem()
+}
+
+func (i ClusterPlacementInfoArgs) ToClusterPlacementInfoOutput() ClusterPlacementInfoOutput {
+	return i.ToClusterPlacementInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterPlacementInfoArgs) ToClusterPlacementInfoOutputWithContext(ctx context.Context) ClusterPlacementInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPlacementInfoOutput)
+}
+
+func (i ClusterPlacementInfoArgs) ToClusterPlacementInfoPtrOutput() ClusterPlacementInfoPtrOutput {
+	return i.ToClusterPlacementInfoPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterPlacementInfoArgs) ToClusterPlacementInfoPtrOutputWithContext(ctx context.Context) ClusterPlacementInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPlacementInfoOutput).ToClusterPlacementInfoPtrOutputWithContext(ctx)
+}
+
+// ClusterPlacementInfoPtrInput is an input type that accepts ClusterPlacementInfoArgs, ClusterPlacementInfoPtr and ClusterPlacementInfoPtrOutput values.
+// You can construct a concrete instance of `ClusterPlacementInfoPtrInput` via:
+//
+//	        ClusterPlacementInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterPlacementInfoPtrInput interface {
+	pulumi.Input
+
+	ToClusterPlacementInfoPtrOutput() ClusterPlacementInfoPtrOutput
+	ToClusterPlacementInfoPtrOutputWithContext(context.Context) ClusterPlacementInfoPtrOutput
+}
+
+type clusterPlacementInfoPtrType ClusterPlacementInfoArgs
+
+func ClusterPlacementInfoPtr(v *ClusterPlacementInfoArgs) ClusterPlacementInfoPtrInput {
+	return (*clusterPlacementInfoPtrType)(v)
+}
+
+func (*clusterPlacementInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterPlacementInfo)(nil)).Elem()
+}
+
+func (i *clusterPlacementInfoPtrType) ToClusterPlacementInfoPtrOutput() ClusterPlacementInfoPtrOutput {
+	return i.ToClusterPlacementInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterPlacementInfoPtrType) ToClusterPlacementInfoPtrOutputWithContext(ctx context.Context) ClusterPlacementInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPlacementInfoPtrOutput)
+}
+
+type ClusterPlacementInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterPlacementInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterPlacementInfo)(nil)).Elem()
+}
+
+func (o ClusterPlacementInfoOutput) ToClusterPlacementInfoOutput() ClusterPlacementInfoOutput {
+	return o
+}
+
+func (o ClusterPlacementInfoOutput) ToClusterPlacementInfoOutputWithContext(ctx context.Context) ClusterPlacementInfoOutput {
+	return o
+}
+
+func (o ClusterPlacementInfoOutput) ToClusterPlacementInfoPtrOutput() ClusterPlacementInfoPtrOutput {
+	return o.ToClusterPlacementInfoPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterPlacementInfoOutput) ToClusterPlacementInfoPtrOutputWithContext(ctx context.Context) ClusterPlacementInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterPlacementInfo) *ClusterPlacementInfo {
+		return &v
+	}).(ClusterPlacementInfoPtrOutput)
+}
+
+// Project id.
+func (o ClusterPlacementInfoOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterPlacementInfo) *int { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Zone.
+func (o ClusterPlacementInfoOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterPlacementInfo) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type ClusterPlacementInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterPlacementInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterPlacementInfo)(nil)).Elem()
+}
+
+func (o ClusterPlacementInfoPtrOutput) ToClusterPlacementInfoPtrOutput() ClusterPlacementInfoPtrOutput {
+	return o
+}
+
+func (o ClusterPlacementInfoPtrOutput) ToClusterPlacementInfoPtrOutputWithContext(ctx context.Context) ClusterPlacementInfoPtrOutput {
+	return o
+}
+
+func (o ClusterPlacementInfoPtrOutput) Elem() ClusterPlacementInfoOutput {
+	return o.ApplyT(func(v *ClusterPlacementInfo) ClusterPlacementInfo {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterPlacementInfo
+		return ret
+	}).(ClusterPlacementInfoOutput)
+}
+
+// Project id.
+func (o ClusterPlacementInfoPtrOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterPlacementInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProjectId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Zone.
+func (o ClusterPlacementInfoPtrOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterPlacementInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Zone
+	}).(pulumi.StringPtrOutput)
+}
+
 type ClusterResourceSpec struct {
 	// The number of common node.
 	CommonCount        *int                                   `pulumi:"commonCount"`
@@ -28,7 +184,7 @@ type ClusterResourceSpec struct {
 // ClusterResourceSpecInput is an input type that accepts ClusterResourceSpecArgs and ClusterResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecInput` via:
 //
-//          ClusterResourceSpecArgs{...}
+//	ClusterResourceSpecArgs{...}
 type ClusterResourceSpecInput interface {
 	pulumi.Input
 
@@ -74,11 +230,11 @@ func (i ClusterResourceSpecArgs) ToClusterResourceSpecPtrOutputWithContext(ctx c
 // ClusterResourceSpecPtrInput is an input type that accepts ClusterResourceSpecArgs, ClusterResourceSpecPtr and ClusterResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecPtrInput` via:
 //
-//          ClusterResourceSpecArgs{...}
+//	        ClusterResourceSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -277,7 +433,7 @@ type ClusterResourceSpecCommonResourceSpec struct {
 // ClusterResourceSpecCommonResourceSpecInput is an input type that accepts ClusterResourceSpecCommonResourceSpecArgs and ClusterResourceSpecCommonResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecInput` via:
 //
-//          ClusterResourceSpecCommonResourceSpecArgs{...}
+//	ClusterResourceSpecCommonResourceSpecArgs{...}
 type ClusterResourceSpecCommonResourceSpecInput interface {
 	pulumi.Input
 
@@ -318,11 +474,11 @@ func (i ClusterResourceSpecCommonResourceSpecArgs) ToClusterResourceSpecCommonRe
 // ClusterResourceSpecCommonResourceSpecPtrInput is an input type that accepts ClusterResourceSpecCommonResourceSpecArgs, ClusterResourceSpecCommonResourceSpecPtr and ClusterResourceSpecCommonResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecPtrInput` via:
 //
-//          ClusterResourceSpecCommonResourceSpecArgs{...}
+//	        ClusterResourceSpecCommonResourceSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterResourceSpecCommonResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -500,7 +656,7 @@ type ClusterResourceSpecCoreResourceSpec struct {
 // ClusterResourceSpecCoreResourceSpecInput is an input type that accepts ClusterResourceSpecCoreResourceSpecArgs and ClusterResourceSpecCoreResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecInput` via:
 //
-//          ClusterResourceSpecCoreResourceSpecArgs{...}
+//	ClusterResourceSpecCoreResourceSpecArgs{...}
 type ClusterResourceSpecCoreResourceSpecInput interface {
 	pulumi.Input
 
@@ -541,11 +697,11 @@ func (i ClusterResourceSpecCoreResourceSpecArgs) ToClusterResourceSpecCoreResour
 // ClusterResourceSpecCoreResourceSpecPtrInput is an input type that accepts ClusterResourceSpecCoreResourceSpecArgs, ClusterResourceSpecCoreResourceSpecPtr and ClusterResourceSpecCoreResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecPtrInput` via:
 //
-//          ClusterResourceSpecCoreResourceSpecArgs{...}
+//	        ClusterResourceSpecCoreResourceSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterResourceSpecCoreResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -723,7 +879,7 @@ type ClusterResourceSpecMasterResourceSpec struct {
 // ClusterResourceSpecMasterResourceSpecInput is an input type that accepts ClusterResourceSpecMasterResourceSpecArgs and ClusterResourceSpecMasterResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecInput` via:
 //
-//          ClusterResourceSpecMasterResourceSpecArgs{...}
+//	ClusterResourceSpecMasterResourceSpecArgs{...}
 type ClusterResourceSpecMasterResourceSpecInput interface {
 	pulumi.Input
 
@@ -764,11 +920,11 @@ func (i ClusterResourceSpecMasterResourceSpecArgs) ToClusterResourceSpecMasterRe
 // ClusterResourceSpecMasterResourceSpecPtrInput is an input type that accepts ClusterResourceSpecMasterResourceSpecArgs, ClusterResourceSpecMasterResourceSpecPtr and ClusterResourceSpecMasterResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecPtrInput` via:
 //
-//          ClusterResourceSpecMasterResourceSpecArgs{...}
+//	        ClusterResourceSpecMasterResourceSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterResourceSpecMasterResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -946,7 +1102,7 @@ type ClusterResourceSpecTaskResourceSpec struct {
 // ClusterResourceSpecTaskResourceSpecInput is an input type that accepts ClusterResourceSpecTaskResourceSpecArgs and ClusterResourceSpecTaskResourceSpecOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecInput` via:
 //
-//          ClusterResourceSpecTaskResourceSpecArgs{...}
+//	ClusterResourceSpecTaskResourceSpecArgs{...}
 type ClusterResourceSpecTaskResourceSpecInput interface {
 	pulumi.Input
 
@@ -987,11 +1143,11 @@ func (i ClusterResourceSpecTaskResourceSpecArgs) ToClusterResourceSpecTaskResour
 // ClusterResourceSpecTaskResourceSpecPtrInput is an input type that accepts ClusterResourceSpecTaskResourceSpecArgs, ClusterResourceSpecTaskResourceSpecPtr and ClusterResourceSpecTaskResourceSpecPtrOutput values.
 // You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecPtrInput` via:
 //
-//          ClusterResourceSpecTaskResourceSpecArgs{...}
+//	        ClusterResourceSpecTaskResourceSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ClusterResourceSpecTaskResourceSpecPtrInput interface {
 	pulumi.Input
 
@@ -1156,6 +1312,671 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) StorageType() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
+type GetAutoScaleRecordsFilter struct {
+	// Key. Note: This field may return null, indicating that no valid value can be obtained.
+	Key string `pulumi:"key"`
+	// Value. Note: This field may return null, indicating that no valid value can be obtained.
+	Value string `pulumi:"value"`
+}
+
+// GetAutoScaleRecordsFilterInput is an input type that accepts GetAutoScaleRecordsFilterArgs and GetAutoScaleRecordsFilterOutput values.
+// You can construct a concrete instance of `GetAutoScaleRecordsFilterInput` via:
+//
+//	GetAutoScaleRecordsFilterArgs{...}
+type GetAutoScaleRecordsFilterInput interface {
+	pulumi.Input
+
+	ToGetAutoScaleRecordsFilterOutput() GetAutoScaleRecordsFilterOutput
+	ToGetAutoScaleRecordsFilterOutputWithContext(context.Context) GetAutoScaleRecordsFilterOutput
+}
+
+type GetAutoScaleRecordsFilterArgs struct {
+	// Key. Note: This field may return null, indicating that no valid value can be obtained.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value. Note: This field may return null, indicating that no valid value can be obtained.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetAutoScaleRecordsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutoScaleRecordsFilter)(nil)).Elem()
+}
+
+func (i GetAutoScaleRecordsFilterArgs) ToGetAutoScaleRecordsFilterOutput() GetAutoScaleRecordsFilterOutput {
+	return i.ToGetAutoScaleRecordsFilterOutputWithContext(context.Background())
+}
+
+func (i GetAutoScaleRecordsFilterArgs) ToGetAutoScaleRecordsFilterOutputWithContext(ctx context.Context) GetAutoScaleRecordsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutoScaleRecordsFilterOutput)
+}
+
+// GetAutoScaleRecordsFilterArrayInput is an input type that accepts GetAutoScaleRecordsFilterArray and GetAutoScaleRecordsFilterArrayOutput values.
+// You can construct a concrete instance of `GetAutoScaleRecordsFilterArrayInput` via:
+//
+//	GetAutoScaleRecordsFilterArray{ GetAutoScaleRecordsFilterArgs{...} }
+type GetAutoScaleRecordsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetAutoScaleRecordsFilterArrayOutput() GetAutoScaleRecordsFilterArrayOutput
+	ToGetAutoScaleRecordsFilterArrayOutputWithContext(context.Context) GetAutoScaleRecordsFilterArrayOutput
+}
+
+type GetAutoScaleRecordsFilterArray []GetAutoScaleRecordsFilterInput
+
+func (GetAutoScaleRecordsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAutoScaleRecordsFilter)(nil)).Elem()
+}
+
+func (i GetAutoScaleRecordsFilterArray) ToGetAutoScaleRecordsFilterArrayOutput() GetAutoScaleRecordsFilterArrayOutput {
+	return i.ToGetAutoScaleRecordsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetAutoScaleRecordsFilterArray) ToGetAutoScaleRecordsFilterArrayOutputWithContext(ctx context.Context) GetAutoScaleRecordsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutoScaleRecordsFilterArrayOutput)
+}
+
+type GetAutoScaleRecordsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetAutoScaleRecordsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutoScaleRecordsFilter)(nil)).Elem()
+}
+
+func (o GetAutoScaleRecordsFilterOutput) ToGetAutoScaleRecordsFilterOutput() GetAutoScaleRecordsFilterOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsFilterOutput) ToGetAutoScaleRecordsFilterOutputWithContext(ctx context.Context) GetAutoScaleRecordsFilterOutput {
+	return o
+}
+
+// Key. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAutoScaleRecordsFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAutoScaleRecordsFilterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsFilter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetAutoScaleRecordsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAutoScaleRecordsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAutoScaleRecordsFilter)(nil)).Elem()
+}
+
+func (o GetAutoScaleRecordsFilterArrayOutput) ToGetAutoScaleRecordsFilterArrayOutput() GetAutoScaleRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsFilterArrayOutput) ToGetAutoScaleRecordsFilterArrayOutputWithContext(ctx context.Context) GetAutoScaleRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsFilterArrayOutput) Index(i pulumi.IntInput) GetAutoScaleRecordsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAutoScaleRecordsFilter {
+		return vs[0].([]GetAutoScaleRecordsFilter)[vs[1].(int)]
+	}).(GetAutoScaleRecordsFilterOutput)
+}
+
+type GetAutoScaleRecordsRecordList struct {
+	// `SUCCESS`, `FAILED`, `PART_SUCCESS`, `IN_PROCESS`.
+	ActionStatus string `pulumi:"actionStatus"`
+	// Process Trigger Time.
+	ActionTime string `pulumi:"actionTime"`
+	// Compensation Times Note: This field may return null, indicating that no valid value can be obtained.
+	CompensateCount int `pulumi:"compensateCount"`
+	// Compensation and expansion, 0 represents no start, 1 represents start. Note: This field may return null, indicating that no valid value can be obtained.
+	CompensateFlag int `pulumi:"compensateFlag"`
+	// Process End Time.
+	EndTime string `pulumi:"endTime"`
+	// Effective only when ScaleAction is SCALE_OUT.
+	ExpectScaleNum int `pulumi:"expectScaleNum"`
+	// `SCALE_OUT` and `SCALE_IN` respectively represent expanding and shrinking capacity.
+	ScaleAction string `pulumi:"scaleAction"`
+	// Scalability-related Description.
+	ScaleInfo string `pulumi:"scaleInfo"`
+	// Specification information used when expanding capacity.
+	SpecInfo string `pulumi:"specInfo"`
+	// Rule name of expanding and shrinking capacity.
+	StrategyName string `pulumi:"strategyName"`
+	// Strategy Type, 1 for Load scaling, 2 for Time scaling.
+	StrategyType int `pulumi:"strategyType"`
+}
+
+// GetAutoScaleRecordsRecordListInput is an input type that accepts GetAutoScaleRecordsRecordListArgs and GetAutoScaleRecordsRecordListOutput values.
+// You can construct a concrete instance of `GetAutoScaleRecordsRecordListInput` via:
+//
+//	GetAutoScaleRecordsRecordListArgs{...}
+type GetAutoScaleRecordsRecordListInput interface {
+	pulumi.Input
+
+	ToGetAutoScaleRecordsRecordListOutput() GetAutoScaleRecordsRecordListOutput
+	ToGetAutoScaleRecordsRecordListOutputWithContext(context.Context) GetAutoScaleRecordsRecordListOutput
+}
+
+type GetAutoScaleRecordsRecordListArgs struct {
+	// `SUCCESS`, `FAILED`, `PART_SUCCESS`, `IN_PROCESS`.
+	ActionStatus pulumi.StringInput `pulumi:"actionStatus"`
+	// Process Trigger Time.
+	ActionTime pulumi.StringInput `pulumi:"actionTime"`
+	// Compensation Times Note: This field may return null, indicating that no valid value can be obtained.
+	CompensateCount pulumi.IntInput `pulumi:"compensateCount"`
+	// Compensation and expansion, 0 represents no start, 1 represents start. Note: This field may return null, indicating that no valid value can be obtained.
+	CompensateFlag pulumi.IntInput `pulumi:"compensateFlag"`
+	// Process End Time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Effective only when ScaleAction is SCALE_OUT.
+	ExpectScaleNum pulumi.IntInput `pulumi:"expectScaleNum"`
+	// `SCALE_OUT` and `SCALE_IN` respectively represent expanding and shrinking capacity.
+	ScaleAction pulumi.StringInput `pulumi:"scaleAction"`
+	// Scalability-related Description.
+	ScaleInfo pulumi.StringInput `pulumi:"scaleInfo"`
+	// Specification information used when expanding capacity.
+	SpecInfo pulumi.StringInput `pulumi:"specInfo"`
+	// Rule name of expanding and shrinking capacity.
+	StrategyName pulumi.StringInput `pulumi:"strategyName"`
+	// Strategy Type, 1 for Load scaling, 2 for Time scaling.
+	StrategyType pulumi.IntInput `pulumi:"strategyType"`
+}
+
+func (GetAutoScaleRecordsRecordListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutoScaleRecordsRecordList)(nil)).Elem()
+}
+
+func (i GetAutoScaleRecordsRecordListArgs) ToGetAutoScaleRecordsRecordListOutput() GetAutoScaleRecordsRecordListOutput {
+	return i.ToGetAutoScaleRecordsRecordListOutputWithContext(context.Background())
+}
+
+func (i GetAutoScaleRecordsRecordListArgs) ToGetAutoScaleRecordsRecordListOutputWithContext(ctx context.Context) GetAutoScaleRecordsRecordListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutoScaleRecordsRecordListOutput)
+}
+
+// GetAutoScaleRecordsRecordListArrayInput is an input type that accepts GetAutoScaleRecordsRecordListArray and GetAutoScaleRecordsRecordListArrayOutput values.
+// You can construct a concrete instance of `GetAutoScaleRecordsRecordListArrayInput` via:
+//
+//	GetAutoScaleRecordsRecordListArray{ GetAutoScaleRecordsRecordListArgs{...} }
+type GetAutoScaleRecordsRecordListArrayInput interface {
+	pulumi.Input
+
+	ToGetAutoScaleRecordsRecordListArrayOutput() GetAutoScaleRecordsRecordListArrayOutput
+	ToGetAutoScaleRecordsRecordListArrayOutputWithContext(context.Context) GetAutoScaleRecordsRecordListArrayOutput
+}
+
+type GetAutoScaleRecordsRecordListArray []GetAutoScaleRecordsRecordListInput
+
+func (GetAutoScaleRecordsRecordListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAutoScaleRecordsRecordList)(nil)).Elem()
+}
+
+func (i GetAutoScaleRecordsRecordListArray) ToGetAutoScaleRecordsRecordListArrayOutput() GetAutoScaleRecordsRecordListArrayOutput {
+	return i.ToGetAutoScaleRecordsRecordListArrayOutputWithContext(context.Background())
+}
+
+func (i GetAutoScaleRecordsRecordListArray) ToGetAutoScaleRecordsRecordListArrayOutputWithContext(ctx context.Context) GetAutoScaleRecordsRecordListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAutoScaleRecordsRecordListArrayOutput)
+}
+
+type GetAutoScaleRecordsRecordListOutput struct{ *pulumi.OutputState }
+
+func (GetAutoScaleRecordsRecordListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAutoScaleRecordsRecordList)(nil)).Elem()
+}
+
+func (o GetAutoScaleRecordsRecordListOutput) ToGetAutoScaleRecordsRecordListOutput() GetAutoScaleRecordsRecordListOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsRecordListOutput) ToGetAutoScaleRecordsRecordListOutputWithContext(ctx context.Context) GetAutoScaleRecordsRecordListOutput {
+	return o
+}
+
+// `SUCCESS`, `FAILED`, `PART_SUCCESS`, `IN_PROCESS`.
+func (o GetAutoScaleRecordsRecordListOutput) ActionStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.ActionStatus }).(pulumi.StringOutput)
+}
+
+// Process Trigger Time.
+func (o GetAutoScaleRecordsRecordListOutput) ActionTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.ActionTime }).(pulumi.StringOutput)
+}
+
+// Compensation Times Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAutoScaleRecordsRecordListOutput) CompensateCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) int { return v.CompensateCount }).(pulumi.IntOutput)
+}
+
+// Compensation and expansion, 0 represents no start, 1 represents start. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAutoScaleRecordsRecordListOutput) CompensateFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) int { return v.CompensateFlag }).(pulumi.IntOutput)
+}
+
+// Process End Time.
+func (o GetAutoScaleRecordsRecordListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Effective only when ScaleAction is SCALE_OUT.
+func (o GetAutoScaleRecordsRecordListOutput) ExpectScaleNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) int { return v.ExpectScaleNum }).(pulumi.IntOutput)
+}
+
+// `SCALE_OUT` and `SCALE_IN` respectively represent expanding and shrinking capacity.
+func (o GetAutoScaleRecordsRecordListOutput) ScaleAction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.ScaleAction }).(pulumi.StringOutput)
+}
+
+// Scalability-related Description.
+func (o GetAutoScaleRecordsRecordListOutput) ScaleInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.ScaleInfo }).(pulumi.StringOutput)
+}
+
+// Specification information used when expanding capacity.
+func (o GetAutoScaleRecordsRecordListOutput) SpecInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.SpecInfo }).(pulumi.StringOutput)
+}
+
+// Rule name of expanding and shrinking capacity.
+func (o GetAutoScaleRecordsRecordListOutput) StrategyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) string { return v.StrategyName }).(pulumi.StringOutput)
+}
+
+// Strategy Type, 1 for Load scaling, 2 for Time scaling.
+func (o GetAutoScaleRecordsRecordListOutput) StrategyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAutoScaleRecordsRecordList) int { return v.StrategyType }).(pulumi.IntOutput)
+}
+
+type GetAutoScaleRecordsRecordListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAutoScaleRecordsRecordListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAutoScaleRecordsRecordList)(nil)).Elem()
+}
+
+func (o GetAutoScaleRecordsRecordListArrayOutput) ToGetAutoScaleRecordsRecordListArrayOutput() GetAutoScaleRecordsRecordListArrayOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsRecordListArrayOutput) ToGetAutoScaleRecordsRecordListArrayOutputWithContext(ctx context.Context) GetAutoScaleRecordsRecordListArrayOutput {
+	return o
+}
+
+func (o GetAutoScaleRecordsRecordListArrayOutput) Index(i pulumi.IntInput) GetAutoScaleRecordsRecordListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAutoScaleRecordsRecordList {
+		return vs[0].([]GetAutoScaleRecordsRecordList)[vs[1].(int)]
+	}).(GetAutoScaleRecordsRecordListOutput)
+}
+
+type GetCvmQuotaEksQuotaSet struct {
+	// Cpu cores.
+	Cpu int `pulumi:"cpu"`
+	// Memory quantity (unit: GB).
+	Memory int `pulumi:"memory"`
+	// The specifications of the marketable resource are as follows: `TASK`, `CORE`, `MASTER`, `ROUTER`.
+	NodeType string `pulumi:"nodeType"`
+	// Specifies the maximum number of resources that can be applied for.
+	Number int `pulumi:"number"`
+}
+
+// GetCvmQuotaEksQuotaSetInput is an input type that accepts GetCvmQuotaEksQuotaSetArgs and GetCvmQuotaEksQuotaSetOutput values.
+// You can construct a concrete instance of `GetCvmQuotaEksQuotaSetInput` via:
+//
+//	GetCvmQuotaEksQuotaSetArgs{...}
+type GetCvmQuotaEksQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaEksQuotaSetOutput() GetCvmQuotaEksQuotaSetOutput
+	ToGetCvmQuotaEksQuotaSetOutputWithContext(context.Context) GetCvmQuotaEksQuotaSetOutput
+}
+
+type GetCvmQuotaEksQuotaSetArgs struct {
+	// Cpu cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Memory quantity (unit: GB).
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// The specifications of the marketable resource are as follows: `TASK`, `CORE`, `MASTER`, `ROUTER`.
+	NodeType pulumi.StringInput `pulumi:"nodeType"`
+	// Specifies the maximum number of resources that can be applied for.
+	Number pulumi.IntInput `pulumi:"number"`
+}
+
+func (GetCvmQuotaEksQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaEksQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaEksQuotaSetArgs) ToGetCvmQuotaEksQuotaSetOutput() GetCvmQuotaEksQuotaSetOutput {
+	return i.ToGetCvmQuotaEksQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaEksQuotaSetArgs) ToGetCvmQuotaEksQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaEksQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaEksQuotaSetOutput)
+}
+
+// GetCvmQuotaEksQuotaSetArrayInput is an input type that accepts GetCvmQuotaEksQuotaSetArray and GetCvmQuotaEksQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetCvmQuotaEksQuotaSetArrayInput` via:
+//
+//	GetCvmQuotaEksQuotaSetArray{ GetCvmQuotaEksQuotaSetArgs{...} }
+type GetCvmQuotaEksQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaEksQuotaSetArrayOutput() GetCvmQuotaEksQuotaSetArrayOutput
+	ToGetCvmQuotaEksQuotaSetArrayOutputWithContext(context.Context) GetCvmQuotaEksQuotaSetArrayOutput
+}
+
+type GetCvmQuotaEksQuotaSetArray []GetCvmQuotaEksQuotaSetInput
+
+func (GetCvmQuotaEksQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaEksQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaEksQuotaSetArray) ToGetCvmQuotaEksQuotaSetArrayOutput() GetCvmQuotaEksQuotaSetArrayOutput {
+	return i.ToGetCvmQuotaEksQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaEksQuotaSetArray) ToGetCvmQuotaEksQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaEksQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaEksQuotaSetArrayOutput)
+}
+
+type GetCvmQuotaEksQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaEksQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaEksQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaEksQuotaSetOutput) ToGetCvmQuotaEksQuotaSetOutput() GetCvmQuotaEksQuotaSetOutput {
+	return o
+}
+
+func (o GetCvmQuotaEksQuotaSetOutput) ToGetCvmQuotaEksQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaEksQuotaSetOutput {
+	return o
+}
+
+// Cpu cores.
+func (o GetCvmQuotaEksQuotaSetOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaEksQuotaSet) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Memory quantity (unit: GB).
+func (o GetCvmQuotaEksQuotaSetOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaEksQuotaSet) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// The specifications of the marketable resource are as follows: `TASK`, `CORE`, `MASTER`, `ROUTER`.
+func (o GetCvmQuotaEksQuotaSetOutput) NodeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmQuotaEksQuotaSet) string { return v.NodeType }).(pulumi.StringOutput)
+}
+
+// Specifies the maximum number of resources that can be applied for.
+func (o GetCvmQuotaEksQuotaSetOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaEksQuotaSet) int { return v.Number }).(pulumi.IntOutput)
+}
+
+type GetCvmQuotaEksQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaEksQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaEksQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaEksQuotaSetArrayOutput) ToGetCvmQuotaEksQuotaSetArrayOutput() GetCvmQuotaEksQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaEksQuotaSetArrayOutput) ToGetCvmQuotaEksQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaEksQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaEksQuotaSetArrayOutput) Index(i pulumi.IntInput) GetCvmQuotaEksQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCvmQuotaEksQuotaSet {
+		return vs[0].([]GetCvmQuotaEksQuotaSet)[vs[1].(int)]
+	}).(GetCvmQuotaEksQuotaSetOutput)
+}
+
+type GetCvmQuotaPostPaidQuotaSet struct {
+	// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	RemainingQuota int `pulumi:"remainingQuota"`
+	// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	UsedQuota int `pulumi:"usedQuota"`
+	// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetCvmQuotaPostPaidQuotaSetInput is an input type that accepts GetCvmQuotaPostPaidQuotaSetArgs and GetCvmQuotaPostPaidQuotaSetOutput values.
+// You can construct a concrete instance of `GetCvmQuotaPostPaidQuotaSetInput` via:
+//
+//	GetCvmQuotaPostPaidQuotaSetArgs{...}
+type GetCvmQuotaPostPaidQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaPostPaidQuotaSetOutput() GetCvmQuotaPostPaidQuotaSetOutput
+	ToGetCvmQuotaPostPaidQuotaSetOutputWithContext(context.Context) GetCvmQuotaPostPaidQuotaSetOutput
+}
+
+type GetCvmQuotaPostPaidQuotaSetArgs struct {
+	// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	RemainingQuota pulumi.IntInput `pulumi:"remainingQuota"`
+	// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+	// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetCvmQuotaPostPaidQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaPostPaidQuotaSetArgs) ToGetCvmQuotaPostPaidQuotaSetOutput() GetCvmQuotaPostPaidQuotaSetOutput {
+	return i.ToGetCvmQuotaPostPaidQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaPostPaidQuotaSetArgs) ToGetCvmQuotaPostPaidQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaPostPaidQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaPostPaidQuotaSetOutput)
+}
+
+// GetCvmQuotaPostPaidQuotaSetArrayInput is an input type that accepts GetCvmQuotaPostPaidQuotaSetArray and GetCvmQuotaPostPaidQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetCvmQuotaPostPaidQuotaSetArrayInput` via:
+//
+//	GetCvmQuotaPostPaidQuotaSetArray{ GetCvmQuotaPostPaidQuotaSetArgs{...} }
+type GetCvmQuotaPostPaidQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaPostPaidQuotaSetArrayOutput() GetCvmQuotaPostPaidQuotaSetArrayOutput
+	ToGetCvmQuotaPostPaidQuotaSetArrayOutputWithContext(context.Context) GetCvmQuotaPostPaidQuotaSetArrayOutput
+}
+
+type GetCvmQuotaPostPaidQuotaSetArray []GetCvmQuotaPostPaidQuotaSetInput
+
+func (GetCvmQuotaPostPaidQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaPostPaidQuotaSetArray) ToGetCvmQuotaPostPaidQuotaSetArrayOutput() GetCvmQuotaPostPaidQuotaSetArrayOutput {
+	return i.ToGetCvmQuotaPostPaidQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaPostPaidQuotaSetArray) ToGetCvmQuotaPostPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaPostPaidQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaPostPaidQuotaSetArrayOutput)
+}
+
+type GetCvmQuotaPostPaidQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaPostPaidQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaPostPaidQuotaSetOutput) ToGetCvmQuotaPostPaidQuotaSetOutput() GetCvmQuotaPostPaidQuotaSetOutput {
+	return o
+}
+
+func (o GetCvmQuotaPostPaidQuotaSetOutput) ToGetCvmQuotaPostPaidQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaPostPaidQuotaSetOutput {
+	return o
+}
+
+// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaPostPaidQuotaSetOutput) RemainingQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaPostPaidQuotaSet) int { return v.RemainingQuota }).(pulumi.IntOutput)
+}
+
+// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaPostPaidQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaPostPaidQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaPostPaidQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaPostPaidQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaPostPaidQuotaSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmQuotaPostPaidQuotaSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetCvmQuotaPostPaidQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaPostPaidQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaPostPaidQuotaSetArrayOutput) ToGetCvmQuotaPostPaidQuotaSetArrayOutput() GetCvmQuotaPostPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaPostPaidQuotaSetArrayOutput) ToGetCvmQuotaPostPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaPostPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaPostPaidQuotaSetArrayOutput) Index(i pulumi.IntInput) GetCvmQuotaPostPaidQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCvmQuotaPostPaidQuotaSet {
+		return vs[0].([]GetCvmQuotaPostPaidQuotaSet)[vs[1].(int)]
+	}).(GetCvmQuotaPostPaidQuotaSetOutput)
+}
+
+type GetCvmQuotaSpotPaidQuotaSet struct {
+	// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	RemainingQuota int `pulumi:"remainingQuota"`
+	// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	UsedQuota int `pulumi:"usedQuota"`
+	// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetCvmQuotaSpotPaidQuotaSetInput is an input type that accepts GetCvmQuotaSpotPaidQuotaSetArgs and GetCvmQuotaSpotPaidQuotaSetOutput values.
+// You can construct a concrete instance of `GetCvmQuotaSpotPaidQuotaSetInput` via:
+//
+//	GetCvmQuotaSpotPaidQuotaSetArgs{...}
+type GetCvmQuotaSpotPaidQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaSpotPaidQuotaSetOutput() GetCvmQuotaSpotPaidQuotaSetOutput
+	ToGetCvmQuotaSpotPaidQuotaSetOutputWithContext(context.Context) GetCvmQuotaSpotPaidQuotaSetOutput
+}
+
+type GetCvmQuotaSpotPaidQuotaSetArgs struct {
+	// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	RemainingQuota pulumi.IntInput `pulumi:"remainingQuota"`
+	// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+	// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetCvmQuotaSpotPaidQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaSpotPaidQuotaSetArgs) ToGetCvmQuotaSpotPaidQuotaSetOutput() GetCvmQuotaSpotPaidQuotaSetOutput {
+	return i.ToGetCvmQuotaSpotPaidQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaSpotPaidQuotaSetArgs) ToGetCvmQuotaSpotPaidQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaSpotPaidQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaSpotPaidQuotaSetOutput)
+}
+
+// GetCvmQuotaSpotPaidQuotaSetArrayInput is an input type that accepts GetCvmQuotaSpotPaidQuotaSetArray and GetCvmQuotaSpotPaidQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetCvmQuotaSpotPaidQuotaSetArrayInput` via:
+//
+//	GetCvmQuotaSpotPaidQuotaSetArray{ GetCvmQuotaSpotPaidQuotaSetArgs{...} }
+type GetCvmQuotaSpotPaidQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetCvmQuotaSpotPaidQuotaSetArrayOutput() GetCvmQuotaSpotPaidQuotaSetArrayOutput
+	ToGetCvmQuotaSpotPaidQuotaSetArrayOutputWithContext(context.Context) GetCvmQuotaSpotPaidQuotaSetArrayOutput
+}
+
+type GetCvmQuotaSpotPaidQuotaSetArray []GetCvmQuotaSpotPaidQuotaSetInput
+
+func (GetCvmQuotaSpotPaidQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetCvmQuotaSpotPaidQuotaSetArray) ToGetCvmQuotaSpotPaidQuotaSetArrayOutput() GetCvmQuotaSpotPaidQuotaSetArrayOutput {
+	return i.ToGetCvmQuotaSpotPaidQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetCvmQuotaSpotPaidQuotaSetArray) ToGetCvmQuotaSpotPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaSpotPaidQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCvmQuotaSpotPaidQuotaSetArrayOutput)
+}
+
+type GetCvmQuotaSpotPaidQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaSpotPaidQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCvmQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) ToGetCvmQuotaSpotPaidQuotaSetOutput() GetCvmQuotaSpotPaidQuotaSetOutput {
+	return o
+}
+
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) ToGetCvmQuotaSpotPaidQuotaSetOutputWithContext(ctx context.Context) GetCvmQuotaSpotPaidQuotaSetOutput {
+	return o
+}
+
+// Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) RemainingQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaSpotPaidQuotaSet) int { return v.RemainingQuota }).(pulumi.IntOutput)
+}
+
+// Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaSpotPaidQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCvmQuotaSpotPaidQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+// Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCvmQuotaSpotPaidQuotaSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCvmQuotaSpotPaidQuotaSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetCvmQuotaSpotPaidQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCvmQuotaSpotPaidQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCvmQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetCvmQuotaSpotPaidQuotaSetArrayOutput) ToGetCvmQuotaSpotPaidQuotaSetArrayOutput() GetCvmQuotaSpotPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaSpotPaidQuotaSetArrayOutput) ToGetCvmQuotaSpotPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetCvmQuotaSpotPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetCvmQuotaSpotPaidQuotaSetArrayOutput) Index(i pulumi.IntInput) GetCvmQuotaSpotPaidQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCvmQuotaSpotPaidQuotaSet {
+		return vs[0].([]GetCvmQuotaSpotPaidQuotaSet)[vs[1].(int)]
+	}).(GetCvmQuotaSpotPaidQuotaSetOutput)
+}
+
 type GetInstanceCluster struct {
 	// Add time of instance.
 	AddTime string `pulumi:"addTime"`
@@ -1186,7 +2007,7 @@ type GetInstanceCluster struct {
 // GetInstanceClusterInput is an input type that accepts GetInstanceClusterArgs and GetInstanceClusterOutput values.
 // You can construct a concrete instance of `GetInstanceClusterInput` via:
 //
-//          GetInstanceClusterArgs{...}
+//	GetInstanceClusterArgs{...}
 type GetInstanceClusterInput interface {
 	pulumi.Input
 
@@ -1236,7 +2057,7 @@ func (i GetInstanceClusterArgs) ToGetInstanceClusterOutputWithContext(ctx contex
 // GetInstanceClusterArrayInput is an input type that accepts GetInstanceClusterArray and GetInstanceClusterArrayOutput values.
 // You can construct a concrete instance of `GetInstanceClusterArrayInput` via:
 //
-//          GetInstanceClusterArray{ GetInstanceClusterArgs{...} }
+//	GetInstanceClusterArray{ GetInstanceClusterArgs{...} }
 type GetInstanceClusterArrayInput interface {
 	pulumi.Input
 
@@ -1438,7 +2259,7 @@ type GetNodesNode struct {
 // GetNodesNodeInput is an input type that accepts GetNodesNodeArgs and GetNodesNodeOutput values.
 // You can construct a concrete instance of `GetNodesNodeInput` via:
 //
-//          GetNodesNodeArgs{...}
+//	GetNodesNodeArgs{...}
 type GetNodesNodeInput interface {
 	pulumi.Input
 
@@ -1544,7 +2365,7 @@ func (i GetNodesNodeArgs) ToGetNodesNodeOutputWithContext(ctx context.Context) G
 // GetNodesNodeArrayInput is an input type that accepts GetNodesNodeArray and GetNodesNodeArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeArrayInput` via:
 //
-//          GetNodesNodeArray{ GetNodesNodeArgs{...} }
+//	GetNodesNodeArray{ GetNodesNodeArgs{...} }
 type GetNodesNodeArrayInput interface {
 	pulumi.Input
 
@@ -1836,7 +2657,7 @@ type GetNodesNodeCdbNodeInfo struct {
 // GetNodesNodeCdbNodeInfoInput is an input type that accepts GetNodesNodeCdbNodeInfoArgs and GetNodesNodeCdbNodeInfoOutput values.
 // You can construct a concrete instance of `GetNodesNodeCdbNodeInfoInput` via:
 //
-//          GetNodesNodeCdbNodeInfoArgs{...}
+//	GetNodesNodeCdbNodeInfoArgs{...}
 type GetNodesNodeCdbNodeInfoInput interface {
 	pulumi.Input
 
@@ -1892,7 +2713,7 @@ func (i GetNodesNodeCdbNodeInfoArgs) ToGetNodesNodeCdbNodeInfoOutputWithContext(
 // GetNodesNodeCdbNodeInfoArrayInput is an input type that accepts GetNodesNodeCdbNodeInfoArray and GetNodesNodeCdbNodeInfoArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeCdbNodeInfoArrayInput` via:
 //
-//          GetNodesNodeCdbNodeInfoArray{ GetNodesNodeCdbNodeInfoArgs{...} }
+//	GetNodesNodeCdbNodeInfoArray{ GetNodesNodeCdbNodeInfoArgs{...} }
 type GetNodesNodeCdbNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -2035,7 +2856,7 @@ type GetNodesNodeMcMultiDisk struct {
 // GetNodesNodeMcMultiDiskInput is an input type that accepts GetNodesNodeMcMultiDiskArgs and GetNodesNodeMcMultiDiskOutput values.
 // You can construct a concrete instance of `GetNodesNodeMcMultiDiskInput` via:
 //
-//          GetNodesNodeMcMultiDiskArgs{...}
+//	GetNodesNodeMcMultiDiskArgs{...}
 type GetNodesNodeMcMultiDiskInput interface {
 	pulumi.Input
 
@@ -2067,7 +2888,7 @@ func (i GetNodesNodeMcMultiDiskArgs) ToGetNodesNodeMcMultiDiskOutputWithContext(
 // GetNodesNodeMcMultiDiskArrayInput is an input type that accepts GetNodesNodeMcMultiDiskArray and GetNodesNodeMcMultiDiskArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeMcMultiDiskArrayInput` via:
 //
-//          GetNodesNodeMcMultiDiskArray{ GetNodesNodeMcMultiDiskArgs{...} }
+//	GetNodesNodeMcMultiDiskArray{ GetNodesNodeMcMultiDiskArgs{...} }
 type GetNodesNodeMcMultiDiskArrayInput interface {
 	pulumi.Input
 
@@ -2148,7 +2969,7 @@ type GetNodesNodeTag struct {
 // GetNodesNodeTagInput is an input type that accepts GetNodesNodeTagArgs and GetNodesNodeTagOutput values.
 // You can construct a concrete instance of `GetNodesNodeTagInput` via:
 //
-//          GetNodesNodeTagArgs{...}
+//	GetNodesNodeTagArgs{...}
 type GetNodesNodeTagInput interface {
 	pulumi.Input
 
@@ -2178,7 +2999,7 @@ func (i GetNodesNodeTagArgs) ToGetNodesNodeTagOutputWithContext(ctx context.Cont
 // GetNodesNodeTagArrayInput is an input type that accepts GetNodesNodeTagArray and GetNodesNodeTagArrayOutput values.
 // You can construct a concrete instance of `GetNodesNodeTagArrayInput` via:
 //
-//          GetNodesNodeTagArray{ GetNodesNodeTagArgs{...} }
+//	GetNodesNodeTagArray{ GetNodesNodeTagArgs{...} }
 type GetNodesNodeTagArrayInput interface {
 	pulumi.Input
 
@@ -2245,6 +3066,8 @@ func (o GetNodesNodeTagArrayOutput) Index(i pulumi.IntInput) GetNodesNodeTagOutp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPlacementInfoInput)(nil)).Elem(), ClusterPlacementInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPlacementInfoPtrInput)(nil)).Elem(), ClusterPlacementInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecInput)(nil)).Elem(), ClusterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecInput)(nil)).Elem(), ClusterResourceSpecCommonResourceSpecArgs{})
@@ -2255,6 +3078,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsFilterInput)(nil)).Elem(), GetAutoScaleRecordsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsFilterArrayInput)(nil)).Elem(), GetAutoScaleRecordsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsRecordListInput)(nil)).Elem(), GetAutoScaleRecordsRecordListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsRecordListArrayInput)(nil)).Elem(), GetAutoScaleRecordsRecordListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaEksQuotaSetInput)(nil)).Elem(), GetCvmQuotaEksQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaEksQuotaSetArrayInput)(nil)).Elem(), GetCvmQuotaEksQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaPostPaidQuotaSetInput)(nil)).Elem(), GetCvmQuotaPostPaidQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaPostPaidQuotaSetArrayInput)(nil)).Elem(), GetCvmQuotaPostPaidQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaSpotPaidQuotaSetInput)(nil)).Elem(), GetCvmQuotaSpotPaidQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCvmQuotaSpotPaidQuotaSetArrayInput)(nil)).Elem(), GetCvmQuotaSpotPaidQuotaSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceClusterInput)(nil)).Elem(), GetInstanceClusterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceClusterArrayInput)(nil)).Elem(), GetInstanceClusterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeInput)(nil)).Elem(), GetNodesNodeArgs{})
@@ -2265,6 +3098,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeMcMultiDiskArrayInput)(nil)).Elem(), GetNodesNodeMcMultiDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeTagInput)(nil)).Elem(), GetNodesNodeTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeTagArrayInput)(nil)).Elem(), GetNodesNodeTagArray{})
+	pulumi.RegisterOutputType(ClusterPlacementInfoOutput{})
+	pulumi.RegisterOutputType(ClusterPlacementInfoPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecOutput{})
@@ -2275,6 +3110,16 @@ func init() {
 	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(GetAutoScaleRecordsFilterOutput{})
+	pulumi.RegisterOutputType(GetAutoScaleRecordsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetAutoScaleRecordsRecordListOutput{})
+	pulumi.RegisterOutputType(GetAutoScaleRecordsRecordListArrayOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaEksQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaEksQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaPostPaidQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaPostPaidQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaSpotPaidQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetCvmQuotaSpotPaidQuotaSetArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceClusterOutput{})
 	pulumi.RegisterOutputType(GetInstanceClusterArrayOutput{})
 	pulumi.RegisterOutputType(GetNodesNodeOutput{})

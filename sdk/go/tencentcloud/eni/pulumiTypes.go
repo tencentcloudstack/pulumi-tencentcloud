@@ -22,7 +22,7 @@ type InstanceIpv4 struct {
 // InstanceIpv4Input is an input type that accepts InstanceIpv4Args and InstanceIpv4Output values.
 // You can construct a concrete instance of `InstanceIpv4Input` via:
 //
-//          InstanceIpv4Args{...}
+//	InstanceIpv4Args{...}
 type InstanceIpv4Input interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i InstanceIpv4Args) ToInstanceIpv4OutputWithContext(ctx context.Context) I
 // InstanceIpv4ArrayInput is an input type that accepts InstanceIpv4Array and InstanceIpv4ArrayOutput values.
 // You can construct a concrete instance of `InstanceIpv4ArrayInput` via:
 //
-//          InstanceIpv4Array{ InstanceIpv4Args{...} }
+//	InstanceIpv4Array{ InstanceIpv4Args{...} }
 type InstanceIpv4ArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +137,7 @@ type InstanceIpv4Info struct {
 // InstanceIpv4InfoInput is an input type that accepts InstanceIpv4InfoArgs and InstanceIpv4InfoOutput values.
 // You can construct a concrete instance of `InstanceIpv4InfoInput` via:
 //
-//          InstanceIpv4InfoArgs{...}
+//	InstanceIpv4InfoArgs{...}
 type InstanceIpv4InfoInput interface {
 	pulumi.Input
 
@@ -169,7 +169,7 @@ func (i InstanceIpv4InfoArgs) ToInstanceIpv4InfoOutputWithContext(ctx context.Co
 // InstanceIpv4InfoArrayInput is an input type that accepts InstanceIpv4InfoArray and InstanceIpv4InfoArrayOutput values.
 // You can construct a concrete instance of `InstanceIpv4InfoArrayInput` via:
 //
-//          InstanceIpv4InfoArray{ InstanceIpv4InfoArgs{...} }
+//	InstanceIpv4InfoArray{ InstanceIpv4InfoArgs{...} }
 type InstanceIpv4InfoArrayInput interface {
 	pulumi.Input
 

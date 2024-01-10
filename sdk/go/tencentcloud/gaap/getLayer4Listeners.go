@@ -18,55 +18,58 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-// 			Ip: pulumi.String("1.1.1.1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer4Listener, err := Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
-// 			Protocol:       pulumi.String("TCP"),
-// 			Port:           pulumi.Int(80),
-// 			RealserverType: pulumi.String("IP"),
-// 			ProxyId:        fooProxy.ID(),
-// 			HealthCheck:    pulumi.Bool(true),
-// 			Interval:       pulumi.Int(5),
-// 			ConnectTimeout: pulumi.Int(2),
-// 			RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
-// 				&gaap.Layer4ListenerRealserverBindSetArgs{
-// 					Id:   fooRealserver.ID(),
-// 					Ip:   fooRealserver.Ip,
-// 					Port: pulumi.Int(80),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Gaap.GetLayer4ListenersOutput(ctx, gaap.GetLayer4ListenersOutputArgs{
-// 			Protocol:   pulumi.String("TCP"),
-// 			ProxyId:    fooProxy.ID(),
-// 			ListenerId: fooLayer4Listener.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
+//				Ip: pulumi.String("1.1.1.1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer4Listener, err := Gaap.NewLayer4Listener(ctx, "fooLayer4Listener", &Gaap.Layer4ListenerArgs{
+//				Protocol:       pulumi.String("TCP"),
+//				Port:           pulumi.Int(80),
+//				RealserverType: pulumi.String("IP"),
+//				ProxyId:        fooProxy.ID(),
+//				HealthCheck:    pulumi.Bool(true),
+//				Interval:       pulumi.Int(5),
+//				ConnectTimeout: pulumi.Int(2),
+//				RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
+//					&gaap.Layer4ListenerRealserverBindSetArgs{
+//						Id:   fooRealserver.ID(),
+//						Ip:   fooRealserver.Ip,
+//						Port: pulumi.Int(80),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Gaap.GetLayer4ListenersOutput(ctx, gaap.GetLayer4ListenersOutputArgs{
+//				Protocol:   pulumi.String("TCP"),
+//				ProxyId:    fooProxy.ID(),
+//				ListenerId: fooLayer4Listener.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLayer4Listeners(ctx *pulumi.Context, args *GetLayer4ListenersArgs, opts ...pulumi.InvokeOption) (*GetLayer4ListenersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

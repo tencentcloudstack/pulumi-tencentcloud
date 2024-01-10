@@ -21,12 +21,24 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Organization/instance:Instance":
+		r = &Instance{}
+	case "tencentcloud:Organization/orgIdentity:OrgIdentity":
+		r = &OrgIdentity{}
 	case "tencentcloud:Organization/orgMember:OrgMember":
 		r = &OrgMember{}
+	case "tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment":
+		r = &OrgMemberAuthIdentityAttachment{}
+	case "tencentcloud:Organization/orgMemberEmail:OrgMemberEmail":
+		r = &OrgMemberEmail{}
+	case "tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment":
+		r = &OrgMemberPolicyAttachment{}
 	case "tencentcloud:Organization/orgNode:OrgNode":
 		r = &OrgNode{}
 	case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
 		r = &PolicySubAccountAttachment{}
+	case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
+		r = &QuitOrganizationOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -42,7 +54,32 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Organization/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgIdentity",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Organization/orgMember",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgMemberAuthIdentityAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgMemberEmail",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgMemberPolicyAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -53,6 +90,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/policySubAccountAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/quitOrganizationOperation",
 		&module{version},
 	)
 }

@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Provides a resource to create a APIGateway ApiApp
     /// 
     /// ## Example Usage
+    /// ### Create a basic apigateway api_app
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,14 +24,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var myApiApp = new Tencentcloud.ApiGateway.ApiApp("myApiApp", new Tencentcloud.ApiGateway.ApiAppArgs
+    ///         var example = new Tencentcloud.ApiGateway.ApiApp("example", new Tencentcloud.ApiGateway.ApiAppArgs
     ///         {
     ///             ApiAppDesc = "app desc.",
-    ///             ApiAppName = "app_test1",
+    ///             ApiAppName = "tf_example",
     ///         });
     ///     }
     /// 
     /// }
+    /// ```
+    /// ### Bind Tag
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.ApiGateway.ApiApp("example", new Tencentcloud.ApiGateway.ApiAppArgs
+    ///         {
+    ///             ApiAppDesc = "app desc.",
+    ///             ApiAppName = "tf_example",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// apigateway api_app can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiApp:ApiApp")]
@@ -77,6 +109,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Output("modifiedTime")]
         public Output<string> ModifiedTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -137,6 +175,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         [Input("apiAppName", required: true)]
         public Input<string> ApiAppName { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         public ApiAppArgs()
         {
         }
@@ -185,6 +235,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("modifiedTime")]
         public Input<string>? ModifiedTime { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public ApiAppState()
         {

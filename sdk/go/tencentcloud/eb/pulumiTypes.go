@@ -10,6 +10,497 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type EventConnectorConnectionDescription struct {
+	// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+	ApiGwParams *EventConnectorConnectionDescriptionApiGwParams `pulumi:"apiGwParams"`
+	// ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+	CkafkaParams *EventConnectorConnectionDescriptionCkafkaParams `pulumi:"ckafkaParams"`
+	// Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+	ResourceDescription string `pulumi:"resourceDescription"`
+}
+
+// EventConnectorConnectionDescriptionInput is an input type that accepts EventConnectorConnectionDescriptionArgs and EventConnectorConnectionDescriptionOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionInput` via:
+//
+//	EventConnectorConnectionDescriptionArgs{...}
+type EventConnectorConnectionDescriptionInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionOutput() EventConnectorConnectionDescriptionOutput
+	ToEventConnectorConnectionDescriptionOutputWithContext(context.Context) EventConnectorConnectionDescriptionOutput
+}
+
+type EventConnectorConnectionDescriptionArgs struct {
+	// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+	ApiGwParams EventConnectorConnectionDescriptionApiGwParamsPtrInput `pulumi:"apiGwParams"`
+	// ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+	CkafkaParams EventConnectorConnectionDescriptionCkafkaParamsPtrInput `pulumi:"ckafkaParams"`
+	// Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+	ResourceDescription pulumi.StringInput `pulumi:"resourceDescription"`
+}
+
+func (EventConnectorConnectionDescriptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescription)(nil)).Elem()
+}
+
+func (i EventConnectorConnectionDescriptionArgs) ToEventConnectorConnectionDescriptionOutput() EventConnectorConnectionDescriptionOutput {
+	return i.ToEventConnectorConnectionDescriptionOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionArgs) ToEventConnectorConnectionDescriptionOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionOutput)
+}
+
+func (i EventConnectorConnectionDescriptionArgs) ToEventConnectorConnectionDescriptionPtrOutput() EventConnectorConnectionDescriptionPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionArgs) ToEventConnectorConnectionDescriptionPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionOutput).ToEventConnectorConnectionDescriptionPtrOutputWithContext(ctx)
+}
+
+// EventConnectorConnectionDescriptionPtrInput is an input type that accepts EventConnectorConnectionDescriptionArgs, EventConnectorConnectionDescriptionPtr and EventConnectorConnectionDescriptionPtrOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionPtrInput` via:
+//
+//	        EventConnectorConnectionDescriptionArgs{...}
+//
+//	or:
+//
+//	        nil
+type EventConnectorConnectionDescriptionPtrInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionPtrOutput() EventConnectorConnectionDescriptionPtrOutput
+	ToEventConnectorConnectionDescriptionPtrOutputWithContext(context.Context) EventConnectorConnectionDescriptionPtrOutput
+}
+
+type eventConnectorConnectionDescriptionPtrType EventConnectorConnectionDescriptionArgs
+
+func EventConnectorConnectionDescriptionPtr(v *EventConnectorConnectionDescriptionArgs) EventConnectorConnectionDescriptionPtrInput {
+	return (*eventConnectorConnectionDescriptionPtrType)(v)
+}
+
+func (*eventConnectorConnectionDescriptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescription)(nil)).Elem()
+}
+
+func (i *eventConnectorConnectionDescriptionPtrType) ToEventConnectorConnectionDescriptionPtrOutput() EventConnectorConnectionDescriptionPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (i *eventConnectorConnectionDescriptionPtrType) ToEventConnectorConnectionDescriptionPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionPtrOutput)
+}
+
+type EventConnectorConnectionDescriptionOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescription)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionOutput) ToEventConnectorConnectionDescriptionOutput() EventConnectorConnectionDescriptionOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionOutput) ToEventConnectorConnectionDescriptionOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionOutput) ToEventConnectorConnectionDescriptionPtrOutput() EventConnectorConnectionDescriptionPtrOutput {
+	return o.ToEventConnectorConnectionDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (o EventConnectorConnectionDescriptionOutput) ToEventConnectorConnectionDescriptionPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v EventConnectorConnectionDescription) *EventConnectorConnectionDescription {
+		return &v
+	}).(EventConnectorConnectionDescriptionPtrOutput)
+}
+
+// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+func (o EventConnectorConnectionDescriptionOutput) ApiGwParams() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescription) *EventConnectorConnectionDescriptionApiGwParams {
+		return v.ApiGwParams
+	}).(EventConnectorConnectionDescriptionApiGwParamsPtrOutput)
+}
+
+// ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+func (o EventConnectorConnectionDescriptionOutput) CkafkaParams() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescription) *EventConnectorConnectionDescriptionCkafkaParams {
+		return v.CkafkaParams
+	}).(EventConnectorConnectionDescriptionCkafkaParamsPtrOutput)
+}
+
+// Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+func (o EventConnectorConnectionDescriptionOutput) ResourceDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescription) string { return v.ResourceDescription }).(pulumi.StringOutput)
+}
+
+type EventConnectorConnectionDescriptionPtrOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescription)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionPtrOutput) ToEventConnectorConnectionDescriptionPtrOutput() EventConnectorConnectionDescriptionPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionPtrOutput) ToEventConnectorConnectionDescriptionPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionPtrOutput) Elem() EventConnectorConnectionDescriptionOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescription) EventConnectorConnectionDescription {
+		if v != nil {
+			return *v
+		}
+		var ret EventConnectorConnectionDescription
+		return ret
+	}).(EventConnectorConnectionDescriptionOutput)
+}
+
+// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+func (o EventConnectorConnectionDescriptionPtrOutput) ApiGwParams() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescription) *EventConnectorConnectionDescriptionApiGwParams {
+		if v == nil {
+			return nil
+		}
+		return v.ApiGwParams
+	}).(EventConnectorConnectionDescriptionApiGwParamsPtrOutput)
+}
+
+// ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+func (o EventConnectorConnectionDescriptionPtrOutput) CkafkaParams() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescription) *EventConnectorConnectionDescriptionCkafkaParams {
+		if v == nil {
+			return nil
+		}
+		return v.CkafkaParams
+	}).(EventConnectorConnectionDescriptionCkafkaParamsPtrOutput)
+}
+
+// Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+func (o EventConnectorConnectionDescriptionPtrOutput) ResourceDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescription) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ResourceDescription
+	}).(pulumi.StringPtrOutput)
+}
+
+type EventConnectorConnectionDescriptionApiGwParams struct {
+	// POST.
+	Method string `pulumi:"method"`
+	// HTTPS.
+	Protocol string `pulumi:"protocol"`
+}
+
+// EventConnectorConnectionDescriptionApiGwParamsInput is an input type that accepts EventConnectorConnectionDescriptionApiGwParamsArgs and EventConnectorConnectionDescriptionApiGwParamsOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionApiGwParamsInput` via:
+//
+//	EventConnectorConnectionDescriptionApiGwParamsArgs{...}
+type EventConnectorConnectionDescriptionApiGwParamsInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionApiGwParamsOutput() EventConnectorConnectionDescriptionApiGwParamsOutput
+	ToEventConnectorConnectionDescriptionApiGwParamsOutputWithContext(context.Context) EventConnectorConnectionDescriptionApiGwParamsOutput
+}
+
+type EventConnectorConnectionDescriptionApiGwParamsArgs struct {
+	// POST.
+	Method pulumi.StringInput `pulumi:"method"`
+	// HTTPS.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (EventConnectorConnectionDescriptionApiGwParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescriptionApiGwParams)(nil)).Elem()
+}
+
+func (i EventConnectorConnectionDescriptionApiGwParamsArgs) ToEventConnectorConnectionDescriptionApiGwParamsOutput() EventConnectorConnectionDescriptionApiGwParamsOutput {
+	return i.ToEventConnectorConnectionDescriptionApiGwParamsOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionApiGwParamsArgs) ToEventConnectorConnectionDescriptionApiGwParamsOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionApiGwParamsOutput)
+}
+
+func (i EventConnectorConnectionDescriptionApiGwParamsArgs) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutput() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionApiGwParamsArgs) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionApiGwParamsOutput).ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(ctx)
+}
+
+// EventConnectorConnectionDescriptionApiGwParamsPtrInput is an input type that accepts EventConnectorConnectionDescriptionApiGwParamsArgs, EventConnectorConnectionDescriptionApiGwParamsPtr and EventConnectorConnectionDescriptionApiGwParamsPtrOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionApiGwParamsPtrInput` via:
+//
+//	        EventConnectorConnectionDescriptionApiGwParamsArgs{...}
+//
+//	or:
+//
+//	        nil
+type EventConnectorConnectionDescriptionApiGwParamsPtrInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionApiGwParamsPtrOutput() EventConnectorConnectionDescriptionApiGwParamsPtrOutput
+	ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(context.Context) EventConnectorConnectionDescriptionApiGwParamsPtrOutput
+}
+
+type eventConnectorConnectionDescriptionApiGwParamsPtrType EventConnectorConnectionDescriptionApiGwParamsArgs
+
+func EventConnectorConnectionDescriptionApiGwParamsPtr(v *EventConnectorConnectionDescriptionApiGwParamsArgs) EventConnectorConnectionDescriptionApiGwParamsPtrInput {
+	return (*eventConnectorConnectionDescriptionApiGwParamsPtrType)(v)
+}
+
+func (*eventConnectorConnectionDescriptionApiGwParamsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescriptionApiGwParams)(nil)).Elem()
+}
+
+func (i *eventConnectorConnectionDescriptionApiGwParamsPtrType) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutput() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(context.Background())
+}
+
+func (i *eventConnectorConnectionDescriptionApiGwParamsPtrType) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionApiGwParamsPtrOutput)
+}
+
+type EventConnectorConnectionDescriptionApiGwParamsOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionApiGwParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescriptionApiGwParams)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) ToEventConnectorConnectionDescriptionApiGwParamsOutput() EventConnectorConnectionDescriptionApiGwParamsOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) ToEventConnectorConnectionDescriptionApiGwParamsOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutput() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o.ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(context.Background())
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v EventConnectorConnectionDescriptionApiGwParams) *EventConnectorConnectionDescriptionApiGwParams {
+		return &v
+	}).(EventConnectorConnectionDescriptionApiGwParamsPtrOutput)
+}
+
+// POST.
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescriptionApiGwParams) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// HTTPS.
+func (o EventConnectorConnectionDescriptionApiGwParamsOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescriptionApiGwParams) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type EventConnectorConnectionDescriptionApiGwParamsPtrOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionApiGwParamsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescriptionApiGwParams)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsPtrOutput) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutput() EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsPtrOutput) ToEventConnectorConnectionDescriptionApiGwParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionApiGwParamsPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionApiGwParamsPtrOutput) Elem() EventConnectorConnectionDescriptionApiGwParamsOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionApiGwParams) EventConnectorConnectionDescriptionApiGwParams {
+		if v != nil {
+			return *v
+		}
+		var ret EventConnectorConnectionDescriptionApiGwParams
+		return ret
+	}).(EventConnectorConnectionDescriptionApiGwParamsOutput)
+}
+
+// POST.
+func (o EventConnectorConnectionDescriptionApiGwParamsPtrOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionApiGwParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Method
+	}).(pulumi.StringPtrOutput)
+}
+
+// HTTPS.
+func (o EventConnectorConnectionDescriptionApiGwParamsPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionApiGwParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+type EventConnectorConnectionDescriptionCkafkaParams struct {
+	// kafka offset.
+	Offset string `pulumi:"offset"`
+	// ckafka  topic.
+	TopicName string `pulumi:"topicName"`
+}
+
+// EventConnectorConnectionDescriptionCkafkaParamsInput is an input type that accepts EventConnectorConnectionDescriptionCkafkaParamsArgs and EventConnectorConnectionDescriptionCkafkaParamsOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionCkafkaParamsInput` via:
+//
+//	EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
+type EventConnectorConnectionDescriptionCkafkaParamsInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionCkafkaParamsOutput() EventConnectorConnectionDescriptionCkafkaParamsOutput
+	ToEventConnectorConnectionDescriptionCkafkaParamsOutputWithContext(context.Context) EventConnectorConnectionDescriptionCkafkaParamsOutput
+}
+
+type EventConnectorConnectionDescriptionCkafkaParamsArgs struct {
+	// kafka offset.
+	Offset pulumi.StringInput `pulumi:"offset"`
+	// ckafka  topic.
+	TopicName pulumi.StringInput `pulumi:"topicName"`
+}
+
+func (EventConnectorConnectionDescriptionCkafkaParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescriptionCkafkaParams)(nil)).Elem()
+}
+
+func (i EventConnectorConnectionDescriptionCkafkaParamsArgs) ToEventConnectorConnectionDescriptionCkafkaParamsOutput() EventConnectorConnectionDescriptionCkafkaParamsOutput {
+	return i.ToEventConnectorConnectionDescriptionCkafkaParamsOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionCkafkaParamsArgs) ToEventConnectorConnectionDescriptionCkafkaParamsOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionCkafkaParamsOutput)
+}
+
+func (i EventConnectorConnectionDescriptionCkafkaParamsArgs) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutput() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(context.Background())
+}
+
+func (i EventConnectorConnectionDescriptionCkafkaParamsArgs) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionCkafkaParamsOutput).ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(ctx)
+}
+
+// EventConnectorConnectionDescriptionCkafkaParamsPtrInput is an input type that accepts EventConnectorConnectionDescriptionCkafkaParamsArgs, EventConnectorConnectionDescriptionCkafkaParamsPtr and EventConnectorConnectionDescriptionCkafkaParamsPtrOutput values.
+// You can construct a concrete instance of `EventConnectorConnectionDescriptionCkafkaParamsPtrInput` via:
+//
+//	        EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
+//
+//	or:
+//
+//	        nil
+type EventConnectorConnectionDescriptionCkafkaParamsPtrInput interface {
+	pulumi.Input
+
+	ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutput() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput
+	ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(context.Context) EventConnectorConnectionDescriptionCkafkaParamsPtrOutput
+}
+
+type eventConnectorConnectionDescriptionCkafkaParamsPtrType EventConnectorConnectionDescriptionCkafkaParamsArgs
+
+func EventConnectorConnectionDescriptionCkafkaParamsPtr(v *EventConnectorConnectionDescriptionCkafkaParamsArgs) EventConnectorConnectionDescriptionCkafkaParamsPtrInput {
+	return (*eventConnectorConnectionDescriptionCkafkaParamsPtrType)(v)
+}
+
+func (*eventConnectorConnectionDescriptionCkafkaParamsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescriptionCkafkaParams)(nil)).Elem()
+}
+
+func (i *eventConnectorConnectionDescriptionCkafkaParamsPtrType) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutput() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return i.ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(context.Background())
+}
+
+func (i *eventConnectorConnectionDescriptionCkafkaParamsPtrType) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(EventConnectorConnectionDescriptionCkafkaParamsPtrOutput)
+}
+
+type EventConnectorConnectionDescriptionCkafkaParamsOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionCkafkaParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*EventConnectorConnectionDescriptionCkafkaParams)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) ToEventConnectorConnectionDescriptionCkafkaParamsOutput() EventConnectorConnectionDescriptionCkafkaParamsOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) ToEventConnectorConnectionDescriptionCkafkaParamsOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutput() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o.ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(context.Background())
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v EventConnectorConnectionDescriptionCkafkaParams) *EventConnectorConnectionDescriptionCkafkaParams {
+		return &v
+	}).(EventConnectorConnectionDescriptionCkafkaParamsPtrOutput)
+}
+
+// kafka offset.
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) Offset() pulumi.StringOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescriptionCkafkaParams) string { return v.Offset }).(pulumi.StringOutput)
+}
+
+// ckafka  topic.
+func (o EventConnectorConnectionDescriptionCkafkaParamsOutput) TopicName() pulumi.StringOutput {
+	return o.ApplyT(func(v EventConnectorConnectionDescriptionCkafkaParams) string { return v.TopicName }).(pulumi.StringOutput)
+}
+
+type EventConnectorConnectionDescriptionCkafkaParamsPtrOutput struct{ *pulumi.OutputState }
+
+func (EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**EventConnectorConnectionDescriptionCkafkaParams)(nil)).Elem()
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutput() EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) ToEventConnectorConnectionDescriptionCkafkaParamsPtrOutputWithContext(ctx context.Context) EventConnectorConnectionDescriptionCkafkaParamsPtrOutput {
+	return o
+}
+
+func (o EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) Elem() EventConnectorConnectionDescriptionCkafkaParamsOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionCkafkaParams) EventConnectorConnectionDescriptionCkafkaParams {
+		if v != nil {
+			return *v
+		}
+		var ret EventConnectorConnectionDescriptionCkafkaParams
+		return ret
+	}).(EventConnectorConnectionDescriptionCkafkaParamsOutput)
+}
+
+// kafka offset.
+func (o EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) Offset() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionCkafkaParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Offset
+	}).(pulumi.StringPtrOutput)
+}
+
+// ckafka  topic.
+func (o EventConnectorConnectionDescriptionCkafkaParamsPtrOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EventConnectorConnectionDescriptionCkafkaParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicName
+	}).(pulumi.StringPtrOutput)
+}
+
 type EventTargetTargetDescription struct {
 	// Ckafka parameters.
 	CkafkaTargetParams *EventTargetTargetDescriptionCkafkaTargetParams `pulumi:"ckafkaTargetParams"`
@@ -24,7 +515,7 @@ type EventTargetTargetDescription struct {
 // EventTargetTargetDescriptionInput is an input type that accepts EventTargetTargetDescriptionArgs and EventTargetTargetDescriptionOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionInput` via:
 //
-//          EventTargetTargetDescriptionArgs{...}
+//	EventTargetTargetDescriptionArgs{...}
 type EventTargetTargetDescriptionInput interface {
 	pulumi.Input
 
@@ -66,11 +557,11 @@ func (i EventTargetTargetDescriptionArgs) ToEventTargetTargetDescriptionPtrOutpu
 // EventTargetTargetDescriptionPtrInput is an input type that accepts EventTargetTargetDescriptionArgs, EventTargetTargetDescriptionPtr and EventTargetTargetDescriptionPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionPtrInput` via:
 //
-//          EventTargetTargetDescriptionArgs{...}
+//	        EventTargetTargetDescriptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionPtrInput interface {
 	pulumi.Input
 
@@ -218,7 +709,7 @@ type EventTargetTargetDescriptionCkafkaTargetParams struct {
 // EventTargetTargetDescriptionCkafkaTargetParamsInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsArgs and EventTargetTargetDescriptionCkafkaTargetParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
+//	EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
 type EventTargetTargetDescriptionCkafkaTargetParamsInput interface {
 	pulumi.Input
 
@@ -256,11 +747,11 @@ func (i EventTargetTargetDescriptionCkafkaTargetParamsArgs) ToEventTargetTargetD
 // EventTargetTargetDescriptionCkafkaTargetParamsPtrInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsArgs, EventTargetTargetDescriptionCkafkaTargetParamsPtr and EventTargetTargetDescriptionCkafkaTargetParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
+//	        EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionCkafkaTargetParamsPtrInput interface {
 	pulumi.Input
 
@@ -376,7 +867,7 @@ type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy struct {
 // EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs and EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
+//	EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
 type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput interface {
 	pulumi.Input
 
@@ -414,11 +905,11 @@ func (i EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs) ToEventTa
 // EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs, EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtr and EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
+//	        EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput interface {
 	pulumi.Input
 
@@ -540,7 +1031,7 @@ type EventTargetTargetDescriptionEsTargetParams struct {
 // EventTargetTargetDescriptionEsTargetParamsInput is an input type that accepts EventTargetTargetDescriptionEsTargetParamsArgs and EventTargetTargetDescriptionEsTargetParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionEsTargetParamsInput` via:
 //
-//          EventTargetTargetDescriptionEsTargetParamsArgs{...}
+//	EventTargetTargetDescriptionEsTargetParamsArgs{...}
 type EventTargetTargetDescriptionEsTargetParamsInput interface {
 	pulumi.Input
 
@@ -586,11 +1077,11 @@ func (i EventTargetTargetDescriptionEsTargetParamsArgs) ToEventTargetTargetDescr
 // EventTargetTargetDescriptionEsTargetParamsPtrInput is an input type that accepts EventTargetTargetDescriptionEsTargetParamsArgs, EventTargetTargetDescriptionEsTargetParamsPtr and EventTargetTargetDescriptionEsTargetParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionEsTargetParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionEsTargetParamsArgs{...}
+//	        EventTargetTargetDescriptionEsTargetParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionEsTargetParamsPtrInput interface {
 	pulumi.Input
 
@@ -766,7 +1257,7 @@ type EventTargetTargetDescriptionScfParams struct {
 // EventTargetTargetDescriptionScfParamsInput is an input type that accepts EventTargetTargetDescriptionScfParamsArgs and EventTargetTargetDescriptionScfParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionScfParamsInput` via:
 //
-//          EventTargetTargetDescriptionScfParamsArgs{...}
+//	EventTargetTargetDescriptionScfParamsArgs{...}
 type EventTargetTargetDescriptionScfParamsInput interface {
 	pulumi.Input
 
@@ -806,11 +1297,11 @@ func (i EventTargetTargetDescriptionScfParamsArgs) ToEventTargetTargetDescriptio
 // EventTargetTargetDescriptionScfParamsPtrInput is an input type that accepts EventTargetTargetDescriptionScfParamsArgs, EventTargetTargetDescriptionScfParamsPtr and EventTargetTargetDescriptionScfParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionScfParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionScfParamsArgs{...}
+//	        EventTargetTargetDescriptionScfParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionScfParamsPtrInput interface {
 	pulumi.Input
 
@@ -941,7 +1432,7 @@ type EventTransformTransformation struct {
 // EventTransformTransformationInput is an input type that accepts EventTransformTransformationArgs and EventTransformTransformationOutput values.
 // You can construct a concrete instance of `EventTransformTransformationInput` via:
 //
-//          EventTransformTransformationArgs{...}
+//	EventTransformTransformationArgs{...}
 type EventTransformTransformationInput interface {
 	pulumi.Input
 
@@ -973,7 +1464,7 @@ func (i EventTransformTransformationArgs) ToEventTransformTransformationOutputWi
 // EventTransformTransformationArrayInput is an input type that accepts EventTransformTransformationArray and EventTransformTransformationArrayOutput values.
 // You can construct a concrete instance of `EventTransformTransformationArrayInput` via:
 //
-//          EventTransformTransformationArray{ EventTransformTransformationArgs{...} }
+//	EventTransformTransformationArray{ EventTransformTransformationArgs{...} }
 type EventTransformTransformationArrayInput interface {
 	pulumi.Input
 
@@ -1052,7 +1543,7 @@ type EventTransformTransformationEtlFilter struct {
 // EventTransformTransformationEtlFilterInput is an input type that accepts EventTransformTransformationEtlFilterArgs and EventTransformTransformationEtlFilterOutput values.
 // You can construct a concrete instance of `EventTransformTransformationEtlFilterInput` via:
 //
-//          EventTransformTransformationEtlFilterArgs{...}
+//	EventTransformTransformationEtlFilterArgs{...}
 type EventTransformTransformationEtlFilterInput interface {
 	pulumi.Input
 
@@ -1088,11 +1579,11 @@ func (i EventTransformTransformationEtlFilterArgs) ToEventTransformTransformatio
 // EventTransformTransformationEtlFilterPtrInput is an input type that accepts EventTransformTransformationEtlFilterArgs, EventTransformTransformationEtlFilterPtr and EventTransformTransformationEtlFilterPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationEtlFilterPtrInput` via:
 //
-//          EventTransformTransformationEtlFilterArgs{...}
+//	        EventTransformTransformationEtlFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationEtlFilterPtrInput interface {
 	pulumi.Input
 
@@ -1193,7 +1684,7 @@ type EventTransformTransformationExtraction struct {
 // EventTransformTransformationExtractionInput is an input type that accepts EventTransformTransformationExtractionArgs and EventTransformTransformationExtractionOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionInput` via:
 //
-//          EventTransformTransformationExtractionArgs{...}
+//	EventTransformTransformationExtractionArgs{...}
 type EventTransformTransformationExtractionInput interface {
 	pulumi.Input
 
@@ -1233,11 +1724,11 @@ func (i EventTransformTransformationExtractionArgs) ToEventTransformTransformati
 // EventTransformTransformationExtractionPtrInput is an input type that accepts EventTransformTransformationExtractionArgs, EventTransformTransformationExtractionPtr and EventTransformTransformationExtractionPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionPtrInput` via:
 //
-//          EventTransformTransformationExtractionArgs{...}
+//	        EventTransformTransformationExtractionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationExtractionPtrInput interface {
 	pulumi.Input
 
@@ -1368,7 +1859,7 @@ type EventTransformTransformationExtractionTextParams struct {
 // EventTransformTransformationExtractionTextParamsInput is an input type that accepts EventTransformTransformationExtractionTextParamsArgs and EventTransformTransformationExtractionTextParamsOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionTextParamsInput` via:
 //
-//          EventTransformTransformationExtractionTextParamsArgs{...}
+//	EventTransformTransformationExtractionTextParamsArgs{...}
 type EventTransformTransformationExtractionTextParamsInput interface {
 	pulumi.Input
 
@@ -1406,11 +1897,11 @@ func (i EventTransformTransformationExtractionTextParamsArgs) ToEventTransformTr
 // EventTransformTransformationExtractionTextParamsPtrInput is an input type that accepts EventTransformTransformationExtractionTextParamsArgs, EventTransformTransformationExtractionTextParamsPtr and EventTransformTransformationExtractionTextParamsPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionTextParamsPtrInput` via:
 //
-//          EventTransformTransformationExtractionTextParamsArgs{...}
+//	        EventTransformTransformationExtractionTextParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationExtractionTextParamsPtrInput interface {
 	pulumi.Input
 
@@ -1522,7 +2013,7 @@ type EventTransformTransformationTransform struct {
 // EventTransformTransformationTransformInput is an input type that accepts EventTransformTransformationTransformArgs and EventTransformTransformationTransformOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformInput` via:
 //
-//          EventTransformTransformationTransformArgs{...}
+//	EventTransformTransformationTransformArgs{...}
 type EventTransformTransformationTransformInput interface {
 	pulumi.Input
 
@@ -1558,11 +2049,11 @@ func (i EventTransformTransformationTransformArgs) ToEventTransformTransformatio
 // EventTransformTransformationTransformPtrInput is an input type that accepts EventTransformTransformationTransformArgs, EventTransformTransformationTransformPtr and EventTransformTransformationTransformPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformPtrInput` via:
 //
-//          EventTransformTransformationTransformArgs{...}
+//	        EventTransformTransformationTransformArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationTransformPtrInput interface {
 	pulumi.Input
 
@@ -1665,7 +2156,7 @@ type EventTransformTransformationTransformOutputStruct struct {
 // EventTransformTransformationTransformOutputStructInput is an input type that accepts EventTransformTransformationTransformOutputStructArgs and EventTransformTransformationTransformOutputStructOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformOutputStructInput` via:
 //
-//          EventTransformTransformationTransformOutputStructArgs{...}
+//	EventTransformTransformationTransformOutputStructArgs{...}
 type EventTransformTransformationTransformOutputStructInput interface {
 	pulumi.Input
 
@@ -1697,7 +2188,7 @@ func (i EventTransformTransformationTransformOutputStructArgs) ToEventTransformT
 // EventTransformTransformationTransformOutputStructArrayInput is an input type that accepts EventTransformTransformationTransformOutputStructArray and EventTransformTransformationTransformOutputStructArrayOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformOutputStructArrayInput` via:
 //
-//          EventTransformTransformationTransformOutputStructArray{ EventTransformTransformationTransformOutputStructArgs{...} }
+//	EventTransformTransformationTransformOutputStructArray{ EventTransformTransformationTransformOutputStructArgs{...} }
 type EventTransformTransformationTransformOutputStructArrayInput interface {
 	pulumi.Input
 
@@ -1784,7 +2275,7 @@ type PutEventsEventList struct {
 // PutEventsEventListInput is an input type that accepts PutEventsEventListArgs and PutEventsEventListOutput values.
 // You can construct a concrete instance of `PutEventsEventListInput` via:
 //
-//          PutEventsEventListArgs{...}
+//	PutEventsEventListArgs{...}
 type PutEventsEventListInput interface {
 	pulumi.Input
 
@@ -1820,7 +2311,7 @@ func (i PutEventsEventListArgs) ToPutEventsEventListOutputWithContext(ctx contex
 // PutEventsEventListArrayInput is an input type that accepts PutEventsEventListArray and PutEventsEventListArrayOutput values.
 // You can construct a concrete instance of `PutEventsEventListArrayInput` via:
 //
-//          PutEventsEventListArray{ PutEventsEventListArgs{...} }
+//	PutEventsEventListArray{ PutEventsEventListArgs{...} }
 type PutEventsEventListArrayInput interface {
 	pulumi.Input
 
@@ -1925,7 +2416,7 @@ type GetBusEventBus struct {
 // GetBusEventBusInput is an input type that accepts GetBusEventBusArgs and GetBusEventBusOutput values.
 // You can construct a concrete instance of `GetBusEventBusInput` via:
 //
-//          GetBusEventBusArgs{...}
+//	GetBusEventBusArgs{...}
 type GetBusEventBusInput interface {
 	pulumi.Input
 
@@ -1969,7 +2460,7 @@ func (i GetBusEventBusArgs) ToGetBusEventBusOutputWithContext(ctx context.Contex
 // GetBusEventBusArrayInput is an input type that accepts GetBusEventBusArray and GetBusEventBusArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusArrayInput` via:
 //
-//          GetBusEventBusArray{ GetBusEventBusArgs{...} }
+//	GetBusEventBusArray{ GetBusEventBusArgs{...} }
 type GetBusEventBusArrayInput interface {
 	pulumi.Input
 
@@ -2080,7 +2571,7 @@ type GetBusEventBusConnectionBrief struct {
 // GetBusEventBusConnectionBriefInput is an input type that accepts GetBusEventBusConnectionBriefArgs and GetBusEventBusConnectionBriefOutput values.
 // You can construct a concrete instance of `GetBusEventBusConnectionBriefInput` via:
 //
-//          GetBusEventBusConnectionBriefArgs{...}
+//	GetBusEventBusConnectionBriefArgs{...}
 type GetBusEventBusConnectionBriefInput interface {
 	pulumi.Input
 
@@ -2110,7 +2601,7 @@ func (i GetBusEventBusConnectionBriefArgs) ToGetBusEventBusConnectionBriefOutput
 // GetBusEventBusConnectionBriefArrayInput is an input type that accepts GetBusEventBusConnectionBriefArray and GetBusEventBusConnectionBriefArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusConnectionBriefArrayInput` via:
 //
-//          GetBusEventBusConnectionBriefArray{ GetBusEventBusConnectionBriefArgs{...} }
+//	GetBusEventBusConnectionBriefArray{ GetBusEventBusConnectionBriefArgs{...} }
 type GetBusEventBusConnectionBriefArrayInput interface {
 	pulumi.Input
 
@@ -2186,7 +2677,7 @@ type GetBusEventBusTargetBrief struct {
 // GetBusEventBusTargetBriefInput is an input type that accepts GetBusEventBusTargetBriefArgs and GetBusEventBusTargetBriefOutput values.
 // You can construct a concrete instance of `GetBusEventBusTargetBriefInput` via:
 //
-//          GetBusEventBusTargetBriefArgs{...}
+//	GetBusEventBusTargetBriefArgs{...}
 type GetBusEventBusTargetBriefInput interface {
 	pulumi.Input
 
@@ -2216,7 +2707,7 @@ func (i GetBusEventBusTargetBriefArgs) ToGetBusEventBusTargetBriefOutputWithCont
 // GetBusEventBusTargetBriefArrayInput is an input type that accepts GetBusEventBusTargetBriefArray and GetBusEventBusTargetBriefArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusTargetBriefArrayInput` via:
 //
-//          GetBusEventBusTargetBriefArray{ GetBusEventBusTargetBriefArgs{...} }
+//	GetBusEventBusTargetBriefArray{ GetBusEventBusTargetBriefArgs{...} }
 type GetBusEventBusTargetBriefArrayInput interface {
 	pulumi.Input
 
@@ -2292,7 +2783,7 @@ type GetBusFilter struct {
 // GetBusFilterInput is an input type that accepts GetBusFilterArgs and GetBusFilterOutput values.
 // You can construct a concrete instance of `GetBusFilterInput` via:
 //
-//          GetBusFilterArgs{...}
+//	GetBusFilterArgs{...}
 type GetBusFilterInput interface {
 	pulumi.Input
 
@@ -2322,7 +2813,7 @@ func (i GetBusFilterArgs) ToGetBusFilterOutputWithContext(ctx context.Context) G
 // GetBusFilterArrayInput is an input type that accepts GetBusFilterArray and GetBusFilterArrayOutput values.
 // You can construct a concrete instance of `GetBusFilterArrayInput` via:
 //
-//          GetBusFilterArray{ GetBusFilterArgs{...} }
+//	GetBusFilterArray{ GetBusFilterArgs{...} }
 type GetBusFilterArrayInput interface {
 	pulumi.Input
 
@@ -2388,6 +2879,822 @@ func (o GetBusFilterArrayOutput) Index(i pulumi.IntInput) GetBusFilterOutput {
 	}).(GetBusFilterOutput)
 }
 
+type GetEventRulesRule struct {
+	// create time.
+	AddTime string `pulumi:"addTime"`
+	// The dlq rule set by rule. It may be null. Note: this field may return null, indicating that no valid value can be obtained.
+	DeadLetterConfigs []GetEventRulesRuleDeadLetterConfig `pulumi:"deadLetterConfigs"`
+	// description.
+	Description string `pulumi:"description"`
+	// enable switch.
+	Enable bool `pulumi:"enable"`
+	// event bus Id.
+	EventBusId string `pulumi:"eventBusId"`
+	// modify time.
+	ModTime string `pulumi:"modTime"`
+	// rule Id.
+	RuleId string `pulumi:"ruleId"`
+	// rule name.
+	RuleName string `pulumi:"ruleName"`
+	// Status.
+	Status string `pulumi:"status"`
+	// Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+	Targets []GetEventRulesRuleTarget `pulumi:"targets"`
+}
+
+// GetEventRulesRuleInput is an input type that accepts GetEventRulesRuleArgs and GetEventRulesRuleOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleInput` via:
+//
+//	GetEventRulesRuleArgs{...}
+type GetEventRulesRuleInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleOutput() GetEventRulesRuleOutput
+	ToGetEventRulesRuleOutputWithContext(context.Context) GetEventRulesRuleOutput
+}
+
+type GetEventRulesRuleArgs struct {
+	// create time.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// The dlq rule set by rule. It may be null. Note: this field may return null, indicating that no valid value can be obtained.
+	DeadLetterConfigs GetEventRulesRuleDeadLetterConfigArrayInput `pulumi:"deadLetterConfigs"`
+	// description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// enable switch.
+	Enable pulumi.BoolInput `pulumi:"enable"`
+	// event bus Id.
+	EventBusId pulumi.StringInput `pulumi:"eventBusId"`
+	// modify time.
+	ModTime pulumi.StringInput `pulumi:"modTime"`
+	// rule Id.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// rule name.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+	Targets GetEventRulesRuleTargetArrayInput `pulumi:"targets"`
+}
+
+func (GetEventRulesRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRule)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleArgs) ToGetEventRulesRuleOutput() GetEventRulesRuleOutput {
+	return i.ToGetEventRulesRuleOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleArgs) ToGetEventRulesRuleOutputWithContext(ctx context.Context) GetEventRulesRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleOutput)
+}
+
+// GetEventRulesRuleArrayInput is an input type that accepts GetEventRulesRuleArray and GetEventRulesRuleArrayOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleArrayInput` via:
+//
+//	GetEventRulesRuleArray{ GetEventRulesRuleArgs{...} }
+type GetEventRulesRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleArrayOutput() GetEventRulesRuleArrayOutput
+	ToGetEventRulesRuleArrayOutputWithContext(context.Context) GetEventRulesRuleArrayOutput
+}
+
+type GetEventRulesRuleArray []GetEventRulesRuleInput
+
+func (GetEventRulesRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRule)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleArray) ToGetEventRulesRuleArrayOutput() GetEventRulesRuleArrayOutput {
+	return i.ToGetEventRulesRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleArray) ToGetEventRulesRuleArrayOutputWithContext(ctx context.Context) GetEventRulesRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleArrayOutput)
+}
+
+type GetEventRulesRuleOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRule)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleOutput) ToGetEventRulesRuleOutput() GetEventRulesRuleOutput {
+	return o
+}
+
+func (o GetEventRulesRuleOutput) ToGetEventRulesRuleOutputWithContext(ctx context.Context) GetEventRulesRuleOutput {
+	return o
+}
+
+// create time.
+func (o GetEventRulesRuleOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// The dlq rule set by rule. It may be null. Note: this field may return null, indicating that no valid value can be obtained.
+func (o GetEventRulesRuleOutput) DeadLetterConfigs() GetEventRulesRuleDeadLetterConfigArrayOutput {
+	return o.ApplyT(func(v GetEventRulesRule) []GetEventRulesRuleDeadLetterConfig { return v.DeadLetterConfigs }).(GetEventRulesRuleDeadLetterConfigArrayOutput)
+}
+
+// description.
+func (o GetEventRulesRuleOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// enable switch.
+func (o GetEventRulesRuleOutput) Enable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetEventRulesRule) bool { return v.Enable }).(pulumi.BoolOutput)
+}
+
+// event bus Id.
+func (o GetEventRulesRuleOutput) EventBusId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.EventBusId }).(pulumi.StringOutput)
+}
+
+// modify time.
+func (o GetEventRulesRuleOutput) ModTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.ModTime }).(pulumi.StringOutput)
+}
+
+// rule Id.
+func (o GetEventRulesRuleOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// rule name.
+func (o GetEventRulesRuleOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Status.
+func (o GetEventRulesRuleOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRule) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+func (o GetEventRulesRuleOutput) Targets() GetEventRulesRuleTargetArrayOutput {
+	return o.ApplyT(func(v GetEventRulesRule) []GetEventRulesRuleTarget { return v.Targets }).(GetEventRulesRuleTargetArrayOutput)
+}
+
+type GetEventRulesRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRule)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleArrayOutput) ToGetEventRulesRuleArrayOutput() GetEventRulesRuleArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleArrayOutput) ToGetEventRulesRuleArrayOutputWithContext(ctx context.Context) GetEventRulesRuleArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleArrayOutput) Index(i pulumi.IntInput) GetEventRulesRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEventRulesRule {
+		return vs[0].([]GetEventRulesRule)[vs[1].(int)]
+	}).(GetEventRulesRuleOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfig struct {
+	// After setting the DLQ mode, this option is required. The error message will be delivered to the corresponding kafka topic Note: This field may return null, indicating that no valid value can be obtained.
+	CkafkaDeliveryParams []GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam `pulumi:"ckafkaDeliveryParams"`
+	// Support three modes of dlq, discarding, ignoring errors and continuing to pass, corresponding to: DLQ, DROP, IGNORE_ERROR.
+	DisposeMethod string `pulumi:"disposeMethod"`
+}
+
+// GetEventRulesRuleDeadLetterConfigInput is an input type that accepts GetEventRulesRuleDeadLetterConfigArgs and GetEventRulesRuleDeadLetterConfigOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigInput` via:
+//
+//	GetEventRulesRuleDeadLetterConfigArgs{...}
+type GetEventRulesRuleDeadLetterConfigInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleDeadLetterConfigOutput() GetEventRulesRuleDeadLetterConfigOutput
+	ToGetEventRulesRuleDeadLetterConfigOutputWithContext(context.Context) GetEventRulesRuleDeadLetterConfigOutput
+}
+
+type GetEventRulesRuleDeadLetterConfigArgs struct {
+	// After setting the DLQ mode, this option is required. The error message will be delivered to the corresponding kafka topic Note: This field may return null, indicating that no valid value can be obtained.
+	CkafkaDeliveryParams GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput `pulumi:"ckafkaDeliveryParams"`
+	// Support three modes of dlq, discarding, ignoring errors and continuing to pass, corresponding to: DLQ, DROP, IGNORE_ERROR.
+	DisposeMethod pulumi.StringInput `pulumi:"disposeMethod"`
+}
+
+func (GetEventRulesRuleDeadLetterConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleDeadLetterConfig)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleDeadLetterConfigArgs) ToGetEventRulesRuleDeadLetterConfigOutput() GetEventRulesRuleDeadLetterConfigOutput {
+	return i.ToGetEventRulesRuleDeadLetterConfigOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleDeadLetterConfigArgs) ToGetEventRulesRuleDeadLetterConfigOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleDeadLetterConfigOutput)
+}
+
+// GetEventRulesRuleDeadLetterConfigArrayInput is an input type that accepts GetEventRulesRuleDeadLetterConfigArray and GetEventRulesRuleDeadLetterConfigArrayOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigArrayInput` via:
+//
+//	GetEventRulesRuleDeadLetterConfigArray{ GetEventRulesRuleDeadLetterConfigArgs{...} }
+type GetEventRulesRuleDeadLetterConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleDeadLetterConfigArrayOutput() GetEventRulesRuleDeadLetterConfigArrayOutput
+	ToGetEventRulesRuleDeadLetterConfigArrayOutputWithContext(context.Context) GetEventRulesRuleDeadLetterConfigArrayOutput
+}
+
+type GetEventRulesRuleDeadLetterConfigArray []GetEventRulesRuleDeadLetterConfigInput
+
+func (GetEventRulesRuleDeadLetterConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleDeadLetterConfig)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleDeadLetterConfigArray) ToGetEventRulesRuleDeadLetterConfigArrayOutput() GetEventRulesRuleDeadLetterConfigArrayOutput {
+	return i.ToGetEventRulesRuleDeadLetterConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleDeadLetterConfigArray) ToGetEventRulesRuleDeadLetterConfigArrayOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleDeadLetterConfigArrayOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfigOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleDeadLetterConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleDeadLetterConfig)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleDeadLetterConfigOutput) ToGetEventRulesRuleDeadLetterConfigOutput() GetEventRulesRuleDeadLetterConfigOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigOutput) ToGetEventRulesRuleDeadLetterConfigOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigOutput {
+	return o
+}
+
+// After setting the DLQ mode, this option is required. The error message will be delivered to the corresponding kafka topic Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetEventRulesRuleDeadLetterConfigOutput) CkafkaDeliveryParams() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput {
+	return o.ApplyT(func(v GetEventRulesRuleDeadLetterConfig) []GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam {
+		return v.CkafkaDeliveryParams
+	}).(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput)
+}
+
+// Support three modes of dlq, discarding, ignoring errors and continuing to pass, corresponding to: DLQ, DROP, IGNORE_ERROR.
+func (o GetEventRulesRuleDeadLetterConfigOutput) DisposeMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRuleDeadLetterConfig) string { return v.DisposeMethod }).(pulumi.StringOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleDeadLetterConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleDeadLetterConfig)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleDeadLetterConfigArrayOutput) ToGetEventRulesRuleDeadLetterConfigArrayOutput() GetEventRulesRuleDeadLetterConfigArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigArrayOutput) ToGetEventRulesRuleDeadLetterConfigArrayOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigArrayOutput) Index(i pulumi.IntInput) GetEventRulesRuleDeadLetterConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEventRulesRuleDeadLetterConfig {
+		return vs[0].([]GetEventRulesRuleDeadLetterConfig)[vs[1].(int)]
+	}).(GetEventRulesRuleDeadLetterConfigOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam struct {
+	// ckafka resource qcs six-segment.
+	ResourceDescription string `pulumi:"resourceDescription"`
+	// ckafka topic name.
+	TopicName string `pulumi:"topicName"`
+}
+
+// GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput is an input type that accepts GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs and GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput` via:
+//
+//	GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...}
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput
+	ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutputWithContext(context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput
+}
+
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs struct {
+	// ckafka resource qcs six-segment.
+	ResourceDescription pulumi.StringInput `pulumi:"resourceDescription"`
+	// ckafka topic name.
+	TopicName pulumi.StringInput `pulumi:"topicName"`
+}
+
+func (GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput {
+	return i.ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput)
+}
+
+// GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput is an input type that accepts GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray and GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput` via:
+//
+//	GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray{ GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...} }
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput
+	ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutputWithContext(context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput
+}
+
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray []GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput
+
+func (GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput {
+	return i.ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput {
+	return o
+}
+
+// ckafka resource qcs six-segment.
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput) ResourceDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam) string { return v.ResourceDescription }).(pulumi.StringOutput)
+}
+
+// ckafka topic name.
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput) TopicName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam) string { return v.TopicName }).(pulumi.StringOutput)
+}
+
+type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput() GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput) ToGetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutputWithContext(ctx context.Context) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput) Index(i pulumi.IntInput) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam {
+		return vs[0].([]GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam)[vs[1].(int)]
+	}).(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput)
+}
+
+type GetEventRulesRuleTarget struct {
+	// target Id.
+	TargetId string `pulumi:"targetId"`
+	// target type.
+	Type string `pulumi:"type"`
+}
+
+// GetEventRulesRuleTargetInput is an input type that accepts GetEventRulesRuleTargetArgs and GetEventRulesRuleTargetOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleTargetInput` via:
+//
+//	GetEventRulesRuleTargetArgs{...}
+type GetEventRulesRuleTargetInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleTargetOutput() GetEventRulesRuleTargetOutput
+	ToGetEventRulesRuleTargetOutputWithContext(context.Context) GetEventRulesRuleTargetOutput
+}
+
+type GetEventRulesRuleTargetArgs struct {
+	// target Id.
+	TargetId pulumi.StringInput `pulumi:"targetId"`
+	// target type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetEventRulesRuleTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleTarget)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleTargetArgs) ToGetEventRulesRuleTargetOutput() GetEventRulesRuleTargetOutput {
+	return i.ToGetEventRulesRuleTargetOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleTargetArgs) ToGetEventRulesRuleTargetOutputWithContext(ctx context.Context) GetEventRulesRuleTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleTargetOutput)
+}
+
+// GetEventRulesRuleTargetArrayInput is an input type that accepts GetEventRulesRuleTargetArray and GetEventRulesRuleTargetArrayOutput values.
+// You can construct a concrete instance of `GetEventRulesRuleTargetArrayInput` via:
+//
+//	GetEventRulesRuleTargetArray{ GetEventRulesRuleTargetArgs{...} }
+type GetEventRulesRuleTargetArrayInput interface {
+	pulumi.Input
+
+	ToGetEventRulesRuleTargetArrayOutput() GetEventRulesRuleTargetArrayOutput
+	ToGetEventRulesRuleTargetArrayOutputWithContext(context.Context) GetEventRulesRuleTargetArrayOutput
+}
+
+type GetEventRulesRuleTargetArray []GetEventRulesRuleTargetInput
+
+func (GetEventRulesRuleTargetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleTarget)(nil)).Elem()
+}
+
+func (i GetEventRulesRuleTargetArray) ToGetEventRulesRuleTargetArrayOutput() GetEventRulesRuleTargetArrayOutput {
+	return i.ToGetEventRulesRuleTargetArrayOutputWithContext(context.Background())
+}
+
+func (i GetEventRulesRuleTargetArray) ToGetEventRulesRuleTargetArrayOutputWithContext(ctx context.Context) GetEventRulesRuleTargetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEventRulesRuleTargetArrayOutput)
+}
+
+type GetEventRulesRuleTargetOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEventRulesRuleTarget)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleTargetOutput) ToGetEventRulesRuleTargetOutput() GetEventRulesRuleTargetOutput {
+	return o
+}
+
+func (o GetEventRulesRuleTargetOutput) ToGetEventRulesRuleTargetOutputWithContext(ctx context.Context) GetEventRulesRuleTargetOutput {
+	return o
+}
+
+// target Id.
+func (o GetEventRulesRuleTargetOutput) TargetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRuleTarget) string { return v.TargetId }).(pulumi.StringOutput)
+}
+
+// target type.
+func (o GetEventRulesRuleTargetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEventRulesRuleTarget) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetEventRulesRuleTargetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEventRulesRuleTargetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEventRulesRuleTarget)(nil)).Elem()
+}
+
+func (o GetEventRulesRuleTargetArrayOutput) ToGetEventRulesRuleTargetArrayOutput() GetEventRulesRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleTargetArrayOutput) ToGetEventRulesRuleTargetArrayOutputWithContext(ctx context.Context) GetEventRulesRuleTargetArrayOutput {
+	return o
+}
+
+func (o GetEventRulesRuleTargetArrayOutput) Index(i pulumi.IntInput) GetEventRulesRuleTargetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEventRulesRuleTarget {
+		return vs[0].([]GetEventRulesRuleTarget)[vs[1].(int)]
+	}).(GetEventRulesRuleTargetOutput)
+}
+
+type GetPlatformEventNamesEventName struct {
+	// Event name.Note: This field may return null, indicating that no valid value can be obtained.
+	EventName string `pulumi:"eventName"`
+	// Event type.Note: This field may return null, indicating that no valid value can be obtained.
+	EventType string `pulumi:"eventType"`
+}
+
+// GetPlatformEventNamesEventNameInput is an input type that accepts GetPlatformEventNamesEventNameArgs and GetPlatformEventNamesEventNameOutput values.
+// You can construct a concrete instance of `GetPlatformEventNamesEventNameInput` via:
+//
+//	GetPlatformEventNamesEventNameArgs{...}
+type GetPlatformEventNamesEventNameInput interface {
+	pulumi.Input
+
+	ToGetPlatformEventNamesEventNameOutput() GetPlatformEventNamesEventNameOutput
+	ToGetPlatformEventNamesEventNameOutputWithContext(context.Context) GetPlatformEventNamesEventNameOutput
+}
+
+type GetPlatformEventNamesEventNameArgs struct {
+	// Event name.Note: This field may return null, indicating that no valid value can be obtained.
+	EventName pulumi.StringInput `pulumi:"eventName"`
+	// Event type.Note: This field may return null, indicating that no valid value can be obtained.
+	EventType pulumi.StringInput `pulumi:"eventType"`
+}
+
+func (GetPlatformEventNamesEventNameArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformEventNamesEventName)(nil)).Elem()
+}
+
+func (i GetPlatformEventNamesEventNameArgs) ToGetPlatformEventNamesEventNameOutput() GetPlatformEventNamesEventNameOutput {
+	return i.ToGetPlatformEventNamesEventNameOutputWithContext(context.Background())
+}
+
+func (i GetPlatformEventNamesEventNameArgs) ToGetPlatformEventNamesEventNameOutputWithContext(ctx context.Context) GetPlatformEventNamesEventNameOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformEventNamesEventNameOutput)
+}
+
+// GetPlatformEventNamesEventNameArrayInput is an input type that accepts GetPlatformEventNamesEventNameArray and GetPlatformEventNamesEventNameArrayOutput values.
+// You can construct a concrete instance of `GetPlatformEventNamesEventNameArrayInput` via:
+//
+//	GetPlatformEventNamesEventNameArray{ GetPlatformEventNamesEventNameArgs{...} }
+type GetPlatformEventNamesEventNameArrayInput interface {
+	pulumi.Input
+
+	ToGetPlatformEventNamesEventNameArrayOutput() GetPlatformEventNamesEventNameArrayOutput
+	ToGetPlatformEventNamesEventNameArrayOutputWithContext(context.Context) GetPlatformEventNamesEventNameArrayOutput
+}
+
+type GetPlatformEventNamesEventNameArray []GetPlatformEventNamesEventNameInput
+
+func (GetPlatformEventNamesEventNameArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformEventNamesEventName)(nil)).Elem()
+}
+
+func (i GetPlatformEventNamesEventNameArray) ToGetPlatformEventNamesEventNameArrayOutput() GetPlatformEventNamesEventNameArrayOutput {
+	return i.ToGetPlatformEventNamesEventNameArrayOutputWithContext(context.Background())
+}
+
+func (i GetPlatformEventNamesEventNameArray) ToGetPlatformEventNamesEventNameArrayOutputWithContext(ctx context.Context) GetPlatformEventNamesEventNameArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformEventNamesEventNameArrayOutput)
+}
+
+type GetPlatformEventNamesEventNameOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformEventNamesEventNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformEventNamesEventName)(nil)).Elem()
+}
+
+func (o GetPlatformEventNamesEventNameOutput) ToGetPlatformEventNamesEventNameOutput() GetPlatformEventNamesEventNameOutput {
+	return o
+}
+
+func (o GetPlatformEventNamesEventNameOutput) ToGetPlatformEventNamesEventNameOutputWithContext(ctx context.Context) GetPlatformEventNamesEventNameOutput {
+	return o
+}
+
+// Event name.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPlatformEventNamesEventNameOutput) EventName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformEventNamesEventName) string { return v.EventName }).(pulumi.StringOutput)
+}
+
+// Event type.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPlatformEventNamesEventNameOutput) EventType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformEventNamesEventName) string { return v.EventType }).(pulumi.StringOutput)
+}
+
+type GetPlatformEventNamesEventNameArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformEventNamesEventNameArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformEventNamesEventName)(nil)).Elem()
+}
+
+func (o GetPlatformEventNamesEventNameArrayOutput) ToGetPlatformEventNamesEventNameArrayOutput() GetPlatformEventNamesEventNameArrayOutput {
+	return o
+}
+
+func (o GetPlatformEventNamesEventNameArrayOutput) ToGetPlatformEventNamesEventNameArrayOutputWithContext(ctx context.Context) GetPlatformEventNamesEventNameArrayOutput {
+	return o
+}
+
+func (o GetPlatformEventNamesEventNameArrayOutput) Index(i pulumi.IntInput) GetPlatformEventNamesEventNameOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPlatformEventNamesEventName {
+		return vs[0].([]GetPlatformEventNamesEventName)[vs[1].(int)]
+	}).(GetPlatformEventNamesEventNameOutput)
+}
+
+type GetPlatformEventPatternsEventPattern struct {
+	// Platform event name.Note: This field may return null, indicating that no valid value can be obtained.
+	EventName string `pulumi:"eventName"`
+	// Platform event matching rules.Note: This field may return null, indicating that no valid value can be obtained.
+	EventPattern string `pulumi:"eventPattern"`
+}
+
+// GetPlatformEventPatternsEventPatternInput is an input type that accepts GetPlatformEventPatternsEventPatternArgs and GetPlatformEventPatternsEventPatternOutput values.
+// You can construct a concrete instance of `GetPlatformEventPatternsEventPatternInput` via:
+//
+//	GetPlatformEventPatternsEventPatternArgs{...}
+type GetPlatformEventPatternsEventPatternInput interface {
+	pulumi.Input
+
+	ToGetPlatformEventPatternsEventPatternOutput() GetPlatformEventPatternsEventPatternOutput
+	ToGetPlatformEventPatternsEventPatternOutputWithContext(context.Context) GetPlatformEventPatternsEventPatternOutput
+}
+
+type GetPlatformEventPatternsEventPatternArgs struct {
+	// Platform event name.Note: This field may return null, indicating that no valid value can be obtained.
+	EventName pulumi.StringInput `pulumi:"eventName"`
+	// Platform event matching rules.Note: This field may return null, indicating that no valid value can be obtained.
+	EventPattern pulumi.StringInput `pulumi:"eventPattern"`
+}
+
+func (GetPlatformEventPatternsEventPatternArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformEventPatternsEventPattern)(nil)).Elem()
+}
+
+func (i GetPlatformEventPatternsEventPatternArgs) ToGetPlatformEventPatternsEventPatternOutput() GetPlatformEventPatternsEventPatternOutput {
+	return i.ToGetPlatformEventPatternsEventPatternOutputWithContext(context.Background())
+}
+
+func (i GetPlatformEventPatternsEventPatternArgs) ToGetPlatformEventPatternsEventPatternOutputWithContext(ctx context.Context) GetPlatformEventPatternsEventPatternOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformEventPatternsEventPatternOutput)
+}
+
+// GetPlatformEventPatternsEventPatternArrayInput is an input type that accepts GetPlatformEventPatternsEventPatternArray and GetPlatformEventPatternsEventPatternArrayOutput values.
+// You can construct a concrete instance of `GetPlatformEventPatternsEventPatternArrayInput` via:
+//
+//	GetPlatformEventPatternsEventPatternArray{ GetPlatformEventPatternsEventPatternArgs{...} }
+type GetPlatformEventPatternsEventPatternArrayInput interface {
+	pulumi.Input
+
+	ToGetPlatformEventPatternsEventPatternArrayOutput() GetPlatformEventPatternsEventPatternArrayOutput
+	ToGetPlatformEventPatternsEventPatternArrayOutputWithContext(context.Context) GetPlatformEventPatternsEventPatternArrayOutput
+}
+
+type GetPlatformEventPatternsEventPatternArray []GetPlatformEventPatternsEventPatternInput
+
+func (GetPlatformEventPatternsEventPatternArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformEventPatternsEventPattern)(nil)).Elem()
+}
+
+func (i GetPlatformEventPatternsEventPatternArray) ToGetPlatformEventPatternsEventPatternArrayOutput() GetPlatformEventPatternsEventPatternArrayOutput {
+	return i.ToGetPlatformEventPatternsEventPatternArrayOutputWithContext(context.Background())
+}
+
+func (i GetPlatformEventPatternsEventPatternArray) ToGetPlatformEventPatternsEventPatternArrayOutputWithContext(ctx context.Context) GetPlatformEventPatternsEventPatternArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformEventPatternsEventPatternArrayOutput)
+}
+
+type GetPlatformEventPatternsEventPatternOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformEventPatternsEventPatternOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformEventPatternsEventPattern)(nil)).Elem()
+}
+
+func (o GetPlatformEventPatternsEventPatternOutput) ToGetPlatformEventPatternsEventPatternOutput() GetPlatformEventPatternsEventPatternOutput {
+	return o
+}
+
+func (o GetPlatformEventPatternsEventPatternOutput) ToGetPlatformEventPatternsEventPatternOutputWithContext(ctx context.Context) GetPlatformEventPatternsEventPatternOutput {
+	return o
+}
+
+// Platform event name.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPlatformEventPatternsEventPatternOutput) EventName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformEventPatternsEventPattern) string { return v.EventName }).(pulumi.StringOutput)
+}
+
+// Platform event matching rules.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetPlatformEventPatternsEventPatternOutput) EventPattern() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformEventPatternsEventPattern) string { return v.EventPattern }).(pulumi.StringOutput)
+}
+
+type GetPlatformEventPatternsEventPatternArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformEventPatternsEventPatternArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformEventPatternsEventPattern)(nil)).Elem()
+}
+
+func (o GetPlatformEventPatternsEventPatternArrayOutput) ToGetPlatformEventPatternsEventPatternArrayOutput() GetPlatformEventPatternsEventPatternArrayOutput {
+	return o
+}
+
+func (o GetPlatformEventPatternsEventPatternArrayOutput) ToGetPlatformEventPatternsEventPatternArrayOutputWithContext(ctx context.Context) GetPlatformEventPatternsEventPatternArrayOutput {
+	return o
+}
+
+func (o GetPlatformEventPatternsEventPatternArrayOutput) Index(i pulumi.IntInput) GetPlatformEventPatternsEventPatternOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPlatformEventPatternsEventPattern {
+		return vs[0].([]GetPlatformEventPatternsEventPattern)[vs[1].(int)]
+	}).(GetPlatformEventPatternsEventPatternOutput)
+}
+
+type GetPlatformProductsPlatformProduct struct {
+	// Platform product name.
+	ProductName string `pulumi:"productName"`
+	// Platform product type.
+	ProductType string `pulumi:"productType"`
+}
+
+// GetPlatformProductsPlatformProductInput is an input type that accepts GetPlatformProductsPlatformProductArgs and GetPlatformProductsPlatformProductOutput values.
+// You can construct a concrete instance of `GetPlatformProductsPlatformProductInput` via:
+//
+//	GetPlatformProductsPlatformProductArgs{...}
+type GetPlatformProductsPlatformProductInput interface {
+	pulumi.Input
+
+	ToGetPlatformProductsPlatformProductOutput() GetPlatformProductsPlatformProductOutput
+	ToGetPlatformProductsPlatformProductOutputWithContext(context.Context) GetPlatformProductsPlatformProductOutput
+}
+
+type GetPlatformProductsPlatformProductArgs struct {
+	// Platform product name.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// Platform product type.
+	ProductType pulumi.StringInput `pulumi:"productType"`
+}
+
+func (GetPlatformProductsPlatformProductArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformProductsPlatformProduct)(nil)).Elem()
+}
+
+func (i GetPlatformProductsPlatformProductArgs) ToGetPlatformProductsPlatformProductOutput() GetPlatformProductsPlatformProductOutput {
+	return i.ToGetPlatformProductsPlatformProductOutputWithContext(context.Background())
+}
+
+func (i GetPlatformProductsPlatformProductArgs) ToGetPlatformProductsPlatformProductOutputWithContext(ctx context.Context) GetPlatformProductsPlatformProductOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformProductsPlatformProductOutput)
+}
+
+// GetPlatformProductsPlatformProductArrayInput is an input type that accepts GetPlatformProductsPlatformProductArray and GetPlatformProductsPlatformProductArrayOutput values.
+// You can construct a concrete instance of `GetPlatformProductsPlatformProductArrayInput` via:
+//
+//	GetPlatformProductsPlatformProductArray{ GetPlatformProductsPlatformProductArgs{...} }
+type GetPlatformProductsPlatformProductArrayInput interface {
+	pulumi.Input
+
+	ToGetPlatformProductsPlatformProductArrayOutput() GetPlatformProductsPlatformProductArrayOutput
+	ToGetPlatformProductsPlatformProductArrayOutputWithContext(context.Context) GetPlatformProductsPlatformProductArrayOutput
+}
+
+type GetPlatformProductsPlatformProductArray []GetPlatformProductsPlatformProductInput
+
+func (GetPlatformProductsPlatformProductArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformProductsPlatformProduct)(nil)).Elem()
+}
+
+func (i GetPlatformProductsPlatformProductArray) ToGetPlatformProductsPlatformProductArrayOutput() GetPlatformProductsPlatformProductArrayOutput {
+	return i.ToGetPlatformProductsPlatformProductArrayOutputWithContext(context.Background())
+}
+
+func (i GetPlatformProductsPlatformProductArray) ToGetPlatformProductsPlatformProductArrayOutputWithContext(ctx context.Context) GetPlatformProductsPlatformProductArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPlatformProductsPlatformProductArrayOutput)
+}
+
+type GetPlatformProductsPlatformProductOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformProductsPlatformProductOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPlatformProductsPlatformProduct)(nil)).Elem()
+}
+
+func (o GetPlatformProductsPlatformProductOutput) ToGetPlatformProductsPlatformProductOutput() GetPlatformProductsPlatformProductOutput {
+	return o
+}
+
+func (o GetPlatformProductsPlatformProductOutput) ToGetPlatformProductsPlatformProductOutputWithContext(ctx context.Context) GetPlatformProductsPlatformProductOutput {
+	return o
+}
+
+// Platform product name.
+func (o GetPlatformProductsPlatformProductOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformProductsPlatformProduct) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// Platform product type.
+func (o GetPlatformProductsPlatformProductOutput) ProductType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPlatformProductsPlatformProduct) string { return v.ProductType }).(pulumi.StringOutput)
+}
+
+type GetPlatformProductsPlatformProductArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPlatformProductsPlatformProductArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPlatformProductsPlatformProduct)(nil)).Elem()
+}
+
+func (o GetPlatformProductsPlatformProductArrayOutput) ToGetPlatformProductsPlatformProductArrayOutput() GetPlatformProductsPlatformProductArrayOutput {
+	return o
+}
+
+func (o GetPlatformProductsPlatformProductArrayOutput) ToGetPlatformProductsPlatformProductArrayOutputWithContext(ctx context.Context) GetPlatformProductsPlatformProductArrayOutput {
+	return o
+}
+
+func (o GetPlatformProductsPlatformProductArrayOutput) Index(i pulumi.IntInput) GetPlatformProductsPlatformProductOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPlatformProductsPlatformProduct {
+		return vs[0].([]GetPlatformProductsPlatformProduct)[vs[1].(int)]
+	}).(GetPlatformProductsPlatformProductOutput)
+}
+
 type GetSearchFilter struct {
 	Filters  []GetSearchFilterFilter `pulumi:"filters"`
 	Key      *string                 `pulumi:"key"`
@@ -2399,7 +3706,7 @@ type GetSearchFilter struct {
 // GetSearchFilterInput is an input type that accepts GetSearchFilterArgs and GetSearchFilterOutput values.
 // You can construct a concrete instance of `GetSearchFilterInput` via:
 //
-//          GetSearchFilterArgs{...}
+//	GetSearchFilterArgs{...}
 type GetSearchFilterInput interface {
 	pulumi.Input
 
@@ -2430,7 +3737,7 @@ func (i GetSearchFilterArgs) ToGetSearchFilterOutputWithContext(ctx context.Cont
 // GetSearchFilterArrayInput is an input type that accepts GetSearchFilterArray and GetSearchFilterArrayOutput values.
 // You can construct a concrete instance of `GetSearchFilterArrayInput` via:
 //
-//          GetSearchFilterArray{ GetSearchFilterArgs{...} }
+//	GetSearchFilterArray{ GetSearchFilterArgs{...} }
 type GetSearchFilterArrayInput interface {
 	pulumi.Input
 
@@ -2515,7 +3822,7 @@ type GetSearchFilterFilter struct {
 // GetSearchFilterFilterInput is an input type that accepts GetSearchFilterFilterArgs and GetSearchFilterFilterOutput values.
 // You can construct a concrete instance of `GetSearchFilterFilterInput` via:
 //
-//          GetSearchFilterFilterArgs{...}
+//	GetSearchFilterFilterArgs{...}
 type GetSearchFilterFilterInput interface {
 	pulumi.Input
 
@@ -2544,7 +3851,7 @@ func (i GetSearchFilterFilterArgs) ToGetSearchFilterFilterOutputWithContext(ctx 
 // GetSearchFilterFilterArrayInput is an input type that accepts GetSearchFilterFilterArray and GetSearchFilterFilterArrayOutput values.
 // You can construct a concrete instance of `GetSearchFilterFilterArrayInput` via:
 //
-//          GetSearchFilterFilterArray{ GetSearchFilterFilterArgs{...} }
+//	GetSearchFilterFilterArray{ GetSearchFilterFilterArgs{...} }
 type GetSearchFilterFilterArrayInput interface {
 	pulumi.Input
 
@@ -2626,7 +3933,7 @@ type GetSearchResult struct {
 // GetSearchResultInput is an input type that accepts GetSearchResultArgs and GetSearchResultOutput values.
 // You can construct a concrete instance of `GetSearchResultInput` via:
 //
-//          GetSearchResultArgs{...}
+//	GetSearchResultArgs{...}
 type GetSearchResultInput interface {
 	pulumi.Input
 
@@ -2660,7 +3967,7 @@ func (i GetSearchResultArgs) ToGetSearchResultOutputWithContext(ctx context.Cont
 // GetSearchResultArrayInput is an input type that accepts GetSearchResultArray and GetSearchResultArrayOutput values.
 // You can construct a concrete instance of `GetSearchResultArrayInput` via:
 //
-//          GetSearchResultArray{ GetSearchResultArgs{...} }
+//	GetSearchResultArray{ GetSearchResultArgs{...} }
 type GetSearchResultArrayInput interface {
 	pulumi.Input
 
@@ -2749,6 +4056,12 @@ func (o GetSearchResultArrayOutput) Index(i pulumi.IntInput) GetSearchResultOutp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionInput)(nil)).Elem(), EventConnectorConnectionDescriptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionPtrInput)(nil)).Elem(), EventConnectorConnectionDescriptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionApiGwParamsInput)(nil)).Elem(), EventConnectorConnectionDescriptionApiGwParamsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionApiGwParamsPtrInput)(nil)).Elem(), EventConnectorConnectionDescriptionApiGwParamsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionCkafkaParamsInput)(nil)).Elem(), EventConnectorConnectionDescriptionCkafkaParamsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EventConnectorConnectionDescriptionCkafkaParamsPtrInput)(nil)).Elem(), EventConnectorConnectionDescriptionCkafkaParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EventTargetTargetDescriptionInput)(nil)).Elem(), EventTargetTargetDescriptionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EventTargetTargetDescriptionPtrInput)(nil)).Elem(), EventTargetTargetDescriptionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EventTargetTargetDescriptionCkafkaTargetParamsInput)(nil)).Elem(), EventTargetTargetDescriptionCkafkaTargetParamsArgs{})
@@ -2781,12 +4094,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBusEventBusTargetBriefArrayInput)(nil)).Elem(), GetBusEventBusTargetBriefArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBusFilterInput)(nil)).Elem(), GetBusFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBusFilterArrayInput)(nil)).Elem(), GetBusFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleInput)(nil)).Elem(), GetEventRulesRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleArrayInput)(nil)).Elem(), GetEventRulesRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigInput)(nil)).Elem(), GetEventRulesRuleDeadLetterConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigArrayInput)(nil)).Elem(), GetEventRulesRuleDeadLetterConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput)(nil)).Elem(), GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput)(nil)).Elem(), GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleTargetInput)(nil)).Elem(), GetEventRulesRuleTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEventRulesRuleTargetArrayInput)(nil)).Elem(), GetEventRulesRuleTargetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformEventNamesEventNameInput)(nil)).Elem(), GetPlatformEventNamesEventNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformEventNamesEventNameArrayInput)(nil)).Elem(), GetPlatformEventNamesEventNameArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformEventPatternsEventPatternInput)(nil)).Elem(), GetPlatformEventPatternsEventPatternArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformEventPatternsEventPatternArrayInput)(nil)).Elem(), GetPlatformEventPatternsEventPatternArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformProductsPlatformProductInput)(nil)).Elem(), GetPlatformProductsPlatformProductArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPlatformProductsPlatformProductArrayInput)(nil)).Elem(), GetPlatformProductsPlatformProductArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchFilterInput)(nil)).Elem(), GetSearchFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchFilterArrayInput)(nil)).Elem(), GetSearchFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchFilterFilterInput)(nil)).Elem(), GetSearchFilterFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchFilterFilterArrayInput)(nil)).Elem(), GetSearchFilterFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchResultInput)(nil)).Elem(), GetSearchResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSearchResultArrayInput)(nil)).Elem(), GetSearchResultArray{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionOutput{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionPtrOutput{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionApiGwParamsOutput{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionApiGwParamsPtrOutput{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionCkafkaParamsOutput{})
+	pulumi.RegisterOutputType(EventConnectorConnectionDescriptionCkafkaParamsPtrOutput{})
 	pulumi.RegisterOutputType(EventTargetTargetDescriptionOutput{})
 	pulumi.RegisterOutputType(EventTargetTargetDescriptionPtrOutput{})
 	pulumi.RegisterOutputType(EventTargetTargetDescriptionCkafkaTargetParamsOutput{})
@@ -2819,6 +4152,20 @@ func init() {
 	pulumi.RegisterOutputType(GetBusEventBusTargetBriefArrayOutput{})
 	pulumi.RegisterOutputType(GetBusFilterOutput{})
 	pulumi.RegisterOutputType(GetBusFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleDeadLetterConfigOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleDeadLetterConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleTargetOutput{})
+	pulumi.RegisterOutputType(GetEventRulesRuleTargetArrayOutput{})
+	pulumi.RegisterOutputType(GetPlatformEventNamesEventNameOutput{})
+	pulumi.RegisterOutputType(GetPlatformEventNamesEventNameArrayOutput{})
+	pulumi.RegisterOutputType(GetPlatformEventPatternsEventPatternOutput{})
+	pulumi.RegisterOutputType(GetPlatformEventPatternsEventPatternArrayOutput{})
+	pulumi.RegisterOutputType(GetPlatformProductsPlatformProductOutput{})
+	pulumi.RegisterOutputType(GetPlatformProductsPlatformProductArrayOutput{})
 	pulumi.RegisterOutputType(GetSearchFilterOutput{})
 	pulumi.RegisterOutputType(GetSearchFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetSearchFilterFilterOutput{})

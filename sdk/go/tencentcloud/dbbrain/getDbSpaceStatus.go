@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetDbSpaceStatus(ctx, &dbbrain.GetDbSpaceStatusArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			RangeDays:  pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetDbSpaceStatus(ctx, &dbbrain.GetDbSpaceStatusArgs{
+//				InstanceId: fmt.Sprintf("%v%v", "%", "s"),
+//				Product:    pulumi.StringRef("mysql"),
+//				RangeDays:  pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDbSpaceStatus(ctx *pulumi.Context, args *GetDbSpaceStatusArgs, opts ...pulumi.InvokeOption) (*GetDbSpaceStatusResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

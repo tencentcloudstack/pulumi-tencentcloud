@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaTtsTemplate(ctx, "mediaTtsTemplate", &Ci.MediaTtsTemplateArgs{
-// 			Bucket:    pulumi.String("terraform-ci-xxxxxx"),
-// 			Codec:     pulumi.String("pcm"),
-// 			Mode:      pulumi.String("Asyc"),
-// 			Speed:     pulumi.String("100"),
-// 			VoiceType: pulumi.String("ruxue"),
-// 			Volume:    pulumi.String("0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaTtsTemplate(ctx, "mediaTtsTemplate", &Ci.MediaTtsTemplateArgs{
+//				Bucket:    pulumi.String("terraform-ci-xxxxxx"),
+//				Codec:     pulumi.String("pcm"),
+//				Mode:      pulumi.String("Asyc"),
+//				Speed:     pulumi.String("100"),
+//				VoiceType: pulumi.String("ruxue"),
+//				Volume:    pulumi.String("0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // ci media_tts_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
+//
+//	$ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
+//
 // ```
 type MediaTtsTemplate struct {
 	pulumi.CustomResourceState
@@ -198,7 +203,7 @@ func (i *MediaTtsTemplate) ToMediaTtsTemplateOutputWithContext(ctx context.Conte
 // MediaTtsTemplateArrayInput is an input type that accepts MediaTtsTemplateArray and MediaTtsTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaTtsTemplateArrayInput` via:
 //
-//          MediaTtsTemplateArray{ MediaTtsTemplateArgs{...} }
+//	MediaTtsTemplateArray{ MediaTtsTemplateArgs{...} }
 type MediaTtsTemplateArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +228,7 @@ func (i MediaTtsTemplateArray) ToMediaTtsTemplateArrayOutputWithContext(ctx cont
 // MediaTtsTemplateMapInput is an input type that accepts MediaTtsTemplateMap and MediaTtsTemplateMapOutput values.
 // You can construct a concrete instance of `MediaTtsTemplateMapInput` via:
 //
-//          MediaTtsTemplateMap{ "key": MediaTtsTemplateArgs{...} }
+//	MediaTtsTemplateMap{ "key": MediaTtsTemplateArgs{...} }
 type MediaTtsTemplateMapInput interface {
 	pulumi.Input
 

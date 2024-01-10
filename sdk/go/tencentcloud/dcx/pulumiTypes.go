@@ -20,7 +20,7 @@ type ExtraConfigBfdInfo struct {
 // ExtraConfigBfdInfoInput is an input type that accepts ExtraConfigBfdInfoArgs and ExtraConfigBfdInfoOutput values.
 // You can construct a concrete instance of `ExtraConfigBfdInfoInput` via:
 //
-//          ExtraConfigBfdInfoArgs{...}
+//	ExtraConfigBfdInfoArgs{...}
 type ExtraConfigBfdInfoInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i ExtraConfigBfdInfoArgs) ToExtraConfigBfdInfoPtrOutputWithContext(ctx con
 // ExtraConfigBfdInfoPtrInput is an input type that accepts ExtraConfigBfdInfoArgs, ExtraConfigBfdInfoPtr and ExtraConfigBfdInfoPtrOutput values.
 // You can construct a concrete instance of `ExtraConfigBfdInfoPtrInput` via:
 //
-//          ExtraConfigBfdInfoArgs{...}
+//	        ExtraConfigBfdInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ExtraConfigBfdInfoPtrInput interface {
 	pulumi.Input
 
@@ -176,7 +176,7 @@ type ExtraConfigBgpPeer struct {
 // ExtraConfigBgpPeerInput is an input type that accepts ExtraConfigBgpPeerArgs and ExtraConfigBgpPeerOutput values.
 // You can construct a concrete instance of `ExtraConfigBgpPeerInput` via:
 //
-//          ExtraConfigBgpPeerArgs{...}
+//	ExtraConfigBgpPeerArgs{...}
 type ExtraConfigBgpPeerInput interface {
 	pulumi.Input
 
@@ -214,11 +214,11 @@ func (i ExtraConfigBgpPeerArgs) ToExtraConfigBgpPeerPtrOutputWithContext(ctx con
 // ExtraConfigBgpPeerPtrInput is an input type that accepts ExtraConfigBgpPeerArgs, ExtraConfigBgpPeerPtr and ExtraConfigBgpPeerPtrOutput values.
 // You can construct a concrete instance of `ExtraConfigBgpPeerPtrInput` via:
 //
-//          ExtraConfigBgpPeerArgs{...}
+//	        ExtraConfigBgpPeerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ExtraConfigBgpPeerPtrInput interface {
 	pulumi.Input
 
@@ -334,7 +334,7 @@ type ExtraConfigNqaInfo struct {
 // ExtraConfigNqaInfoInput is an input type that accepts ExtraConfigNqaInfoArgs and ExtraConfigNqaInfoOutput values.
 // You can construct a concrete instance of `ExtraConfigNqaInfoInput` via:
 //
-//          ExtraConfigNqaInfoArgs{...}
+//	ExtraConfigNqaInfoArgs{...}
 type ExtraConfigNqaInfoInput interface {
 	pulumi.Input
 
@@ -374,11 +374,11 @@ func (i ExtraConfigNqaInfoArgs) ToExtraConfigNqaInfoPtrOutputWithContext(ctx con
 // ExtraConfigNqaInfoPtrInput is an input type that accepts ExtraConfigNqaInfoArgs, ExtraConfigNqaInfoPtr and ExtraConfigNqaInfoPtrOutput values.
 // You can construct a concrete instance of `ExtraConfigNqaInfoPtrInput` via:
 //
-//          ExtraConfigNqaInfoArgs{...}
+//	        ExtraConfigNqaInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ExtraConfigNqaInfoPtrInput interface {
 	pulumi.Input
 
@@ -505,7 +505,7 @@ type ExtraConfigRouteFilterPrefixes struct {
 // ExtraConfigRouteFilterPrefixesInput is an input type that accepts ExtraConfigRouteFilterPrefixesArgs and ExtraConfigRouteFilterPrefixesOutput values.
 // You can construct a concrete instance of `ExtraConfigRouteFilterPrefixesInput` via:
 //
-//          ExtraConfigRouteFilterPrefixesArgs{...}
+//	ExtraConfigRouteFilterPrefixesArgs{...}
 type ExtraConfigRouteFilterPrefixesInput interface {
 	pulumi.Input
 
@@ -541,11 +541,11 @@ func (i ExtraConfigRouteFilterPrefixesArgs) ToExtraConfigRouteFilterPrefixesPtrO
 // ExtraConfigRouteFilterPrefixesPtrInput is an input type that accepts ExtraConfigRouteFilterPrefixesArgs, ExtraConfigRouteFilterPrefixesPtr and ExtraConfigRouteFilterPrefixesPtrOutput values.
 // You can construct a concrete instance of `ExtraConfigRouteFilterPrefixesPtrInput` via:
 //
-//          ExtraConfigRouteFilterPrefixesArgs{...}
+//	        ExtraConfigRouteFilterPrefixesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ExtraConfigRouteFilterPrefixesPtrInput interface {
 	pulumi.Input
 
@@ -674,7 +674,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -734,7 +734,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 

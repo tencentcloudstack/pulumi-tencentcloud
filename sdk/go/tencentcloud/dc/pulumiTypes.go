@@ -38,7 +38,7 @@ type GetAccessPointsAccessPointSet struct {
 // GetAccessPointsAccessPointSetInput is an input type that accepts GetAccessPointsAccessPointSetArgs and GetAccessPointsAccessPointSetOutput values.
 // You can construct a concrete instance of `GetAccessPointsAccessPointSetInput` via:
 //
-//          GetAccessPointsAccessPointSetArgs{...}
+//	GetAccessPointsAccessPointSetArgs{...}
 type GetAccessPointsAccessPointSetInput interface {
 	pulumi.Input
 
@@ -86,7 +86,7 @@ func (i GetAccessPointsAccessPointSetArgs) ToGetAccessPointsAccessPointSetOutput
 // GetAccessPointsAccessPointSetArrayInput is an input type that accepts GetAccessPointsAccessPointSetArray and GetAccessPointsAccessPointSetArrayOutput values.
 // You can construct a concrete instance of `GetAccessPointsAccessPointSetArrayInput` via:
 //
-//          GetAccessPointsAccessPointSetArray{ GetAccessPointsAccessPointSetArgs{...} }
+//	GetAccessPointsAccessPointSetArray{ GetAccessPointsAccessPointSetArgs{...} }
 type GetAccessPointsAccessPointSetArrayInput interface {
 	pulumi.Input
 
@@ -207,7 +207,7 @@ type GetAccessPointsAccessPointSetCoordinate struct {
 // GetAccessPointsAccessPointSetCoordinateInput is an input type that accepts GetAccessPointsAccessPointSetCoordinateArgs and GetAccessPointsAccessPointSetCoordinateOutput values.
 // You can construct a concrete instance of `GetAccessPointsAccessPointSetCoordinateInput` via:
 //
-//          GetAccessPointsAccessPointSetCoordinateArgs{...}
+//	GetAccessPointsAccessPointSetCoordinateArgs{...}
 type GetAccessPointsAccessPointSetCoordinateInput interface {
 	pulumi.Input
 
@@ -237,7 +237,7 @@ func (i GetAccessPointsAccessPointSetCoordinateArgs) ToGetAccessPointsAccessPoin
 // GetAccessPointsAccessPointSetCoordinateArrayInput is an input type that accepts GetAccessPointsAccessPointSetCoordinateArray and GetAccessPointsAccessPointSetCoordinateArrayOutput values.
 // You can construct a concrete instance of `GetAccessPointsAccessPointSetCoordinateArrayInput` via:
 //
-//          GetAccessPointsAccessPointSetCoordinateArray{ GetAccessPointsAccessPointSetCoordinateArgs{...} }
+//	GetAccessPointsAccessPointSetCoordinateArray{ GetAccessPointsAccessPointSetCoordinateArgs{...} }
 type GetAccessPointsAccessPointSetCoordinateArrayInput interface {
 	pulumi.Input
 
@@ -317,7 +317,7 @@ type GetGatewayCcnRoutesInstanceList struct {
 // GetGatewayCcnRoutesInstanceListInput is an input type that accepts GetGatewayCcnRoutesInstanceListArgs and GetGatewayCcnRoutesInstanceListOutput values.
 // You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListInput` via:
 //
-//          GetGatewayCcnRoutesInstanceListArgs{...}
+//	GetGatewayCcnRoutesInstanceListArgs{...}
 type GetGatewayCcnRoutesInstanceListInput interface {
 	pulumi.Input
 
@@ -351,7 +351,7 @@ func (i GetGatewayCcnRoutesInstanceListArgs) ToGetGatewayCcnRoutesInstanceListOu
 // GetGatewayCcnRoutesInstanceListArrayInput is an input type that accepts GetGatewayCcnRoutesInstanceListArray and GetGatewayCcnRoutesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayCcnRoutesInstanceListArrayInput` via:
 //
-//          GetGatewayCcnRoutesInstanceListArray{ GetGatewayCcnRoutesInstanceListArgs{...} }
+//	GetGatewayCcnRoutesInstanceListArray{ GetGatewayCcnRoutesInstanceListArgs{...} }
 type GetGatewayCcnRoutesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -451,7 +451,7 @@ type GetGatewayInstancesInstanceList struct {
 // GetGatewayInstancesInstanceListInput is an input type that accepts GetGatewayInstancesInstanceListArgs and GetGatewayInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetGatewayInstancesInstanceListInput` via:
 //
-//          GetGatewayInstancesInstanceListArgs{...}
+//	GetGatewayInstancesInstanceListArgs{...}
 type GetGatewayInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -495,7 +495,7 @@ func (i GetGatewayInstancesInstanceListArgs) ToGetGatewayInstancesInstanceListOu
 // GetGatewayInstancesInstanceListArrayInput is an input type that accepts GetGatewayInstancesInstanceListArray and GetGatewayInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayInstancesInstanceListArrayInput` via:
 //
-//          GetGatewayInstancesInstanceListArray{ GetGatewayInstancesInstanceListArgs{...} }
+//	GetGatewayInstancesInstanceListArray{ GetGatewayInstancesInstanceListArgs{...} }
 type GetGatewayInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -642,7 +642,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -708,7 +708,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -874,7 +874,7 @@ type GetInternetAddressStatisticsInternetAddressStatistic struct {
 // GetInternetAddressStatisticsInternetAddressStatisticInput is an input type that accepts GetInternetAddressStatisticsInternetAddressStatisticArgs and GetInternetAddressStatisticsInternetAddressStatisticOutput values.
 // You can construct a concrete instance of `GetInternetAddressStatisticsInternetAddressStatisticInput` via:
 //
-//          GetInternetAddressStatisticsInternetAddressStatisticArgs{...}
+//	GetInternetAddressStatisticsInternetAddressStatisticArgs{...}
 type GetInternetAddressStatisticsInternetAddressStatisticInput interface {
 	pulumi.Input
 
@@ -904,7 +904,7 @@ func (i GetInternetAddressStatisticsInternetAddressStatisticArgs) ToGetInternetA
 // GetInternetAddressStatisticsInternetAddressStatisticArrayInput is an input type that accepts GetInternetAddressStatisticsInternetAddressStatisticArray and GetInternetAddressStatisticsInternetAddressStatisticArrayOutput values.
 // You can construct a concrete instance of `GetInternetAddressStatisticsInternetAddressStatisticArrayInput` via:
 //
-//          GetInternetAddressStatisticsInternetAddressStatisticArray{ GetInternetAddressStatisticsInternetAddressStatisticArgs{...} }
+//	GetInternetAddressStatisticsInternetAddressStatisticArray{ GetInternetAddressStatisticsInternetAddressStatisticArgs{...} }
 type GetInternetAddressStatisticsInternetAddressStatisticArrayInput interface {
 	pulumi.Input
 
@@ -980,7 +980,7 @@ type GetPublicDirectConnectTunnelRoutesFilter struct {
 // GetPublicDirectConnectTunnelRoutesFilterInput is an input type that accepts GetPublicDirectConnectTunnelRoutesFilterArgs and GetPublicDirectConnectTunnelRoutesFilterOutput values.
 // You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesFilterInput` via:
 //
-//          GetPublicDirectConnectTunnelRoutesFilterArgs{...}
+//	GetPublicDirectConnectTunnelRoutesFilterArgs{...}
 type GetPublicDirectConnectTunnelRoutesFilterInput interface {
 	pulumi.Input
 
@@ -1010,7 +1010,7 @@ func (i GetPublicDirectConnectTunnelRoutesFilterArgs) ToGetPublicDirectConnectTu
 // GetPublicDirectConnectTunnelRoutesFilterArrayInput is an input type that accepts GetPublicDirectConnectTunnelRoutesFilterArray and GetPublicDirectConnectTunnelRoutesFilterArrayOutput values.
 // You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesFilterArrayInput` via:
 //
-//          GetPublicDirectConnectTunnelRoutesFilterArray{ GetPublicDirectConnectTunnelRoutesFilterArgs{...} }
+//	GetPublicDirectConnectTunnelRoutesFilterArray{ GetPublicDirectConnectTunnelRoutesFilterArgs{...} }
 type GetPublicDirectConnectTunnelRoutesFilterArrayInput interface {
 	pulumi.Input
 
@@ -1094,7 +1094,7 @@ type GetPublicDirectConnectTunnelRoutesRoute struct {
 // GetPublicDirectConnectTunnelRoutesRouteInput is an input type that accepts GetPublicDirectConnectTunnelRoutesRouteArgs and GetPublicDirectConnectTunnelRoutesRouteOutput values.
 // You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesRouteInput` via:
 //
-//          GetPublicDirectConnectTunnelRoutesRouteArgs{...}
+//	GetPublicDirectConnectTunnelRoutesRouteArgs{...}
 type GetPublicDirectConnectTunnelRoutesRouteInput interface {
 	pulumi.Input
 
@@ -1132,7 +1132,7 @@ func (i GetPublicDirectConnectTunnelRoutesRouteArgs) ToGetPublicDirectConnectTun
 // GetPublicDirectConnectTunnelRoutesRouteArrayInput is an input type that accepts GetPublicDirectConnectTunnelRoutesRouteArray and GetPublicDirectConnectTunnelRoutesRouteArrayOutput values.
 // You can construct a concrete instance of `GetPublicDirectConnectTunnelRoutesRouteArrayInput` via:
 //
-//          GetPublicDirectConnectTunnelRoutesRouteArray{ GetPublicDirectConnectTunnelRoutesRouteArgs{...} }
+//	GetPublicDirectConnectTunnelRoutesRouteArray{ GetPublicDirectConnectTunnelRoutesRouteArgs{...} }
 type GetPublicDirectConnectTunnelRoutesRouteArrayInput interface {
 	pulumi.Input
 

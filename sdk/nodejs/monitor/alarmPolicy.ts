@@ -304,6 +304,14 @@ export class AlarmPolicy extends pulumi.CustomResource {
      */
     public readonly eventConditions!: pulumi.Output<outputs.Monitor.AlarmPolicyEventCondition[]>;
     /**
+     * Global filters.
+     */
+    public readonly filter!: pulumi.Output<outputs.Monitor.AlarmPolicyFilter | undefined>;
+    /**
+     * Aggregate dimension list, specify which dimension keys to use for group by.
+     */
+    public readonly groupBies!: pulumi.Output<string[] | undefined>;
+    /**
      * The type of monitor.
      */
     public readonly monitorType!: pulumi.Output<string>;
@@ -358,6 +366,8 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["enable"] = state ? state.enable : undefined;
             resourceInputs["eventConditions"] = state ? state.eventConditions : undefined;
+            resourceInputs["filter"] = state ? state.filter : undefined;
+            resourceInputs["groupBies"] = state ? state.groupBies : undefined;
             resourceInputs["monitorType"] = state ? state.monitorType : undefined;
             resourceInputs["namespace"] = state ? state.namespace : undefined;
             resourceInputs["noticeIds"] = state ? state.noticeIds : undefined;
@@ -382,6 +392,8 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["conditonTemplateId"] = args ? args.conditonTemplateId : undefined;
             resourceInputs["enable"] = args ? args.enable : undefined;
             resourceInputs["eventConditions"] = args ? args.eventConditions : undefined;
+            resourceInputs["filter"] = args ? args.filter : undefined;
+            resourceInputs["groupBies"] = args ? args.groupBies : undefined;
             resourceInputs["monitorType"] = args ? args.monitorType : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["noticeIds"] = args ? args.noticeIds : undefined;
@@ -422,6 +434,14 @@ export interface AlarmPolicyState {
      * A list of event trigger condition.
      */
     eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[]>;
+    /**
+     * Global filters.
+     */
+    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter>;
+    /**
+     * Aggregate dimension list, specify which dimension keys to use for group by.
+     */
+    groupBies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The type of monitor.
      */
@@ -480,6 +500,14 @@ export interface AlarmPolicyArgs {
      * A list of event trigger condition.
      */
     eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[]>;
+    /**
+     * Global filters.
+     */
+    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter>;
+    /**
+     * Aggregate dimension list, specify which dimension keys to use for group by.
+     */
+    groupBies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The type of monitor.
      */

@@ -179,6 +179,7 @@ class _CronJobState:
                  app_id: Optional[pulumi.Input[int]] = None,
                  created_at: Optional[pulumi.Input[str]] = None,
                  cron_expression: Optional[pulumi.Input[str]] = None,
+                 cron_job_id: Optional[pulumi.Input[str]] = None,
                  end_time: Optional[pulumi.Input[str]] = None,
                  frequency_type: Optional[pulumi.Input[int]] = None,
                  job_owner: Optional[pulumi.Input[str]] = None,
@@ -198,6 +199,7 @@ class _CronJobState:
         :param pulumi.Input[int] app_id: App ID.
         :param pulumi.Input[str] created_at: Creation time; type: Timestamp ISO8601.
         :param pulumi.Input[str] cron_expression: Cron expression, When setting cron_expression at that time, frequency_type must be greater than 1.
+        :param pulumi.Input[str] cron_job_id: Cron job ID.
         :param pulumi.Input[str] end_time: End Time; type: Timestamp ISO8601.
         :param pulumi.Input[int] frequency_type: Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
         :param pulumi.Input[str] job_owner: Job Owner.
@@ -220,6 +222,8 @@ class _CronJobState:
             pulumi.set(__self__, "created_at", created_at)
         if cron_expression is not None:
             pulumi.set(__self__, "cron_expression", cron_expression)
+        if cron_job_id is not None:
+            pulumi.set(__self__, "cron_job_id", cron_job_id)
         if end_time is not None:
             pulumi.set(__self__, "end_time", end_time)
         if frequency_type is not None:
@@ -294,6 +298,18 @@ class _CronJobState:
     @cron_expression.setter
     def cron_expression(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cron_expression", value)
+
+    @property
+    @pulumi.getter(name="cronJobId")
+    def cron_job_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cron job ID.
+        """
+        return pulumi.get(self, "cron_job_id")
+
+    @cron_job_id.setter
+    def cron_job_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cron_job_id", value)
 
     @property
     @pulumi.getter(name="endTime")
@@ -607,6 +623,7 @@ class CronJob(pulumi.CustomResource):
             __props__.__dict__["abort_reason"] = None
             __props__.__dict__["app_id"] = None
             __props__.__dict__["created_at"] = None
+            __props__.__dict__["cron_job_id"] = None
             __props__.__dict__["status"] = None
             __props__.__dict__["sub_account_uin"] = None
             __props__.__dict__["uin"] = None
@@ -625,6 +642,7 @@ class CronJob(pulumi.CustomResource):
             app_id: Optional[pulumi.Input[int]] = None,
             created_at: Optional[pulumi.Input[str]] = None,
             cron_expression: Optional[pulumi.Input[str]] = None,
+            cron_job_id: Optional[pulumi.Input[str]] = None,
             end_time: Optional[pulumi.Input[str]] = None,
             frequency_type: Optional[pulumi.Input[int]] = None,
             job_owner: Optional[pulumi.Input[str]] = None,
@@ -649,6 +667,7 @@ class CronJob(pulumi.CustomResource):
         :param pulumi.Input[int] app_id: App ID.
         :param pulumi.Input[str] created_at: Creation time; type: Timestamp ISO8601.
         :param pulumi.Input[str] cron_expression: Cron expression, When setting cron_expression at that time, frequency_type must be greater than 1.
+        :param pulumi.Input[str] cron_job_id: Cron job ID.
         :param pulumi.Input[str] end_time: End Time; type: Timestamp ISO8601.
         :param pulumi.Input[int] frequency_type: Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
         :param pulumi.Input[str] job_owner: Job Owner.
@@ -671,6 +690,7 @@ class CronJob(pulumi.CustomResource):
         __props__.__dict__["app_id"] = app_id
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["cron_expression"] = cron_expression
+        __props__.__dict__["cron_job_id"] = cron_job_id
         __props__.__dict__["end_time"] = end_time
         __props__.__dict__["frequency_type"] = frequency_type
         __props__.__dict__["job_owner"] = job_owner
@@ -717,6 +737,14 @@ class CronJob(pulumi.CustomResource):
         Cron expression, When setting cron_expression at that time, frequency_type must be greater than 1.
         """
         return pulumi.get(self, "cron_expression")
+
+    @property
+    @pulumi.getter(name="cronJobId")
+    def cron_job_id(self) -> pulumi.Output[str]:
+        """
+        Cron job ID.
+        """
+        return pulumi.get(self, "cron_job_id")
 
     @property
     @pulumi.getter(name="endTime")

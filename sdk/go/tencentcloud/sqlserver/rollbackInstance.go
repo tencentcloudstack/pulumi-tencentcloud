@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewRollbackInstance(ctx, "rollbackInstance", &Sqlserver.RollbackInstanceArgs{
-// 			InstanceId: pulumi.String("mssql-qelbzgwf"),
-// 			RenameRestores: sqlserver.RollbackInstanceRenameRestoreArray{
-// 				&sqlserver.RollbackInstanceRenameRestoreArgs{
-// 					NewName: pulumi.String("rollback_pubsub_db3"),
-// 					OldName: pulumi.String("keep_pubsub_db2"),
-// 				},
-// 			},
-// 			Time: pulumi.String("2023-05-23 01:00:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewRollbackInstance(ctx, "rollbackInstance", &Sqlserver.RollbackInstanceArgs{
+//				InstanceId: pulumi.String("mssql-qelbzgwf"),
+//				RenameRestores: sqlserver.RollbackInstanceRenameRestoreArray{
+//					&sqlserver.RollbackInstanceRenameRestoreArgs{
+//						NewName: pulumi.String("rollback_pubsub_db3"),
+//						OldName: pulumi.String("keep_pubsub_db2"),
+//					},
+//				},
+//				Time: pulumi.String("2023-05-23 01:00:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // sqlserver rollback_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
+//
+//	$ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
+//
 // ```
 type RollbackInstance struct {
 	pulumi.CustomResourceState
@@ -173,7 +178,7 @@ func (i *RollbackInstance) ToRollbackInstanceOutputWithContext(ctx context.Conte
 // RollbackInstanceArrayInput is an input type that accepts RollbackInstanceArray and RollbackInstanceArrayOutput values.
 // You can construct a concrete instance of `RollbackInstanceArrayInput` via:
 //
-//          RollbackInstanceArray{ RollbackInstanceArgs{...} }
+//	RollbackInstanceArray{ RollbackInstanceArgs{...} }
 type RollbackInstanceArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +203,7 @@ func (i RollbackInstanceArray) ToRollbackInstanceArrayOutputWithContext(ctx cont
 // RollbackInstanceMapInput is an input type that accepts RollbackInstanceMap and RollbackInstanceMapOutput values.
 // You can construct a concrete instance of `RollbackInstanceMapInput` via:
 //
-//          RollbackInstanceMap{ "key": RollbackInstanceArgs{...} }
+//	RollbackInstanceMap{ "key": RollbackInstanceArgs{...} }
 type RollbackInstanceMapInput interface {
 	pulumi.Input
 

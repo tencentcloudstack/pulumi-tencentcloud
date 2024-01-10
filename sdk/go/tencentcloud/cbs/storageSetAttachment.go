@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewStorageSetAttachment(ctx, "attachment", &Cbs.StorageSetAttachmentArgs{
-// 			InstanceId: pulumi.String("ins-jqlegd42"),
-// 			StorageId:  pulumi.String("disk-kdt0sq6m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorageSetAttachment(ctx, "attachment", &Cbs.StorageSetAttachmentArgs{
+//				InstanceId: pulumi.String("ins-jqlegd42"),
+//				StorageId:  pulumi.String("disk-kdt0sq6m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StorageSetAttachment struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *StorageSetAttachment) ToStorageSetAttachmentOutputWithContext(ctx conte
 // StorageSetAttachmentArrayInput is an input type that accepts StorageSetAttachmentArray and StorageSetAttachmentArrayOutput values.
 // You can construct a concrete instance of `StorageSetAttachmentArrayInput` via:
 //
-//          StorageSetAttachmentArray{ StorageSetAttachmentArgs{...} }
+//	StorageSetAttachmentArray{ StorageSetAttachmentArgs{...} }
 type StorageSetAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i StorageSetAttachmentArray) ToStorageSetAttachmentArrayOutputWithContext(
 // StorageSetAttachmentMapInput is an input type that accepts StorageSetAttachmentMap and StorageSetAttachmentMapOutput values.
 // You can construct a concrete instance of `StorageSetAttachmentMapInput` via:
 //
-//          StorageSetAttachmentMap{ "key": StorageSetAttachmentArgs{...} }
+//	StorageSetAttachmentMap{ "key": StorageSetAttachmentArgs{...} }
 type StorageSetAttachmentMapInput interface {
 	pulumi.Input
 

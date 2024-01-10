@@ -19,7 +19,8 @@ class SshKeyPairSecretArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  ssh_key_name: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[str]] = None):
+                 status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a SshKeyPairSecret resource.
         :param pulumi.Input[int] project_id: ID of the project to which the created SSH key belongs.
@@ -29,6 +30,7 @@ class SshKeyPairSecretArgs:
         :param pulumi.Input[str] kms_key_id: Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         :param pulumi.Input[str] ssh_key_name: Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "secret_name", secret_name)
@@ -42,6 +44,8 @@ class SshKeyPairSecretArgs:
             pulumi.set(__self__, "ssh_key_name", ssh_key_name)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="projectId")
@@ -127,6 +131,18 @@ class SshKeyPairSecretArgs:
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _SshKeyPairSecretState:
@@ -139,7 +155,8 @@ class _SshKeyPairSecretState:
                  secret_name: Optional[pulumi.Input[str]] = None,
                  secret_type: Optional[pulumi.Input[int]] = None,
                  ssh_key_name: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[str]] = None):
+                 status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering SshKeyPairSecret resources.
         :param pulumi.Input[bool] clean_ssh_key: Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
@@ -151,6 +168,7 @@ class _SshKeyPairSecretState:
         :param pulumi.Input[int] secret_type: `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
         :param pulumi.Input[str] ssh_key_name: Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         if clean_ssh_key is not None:
             pulumi.set(__self__, "clean_ssh_key", clean_ssh_key)
@@ -170,6 +188,8 @@ class _SshKeyPairSecretState:
             pulumi.set(__self__, "ssh_key_name", ssh_key_name)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="cleanSshKey")
@@ -279,6 +299,18 @@ class _SshKeyPairSecretState:
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class SshKeyPairSecret(pulumi.CustomResource):
     @overload
@@ -292,9 +324,37 @@ class SshKeyPairSecret(pulumi.CustomResource):
                  secret_name: Optional[pulumi.Input[str]] = None,
                  ssh_key_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a resource to create a ssm ssh key pair secret
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_key = tencentcloud.kms.Key("exampleKey",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_ssh_key_pair_secret = tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPairSecret",
+            secret_name="tf-example",
+            project_id=0,
+            description="desc.",
+            kms_key_id=example_key.id,
+            ssh_key_name="tf_example_ssh",
+            status="Enabled",
+            clean_ssh_key=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
@@ -313,6 +373,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
         :param pulumi.Input[str] secret_name: Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
         :param pulumi.Input[str] ssh_key_name: Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         ...
     @overload
@@ -322,6 +383,33 @@ class SshKeyPairSecret(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a ssm ssh key pair secret
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_key = tencentcloud.kms.Key("exampleKey",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_ssh_key_pair_secret = tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPairSecret",
+            secret_name="tf-example",
+            project_id=0,
+            description="desc.",
+            kms_key_id=example_key.id,
+            ssh_key_name="tf_example_ssh",
+            status="Enabled",
+            clean_ssh_key=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
@@ -353,6 +441,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
                  secret_name: Optional[pulumi.Input[str]] = None,
                  ssh_key_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -378,6 +467,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
             __props__.__dict__["secret_name"] = secret_name
             __props__.__dict__["ssh_key_name"] = ssh_key_name
             __props__.__dict__["status"] = status
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["secret_type"] = None
         super(SshKeyPairSecret, __self__).__init__(
@@ -398,7 +488,8 @@ class SshKeyPairSecret(pulumi.CustomResource):
             secret_name: Optional[pulumi.Input[str]] = None,
             secret_type: Optional[pulumi.Input[int]] = None,
             ssh_key_name: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None) -> 'SshKeyPairSecret':
+            status: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'SshKeyPairSecret':
         """
         Get an existing SshKeyPairSecret resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -415,6 +506,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
         :param pulumi.Input[int] secret_type: `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
         :param pulumi.Input[str] ssh_key_name: Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -429,6 +521,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
         __props__.__dict__["secret_type"] = secret_type
         __props__.__dict__["ssh_key_name"] = ssh_key_name
         __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         return SshKeyPairSecret(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -457,7 +550,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="kmsKeyId")
-    def kms_key_id(self) -> pulumi.Output[Optional[str]]:
+    def kms_key_id(self) -> pulumi.Output[str]:
         """
         Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         """
@@ -489,7 +582,7 @@ class SshKeyPairSecret(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="sshKeyName")
-    def ssh_key_name(self) -> pulumi.Output[Optional[str]]:
+    def ssh_key_name(self) -> pulumi.Output[str]:
         """
         Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         """
@@ -502,4 +595,12 @@ class SshKeyPairSecret(pulumi.CustomResource):
         Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
 

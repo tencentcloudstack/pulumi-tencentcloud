@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Monitor.AlarmNotice("foo", new Tencentcloud.Monitor.AlarmNoticeArgs
+    ///         var example = new Tencentcloud.Monitor.AlarmNotice("example", new Tencentcloud.Monitor.AlarmNoticeArgs
     ///         {
     ///             NoticeLanguage = "zh-CN",
     ///             NoticeType = "ALL",
@@ -31,8 +31,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///             {
     ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUrlNoticeArgs
     ///                 {
-    ///                     EndTime = 0,
-    ///                     StartTime = 1,
+    ///                     EndTime = 86399,
+    ///                     IsValid = 0,
+    ///                     StartTime = 0,
     ///                     Url = "https://www.mytest.com/validate",
     ///                     Weekdays = 
     ///                     {
@@ -50,27 +51,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///             {
     ///                 new Tencentcloud.Monitor.Inputs.AlarmNoticeUserNoticeArgs
     ///                 {
-    ///                     EndTime = 1,
+    ///                     EndTime = 86399,
     ///                     GroupIds = {},
     ///                     NeedPhoneArriveNotice = 1,
     ///                     NoticeWays = 
     ///                     {
-    ///                         "SMS",
     ///                         "EMAIL",
+    ///                         "SMS",
     ///                     },
     ///                     PhoneCallType = "CIRCLE",
-    ///                     PhoneCircleInterval = 50,
+    ///                     PhoneCircleInterval = 180,
     ///                     PhoneCircleTimes = 2,
-    ///                     PhoneInnerInterval = 60,
-    ///                     PhoneOrders = 
-    ///                     {
-    ///                         10001,
-    ///                     },
+    ///                     PhoneInnerInterval = 180,
+    ///                     PhoneOrders = {},
     ///                     ReceiverType = "USER",
     ///                     StartTime = 0,
     ///                     UserIds = 
     ///                     {
-    ///                         10001,
+    ///                         11082189,
+    ///                         11082190,
     ///                     },
     ///                     Weekdays = 
     ///                     {

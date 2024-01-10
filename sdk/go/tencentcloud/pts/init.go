@@ -25,14 +25,22 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AlertChannel{}
 	case "tencentcloud:Pts/cronJob:CronJob":
 		r = &CronJob{}
+	case "tencentcloud:Pts/cronJobAbort:CronJobAbort":
+		r = &CronJobAbort{}
+	case "tencentcloud:Pts/cronJobRestart:CronJobRestart":
+		r = &CronJobRestart{}
 	case "tencentcloud:Pts/file:File":
 		r = &File{}
 	case "tencentcloud:Pts/job:Job":
 		r = &Job{}
+	case "tencentcloud:Pts/jobAbort:JobAbort":
+		r = &JobAbort{}
 	case "tencentcloud:Pts/project:Project":
 		r = &Project{}
 	case "tencentcloud:Pts/scenario:Scenario":
 		r = &Scenario{}
+	case "tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate":
+		r = &TmpKeyGenerate{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -58,6 +66,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Pts/cronJobAbort",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Pts/cronJobRestart",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Pts/file",
 		&module{version},
 	)
@@ -68,12 +86,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Pts/jobAbort",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Pts/project",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Pts/scenario",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Pts/tmpKeyGenerate",
 		&module{version},
 	)
 }

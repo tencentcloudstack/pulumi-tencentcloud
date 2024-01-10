@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetAlarmNotices(ctx, &monitor.GetAlarmNoticesArgs{
-// 			GroupIds:     []interface{}{},
-// 			Name:         pulumi.StringRef(""),
-// 			NoticeIds:    []interface{}{},
-// 			Order:        pulumi.StringRef("DESC"),
-// 			OwnerUid:     pulumi.IntRef(1),
-// 			ReceiverType: pulumi.StringRef(""),
-// 			UserIds:      []interface{}{},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetAlarmNotices(ctx, &monitor.GetAlarmNoticesArgs{
+//				GroupIds:     []interface{}{},
+//				Name:         pulumi.StringRef(""),
+//				NoticeIds:    []interface{}{},
+//				Order:        pulumi.StringRef("DESC"),
+//				OwnerUid:     pulumi.IntRef(1),
+//				ReceiverType: pulumi.StringRef(""),
+//				UserIds:      []interface{}{},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAlarmNotices(ctx *pulumi.Context, args *GetAlarmNoticesArgs, opts ...pulumi.InvokeOption) (*GetAlarmNoticesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

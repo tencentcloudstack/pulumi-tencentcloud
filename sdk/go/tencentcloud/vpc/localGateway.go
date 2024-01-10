@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewLocalGateway(ctx, "example", &Vpc.LocalGatewayArgs{
-// 			LocalGatewayName: pulumi.String("tf-example"),
-// 			VpcId:            vpc.ID(),
-// 			CdcId:            pulumi.String("cluster-j9gyu1iy"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewLocalGateway(ctx, "example", &Vpc.LocalGatewayArgs{
+//				LocalGatewayName: pulumi.String("tf-example"),
+//				VpcId:            vpc.ID(),
+//				CdcId:            pulumi.String("cluster-j9gyu1iy"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // vpc local_gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
+//
+//	$ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
+//
 // ```
 type LocalGateway struct {
 	pulumi.CustomResourceState
@@ -167,7 +172,7 @@ func (i *LocalGateway) ToLocalGatewayOutputWithContext(ctx context.Context) Loca
 // LocalGatewayArrayInput is an input type that accepts LocalGatewayArray and LocalGatewayArrayOutput values.
 // You can construct a concrete instance of `LocalGatewayArrayInput` via:
 //
-//          LocalGatewayArray{ LocalGatewayArgs{...} }
+//	LocalGatewayArray{ LocalGatewayArgs{...} }
 type LocalGatewayArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +197,7 @@ func (i LocalGatewayArray) ToLocalGatewayArrayOutputWithContext(ctx context.Cont
 // LocalGatewayMapInput is an input type that accepts LocalGatewayMap and LocalGatewayMapOutput values.
 // You can construct a concrete instance of `LocalGatewayMapInput` via:
 //
-//          LocalGatewayMap{ "key": LocalGatewayArgs{...} }
+//	LocalGatewayMap{ "key": LocalGatewayArgs{...} }
 type LocalGatewayMapInput interface {
 	pulumi.Input
 

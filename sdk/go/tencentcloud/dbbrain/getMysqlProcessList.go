@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetMysqlProcessList(ctx, &dbbrain.GetMysqlProcessListArgs{
-// 			InstanceId: local.Mysql_id,
-// 			Product:    pulumi.StringRef("mysql"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetMysqlProcessList(ctx, &dbbrain.GetMysqlProcessListArgs{
+//				InstanceId: local.Mysql_id,
+//				Product:    pulumi.StringRef("mysql"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMysqlProcessList(ctx *pulumi.Context, args *GetMysqlProcessListArgs, opts ...pulumi.InvokeOption) (*GetMysqlProcessListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

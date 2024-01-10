@@ -14,13 +14,25 @@ __all__ = ['ApiKeyArgs', 'ApiKey']
 class ApiKeyArgs:
     def __init__(__self__, *,
                  secret_name: pulumi.Input[str],
+                 access_key_id: Optional[pulumi.Input[str]] = None,
+                 access_key_secret: Optional[pulumi.Input[str]] = None,
+                 access_key_type: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApiKey resource.
         :param pulumi.Input[str] secret_name: Custom key name.
+        :param pulumi.Input[str] access_key_id: User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_secret: The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_type: Key type, supports both auto and manual (custom keys), defaults to auto.
         :param pulumi.Input[str] status: Key status. Valid values: `on`, `off`.
         """
         pulumi.set(__self__, "secret_name", secret_name)
+        if access_key_id is not None:
+            pulumi.set(__self__, "access_key_id", access_key_id)
+        if access_key_secret is not None:
+            pulumi.set(__self__, "access_key_secret", access_key_secret)
+        if access_key_type is not None:
+            pulumi.set(__self__, "access_key_type", access_key_type)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
@@ -35,6 +47,42 @@ class ApiKeyArgs:
     @secret_name.setter
     def secret_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "secret_name", value)
+
+    @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @access_key_id.setter
+    def access_key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key_id", value)
+
+    @property
+    @pulumi.getter(name="accessKeySecret")
+    def access_key_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        """
+        return pulumi.get(self, "access_key_secret")
+
+    @access_key_secret.setter
+    def access_key_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key_secret", value)
+
+    @property
+    @pulumi.getter(name="accessKeyType")
+    def access_key_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key type, supports both auto and manual (custom keys), defaults to auto.
+        """
+        return pulumi.get(self, "access_key_type")
+
+    @access_key_type.setter
+    def access_key_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key_type", value)
 
     @property
     @pulumi.getter
@@ -52,21 +100,29 @@ class ApiKeyArgs:
 @pulumi.input_type
 class _ApiKeyState:
     def __init__(__self__, *,
+                 access_key_id: Optional[pulumi.Input[str]] = None,
                  access_key_secret: Optional[pulumi.Input[str]] = None,
+                 access_key_type: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  modify_time: Optional[pulumi.Input[str]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ApiKey resources.
-        :param pulumi.Input[str] access_key_secret: Created API key.
+        :param pulumi.Input[str] access_key_id: User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_secret: The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_type: Key type, supports both auto and manual (custom keys), defaults to auto.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] secret_name: Custom key name.
         :param pulumi.Input[str] status: Key status. Valid values: `on`, `off`.
         """
+        if access_key_id is not None:
+            pulumi.set(__self__, "access_key_id", access_key_id)
         if access_key_secret is not None:
             pulumi.set(__self__, "access_key_secret", access_key_secret)
+        if access_key_type is not None:
+            pulumi.set(__self__, "access_key_type", access_key_type)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if modify_time is not None:
@@ -77,16 +133,40 @@ class _ApiKeyState:
             pulumi.set(__self__, "status", status)
 
     @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @access_key_id.setter
+    def access_key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key_id", value)
+
+    @property
     @pulumi.getter(name="accessKeySecret")
     def access_key_secret(self) -> Optional[pulumi.Input[str]]:
         """
-        Created API key.
+        The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
         """
         return pulumi.get(self, "access_key_secret")
 
     @access_key_secret.setter
     def access_key_secret(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "access_key_secret", value)
+
+    @property
+    @pulumi.getter(name="accessKeyType")
+    def access_key_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key type, supports both auto and manual (custom keys), defaults to auto.
+        """
+        return pulumi.get(self, "access_key_type")
+
+    @access_key_type.setter
+    def access_key_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key_type", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -142,6 +222,9 @@ class ApiKey(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 access_key_id: Optional[pulumi.Input[str]] = None,
+                 access_key_secret: Optional[pulumi.Input[str]] = None,
+                 access_key_type: Optional[pulumi.Input[str]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -149,13 +232,27 @@ class ApiKey(pulumi.CustomResource):
         Use this resource to create API gateway access key.
 
         ## Example Usage
+        ### Automatically generate key for API gateway access key.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.api_gateway.ApiKey("test",
-            secret_name="my_api_key",
+        example_auto = tencentcloud.api_gateway.ApiKey("exampleAuto",
+            secret_name="tf_example_auto",
+            status="on")
+        ```
+        ### Manually generate a secret key for API gateway access key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_manual = tencentcloud.api_gateway.ApiKey("exampleManual",
+            access_key_id="28e287e340507fa147b2c8284dab542f",
+            access_key_secret="0198a4b8c3105080f4acd9e507599eff",
+            access_key_type="manual",
+            secret_name="tf_example_manual",
             status="on")
         ```
 
@@ -169,6 +266,9 @@ class ApiKey(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] access_key_id: User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_secret: The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_type: Key type, supports both auto and manual (custom keys), defaults to auto.
         :param pulumi.Input[str] secret_name: Custom key name.
         :param pulumi.Input[str] status: Key status. Valid values: `on`, `off`.
         """
@@ -182,13 +282,27 @@ class ApiKey(pulumi.CustomResource):
         Use this resource to create API gateway access key.
 
         ## Example Usage
+        ### Automatically generate key for API gateway access key.
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test = tencentcloud.api_gateway.ApiKey("test",
-            secret_name="my_api_key",
+        example_auto = tencentcloud.api_gateway.ApiKey("exampleAuto",
+            secret_name="tf_example_auto",
+            status="on")
+        ```
+        ### Manually generate a secret key for API gateway access key.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_manual = tencentcloud.api_gateway.ApiKey("exampleManual",
+            access_key_id="28e287e340507fa147b2c8284dab542f",
+            access_key_secret="0198a4b8c3105080f4acd9e507599eff",
+            access_key_type="manual",
+            secret_name="tf_example_manual",
             status="on")
         ```
 
@@ -215,6 +329,9 @@ class ApiKey(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 access_key_id: Optional[pulumi.Input[str]] = None,
+                 access_key_secret: Optional[pulumi.Input[str]] = None,
+                 access_key_type: Optional[pulumi.Input[str]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -231,11 +348,13 @@ class ApiKey(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ApiKeyArgs.__new__(ApiKeyArgs)
 
+            __props__.__dict__["access_key_id"] = access_key_id
+            __props__.__dict__["access_key_secret"] = access_key_secret
+            __props__.__dict__["access_key_type"] = access_key_type
             if secret_name is None and not opts.urn:
                 raise TypeError("Missing required property 'secret_name'")
             __props__.__dict__["secret_name"] = secret_name
             __props__.__dict__["status"] = status
-            __props__.__dict__["access_key_secret"] = None
             __props__.__dict__["create_time"] = None
             __props__.__dict__["modify_time"] = None
         super(ApiKey, __self__).__init__(
@@ -248,7 +367,9 @@ class ApiKey(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            access_key_id: Optional[pulumi.Input[str]] = None,
             access_key_secret: Optional[pulumi.Input[str]] = None,
+            access_key_type: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             modify_time: Optional[pulumi.Input[str]] = None,
             secret_name: Optional[pulumi.Input[str]] = None,
@@ -260,7 +381,9 @@ class ApiKey(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_key_secret: Created API key.
+        :param pulumi.Input[str] access_key_id: User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_secret: The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+        :param pulumi.Input[str] access_key_type: Key type, supports both auto and manual (custom keys), defaults to auto.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[str] secret_name: Custom key name.
@@ -270,7 +393,9 @@ class ApiKey(pulumi.CustomResource):
 
         __props__ = _ApiKeyState.__new__(_ApiKeyState)
 
+        __props__.__dict__["access_key_id"] = access_key_id
         __props__.__dict__["access_key_secret"] = access_key_secret
+        __props__.__dict__["access_key_type"] = access_key_type
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["modify_time"] = modify_time
         __props__.__dict__["secret_name"] = secret_name
@@ -278,12 +403,28 @@ class ApiKey(pulumi.CustomResource):
         return ApiKey(resource_name, opts=opts, __props__=__props__)
 
     @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> pulumi.Output[str]:
+        """
+        User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @property
     @pulumi.getter(name="accessKeySecret")
     def access_key_secret(self) -> pulumi.Output[str]:
         """
-        Created API key.
+        The user-defined key must be passed when the access_key_type is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
         """
         return pulumi.get(self, "access_key_secret")
+
+    @property
+    @pulumi.getter(name="accessKeyType")
+    def access_key_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        Key type, supports both auto and manual (custom keys), defaults to auto.
+        """
+        return pulumi.get(self, "access_key_type")
 
     @property
     @pulumi.getter(name="createTime")

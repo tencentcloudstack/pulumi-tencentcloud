@@ -48,6 +48,50 @@ __all__ = [
     'ScenarioSlaPolicySlaRule',
     'ScenarioSlaPolicySlaRuleLabelFilter',
     'ScenarioTestScript',
+    'TmpKeyGenerateCredential',
+    'GetScenarioWithJobsScenarioWithJobsSetResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobDatasetResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobPluginResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobProtocolResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobRequestFileResult',
+    'GetScenarioWithJobsScenarioWithJobsSetJobTestScriptResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioPluginResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterResult',
+    'GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptResult',
 ]
 
 @pulumi.output_type
@@ -2606,6 +2650,2932 @@ class ScenarioTestScript(dict):
     def updated_at(self) -> Optional[str]:
         """
         Update time.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class TmpKeyGenerateCredential(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tmpSecretId":
+            suggest = "tmp_secret_id"
+        elif key == "tmpSecretKey":
+            suggest = "tmp_secret_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpKeyGenerateCredential. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpKeyGenerateCredential.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpKeyGenerateCredential.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 tmp_secret_id: Optional[str] = None,
+                 tmp_secret_key: Optional[str] = None,
+                 token: Optional[str] = None):
+        """
+        :param str tmp_secret_id: Temporary secret ID.
+        :param str tmp_secret_key: Temporary secret key.
+        :param str token: Temporary token.
+        """
+        if tmp_secret_id is not None:
+            pulumi.set(__self__, "tmp_secret_id", tmp_secret_id)
+        if tmp_secret_key is not None:
+            pulumi.set(__self__, "tmp_secret_key", tmp_secret_key)
+        if token is not None:
+            pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter(name="tmpSecretId")
+    def tmp_secret_id(self) -> Optional[str]:
+        """
+        Temporary secret ID.
+        """
+        return pulumi.get(self, "tmp_secret_id")
+
+    @property
+    @pulumi.getter(name="tmpSecretKey")
+    def tmp_secret_key(self) -> Optional[str]:
+        """
+        Temporary secret key.
+        """
+        return pulumi.get(self, "tmp_secret_key")
+
+    @property
+    @pulumi.getter
+    def token(self) -> Optional[str]:
+        """
+        Temporary token.
+        """
+        return pulumi.get(self, "token")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetResult(dict):
+    def __init__(__self__, *,
+                 jobs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobResult'],
+                 scenarios: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobArgs'] jobs: Jobs related to the scenario.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioArgs'] scenarios: The returned scenario.
+        """
+        pulumi.set(__self__, "jobs", jobs)
+        pulumi.set(__self__, "scenarios", scenarios)
+
+    @property
+    @pulumi.getter
+    def jobs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobResult']:
+        """
+        Jobs related to the scenario.
+        """
+        return pulumi.get(self, "jobs")
+
+    @property
+    @pulumi.getter
+    def scenarios(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioResult']:
+        """
+        The returned scenario.
+        """
+        return pulumi.get(self, "scenarios")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobResult(dict):
+    def __init__(__self__, *,
+                 abort_reason: int,
+                 configs: Sequence[str],
+                 created_at: str,
+                 cron_id: str,
+                 datasets: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDatasetResult'],
+                 debug: bool,
+                 domain_name_configs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigResult'],
+                 duration: int,
+                 end_time: str,
+                 error_rate: float,
+                 extensions: Sequence[str],
+                 job_id: str,
+                 job_owner: str,
+                 load_source_infos: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoResult'],
+                 load_sources: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceResult'],
+                 loads: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadResult'],
+                 max_requests_per_second: int,
+                 max_virtual_user_count: int,
+                 message: str,
+                 network_receive_rate: float,
+                 network_send_rate: float,
+                 note: str,
+                 notification_hooks: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookResult'],
+                 plugins: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobPluginResult'],
+                 project_id: str,
+                 project_name: str,
+                 protocols: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobProtocolResult'],
+                 request_files: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobRequestFileResult'],
+                 request_total: float,
+                 requests_per_second: float,
+                 response_time_average: float,
+                 response_time_max: float,
+                 response_time_min: float,
+                 response_time_p90: float,
+                 response_time_p95: float,
+                 response_time_p99: float,
+                 scenario_id: str,
+                 scenario_name: str,
+                 scripts: Sequence[str],
+                 start_time: str,
+                 status: int,
+                 test_scripts: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobTestScriptResult'],
+                 type: str):
+        """
+        :param int abort_reason: The reason for aborting the job.
+        :param Sequence[str] configs: Deprecated.
+        :param str created_at: The creation time of the scenario.
+        :param str cron_id: The cron job ID.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs'] datasets: The test data sets for the load test.
+        :param bool debug: Whether to run the job in the debug mode. The default value is false.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs'] domain_name_configs: The configuration for parsing domain names.
+        :param int duration: Job running duration.
+        :param str end_time: The job ending time.
+        :param float error_rate: Error rate.
+        :param Sequence[str] extensions: Deprecated.
+        :param str job_id: Job ID.
+        :param str job_owner: Job owner.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs'] load_source_infos: The load source information.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs'] load_sources: Deprecated.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs'] loads: Scenario is load test configuration.
+        :param int max_requests_per_second: The maximum RPS.
+        :param int max_virtual_user_count: The maximum VU of the job.
+        :param str message: The message describing the job running status.
+        :param float network_receive_rate: The rate of receiving bytes.
+        :param float network_send_rate: The rate of sending bytes.
+        :param str note: The note of the job.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs'] notification_hooks: The notification hooks.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs'] plugins: Plugins.
+        :param str project_id: Project ID.
+        :param str project_name: Project name.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs'] protocols: The protocol file.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs'] request_files: The files in the request.
+        :param float request_total: The total reqeust count.
+        :param float requests_per_second: The configuration of the RPS mode load test.
+        :param float response_time_average: The average response time.
+        :param float response_time_max: The maximum response time.
+        :param float response_time_min: The minimum response time.
+        :param float response_time_p90: The 90 percentile of the response time.
+        :param float response_time_p95: The 95 percentile of the response time.
+        :param float response_time_p99: The 99 percentile of the response time.
+        :param str scenario_id: Scenario ID.
+        :param str scenario_name: Scenario name.
+        :param Sequence[str] scripts: Deprecated.
+        :param str start_time: The job starting time.
+        :param int status: Scenario status.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs'] test_scripts: The script of the load test.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        pulumi.set(__self__, "abort_reason", abort_reason)
+        pulumi.set(__self__, "configs", configs)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "cron_id", cron_id)
+        pulumi.set(__self__, "datasets", datasets)
+        pulumi.set(__self__, "debug", debug)
+        pulumi.set(__self__, "domain_name_configs", domain_name_configs)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "error_rate", error_rate)
+        pulumi.set(__self__, "extensions", extensions)
+        pulumi.set(__self__, "job_id", job_id)
+        pulumi.set(__self__, "job_owner", job_owner)
+        pulumi.set(__self__, "load_source_infos", load_source_infos)
+        pulumi.set(__self__, "load_sources", load_sources)
+        pulumi.set(__self__, "loads", loads)
+        pulumi.set(__self__, "max_requests_per_second", max_requests_per_second)
+        pulumi.set(__self__, "max_virtual_user_count", max_virtual_user_count)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "network_receive_rate", network_receive_rate)
+        pulumi.set(__self__, "network_send_rate", network_send_rate)
+        pulumi.set(__self__, "note", note)
+        pulumi.set(__self__, "notification_hooks", notification_hooks)
+        pulumi.set(__self__, "plugins", plugins)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "protocols", protocols)
+        pulumi.set(__self__, "request_files", request_files)
+        pulumi.set(__self__, "request_total", request_total)
+        pulumi.set(__self__, "requests_per_second", requests_per_second)
+        pulumi.set(__self__, "response_time_average", response_time_average)
+        pulumi.set(__self__, "response_time_max", response_time_max)
+        pulumi.set(__self__, "response_time_min", response_time_min)
+        pulumi.set(__self__, "response_time_p90", response_time_p90)
+        pulumi.set(__self__, "response_time_p95", response_time_p95)
+        pulumi.set(__self__, "response_time_p99", response_time_p99)
+        pulumi.set(__self__, "scenario_id", scenario_id)
+        pulumi.set(__self__, "scenario_name", scenario_name)
+        pulumi.set(__self__, "scripts", scripts)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "test_scripts", test_scripts)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="abortReason")
+    def abort_reason(self) -> int:
+        """
+        The reason for aborting the job.
+        """
+        return pulumi.get(self, "abort_reason")
+
+    @property
+    @pulumi.getter
+    def configs(self) -> Sequence[str]:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "configs")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        The creation time of the scenario.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter(name="cronId")
+    def cron_id(self) -> str:
+        """
+        The cron job ID.
+        """
+        return pulumi.get(self, "cron_id")
+
+    @property
+    @pulumi.getter
+    def datasets(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDatasetResult']:
+        """
+        The test data sets for the load test.
+        """
+        return pulumi.get(self, "datasets")
+
+    @property
+    @pulumi.getter
+    def debug(self) -> bool:
+        """
+        Whether to run the job in the debug mode. The default value is false.
+        """
+        return pulumi.get(self, "debug")
+
+    @property
+    @pulumi.getter(name="domainNameConfigs")
+    def domain_name_configs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigResult']:
+        """
+        The configuration for parsing domain names.
+        """
+        return pulumi.get(self, "domain_name_configs")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> int:
+        """
+        Job running duration.
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        The job ending time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="errorRate")
+    def error_rate(self) -> float:
+        """
+        Error rate.
+        """
+        return pulumi.get(self, "error_rate")
+
+    @property
+    @pulumi.getter
+    def extensions(self) -> Sequence[str]:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "extensions")
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> str:
+        """
+        Job ID.
+        """
+        return pulumi.get(self, "job_id")
+
+    @property
+    @pulumi.getter(name="jobOwner")
+    def job_owner(self) -> str:
+        """
+        Job owner.
+        """
+        return pulumi.get(self, "job_owner")
+
+    @property
+    @pulumi.getter(name="loadSourceInfos")
+    def load_source_infos(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoResult']:
+        """
+        The load source information.
+        """
+        return pulumi.get(self, "load_source_infos")
+
+    @property
+    @pulumi.getter(name="loadSources")
+    def load_sources(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceResult']:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "load_sources")
+
+    @property
+    @pulumi.getter
+    def loads(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadResult']:
+        """
+        Scenario is load test configuration.
+        """
+        return pulumi.get(self, "loads")
+
+    @property
+    @pulumi.getter(name="maxRequestsPerSecond")
+    def max_requests_per_second(self) -> int:
+        """
+        The maximum RPS.
+        """
+        return pulumi.get(self, "max_requests_per_second")
+
+    @property
+    @pulumi.getter(name="maxVirtualUserCount")
+    def max_virtual_user_count(self) -> int:
+        """
+        The maximum VU of the job.
+        """
+        return pulumi.get(self, "max_virtual_user_count")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        The message describing the job running status.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter(name="networkReceiveRate")
+    def network_receive_rate(self) -> float:
+        """
+        The rate of receiving bytes.
+        """
+        return pulumi.get(self, "network_receive_rate")
+
+    @property
+    @pulumi.getter(name="networkSendRate")
+    def network_send_rate(self) -> float:
+        """
+        The rate of sending bytes.
+        """
+        return pulumi.get(self, "network_send_rate")
+
+    @property
+    @pulumi.getter
+    def note(self) -> str:
+        """
+        The note of the job.
+        """
+        return pulumi.get(self, "note")
+
+    @property
+    @pulumi.getter(name="notificationHooks")
+    def notification_hooks(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookResult']:
+        """
+        The notification hooks.
+        """
+        return pulumi.get(self, "notification_hooks")
+
+    @property
+    @pulumi.getter
+    def plugins(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobPluginResult']:
+        """
+        Plugins.
+        """
+        return pulumi.get(self, "plugins")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> str:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> str:
+        """
+        Project name.
+        """
+        return pulumi.get(self, "project_name")
+
+    @property
+    @pulumi.getter
+    def protocols(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobProtocolResult']:
+        """
+        The protocol file.
+        """
+        return pulumi.get(self, "protocols")
+
+    @property
+    @pulumi.getter(name="requestFiles")
+    def request_files(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobRequestFileResult']:
+        """
+        The files in the request.
+        """
+        return pulumi.get(self, "request_files")
+
+    @property
+    @pulumi.getter(name="requestTotal")
+    def request_total(self) -> float:
+        """
+        The total reqeust count.
+        """
+        return pulumi.get(self, "request_total")
+
+    @property
+    @pulumi.getter(name="requestsPerSecond")
+    def requests_per_second(self) -> float:
+        """
+        The configuration of the RPS mode load test.
+        """
+        return pulumi.get(self, "requests_per_second")
+
+    @property
+    @pulumi.getter(name="responseTimeAverage")
+    def response_time_average(self) -> float:
+        """
+        The average response time.
+        """
+        return pulumi.get(self, "response_time_average")
+
+    @property
+    @pulumi.getter(name="responseTimeMax")
+    def response_time_max(self) -> float:
+        """
+        The maximum response time.
+        """
+        return pulumi.get(self, "response_time_max")
+
+    @property
+    @pulumi.getter(name="responseTimeMin")
+    def response_time_min(self) -> float:
+        """
+        The minimum response time.
+        """
+        return pulumi.get(self, "response_time_min")
+
+    @property
+    @pulumi.getter(name="responseTimeP90")
+    def response_time_p90(self) -> float:
+        """
+        The 90 percentile of the response time.
+        """
+        return pulumi.get(self, "response_time_p90")
+
+    @property
+    @pulumi.getter(name="responseTimeP95")
+    def response_time_p95(self) -> float:
+        """
+        The 95 percentile of the response time.
+        """
+        return pulumi.get(self, "response_time_p95")
+
+    @property
+    @pulumi.getter(name="responseTimeP99")
+    def response_time_p99(self) -> float:
+        """
+        The 99 percentile of the response time.
+        """
+        return pulumi.get(self, "response_time_p99")
+
+    @property
+    @pulumi.getter(name="scenarioId")
+    def scenario_id(self) -> str:
+        """
+        Scenario ID.
+        """
+        return pulumi.get(self, "scenario_id")
+
+    @property
+    @pulumi.getter(name="scenarioName")
+    def scenario_name(self) -> str:
+        """
+        Scenario name.
+        """
+        return pulumi.get(self, "scenario_name")
+
+    @property
+    @pulumi.getter
+    def scripts(self) -> Sequence[str]:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "scripts")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        The job starting time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Scenario status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="testScripts")
+    def test_scripts(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobTestScriptResult']:
+        """
+        The script of the load test.
+        """
+        return pulumi.get(self, "test_scripts")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobDatasetResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 head_lines: Sequence[str],
+                 header_columns: Sequence[str],
+                 header_in_file: bool,
+                 line_count: int,
+                 name: str,
+                 size: int,
+                 split: bool,
+                 tail_lines: Sequence[str],
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param Sequence[str] head_lines: The header lines of the file.
+        :param Sequence[str] header_columns: The parameter name list.
+        :param bool header_in_file: Whether the first line contains the parameter names.
+        :param int line_count: The line count of the file.
+        :param str name: File name.
+        :param int size: File size.
+        :param bool split: Whether to split the test data.
+        :param Sequence[str] tail_lines: The tail lines of the file.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "head_lines", head_lines)
+        pulumi.set(__self__, "header_columns", header_columns)
+        pulumi.set(__self__, "header_in_file", header_in_file)
+        pulumi.set(__self__, "line_count", line_count)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "split", split)
+        pulumi.set(__self__, "tail_lines", tail_lines)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter(name="headLines")
+    def head_lines(self) -> Sequence[str]:
+        """
+        The header lines of the file.
+        """
+        return pulumi.get(self, "head_lines")
+
+    @property
+    @pulumi.getter(name="headerColumns")
+    def header_columns(self) -> Sequence[str]:
+        """
+        The parameter name list.
+        """
+        return pulumi.get(self, "header_columns")
+
+    @property
+    @pulumi.getter(name="headerInFile")
+    def header_in_file(self) -> bool:
+        """
+        Whether the first line contains the parameter names.
+        """
+        return pulumi.get(self, "header_in_file")
+
+    @property
+    @pulumi.getter(name="lineCount")
+    def line_count(self) -> int:
+        """
+        The line count of the file.
+        """
+        return pulumi.get(self, "line_count")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def split(self) -> bool:
+        """
+        Whether to split the test data.
+        """
+        return pulumi.get(self, "split")
+
+    @property
+    @pulumi.getter(name="tailLines")
+    def tail_lines(self) -> Sequence[str]:
+        """
+        The tail lines of the file.
+        """
+        return pulumi.get(self, "tail_lines")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigResult(dict):
+    def __init__(__self__, *,
+                 dns_configs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigResult'],
+                 host_aliases: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs'] dns_configs: The DNS configuration.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs'] host_aliases: The configuration for host aliases.
+        """
+        pulumi.set(__self__, "dns_configs", dns_configs)
+        pulumi.set(__self__, "host_aliases", host_aliases)
+
+    @property
+    @pulumi.getter(name="dnsConfigs")
+    def dns_configs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigResult']:
+        """
+        The DNS configuration.
+        """
+        return pulumi.get(self, "dns_configs")
+
+    @property
+    @pulumi.getter(name="hostAliases")
+    def host_aliases(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasResult']:
+        """
+        The configuration for host aliases.
+        """
+        return pulumi.get(self, "host_aliases")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigResult(dict):
+    def __init__(__self__, *,
+                 nameservers: Sequence[str]):
+        """
+        :param Sequence[str] nameservers: DNS IP list.
+        """
+        pulumi.set(__self__, "nameservers", nameservers)
+
+    @property
+    @pulumi.getter
+    def nameservers(self) -> Sequence[str]:
+        """
+        DNS IP list.
+        """
+        return pulumi.get(self, "nameservers")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasResult(dict):
+    def __init__(__self__, *,
+                 host_names: Sequence[str],
+                 ip: str):
+        """
+        :param Sequence[str] host_names: Host names.
+        :param str ip: IP.
+        """
+        pulumi.set(__self__, "host_names", host_names)
+        pulumi.set(__self__, "ip", ip)
+
+    @property
+    @pulumi.getter(name="hostNames")
+    def host_names(self) -> Sequence[str]:
+        """
+        Host names.
+        """
+        return pulumi.get(self, "host_names")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadResult(dict):
+    def __init__(__self__, *,
+                 geo_regions_load_distributions: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionResult'],
+                 load_specs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecResult'],
+                 vpc_load_distributions: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs'] geo_regions_load_distributions: The geographical distribution of the load source.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs'] load_specs: Scenario is load specification.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs'] vpc_load_distributions: The distribution of the load source.
+        """
+        pulumi.set(__self__, "geo_regions_load_distributions", geo_regions_load_distributions)
+        pulumi.set(__self__, "load_specs", load_specs)
+        pulumi.set(__self__, "vpc_load_distributions", vpc_load_distributions)
+
+    @property
+    @pulumi.getter(name="geoRegionsLoadDistributions")
+    def geo_regions_load_distributions(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionResult']:
+        """
+        The geographical distribution of the load source.
+        """
+        return pulumi.get(self, "geo_regions_load_distributions")
+
+    @property
+    @pulumi.getter(name="loadSpecs")
+    def load_specs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecResult']:
+        """
+        Scenario is load specification.
+        """
+        return pulumi.get(self, "load_specs")
+
+    @property
+    @pulumi.getter(name="vpcLoadDistributions")
+    def vpc_load_distributions(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionResult']:
+        """
+        The distribution of the load source.
+        """
+        return pulumi.get(self, "vpc_load_distributions")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionResult(dict):
+    def __init__(__self__, *,
+                 percentage: int,
+                 region: str,
+                 region_id: int):
+        """
+        :param int percentage: Percentage.
+        :param str region: Region.
+        :param int region_id: Region ID.
+        """
+        pulumi.set(__self__, "percentage", percentage)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+
+    @property
+    @pulumi.getter
+    def percentage(self) -> int:
+        """
+        Percentage.
+        """
+        return pulumi.get(self, "percentage")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecResult(dict):
+    def __init__(__self__, *,
+                 concurrencies: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyResult'],
+                 requests_per_seconds: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondResult'],
+                 script_origins: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs'] concurrencies: The configuration for the concurrency mode.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs'] requests_per_seconds: The configuration of the RPS mode load test.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs'] script_origins: The script origin.
+        """
+        pulumi.set(__self__, "concurrencies", concurrencies)
+        pulumi.set(__self__, "requests_per_seconds", requests_per_seconds)
+        pulumi.set(__self__, "script_origins", script_origins)
+
+    @property
+    @pulumi.getter
+    def concurrencies(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyResult']:
+        """
+        The configuration for the concurrency mode.
+        """
+        return pulumi.get(self, "concurrencies")
+
+    @property
+    @pulumi.getter(name="requestsPerSeconds")
+    def requests_per_seconds(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondResult']:
+        """
+        The configuration of the RPS mode load test.
+        """
+        return pulumi.get(self, "requests_per_seconds")
+
+    @property
+    @pulumi.getter(name="scriptOrigins")
+    def script_origins(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginResult']:
+        """
+        The script origin.
+        """
+        return pulumi.get(self, "script_origins")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyResult(dict):
+    def __init__(__self__, *,
+                 graceful_stop_seconds: int,
+                 iteration_count: int,
+                 max_requests_per_second: int,
+                 resources: int,
+                 stages: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageResult']):
+        """
+        :param int graceful_stop_seconds: The waiting period for a graceful shutdown.
+        :param int iteration_count: The iteration count of the load test.
+        :param int max_requests_per_second: The maximum RPS.
+        :param int resources: The recource count of the load test.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs'] stages: The configuration for the multi-stage load test.
+        """
+        pulumi.set(__self__, "graceful_stop_seconds", graceful_stop_seconds)
+        pulumi.set(__self__, "iteration_count", iteration_count)
+        pulumi.set(__self__, "max_requests_per_second", max_requests_per_second)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "stages", stages)
+
+    @property
+    @pulumi.getter(name="gracefulStopSeconds")
+    def graceful_stop_seconds(self) -> int:
+        """
+        The waiting period for a graceful shutdown.
+        """
+        return pulumi.get(self, "graceful_stop_seconds")
+
+    @property
+    @pulumi.getter(name="iterationCount")
+    def iteration_count(self) -> int:
+        """
+        The iteration count of the load test.
+        """
+        return pulumi.get(self, "iteration_count")
+
+    @property
+    @pulumi.getter(name="maxRequestsPerSecond")
+    def max_requests_per_second(self) -> int:
+        """
+        The maximum RPS.
+        """
+        return pulumi.get(self, "max_requests_per_second")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> int:
+        """
+        The recource count of the load test.
+        """
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def stages(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageResult']:
+        """
+        The configuration for the multi-stage load test.
+        """
+        return pulumi.get(self, "stages")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 target_virtual_users: int):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int target_virtual_users: Deprecated.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "target_virtual_users", target_virtual_users)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="targetVirtualUsers")
+    def target_virtual_users(self) -> int:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "target_virtual_users")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 graceful_stop_seconds: int,
+                 max_requests_per_second: int,
+                 resources: int,
+                 start_requests_per_second: int,
+                 target_requests_per_second: int,
+                 target_virtual_users: int):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int graceful_stop_seconds: The waiting period for a graceful shutdown.
+        :param int max_requests_per_second: The maximum RPS.
+        :param int resources: The recource count of the load test.
+        :param int start_requests_per_second: The starting minimum RPS.
+        :param int target_requests_per_second: The target RPS.
+        :param int target_virtual_users: Deprecated.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "graceful_stop_seconds", graceful_stop_seconds)
+        pulumi.set(__self__, "max_requests_per_second", max_requests_per_second)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "start_requests_per_second", start_requests_per_second)
+        pulumi.set(__self__, "target_requests_per_second", target_requests_per_second)
+        pulumi.set(__self__, "target_virtual_users", target_virtual_users)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="gracefulStopSeconds")
+    def graceful_stop_seconds(self) -> int:
+        """
+        The waiting period for a graceful shutdown.
+        """
+        return pulumi.get(self, "graceful_stop_seconds")
+
+    @property
+    @pulumi.getter(name="maxRequestsPerSecond")
+    def max_requests_per_second(self) -> int:
+        """
+        The maximum RPS.
+        """
+        return pulumi.get(self, "max_requests_per_second")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> int:
+        """
+        The recource count of the load test.
+        """
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="startRequestsPerSecond")
+    def start_requests_per_second(self) -> int:
+        """
+        The starting minimum RPS.
+        """
+        return pulumi.get(self, "start_requests_per_second")
+
+    @property
+    @pulumi.getter(name="targetRequestsPerSecond")
+    def target_requests_per_second(self) -> int:
+        """
+        The target RPS.
+        """
+        return pulumi.get(self, "target_requests_per_second")
+
+    @property
+    @pulumi.getter(name="targetVirtualUsers")
+    def target_virtual_users(self) -> int:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "target_virtual_users")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 machine_number: int,
+                 machine_specification: str):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int machine_number: The load test machine number.
+        :param str machine_specification: The load test machine specification.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "machine_number", machine_number)
+        pulumi.set(__self__, "machine_specification", machine_specification)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="machineNumber")
+    def machine_number(self) -> int:
+        """
+        The load test machine number.
+        """
+        return pulumi.get(self, "machine_number")
+
+    @property
+    @pulumi.getter(name="machineSpecification")
+    def machine_specification(self) -> str:
+        """
+        The load test machine specification.
+        """
+        return pulumi.get(self, "machine_specification")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 pod_name: str,
+                 region: str):
+        """
+        :param str ip: IP.
+        :param str pod_name: The pod name of the load source.
+        :param str region: Region.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "pod_name", pod_name)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="podName")
+    def pod_name(self) -> str:
+        """
+        The pod name of the load source.
+        """
+        return pulumi.get(self, "pod_name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 pod_name: str,
+                 region: str):
+        """
+        :param str ip: IP.
+        :param str pod_name: The pod name of the load source.
+        :param str region: Region.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "pod_name", pod_name)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="podName")
+    def pod_name(self) -> str:
+        """
+        The pod name of the load source.
+        """
+        return pulumi.get(self, "pod_name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 region_id: int,
+                 subnet_ids: Sequence[str],
+                 vpc_id: str):
+        """
+        :param str region: Region.
+        :param int region_id: Region ID.
+        :param Sequence[str] subnet_ids: The subnet ID list.
+        :param str vpc_id: The VPC ID.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        The subnet ID list.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        The VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookResult(dict):
+    def __init__(__self__, *,
+                 events: Sequence[str],
+                 url: str):
+        """
+        :param Sequence[str] events: The notification hook.
+        :param str url: The callback URL.
+        """
+        pulumi.set(__self__, "events", events)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def events(self) -> Sequence[str]:
+        """
+        The notification hook.
+        """
+        return pulumi.get(self, "events")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        The callback URL.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobPluginResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobProtocolResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobRequestFileResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetJobTestScriptResult(dict):
+    def __init__(__self__, *,
+                 encoded_content: str,
+                 encoded_http_archive: str,
+                 file_id: str,
+                 load_weight: int,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str encoded_content: The base64 encoded content.
+        :param str encoded_http_archive: The base64 encoded HAR.
+        :param str file_id: File ID.
+        :param int load_weight: The weight of the script, ranging from 1 to 100.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "encoded_content", encoded_content)
+        pulumi.set(__self__, "encoded_http_archive", encoded_http_archive)
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "load_weight", load_weight)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="encodedContent")
+    def encoded_content(self) -> str:
+        """
+        The base64 encoded content.
+        """
+        return pulumi.get(self, "encoded_content")
+
+    @property
+    @pulumi.getter(name="encodedHttpArchive")
+    def encoded_http_archive(self) -> str:
+        """
+        The base64 encoded HAR.
+        """
+        return pulumi.get(self, "encoded_http_archive")
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter(name="loadWeight")
+    def load_weight(self) -> int:
+        """
+        The weight of the script, ranging from 1 to 100.
+        """
+        return pulumi.get(self, "load_weight")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 configs: Sequence[str],
+                 created_at: str,
+                 cron_id: str,
+                 datasets: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetResult'],
+                 description: str,
+                 domain_name_configs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigResult'],
+                 encoded_scripts: str,
+                 extensions: Sequence[str],
+                 loads: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadResult'],
+                 name: str,
+                 notification_hooks: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookResult'],
+                 owner: str,
+                 plugins: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioPluginResult'],
+                 project_id: str,
+                 project_name: str,
+                 protocols: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolResult'],
+                 request_files: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileResult'],
+                 scenario_id: str,
+                 sla_id: str,
+                 sla_policies: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyResult'],
+                 status: int,
+                 sub_account_uin: str,
+                 test_scripts: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptResult'],
+                 type: str,
+                 uin: str,
+                 updated_at: str):
+        """
+        :param int app_id: AppId.
+        :param Sequence[str] configs: Deprecated.
+        :param str created_at: The creation time of the scenario.
+        :param str cron_id: The cron job ID.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs'] datasets: The test data sets for the load test.
+        :param str description: Scenario description.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs'] domain_name_configs: The configuration for parsing domain names.
+        :param str encoded_scripts: Deprecated.
+        :param Sequence[str] extensions: Deprecated.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs'] loads: Scenario is load test configuration.
+        :param str name: File name.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs'] notification_hooks: The notification hooks.
+        :param str owner: The job owner.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs'] plugins: Plugins.
+        :param str project_id: Project ID.
+        :param str project_name: Project name.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs'] protocols: The protocol file.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs'] request_files: The files in the request.
+        :param str scenario_id: Scenario ID.
+        :param str sla_id: The ID of the SLA policy.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs'] sla_policies: The SLA policy.
+        :param int status: Scenario status.
+        :param str sub_account_uin: SubAccountUin.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs'] test_scripts: The script of the load test.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str uin: Uin.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "configs", configs)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "cron_id", cron_id)
+        pulumi.set(__self__, "datasets", datasets)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "domain_name_configs", domain_name_configs)
+        pulumi.set(__self__, "encoded_scripts", encoded_scripts)
+        pulumi.set(__self__, "extensions", extensions)
+        pulumi.set(__self__, "loads", loads)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "notification_hooks", notification_hooks)
+        pulumi.set(__self__, "owner", owner)
+        pulumi.set(__self__, "plugins", plugins)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "protocols", protocols)
+        pulumi.set(__self__, "request_files", request_files)
+        pulumi.set(__self__, "scenario_id", scenario_id)
+        pulumi.set(__self__, "sla_id", sla_id)
+        pulumi.set(__self__, "sla_policies", sla_policies)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "sub_account_uin", sub_account_uin)
+        pulumi.set(__self__, "test_scripts", test_scripts)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        AppId.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter
+    def configs(self) -> Sequence[str]:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "configs")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        The creation time of the scenario.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter(name="cronId")
+    def cron_id(self) -> str:
+        """
+        The cron job ID.
+        """
+        return pulumi.get(self, "cron_id")
+
+    @property
+    @pulumi.getter
+    def datasets(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetResult']:
+        """
+        The test data sets for the load test.
+        """
+        return pulumi.get(self, "datasets")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Scenario description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="domainNameConfigs")
+    def domain_name_configs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigResult']:
+        """
+        The configuration for parsing domain names.
+        """
+        return pulumi.get(self, "domain_name_configs")
+
+    @property
+    @pulumi.getter(name="encodedScripts")
+    def encoded_scripts(self) -> str:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "encoded_scripts")
+
+    @property
+    @pulumi.getter
+    def extensions(self) -> Sequence[str]:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "extensions")
+
+    @property
+    @pulumi.getter
+    def loads(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadResult']:
+        """
+        Scenario is load test configuration.
+        """
+        return pulumi.get(self, "loads")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="notificationHooks")
+    def notification_hooks(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookResult']:
+        """
+        The notification hooks.
+        """
+        return pulumi.get(self, "notification_hooks")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> str:
+        """
+        The job owner.
+        """
+        return pulumi.get(self, "owner")
+
+    @property
+    @pulumi.getter
+    def plugins(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioPluginResult']:
+        """
+        Plugins.
+        """
+        return pulumi.get(self, "plugins")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> str:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> str:
+        """
+        Project name.
+        """
+        return pulumi.get(self, "project_name")
+
+    @property
+    @pulumi.getter
+    def protocols(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolResult']:
+        """
+        The protocol file.
+        """
+        return pulumi.get(self, "protocols")
+
+    @property
+    @pulumi.getter(name="requestFiles")
+    def request_files(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileResult']:
+        """
+        The files in the request.
+        """
+        return pulumi.get(self, "request_files")
+
+    @property
+    @pulumi.getter(name="scenarioId")
+    def scenario_id(self) -> str:
+        """
+        Scenario ID.
+        """
+        return pulumi.get(self, "scenario_id")
+
+    @property
+    @pulumi.getter(name="slaId")
+    def sla_id(self) -> str:
+        """
+        The ID of the SLA policy.
+        """
+        return pulumi.get(self, "sla_id")
+
+    @property
+    @pulumi.getter(name="slaPolicies")
+    def sla_policies(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyResult']:
+        """
+        The SLA policy.
+        """
+        return pulumi.get(self, "sla_policies")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Scenario status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subAccountUin")
+    def sub_account_uin(self) -> str:
+        """
+        SubAccountUin.
+        """
+        return pulumi.get(self, "sub_account_uin")
+
+    @property
+    @pulumi.getter(name="testScripts")
+    def test_scripts(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptResult']:
+        """
+        The script of the load test.
+        """
+        return pulumi.get(self, "test_scripts")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uin(self) -> str:
+        """
+        Uin.
+        """
+        return pulumi.get(self, "uin")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 head_lines: Sequence[str],
+                 header_columns: Sequence[str],
+                 header_in_file: bool,
+                 line_count: int,
+                 name: str,
+                 size: int,
+                 split: bool,
+                 tail_lines: Sequence[str],
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param Sequence[str] head_lines: The header lines of the file.
+        :param Sequence[str] header_columns: The parameter name list.
+        :param bool header_in_file: Whether the first line contains the parameter names.
+        :param int line_count: The line count of the file.
+        :param str name: File name.
+        :param int size: File size.
+        :param bool split: Whether to split the test data.
+        :param Sequence[str] tail_lines: The tail lines of the file.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "head_lines", head_lines)
+        pulumi.set(__self__, "header_columns", header_columns)
+        pulumi.set(__self__, "header_in_file", header_in_file)
+        pulumi.set(__self__, "line_count", line_count)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "split", split)
+        pulumi.set(__self__, "tail_lines", tail_lines)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter(name="headLines")
+    def head_lines(self) -> Sequence[str]:
+        """
+        The header lines of the file.
+        """
+        return pulumi.get(self, "head_lines")
+
+    @property
+    @pulumi.getter(name="headerColumns")
+    def header_columns(self) -> Sequence[str]:
+        """
+        The parameter name list.
+        """
+        return pulumi.get(self, "header_columns")
+
+    @property
+    @pulumi.getter(name="headerInFile")
+    def header_in_file(self) -> bool:
+        """
+        Whether the first line contains the parameter names.
+        """
+        return pulumi.get(self, "header_in_file")
+
+    @property
+    @pulumi.getter(name="lineCount")
+    def line_count(self) -> int:
+        """
+        The line count of the file.
+        """
+        return pulumi.get(self, "line_count")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def split(self) -> bool:
+        """
+        Whether to split the test data.
+        """
+        return pulumi.get(self, "split")
+
+    @property
+    @pulumi.getter(name="tailLines")
+    def tail_lines(self) -> Sequence[str]:
+        """
+        The tail lines of the file.
+        """
+        return pulumi.get(self, "tail_lines")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigResult(dict):
+    def __init__(__self__, *,
+                 dns_configs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigResult'],
+                 host_aliases: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs'] dns_configs: The DNS configuration.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs'] host_aliases: The configuration for host aliases.
+        """
+        pulumi.set(__self__, "dns_configs", dns_configs)
+        pulumi.set(__self__, "host_aliases", host_aliases)
+
+    @property
+    @pulumi.getter(name="dnsConfigs")
+    def dns_configs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigResult']:
+        """
+        The DNS configuration.
+        """
+        return pulumi.get(self, "dns_configs")
+
+    @property
+    @pulumi.getter(name="hostAliases")
+    def host_aliases(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasResult']:
+        """
+        The configuration for host aliases.
+        """
+        return pulumi.get(self, "host_aliases")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigResult(dict):
+    def __init__(__self__, *,
+                 nameservers: Sequence[str]):
+        """
+        :param Sequence[str] nameservers: DNS IP list.
+        """
+        pulumi.set(__self__, "nameservers", nameservers)
+
+    @property
+    @pulumi.getter
+    def nameservers(self) -> Sequence[str]:
+        """
+        DNS IP list.
+        """
+        return pulumi.get(self, "nameservers")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasResult(dict):
+    def __init__(__self__, *,
+                 host_names: Sequence[str],
+                 ip: str):
+        """
+        :param Sequence[str] host_names: Host names.
+        :param str ip: IP.
+        """
+        pulumi.set(__self__, "host_names", host_names)
+        pulumi.set(__self__, "ip", ip)
+
+    @property
+    @pulumi.getter(name="hostNames")
+    def host_names(self) -> Sequence[str]:
+        """
+        Host names.
+        """
+        return pulumi.get(self, "host_names")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadResult(dict):
+    def __init__(__self__, *,
+                 geo_regions_load_distributions: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionResult'],
+                 load_specs: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecResult'],
+                 vpc_load_distributions: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs'] geo_regions_load_distributions: The geographical distribution of the load source.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs'] load_specs: Scenario is load specification.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs'] vpc_load_distributions: The distribution of the load source.
+        """
+        pulumi.set(__self__, "geo_regions_load_distributions", geo_regions_load_distributions)
+        pulumi.set(__self__, "load_specs", load_specs)
+        pulumi.set(__self__, "vpc_load_distributions", vpc_load_distributions)
+
+    @property
+    @pulumi.getter(name="geoRegionsLoadDistributions")
+    def geo_regions_load_distributions(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionResult']:
+        """
+        The geographical distribution of the load source.
+        """
+        return pulumi.get(self, "geo_regions_load_distributions")
+
+    @property
+    @pulumi.getter(name="loadSpecs")
+    def load_specs(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecResult']:
+        """
+        Scenario is load specification.
+        """
+        return pulumi.get(self, "load_specs")
+
+    @property
+    @pulumi.getter(name="vpcLoadDistributions")
+    def vpc_load_distributions(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionResult']:
+        """
+        The distribution of the load source.
+        """
+        return pulumi.get(self, "vpc_load_distributions")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionResult(dict):
+    def __init__(__self__, *,
+                 percentage: int,
+                 region: str,
+                 region_id: int):
+        """
+        :param int percentage: Percentage.
+        :param str region: Region.
+        :param int region_id: Region ID.
+        """
+        pulumi.set(__self__, "percentage", percentage)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+
+    @property
+    @pulumi.getter
+    def percentage(self) -> int:
+        """
+        Percentage.
+        """
+        return pulumi.get(self, "percentage")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecResult(dict):
+    def __init__(__self__, *,
+                 concurrencies: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyResult'],
+                 requests_per_seconds: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondResult'],
+                 script_origins: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs'] concurrencies: The configuration for the concurrency mode.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs'] requests_per_seconds: The configuration of the RPS mode load test.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs'] script_origins: The script origin.
+        """
+        pulumi.set(__self__, "concurrencies", concurrencies)
+        pulumi.set(__self__, "requests_per_seconds", requests_per_seconds)
+        pulumi.set(__self__, "script_origins", script_origins)
+
+    @property
+    @pulumi.getter
+    def concurrencies(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyResult']:
+        """
+        The configuration for the concurrency mode.
+        """
+        return pulumi.get(self, "concurrencies")
+
+    @property
+    @pulumi.getter(name="requestsPerSeconds")
+    def requests_per_seconds(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondResult']:
+        """
+        The configuration of the RPS mode load test.
+        """
+        return pulumi.get(self, "requests_per_seconds")
+
+    @property
+    @pulumi.getter(name="scriptOrigins")
+    def script_origins(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginResult']:
+        """
+        The script origin.
+        """
+        return pulumi.get(self, "script_origins")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyResult(dict):
+    def __init__(__self__, *,
+                 graceful_stop_seconds: int,
+                 iteration_count: int,
+                 max_requests_per_second: int,
+                 resources: int,
+                 stages: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageResult']):
+        """
+        :param int graceful_stop_seconds: The waiting period for a graceful shutdown.
+        :param int iteration_count: The iteration count of the load test.
+        :param int max_requests_per_second: The maximum RPS.
+        :param int resources: The recource count of the load test.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs'] stages: The configuration for the multi-stage load test.
+        """
+        pulumi.set(__self__, "graceful_stop_seconds", graceful_stop_seconds)
+        pulumi.set(__self__, "iteration_count", iteration_count)
+        pulumi.set(__self__, "max_requests_per_second", max_requests_per_second)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "stages", stages)
+
+    @property
+    @pulumi.getter(name="gracefulStopSeconds")
+    def graceful_stop_seconds(self) -> int:
+        """
+        The waiting period for a graceful shutdown.
+        """
+        return pulumi.get(self, "graceful_stop_seconds")
+
+    @property
+    @pulumi.getter(name="iterationCount")
+    def iteration_count(self) -> int:
+        """
+        The iteration count of the load test.
+        """
+        return pulumi.get(self, "iteration_count")
+
+    @property
+    @pulumi.getter(name="maxRequestsPerSecond")
+    def max_requests_per_second(self) -> int:
+        """
+        The maximum RPS.
+        """
+        return pulumi.get(self, "max_requests_per_second")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> int:
+        """
+        The recource count of the load test.
+        """
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def stages(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageResult']:
+        """
+        The configuration for the multi-stage load test.
+        """
+        return pulumi.get(self, "stages")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 target_virtual_users: int):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int target_virtual_users: Deprecated.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "target_virtual_users", target_virtual_users)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="targetVirtualUsers")
+    def target_virtual_users(self) -> int:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "target_virtual_users")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 graceful_stop_seconds: int,
+                 max_requests_per_second: int,
+                 resources: int,
+                 start_requests_per_second: int,
+                 target_requests_per_second: int,
+                 target_virtual_users: int):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int graceful_stop_seconds: The waiting period for a graceful shutdown.
+        :param int max_requests_per_second: The maximum RPS.
+        :param int resources: The recource count of the load test.
+        :param int start_requests_per_second: The starting minimum RPS.
+        :param int target_requests_per_second: The target RPS.
+        :param int target_virtual_users: Deprecated.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "graceful_stop_seconds", graceful_stop_seconds)
+        pulumi.set(__self__, "max_requests_per_second", max_requests_per_second)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "start_requests_per_second", start_requests_per_second)
+        pulumi.set(__self__, "target_requests_per_second", target_requests_per_second)
+        pulumi.set(__self__, "target_virtual_users", target_virtual_users)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="gracefulStopSeconds")
+    def graceful_stop_seconds(self) -> int:
+        """
+        The waiting period for a graceful shutdown.
+        """
+        return pulumi.get(self, "graceful_stop_seconds")
+
+    @property
+    @pulumi.getter(name="maxRequestsPerSecond")
+    def max_requests_per_second(self) -> int:
+        """
+        The maximum RPS.
+        """
+        return pulumi.get(self, "max_requests_per_second")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> int:
+        """
+        The recource count of the load test.
+        """
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="startRequestsPerSecond")
+    def start_requests_per_second(self) -> int:
+        """
+        The starting minimum RPS.
+        """
+        return pulumi.get(self, "start_requests_per_second")
+
+    @property
+    @pulumi.getter(name="targetRequestsPerSecond")
+    def target_requests_per_second(self) -> int:
+        """
+        The target RPS.
+        """
+        return pulumi.get(self, "target_requests_per_second")
+
+    @property
+    @pulumi.getter(name="targetVirtualUsers")
+    def target_virtual_users(self) -> int:
+        """
+        Deprecated.
+        """
+        return pulumi.get(self, "target_virtual_users")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginResult(dict):
+    def __init__(__self__, *,
+                 duration_seconds: int,
+                 machine_number: int,
+                 machine_specification: str):
+        """
+        :param int duration_seconds: The load test execution time.
+        :param int machine_number: The load test machine number.
+        :param str machine_specification: The load test machine specification.
+        """
+        pulumi.set(__self__, "duration_seconds", duration_seconds)
+        pulumi.set(__self__, "machine_number", machine_number)
+        pulumi.set(__self__, "machine_specification", machine_specification)
+
+    @property
+    @pulumi.getter(name="durationSeconds")
+    def duration_seconds(self) -> int:
+        """
+        The load test execution time.
+        """
+        return pulumi.get(self, "duration_seconds")
+
+    @property
+    @pulumi.getter(name="machineNumber")
+    def machine_number(self) -> int:
+        """
+        The load test machine number.
+        """
+        return pulumi.get(self, "machine_number")
+
+    @property
+    @pulumi.getter(name="machineSpecification")
+    def machine_specification(self) -> str:
+        """
+        The load test machine specification.
+        """
+        return pulumi.get(self, "machine_specification")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 region_id: int,
+                 subnet_ids: Sequence[str],
+                 vpc_id: str):
+        """
+        :param str region: Region.
+        :param int region_id: Region ID.
+        :param Sequence[str] subnet_ids: The subnet ID list.
+        :param str vpc_id: The VPC ID.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        The subnet ID list.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        The VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookResult(dict):
+    def __init__(__self__, *,
+                 events: Sequence[str],
+                 url: str):
+        """
+        :param Sequence[str] events: The notification hook.
+        :param str url: The callback URL.
+        """
+        pulumi.set(__self__, "events", events)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def events(self) -> Sequence[str]:
+        """
+        The notification hook.
+        """
+        return pulumi.get(self, "events")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        The callback URL.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioPluginResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileResult(dict):
+    def __init__(__self__, *,
+                 file_id: str,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str file_id: File ID.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyResult(dict):
+    def __init__(__self__, *,
+                 alert_channels: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelResult'],
+                 sla_rules: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleResult']):
+        """
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs'] alert_channels: The alert channel.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs'] sla_rules: The SLA rules.
+        """
+        pulumi.set(__self__, "alert_channels", alert_channels)
+        pulumi.set(__self__, "sla_rules", sla_rules)
+
+    @property
+    @pulumi.getter(name="alertChannels")
+    def alert_channels(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelResult']:
+        """
+        The alert channel.
+        """
+        return pulumi.get(self, "alert_channels")
+
+    @property
+    @pulumi.getter(name="slaRules")
+    def sla_rules(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleResult']:
+        """
+        The SLA rules.
+        """
+        return pulumi.get(self, "sla_rules")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelResult(dict):
+    def __init__(__self__, *,
+                 amp_consumer_id: str,
+                 notice_id: str):
+        """
+        :param str amp_consumer_id: AMP consumer ID.
+        :param str notice_id: The notice ID bound with this alert channel.
+        """
+        pulumi.set(__self__, "amp_consumer_id", amp_consumer_id)
+        pulumi.set(__self__, "notice_id", notice_id)
+
+    @property
+    @pulumi.getter(name="ampConsumerId")
+    def amp_consumer_id(self) -> str:
+        """
+        AMP consumer ID.
+        """
+        return pulumi.get(self, "amp_consumer_id")
+
+    @property
+    @pulumi.getter(name="noticeId")
+    def notice_id(self) -> str:
+        """
+        The notice ID bound with this alert channel.
+        """
+        return pulumi.get(self, "notice_id")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleResult(dict):
+    def __init__(__self__, *,
+                 abort_flag: bool,
+                 aggregation: str,
+                 condition: str,
+                 for_: str,
+                 label_filters: Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterResult'],
+                 metric: str,
+                 value: float):
+        """
+        :param bool abort_flag: Whether to abort the load test job.
+        :param str aggregation: The aggregation method of the metrics.
+        :param str condition: The operator for checking the condition.
+        :param str for_: The duration for checking the condition.
+        :param Sequence['GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs'] label_filters: The label filter.
+        :param str metric: The load test metrics.
+        :param float value: The threshold in the condition.
+        """
+        pulumi.set(__self__, "abort_flag", abort_flag)
+        pulumi.set(__self__, "aggregation", aggregation)
+        pulumi.set(__self__, "condition", condition)
+        pulumi.set(__self__, "for_", for_)
+        pulumi.set(__self__, "label_filters", label_filters)
+        pulumi.set(__self__, "metric", metric)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="abortFlag")
+    def abort_flag(self) -> bool:
+        """
+        Whether to abort the load test job.
+        """
+        return pulumi.get(self, "abort_flag")
+
+    @property
+    @pulumi.getter
+    def aggregation(self) -> str:
+        """
+        The aggregation method of the metrics.
+        """
+        return pulumi.get(self, "aggregation")
+
+    @property
+    @pulumi.getter
+    def condition(self) -> str:
+        """
+        The operator for checking the condition.
+        """
+        return pulumi.get(self, "condition")
+
+    @property
+    @pulumi.getter(name="for")
+    def for_(self) -> str:
+        """
+        The duration for checking the condition.
+        """
+        return pulumi.get(self, "for_")
+
+    @property
+    @pulumi.getter(name="labelFilters")
+    def label_filters(self) -> Sequence['outputs.GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterResult']:
+        """
+        The label filter.
+        """
+        return pulumi.get(self, "label_filters")
+
+    @property
+    @pulumi.getter
+    def metric(self) -> str:
+        """
+        The load test metrics.
+        """
+        return pulumi.get(self, "metric")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        """
+        The threshold in the condition.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterResult(dict):
+    def __init__(__self__, *,
+                 label_name: str,
+                 label_value: str):
+        """
+        :param str label_name: Label name.
+        :param str label_value: Label value.
+        """
+        pulumi.set(__self__, "label_name", label_name)
+        pulumi.set(__self__, "label_value", label_value)
+
+    @property
+    @pulumi.getter(name="labelName")
+    def label_name(self) -> str:
+        """
+        Label name.
+        """
+        return pulumi.get(self, "label_name")
+
+    @property
+    @pulumi.getter(name="labelValue")
+    def label_value(self) -> str:
+        """
+        Label value.
+        """
+        return pulumi.get(self, "label_value")
+
+
+@pulumi.output_type
+class GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptResult(dict):
+    def __init__(__self__, *,
+                 encoded_content: str,
+                 encoded_http_archive: str,
+                 file_id: str,
+                 load_weight: int,
+                 name: str,
+                 size: int,
+                 type: str,
+                 updated_at: str):
+        """
+        :param str encoded_content: The base64 encoded content.
+        :param str encoded_http_archive: The base64 encoded HAR.
+        :param str file_id: File ID.
+        :param int load_weight: The weight of the script, ranging from 1 to 100.
+        :param str name: File name.
+        :param int size: File size.
+        :param str type: Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        :param str updated_at: The updating time of the scenario.
+        """
+        pulumi.set(__self__, "encoded_content", encoded_content)
+        pulumi.set(__self__, "encoded_http_archive", encoded_http_archive)
+        pulumi.set(__self__, "file_id", file_id)
+        pulumi.set(__self__, "load_weight", load_weight)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter(name="encodedContent")
+    def encoded_content(self) -> str:
+        """
+        The base64 encoded content.
+        """
+        return pulumi.get(self, "encoded_content")
+
+    @property
+    @pulumi.getter(name="encodedHttpArchive")
+    def encoded_http_archive(self) -> str:
+        """
+        The base64 encoded HAR.
+        """
+        return pulumi.get(self, "encoded_http_archive")
+
+    @property
+    @pulumi.getter(name="fileId")
+    def file_id(self) -> str:
+        """
+        File ID.
+        """
+        return pulumi.get(self, "file_id")
+
+    @property
+    @pulumi.getter(name="loadWeight")
+    def load_weight(self) -> int:
+        """
+        The weight of the script, ranging from 1 to 100.
+        """
+        return pulumi.get(self, "load_weight")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        File name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        """
+        File size.
+        """
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        The updating time of the scenario.
         """
         return pulumi.get(self, "updated_at")
 

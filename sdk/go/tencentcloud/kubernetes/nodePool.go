@@ -25,111 +25,114 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		clusterCidr := "172.31.0.0/16"
-// 		if param := cfg.Get("clusterCidr"); param != "" {
-// 			clusterCidr = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		defaultInstanceType := "S1.SMALL1"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-// 			ClusterCidr:          pulumi.String(clusterCidr),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("tf-tke-unit-test"),
-// 			ClusterDesc:          pulumi.String("test cluster desc"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterVersion:       pulumi.String("1.18.4"),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-// 			ClusterId: managedCluster.ID(),
-// 			MaxSize:   pulumi.Int(6),
-// 			MinSize:   pulumi.Int(1),
-// 			VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String(vpc.InstanceLists[0].SubnetId),
-// 			},
-// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-// 			DesiredCapacity:       pulumi.Int(4),
-// 			EnableAutoScale:       pulumi.Bool(true),
-// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-// 				InstanceType:   pulumi.String(defaultInstanceType),
-// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				SystemDiskSize: pulumi.Int(50),
-// 				SecurityGroupIds: pulumi.StringArray{
-// 					pulumi.String("sg-24vswocp"),
-// 				},
-// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(10),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				Password:                pulumi.String("test123#"),
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 				HostName:                pulumi.String("12.123.0.0"),
-// 				HostNameStyle:           pulumi.String("ORIGINAL"),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			Taints: kubernetes.NodePoolTaintArray{
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint"),
-// 					Value:  pulumi.String("taint_value"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint2"),
-// 					Value:  pulumi.String("taint_value2"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 			},
-// 			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
-// 				ExtraArgs: pulumi.StringArray{
-// 					pulumi.String("root-dir=/var/lib/kubelet"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			clusterCidr := "172.31.0.0/16"
+//			if param := cfg.Get("clusterCidr"); param != "" {
+//				clusterCidr = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			defaultInstanceType := "S1.SMALL1"
+//			if param := cfg.Get("defaultInstanceType"); param != "" {
+//				defaultInstanceType = param
+//			}
+//			managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				ClusterCidr:          pulumi.String(clusterCidr),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("tf-tke-unit-test"),
+//				ClusterDesc:          pulumi.String("test cluster desc"),
+//				ClusterMaxServiceNum: pulumi.Int(32),
+//				ClusterVersion:       pulumi.String("1.18.4"),
+//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
+//				ClusterId: managedCluster.ID(),
+//				MaxSize:   pulumi.Int(6),
+//				MinSize:   pulumi.Int(1),
+//				VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
+//				SubnetIds: pulumi.StringArray{
+//					pulumi.String(vpc.InstanceLists[0].SubnetId),
+//				},
+//				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+//				DesiredCapacity:       pulumi.Int(4),
+//				EnableAutoScale:       pulumi.Bool(true),
+//				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+//				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+//					InstanceType:   pulumi.String(defaultInstanceType),
+//					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+//					SystemDiskSize: pulumi.Int(50),
+//					OrderlySecurityGroupIds: pulumi.StringArray{
+//						pulumi.String("sg-24vswocp"),
+//					},
+//					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+//						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+//							DiskType: pulumi.String("CLOUD_PREMIUM"),
+//							DiskSize: pulumi.Int(50),
+//						},
+//					},
+//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					InternetMaxBandwidthOut: pulumi.Int(10),
+//					PublicIpAssigned:        pulumi.Bool(true),
+//					Password:                pulumi.String("test123#"),
+//					EnhancedSecurityService: pulumi.Bool(false),
+//					EnhancedMonitorService:  pulumi.Bool(false),
+//					HostName:                pulumi.String("12.123.0.0"),
+//					HostNameStyle:           pulumi.String("ORIGINAL"),
+//				},
+//				Labels: pulumi.AnyMap{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//				Taints: kubernetes.NodePoolTaintArray{
+//					&kubernetes.NodePoolTaintArgs{
+//						Key:    pulumi.String("test_taint"),
+//						Value:  pulumi.String("taint_value"),
+//						Effect: pulumi.String("PreferNoSchedule"),
+//					},
+//					&kubernetes.NodePoolTaintArgs{
+//						Key:    pulumi.String("test_taint2"),
+//						Value:  pulumi.String("taint_value2"),
+//						Effect: pulumi.String("PreferNoSchedule"),
+//					},
+//				},
+//				NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+//					ExtraArgs: pulumi.StringArray{
+//						pulumi.String("root-dir=/var/lib/kubelet"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using Spot CVM Instance
 //
@@ -137,59 +140,64 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-// 			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
-// 			MaxSize:   pulumi.Int(6),
-// 			MinSize:   pulumi.Int(1),
-// 			VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id),
-// 			},
-// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-// 			DesiredCapacity:       pulumi.Int(4),
-// 			EnableAutoScale:       pulumi.Bool(true),
-// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-// 				InstanceType:   pulumi.Any(_var.Default_instance_type),
-// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				SystemDiskSize: pulumi.Int(50),
-// 				SecurityGroupIds: pulumi.StringArray{
-// 					pulumi.String("sg-24vswocp"),
-// 				},
-// 				InstanceChargeType: pulumi.String("SPOTPAID"),
-// 				SpotInstanceType:   pulumi.String("one-time"),
-// 				SpotMaxPrice:       pulumi.String("1000"),
-// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(10),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				Password:                pulumi.String("test123#"),
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
+//				ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
+//				MaxSize:   pulumi.Int(6),
+//				MinSize:   pulumi.Int(1),
+//				VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
+//				SubnetIds: pulumi.StringArray{
+//					pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id),
+//				},
+//				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+//				DesiredCapacity:       pulumi.Int(4),
+//				EnableAutoScale:       pulumi.Bool(true),
+//				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+//				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+//					InstanceType:   pulumi.Any(_var.Default_instance_type),
+//					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+//					SystemDiskSize: pulumi.Int(50),
+//					OrderlySecurityGroupIds: pulumi.StringArray{
+//						pulumi.String("sg-24vswocp"),
+//						pulumi.String("sg-3qntci2v"),
+//						pulumi.String("sg-7y1t2wax"),
+//					},
+//					InstanceChargeType: pulumi.String("SPOTPAID"),
+//					SpotInstanceType:   pulumi.String("one-time"),
+//					SpotMaxPrice:       pulumi.String("1000"),
+//					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+//						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+//							DiskType: pulumi.String("CLOUD_PREMIUM"),
+//							DiskSize: pulumi.Int(50),
+//						},
+//					},
+//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					InternetMaxBandwidthOut: pulumi.Int(10),
+//					PublicIpAssigned:        pulumi.Bool(true),
+//					Password:                pulumi.String("test123#"),
+//					EnhancedSecurityService: pulumi.Bool(false),
+//					EnhancedMonitorService:  pulumi.Bool(false),
+//				},
+//				Labels: pulumi.AnyMap{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type NodePool struct {
 	pulumi.CustomResourceState
@@ -206,7 +214,9 @@ type NodePool struct {
 	DefaultCooldown pulumi.IntOutput `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrOutput `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolOutput `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntOutput `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrOutput `pulumi:"enableAutoScale"`
@@ -315,7 +325,9 @@ type nodePoolState struct {
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance *bool `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale *bool `pulumi:"enableAutoScale"`
@@ -380,7 +392,9 @@ type NodePoolState struct {
 	DefaultCooldown pulumi.IntPtrInput
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrInput
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolPtrInput
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntPtrInput
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrInput
@@ -445,7 +459,9 @@ type nodePoolArgs struct {
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance *bool `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale *bool `pulumi:"enableAutoScale"`
@@ -499,7 +515,9 @@ type NodePoolArgs struct {
 	DefaultCooldown pulumi.IntPtrInput
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrInput
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolPtrInput
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntPtrInput
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrInput
@@ -569,7 +587,7 @@ func (i *NodePool) ToNodePoolOutputWithContext(ctx context.Context) NodePoolOutp
 // NodePoolArrayInput is an input type that accepts NodePoolArray and NodePoolArrayOutput values.
 // You can construct a concrete instance of `NodePoolArrayInput` via:
 //
-//          NodePoolArray{ NodePoolArgs{...} }
+//	NodePoolArray{ NodePoolArgs{...} }
 type NodePoolArrayInput interface {
 	pulumi.Input
 
@@ -594,7 +612,7 @@ func (i NodePoolArray) ToNodePoolArrayOutputWithContext(ctx context.Context) Nod
 // NodePoolMapInput is an input type that accepts NodePoolMap and NodePoolMapOutput values.
 // You can construct a concrete instance of `NodePoolMapInput` via:
 //
-//          NodePoolMap{ "key": NodePoolArgs{...} }
+//	NodePoolMap{ "key": NodePoolArgs{...} }
 type NodePoolMapInput interface {
 	pulumi.Input
 
@@ -660,7 +678,12 @@ func (o NodePoolOutput) DeleteKeepInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.BoolPtrOutput { return v.DeleteKeepInstance }).(pulumi.BoolPtrOutput)
 }
 
-// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+// Indicates whether the node pool deletion protection is enabled.
+func (o NodePoolOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.BoolOutput { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 func (o NodePoolOutput) DesiredCapacity() pulumi.IntOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.IntOutput { return v.DesiredCapacity }).(pulumi.IntOutput)
 }

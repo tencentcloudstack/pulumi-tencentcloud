@@ -169,15 +169,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// }
     /// ```
+    /// ### Use OIDC Config
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testAuthAttach", new Tencentcloud.Kubernetes.AuthAttachmentArgs
+    ///         {
+    ///             ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
+    ///             UseTkeDefault = true,
+    ///             AutoCreateDiscoveryAnonymousAuth = true,
+    ///             AutoCreateOidcConfig = true,
+    ///             AutoInstallPodIdentityWebhookAddon = true,
+    ///         });
+    ///         var oidcConfig = Output.Create(Tencentcloud.Cam.GetOidcConfig.InvokeAsync(new Tencentcloud.Cam.GetOidcConfigArgs
+    ///         {
+    ///             Name = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
+    ///         }));
+    ///         this.IdentityKey = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityKey);
+    ///         this.IdentityUrl = oidcConfig.Apply(oidcConfig =&gt; oidcConfig.IdentityUrl);
+    ///     }
+    /// 
+    ///     [Output("identityKey")]
+    ///     public Output&lt;string&gt; IdentityKey { get; set; }
+    ///     [Output("identityUrl")]
+    ///     public Output&lt;string&gt; IdentityUrl { get; set; }
+    /// }
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/authAttachment:AuthAttachment")]
     public partial class AuthAttachment : Pulumi.CustomResource
     {
         /// <summary>
+        /// Creating ClientId of the identity provider.
+        /// </summary>
+        [Output("autoCreateClientIds")]
+        public Output<ImmutableArray<string>> AutoCreateClientIds { get; private set; } = null!;
+
+        /// <summary>
         /// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         /// </summary>
         [Output("autoCreateDiscoveryAnonymousAuth")]
         public Output<bool?> AutoCreateDiscoveryAnonymousAuth { get; private set; } = null!;
+
+        /// <summary>
+        /// Creating an identity provider.
+        /// </summary>
+        [Output("autoCreateOidcConfig")]
+        public Output<bool> AutoCreateOidcConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        /// </summary>
+        [Output("autoInstallPodIdentityWebhookAddon")]
+        public Output<bool> AutoInstallPodIdentityWebhookAddon { get; private set; } = null!;
 
         /// <summary>
         /// ID of clusters.
@@ -262,11 +313,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 
     public sealed class AuthAttachmentArgs : Pulumi.ResourceArgs
     {
+        [Input("autoCreateClientIds")]
+        private InputList<string>? _autoCreateClientIds;
+
+        /// <summary>
+        /// Creating ClientId of the identity provider.
+        /// </summary>
+        public InputList<string> AutoCreateClientIds
+        {
+            get => _autoCreateClientIds ?? (_autoCreateClientIds = new InputList<string>());
+            set => _autoCreateClientIds = value;
+        }
+
         /// <summary>
         /// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         /// </summary>
         [Input("autoCreateDiscoveryAnonymousAuth")]
         public Input<bool>? AutoCreateDiscoveryAnonymousAuth { get; set; }
+
+        /// <summary>
+        /// Creating an identity provider.
+        /// </summary>
+        [Input("autoCreateOidcConfig")]
+        public Input<bool>? AutoCreateOidcConfig { get; set; }
+
+        /// <summary>
+        /// Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        /// </summary>
+        [Input("autoInstallPodIdentityWebhookAddon")]
+        public Input<bool>? AutoInstallPodIdentityWebhookAddon { get; set; }
 
         /// <summary>
         /// ID of clusters.
@@ -299,11 +374,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 
     public sealed class AuthAttachmentState : Pulumi.ResourceArgs
     {
+        [Input("autoCreateClientIds")]
+        private InputList<string>? _autoCreateClientIds;
+
+        /// <summary>
+        /// Creating ClientId of the identity provider.
+        /// </summary>
+        public InputList<string> AutoCreateClientIds
+        {
+            get => _autoCreateClientIds ?? (_autoCreateClientIds = new InputList<string>());
+            set => _autoCreateClientIds = value;
+        }
+
         /// <summary>
         /// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         /// </summary>
         [Input("autoCreateDiscoveryAnonymousAuth")]
         public Input<bool>? AutoCreateDiscoveryAnonymousAuth { get; set; }
+
+        /// <summary>
+        /// Creating an identity provider.
+        /// </summary>
+        [Input("autoCreateOidcConfig")]
+        public Input<bool>? AutoCreateOidcConfig { get; set; }
+
+        /// <summary>
+        /// Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        /// </summary>
+        [Input("autoInstallPodIdentityWebhookAddon")]
+        public Input<bool>? AutoInstallPodIdentityWebhookAddon { get; set; }
 
         /// <summary>
         /// ID of clusters.

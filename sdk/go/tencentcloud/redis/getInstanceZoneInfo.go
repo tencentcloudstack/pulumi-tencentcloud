@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.GetInstanceZoneInfo(ctx, &redis.GetInstanceZoneInfoArgs{
-// 			InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.GetInstanceZoneInfo(ctx, &redis.GetInstanceZoneInfoArgs{
+//				InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceZoneInfo(ctx *pulumi.Context, args *GetInstanceZoneInfoArgs, opts ...pulumi.InvokeOption) (*GetInstanceZoneInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

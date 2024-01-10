@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewUpgradeMultiZoneOperation(ctx, "upgradeMultiZoneOperation", &Redis.UpgradeMultiZoneOperationArgs{
-// 			InstanceId:                 pulumi.String("crs-c1nl9rpv"),
-// 			UpgradeProxyAndRedisServer: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewUpgradeMultiZoneOperation(ctx, "upgradeMultiZoneOperation", &Redis.UpgradeMultiZoneOperationArgs{
+//				InstanceId:                 pulumi.String("crs-c1nl9rpv"),
+//				UpgradeProxyAndRedisServer: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UpgradeMultiZoneOperation struct {
 	pulumi.CustomResourceState
@@ -136,7 +139,7 @@ func (i *UpgradeMultiZoneOperation) ToUpgradeMultiZoneOperationOutputWithContext
 // UpgradeMultiZoneOperationArrayInput is an input type that accepts UpgradeMultiZoneOperationArray and UpgradeMultiZoneOperationArrayOutput values.
 // You can construct a concrete instance of `UpgradeMultiZoneOperationArrayInput` via:
 //
-//          UpgradeMultiZoneOperationArray{ UpgradeMultiZoneOperationArgs{...} }
+//	UpgradeMultiZoneOperationArray{ UpgradeMultiZoneOperationArgs{...} }
 type UpgradeMultiZoneOperationArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +164,7 @@ func (i UpgradeMultiZoneOperationArray) ToUpgradeMultiZoneOperationArrayOutputWi
 // UpgradeMultiZoneOperationMapInput is an input type that accepts UpgradeMultiZoneOperationMap and UpgradeMultiZoneOperationMapOutput values.
 // You can construct a concrete instance of `UpgradeMultiZoneOperationMapInput` via:
 //
-//          UpgradeMultiZoneOperationMap{ "key": UpgradeMultiZoneOperationArgs{...} }
+//	UpgradeMultiZoneOperationMap{ "key": UpgradeMultiZoneOperationArgs{...} }
 type UpgradeMultiZoneOperationMapInput interface {
 	pulumi.Input
 

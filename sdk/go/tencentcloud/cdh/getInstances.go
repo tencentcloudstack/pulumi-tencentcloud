@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdh"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdh.GetInstances(ctx, &cdh.GetInstancesArgs{
-// 			AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
-// 			HostId:           pulumi.StringRef("host-d6s7i5q4"),
-// 			HostName:         pulumi.StringRef("test"),
-// 			HostState:        pulumi.StringRef("RUNNING"),
-// 			ProjectId:        pulumi.IntRef(1154137),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdh.GetInstances(ctx, &cdh.GetInstancesArgs{
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-3"),
+//				HostId:           pulumi.StringRef("host-d6s7i5q4"),
+//				HostName:         pulumi.StringRef("test"),
+//				HostState:        pulumi.StringRef("RUNNING"),
+//				ProjectId:        pulumi.IntRef(1154137),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

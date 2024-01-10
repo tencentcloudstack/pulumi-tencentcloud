@@ -23,6 +23,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule":
 		r = &CngwCanaryRule{}
+	case "tencentcloud:Tse/cngwCertificate:CngwCertificate":
+		r = &CngwCertificate{}
+	case "tencentcloud:Tse/cngwGateway:CngwGateway":
+		r = &CngwGateway{}
+	case "tencentcloud:Tse/cngwGroup:CngwGroup":
+		r = &CngwGroup{}
 	case "tencentcloud:Tse/cngwRoute:CngwRoute":
 		r = &CngwRoute{}
 	case "tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit":
@@ -33,6 +39,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CngwServiceRateLimit{}
 	case "tencentcloud:Tse/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Tse/wafDomains:WafDomains":
+		r = &WafDomains{}
+	case "tencentcloud:Tse/wafProtection:WafProtection":
+		r = &WafProtection{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -49,6 +59,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tse/cngwCanaryRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwCertificate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cngwGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -74,6 +99,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tse/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/wafDomains",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/wafProtection",
 		&module{version},
 	)
 }

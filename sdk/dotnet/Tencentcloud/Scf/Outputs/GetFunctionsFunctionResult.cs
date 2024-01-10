@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
     public sealed class GetFunctionsFunctionResult
     {
         /// <summary>
+        /// Whether asynchronous attribute is enabled.
+        /// </summary>
+        public readonly string AsyncRunEnable;
+        /// <summary>
         /// CLS logset ID of the SCF function.
         /// </summary>
         public readonly string ClsLogsetId;
@@ -42,6 +46,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// Description of the SCF function to be queried.
         /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        /// </summary>
+        public readonly bool DnsCache;
         /// <summary>
         /// Whether EIP is a fixed IP.
         /// </summary>
@@ -75,9 +83,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// </summary>
         public readonly string Host;
         /// <summary>
+        /// Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetFunctionsFunctionImageConfigResult> ImageConfigs;
+        /// <summary>
         /// Whether to automatically install dependencies.
         /// </summary>
         public readonly bool InstallDependency;
+        /// <summary>
+        /// Intranet access configuration.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetFunctionsFunctionIntranetConfigResult> IntranetConfigs;
         /// <summary>
         /// Whether to enable L5.
         /// </summary>
@@ -141,6 +157,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
 
         [OutputConstructor]
         private GetFunctionsFunctionResult(
+            string asyncRunEnable,
+
             string clsLogsetId,
 
             string clsTopicId,
@@ -154,6 +172,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
             string createTime,
 
             string description,
+
+            bool dnsCache,
 
             bool eipFixed,
 
@@ -171,7 +191,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
 
             string host,
 
+            ImmutableArray<Outputs.GetFunctionsFunctionImageConfigResult> imageConfigs,
+
             bool installDependency,
+
+            ImmutableArray<Outputs.GetFunctionsFunctionIntranetConfigResult> intranetConfigs,
 
             bool l5Enable,
 
@@ -203,6 +227,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
 
             string vpcId)
         {
+            AsyncRunEnable = asyncRunEnable;
             ClsLogsetId = clsLogsetId;
             ClsTopicId = clsTopicId;
             CodeError = codeError;
@@ -210,6 +235,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
             CodeSize = codeSize;
             CreateTime = createTime;
             Description = description;
+            DnsCache = dnsCache;
             EipFixed = eipFixed;
             Eips = eips;
             EnableEipConfig = enableEipConfig;
@@ -218,7 +244,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
             ErrNo = errNo;
             Handler = handler;
             Host = host;
+            ImageConfigs = imageConfigs;
             InstallDependency = installDependency;
+            IntranetConfigs = intranetConfigs;
             L5Enable = l5Enable;
             MemSize = memSize;
             ModifyTime = modifyTime;

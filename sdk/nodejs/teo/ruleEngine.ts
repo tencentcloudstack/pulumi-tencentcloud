@@ -159,7 +159,7 @@ export class RuleEngine extends pulumi.CustomResource {
      */
     public /*out*/ readonly ruleId!: pulumi.Output<string>;
     /**
-     * Rule name.
+     * The rule name (1 to 255 characters).
      */
     public readonly ruleName!: pulumi.Output<string>;
     /**
@@ -167,7 +167,7 @@ export class RuleEngine extends pulumi.CustomResource {
      */
     public readonly rules!: pulumi.Output<outputs.Teo.RuleEngineRule[]>;
     /**
-     * Status of the rule, valid value can be `enable` or `disable`.
+     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
      */
     public readonly status!: pulumi.Output<string>;
     /**
@@ -175,7 +175,7 @@ export class RuleEngine extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * Site ID.
+     * ID of the site.
      */
     public readonly zoneId!: pulumi.Output<string>;
 
@@ -233,7 +233,7 @@ export interface RuleEngineState {
      */
     ruleId?: pulumi.Input<string>;
     /**
-     * Rule name.
+     * The rule name (1 to 255 characters).
      */
     ruleName?: pulumi.Input<string>;
     /**
@@ -241,7 +241,7 @@ export interface RuleEngineState {
      */
     rules?: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[]>;
     /**
-     * Status of the rule, valid value can be `enable` or `disable`.
+     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
      */
     status?: pulumi.Input<string>;
     /**
@@ -249,7 +249,7 @@ export interface RuleEngineState {
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Site ID.
+     * ID of the site.
      */
     zoneId?: pulumi.Input<string>;
 }
@@ -259,7 +259,7 @@ export interface RuleEngineState {
  */
 export interface RuleEngineArgs {
     /**
-     * Rule name.
+     * The rule name (1 to 255 characters).
      */
     ruleName: pulumi.Input<string>;
     /**
@@ -267,7 +267,7 @@ export interface RuleEngineArgs {
      */
     rules: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[]>;
     /**
-     * Status of the rule, valid value can be `enable` or `disable`.
+     * Rule status. Values: `enable`: Enabled; `disable`: Disabled.
      */
     status: pulumi.Input<string>;
     /**
@@ -275,7 +275,7 @@ export interface RuleEngineArgs {
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Site ID.
+     * ID of the site.
      */
     zoneId: pulumi.Input<string>;
 }

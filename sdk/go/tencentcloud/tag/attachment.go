@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tag"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tag"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tag.NewAttachment(ctx, "attachment", &Tag.AttachmentArgs{
-// 			Resource: pulumi.String("qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4"),
-// 			TagKey:   pulumi.String("test3"),
-// 			TagValue: pulumi.String("Terraform3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tag.NewAttachment(ctx, "attachment", &Tag.AttachmentArgs{
+//				Resource: pulumi.String("qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4"),
+//				TagKey:   pulumi.String("test3"),
+//				TagValue: pulumi.String("Terraform3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // tag attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
+//
+//	$ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
+//
 // ```
 type Attachment struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *Attachment) ToAttachmentOutputWithContext(ctx context.Context) Attachme
 // AttachmentArrayInput is an input type that accepts AttachmentArray and AttachmentArrayOutput values.
 // You can construct a concrete instance of `AttachmentArrayInput` via:
 //
-//          AttachmentArray{ AttachmentArgs{...} }
+//	AttachmentArray{ AttachmentArgs{...} }
 type AttachmentArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i AttachmentArray) ToAttachmentArrayOutputWithContext(ctx context.Context)
 // AttachmentMapInput is an input type that accepts AttachmentMap and AttachmentMapOutput values.
 // You can construct a concrete instance of `AttachmentMapInput` via:
 //
-//          AttachmentMap{ "key": AttachmentArgs{...} }
+//	AttachmentMap{ "key": AttachmentArgs{...} }
 type AttachmentMapInput interface {
 	pulumi.Input
 

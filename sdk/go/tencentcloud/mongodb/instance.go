@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
-// 			AvailableZone: pulumi.String("ap-guangzhou-2"),
-// 			EngineVersion: pulumi.String("MONGO_36_WT"),
-// 			InstanceName:  pulumi.String("mongodb"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			Memory:        pulumi.Int(4),
-// 			Password:      pulumi.String("password1234"),
-// 			ProjectId:     pulumi.Int(0),
-// 			SubnetId:      pulumi.String("subnet-xxxxxx"),
-// 			Volume:        pulumi.Int(100),
-// 			VpcId:         pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
+//				AvailableZone: pulumi.String("ap-guangzhou-2"),
+//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				InstanceName:  pulumi.String("mongodb"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				Memory:        pulumi.Int(4),
+//				Password:      pulumi.String("password1234"),
+//				ProjectId:     pulumi.Int(0),
+//				SubnetId:      pulumi.String("subnet-xxxxxx"),
+//				Volume:        pulumi.Int(100),
+//				VpcId:         pulumi.String("vpc-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // Mongodb instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+//
+//	$ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -87,7 +92,7 @@ type Instance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// List of standby instances' info.
 	StandbyInstanceLists InstanceStandbyInstanceListArrayOutput `pulumi:"standbyInstanceLists"`
@@ -187,7 +192,7 @@ type instanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// List of standby instances' info.
 	StandbyInstanceLists []InstanceStandbyInstanceList `pulumi:"standbyInstanceLists"`
@@ -240,7 +245,7 @@ type InstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// List of standby instances' info.
 	StandbyInstanceLists InstanceStandbyInstanceListArrayInput
@@ -295,7 +300,7 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId *string `pulumi:"subnetId"`
@@ -339,7 +344,7 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId pulumi.StringPtrInput
@@ -377,7 +382,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -402,7 +407,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -512,7 +517,7 @@ func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+// ID of the security group.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }

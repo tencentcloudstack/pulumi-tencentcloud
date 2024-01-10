@@ -17,6 +17,7 @@ __all__ = [
     'FunctionEventInvokeConfigAsyncTriggerConfig',
     'FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig',
     'FunctionImageConfig',
+    'FunctionIntranetConfig',
     'FunctionLayer',
     'FunctionTrigger',
     'FunctionTriggerInfo',
@@ -35,6 +36,8 @@ __all__ = [
     'GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightResult',
     'GetFunctionVersionsVersionResult',
     'GetFunctionsFunctionResult',
+    'GetFunctionsFunctionImageConfigResult',
+    'GetFunctionsFunctionIntranetConfigResult',
     'GetFunctionsFunctionTriggerInfoResult',
     'GetLayerVersionsLayerVersionResult',
     'GetLayersLayerResult',
@@ -397,8 +400,12 @@ class FunctionImageConfig(dict):
             suggest = "image_type"
         elif key == "imageUri":
             suggest = "image_uri"
+        elif key == "containerImageAccelerate":
+            suggest = "container_image_accelerate"
         elif key == "entryPoint":
             suggest = "entry_point"
+        elif key == "imagePort":
+            suggest = "image_port"
         elif key == "registryId":
             suggest = "registry_id"
 
@@ -418,14 +425,18 @@ class FunctionImageConfig(dict):
                  image_uri: str,
                  args: Optional[str] = None,
                  command: Optional[str] = None,
+                 container_image_accelerate: Optional[bool] = None,
                  entry_point: Optional[str] = None,
+                 image_port: Optional[int] = None,
                  registry_id: Optional[str] = None):
         """
         :param str image_type: The image type. personal or enterprise.
         :param str image_uri: The uri of image.
         :param str args: the parameters of command.
         :param str command: The command of entrypoint.
+        :param bool container_image_accelerate: Image accelerate switch.
         :param str entry_point: The entrypoint of app.
+        :param int image_port: Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
         :param str registry_id: The registry id of TCR. When image type is enterprise, it must be set.
         """
         pulumi.set(__self__, "image_type", image_type)
@@ -434,8 +445,12 @@ class FunctionImageConfig(dict):
             pulumi.set(__self__, "args", args)
         if command is not None:
             pulumi.set(__self__, "command", command)
+        if container_image_accelerate is not None:
+            pulumi.set(__self__, "container_image_accelerate", container_image_accelerate)
         if entry_point is not None:
             pulumi.set(__self__, "entry_point", entry_point)
+        if image_port is not None:
+            pulumi.set(__self__, "image_port", image_port)
         if registry_id is not None:
             pulumi.set(__self__, "registry_id", registry_id)
 
@@ -472,6 +487,14 @@ class FunctionImageConfig(dict):
         return pulumi.get(self, "command")
 
     @property
+    @pulumi.getter(name="containerImageAccelerate")
+    def container_image_accelerate(self) -> Optional[bool]:
+        """
+        Image accelerate switch.
+        """
+        return pulumi.get(self, "container_image_accelerate")
+
+    @property
     @pulumi.getter(name="entryPoint")
     def entry_point(self) -> Optional[str]:
         """
@@ -480,12 +503,65 @@ class FunctionImageConfig(dict):
         return pulumi.get(self, "entry_point")
 
     @property
+    @pulumi.getter(name="imagePort")
+    def image_port(self) -> Optional[int]:
+        """
+        Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+        """
+        return pulumi.get(self, "image_port")
+
+    @property
     @pulumi.getter(name="registryId")
     def registry_id(self) -> Optional[str]:
         """
         The registry id of TCR. When image type is enterprise, it must be set.
         """
         return pulumi.get(self, "registry_id")
+
+
+@pulumi.output_type
+class FunctionIntranetConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ipFixed":
+            suggest = "ip_fixed"
+        elif key == "ipAddresses":
+            suggest = "ip_addresses"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionIntranetConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionIntranetConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionIntranetConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ip_fixed: str,
+                 ip_addresses: Optional[Sequence[str]] = None):
+        """
+        :param str ip_fixed: Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        pulumi.set(__self__, "ip_fixed", ip_fixed)
+        if ip_addresses is not None:
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
+
+    @property
+    @pulumi.getter(name="ipFixed")
+    def ip_fixed(self) -> str:
+        """
+        Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        return pulumi.get(self, "ip_fixed")
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "ip_addresses")
 
 
 @pulumi.output_type
@@ -1654,6 +1730,7 @@ class GetFunctionVersionsVersionResult(dict):
 @pulumi.output_type
 class GetFunctionsFunctionResult(dict):
     def __init__(__self__, *,
+                 async_run_enable: str,
                  cls_logset_id: str,
                  cls_topic_id: str,
                  code_error: str,
@@ -1661,6 +1738,7 @@ class GetFunctionsFunctionResult(dict):
                  code_size: int,
                  create_time: str,
                  description: str,
+                 dns_cache: bool,
                  eip_fixed: bool,
                  eips: Sequence[str],
                  enable_eip_config: bool,
@@ -1669,7 +1747,9 @@ class GetFunctionsFunctionResult(dict):
                  err_no: int,
                  handler: str,
                  host: str,
+                 image_configs: Sequence['outputs.GetFunctionsFunctionImageConfigResult'],
                  install_dependency: bool,
+                 intranet_configs: Sequence['outputs.GetFunctionsFunctionIntranetConfigResult'],
                  l5_enable: bool,
                  mem_size: int,
                  modify_time: str,
@@ -1686,6 +1766,7 @@ class GetFunctionsFunctionResult(dict):
                  vip: str,
                  vpc_id: str):
         """
+        :param str async_run_enable: Whether asynchronous attribute is enabled.
         :param str cls_logset_id: CLS logset ID of the SCF function.
         :param str cls_topic_id: CLS topic ID of the SCF function.
         :param str code_error: Code error of the SCF function.
@@ -1693,6 +1774,7 @@ class GetFunctionsFunctionResult(dict):
         :param int code_size: Code size of the SCF function.
         :param str create_time: Create time of the SCF function trigger.
         :param str description: Description of the SCF function to be queried.
+        :param bool dns_cache: Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
         :param bool eip_fixed: Whether EIP is a fixed IP.
         :param Sequence[str] eips: EIP list of the SCF function.
         :param bool enable_eip_config: Whether the EIP enabled.
@@ -1701,7 +1783,9 @@ class GetFunctionsFunctionResult(dict):
         :param int err_no: Errno of the SCF function.
         :param str handler: Handler of the SCF function.
         :param str host: Host of the SCF function.
+        :param Sequence['GetFunctionsFunctionImageConfigArgs'] image_configs: Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         :param bool install_dependency: Whether to automatically install dependencies.
+        :param Sequence['GetFunctionsFunctionIntranetConfigArgs'] intranet_configs: Intranet access configuration.
         :param bool l5_enable: Whether to enable L5.
         :param int mem_size: Memory size of the SCF function runtime, unit is M.
         :param str modify_time: Modify time of the SCF function trigger.
@@ -1718,6 +1802,7 @@ class GetFunctionsFunctionResult(dict):
         :param str vip: Vip of the SCF function.
         :param str vpc_id: VPC ID of the SCF function.
         """
+        pulumi.set(__self__, "async_run_enable", async_run_enable)
         pulumi.set(__self__, "cls_logset_id", cls_logset_id)
         pulumi.set(__self__, "cls_topic_id", cls_topic_id)
         pulumi.set(__self__, "code_error", code_error)
@@ -1725,6 +1810,7 @@ class GetFunctionsFunctionResult(dict):
         pulumi.set(__self__, "code_size", code_size)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "dns_cache", dns_cache)
         pulumi.set(__self__, "eip_fixed", eip_fixed)
         pulumi.set(__self__, "eips", eips)
         pulumi.set(__self__, "enable_eip_config", enable_eip_config)
@@ -1733,7 +1819,9 @@ class GetFunctionsFunctionResult(dict):
         pulumi.set(__self__, "err_no", err_no)
         pulumi.set(__self__, "handler", handler)
         pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "image_configs", image_configs)
         pulumi.set(__self__, "install_dependency", install_dependency)
+        pulumi.set(__self__, "intranet_configs", intranet_configs)
         pulumi.set(__self__, "l5_enable", l5_enable)
         pulumi.set(__self__, "mem_size", mem_size)
         pulumi.set(__self__, "modify_time", modify_time)
@@ -1749,6 +1837,14 @@ class GetFunctionsFunctionResult(dict):
         pulumi.set(__self__, "trigger_infos", trigger_infos)
         pulumi.set(__self__, "vip", vip)
         pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="asyncRunEnable")
+    def async_run_enable(self) -> str:
+        """
+        Whether asynchronous attribute is enabled.
+        """
+        return pulumi.get(self, "async_run_enable")
 
     @property
     @pulumi.getter(name="clsLogsetId")
@@ -1805,6 +1901,14 @@ class GetFunctionsFunctionResult(dict):
         Description of the SCF function to be queried.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="dnsCache")
+    def dns_cache(self) -> bool:
+        """
+        Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        """
+        return pulumi.get(self, "dns_cache")
 
     @property
     @pulumi.getter(name="eipFixed")
@@ -1871,12 +1975,28 @@ class GetFunctionsFunctionResult(dict):
         return pulumi.get(self, "host")
 
     @property
+    @pulumi.getter(name="imageConfigs")
+    def image_configs(self) -> Sequence['outputs.GetFunctionsFunctionImageConfigResult']:
+        """
+        Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
+        """
+        return pulumi.get(self, "image_configs")
+
+    @property
     @pulumi.getter(name="installDependency")
     def install_dependency(self) -> bool:
         """
         Whether to automatically install dependencies.
         """
         return pulumi.get(self, "install_dependency")
+
+    @property
+    @pulumi.getter(name="intranetConfigs")
+    def intranet_configs(self) -> Sequence['outputs.GetFunctionsFunctionIntranetConfigResult']:
+        """
+        Intranet access configuration.
+        """
+        return pulumi.get(self, "intranet_configs")
 
     @property
     @pulumi.getter(name="l5Enable")
@@ -1997,6 +2117,130 @@ class GetFunctionsFunctionResult(dict):
         VPC ID of the SCF function.
         """
         return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetFunctionsFunctionImageConfigResult(dict):
+    def __init__(__self__, *,
+                 args: str,
+                 command: str,
+                 container_image_accelerate: bool,
+                 entry_point: str,
+                 image_port: int,
+                 image_type: str,
+                 image_uri: str,
+                 registry_id: str):
+        """
+        :param str args: the parameters of command.
+        :param str command: The command of entrypoint.
+        :param bool container_image_accelerate: Image accelerate switch.
+        :param str entry_point: The entrypoint of app.
+        :param int image_port: Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+        :param str image_type: The image type. personal or enterprise.
+        :param str image_uri: The uri of image.
+        :param str registry_id: The registry id of TCR. When image type is enterprise, it must be set.
+        """
+        pulumi.set(__self__, "args", args)
+        pulumi.set(__self__, "command", command)
+        pulumi.set(__self__, "container_image_accelerate", container_image_accelerate)
+        pulumi.set(__self__, "entry_point", entry_point)
+        pulumi.set(__self__, "image_port", image_port)
+        pulumi.set(__self__, "image_type", image_type)
+        pulumi.set(__self__, "image_uri", image_uri)
+        pulumi.set(__self__, "registry_id", registry_id)
+
+    @property
+    @pulumi.getter
+    def args(self) -> str:
+        """
+        the parameters of command.
+        """
+        return pulumi.get(self, "args")
+
+    @property
+    @pulumi.getter
+    def command(self) -> str:
+        """
+        The command of entrypoint.
+        """
+        return pulumi.get(self, "command")
+
+    @property
+    @pulumi.getter(name="containerImageAccelerate")
+    def container_image_accelerate(self) -> bool:
+        """
+        Image accelerate switch.
+        """
+        return pulumi.get(self, "container_image_accelerate")
+
+    @property
+    @pulumi.getter(name="entryPoint")
+    def entry_point(self) -> str:
+        """
+        The entrypoint of app.
+        """
+        return pulumi.get(self, "entry_point")
+
+    @property
+    @pulumi.getter(name="imagePort")
+    def image_port(self) -> int:
+        """
+        Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+        """
+        return pulumi.get(self, "image_port")
+
+    @property
+    @pulumi.getter(name="imageType")
+    def image_type(self) -> str:
+        """
+        The image type. personal or enterprise.
+        """
+        return pulumi.get(self, "image_type")
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> str:
+        """
+        The uri of image.
+        """
+        return pulumi.get(self, "image_uri")
+
+    @property
+    @pulumi.getter(name="registryId")
+    def registry_id(self) -> str:
+        """
+        The registry id of TCR. When image type is enterprise, it must be set.
+        """
+        return pulumi.get(self, "registry_id")
+
+
+@pulumi.output_type
+class GetFunctionsFunctionIntranetConfigResult(dict):
+    def __init__(__self__, *,
+                 ip_addresses: Sequence[str],
+                 ip_fixed: str):
+        """
+        :param Sequence[str] ip_addresses: If fixed intranet IP is enabled, this field returns the IP list used.
+        :param str ip_fixed: Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        pulumi.set(__self__, "ip_addresses", ip_addresses)
+        pulumi.set(__self__, "ip_fixed", ip_fixed)
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Sequence[str]:
+        """
+        If fixed intranet IP is enabled, this field returns the IP list used.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @property
+    @pulumi.getter(name="ipFixed")
+    def ip_fixed(self) -> str:
+        """
+        Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        return pulumi.get(self, "ip_fixed")
 
 
 @pulumi.output_type

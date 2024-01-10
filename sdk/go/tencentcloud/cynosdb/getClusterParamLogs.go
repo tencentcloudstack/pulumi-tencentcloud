@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetClusterParamLogs(ctx, &cynosdb.GetClusterParamLogsArgs{
-// 			ClusterId: "cynosdbmysql-bws8h88b",
-// 			InstanceIds: []string{
-// 				"cynosdbmysql-ins-afqx1hy0",
-// 			},
-// 			OrderBy:     pulumi.StringRef("CreateTime"),
-// 			OrderByType: pulumi.StringRef("DESC"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetClusterParamLogs(ctx, &cynosdb.GetClusterParamLogsArgs{
+//				ClusterId: "cynosdbmysql-bws8h88b",
+//				InstanceIds: []string{
+//					"cynosdbmysql-ins-afqx1hy0",
+//				},
+//				OrderBy:     pulumi.StringRef("CreateTime"),
+//				OrderByType: pulumi.StringRef("DESC"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterParamLogs(ctx *pulumi.Context, args *GetClusterParamLogsArgs, opts ...pulumi.InvokeOption) (*GetClusterParamLogsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

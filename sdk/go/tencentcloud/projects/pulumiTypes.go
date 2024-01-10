@@ -26,7 +26,7 @@ type GetInstanceProject struct {
 // GetInstanceProjectInput is an input type that accepts GetInstanceProjectArgs and GetInstanceProjectOutput values.
 // You can construct a concrete instance of `GetInstanceProjectInput` via:
 //
-//          GetInstanceProjectArgs{...}
+//	GetInstanceProjectArgs{...}
 type GetInstanceProjectInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i GetInstanceProjectArgs) ToGetInstanceProjectOutputWithContext(ctx contex
 // GetInstanceProjectArrayInput is an input type that accepts GetInstanceProjectArray and GetInstanceProjectArrayOutput values.
 // You can construct a concrete instance of `GetInstanceProjectArrayInput` via:
 //
-//          GetInstanceProjectArray{ GetInstanceProjectArgs{...} }
+//	GetInstanceProjectArray{ GetInstanceProjectArgs{...} }
 type GetInstanceProjectArrayInput interface {
 	pulumi.Input
 

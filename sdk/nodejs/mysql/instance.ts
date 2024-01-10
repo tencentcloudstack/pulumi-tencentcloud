@@ -205,7 +205,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * List of parameters to use.
      */
-    public readonly parameters!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly parameters!: pulumi.Output<{[key: string]: any}>;
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
@@ -274,6 +274,10 @@ export class Instance extends pulumi.CustomResource {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     public readonly vpcId!: pulumi.Output<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    public readonly waitSwitch!: pulumi.Output<number | undefined>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -325,6 +329,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["upgradeSubversion"] = state ? state.upgradeSubversion : undefined;
             resourceInputs["volumeSize"] = state ? state.volumeSize : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["waitSwitch"] = state ? state.waitSwitch : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
             if ((!args || args.instanceName === undefined) && !opts.urn) {
@@ -366,6 +371,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["upgradeSubversion"] = args ? args.upgradeSubversion : undefined;
             resourceInputs["volumeSize"] = args ? args.volumeSize : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["waitSwitch"] = args ? args.waitSwitch : undefined;
             resourceInputs["gtid"] = undefined /*out*/;
             resourceInputs["internetHost"] = undefined /*out*/;
             resourceInputs["internetPort"] = undefined /*out*/;
@@ -535,6 +541,10 @@ export interface InstanceState {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }
 
 /**
@@ -665,4 +675,8 @@ export interface InstanceArgs {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    waitSwitch?: pulumi.Input<number>;
 }

@@ -26,13 +26,14 @@ class ProductSecretArgs:
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  rotation_begin_time: Optional[pulumi.Input[str]] = None,
                  rotation_frequency: Optional[pulumi.Input[int]] = None,
-                 status: Optional[pulumi.Input[str]] = None):
+                 status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a ProductSecret resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] domains: Domain name of the account in the form of IP. You can enter `%`.
         :param pulumi.Input[str] instance_id: Tencent Cloud service instance ID.
         :param pulumi.Input[Sequence[pulumi.Input['ProductSecretPrivilegesListArgs']]] privileges_lists: List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         :param pulumi.Input[str] secret_name: Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
         :param pulumi.Input[str] user_name_prefix: Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
         :param pulumi.Input[str] description: Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
@@ -41,6 +42,7 @@ class ProductSecretArgs:
         :param pulumi.Input[str] rotation_begin_time: User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
         :param pulumi.Input[int] rotation_frequency: Rotation frequency in days. Default value: 1 day.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         pulumi.set(__self__, "domains", domains)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -60,6 +62,8 @@ class ProductSecretArgs:
             pulumi.set(__self__, "rotation_frequency", rotation_frequency)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -101,7 +105,7 @@ class ProductSecretArgs:
     @pulumi.getter(name="productName")
     def product_name(self) -> pulumi.Input[str]:
         """
-        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         """
         return pulumi.get(self, "product_name")
 
@@ -205,6 +209,18 @@ class ProductSecretArgs:
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _ProductSecretState:
@@ -222,6 +238,7 @@ class _ProductSecretState:
                  secret_name: Optional[pulumi.Input[str]] = None,
                  secret_type: Optional[pulumi.Input[int]] = None,
                  status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  user_name_prefix: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ProductSecret resources.
@@ -232,12 +249,13 @@ class _ProductSecretState:
         :param pulumi.Input[str] instance_id: Tencent Cloud service instance ID.
         :param pulumi.Input[str] kms_key_id: Specifies the KMS CMK that encrypts the credential. If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         :param pulumi.Input[Sequence[pulumi.Input['ProductSecretPrivilegesListArgs']]] privileges_lists: List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         :param pulumi.Input[str] rotation_begin_time: User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
         :param pulumi.Input[int] rotation_frequency: Rotation frequency in days. Default value: 1 day.
         :param pulumi.Input[str] secret_name: Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
         :param pulumi.Input[int] secret_type: `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         :param pulumi.Input[str] user_name_prefix: Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
         """
         if create_time is not None:
@@ -266,6 +284,8 @@ class _ProductSecretState:
             pulumi.set(__self__, "secret_type", secret_type)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if user_name_prefix is not None:
             pulumi.set(__self__, "user_name_prefix", user_name_prefix)
 
@@ -357,7 +377,7 @@ class _ProductSecretState:
     @pulumi.getter(name="productName")
     def product_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         """
         return pulumi.get(self, "product_name")
 
@@ -426,6 +446,18 @@ class _ProductSecretState:
         pulumi.set(self, "status", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="userNamePrefix")
     def user_name_prefix(self) -> Optional[pulumi.Input[str]]:
         """
@@ -454,36 +486,119 @@ class ProductSecret(pulumi.CustomResource):
                  rotation_frequency: Optional[pulumi.Input[int]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  user_name_prefix: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Provides a resource to create a ssm product_secret
 
         ## Example Usage
+        ### Ssm secret for mysql
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        kms = tencentcloud.Kms.get_keys(key_state=1)
-        mysql = tencentcloud.Mysql.get_instance(mysql_id="cdb-fitq5t9h")
-        product_secret = tencentcloud.ssm.ProductSecret("productSecret",
-            secret_name="tf-product-ssm-test",
-            user_name_prefix="test",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "createBy": "terraform",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_key = tencentcloud.kms.Key("exampleKey",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_product_secret = tencentcloud.ssm.ProductSecret("exampleProductSecret",
+            secret_name="tf-example",
+            user_name_prefix="prefix",
             product_name="Mysql",
-            instance_id=mysql.instance_lists[0].mysql_id,
+            instance_id=example_instance.id,
             domains=["10.0.0.0"],
             privileges_lists=[tencentcloud.ssm.ProductSecretPrivilegesListArgs(
                 privilege_name="GlobalPrivileges",
                 privileges=["ALTER ROUTINE"],
             )],
             description="for ssm product test",
-            kms_key_id=kms.key_lists[0].key_id,
+            kms_key_id=example_key.id,
             status="Enabled",
             enable_rotation=True,
             rotation_begin_time="2023-08-05 20:54:33",
-            rotation_frequency=30)
+            rotation_frequency=30,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Ssm secret for tdsql-c-mysql
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.ssm.ProductSecret("example",
+            secret_name="tf-tdsql-c-example",
+            user_name_prefix="prefix",
+            product_name="Tdsql_C_Mysql",
+            instance_id="cynosdbmysql-xxxxxx",
+            domains=["%"],
+            privileges_lists=[
+                tencentcloud.ssm.ProductSecretPrivilegesListArgs(
+                    privilege_name="GlobalPrivileges",
+                    privileges=[
+                        "ALTER",
+                        "CREATE",
+                        "DELETE",
+                    ],
+                ),
+                tencentcloud.ssm.ProductSecretPrivilegesListArgs(
+                    privilege_name="DatabasePrivileges",
+                    database="test",
+                    privileges=[
+                        "ALTER",
+                        "CREATE",
+                        "DELETE",
+                        "SELECT",
+                    ],
+                ),
+            ],
+            description="test tdsql-c",
+            kms_key_id=None,
+            status="Enabled",
+            enable_rotation=False,
+            rotation_begin_time="2023-08-05 20:54:33",
+            rotation_frequency=30,
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         :param str resource_name: The name of the resource.
@@ -494,11 +609,12 @@ class ProductSecret(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: Tencent Cloud service instance ID.
         :param pulumi.Input[str] kms_key_id: Specifies the KMS CMK that encrypts the credential. If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProductSecretPrivilegesListArgs']]]] privileges_lists: List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         :param pulumi.Input[str] rotation_begin_time: User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
         :param pulumi.Input[int] rotation_frequency: Rotation frequency in days. Default value: 1 day.
         :param pulumi.Input[str] secret_name: Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         :param pulumi.Input[str] user_name_prefix: Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
         """
         ...
@@ -511,30 +627,112 @@ class ProductSecret(pulumi.CustomResource):
         Provides a resource to create a ssm product_secret
 
         ## Example Usage
+        ### Ssm secret for mysql
 
         ```python
         import pulumi
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        kms = tencentcloud.Kms.get_keys(key_state=1)
-        mysql = tencentcloud.Mysql.get_instance(mysql_id="cdb-fitq5t9h")
-        product_secret = tencentcloud.ssm.ProductSecret("productSecret",
-            secret_name="tf-product-ssm-test",
-            user_name_prefix="test",
+        zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=zones.zones[0].name,
+            vpc_id=vpc.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        security_group = tencentcloud.security.Group("securityGroup", description="desc.")
+        example_instance = tencentcloud.mysql.Instance("exampleInstance",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones.zones[0].name,
+            slave_sync_mode=1,
+            instance_name="tf-example",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            intranet_port=3306,
+            security_groups=[security_group.id],
+            tags={
+                "createBy": "terraform",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        example_key = tencentcloud.kms.Key("exampleKey",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_product_secret = tencentcloud.ssm.ProductSecret("exampleProductSecret",
+            secret_name="tf-example",
+            user_name_prefix="prefix",
             product_name="Mysql",
-            instance_id=mysql.instance_lists[0].mysql_id,
+            instance_id=example_instance.id,
             domains=["10.0.0.0"],
             privileges_lists=[tencentcloud.ssm.ProductSecretPrivilegesListArgs(
                 privilege_name="GlobalPrivileges",
                 privileges=["ALTER ROUTINE"],
             )],
             description="for ssm product test",
-            kms_key_id=kms.key_lists[0].key_id,
+            kms_key_id=example_key.id,
             status="Enabled",
             enable_rotation=True,
             rotation_begin_time="2023-08-05 20:54:33",
-            rotation_frequency=30)
+            rotation_frequency=30,
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+        ### Ssm secret for tdsql-c-mysql
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.ssm.ProductSecret("example",
+            secret_name="tf-tdsql-c-example",
+            user_name_prefix="prefix",
+            product_name="Tdsql_C_Mysql",
+            instance_id="cynosdbmysql-xxxxxx",
+            domains=["%"],
+            privileges_lists=[
+                tencentcloud.ssm.ProductSecretPrivilegesListArgs(
+                    privilege_name="GlobalPrivileges",
+                    privileges=[
+                        "ALTER",
+                        "CREATE",
+                        "DELETE",
+                    ],
+                ),
+                tencentcloud.ssm.ProductSecretPrivilegesListArgs(
+                    privilege_name="DatabasePrivileges",
+                    database="test",
+                    privileges=[
+                        "ALTER",
+                        "CREATE",
+                        "DELETE",
+                        "SELECT",
+                    ],
+                ),
+            ],
+            description="test tdsql-c",
+            kms_key_id=None,
+            status="Enabled",
+            enable_rotation=False,
+            rotation_begin_time="2023-08-05 20:54:33",
+            rotation_frequency=30,
+            tags={
+                "createdBy": "terraform",
+            })
         ```
 
         :param str resource_name: The name of the resource.
@@ -563,6 +761,7 @@ class ProductSecret(pulumi.CustomResource):
                  rotation_frequency: Optional[pulumi.Input[int]] = None,
                  secret_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  user_name_prefix: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -599,6 +798,7 @@ class ProductSecret(pulumi.CustomResource):
                 raise TypeError("Missing required property 'secret_name'")
             __props__.__dict__["secret_name"] = secret_name
             __props__.__dict__["status"] = status
+            __props__.__dict__["tags"] = tags
             if user_name_prefix is None and not opts.urn:
                 raise TypeError("Missing required property 'user_name_prefix'")
             __props__.__dict__["user_name_prefix"] = user_name_prefix
@@ -627,6 +827,7 @@ class ProductSecret(pulumi.CustomResource):
             secret_name: Optional[pulumi.Input[str]] = None,
             secret_type: Optional[pulumi.Input[int]] = None,
             status: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             user_name_prefix: Optional[pulumi.Input[str]] = None) -> 'ProductSecret':
         """
         Get an existing ProductSecret resource's state with the given name, id, and optional extra
@@ -642,12 +843,13 @@ class ProductSecret(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: Tencent Cloud service instance ID.
         :param pulumi.Input[str] kms_key_id: Specifies the KMS CMK that encrypts the credential. If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProductSecretPrivilegesListArgs']]]] privileges_lists: List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        :param pulumi.Input[str] product_name: Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         :param pulumi.Input[str] rotation_begin_time: User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
         :param pulumi.Input[int] rotation_frequency: Rotation frequency in days. Default value: 1 day.
         :param pulumi.Input[str] secret_name: Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
         :param pulumi.Input[int] secret_type: `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
         :param pulumi.Input[str] status: Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         :param pulumi.Input[str] user_name_prefix: Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -667,6 +869,7 @@ class ProductSecret(pulumi.CustomResource):
         __props__.__dict__["secret_name"] = secret_name
         __props__.__dict__["secret_type"] = secret_type
         __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["user_name_prefix"] = user_name_prefix
         return ProductSecret(resource_name, opts=opts, __props__=__props__)
 
@@ -730,7 +933,7 @@ class ProductSecret(pulumi.CustomResource):
     @pulumi.getter(name="productName")
     def product_name(self) -> pulumi.Output[str]:
         """
-        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `_ssm.get_products` to query supported products.
+        Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `_ssm.get_products` to query supported products.
         """
         return pulumi.get(self, "product_name")
 
@@ -773,6 +976,14 @@ class ProductSecret(pulumi.CustomResource):
         Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tags of secret.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="userNamePrefix")

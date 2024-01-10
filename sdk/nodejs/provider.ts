@@ -31,6 +31,11 @@ export class Provider extends pulumi.ProviderResource {
      */
     public readonly domain!: pulumi.Output<string | undefined>;
     /**
+     * The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+     * variable. If not set, the default profile created with `tccli configure` will be used.
+     */
+    public readonly profile!: pulumi.Output<string | undefined>;
+    /**
      * The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
      */
     public readonly protocol!: pulumi.Output<string | undefined>;
@@ -55,6 +60,11 @@ export class Provider extends pulumi.ProviderResource {
      * products](https://intl.cloud.tencent.com/document/product/598/10588).
      */
     public readonly securityToken!: pulumi.Output<string | undefined>;
+    /**
+     * The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+     * environment variable. If not set this defaults to ~/.tccli.
+     */
+    public readonly sharedCredentialsDir!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -69,11 +79,13 @@ export class Provider extends pulumi.ProviderResource {
         {
             resourceInputs["assumeRole"] = pulumi.output(args ? args.assumeRole : undefined).apply(JSON.stringify);
             resourceInputs["domain"] = args ? args.domain : undefined;
+            resourceInputs["profile"] = args ? args.profile : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["region"] = (args ? args.region : undefined) ?? utilities.getEnv("TENCENTCLOUD_REGION");
             resourceInputs["secretId"] = (args ? args.secretId : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECRET_ID");
             resourceInputs["secretKey"] = (args ? args.secretKey : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECRET_KEY");
             resourceInputs["securityToken"] = (args ? args.securityToken : undefined) ?? utilities.getEnv("TENCENTCLOUD_SECURITY_TOKEN");
+            resourceInputs["sharedCredentialsDir"] = args ? args.sharedCredentialsDir : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
@@ -92,6 +104,11 @@ export interface ProviderArgs {
      * The root domain of the API request, Default is `tencentcloudapi.com`.
      */
     domain?: pulumi.Input<string>;
+    /**
+     * The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+     * variable. If not set, the default profile created with `tccli configure` will be used.
+     */
+    profile?: pulumi.Input<string>;
     /**
      * The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
      */
@@ -117,4 +134,9 @@ export interface ProviderArgs {
      * products](https://intl.cloud.tencent.com/document/product/598/10588).
      */
     securityToken?: pulumi.Input<string>;
+    /**
+     * The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+     * environment variable. If not set this defaults to ~/.tccli.
+     */
+    sharedCredentialsDir?: pulumi.Input<string>;
 }

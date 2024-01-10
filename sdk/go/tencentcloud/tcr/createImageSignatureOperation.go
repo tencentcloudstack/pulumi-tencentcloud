@@ -19,58 +19,61 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleRepository, err := Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
-// 			InstanceId:    exampleInstance.ID(),
-// 			NamespaceName: exampleNamespace.Name,
-// 			BriefDesc:     pulumi.String("111"),
-// 			Description:   pulumi.String("111111111111111111111111111111111111"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewCreateImageSignatureOperation(ctx, "exampleCreateImageSignatureOperation", &Tcr.CreateImageSignatureOperationArgs{
-// 			RegistryId:     exampleInstance.ID(),
-// 			NamespaceName:  exampleNamespace.Name,
-// 			RepositoryName: exampleRepository.Name,
-// 			ImageVersion:   pulumi.String("v1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleRepository, err := Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
+//				InstanceId:    exampleInstance.ID(),
+//				NamespaceName: exampleNamespace.Name,
+//				BriefDesc:     pulumi.String("111"),
+//				Description:   pulumi.String("111111111111111111111111111111111111"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewCreateImageSignatureOperation(ctx, "exampleCreateImageSignatureOperation", &Tcr.CreateImageSignatureOperationArgs{
+//				RegistryId:     exampleInstance.ID(),
+//				NamespaceName:  exampleNamespace.Name,
+//				RepositoryName: exampleRepository.Name,
+//				ImageVersion:   pulumi.String("v1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -78,7 +81,9 @@ import (
 // tcr image_signature_operation can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
+//
+//	$ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
+//
 // ```
 type CreateImageSignatureOperation struct {
 	pulumi.CustomResourceState
@@ -209,7 +214,7 @@ func (i *CreateImageSignatureOperation) ToCreateImageSignatureOperationOutputWit
 // CreateImageSignatureOperationArrayInput is an input type that accepts CreateImageSignatureOperationArray and CreateImageSignatureOperationArrayOutput values.
 // You can construct a concrete instance of `CreateImageSignatureOperationArrayInput` via:
 //
-//          CreateImageSignatureOperationArray{ CreateImageSignatureOperationArgs{...} }
+//	CreateImageSignatureOperationArray{ CreateImageSignatureOperationArgs{...} }
 type CreateImageSignatureOperationArrayInput interface {
 	pulumi.Input
 
@@ -234,7 +239,7 @@ func (i CreateImageSignatureOperationArray) ToCreateImageSignatureOperationArray
 // CreateImageSignatureOperationMapInput is an input type that accepts CreateImageSignatureOperationMap and CreateImageSignatureOperationMapOutput values.
 // You can construct a concrete instance of `CreateImageSignatureOperationMapInput` via:
 //
-//          CreateImageSignatureOperationMap{ "key": CreateImageSignatureOperationArgs{...} }
+//	CreateImageSignatureOperationMap{ "key": CreateImageSignatureOperationArgs{...} }
 type CreateImageSignatureOperationMapInput interface {
 	pulumi.Input
 

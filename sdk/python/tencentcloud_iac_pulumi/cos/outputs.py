@@ -32,6 +32,7 @@ __all__ = [
     'BucketInventoryOptionalFields',
     'BucketInventorySchedule',
     'BucketLifecycleRule',
+    'BucketLifecycleRuleAbortIncompleteMultipartUpload',
     'BucketLifecycleRuleExpiration',
     'BucketLifecycleRuleNonCurrentExpiration',
     'BucketLifecycleRuleNonCurrentTransition',
@@ -55,6 +56,7 @@ __all__ = [
     'GetBucketsBucketListResult',
     'GetBucketsBucketListCorsRuleResult',
     'GetBucketsBucketListLifecycleRuleResult',
+    'GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadResult',
     'GetBucketsBucketListLifecycleRuleExpirationResult',
     'GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult',
     'GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult',
@@ -1288,6 +1290,8 @@ class BucketLifecycleRule(dict):
         suggest = None
         if key == "filterPrefix":
             suggest = "filter_prefix"
+        elif key == "abortIncompleteMultipartUpload":
+            suggest = "abort_incomplete_multipart_upload"
         elif key == "nonCurrentExpiration":
             suggest = "non_current_expiration"
         elif key == "nonCurrentTransitions":
@@ -1306,6 +1310,7 @@ class BucketLifecycleRule(dict):
 
     def __init__(__self__, *,
                  filter_prefix: str,
+                 abort_incomplete_multipart_upload: Optional['outputs.BucketLifecycleRuleAbortIncompleteMultipartUpload'] = None,
                  expiration: Optional['outputs.BucketLifecycleRuleExpiration'] = None,
                  id: Optional[str] = None,
                  non_current_expiration: Optional['outputs.BucketLifecycleRuleNonCurrentExpiration'] = None,
@@ -1313,6 +1318,7 @@ class BucketLifecycleRule(dict):
                  transitions: Optional[Sequence['outputs.BucketLifecycleRuleTransition']] = None):
         """
         :param str filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
+        :param 'BucketLifecycleRuleAbortIncompleteMultipartUploadArgs' abort_incomplete_multipart_upload: Set the maximum time a multipart upload is allowed to remain running.
         :param 'BucketLifecycleRuleExpirationArgs' expiration: Specifies a period in the object's expire (documented below).
         :param str id: A unique identifier for the rule. It can be up to 255 characters.
         :param 'BucketLifecycleRuleNonCurrentExpirationArgs' non_current_expiration: Specifies when non current object versions shall expire.
@@ -1320,6 +1326,8 @@ class BucketLifecycleRule(dict):
         :param Sequence['BucketLifecycleRuleTransitionArgs'] transitions: Specifies a period in the object's transitions (documented below).
         """
         pulumi.set(__self__, "filter_prefix", filter_prefix)
+        if abort_incomplete_multipart_upload is not None:
+            pulumi.set(__self__, "abort_incomplete_multipart_upload", abort_incomplete_multipart_upload)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
         if id is not None:
@@ -1338,6 +1346,14 @@ class BucketLifecycleRule(dict):
         Object key prefix identifying one or more objects to which the rule applies.
         """
         return pulumi.get(self, "filter_prefix")
+
+    @property
+    @pulumi.getter(name="abortIncompleteMultipartUpload")
+    def abort_incomplete_multipart_upload(self) -> Optional['outputs.BucketLifecycleRuleAbortIncompleteMultipartUpload']:
+        """
+        Set the maximum time a multipart upload is allowed to remain running.
+        """
+        return pulumi.get(self, "abort_incomplete_multipart_upload")
 
     @property
     @pulumi.getter
@@ -1378,6 +1394,41 @@ class BucketLifecycleRule(dict):
         Specifies a period in the object's transitions (documented below).
         """
         return pulumi.get(self, "transitions")
+
+
+@pulumi.output_type
+class BucketLifecycleRuleAbortIncompleteMultipartUpload(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "daysAfterInitiation":
+            suggest = "days_after_initiation"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRuleAbortIncompleteMultipartUpload. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketLifecycleRuleAbortIncompleteMultipartUpload.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketLifecycleRuleAbortIncompleteMultipartUpload.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 days_after_initiation: int):
+        """
+        :param int days_after_initiation: Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        pulumi.set(__self__, "days_after_initiation", days_after_initiation)
+
+    @property
+    @pulumi.getter(name="daysAfterInitiation")
+    def days_after_initiation(self) -> int:
+        """
+        Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        return pulumi.get(self, "days_after_initiation")
 
 
 @pulumi.output_type
@@ -2603,23 +2654,34 @@ class GetBucketsBucketListCorsRuleResult(dict):
 @pulumi.output_type
 class GetBucketsBucketListLifecycleRuleResult(dict):
     def __init__(__self__, *,
+                 abort_incomplete_multipart_uploads: Sequence['outputs.GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadResult'],
                  expirations: Sequence['outputs.GetBucketsBucketListLifecycleRuleExpirationResult'],
                  filter_prefix: str,
                  non_current_expirations: Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult'],
                  non_current_transitions: Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult'],
                  transitions: Sequence['outputs.GetBucketsBucketListLifecycleRuleTransitionResult']):
         """
+        :param Sequence['GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs'] abort_incomplete_multipart_uploads: Set the maximum time a multipart upload is allowed to remain running.
         :param Sequence['GetBucketsBucketListLifecycleRuleExpirationArgs'] expirations: Specifies a period in the object's expire.
         :param str filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
         :param Sequence['GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs'] non_current_expirations: Specifies when non current object versions shall expire.
         :param Sequence['GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs'] non_current_transitions: Specifies when to transition objects of non current versions and the target storage class.
         :param Sequence['GetBucketsBucketListLifecycleRuleTransitionArgs'] transitions: Specifies a period in the object's transitions.
         """
+        pulumi.set(__self__, "abort_incomplete_multipart_uploads", abort_incomplete_multipart_uploads)
         pulumi.set(__self__, "expirations", expirations)
         pulumi.set(__self__, "filter_prefix", filter_prefix)
         pulumi.set(__self__, "non_current_expirations", non_current_expirations)
         pulumi.set(__self__, "non_current_transitions", non_current_transitions)
         pulumi.set(__self__, "transitions", transitions)
+
+    @property
+    @pulumi.getter(name="abortIncompleteMultipartUploads")
+    def abort_incomplete_multipart_uploads(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadResult']:
+        """
+        Set the maximum time a multipart upload is allowed to remain running.
+        """
+        return pulumi.get(self, "abort_incomplete_multipart_uploads")
 
     @property
     @pulumi.getter
@@ -2660,6 +2722,24 @@ class GetBucketsBucketListLifecycleRuleResult(dict):
         Specifies a period in the object's transitions.
         """
         return pulumi.get(self, "transitions")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadResult(dict):
+    def __init__(__self__, *,
+                 days_after_initiation: int):
+        """
+        :param int days_after_initiation: Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        pulumi.set(__self__, "days_after_initiation", days_after_initiation)
+
+    @property
+    @pulumi.getter(name="daysAfterInitiation")
+    def days_after_initiation(self) -> int:
+        """
+        Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        return pulumi.get(self, "days_after_initiation")
 
 
 @pulumi.output_type

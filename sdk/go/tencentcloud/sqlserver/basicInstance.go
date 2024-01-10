@@ -19,74 +19,77 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewBasicInstance(ctx, "example", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewBasicInstance(ctx, "example", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -94,7 +97,9 @@ import (
 // SQL Server basic instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql-3cdq7kx5
+//
+//	$ pulumi import tencentcloud:Sqlserver/basicInstance:BasicInstance example mssql-3cdq7kx5
+//
 // ```
 type BasicInstance struct {
 	pulumi.CustomResourceState
@@ -107,6 +112,8 @@ type BasicInstance struct {
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrOutput `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
@@ -199,6 +206,8 @@ type basicInstanceState struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType *string `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation *string `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu *int `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
@@ -250,6 +259,8 @@ type BasicInstanceState struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrInput
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrInput
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntPtrInput
 	// Create time of the SQL Server basic instance.
@@ -305,6 +316,8 @@ type basicInstanceArgs struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType *string `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation *string `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu int `pulumi:"cpu"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -349,6 +362,8 @@ type BasicInstanceArgs struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrInput
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrInput
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntInput
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -409,7 +424,7 @@ func (i *BasicInstance) ToBasicInstanceOutputWithContext(ctx context.Context) Ba
 // BasicInstanceArrayInput is an input type that accepts BasicInstanceArray and BasicInstanceArrayOutput values.
 // You can construct a concrete instance of `BasicInstanceArrayInput` via:
 //
-//          BasicInstanceArray{ BasicInstanceArgs{...} }
+//	BasicInstanceArray{ BasicInstanceArgs{...} }
 type BasicInstanceArrayInput interface {
 	pulumi.Input
 
@@ -434,7 +449,7 @@ func (i BasicInstanceArray) ToBasicInstanceArrayOutputWithContext(ctx context.Co
 // BasicInstanceMapInput is an input type that accepts BasicInstanceMap and BasicInstanceMapOutput values.
 // You can construct a concrete instance of `BasicInstanceMapInput` via:
 //
-//          BasicInstanceMap{ "key": BasicInstanceArgs{...} }
+//	BasicInstanceMap{ "key": BasicInstanceArgs{...} }
 type BasicInstanceMapInput interface {
 	pulumi.Input
 
@@ -488,6 +503,11 @@ func (o BasicInstanceOutput) AvailabilityZone() pulumi.StringOutput {
 // Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 func (o BasicInstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
+}
+
+// System character set sorting rule, default: Chinese_PRC_CI_AS.
+func (o BasicInstanceOutput) Collation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.StringPtrOutput { return v.Collation }).(pulumi.StringPtrOutput)
 }
 
 // The CPU number of the SQL Server basic instance.

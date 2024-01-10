@@ -76,13 +76,13 @@ import * as utilities from "../utilities";
  *         "global.imagePullSecretsCrs[1].type=docker",
  *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerUsername=${userName}`,
  *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerPassword=${token}`,
- *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerServer=${tcrName}-tencentcloudcr.com`,
+ *         pulumi.interpolate`global.imagePullSecretsCrs[1].dockerServer=${tcrName}.tencentcloudcr.com`,
  *         "global.cluster.region=gz",
  *         "global.cluster.longregion=ap-guangzhou",
  *         pulumi.interpolate`global.hosts[0].domain=${tcrName}-vpc.tencentcloudcr.com`,
  *         endPoint.apply(endPoint => `global.hosts[0].ip=${endPoint}`),
  *         "global.hosts[0].disabled=false",
- *         pulumi.interpolate`global.hosts[1].domain=${tcrName}-tencentcloudcr.com`,
+ *         pulumi.interpolate`global.hosts[1].domain=${tcrName}.tencentcloudcr.com`,
  *         endPoint.apply(endPoint => `global.hosts[1].ip=${endPoint}`),
  *         "global.hosts[1].disabled=false",
  *     ],
@@ -159,6 +159,14 @@ export class AddonAttachment extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+     */
+    public readonly rawValues!: pulumi.Output<string>;
+    /**
+     * The type of raw Values. Required with `rawValues`.
+     */
+    public readonly rawValuesType!: pulumi.Output<string>;
+    /**
      * Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
      */
     public readonly requestBody!: pulumi.Output<string | undefined>;
@@ -194,6 +202,8 @@ export class AddonAttachment extends pulumi.CustomResource {
             const state = argsOrState as AddonAttachmentState | undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["rawValues"] = state ? state.rawValues : undefined;
+            resourceInputs["rawValuesType"] = state ? state.rawValuesType : undefined;
             resourceInputs["requestBody"] = state ? state.requestBody : undefined;
             resourceInputs["responseBody"] = state ? state.responseBody : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -206,6 +216,8 @@ export class AddonAttachment extends pulumi.CustomResource {
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["rawValues"] = args ? args.rawValues : undefined;
+            resourceInputs["rawValuesType"] = args ? args.rawValuesType : undefined;
             resourceInputs["requestBody"] = args ? args.requestBody : undefined;
             resourceInputs["values"] = args ? args.values : undefined;
             resourceInputs["version"] = args ? args.version : undefined;
@@ -229,6 +241,14 @@ export interface AddonAttachmentState {
      * Name of addon.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+     */
+    rawValues?: pulumi.Input<string>;
+    /**
+     * The type of raw Values. Required with `rawValues`.
+     */
+    rawValuesType?: pulumi.Input<string>;
     /**
      * Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
      */
@@ -263,6 +283,14 @@ export interface AddonAttachmentArgs {
      * Name of addon.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+     */
+    rawValues?: pulumi.Input<string>;
+    /**
+     * The type of raw Values. Required with `rawValues`.
+     */
+    rawValuesType?: pulumi.Input<string>;
     /**
      * Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
      */

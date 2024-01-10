@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public partial class ApplicationProxyRule : Pulumi.CustomResource
     {
         /// <summary>
-        /// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         /// </summary>
         [Output("forwardClientIp")]
         public Output<string> ForwardClientIp { get; private set; } = null!;
@@ -71,19 +71,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> OriginPort { get; private set; } = null!;
 
         /// <summary>
-        /// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        /// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         /// </summary>
         [Output("originType")]
         public Output<string> OriginType { get; private set; } = null!;
 
         /// <summary>
-        /// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        /// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         /// </summary>
         [Output("originValues")]
         public Output<ImmutableArray<string>> OriginValues { get; private set; } = null!;
 
         /// <summary>
-        /// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        /// Valid values: `80` means port 80; `81-90` means port range 81-90.
         /// </summary>
         [Output("ports")]
         public Output<ImmutableArray<string>> Ports { get; private set; } = null!;
@@ -113,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<bool> SessionPersist { get; private set; } = null!;
 
         /// <summary>
-        /// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        /// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -172,7 +172,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class ApplicationProxyRuleArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         /// </summary>
         [Input("forwardClientIp")]
         public Input<string>? ForwardClientIp { get; set; }
@@ -184,7 +184,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> OriginPort { get; set; } = null!;
 
         /// <summary>
-        /// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        /// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         /// </summary>
         [Input("originType", required: true)]
         public Input<string> OriginType { get; set; } = null!;
@@ -193,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         private InputList<string>? _originValues;
 
         /// <summary>
-        /// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        /// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         /// </summary>
         public InputList<string> OriginValues
         {
@@ -205,7 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         private InputList<string>? _ports;
 
         /// <summary>
-        /// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        /// Valid values: `80` means port 80; `81-90` means port range 81-90.
         /// </summary>
         public InputList<string> Ports
         {
@@ -232,7 +232,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<bool>? SessionPersist { get; set; }
 
         /// <summary>
-        /// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        /// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -251,7 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class ApplicationProxyRuleState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+        /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
         /// </summary>
         [Input("forwardClientIp")]
         public Input<string>? ForwardClientIp { get; set; }
@@ -263,7 +263,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? OriginPort { get; set; }
 
         /// <summary>
-        /// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+        /// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
         /// </summary>
         [Input("originType")]
         public Input<string>? OriginType { get; set; }
@@ -272,7 +272,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         private InputList<string>? _originValues;
 
         /// <summary>
-        /// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+        /// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
         /// </summary>
         public InputList<string> OriginValues
         {
@@ -284,7 +284,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         private InputList<string>? _ports;
 
         /// <summary>
-        /// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+        /// Valid values: `80` means port 80; `81-90` means port range 81-90.
         /// </summary>
         public InputList<string> Ports
         {
@@ -317,7 +317,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<bool>? SessionPersist { get; set; }
 
         /// <summary>
-        /// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+        /// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

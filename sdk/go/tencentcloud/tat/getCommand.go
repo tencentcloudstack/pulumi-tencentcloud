@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.GetCommand(ctx, &tat.GetCommandArgs{
-// 			CommandType: pulumi.StringRef("SHELL"),
-// 			CreatedBy:   pulumi.StringRef("TAT"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.GetCommand(ctx, &tat.GetCommandArgs{
+//				CommandType: pulumi.StringRef("SHELL"),
+//				CreatedBy:   pulumi.StringRef("TAT"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupCommand(ctx *pulumi.Context, args *LookupCommandArgs, opts ...pulumi.InvokeOption) (*LookupCommandResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

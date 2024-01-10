@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewFileSystem(ctx, "fileSystem", &Chdfs.FileSystemArgs{
-// 			CapacityQuota:  pulumi.Int(10995116277760),
-// 			Description:    pulumi.String("file system for terraform test"),
-// 			EnableRanger:   pulumi.Bool(true),
-// 			FileSystemName: pulumi.String("terraform-test"),
-// 			PosixAcl:       pulumi.Bool(false),
-// 			RangerServiceAddresses: pulumi.StringArray{
-// 				pulumi.String("127.0.0.1:80"),
-// 				pulumi.String("127.0.0.1:8000"),
-// 			},
-// 			SuperUsers: pulumi.StringArray{
-// 				pulumi.String("terraform"),
-// 				pulumi.String("iac"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewFileSystem(ctx, "fileSystem", &Chdfs.FileSystemArgs{
+//				CapacityQuota:  pulumi.Int(10995116277760),
+//				Description:    pulumi.String("file system for terraform test"),
+//				EnableRanger:   pulumi.Bool(true),
+//				FileSystemName: pulumi.String("terraform-test"),
+//				PosixAcl:       pulumi.Bool(false),
+//				RangerServiceAddresses: pulumi.StringArray{
+//					pulumi.String("127.0.0.1:80"),
+//					pulumi.String("127.0.0.1:8000"),
+//				},
+//				SuperUsers: pulumi.StringArray{
+//					pulumi.String("terraform"),
+//					pulumi.String("iac"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -53,7 +56,9 @@ import (
 // chdfs file_system can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
+//
+//	$ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
+//
 // ```
 type FileSystem struct {
 	pulumi.CustomResourceState
@@ -211,7 +216,7 @@ func (i *FileSystem) ToFileSystemOutputWithContext(ctx context.Context) FileSyst
 // FileSystemArrayInput is an input type that accepts FileSystemArray and FileSystemArrayOutput values.
 // You can construct a concrete instance of `FileSystemArrayInput` via:
 //
-//          FileSystemArray{ FileSystemArgs{...} }
+//	FileSystemArray{ FileSystemArgs{...} }
 type FileSystemArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +241,7 @@ func (i FileSystemArray) ToFileSystemArrayOutputWithContext(ctx context.Context)
 // FileSystemMapInput is an input type that accepts FileSystemMap and FileSystemMapOutput values.
 // You can construct a concrete instance of `FileSystemMapInput` via:
 //
-//          FileSystemMap{ "key": FileSystemArgs{...} }
+//	FileSystemMap{ "key": FileSystemArgs{...} }
 type FileSystemMapInput interface {
 	pulumi.Input
 

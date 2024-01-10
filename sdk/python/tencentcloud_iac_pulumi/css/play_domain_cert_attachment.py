@@ -180,8 +180,7 @@ class PlayDomainCertAttachment(pulumi.CustomResource):
                  domain_info: Optional[pulumi.Input[pulumi.InputType['PlayDomainCertAttachmentDomainInfoArgs']]] = None,
                  __props__=None):
         """
-        Provides a resource to create a css play_domain_cert_attachment.
-        This resource is used for binding the play domain and specified certification together.
+        Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together.
 
         ## Example Usage
 
@@ -219,8 +218,7 @@ class PlayDomainCertAttachment(pulumi.CustomResource):
                  args: PlayDomainCertAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a css play_domain_cert_attachment.
-        This resource is used for binding the play domain and specified certification together.
+        Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together.
 
         ## Example Usage
 

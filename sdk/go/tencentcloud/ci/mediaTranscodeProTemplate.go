@@ -19,53 +19,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaTranscodeProTemplate(ctx, "mediaTranscodeProTemplate", &Ci.MediaTranscodeProTemplateArgs{
-// 			Audio: &ci.MediaTranscodeProTemplateAudioArgs{
-// 				Codec:  pulumi.String("pcm_s24le"),
-// 				Remove: pulumi.String("true"),
-// 			},
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			Container: &ci.MediaTranscodeProTemplateContainerArgs{
-// 				Format: pulumi.String("mxf"),
-// 			},
-// 			TimeInterval: &ci.MediaTranscodeProTemplateTimeIntervalArgs{
-// 				Duration: pulumi.String(""),
-// 				Start:    pulumi.String(""),
-// 			},
-// 			TransConfig: &ci.MediaTranscodeProTemplateTransConfigArgs{
-// 				AdjDarMethod:          pulumi.String("scale"),
-// 				AudioBitrateAdjMethod: pulumi.String("0"),
-// 				DeleteMetadata:        pulumi.String("false"),
-// 				IsCheckAudioBitrate:   pulumi.String("false"),
-// 				IsCheckReso:           pulumi.String("false"),
-// 				IsCheckVideoBitrate:   pulumi.String("false"),
-// 				IsHdr2Sdr:             pulumi.String("false"),
-// 				ResoAdjMethod:         pulumi.String("1"),
-// 				VideoBitrateAdjMethod: pulumi.String("0"),
-// 			},
-// 			Video: &ci.MediaTranscodeProTemplateVideoArgs{
-// 				Bitrate:    pulumi.String("50000"),
-// 				Codec:      pulumi.String("xavc"),
-// 				Fps:        pulumi.String("30000/1001"),
-// 				Height:     pulumi.String("1080"),
-// 				Interlaced: pulumi.String("true"),
-// 				Profile:    pulumi.String("XAVC-HD_422_10bit"),
-// 				Width:      pulumi.String("1920"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaTranscodeProTemplate(ctx, "mediaTranscodeProTemplate", &Ci.MediaTranscodeProTemplateArgs{
+//				Audio: &ci.MediaTranscodeProTemplateAudioArgs{
+//					Codec:  pulumi.String("pcm_s24le"),
+//					Remove: pulumi.String("true"),
+//				},
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				Container: &ci.MediaTranscodeProTemplateContainerArgs{
+//					Format: pulumi.String("mxf"),
+//				},
+//				TimeInterval: &ci.MediaTranscodeProTemplateTimeIntervalArgs{
+//					Duration: pulumi.String(""),
+//					Start:    pulumi.String(""),
+//				},
+//				TransConfig: &ci.MediaTranscodeProTemplateTransConfigArgs{
+//					AdjDarMethod:          pulumi.String("scale"),
+//					AudioBitrateAdjMethod: pulumi.String("0"),
+//					DeleteMetadata:        pulumi.String("false"),
+//					IsCheckAudioBitrate:   pulumi.String("false"),
+//					IsCheckReso:           pulumi.String("false"),
+//					IsCheckVideoBitrate:   pulumi.String("false"),
+//					IsHdr2Sdr:             pulumi.String("false"),
+//					ResoAdjMethod:         pulumi.String("1"),
+//					VideoBitrateAdjMethod: pulumi.String("0"),
+//				},
+//				Video: &ci.MediaTranscodeProTemplateVideoArgs{
+//					Bitrate:    pulumi.String("50000"),
+//					Codec:      pulumi.String("xavc"),
+//					Fps:        pulumi.String("30000/1001"),
+//					Height:     pulumi.String("1080"),
+//					Interlaced: pulumi.String("true"),
+//					Profile:    pulumi.String("XAVC-HD_422_10bit"),
+//					Width:      pulumi.String("1920"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -73,7 +76,9 @@ import (
 // ci media_transcode_pro_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
+//
+//	$ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
+//
 // ```
 type MediaTranscodeProTemplate struct {
 	pulumi.CustomResourceState
@@ -228,7 +233,7 @@ func (i *MediaTranscodeProTemplate) ToMediaTranscodeProTemplateOutputWithContext
 // MediaTranscodeProTemplateArrayInput is an input type that accepts MediaTranscodeProTemplateArray and MediaTranscodeProTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateArrayInput` via:
 //
-//          MediaTranscodeProTemplateArray{ MediaTranscodeProTemplateArgs{...} }
+//	MediaTranscodeProTemplateArray{ MediaTranscodeProTemplateArgs{...} }
 type MediaTranscodeProTemplateArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +258,7 @@ func (i MediaTranscodeProTemplateArray) ToMediaTranscodeProTemplateArrayOutputWi
 // MediaTranscodeProTemplateMapInput is an input type that accepts MediaTranscodeProTemplateMap and MediaTranscodeProTemplateMapOutput values.
 // You can construct a concrete instance of `MediaTranscodeProTemplateMapInput` via:
 //
-//          MediaTranscodeProTemplateMap{ "key": MediaTranscodeProTemplateArgs{...} }
+//	MediaTranscodeProTemplateMap{ "key": MediaTranscodeProTemplateArgs{...} }
 type MediaTranscodeProTemplateMapInput interface {
 	pulumi.Input
 

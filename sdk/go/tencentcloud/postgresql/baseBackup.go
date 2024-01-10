@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewBaseBackup(ctx, "baseBackup", &Postgresql.BaseBackupArgs{
-// 			DbInstanceId: pulumi.Any(local.Pgsql_id),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewBaseBackup(ctx, "baseBackup", &Postgresql.BaseBackupArgs{
+//				DbInstanceId: pulumi.Any(local.Pgsql_id),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BaseBackup struct {
 	pulumi.CustomResourceState
@@ -154,7 +157,7 @@ func (i *BaseBackup) ToBaseBackupOutputWithContext(ctx context.Context) BaseBack
 // BaseBackupArrayInput is an input type that accepts BaseBackupArray and BaseBackupArrayOutput values.
 // You can construct a concrete instance of `BaseBackupArrayInput` via:
 //
-//          BaseBackupArray{ BaseBackupArgs{...} }
+//	BaseBackupArray{ BaseBackupArgs{...} }
 type BaseBackupArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +182,7 @@ func (i BaseBackupArray) ToBaseBackupArrayOutputWithContext(ctx context.Context)
 // BaseBackupMapInput is an input type that accepts BaseBackupMap and BaseBackupMapOutput values.
 // You can construct a concrete instance of `BaseBackupMapInput` via:
 //
-//          BaseBackupMap{ "key": BaseBackupArgs{...} }
+//	BaseBackupMap{ "key": BaseBackupArgs{...} }
 type BaseBackupMapInput interface {
 	pulumi.Input
 

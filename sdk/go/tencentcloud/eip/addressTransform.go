@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAddressTransform(ctx, "addressTransform", &Eip.AddressTransformArgs{
-// 			InstanceId: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewAddressTransform(ctx, "addressTransform", &Eip.AddressTransformArgs{
+//				InstanceId: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // eip address_transform can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
+//
+//	$ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
+//
 // ```
 type AddressTransform struct {
 	pulumi.CustomResourceState
@@ -133,7 +138,7 @@ func (i *AddressTransform) ToAddressTransformOutputWithContext(ctx context.Conte
 // AddressTransformArrayInput is an input type that accepts AddressTransformArray and AddressTransformArrayOutput values.
 // You can construct a concrete instance of `AddressTransformArrayInput` via:
 //
-//          AddressTransformArray{ AddressTransformArgs{...} }
+//	AddressTransformArray{ AddressTransformArgs{...} }
 type AddressTransformArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +163,7 @@ func (i AddressTransformArray) ToAddressTransformArrayOutputWithContext(ctx cont
 // AddressTransformMapInput is an input type that accepts AddressTransformMap and AddressTransformMapOutput values.
 // You can construct a concrete instance of `AddressTransformMapInput` via:
 //
-//          AddressTransformMap{ "key": AddressTransformArgs{...} }
+//	AddressTransformMap{ "key": AddressTransformArgs{...} }
 type AddressTransformMapInput interface {
 	pulumi.Input
 

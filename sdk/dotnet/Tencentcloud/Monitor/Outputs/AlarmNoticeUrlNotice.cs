@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// </summary>
         public readonly int? EndTime;
         /// <summary>
+        /// If passed verification `0` is no, `1` is yes. Default `0`.
+        /// </summary>
+        public readonly int? IsValid;
+        /// <summary>
         /// Notification Start Time Number of seconds at the start of a day.
         /// </summary>
         public readonly int? StartTime;
@@ -26,6 +30,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// Callback URL (limited to 256 characters).
         /// </summary>
         public readonly string Url;
+        /// <summary>
+        /// Verification code.
+        /// </summary>
+        public readonly string? ValidationCode;
         /// <summary>
         /// Notification period 1-7 indicates Monday to Sunday.
         /// </summary>
@@ -35,15 +43,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         private AlarmNoticeUrlNotice(
             int? endTime,
 
+            int? isValid,
+
             int? startTime,
 
             string url,
 
+            string? validationCode,
+
             ImmutableArray<int> weekdays)
         {
             EndTime = endTime;
+            IsValid = isValid;
             StartTime = startTime;
             Url = url;
+            ValidationCode = validationCode;
             Weekdays = weekdays;
         }
     }

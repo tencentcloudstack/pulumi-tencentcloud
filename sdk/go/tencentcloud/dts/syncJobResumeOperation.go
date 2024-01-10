@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobResumeOperation(ctx, "syncJobResumeOperation", &Dts.SyncJobResumeOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobResumeOperation(ctx, "syncJobResumeOperation", &Dts.SyncJobResumeOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobResumeOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *SyncJobResumeOperation) ToSyncJobResumeOperationOutputWithContext(ctx c
 // SyncJobResumeOperationArrayInput is an input type that accepts SyncJobResumeOperationArray and SyncJobResumeOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobResumeOperationArrayInput` via:
 //
-//          SyncJobResumeOperationArray{ SyncJobResumeOperationArgs{...} }
+//	SyncJobResumeOperationArray{ SyncJobResumeOperationArgs{...} }
 type SyncJobResumeOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i SyncJobResumeOperationArray) ToSyncJobResumeOperationArrayOutputWithCont
 // SyncJobResumeOperationMapInput is an input type that accepts SyncJobResumeOperationMap and SyncJobResumeOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobResumeOperationMapInput` via:
 //
-//          SyncJobResumeOperationMap{ "key": SyncJobResumeOperationArgs{...} }
+//	SyncJobResumeOperationMap{ "key": SyncJobResumeOperationArgs{...} }
 type SyncJobResumeOperationMapInput interface {
 	pulumi.Input
 

@@ -10,6 +10,7 @@ from .. import _utilities
 
 __all__ = [
     'NamespaceRetentionPolicyArgs',
+    'ProfessionalClusterVpcArgs',
     'RocketmqClusterVpcArgs',
     'RocketmqVipInstanceVpcInfoArgs',
     'GetProInstancesFilterArgs',
@@ -56,6 +57,43 @@ class NamespaceRetentionPolicyArgs:
     @time_in_minutes.setter
     def time_in_minutes(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "time_in_minutes", value)
+
+
+@pulumi.input_type
+class ProfessionalClusterVpcArgs:
+    def __init__(__self__, *,
+                 subnet_id: pulumi.Input[str],
+                 vpc_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] subnet_id: Id of Subnet.
+        :param pulumi.Input[str] vpc_id: Id of VPC.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        Id of Subnet.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[str]:
+        """
+        Id of VPC.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "vpc_id", value)
 
 
 @pulumi.input_type

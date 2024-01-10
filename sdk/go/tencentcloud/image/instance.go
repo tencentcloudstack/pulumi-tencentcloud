@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Image.NewInstance(ctx, "imageSnap", &Image.InstanceArgs{
-// 			ForcePoweroff:    pulumi.Bool(true),
-// 			ImageDescription: pulumi.String("create image with snapshot"),
-// 			ImageName:        pulumi.String("image-snapshot-keep"),
-// 			SnapshotIds: pulumi.StringArray{
-// 				pulumi.String("snap-nbp3xy1d"),
-// 				pulumi.String("snap-nvzu3dmh"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Image.NewInstance(ctx, "imageSnap", &Image.InstanceArgs{
+//				ForcePoweroff:    pulumi.Bool(true),
+//				ImageDescription: pulumi.String("create image with snapshot"),
+//				ImageName:        pulumi.String("image-snapshot-keep"),
+//				SnapshotIds: pulumi.StringArray{
+//					pulumi.String("snap-nbp3xy1d"),
+//					pulumi.String("snap-nvzu3dmh"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // image instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+//
+//	$ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -209,7 +214,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -234,7 +239,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

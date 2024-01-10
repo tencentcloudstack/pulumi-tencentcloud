@@ -128,7 +128,7 @@ export class PullStreamTask extends pulumi.CustomResource {
      */
     public /*out*/ readonly region!: pulumi.Output<string>;
     /**
-     * &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+     * `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
      */
     public readonly sourceType!: pulumi.Output<string>;
     /**
@@ -164,7 +164,7 @@ export class PullStreamTask extends pulumi.CustomResource {
      */
     public readonly vodLoopTimes!: pulumi.Output<number>;
     /**
-     * vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+     * vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
      */
     public readonly vodRefreshType!: pulumi.Output<string>;
     /**
@@ -337,7 +337,7 @@ export interface PullStreamTaskState {
      */
     region?: pulumi.Input<string>;
     /**
-     * &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+     * `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
      */
     sourceType?: pulumi.Input<string>;
     /**
@@ -373,7 +373,7 @@ export interface PullStreamTaskState {
      */
     vodLoopTimes?: pulumi.Input<number>;
     /**
-     * vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+     * vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
      */
     vodRefreshType?: pulumi.Input<string>;
     /**
@@ -439,7 +439,7 @@ export interface PullStreamTaskArgs {
      */
     pushArgs?: pulumi.Input<string>;
     /**
-     * &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+     * `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
      */
     sourceType: pulumi.Input<string>;
     /**
@@ -467,7 +467,7 @@ export interface PullStreamTaskArgs {
      */
     vodLoopTimes?: pulumi.Input<number>;
     /**
-     * vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+     * vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
      */
     vodRefreshType?: pulumi.Input<string>;
     /**

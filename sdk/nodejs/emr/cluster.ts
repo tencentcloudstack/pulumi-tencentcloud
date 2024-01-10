@@ -44,13 +44,18 @@ import * as utilities from "../utilities";
  *     projectId: 0,
  * });
  * const emrCluster = new tencentcloud.emr.Cluster("emrCluster", {
- *     productId: 4,
- *     displayStrategy: "clusterList",
+ *     productId: 38,
  *     vpcSettings: {
  *         vpc_id: emrVpc.id,
  *         subnet_id: emrSubnet.id,
  *     },
- *     softwares: ["zookeeper-3.6.1"],
+ *     softwares: [
+ *         "hdfs-2.8.5",
+ *         "knox-1.6.1",
+ *         "openldap-2.4.44",
+ *         "yarn-2.8.5",
+ *         "zookeeper-3.6.3",
+ *     ],
  *     supportHa: 0,
  *     instanceName: "emr-cluster-test",
  *     resourceSpec: {
@@ -81,9 +86,9 @@ import * as utilities from "../utilities";
  *     timeSpan: 3600,
  *     timeUnit: "s",
  *     payMode: 0,
- *     placement: {
+ *     placementInfo: {
  *         zone: availabilityZone,
- *         project_id: 0,
+ *         projectId: 0,
  *     },
  *     sgId: emrSg.id,
  * });
@@ -118,9 +123,11 @@ export class Cluster extends pulumi.CustomResource {
     }
 
     /**
-     * Display strategy of EMR instance.
+     * It will be deprecated in later versions. Display strategy of EMR instance.
+     *
+     * @deprecated It will be deprecated in later versions.
      */
-    public readonly displayStrategy!: pulumi.Output<string>;
+    public readonly displayStrategy!: pulumi.Output<string | undefined>;
     /**
      * Access the external file system.
      */
@@ -136,7 +143,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Instance login settings.
      */
-    public readonly loginSettings!: pulumi.Output<{[key: string]: any}>;
+    public readonly loginSettings!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
      * Whether to enable the cluster Master node public network. Value range:
      * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -149,9 +156,15 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly payMode!: pulumi.Output<number>;
     /**
-     * The location of the instance.
+     * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+     *
+     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
      */
     public readonly placement!: pulumi.Output<{[key: string]: any}>;
+    /**
+     * The location of the instance.
+     */
+    public readonly placementInfo!: pulumi.Output<outputs.Emr.ClusterPlacementInfo>;
     /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
@@ -192,11 +205,11 @@ export class Cluster extends pulumi.CustomResource {
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
-    public readonly timeSpan!: pulumi.Output<number>;
+    public readonly timeSpan!: pulumi.Output<number | undefined>;
     /**
      * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
-    public readonly timeUnit!: pulumi.Output<string>;
+    public readonly timeUnit!: pulumi.Output<string | undefined>;
     /**
      * The private net config of EMR instance.
      */
@@ -223,6 +236,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["needMasterWan"] = state ? state.needMasterWan : undefined;
             resourceInputs["payMode"] = state ? state.payMode : undefined;
             resourceInputs["placement"] = state ? state.placement : undefined;
+            resourceInputs["placementInfo"] = state ? state.placementInfo : undefined;
             resourceInputs["productId"] = state ? state.productId : undefined;
             resourceInputs["resourceSpec"] = state ? state.resourceSpec : undefined;
             resourceInputs["sgId"] = state ? state.sgId : undefined;
@@ -234,20 +248,11 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["vpcSettings"] = state ? state.vpcSettings : undefined;
         } else {
             const args = argsOrState as ClusterArgs | undefined;
-            if ((!args || args.displayStrategy === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'displayStrategy'");
-            }
             if ((!args || args.instanceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceName'");
             }
-            if ((!args || args.loginSettings === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'loginSettings'");
-            }
             if ((!args || args.payMode === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'payMode'");
-            }
-            if ((!args || args.placement === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'placement'");
             }
             if ((!args || args.productId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'productId'");
@@ -257,12 +262,6 @@ export class Cluster extends pulumi.CustomResource {
             }
             if ((!args || args.supportHa === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'supportHa'");
-            }
-            if ((!args || args.timeSpan === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'timeSpan'");
-            }
-            if ((!args || args.timeUnit === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'timeUnit'");
             }
             if ((!args || args.vpcSettings === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcSettings'");
@@ -274,6 +273,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["needMasterWan"] = args ? args.needMasterWan : undefined;
             resourceInputs["payMode"] = args ? args.payMode : undefined;
             resourceInputs["placement"] = args ? args.placement : undefined;
+            resourceInputs["placementInfo"] = args ? args.placementInfo : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
             resourceInputs["resourceSpec"] = args ? args.resourceSpec : undefined;
             resourceInputs["sgId"] = args ? args.sgId : undefined;
@@ -295,7 +295,9 @@ export class Cluster extends pulumi.CustomResource {
  */
 export interface ClusterState {
     /**
-     * Display strategy of EMR instance.
+     * It will be deprecated in later versions. Display strategy of EMR instance.
+     *
+     * @deprecated It will be deprecated in later versions.
      */
     displayStrategy?: pulumi.Input<string>;
     /**
@@ -326,9 +328,15 @@ export interface ClusterState {
      */
     payMode?: pulumi.Input<number>;
     /**
-     * The location of the instance.
+     * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+     *
+     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
      */
     placement?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * The location of the instance.
+     */
+    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
     /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
@@ -385,9 +393,11 @@ export interface ClusterState {
  */
 export interface ClusterArgs {
     /**
-     * Display strategy of EMR instance.
+     * It will be deprecated in later versions. Display strategy of EMR instance.
+     *
+     * @deprecated It will be deprecated in later versions.
      */
-    displayStrategy: pulumi.Input<string>;
+    displayStrategy?: pulumi.Input<string>;
     /**
      * Access the external file system.
      */
@@ -399,7 +409,7 @@ export interface ClusterArgs {
     /**
      * Instance login settings.
      */
-    loginSettings: pulumi.Input<{[key: string]: any}>;
+    loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**
      * Whether to enable the cluster Master node public network. Value range:
      * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
@@ -412,9 +422,15 @@ export interface ClusterArgs {
      */
     payMode: pulumi.Input<number>;
     /**
+     * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+     *
+     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
+     */
+    placement?: pulumi.Input<{[key: string]: any}>;
+    /**
      * The location of the instance.
      */
-    placement: pulumi.Input<{[key: string]: any}>;
+    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
     /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
@@ -455,11 +471,11 @@ export interface ClusterArgs {
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
-    timeSpan: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number>;
     /**
      * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
-    timeUnit: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string>;
     /**
      * The private net config of EMR instance.
      */

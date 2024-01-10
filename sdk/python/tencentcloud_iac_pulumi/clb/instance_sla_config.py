@@ -18,7 +18,7 @@ class InstanceSlaConfigArgs:
         """
         The set of arguments for constructing a InstanceSlaConfig resource.
         :param pulumi.Input[str] load_balancer_id: ID of the CLB instance.
-        :param pulumi.Input[str] sla_type: To upgrade to LCU-supported CLB instances. It must be SLA.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         pulumi.set(__self__, "load_balancer_id", load_balancer_id)
         pulumi.set(__self__, "sla_type", sla_type)
@@ -39,7 +39,7 @@ class InstanceSlaConfigArgs:
     @pulumi.getter(name="slaType")
     def sla_type(self) -> pulumi.Input[str]:
         """
-        To upgrade to LCU-supported CLB instances. It must be SLA.
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         return pulumi.get(self, "sla_type")
 
@@ -56,7 +56,7 @@ class _InstanceSlaConfigState:
         """
         Input properties used for looking up and filtering InstanceSlaConfig resources.
         :param pulumi.Input[str] load_balancer_id: ID of the CLB instance.
-        :param pulumi.Input[str] sla_type: To upgrade to LCU-supported CLB instances. It must be SLA.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         if load_balancer_id is not None:
             pulumi.set(__self__, "load_balancer_id", load_balancer_id)
@@ -79,7 +79,7 @@ class _InstanceSlaConfigState:
     @pulumi.getter(name="slaType")
     def sla_type(self) -> Optional[pulumi.Input[str]]:
         """
-        To upgrade to LCU-supported CLB instances. It must be SLA.
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         return pulumi.get(self, "sla_type")
 
@@ -121,7 +121,7 @@ class InstanceSlaConfig(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] load_balancer_id: ID of the CLB instance.
-        :param pulumi.Input[str] sla_type: To upgrade to LCU-supported CLB instances. It must be SLA.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         ...
     @overload
@@ -208,7 +208,7 @@ class InstanceSlaConfig(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] load_balancer_id: ID of the CLB instance.
-        :param pulumi.Input[str] sla_type: To upgrade to LCU-supported CLB instances. It must be SLA.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -230,7 +230,7 @@ class InstanceSlaConfig(pulumi.CustomResource):
     @pulumi.getter(name="slaType")
     def sla_type(self) -> pulumi.Output[str]:
         """
-        To upgrade to LCU-supported CLB instances. It must be SLA.
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         """
         return pulumi.get(self, "sla_type")
 

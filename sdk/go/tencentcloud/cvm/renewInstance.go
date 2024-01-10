@@ -137,7 +137,7 @@ func (i *RenewInstance) ToRenewInstanceOutputWithContext(ctx context.Context) Re
 // RenewInstanceArrayInput is an input type that accepts RenewInstanceArray and RenewInstanceArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceArrayInput` via:
 //
-//          RenewInstanceArray{ RenewInstanceArgs{...} }
+//	RenewInstanceArray{ RenewInstanceArgs{...} }
 type RenewInstanceArrayInput interface {
 	pulumi.Input
 
@@ -162,7 +162,7 @@ func (i RenewInstanceArray) ToRenewInstanceArrayOutputWithContext(ctx context.Co
 // RenewInstanceMapInput is an input type that accepts RenewInstanceMap and RenewInstanceMapOutput values.
 // You can construct a concrete instance of `RenewInstanceMapInput` via:
 //
-//          RenewInstanceMap{ "key": RenewInstanceArgs{...} }
+//	RenewInstanceMap{ "key": RenewInstanceArgs{...} }
 type RenewInstanceMapInput interface {
 	pulumi.Input
 
@@ -209,9 +209,9 @@ func (o RenewInstanceOutput) InstanceId() pulumi.StringOutput {
 }
 
 // Whether to renew the elastic data disk. Valid values:
-// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-//   Default value: TRUE.
+//   - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
+//   - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
+//     Default value: TRUE.
 func (o RenewInstanceOutput) RenewPortableDataDisk() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RenewInstance) pulumi.BoolPtrOutput { return v.RenewPortableDataDisk }).(pulumi.BoolPtrOutput)
 }

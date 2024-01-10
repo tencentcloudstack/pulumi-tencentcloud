@@ -15,6 +15,7 @@ class BandwidthPackageArgs:
     def __init__(__self__, *,
                  bandwidth_package_name: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 egress: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -22,9 +23,10 @@ class BandwidthPackageArgs:
         """
         The set of arguments for constructing a BandwidthPackage resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] egress: Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
-        :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        :param pulumi.Input[str] network_type: Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
@@ -32,6 +34,8 @@ class BandwidthPackageArgs:
             pulumi.set(__self__, "bandwidth_package_name", bandwidth_package_name)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if egress is not None:
+            pulumi.set(__self__, "egress", egress)
         if internet_max_bandwidth is not None:
             pulumi.set(__self__, "internet_max_bandwidth", internet_max_bandwidth)
         if network_type is not None:
@@ -57,13 +61,25 @@ class BandwidthPackageArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
 
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter
+    def egress(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "egress")
+
+    @egress.setter
+    def egress(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "egress", value)
 
     @property
     @pulumi.getter(name="internetMaxBandwidth")
@@ -81,7 +97,7 @@ class BandwidthPackageArgs:
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         """
         return pulumi.get(self, "network_type")
 
@@ -119,6 +135,7 @@ class _BandwidthPackageState:
     def __init__(__self__, *,
                  bandwidth_package_name: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 egress: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -126,9 +143,10 @@ class _BandwidthPackageState:
         """
         Input properties used for looking up and filtering BandwidthPackage resources.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] egress: Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
-        :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        :param pulumi.Input[str] network_type: Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
@@ -136,6 +154,8 @@ class _BandwidthPackageState:
             pulumi.set(__self__, "bandwidth_package_name", bandwidth_package_name)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if egress is not None:
+            pulumi.set(__self__, "egress", egress)
         if internet_max_bandwidth is not None:
             pulumi.set(__self__, "internet_max_bandwidth", internet_max_bandwidth)
         if network_type is not None:
@@ -161,13 +181,25 @@ class _BandwidthPackageState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
 
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter
+    def egress(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "egress")
+
+    @egress.setter
+    def egress(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "egress", value)
 
     @property
     @pulumi.getter(name="internetMaxBandwidth")
@@ -185,7 +217,7 @@ class _BandwidthPackageState:
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         """
         return pulumi.get(self, "network_type")
 
@@ -225,6 +257,7 @@ class BandwidthPackage(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  bandwidth_package_name: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 egress: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -263,6 +296,22 @@ class BandwidthPackage(pulumi.CustomResource):
             },
             time_span=3)
         ```
+        ### Bandwidth Package With Egress
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            bandwidth_package_name="tf-example",
+            charge_type="ENHANCED95_POSTPAID_BY_MONTH",
+            egress="center_egress2",
+            internet_max_bandwidth=400,
+            network_type="SINGLEISP_CMCC",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
@@ -275,9 +324,10 @@ class BandwidthPackage(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] egress: Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
-        :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        :param pulumi.Input[str] network_type: Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
@@ -320,6 +370,22 @@ class BandwidthPackage(pulumi.CustomResource):
             },
             time_span=3)
         ```
+        ### Bandwidth Package With Egress
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            bandwidth_package_name="tf-example",
+            charge_type="ENHANCED95_POSTPAID_BY_MONTH",
+            egress="center_egress2",
+            internet_max_bandwidth=400,
+            network_type="SINGLEISP_CMCC",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
 
         ## Import
 
@@ -346,6 +412,7 @@ class BandwidthPackage(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  bandwidth_package_name: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 egress: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -366,6 +433,7 @@ class BandwidthPackage(pulumi.CustomResource):
 
             __props__.__dict__["bandwidth_package_name"] = bandwidth_package_name
             __props__.__dict__["charge_type"] = charge_type
+            __props__.__dict__["egress"] = egress
             __props__.__dict__["internet_max_bandwidth"] = internet_max_bandwidth
             __props__.__dict__["network_type"] = network_type
             __props__.__dict__["tags"] = tags
@@ -382,6 +450,7 @@ class BandwidthPackage(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             bandwidth_package_name: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
+            egress: Optional[pulumi.Input[str]] = None,
             internet_max_bandwidth: Optional[pulumi.Input[int]] = None,
             network_type: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -394,9 +463,10 @@ class BandwidthPackage(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bandwidth_package_name: Bandwidth package name.
-        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] charge_type: Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        :param pulumi.Input[str] egress: Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[int] internet_max_bandwidth: Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
-        :param pulumi.Input[str] network_type: Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        :param pulumi.Input[str] network_type: Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] time_span: The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
         """
@@ -406,6 +476,7 @@ class BandwidthPackage(pulumi.CustomResource):
 
         __props__.__dict__["bandwidth_package_name"] = bandwidth_package_name
         __props__.__dict__["charge_type"] = charge_type
+        __props__.__dict__["egress"] = egress
         __props__.__dict__["internet_max_bandwidth"] = internet_max_bandwidth
         __props__.__dict__["network_type"] = network_type
         __props__.__dict__["tags"] = tags
@@ -424,9 +495,17 @@ class BandwidthPackage(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         """
         return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter
+    def egress(self) -> pulumi.Output[str]:
+        """
+        Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "egress")
 
     @property
     @pulumi.getter(name="internetMaxBandwidth")
@@ -440,7 +519,7 @@ class BandwidthPackage(pulumi.CustomResource):
     @pulumi.getter(name="networkType")
     def network_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         """
         return pulumi.get(self, "network_type")
 

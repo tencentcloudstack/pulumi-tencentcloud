@@ -34,7 +34,7 @@ class CngwServiceArgs:
         :param pulumi.Input['CngwServiceUpstreamInfoArgs'] upstream_info: service config information.
         :param pulumi.Input[str] upstream_type: service type. Reference value:`Kubernetes`, `Registry`, `IPList`, `HostIP`, `Scf`.
         :param pulumi.Input[str] name: service name.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[Mapping[str, Any]] tags: Deprecate ineffective tags Tag description list.
         """
         pulumi.set(__self__, "gateway_id", gateway_id)
         pulumi.set(__self__, "path", path)
@@ -45,6 +45,9 @@ class CngwServiceArgs:
         pulumi.set(__self__, "upstream_type", upstream_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if tags is not None:
+            warnings.warn("""Deprecate ineffective tags""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: Deprecate ineffective tags""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -148,7 +151,7 @@ class CngwServiceArgs:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Tag description list.
+        Deprecate ineffective tags Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -178,7 +181,7 @@ class _CngwServiceState:
         :param pulumi.Input[str] protocol: protocol. Reference value:`https`, `http`, `tcp`, `udp`.
         :param pulumi.Input[int] retries: retry times.
         :param pulumi.Input[str] service_id: service id.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[Mapping[str, Any]] tags: Deprecate ineffective tags Tag description list.
         :param pulumi.Input[int] timeout: time out, unit:ms.
         :param pulumi.Input['CngwServiceUpstreamInfoArgs'] upstream_info: service config information.
         :param pulumi.Input[str] upstream_type: service type. Reference value:`Kubernetes`, `Registry`, `IPList`, `HostIP`, `Scf`.
@@ -195,6 +198,9 @@ class _CngwServiceState:
             pulumi.set(__self__, "retries", retries)
         if service_id is not None:
             pulumi.set(__self__, "service_id", service_id)
+        if tags is not None:
+            warnings.warn("""Deprecate ineffective tags""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: Deprecate ineffective tags""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if timeout is not None:
@@ -280,7 +286,7 @@ class _CngwServiceState:
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Tag description list.
+        Deprecate ineffective tags Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -349,30 +355,50 @@ class CngwService(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
         cngw_service = tencentcloud.tse.CngwService("cngwService",
-            gateway_id="gateway-ddbb709b",
+            gateway_id=cngw_gateway.id,
             path="/test",
             protocol="http",
             retries=5,
-            tags={
-                "created": "terraform",
-            },
-            timeout=6000,
+            timeout=60000,
+            upstream_type="HostIP",
             upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
                 algorithm="round-robin",
-                auto_scaling_cvm_port=80,
-                auto_scaling_group_id="asg-519acdug",
-                auto_scaling_hook_status="Normal",
-                auto_scaling_tat_cmd_status="Normal",
-                port=0,
-                slow_start=20,
-                targets=[tencentcloud.tse.CngwServiceUpstreamInfoTargetArgs(
-                    host="192.168.0.1",
-                    port=80,
-                    weight=100,
-                )],
-            ),
-            upstream_type="IPList")
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
         ```
 
         ## Import
@@ -380,7 +406,7 @@ class CngwService(pulumi.CustomResource):
         tse cngw_service can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service cngw_service_id
+         $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
         ```
 
         :param str resource_name: The name of the resource.
@@ -390,7 +416,7 @@ class CngwService(pulumi.CustomResource):
         :param pulumi.Input[str] path: path.
         :param pulumi.Input[str] protocol: protocol. Reference value:`https`, `http`, `tcp`, `udp`.
         :param pulumi.Input[int] retries: retry times.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[Mapping[str, Any]] tags: Deprecate ineffective tags Tag description list.
         :param pulumi.Input[int] timeout: time out, unit:ms.
         :param pulumi.Input[pulumi.InputType['CngwServiceUpstreamInfoArgs']] upstream_info: service config information.
         :param pulumi.Input[str] upstream_type: service type. Reference value:`Kubernetes`, `Registry`, `IPList`, `HostIP`, `Scf`.
@@ -410,30 +436,50 @@ class CngwService(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
         cngw_service = tencentcloud.tse.CngwService("cngwService",
-            gateway_id="gateway-ddbb709b",
+            gateway_id=cngw_gateway.id,
             path="/test",
             protocol="http",
             retries=5,
-            tags={
-                "created": "terraform",
-            },
-            timeout=6000,
+            timeout=60000,
+            upstream_type="HostIP",
             upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
                 algorithm="round-robin",
-                auto_scaling_cvm_port=80,
-                auto_scaling_group_id="asg-519acdug",
-                auto_scaling_hook_status="Normal",
-                auto_scaling_tat_cmd_status="Normal",
-                port=0,
-                slow_start=20,
-                targets=[tencentcloud.tse.CngwServiceUpstreamInfoTargetArgs(
-                    host="192.168.0.1",
-                    port=80,
-                    weight=100,
-                )],
-            ),
-            upstream_type="IPList")
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
         ```
 
         ## Import
@@ -441,7 +487,7 @@ class CngwService(pulumi.CustomResource):
         tse cngw_service can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service cngw_service_id
+         $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
         ```
 
         :param str resource_name: The name of the resource.
@@ -495,6 +541,9 @@ class CngwService(pulumi.CustomResource):
             if retries is None and not opts.urn:
                 raise TypeError("Missing required property 'retries'")
             __props__.__dict__["retries"] = retries
+            if tags is not None and not opts.urn:
+                warnings.warn("""Deprecate ineffective tags""", DeprecationWarning)
+                pulumi.log.warn("""tags is deprecated: Deprecate ineffective tags""")
             __props__.__dict__["tags"] = tags
             if timeout is None and not opts.urn:
                 raise TypeError("Missing required property 'timeout'")
@@ -539,7 +588,7 @@ class CngwService(pulumi.CustomResource):
         :param pulumi.Input[str] protocol: protocol. Reference value:`https`, `http`, `tcp`, `udp`.
         :param pulumi.Input[int] retries: retry times.
         :param pulumi.Input[str] service_id: service id.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
+        :param pulumi.Input[Mapping[str, Any]] tags: Deprecate ineffective tags Tag description list.
         :param pulumi.Input[int] timeout: time out, unit:ms.
         :param pulumi.Input[pulumi.InputType['CngwServiceUpstreamInfoArgs']] upstream_info: service config information.
         :param pulumi.Input[str] upstream_type: service type. Reference value:`Kubernetes`, `Registry`, `IPList`, `HostIP`, `Scf`.
@@ -612,7 +661,7 @@ class CngwService(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
         """
-        Tag description list.
+        Deprecate ineffective tags Tag description list.
         """
         return pulumi.get(self, "tags")
 

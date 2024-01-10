@@ -105,6 +105,10 @@ export class Attachment extends pulumi.CustomResource {
      */
     public readonly instanceType!: pulumi.Output<string>;
     /**
+     * Route id list.
+     */
+    public /*out*/ readonly routeIds!: pulumi.Output<string[]>;
+    /**
      * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
@@ -130,6 +134,7 @@ export class Attachment extends pulumi.CustomResource {
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["instanceRegion"] = state ? state.instanceRegion : undefined;
             resourceInputs["instanceType"] = state ? state.instanceType : undefined;
+            resourceInputs["routeIds"] = state ? state.routeIds : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
         } else {
             const args = argsOrState as AttachmentArgs | undefined;
@@ -153,6 +158,7 @@ export class Attachment extends pulumi.CustomResource {
             resourceInputs["instanceType"] = args ? args.instanceType : undefined;
             resourceInputs["attachedTime"] = undefined /*out*/;
             resourceInputs["cidrBlocks"] = undefined /*out*/;
+            resourceInputs["routeIds"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -196,6 +202,10 @@ export interface AttachmentState {
      * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
     instanceType?: pulumi.Input<string>;
+    /**
+     * Route id list.
+     */
+    routeIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */

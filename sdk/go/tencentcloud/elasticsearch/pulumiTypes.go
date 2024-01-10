@@ -10,6 +10,121 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type DiagnoseDiagnoseJobMeta struct {
+	// Intelligent operation and maintenance diagnostic item description.
+	JobDescription *string `pulumi:"jobDescription"`
+	// English name of diagnosis item for intelligent operation and maintenance.
+	JobName *string `pulumi:"jobName"`
+	// Chinese name of intelligent operation and maintenance diagnosis item.
+	JobZhName *string `pulumi:"jobZhName"`
+}
+
+// DiagnoseDiagnoseJobMetaInput is an input type that accepts DiagnoseDiagnoseJobMetaArgs and DiagnoseDiagnoseJobMetaOutput values.
+// You can construct a concrete instance of `DiagnoseDiagnoseJobMetaInput` via:
+//
+//	DiagnoseDiagnoseJobMetaArgs{...}
+type DiagnoseDiagnoseJobMetaInput interface {
+	pulumi.Input
+
+	ToDiagnoseDiagnoseJobMetaOutput() DiagnoseDiagnoseJobMetaOutput
+	ToDiagnoseDiagnoseJobMetaOutputWithContext(context.Context) DiagnoseDiagnoseJobMetaOutput
+}
+
+type DiagnoseDiagnoseJobMetaArgs struct {
+	// Intelligent operation and maintenance diagnostic item description.
+	JobDescription pulumi.StringPtrInput `pulumi:"jobDescription"`
+	// English name of diagnosis item for intelligent operation and maintenance.
+	JobName pulumi.StringPtrInput `pulumi:"jobName"`
+	// Chinese name of intelligent operation and maintenance diagnosis item.
+	JobZhName pulumi.StringPtrInput `pulumi:"jobZhName"`
+}
+
+func (DiagnoseDiagnoseJobMetaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiagnoseDiagnoseJobMeta)(nil)).Elem()
+}
+
+func (i DiagnoseDiagnoseJobMetaArgs) ToDiagnoseDiagnoseJobMetaOutput() DiagnoseDiagnoseJobMetaOutput {
+	return i.ToDiagnoseDiagnoseJobMetaOutputWithContext(context.Background())
+}
+
+func (i DiagnoseDiagnoseJobMetaArgs) ToDiagnoseDiagnoseJobMetaOutputWithContext(ctx context.Context) DiagnoseDiagnoseJobMetaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiagnoseDiagnoseJobMetaOutput)
+}
+
+// DiagnoseDiagnoseJobMetaArrayInput is an input type that accepts DiagnoseDiagnoseJobMetaArray and DiagnoseDiagnoseJobMetaArrayOutput values.
+// You can construct a concrete instance of `DiagnoseDiagnoseJobMetaArrayInput` via:
+//
+//	DiagnoseDiagnoseJobMetaArray{ DiagnoseDiagnoseJobMetaArgs{...} }
+type DiagnoseDiagnoseJobMetaArrayInput interface {
+	pulumi.Input
+
+	ToDiagnoseDiagnoseJobMetaArrayOutput() DiagnoseDiagnoseJobMetaArrayOutput
+	ToDiagnoseDiagnoseJobMetaArrayOutputWithContext(context.Context) DiagnoseDiagnoseJobMetaArrayOutput
+}
+
+type DiagnoseDiagnoseJobMetaArray []DiagnoseDiagnoseJobMetaInput
+
+func (DiagnoseDiagnoseJobMetaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DiagnoseDiagnoseJobMeta)(nil)).Elem()
+}
+
+func (i DiagnoseDiagnoseJobMetaArray) ToDiagnoseDiagnoseJobMetaArrayOutput() DiagnoseDiagnoseJobMetaArrayOutput {
+	return i.ToDiagnoseDiagnoseJobMetaArrayOutputWithContext(context.Background())
+}
+
+func (i DiagnoseDiagnoseJobMetaArray) ToDiagnoseDiagnoseJobMetaArrayOutputWithContext(ctx context.Context) DiagnoseDiagnoseJobMetaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DiagnoseDiagnoseJobMetaArrayOutput)
+}
+
+type DiagnoseDiagnoseJobMetaOutput struct{ *pulumi.OutputState }
+
+func (DiagnoseDiagnoseJobMetaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DiagnoseDiagnoseJobMeta)(nil)).Elem()
+}
+
+func (o DiagnoseDiagnoseJobMetaOutput) ToDiagnoseDiagnoseJobMetaOutput() DiagnoseDiagnoseJobMetaOutput {
+	return o
+}
+
+func (o DiagnoseDiagnoseJobMetaOutput) ToDiagnoseDiagnoseJobMetaOutputWithContext(ctx context.Context) DiagnoseDiagnoseJobMetaOutput {
+	return o
+}
+
+// Intelligent operation and maintenance diagnostic item description.
+func (o DiagnoseDiagnoseJobMetaOutput) JobDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiagnoseDiagnoseJobMeta) *string { return v.JobDescription }).(pulumi.StringPtrOutput)
+}
+
+// English name of diagnosis item for intelligent operation and maintenance.
+func (o DiagnoseDiagnoseJobMetaOutput) JobName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiagnoseDiagnoseJobMeta) *string { return v.JobName }).(pulumi.StringPtrOutput)
+}
+
+// Chinese name of intelligent operation and maintenance diagnosis item.
+func (o DiagnoseDiagnoseJobMetaOutput) JobZhName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DiagnoseDiagnoseJobMeta) *string { return v.JobZhName }).(pulumi.StringPtrOutput)
+}
+
+type DiagnoseDiagnoseJobMetaArrayOutput struct{ *pulumi.OutputState }
+
+func (DiagnoseDiagnoseJobMetaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DiagnoseDiagnoseJobMeta)(nil)).Elem()
+}
+
+func (o DiagnoseDiagnoseJobMetaArrayOutput) ToDiagnoseDiagnoseJobMetaArrayOutput() DiagnoseDiagnoseJobMetaArrayOutput {
+	return o
+}
+
+func (o DiagnoseDiagnoseJobMetaArrayOutput) ToDiagnoseDiagnoseJobMetaArrayOutputWithContext(ctx context.Context) DiagnoseDiagnoseJobMetaArrayOutput {
+	return o
+}
+
+func (o DiagnoseDiagnoseJobMetaArrayOutput) Index(i pulumi.IntInput) DiagnoseDiagnoseJobMetaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DiagnoseDiagnoseJobMeta {
+		return vs[0].([]DiagnoseDiagnoseJobMeta)[vs[1].(int)]
+	}).(DiagnoseDiagnoseJobMetaOutput)
+}
+
 type InstanceEsAcl struct {
 	// Blacklist of kibana access.
 	BlackLists []string `pulumi:"blackLists"`
@@ -20,7 +135,7 @@ type InstanceEsAcl struct {
 // InstanceEsAclInput is an input type that accepts InstanceEsAclArgs and InstanceEsAclOutput values.
 // You can construct a concrete instance of `InstanceEsAclInput` via:
 //
-//          InstanceEsAclArgs{...}
+//	InstanceEsAclArgs{...}
 type InstanceEsAclInput interface {
 	pulumi.Input
 
@@ -58,11 +173,11 @@ func (i InstanceEsAclArgs) ToInstanceEsAclPtrOutputWithContext(ctx context.Conte
 // InstanceEsAclPtrInput is an input type that accepts InstanceEsAclArgs, InstanceEsAclPtr and InstanceEsAclPtrOutput values.
 // You can construct a concrete instance of `InstanceEsAclPtrInput` via:
 //
-//          InstanceEsAclArgs{...}
+//	        InstanceEsAclArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceEsAclPtrInput interface {
 	pulumi.Input
 
@@ -176,7 +291,7 @@ type InstanceMultiZoneInfo struct {
 // InstanceMultiZoneInfoInput is an input type that accepts InstanceMultiZoneInfoArgs and InstanceMultiZoneInfoOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoInput` via:
 //
-//          InstanceMultiZoneInfoArgs{...}
+//	InstanceMultiZoneInfoArgs{...}
 type InstanceMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -206,7 +321,7 @@ func (i InstanceMultiZoneInfoArgs) ToInstanceMultiZoneInfoOutputWithContext(ctx 
 // InstanceMultiZoneInfoArrayInput is an input type that accepts InstanceMultiZoneInfoArray and InstanceMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceMultiZoneInfoArrayInput` via:
 //
-//          InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
+//	InstanceMultiZoneInfoArray{ InstanceMultiZoneInfoArgs{...} }
 type InstanceMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -290,7 +405,7 @@ type InstanceNodeInfoList struct {
 // InstanceNodeInfoListInput is an input type that accepts InstanceNodeInfoListArgs and InstanceNodeInfoListOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListInput` via:
 //
-//          InstanceNodeInfoListArgs{...}
+//	InstanceNodeInfoListArgs{...}
 type InstanceNodeInfoListInput interface {
 	pulumi.Input
 
@@ -328,7 +443,7 @@ func (i InstanceNodeInfoListArgs) ToInstanceNodeInfoListOutputWithContext(ctx co
 // InstanceNodeInfoListArrayInput is an input type that accepts InstanceNodeInfoListArray and InstanceNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoListArrayInput` via:
 //
-//          InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
+//	InstanceNodeInfoListArray{ InstanceNodeInfoListArgs{...} }
 type InstanceNodeInfoListArrayInput interface {
 	pulumi.Input
 
@@ -424,7 +539,7 @@ type InstanceWebNodeTypeInfo struct {
 // InstanceWebNodeTypeInfoInput is an input type that accepts InstanceWebNodeTypeInfoArgs and InstanceWebNodeTypeInfoOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoInput` via:
 //
-//          InstanceWebNodeTypeInfoArgs{...}
+//	InstanceWebNodeTypeInfoArgs{...}
 type InstanceWebNodeTypeInfoInput interface {
 	pulumi.Input
 
@@ -454,7 +569,7 @@ func (i InstanceWebNodeTypeInfoArgs) ToInstanceWebNodeTypeInfoOutputWithContext(
 // InstanceWebNodeTypeInfoArrayInput is an input type that accepts InstanceWebNodeTypeInfoArray and InstanceWebNodeTypeInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceWebNodeTypeInfoArrayInput` via:
 //
-//          InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
+//	InstanceWebNodeTypeInfoArray{ InstanceWebNodeTypeInfoArgs{...} }
 type InstanceWebNodeTypeInfoArrayInput interface {
 	pulumi.Input
 
@@ -520,6 +635,3477 @@ func (o InstanceWebNodeTypeInfoArrayOutput) Index(i pulumi.IntInput) InstanceWeb
 	}).(InstanceWebNodeTypeInfoOutput)
 }
 
+type LogstashOperationDuration struct {
+	// day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+	Periods []int `pulumi:"periods"`
+	// operation end time.
+	TimeEnd string `pulumi:"timeEnd"`
+	// operation start time.
+	TimeStart string `pulumi:"timeStart"`
+	// time zone, for example: UTC+8.
+	TimeZone string `pulumi:"timeZone"`
+}
+
+// LogstashOperationDurationInput is an input type that accepts LogstashOperationDurationArgs and LogstashOperationDurationOutput values.
+// You can construct a concrete instance of `LogstashOperationDurationInput` via:
+//
+//	LogstashOperationDurationArgs{...}
+type LogstashOperationDurationInput interface {
+	pulumi.Input
+
+	ToLogstashOperationDurationOutput() LogstashOperationDurationOutput
+	ToLogstashOperationDurationOutputWithContext(context.Context) LogstashOperationDurationOutput
+}
+
+type LogstashOperationDurationArgs struct {
+	// day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+	Periods pulumi.IntArrayInput `pulumi:"periods"`
+	// operation end time.
+	TimeEnd pulumi.StringInput `pulumi:"timeEnd"`
+	// operation start time.
+	TimeStart pulumi.StringInput `pulumi:"timeStart"`
+	// time zone, for example: UTC+8.
+	TimeZone pulumi.StringInput `pulumi:"timeZone"`
+}
+
+func (LogstashOperationDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogstashOperationDuration)(nil)).Elem()
+}
+
+func (i LogstashOperationDurationArgs) ToLogstashOperationDurationOutput() LogstashOperationDurationOutput {
+	return i.ToLogstashOperationDurationOutputWithContext(context.Background())
+}
+
+func (i LogstashOperationDurationArgs) ToLogstashOperationDurationOutputWithContext(ctx context.Context) LogstashOperationDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashOperationDurationOutput)
+}
+
+func (i LogstashOperationDurationArgs) ToLogstashOperationDurationPtrOutput() LogstashOperationDurationPtrOutput {
+	return i.ToLogstashOperationDurationPtrOutputWithContext(context.Background())
+}
+
+func (i LogstashOperationDurationArgs) ToLogstashOperationDurationPtrOutputWithContext(ctx context.Context) LogstashOperationDurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashOperationDurationOutput).ToLogstashOperationDurationPtrOutputWithContext(ctx)
+}
+
+// LogstashOperationDurationPtrInput is an input type that accepts LogstashOperationDurationArgs, LogstashOperationDurationPtr and LogstashOperationDurationPtrOutput values.
+// You can construct a concrete instance of `LogstashOperationDurationPtrInput` via:
+//
+//	        LogstashOperationDurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type LogstashOperationDurationPtrInput interface {
+	pulumi.Input
+
+	ToLogstashOperationDurationPtrOutput() LogstashOperationDurationPtrOutput
+	ToLogstashOperationDurationPtrOutputWithContext(context.Context) LogstashOperationDurationPtrOutput
+}
+
+type logstashOperationDurationPtrType LogstashOperationDurationArgs
+
+func LogstashOperationDurationPtr(v *LogstashOperationDurationArgs) LogstashOperationDurationPtrInput {
+	return (*logstashOperationDurationPtrType)(v)
+}
+
+func (*logstashOperationDurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogstashOperationDuration)(nil)).Elem()
+}
+
+func (i *logstashOperationDurationPtrType) ToLogstashOperationDurationPtrOutput() LogstashOperationDurationPtrOutput {
+	return i.ToLogstashOperationDurationPtrOutputWithContext(context.Background())
+}
+
+func (i *logstashOperationDurationPtrType) ToLogstashOperationDurationPtrOutputWithContext(ctx context.Context) LogstashOperationDurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashOperationDurationPtrOutput)
+}
+
+type LogstashOperationDurationOutput struct{ *pulumi.OutputState }
+
+func (LogstashOperationDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogstashOperationDuration)(nil)).Elem()
+}
+
+func (o LogstashOperationDurationOutput) ToLogstashOperationDurationOutput() LogstashOperationDurationOutput {
+	return o
+}
+
+func (o LogstashOperationDurationOutput) ToLogstashOperationDurationOutputWithContext(ctx context.Context) LogstashOperationDurationOutput {
+	return o
+}
+
+func (o LogstashOperationDurationOutput) ToLogstashOperationDurationPtrOutput() LogstashOperationDurationPtrOutput {
+	return o.ToLogstashOperationDurationPtrOutputWithContext(context.Background())
+}
+
+func (o LogstashOperationDurationOutput) ToLogstashOperationDurationPtrOutputWithContext(ctx context.Context) LogstashOperationDurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LogstashOperationDuration) *LogstashOperationDuration {
+		return &v
+	}).(LogstashOperationDurationPtrOutput)
+}
+
+// day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+func (o LogstashOperationDurationOutput) Periods() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v LogstashOperationDuration) []int { return v.Periods }).(pulumi.IntArrayOutput)
+}
+
+// operation end time.
+func (o LogstashOperationDurationOutput) TimeEnd() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashOperationDuration) string { return v.TimeEnd }).(pulumi.StringOutput)
+}
+
+// operation start time.
+func (o LogstashOperationDurationOutput) TimeStart() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashOperationDuration) string { return v.TimeStart }).(pulumi.StringOutput)
+}
+
+// time zone, for example: UTC+8.
+func (o LogstashOperationDurationOutput) TimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashOperationDuration) string { return v.TimeZone }).(pulumi.StringOutput)
+}
+
+type LogstashOperationDurationPtrOutput struct{ *pulumi.OutputState }
+
+func (LogstashOperationDurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogstashOperationDuration)(nil)).Elem()
+}
+
+func (o LogstashOperationDurationPtrOutput) ToLogstashOperationDurationPtrOutput() LogstashOperationDurationPtrOutput {
+	return o
+}
+
+func (o LogstashOperationDurationPtrOutput) ToLogstashOperationDurationPtrOutputWithContext(ctx context.Context) LogstashOperationDurationPtrOutput {
+	return o
+}
+
+func (o LogstashOperationDurationPtrOutput) Elem() LogstashOperationDurationOutput {
+	return o.ApplyT(func(v *LogstashOperationDuration) LogstashOperationDuration {
+		if v != nil {
+			return *v
+		}
+		var ret LogstashOperationDuration
+		return ret
+	}).(LogstashOperationDurationOutput)
+}
+
+// day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+func (o LogstashOperationDurationPtrOutput) Periods() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *LogstashOperationDuration) []int {
+		if v == nil {
+			return nil
+		}
+		return v.Periods
+	}).(pulumi.IntArrayOutput)
+}
+
+// operation end time.
+func (o LogstashOperationDurationPtrOutput) TimeEnd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashOperationDuration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TimeEnd
+	}).(pulumi.StringPtrOutput)
+}
+
+// operation start time.
+func (o LogstashOperationDurationPtrOutput) TimeStart() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashOperationDuration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TimeStart
+	}).(pulumi.StringPtrOutput)
+}
+
+// time zone, for example: UTC+8.
+func (o LogstashOperationDurationPtrOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashOperationDuration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TimeZone
+	}).(pulumi.StringPtrOutput)
+}
+
+type LogstashPipelinePipeline struct {
+	// Pipeline batch processing delay.
+	BatchDelay int `pulumi:"batchDelay"`
+	// Pipe batch size.
+	BatchSize int `pulumi:"batchSize"`
+	// Pipeline configuration content.
+	Config string `pulumi:"config"`
+	// Pipeline description information.
+	PipelineDesc string `pulumi:"pipelineDesc"`
+	// Pipeline id.
+	PipelineId string `pulumi:"pipelineId"`
+	// Number of pipeline buffer queue checkpoint writes.
+	QueueCheckPointWrites int `pulumi:"queueCheckPointWrites"`
+	// Pipeline buffer queue size.
+	QueueMaxBytes string `pulumi:"queueMaxBytes"`
+	// Pipeline buffer queue type.
+	QueueType string `pulumi:"queueType"`
+	// Number of Worker of pipe.
+	Workers int `pulumi:"workers"`
+}
+
+// LogstashPipelinePipelineInput is an input type that accepts LogstashPipelinePipelineArgs and LogstashPipelinePipelineOutput values.
+// You can construct a concrete instance of `LogstashPipelinePipelineInput` via:
+//
+//	LogstashPipelinePipelineArgs{...}
+type LogstashPipelinePipelineInput interface {
+	pulumi.Input
+
+	ToLogstashPipelinePipelineOutput() LogstashPipelinePipelineOutput
+	ToLogstashPipelinePipelineOutputWithContext(context.Context) LogstashPipelinePipelineOutput
+}
+
+type LogstashPipelinePipelineArgs struct {
+	// Pipeline batch processing delay.
+	BatchDelay pulumi.IntInput `pulumi:"batchDelay"`
+	// Pipe batch size.
+	BatchSize pulumi.IntInput `pulumi:"batchSize"`
+	// Pipeline configuration content.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Pipeline description information.
+	PipelineDesc pulumi.StringInput `pulumi:"pipelineDesc"`
+	// Pipeline id.
+	PipelineId pulumi.StringInput `pulumi:"pipelineId"`
+	// Number of pipeline buffer queue checkpoint writes.
+	QueueCheckPointWrites pulumi.IntInput `pulumi:"queueCheckPointWrites"`
+	// Pipeline buffer queue size.
+	QueueMaxBytes pulumi.StringInput `pulumi:"queueMaxBytes"`
+	// Pipeline buffer queue type.
+	QueueType pulumi.StringInput `pulumi:"queueType"`
+	// Number of Worker of pipe.
+	Workers pulumi.IntInput `pulumi:"workers"`
+}
+
+func (LogstashPipelinePipelineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogstashPipelinePipeline)(nil)).Elem()
+}
+
+func (i LogstashPipelinePipelineArgs) ToLogstashPipelinePipelineOutput() LogstashPipelinePipelineOutput {
+	return i.ToLogstashPipelinePipelineOutputWithContext(context.Background())
+}
+
+func (i LogstashPipelinePipelineArgs) ToLogstashPipelinePipelineOutputWithContext(ctx context.Context) LogstashPipelinePipelineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashPipelinePipelineOutput)
+}
+
+func (i LogstashPipelinePipelineArgs) ToLogstashPipelinePipelinePtrOutput() LogstashPipelinePipelinePtrOutput {
+	return i.ToLogstashPipelinePipelinePtrOutputWithContext(context.Background())
+}
+
+func (i LogstashPipelinePipelineArgs) ToLogstashPipelinePipelinePtrOutputWithContext(ctx context.Context) LogstashPipelinePipelinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashPipelinePipelineOutput).ToLogstashPipelinePipelinePtrOutputWithContext(ctx)
+}
+
+// LogstashPipelinePipelinePtrInput is an input type that accepts LogstashPipelinePipelineArgs, LogstashPipelinePipelinePtr and LogstashPipelinePipelinePtrOutput values.
+// You can construct a concrete instance of `LogstashPipelinePipelinePtrInput` via:
+//
+//	        LogstashPipelinePipelineArgs{...}
+//
+//	or:
+//
+//	        nil
+type LogstashPipelinePipelinePtrInput interface {
+	pulumi.Input
+
+	ToLogstashPipelinePipelinePtrOutput() LogstashPipelinePipelinePtrOutput
+	ToLogstashPipelinePipelinePtrOutputWithContext(context.Context) LogstashPipelinePipelinePtrOutput
+}
+
+type logstashPipelinePipelinePtrType LogstashPipelinePipelineArgs
+
+func LogstashPipelinePipelinePtr(v *LogstashPipelinePipelineArgs) LogstashPipelinePipelinePtrInput {
+	return (*logstashPipelinePipelinePtrType)(v)
+}
+
+func (*logstashPipelinePipelinePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogstashPipelinePipeline)(nil)).Elem()
+}
+
+func (i *logstashPipelinePipelinePtrType) ToLogstashPipelinePipelinePtrOutput() LogstashPipelinePipelinePtrOutput {
+	return i.ToLogstashPipelinePipelinePtrOutputWithContext(context.Background())
+}
+
+func (i *logstashPipelinePipelinePtrType) ToLogstashPipelinePipelinePtrOutputWithContext(ctx context.Context) LogstashPipelinePipelinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogstashPipelinePipelinePtrOutput)
+}
+
+type LogstashPipelinePipelineOutput struct{ *pulumi.OutputState }
+
+func (LogstashPipelinePipelineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogstashPipelinePipeline)(nil)).Elem()
+}
+
+func (o LogstashPipelinePipelineOutput) ToLogstashPipelinePipelineOutput() LogstashPipelinePipelineOutput {
+	return o
+}
+
+func (o LogstashPipelinePipelineOutput) ToLogstashPipelinePipelineOutputWithContext(ctx context.Context) LogstashPipelinePipelineOutput {
+	return o
+}
+
+func (o LogstashPipelinePipelineOutput) ToLogstashPipelinePipelinePtrOutput() LogstashPipelinePipelinePtrOutput {
+	return o.ToLogstashPipelinePipelinePtrOutputWithContext(context.Background())
+}
+
+func (o LogstashPipelinePipelineOutput) ToLogstashPipelinePipelinePtrOutputWithContext(ctx context.Context) LogstashPipelinePipelinePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LogstashPipelinePipeline) *LogstashPipelinePipeline {
+		return &v
+	}).(LogstashPipelinePipelinePtrOutput)
+}
+
+// Pipeline batch processing delay.
+func (o LogstashPipelinePipelineOutput) BatchDelay() pulumi.IntOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) int { return v.BatchDelay }).(pulumi.IntOutput)
+}
+
+// Pipe batch size.
+func (o LogstashPipelinePipelineOutput) BatchSize() pulumi.IntOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) int { return v.BatchSize }).(pulumi.IntOutput)
+}
+
+// Pipeline configuration content.
+func (o LogstashPipelinePipelineOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Pipeline description information.
+func (o LogstashPipelinePipelineOutput) PipelineDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) string { return v.PipelineDesc }).(pulumi.StringOutput)
+}
+
+// Pipeline id.
+func (o LogstashPipelinePipelineOutput) PipelineId() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) string { return v.PipelineId }).(pulumi.StringOutput)
+}
+
+// Number of pipeline buffer queue checkpoint writes.
+func (o LogstashPipelinePipelineOutput) QueueCheckPointWrites() pulumi.IntOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) int { return v.QueueCheckPointWrites }).(pulumi.IntOutput)
+}
+
+// Pipeline buffer queue size.
+func (o LogstashPipelinePipelineOutput) QueueMaxBytes() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) string { return v.QueueMaxBytes }).(pulumi.StringOutput)
+}
+
+// Pipeline buffer queue type.
+func (o LogstashPipelinePipelineOutput) QueueType() pulumi.StringOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) string { return v.QueueType }).(pulumi.StringOutput)
+}
+
+// Number of Worker of pipe.
+func (o LogstashPipelinePipelineOutput) Workers() pulumi.IntOutput {
+	return o.ApplyT(func(v LogstashPipelinePipeline) int { return v.Workers }).(pulumi.IntOutput)
+}
+
+type LogstashPipelinePipelinePtrOutput struct{ *pulumi.OutputState }
+
+func (LogstashPipelinePipelinePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogstashPipelinePipeline)(nil)).Elem()
+}
+
+func (o LogstashPipelinePipelinePtrOutput) ToLogstashPipelinePipelinePtrOutput() LogstashPipelinePipelinePtrOutput {
+	return o
+}
+
+func (o LogstashPipelinePipelinePtrOutput) ToLogstashPipelinePipelinePtrOutputWithContext(ctx context.Context) LogstashPipelinePipelinePtrOutput {
+	return o
+}
+
+func (o LogstashPipelinePipelinePtrOutput) Elem() LogstashPipelinePipelineOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) LogstashPipelinePipeline {
+		if v != nil {
+			return *v
+		}
+		var ret LogstashPipelinePipeline
+		return ret
+	}).(LogstashPipelinePipelineOutput)
+}
+
+// Pipeline batch processing delay.
+func (o LogstashPipelinePipelinePtrOutput) BatchDelay() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.BatchDelay
+	}).(pulumi.IntPtrOutput)
+}
+
+// Pipe batch size.
+func (o LogstashPipelinePipelinePtrOutput) BatchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.BatchSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Pipeline configuration content.
+func (o LogstashPipelinePipelinePtrOutput) Config() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Config
+	}).(pulumi.StringPtrOutput)
+}
+
+// Pipeline description information.
+func (o LogstashPipelinePipelinePtrOutput) PipelineDesc() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PipelineDesc
+	}).(pulumi.StringPtrOutput)
+}
+
+// Pipeline id.
+func (o LogstashPipelinePipelinePtrOutput) PipelineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PipelineId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of pipeline buffer queue checkpoint writes.
+func (o LogstashPipelinePipelinePtrOutput) QueueCheckPointWrites() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.QueueCheckPointWrites
+	}).(pulumi.IntPtrOutput)
+}
+
+// Pipeline buffer queue size.
+func (o LogstashPipelinePipelinePtrOutput) QueueMaxBytes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.QueueMaxBytes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Pipeline buffer queue type.
+func (o LogstashPipelinePipelinePtrOutput) QueueType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.QueueType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of Worker of pipe.
+func (o LogstashPipelinePipelinePtrOutput) Workers() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LogstashPipelinePipeline) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Workers
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetDescribeIndexListIndexMetaField struct {
+	// App id.
+	AppId int `pulumi:"appId"`
+	// Backing indices.
+	BackingIndices []GetDescribeIndexListIndexMetaFieldBackingIndex `pulumi:"backingIndices"`
+	// Cluster id.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster version.
+	ClusterVersion string `pulumi:"clusterVersion"`
+	// Index create time.
+	IndexCreateTime string `pulumi:"indexCreateTime"`
+	// Number of indexed documents.
+	IndexDocs int `pulumi:"indexDocs"`
+	// Index meta json.
+	IndexMetaJson string `pulumi:"indexMetaJson"`
+	// Index name. If you fill in the blanks, get all indexes.
+	IndexName string `pulumi:"indexName"`
+	// Index options field.
+	IndexOptionsFields []GetDescribeIndexListIndexMetaFieldIndexOptionsField `pulumi:"indexOptionsFields"`
+	// Index lifecycle field.
+	IndexPolicyFields []GetDescribeIndexListIndexMetaFieldIndexPolicyField `pulumi:"indexPolicyFields"`
+	// Index settings field.
+	IndexSettingsFields []GetDescribeIndexListIndexMetaFieldIndexSettingsField `pulumi:"indexSettingsFields"`
+	// Index status.
+	IndexStatus string `pulumi:"indexStatus"`
+	// Index storage.
+	IndexStorage int `pulumi:"indexStorage"`
+	// Index type. `auto`: Autonomous index; `normal`: General index.
+	IndexType string `pulumi:"indexType"`
+}
+
+// GetDescribeIndexListIndexMetaFieldInput is an input type that accepts GetDescribeIndexListIndexMetaFieldArgs and GetDescribeIndexListIndexMetaFieldOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldArgs{...}
+type GetDescribeIndexListIndexMetaFieldInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldOutput() GetDescribeIndexListIndexMetaFieldOutput
+	ToGetDescribeIndexListIndexMetaFieldOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldArgs struct {
+	// App id.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Backing indices.
+	BackingIndices GetDescribeIndexListIndexMetaFieldBackingIndexArrayInput `pulumi:"backingIndices"`
+	// Cluster id.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster version.
+	ClusterVersion pulumi.StringInput `pulumi:"clusterVersion"`
+	// Index create time.
+	IndexCreateTime pulumi.StringInput `pulumi:"indexCreateTime"`
+	// Number of indexed documents.
+	IndexDocs pulumi.IntInput `pulumi:"indexDocs"`
+	// Index meta json.
+	IndexMetaJson pulumi.StringInput `pulumi:"indexMetaJson"`
+	// Index name. If you fill in the blanks, get all indexes.
+	IndexName pulumi.StringInput `pulumi:"indexName"`
+	// Index options field.
+	IndexOptionsFields GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayInput `pulumi:"indexOptionsFields"`
+	// Index lifecycle field.
+	IndexPolicyFields GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayInput `pulumi:"indexPolicyFields"`
+	// Index settings field.
+	IndexSettingsFields GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayInput `pulumi:"indexSettingsFields"`
+	// Index status.
+	IndexStatus pulumi.StringInput `pulumi:"indexStatus"`
+	// Index storage.
+	IndexStorage pulumi.IntInput `pulumi:"indexStorage"`
+	// Index type. `auto`: Autonomous index; `normal`: General index.
+	IndexType pulumi.StringInput `pulumi:"indexType"`
+}
+
+func (GetDescribeIndexListIndexMetaFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldArgs) ToGetDescribeIndexListIndexMetaFieldOutput() GetDescribeIndexListIndexMetaFieldOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldArgs) ToGetDescribeIndexListIndexMetaFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldOutput)
+}
+
+// GetDescribeIndexListIndexMetaFieldArrayInput is an input type that accepts GetDescribeIndexListIndexMetaFieldArray and GetDescribeIndexListIndexMetaFieldArrayOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldArrayInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldArray{ GetDescribeIndexListIndexMetaFieldArgs{...} }
+type GetDescribeIndexListIndexMetaFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldArrayOutput() GetDescribeIndexListIndexMetaFieldArrayOutput
+	ToGetDescribeIndexListIndexMetaFieldArrayOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldArrayOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldArray []GetDescribeIndexListIndexMetaFieldInput
+
+func (GetDescribeIndexListIndexMetaFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldArray) ToGetDescribeIndexListIndexMetaFieldArrayOutput() GetDescribeIndexListIndexMetaFieldArrayOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldArray) ToGetDescribeIndexListIndexMetaFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldArrayOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldOutput) ToGetDescribeIndexListIndexMetaFieldOutput() GetDescribeIndexListIndexMetaFieldOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldOutput) ToGetDescribeIndexListIndexMetaFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldOutput {
+	return o
+}
+
+// App id.
+func (o GetDescribeIndexListIndexMetaFieldOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Backing indices.
+func (o GetDescribeIndexListIndexMetaFieldOutput) BackingIndices() GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) []GetDescribeIndexListIndexMetaFieldBackingIndex {
+		return v.BackingIndices
+	}).(GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput)
+}
+
+// Cluster id.
+func (o GetDescribeIndexListIndexMetaFieldOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o GetDescribeIndexListIndexMetaFieldOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster version.
+func (o GetDescribeIndexListIndexMetaFieldOutput) ClusterVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.ClusterVersion }).(pulumi.StringOutput)
+}
+
+// Index create time.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.IndexCreateTime }).(pulumi.StringOutput)
+}
+
+// Number of indexed documents.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexDocs() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) int { return v.IndexDocs }).(pulumi.IntOutput)
+}
+
+// Index meta json.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexMetaJson() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.IndexMetaJson }).(pulumi.StringOutput)
+}
+
+// Index name. If you fill in the blanks, get all indexes.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.IndexName }).(pulumi.StringOutput)
+}
+
+// Index options field.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexOptionsFields() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) []GetDescribeIndexListIndexMetaFieldIndexOptionsField {
+		return v.IndexOptionsFields
+	}).(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput)
+}
+
+// Index lifecycle field.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexPolicyFields() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) []GetDescribeIndexListIndexMetaFieldIndexPolicyField {
+		return v.IndexPolicyFields
+	}).(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput)
+}
+
+// Index settings field.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexSettingsFields() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) []GetDescribeIndexListIndexMetaFieldIndexSettingsField {
+		return v.IndexSettingsFields
+	}).(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput)
+}
+
+// Index status.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.IndexStatus }).(pulumi.StringOutput)
+}
+
+// Index storage.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) int { return v.IndexStorage }).(pulumi.IntOutput)
+}
+
+// Index type. `auto`: Autonomous index; `normal`: General index.
+func (o GetDescribeIndexListIndexMetaFieldOutput) IndexType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaField) string { return v.IndexType }).(pulumi.StringOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldArrayOutput() GetDescribeIndexListIndexMetaFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldArrayOutput) Index(i pulumi.IntInput) GetDescribeIndexListIndexMetaFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeIndexListIndexMetaField {
+		return vs[0].([]GetDescribeIndexListIndexMetaField)[vs[1].(int)]
+	}).(GetDescribeIndexListIndexMetaFieldOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldBackingIndex struct {
+	// Index create time.
+	IndexCreateTime string `pulumi:"indexCreateTime"`
+	// Index name. If you fill in the blanks, get all indexes.
+	IndexName string `pulumi:"indexName"`
+	// Index phrase.
+	IndexPhrase string `pulumi:"indexPhrase"`
+	// Index status.
+	IndexStatus string `pulumi:"indexStatus"`
+	// Index storage.
+	IndexStorage int `pulumi:"indexStorage"`
+}
+
+// GetDescribeIndexListIndexMetaFieldBackingIndexInput is an input type that accepts GetDescribeIndexListIndexMetaFieldBackingIndexArgs and GetDescribeIndexListIndexMetaFieldBackingIndexOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldBackingIndexInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldBackingIndexArgs{...}
+type GetDescribeIndexListIndexMetaFieldBackingIndexInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldBackingIndexOutput() GetDescribeIndexListIndexMetaFieldBackingIndexOutput
+	ToGetDescribeIndexListIndexMetaFieldBackingIndexOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldBackingIndexArgs struct {
+	// Index create time.
+	IndexCreateTime pulumi.StringInput `pulumi:"indexCreateTime"`
+	// Index name. If you fill in the blanks, get all indexes.
+	IndexName pulumi.StringInput `pulumi:"indexName"`
+	// Index phrase.
+	IndexPhrase pulumi.StringInput `pulumi:"indexPhrase"`
+	// Index status.
+	IndexStatus pulumi.StringInput `pulumi:"indexStatus"`
+	// Index storage.
+	IndexStorage pulumi.IntInput `pulumi:"indexStorage"`
+}
+
+func (GetDescribeIndexListIndexMetaFieldBackingIndexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldBackingIndex)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldBackingIndexArgs) ToGetDescribeIndexListIndexMetaFieldBackingIndexOutput() GetDescribeIndexListIndexMetaFieldBackingIndexOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldBackingIndexOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldBackingIndexArgs) ToGetDescribeIndexListIndexMetaFieldBackingIndexOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldBackingIndexOutput)
+}
+
+// GetDescribeIndexListIndexMetaFieldBackingIndexArrayInput is an input type that accepts GetDescribeIndexListIndexMetaFieldBackingIndexArray and GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldBackingIndexArrayInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldBackingIndexArray{ GetDescribeIndexListIndexMetaFieldBackingIndexArgs{...} }
+type GetDescribeIndexListIndexMetaFieldBackingIndexArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput() GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput
+	ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldBackingIndexArray []GetDescribeIndexListIndexMetaFieldBackingIndexInput
+
+func (GetDescribeIndexListIndexMetaFieldBackingIndexArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldBackingIndex)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldBackingIndexArray) ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput() GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldBackingIndexArray) ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldBackingIndexOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldBackingIndexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldBackingIndex)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) ToGetDescribeIndexListIndexMetaFieldBackingIndexOutput() GetDescribeIndexListIndexMetaFieldBackingIndexOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) ToGetDescribeIndexListIndexMetaFieldBackingIndexOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexOutput {
+	return o
+}
+
+// Index create time.
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) IndexCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldBackingIndex) string { return v.IndexCreateTime }).(pulumi.StringOutput)
+}
+
+// Index name. If you fill in the blanks, get all indexes.
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) IndexName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldBackingIndex) string { return v.IndexName }).(pulumi.StringOutput)
+}
+
+// Index phrase.
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) IndexPhrase() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldBackingIndex) string { return v.IndexPhrase }).(pulumi.StringOutput)
+}
+
+// Index status.
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) IndexStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldBackingIndex) string { return v.IndexStatus }).(pulumi.StringOutput)
+}
+
+// Index storage.
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexOutput) IndexStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldBackingIndex) int { return v.IndexStorage }).(pulumi.IntOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldBackingIndex)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput) ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput() GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput) ToGetDescribeIndexListIndexMetaFieldBackingIndexArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput) Index(i pulumi.IntInput) GetDescribeIndexListIndexMetaFieldBackingIndexOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeIndexListIndexMetaFieldBackingIndex {
+		return vs[0].([]GetDescribeIndexListIndexMetaFieldBackingIndex)[vs[1].(int)]
+	}).(GetDescribeIndexListIndexMetaFieldBackingIndexOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexOptionsField struct {
+	// Expire max age.
+	ExpireMaxAge string `pulumi:"expireMaxAge"`
+	// Expire max size.
+	ExpireMaxSize string `pulumi:"expireMaxSize"`
+	// Whether to turn on dynamic scrolling.
+	RolloverDynamic string `pulumi:"rolloverDynamic"`
+	// Rollover max age.
+	RolloverMaxAge string `pulumi:"rolloverMaxAge"`
+	// Whether to enable dynamic slicing.
+	ShardNumDynamic string `pulumi:"shardNumDynamic"`
+	// Time partition field.
+	TimestampField string `pulumi:"timestampField"`
+	// Write mode.
+	WriteMode string `pulumi:"writeMode"`
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexOptionsFieldInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs and GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexOptionsFieldInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs{...}
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs struct {
+	// Expire max age.
+	ExpireMaxAge pulumi.StringInput `pulumi:"expireMaxAge"`
+	// Expire max size.
+	ExpireMaxSize pulumi.StringInput `pulumi:"expireMaxSize"`
+	// Whether to turn on dynamic scrolling.
+	RolloverDynamic pulumi.StringInput `pulumi:"rolloverDynamic"`
+	// Rollover max age.
+	RolloverMaxAge pulumi.StringInput `pulumi:"rolloverMaxAge"`
+	// Whether to enable dynamic slicing.
+	ShardNumDynamic pulumi.StringInput `pulumi:"shardNumDynamic"`
+	// Time partition field.
+	TimestampField pulumi.StringInput `pulumi:"timestampField"`
+	// Write mode.
+	WriteMode pulumi.StringInput `pulumi:"writeMode"`
+}
+
+func (GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexOptionsField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput)
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray and GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray{ GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs{...} }
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray []GetDescribeIndexListIndexMetaFieldIndexOptionsFieldInput
+
+func (GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexOptionsField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexOptionsField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput {
+	return o
+}
+
+// Expire max age.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ExpireMaxAge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.ExpireMaxAge }).(pulumi.StringOutput)
+}
+
+// Expire max size.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ExpireMaxSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.ExpireMaxSize }).(pulumi.StringOutput)
+}
+
+// Whether to turn on dynamic scrolling.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) RolloverDynamic() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.RolloverDynamic }).(pulumi.StringOutput)
+}
+
+// Rollover max age.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) RolloverMaxAge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.RolloverMaxAge }).(pulumi.StringOutput)
+}
+
+// Whether to enable dynamic slicing.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) ShardNumDynamic() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.ShardNumDynamic }).(pulumi.StringOutput)
+}
+
+// Time partition field.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) TimestampField() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.TimestampField }).(pulumi.StringOutput)
+}
+
+// Write mode.
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput) WriteMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexOptionsField) string { return v.WriteMode }).(pulumi.StringOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexOptionsField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput) Index(i pulumi.IntInput) GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeIndexListIndexMetaFieldIndexOptionsField {
+		return vs[0].([]GetDescribeIndexListIndexMetaFieldIndexOptionsField)[vs[1].(int)]
+	}).(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexPolicyField struct {
+	// Cold action.
+	ColdAction string `pulumi:"coldAction"`
+	// Whether to enable the cold phase.
+	ColdEnable string `pulumi:"coldEnable"`
+	// Cold phase transition time.
+	ColdMinAge string `pulumi:"coldMinAge"`
+	// Start frozen phase.
+	FrozenEnable string `pulumi:"frozenEnable"`
+	// Frozen phase transition time.
+	FrozenMinAge string `pulumi:"frozenMinAge"`
+	// Whether to enable warm.
+	WarmEnable string `pulumi:"warmEnable"`
+	// Warm phase transition time.
+	WarmMinAge string `pulumi:"warmMinAge"`
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexPolicyFieldInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs and GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexPolicyFieldInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs{...}
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs struct {
+	// Cold action.
+	ColdAction pulumi.StringInput `pulumi:"coldAction"`
+	// Whether to enable the cold phase.
+	ColdEnable pulumi.StringInput `pulumi:"coldEnable"`
+	// Cold phase transition time.
+	ColdMinAge pulumi.StringInput `pulumi:"coldMinAge"`
+	// Start frozen phase.
+	FrozenEnable pulumi.StringInput `pulumi:"frozenEnable"`
+	// Frozen phase transition time.
+	FrozenMinAge pulumi.StringInput `pulumi:"frozenMinAge"`
+	// Whether to enable warm.
+	WarmEnable pulumi.StringInput `pulumi:"warmEnable"`
+	// Warm phase transition time.
+	WarmMinAge pulumi.StringInput `pulumi:"warmMinAge"`
+}
+
+func (GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexPolicyField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput)
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray and GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray{ GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs{...} }
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray []GetDescribeIndexListIndexMetaFieldIndexPolicyFieldInput
+
+func (GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexPolicyField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexPolicyField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput {
+	return o
+}
+
+// Cold action.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ColdAction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.ColdAction }).(pulumi.StringOutput)
+}
+
+// Whether to enable the cold phase.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ColdEnable() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.ColdEnable }).(pulumi.StringOutput)
+}
+
+// Cold phase transition time.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) ColdMinAge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.ColdMinAge }).(pulumi.StringOutput)
+}
+
+// Start frozen phase.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) FrozenEnable() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.FrozenEnable }).(pulumi.StringOutput)
+}
+
+// Frozen phase transition time.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) FrozenMinAge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.FrozenMinAge }).(pulumi.StringOutput)
+}
+
+// Whether to enable warm.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) WarmEnable() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.WarmEnable }).(pulumi.StringOutput)
+}
+
+// Warm phase transition time.
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput) WarmMinAge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexPolicyField) string { return v.WarmMinAge }).(pulumi.StringOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexPolicyField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput) Index(i pulumi.IntInput) GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeIndexListIndexMetaFieldIndexPolicyField {
+		return vs[0].([]GetDescribeIndexListIndexMetaFieldIndexPolicyField)[vs[1].(int)]
+	}).(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexSettingsField struct {
+	// Number of index copy fragments.
+	NumberOfReplicas string `pulumi:"numberOfReplicas"`
+	// Number of index main fragments.
+	NumberOfShards string `pulumi:"numberOfShards"`
+	// Index refresh frequency.
+	RefreshInterval string `pulumi:"refreshInterval"`
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexSettingsFieldInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs and GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexSettingsFieldInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs{...}
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs struct {
+	// Number of index copy fragments.
+	NumberOfReplicas pulumi.StringInput `pulumi:"numberOfReplicas"`
+	// Number of index main fragments.
+	NumberOfShards pulumi.StringInput `pulumi:"numberOfShards"`
+	// Index refresh frequency.
+	RefreshInterval pulumi.StringInput `pulumi:"refreshInterval"`
+}
+
+func (GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexSettingsField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput)
+}
+
+// GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayInput is an input type that accepts GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray and GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput values.
+// You can construct a concrete instance of `GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayInput` via:
+//
+//	GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray{ GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs{...} }
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput
+	ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutputWithContext(context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray []GetDescribeIndexListIndexMetaFieldIndexSettingsFieldInput
+
+func (GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexSettingsField)(nil)).Elem()
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput {
+	return i.ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexSettingsField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput {
+	return o
+}
+
+// Number of index copy fragments.
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) NumberOfReplicas() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexSettingsField) string { return v.NumberOfReplicas }).(pulumi.StringOutput)
+}
+
+// Number of index main fragments.
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) NumberOfShards() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexSettingsField) string { return v.NumberOfShards }).(pulumi.StringOutput)
+}
+
+// Index refresh frequency.
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput) RefreshInterval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeIndexListIndexMetaFieldIndexSettingsField) string { return v.RefreshInterval }).(pulumi.StringOutput)
+}
+
+type GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeIndexListIndexMetaFieldIndexSettingsField)(nil)).Elem()
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput() GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput) ToGetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutputWithContext(ctx context.Context) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput {
+	return o
+}
+
+func (o GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput) Index(i pulumi.IntInput) GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeIndexListIndexMetaFieldIndexSettingsField {
+		return vs[0].([]GetDescribeIndexListIndexMetaFieldIndexSettingsField)[vs[1].(int)]
+	}).(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput)
+}
+
+type GetDiagnoseDiagnoseResult struct {
+	// Whether the diagnosis is complete or not.
+	Completed bool `pulumi:"completed"`
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// Instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Diagnostic parameters such as diagnostic time, diagnostic index, etc.
+	JobParams []GetDiagnoseDiagnoseResultJobParam `pulumi:"jobParams"`
+	// Diagnostic item result list.
+	JobResults []GetDiagnoseDiagnoseResultJobResult `pulumi:"jobResults"`
+	// Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.
+	JobType int `pulumi:"jobType"`
+	// Request id.
+	RequestId string `pulumi:"requestId"`
+	// Total diagnostic score.
+	Score int `pulumi:"score"`
+}
+
+// GetDiagnoseDiagnoseResultInput is an input type that accepts GetDiagnoseDiagnoseResultArgs and GetDiagnoseDiagnoseResultOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultInput` via:
+//
+//	GetDiagnoseDiagnoseResultArgs{...}
+type GetDiagnoseDiagnoseResultInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultOutput() GetDiagnoseDiagnoseResultOutput
+	ToGetDiagnoseDiagnoseResultOutputWithContext(context.Context) GetDiagnoseDiagnoseResultOutput
+}
+
+type GetDiagnoseDiagnoseResultArgs struct {
+	// Whether the diagnosis is complete or not.
+	Completed pulumi.BoolInput `pulumi:"completed"`
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Diagnostic parameters such as diagnostic time, diagnostic index, etc.
+	JobParams GetDiagnoseDiagnoseResultJobParamArrayInput `pulumi:"jobParams"`
+	// Diagnostic item result list.
+	JobResults GetDiagnoseDiagnoseResultJobResultArrayInput `pulumi:"jobResults"`
+	// Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.
+	JobType pulumi.IntInput `pulumi:"jobType"`
+	// Request id.
+	RequestId pulumi.StringInput `pulumi:"requestId"`
+	// Total diagnostic score.
+	Score pulumi.IntInput `pulumi:"score"`
+}
+
+func (GetDiagnoseDiagnoseResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResult)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultArgs) ToGetDiagnoseDiagnoseResultOutput() GetDiagnoseDiagnoseResultOutput {
+	return i.ToGetDiagnoseDiagnoseResultOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultArgs) ToGetDiagnoseDiagnoseResultOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultOutput)
+}
+
+// GetDiagnoseDiagnoseResultArrayInput is an input type that accepts GetDiagnoseDiagnoseResultArray and GetDiagnoseDiagnoseResultArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultArray{ GetDiagnoseDiagnoseResultArgs{...} }
+type GetDiagnoseDiagnoseResultArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultArrayOutput() GetDiagnoseDiagnoseResultArrayOutput
+	ToGetDiagnoseDiagnoseResultArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultArray []GetDiagnoseDiagnoseResultInput
+
+func (GetDiagnoseDiagnoseResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResult)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultArray) ToGetDiagnoseDiagnoseResultArrayOutput() GetDiagnoseDiagnoseResultArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultArray) ToGetDiagnoseDiagnoseResultArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResult)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultOutput) ToGetDiagnoseDiagnoseResultOutput() GetDiagnoseDiagnoseResultOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultOutput) ToGetDiagnoseDiagnoseResultOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultOutput {
+	return o
+}
+
+// Whether the diagnosis is complete or not.
+func (o GetDiagnoseDiagnoseResultOutput) Completed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) bool { return v.Completed }).(pulumi.BoolOutput)
+}
+
+// Create time.
+func (o GetDiagnoseDiagnoseResultOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Instance id.
+func (o GetDiagnoseDiagnoseResultOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Diagnostic parameters such as diagnostic time, diagnostic index, etc.
+func (o GetDiagnoseDiagnoseResultOutput) JobParams() GetDiagnoseDiagnoseResultJobParamArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) []GetDiagnoseDiagnoseResultJobParam { return v.JobParams }).(GetDiagnoseDiagnoseResultJobParamArrayOutput)
+}
+
+// Diagnostic item result list.
+func (o GetDiagnoseDiagnoseResultOutput) JobResults() GetDiagnoseDiagnoseResultJobResultArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) []GetDiagnoseDiagnoseResultJobResult { return v.JobResults }).(GetDiagnoseDiagnoseResultJobResultArrayOutput)
+}
+
+// Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.
+func (o GetDiagnoseDiagnoseResultOutput) JobType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) int { return v.JobType }).(pulumi.IntOutput)
+}
+
+// Request id.
+func (o GetDiagnoseDiagnoseResultOutput) RequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) string { return v.RequestId }).(pulumi.StringOutput)
+}
+
+// Total diagnostic score.
+func (o GetDiagnoseDiagnoseResultOutput) Score() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResult) int { return v.Score }).(pulumi.IntOutput)
+}
+
+type GetDiagnoseDiagnoseResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResult)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultArrayOutput) ToGetDiagnoseDiagnoseResultArrayOutput() GetDiagnoseDiagnoseResultArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultArrayOutput) ToGetDiagnoseDiagnoseResultArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResult {
+		return vs[0].([]GetDiagnoseDiagnoseResult)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobParam struct {
+	// Diagnostic indices.
+	Indices string `pulumi:"indices"`
+	// Historical diagnosis time.
+	Interval int `pulumi:"interval"`
+	// Diagnostic item list.
+	Jobs []string `pulumi:"jobs"`
+}
+
+// GetDiagnoseDiagnoseResultJobParamInput is an input type that accepts GetDiagnoseDiagnoseResultJobParamArgs and GetDiagnoseDiagnoseResultJobParamOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobParamInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobParamArgs{...}
+type GetDiagnoseDiagnoseResultJobParamInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobParamOutput() GetDiagnoseDiagnoseResultJobParamOutput
+	ToGetDiagnoseDiagnoseResultJobParamOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobParamOutput
+}
+
+type GetDiagnoseDiagnoseResultJobParamArgs struct {
+	// Diagnostic indices.
+	Indices pulumi.StringInput `pulumi:"indices"`
+	// Historical diagnosis time.
+	Interval pulumi.IntInput `pulumi:"interval"`
+	// Diagnostic item list.
+	Jobs pulumi.StringArrayInput `pulumi:"jobs"`
+}
+
+func (GetDiagnoseDiagnoseResultJobParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobParam)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobParamArgs) ToGetDiagnoseDiagnoseResultJobParamOutput() GetDiagnoseDiagnoseResultJobParamOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobParamOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobParamArgs) ToGetDiagnoseDiagnoseResultJobParamOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobParamOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobParamArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobParamArray and GetDiagnoseDiagnoseResultJobParamArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobParamArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobParamArray{ GetDiagnoseDiagnoseResultJobParamArgs{...} }
+type GetDiagnoseDiagnoseResultJobParamArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobParamArrayOutput() GetDiagnoseDiagnoseResultJobParamArrayOutput
+	ToGetDiagnoseDiagnoseResultJobParamArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobParamArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobParamArray []GetDiagnoseDiagnoseResultJobParamInput
+
+func (GetDiagnoseDiagnoseResultJobParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobParam)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobParamArray) ToGetDiagnoseDiagnoseResultJobParamArrayOutput() GetDiagnoseDiagnoseResultJobParamArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobParamArray) ToGetDiagnoseDiagnoseResultJobParamArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobParamArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobParamOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobParam)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobParamOutput) ToGetDiagnoseDiagnoseResultJobParamOutput() GetDiagnoseDiagnoseResultJobParamOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobParamOutput) ToGetDiagnoseDiagnoseResultJobParamOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobParamOutput {
+	return o
+}
+
+// Diagnostic indices.
+func (o GetDiagnoseDiagnoseResultJobParamOutput) Indices() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobParam) string { return v.Indices }).(pulumi.StringOutput)
+}
+
+// Historical diagnosis time.
+func (o GetDiagnoseDiagnoseResultJobParamOutput) Interval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobParam) int { return v.Interval }).(pulumi.IntOutput)
+}
+
+// Diagnostic item list.
+func (o GetDiagnoseDiagnoseResultJobParamOutput) Jobs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobParam) []string { return v.Jobs }).(pulumi.StringArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobParam)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobParamArrayOutput) ToGetDiagnoseDiagnoseResultJobParamArrayOutput() GetDiagnoseDiagnoseResultJobParamArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobParamArrayOutput) ToGetDiagnoseDiagnoseResultJobParamArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobParamArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobParamArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobParam {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobParam)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobParamOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResult struct {
+	// Configuration processing recommendations.
+	Advise string `pulumi:"advise"`
+	// Diagnosis details.
+	Detail string `pulumi:"detail"`
+	// Diagnostic item name.
+	JobName string `pulumi:"jobName"`
+	// Diagnostic log details.
+	LogDetails []GetDiagnoseDiagnoseResultJobResultLogDetail `pulumi:"logDetails"`
+	// Details of diagnostic metrics.
+	MetricDetails []GetDiagnoseDiagnoseResultJobResultMetricDetail `pulumi:"metricDetails"`
+	// Total diagnostic score.
+	Score int `pulumi:"score"`
+	// Diagnostic configuration detail.
+	SettingDetails []GetDiagnoseDiagnoseResultJobResultSettingDetail `pulumi:"settingDetails"`
+	// Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.
+	Status int `pulumi:"status"`
+	// Diagnostic summary.
+	Summary string `pulumi:"summary"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultArgs and GetDiagnoseDiagnoseResultJobResultOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultArgs{...}
+type GetDiagnoseDiagnoseResultJobResultInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultOutput() GetDiagnoseDiagnoseResultJobResultOutput
+	ToGetDiagnoseDiagnoseResultJobResultOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultArgs struct {
+	// Configuration processing recommendations.
+	Advise pulumi.StringInput `pulumi:"advise"`
+	// Diagnosis details.
+	Detail pulumi.StringInput `pulumi:"detail"`
+	// Diagnostic item name.
+	JobName pulumi.StringInput `pulumi:"jobName"`
+	// Diagnostic log details.
+	LogDetails GetDiagnoseDiagnoseResultJobResultLogDetailArrayInput `pulumi:"logDetails"`
+	// Details of diagnostic metrics.
+	MetricDetails GetDiagnoseDiagnoseResultJobResultMetricDetailArrayInput `pulumi:"metricDetails"`
+	// Total diagnostic score.
+	Score pulumi.IntInput `pulumi:"score"`
+	// Diagnostic configuration detail.
+	SettingDetails GetDiagnoseDiagnoseResultJobResultSettingDetailArrayInput `pulumi:"settingDetails"`
+	// Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Diagnostic summary.
+	Summary pulumi.StringInput `pulumi:"summary"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResult)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultArgs) ToGetDiagnoseDiagnoseResultJobResultOutput() GetDiagnoseDiagnoseResultJobResultOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultArgs) ToGetDiagnoseDiagnoseResultJobResultOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultArray and GetDiagnoseDiagnoseResultJobResultArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultArray{ GetDiagnoseDiagnoseResultJobResultArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultArrayOutput() GetDiagnoseDiagnoseResultJobResultArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultArray []GetDiagnoseDiagnoseResultJobResultInput
+
+func (GetDiagnoseDiagnoseResultJobResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResult)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultArray) ToGetDiagnoseDiagnoseResultJobResultArrayOutput() GetDiagnoseDiagnoseResultJobResultArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultArray) ToGetDiagnoseDiagnoseResultJobResultArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResult)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultOutput) ToGetDiagnoseDiagnoseResultJobResultOutput() GetDiagnoseDiagnoseResultJobResultOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultOutput) ToGetDiagnoseDiagnoseResultJobResultOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultOutput {
+	return o
+}
+
+// Configuration processing recommendations.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) Advise() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) string { return v.Advise }).(pulumi.StringOutput)
+}
+
+// Diagnosis details.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) Detail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) string { return v.Detail }).(pulumi.StringOutput)
+}
+
+// Diagnostic item name.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) JobName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) string { return v.JobName }).(pulumi.StringOutput)
+}
+
+// Diagnostic log details.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) LogDetails() GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) []GetDiagnoseDiagnoseResultJobResultLogDetail {
+		return v.LogDetails
+	}).(GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput)
+}
+
+// Details of diagnostic metrics.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) MetricDetails() GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) []GetDiagnoseDiagnoseResultJobResultMetricDetail {
+		return v.MetricDetails
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput)
+}
+
+// Total diagnostic score.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) Score() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) int { return v.Score }).(pulumi.IntOutput)
+}
+
+// Diagnostic configuration detail.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) SettingDetails() GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) []GetDiagnoseDiagnoseResultJobResultSettingDetail {
+		return v.SettingDetails
+	}).(GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput)
+}
+
+// Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Diagnostic summary.
+func (o GetDiagnoseDiagnoseResultJobResultOutput) Summary() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResult) string { return v.Summary }).(pulumi.StringOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResult)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultArrayOutput) ToGetDiagnoseDiagnoseResultJobResultArrayOutput() GetDiagnoseDiagnoseResultJobResultArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultArrayOutput) ToGetDiagnoseDiagnoseResultJobResultArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResult {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResult)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultLogDetail struct {
+	// Configuration processing recommendations.
+	Advise string `pulumi:"advise"`
+	// Number of occurrences of log exception names.
+	Count int `pulumi:"count"`
+	// Key.
+	Key string `pulumi:"key"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultLogDetailInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultLogDetailArgs and GetDiagnoseDiagnoseResultJobResultLogDetailOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultLogDetailInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultLogDetailArgs{...}
+type GetDiagnoseDiagnoseResultJobResultLogDetailInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultLogDetailOutput() GetDiagnoseDiagnoseResultJobResultLogDetailOutput
+	ToGetDiagnoseDiagnoseResultJobResultLogDetailOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultLogDetailArgs struct {
+	// Configuration processing recommendations.
+	Advise pulumi.StringInput `pulumi:"advise"`
+	// Number of occurrences of log exception names.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultLogDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultLogDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultLogDetailArgs) ToGetDiagnoseDiagnoseResultJobResultLogDetailOutput() GetDiagnoseDiagnoseResultJobResultLogDetailOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultLogDetailOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultLogDetailArgs) ToGetDiagnoseDiagnoseResultJobResultLogDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultLogDetailOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultLogDetailArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultLogDetailArray and GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultLogDetailArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultLogDetailArray{ GetDiagnoseDiagnoseResultJobResultLogDetailArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultLogDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultLogDetailArray []GetDiagnoseDiagnoseResultJobResultLogDetailInput
+
+func (GetDiagnoseDiagnoseResultJobResultLogDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultLogDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultLogDetailArray) ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultLogDetailArray) ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultLogDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultLogDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultLogDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailOutput) ToGetDiagnoseDiagnoseResultJobResultLogDetailOutput() GetDiagnoseDiagnoseResultJobResultLogDetailOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailOutput) ToGetDiagnoseDiagnoseResultJobResultLogDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailOutput {
+	return o
+}
+
+// Configuration processing recommendations.
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailOutput) Advise() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultLogDetail) string { return v.Advise }).(pulumi.StringOutput)
+}
+
+// Number of occurrences of log exception names.
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultLogDetail) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// Key.
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultLogDetail) string { return v.Key }).(pulumi.StringOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultLogDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultLogDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultLogDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResultLogDetail {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResultLogDetail)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultLogDetailOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetail struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Metric detail value.
+	Metrics []GetDiagnoseDiagnoseResultJobResultMetricDetailMetric `pulumi:"metrics"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailArgs and GetDiagnoseDiagnoseResultJobResultMetricDetailOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailArgs{...}
+type GetDiagnoseDiagnoseResultJobResultMetricDetailInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Metric detail value.
+	Metrics GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayInput `pulumi:"metrics"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailArray and GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailArray{ GetDiagnoseDiagnoseResultJobResultMetricDetailArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultMetricDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailArray []GetDiagnoseDiagnoseResultJobResultMetricDetailInput
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailOutput {
+	return o
+}
+
+// Key.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetail) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Metric detail value.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailOutput) Metrics() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetail) []GetDiagnoseDiagnoseResultJobResultMetricDetailMetric {
+		return v.Metrics
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultMetricDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResultMetricDetail {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResultMetricDetail)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetric struct {
+	// Index dimension family.
+	Dimensions []GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension `pulumi:"dimensions"`
+	// Value.
+	Value float64 `pulumi:"value"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailMetricInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs and GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailMetricInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs{...}
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs struct {
+	// Index dimension family.
+	Dimensions GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayInput `pulumi:"dimensions"`
+	// Value.
+	Value pulumi.Float64Input `pulumi:"value"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetric)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray and GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray{ GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray []GetDiagnoseDiagnoseResultJobResultMetricDetailMetricInput
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetailMetric)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetric)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput {
+	return o
+}
+
+// Index dimension family.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput) Dimensions() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetailMetric) []GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension {
+		return v.Dimensions
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput)
+}
+
+// Value.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput) Value() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetailMetric) float64 { return v.Value }).(pulumi.Float64Output)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetailMetric)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResultMetricDetailMetric {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResultMetricDetailMetric)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs and GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs{...}
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray and GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray{ GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray []GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionInput
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput {
+	return o
+}
+
+// Key.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput() GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput) ToGetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimension)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultSettingDetail struct {
+	// Configuration processing recommendations.
+	Advise string `pulumi:"advise"`
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetDiagnoseDiagnoseResultJobResultSettingDetailInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultSettingDetailArgs and GetDiagnoseDiagnoseResultJobResultSettingDetailOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultSettingDetailInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultSettingDetailArgs{...}
+type GetDiagnoseDiagnoseResultJobResultSettingDetailInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailOutput
+	ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultSettingDetailArgs struct {
+	// Configuration processing recommendations.
+	Advise pulumi.StringInput `pulumi:"advise"`
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDiagnoseDiagnoseResultJobResultSettingDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultSettingDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultSettingDetailArgs) ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultSettingDetailArgs) ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultSettingDetailOutput)
+}
+
+// GetDiagnoseDiagnoseResultJobResultSettingDetailArrayInput is an input type that accepts GetDiagnoseDiagnoseResultJobResultSettingDetailArray and GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput values.
+// You can construct a concrete instance of `GetDiagnoseDiagnoseResultJobResultSettingDetailArrayInput` via:
+//
+//	GetDiagnoseDiagnoseResultJobResultSettingDetailArray{ GetDiagnoseDiagnoseResultJobResultSettingDetailArgs{...} }
+type GetDiagnoseDiagnoseResultJobResultSettingDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput
+	ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutputWithContext(context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput
+}
+
+type GetDiagnoseDiagnoseResultJobResultSettingDetailArray []GetDiagnoseDiagnoseResultJobResultSettingDetailInput
+
+func (GetDiagnoseDiagnoseResultJobResultSettingDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultSettingDetail)(nil)).Elem()
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultSettingDetailArray) ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput {
+	return i.ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiagnoseDiagnoseResultJobResultSettingDetailArray) ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultSettingDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultSettingDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) ToGetDiagnoseDiagnoseResultJobResultSettingDetailOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailOutput {
+	return o
+}
+
+// Configuration processing recommendations.
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) Advise() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultSettingDetail) string { return v.Advise }).(pulumi.StringOutput)
+}
+
+// Key.
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultSettingDetail) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiagnoseDiagnoseResultJobResultSettingDetail) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiagnoseDiagnoseResultJobResultSettingDetail)(nil)).Elem()
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput() GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput) ToGetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutputWithContext(ctx context.Context) GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput {
+	return o
+}
+
+func (o GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput) Index(i pulumi.IntInput) GetDiagnoseDiagnoseResultJobResultSettingDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiagnoseDiagnoseResultJobResultSettingDetail {
+		return vs[0].([]GetDiagnoseDiagnoseResultJobResultSettingDetail)[vs[1].(int)]
+	}).(GetDiagnoseDiagnoseResultJobResultSettingDetailOutput)
+}
+
+type GetInstanceLogsInstanceLogList struct {
+	// Cluster node ip.
+	Ip string `pulumi:"ip"`
+	// Log level.
+	Level string `pulumi:"level"`
+	// Log message.
+	Message string `pulumi:"message"`
+	// Cluster node id.
+	NodeId string `pulumi:"nodeId"`
+	// Log time.
+	Time string `pulumi:"time"`
+}
+
+// GetInstanceLogsInstanceLogListInput is an input type that accepts GetInstanceLogsInstanceLogListArgs and GetInstanceLogsInstanceLogListOutput values.
+// You can construct a concrete instance of `GetInstanceLogsInstanceLogListInput` via:
+//
+//	GetInstanceLogsInstanceLogListArgs{...}
+type GetInstanceLogsInstanceLogListInput interface {
+	pulumi.Input
+
+	ToGetInstanceLogsInstanceLogListOutput() GetInstanceLogsInstanceLogListOutput
+	ToGetInstanceLogsInstanceLogListOutputWithContext(context.Context) GetInstanceLogsInstanceLogListOutput
+}
+
+type GetInstanceLogsInstanceLogListArgs struct {
+	// Cluster node ip.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Log level.
+	Level pulumi.StringInput `pulumi:"level"`
+	// Log message.
+	Message pulumi.StringInput `pulumi:"message"`
+	// Cluster node id.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Log time.
+	Time pulumi.StringInput `pulumi:"time"`
+}
+
+func (GetInstanceLogsInstanceLogListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (i GetInstanceLogsInstanceLogListArgs) ToGetInstanceLogsInstanceLogListOutput() GetInstanceLogsInstanceLogListOutput {
+	return i.ToGetInstanceLogsInstanceLogListOutputWithContext(context.Background())
+}
+
+func (i GetInstanceLogsInstanceLogListArgs) ToGetInstanceLogsInstanceLogListOutputWithContext(ctx context.Context) GetInstanceLogsInstanceLogListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceLogsInstanceLogListOutput)
+}
+
+// GetInstanceLogsInstanceLogListArrayInput is an input type that accepts GetInstanceLogsInstanceLogListArray and GetInstanceLogsInstanceLogListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceLogsInstanceLogListArrayInput` via:
+//
+//	GetInstanceLogsInstanceLogListArray{ GetInstanceLogsInstanceLogListArgs{...} }
+type GetInstanceLogsInstanceLogListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceLogsInstanceLogListArrayOutput() GetInstanceLogsInstanceLogListArrayOutput
+	ToGetInstanceLogsInstanceLogListArrayOutputWithContext(context.Context) GetInstanceLogsInstanceLogListArrayOutput
+}
+
+type GetInstanceLogsInstanceLogListArray []GetInstanceLogsInstanceLogListInput
+
+func (GetInstanceLogsInstanceLogListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (i GetInstanceLogsInstanceLogListArray) ToGetInstanceLogsInstanceLogListArrayOutput() GetInstanceLogsInstanceLogListArrayOutput {
+	return i.ToGetInstanceLogsInstanceLogListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceLogsInstanceLogListArray) ToGetInstanceLogsInstanceLogListArrayOutputWithContext(ctx context.Context) GetInstanceLogsInstanceLogListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceLogsInstanceLogListArrayOutput)
+}
+
+type GetInstanceLogsInstanceLogListOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceLogsInstanceLogListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (o GetInstanceLogsInstanceLogListOutput) ToGetInstanceLogsInstanceLogListOutput() GetInstanceLogsInstanceLogListOutput {
+	return o
+}
+
+func (o GetInstanceLogsInstanceLogListOutput) ToGetInstanceLogsInstanceLogListOutputWithContext(ctx context.Context) GetInstanceLogsInstanceLogListOutput {
+	return o
+}
+
+// Cluster node ip.
+func (o GetInstanceLogsInstanceLogListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceLogsInstanceLogList) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Log level.
+func (o GetInstanceLogsInstanceLogListOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceLogsInstanceLogList) string { return v.Level }).(pulumi.StringOutput)
+}
+
+// Log message.
+func (o GetInstanceLogsInstanceLogListOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceLogsInstanceLogList) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// Cluster node id.
+func (o GetInstanceLogsInstanceLogListOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceLogsInstanceLogList) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Log time.
+func (o GetInstanceLogsInstanceLogListOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceLogsInstanceLogList) string { return v.Time }).(pulumi.StringOutput)
+}
+
+type GetInstanceLogsInstanceLogListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceLogsInstanceLogListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (o GetInstanceLogsInstanceLogListArrayOutput) ToGetInstanceLogsInstanceLogListArrayOutput() GetInstanceLogsInstanceLogListArrayOutput {
+	return o
+}
+
+func (o GetInstanceLogsInstanceLogListArrayOutput) ToGetInstanceLogsInstanceLogListArrayOutputWithContext(ctx context.Context) GetInstanceLogsInstanceLogListArrayOutput {
+	return o
+}
+
+func (o GetInstanceLogsInstanceLogListArrayOutput) Index(i pulumi.IntInput) GetInstanceLogsInstanceLogListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceLogsInstanceLogList {
+		return vs[0].([]GetInstanceLogsInstanceLogList)[vs[1].(int)]
+	}).(GetInstanceLogsInstanceLogListOutput)
+}
+
+type GetInstanceOperationsOperation struct {
+	// Operation details.
+	Details []GetInstanceOperationsOperationDetail `pulumi:"details"`
+	// Id.
+	Id int `pulumi:"id"`
+	// Task progress.
+	Progress float64 `pulumi:"progress"`
+	// Subtask result.
+	Result string `pulumi:"result"`
+	// Start time, e.g. 2019-03-07 16:30:39.
+	StartTime string `pulumi:"startTime"`
+	// Operator uin.
+	SubAccountUin string `pulumi:"subAccountUin"`
+	// Task information.
+	Tasks []GetInstanceOperationsOperationTask `pulumi:"tasks"`
+	// Type.
+	Type string `pulumi:"type"`
+}
+
+// GetInstanceOperationsOperationInput is an input type that accepts GetInstanceOperationsOperationArgs and GetInstanceOperationsOperationOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationInput` via:
+//
+//	GetInstanceOperationsOperationArgs{...}
+type GetInstanceOperationsOperationInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationOutput() GetInstanceOperationsOperationOutput
+	ToGetInstanceOperationsOperationOutputWithContext(context.Context) GetInstanceOperationsOperationOutput
+}
+
+type GetInstanceOperationsOperationArgs struct {
+	// Operation details.
+	Details GetInstanceOperationsOperationDetailArrayInput `pulumi:"details"`
+	// Id.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Task progress.
+	Progress pulumi.Float64Input `pulumi:"progress"`
+	// Subtask result.
+	Result pulumi.StringInput `pulumi:"result"`
+	// Start time, e.g. 2019-03-07 16:30:39.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Operator uin.
+	SubAccountUin pulumi.StringInput `pulumi:"subAccountUin"`
+	// Task information.
+	Tasks GetInstanceOperationsOperationTaskArrayInput `pulumi:"tasks"`
+	// Type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetInstanceOperationsOperationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationArgs) ToGetInstanceOperationsOperationOutput() GetInstanceOperationsOperationOutput {
+	return i.ToGetInstanceOperationsOperationOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationArgs) ToGetInstanceOperationsOperationOutputWithContext(ctx context.Context) GetInstanceOperationsOperationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationOutput)
+}
+
+// GetInstanceOperationsOperationArrayInput is an input type that accepts GetInstanceOperationsOperationArray and GetInstanceOperationsOperationArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationArrayInput` via:
+//
+//	GetInstanceOperationsOperationArray{ GetInstanceOperationsOperationArgs{...} }
+type GetInstanceOperationsOperationArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationArrayOutput() GetInstanceOperationsOperationArrayOutput
+	ToGetInstanceOperationsOperationArrayOutputWithContext(context.Context) GetInstanceOperationsOperationArrayOutput
+}
+
+type GetInstanceOperationsOperationArray []GetInstanceOperationsOperationInput
+
+func (GetInstanceOperationsOperationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationArray) ToGetInstanceOperationsOperationArrayOutput() GetInstanceOperationsOperationArrayOutput {
+	return i.ToGetInstanceOperationsOperationArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationArray) ToGetInstanceOperationsOperationArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationArrayOutput)
+}
+
+type GetInstanceOperationsOperationOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationOutput) ToGetInstanceOperationsOperationOutput() GetInstanceOperationsOperationOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationOutput) ToGetInstanceOperationsOperationOutputWithContext(ctx context.Context) GetInstanceOperationsOperationOutput {
+	return o
+}
+
+// Operation details.
+func (o GetInstanceOperationsOperationOutput) Details() GetInstanceOperationsOperationDetailArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) []GetInstanceOperationsOperationDetail { return v.Details }).(GetInstanceOperationsOperationDetailArrayOutput)
+}
+
+// Id.
+func (o GetInstanceOperationsOperationOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Task progress.
+func (o GetInstanceOperationsOperationOutput) Progress() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) float64 { return v.Progress }).(pulumi.Float64Output)
+}
+
+// Subtask result.
+func (o GetInstanceOperationsOperationOutput) Result() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) string { return v.Result }).(pulumi.StringOutput)
+}
+
+// Start time, e.g. 2019-03-07 16:30:39.
+func (o GetInstanceOperationsOperationOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Operator uin.
+func (o GetInstanceOperationsOperationOutput) SubAccountUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) string { return v.SubAccountUin }).(pulumi.StringOutput)
+}
+
+// Task information.
+func (o GetInstanceOperationsOperationOutput) Tasks() GetInstanceOperationsOperationTaskArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) []GetInstanceOperationsOperationTask { return v.Tasks }).(GetInstanceOperationsOperationTaskArrayOutput)
+}
+
+// Type.
+func (o GetInstanceOperationsOperationOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperation) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetInstanceOperationsOperationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationArrayOutput) ToGetInstanceOperationsOperationArrayOutput() GetInstanceOperationsOperationArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationArrayOutput) ToGetInstanceOperationsOperationArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperation {
+		return vs[0].([]GetInstanceOperationsOperation)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationOutput)
+}
+
+type GetInstanceOperationsOperationDetail struct {
+	// Configuration information after instance update.
+	NewInfos []GetInstanceOperationsOperationDetailNewInfo `pulumi:"newInfos"`
+	// Instance original configuration information.
+	OldInfos []GetInstanceOperationsOperationDetailOldInfo `pulumi:"oldInfos"`
+}
+
+// GetInstanceOperationsOperationDetailInput is an input type that accepts GetInstanceOperationsOperationDetailArgs and GetInstanceOperationsOperationDetailOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailInput` via:
+//
+//	GetInstanceOperationsOperationDetailArgs{...}
+type GetInstanceOperationsOperationDetailInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailOutput() GetInstanceOperationsOperationDetailOutput
+	ToGetInstanceOperationsOperationDetailOutputWithContext(context.Context) GetInstanceOperationsOperationDetailOutput
+}
+
+type GetInstanceOperationsOperationDetailArgs struct {
+	// Configuration information after instance update.
+	NewInfos GetInstanceOperationsOperationDetailNewInfoArrayInput `pulumi:"newInfos"`
+	// Instance original configuration information.
+	OldInfos GetInstanceOperationsOperationDetailOldInfoArrayInput `pulumi:"oldInfos"`
+}
+
+func (GetInstanceOperationsOperationDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailArgs) ToGetInstanceOperationsOperationDetailOutput() GetInstanceOperationsOperationDetailOutput {
+	return i.ToGetInstanceOperationsOperationDetailOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailArgs) ToGetInstanceOperationsOperationDetailOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailOutput)
+}
+
+// GetInstanceOperationsOperationDetailArrayInput is an input type that accepts GetInstanceOperationsOperationDetailArray and GetInstanceOperationsOperationDetailArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailArrayInput` via:
+//
+//	GetInstanceOperationsOperationDetailArray{ GetInstanceOperationsOperationDetailArgs{...} }
+type GetInstanceOperationsOperationDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailArrayOutput() GetInstanceOperationsOperationDetailArrayOutput
+	ToGetInstanceOperationsOperationDetailArrayOutputWithContext(context.Context) GetInstanceOperationsOperationDetailArrayOutput
+}
+
+type GetInstanceOperationsOperationDetailArray []GetInstanceOperationsOperationDetailInput
+
+func (GetInstanceOperationsOperationDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailArray) ToGetInstanceOperationsOperationDetailArrayOutput() GetInstanceOperationsOperationDetailArrayOutput {
+	return i.ToGetInstanceOperationsOperationDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailArray) ToGetInstanceOperationsOperationDetailArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailArrayOutput)
+}
+
+type GetInstanceOperationsOperationDetailOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailOutput) ToGetInstanceOperationsOperationDetailOutput() GetInstanceOperationsOperationDetailOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailOutput) ToGetInstanceOperationsOperationDetailOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOutput {
+	return o
+}
+
+// Configuration information after instance update.
+func (o GetInstanceOperationsOperationDetailOutput) NewInfos() GetInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetail) []GetInstanceOperationsOperationDetailNewInfo {
+		return v.NewInfos
+	}).(GetInstanceOperationsOperationDetailNewInfoArrayOutput)
+}
+
+// Instance original configuration information.
+func (o GetInstanceOperationsOperationDetailOutput) OldInfos() GetInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetail) []GetInstanceOperationsOperationDetailOldInfo {
+		return v.OldInfos
+	}).(GetInstanceOperationsOperationDetailOldInfoArrayOutput)
+}
+
+type GetInstanceOperationsOperationDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailArrayOutput) ToGetInstanceOperationsOperationDetailArrayOutput() GetInstanceOperationsOperationDetailArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailArrayOutput) ToGetInstanceOperationsOperationDetailArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationDetail {
+		return vs[0].([]GetInstanceOperationsOperationDetail)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationDetailOutput)
+}
+
+type GetInstanceOperationsOperationDetailNewInfo struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetInstanceOperationsOperationDetailNewInfoInput is an input type that accepts GetInstanceOperationsOperationDetailNewInfoArgs and GetInstanceOperationsOperationDetailNewInfoOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailNewInfoInput` via:
+//
+//	GetInstanceOperationsOperationDetailNewInfoArgs{...}
+type GetInstanceOperationsOperationDetailNewInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailNewInfoOutput() GetInstanceOperationsOperationDetailNewInfoOutput
+	ToGetInstanceOperationsOperationDetailNewInfoOutputWithContext(context.Context) GetInstanceOperationsOperationDetailNewInfoOutput
+}
+
+type GetInstanceOperationsOperationDetailNewInfoArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetInstanceOperationsOperationDetailNewInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailNewInfoArgs) ToGetInstanceOperationsOperationDetailNewInfoOutput() GetInstanceOperationsOperationDetailNewInfoOutput {
+	return i.ToGetInstanceOperationsOperationDetailNewInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailNewInfoArgs) ToGetInstanceOperationsOperationDetailNewInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailNewInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailNewInfoOutput)
+}
+
+// GetInstanceOperationsOperationDetailNewInfoArrayInput is an input type that accepts GetInstanceOperationsOperationDetailNewInfoArray and GetInstanceOperationsOperationDetailNewInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailNewInfoArrayInput` via:
+//
+//	GetInstanceOperationsOperationDetailNewInfoArray{ GetInstanceOperationsOperationDetailNewInfoArgs{...} }
+type GetInstanceOperationsOperationDetailNewInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailNewInfoArrayOutput() GetInstanceOperationsOperationDetailNewInfoArrayOutput
+	ToGetInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(context.Context) GetInstanceOperationsOperationDetailNewInfoArrayOutput
+}
+
+type GetInstanceOperationsOperationDetailNewInfoArray []GetInstanceOperationsOperationDetailNewInfoInput
+
+func (GetInstanceOperationsOperationDetailNewInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailNewInfoArray) ToGetInstanceOperationsOperationDetailNewInfoArrayOutput() GetInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return i.ToGetInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailNewInfoArray) ToGetInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailNewInfoArrayOutput)
+}
+
+type GetInstanceOperationsOperationDetailNewInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailNewInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailNewInfoOutput) ToGetInstanceOperationsOperationDetailNewInfoOutput() GetInstanceOperationsOperationDetailNewInfoOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailNewInfoOutput) ToGetInstanceOperationsOperationDetailNewInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailNewInfoOutput {
+	return o
+}
+
+// Key.
+func (o GetInstanceOperationsOperationDetailNewInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetailNewInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetInstanceOperationsOperationDetailNewInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetailNewInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetInstanceOperationsOperationDetailNewInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailNewInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailNewInfoArrayOutput) ToGetInstanceOperationsOperationDetailNewInfoArrayOutput() GetInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailNewInfoArrayOutput) ToGetInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailNewInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationDetailNewInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationDetailNewInfo {
+		return vs[0].([]GetInstanceOperationsOperationDetailNewInfo)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationDetailNewInfoOutput)
+}
+
+type GetInstanceOperationsOperationDetailOldInfo struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetInstanceOperationsOperationDetailOldInfoInput is an input type that accepts GetInstanceOperationsOperationDetailOldInfoArgs and GetInstanceOperationsOperationDetailOldInfoOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailOldInfoInput` via:
+//
+//	GetInstanceOperationsOperationDetailOldInfoArgs{...}
+type GetInstanceOperationsOperationDetailOldInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailOldInfoOutput() GetInstanceOperationsOperationDetailOldInfoOutput
+	ToGetInstanceOperationsOperationDetailOldInfoOutputWithContext(context.Context) GetInstanceOperationsOperationDetailOldInfoOutput
+}
+
+type GetInstanceOperationsOperationDetailOldInfoArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetInstanceOperationsOperationDetailOldInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailOldInfoArgs) ToGetInstanceOperationsOperationDetailOldInfoOutput() GetInstanceOperationsOperationDetailOldInfoOutput {
+	return i.ToGetInstanceOperationsOperationDetailOldInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailOldInfoArgs) ToGetInstanceOperationsOperationDetailOldInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOldInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailOldInfoOutput)
+}
+
+// GetInstanceOperationsOperationDetailOldInfoArrayInput is an input type that accepts GetInstanceOperationsOperationDetailOldInfoArray and GetInstanceOperationsOperationDetailOldInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationDetailOldInfoArrayInput` via:
+//
+//	GetInstanceOperationsOperationDetailOldInfoArray{ GetInstanceOperationsOperationDetailOldInfoArgs{...} }
+type GetInstanceOperationsOperationDetailOldInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationDetailOldInfoArrayOutput() GetInstanceOperationsOperationDetailOldInfoArrayOutput
+	ToGetInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(context.Context) GetInstanceOperationsOperationDetailOldInfoArrayOutput
+}
+
+type GetInstanceOperationsOperationDetailOldInfoArray []GetInstanceOperationsOperationDetailOldInfoInput
+
+func (GetInstanceOperationsOperationDetailOldInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationDetailOldInfoArray) ToGetInstanceOperationsOperationDetailOldInfoArrayOutput() GetInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return i.ToGetInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationDetailOldInfoArray) ToGetInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationDetailOldInfoArrayOutput)
+}
+
+type GetInstanceOperationsOperationDetailOldInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailOldInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailOldInfoOutput) ToGetInstanceOperationsOperationDetailOldInfoOutput() GetInstanceOperationsOperationDetailOldInfoOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailOldInfoOutput) ToGetInstanceOperationsOperationDetailOldInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOldInfoOutput {
+	return o
+}
+
+// Key.
+func (o GetInstanceOperationsOperationDetailOldInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetailOldInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetInstanceOperationsOperationDetailOldInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationDetailOldInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetInstanceOperationsOperationDetailOldInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationDetailOldInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationDetailOldInfoArrayOutput) ToGetInstanceOperationsOperationDetailOldInfoArrayOutput() GetInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailOldInfoArrayOutput) ToGetInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationDetailOldInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationDetailOldInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationDetailOldInfo {
+		return vs[0].([]GetInstanceOperationsOperationDetailOldInfo)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationDetailOldInfoOutput)
+}
+
+type GetInstanceOperationsOperationTask struct {
+	// Elapsed time.
+	ElapsedTime int `pulumi:"elapsedTime"`
+	// Subtask end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Subtask name.
+	Name string `pulumi:"name"`
+	// Progress info.
+	ProcessInfos []GetInstanceOperationsOperationTaskProcessInfo `pulumi:"processInfos"`
+	// Task progress.
+	Progress float64 `pulumi:"progress"`
+	// Subtask.
+	SubTasks []GetInstanceOperationsOperationTaskSubTask `pulumi:"subTasks"`
+}
+
+// GetInstanceOperationsOperationTaskInput is an input type that accepts GetInstanceOperationsOperationTaskArgs and GetInstanceOperationsOperationTaskOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskInput` via:
+//
+//	GetInstanceOperationsOperationTaskArgs{...}
+type GetInstanceOperationsOperationTaskInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskOutput() GetInstanceOperationsOperationTaskOutput
+	ToGetInstanceOperationsOperationTaskOutputWithContext(context.Context) GetInstanceOperationsOperationTaskOutput
+}
+
+type GetInstanceOperationsOperationTaskArgs struct {
+	// Elapsed time.
+	ElapsedTime pulumi.IntInput `pulumi:"elapsedTime"`
+	// Subtask end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Subtask name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Progress info.
+	ProcessInfos GetInstanceOperationsOperationTaskProcessInfoArrayInput `pulumi:"processInfos"`
+	// Task progress.
+	Progress pulumi.Float64Input `pulumi:"progress"`
+	// Subtask.
+	SubTasks GetInstanceOperationsOperationTaskSubTaskArrayInput `pulumi:"subTasks"`
+}
+
+func (GetInstanceOperationsOperationTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskArgs) ToGetInstanceOperationsOperationTaskOutput() GetInstanceOperationsOperationTaskOutput {
+	return i.ToGetInstanceOperationsOperationTaskOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskArgs) ToGetInstanceOperationsOperationTaskOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskOutput)
+}
+
+// GetInstanceOperationsOperationTaskArrayInput is an input type that accepts GetInstanceOperationsOperationTaskArray and GetInstanceOperationsOperationTaskArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskArrayInput` via:
+//
+//	GetInstanceOperationsOperationTaskArray{ GetInstanceOperationsOperationTaskArgs{...} }
+type GetInstanceOperationsOperationTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskArrayOutput() GetInstanceOperationsOperationTaskArrayOutput
+	ToGetInstanceOperationsOperationTaskArrayOutputWithContext(context.Context) GetInstanceOperationsOperationTaskArrayOutput
+}
+
+type GetInstanceOperationsOperationTaskArray []GetInstanceOperationsOperationTaskInput
+
+func (GetInstanceOperationsOperationTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskArray) ToGetInstanceOperationsOperationTaskArrayOutput() GetInstanceOperationsOperationTaskArrayOutput {
+	return i.ToGetInstanceOperationsOperationTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskArray) ToGetInstanceOperationsOperationTaskArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskArrayOutput)
+}
+
+type GetInstanceOperationsOperationTaskOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskOutput) ToGetInstanceOperationsOperationTaskOutput() GetInstanceOperationsOperationTaskOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskOutput) ToGetInstanceOperationsOperationTaskOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskOutput {
+	return o
+}
+
+// Elapsed time.
+func (o GetInstanceOperationsOperationTaskOutput) ElapsedTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) int { return v.ElapsedTime }).(pulumi.IntOutput)
+}
+
+// Subtask end time.
+func (o GetInstanceOperationsOperationTaskOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Subtask name.
+func (o GetInstanceOperationsOperationTaskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Progress info.
+func (o GetInstanceOperationsOperationTaskOutput) ProcessInfos() GetInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) []GetInstanceOperationsOperationTaskProcessInfo {
+		return v.ProcessInfos
+	}).(GetInstanceOperationsOperationTaskProcessInfoArrayOutput)
+}
+
+// Task progress.
+func (o GetInstanceOperationsOperationTaskOutput) Progress() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) float64 { return v.Progress }).(pulumi.Float64Output)
+}
+
+// Subtask.
+func (o GetInstanceOperationsOperationTaskOutput) SubTasks() GetInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTask) []GetInstanceOperationsOperationTaskSubTask {
+		return v.SubTasks
+	}).(GetInstanceOperationsOperationTaskSubTaskArrayOutput)
+}
+
+type GetInstanceOperationsOperationTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskArrayOutput) ToGetInstanceOperationsOperationTaskArrayOutput() GetInstanceOperationsOperationTaskArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskArrayOutput) ToGetInstanceOperationsOperationTaskArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationTask {
+		return vs[0].([]GetInstanceOperationsOperationTask)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationTaskOutput)
+}
+
+type GetInstanceOperationsOperationTaskProcessInfo struct {
+	// Completed quantity.
+	Completed int `pulumi:"completed"`
+	// Remaining quantity.
+	Remain int `pulumi:"remain"`
+	// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+	TaskType int `pulumi:"taskType"`
+	// Total quantity.
+	Total int `pulumi:"total"`
+}
+
+// GetInstanceOperationsOperationTaskProcessInfoInput is an input type that accepts GetInstanceOperationsOperationTaskProcessInfoArgs and GetInstanceOperationsOperationTaskProcessInfoOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskProcessInfoInput` via:
+//
+//	GetInstanceOperationsOperationTaskProcessInfoArgs{...}
+type GetInstanceOperationsOperationTaskProcessInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskProcessInfoOutput() GetInstanceOperationsOperationTaskProcessInfoOutput
+	ToGetInstanceOperationsOperationTaskProcessInfoOutputWithContext(context.Context) GetInstanceOperationsOperationTaskProcessInfoOutput
+}
+
+type GetInstanceOperationsOperationTaskProcessInfoArgs struct {
+	// Completed quantity.
+	Completed pulumi.IntInput `pulumi:"completed"`
+	// Remaining quantity.
+	Remain pulumi.IntInput `pulumi:"remain"`
+	// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+	TaskType pulumi.IntInput `pulumi:"taskType"`
+	// Total quantity.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetInstanceOperationsOperationTaskProcessInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskProcessInfoArgs) ToGetInstanceOperationsOperationTaskProcessInfoOutput() GetInstanceOperationsOperationTaskProcessInfoOutput {
+	return i.ToGetInstanceOperationsOperationTaskProcessInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskProcessInfoArgs) ToGetInstanceOperationsOperationTaskProcessInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskProcessInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskProcessInfoOutput)
+}
+
+// GetInstanceOperationsOperationTaskProcessInfoArrayInput is an input type that accepts GetInstanceOperationsOperationTaskProcessInfoArray and GetInstanceOperationsOperationTaskProcessInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskProcessInfoArrayInput` via:
+//
+//	GetInstanceOperationsOperationTaskProcessInfoArray{ GetInstanceOperationsOperationTaskProcessInfoArgs{...} }
+type GetInstanceOperationsOperationTaskProcessInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskProcessInfoArrayOutput() GetInstanceOperationsOperationTaskProcessInfoArrayOutput
+	ToGetInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(context.Context) GetInstanceOperationsOperationTaskProcessInfoArrayOutput
+}
+
+type GetInstanceOperationsOperationTaskProcessInfoArray []GetInstanceOperationsOperationTaskProcessInfoInput
+
+func (GetInstanceOperationsOperationTaskProcessInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskProcessInfoArray) ToGetInstanceOperationsOperationTaskProcessInfoArrayOutput() GetInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return i.ToGetInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskProcessInfoArray) ToGetInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskProcessInfoArrayOutput)
+}
+
+type GetInstanceOperationsOperationTaskProcessInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskProcessInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) ToGetInstanceOperationsOperationTaskProcessInfoOutput() GetInstanceOperationsOperationTaskProcessInfoOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) ToGetInstanceOperationsOperationTaskProcessInfoOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskProcessInfoOutput {
+	return o
+}
+
+// Completed quantity.
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) Completed() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskProcessInfo) int { return v.Completed }).(pulumi.IntOutput)
+}
+
+// Remaining quantity.
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) Remain() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskProcessInfo) int { return v.Remain }).(pulumi.IntOutput)
+}
+
+// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) TaskType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskProcessInfo) int { return v.TaskType }).(pulumi.IntOutput)
+}
+
+// Total quantity.
+func (o GetInstanceOperationsOperationTaskProcessInfoOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskProcessInfo) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetInstanceOperationsOperationTaskProcessInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskProcessInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskProcessInfoArrayOutput) ToGetInstanceOperationsOperationTaskProcessInfoArrayOutput() GetInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskProcessInfoArrayOutput) ToGetInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskProcessInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationTaskProcessInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationTaskProcessInfo {
+		return vs[0].([]GetInstanceOperationsOperationTaskProcessInfo)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationTaskProcessInfoOutput)
+}
+
+type GetInstanceOperationsOperationTaskSubTask struct {
+	// Subtask error message.
+	ErrMsg string `pulumi:"errMsg"`
+	// The index name of the failed upgrade check.
+	FailedIndices []string `pulumi:"failedIndices"`
+	// Subtask end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Subtask level, 1: warning; 2: failed.
+	Level int `pulumi:"level"`
+	// Subtask name.
+	Name string `pulumi:"name"`
+	// Subtask result.
+	Result bool `pulumi:"result"`
+	// Subtask status, 1: success; 0: processing; -1: failure.
+	Status int `pulumi:"status"`
+	// Type.
+	Type string `pulumi:"type"`
+}
+
+// GetInstanceOperationsOperationTaskSubTaskInput is an input type that accepts GetInstanceOperationsOperationTaskSubTaskArgs and GetInstanceOperationsOperationTaskSubTaskOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskSubTaskInput` via:
+//
+//	GetInstanceOperationsOperationTaskSubTaskArgs{...}
+type GetInstanceOperationsOperationTaskSubTaskInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskSubTaskOutput() GetInstanceOperationsOperationTaskSubTaskOutput
+	ToGetInstanceOperationsOperationTaskSubTaskOutputWithContext(context.Context) GetInstanceOperationsOperationTaskSubTaskOutput
+}
+
+type GetInstanceOperationsOperationTaskSubTaskArgs struct {
+	// Subtask error message.
+	ErrMsg pulumi.StringInput `pulumi:"errMsg"`
+	// The index name of the failed upgrade check.
+	FailedIndices pulumi.StringArrayInput `pulumi:"failedIndices"`
+	// Subtask end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Subtask level, 1: warning; 2: failed.
+	Level pulumi.IntInput `pulumi:"level"`
+	// Subtask name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Subtask result.
+	Result pulumi.BoolInput `pulumi:"result"`
+	// Subtask status, 1: success; 0: processing; -1: failure.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetInstanceOperationsOperationTaskSubTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskSubTaskArgs) ToGetInstanceOperationsOperationTaskSubTaskOutput() GetInstanceOperationsOperationTaskSubTaskOutput {
+	return i.ToGetInstanceOperationsOperationTaskSubTaskOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskSubTaskArgs) ToGetInstanceOperationsOperationTaskSubTaskOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskSubTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskSubTaskOutput)
+}
+
+// GetInstanceOperationsOperationTaskSubTaskArrayInput is an input type that accepts GetInstanceOperationsOperationTaskSubTaskArray and GetInstanceOperationsOperationTaskSubTaskArrayOutput values.
+// You can construct a concrete instance of `GetInstanceOperationsOperationTaskSubTaskArrayInput` via:
+//
+//	GetInstanceOperationsOperationTaskSubTaskArray{ GetInstanceOperationsOperationTaskSubTaskArgs{...} }
+type GetInstanceOperationsOperationTaskSubTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceOperationsOperationTaskSubTaskArrayOutput() GetInstanceOperationsOperationTaskSubTaskArrayOutput
+	ToGetInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(context.Context) GetInstanceOperationsOperationTaskSubTaskArrayOutput
+}
+
+type GetInstanceOperationsOperationTaskSubTaskArray []GetInstanceOperationsOperationTaskSubTaskInput
+
+func (GetInstanceOperationsOperationTaskSubTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (i GetInstanceOperationsOperationTaskSubTaskArray) ToGetInstanceOperationsOperationTaskSubTaskArrayOutput() GetInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return i.ToGetInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceOperationsOperationTaskSubTaskArray) ToGetInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceOperationsOperationTaskSubTaskArrayOutput)
+}
+
+type GetInstanceOperationsOperationTaskSubTaskOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskSubTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) ToGetInstanceOperationsOperationTaskSubTaskOutput() GetInstanceOperationsOperationTaskSubTaskOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) ToGetInstanceOperationsOperationTaskSubTaskOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskSubTaskOutput {
+	return o
+}
+
+// Subtask error message.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) ErrMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) string { return v.ErrMsg }).(pulumi.StringOutput)
+}
+
+// The index name of the failed upgrade check.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) FailedIndices() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) []string { return v.FailedIndices }).(pulumi.StringArrayOutput)
+}
+
+// Subtask end time.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Subtask level, 1: warning; 2: failed.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) Level() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) int { return v.Level }).(pulumi.IntOutput)
+}
+
+// Subtask name.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Subtask result.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) Result() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) bool { return v.Result }).(pulumi.BoolOutput)
+}
+
+// Subtask status, 1: success; 0: processing; -1: failure.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Type.
+func (o GetInstanceOperationsOperationTaskSubTaskOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceOperationsOperationTaskSubTask) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetInstanceOperationsOperationTaskSubTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceOperationsOperationTaskSubTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (o GetInstanceOperationsOperationTaskSubTaskArrayOutput) ToGetInstanceOperationsOperationTaskSubTaskArrayOutput() GetInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskSubTaskArrayOutput) ToGetInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(ctx context.Context) GetInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o
+}
+
+func (o GetInstanceOperationsOperationTaskSubTaskArrayOutput) Index(i pulumi.IntInput) GetInstanceOperationsOperationTaskSubTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceOperationsOperationTaskSubTask {
+		return vs[0].([]GetInstanceOperationsOperationTaskSubTask)[vs[1].(int)]
+	}).(GetInstanceOperationsOperationTaskSubTaskOutput)
+}
+
+type GetInstancePluginListPluginList struct {
+	// Plugin description.
+	PluginDesc string `pulumi:"pluginDesc"`
+	// Plugin name.
+	PluginName string `pulumi:"pluginName"`
+	// Plugin type. Valid values: `0`: System plugin.
+	PluginType int `pulumi:"pluginType"`
+	// Plugin update time.
+	PluginUpdateTime string `pulumi:"pluginUpdateTime"`
+	// Plugin version.
+	PluginVersion string `pulumi:"pluginVersion"`
+	// Whether the plug-in can be uninstalled.
+	Removable bool `pulumi:"removable"`
+	// Plugin status. Valid values:
+	// - `-2` has been uninstalled
+	// - `-1` has been installed in
+	// - `0` installation.
+	Status int `pulumi:"status"`
+}
+
+// GetInstancePluginListPluginListInput is an input type that accepts GetInstancePluginListPluginListArgs and GetInstancePluginListPluginListOutput values.
+// You can construct a concrete instance of `GetInstancePluginListPluginListInput` via:
+//
+//	GetInstancePluginListPluginListArgs{...}
+type GetInstancePluginListPluginListInput interface {
+	pulumi.Input
+
+	ToGetInstancePluginListPluginListOutput() GetInstancePluginListPluginListOutput
+	ToGetInstancePluginListPluginListOutputWithContext(context.Context) GetInstancePluginListPluginListOutput
+}
+
+type GetInstancePluginListPluginListArgs struct {
+	// Plugin description.
+	PluginDesc pulumi.StringInput `pulumi:"pluginDesc"`
+	// Plugin name.
+	PluginName pulumi.StringInput `pulumi:"pluginName"`
+	// Plugin type. Valid values: `0`: System plugin.
+	PluginType pulumi.IntInput `pulumi:"pluginType"`
+	// Plugin update time.
+	PluginUpdateTime pulumi.StringInput `pulumi:"pluginUpdateTime"`
+	// Plugin version.
+	PluginVersion pulumi.StringInput `pulumi:"pluginVersion"`
+	// Whether the plug-in can be uninstalled.
+	Removable pulumi.BoolInput `pulumi:"removable"`
+	// Plugin status. Valid values:
+	// - `-2` has been uninstalled
+	// - `-1` has been installed in
+	// - `0` installation.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetInstancePluginListPluginListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancePluginListPluginList)(nil)).Elem()
+}
+
+func (i GetInstancePluginListPluginListArgs) ToGetInstancePluginListPluginListOutput() GetInstancePluginListPluginListOutput {
+	return i.ToGetInstancePluginListPluginListOutputWithContext(context.Background())
+}
+
+func (i GetInstancePluginListPluginListArgs) ToGetInstancePluginListPluginListOutputWithContext(ctx context.Context) GetInstancePluginListPluginListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancePluginListPluginListOutput)
+}
+
+// GetInstancePluginListPluginListArrayInput is an input type that accepts GetInstancePluginListPluginListArray and GetInstancePluginListPluginListArrayOutput values.
+// You can construct a concrete instance of `GetInstancePluginListPluginListArrayInput` via:
+//
+//	GetInstancePluginListPluginListArray{ GetInstancePluginListPluginListArgs{...} }
+type GetInstancePluginListPluginListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancePluginListPluginListArrayOutput() GetInstancePluginListPluginListArrayOutput
+	ToGetInstancePluginListPluginListArrayOutputWithContext(context.Context) GetInstancePluginListPluginListArrayOutput
+}
+
+type GetInstancePluginListPluginListArray []GetInstancePluginListPluginListInput
+
+func (GetInstancePluginListPluginListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancePluginListPluginList)(nil)).Elem()
+}
+
+func (i GetInstancePluginListPluginListArray) ToGetInstancePluginListPluginListArrayOutput() GetInstancePluginListPluginListArrayOutput {
+	return i.ToGetInstancePluginListPluginListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancePluginListPluginListArray) ToGetInstancePluginListPluginListArrayOutputWithContext(ctx context.Context) GetInstancePluginListPluginListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancePluginListPluginListArrayOutput)
+}
+
+type GetInstancePluginListPluginListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancePluginListPluginListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancePluginListPluginList)(nil)).Elem()
+}
+
+func (o GetInstancePluginListPluginListOutput) ToGetInstancePluginListPluginListOutput() GetInstancePluginListPluginListOutput {
+	return o
+}
+
+func (o GetInstancePluginListPluginListOutput) ToGetInstancePluginListPluginListOutputWithContext(ctx context.Context) GetInstancePluginListPluginListOutput {
+	return o
+}
+
+// Plugin description.
+func (o GetInstancePluginListPluginListOutput) PluginDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) string { return v.PluginDesc }).(pulumi.StringOutput)
+}
+
+// Plugin name.
+func (o GetInstancePluginListPluginListOutput) PluginName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) string { return v.PluginName }).(pulumi.StringOutput)
+}
+
+// Plugin type. Valid values: `0`: System plugin.
+func (o GetInstancePluginListPluginListOutput) PluginType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) int { return v.PluginType }).(pulumi.IntOutput)
+}
+
+// Plugin update time.
+func (o GetInstancePluginListPluginListOutput) PluginUpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) string { return v.PluginUpdateTime }).(pulumi.StringOutput)
+}
+
+// Plugin version.
+func (o GetInstancePluginListPluginListOutput) PluginVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) string { return v.PluginVersion }).(pulumi.StringOutput)
+}
+
+// Whether the plug-in can be uninstalled.
+func (o GetInstancePluginListPluginListOutput) Removable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) bool { return v.Removable }).(pulumi.BoolOutput)
+}
+
+// Plugin status. Valid values:
+// - `-2` has been uninstalled
+// - `-1` has been installed in
+// - `0` installation.
+func (o GetInstancePluginListPluginListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancePluginListPluginList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetInstancePluginListPluginListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancePluginListPluginListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancePluginListPluginList)(nil)).Elem()
+}
+
+func (o GetInstancePluginListPluginListArrayOutput) ToGetInstancePluginListPluginListArrayOutput() GetInstancePluginListPluginListArrayOutput {
+	return o
+}
+
+func (o GetInstancePluginListPluginListArrayOutput) ToGetInstancePluginListPluginListArrayOutputWithContext(ctx context.Context) GetInstancePluginListPluginListArrayOutput {
+	return o
+}
+
+func (o GetInstancePluginListPluginListArrayOutput) Index(i pulumi.IntInput) GetInstancePluginListPluginListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancePluginListPluginList {
+		return vs[0].([]GetInstancePluginListPluginList)[vs[1].(int)]
+	}).(GetInstancePluginListPluginListOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Availability zone.
 	AvailabilityZone string `pulumi:"availabilityZone"`
@@ -562,7 +4148,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -624,7 +4210,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -780,7 +4366,7 @@ type GetInstancesInstanceListMultiZoneInfo struct {
 // GetInstancesInstanceListMultiZoneInfoInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArgs and GetInstancesInstanceListMultiZoneInfoOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoInput` via:
 //
-//          GetInstancesInstanceListMultiZoneInfoArgs{...}
+//	GetInstancesInstanceListMultiZoneInfoArgs{...}
 type GetInstancesInstanceListMultiZoneInfoInput interface {
 	pulumi.Input
 
@@ -810,7 +4396,7 @@ func (i GetInstancesInstanceListMultiZoneInfoArgs) ToGetInstancesInstanceListMul
 // GetInstancesInstanceListMultiZoneInfoArrayInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArray and GetInstancesInstanceListMultiZoneInfoArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoArrayInput` via:
 //
-//          GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
+//	GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
 type GetInstancesInstanceListMultiZoneInfoArrayInput interface {
 	pulumi.Input
 
@@ -894,7 +4480,7 @@ type GetInstancesInstanceListNodeInfoList struct {
 // GetInstancesInstanceListNodeInfoListInput is an input type that accepts GetInstancesInstanceListNodeInfoListArgs and GetInstancesInstanceListNodeInfoListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListInput` via:
 //
-//          GetInstancesInstanceListNodeInfoListArgs{...}
+//	GetInstancesInstanceListNodeInfoListArgs{...}
 type GetInstancesInstanceListNodeInfoListInput interface {
 	pulumi.Input
 
@@ -932,7 +4518,7 @@ func (i GetInstancesInstanceListNodeInfoListArgs) ToGetInstancesInstanceListNode
 // GetInstancesInstanceListNodeInfoListArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoListArray and GetInstancesInstanceListNodeInfoListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListArrayInput` via:
 //
-//          GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
+//	GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
 type GetInstancesInstanceListNodeInfoListArrayInput interface {
 	pulumi.Input
 
@@ -1018,7 +4604,1763 @@ func (o GetInstancesInstanceListNodeInfoListArrayOutput) Index(i pulumi.IntInput
 	}).(GetInstancesInstanceListNodeInfoListOutput)
 }
 
+type GetLogstashInstanceLogsInstanceLogList struct {
+	// Cluster node ip.
+	Ip string `pulumi:"ip"`
+	// Log level.
+	Level string `pulumi:"level"`
+	// Log content.
+	Message string `pulumi:"message"`
+	// Cluster node id.
+	NodeId string `pulumi:"nodeId"`
+	// Log time.
+	Time string `pulumi:"time"`
+}
+
+// GetLogstashInstanceLogsInstanceLogListInput is an input type that accepts GetLogstashInstanceLogsInstanceLogListArgs and GetLogstashInstanceLogsInstanceLogListOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceLogsInstanceLogListInput` via:
+//
+//	GetLogstashInstanceLogsInstanceLogListArgs{...}
+type GetLogstashInstanceLogsInstanceLogListInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceLogsInstanceLogListOutput() GetLogstashInstanceLogsInstanceLogListOutput
+	ToGetLogstashInstanceLogsInstanceLogListOutputWithContext(context.Context) GetLogstashInstanceLogsInstanceLogListOutput
+}
+
+type GetLogstashInstanceLogsInstanceLogListArgs struct {
+	// Cluster node ip.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Log level.
+	Level pulumi.StringInput `pulumi:"level"`
+	// Log content.
+	Message pulumi.StringInput `pulumi:"message"`
+	// Cluster node id.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Log time.
+	Time pulumi.StringInput `pulumi:"time"`
+}
+
+func (GetLogstashInstanceLogsInstanceLogListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceLogsInstanceLogListArgs) ToGetLogstashInstanceLogsInstanceLogListOutput() GetLogstashInstanceLogsInstanceLogListOutput {
+	return i.ToGetLogstashInstanceLogsInstanceLogListOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceLogsInstanceLogListArgs) ToGetLogstashInstanceLogsInstanceLogListOutputWithContext(ctx context.Context) GetLogstashInstanceLogsInstanceLogListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceLogsInstanceLogListOutput)
+}
+
+// GetLogstashInstanceLogsInstanceLogListArrayInput is an input type that accepts GetLogstashInstanceLogsInstanceLogListArray and GetLogstashInstanceLogsInstanceLogListArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceLogsInstanceLogListArrayInput` via:
+//
+//	GetLogstashInstanceLogsInstanceLogListArray{ GetLogstashInstanceLogsInstanceLogListArgs{...} }
+type GetLogstashInstanceLogsInstanceLogListArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceLogsInstanceLogListArrayOutput() GetLogstashInstanceLogsInstanceLogListArrayOutput
+	ToGetLogstashInstanceLogsInstanceLogListArrayOutputWithContext(context.Context) GetLogstashInstanceLogsInstanceLogListArrayOutput
+}
+
+type GetLogstashInstanceLogsInstanceLogListArray []GetLogstashInstanceLogsInstanceLogListInput
+
+func (GetLogstashInstanceLogsInstanceLogListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceLogsInstanceLogListArray) ToGetLogstashInstanceLogsInstanceLogListArrayOutput() GetLogstashInstanceLogsInstanceLogListArrayOutput {
+	return i.ToGetLogstashInstanceLogsInstanceLogListArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceLogsInstanceLogListArray) ToGetLogstashInstanceLogsInstanceLogListArrayOutputWithContext(ctx context.Context) GetLogstashInstanceLogsInstanceLogListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceLogsInstanceLogListArrayOutput)
+}
+
+type GetLogstashInstanceLogsInstanceLogListOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceLogsInstanceLogListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceLogsInstanceLogListOutput) ToGetLogstashInstanceLogsInstanceLogListOutput() GetLogstashInstanceLogsInstanceLogListOutput {
+	return o
+}
+
+func (o GetLogstashInstanceLogsInstanceLogListOutput) ToGetLogstashInstanceLogsInstanceLogListOutputWithContext(ctx context.Context) GetLogstashInstanceLogsInstanceLogListOutput {
+	return o
+}
+
+// Cluster node ip.
+func (o GetLogstashInstanceLogsInstanceLogListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceLogsInstanceLogList) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Log level.
+func (o GetLogstashInstanceLogsInstanceLogListOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceLogsInstanceLogList) string { return v.Level }).(pulumi.StringOutput)
+}
+
+// Log content.
+func (o GetLogstashInstanceLogsInstanceLogListOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceLogsInstanceLogList) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// Cluster node id.
+func (o GetLogstashInstanceLogsInstanceLogListOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceLogsInstanceLogList) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Log time.
+func (o GetLogstashInstanceLogsInstanceLogListOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceLogsInstanceLogList) string { return v.Time }).(pulumi.StringOutput)
+}
+
+type GetLogstashInstanceLogsInstanceLogListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceLogsInstanceLogListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceLogsInstanceLogList)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceLogsInstanceLogListArrayOutput) ToGetLogstashInstanceLogsInstanceLogListArrayOutput() GetLogstashInstanceLogsInstanceLogListArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceLogsInstanceLogListArrayOutput) ToGetLogstashInstanceLogsInstanceLogListArrayOutputWithContext(ctx context.Context) GetLogstashInstanceLogsInstanceLogListArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceLogsInstanceLogListArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceLogsInstanceLogListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceLogsInstanceLogList {
+		return vs[0].([]GetLogstashInstanceLogsInstanceLogList)[vs[1].(int)]
+	}).(GetLogstashInstanceLogsInstanceLogListOutput)
+}
+
+type GetLogstashInstanceOperationsOperation struct {
+	// Operation details.
+	Details []GetLogstashInstanceOperationsOperationDetail `pulumi:"details"`
+	// Id.
+	Id int `pulumi:"id"`
+	// Task progress.
+	Progress float64 `pulumi:"progress"`
+	// Subtask result.
+	Result string `pulumi:"result"`
+	// Start time, e.g. 2019-03-07 16:30:39.
+	StartTime string `pulumi:"startTime"`
+	// Operator uin.
+	SubAccountUin string `pulumi:"subAccountUin"`
+	// Task information.
+	Tasks []GetLogstashInstanceOperationsOperationTask `pulumi:"tasks"`
+	// Type.
+	Type string `pulumi:"type"`
+}
+
+// GetLogstashInstanceOperationsOperationInput is an input type that accepts GetLogstashInstanceOperationsOperationArgs and GetLogstashInstanceOperationsOperationOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationInput` via:
+//
+//	GetLogstashInstanceOperationsOperationArgs{...}
+type GetLogstashInstanceOperationsOperationInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationOutput() GetLogstashInstanceOperationsOperationOutput
+	ToGetLogstashInstanceOperationsOperationOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationOutput
+}
+
+type GetLogstashInstanceOperationsOperationArgs struct {
+	// Operation details.
+	Details GetLogstashInstanceOperationsOperationDetailArrayInput `pulumi:"details"`
+	// Id.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Task progress.
+	Progress pulumi.Float64Input `pulumi:"progress"`
+	// Subtask result.
+	Result pulumi.StringInput `pulumi:"result"`
+	// Start time, e.g. 2019-03-07 16:30:39.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Operator uin.
+	SubAccountUin pulumi.StringInput `pulumi:"subAccountUin"`
+	// Task information.
+	Tasks GetLogstashInstanceOperationsOperationTaskArrayInput `pulumi:"tasks"`
+	// Type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetLogstashInstanceOperationsOperationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationArgs) ToGetLogstashInstanceOperationsOperationOutput() GetLogstashInstanceOperationsOperationOutput {
+	return i.ToGetLogstashInstanceOperationsOperationOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationArgs) ToGetLogstashInstanceOperationsOperationOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationOutput)
+}
+
+// GetLogstashInstanceOperationsOperationArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationArray and GetLogstashInstanceOperationsOperationArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationArray{ GetLogstashInstanceOperationsOperationArgs{...} }
+type GetLogstashInstanceOperationsOperationArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationArrayOutput() GetLogstashInstanceOperationsOperationArrayOutput
+	ToGetLogstashInstanceOperationsOperationArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationArray []GetLogstashInstanceOperationsOperationInput
+
+func (GetLogstashInstanceOperationsOperationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationArray) ToGetLogstashInstanceOperationsOperationArrayOutput() GetLogstashInstanceOperationsOperationArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationArray) ToGetLogstashInstanceOperationsOperationArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationOutput) ToGetLogstashInstanceOperationsOperationOutput() GetLogstashInstanceOperationsOperationOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationOutput) ToGetLogstashInstanceOperationsOperationOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationOutput {
+	return o
+}
+
+// Operation details.
+func (o GetLogstashInstanceOperationsOperationOutput) Details() GetLogstashInstanceOperationsOperationDetailArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) []GetLogstashInstanceOperationsOperationDetail {
+		return v.Details
+	}).(GetLogstashInstanceOperationsOperationDetailArrayOutput)
+}
+
+// Id.
+func (o GetLogstashInstanceOperationsOperationOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Task progress.
+func (o GetLogstashInstanceOperationsOperationOutput) Progress() pulumi.Float64Output {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) float64 { return v.Progress }).(pulumi.Float64Output)
+}
+
+// Subtask result.
+func (o GetLogstashInstanceOperationsOperationOutput) Result() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) string { return v.Result }).(pulumi.StringOutput)
+}
+
+// Start time, e.g. 2019-03-07 16:30:39.
+func (o GetLogstashInstanceOperationsOperationOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Operator uin.
+func (o GetLogstashInstanceOperationsOperationOutput) SubAccountUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) string { return v.SubAccountUin }).(pulumi.StringOutput)
+}
+
+// Task information.
+func (o GetLogstashInstanceOperationsOperationOutput) Tasks() GetLogstashInstanceOperationsOperationTaskArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) []GetLogstashInstanceOperationsOperationTask {
+		return v.Tasks
+	}).(GetLogstashInstanceOperationsOperationTaskArrayOutput)
+}
+
+// Type.
+func (o GetLogstashInstanceOperationsOperationOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperation) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetLogstashInstanceOperationsOperationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperation)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationArrayOutput) ToGetLogstashInstanceOperationsOperationArrayOutput() GetLogstashInstanceOperationsOperationArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationArrayOutput) ToGetLogstashInstanceOperationsOperationArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperation {
+		return vs[0].([]GetLogstashInstanceOperationsOperation)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetail struct {
+	// Configuration information after instance update.
+	NewInfos []GetLogstashInstanceOperationsOperationDetailNewInfo `pulumi:"newInfos"`
+	// Instance original configuration information.
+	OldInfos []GetLogstashInstanceOperationsOperationDetailOldInfo `pulumi:"oldInfos"`
+}
+
+// GetLogstashInstanceOperationsOperationDetailInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailArgs and GetLogstashInstanceOperationsOperationDetailOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailArgs{...}
+type GetLogstashInstanceOperationsOperationDetailInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailOutput() GetLogstashInstanceOperationsOperationDetailOutput
+	ToGetLogstashInstanceOperationsOperationDetailOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailArgs struct {
+	// Configuration information after instance update.
+	NewInfos GetLogstashInstanceOperationsOperationDetailNewInfoArrayInput `pulumi:"newInfos"`
+	// Instance original configuration information.
+	OldInfos GetLogstashInstanceOperationsOperationDetailOldInfoArrayInput `pulumi:"oldInfos"`
+}
+
+func (GetLogstashInstanceOperationsOperationDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailArgs) ToGetLogstashInstanceOperationsOperationDetailOutput() GetLogstashInstanceOperationsOperationDetailOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailArgs) ToGetLogstashInstanceOperationsOperationDetailOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailOutput)
+}
+
+// GetLogstashInstanceOperationsOperationDetailArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailArray and GetLogstashInstanceOperationsOperationDetailArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailArray{ GetLogstashInstanceOperationsOperationDetailArgs{...} }
+type GetLogstashInstanceOperationsOperationDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailArrayOutput() GetLogstashInstanceOperationsOperationDetailArrayOutput
+	ToGetLogstashInstanceOperationsOperationDetailArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailArray []GetLogstashInstanceOperationsOperationDetailInput
+
+func (GetLogstashInstanceOperationsOperationDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailArray) ToGetLogstashInstanceOperationsOperationDetailArrayOutput() GetLogstashInstanceOperationsOperationDetailArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailArray) ToGetLogstashInstanceOperationsOperationDetailArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOutput) ToGetLogstashInstanceOperationsOperationDetailOutput() GetLogstashInstanceOperationsOperationDetailOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOutput) ToGetLogstashInstanceOperationsOperationDetailOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOutput {
+	return o
+}
+
+// Configuration information after instance update.
+func (o GetLogstashInstanceOperationsOperationDetailOutput) NewInfos() GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetail) []GetLogstashInstanceOperationsOperationDetailNewInfo {
+		return v.NewInfos
+	}).(GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput)
+}
+
+// Instance original configuration information.
+func (o GetLogstashInstanceOperationsOperationDetailOutput) OldInfos() GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetail) []GetLogstashInstanceOperationsOperationDetailOldInfo {
+		return v.OldInfos
+	}).(GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetail)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailArrayOutput) ToGetLogstashInstanceOperationsOperationDetailArrayOutput() GetLogstashInstanceOperationsOperationDetailArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailArrayOutput) ToGetLogstashInstanceOperationsOperationDetailArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationDetail {
+		return vs[0].([]GetLogstashInstanceOperationsOperationDetail)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationDetailOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailNewInfo struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetLogstashInstanceOperationsOperationDetailNewInfoInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailNewInfoArgs and GetLogstashInstanceOperationsOperationDetailNewInfoOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailNewInfoInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailNewInfoArgs{...}
+type GetLogstashInstanceOperationsOperationDetailNewInfoInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailNewInfoOutput() GetLogstashInstanceOperationsOperationDetailNewInfoOutput
+	ToGetLogstashInstanceOperationsOperationDetailNewInfoOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailNewInfoArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetLogstashInstanceOperationsOperationDetailNewInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailNewInfoArgs) ToGetLogstashInstanceOperationsOperationDetailNewInfoOutput() GetLogstashInstanceOperationsOperationDetailNewInfoOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailNewInfoOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailNewInfoArgs) ToGetLogstashInstanceOperationsOperationDetailNewInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailNewInfoOutput)
+}
+
+// GetLogstashInstanceOperationsOperationDetailNewInfoArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailNewInfoArray and GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailNewInfoArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailNewInfoArray{ GetLogstashInstanceOperationsOperationDetailNewInfoArgs{...} }
+type GetLogstashInstanceOperationsOperationDetailNewInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput
+	ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailNewInfoArray []GetLogstashInstanceOperationsOperationDetailNewInfoInput
+
+func (GetLogstashInstanceOperationsOperationDetailNewInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailNewInfoArray) ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailNewInfoArray) ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailNewInfoOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailNewInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoOutput) ToGetLogstashInstanceOperationsOperationDetailNewInfoOutput() GetLogstashInstanceOperationsOperationDetailNewInfoOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoOutput) ToGetLogstashInstanceOperationsOperationDetailNewInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoOutput {
+	return o
+}
+
+// Key.
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetailNewInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetailNewInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetailNewInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput) ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput) ToGetLogstashInstanceOperationsOperationDetailNewInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationDetailNewInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationDetailNewInfo {
+		return vs[0].([]GetLogstashInstanceOperationsOperationDetailNewInfo)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationDetailNewInfoOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailOldInfo struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// GetLogstashInstanceOperationsOperationDetailOldInfoInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailOldInfoArgs and GetLogstashInstanceOperationsOperationDetailOldInfoOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailOldInfoInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailOldInfoArgs{...}
+type GetLogstashInstanceOperationsOperationDetailOldInfoInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailOldInfoOutput() GetLogstashInstanceOperationsOperationDetailOldInfoOutput
+	ToGetLogstashInstanceOperationsOperationDetailOldInfoOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailOldInfoArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetLogstashInstanceOperationsOperationDetailOldInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailOldInfoArgs) ToGetLogstashInstanceOperationsOperationDetailOldInfoOutput() GetLogstashInstanceOperationsOperationDetailOldInfoOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailOldInfoOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailOldInfoArgs) ToGetLogstashInstanceOperationsOperationDetailOldInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailOldInfoOutput)
+}
+
+// GetLogstashInstanceOperationsOperationDetailOldInfoArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationDetailOldInfoArray and GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationDetailOldInfoArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationDetailOldInfoArray{ GetLogstashInstanceOperationsOperationDetailOldInfoArgs{...} }
+type GetLogstashInstanceOperationsOperationDetailOldInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput
+	ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationDetailOldInfoArray []GetLogstashInstanceOperationsOperationDetailOldInfoInput
+
+func (GetLogstashInstanceOperationsOperationDetailOldInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailOldInfoArray) ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationDetailOldInfoArray) ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailOldInfoOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailOldInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoOutput) ToGetLogstashInstanceOperationsOperationDetailOldInfoOutput() GetLogstashInstanceOperationsOperationDetailOldInfoOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoOutput) ToGetLogstashInstanceOperationsOperationDetailOldInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoOutput {
+	return o
+}
+
+// Key.
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetailOldInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationDetailOldInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationDetailOldInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput) ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput() GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput) ToGetLogstashInstanceOperationsOperationDetailOldInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationDetailOldInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationDetailOldInfo {
+		return vs[0].([]GetLogstashInstanceOperationsOperationDetailOldInfo)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationDetailOldInfoOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTask struct {
+	// Elapsed time.
+	ElapsedTime int `pulumi:"elapsedTime"`
+	// Subtask end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Subtask name.
+	Name string `pulumi:"name"`
+	// Progress info.
+	ProcessInfos []GetLogstashInstanceOperationsOperationTaskProcessInfo `pulumi:"processInfos"`
+	// Task progress.
+	Progress float64 `pulumi:"progress"`
+	// Subtask.
+	SubTasks []GetLogstashInstanceOperationsOperationTaskSubTask `pulumi:"subTasks"`
+}
+
+// GetLogstashInstanceOperationsOperationTaskInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskArgs and GetLogstashInstanceOperationsOperationTaskOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskArgs{...}
+type GetLogstashInstanceOperationsOperationTaskInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskOutput() GetLogstashInstanceOperationsOperationTaskOutput
+	ToGetLogstashInstanceOperationsOperationTaskOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskArgs struct {
+	// Elapsed time.
+	ElapsedTime pulumi.IntInput `pulumi:"elapsedTime"`
+	// Subtask end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Subtask name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Progress info.
+	ProcessInfos GetLogstashInstanceOperationsOperationTaskProcessInfoArrayInput `pulumi:"processInfos"`
+	// Task progress.
+	Progress pulumi.Float64Input `pulumi:"progress"`
+	// Subtask.
+	SubTasks GetLogstashInstanceOperationsOperationTaskSubTaskArrayInput `pulumi:"subTasks"`
+}
+
+func (GetLogstashInstanceOperationsOperationTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskArgs) ToGetLogstashInstanceOperationsOperationTaskOutput() GetLogstashInstanceOperationsOperationTaskOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskArgs) ToGetLogstashInstanceOperationsOperationTaskOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskOutput)
+}
+
+// GetLogstashInstanceOperationsOperationTaskArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskArray and GetLogstashInstanceOperationsOperationTaskArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskArray{ GetLogstashInstanceOperationsOperationTaskArgs{...} }
+type GetLogstashInstanceOperationsOperationTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskArrayOutput
+	ToGetLogstashInstanceOperationsOperationTaskArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskArray []GetLogstashInstanceOperationsOperationTaskInput
+
+func (GetLogstashInstanceOperationsOperationTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskArray) ToGetLogstashInstanceOperationsOperationTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskArray) ToGetLogstashInstanceOperationsOperationTaskArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskOutput) ToGetLogstashInstanceOperationsOperationTaskOutput() GetLogstashInstanceOperationsOperationTaskOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskOutput) ToGetLogstashInstanceOperationsOperationTaskOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskOutput {
+	return o
+}
+
+// Elapsed time.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) ElapsedTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) int { return v.ElapsedTime }).(pulumi.IntOutput)
+}
+
+// Subtask end time.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Subtask name.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Progress info.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) ProcessInfos() GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) []GetLogstashInstanceOperationsOperationTaskProcessInfo {
+		return v.ProcessInfos
+	}).(GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput)
+}
+
+// Task progress.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) Progress() pulumi.Float64Output {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) float64 { return v.Progress }).(pulumi.Float64Output)
+}
+
+// Subtask.
+func (o GetLogstashInstanceOperationsOperationTaskOutput) SubTasks() GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTask) []GetLogstashInstanceOperationsOperationTaskSubTask {
+		return v.SubTasks
+	}).(GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTask)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskArrayOutput) ToGetLogstashInstanceOperationsOperationTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskArrayOutput) ToGetLogstashInstanceOperationsOperationTaskArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationTask {
+		return vs[0].([]GetLogstashInstanceOperationsOperationTask)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationTaskOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskProcessInfo struct {
+	// Completed quantity.
+	Completed int `pulumi:"completed"`
+	// Remaining quantity.
+	Remain int `pulumi:"remain"`
+	// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+	TaskType int `pulumi:"taskType"`
+	// Total quantity.
+	Total int `pulumi:"total"`
+}
+
+// GetLogstashInstanceOperationsOperationTaskProcessInfoInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskProcessInfoArgs and GetLogstashInstanceOperationsOperationTaskProcessInfoOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskProcessInfoInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskProcessInfoArgs{...}
+type GetLogstashInstanceOperationsOperationTaskProcessInfoInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoOutput
+	ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskProcessInfoArgs struct {
+	// Completed quantity.
+	Completed pulumi.IntInput `pulumi:"completed"`
+	// Remaining quantity.
+	Remain pulumi.IntInput `pulumi:"remain"`
+	// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+	TaskType pulumi.IntInput `pulumi:"taskType"`
+	// Total quantity.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetLogstashInstanceOperationsOperationTaskProcessInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskProcessInfoArgs) ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskProcessInfoArgs) ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskProcessInfoOutput)
+}
+
+// GetLogstashInstanceOperationsOperationTaskProcessInfoArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskProcessInfoArray and GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskProcessInfoArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskProcessInfoArray{ GetLogstashInstanceOperationsOperationTaskProcessInfoArgs{...} }
+type GetLogstashInstanceOperationsOperationTaskProcessInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput
+	ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskProcessInfoArray []GetLogstashInstanceOperationsOperationTaskProcessInfoInput
+
+func (GetLogstashInstanceOperationsOperationTaskProcessInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskProcessInfoArray) ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskProcessInfoArray) ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskProcessInfoOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) ToGetLogstashInstanceOperationsOperationTaskProcessInfoOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoOutput {
+	return o
+}
+
+// Completed quantity.
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) Completed() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskProcessInfo) int { return v.Completed }).(pulumi.IntOutput)
+}
+
+// Remaining quantity.
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) Remain() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskProcessInfo) int { return v.Remain }).(pulumi.IntOutput)
+}
+
+// Task type. 60: restart task 70: fragment migration task 80: node modification task.
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) TaskType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskProcessInfo) int { return v.TaskType }).(pulumi.IntOutput)
+}
+
+// Total quantity.
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskProcessInfo) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTaskProcessInfo)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput) ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput() GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput) ToGetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationTaskProcessInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationTaskProcessInfo {
+		return vs[0].([]GetLogstashInstanceOperationsOperationTaskProcessInfo)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationTaskProcessInfoOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskSubTask struct {
+	// Subtask error message.
+	ErrMsg string `pulumi:"errMsg"`
+	// The index name of the failed upgrade check.
+	FailedIndices []string `pulumi:"failedIndices"`
+	// Subtask end time.
+	FinishTime string `pulumi:"finishTime"`
+	// Subtask level, 1: warning; 2: failed.
+	Level int `pulumi:"level"`
+	// Subtask name.
+	Name string `pulumi:"name"`
+	// Subtask result.
+	Result bool `pulumi:"result"`
+	// Subtask status, 1: success; 0: processing; -1: failure.
+	Status int `pulumi:"status"`
+	// Type.
+	Type string `pulumi:"type"`
+}
+
+// GetLogstashInstanceOperationsOperationTaskSubTaskInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskSubTaskArgs and GetLogstashInstanceOperationsOperationTaskSubTaskOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskSubTaskInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskSubTaskArgs{...}
+type GetLogstashInstanceOperationsOperationTaskSubTaskInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskSubTaskOutput() GetLogstashInstanceOperationsOperationTaskSubTaskOutput
+	ToGetLogstashInstanceOperationsOperationTaskSubTaskOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskSubTaskArgs struct {
+	// Subtask error message.
+	ErrMsg pulumi.StringInput `pulumi:"errMsg"`
+	// The index name of the failed upgrade check.
+	FailedIndices pulumi.StringArrayInput `pulumi:"failedIndices"`
+	// Subtask end time.
+	FinishTime pulumi.StringInput `pulumi:"finishTime"`
+	// Subtask level, 1: warning; 2: failed.
+	Level pulumi.IntInput `pulumi:"level"`
+	// Subtask name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Subtask result.
+	Result pulumi.BoolInput `pulumi:"result"`
+	// Subtask status, 1: success; 0: processing; -1: failure.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetLogstashInstanceOperationsOperationTaskSubTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskSubTaskArgs) ToGetLogstashInstanceOperationsOperationTaskSubTaskOutput() GetLogstashInstanceOperationsOperationTaskSubTaskOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskSubTaskOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskSubTaskArgs) ToGetLogstashInstanceOperationsOperationTaskSubTaskOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskSubTaskOutput)
+}
+
+// GetLogstashInstanceOperationsOperationTaskSubTaskArrayInput is an input type that accepts GetLogstashInstanceOperationsOperationTaskSubTaskArray and GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput values.
+// You can construct a concrete instance of `GetLogstashInstanceOperationsOperationTaskSubTaskArrayInput` via:
+//
+//	GetLogstashInstanceOperationsOperationTaskSubTaskArray{ GetLogstashInstanceOperationsOperationTaskSubTaskArgs{...} }
+type GetLogstashInstanceOperationsOperationTaskSubTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput
+	ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput
+}
+
+type GetLogstashInstanceOperationsOperationTaskSubTaskArray []GetLogstashInstanceOperationsOperationTaskSubTaskInput
+
+func (GetLogstashInstanceOperationsOperationTaskSubTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskSubTaskArray) ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return i.ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogstashInstanceOperationsOperationTaskSubTaskArray) ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskSubTaskOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskSubTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) ToGetLogstashInstanceOperationsOperationTaskSubTaskOutput() GetLogstashInstanceOperationsOperationTaskSubTaskOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) ToGetLogstashInstanceOperationsOperationTaskSubTaskOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskOutput {
+	return o
+}
+
+// Subtask error message.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) ErrMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) string { return v.ErrMsg }).(pulumi.StringOutput)
+}
+
+// The index name of the failed upgrade check.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) FailedIndices() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) []string { return v.FailedIndices }).(pulumi.StringArrayOutput)
+}
+
+// Subtask end time.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) FinishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) string { return v.FinishTime }).(pulumi.StringOutput)
+}
+
+// Subtask level, 1: warning; 2: failed.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) Level() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) int { return v.Level }).(pulumi.IntOutput)
+}
+
+// Subtask name.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Subtask result.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) Result() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) bool { return v.Result }).(pulumi.BoolOutput)
+}
+
+// Subtask status, 1: success; 0: processing; -1: failure.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Type.
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogstashInstanceOperationsOperationTaskSubTask) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogstashInstanceOperationsOperationTaskSubTask)(nil)).Elem()
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput) ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput() GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput) ToGetLogstashInstanceOperationsOperationTaskSubTaskArrayOutputWithContext(ctx context.Context) GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput {
+	return o
+}
+
+func (o GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput) Index(i pulumi.IntInput) GetLogstashInstanceOperationsOperationTaskSubTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogstashInstanceOperationsOperationTaskSubTask {
+		return vs[0].([]GetLogstashInstanceOperationsOperationTaskSubTask)[vs[1].(int)]
+	}).(GetLogstashInstanceOperationsOperationTaskSubTaskOutput)
+}
+
+type GetViewsClusterView struct {
+	// Average cpu utilization.
+	AvgCpuUsage float64 `pulumi:"avgCpuUsage"`
+	// Average disk utilization.
+	AvgDiskUsage float64 `pulumi:"avgDiskUsage"`
+	// Average memory utilization.
+	AvgMemUsage float64 `pulumi:"avgMemUsage"`
+	// Whether or not to break.
+	Break float64 `pulumi:"break"`
+	// Number of data nodes.
+	DataNodeNum int `pulumi:"dataNodeNum"`
+	// Bytes used on disk.
+	DiskUsedInBytes int `pulumi:"diskUsedInBytes"`
+	// Number of documents.
+	DocNum int `pulumi:"docNum"`
+	// Cluster health status.
+	Health float64 `pulumi:"health"`
+	// Index number.
+	IndexNum int `pulumi:"indexNum"`
+	// Initializing shard number.
+	InitializingShardNum int `pulumi:"initializingShardNum"`
+	// Number of online nodes.
+	NodeNum int `pulumi:"nodeNum"`
+	// Primary shard number.
+	PrimaryShardNum int `pulumi:"primaryShardNum"`
+	// Relocating shard number.
+	RelocatingShardNum int `pulumi:"relocatingShardNum"`
+	// Enterprise cluster can search the appid to which snapshot cos belongs.
+	SearchableSnapshotCosAppId string `pulumi:"searchableSnapshotCosAppId"`
+	// Enterprise cluster searchable bucket name stored in snapshot cos.
+	SearchableSnapshotCosBucket string `pulumi:"searchableSnapshotCosBucket"`
+	// Number of node fragments.
+	ShardNum int `pulumi:"shardNum"`
+	// Client request node.
+	TargetNodeTypes []string `pulumi:"targetNodeTypes"`
+	// Storage capacity of COS Enterprise Edition (in GB).
+	TotalCosStorage int `pulumi:"totalCosStorage"`
+	// Total storage size of cluster.
+	TotalDiskSize int `pulumi:"totalDiskSize"`
+	// Total number of nodes.
+	TotalNodeNum int `pulumi:"totalNodeNum"`
+	// Unassigned shard number.
+	UnassignedShardNum int `pulumi:"unassignedShardNum"`
+	// Whether the node is visible.
+	Visible float64 `pulumi:"visible"`
+}
+
+// GetViewsClusterViewInput is an input type that accepts GetViewsClusterViewArgs and GetViewsClusterViewOutput values.
+// You can construct a concrete instance of `GetViewsClusterViewInput` via:
+//
+//	GetViewsClusterViewArgs{...}
+type GetViewsClusterViewInput interface {
+	pulumi.Input
+
+	ToGetViewsClusterViewOutput() GetViewsClusterViewOutput
+	ToGetViewsClusterViewOutputWithContext(context.Context) GetViewsClusterViewOutput
+}
+
+type GetViewsClusterViewArgs struct {
+	// Average cpu utilization.
+	AvgCpuUsage pulumi.Float64Input `pulumi:"avgCpuUsage"`
+	// Average disk utilization.
+	AvgDiskUsage pulumi.Float64Input `pulumi:"avgDiskUsage"`
+	// Average memory utilization.
+	AvgMemUsage pulumi.Float64Input `pulumi:"avgMemUsage"`
+	// Whether or not to break.
+	Break pulumi.Float64Input `pulumi:"break"`
+	// Number of data nodes.
+	DataNodeNum pulumi.IntInput `pulumi:"dataNodeNum"`
+	// Bytes used on disk.
+	DiskUsedInBytes pulumi.IntInput `pulumi:"diskUsedInBytes"`
+	// Number of documents.
+	DocNum pulumi.IntInput `pulumi:"docNum"`
+	// Cluster health status.
+	Health pulumi.Float64Input `pulumi:"health"`
+	// Index number.
+	IndexNum pulumi.IntInput `pulumi:"indexNum"`
+	// Initializing shard number.
+	InitializingShardNum pulumi.IntInput `pulumi:"initializingShardNum"`
+	// Number of online nodes.
+	NodeNum pulumi.IntInput `pulumi:"nodeNum"`
+	// Primary shard number.
+	PrimaryShardNum pulumi.IntInput `pulumi:"primaryShardNum"`
+	// Relocating shard number.
+	RelocatingShardNum pulumi.IntInput `pulumi:"relocatingShardNum"`
+	// Enterprise cluster can search the appid to which snapshot cos belongs.
+	SearchableSnapshotCosAppId pulumi.StringInput `pulumi:"searchableSnapshotCosAppId"`
+	// Enterprise cluster searchable bucket name stored in snapshot cos.
+	SearchableSnapshotCosBucket pulumi.StringInput `pulumi:"searchableSnapshotCosBucket"`
+	// Number of node fragments.
+	ShardNum pulumi.IntInput `pulumi:"shardNum"`
+	// Client request node.
+	TargetNodeTypes pulumi.StringArrayInput `pulumi:"targetNodeTypes"`
+	// Storage capacity of COS Enterprise Edition (in GB).
+	TotalCosStorage pulumi.IntInput `pulumi:"totalCosStorage"`
+	// Total storage size of cluster.
+	TotalDiskSize pulumi.IntInput `pulumi:"totalDiskSize"`
+	// Total number of nodes.
+	TotalNodeNum pulumi.IntInput `pulumi:"totalNodeNum"`
+	// Unassigned shard number.
+	UnassignedShardNum pulumi.IntInput `pulumi:"unassignedShardNum"`
+	// Whether the node is visible.
+	Visible pulumi.Float64Input `pulumi:"visible"`
+}
+
+func (GetViewsClusterViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsClusterView)(nil)).Elem()
+}
+
+func (i GetViewsClusterViewArgs) ToGetViewsClusterViewOutput() GetViewsClusterViewOutput {
+	return i.ToGetViewsClusterViewOutputWithContext(context.Background())
+}
+
+func (i GetViewsClusterViewArgs) ToGetViewsClusterViewOutputWithContext(ctx context.Context) GetViewsClusterViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsClusterViewOutput)
+}
+
+// GetViewsClusterViewArrayInput is an input type that accepts GetViewsClusterViewArray and GetViewsClusterViewArrayOutput values.
+// You can construct a concrete instance of `GetViewsClusterViewArrayInput` via:
+//
+//	GetViewsClusterViewArray{ GetViewsClusterViewArgs{...} }
+type GetViewsClusterViewArrayInput interface {
+	pulumi.Input
+
+	ToGetViewsClusterViewArrayOutput() GetViewsClusterViewArrayOutput
+	ToGetViewsClusterViewArrayOutputWithContext(context.Context) GetViewsClusterViewArrayOutput
+}
+
+type GetViewsClusterViewArray []GetViewsClusterViewInput
+
+func (GetViewsClusterViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsClusterView)(nil)).Elem()
+}
+
+func (i GetViewsClusterViewArray) ToGetViewsClusterViewArrayOutput() GetViewsClusterViewArrayOutput {
+	return i.ToGetViewsClusterViewArrayOutputWithContext(context.Background())
+}
+
+func (i GetViewsClusterViewArray) ToGetViewsClusterViewArrayOutputWithContext(ctx context.Context) GetViewsClusterViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsClusterViewArrayOutput)
+}
+
+type GetViewsClusterViewOutput struct{ *pulumi.OutputState }
+
+func (GetViewsClusterViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsClusterView)(nil)).Elem()
+}
+
+func (o GetViewsClusterViewOutput) ToGetViewsClusterViewOutput() GetViewsClusterViewOutput {
+	return o
+}
+
+func (o GetViewsClusterViewOutput) ToGetViewsClusterViewOutputWithContext(ctx context.Context) GetViewsClusterViewOutput {
+	return o
+}
+
+// Average cpu utilization.
+func (o GetViewsClusterViewOutput) AvgCpuUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.AvgCpuUsage }).(pulumi.Float64Output)
+}
+
+// Average disk utilization.
+func (o GetViewsClusterViewOutput) AvgDiskUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.AvgDiskUsage }).(pulumi.Float64Output)
+}
+
+// Average memory utilization.
+func (o GetViewsClusterViewOutput) AvgMemUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.AvgMemUsage }).(pulumi.Float64Output)
+}
+
+// Whether or not to break.
+func (o GetViewsClusterViewOutput) Break() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.Break }).(pulumi.Float64Output)
+}
+
+// Number of data nodes.
+func (o GetViewsClusterViewOutput) DataNodeNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.DataNodeNum }).(pulumi.IntOutput)
+}
+
+// Bytes used on disk.
+func (o GetViewsClusterViewOutput) DiskUsedInBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.DiskUsedInBytes }).(pulumi.IntOutput)
+}
+
+// Number of documents.
+func (o GetViewsClusterViewOutput) DocNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.DocNum }).(pulumi.IntOutput)
+}
+
+// Cluster health status.
+func (o GetViewsClusterViewOutput) Health() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.Health }).(pulumi.Float64Output)
+}
+
+// Index number.
+func (o GetViewsClusterViewOutput) IndexNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.IndexNum }).(pulumi.IntOutput)
+}
+
+// Initializing shard number.
+func (o GetViewsClusterViewOutput) InitializingShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.InitializingShardNum }).(pulumi.IntOutput)
+}
+
+// Number of online nodes.
+func (o GetViewsClusterViewOutput) NodeNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.NodeNum }).(pulumi.IntOutput)
+}
+
+// Primary shard number.
+func (o GetViewsClusterViewOutput) PrimaryShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.PrimaryShardNum }).(pulumi.IntOutput)
+}
+
+// Relocating shard number.
+func (o GetViewsClusterViewOutput) RelocatingShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.RelocatingShardNum }).(pulumi.IntOutput)
+}
+
+// Enterprise cluster can search the appid to which snapshot cos belongs.
+func (o GetViewsClusterViewOutput) SearchableSnapshotCosAppId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsClusterView) string { return v.SearchableSnapshotCosAppId }).(pulumi.StringOutput)
+}
+
+// Enterprise cluster searchable bucket name stored in snapshot cos.
+func (o GetViewsClusterViewOutput) SearchableSnapshotCosBucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsClusterView) string { return v.SearchableSnapshotCosBucket }).(pulumi.StringOutput)
+}
+
+// Number of node fragments.
+func (o GetViewsClusterViewOutput) ShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.ShardNum }).(pulumi.IntOutput)
+}
+
+// Client request node.
+func (o GetViewsClusterViewOutput) TargetNodeTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetViewsClusterView) []string { return v.TargetNodeTypes }).(pulumi.StringArrayOutput)
+}
+
+// Storage capacity of COS Enterprise Edition (in GB).
+func (o GetViewsClusterViewOutput) TotalCosStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.TotalCosStorage }).(pulumi.IntOutput)
+}
+
+// Total storage size of cluster.
+func (o GetViewsClusterViewOutput) TotalDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.TotalDiskSize }).(pulumi.IntOutput)
+}
+
+// Total number of nodes.
+func (o GetViewsClusterViewOutput) TotalNodeNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.TotalNodeNum }).(pulumi.IntOutput)
+}
+
+// Unassigned shard number.
+func (o GetViewsClusterViewOutput) UnassignedShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsClusterView) int { return v.UnassignedShardNum }).(pulumi.IntOutput)
+}
+
+// Whether the node is visible.
+func (o GetViewsClusterViewOutput) Visible() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsClusterView) float64 { return v.Visible }).(pulumi.Float64Output)
+}
+
+type GetViewsClusterViewArrayOutput struct{ *pulumi.OutputState }
+
+func (GetViewsClusterViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsClusterView)(nil)).Elem()
+}
+
+func (o GetViewsClusterViewArrayOutput) ToGetViewsClusterViewArrayOutput() GetViewsClusterViewArrayOutput {
+	return o
+}
+
+func (o GetViewsClusterViewArrayOutput) ToGetViewsClusterViewArrayOutputWithContext(ctx context.Context) GetViewsClusterViewArrayOutput {
+	return o
+}
+
+func (o GetViewsClusterViewArrayOutput) Index(i pulumi.IntInput) GetViewsClusterViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetViewsClusterView {
+		return vs[0].([]GetViewsClusterView)[vs[1].(int)]
+	}).(GetViewsClusterViewOutput)
+}
+
+type GetViewsKibanasView struct {
+	// CPU number.
+	CpuNum int `pulumi:"cpuNum"`
+	// CPU usage.
+	CpuUsage float64 `pulumi:"cpuUsage"`
+	// Total disk size of node.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk usage.
+	DiskUsage float64 `pulumi:"diskUsage"`
+	// Kibana node ip.
+	Ip string `pulumi:"ip"`
+	// Node memory size (in GB).
+	MemSize int `pulumi:"memSize"`
+	// Memory usage.
+	MemUsage float64 `pulumi:"memUsage"`
+	// Node id.
+	NodeId string `pulumi:"nodeId"`
+	// Zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetViewsKibanasViewInput is an input type that accepts GetViewsKibanasViewArgs and GetViewsKibanasViewOutput values.
+// You can construct a concrete instance of `GetViewsKibanasViewInput` via:
+//
+//	GetViewsKibanasViewArgs{...}
+type GetViewsKibanasViewInput interface {
+	pulumi.Input
+
+	ToGetViewsKibanasViewOutput() GetViewsKibanasViewOutput
+	ToGetViewsKibanasViewOutputWithContext(context.Context) GetViewsKibanasViewOutput
+}
+
+type GetViewsKibanasViewArgs struct {
+	// CPU number.
+	CpuNum pulumi.IntInput `pulumi:"cpuNum"`
+	// CPU usage.
+	CpuUsage pulumi.Float64Input `pulumi:"cpuUsage"`
+	// Total disk size of node.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk usage.
+	DiskUsage pulumi.Float64Input `pulumi:"diskUsage"`
+	// Kibana node ip.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Node memory size (in GB).
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Memory usage.
+	MemUsage pulumi.Float64Input `pulumi:"memUsage"`
+	// Node id.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetViewsKibanasViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsKibanasView)(nil)).Elem()
+}
+
+func (i GetViewsKibanasViewArgs) ToGetViewsKibanasViewOutput() GetViewsKibanasViewOutput {
+	return i.ToGetViewsKibanasViewOutputWithContext(context.Background())
+}
+
+func (i GetViewsKibanasViewArgs) ToGetViewsKibanasViewOutputWithContext(ctx context.Context) GetViewsKibanasViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsKibanasViewOutput)
+}
+
+// GetViewsKibanasViewArrayInput is an input type that accepts GetViewsKibanasViewArray and GetViewsKibanasViewArrayOutput values.
+// You can construct a concrete instance of `GetViewsKibanasViewArrayInput` via:
+//
+//	GetViewsKibanasViewArray{ GetViewsKibanasViewArgs{...} }
+type GetViewsKibanasViewArrayInput interface {
+	pulumi.Input
+
+	ToGetViewsKibanasViewArrayOutput() GetViewsKibanasViewArrayOutput
+	ToGetViewsKibanasViewArrayOutputWithContext(context.Context) GetViewsKibanasViewArrayOutput
+}
+
+type GetViewsKibanasViewArray []GetViewsKibanasViewInput
+
+func (GetViewsKibanasViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsKibanasView)(nil)).Elem()
+}
+
+func (i GetViewsKibanasViewArray) ToGetViewsKibanasViewArrayOutput() GetViewsKibanasViewArrayOutput {
+	return i.ToGetViewsKibanasViewArrayOutputWithContext(context.Background())
+}
+
+func (i GetViewsKibanasViewArray) ToGetViewsKibanasViewArrayOutputWithContext(ctx context.Context) GetViewsKibanasViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsKibanasViewArrayOutput)
+}
+
+type GetViewsKibanasViewOutput struct{ *pulumi.OutputState }
+
+func (GetViewsKibanasViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsKibanasView)(nil)).Elem()
+}
+
+func (o GetViewsKibanasViewOutput) ToGetViewsKibanasViewOutput() GetViewsKibanasViewOutput {
+	return o
+}
+
+func (o GetViewsKibanasViewOutput) ToGetViewsKibanasViewOutputWithContext(ctx context.Context) GetViewsKibanasViewOutput {
+	return o
+}
+
+// CPU number.
+func (o GetViewsKibanasViewOutput) CpuNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) int { return v.CpuNum }).(pulumi.IntOutput)
+}
+
+// CPU usage.
+func (o GetViewsKibanasViewOutput) CpuUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsKibanasView) float64 { return v.CpuUsage }).(pulumi.Float64Output)
+}
+
+// Total disk size of node.
+func (o GetViewsKibanasViewOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk usage.
+func (o GetViewsKibanasViewOutput) DiskUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsKibanasView) float64 { return v.DiskUsage }).(pulumi.Float64Output)
+}
+
+// Kibana node ip.
+func (o GetViewsKibanasViewOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Node memory size (in GB).
+func (o GetViewsKibanasViewOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) int { return v.MemSize }).(pulumi.IntOutput)
+}
+
+// Memory usage.
+func (o GetViewsKibanasViewOutput) MemUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsKibanasView) float64 { return v.MemUsage }).(pulumi.Float64Output)
+}
+
+// Node id.
+func (o GetViewsKibanasViewOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Zone.
+func (o GetViewsKibanasViewOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsKibanasView) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetViewsKibanasViewArrayOutput struct{ *pulumi.OutputState }
+
+func (GetViewsKibanasViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsKibanasView)(nil)).Elem()
+}
+
+func (o GetViewsKibanasViewArrayOutput) ToGetViewsKibanasViewArrayOutput() GetViewsKibanasViewArrayOutput {
+	return o
+}
+
+func (o GetViewsKibanasViewArrayOutput) ToGetViewsKibanasViewArrayOutputWithContext(ctx context.Context) GetViewsKibanasViewArrayOutput {
+	return o
+}
+
+func (o GetViewsKibanasViewArrayOutput) Index(i pulumi.IntInput) GetViewsKibanasViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetViewsKibanasView {
+		return vs[0].([]GetViewsKibanasView)[vs[1].(int)]
+	}).(GetViewsKibanasViewOutput)
+}
+
+type GetViewsNodesView struct {
+	// Whether or not to break.
+	Break float64 `pulumi:"break"`
+	// CPU number.
+	CpuNum int `pulumi:"cpuNum"`
+	// CPU usage.
+	CpuUsage float64 `pulumi:"cpuUsage"`
+	// List of disk ID on the node.
+	DiskIds []string `pulumi:"diskIds"`
+	// Total disk size of node.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk usage.
+	DiskUsage float64 `pulumi:"diskUsage"`
+	// Whether it is a hidden availability zone.
+	Hidden bool `pulumi:"hidden"`
+	// Whether to act as a coordinator node or not.
+	IsCoordinationNode bool `pulumi:"isCoordinationNode"`
+	// JVM memory usage.
+	JvmMemUsage float64 `pulumi:"jvmMemUsage"`
+	// Node memory size (in GB).
+	MemSize int `pulumi:"memSize"`
+	// Memory usage.
+	MemUsage float64 `pulumi:"memUsage"`
+	// Node HTTP IP.
+	NodeHttpIp string `pulumi:"nodeHttpIp"`
+	// Node id.
+	NodeId string `pulumi:"nodeId"`
+	// Node ip.
+	NodeIp string `pulumi:"nodeIp"`
+	// Node role.
+	NodeRole string `pulumi:"nodeRole"`
+	// Number of node fragments.
+	ShardNum int `pulumi:"shardNum"`
+	// Whether the node is visible.
+	Visible float64 `pulumi:"visible"`
+	// Zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetViewsNodesViewInput is an input type that accepts GetViewsNodesViewArgs and GetViewsNodesViewOutput values.
+// You can construct a concrete instance of `GetViewsNodesViewInput` via:
+//
+//	GetViewsNodesViewArgs{...}
+type GetViewsNodesViewInput interface {
+	pulumi.Input
+
+	ToGetViewsNodesViewOutput() GetViewsNodesViewOutput
+	ToGetViewsNodesViewOutputWithContext(context.Context) GetViewsNodesViewOutput
+}
+
+type GetViewsNodesViewArgs struct {
+	// Whether or not to break.
+	Break pulumi.Float64Input `pulumi:"break"`
+	// CPU number.
+	CpuNum pulumi.IntInput `pulumi:"cpuNum"`
+	// CPU usage.
+	CpuUsage pulumi.Float64Input `pulumi:"cpuUsage"`
+	// List of disk ID on the node.
+	DiskIds pulumi.StringArrayInput `pulumi:"diskIds"`
+	// Total disk size of node.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk usage.
+	DiskUsage pulumi.Float64Input `pulumi:"diskUsage"`
+	// Whether it is a hidden availability zone.
+	Hidden pulumi.BoolInput `pulumi:"hidden"`
+	// Whether to act as a coordinator node or not.
+	IsCoordinationNode pulumi.BoolInput `pulumi:"isCoordinationNode"`
+	// JVM memory usage.
+	JvmMemUsage pulumi.Float64Input `pulumi:"jvmMemUsage"`
+	// Node memory size (in GB).
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Memory usage.
+	MemUsage pulumi.Float64Input `pulumi:"memUsage"`
+	// Node HTTP IP.
+	NodeHttpIp pulumi.StringInput `pulumi:"nodeHttpIp"`
+	// Node id.
+	NodeId pulumi.StringInput `pulumi:"nodeId"`
+	// Node ip.
+	NodeIp pulumi.StringInput `pulumi:"nodeIp"`
+	// Node role.
+	NodeRole pulumi.StringInput `pulumi:"nodeRole"`
+	// Number of node fragments.
+	ShardNum pulumi.IntInput `pulumi:"shardNum"`
+	// Whether the node is visible.
+	Visible pulumi.Float64Input `pulumi:"visible"`
+	// Zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetViewsNodesViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsNodesView)(nil)).Elem()
+}
+
+func (i GetViewsNodesViewArgs) ToGetViewsNodesViewOutput() GetViewsNodesViewOutput {
+	return i.ToGetViewsNodesViewOutputWithContext(context.Background())
+}
+
+func (i GetViewsNodesViewArgs) ToGetViewsNodesViewOutputWithContext(ctx context.Context) GetViewsNodesViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsNodesViewOutput)
+}
+
+// GetViewsNodesViewArrayInput is an input type that accepts GetViewsNodesViewArray and GetViewsNodesViewArrayOutput values.
+// You can construct a concrete instance of `GetViewsNodesViewArrayInput` via:
+//
+//	GetViewsNodesViewArray{ GetViewsNodesViewArgs{...} }
+type GetViewsNodesViewArrayInput interface {
+	pulumi.Input
+
+	ToGetViewsNodesViewArrayOutput() GetViewsNodesViewArrayOutput
+	ToGetViewsNodesViewArrayOutputWithContext(context.Context) GetViewsNodesViewArrayOutput
+}
+
+type GetViewsNodesViewArray []GetViewsNodesViewInput
+
+func (GetViewsNodesViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsNodesView)(nil)).Elem()
+}
+
+func (i GetViewsNodesViewArray) ToGetViewsNodesViewArrayOutput() GetViewsNodesViewArrayOutput {
+	return i.ToGetViewsNodesViewArrayOutputWithContext(context.Background())
+}
+
+func (i GetViewsNodesViewArray) ToGetViewsNodesViewArrayOutputWithContext(ctx context.Context) GetViewsNodesViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetViewsNodesViewArrayOutput)
+}
+
+type GetViewsNodesViewOutput struct{ *pulumi.OutputState }
+
+func (GetViewsNodesViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetViewsNodesView)(nil)).Elem()
+}
+
+func (o GetViewsNodesViewOutput) ToGetViewsNodesViewOutput() GetViewsNodesViewOutput {
+	return o
+}
+
+func (o GetViewsNodesViewOutput) ToGetViewsNodesViewOutputWithContext(ctx context.Context) GetViewsNodesViewOutput {
+	return o
+}
+
+// Whether or not to break.
+func (o GetViewsNodesViewOutput) Break() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.Break }).(pulumi.Float64Output)
+}
+
+// CPU number.
+func (o GetViewsNodesViewOutput) CpuNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsNodesView) int { return v.CpuNum }).(pulumi.IntOutput)
+}
+
+// CPU usage.
+func (o GetViewsNodesViewOutput) CpuUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.CpuUsage }).(pulumi.Float64Output)
+}
+
+// List of disk ID on the node.
+func (o GetViewsNodesViewOutput) DiskIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetViewsNodesView) []string { return v.DiskIds }).(pulumi.StringArrayOutput)
+}
+
+// Total disk size of node.
+func (o GetViewsNodesViewOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsNodesView) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk usage.
+func (o GetViewsNodesViewOutput) DiskUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.DiskUsage }).(pulumi.Float64Output)
+}
+
+// Whether it is a hidden availability zone.
+func (o GetViewsNodesViewOutput) Hidden() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetViewsNodesView) bool { return v.Hidden }).(pulumi.BoolOutput)
+}
+
+// Whether to act as a coordinator node or not.
+func (o GetViewsNodesViewOutput) IsCoordinationNode() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetViewsNodesView) bool { return v.IsCoordinationNode }).(pulumi.BoolOutput)
+}
+
+// JVM memory usage.
+func (o GetViewsNodesViewOutput) JvmMemUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.JvmMemUsage }).(pulumi.Float64Output)
+}
+
+// Node memory size (in GB).
+func (o GetViewsNodesViewOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsNodesView) int { return v.MemSize }).(pulumi.IntOutput)
+}
+
+// Memory usage.
+func (o GetViewsNodesViewOutput) MemUsage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.MemUsage }).(pulumi.Float64Output)
+}
+
+// Node HTTP IP.
+func (o GetViewsNodesViewOutput) NodeHttpIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsNodesView) string { return v.NodeHttpIp }).(pulumi.StringOutput)
+}
+
+// Node id.
+func (o GetViewsNodesViewOutput) NodeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsNodesView) string { return v.NodeId }).(pulumi.StringOutput)
+}
+
+// Node ip.
+func (o GetViewsNodesViewOutput) NodeIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsNodesView) string { return v.NodeIp }).(pulumi.StringOutput)
+}
+
+// Node role.
+func (o GetViewsNodesViewOutput) NodeRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsNodesView) string { return v.NodeRole }).(pulumi.StringOutput)
+}
+
+// Number of node fragments.
+func (o GetViewsNodesViewOutput) ShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetViewsNodesView) int { return v.ShardNum }).(pulumi.IntOutput)
+}
+
+// Whether the node is visible.
+func (o GetViewsNodesViewOutput) Visible() pulumi.Float64Output {
+	return o.ApplyT(func(v GetViewsNodesView) float64 { return v.Visible }).(pulumi.Float64Output)
+}
+
+// Zone.
+func (o GetViewsNodesViewOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetViewsNodesView) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetViewsNodesViewArrayOutput struct{ *pulumi.OutputState }
+
+func (GetViewsNodesViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetViewsNodesView)(nil)).Elem()
+}
+
+func (o GetViewsNodesViewArrayOutput) ToGetViewsNodesViewArrayOutput() GetViewsNodesViewArrayOutput {
+	return o
+}
+
+func (o GetViewsNodesViewArrayOutput) ToGetViewsNodesViewArrayOutputWithContext(ctx context.Context) GetViewsNodesViewArrayOutput {
+	return o
+}
+
+func (o GetViewsNodesViewArrayOutput) Index(i pulumi.IntInput) GetViewsNodesViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetViewsNodesView {
+		return vs[0].([]GetViewsNodesView)[vs[1].(int)]
+	}).(GetViewsNodesViewOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DiagnoseDiagnoseJobMetaInput)(nil)).Elem(), DiagnoseDiagnoseJobMetaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiagnoseDiagnoseJobMetaArrayInput)(nil)).Elem(), DiagnoseDiagnoseJobMetaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclInput)(nil)).Elem(), InstanceEsAclArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclPtrInput)(nil)).Elem(), InstanceEsAclArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceMultiZoneInfoInput)(nil)).Elem(), InstanceMultiZoneInfoArgs{})
@@ -1027,12 +6369,84 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceNodeInfoListArrayInput)(nil)).Elem(), InstanceNodeInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceWebNodeTypeInfoInput)(nil)).Elem(), InstanceWebNodeTypeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceWebNodeTypeInfoArrayInput)(nil)).Elem(), InstanceWebNodeTypeInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogstashOperationDurationInput)(nil)).Elem(), LogstashOperationDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogstashOperationDurationPtrInput)(nil)).Elem(), LogstashOperationDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogstashPipelinePipelineInput)(nil)).Elem(), LogstashPipelinePipelineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogstashPipelinePipelinePtrInput)(nil)).Elem(), LogstashPipelinePipelineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldArrayInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldBackingIndexInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldBackingIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldBackingIndexArrayInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldBackingIndexArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexOptionsFieldInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexPolicyFieldInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexSettingsFieldInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayInput)(nil)).Elem(), GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultInput)(nil)).Elem(), GetDiagnoseDiagnoseResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobParamInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobParamArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultLogDetailInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultLogDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultLogDetailArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultLogDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultSettingDetailInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultSettingDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiagnoseDiagnoseResultJobResultSettingDetailArrayInput)(nil)).Elem(), GetDiagnoseDiagnoseResultJobResultSettingDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceLogsInstanceLogListInput)(nil)).Elem(), GetInstanceLogsInstanceLogListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceLogsInstanceLogListArrayInput)(nil)).Elem(), GetInstanceLogsInstanceLogListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationInput)(nil)).Elem(), GetInstanceOperationsOperationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationArrayInput)(nil)).Elem(), GetInstanceOperationsOperationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailInput)(nil)).Elem(), GetInstanceOperationsOperationDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailArrayInput)(nil)).Elem(), GetInstanceOperationsOperationDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailNewInfoInput)(nil)).Elem(), GetInstanceOperationsOperationDetailNewInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailNewInfoArrayInput)(nil)).Elem(), GetInstanceOperationsOperationDetailNewInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailOldInfoInput)(nil)).Elem(), GetInstanceOperationsOperationDetailOldInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationDetailOldInfoArrayInput)(nil)).Elem(), GetInstanceOperationsOperationDetailOldInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskInput)(nil)).Elem(), GetInstanceOperationsOperationTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskArrayInput)(nil)).Elem(), GetInstanceOperationsOperationTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskProcessInfoInput)(nil)).Elem(), GetInstanceOperationsOperationTaskProcessInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskProcessInfoArrayInput)(nil)).Elem(), GetInstanceOperationsOperationTaskProcessInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskSubTaskInput)(nil)).Elem(), GetInstanceOperationsOperationTaskSubTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceOperationsOperationTaskSubTaskArrayInput)(nil)).Elem(), GetInstanceOperationsOperationTaskSubTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancePluginListPluginListInput)(nil)).Elem(), GetInstancePluginListPluginListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancePluginListPluginListArrayInput)(nil)).Elem(), GetInstancePluginListPluginListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfoInput)(nil)).Elem(), GetInstancesInstanceListMultiZoneInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfoArrayInput)(nil)).Elem(), GetInstancesInstanceListMultiZoneInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListArrayInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceLogsInstanceLogListInput)(nil)).Elem(), GetLogstashInstanceLogsInstanceLogListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceLogsInstanceLogListArrayInput)(nil)).Elem(), GetLogstashInstanceLogsInstanceLogListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailNewInfoInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailNewInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailNewInfoArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailNewInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailOldInfoInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailOldInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationDetailOldInfoArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationDetailOldInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskProcessInfoInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskProcessInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskProcessInfoArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskProcessInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskSubTaskInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskSubTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogstashInstanceOperationsOperationTaskSubTaskArrayInput)(nil)).Elem(), GetLogstashInstanceOperationsOperationTaskSubTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsClusterViewInput)(nil)).Elem(), GetViewsClusterViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsClusterViewArrayInput)(nil)).Elem(), GetViewsClusterViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsKibanasViewInput)(nil)).Elem(), GetViewsKibanasViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsKibanasViewArrayInput)(nil)).Elem(), GetViewsKibanasViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsNodesViewInput)(nil)).Elem(), GetViewsNodesViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsNodesViewArrayInput)(nil)).Elem(), GetViewsNodesViewArray{})
+	pulumi.RegisterOutputType(DiagnoseDiagnoseJobMetaOutput{})
+	pulumi.RegisterOutputType(DiagnoseDiagnoseJobMetaArrayOutput{})
 	pulumi.RegisterOutputType(InstanceEsAclOutput{})
 	pulumi.RegisterOutputType(InstanceEsAclPtrOutput{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoOutput{})
@@ -1041,10 +6455,80 @@ func init() {
 	pulumi.RegisterOutputType(InstanceNodeInfoListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceWebNodeTypeInfoOutput{})
 	pulumi.RegisterOutputType(InstanceWebNodeTypeInfoArrayOutput{})
+	pulumi.RegisterOutputType(LogstashOperationDurationOutput{})
+	pulumi.RegisterOutputType(LogstashOperationDurationPtrOutput{})
+	pulumi.RegisterOutputType(LogstashPipelinePipelineOutput{})
+	pulumi.RegisterOutputType(LogstashPipelinePipelinePtrOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldBackingIndexOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldBackingIndexArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldOutput{})
+	pulumi.RegisterOutputType(GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobParamOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobParamArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultLogDetailOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultLogDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArrayOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultSettingDetailOutput{})
+	pulumi.RegisterOutputType(GetDiagnoseDiagnoseResultJobResultSettingDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceLogsInstanceLogListOutput{})
+	pulumi.RegisterOutputType(GetInstanceLogsInstanceLogListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailNewInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailNewInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailOldInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationDetailOldInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskProcessInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskProcessInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskSubTaskOutput{})
+	pulumi.RegisterOutputType(GetInstanceOperationsOperationTaskSubTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancePluginListPluginListOutput{})
+	pulumi.RegisterOutputType(GetInstancePluginListPluginListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListMultiZoneInfoOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListMultiZoneInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceLogsInstanceLogListOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceLogsInstanceLogListArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailNewInfoOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailNewInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailOldInfoOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationDetailOldInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskProcessInfoOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskProcessInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskSubTaskOutput{})
+	pulumi.RegisterOutputType(GetLogstashInstanceOperationsOperationTaskSubTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetViewsClusterViewOutput{})
+	pulumi.RegisterOutputType(GetViewsClusterViewArrayOutput{})
+	pulumi.RegisterOutputType(GetViewsKibanasViewOutput{})
+	pulumi.RegisterOutputType(GetViewsKibanasViewArrayOutput{})
+	pulumi.RegisterOutputType(GetViewsNodesViewOutput{})
+	pulumi.RegisterOutputType(GetViewsNodesViewArrayOutput{})
 }

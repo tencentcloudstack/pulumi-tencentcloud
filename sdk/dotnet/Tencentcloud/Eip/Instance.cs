@@ -59,6 +59,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// }
     /// ```
+    /// ### Eip With Network Egress
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Eip.Instance("foo", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///             Egress = "center_egress2",
+    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///             InternetMaxBandwidthOut = 1,
+    ///             InternetServiceProvider = "CMCC",
+    ///             Type = "EIP",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -100,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Output("bandwidthPackageId")]
         public Output<string> BandwidthPackageId { get; private set; } = null!;
+
+        /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Output("egress")]
+        public Output<string> Egress { get; private set; } = null!;
 
         /// <summary>
         /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -233,6 +261,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<string>? BandwidthPackageId { get; set; }
 
         /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("egress")]
+        public Input<string>? Egress { get; set; }
+
+        /// <summary>
         /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("internetChargeType")]
@@ -316,6 +350,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Input("bandwidthPackageId")]
         public Input<string>? BandwidthPackageId { get; set; }
+
+        /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("egress")]
+        public Input<string>? Egress { get; set; }
 
         /// <summary>
         /// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.

@@ -19,70 +19,73 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"ipType":            0,
-// 			"grabBag":           0,
-// 			"filterIp":          0,
-// 			"netIcmpOn":         1,
-// 			"netIcmpActivex":    0,
-// 			"netIcmpTimeout":    20,
-// 			"netIcmpInterval":   0.5,
-// 			"netIcmpNum":        20,
-// 			"netIcmpSize":       32,
-// 			"netIcmpDataCut":    1,
-// 			"netDnsOn":          1,
-// 			"netDnsTimeout":     5,
-// 			"netDnsQuerymethod": 1,
-// 			"netDnsNs":          "",
-// 			"netDigOn":          1,
-// 			"netDnsServer":      2,
-// 			"netTracertOn":      1,
-// 			"netTracertTimeout": 60,
-// 			"netTracertNum":     30,
-// 			"whiteList":         "",
-// 			"blackList":         "",
-// 			"netIcmpActivexStr": "",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Cat.NewTaskSet(ctx, "taskSet", &Cat.TaskSetArgs{
-// 			BatchTasks: &cat.TaskSetBatchTasksArgs{
-// 				Name:          pulumi.String("demo"),
-// 				TargetAddress: pulumi.String("http://www.baidu.com"),
-// 			},
-// 			TaskType: pulumi.Int(5),
-// 			Nodes: pulumi.StringArray{
-// 				pulumi.String("12136"),
-// 				pulumi.String("12137"),
-// 				pulumi.String("12138"),
-// 				pulumi.String("12141"),
-// 				pulumi.String("12144"),
-// 			},
-// 			Interval:     pulumi.Int(6),
-// 			Parameters:   pulumi.String(json0),
-// 			TaskCategory: pulumi.Int(1),
-// 			Cron:         pulumi.String("* 0-6 * * *"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"ipType":            0,
+//				"grabBag":           0,
+//				"filterIp":          0,
+//				"netIcmpOn":         1,
+//				"netIcmpActivex":    0,
+//				"netIcmpTimeout":    20,
+//				"netIcmpInterval":   0.5,
+//				"netIcmpNum":        20,
+//				"netIcmpSize":       32,
+//				"netIcmpDataCut":    1,
+//				"netDnsOn":          1,
+//				"netDnsTimeout":     5,
+//				"netDnsQuerymethod": 1,
+//				"netDnsNs":          "",
+//				"netDigOn":          1,
+//				"netDnsServer":      2,
+//				"netTracertOn":      1,
+//				"netTracertTimeout": 60,
+//				"netTracertNum":     30,
+//				"whiteList":         "",
+//				"blackList":         "",
+//				"netIcmpActivexStr": "",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Cat.NewTaskSet(ctx, "taskSet", &Cat.TaskSetArgs{
+//				BatchTasks: &cat.TaskSetBatchTasksArgs{
+//					Name:          pulumi.String("demo"),
+//					TargetAddress: pulumi.String("http://www.baidu.com"),
+//				},
+//				TaskType: pulumi.Int(5),
+//				Nodes: pulumi.StringArray{
+//					pulumi.String("12136"),
+//					pulumi.String("12137"),
+//					pulumi.String("12138"),
+//					pulumi.String("12141"),
+//					pulumi.String("12144"),
+//				},
+//				Interval:     pulumi.Int(6),
+//				Parameters:   pulumi.String(json0),
+//				TaskCategory: pulumi.Int(1),
+//				Cron:         pulumi.String("* 0-6 * * *"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,7 +93,9 @@ import (
 // cat task_set can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
+//
+//	$ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
+//
 // ```
 type TaskSet struct {
 	pulumi.CustomResourceState
@@ -101,8 +106,12 @@ type TaskSet struct {
 	Cron pulumi.StringPtrOutput `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntOutput `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntOutput `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes pulumi.StringArrayOutput `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrOutput `pulumi:"operate"`
 	// tasks parameters.
 	Parameters pulumi.StringOutput `pulumi:"parameters"`
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -171,8 +180,12 @@ type taskSetState struct {
 	Cron *string `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval *int `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType *int `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes []string `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate *string `pulumi:"operate"`
 	// tasks parameters.
 	Parameters *string `pulumi:"parameters"`
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -194,8 +207,12 @@ type TaskSetState struct {
 	Cron pulumi.StringPtrInput
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntPtrInput
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntPtrInput
 	// Task Nodes.
 	Nodes pulumi.StringArrayInput
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrInput
 	// tasks parameters.
 	Parameters pulumi.StringPtrInput
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -221,8 +238,12 @@ type taskSetArgs struct {
 	Cron *string `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval int `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType *int `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes []string `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate *string `pulumi:"operate"`
 	// tasks parameters.
 	Parameters string `pulumi:"parameters"`
 	// Tag description list.
@@ -241,8 +262,12 @@ type TaskSetArgs struct {
 	Cron pulumi.StringPtrInput
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntInput
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntPtrInput
 	// Task Nodes.
 	Nodes pulumi.StringArrayInput
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrInput
 	// tasks parameters.
 	Parameters pulumi.StringInput
 	// Tag description list.
@@ -279,7 +304,7 @@ func (i *TaskSet) ToTaskSetOutputWithContext(ctx context.Context) TaskSetOutput 
 // TaskSetArrayInput is an input type that accepts TaskSetArray and TaskSetArrayOutput values.
 // You can construct a concrete instance of `TaskSetArrayInput` via:
 //
-//          TaskSetArray{ TaskSetArgs{...} }
+//	TaskSetArray{ TaskSetArgs{...} }
 type TaskSetArrayInput interface {
 	pulumi.Input
 
@@ -304,7 +329,7 @@ func (i TaskSetArray) ToTaskSetArrayOutputWithContext(ctx context.Context) TaskS
 // TaskSetMapInput is an input type that accepts TaskSetMap and TaskSetMapOutput values.
 // You can construct a concrete instance of `TaskSetMapInput` via:
 //
-//          TaskSetMap{ "key": TaskSetArgs{...} }
+//	TaskSetMap{ "key": TaskSetArgs{...} }
 type TaskSetMapInput interface {
 	pulumi.Input
 
@@ -355,9 +380,19 @@ func (o TaskSetOutput) Interval() pulumi.IntOutput {
 	return o.ApplyT(func(v *TaskSet) pulumi.IntOutput { return v.Interval }).(pulumi.IntOutput)
 }
 
+// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+func (o TaskSetOutput) NodeIpType() pulumi.IntOutput {
+	return o.ApplyT(func(v *TaskSet) pulumi.IntOutput { return v.NodeIpType }).(pulumi.IntOutput)
+}
+
 // Task Nodes.
 func (o TaskSetOutput) Nodes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *TaskSet) pulumi.StringArrayOutput { return v.Nodes }).(pulumi.StringArrayOutput)
+}
+
+// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+func (o TaskSetOutput) Operate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TaskSet) pulumi.StringPtrOutput { return v.Operate }).(pulumi.StringPtrOutput)
 }
 
 // tasks parameters.

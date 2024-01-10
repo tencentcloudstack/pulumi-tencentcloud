@@ -24,52 +24,55 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Buy a month of prepaid instances
 //
@@ -77,78 +80,81 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 			ChargeType:    pulumi.String("PREPAID"),
-// 			PrepaidPeriod: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+//				SecurityGroupId: fooGroup.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+//					pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+//					pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+//					pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+//					pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//				ChargeType:    pulumi.String("PREPAID"),
+//				PrepaidPeriod: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a multi-AZ instance
 //
@@ -156,87 +162,90 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 			Region: pulumi.StringRef("ap-guangzhou"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cfg := config.New(ctx, "")
-// 		replicaZoneIds := []float64{
-// 			100004,
-// 			100006,
-// 		}
-// 		if param := cfg.GetBool("replicaZoneIds"); param != nil {
-// 			replicaZoneIds = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(2),
-// 			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//				Region: pulumi.StringRef("ap-guangzhou"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			cfg := config.New(ctx, "")
+//			replicaZoneIds := []float64{
+//				100004,
+//				100006,
+//			}
+//			if param := cfg.GetBool("replicaZoneIds"); param != nil {
+//				replicaZoneIds = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+//				SecurityGroupId: fooGroup.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+//					pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+//					pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+//					pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+//					pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[2].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(2),
+//				ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -244,7 +253,9 @@ import (
 // Redis instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+//
+//	$ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -283,9 +294,9 @@ type Instance struct {
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrOutput `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrOutput `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntOutput `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayOutput `pulumi:"replicaZoneIds"`
@@ -307,6 +318,8 @@ type Instance struct {
 	TypeId pulumi.IntPtrOutput `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -379,9 +392,9 @@ type instanceState struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
@@ -403,6 +416,8 @@ type instanceState struct {
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 type InstanceState struct {
@@ -440,9 +455,9 @@ type InstanceState struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrInput
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
@@ -464,6 +479,8 @@ type InstanceState struct {
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -501,9 +518,9 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
@@ -523,6 +540,8 @@ type instanceArgs struct {
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -557,9 +576,9 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrInput
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
@@ -579,6 +598,8 @@ type InstanceArgs struct {
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -607,7 +628,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -632,7 +653,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -753,12 +774,12 @@ func (o InstanceOutput) Recycle() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Recycle }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 func (o InstanceOutput) RedisReplicasNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RedisReplicasNum }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 func (o InstanceOutput) RedisShardNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RedisShardNum }).(pulumi.IntOutput)
 }
@@ -808,6 +829,11 @@ func (o InstanceOutput) TypeId() pulumi.IntPtrOutput {
 // ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 func (o InstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+func (o InstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

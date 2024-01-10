@@ -25,17 +25,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var plugin = new Tencentcloud.ApiGateway.Plugin("plugin", new Tencentcloud.ApiGateway.PluginArgs
+    ///         var example = new Tencentcloud.ApiGateway.Plugin("example", new Tencentcloud.ApiGateway.PluginArgs
     ///         {
-    ///             PluginName = "terraform-plugin-test",
+    ///             PluginName = "tf-example",
     ///             PluginType = "IPControl",
     ///             PluginData = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///             {
     ///                 { "type", "white_list" },
-    ///                 { "blocks", @"1.1.1.1
-    /// 2.2.2.2" },
+    ///                 { "blocks", "1.1.1.1" },
     ///             }),
-    ///             Description = "terraform test",
+    ///             Description = "desc.",
     ///         });
     ///     }
     /// 

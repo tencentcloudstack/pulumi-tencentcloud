@@ -17,7 +17,6 @@ class ConnectionArgs:
     def __init__(__self__, *,
                  customer_gateway_id: pulumi.Input[str],
                  pre_share_key: pulumi.Input[str],
-                 security_group_policies: pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]],
                  vpn_gateway_id: pulumi.Input[str],
                  dpd_action: Optional[pulumi.Input[str]] = None,
                  dpd_enable: Optional[pulumi.Input[int]] = None,
@@ -43,13 +42,14 @@ class ConnectionArgs:
                  ipsec_sa_lifetime_seconds: Optional[pulumi.Input[int]] = None,
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 route_type: Optional[pulumi.Input[str]] = None,
+                 security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Connection resource.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: Security group policy of the VPN connection.
         :param pulumi.Input[str] vpn_gateway_id: ID of the VPN gateway.
         :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
         :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
@@ -75,12 +75,13 @@ class ConnectionArgs:
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
         """
         pulumi.set(__self__, "customer_gateway_id", customer_gateway_id)
         pulumi.set(__self__, "pre_share_key", pre_share_key)
-        pulumi.set(__self__, "security_group_policies", security_group_policies)
         pulumi.set(__self__, "vpn_gateway_id", vpn_gateway_id)
         if dpd_action is not None:
             pulumi.set(__self__, "dpd_action", dpd_action)
@@ -130,6 +131,10 @@ class ConnectionArgs:
             pulumi.set(__self__, "ipsec_sa_lifetime_traffic", ipsec_sa_lifetime_traffic)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if route_type is not None:
+            pulumi.set(__self__, "route_type", route_type)
+        if security_group_policies is not None:
+            pulumi.set(__self__, "security_group_policies", security_group_policies)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
@@ -158,18 +163,6 @@ class ConnectionArgs:
     @pre_share_key.setter
     def pre_share_key(self, value: pulumi.Input[str]):
         pulumi.set(self, "pre_share_key", value)
-
-    @property
-    @pulumi.getter(name="securityGroupPolicies")
-    def security_group_policies(self) -> pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]:
-        """
-        Security group policy of the VPN connection.
-        """
-        return pulumi.get(self, "security_group_policies")
-
-    @security_group_policies.setter
-    def security_group_policies(self, value: pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]):
-        pulumi.set(self, "security_group_policies", value)
 
     @property
     @pulumi.getter(name="vpnGatewayId")
@@ -472,6 +465,30 @@ class ConnectionArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="routeType")
+    def route_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        """
+        return pulumi.get(self, "route_type")
+
+    @route_type.setter
+    def route_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "route_type", value)
+
+    @property
+    @pulumi.getter(name="securityGroupPolicies")
+    def security_group_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]]:
+        """
+        SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
+        """
+        return pulumi.get(self, "security_group_policies")
+
+    @security_group_policies.setter
+    def security_group_policies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]]):
+        pulumi.set(self, "security_group_policies", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -568,8 +585,8 @@ class _ConnectionState:
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
         :param pulumi.Input[str] net_status: Net status of the VPN connection. Valid value: `AVAILABLE`.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection.
-        :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: Security group policy of the VPN connection.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[str] state: State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -1015,7 +1032,7 @@ class _ConnectionState:
     @pulumi.getter(name="routeType")
     def route_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Route type of the VPN connection.
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
         """
         return pulumi.get(self, "route_type")
 
@@ -1027,7 +1044,7 @@ class _ConnectionState:
     @pulumi.getter(name="securityGroupPolicies")
     def security_group_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]]:
         """
-        Security group policy of the VPN connection.
+        SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         """
         return pulumi.get(self, "security_group_policies")
 
@@ -1127,6 +1144,7 @@ class Connection(pulumi.CustomResource):
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  pre_share_key: Optional[pulumi.Input[str]] = None,
+                 route_type: Optional[pulumi.Input[str]] = None,
                  security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -1205,7 +1223,8 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: Security group policy of the VPN connection.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
         :param pulumi.Input[str] vpn_gateway_id: ID of the VPN gateway.
@@ -1302,6 +1321,7 @@ class Connection(pulumi.CustomResource):
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  pre_share_key: Optional[pulumi.Input[str]] = None,
+                 route_type: Optional[pulumi.Input[str]] = None,
                  security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
@@ -1350,8 +1370,7 @@ class Connection(pulumi.CustomResource):
             if pre_share_key is None and not opts.urn:
                 raise TypeError("Missing required property 'pre_share_key'")
             __props__.__dict__["pre_share_key"] = pre_share_key
-            if security_group_policies is None and not opts.urn:
-                raise TypeError("Missing required property 'security_group_policies'")
+            __props__.__dict__["route_type"] = route_type
             __props__.__dict__["security_group_policies"] = security_group_policies
             __props__.__dict__["tags"] = tags
             __props__.__dict__["vpc_id"] = vpc_id
@@ -1362,7 +1381,6 @@ class Connection(pulumi.CustomResource):
             __props__.__dict__["encrypt_proto"] = None
             __props__.__dict__["is_ccn_type"] = None
             __props__.__dict__["net_status"] = None
-            __props__.__dict__["route_type"] = None
             __props__.__dict__["state"] = None
             __props__.__dict__["vpn_proto"] = None
         super(Connection, __self__).__init__(
@@ -1449,8 +1467,8 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
         :param pulumi.Input[str] net_status: Net status of the VPN connection. Valid value: `AVAILABLE`.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: Security group policy of the VPN connection.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[str] state: State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -1744,15 +1762,15 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="routeType")
     def route_type(self) -> pulumi.Output[str]:
         """
-        Route type of the VPN connection.
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
         """
         return pulumi.get(self, "route_type")
 
     @property
     @pulumi.getter(name="securityGroupPolicies")
-    def security_group_policies(self) -> pulumi.Output[Sequence['outputs.ConnectionSecurityGroupPolicy']]:
+    def security_group_policies(self) -> pulumi.Output[Optional[Sequence['outputs.ConnectionSecurityGroupPolicy']]]:
         """
-        Security group policy of the VPN connection.
+        SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         """
         return pulumi.get(self, "security_group_policies")
 

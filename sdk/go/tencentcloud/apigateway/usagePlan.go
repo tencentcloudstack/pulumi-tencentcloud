@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-// 			MaxRequestNum:       pulumi.Int(100),
-// 			MaxRequestNumPreSec: pulumi.Int(10),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
-// 			UsagePlanName:       pulumi.String("my_plan"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewUsagePlan(ctx, "example", &ApiGateway.UsagePlanArgs{
+//				MaxRequestNum:       pulumi.Int(100),
+//				MaxRequestNumPreSec: pulumi.Int(10),
+//				UsagePlanDesc:       pulumi.String("desc."),
+//				UsagePlanName:       pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // API gateway usage plan can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+//
+//	$ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+//
 // ```
 type UsagePlan struct {
 	pulumi.CustomResourceState
@@ -190,7 +195,7 @@ func (i *UsagePlan) ToUsagePlanOutputWithContext(ctx context.Context) UsagePlanO
 // UsagePlanArrayInput is an input type that accepts UsagePlanArray and UsagePlanArrayOutput values.
 // You can construct a concrete instance of `UsagePlanArrayInput` via:
 //
-//          UsagePlanArray{ UsagePlanArgs{...} }
+//	UsagePlanArray{ UsagePlanArgs{...} }
 type UsagePlanArrayInput interface {
 	pulumi.Input
 
@@ -215,7 +220,7 @@ func (i UsagePlanArray) ToUsagePlanArrayOutputWithContext(ctx context.Context) U
 // UsagePlanMapInput is an input type that accepts UsagePlanMap and UsagePlanMapOutput values.
 // You can construct a concrete instance of `UsagePlanMapInput` via:
 //
-//          UsagePlanMap{ "key": UsagePlanArgs{...} }
+//	UsagePlanMap{ "key": UsagePlanArgs{...} }
 type UsagePlanMapInput interface {
 	pulumi.Input
 

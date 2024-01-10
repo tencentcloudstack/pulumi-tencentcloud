@@ -12,6 +12,8 @@ from ._inputs import *
 if typing.TYPE_CHECKING:
     import tencentcloud_iac_pulumi.address as __address
     address = __address
+    import tencentcloud_iac_pulumi.antiddos as __antiddos
+    antiddos = __antiddos
     import tencentcloud_iac_pulumi.apigateway as __apigateway
     apigateway = __apigateway
     import tencentcloud_iac_pulumi.apm as __apm
@@ -24,6 +26,8 @@ if typing.TYPE_CHECKING:
     audits = __audits
     import tencentcloud_iac_pulumi.availability as __availability
     availability = __availability
+    import tencentcloud_iac_pulumi.bi as __bi
+    bi = __bi
     import tencentcloud_iac_pulumi.cam as __cam
     cam = __cam
     import tencentcloud_iac_pulumi.cat as __cat
@@ -36,8 +40,12 @@ if typing.TYPE_CHECKING:
     cdh = __cdh
     import tencentcloud_iac_pulumi.cdn as __cdn
     cdn = __cdn
+    import tencentcloud_iac_pulumi.cdwpg as __cdwpg
+    cdwpg = __cdwpg
     import tencentcloud_iac_pulumi.cfs as __cfs
     cfs = __cfs
+    import tencentcloud_iac_pulumi.cfw as __cfw
+    cfw = __cfw
     import tencentcloud_iac_pulumi.chdfs as __chdfs
     chdfs = __chdfs
     import tencentcloud_iac_pulumi.ci as __ci
@@ -60,8 +68,12 @@ if typing.TYPE_CHECKING:
     css = __css
     import tencentcloud_iac_pulumi.cvm as __cvm
     cvm = __cvm
+    import tencentcloud_iac_pulumi.cwp as __cwp
+    cwp = __cwp
     import tencentcloud_iac_pulumi.cynosdb as __cynosdb
     cynosdb = __cynosdb
+    import tencentcloud_iac_pulumi.dasb as __dasb
+    dasb = __dasb
     import tencentcloud_iac_pulumi.dayu as __dayu
     dayu = __dayu
     import tencentcloud_iac_pulumi.dbbrain as __dbbrain
@@ -72,6 +84,8 @@ if typing.TYPE_CHECKING:
     dcdb = __dcdb
     import tencentcloud_iac_pulumi.dcx as __dcx
     dcx = __dcx
+    import tencentcloud_iac_pulumi.dlc as __dlc
+    dlc = __dlc
     import tencentcloud_iac_pulumi.dnat as __dnat
     dnat = __dnat
     import tencentcloud_iac_pulumi.dnats as __dnats
@@ -132,6 +146,8 @@ if typing.TYPE_CHECKING:
     mysql = __mysql
     import tencentcloud_iac_pulumi.nat as __nat
     nat = __nat
+    import tencentcloud_iac_pulumi.oceanus as __oceanus
+    oceanus = __oceanus
     import tencentcloud_iac_pulumi.organization as __organization
     organization = __organization
     import tencentcloud_iac_pulumi.placement as __placement
@@ -194,6 +210,8 @@ if typing.TYPE_CHECKING:
     tem = __tem
     import tencentcloud_iac_pulumi.teo as __teo
     teo = __teo
+    import tencentcloud_iac_pulumi.trocket as __trocket
+    trocket = __trocket
     import tencentcloud_iac_pulumi.tse as __tse
     tse = __tse
     import tencentcloud_iac_pulumi.tsf as __tsf
@@ -206,21 +224,29 @@ if typing.TYPE_CHECKING:
     vpc = __vpc
     import tencentcloud_iac_pulumi.vpn as __vpn
     vpn = __vpn
+    import tencentcloud_iac_pulumi.waf as __waf
+    waf = __waf
+    import tencentcloud_iac_pulumi.wedata as __wedata
+    wedata = __wedata
 else:
     address = _utilities.lazy_import('tencentcloud_iac_pulumi.address')
+    antiddos = _utilities.lazy_import('tencentcloud_iac_pulumi.antiddos')
     apigateway = _utilities.lazy_import('tencentcloud_iac_pulumi.apigateway')
     apm = _utilities.lazy_import('tencentcloud_iac_pulumi.apm')
     as_ = _utilities.lazy_import('tencentcloud_iac_pulumi.as_')
     audit = _utilities.lazy_import('tencentcloud_iac_pulumi.audit')
     audits = _utilities.lazy_import('tencentcloud_iac_pulumi.audits')
     availability = _utilities.lazy_import('tencentcloud_iac_pulumi.availability')
+    bi = _utilities.lazy_import('tencentcloud_iac_pulumi.bi')
     cam = _utilities.lazy_import('tencentcloud_iac_pulumi.cam')
     cat = _utilities.lazy_import('tencentcloud_iac_pulumi.cat')
     cbs = _utilities.lazy_import('tencentcloud_iac_pulumi.cbs')
     ccn = _utilities.lazy_import('tencentcloud_iac_pulumi.ccn')
     cdh = _utilities.lazy_import('tencentcloud_iac_pulumi.cdh')
     cdn = _utilities.lazy_import('tencentcloud_iac_pulumi.cdn')
+    cdwpg = _utilities.lazy_import('tencentcloud_iac_pulumi.cdwpg')
     cfs = _utilities.lazy_import('tencentcloud_iac_pulumi.cfs')
+    cfw = _utilities.lazy_import('tencentcloud_iac_pulumi.cfw')
     chdfs = _utilities.lazy_import('tencentcloud_iac_pulumi.chdfs')
     ci = _utilities.lazy_import('tencentcloud_iac_pulumi.ci')
     ciam = _utilities.lazy_import('tencentcloud_iac_pulumi.ciam')
@@ -232,12 +258,15 @@ else:
     cos = _utilities.lazy_import('tencentcloud_iac_pulumi.cos')
     css = _utilities.lazy_import('tencentcloud_iac_pulumi.css')
     cvm = _utilities.lazy_import('tencentcloud_iac_pulumi.cvm')
+    cwp = _utilities.lazy_import('tencentcloud_iac_pulumi.cwp')
     cynosdb = _utilities.lazy_import('tencentcloud_iac_pulumi.cynosdb')
+    dasb = _utilities.lazy_import('tencentcloud_iac_pulumi.dasb')
     dayu = _utilities.lazy_import('tencentcloud_iac_pulumi.dayu')
     dbbrain = _utilities.lazy_import('tencentcloud_iac_pulumi.dbbrain')
     dc = _utilities.lazy_import('tencentcloud_iac_pulumi.dc')
     dcdb = _utilities.lazy_import('tencentcloud_iac_pulumi.dcdb')
     dcx = _utilities.lazy_import('tencentcloud_iac_pulumi.dcx')
+    dlc = _utilities.lazy_import('tencentcloud_iac_pulumi.dlc')
     dnat = _utilities.lazy_import('tencentcloud_iac_pulumi.dnat')
     dnats = _utilities.lazy_import('tencentcloud_iac_pulumi.dnats')
     dnspod = _utilities.lazy_import('tencentcloud_iac_pulumi.dnspod')
@@ -268,6 +297,7 @@ else:
     mps = _utilities.lazy_import('tencentcloud_iac_pulumi.mps')
     mysql = _utilities.lazy_import('tencentcloud_iac_pulumi.mysql')
     nat = _utilities.lazy_import('tencentcloud_iac_pulumi.nat')
+    oceanus = _utilities.lazy_import('tencentcloud_iac_pulumi.oceanus')
     organization = _utilities.lazy_import('tencentcloud_iac_pulumi.organization')
     placement = _utilities.lazy_import('tencentcloud_iac_pulumi.placement')
     postgresql = _utilities.lazy_import('tencentcloud_iac_pulumi.postgresql')
@@ -299,12 +329,15 @@ else:
     tdmq = _utilities.lazy_import('tencentcloud_iac_pulumi.tdmq')
     tem = _utilities.lazy_import('tencentcloud_iac_pulumi.tem')
     teo = _utilities.lazy_import('tencentcloud_iac_pulumi.teo')
+    trocket = _utilities.lazy_import('tencentcloud_iac_pulumi.trocket')
     tse = _utilities.lazy_import('tencentcloud_iac_pulumi.tse')
     tsf = _utilities.lazy_import('tencentcloud_iac_pulumi.tsf')
     user = _utilities.lazy_import('tencentcloud_iac_pulumi.user')
     vod = _utilities.lazy_import('tencentcloud_iac_pulumi.vod')
     vpc = _utilities.lazy_import('tencentcloud_iac_pulumi.vpc')
     vpn = _utilities.lazy_import('tencentcloud_iac_pulumi.vpn')
+    waf = _utilities.lazy_import('tencentcloud_iac_pulumi.waf')
+    wedata = _utilities.lazy_import('tencentcloud_iac_pulumi.wedata')
 
 _utilities.register(
     resource_modules="""
@@ -327,6 +360,86 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Antiddos/ccBlackWhiteIp",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp": "CcBlackWhiteIp"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/ccPrecisionPolicy",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy": "CcPrecisionPolicy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/ddosBlackWhiteIp",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp": "DdosBlackWhiteIp"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/ddosGeoIpBlockConfig",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig": "DdosGeoIpBlockConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/ddosSpeedLimitConfig",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig": "DdosSpeedLimitConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/defaultAlarmThreshold",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold": "DefaultAlarmThreshold"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/ipAlarmThresholdConfig",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig": "IpAlarmThresholdConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/packetFilterConfig",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig": "PacketFilterConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/portAclConfig",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/portAclConfig:PortAclConfig": "PortAclConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Antiddos/schedulingDomainUserName",
+  "fqn": "tencentcloud_iac_pulumi.antiddos",
+  "classes": {
+   "tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName": "SchedulingDomainUserName"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "ApiGateway/api",
   "fqn": "tencentcloud_iac_pulumi.apigateway",
   "classes": {
@@ -339,6 +452,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.apigateway",
   "classes": {
    "tencentcloud:ApiGateway/apiApp:ApiApp": "ApiApp"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "ApiGateway/apiAppAttachment",
+  "fqn": "tencentcloud_iac_pulumi.apigateway",
+  "classes": {
+   "tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment": "ApiAppAttachment"
   }
  },
  {
@@ -371,6 +492,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.apigateway",
   "classes": {
    "tencentcloud:ApiGateway/customDomain:CustomDomain": "CustomDomain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "ApiGateway/importOpenApi",
+  "fqn": "tencentcloud_iac_pulumi.apigateway",
+  "classes": {
+   "tencentcloud:ApiGateway/importOpenApi:ImportOpenApi": "ImportOpenApi"
   }
  },
  {
@@ -419,6 +548,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.apigateway",
   "classes": {
    "tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment": "StrategyAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "ApiGateway/updateApiAppKey",
+  "fqn": "tencentcloud_iac_pulumi.apigateway",
+  "classes": {
+   "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey": "UpdateApiAppKey"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "ApiGateway/upstream",
+  "fqn": "tencentcloud_iac_pulumi.apigateway",
+  "classes": {
+   "tencentcloud:ApiGateway/upstream:Upstream": "Upstream"
   }
  },
  {
@@ -591,6 +736,70 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Bi/datasource",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/datasource:Datasource": "Datasource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/datasourceCloud",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/datasourceCloud:DatasourceCloud": "DatasourceCloud"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/embedIntervalApply",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/embedIntervalApply:EmbedIntervalApply": "EmbedIntervalApply"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/embedTokenApply",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/embedTokenApply:EmbedTokenApply": "EmbedTokenApply"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/project",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/project:Project": "Project"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/projectUserRole",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/projectUserRole:ProjectUserRole": "ProjectUserRole"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Bi/userRole",
+  "fqn": "tencentcloud_iac_pulumi.bi",
+  "classes": {
+   "tencentcloud:Bi/userRole:UserRole": "UserRole"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cam/accessKey",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/accessKey:AccessKey": "AccessKey"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cam/group",
   "fqn": "tencentcloud_iac_pulumi.cam",
   "classes": {
@@ -611,6 +820,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cam",
   "classes": {
    "tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment": "GroupPolicyAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cam/mfaFlag",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/mfaFlag:MfaFlag": "MfaFlag"
   }
  },
  {
@@ -639,6 +856,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cam/policyVersion",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/policyVersion:PolicyVersion": "PolicyVersion"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cam/role",
   "fqn": "tencentcloud_iac_pulumi.cam",
   "classes": {
@@ -651,6 +876,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cam",
   "classes": {
    "tencentcloud:Cam/roleByName:RoleByName": "RoleByName"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cam/rolePermissionBoundaryAttachment",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment": "RolePermissionBoundaryAttachment"
   }
  },
  {
@@ -695,10 +928,34 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cam/setPolicyVersionConfig",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig": "SetPolicyVersionConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cam/tagRoleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment": "TagRoleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cam/user",
   "fqn": "tencentcloud_iac_pulumi.cam",
   "classes": {
    "tencentcloud:Cam/user:User": "User"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cam/userPermissionBoundaryAttachment",
+  "fqn": "tencentcloud_iac_pulumi.cam",
+  "classes": {
+   "tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment": "UserPermissionBoundaryAttachment"
   }
  },
  {
@@ -895,6 +1152,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cdwpg/instance",
+  "fqn": "tencentcloud_iac_pulumi.cdwpg",
+  "classes": {
+   "tencentcloud:Cdwpg/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cfs/accessGroup",
   "fqn": "tencentcloud_iac_pulumi.cfs",
   "classes": {
@@ -955,6 +1220,102 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cfs",
   "classes": {
    "tencentcloud:Cfs/userQuota:UserQuota": "UserQuota"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/addressTemplate",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/addressTemplate:AddressTemplate": "AddressTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/blockIgnore",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/blockIgnore:BlockIgnore": "BlockIgnore"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/edgeFirewallSwitch",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/edgeFirewallSwitch:EdgeFirewallSwitch": "EdgeFirewallSwitch"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/edgePolicy",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/edgePolicy:EdgePolicy": "EdgePolicy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/natFirewallSwitch",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch": "NatFirewallSwitch"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/natInstance",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/natInstance:NatInstance": "NatInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/natPolicy",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/natPolicy:NatPolicy": "NatPolicy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/syncAsset",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/syncAsset:SyncAsset": "SyncAsset"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/syncRoute",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/syncRoute:SyncRoute": "SyncRoute"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/vpcFirewallSwitch",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch": "VpcFirewallSwitch"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/vpcInstance",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/vpcInstance:VpcInstance": "VpcInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cfw/vpcPolicy",
+  "fqn": "tencentcloud_iac_pulumi.cfw",
+  "classes": {
+   "tencentcloud:Cfw/vpcPolicy:VpcPolicy": "VpcPolicy"
   }
  },
  {
@@ -1399,6 +1760,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Clb/targetGroupAttachments",
+  "fqn": "tencentcloud_iac_pulumi.clb",
+  "classes": {
+   "tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments": "TargetGroupAttachments"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Clb/targetGroupInstanceAttachment",
   "fqn": "tencentcloud_iac_pulumi.clb",
   "classes": {
@@ -1407,10 +1776,74 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Clickhouse/account",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/account:Account": "Account"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/accountPermission",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/accountPermission:AccountPermission": "AccountPermission"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/backup",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/backup:Backup": "Backup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/backupStrategy",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/backupStrategy:BackupStrategy": "BackupStrategy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/deleteBackupData",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData": "DeleteBackupData"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Clickhouse/instance",
   "fqn": "tencentcloud_iac_pulumi.clickhouse",
   "classes": {
    "tencentcloud:Clickhouse/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/keyvalConfig",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig": "KeyvalConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/recoverBackupJob",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob": "RecoverBackupJob"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Clickhouse/xmlConfig",
+  "fqn": "tencentcloud_iac_pulumi.clickhouse",
+  "classes": {
+   "tencentcloud:Clickhouse/xmlConfig:XmlConfig": "XmlConfig"
   }
  },
  {
@@ -1655,10 +2088,50 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Css/backupStream",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/backupStream:BackupStream": "BackupStream"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/callbackRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment": "CallbackRuleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/callbackTemplate",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/callbackTemplate:CallbackTemplate": "CallbackTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Css/domain",
   "fqn": "tencentcloud_iac_pulumi.css",
   "classes": {
    "tencentcloud:Css/domain:Domain": "Domain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/domainReferer",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/domainReferer:DomainReferer": "DomainReferer"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/enableOptimalSwitching",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching": "EnableOptimalSwitching"
   }
  },
  {
@@ -1675,6 +2148,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.css",
   "classes": {
    "tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate": "LiveTranscodeTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/padRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/padRuleAttachment:PadRuleAttachment": "PadRuleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/padTemplate",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/padTemplate:PadTemplate": "PadTemplate"
   }
  },
  {
@@ -1703,6 +2192,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Css/pullStreamTaskRestart",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/pullStreamTaskRestart:PullStreamTaskRestart": "PullStreamTaskRestart"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Css/pushAuthKeyConfig",
   "fqn": "tencentcloud_iac_pulumi.css",
   "classes": {
@@ -1711,10 +2208,82 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Css/recordRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment": "RecordRuleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/recordTemplate",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/recordTemplate:RecordTemplate": "RecordTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/snapshotRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment": "SnapshotRuleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/snapshotTemplate",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/snapshotTemplate:SnapshotTemplate": "SnapshotTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/startStreamMonitor",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/startStreamMonitor:StartStreamMonitor": "StartStreamMonitor"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/streamMonitor",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/streamMonitor:StreamMonitor": "StreamMonitor"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/timeshiftRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment": "TimeshiftRuleAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/timeshiftTemplate",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate": "TimeshiftTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Css/watermark",
   "fqn": "tencentcloud_iac_pulumi.css",
   "classes": {
    "tencentcloud:Css/watermark:Watermark": "Watermark"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Css/watermarkRuleAttachment",
+  "fqn": "tencentcloud_iac_pulumi.css",
+  "classes": {
+   "tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment": "WatermarkRuleAttachment"
   }
  },
  {
@@ -1835,6 +2404,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cvm",
   "classes": {
    "tencentcloud:Cvm/syncImage:SyncImage": "SyncImage"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cwp/licenseBindAttachment",
+  "fqn": "tencentcloud_iac_pulumi.cwp",
+  "classes": {
+   "tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment": "LicenseBindAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cwp/licenseOrder",
+  "fqn": "tencentcloud_iac_pulumi.cwp",
+  "classes": {
+   "tencentcloud:Cwp/licenseOrder:LicenseOrder": "LicenseOrder"
   }
  },
  {
@@ -2035,6 +2620,118 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cynosdb",
   "classes": {
    "tencentcloud:Cynosdb/wan:Wan": "Wan"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/acl",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/acl:Acl": "Acl"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/bindDeviceAccountPassword",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/bindDeviceAccountPassword:BindDeviceAccountPassword": "BindDeviceAccountPassword"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/bindDeviceAccountPrivateKey",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/bindDeviceAccountPrivateKey:BindDeviceAccountPrivateKey": "BindDeviceAccountPrivateKey"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/bindDeviceResource",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/bindDeviceResource:BindDeviceResource": "BindDeviceResource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/cmdTemplate",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/cmdTemplate:CmdTemplate": "CmdTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/device",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/device:Device": "Device"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/deviceAccount",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/deviceAccount:DeviceAccount": "DeviceAccount"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/deviceGroup",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/deviceGroup:DeviceGroup": "DeviceGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/deviceGroupMembers",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers": "DeviceGroupMembers"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/resetUser",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/resetUser:ResetUser": "ResetUser"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/resource",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/resource:Resource": "Resource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/user",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/user:User": "User"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/userGroup",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/userGroup:UserGroup": "UserGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dasb/userGroupMembers",
+  "fqn": "tencentcloud_iac_pulumi.dasb",
+  "classes": {
+   "tencentcloud:Dasb/userGroupMembers:UserGroupMembers": "UserGroupMembers"
   }
  },
  {
@@ -2367,10 +3064,194 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Dlc/addUsersToWorkGroupAttachment",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment": "AddUsersToWorkGroupAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/attachUserPolicyOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/attachUserPolicyOperation:AttachUserPolicyOperation": "AttachUserPolicyOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/attachWorkGroupPolicyOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/attachWorkGroupPolicyOperation:AttachWorkGroupPolicyOperation": "AttachWorkGroupPolicyOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/bindWorkGroupsToUserAttachment",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment": "BindWorkGroupsToUserAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/dataEngine",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/dataEngine:DataEngine": "DataEngine"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/detachUserPolicyOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/detachUserPolicyOperation:DetachUserPolicyOperation": "DetachUserPolicyOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/detachWorkGroupPolicyOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/detachWorkGroupPolicyOperation:DetachWorkGroupPolicyOperation": "DetachWorkGroupPolicyOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/modifyDataEngineDescriptionOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation": "ModifyDataEngineDescriptionOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/modifyUserTypOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation": "ModifyUserTypOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/renewDataEngineOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation": "RenewDataEngineOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/restartDataEngineOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/restartDataEngineOperation:RestartDataEngineOperation": "RestartDataEngineOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/rollbackDataEngineImageOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation": "RollbackDataEngineImageOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/storeLocationConfig",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig": "StoreLocationConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/suspendResumeDataEngine",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine": "SuspendResumeDataEngine"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/switchDataEngineImageOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/switchDataEngineImageOperation:SwitchDataEngineImageOperation": "SwitchDataEngineImageOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/updateDataEngineConfigOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/updateDataEngineConfigOperation:UpdateDataEngineConfigOperation": "UpdateDataEngineConfigOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/updateRowFilterOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/updateRowFilterOperation:UpdateRowFilterOperation": "UpdateRowFilterOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/upgradeDataEngineImageOperation",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/upgradeDataEngineImageOperation:UpgradeDataEngineImageOperation": "UpgradeDataEngineImageOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/user",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/user:User": "User"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/userDataEngineConfig",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig": "UserDataEngineConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dlc/workGroup",
+  "fqn": "tencentcloud_iac_pulumi.dlc",
+  "classes": {
+   "tencentcloud:Dlc/workGroup:WorkGroup": "WorkGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Dnat/instance",
   "fqn": "tencentcloud_iac_pulumi.dnat",
   "classes": {
    "tencentcloud:Dnat/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/customLine",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/customLine:CustomLine": "CustomLine"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/domainAlias",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/domainAlias:DomainAlias": "DomainAlias"
   }
  },
  {
@@ -2383,10 +3264,58 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Dnspod/domainLock",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/domainLock:DomainLock": "DomainLock"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/downloadSnapshotOperation",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation": "DownloadSnapshotOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/modifyDomainOwnerOperation",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation": "ModifyDomainOwnerOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/modifyRecordGroupOperation",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation": "ModifyRecordGroupOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Dnspod/record",
   "fqn": "tencentcloud_iac_pulumi.dnspod",
   "classes": {
    "tencentcloud:Dnspod/record:Record": "Record"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/recordGroup",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/recordGroup:RecordGroup": "RecordGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Dnspod/snapshotConfig",
+  "fqn": "tencentcloud_iac_pulumi.dnspod",
+  "classes": {
+   "tencentcloud:Dnspod/snapshotConfig:SnapshotConfig": "SnapshotConfig"
   }
  },
  {
@@ -2543,6 +3472,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Eb/eventConnector",
+  "fqn": "tencentcloud_iac_pulumi.eb",
+  "classes": {
+   "tencentcloud:Eb/eventConnector:EventConnector": "EventConnector"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Eb/eventRule",
   "fqn": "tencentcloud_iac_pulumi.eb",
   "classes": {
@@ -2615,10 +3552,82 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Elasticsearch/diagnose",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/diagnose:Diagnose": "Diagnose"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/diagnoseInstance",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance": "DiagnoseInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/index",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/index:Index": "Index"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Elasticsearch/instance",
   "fqn": "tencentcloud_iac_pulumi.elasticsearch",
   "classes": {
    "tencentcloud:Elasticsearch/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/logstash",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/logstash:Logstash": "Logstash"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/logstashPipeline",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline": "LogstashPipeline"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/restartInstanceOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/restartInstanceOperation:RestartInstanceOperation": "RestartInstanceOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/restartKibanaOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/restartKibanaOperation:RestartKibanaOperation": "RestartKibanaOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/restartLogstashInstanceOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation": "RestartLogstashInstanceOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/restartNodesOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/restartNodesOperation:RestartNodesOperation": "RestartNodesOperation"
   }
  },
  {
@@ -2631,10 +3640,42 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Elasticsearch/startLogstashPipelineOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/startLogstashPipelineOperation:StartLogstashPipelineOperation": "StartLogstashPipelineOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/stopLogstashPipelineOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/stopLogstashPipelineOperation:StopLogstashPipelineOperation": "StopLogstashPipelineOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Elasticsearch/updatePluginsOperation",
+  "fqn": "tencentcloud_iac_pulumi.elasticsearch",
+  "classes": {
+   "tencentcloud:Elasticsearch/updatePluginsOperation:UpdatePluginsOperation": "UpdatePluginsOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Emr/cluster",
   "fqn": "tencentcloud_iac_pulumi.emr",
   "classes": {
    "tencentcloud:Emr/cluster:Cluster": "Cluster"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Emr/userManager",
+  "fqn": "tencentcloud_iac_pulumi.emr",
+  "classes": {
+   "tencentcloud:Emr/userManager:UserManager": "UserManager"
   }
  },
  {
@@ -2671,10 +3712,34 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Gaap/customHeader",
+  "fqn": "tencentcloud_iac_pulumi.gaap",
+  "classes": {
+   "tencentcloud:Gaap/customHeader:CustomHeader": "CustomHeader"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Gaap/domainErrorPage",
   "fqn": "tencentcloud_iac_pulumi.gaap",
   "classes": {
    "tencentcloud:Gaap/domainErrorPage:DomainErrorPage": "DomainErrorPage"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Gaap/globalDomain",
+  "fqn": "tencentcloud_iac_pulumi.gaap",
+  "classes": {
+   "tencentcloud:Gaap/globalDomain:GlobalDomain": "GlobalDomain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Gaap/globalDomainDns",
+  "fqn": "tencentcloud_iac_pulumi.gaap",
+  "classes": {
+   "tencentcloud:Gaap/globalDomainDns:GlobalDomainDns": "GlobalDomainDns"
   }
  },
  {
@@ -2715,6 +3780,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.gaap",
   "classes": {
    "tencentcloud:Gaap/proxy:Proxy": "Proxy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Gaap/proxyGroup",
+  "fqn": "tencentcloud_iac_pulumi.gaap",
+  "classes": {
+   "tencentcloud:Gaap/proxyGroup:ProxyGroup": "ProxyGroup"
   }
  },
  {
@@ -2799,6 +3872,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Kms/cloudResourceAttachment",
+  "fqn": "tencentcloud_iac_pulumi.kms",
+  "classes": {
+   "tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment": "CloudResourceAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Kms/externalKey",
   "fqn": "tencentcloud_iac_pulumi.kms",
   "classes": {
@@ -2811,6 +3892,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.kms",
   "classes": {
    "tencentcloud:Kms/key:Key": "Key"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Kms/overwriteWhiteBoxDeviceFingerprints",
+  "fqn": "tencentcloud_iac_pulumi.kms",
+  "classes": {
+   "tencentcloud:Kms/overwriteWhiteBoxDeviceFingerprints:OverwriteWhiteBoxDeviceFingerprints": "OverwriteWhiteBoxDeviceFingerprints"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Kms/whiteBoxKey",
+  "fqn": "tencentcloud_iac_pulumi.kms",
+  "classes": {
+   "tencentcloud:Kms/whiteBoxKey:WhiteBoxKey": "WhiteBoxKey"
   }
  },
  {
@@ -2947,6 +4044,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.lighthouse",
   "classes": {
    "tencentcloud:Lighthouse/firewallRule:FirewallRule": "FirewallRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Lighthouse/firewallTemplate",
+  "fqn": "tencentcloud_iac_pulumi.lighthouse",
+  "classes": {
+   "tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate": "FirewallTemplate"
   }
  },
  {
@@ -3231,10 +4336,34 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Monitor/alarmPolicySetDefault",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/alarmPolicySetDefault:AlarmPolicySetDefault": "AlarmPolicySetDefault"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Monitor/bindingReceiver",
   "fqn": "tencentcloud_iac_pulumi.monitor",
   "classes": {
    "tencentcloud:Monitor/bindingReceiver:BindingReceiver": "BindingReceiver"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaDnsConfig",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig": "GrafanaDnsConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaEnvConfig",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig": "GrafanaEnvConfig"
   }
  },
  {
@@ -3275,6 +4404,38 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.monitor",
   "classes": {
    "tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount": "GrafanaSsoAccount"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaSsoCamConfig",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig": "GrafanaSsoCamConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaSsoConfig",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig": "GrafanaSsoConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaVersionUpgrade",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade": "GrafanaVersionUpgrade"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Monitor/grafanaWhitelistConfig",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig": "GrafanaWhitelistConfig"
   }
  },
  {
@@ -3447,10 +4608,90 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Mps/contentReviewTemplate",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate": "ContentReviewTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/editMediaOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/editMediaOperation:EditMediaOperation": "EditMediaOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/enableScheduleConfig",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig": "EnableScheduleConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/enableWorkflowConfig",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig": "EnableWorkflowConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/event",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/event:Event": "Event"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/executeFunctionOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation": "ExecuteFunctionOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/flow",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/flow:Flow": "Flow"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Mps/imageSpriteTemplate",
   "fqn": "tencentcloud_iac_pulumi.mps",
   "classes": {
    "tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate": "ImageSpriteTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/input",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/input:Input": "Input"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/manageTaskOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/manageTaskOperation:ManageTaskOperation": "ManageTaskOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/output",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/output:Output": "Output"
   }
  },
  {
@@ -3463,6 +4704,22 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Mps/processLiveStreamOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation": "ProcessLiveStreamOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/processMediaOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/processMediaOperation:ProcessMediaOperation": "ProcessMediaOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Mps/sampleSnapshotTemplate",
   "fqn": "tencentcloud_iac_pulumi.mps",
   "classes": {
@@ -3471,10 +4728,26 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Mps/schedule",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/schedule:Schedule": "Schedule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Mps/snapshotByTimeoffsetTemplate",
   "fqn": "tencentcloud_iac_pulumi.mps",
   "classes": {
    "tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate": "SnapshotByTimeoffsetTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/startFlowOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/startFlowOperation:StartFlowOperation": "StartFlowOperation"
   }
  },
  {
@@ -3491,6 +4764,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.mps",
   "classes": {
    "tencentcloud:Mps/watermarkTemplate:WatermarkTemplate": "WatermarkTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/withdrawsWatermarkOperation",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/withdrawsWatermarkOperation:WithdrawsWatermarkOperation": "WithdrawsWatermarkOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mps/wordSample",
+  "fqn": "tencentcloud_iac_pulumi.mps",
+  "classes": {
+   "tencentcloud:Mps/wordSample:WordSample": "WordSample"
   }
  },
  {
@@ -3539,6 +4828,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.mysql",
   "classes": {
    "tencentcloud:Mysql/backupPolicy:BackupPolicy": "BackupPolicy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mysql/database",
+  "fqn": "tencentcloud_iac_pulumi.mysql",
+  "classes": {
+   "tencentcloud:Mysql/database:Database": "Database"
   }
  },
  {
@@ -3807,10 +5104,130 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Oceanus/folder",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/folder:Folder": "Folder"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/job",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/job:Job": "Job"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/jobConfig",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/jobConfig:JobConfig": "JobConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/jobCopy",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/jobCopy:JobCopy": "JobCopy"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/resource",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/resource:Resource": "Resource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/resourceConfig",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/resourceConfig:ResourceConfig": "ResourceConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/runJob",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/runJob:RunJob": "RunJob"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/stopJob",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/stopJob:StopJob": "StopJob"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/triggerJobSavepoint",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/triggerJobSavepoint:TriggerJobSavepoint": "TriggerJobSavepoint"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Oceanus/workSpace",
+  "fqn": "tencentcloud_iac_pulumi.oceanus",
+  "classes": {
+   "tencentcloud:Oceanus/workSpace:WorkSpace": "WorkSpace"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/instance",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgIdentity",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgIdentity:OrgIdentity": "OrgIdentity"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Organization/orgMember",
   "fqn": "tencentcloud_iac_pulumi.organization",
   "classes": {
    "tencentcloud:Organization/orgMember:OrgMember": "OrgMember"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgMemberAuthIdentityAttachment",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment": "OrgMemberAuthIdentityAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgMemberEmail",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgMemberEmail:OrgMemberEmail": "OrgMemberEmail"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgMemberPolicyAttachment",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment": "OrgMemberPolicyAttachment"
   }
  },
  {
@@ -3827,6 +5244,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.organization",
   "classes": {
    "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment": "PolicySubAccountAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/quitOrganizationOperation",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation": "QuitOrganizationOperation"
   }
  },
  {
@@ -3883,6 +5308,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.postgresql",
   "classes": {
    "tencentcloud:Postgresql/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Postgresql/instanceHaConfig",
+  "fqn": "tencentcloud_iac_pulumi.postgresql",
+  "classes": {
+   "tencentcloud:Postgresql/instanceHaConfig:InstanceHaConfig": "InstanceHaConfig"
   }
  },
  {
@@ -3991,6 +5424,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "PrivateDns/zoneVpcAttachment",
+  "fqn": "tencentcloud_iac_pulumi.privatedns",
+  "classes": {
+   "tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment": "ZoneVpcAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Project/instance",
   "fqn": "tencentcloud_iac_pulumi.project",
   "classes": {
@@ -4031,6 +5472,22 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Pts/cronJobAbort",
+  "fqn": "tencentcloud_iac_pulumi.pts",
+  "classes": {
+   "tencentcloud:Pts/cronJobAbort:CronJobAbort": "CronJobAbort"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Pts/cronJobRestart",
+  "fqn": "tencentcloud_iac_pulumi.pts",
+  "classes": {
+   "tencentcloud:Pts/cronJobRestart:CronJobRestart": "CronJobRestart"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Pts/file",
   "fqn": "tencentcloud_iac_pulumi.pts",
   "classes": {
@@ -4047,6 +5504,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Pts/jobAbort",
+  "fqn": "tencentcloud_iac_pulumi.pts",
+  "classes": {
+   "tencentcloud:Pts/jobAbort:JobAbort": "JobAbort"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Pts/project",
   "fqn": "tencentcloud_iac_pulumi.pts",
   "classes": {
@@ -4059,6 +5524,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.pts",
   "classes": {
    "tencentcloud:Pts/scenario:Scenario": "Scenario"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Pts/tmpKeyGenerate",
+  "fqn": "tencentcloud_iac_pulumi.pts",
+  "classes": {
+   "tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate": "TmpKeyGenerate"
   }
  },
  {
@@ -4247,10 +5720,26 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Route/tableAssociation",
+  "fqn": "tencentcloud_iac_pulumi.route",
+  "classes": {
+   "tencentcloud:Route/tableAssociation:TableAssociation": "TableAssociation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Route/tableEntry",
   "fqn": "tencentcloud_iac_pulumi.route",
   "classes": {
    "tencentcloud:Route/tableEntry:TableEntry": "TableEntry"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Rum/instanceStatusConfig",
+  "fqn": "tencentcloud_iac_pulumi.rum",
+  "classes": {
+   "tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig": "InstanceStatusConfig"
   }
  },
  {
@@ -4267,6 +5756,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.rum",
   "classes": {
    "tencentcloud:Rum/project:Project": "Project"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Rum/projectStatusConfig",
+  "fqn": "tencentcloud_iac_pulumi.rum",
+  "classes": {
+   "tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig": "ProjectStatusConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Rum/releaseFile",
+  "fqn": "tencentcloud_iac_pulumi.rum",
+  "classes": {
+   "tencentcloud:Rum/releaseFile:ReleaseFile": "ReleaseFile"
   }
  },
  {
@@ -4407,6 +5912,22 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ses/batchSendEmail",
+  "fqn": "tencentcloud_iac_pulumi.ses",
+  "classes": {
+   "tencentcloud:Ses/batchSendEmail:BatchSendEmail": "BatchSendEmail"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ses/blackListDelete",
+  "fqn": "tencentcloud_iac_pulumi.ses",
+  "classes": {
+   "tencentcloud:Ses/blackListDelete:BlackListDelete": "BlackListDelete"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ses/domain",
   "fqn": "tencentcloud_iac_pulumi.ses",
   "classes": {
@@ -4423,10 +5944,34 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ses/receiver",
+  "fqn": "tencentcloud_iac_pulumi.ses",
+  "classes": {
+   "tencentcloud:Ses/receiver:Receiver": "Receiver"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ses/sendEmail",
+  "fqn": "tencentcloud_iac_pulumi.ses",
+  "classes": {
+   "tencentcloud:Ses/sendEmail:SendEmail": "SendEmail"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ses/template",
   "fqn": "tencentcloud_iac_pulumi.ses",
   "classes": {
    "tencentcloud:Ses/template:Template": "Template"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ses/verifyDomain",
+  "fqn": "tencentcloud_iac_pulumi.ses",
+  "classes": {
+   "tencentcloud:Ses/verifyDomain:VerifyDomain": "VerifyDomain"
   }
  },
  {
@@ -4639,6 +6184,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Sqlserver/instanceSsl",
+  "fqn": "tencentcloud_iac_pulumi.sqlserver",
+  "classes": {
+   "tencentcloud:Sqlserver/instanceSsl:InstanceSsl": "InstanceSsl"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Sqlserver/instanceTde",
   "fqn": "tencentcloud_iac_pulumi.sqlserver",
   "classes": {
@@ -4743,6 +6296,54 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ssl/checkCertificateChainOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation": "CheckCertificateChainOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/completeCertificateOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation": "CompleteCertificateOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/deployCertificateInstanceOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation": "DeployCertificateInstanceOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/deployCertificateRecordRetryOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation": "DeployCertificateRecordRetryOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/deployCertificateRecordRollbackOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation": "DeployCertificateRecordRollbackOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/downloadCertificateOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation": "DownloadCertificateOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ssl/freeCertificate",
   "fqn": "tencentcloud_iac_pulumi.ssl",
   "classes": {
@@ -4759,10 +6360,66 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ssl/replaceCertificateOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation": "ReplaceCertificateOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/revokeCertificateOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation": "RevokeCertificateOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/updateCertificateInstanceOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/updateCertificateInstanceOperation:UpdateCertificateInstanceOperation": "UpdateCertificateInstanceOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/updateCertificateRecordRetryOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation": "UpdateCertificateRecordRetryOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/updateCertificateRecordRollbackOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation": "UpdateCertificateRecordRollbackOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssl/uploadRevokeLetterOperation",
+  "fqn": "tencentcloud_iac_pulumi.ssl",
+  "classes": {
+   "tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation": "UploadRevokeLetterOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ssm/productSecret",
   "fqn": "tencentcloud_iac_pulumi.ssm",
   "classes": {
    "tencentcloud:Ssm/productSecret:ProductSecret": "ProductSecret"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ssm/rotateProductSecret",
+  "fqn": "tencentcloud_iac_pulumi.ssm",
+  "classes": {
+   "tencentcloud:Ssm/rotateProductSecret:RotateProductSecret": "RotateProductSecret"
   }
  },
  {
@@ -5103,6 +6760,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Tdmq/professionalCluster",
+  "fqn": "tencentcloud_iac_pulumi.tdmq",
+  "classes": {
+   "tencentcloud:Tdmq/professionalCluster:ProfessionalCluster": "ProfessionalCluster"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Tdmq/rabbitmqUser",
   "fqn": "tencentcloud_iac_pulumi.tdmq",
   "classes": {
@@ -5199,10 +6864,10 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
-  "mod": "Tdmq/subscriptionAttachment",
+  "mod": "Tdmq/subscription",
   "fqn": "tencentcloud_iac_pulumi.tdmq",
   "classes": {
-   "tencentcloud:Tdmq/subscriptionAttachment:SubscriptionAttachment": "SubscriptionAttachment"
+   "tencentcloud:Tdmq/subscription:Subscription": "Subscription"
   }
  },
  {
@@ -5279,6 +6944,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Teo/accelerationDomain",
+  "fqn": "tencentcloud_iac_pulumi.teo",
+  "classes": {
+   "tencentcloud:Teo/accelerationDomain:AccelerationDomain": "AccelerationDomain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Teo/applicationProxy",
   "fqn": "tencentcloud_iac_pulumi.teo",
   "classes": {
@@ -5295,42 +6968,10 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
-  "mod": "Teo/customErrorPage",
+  "mod": "Teo/certificateConfig",
   "fqn": "tencentcloud_iac_pulumi.teo",
   "classes": {
-   "tencentcloud:Teo/customErrorPage:CustomErrorPage": "CustomErrorPage"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/ddosPolicy",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/ddosPolicy:DdosPolicy": "DdosPolicy"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/dnsRecord",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/dnsRecord:DnsRecord": "DnsRecord"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/dnsSec",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/dnsSec:DnsSec": "DnsSec"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/loadBalancing",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/loadBalancing:LoadBalancing": "LoadBalancing"
+   "tencentcloud:Teo/certificateConfig:CertificateConfig": "CertificateConfig"
   }
  },
  {
@@ -5343,26 +6984,18 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Teo/ownershipVerify",
+  "fqn": "tencentcloud_iac_pulumi.teo",
+  "classes": {
+   "tencentcloud:Teo/ownershipVerify:OwnershipVerify": "OwnershipVerify"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Teo/ruleEngine",
   "fqn": "tencentcloud_iac_pulumi.teo",
   "classes": {
    "tencentcloud:Teo/ruleEngine:RuleEngine": "RuleEngine"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/ruleEnginePriority",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/ruleEnginePriority:RuleEnginePriority": "RuleEnginePriority"
-  }
- },
- {
-  "pkg": "tencentcloud",
-  "mod": "Teo/securityPolicy",
-  "fqn": "tencentcloud_iac_pulumi.teo",
-  "classes": {
-   "tencentcloud:Teo/securityPolicy:SecurityPolicy": "SecurityPolicy"
   }
  },
  {
@@ -5383,10 +7016,66 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Trocket/rocketmqConsumerGroup",
+  "fqn": "tencentcloud_iac_pulumi.trocket",
+  "classes": {
+   "tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup": "RocketmqConsumerGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Trocket/rocketmqInstance",
+  "fqn": "tencentcloud_iac_pulumi.trocket",
+  "classes": {
+   "tencentcloud:Trocket/rocketmqInstance:RocketmqInstance": "RocketmqInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Trocket/rocketmqRole",
+  "fqn": "tencentcloud_iac_pulumi.trocket",
+  "classes": {
+   "tencentcloud:Trocket/rocketmqRole:RocketmqRole": "RocketmqRole"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Trocket/rocketmqTopic",
+  "fqn": "tencentcloud_iac_pulumi.trocket",
+  "classes": {
+   "tencentcloud:Trocket/rocketmqTopic:RocketmqTopic": "RocketmqTopic"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Tse/cngwCanaryRule",
   "fqn": "tencentcloud_iac_pulumi.tse",
   "classes": {
    "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule": "CngwCanaryRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwCertificate",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwCertificate:CngwCertificate": "CngwCertificate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwGateway",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwGateway:CngwGateway": "CngwGateway"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/cngwGroup",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/cngwGroup:CngwGroup": "CngwGroup"
   }
  },
  {
@@ -5427,6 +7116,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.tse",
   "classes": {
    "tencentcloud:Tse/instance:Instance": "Instance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/wafDomains",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/wafDomains:WafDomains": "WafDomains"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Tse/wafProtection",
+  "fqn": "tencentcloud_iac_pulumi.tse",
+  "classes": {
+   "tencentcloud:Tse/wafProtection:WafProtection": "WafProtection"
   }
  },
  {
@@ -5879,6 +7584,30 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Vpc/peerConnectAcceptOperation",
+  "fqn": "tencentcloud_iac_pulumi.vpc",
+  "classes": {
+   "tencentcloud:Vpc/peerConnectAcceptOperation:PeerConnectAcceptOperation": "PeerConnectAcceptOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Vpc/peerConnectManager",
+  "fqn": "tencentcloud_iac_pulumi.vpc",
+  "classes": {
+   "tencentcloud:Vpc/peerConnectManager:PeerConnectManager": "PeerConnectManager"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Vpc/peerConnectRejectOperation",
+  "fqn": "tencentcloud_iac_pulumi.vpc",
+  "classes": {
+   "tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation": "PeerConnectRejectOperation"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Vpc/resumeSnapshotInstance",
   "fqn": "tencentcloud_iac_pulumi.vpc",
   "classes": {
@@ -5995,6 +7724,222 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.vpn",
   "classes": {
    "tencentcloud:Vpn/sslServer:SslServer": "SslServer"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/antiFake",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/antiFake:AntiFake": "AntiFake"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/antiInfoLeak",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/antiInfoLeak:AntiInfoLeak": "AntiInfoLeak"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/autoDenyRules",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/autoDenyRules:AutoDenyRules": "AutoDenyRules"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/cc",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/cc:Cc": "Cc"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/ccAutoStatus",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/ccAutoStatus:CcAutoStatus": "CcAutoStatus"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/ccSession",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/ccSession:CcSession": "CcSession"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/clbDomain",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/clbDomain:ClbDomain": "ClbDomain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/clbInstance",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/clbInstance:ClbInstance": "ClbInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/customRule",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/customRule:CustomRule": "CustomRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/customWhiteRule",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/customWhiteRule:CustomWhiteRule": "CustomWhiteRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/ipAccessControl",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/ipAccessControl:IpAccessControl": "IpAccessControl"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/modifyAccessPeriod",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/modifyAccessPeriod:ModifyAccessPeriod": "ModifyAccessPeriod"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/moduleStatus",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/moduleStatus:ModuleStatus": "ModuleStatus"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/protectionMode",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/protectionMode:ProtectionMode": "ProtectionMode"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/saasDomain",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/saasDomain:SaasDomain": "SaasDomain"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/saasInstance",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/saasInstance:SaasInstance": "SaasInstance"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Waf/webShell",
+  "fqn": "tencentcloud_iac_pulumi.waf",
+  "classes": {
+   "tencentcloud:Waf/webShell:WebShell": "WebShell"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/baseline",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/baseline:Baseline": "Baseline"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/datasource",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/datasource:Datasource": "Datasource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/dqRule",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/dqRule:DqRule": "DqRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/function",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/function:Function": "Function"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/integrationOfflineTask",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask": "IntegrationOfflineTask"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/integrationRealtimeTask",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask": "IntegrationRealtimeTask"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/integrationTaskNode",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/integrationTaskNode:IntegrationTaskNode": "IntegrationTaskNode"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/resource",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/resource:Resource": "Resource"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/ruleTemplate",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/ruleTemplate:RuleTemplate": "RuleTemplate"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Wedata/script",
+  "fqn": "tencentcloud_iac_pulumi.wedata",
+  "classes": {
+   "tencentcloud:Wedata/script:Script": "Script"
   }
  }
 ]

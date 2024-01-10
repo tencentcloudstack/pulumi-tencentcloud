@@ -18,33 +18,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.GetMesh(ctx, &tcm.GetMeshArgs{
-// 			MeshClusters: []string{
-// 				"cls-xxxx",
-// 			},
-// 			MeshIds: []string{
-// 				"mesh-xxxxxx",
-// 			},
-// 			MeshNames: []string{
-// 				"KEEP_MASH",
-// 			},
-// 			Tags: []string{
-// 				"key",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.GetMesh(ctx, &tcm.GetMeshArgs{
+//				MeshClusters: []string{
+//					"cls-xxxx",
+//				},
+//				MeshIds: []string{
+//					"mesh-xxxxxx",
+//				},
+//				MeshNames: []string{
+//					"KEEP_MASH",
+//				},
+//				Tags: []string{
+//					"key",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupMesh(ctx *pulumi.Context, args *LookupMeshArgs, opts ...pulumi.InvokeOption) (*LookupMeshResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

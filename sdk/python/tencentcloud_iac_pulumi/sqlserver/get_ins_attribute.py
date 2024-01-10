@@ -21,7 +21,7 @@ class GetInsAttributeResult:
     """
     A collection of values returned by getInsAttribute.
     """
-    def __init__(__self__, blocked_threshold=None, event_save_days=None, id=None, instance_id=None, regular_backup_counts=None, regular_backup_enable=None, regular_backup_save_days=None, regular_backup_start_time=None, regular_backup_strategy=None, result_output_file=None, tde_configs=None):
+    def __init__(__self__, blocked_threshold=None, event_save_days=None, id=None, instance_id=None, regular_backup_counts=None, regular_backup_enable=None, regular_backup_save_days=None, regular_backup_start_time=None, regular_backup_strategy=None, result_output_file=None, ssl_configs=None, tde_configs=None):
         if blocked_threshold and not isinstance(blocked_threshold, int):
             raise TypeError("Expected argument 'blocked_threshold' to be a int")
         pulumi.set(__self__, "blocked_threshold", blocked_threshold)
@@ -52,6 +52,9 @@ class GetInsAttributeResult:
         if result_output_file and not isinstance(result_output_file, str):
             raise TypeError("Expected argument 'result_output_file' to be a str")
         pulumi.set(__self__, "result_output_file", result_output_file)
+        if ssl_configs and not isinstance(ssl_configs, list):
+            raise TypeError("Expected argument 'ssl_configs' to be a list")
+        pulumi.set(__self__, "ssl_configs", ssl_configs)
         if tde_configs and not isinstance(tde_configs, list):
             raise TypeError("Expected argument 'tde_configs' to be a list")
         pulumi.set(__self__, "tde_configs", tde_configs)
@@ -131,6 +134,14 @@ class GetInsAttributeResult:
         return pulumi.get(self, "result_output_file")
 
     @property
+    @pulumi.getter(name="sslConfigs")
+    def ssl_configs(self) -> Sequence['outputs.GetInsAttributeSslConfigResult']:
+        """
+        SSL encryption.
+        """
+        return pulumi.get(self, "ssl_configs")
+
+    @property
     @pulumi.getter(name="tdeConfigs")
     def tde_configs(self) -> Sequence['outputs.GetInsAttributeTdeConfigResult']:
         """
@@ -155,6 +166,7 @@ class AwaitableGetInsAttributeResult(GetInsAttributeResult):
             regular_backup_start_time=self.regular_backup_start_time,
             regular_backup_strategy=self.regular_backup_strategy,
             result_output_file=self.result_output_file,
+            ssl_configs=self.ssl_configs,
             tde_configs=self.tde_configs)
 
 
@@ -199,6 +211,7 @@ def get_ins_attribute(instance_id: Optional[str] = None,
         regular_backup_start_time=__ret__.regular_backup_start_time,
         regular_backup_strategy=__ret__.regular_backup_strategy,
         result_output_file=__ret__.result_output_file,
+        ssl_configs=__ret__.ssl_configs,
         tde_configs=__ret__.tde_configs)
 
 

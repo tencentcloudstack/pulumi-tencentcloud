@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.GetShipperTasks(ctx, &cls.GetShipperTasksArgs{
-// 			EndTime:   160749910800,
-// 			ShipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
-// 			StartTime: 160749910700,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.GetShipperTasks(ctx, &cls.GetShipperTasksArgs{
+//				EndTime:   160749910800,
+//				ShipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
+//				StartTime: 160749910700,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetShipperTasks(ctx *pulumi.Context, args *GetShipperTasksArgs, opts ...pulumi.InvokeOption) (*GetShipperTasksResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

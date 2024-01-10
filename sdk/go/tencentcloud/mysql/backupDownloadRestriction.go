@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewBackupDownloadRestriction(ctx, "example", &Mysql.BackupDownloadRestrictionArgs{
-// 			IpComparisonSymbol: pulumi.String("In"),
-// 			LimitIps: pulumi.StringArray{
-// 				pulumi.String("127.0.0.1"),
-// 			},
-// 			LimitType: pulumi.String("Customize"),
-// 			LimitVpcs: mysql.BackupDownloadRestrictionLimitVpcArray{
-// 				&mysql.BackupDownloadRestrictionLimitVpcArgs{
-// 					Region: pulumi.String("ap-guangzhou"),
-// 					VpcLists: pulumi.StringArray{
-// 						pulumi.String("vpc-4owdpnwr"),
-// 					},
-// 				},
-// 			},
-// 			VpcComparisonSymbol: pulumi.String("In"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewBackupDownloadRestriction(ctx, "example", &Mysql.BackupDownloadRestrictionArgs{
+//				IpComparisonSymbol: pulumi.String("In"),
+//				LimitIps: pulumi.StringArray{
+//					pulumi.String("127.0.0.1"),
+//				},
+//				LimitType: pulumi.String("Customize"),
+//				LimitVpcs: mysql.BackupDownloadRestrictionLimitVpcArray{
+//					&mysql.BackupDownloadRestrictionLimitVpcArgs{
+//						Region: pulumi.String("ap-guangzhou"),
+//						VpcLists: pulumi.StringArray{
+//							pulumi.String("vpc-4owdpnwr"),
+//						},
+//					},
+//				},
+//				VpcComparisonSymbol: pulumi.String("In"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // mysql backup_download_restriction can be imported using the "BackupDownloadRestriction", as follows.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
+//
+//	$ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
+//
 // ```
 type BackupDownloadRestriction struct {
 	pulumi.CustomResourceState
@@ -187,7 +192,7 @@ func (i *BackupDownloadRestriction) ToBackupDownloadRestrictionOutputWithContext
 // BackupDownloadRestrictionArrayInput is an input type that accepts BackupDownloadRestrictionArray and BackupDownloadRestrictionArrayOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionArrayInput` via:
 //
-//          BackupDownloadRestrictionArray{ BackupDownloadRestrictionArgs{...} }
+//	BackupDownloadRestrictionArray{ BackupDownloadRestrictionArgs{...} }
 type BackupDownloadRestrictionArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +217,7 @@ func (i BackupDownloadRestrictionArray) ToBackupDownloadRestrictionArrayOutputWi
 // BackupDownloadRestrictionMapInput is an input type that accepts BackupDownloadRestrictionMap and BackupDownloadRestrictionMapOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionMapInput` via:
 //
-//          BackupDownloadRestrictionMap{ "key": BackupDownloadRestrictionArgs{...} }
+//	BackupDownloadRestrictionMap{ "key": BackupDownloadRestrictionArgs{...} }
 type BackupDownloadRestrictionMapInput interface {
 	pulumi.Input
 

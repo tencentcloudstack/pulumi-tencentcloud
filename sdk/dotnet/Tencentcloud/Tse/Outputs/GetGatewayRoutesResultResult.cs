@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class GetGatewayRoutesResultResult
     {
+        /// <summary>
+        /// route list.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetGatewayRoutesResultRouteListResult> RouteLists;
+        /// <summary>
+        /// total count.
+        /// </summary>
         public readonly int TotalCount;
 
         [OutputConstructor]

@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewDisk(ctx, "disk", &Lighthouse.DiskArgs{
-// 			DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
-// 				Period:    pulumi.Int(1),
-// 				RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 				TimeUnit:  pulumi.String("m"),
-// 			},
-// 			DiskName: pulumi.String("test"),
-// 			DiskSize: pulumi.Int(20),
-// 			DiskType: pulumi.String("CLOUD_SSD"),
-// 			Zone:     pulumi.String("ap-hongkong-2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewDisk(ctx, "disk", &Lighthouse.DiskArgs{
+//				DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
+//					Period:    pulumi.Int(1),
+//					RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//					TimeUnit:  pulumi.String("m"),
+//				},
+//				DiskName: pulumi.String("test"),
+//				DiskSize: pulumi.Int(20),
+//				DiskType: pulumi.String("CLOUD_SSD"),
+//				Zone:     pulumi.String("ap-hongkong-2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Disk struct {
 	pulumi.CustomResourceState
@@ -223,7 +226,7 @@ func (i *Disk) ToDiskOutputWithContext(ctx context.Context) DiskOutput {
 // DiskArrayInput is an input type that accepts DiskArray and DiskArrayOutput values.
 // You can construct a concrete instance of `DiskArrayInput` via:
 //
-//          DiskArray{ DiskArgs{...} }
+//	DiskArray{ DiskArgs{...} }
 type DiskArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +251,7 @@ func (i DiskArray) ToDiskArrayOutputWithContext(ctx context.Context) DiskArrayOu
 // DiskMapInput is an input type that accepts DiskMap and DiskMapOutput values.
 // You can construct a concrete instance of `DiskMapInput` via:
 //
-//          DiskMap{ "key": DiskArgs{...} }
+//	DiskMap{ "key": DiskArgs{...} }
 type DiskMapInput interface {
 	pulumi.Input
 

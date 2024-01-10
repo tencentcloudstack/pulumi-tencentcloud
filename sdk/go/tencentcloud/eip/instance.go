@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-// 			BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
-// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-// 			Type:               pulumi.String("EIP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
+//				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+//				Type:               pulumi.String("EIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### AntiDDos Eip
 //
@@ -43,27 +46,59 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-// 			AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
-// 			BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
-// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			Type: pulumi.String("AntiDDoSEIP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
+//				BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
+//				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//				Type: pulumi.String("AntiDDoSEIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Eip With Network Egress
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				Egress:                  pulumi.String("center_egress2"),
+//				InternetChargeType:      pulumi.String("BANDWIDTH_PACKAGE"),
+//				InternetMaxBandwidthOut: pulumi.Int(1),
+//				InternetServiceProvider: pulumi.String("CMCC"),
+//				Type:                    pulumi.String("EIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -71,7 +106,9 @@ import (
 // EIP can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+//
+//	$ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -88,6 +125,8 @@ type Instance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringOutput `pulumi:"bandwidthPackageId"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringOutput `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
@@ -150,6 +189,8 @@ type instanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress *string `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
@@ -183,6 +224,8 @@ type InstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringPtrInput
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType pulumi.StringPtrInput
 	// The bandwidth limit of EIP, unit is Mbps.
@@ -220,6 +263,8 @@ type instanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress *string `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// The bandwidth limit of EIP, unit is Mbps.
@@ -250,6 +295,8 @@ type InstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringPtrInput
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
 	InternetChargeType pulumi.StringPtrInput
 	// The bandwidth limit of EIP, unit is Mbps.
@@ -292,7 +339,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -317,7 +364,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -378,6 +425,11 @@ func (o InstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 // ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 func (o InstanceOutput) BandwidthPackageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.BandwidthPackageId }).(pulumi.StringOutput)
+}
+
+// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+func (o InstanceOutput) Egress() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Egress }).(pulumi.StringOutput)
 }
 
 // The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.

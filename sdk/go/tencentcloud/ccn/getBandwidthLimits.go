@@ -18,40 +18,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		otherRegion1 := "ap-shanghai"
-// 		if param := cfg.Get("otherRegion1"); param != "" {
-// 			otherRegion1 = param
-// 		}
-// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			Description: pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:         pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Ccn.GetBandwidthLimitsOutput(ctx, ccn.GetBandwidthLimitsOutputArgs{
-// 			CcnId: main.ID(),
-// 		}, nil)
-// 		_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
-// 			CcnId:          main.ID(),
-// 			Region:         pulumi.String(otherRegion1),
-// 			BandwidthLimit: pulumi.Int(500),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			otherRegion1 := "ap-shanghai"
+//			if param := cfg.Get("otherRegion1"); param != "" {
+//				otherRegion1 = param
+//			}
+//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				Description: pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:         pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Ccn.GetBandwidthLimitsOutput(ctx, ccn.GetBandwidthLimitsOutputArgs{
+//				CcnId: main.ID(),
+//			}, nil)
+//			_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
+//				CcnId:          main.ID(),
+//				Region:         pulumi.String(otherRegion1),
+//				BandwidthLimit: pulumi.Int(500),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBandwidthLimits(ctx *pulumi.Context, args *GetBandwidthLimitsArgs, opts ...pulumi.InvokeOption) (*GetBandwidthLimitsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

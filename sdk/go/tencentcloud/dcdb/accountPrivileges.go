@@ -18,7 +18,9 @@ import (
 // dcdb account_privileges can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
+//
+//	$ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
+//
 // ```
 type AccountPrivileges struct {
 	pulumi.CustomResourceState
@@ -173,7 +175,7 @@ func (i *AccountPrivileges) ToAccountPrivilegesOutputWithContext(ctx context.Con
 // AccountPrivilegesArrayInput is an input type that accepts AccountPrivilegesArray and AccountPrivilegesArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesArrayInput` via:
 //
-//          AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
+//	AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
 type AccountPrivilegesArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +200,7 @@ func (i AccountPrivilegesArray) ToAccountPrivilegesArrayOutputWithContext(ctx co
 // AccountPrivilegesMapInput is an input type that accepts AccountPrivilegesMap and AccountPrivilegesMapOutput values.
 // You can construct a concrete instance of `AccountPrivilegesMapInput` via:
 //
-//          AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
+//	AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
 type AccountPrivilegesMapInput interface {
 	pulumi.Input
 

@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewWorkload(ctx, "workload", &Tem.WorkloadArgs{
-// 			ApplicationId: pulumi.String("app-j4d3x6kj"),
-// 			CpuSpec:       pulumi.Float64(1),
-// 			DeployMode:    pulumi.String("IMAGE"),
-// 			DeployVersion: pulumi.String("hello-world"),
-// 			EnvironmentId: pulumi.String("en-85377m6j"),
-// 			ImgRepo:       pulumi.String("tem_demo/tem_demo"),
-// 			InitPodNum:    pulumi.Int(1),
-// 			MemorySpec:    pulumi.Float64(1),
-// 			RepoServer:    pulumi.String("ccr.ccs.tencentyun.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewWorkload(ctx, "workload", &Tem.WorkloadArgs{
+//				ApplicationId: pulumi.String("app-j4d3x6kj"),
+//				CpuSpec:       pulumi.Float64(1),
+//				DeployMode:    pulumi.String("IMAGE"),
+//				DeployVersion: pulumi.String("hello-world"),
+//				EnvironmentId: pulumi.String("en-85377m6j"),
+//				ImgRepo:       pulumi.String("tem_demo/tem_demo"),
+//				InitPodNum:    pulumi.Int(1),
+//				MemorySpec:    pulumi.Float64(1),
+//				RepoServer:    pulumi.String("ccr.ccs.tencentyun.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // tem workload can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
+//
+//	$ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
+//
 // ```
 type Workload struct {
 	pulumi.CustomResourceState
@@ -362,7 +367,7 @@ func (i *Workload) ToWorkloadOutputWithContext(ctx context.Context) WorkloadOutp
 // WorkloadArrayInput is an input type that accepts WorkloadArray and WorkloadArrayOutput values.
 // You can construct a concrete instance of `WorkloadArrayInput` via:
 //
-//          WorkloadArray{ WorkloadArgs{...} }
+//	WorkloadArray{ WorkloadArgs{...} }
 type WorkloadArrayInput interface {
 	pulumi.Input
 
@@ -387,7 +392,7 @@ func (i WorkloadArray) ToWorkloadArrayOutputWithContext(ctx context.Context) Wor
 // WorkloadMapInput is an input type that accepts WorkloadMap and WorkloadMapOutput values.
 // You can construct a concrete instance of `WorkloadMapInput` via:
 //
-//          WorkloadMap{ "key": WorkloadArgs{...} }
+//	WorkloadMap{ "key": WorkloadArgs{...} }
 type WorkloadMapInput interface {
 	pulumi.Input
 

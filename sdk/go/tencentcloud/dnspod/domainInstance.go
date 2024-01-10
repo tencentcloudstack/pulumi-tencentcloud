@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDomainInstance(ctx, "foo", &Dnspod.DomainInstanceArgs{
-// 			Domain: pulumi.String("hello.com"),
-// 			Remark: pulumi.String("this is demo"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDomainInstance(ctx, "foo", &Dnspod.DomainInstanceArgs{
+//				Domain: pulumi.String("hello.com"),
+//				Remark: pulumi.String("this is demo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // DnsPod Domain instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+//
+//	$ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+//
 // ```
 type DomainInstance struct {
 	pulumi.CustomResourceState
@@ -57,6 +62,8 @@ type DomainInstance struct {
 	IsMark pulumi.StringOutput `pulumi:"isMark"`
 	// The remark of Domain.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns pulumi.StringOutput `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
 }
@@ -104,6 +111,8 @@ type domainInstanceState struct {
 	IsMark *string `pulumi:"isMark"`
 	// The remark of Domain.
 	Remark *string `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns *string `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status *string `pulumi:"status"`
 }
@@ -119,6 +128,8 @@ type DomainInstanceState struct {
 	IsMark pulumi.StringPtrInput
 	// The remark of Domain.
 	Remark pulumi.StringPtrInput
+	// Is secondary DNS enabled.
+	SlaveDns pulumi.StringPtrInput
 	// The status of Domain.
 	Status pulumi.StringPtrInput
 }
@@ -180,7 +191,7 @@ func (i *DomainInstance) ToDomainInstanceOutputWithContext(ctx context.Context) 
 // DomainInstanceArrayInput is an input type that accepts DomainInstanceArray and DomainInstanceArrayOutput values.
 // You can construct a concrete instance of `DomainInstanceArrayInput` via:
 //
-//          DomainInstanceArray{ DomainInstanceArgs{...} }
+//	DomainInstanceArray{ DomainInstanceArgs{...} }
 type DomainInstanceArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +216,7 @@ func (i DomainInstanceArray) ToDomainInstanceArrayOutputWithContext(ctx context.
 // DomainInstanceMapInput is an input type that accepts DomainInstanceMap and DomainInstanceMapOutput values.
 // You can construct a concrete instance of `DomainInstanceMapInput` via:
 //
-//          DomainInstanceMap{ "key": DomainInstanceArgs{...} }
+//	DomainInstanceMap{ "key": DomainInstanceArgs{...} }
 type DomainInstanceMapInput interface {
 	pulumi.Input
 
@@ -264,6 +275,11 @@ func (o DomainInstanceOutput) IsMark() pulumi.StringOutput {
 // The remark of Domain.
 func (o DomainInstanceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Is secondary DNS enabled.
+func (o DomainInstanceOutput) SlaveDns() pulumi.StringOutput {
+	return o.ApplyT(func(v *DomainInstance) pulumi.StringOutput { return v.SlaveDns }).(pulumi.StringOutput)
 }
 
 // The status of Domain.

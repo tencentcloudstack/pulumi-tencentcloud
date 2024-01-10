@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewDeleteLogBackupOperation(ctx, "deleteLogBackupOperation", &Postgresql.DeleteLogBackupOperationArgs{
-// 			DbInstanceId: pulumi.String("local.pg_id"),
-// 			LogBackupId:  pulumi.String("local.pg_log_backup_id"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewDeleteLogBackupOperation(ctx, "deleteLogBackupOperation", &Postgresql.DeleteLogBackupOperationArgs{
+//				DbInstanceId: pulumi.String("local.pg_id"),
+//				LogBackupId:  pulumi.String("local.pg_log_backup_id"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DeleteLogBackupOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *DeleteLogBackupOperation) ToDeleteLogBackupOperationOutputWithContext(c
 // DeleteLogBackupOperationArrayInput is an input type that accepts DeleteLogBackupOperationArray and DeleteLogBackupOperationArrayOutput values.
 // You can construct a concrete instance of `DeleteLogBackupOperationArrayInput` via:
 //
-//          DeleteLogBackupOperationArray{ DeleteLogBackupOperationArgs{...} }
+//	DeleteLogBackupOperationArray{ DeleteLogBackupOperationArgs{...} }
 type DeleteLogBackupOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i DeleteLogBackupOperationArray) ToDeleteLogBackupOperationArrayOutputWith
 // DeleteLogBackupOperationMapInput is an input type that accepts DeleteLogBackupOperationMap and DeleteLogBackupOperationMapOutput values.
 // You can construct a concrete instance of `DeleteLogBackupOperationMapInput` via:
 //
-//          DeleteLogBackupOperationMap{ "key": DeleteLogBackupOperationArgs{...} }
+//	DeleteLogBackupOperationMap{ "key": DeleteLogBackupOperationArgs{...} }
 type DeleteLogBackupOperationMapInput interface {
 	pulumi.Input
 

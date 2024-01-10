@@ -14,13 +14,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Ssm.Secret("foo", {
- *     description: "user defined secret",
+ * const example = new tencentcloud.Ssm.Secret("example", {
+ *     description: "desc.",
  *     isEnabled: true,
  *     recoveryWindowInDays: 0,
- *     secretName: "test",
+ *     secretName: "tf-example",
  *     tags: {
- *         "test-tag": "test",
+ *         createBy: "terraform",
  *     },
  * });
  * ```
@@ -31,23 +31,40 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instance = tencentcloud.Redis.getInstances({
- *     zone: "ap-guangzhou-6",
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 8,
  * });
- * const secret = new tencentcloud.ssm.Secret("secret", {
- *     secretName: "for-redis-test",
- *     description: "redis secret",
- *     isEnabled: false,
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: zone.then(zone => zone.lists?[3]?.zone),
+ *     cidrBlock: "10.0.0.0/16",
+ * });
+ * const exampleInstance = new tencentcloud.redis.Instance("exampleInstance", {
+ *     availabilityZone: zone.then(zone => zone.lists?[3]?.zone),
+ *     typeId: zone.then(zone => zone.lists?[3]?.typeId),
+ *     password: "Qwer@234",
+ *     memSize: zone.then(zone => zone.lists?[3]?.memSizes?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?[3]?.redisShardNums?[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?[3]?.redisReplicasNums?[0]),
+ *     port: 6379,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ * });
+ * const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+ *     secretName: "tf-example",
+ *     description: "redis desc.",
+ *     isEnabled: true,
  *     secretType: 4,
- *     additionalConfig: instance.then(instance => JSON.stringify({
+ *     additionalConfig: exampleInstance.id.apply(id => JSON.stringify({
  *         Region: "ap-guangzhou",
  *         Privilege: "r",
- *         InstanceId: instance.instanceLists?[0]?.redisId,
+ *         InstanceId: id,
  *         ReadonlyPolicy: ["master"],
  *         Remark: "for tf test",
  *     })),
  *     tags: {
- *         "test-tag": "test",
+ *         createdBy: "terraform",
  *     },
  *     recoveryWindowInDays: 0,
  * });
@@ -114,7 +131,7 @@ export class Secret extends pulumi.CustomResource {
      */
     public readonly secretName!: pulumi.Output<string>;
     /**
-     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     * Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
      */
     public readonly secretType!: pulumi.Output<number>;
     /**
@@ -197,7 +214,7 @@ export interface SecretState {
      */
     secretName?: pulumi.Input<string>;
     /**
-     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     * Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
      */
     secretType?: pulumi.Input<number>;
     /**
@@ -239,7 +256,7 @@ export interface SecretArgs {
      */
     secretName: pulumi.Input<string>;
     /**
-     * Type of secret. `0`: user-defined secret. `4`: redis secret.
+     * Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
      */
     secretType?: pulumi.Input<number>;
     /**

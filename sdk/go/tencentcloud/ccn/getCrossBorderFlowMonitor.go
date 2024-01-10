@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetCrossBorderFlowMonitor(ctx, &ccn.GetCrossBorderFlowMonitorArgs{
-// 			CcnId:             "ccn-39lqkygf",
-// 			CcnUin:            "979137",
-// 			DestinationRegion: "ap-singapore",
-// 			EndTime:           "2023-01-01 01:00:00",
-// 			Period:            60,
-// 			SourceRegion:      "ap-guangzhou",
-// 			StartTime:         "2023-01-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetCrossBorderFlowMonitor(ctx, &ccn.GetCrossBorderFlowMonitorArgs{
+//				CcnId:             "ccn-39lqkygf",
+//				CcnUin:            "979137",
+//				DestinationRegion: "ap-singapore",
+//				EndTime:           "2023-01-01 01:00:00",
+//				Period:            60,
+//				SourceRegion:      "ap-guangzhou",
+//				StartTime:         "2023-01-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCrossBorderFlowMonitor(ctx *pulumi.Context, args *GetCrossBorderFlowMonitorArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderFlowMonitorResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -6,10 +6,16 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .event_bus import *
+from .event_connector import *
 from .event_rule import *
 from .event_target import *
 from .event_transform import *
 from .get_bus import *
+from .get_event_rules import *
+from .get_plateform_event_template import *
+from .get_platform_event_names import *
+from .get_platform_event_patterns import *
+from .get_platform_products import *
 from .get_search import *
 from .put_events import *
 from ._inputs import *

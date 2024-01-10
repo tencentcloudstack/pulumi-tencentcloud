@@ -25,6 +25,7 @@ from .get_specinfos import *
 from .get_xlogs import *
 from .get_zones import *
 from .instance import *
+from .instance_ha_config import *
 from .isolate_db_instance_operation import *
 from .modify_account_remark_operation import *
 from .modify_switch_time_period_operation import *

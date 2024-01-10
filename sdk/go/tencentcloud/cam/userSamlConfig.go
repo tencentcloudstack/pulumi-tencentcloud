@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewUserSamlConfig(ctx, "userSamlConfig", &Cam.UserSamlConfigArgs{
-// 			SamlMetadataDocument: pulumi.String("./metadataDocument.xml"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewUserSamlConfig(ctx, "userSamlConfig", &Cam.UserSamlConfigArgs{
+//				SamlMetadataDocument: pulumi.String("./metadataDocument.xml"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // cam user_saml_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
+//
+//	$ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
+//
 // ```
 type UserSamlConfig struct {
 	pulumi.CustomResourceState
@@ -149,7 +154,7 @@ func (i *UserSamlConfig) ToUserSamlConfigOutputWithContext(ctx context.Context) 
 // UserSamlConfigArrayInput is an input type that accepts UserSamlConfigArray and UserSamlConfigArrayOutput values.
 // You can construct a concrete instance of `UserSamlConfigArrayInput` via:
 //
-//          UserSamlConfigArray{ UserSamlConfigArgs{...} }
+//	UserSamlConfigArray{ UserSamlConfigArgs{...} }
 type UserSamlConfigArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +179,7 @@ func (i UserSamlConfigArray) ToUserSamlConfigArrayOutputWithContext(ctx context.
 // UserSamlConfigMapInput is an input type that accepts UserSamlConfigMap and UserSamlConfigMapOutput values.
 // You can construct a concrete instance of `UserSamlConfigMapInput` via:
 //
-//          UserSamlConfigMap{ "key": UserSamlConfigArgs{...} }
+//	UserSamlConfigMap{ "key": UserSamlConfigArgs{...} }
 type UserSamlConfigMapInput interface {
 	pulumi.Input
 

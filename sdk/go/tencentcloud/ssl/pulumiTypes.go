@@ -22,7 +22,7 @@ type FreeCertificateDvAuth struct {
 // FreeCertificateDvAuthInput is an input type that accepts FreeCertificateDvAuthArgs and FreeCertificateDvAuthOutput values.
 // You can construct a concrete instance of `FreeCertificateDvAuthInput` via:
 //
-//          FreeCertificateDvAuthArgs{...}
+//	FreeCertificateDvAuthArgs{...}
 type FreeCertificateDvAuthInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i FreeCertificateDvAuthArgs) ToFreeCertificateDvAuthOutputWithContext(ctx 
 // FreeCertificateDvAuthArrayInput is an input type that accepts FreeCertificateDvAuthArray and FreeCertificateDvAuthArrayOutput values.
 // You can construct a concrete instance of `FreeCertificateDvAuthArrayInput` via:
 //
-//          FreeCertificateDvAuthArray{ FreeCertificateDvAuthArgs{...} }
+//	FreeCertificateDvAuthArray{ FreeCertificateDvAuthArgs{...} }
 type FreeCertificateDvAuthArrayInput interface {
 	pulumi.Input
 
@@ -126,18 +126,15 @@ func (o FreeCertificateDvAuthArrayOutput) Index(i pulumi.IntInput) FreeCertifica
 }
 
 type PayCertificateDvAuth struct {
-	// DV authentication key.
-	DvAuthKey *string `pulumi:"dvAuthKey"`
-	// DV authentication value.
-	DvAuthValue *string `pulumi:"dvAuthValue"`
-	// DV authentication type.
+	DvAuthKey        *string `pulumi:"dvAuthKey"`
+	DvAuthValue      *string `pulumi:"dvAuthValue"`
 	DvAuthVerifyType *string `pulumi:"dvAuthVerifyType"`
 }
 
 // PayCertificateDvAuthInput is an input type that accepts PayCertificateDvAuthArgs and PayCertificateDvAuthOutput values.
 // You can construct a concrete instance of `PayCertificateDvAuthInput` via:
 //
-//          PayCertificateDvAuthArgs{...}
+//	PayCertificateDvAuthArgs{...}
 type PayCertificateDvAuthInput interface {
 	pulumi.Input
 
@@ -146,11 +143,8 @@ type PayCertificateDvAuthInput interface {
 }
 
 type PayCertificateDvAuthArgs struct {
-	// DV authentication key.
-	DvAuthKey pulumi.StringPtrInput `pulumi:"dvAuthKey"`
-	// DV authentication value.
-	DvAuthValue pulumi.StringPtrInput `pulumi:"dvAuthValue"`
-	// DV authentication type.
+	DvAuthKey        pulumi.StringPtrInput `pulumi:"dvAuthKey"`
+	DvAuthValue      pulumi.StringPtrInput `pulumi:"dvAuthValue"`
 	DvAuthVerifyType pulumi.StringPtrInput `pulumi:"dvAuthVerifyType"`
 }
 
@@ -169,7 +163,7 @@ func (i PayCertificateDvAuthArgs) ToPayCertificateDvAuthOutputWithContext(ctx co
 // PayCertificateDvAuthArrayInput is an input type that accepts PayCertificateDvAuthArray and PayCertificateDvAuthArrayOutput values.
 // You can construct a concrete instance of `PayCertificateDvAuthArrayInput` via:
 //
-//          PayCertificateDvAuthArray{ PayCertificateDvAuthArgs{...} }
+//	PayCertificateDvAuthArray{ PayCertificateDvAuthArgs{...} }
 type PayCertificateDvAuthArrayInput interface {
 	pulumi.Input
 
@@ -205,17 +199,14 @@ func (o PayCertificateDvAuthOutput) ToPayCertificateDvAuthOutputWithContext(ctx 
 	return o
 }
 
-// DV authentication key.
 func (o PayCertificateDvAuthOutput) DvAuthKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PayCertificateDvAuth) *string { return v.DvAuthKey }).(pulumi.StringPtrOutput)
 }
 
-// DV authentication value.
 func (o PayCertificateDvAuthOutput) DvAuthValue() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PayCertificateDvAuth) *string { return v.DvAuthValue }).(pulumi.StringPtrOutput)
 }
 
-// DV authentication type.
 func (o PayCertificateDvAuthOutput) DvAuthVerifyType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PayCertificateDvAuth) *string { return v.DvAuthVerifyType }).(pulumi.StringPtrOutput)
 }
@@ -296,7 +287,7 @@ type PayCertificateInformation struct {
 // PayCertificateInformationInput is an input type that accepts PayCertificateInformationArgs and PayCertificateInformationOutput values.
 // You can construct a concrete instance of `PayCertificateInformationInput` via:
 //
-//          PayCertificateInformationArgs{...}
+//	PayCertificateInformationArgs{...}
 type PayCertificateInformationInput interface {
 	pulumi.Input
 
@@ -380,11 +371,11 @@ func (i PayCertificateInformationArgs) ToPayCertificateInformationPtrOutputWithC
 // PayCertificateInformationPtrInput is an input type that accepts PayCertificateInformationArgs, PayCertificateInformationPtr and PayCertificateInformationPtrOutput values.
 // You can construct a concrete instance of `PayCertificateInformationPtrInput` via:
 //
-//          PayCertificateInformationArgs{...}
+//	        PayCertificateInformationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PayCertificateInformationPtrInput interface {
 	pulumi.Input
 
@@ -833,6 +824,112 @@ func (o PayCertificateInformationPtrOutput) VerifyType() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+type UpdateCertificateInstanceOperationResourceTypesRegion struct {
+	// Region list.
+	Regions []string `pulumi:"regions"`
+	// Cloud resource type.
+	ResourceType *string `pulumi:"resourceType"`
+}
+
+// UpdateCertificateInstanceOperationResourceTypesRegionInput is an input type that accepts UpdateCertificateInstanceOperationResourceTypesRegionArgs and UpdateCertificateInstanceOperationResourceTypesRegionOutput values.
+// You can construct a concrete instance of `UpdateCertificateInstanceOperationResourceTypesRegionInput` via:
+//
+//	UpdateCertificateInstanceOperationResourceTypesRegionArgs{...}
+type UpdateCertificateInstanceOperationResourceTypesRegionInput interface {
+	pulumi.Input
+
+	ToUpdateCertificateInstanceOperationResourceTypesRegionOutput() UpdateCertificateInstanceOperationResourceTypesRegionOutput
+	ToUpdateCertificateInstanceOperationResourceTypesRegionOutputWithContext(context.Context) UpdateCertificateInstanceOperationResourceTypesRegionOutput
+}
+
+type UpdateCertificateInstanceOperationResourceTypesRegionArgs struct {
+	// Region list.
+	Regions pulumi.StringArrayInput `pulumi:"regions"`
+	// Cloud resource type.
+	ResourceType pulumi.StringPtrInput `pulumi:"resourceType"`
+}
+
+func (UpdateCertificateInstanceOperationResourceTypesRegionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegion)(nil)).Elem()
+}
+
+func (i UpdateCertificateInstanceOperationResourceTypesRegionArgs) ToUpdateCertificateInstanceOperationResourceTypesRegionOutput() UpdateCertificateInstanceOperationResourceTypesRegionOutput {
+	return i.ToUpdateCertificateInstanceOperationResourceTypesRegionOutputWithContext(context.Background())
+}
+
+func (i UpdateCertificateInstanceOperationResourceTypesRegionArgs) ToUpdateCertificateInstanceOperationResourceTypesRegionOutputWithContext(ctx context.Context) UpdateCertificateInstanceOperationResourceTypesRegionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpdateCertificateInstanceOperationResourceTypesRegionOutput)
+}
+
+// UpdateCertificateInstanceOperationResourceTypesRegionArrayInput is an input type that accepts UpdateCertificateInstanceOperationResourceTypesRegionArray and UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput values.
+// You can construct a concrete instance of `UpdateCertificateInstanceOperationResourceTypesRegionArrayInput` via:
+//
+//	UpdateCertificateInstanceOperationResourceTypesRegionArray{ UpdateCertificateInstanceOperationResourceTypesRegionArgs{...} }
+type UpdateCertificateInstanceOperationResourceTypesRegionArrayInput interface {
+	pulumi.Input
+
+	ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutput() UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput
+	ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutputWithContext(context.Context) UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput
+}
+
+type UpdateCertificateInstanceOperationResourceTypesRegionArray []UpdateCertificateInstanceOperationResourceTypesRegionInput
+
+func (UpdateCertificateInstanceOperationResourceTypesRegionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UpdateCertificateInstanceOperationResourceTypesRegion)(nil)).Elem()
+}
+
+func (i UpdateCertificateInstanceOperationResourceTypesRegionArray) ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutput() UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput {
+	return i.ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutputWithContext(context.Background())
+}
+
+func (i UpdateCertificateInstanceOperationResourceTypesRegionArray) ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutputWithContext(ctx context.Context) UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput)
+}
+
+type UpdateCertificateInstanceOperationResourceTypesRegionOutput struct{ *pulumi.OutputState }
+
+func (UpdateCertificateInstanceOperationResourceTypesRegionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegion)(nil)).Elem()
+}
+
+func (o UpdateCertificateInstanceOperationResourceTypesRegionOutput) ToUpdateCertificateInstanceOperationResourceTypesRegionOutput() UpdateCertificateInstanceOperationResourceTypesRegionOutput {
+	return o
+}
+
+func (o UpdateCertificateInstanceOperationResourceTypesRegionOutput) ToUpdateCertificateInstanceOperationResourceTypesRegionOutputWithContext(ctx context.Context) UpdateCertificateInstanceOperationResourceTypesRegionOutput {
+	return o
+}
+
+// Region list.
+func (o UpdateCertificateInstanceOperationResourceTypesRegionOutput) Regions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v UpdateCertificateInstanceOperationResourceTypesRegion) []string { return v.Regions }).(pulumi.StringArrayOutput)
+}
+
+// Cloud resource type.
+func (o UpdateCertificateInstanceOperationResourceTypesRegionOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UpdateCertificateInstanceOperationResourceTypesRegion) *string { return v.ResourceType }).(pulumi.StringPtrOutput)
+}
+
+type UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput struct{ *pulumi.OutputState }
+
+func (UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UpdateCertificateInstanceOperationResourceTypesRegion)(nil)).Elem()
+}
+
+func (o UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput) ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutput() UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput {
+	return o
+}
+
+func (o UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput) ToUpdateCertificateInstanceOperationResourceTypesRegionArrayOutputWithContext(ctx context.Context) UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput {
+	return o
+}
+
+func (o UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput) Index(i pulumi.IntInput) UpdateCertificateInstanceOperationResourceTypesRegionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UpdateCertificateInstanceOperationResourceTypesRegion {
+		return vs[0].([]UpdateCertificateInstanceOperationResourceTypesRegion)[vs[1].(int)]
+	}).(UpdateCertificateInstanceOperationResourceTypesRegionOutput)
+}
+
 type GetCertificatesCertificate struct {
 	// Beginning time of the SSL certificate.
 	BeginTime string `pulumi:"beginTime"`
@@ -869,7 +966,7 @@ type GetCertificatesCertificate struct {
 // GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateInput` via:
 //
-//          GetCertificatesCertificateArgs{...}
+//	GetCertificatesCertificateArgs{...}
 type GetCertificatesCertificateInput interface {
 	pulumi.Input
 
@@ -925,7 +1022,7 @@ func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutputWithCo
 // GetCertificatesCertificateArrayInput is an input type that accepts GetCertificatesCertificateArray and GetCertificatesCertificateArrayOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateArrayInput` via:
 //
-//          GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
+//	GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
 type GetCertificatesCertificateArrayInput interface {
 	pulumi.Input
 
@@ -1068,7 +1165,7 @@ type GetCertificatesCertificateDvAuth struct {
 // GetCertificatesCertificateDvAuthInput is an input type that accepts GetCertificatesCertificateDvAuthArgs and GetCertificatesCertificateDvAuthOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateDvAuthInput` via:
 //
-//          GetCertificatesCertificateDvAuthArgs{...}
+//	GetCertificatesCertificateDvAuthArgs{...}
 type GetCertificatesCertificateDvAuthInput interface {
 	pulumi.Input
 
@@ -1100,7 +1197,7 @@ func (i GetCertificatesCertificateDvAuthArgs) ToGetCertificatesCertificateDvAuth
 // GetCertificatesCertificateDvAuthArrayInput is an input type that accepts GetCertificatesCertificateDvAuthArray and GetCertificatesCertificateDvAuthArrayOutput values.
 // You can construct a concrete instance of `GetCertificatesCertificateDvAuthArrayInput` via:
 //
-//          GetCertificatesCertificateDvAuthArray{ GetCertificatesCertificateDvAuthArgs{...} }
+//	GetCertificatesCertificateDvAuthArray{ GetCertificatesCertificateDvAuthArgs{...} }
 type GetCertificatesCertificateDvAuthArrayInput interface {
 	pulumi.Input
 
@@ -1171,6 +1268,6263 @@ func (o GetCertificatesCertificateDvAuthArrayOutput) Index(i pulumi.IntInput) Ge
 	}).(GetCertificatesCertificateDvAuthOutput)
 }
 
+type GetDescribeCertificateResult struct {
+	// Remark name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Alias string `pulumi:"alias"`
+	// All general names of the CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CACommonNames []string `pulumi:"cACommonNames"`
+	// All encryption methods of CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CAEncryptAlgorithms []string `pulumi:"cAEncryptAlgorithms"`
+	// CA certificate all maturity timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CAEndTimes []string `pulumi:"cAEndTimes"`
+	// Certificate takes effect time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertBeginTime string `pulumi:"certBeginTime"`
+	// The certificate is invalid time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertEndTime string `pulumi:"certEndTime"`
+	// Certificate extension information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateExtras []GetDescribeCertificateResultCertificateExtra `pulumi:"certificateExtras"`
+	// Certificate type: CA = CA certificate, SVR = server certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateType string `pulumi:"certificateType"`
+	// Whether it can be deployed.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Deployable bool `pulumi:"deployable"`
+	// domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Domain string `pulumi:"domain"`
+	// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDetails []GetDescribeCertificateResultDvAuthDetail `pulumi:"dvAuthDetails"`
+	// DV certificate revoking verification valueNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvRevokeAuthDetails []GetDescribeCertificateResultDvRevokeAuthDetail `pulumi:"dvRevokeAuthDetails"`
+	// Certificate source: Trustasia,uploadNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	From string `pulumi:"from"`
+	// application time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	InsertTime string `pulumi:"insertTime"`
+	// Whether it is the DV version.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsDv bool `pulumi:"isDv"`
+	// Whether it is a VIP customer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsVip bool `pulumi:"isVip"`
+	// Whether the vulnerability scanning function is enabled.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsVulnerability bool `pulumi:"isVulnerability"`
+	// Whether it is a pan -domain certificate certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsWildcard bool `pulumi:"isWildcard"`
+	// Order ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrderId string `pulumi:"orderId"`
+	// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Types of Certificate Package: 1 = Geotrust DV SSL CA -G3, 2 = Trustasia TLS RSA CA, 3 = SecureSite Enhanced Enterprise Edition (EV Pro), 4 = SecureSite enhanced (EV), 5 = SecureSite Enterprise Professional Edition (OVPro), 6 = SecureSite Enterprise (OV), 7 = SecureSite Enterprise (OV) compatriots, 8 = Geotrust enhanced type (EV), 9 = Geotrust Enterprise (OV), 10 = Geotrust Enterprise (OV) pass,11 = Trustasia Domain Multi -domain SSL certificate, 12 = Trustasia domain model (DV) passing, 13 = Trustasia Enterprise Passing Character (OV) SSL certificate (D3), 14 = Trustasia Enterprise (OV) SSL certificate (D3), 15= Trustasia Enterprise Multi -domain name (OV) SSL certificate (D3), 16 = Trustasia enhanced (EV) SSL certificate (D3), 17 = Trustasia enhanced multi -domain name (EV) SSL certificate (D3), 18 = GlobalSign enterprise type enterprise type(OV) SSL certificate, 19 = GlobalSign Enterprise Type -type STL Certificate, 20 = GlobalSign enhanced (EV) SSL certificate, 21 = Trustasia Enterprise Tongzhi Multi -domain name (OV) SSL certificate (D3), 22 = GlobalSignignMulti -domain name (OV) SSL certificate, 23 = GlobalSign Enterprise Type -type multi -domain name (OV) SSL certificate, 24 = GlobalSign enhanced multi -domain name (EV) SSL certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PackageType string `pulumi:"packageType"`
+	// Certificate type name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PackageTypeName string `pulumi:"packageTypeName"`
+	// Certificate issuer name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ProductZhName string `pulumi:"productZhName"`
+	// Project ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ProjectId string `pulumi:"projectId"`
+	// Whether you can issue a certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	RenewAble bool `pulumi:"renewAble"`
+	// = Submitted information, to be uploaded to confirmation letter, 9 = Certificate is revoked, 10 = revoked, 11 = Re -issuance, 12 = Upload and revoke the confirmation letter.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Status int `pulumi:"status"`
+	// status information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	StatusMsg string `pulumi:"statusMsg"`
+	// status description.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	StatusName string `pulumi:"statusName"`
+	// The certificate contains multiple domain names (containing the main domain name).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubjectAltNames []string `pulumi:"subjectAltNames"`
+	// Submitted information information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubmittedDatas []GetDescribeCertificateResultSubmittedData `pulumi:"submittedDatas"`
+	// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ValidityPeriod string `pulumi:"validityPeriod"`
+	// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyType string `pulumi:"verifyType"`
+	// Vulnerability scanning evaluation report.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VulnerabilityReport string `pulumi:"vulnerabilityReport"`
+	// Vulnerability scanning status.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VulnerabilityStatus string `pulumi:"vulnerabilityStatus"`
+}
+
+// GetDescribeCertificateResultInput is an input type that accepts GetDescribeCertificateResultArgs and GetDescribeCertificateResultOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultInput` via:
+//
+//	GetDescribeCertificateResultArgs{...}
+type GetDescribeCertificateResultInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultOutput() GetDescribeCertificateResultOutput
+	ToGetDescribeCertificateResultOutputWithContext(context.Context) GetDescribeCertificateResultOutput
+}
+
+type GetDescribeCertificateResultArgs struct {
+	// Remark name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// All general names of the CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CACommonNames pulumi.StringArrayInput `pulumi:"cACommonNames"`
+	// All encryption methods of CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CAEncryptAlgorithms pulumi.StringArrayInput `pulumi:"cAEncryptAlgorithms"`
+	// CA certificate all maturity timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CAEndTimes pulumi.StringArrayInput `pulumi:"cAEndTimes"`
+	// Certificate takes effect time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertBeginTime pulumi.StringInput `pulumi:"certBeginTime"`
+	// The certificate is invalid time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertEndTime pulumi.StringInput `pulumi:"certEndTime"`
+	// Certificate extension information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateExtras GetDescribeCertificateResultCertificateExtraArrayInput `pulumi:"certificateExtras"`
+	// Certificate type: CA = CA certificate, SVR = server certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateType pulumi.StringInput `pulumi:"certificateType"`
+	// Whether it can be deployed.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Deployable pulumi.BoolInput `pulumi:"deployable"`
+	// domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDetails GetDescribeCertificateResultDvAuthDetailArrayInput `pulumi:"dvAuthDetails"`
+	// DV certificate revoking verification valueNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvRevokeAuthDetails GetDescribeCertificateResultDvRevokeAuthDetailArrayInput `pulumi:"dvRevokeAuthDetails"`
+	// Certificate source: Trustasia,uploadNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	From pulumi.StringInput `pulumi:"from"`
+	// application time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	InsertTime pulumi.StringInput `pulumi:"insertTime"`
+	// Whether it is the DV version.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsDv pulumi.BoolInput `pulumi:"isDv"`
+	// Whether it is a VIP customer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsVip pulumi.BoolInput `pulumi:"isVip"`
+	// Whether the vulnerability scanning function is enabled.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsVulnerability pulumi.BoolInput `pulumi:"isVulnerability"`
+	// Whether it is a pan -domain certificate certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsWildcard pulumi.BoolInput `pulumi:"isWildcard"`
+	// Order ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrderId pulumi.StringInput `pulumi:"orderId"`
+	// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Types of Certificate Package: 1 = Geotrust DV SSL CA -G3, 2 = Trustasia TLS RSA CA, 3 = SecureSite Enhanced Enterprise Edition (EV Pro), 4 = SecureSite enhanced (EV), 5 = SecureSite Enterprise Professional Edition (OVPro), 6 = SecureSite Enterprise (OV), 7 = SecureSite Enterprise (OV) compatriots, 8 = Geotrust enhanced type (EV), 9 = Geotrust Enterprise (OV), 10 = Geotrust Enterprise (OV) pass,11 = Trustasia Domain Multi -domain SSL certificate, 12 = Trustasia domain model (DV) passing, 13 = Trustasia Enterprise Passing Character (OV) SSL certificate (D3), 14 = Trustasia Enterprise (OV) SSL certificate (D3), 15= Trustasia Enterprise Multi -domain name (OV) SSL certificate (D3), 16 = Trustasia enhanced (EV) SSL certificate (D3), 17 = Trustasia enhanced multi -domain name (EV) SSL certificate (D3), 18 = GlobalSign enterprise type enterprise type(OV) SSL certificate, 19 = GlobalSign Enterprise Type -type STL Certificate, 20 = GlobalSign enhanced (EV) SSL certificate, 21 = Trustasia Enterprise Tongzhi Multi -domain name (OV) SSL certificate (D3), 22 = GlobalSignignMulti -domain name (OV) SSL certificate, 23 = GlobalSign Enterprise Type -type multi -domain name (OV) SSL certificate, 24 = GlobalSign enhanced multi -domain name (EV) SSL certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PackageType pulumi.StringInput `pulumi:"packageType"`
+	// Certificate type name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PackageTypeName pulumi.StringInput `pulumi:"packageTypeName"`
+	// Certificate issuer name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ProductZhName pulumi.StringInput `pulumi:"productZhName"`
+	// Project ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Whether you can issue a certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	RenewAble pulumi.BoolInput `pulumi:"renewAble"`
+	// = Submitted information, to be uploaded to confirmation letter, 9 = Certificate is revoked, 10 = revoked, 11 = Re -issuance, 12 = Upload and revoke the confirmation letter.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+	// status information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	StatusMsg pulumi.StringInput `pulumi:"statusMsg"`
+	// status description.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	StatusName pulumi.StringInput `pulumi:"statusName"`
+	// The certificate contains multiple domain names (containing the main domain name).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubjectAltNames pulumi.StringArrayInput `pulumi:"subjectAltNames"`
+	// Submitted information information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubmittedDatas GetDescribeCertificateResultSubmittedDataArrayInput `pulumi:"submittedDatas"`
+	// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ValidityPeriod pulumi.StringInput `pulumi:"validityPeriod"`
+	// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyType pulumi.StringInput `pulumi:"verifyType"`
+	// Vulnerability scanning evaluation report.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VulnerabilityReport pulumi.StringInput `pulumi:"vulnerabilityReport"`
+	// Vulnerability scanning status.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VulnerabilityStatus pulumi.StringInput `pulumi:"vulnerabilityStatus"`
+}
+
+func (GetDescribeCertificateResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResult)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultArgs) ToGetDescribeCertificateResultOutput() GetDescribeCertificateResultOutput {
+	return i.ToGetDescribeCertificateResultOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultArgs) ToGetDescribeCertificateResultOutputWithContext(ctx context.Context) GetDescribeCertificateResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultOutput)
+}
+
+// GetDescribeCertificateResultArrayInput is an input type that accepts GetDescribeCertificateResultArray and GetDescribeCertificateResultArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultArrayInput` via:
+//
+//	GetDescribeCertificateResultArray{ GetDescribeCertificateResultArgs{...} }
+type GetDescribeCertificateResultArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultArrayOutput() GetDescribeCertificateResultArrayOutput
+	ToGetDescribeCertificateResultArrayOutputWithContext(context.Context) GetDescribeCertificateResultArrayOutput
+}
+
+type GetDescribeCertificateResultArray []GetDescribeCertificateResultInput
+
+func (GetDescribeCertificateResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResult)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultArray) ToGetDescribeCertificateResultArrayOutput() GetDescribeCertificateResultArrayOutput {
+	return i.ToGetDescribeCertificateResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultArray) ToGetDescribeCertificateResultArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultArrayOutput)
+}
+
+type GetDescribeCertificateResultOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResult)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultOutput) ToGetDescribeCertificateResultOutput() GetDescribeCertificateResultOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultOutput) ToGetDescribeCertificateResultOutputWithContext(ctx context.Context) GetDescribeCertificateResultOutput {
+	return o
+}
+
+// Remark name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// All general names of the CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CACommonNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []string { return v.CACommonNames }).(pulumi.StringArrayOutput)
+}
+
+// All encryption methods of CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CAEncryptAlgorithms() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []string { return v.CAEncryptAlgorithms }).(pulumi.StringArrayOutput)
+}
+
+// CA certificate all maturity timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CAEndTimes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []string { return v.CAEndTimes }).(pulumi.StringArrayOutput)
+}
+
+// Certificate takes effect time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CertBeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.CertBeginTime }).(pulumi.StringOutput)
+}
+
+// The certificate is invalid time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CertEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.CertEndTime }).(pulumi.StringOutput)
+}
+
+// Certificate extension information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CertificateExtras() GetDescribeCertificateResultCertificateExtraArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []GetDescribeCertificateResultCertificateExtra {
+		return v.CertificateExtras
+	}).(GetDescribeCertificateResultCertificateExtraArrayOutput)
+}
+
+// Certificate type: CA = CA certificate, SVR = server certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) CertificateType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.CertificateType }).(pulumi.StringOutput)
+}
+
+// Whether it can be deployed.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) Deployable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.Deployable }).(pulumi.BoolOutput)
+}
+
+// domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) DvAuthDetails() GetDescribeCertificateResultDvAuthDetailArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []GetDescribeCertificateResultDvAuthDetail {
+		return v.DvAuthDetails
+	}).(GetDescribeCertificateResultDvAuthDetailArrayOutput)
+}
+
+// DV certificate revoking verification valueNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) DvRevokeAuthDetails() GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []GetDescribeCertificateResultDvRevokeAuthDetail {
+		return v.DvRevokeAuthDetails
+	}).(GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput)
+}
+
+// Certificate source: Trustasia,uploadNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) From() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.From }).(pulumi.StringOutput)
+}
+
+// application time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) InsertTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.InsertTime }).(pulumi.StringOutput)
+}
+
+// Whether it is the DV version.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) IsDv() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.IsDv }).(pulumi.BoolOutput)
+}
+
+// Whether it is a VIP customer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) IsVip() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.IsVip }).(pulumi.BoolOutput)
+}
+
+// Whether the vulnerability scanning function is enabled.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) IsVulnerability() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.IsVulnerability }).(pulumi.BoolOutput)
+}
+
+// Whether it is a pan -domain certificate certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) IsWildcard() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.IsWildcard }).(pulumi.BoolOutput)
+}
+
+// Order ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) OrderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.OrderId }).(pulumi.StringOutput)
+}
+
+// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Types of Certificate Package: 1 = Geotrust DV SSL CA -G3, 2 = Trustasia TLS RSA CA, 3 = SecureSite Enhanced Enterprise Edition (EV Pro), 4 = SecureSite enhanced (EV), 5 = SecureSite Enterprise Professional Edition (OVPro), 6 = SecureSite Enterprise (OV), 7 = SecureSite Enterprise (OV) compatriots, 8 = Geotrust enhanced type (EV), 9 = Geotrust Enterprise (OV), 10 = Geotrust Enterprise (OV) pass,11 = Trustasia Domain Multi -domain SSL certificate, 12 = Trustasia domain model (DV) passing, 13 = Trustasia Enterprise Passing Character (OV) SSL certificate (D3), 14 = Trustasia Enterprise (OV) SSL certificate (D3), 15= Trustasia Enterprise Multi -domain name (OV) SSL certificate (D3), 16 = Trustasia enhanced (EV) SSL certificate (D3), 17 = Trustasia enhanced multi -domain name (EV) SSL certificate (D3), 18 = GlobalSign enterprise type enterprise type(OV) SSL certificate, 19 = GlobalSign Enterprise Type -type STL Certificate, 20 = GlobalSign enhanced (EV) SSL certificate, 21 = Trustasia Enterprise Tongzhi Multi -domain name (OV) SSL certificate (D3), 22 = GlobalSignignMulti -domain name (OV) SSL certificate, 23 = GlobalSign Enterprise Type -type multi -domain name (OV) SSL certificate, 24 = GlobalSign enhanced multi -domain name (EV) SSL certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) PackageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.PackageType }).(pulumi.StringOutput)
+}
+
+// Certificate type name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) PackageTypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.PackageTypeName }).(pulumi.StringOutput)
+}
+
+// Certificate issuer name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) ProductZhName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.ProductZhName }).(pulumi.StringOutput)
+}
+
+// Project ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Whether you can issue a certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) RenewAble() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) bool { return v.RenewAble }).(pulumi.BoolOutput)
+}
+
+// = Submitted information, to be uploaded to confirmation letter, 9 = Certificate is revoked, 10 = revoked, 11 = Re -issuance, 12 = Upload and revoke the confirmation letter.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// status information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) StatusMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.StatusMsg }).(pulumi.StringOutput)
+}
+
+// status description.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) StatusName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.StatusName }).(pulumi.StringOutput)
+}
+
+// The certificate contains multiple domain names (containing the main domain name).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) SubjectAltNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []string { return v.SubjectAltNames }).(pulumi.StringArrayOutput)
+}
+
+// Submitted information information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) SubmittedDatas() GetDescribeCertificateResultSubmittedDataArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) []GetDescribeCertificateResultSubmittedData {
+		return v.SubmittedDatas
+	}).(GetDescribeCertificateResultSubmittedDataArrayOutput)
+}
+
+// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) ValidityPeriod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.ValidityPeriod }).(pulumi.StringOutput)
+}
+
+// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) VerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.VerifyType }).(pulumi.StringOutput)
+}
+
+// Vulnerability scanning evaluation report.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) VulnerabilityReport() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.VulnerabilityReport }).(pulumi.StringOutput)
+}
+
+// Vulnerability scanning status.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultOutput) VulnerabilityStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResult) string { return v.VulnerabilityStatus }).(pulumi.StringOutput)
+}
+
+type GetDescribeCertificateResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResult)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultArrayOutput) ToGetDescribeCertificateResultArrayOutput() GetDescribeCertificateResultArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultArrayOutput) ToGetDescribeCertificateResultArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResult {
+		return vs[0].([]GetDescribeCertificateResult)[vs[1].(int)]
+	}).(GetDescribeCertificateResultOutput)
+}
+
+type GetDescribeCertificateResultCertificateExtra struct {
+	// Type of company. Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CompanyType int `pulumi:"companyType"`
+	// Certificate can be configured in the number of domain names.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DomainNumber string `pulumi:"domainNumber"`
+	// Original certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OriginCertificateId string `pulumi:"originCertificateId"`
+	// New order certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	RenewOrder string `pulumi:"renewOrder"`
+	// Re -issue the original ID of the certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ReplacedBy string `pulumi:"replacedBy"`
+	// Re -issue a new ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ReplacedFor string `pulumi:"replacedFor"`
+	// Is it a national secret certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SMCert int `pulumi:"sMCert"`
+}
+
+// GetDescribeCertificateResultCertificateExtraInput is an input type that accepts GetDescribeCertificateResultCertificateExtraArgs and GetDescribeCertificateResultCertificateExtraOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultCertificateExtraInput` via:
+//
+//	GetDescribeCertificateResultCertificateExtraArgs{...}
+type GetDescribeCertificateResultCertificateExtraInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultCertificateExtraOutput() GetDescribeCertificateResultCertificateExtraOutput
+	ToGetDescribeCertificateResultCertificateExtraOutputWithContext(context.Context) GetDescribeCertificateResultCertificateExtraOutput
+}
+
+type GetDescribeCertificateResultCertificateExtraArgs struct {
+	// Type of company. Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CompanyType pulumi.IntInput `pulumi:"companyType"`
+	// Certificate can be configured in the number of domain names.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DomainNumber pulumi.StringInput `pulumi:"domainNumber"`
+	// Original certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OriginCertificateId pulumi.StringInput `pulumi:"originCertificateId"`
+	// New order certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	RenewOrder pulumi.StringInput `pulumi:"renewOrder"`
+	// Re -issue the original ID of the certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ReplacedBy pulumi.StringInput `pulumi:"replacedBy"`
+	// Re -issue a new ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ReplacedFor pulumi.StringInput `pulumi:"replacedFor"`
+	// Is it a national secret certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SMCert pulumi.IntInput `pulumi:"sMCert"`
+}
+
+func (GetDescribeCertificateResultCertificateExtraArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultCertificateExtra)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultCertificateExtraArgs) ToGetDescribeCertificateResultCertificateExtraOutput() GetDescribeCertificateResultCertificateExtraOutput {
+	return i.ToGetDescribeCertificateResultCertificateExtraOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultCertificateExtraArgs) ToGetDescribeCertificateResultCertificateExtraOutputWithContext(ctx context.Context) GetDescribeCertificateResultCertificateExtraOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultCertificateExtraOutput)
+}
+
+// GetDescribeCertificateResultCertificateExtraArrayInput is an input type that accepts GetDescribeCertificateResultCertificateExtraArray and GetDescribeCertificateResultCertificateExtraArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultCertificateExtraArrayInput` via:
+//
+//	GetDescribeCertificateResultCertificateExtraArray{ GetDescribeCertificateResultCertificateExtraArgs{...} }
+type GetDescribeCertificateResultCertificateExtraArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultCertificateExtraArrayOutput() GetDescribeCertificateResultCertificateExtraArrayOutput
+	ToGetDescribeCertificateResultCertificateExtraArrayOutputWithContext(context.Context) GetDescribeCertificateResultCertificateExtraArrayOutput
+}
+
+type GetDescribeCertificateResultCertificateExtraArray []GetDescribeCertificateResultCertificateExtraInput
+
+func (GetDescribeCertificateResultCertificateExtraArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultCertificateExtra)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultCertificateExtraArray) ToGetDescribeCertificateResultCertificateExtraArrayOutput() GetDescribeCertificateResultCertificateExtraArrayOutput {
+	return i.ToGetDescribeCertificateResultCertificateExtraArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultCertificateExtraArray) ToGetDescribeCertificateResultCertificateExtraArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultCertificateExtraArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultCertificateExtraArrayOutput)
+}
+
+type GetDescribeCertificateResultCertificateExtraOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultCertificateExtraOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultCertificateExtra)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultCertificateExtraOutput) ToGetDescribeCertificateResultCertificateExtraOutput() GetDescribeCertificateResultCertificateExtraOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultCertificateExtraOutput) ToGetDescribeCertificateResultCertificateExtraOutputWithContext(ctx context.Context) GetDescribeCertificateResultCertificateExtraOutput {
+	return o
+}
+
+// Type of company. Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) CompanyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) int { return v.CompanyType }).(pulumi.IntOutput)
+}
+
+// Certificate can be configured in the number of domain names.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) DomainNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) string { return v.DomainNumber }).(pulumi.StringOutput)
+}
+
+// Original certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) OriginCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) string { return v.OriginCertificateId }).(pulumi.StringOutput)
+}
+
+// New order certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) RenewOrder() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) string { return v.RenewOrder }).(pulumi.StringOutput)
+}
+
+// Re -issue the original ID of the certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) ReplacedBy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) string { return v.ReplacedBy }).(pulumi.StringOutput)
+}
+
+// Re -issue a new ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) ReplacedFor() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) string { return v.ReplacedFor }).(pulumi.StringOutput)
+}
+
+// Is it a national secret certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultCertificateExtraOutput) SMCert() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultCertificateExtra) int { return v.SMCert }).(pulumi.IntOutput)
+}
+
+type GetDescribeCertificateResultCertificateExtraArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultCertificateExtraArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultCertificateExtra)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultCertificateExtraArrayOutput) ToGetDescribeCertificateResultCertificateExtraArrayOutput() GetDescribeCertificateResultCertificateExtraArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultCertificateExtraArrayOutput) ToGetDescribeCertificateResultCertificateExtraArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultCertificateExtraArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultCertificateExtraArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultCertificateExtraOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResultCertificateExtra {
+		return vs[0].([]GetDescribeCertificateResultCertificateExtra)[vs[1].(int)]
+	}).(GetDescribeCertificateResultCertificateExtraOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetail struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain string `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey string `pulumi:"dvAuthKey"`
+	// DV certification sub -domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKeySubDomain string `pulumi:"dvAuthKeySubDomain"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath string `pulumi:"dvAuthPath"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue string `pulumi:"dvAuthValue"`
+	// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuths []GetDescribeCertificateResultDvAuthDetailDvAuth `pulumi:"dvAuths"`
+}
+
+// GetDescribeCertificateResultDvAuthDetailInput is an input type that accepts GetDescribeCertificateResultDvAuthDetailArgs and GetDescribeCertificateResultDvAuthDetailOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvAuthDetailInput` via:
+//
+//	GetDescribeCertificateResultDvAuthDetailArgs{...}
+type GetDescribeCertificateResultDvAuthDetailInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvAuthDetailOutput() GetDescribeCertificateResultDvAuthDetailOutput
+	ToGetDescribeCertificateResultDvAuthDetailOutputWithContext(context.Context) GetDescribeCertificateResultDvAuthDetailOutput
+}
+
+type GetDescribeCertificateResultDvAuthDetailArgs struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain pulumi.StringInput `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey pulumi.StringInput `pulumi:"dvAuthKey"`
+	// DV certification sub -domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKeySubDomain pulumi.StringInput `pulumi:"dvAuthKeySubDomain"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath pulumi.StringInput `pulumi:"dvAuthPath"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue pulumi.StringInput `pulumi:"dvAuthValue"`
+	// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuths GetDescribeCertificateResultDvAuthDetailDvAuthArrayInput `pulumi:"dvAuths"`
+}
+
+func (GetDescribeCertificateResultDvAuthDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetail)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailArgs) ToGetDescribeCertificateResultDvAuthDetailOutput() GetDescribeCertificateResultDvAuthDetailOutput {
+	return i.ToGetDescribeCertificateResultDvAuthDetailOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailArgs) ToGetDescribeCertificateResultDvAuthDetailOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvAuthDetailOutput)
+}
+
+// GetDescribeCertificateResultDvAuthDetailArrayInput is an input type that accepts GetDescribeCertificateResultDvAuthDetailArray and GetDescribeCertificateResultDvAuthDetailArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvAuthDetailArrayInput` via:
+//
+//	GetDescribeCertificateResultDvAuthDetailArray{ GetDescribeCertificateResultDvAuthDetailArgs{...} }
+type GetDescribeCertificateResultDvAuthDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvAuthDetailArrayOutput() GetDescribeCertificateResultDvAuthDetailArrayOutput
+	ToGetDescribeCertificateResultDvAuthDetailArrayOutputWithContext(context.Context) GetDescribeCertificateResultDvAuthDetailArrayOutput
+}
+
+type GetDescribeCertificateResultDvAuthDetailArray []GetDescribeCertificateResultDvAuthDetailInput
+
+func (GetDescribeCertificateResultDvAuthDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvAuthDetail)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailArray) ToGetDescribeCertificateResultDvAuthDetailArrayOutput() GetDescribeCertificateResultDvAuthDetailArrayOutput {
+	return i.ToGetDescribeCertificateResultDvAuthDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailArray) ToGetDescribeCertificateResultDvAuthDetailArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvAuthDetailArrayOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvAuthDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetail)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailOutput) ToGetDescribeCertificateResultDvAuthDetailOutput() GetDescribeCertificateResultDvAuthDetailOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailOutput) ToGetDescribeCertificateResultDvAuthDetailOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailOutput {
+	return o
+}
+
+// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuthDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) string { return v.DvAuthDomain }).(pulumi.StringOutput)
+}
+
+// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuthKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) string { return v.DvAuthKey }).(pulumi.StringOutput)
+}
+
+// DV certification sub -domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuthKeySubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) string { return v.DvAuthKeySubDomain }).(pulumi.StringOutput)
+}
+
+// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuthPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) string { return v.DvAuthPath }).(pulumi.StringOutput)
+}
+
+// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuthValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) string { return v.DvAuthValue }).(pulumi.StringOutput)
+}
+
+// DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailOutput) DvAuths() GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetail) []GetDescribeCertificateResultDvAuthDetailDvAuth {
+		return v.DvAuths
+	}).(GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvAuthDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvAuthDetail)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailArrayOutput) ToGetDescribeCertificateResultDvAuthDetailArrayOutput() GetDescribeCertificateResultDvAuthDetailArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailArrayOutput) ToGetDescribeCertificateResultDvAuthDetailArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultDvAuthDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResultDvAuthDetail {
+		return vs[0].([]GetDescribeCertificateResultDvAuthDetail)[vs[1].(int)]
+	}).(GetDescribeCertificateResultDvAuthDetailOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetailDvAuth struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain string `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey string `pulumi:"dvAuthKey"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath string `pulumi:"dvAuthPath"`
+	// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthSubDomain string `pulumi:"dvAuthSubDomain"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue string `pulumi:"dvAuthValue"`
+	// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthVerifyType string `pulumi:"dvAuthVerifyType"`
+}
+
+// GetDescribeCertificateResultDvAuthDetailDvAuthInput is an input type that accepts GetDescribeCertificateResultDvAuthDetailDvAuthArgs and GetDescribeCertificateResultDvAuthDetailDvAuthOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvAuthDetailDvAuthInput` via:
+//
+//	GetDescribeCertificateResultDvAuthDetailDvAuthArgs{...}
+type GetDescribeCertificateResultDvAuthDetailDvAuthInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvAuthDetailDvAuthOutput() GetDescribeCertificateResultDvAuthDetailDvAuthOutput
+	ToGetDescribeCertificateResultDvAuthDetailDvAuthOutputWithContext(context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthOutput
+}
+
+type GetDescribeCertificateResultDvAuthDetailDvAuthArgs struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain pulumi.StringInput `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey pulumi.StringInput `pulumi:"dvAuthKey"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath pulumi.StringInput `pulumi:"dvAuthPath"`
+	// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthSubDomain pulumi.StringInput `pulumi:"dvAuthSubDomain"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue pulumi.StringInput `pulumi:"dvAuthValue"`
+	// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthVerifyType pulumi.StringInput `pulumi:"dvAuthVerifyType"`
+}
+
+func (GetDescribeCertificateResultDvAuthDetailDvAuthArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailDvAuth)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailDvAuthArgs) ToGetDescribeCertificateResultDvAuthDetailDvAuthOutput() GetDescribeCertificateResultDvAuthDetailDvAuthOutput {
+	return i.ToGetDescribeCertificateResultDvAuthDetailDvAuthOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailDvAuthArgs) ToGetDescribeCertificateResultDvAuthDetailDvAuthOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvAuthDetailDvAuthOutput)
+}
+
+// GetDescribeCertificateResultDvAuthDetailDvAuthArrayInput is an input type that accepts GetDescribeCertificateResultDvAuthDetailDvAuthArray and GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvAuthDetailDvAuthArrayInput` via:
+//
+//	GetDescribeCertificateResultDvAuthDetailDvAuthArray{ GetDescribeCertificateResultDvAuthDetailDvAuthArgs{...} }
+type GetDescribeCertificateResultDvAuthDetailDvAuthArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput() GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput
+	ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutputWithContext(context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput
+}
+
+type GetDescribeCertificateResultDvAuthDetailDvAuthArray []GetDescribeCertificateResultDvAuthDetailDvAuthInput
+
+func (GetDescribeCertificateResultDvAuthDetailDvAuthArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvAuthDetailDvAuth)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailDvAuthArray) ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput() GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput {
+	return i.ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvAuthDetailDvAuthArray) ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetailDvAuthOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvAuthDetailDvAuthOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailDvAuth)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) ToGetDescribeCertificateResultDvAuthDetailDvAuthOutput() GetDescribeCertificateResultDvAuthDetailDvAuthOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) ToGetDescribeCertificateResultDvAuthDetailDvAuthOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthOutput {
+	return o
+}
+
+// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthDomain }).(pulumi.StringOutput)
+}
+
+// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthKey }).(pulumi.StringOutput)
+}
+
+// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthPath }).(pulumi.StringOutput)
+}
+
+// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthSubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthSubDomain }).(pulumi.StringOutput)
+}
+
+// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthValue }).(pulumi.StringOutput)
+}
+
+// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthOutput) DvAuthVerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvAuthDetailDvAuth) string { return v.DvAuthVerifyType }).(pulumi.StringOutput)
+}
+
+type GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvAuthDetailDvAuth)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput) ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput() GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput) ToGetDescribeCertificateResultDvAuthDetailDvAuthArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultDvAuthDetailDvAuthOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResultDvAuthDetailDvAuth {
+		return vs[0].([]GetDescribeCertificateResultDvAuthDetailDvAuth)[vs[1].(int)]
+	}).(GetDescribeCertificateResultDvAuthDetailDvAuthOutput)
+}
+
+type GetDescribeCertificateResultDvRevokeAuthDetail struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain string `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey string `pulumi:"dvAuthKey"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath string `pulumi:"dvAuthPath"`
+	// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthSubDomain string `pulumi:"dvAuthSubDomain"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue string `pulumi:"dvAuthValue"`
+	// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthVerifyType string `pulumi:"dvAuthVerifyType"`
+}
+
+// GetDescribeCertificateResultDvRevokeAuthDetailInput is an input type that accepts GetDescribeCertificateResultDvRevokeAuthDetailArgs and GetDescribeCertificateResultDvRevokeAuthDetailOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvRevokeAuthDetailInput` via:
+//
+//	GetDescribeCertificateResultDvRevokeAuthDetailArgs{...}
+type GetDescribeCertificateResultDvRevokeAuthDetailInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvRevokeAuthDetailOutput() GetDescribeCertificateResultDvRevokeAuthDetailOutput
+	ToGetDescribeCertificateResultDvRevokeAuthDetailOutputWithContext(context.Context) GetDescribeCertificateResultDvRevokeAuthDetailOutput
+}
+
+type GetDescribeCertificateResultDvRevokeAuthDetailArgs struct {
+	// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthDomain pulumi.StringInput `pulumi:"dvAuthDomain"`
+	// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthKey pulumi.StringInput `pulumi:"dvAuthKey"`
+	// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthPath pulumi.StringInput `pulumi:"dvAuthPath"`
+	// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthSubDomain pulumi.StringInput `pulumi:"dvAuthSubDomain"`
+	// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthValue pulumi.StringInput `pulumi:"dvAuthValue"`
+	// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DvAuthVerifyType pulumi.StringInput `pulumi:"dvAuthVerifyType"`
+}
+
+func (GetDescribeCertificateResultDvRevokeAuthDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvRevokeAuthDetail)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvRevokeAuthDetailArgs) ToGetDescribeCertificateResultDvRevokeAuthDetailOutput() GetDescribeCertificateResultDvRevokeAuthDetailOutput {
+	return i.ToGetDescribeCertificateResultDvRevokeAuthDetailOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvRevokeAuthDetailArgs) ToGetDescribeCertificateResultDvRevokeAuthDetailOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvRevokeAuthDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvRevokeAuthDetailOutput)
+}
+
+// GetDescribeCertificateResultDvRevokeAuthDetailArrayInput is an input type that accepts GetDescribeCertificateResultDvRevokeAuthDetailArray and GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultDvRevokeAuthDetailArrayInput` via:
+//
+//	GetDescribeCertificateResultDvRevokeAuthDetailArray{ GetDescribeCertificateResultDvRevokeAuthDetailArgs{...} }
+type GetDescribeCertificateResultDvRevokeAuthDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutput() GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput
+	ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutputWithContext(context.Context) GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput
+}
+
+type GetDescribeCertificateResultDvRevokeAuthDetailArray []GetDescribeCertificateResultDvRevokeAuthDetailInput
+
+func (GetDescribeCertificateResultDvRevokeAuthDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvRevokeAuthDetail)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultDvRevokeAuthDetailArray) ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutput() GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput {
+	return i.ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultDvRevokeAuthDetailArray) ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput)
+}
+
+type GetDescribeCertificateResultDvRevokeAuthDetailOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvRevokeAuthDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultDvRevokeAuthDetail)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) ToGetDescribeCertificateResultDvRevokeAuthDetailOutput() GetDescribeCertificateResultDvRevokeAuthDetailOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) ToGetDescribeCertificateResultDvRevokeAuthDetailOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvRevokeAuthDetailOutput {
+	return o
+}
+
+// DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthDomain }).(pulumi.StringOutput)
+}
+
+// DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthKey }).(pulumi.StringOutput)
+}
+
+// DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthPath }).(pulumi.StringOutput)
+}
+
+// DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthSubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthSubDomain }).(pulumi.StringOutput)
+}
+
+// DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthValue }).(pulumi.StringOutput)
+}
+
+// DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultDvRevokeAuthDetailOutput) DvAuthVerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultDvRevokeAuthDetail) string { return v.DvAuthVerifyType }).(pulumi.StringOutput)
+}
+
+type GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultDvRevokeAuthDetail)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput) ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutput() GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput) ToGetDescribeCertificateResultDvRevokeAuthDetailArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultDvRevokeAuthDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResultDvRevokeAuthDetail {
+		return vs[0].([]GetDescribeCertificateResultDvRevokeAuthDetail)[vs[1].(int)]
+	}).(GetDescribeCertificateResultDvRevokeAuthDetailOutput)
+}
+
+type GetDescribeCertificateResultSubmittedData struct {
+	// Administrator mailbox address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminEmail string `pulumi:"adminEmail"`
+	// Administrator name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminFirstName string `pulumi:"adminFirstName"`
+	// The surname of the administrator.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminLastName string `pulumi:"adminLastName"`
+	// Administrator phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminPhoneNum string `pulumi:"adminPhoneNum"`
+	// Administrator position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminPosition string `pulumi:"adminPosition"`
+	// Domain information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateDomain string `pulumi:"certificateDomain"`
+	// Contact mailbox address,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactEmail string `pulumi:"contactEmail"`
+	// Contact name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactFirstName string `pulumi:"contactFirstName"`
+	// Contact surname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactLastName string `pulumi:"contactLastName"`
+	// Contact phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactNumber string `pulumi:"contactNumber"`
+	// Contact position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactPosition string `pulumi:"contactPosition"`
+	// CSR content.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CsrContent string `pulumi:"csrContent"`
+	// CSR type, (online = online CSR, PARSE = paste CSR).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CsrType string `pulumi:"csrType"`
+	// DNS information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DomainLists []string `pulumi:"domainLists"`
+	// Private key password.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	KeyPassword string `pulumi:"keyPassword"`
+	// address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationAddress string `pulumi:"organizationAddress"`
+	// city.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationCity string `pulumi:"organizationCity"`
+	// nation.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationCountry string `pulumi:"organizationCountry"`
+	// department.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationDivision string `pulumi:"organizationDivision"`
+	// Enterprise or unit name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationName string `pulumi:"organizationName"`
+	// Province.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationRegion string `pulumi:"organizationRegion"`
+	// Local region code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PhoneAreaCode string `pulumi:"phoneAreaCode"`
+	// Landline number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PhoneNumber string `pulumi:"phoneNumber"`
+	// Postal code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PostalCode string `pulumi:"postalCode"`
+	// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyType string `pulumi:"verifyType"`
+}
+
+// GetDescribeCertificateResultSubmittedDataInput is an input type that accepts GetDescribeCertificateResultSubmittedDataArgs and GetDescribeCertificateResultSubmittedDataOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultSubmittedDataInput` via:
+//
+//	GetDescribeCertificateResultSubmittedDataArgs{...}
+type GetDescribeCertificateResultSubmittedDataInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultSubmittedDataOutput() GetDescribeCertificateResultSubmittedDataOutput
+	ToGetDescribeCertificateResultSubmittedDataOutputWithContext(context.Context) GetDescribeCertificateResultSubmittedDataOutput
+}
+
+type GetDescribeCertificateResultSubmittedDataArgs struct {
+	// Administrator mailbox address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminEmail pulumi.StringInput `pulumi:"adminEmail"`
+	// Administrator name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminFirstName pulumi.StringInput `pulumi:"adminFirstName"`
+	// The surname of the administrator.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminLastName pulumi.StringInput `pulumi:"adminLastName"`
+	// Administrator phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminPhoneNum pulumi.StringInput `pulumi:"adminPhoneNum"`
+	// Administrator position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	AdminPosition pulumi.StringInput `pulumi:"adminPosition"`
+	// Domain information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertificateDomain pulumi.StringInput `pulumi:"certificateDomain"`
+	// Contact mailbox address,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactEmail pulumi.StringInput `pulumi:"contactEmail"`
+	// Contact name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactFirstName pulumi.StringInput `pulumi:"contactFirstName"`
+	// Contact surname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactLastName pulumi.StringInput `pulumi:"contactLastName"`
+	// Contact phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactNumber pulumi.StringInput `pulumi:"contactNumber"`
+	// Contact position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ContactPosition pulumi.StringInput `pulumi:"contactPosition"`
+	// CSR content.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CsrContent pulumi.StringInput `pulumi:"csrContent"`
+	// CSR type, (online = online CSR, PARSE = paste CSR).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	CsrType pulumi.StringInput `pulumi:"csrType"`
+	// DNS information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	DomainLists pulumi.StringArrayInput `pulumi:"domainLists"`
+	// Private key password.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	KeyPassword pulumi.StringInput `pulumi:"keyPassword"`
+	// address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationAddress pulumi.StringInput `pulumi:"organizationAddress"`
+	// city.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationCity pulumi.StringInput `pulumi:"organizationCity"`
+	// nation.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationCountry pulumi.StringInput `pulumi:"organizationCountry"`
+	// department.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationDivision pulumi.StringInput `pulumi:"organizationDivision"`
+	// Enterprise or unit name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationName pulumi.StringInput `pulumi:"organizationName"`
+	// Province.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OrganizationRegion pulumi.StringInput `pulumi:"organizationRegion"`
+	// Local region code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PhoneAreaCode pulumi.StringInput `pulumi:"phoneAreaCode"`
+	// Landline number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PhoneNumber pulumi.StringInput `pulumi:"phoneNumber"`
+	// Postal code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	PostalCode pulumi.StringInput `pulumi:"postalCode"`
+	// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyType pulumi.StringInput `pulumi:"verifyType"`
+}
+
+func (GetDescribeCertificateResultSubmittedDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultSubmittedData)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultSubmittedDataArgs) ToGetDescribeCertificateResultSubmittedDataOutput() GetDescribeCertificateResultSubmittedDataOutput {
+	return i.ToGetDescribeCertificateResultSubmittedDataOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultSubmittedDataArgs) ToGetDescribeCertificateResultSubmittedDataOutputWithContext(ctx context.Context) GetDescribeCertificateResultSubmittedDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultSubmittedDataOutput)
+}
+
+// GetDescribeCertificateResultSubmittedDataArrayInput is an input type that accepts GetDescribeCertificateResultSubmittedDataArray and GetDescribeCertificateResultSubmittedDataArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCertificateResultSubmittedDataArrayInput` via:
+//
+//	GetDescribeCertificateResultSubmittedDataArray{ GetDescribeCertificateResultSubmittedDataArgs{...} }
+type GetDescribeCertificateResultSubmittedDataArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCertificateResultSubmittedDataArrayOutput() GetDescribeCertificateResultSubmittedDataArrayOutput
+	ToGetDescribeCertificateResultSubmittedDataArrayOutputWithContext(context.Context) GetDescribeCertificateResultSubmittedDataArrayOutput
+}
+
+type GetDescribeCertificateResultSubmittedDataArray []GetDescribeCertificateResultSubmittedDataInput
+
+func (GetDescribeCertificateResultSubmittedDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultSubmittedData)(nil)).Elem()
+}
+
+func (i GetDescribeCertificateResultSubmittedDataArray) ToGetDescribeCertificateResultSubmittedDataArrayOutput() GetDescribeCertificateResultSubmittedDataArrayOutput {
+	return i.ToGetDescribeCertificateResultSubmittedDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCertificateResultSubmittedDataArray) ToGetDescribeCertificateResultSubmittedDataArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultSubmittedDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCertificateResultSubmittedDataArrayOutput)
+}
+
+type GetDescribeCertificateResultSubmittedDataOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultSubmittedDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCertificateResultSubmittedData)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultSubmittedDataOutput) ToGetDescribeCertificateResultSubmittedDataOutput() GetDescribeCertificateResultSubmittedDataOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultSubmittedDataOutput) ToGetDescribeCertificateResultSubmittedDataOutputWithContext(ctx context.Context) GetDescribeCertificateResultSubmittedDataOutput {
+	return o
+}
+
+// Administrator mailbox address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) AdminEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.AdminEmail }).(pulumi.StringOutput)
+}
+
+// Administrator name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) AdminFirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.AdminFirstName }).(pulumi.StringOutput)
+}
+
+// The surname of the administrator.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) AdminLastName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.AdminLastName }).(pulumi.StringOutput)
+}
+
+// Administrator phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) AdminPhoneNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.AdminPhoneNum }).(pulumi.StringOutput)
+}
+
+// Administrator position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) AdminPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.AdminPosition }).(pulumi.StringOutput)
+}
+
+// Domain information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) CertificateDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.CertificateDomain }).(pulumi.StringOutput)
+}
+
+// Contact mailbox address,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) ContactEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.ContactEmail }).(pulumi.StringOutput)
+}
+
+// Contact name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) ContactFirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.ContactFirstName }).(pulumi.StringOutput)
+}
+
+// Contact surname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) ContactLastName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.ContactLastName }).(pulumi.StringOutput)
+}
+
+// Contact phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) ContactNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.ContactNumber }).(pulumi.StringOutput)
+}
+
+// Contact position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) ContactPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.ContactPosition }).(pulumi.StringOutput)
+}
+
+// CSR content.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) CsrContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.CsrContent }).(pulumi.StringOutput)
+}
+
+// CSR type, (online = online CSR, PARSE = paste CSR).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) CsrType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.CsrType }).(pulumi.StringOutput)
+}
+
+// DNS information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) DomainLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) []string { return v.DomainLists }).(pulumi.StringArrayOutput)
+}
+
+// Private key password.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) KeyPassword() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.KeyPassword }).(pulumi.StringOutput)
+}
+
+// address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationAddress }).(pulumi.StringOutput)
+}
+
+// city.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationCity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationCity }).(pulumi.StringOutput)
+}
+
+// nation.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationCountry() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationCountry }).(pulumi.StringOutput)
+}
+
+// department.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationDivision() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationDivision }).(pulumi.StringOutput)
+}
+
+// Enterprise or unit name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationName }).(pulumi.StringOutput)
+}
+
+// Province.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) OrganizationRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.OrganizationRegion }).(pulumi.StringOutput)
+}
+
+// Local region code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) PhoneAreaCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.PhoneAreaCode }).(pulumi.StringOutput)
+}
+
+// Landline number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) PhoneNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.PhoneNumber }).(pulumi.StringOutput)
+}
+
+// Postal code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) PostalCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.PostalCode }).(pulumi.StringOutput)
+}
+
+// Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCertificateResultSubmittedDataOutput) VerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCertificateResultSubmittedData) string { return v.VerifyType }).(pulumi.StringOutput)
+}
+
+type GetDescribeCertificateResultSubmittedDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCertificateResultSubmittedDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCertificateResultSubmittedData)(nil)).Elem()
+}
+
+func (o GetDescribeCertificateResultSubmittedDataArrayOutput) ToGetDescribeCertificateResultSubmittedDataArrayOutput() GetDescribeCertificateResultSubmittedDataArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultSubmittedDataArrayOutput) ToGetDescribeCertificateResultSubmittedDataArrayOutputWithContext(ctx context.Context) GetDescribeCertificateResultSubmittedDataArrayOutput {
+	return o
+}
+
+func (o GetDescribeCertificateResultSubmittedDataArrayOutput) Index(i pulumi.IntInput) GetDescribeCertificateResultSubmittedDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCertificateResultSubmittedData {
+		return vs[0].([]GetDescribeCertificateResultSubmittedData)[vs[1].(int)]
+	}).(GetDescribeCertificateResultSubmittedDataOutput)
+}
+
+type GetDescribeCompaniesCompany struct {
+	// Detailed address where the company is located.
+	CompanyAddress string `pulumi:"companyAddress"`
+	// The city where the company is.
+	CompanyCity string `pulumi:"companyCity"`
+	// Company country.
+	CompanyCountry string `pulumi:"companyCountry"`
+	// Company ID.
+	CompanyId int `pulumi:"companyId"`
+	// Company Name.
+	CompanyName string `pulumi:"companyName"`
+	// company phone.
+	CompanyPhone string `pulumi:"companyPhone"`
+	// Province where the company is located.
+	CompanyProvince string `pulumi:"companyProvince"`
+	// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdNumber string `pulumi:"idNumber"`
+	// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdType string `pulumi:"idType"`
+}
+
+// GetDescribeCompaniesCompanyInput is an input type that accepts GetDescribeCompaniesCompanyArgs and GetDescribeCompaniesCompanyOutput values.
+// You can construct a concrete instance of `GetDescribeCompaniesCompanyInput` via:
+//
+//	GetDescribeCompaniesCompanyArgs{...}
+type GetDescribeCompaniesCompanyInput interface {
+	pulumi.Input
+
+	ToGetDescribeCompaniesCompanyOutput() GetDescribeCompaniesCompanyOutput
+	ToGetDescribeCompaniesCompanyOutputWithContext(context.Context) GetDescribeCompaniesCompanyOutput
+}
+
+type GetDescribeCompaniesCompanyArgs struct {
+	// Detailed address where the company is located.
+	CompanyAddress pulumi.StringInput `pulumi:"companyAddress"`
+	// The city where the company is.
+	CompanyCity pulumi.StringInput `pulumi:"companyCity"`
+	// Company country.
+	CompanyCountry pulumi.StringInput `pulumi:"companyCountry"`
+	// Company ID.
+	CompanyId pulumi.IntInput `pulumi:"companyId"`
+	// Company Name.
+	CompanyName pulumi.StringInput `pulumi:"companyName"`
+	// company phone.
+	CompanyPhone pulumi.StringInput `pulumi:"companyPhone"`
+	// Province where the company is located.
+	CompanyProvince pulumi.StringInput `pulumi:"companyProvince"`
+	// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdNumber pulumi.StringInput `pulumi:"idNumber"`
+	// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdType pulumi.StringInput `pulumi:"idType"`
+}
+
+func (GetDescribeCompaniesCompanyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCompaniesCompany)(nil)).Elem()
+}
+
+func (i GetDescribeCompaniesCompanyArgs) ToGetDescribeCompaniesCompanyOutput() GetDescribeCompaniesCompanyOutput {
+	return i.ToGetDescribeCompaniesCompanyOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCompaniesCompanyArgs) ToGetDescribeCompaniesCompanyOutputWithContext(ctx context.Context) GetDescribeCompaniesCompanyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCompaniesCompanyOutput)
+}
+
+// GetDescribeCompaniesCompanyArrayInput is an input type that accepts GetDescribeCompaniesCompanyArray and GetDescribeCompaniesCompanyArrayOutput values.
+// You can construct a concrete instance of `GetDescribeCompaniesCompanyArrayInput` via:
+//
+//	GetDescribeCompaniesCompanyArray{ GetDescribeCompaniesCompanyArgs{...} }
+type GetDescribeCompaniesCompanyArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeCompaniesCompanyArrayOutput() GetDescribeCompaniesCompanyArrayOutput
+	ToGetDescribeCompaniesCompanyArrayOutputWithContext(context.Context) GetDescribeCompaniesCompanyArrayOutput
+}
+
+type GetDescribeCompaniesCompanyArray []GetDescribeCompaniesCompanyInput
+
+func (GetDescribeCompaniesCompanyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCompaniesCompany)(nil)).Elem()
+}
+
+func (i GetDescribeCompaniesCompanyArray) ToGetDescribeCompaniesCompanyArrayOutput() GetDescribeCompaniesCompanyArrayOutput {
+	return i.ToGetDescribeCompaniesCompanyArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeCompaniesCompanyArray) ToGetDescribeCompaniesCompanyArrayOutputWithContext(ctx context.Context) GetDescribeCompaniesCompanyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeCompaniesCompanyArrayOutput)
+}
+
+type GetDescribeCompaniesCompanyOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCompaniesCompanyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeCompaniesCompany)(nil)).Elem()
+}
+
+func (o GetDescribeCompaniesCompanyOutput) ToGetDescribeCompaniesCompanyOutput() GetDescribeCompaniesCompanyOutput {
+	return o
+}
+
+func (o GetDescribeCompaniesCompanyOutput) ToGetDescribeCompaniesCompanyOutputWithContext(ctx context.Context) GetDescribeCompaniesCompanyOutput {
+	return o
+}
+
+// Detailed address where the company is located.
+func (o GetDescribeCompaniesCompanyOutput) CompanyAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyAddress }).(pulumi.StringOutput)
+}
+
+// The city where the company is.
+func (o GetDescribeCompaniesCompanyOutput) CompanyCity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyCity }).(pulumi.StringOutput)
+}
+
+// Company country.
+func (o GetDescribeCompaniesCompanyOutput) CompanyCountry() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyCountry }).(pulumi.StringOutput)
+}
+
+// Company ID.
+func (o GetDescribeCompaniesCompanyOutput) CompanyId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) int { return v.CompanyId }).(pulumi.IntOutput)
+}
+
+// Company Name.
+func (o GetDescribeCompaniesCompanyOutput) CompanyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyName }).(pulumi.StringOutput)
+}
+
+// company phone.
+func (o GetDescribeCompaniesCompanyOutput) CompanyPhone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyPhone }).(pulumi.StringOutput)
+}
+
+// Province where the company is located.
+func (o GetDescribeCompaniesCompanyOutput) CompanyProvince() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.CompanyProvince }).(pulumi.StringOutput)
+}
+
+// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCompaniesCompanyOutput) IdNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.IdNumber }).(pulumi.StringOutput)
+}
+
+// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeCompaniesCompanyOutput) IdType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeCompaniesCompany) string { return v.IdType }).(pulumi.StringOutput)
+}
+
+type GetDescribeCompaniesCompanyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeCompaniesCompanyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeCompaniesCompany)(nil)).Elem()
+}
+
+func (o GetDescribeCompaniesCompanyArrayOutput) ToGetDescribeCompaniesCompanyArrayOutput() GetDescribeCompaniesCompanyArrayOutput {
+	return o
+}
+
+func (o GetDescribeCompaniesCompanyArrayOutput) ToGetDescribeCompaniesCompanyArrayOutputWithContext(ctx context.Context) GetDescribeCompaniesCompanyArrayOutput {
+	return o
+}
+
+func (o GetDescribeCompaniesCompanyArrayOutput) Index(i pulumi.IntInput) GetDescribeCompaniesCompanyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeCompaniesCompany {
+		return vs[0].([]GetDescribeCompaniesCompany)[vs[1].(int)]
+	}).(GetDescribeCompaniesCompanyOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostApiGatewayInstanceListFilterInput is an input type that accepts GetDescribeHostApiGatewayInstanceListFilterArgs and GetDescribeHostApiGatewayInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostApiGatewayInstanceListFilterInput` via:
+//
+//	GetDescribeHostApiGatewayInstanceListFilterArgs{...}
+type GetDescribeHostApiGatewayInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostApiGatewayInstanceListFilterOutput() GetDescribeHostApiGatewayInstanceListFilterOutput
+	ToGetDescribeHostApiGatewayInstanceListFilterOutputWithContext(context.Context) GetDescribeHostApiGatewayInstanceListFilterOutput
+}
+
+type GetDescribeHostApiGatewayInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostApiGatewayInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostApiGatewayInstanceListFilterArgs) ToGetDescribeHostApiGatewayInstanceListFilterOutput() GetDescribeHostApiGatewayInstanceListFilterOutput {
+	return i.ToGetDescribeHostApiGatewayInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostApiGatewayInstanceListFilterArgs) ToGetDescribeHostApiGatewayInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostApiGatewayInstanceListFilterOutput)
+}
+
+// GetDescribeHostApiGatewayInstanceListFilterArrayInput is an input type that accepts GetDescribeHostApiGatewayInstanceListFilterArray and GetDescribeHostApiGatewayInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostApiGatewayInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostApiGatewayInstanceListFilterArray{ GetDescribeHostApiGatewayInstanceListFilterArgs{...} }
+type GetDescribeHostApiGatewayInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostApiGatewayInstanceListFilterArrayOutput() GetDescribeHostApiGatewayInstanceListFilterArrayOutput
+	ToGetDescribeHostApiGatewayInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostApiGatewayInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostApiGatewayInstanceListFilterArray []GetDescribeHostApiGatewayInstanceListFilterInput
+
+func (GetDescribeHostApiGatewayInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostApiGatewayInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostApiGatewayInstanceListFilterArray) ToGetDescribeHostApiGatewayInstanceListFilterArrayOutput() GetDescribeHostApiGatewayInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostApiGatewayInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostApiGatewayInstanceListFilterArray) ToGetDescribeHostApiGatewayInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostApiGatewayInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostApiGatewayInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostApiGatewayInstanceListFilterOutput) ToGetDescribeHostApiGatewayInstanceListFilterOutput() GetDescribeHostApiGatewayInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListFilterOutput) ToGetDescribeHostApiGatewayInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostApiGatewayInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostApiGatewayInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostApiGatewayInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostApiGatewayInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostApiGatewayInstanceListFilterArrayOutput) ToGetDescribeHostApiGatewayInstanceListFilterArrayOutput() GetDescribeHostApiGatewayInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListFilterArrayOutput) ToGetDescribeHostApiGatewayInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostApiGatewayInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostApiGatewayInstanceListFilter {
+		return vs[0].([]GetDescribeHostApiGatewayInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostApiGatewayInstanceListFilterOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListInstanceList struct {
+	// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// Use Agreement.
+	Protocol string `pulumi:"protocol"`
+	// Instance ID.
+	ServiceId string `pulumi:"serviceId"`
+	// Example name.
+	ServiceName string `pulumi:"serviceName"`
+}
+
+// GetDescribeHostApiGatewayInstanceListInstanceListInput is an input type that accepts GetDescribeHostApiGatewayInstanceListInstanceListArgs and GetDescribeHostApiGatewayInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostApiGatewayInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostApiGatewayInstanceListInstanceListArgs{...}
+type GetDescribeHostApiGatewayInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostApiGatewayInstanceListInstanceListOutput() GetDescribeHostApiGatewayInstanceListInstanceListOutput
+	ToGetDescribeHostApiGatewayInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostApiGatewayInstanceListInstanceListOutput
+}
+
+type GetDescribeHostApiGatewayInstanceListInstanceListArgs struct {
+	// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Use Agreement.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Instance ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// Example name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+}
+
+func (GetDescribeHostApiGatewayInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostApiGatewayInstanceListInstanceListArgs) ToGetDescribeHostApiGatewayInstanceListInstanceListOutput() GetDescribeHostApiGatewayInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostApiGatewayInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostApiGatewayInstanceListInstanceListArgs) ToGetDescribeHostApiGatewayInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostApiGatewayInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostApiGatewayInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostApiGatewayInstanceListInstanceListArray and GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostApiGatewayInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostApiGatewayInstanceListInstanceListArray{ GetDescribeHostApiGatewayInstanceListInstanceListArgs{...} }
+type GetDescribeHostApiGatewayInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutput() GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput
+	ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostApiGatewayInstanceListInstanceListArray []GetDescribeHostApiGatewayInstanceListInstanceListInput
+
+func (GetDescribeHostApiGatewayInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostApiGatewayInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostApiGatewayInstanceListInstanceListArray) ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutput() GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostApiGatewayInstanceListInstanceListArray) ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostApiGatewayInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) ToGetDescribeHostApiGatewayInstanceListInstanceListOutput() GetDescribeHostApiGatewayInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) ToGetDescribeHostApiGatewayInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListInstanceListOutput {
+	return o
+}
+
+// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Use Agreement.
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListInstanceList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListInstanceList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// Example name.
+func (o GetDescribeHostApiGatewayInstanceListInstanceListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostApiGatewayInstanceListInstanceList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostApiGatewayInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput) ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutput() GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput) ToGetDescribeHostApiGatewayInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostApiGatewayInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostApiGatewayInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostApiGatewayInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostApiGatewayInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostCdnInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostCdnInstanceListFilterInput is an input type that accepts GetDescribeHostCdnInstanceListFilterArgs and GetDescribeHostCdnInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostCdnInstanceListFilterInput` via:
+//
+//	GetDescribeHostCdnInstanceListFilterArgs{...}
+type GetDescribeHostCdnInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCdnInstanceListFilterOutput() GetDescribeHostCdnInstanceListFilterOutput
+	ToGetDescribeHostCdnInstanceListFilterOutputWithContext(context.Context) GetDescribeHostCdnInstanceListFilterOutput
+}
+
+type GetDescribeHostCdnInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostCdnInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCdnInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostCdnInstanceListFilterArgs) ToGetDescribeHostCdnInstanceListFilterOutput() GetDescribeHostCdnInstanceListFilterOutput {
+	return i.ToGetDescribeHostCdnInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCdnInstanceListFilterArgs) ToGetDescribeHostCdnInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCdnInstanceListFilterOutput)
+}
+
+// GetDescribeHostCdnInstanceListFilterArrayInput is an input type that accepts GetDescribeHostCdnInstanceListFilterArray and GetDescribeHostCdnInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostCdnInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostCdnInstanceListFilterArray{ GetDescribeHostCdnInstanceListFilterArgs{...} }
+type GetDescribeHostCdnInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCdnInstanceListFilterArrayOutput() GetDescribeHostCdnInstanceListFilterArrayOutput
+	ToGetDescribeHostCdnInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostCdnInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostCdnInstanceListFilterArray []GetDescribeHostCdnInstanceListFilterInput
+
+func (GetDescribeHostCdnInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCdnInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostCdnInstanceListFilterArray) ToGetDescribeHostCdnInstanceListFilterArrayOutput() GetDescribeHostCdnInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostCdnInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCdnInstanceListFilterArray) ToGetDescribeHostCdnInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCdnInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostCdnInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCdnInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCdnInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostCdnInstanceListFilterOutput) ToGetDescribeHostCdnInstanceListFilterOutput() GetDescribeHostCdnInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListFilterOutput) ToGetDescribeHostCdnInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostCdnInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostCdnInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostCdnInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCdnInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCdnInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostCdnInstanceListFilterArrayOutput) ToGetDescribeHostCdnInstanceListFilterArrayOutput() GetDescribeHostCdnInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListFilterArrayOutput) ToGetDescribeHostCdnInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostCdnInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostCdnInstanceListFilter {
+		return vs[0].([]GetDescribeHostCdnInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostCdnInstanceListFilterOutput)
+}
+
+type GetDescribeHostCdnInstanceListInstanceList struct {
+	// Deployment certificate ID.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// Domain name billing status.
+	HttpsBillingSwitch string `pulumi:"httpsBillingSwitch"`
+	// Domain name.
+	Status string `pulumi:"status"`
+}
+
+// GetDescribeHostCdnInstanceListInstanceListInput is an input type that accepts GetDescribeHostCdnInstanceListInstanceListArgs and GetDescribeHostCdnInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostCdnInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostCdnInstanceListInstanceListArgs{...}
+type GetDescribeHostCdnInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCdnInstanceListInstanceListOutput() GetDescribeHostCdnInstanceListInstanceListOutput
+	ToGetDescribeHostCdnInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostCdnInstanceListInstanceListOutput
+}
+
+type GetDescribeHostCdnInstanceListInstanceListArgs struct {
+	// Deployment certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain name billing status.
+	HttpsBillingSwitch pulumi.StringInput `pulumi:"httpsBillingSwitch"`
+	// Domain name.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetDescribeHostCdnInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCdnInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostCdnInstanceListInstanceListArgs) ToGetDescribeHostCdnInstanceListInstanceListOutput() GetDescribeHostCdnInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostCdnInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCdnInstanceListInstanceListArgs) ToGetDescribeHostCdnInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCdnInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostCdnInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostCdnInstanceListInstanceListArray and GetDescribeHostCdnInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostCdnInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostCdnInstanceListInstanceListArray{ GetDescribeHostCdnInstanceListInstanceListArgs{...} }
+type GetDescribeHostCdnInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCdnInstanceListInstanceListArrayOutput() GetDescribeHostCdnInstanceListInstanceListArrayOutput
+	ToGetDescribeHostCdnInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostCdnInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostCdnInstanceListInstanceListArray []GetDescribeHostCdnInstanceListInstanceListInput
+
+func (GetDescribeHostCdnInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCdnInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostCdnInstanceListInstanceListArray) ToGetDescribeHostCdnInstanceListInstanceListArrayOutput() GetDescribeHostCdnInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostCdnInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCdnInstanceListInstanceListArray) ToGetDescribeHostCdnInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCdnInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostCdnInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCdnInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCdnInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) ToGetDescribeHostCdnInstanceListInstanceListOutput() GetDescribeHostCdnInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) ToGetDescribeHostCdnInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListInstanceListOutput {
+	return o
+}
+
+// Deployment certificate ID.
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain name billing status.
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) HttpsBillingSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListInstanceList) string { return v.HttpsBillingSwitch }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetDescribeHostCdnInstanceListInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCdnInstanceListInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostCdnInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCdnInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCdnInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostCdnInstanceListInstanceListArrayOutput) ToGetDescribeHostCdnInstanceListInstanceListArrayOutput() GetDescribeHostCdnInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListInstanceListArrayOutput) ToGetDescribeHostCdnInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostCdnInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCdnInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostCdnInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostCdnInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostCdnInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostCdnInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostClbInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostClbInstanceListFilterInput is an input type that accepts GetDescribeHostClbInstanceListFilterArgs and GetDescribeHostClbInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListFilterInput` via:
+//
+//	GetDescribeHostClbInstanceListFilterArgs{...}
+type GetDescribeHostClbInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListFilterOutput() GetDescribeHostClbInstanceListFilterOutput
+	ToGetDescribeHostClbInstanceListFilterOutputWithContext(context.Context) GetDescribeHostClbInstanceListFilterOutput
+}
+
+type GetDescribeHostClbInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostClbInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListFilterArgs) ToGetDescribeHostClbInstanceListFilterOutput() GetDescribeHostClbInstanceListFilterOutput {
+	return i.ToGetDescribeHostClbInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListFilterArgs) ToGetDescribeHostClbInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListFilterOutput)
+}
+
+// GetDescribeHostClbInstanceListFilterArrayInput is an input type that accepts GetDescribeHostClbInstanceListFilterArray and GetDescribeHostClbInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListFilterArray{ GetDescribeHostClbInstanceListFilterArgs{...} }
+type GetDescribeHostClbInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListFilterArrayOutput() GetDescribeHostClbInstanceListFilterArrayOutput
+	ToGetDescribeHostClbInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostClbInstanceListFilterArray []GetDescribeHostClbInstanceListFilterInput
+
+func (GetDescribeHostClbInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListFilterArray) ToGetDescribeHostClbInstanceListFilterArrayOutput() GetDescribeHostClbInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListFilterArray) ToGetDescribeHostClbInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListFilterOutput) ToGetDescribeHostClbInstanceListFilterOutput() GetDescribeHostClbInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListFilterOutput) ToGetDescribeHostClbInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostClbInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostClbInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostClbInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListFilterArrayOutput) ToGetDescribeHostClbInstanceListFilterArrayOutput() GetDescribeHostClbInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListFilterArrayOutput) ToGetDescribeHostClbInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListFilter {
+		return vs[0].([]GetDescribeHostClbInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListFilterOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceList struct {
+	// CLB listener listNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Listeners []GetDescribeHostClbInstanceListInstanceListListener `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+}
+
+// GetDescribeHostClbInstanceListInstanceListInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListArgs and GetDescribeHostClbInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListArgs{...}
+type GetDescribeHostClbInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListOutput() GetDescribeHostClbInstanceListInstanceListOutput
+	ToGetDescribeHostClbInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListArgs struct {
+	// CLB listener listNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Listeners GetDescribeHostClbInstanceListInstanceListListenerArrayInput `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+}
+
+func (GetDescribeHostClbInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListArgs) ToGetDescribeHostClbInstanceListInstanceListOutput() GetDescribeHostClbInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListArgs) ToGetDescribeHostClbInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostClbInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListArray and GetDescribeHostClbInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListArray{ GetDescribeHostClbInstanceListInstanceListArgs{...} }
+type GetDescribeHostClbInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListArrayOutput() GetDescribeHostClbInstanceListInstanceListArrayOutput
+	ToGetDescribeHostClbInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListArray []GetDescribeHostClbInstanceListInstanceListInput
+
+func (GetDescribeHostClbInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListArray) ToGetDescribeHostClbInstanceListInstanceListArrayOutput() GetDescribeHostClbInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListArray) ToGetDescribeHostClbInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListOutput) ToGetDescribeHostClbInstanceListInstanceListOutput() GetDescribeHostClbInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListOutput) ToGetDescribeHostClbInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListOutput {
+	return o
+}
+
+// CLB listener listNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListOutput) Listeners() GetDescribeHostClbInstanceListInstanceListListenerArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceList) []GetDescribeHostClbInstanceListInstanceListListener {
+		return v.Listeners
+	}).(GetDescribeHostClbInstanceListInstanceListListenerArrayOutput)
+}
+
+// CLB instance ID.
+func (o GetDescribeHostClbInstanceListInstanceListOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceList) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name name.
+func (o GetDescribeHostClbInstanceListInstanceListOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceList) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListArrayOutput) ToGetDescribeHostClbInstanceListInstanceListArrayOutput() GetDescribeHostClbInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListArrayOutput) ToGetDescribeHostClbInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostClbInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListener struct {
+	// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Certificates []GetDescribeHostClbInstanceListInstanceListListenerCertificate `pulumi:"certificates"`
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// Name of listeners.
+	ListenerName string `pulumi:"listenerName"`
+	// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+	// Type of listener protocol, https | TCP_SSL.
+	Protocol string `pulumi:"protocol"`
+	// List of listeners&#39; rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Rules []GetDescribeHostClbInstanceListInstanceListListenerRule `pulumi:"rules"`
+	// Whether to turn on SNI, 1 to open, 0 to close.
+	SniSwitch int `pulumi:"sniSwitch"`
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerArgs and GetDescribeHostClbInstanceListInstanceListListenerOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerArgs{...}
+type GetDescribeHostClbInstanceListInstanceListListenerInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerOutput() GetDescribeHostClbInstanceListInstanceListListenerOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerArgs struct {
+	// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Certificates GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayInput `pulumi:"certificates"`
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Name of listeners.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+	// Type of listener protocol, https | TCP_SSL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// List of listeners&#39; rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Rules GetDescribeHostClbInstanceListInstanceListListenerRuleArrayInput `pulumi:"rules"`
+	// Whether to turn on SNI, 1 to open, 0 to close.
+	SniSwitch pulumi.IntInput `pulumi:"sniSwitch"`
+}
+
+func (GetDescribeHostClbInstanceListInstanceListListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListener)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerArgs) ToGetDescribeHostClbInstanceListInstanceListListenerOutput() GetDescribeHostClbInstanceListInstanceListListenerOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerArgs) ToGetDescribeHostClbInstanceListInstanceListListenerOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerOutput)
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerArrayInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerArray and GetDescribeHostClbInstanceListInstanceListListenerArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerArray{ GetDescribeHostClbInstanceListInstanceListListenerArgs{...} }
+type GetDescribeHostClbInstanceListInstanceListListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerArrayOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerArrayOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerArray []GetDescribeHostClbInstanceListInstanceListListenerInput
+
+func (GetDescribeHostClbInstanceListInstanceListListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListener)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerArray) ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerArray) ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListener)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) ToGetDescribeHostClbInstanceListInstanceListListenerOutput() GetDescribeHostClbInstanceListInstanceListListenerOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) ToGetDescribeHostClbInstanceListInstanceListListenerOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerOutput {
+	return o
+}
+
+// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) Certificates() GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) []GetDescribeHostClbInstanceListInstanceListListenerCertificate {
+		return v.Certificates
+	}).(GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput)
+}
+
+// Listener ID.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Name of listeners.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) []string { return v.NoMatchDomains }).(pulumi.StringArrayOutput)
+}
+
+// Type of listener protocol, https | TCP_SSL.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// List of listeners&#39; rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) Rules() GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) []GetDescribeHostClbInstanceListInstanceListListenerRule {
+		return v.Rules
+	}).(GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput)
+}
+
+// Whether to turn on SNI, 1 to open, 0 to close.
+func (o GetDescribeHostClbInstanceListInstanceListListenerOutput) SniSwitch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListener) int { return v.SniSwitch }).(pulumi.IntOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListener)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListInstanceListListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListInstanceListListener {
+		return vs[0].([]GetDescribeHostClbInstanceListInstanceListListener)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListInstanceListListenerOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerCertificate struct {
+	// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertCaId string `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name binding of certificates.
+	DnsNames []string `pulumi:"dnsNames"`
+	// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SSLMode string `pulumi:"sSLMode"`
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerCertificateInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs and GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerCertificateInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs{...}
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs struct {
+	// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertCaId pulumi.StringInput `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name binding of certificates.
+	DnsNames pulumi.StringArrayInput `pulumi:"dnsNames"`
+	// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SSLMode pulumi.StringInput `pulumi:"sSLMode"`
+}
+
+func (GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput)
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerCertificateArray and GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerCertificateArray{ GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs{...} }
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateArray []GetDescribeHostClbInstanceListInstanceListListenerCertificateInput
+
+func (GetDescribeHostClbInstanceListInstanceListListenerCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerCertificateArray) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerCertificateArray) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput {
+	return o
+}
+
+// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) CertCaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerCertificate) string { return v.CertCaId }).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerCertificate) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name binding of certificates.
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerCertificate) []string { return v.DnsNames }).(pulumi.StringArrayOutput)
+}
+
+// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput) SSLMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerCertificate) string { return v.SSLMode }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListInstanceListListenerCertificate {
+		return vs[0].([]GetDescribeHostClbInstanceListInstanceListListenerCertificate)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRule struct {
+	// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Certificates []GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate `pulumi:"certificates"`
+	// Domain name binding.
+	Domain string `pulumi:"domain"`
+	// Whether the rules match the domain name to be bound to the certificate.
+	IsMatch bool `pulumi:"isMatch"`
+	// Rule ID.
+	LocationId string `pulumi:"locationId"`
+	// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerRuleInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerRuleArgs and GetDescribeHostClbInstanceListInstanceListListenerRuleOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerRuleInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerRuleArgs{...}
+type GetDescribeHostClbInstanceListInstanceListListenerRuleInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleArgs struct {
+	// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Certificates GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayInput `pulumi:"certificates"`
+	// Domain name binding.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether the rules match the domain name to be bound to the certificate.
+	IsMatch pulumi.BoolInput `pulumi:"isMatch"`
+	// Rule ID.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+}
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRule)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleArgs) ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleArgs) ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerRuleOutput)
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerRuleArrayInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerRuleArray and GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerRuleArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerRuleArray{ GetDescribeHostClbInstanceListInstanceListListenerRuleArgs{...} }
+type GetDescribeHostClbInstanceListInstanceListListenerRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleArray []GetDescribeHostClbInstanceListInstanceListListenerRuleInput
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerRule)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleArray) ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleArray) ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRule)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleOutput {
+	return o
+}
+
+// Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) Certificates() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRule) []GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate {
+		return v.Certificates
+	}).(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput)
+}
+
+// Domain name binding.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Whether the rules match the domain name to be bound to the certificate.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) IsMatch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRule) bool { return v.IsMatch }).(pulumi.BoolOutput)
+}
+
+// Rule ID.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRule) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRule) []string { return v.NoMatchDomains }).(pulumi.StringArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerRule)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListInstanceListListenerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListInstanceListListenerRule {
+		return vs[0].([]GetDescribeHostClbInstanceListInstanceListListenerRule)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListInstanceListListenerRuleOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate struct {
+	// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertCaId string `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name binding of certificates.
+	DnsNames []string `pulumi:"dnsNames"`
+	// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SSLMode string `pulumi:"sSLMode"`
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs and GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs{...}
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs struct {
+	// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertCaId pulumi.StringInput `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name binding of certificates.
+	DnsNames pulumi.StringArrayInput `pulumi:"dnsNames"`
+	// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SSLMode pulumi.StringInput `pulumi:"sSLMode"`
+}
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput)
+}
+
+// GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayInput is an input type that accepts GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray and GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayInput` via:
+//
+//	GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray{ GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs{...} }
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput
+	ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutputWithContext(context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray []GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateInput
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput {
+	return i.ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput {
+	return o
+}
+
+// Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) CertCaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate) string { return v.CertCaId }).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name binding of certificates.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate) []string { return v.DnsNames }).(pulumi.StringArrayOutput)
+}
+
+// Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput) SSLMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate) string { return v.SSLMode }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput() GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput) ToGetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutputWithContext(ctx context.Context) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput) Index(i pulumi.IntInput) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate {
+		return vs[0].([]GetDescribeHostClbInstanceListInstanceListListenerRuleCertificate)[vs[1].(int)]
+	}).(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput)
+}
+
+type GetDescribeHostCosInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostCosInstanceListFilterInput is an input type that accepts GetDescribeHostCosInstanceListFilterArgs and GetDescribeHostCosInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostCosInstanceListFilterInput` via:
+//
+//	GetDescribeHostCosInstanceListFilterArgs{...}
+type GetDescribeHostCosInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCosInstanceListFilterOutput() GetDescribeHostCosInstanceListFilterOutput
+	ToGetDescribeHostCosInstanceListFilterOutputWithContext(context.Context) GetDescribeHostCosInstanceListFilterOutput
+}
+
+type GetDescribeHostCosInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostCosInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCosInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostCosInstanceListFilterArgs) ToGetDescribeHostCosInstanceListFilterOutput() GetDescribeHostCosInstanceListFilterOutput {
+	return i.ToGetDescribeHostCosInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCosInstanceListFilterArgs) ToGetDescribeHostCosInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCosInstanceListFilterOutput)
+}
+
+// GetDescribeHostCosInstanceListFilterArrayInput is an input type that accepts GetDescribeHostCosInstanceListFilterArray and GetDescribeHostCosInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostCosInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostCosInstanceListFilterArray{ GetDescribeHostCosInstanceListFilterArgs{...} }
+type GetDescribeHostCosInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCosInstanceListFilterArrayOutput() GetDescribeHostCosInstanceListFilterArrayOutput
+	ToGetDescribeHostCosInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostCosInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostCosInstanceListFilterArray []GetDescribeHostCosInstanceListFilterInput
+
+func (GetDescribeHostCosInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCosInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostCosInstanceListFilterArray) ToGetDescribeHostCosInstanceListFilterArrayOutput() GetDescribeHostCosInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostCosInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCosInstanceListFilterArray) ToGetDescribeHostCosInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCosInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostCosInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCosInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCosInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostCosInstanceListFilterOutput) ToGetDescribeHostCosInstanceListFilterOutput() GetDescribeHostCosInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListFilterOutput) ToGetDescribeHostCosInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostCosInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostCosInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostCosInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCosInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCosInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostCosInstanceListFilterArrayOutput) ToGetDescribeHostCosInstanceListFilterArrayOutput() GetDescribeHostCosInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListFilterArrayOutput) ToGetDescribeHostCosInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostCosInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostCosInstanceListFilter {
+		return vs[0].([]GetDescribeHostCosInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostCosInstanceListFilterOutput)
+}
+
+type GetDescribeHostCosInstanceListInstanceList struct {
+	// Reserve bucket nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket string `pulumi:"bucket"`
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// Barrel areaNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region string `pulumi:"region"`
+	// Enabled: domain name online statusDisabled: Domain name offline status.
+	Status string `pulumi:"status"`
+}
+
+// GetDescribeHostCosInstanceListInstanceListInput is an input type that accepts GetDescribeHostCosInstanceListInstanceListArgs and GetDescribeHostCosInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostCosInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostCosInstanceListInstanceListArgs{...}
+type GetDescribeHostCosInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCosInstanceListInstanceListOutput() GetDescribeHostCosInstanceListInstanceListOutput
+	ToGetDescribeHostCosInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostCosInstanceListInstanceListOutput
+}
+
+type GetDescribeHostCosInstanceListInstanceListArgs struct {
+	// Reserve bucket nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Barrel areaNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Enabled: domain name online statusDisabled: Domain name offline status.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetDescribeHostCosInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostCosInstanceListInstanceListArgs) ToGetDescribeHostCosInstanceListInstanceListOutput() GetDescribeHostCosInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostCosInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCosInstanceListInstanceListArgs) ToGetDescribeHostCosInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCosInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostCosInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostCosInstanceListInstanceListArray and GetDescribeHostCosInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostCosInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostCosInstanceListInstanceListArray{ GetDescribeHostCosInstanceListInstanceListArgs{...} }
+type GetDescribeHostCosInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostCosInstanceListInstanceListArrayOutput() GetDescribeHostCosInstanceListInstanceListArrayOutput
+	ToGetDescribeHostCosInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostCosInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostCosInstanceListInstanceListArray []GetDescribeHostCosInstanceListInstanceListInput
+
+func (GetDescribeHostCosInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostCosInstanceListInstanceListArray) ToGetDescribeHostCosInstanceListInstanceListArrayOutput() GetDescribeHostCosInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostCosInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostCosInstanceListInstanceListArray) ToGetDescribeHostCosInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostCosInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostCosInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCosInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostCosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostCosInstanceListInstanceListOutput) ToGetDescribeHostCosInstanceListInstanceListOutput() GetDescribeHostCosInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListInstanceListOutput) ToGetDescribeHostCosInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListInstanceListOutput {
+	return o
+}
+
+// Reserve bucket nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostCosInstanceListInstanceListOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListInstanceList) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostCosInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostCosInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Barrel areaNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostCosInstanceListInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Enabled: domain name online statusDisabled: Domain name offline status.
+func (o GetDescribeHostCosInstanceListInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostCosInstanceListInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostCosInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostCosInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostCosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostCosInstanceListInstanceListArrayOutput) ToGetDescribeHostCosInstanceListInstanceListArrayOutput() GetDescribeHostCosInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListInstanceListArrayOutput) ToGetDescribeHostCosInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostCosInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostCosInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostCosInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostCosInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostCosInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostCosInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostDdosInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostDdosInstanceListFilterInput is an input type that accepts GetDescribeHostDdosInstanceListFilterArgs and GetDescribeHostDdosInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostDdosInstanceListFilterInput` via:
+//
+//	GetDescribeHostDdosInstanceListFilterArgs{...}
+type GetDescribeHostDdosInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDdosInstanceListFilterOutput() GetDescribeHostDdosInstanceListFilterOutput
+	ToGetDescribeHostDdosInstanceListFilterOutputWithContext(context.Context) GetDescribeHostDdosInstanceListFilterOutput
+}
+
+type GetDescribeHostDdosInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostDdosInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDdosInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostDdosInstanceListFilterArgs) ToGetDescribeHostDdosInstanceListFilterOutput() GetDescribeHostDdosInstanceListFilterOutput {
+	return i.ToGetDescribeHostDdosInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDdosInstanceListFilterArgs) ToGetDescribeHostDdosInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDdosInstanceListFilterOutput)
+}
+
+// GetDescribeHostDdosInstanceListFilterArrayInput is an input type that accepts GetDescribeHostDdosInstanceListFilterArray and GetDescribeHostDdosInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostDdosInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostDdosInstanceListFilterArray{ GetDescribeHostDdosInstanceListFilterArgs{...} }
+type GetDescribeHostDdosInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDdosInstanceListFilterArrayOutput() GetDescribeHostDdosInstanceListFilterArrayOutput
+	ToGetDescribeHostDdosInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostDdosInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostDdosInstanceListFilterArray []GetDescribeHostDdosInstanceListFilterInput
+
+func (GetDescribeHostDdosInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDdosInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostDdosInstanceListFilterArray) ToGetDescribeHostDdosInstanceListFilterArrayOutput() GetDescribeHostDdosInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostDdosInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDdosInstanceListFilterArray) ToGetDescribeHostDdosInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDdosInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostDdosInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDdosInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDdosInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostDdosInstanceListFilterOutput) ToGetDescribeHostDdosInstanceListFilterOutput() GetDescribeHostDdosInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListFilterOutput) ToGetDescribeHostDdosInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostDdosInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostDdosInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostDdosInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDdosInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDdosInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostDdosInstanceListFilterArrayOutput) ToGetDescribeHostDdosInstanceListFilterArrayOutput() GetDescribeHostDdosInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListFilterArrayOutput) ToGetDescribeHostDdosInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostDdosInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostDdosInstanceListFilter {
+		return vs[0].([]GetDescribeHostDdosInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostDdosInstanceListFilterOutput)
+}
+
+type GetDescribeHostDdosInstanceListInstanceList struct {
+	// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// agreement type.
+	Protocol string `pulumi:"protocol"`
+	// Forwarding port.
+	VirtualPort string `pulumi:"virtualPort"`
+}
+
+// GetDescribeHostDdosInstanceListInstanceListInput is an input type that accepts GetDescribeHostDdosInstanceListInstanceListArgs and GetDescribeHostDdosInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostDdosInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostDdosInstanceListInstanceListArgs{...}
+type GetDescribeHostDdosInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDdosInstanceListInstanceListOutput() GetDescribeHostDdosInstanceListInstanceListOutput
+	ToGetDescribeHostDdosInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostDdosInstanceListInstanceListOutput
+}
+
+type GetDescribeHostDdosInstanceListInstanceListArgs struct {
+	// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// agreement type.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Forwarding port.
+	VirtualPort pulumi.StringInput `pulumi:"virtualPort"`
+}
+
+func (GetDescribeHostDdosInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDdosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDdosInstanceListInstanceListArgs) ToGetDescribeHostDdosInstanceListInstanceListOutput() GetDescribeHostDdosInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostDdosInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDdosInstanceListInstanceListArgs) ToGetDescribeHostDdosInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDdosInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostDdosInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostDdosInstanceListInstanceListArray and GetDescribeHostDdosInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostDdosInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostDdosInstanceListInstanceListArray{ GetDescribeHostDdosInstanceListInstanceListArgs{...} }
+type GetDescribeHostDdosInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDdosInstanceListInstanceListArrayOutput() GetDescribeHostDdosInstanceListInstanceListArrayOutput
+	ToGetDescribeHostDdosInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostDdosInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostDdosInstanceListInstanceListArray []GetDescribeHostDdosInstanceListInstanceListInput
+
+func (GetDescribeHostDdosInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDdosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDdosInstanceListInstanceListArray) ToGetDescribeHostDdosInstanceListInstanceListArrayOutput() GetDescribeHostDdosInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostDdosInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDdosInstanceListInstanceListArray) ToGetDescribeHostDdosInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDdosInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostDdosInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDdosInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDdosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) ToGetDescribeHostDdosInstanceListInstanceListOutput() GetDescribeHostDdosInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) ToGetDescribeHostDdosInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListInstanceListOutput {
+	return o
+}
+
+// Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// agreement type.
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListInstanceList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Forwarding port.
+func (o GetDescribeHostDdosInstanceListInstanceListOutput) VirtualPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDdosInstanceListInstanceList) string { return v.VirtualPort }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostDdosInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDdosInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDdosInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDdosInstanceListInstanceListArrayOutput) ToGetDescribeHostDdosInstanceListInstanceListArrayOutput() GetDescribeHostDdosInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListInstanceListArrayOutput) ToGetDescribeHostDdosInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostDdosInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDdosInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostDdosInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostDdosInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostDdosInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostDdosInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostDeployRecordDeployRecordList struct {
+	// Deployment certificate ID.
+	CertId string `pulumi:"certId"`
+	// Deployment time.
+	CreateTime string `pulumi:"createTime"`
+	// Deployment record ID.
+	Id int `pulumi:"id"`
+	// Deployment.
+	Region string `pulumi:"region"`
+	// Resource Type.
+	ResourceType string `pulumi:"resourceType"`
+	// Deployment state.
+	Status int `pulumi:"status"`
+	// Recent update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDescribeHostDeployRecordDeployRecordListInput is an input type that accepts GetDescribeHostDeployRecordDeployRecordListArgs and GetDescribeHostDeployRecordDeployRecordListOutput values.
+// You can construct a concrete instance of `GetDescribeHostDeployRecordDeployRecordListInput` via:
+//
+//	GetDescribeHostDeployRecordDeployRecordListArgs{...}
+type GetDescribeHostDeployRecordDeployRecordListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDeployRecordDeployRecordListOutput() GetDescribeHostDeployRecordDeployRecordListOutput
+	ToGetDescribeHostDeployRecordDeployRecordListOutputWithContext(context.Context) GetDescribeHostDeployRecordDeployRecordListOutput
+}
+
+type GetDescribeHostDeployRecordDeployRecordListArgs struct {
+	// Deployment certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Deployment time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Deployment record ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Deployment.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Resource Type.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Deployment state.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Recent update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDescribeHostDeployRecordDeployRecordListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDeployRecordDeployRecordList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDeployRecordDeployRecordListArgs) ToGetDescribeHostDeployRecordDeployRecordListOutput() GetDescribeHostDeployRecordDeployRecordListOutput {
+	return i.ToGetDescribeHostDeployRecordDeployRecordListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDeployRecordDeployRecordListArgs) ToGetDescribeHostDeployRecordDeployRecordListOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDeployRecordListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDeployRecordDeployRecordListOutput)
+}
+
+// GetDescribeHostDeployRecordDeployRecordListArrayInput is an input type that accepts GetDescribeHostDeployRecordDeployRecordListArray and GetDescribeHostDeployRecordDeployRecordListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostDeployRecordDeployRecordListArrayInput` via:
+//
+//	GetDescribeHostDeployRecordDeployRecordListArray{ GetDescribeHostDeployRecordDeployRecordListArgs{...} }
+type GetDescribeHostDeployRecordDeployRecordListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDeployRecordDeployRecordListArrayOutput() GetDescribeHostDeployRecordDeployRecordListArrayOutput
+	ToGetDescribeHostDeployRecordDeployRecordListArrayOutputWithContext(context.Context) GetDescribeHostDeployRecordDeployRecordListArrayOutput
+}
+
+type GetDescribeHostDeployRecordDeployRecordListArray []GetDescribeHostDeployRecordDeployRecordListInput
+
+func (GetDescribeHostDeployRecordDeployRecordListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDeployRecordDeployRecordList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDeployRecordDeployRecordListArray) ToGetDescribeHostDeployRecordDeployRecordListArrayOutput() GetDescribeHostDeployRecordDeployRecordListArrayOutput {
+	return i.ToGetDescribeHostDeployRecordDeployRecordListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDeployRecordDeployRecordListArray) ToGetDescribeHostDeployRecordDeployRecordListArrayOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDeployRecordListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDeployRecordDeployRecordListArrayOutput)
+}
+
+type GetDescribeHostDeployRecordDeployRecordListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDeployRecordDeployRecordListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDeployRecordDeployRecordList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) ToGetDescribeHostDeployRecordDeployRecordListOutput() GetDescribeHostDeployRecordDeployRecordListOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) ToGetDescribeHostDeployRecordDeployRecordListOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDeployRecordListOutput {
+	return o
+}
+
+// Deployment certificate ID.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Deployment time.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Deployment record ID.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Deployment.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Resource Type.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Deployment state.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Recent update time.
+func (o GetDescribeHostDeployRecordDeployRecordListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDeployRecordList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostDeployRecordDeployRecordListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDeployRecordDeployRecordListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDeployRecordDeployRecordList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDeployRecordDeployRecordListArrayOutput) ToGetDescribeHostDeployRecordDeployRecordListArrayOutput() GetDescribeHostDeployRecordDeployRecordListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDeployRecordListArrayOutput) ToGetDescribeHostDeployRecordDeployRecordListArrayOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDeployRecordListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDeployRecordListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostDeployRecordDeployRecordListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostDeployRecordDeployRecordList {
+		return vs[0].([]GetDescribeHostDeployRecordDeployRecordList)[vs[1].(int)]
+	}).(GetDescribeHostDeployRecordDeployRecordListOutput)
+}
+
+type GetDescribeHostDeployRecordDetailDeployRecordDetailList struct {
+	// COS storage barrel nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket string `pulumi:"bucket"`
+	// Deployment certificate ID.
+	CertId string `pulumi:"certId"`
+	// Deployment record details Create time.
+	CreateTime string `pulumi:"createTime"`
+	// List of deployment domain.
+	Domains []string `pulumi:"domains"`
+	// TCB environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	EnvId string `pulumi:"envId"`
+	// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ErrorMsg string `pulumi:"errorMsg"`
+	// Deployment record details ID.
+	Id int `pulumi:"id"`
+	// Deployment instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Deployment example name.
+	InstanceName string `pulumi:"instanceName"`
+	// Deployment monitor IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerId string `pulumi:"listenerId"`
+	// Delicate monitor name.
+	ListenerName string `pulumi:"listenerName"`
+	// Named space nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Namespace string `pulumi:"namespace"`
+	// Original binding certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	OldCertId string `pulumi:"oldCertId"`
+	// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Port int `pulumi:"port"`
+	// Deployment monitoring protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Protocol string `pulumi:"protocol"`
+	// Deployed TCB regionNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region string `pulumi:"region"`
+	// Secret nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SecretName string `pulumi:"secretName"`
+	// Whether to turn on SNI.
+	SniSwitch int `pulumi:"sniSwitch"`
+	// Deployment state.
+	Status int `pulumi:"status"`
+	// Deployed TCB typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	TcbType string `pulumi:"tcbType"`
+	// Deployment record details last update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDescribeHostDeployRecordDetailDeployRecordDetailListInput is an input type that accepts GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs and GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput values.
+// You can construct a concrete instance of `GetDescribeHostDeployRecordDetailDeployRecordDetailListInput` via:
+//
+//	GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs{...}
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput
+	ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutputWithContext(context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput
+}
+
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs struct {
+	// COS storage barrel nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Deployment certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Deployment record details Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// List of deployment domain.
+	Domains pulumi.StringArrayInput `pulumi:"domains"`
+	// TCB environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	EnvId pulumi.StringInput `pulumi:"envId"`
+	// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ErrorMsg pulumi.StringInput `pulumi:"errorMsg"`
+	// Deployment record details ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Deployment instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Deployment example name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Deployment monitor IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Delicate monitor name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// Named space nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Original binding certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	OldCertId pulumi.StringInput `pulumi:"oldCertId"`
+	// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Deployment monitoring protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Deployed TCB regionNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Secret nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SecretName pulumi.StringInput `pulumi:"secretName"`
+	// Whether to turn on SNI.
+	SniSwitch pulumi.IntInput `pulumi:"sniSwitch"`
+	// Deployment state.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Deployed TCB typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	TcbType pulumi.StringInput `pulumi:"tcbType"`
+	// Deployment record details last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDeployRecordDetailDeployRecordDetailList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput {
+	return i.ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput)
+}
+
+// GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayInput is an input type that accepts GetDescribeHostDeployRecordDetailDeployRecordDetailListArray and GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayInput` via:
+//
+//	GetDescribeHostDeployRecordDetailDeployRecordDetailListArray{ GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs{...} }
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput
+	ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutputWithContext(context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput
+}
+
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListArray []GetDescribeHostDeployRecordDetailDeployRecordDetailListInput
+
+func (GetDescribeHostDeployRecordDetailDeployRecordDetailListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDeployRecordDetailDeployRecordDetailList)(nil)).Elem()
+}
+
+func (i GetDescribeHostDeployRecordDetailDeployRecordDetailListArray) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput {
+	return i.ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostDeployRecordDetailDeployRecordDetailListArray) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput)
+}
+
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostDeployRecordDetailDeployRecordDetailList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput {
+	return o
+}
+
+// COS storage barrel nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Deployment certificate ID.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Deployment record details Create time.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// List of deployment domain.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) []string { return v.Domains }).(pulumi.StringArrayOutput)
+}
+
+// TCB environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) EnvId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.EnvId }).(pulumi.StringOutput)
+}
+
+// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ErrorMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.ErrorMsg }).(pulumi.StringOutput)
+}
+
+// Deployment record details ID.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Deployment instance ID.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Deployment example name.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Deployment monitor IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Delicate monitor name.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// Named space nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Original binding certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) OldCertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.OldCertId }).(pulumi.StringOutput)
+}
+
+// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Deployment monitoring protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Deployed TCB regionNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Secret nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) SecretName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.SecretName }).(pulumi.StringOutput)
+}
+
+// Whether to turn on SNI.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) SniSwitch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) int { return v.SniSwitch }).(pulumi.IntOutput)
+}
+
+// Deployment state.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Deployed TCB typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) TcbType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.TcbType }).(pulumi.StringOutput)
+}
+
+// Deployment record details last update time.
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostDeployRecordDetailDeployRecordDetailList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostDeployRecordDetailDeployRecordDetailList)(nil)).Elem()
+}
+
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput() GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput) ToGetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutputWithContext(ctx context.Context) GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostDeployRecordDetailDeployRecordDetailList {
+		return vs[0].([]GetDescribeHostDeployRecordDetailDeployRecordDetailList)[vs[1].(int)]
+	}).(GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostLighthouseInstanceListFilterInput is an input type that accepts GetDescribeHostLighthouseInstanceListFilterArgs and GetDescribeHostLighthouseInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostLighthouseInstanceListFilterInput` via:
+//
+//	GetDescribeHostLighthouseInstanceListFilterArgs{...}
+type GetDescribeHostLighthouseInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLighthouseInstanceListFilterOutput() GetDescribeHostLighthouseInstanceListFilterOutput
+	ToGetDescribeHostLighthouseInstanceListFilterOutputWithContext(context.Context) GetDescribeHostLighthouseInstanceListFilterOutput
+}
+
+type GetDescribeHostLighthouseInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostLighthouseInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLighthouseInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostLighthouseInstanceListFilterArgs) ToGetDescribeHostLighthouseInstanceListFilterOutput() GetDescribeHostLighthouseInstanceListFilterOutput {
+	return i.ToGetDescribeHostLighthouseInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLighthouseInstanceListFilterArgs) ToGetDescribeHostLighthouseInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLighthouseInstanceListFilterOutput)
+}
+
+// GetDescribeHostLighthouseInstanceListFilterArrayInput is an input type that accepts GetDescribeHostLighthouseInstanceListFilterArray and GetDescribeHostLighthouseInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostLighthouseInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostLighthouseInstanceListFilterArray{ GetDescribeHostLighthouseInstanceListFilterArgs{...} }
+type GetDescribeHostLighthouseInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLighthouseInstanceListFilterArrayOutput() GetDescribeHostLighthouseInstanceListFilterArrayOutput
+	ToGetDescribeHostLighthouseInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostLighthouseInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostLighthouseInstanceListFilterArray []GetDescribeHostLighthouseInstanceListFilterInput
+
+func (GetDescribeHostLighthouseInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLighthouseInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostLighthouseInstanceListFilterArray) ToGetDescribeHostLighthouseInstanceListFilterArrayOutput() GetDescribeHostLighthouseInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostLighthouseInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLighthouseInstanceListFilterArray) ToGetDescribeHostLighthouseInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLighthouseInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLighthouseInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLighthouseInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostLighthouseInstanceListFilterOutput) ToGetDescribeHostLighthouseInstanceListFilterOutput() GetDescribeHostLighthouseInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListFilterOutput) ToGetDescribeHostLighthouseInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostLighthouseInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostLighthouseInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLighthouseInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLighthouseInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostLighthouseInstanceListFilterArrayOutput) ToGetDescribeHostLighthouseInstanceListFilterArrayOutput() GetDescribeHostLighthouseInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListFilterArrayOutput) ToGetDescribeHostLighthouseInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostLighthouseInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostLighthouseInstanceListFilter {
+		return vs[0].([]GetDescribeHostLighthouseInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostLighthouseInstanceListFilterOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListInstanceList struct {
+	// Optional domain name.
+	Domains []string `pulumi:"domains"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Example name.
+	InstanceName string `pulumi:"instanceName"`
+	// IP address.
+	Ips []string `pulumi:"ips"`
+}
+
+// GetDescribeHostLighthouseInstanceListInstanceListInput is an input type that accepts GetDescribeHostLighthouseInstanceListInstanceListArgs and GetDescribeHostLighthouseInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostLighthouseInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostLighthouseInstanceListInstanceListArgs{...}
+type GetDescribeHostLighthouseInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLighthouseInstanceListInstanceListOutput() GetDescribeHostLighthouseInstanceListInstanceListOutput
+	ToGetDescribeHostLighthouseInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostLighthouseInstanceListInstanceListOutput
+}
+
+type GetDescribeHostLighthouseInstanceListInstanceListArgs struct {
+	// Optional domain name.
+	Domains pulumi.StringArrayInput `pulumi:"domains"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Example name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// IP address.
+	Ips pulumi.StringArrayInput `pulumi:"ips"`
+}
+
+func (GetDescribeHostLighthouseInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLighthouseInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostLighthouseInstanceListInstanceListArgs) ToGetDescribeHostLighthouseInstanceListInstanceListOutput() GetDescribeHostLighthouseInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostLighthouseInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLighthouseInstanceListInstanceListArgs) ToGetDescribeHostLighthouseInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLighthouseInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostLighthouseInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostLighthouseInstanceListInstanceListArray and GetDescribeHostLighthouseInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostLighthouseInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostLighthouseInstanceListInstanceListArray{ GetDescribeHostLighthouseInstanceListInstanceListArgs{...} }
+type GetDescribeHostLighthouseInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutput() GetDescribeHostLighthouseInstanceListInstanceListArrayOutput
+	ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostLighthouseInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostLighthouseInstanceListInstanceListArray []GetDescribeHostLighthouseInstanceListInstanceListInput
+
+func (GetDescribeHostLighthouseInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLighthouseInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostLighthouseInstanceListInstanceListArray) ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutput() GetDescribeHostLighthouseInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLighthouseInstanceListInstanceListArray) ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLighthouseInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLighthouseInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLighthouseInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) ToGetDescribeHostLighthouseInstanceListInstanceListOutput() GetDescribeHostLighthouseInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) ToGetDescribeHostLighthouseInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListInstanceListOutput {
+	return o
+}
+
+// Optional domain name.
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListInstanceList) []string { return v.Domains }).(pulumi.StringArrayOutput)
+}
+
+// Instance ID.
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Example name.
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// IP address.
+func (o GetDescribeHostLighthouseInstanceListInstanceListOutput) Ips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostLighthouseInstanceListInstanceList) []string { return v.Ips }).(pulumi.StringArrayOutput)
+}
+
+type GetDescribeHostLighthouseInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLighthouseInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLighthouseInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostLighthouseInstanceListInstanceListArrayOutput) ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutput() GetDescribeHostLighthouseInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListInstanceListArrayOutput) ToGetDescribeHostLighthouseInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostLighthouseInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLighthouseInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostLighthouseInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostLighthouseInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostLighthouseInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostLighthouseInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostLiveInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostLiveInstanceListFilterInput is an input type that accepts GetDescribeHostLiveInstanceListFilterArgs and GetDescribeHostLiveInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostLiveInstanceListFilterInput` via:
+//
+//	GetDescribeHostLiveInstanceListFilterArgs{...}
+type GetDescribeHostLiveInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLiveInstanceListFilterOutput() GetDescribeHostLiveInstanceListFilterOutput
+	ToGetDescribeHostLiveInstanceListFilterOutputWithContext(context.Context) GetDescribeHostLiveInstanceListFilterOutput
+}
+
+type GetDescribeHostLiveInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostLiveInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLiveInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostLiveInstanceListFilterArgs) ToGetDescribeHostLiveInstanceListFilterOutput() GetDescribeHostLiveInstanceListFilterOutput {
+	return i.ToGetDescribeHostLiveInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLiveInstanceListFilterArgs) ToGetDescribeHostLiveInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLiveInstanceListFilterOutput)
+}
+
+// GetDescribeHostLiveInstanceListFilterArrayInput is an input type that accepts GetDescribeHostLiveInstanceListFilterArray and GetDescribeHostLiveInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostLiveInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostLiveInstanceListFilterArray{ GetDescribeHostLiveInstanceListFilterArgs{...} }
+type GetDescribeHostLiveInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLiveInstanceListFilterArrayOutput() GetDescribeHostLiveInstanceListFilterArrayOutput
+	ToGetDescribeHostLiveInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostLiveInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostLiveInstanceListFilterArray []GetDescribeHostLiveInstanceListFilterInput
+
+func (GetDescribeHostLiveInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLiveInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostLiveInstanceListFilterArray) ToGetDescribeHostLiveInstanceListFilterArrayOutput() GetDescribeHostLiveInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostLiveInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLiveInstanceListFilterArray) ToGetDescribeHostLiveInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLiveInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostLiveInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLiveInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLiveInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostLiveInstanceListFilterOutput) ToGetDescribeHostLiveInstanceListFilterOutput() GetDescribeHostLiveInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListFilterOutput) ToGetDescribeHostLiveInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostLiveInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLiveInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostLiveInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLiveInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostLiveInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLiveInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLiveInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostLiveInstanceListFilterArrayOutput) ToGetDescribeHostLiveInstanceListFilterArrayOutput() GetDescribeHostLiveInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListFilterArrayOutput) ToGetDescribeHostLiveInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostLiveInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostLiveInstanceListFilter {
+		return vs[0].([]GetDescribeHostLiveInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostLiveInstanceListFilterOutput)
+}
+
+type GetDescribeHostLiveInstanceListInstanceList struct {
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	Status int `pulumi:"status"`
+}
+
+// GetDescribeHostLiveInstanceListInstanceListInput is an input type that accepts GetDescribeHostLiveInstanceListInstanceListArgs and GetDescribeHostLiveInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostLiveInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostLiveInstanceListInstanceListArgs{...}
+type GetDescribeHostLiveInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLiveInstanceListInstanceListOutput() GetDescribeHostLiveInstanceListInstanceListOutput
+	ToGetDescribeHostLiveInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostLiveInstanceListInstanceListOutput
+}
+
+type GetDescribeHostLiveInstanceListInstanceListArgs struct {
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetDescribeHostLiveInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLiveInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostLiveInstanceListInstanceListArgs) ToGetDescribeHostLiveInstanceListInstanceListOutput() GetDescribeHostLiveInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostLiveInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLiveInstanceListInstanceListArgs) ToGetDescribeHostLiveInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLiveInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostLiveInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostLiveInstanceListInstanceListArray and GetDescribeHostLiveInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostLiveInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostLiveInstanceListInstanceListArray{ GetDescribeHostLiveInstanceListInstanceListArgs{...} }
+type GetDescribeHostLiveInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostLiveInstanceListInstanceListArrayOutput() GetDescribeHostLiveInstanceListInstanceListArrayOutput
+	ToGetDescribeHostLiveInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostLiveInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostLiveInstanceListInstanceListArray []GetDescribeHostLiveInstanceListInstanceListInput
+
+func (GetDescribeHostLiveInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLiveInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostLiveInstanceListInstanceListArray) ToGetDescribeHostLiveInstanceListInstanceListArrayOutput() GetDescribeHostLiveInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostLiveInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostLiveInstanceListInstanceListArray) ToGetDescribeHostLiveInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostLiveInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostLiveInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLiveInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostLiveInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostLiveInstanceListInstanceListOutput) ToGetDescribeHostLiveInstanceListInstanceListOutput() GetDescribeHostLiveInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListInstanceListOutput) ToGetDescribeHostLiveInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListInstanceListOutput {
+	return o
+}
+
+// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostLiveInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLiveInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostLiveInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostLiveInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+func (o GetDescribeHostLiveInstanceListInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostLiveInstanceListInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetDescribeHostLiveInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostLiveInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostLiveInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostLiveInstanceListInstanceListArrayOutput) ToGetDescribeHostLiveInstanceListInstanceListArrayOutput() GetDescribeHostLiveInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListInstanceListArrayOutput) ToGetDescribeHostLiveInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostLiveInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostLiveInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostLiveInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostLiveInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostLiveInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostLiveInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostTeoInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostTeoInstanceListFilterInput is an input type that accepts GetDescribeHostTeoInstanceListFilterArgs and GetDescribeHostTeoInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostTeoInstanceListFilterInput` via:
+//
+//	GetDescribeHostTeoInstanceListFilterArgs{...}
+type GetDescribeHostTeoInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTeoInstanceListFilterOutput() GetDescribeHostTeoInstanceListFilterOutput
+	ToGetDescribeHostTeoInstanceListFilterOutputWithContext(context.Context) GetDescribeHostTeoInstanceListFilterOutput
+}
+
+type GetDescribeHostTeoInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostTeoInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTeoInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostTeoInstanceListFilterArgs) ToGetDescribeHostTeoInstanceListFilterOutput() GetDescribeHostTeoInstanceListFilterOutput {
+	return i.ToGetDescribeHostTeoInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTeoInstanceListFilterArgs) ToGetDescribeHostTeoInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTeoInstanceListFilterOutput)
+}
+
+// GetDescribeHostTeoInstanceListFilterArrayInput is an input type that accepts GetDescribeHostTeoInstanceListFilterArray and GetDescribeHostTeoInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTeoInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostTeoInstanceListFilterArray{ GetDescribeHostTeoInstanceListFilterArgs{...} }
+type GetDescribeHostTeoInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTeoInstanceListFilterArrayOutput() GetDescribeHostTeoInstanceListFilterArrayOutput
+	ToGetDescribeHostTeoInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostTeoInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostTeoInstanceListFilterArray []GetDescribeHostTeoInstanceListFilterInput
+
+func (GetDescribeHostTeoInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTeoInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostTeoInstanceListFilterArray) ToGetDescribeHostTeoInstanceListFilterArrayOutput() GetDescribeHostTeoInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostTeoInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTeoInstanceListFilterArray) ToGetDescribeHostTeoInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTeoInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostTeoInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTeoInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTeoInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostTeoInstanceListFilterOutput) ToGetDescribeHostTeoInstanceListFilterOutput() GetDescribeHostTeoInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListFilterOutput) ToGetDescribeHostTeoInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostTeoInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostTeoInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostTeoInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTeoInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTeoInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostTeoInstanceListFilterArrayOutput) ToGetDescribeHostTeoInstanceListFilterArrayOutput() GetDescribeHostTeoInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListFilterArrayOutput) ToGetDescribeHostTeoInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTeoInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTeoInstanceListFilter {
+		return vs[0].([]GetDescribeHostTeoInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostTeoInstanceListFilterOutput)
+}
+
+type GetDescribeHostTeoInstanceListInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Host string `pulumi:"host"`
+	// Domain name.
+	Status string `pulumi:"status"`
+	// Regional IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetDescribeHostTeoInstanceListInstanceListInput is an input type that accepts GetDescribeHostTeoInstanceListInstanceListArgs and GetDescribeHostTeoInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostTeoInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostTeoInstanceListInstanceListArgs{...}
+type GetDescribeHostTeoInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTeoInstanceListInstanceListOutput() GetDescribeHostTeoInstanceListInstanceListOutput
+	ToGetDescribeHostTeoInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostTeoInstanceListInstanceListOutput
+}
+
+type GetDescribeHostTeoInstanceListInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Domain name.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Regional IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetDescribeHostTeoInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTeoInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTeoInstanceListInstanceListArgs) ToGetDescribeHostTeoInstanceListInstanceListOutput() GetDescribeHostTeoInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostTeoInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTeoInstanceListInstanceListArgs) ToGetDescribeHostTeoInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTeoInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostTeoInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostTeoInstanceListInstanceListArray and GetDescribeHostTeoInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTeoInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostTeoInstanceListInstanceListArray{ GetDescribeHostTeoInstanceListInstanceListArgs{...} }
+type GetDescribeHostTeoInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTeoInstanceListInstanceListArrayOutput() GetDescribeHostTeoInstanceListInstanceListArrayOutput
+	ToGetDescribeHostTeoInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostTeoInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostTeoInstanceListInstanceListArray []GetDescribeHostTeoInstanceListInstanceListInput
+
+func (GetDescribeHostTeoInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTeoInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTeoInstanceListInstanceListArray) ToGetDescribeHostTeoInstanceListInstanceListArrayOutput() GetDescribeHostTeoInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostTeoInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTeoInstanceListInstanceListArray) ToGetDescribeHostTeoInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTeoInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostTeoInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTeoInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTeoInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) ToGetDescribeHostTeoInstanceListInstanceListOutput() GetDescribeHostTeoInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) ToGetDescribeHostTeoInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListInstanceList) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Regional IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostTeoInstanceListInstanceListOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTeoInstanceListInstanceList) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostTeoInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTeoInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTeoInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTeoInstanceListInstanceListArrayOutput) ToGetDescribeHostTeoInstanceListInstanceListArrayOutput() GetDescribeHostTeoInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListInstanceListArrayOutput) ToGetDescribeHostTeoInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTeoInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTeoInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTeoInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTeoInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostTeoInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostTeoInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostTkeInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostTkeInstanceListFilterInput is an input type that accepts GetDescribeHostTkeInstanceListFilterArgs and GetDescribeHostTkeInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListFilterInput` via:
+//
+//	GetDescribeHostTkeInstanceListFilterArgs{...}
+type GetDescribeHostTkeInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListFilterOutput() GetDescribeHostTkeInstanceListFilterOutput
+	ToGetDescribeHostTkeInstanceListFilterOutputWithContext(context.Context) GetDescribeHostTkeInstanceListFilterOutput
+}
+
+type GetDescribeHostTkeInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostTkeInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListFilterArgs) ToGetDescribeHostTkeInstanceListFilterOutput() GetDescribeHostTkeInstanceListFilterOutput {
+	return i.ToGetDescribeHostTkeInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListFilterArgs) ToGetDescribeHostTkeInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListFilterOutput)
+}
+
+// GetDescribeHostTkeInstanceListFilterArrayInput is an input type that accepts GetDescribeHostTkeInstanceListFilterArray and GetDescribeHostTkeInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostTkeInstanceListFilterArray{ GetDescribeHostTkeInstanceListFilterArgs{...} }
+type GetDescribeHostTkeInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListFilterArrayOutput() GetDescribeHostTkeInstanceListFilterArrayOutput
+	ToGetDescribeHostTkeInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostTkeInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostTkeInstanceListFilterArray []GetDescribeHostTkeInstanceListFilterInput
+
+func (GetDescribeHostTkeInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListFilterArray) ToGetDescribeHostTkeInstanceListFilterArrayOutput() GetDescribeHostTkeInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostTkeInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListFilterArray) ToGetDescribeHostTkeInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListFilterOutput) ToGetDescribeHostTkeInstanceListFilterOutput() GetDescribeHostTkeInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListFilterOutput) ToGetDescribeHostTkeInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostTkeInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostTkeInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostTkeInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListFilterArrayOutput) ToGetDescribeHostTkeInstanceListFilterArrayOutput() GetDescribeHostTkeInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListFilterArrayOutput) ToGetDescribeHostTkeInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTkeInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTkeInstanceListFilter {
+		return vs[0].([]GetDescribeHostTkeInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostTkeInstanceListFilterOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceList struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster.
+	ClusterType string `pulumi:"clusterType"`
+	// Cluster.
+	ClusterVersion string `pulumi:"clusterVersion"`
+	// Cluster Naming Space List.
+	NamespaceLists []GetDescribeHostTkeInstanceListInstanceListNamespaceList `pulumi:"namespaceLists"`
+}
+
+// GetDescribeHostTkeInstanceListInstanceListInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListArgs and GetDescribeHostTkeInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListArgs{...}
+type GetDescribeHostTkeInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListOutput() GetDescribeHostTkeInstanceListInstanceListOutput
+	ToGetDescribeHostTkeInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Cluster.
+	ClusterVersion pulumi.StringInput `pulumi:"clusterVersion"`
+	// Cluster Naming Space List.
+	NamespaceLists GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayInput `pulumi:"namespaceLists"`
+}
+
+func (GetDescribeHostTkeInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListArgs) ToGetDescribeHostTkeInstanceListInstanceListOutput() GetDescribeHostTkeInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListArgs) ToGetDescribeHostTkeInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostTkeInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListArray and GetDescribeHostTkeInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListArray{ GetDescribeHostTkeInstanceListInstanceListArgs{...} }
+type GetDescribeHostTkeInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListArrayOutput
+	ToGetDescribeHostTkeInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListArray []GetDescribeHostTkeInstanceListInstanceListInput
+
+func (GetDescribeHostTkeInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListArray) ToGetDescribeHostTkeInstanceListInstanceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListArray) ToGetDescribeHostTkeInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ToGetDescribeHostTkeInstanceListInstanceListOutput() GetDescribeHostTkeInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ToGetDescribeHostTkeInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListOutput {
+	return o
+}
+
+// Cluster ID.
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster.
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceList) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Cluster.
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) ClusterVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceList) string { return v.ClusterVersion }).(pulumi.StringOutput)
+}
+
+// Cluster Naming Space List.
+func (o GetDescribeHostTkeInstanceListInstanceListOutput) NamespaceLists() GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceList) []GetDescribeHostTkeInstanceListInstanceListNamespaceList {
+		return v.NamespaceLists
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTkeInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTkeInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostTkeInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostTkeInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceList struct {
+	// Secret name.
+	Name string `pulumi:"name"`
+	// Secret list.
+	SecretLists []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList `pulumi:"secretLists"`
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs and GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs{...}
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs struct {
+	// Secret name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Secret list.
+	SecretLists GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayInput `pulumi:"secretLists"`
+}
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput)
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListArray and GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListArray{ GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs{...} }
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListArray []GetDescribeHostTkeInstanceListInstanceListNamespaceListInput
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput {
+	return o
+}
+
+// Secret name.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Secret list.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput) SecretLists() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceList) []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList {
+		return v.SecretLists
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTkeInstanceListInstanceListNamespaceList {
+		return vs[0].([]GetDescribeHostTkeInstanceListInstanceListNamespaceList)[vs[1].(int)]
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Ingress list.
+	IngressLists []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList `pulumi:"ingressLists"`
+	// Secret name.
+	Name string `pulumi:"name"`
+	// List of domain names that are not matched with the new certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs and GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs{...}
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Ingress list.
+	IngressLists GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayInput `pulumi:"ingressLists"`
+	// Secret name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of domain names that are not matched with the new certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+}
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput)
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray and GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray{ GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs{...} }
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListInput
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Ingress list.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) IngressLists() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList) []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList {
+		return v.IngressLists
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput)
+}
+
+// Secret name.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of domain names that are not matched with the new certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList) []string {
+		return v.NoMatchDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList {
+		return vs[0].([]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretList)[vs[1].(int)]
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList struct {
+	// Ingress domain name list.
+	Domains []string `pulumi:"domains"`
+	// Ingress name.
+	IngressName string `pulumi:"ingressName"`
+	// TLS domain name list.
+	TlsDomains []string `pulumi:"tlsDomains"`
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs and GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs{...}
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs struct {
+	// Ingress domain name list.
+	Domains pulumi.StringArrayInput `pulumi:"domains"`
+	// Ingress name.
+	IngressName pulumi.StringInput `pulumi:"ingressName"`
+	// TLS domain name list.
+	TlsDomains pulumi.StringArrayInput `pulumi:"tlsDomains"`
+}
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput)
+}
+
+// GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayInput is an input type that accepts GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray and GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayInput` via:
+//
+//	GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray{ GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs{...} }
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput
+	ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray []GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListInput
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return i.ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput {
+	return o
+}
+
+// Ingress domain name list.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList) []string {
+		return v.Domains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Ingress name.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) IngressName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList) string {
+		return v.IngressName
+	}).(pulumi.StringOutput)
+}
+
+// TLS domain name list.
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput) TlsDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList) []string {
+		return v.TlsDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput() GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput) ToGetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(ctx context.Context) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList {
+		return vs[0].([]GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressList)[vs[1].(int)]
+	}).(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput)
+}
+
+type GetDescribeHostUpdateRecordDeployRecordList struct {
+	// New certificate ID.
+	CertId string `pulumi:"certId"`
+	// Deployment time.
+	CreateTime string `pulumi:"createTime"`
+	// Record ID.
+	Id int `pulumi:"id"`
+	// Original certificate ID.
+	OldCertId string `pulumi:"oldCertId"`
+	// List of regional deploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Regions []string `pulumi:"regions"`
+	// List of resource types.
+	ResourceTypes []string `pulumi:"resourceTypes"`
+	// Deployment state.
+	Status int `pulumi:"status"`
+	// Last update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDescribeHostUpdateRecordDeployRecordListInput is an input type that accepts GetDescribeHostUpdateRecordDeployRecordListArgs and GetDescribeHostUpdateRecordDeployRecordListOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDeployRecordListInput` via:
+//
+//	GetDescribeHostUpdateRecordDeployRecordListArgs{...}
+type GetDescribeHostUpdateRecordDeployRecordListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDeployRecordListOutput() GetDescribeHostUpdateRecordDeployRecordListOutput
+	ToGetDescribeHostUpdateRecordDeployRecordListOutputWithContext(context.Context) GetDescribeHostUpdateRecordDeployRecordListOutput
+}
+
+type GetDescribeHostUpdateRecordDeployRecordListArgs struct {
+	// New certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Deployment time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Record ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Original certificate ID.
+	OldCertId pulumi.StringInput `pulumi:"oldCertId"`
+	// List of regional deploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Regions pulumi.StringArrayInput `pulumi:"regions"`
+	// List of resource types.
+	ResourceTypes pulumi.StringArrayInput `pulumi:"resourceTypes"`
+	// Deployment state.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDescribeHostUpdateRecordDeployRecordListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDeployRecordList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDeployRecordListArgs) ToGetDescribeHostUpdateRecordDeployRecordListOutput() GetDescribeHostUpdateRecordDeployRecordListOutput {
+	return i.ToGetDescribeHostUpdateRecordDeployRecordListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDeployRecordListArgs) ToGetDescribeHostUpdateRecordDeployRecordListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDeployRecordListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDeployRecordListOutput)
+}
+
+// GetDescribeHostUpdateRecordDeployRecordListArrayInput is an input type that accepts GetDescribeHostUpdateRecordDeployRecordListArray and GetDescribeHostUpdateRecordDeployRecordListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDeployRecordListArrayInput` via:
+//
+//	GetDescribeHostUpdateRecordDeployRecordListArray{ GetDescribeHostUpdateRecordDeployRecordListArgs{...} }
+type GetDescribeHostUpdateRecordDeployRecordListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDeployRecordListArrayOutput() GetDescribeHostUpdateRecordDeployRecordListArrayOutput
+	ToGetDescribeHostUpdateRecordDeployRecordListArrayOutputWithContext(context.Context) GetDescribeHostUpdateRecordDeployRecordListArrayOutput
+}
+
+type GetDescribeHostUpdateRecordDeployRecordListArray []GetDescribeHostUpdateRecordDeployRecordListInput
+
+func (GetDescribeHostUpdateRecordDeployRecordListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDeployRecordList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDeployRecordListArray) ToGetDescribeHostUpdateRecordDeployRecordListArrayOutput() GetDescribeHostUpdateRecordDeployRecordListArrayOutput {
+	return i.ToGetDescribeHostUpdateRecordDeployRecordListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDeployRecordListArray) ToGetDescribeHostUpdateRecordDeployRecordListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDeployRecordListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDeployRecordListArrayOutput)
+}
+
+type GetDescribeHostUpdateRecordDeployRecordListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDeployRecordListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDeployRecordList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) ToGetDescribeHostUpdateRecordDeployRecordListOutput() GetDescribeHostUpdateRecordDeployRecordListOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) ToGetDescribeHostUpdateRecordDeployRecordListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDeployRecordListOutput {
+	return o
+}
+
+// New certificate ID.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Deployment time.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Record ID.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Original certificate ID.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) OldCertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) string { return v.OldCertId }).(pulumi.StringOutput)
+}
+
+// List of regional deploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) Regions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) []string { return v.Regions }).(pulumi.StringArrayOutput)
+}
+
+// List of resource types.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) ResourceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) []string { return v.ResourceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Deployment state.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Last update time.
+func (o GetDescribeHostUpdateRecordDeployRecordListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDeployRecordList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostUpdateRecordDeployRecordListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDeployRecordListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDeployRecordList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDeployRecordListArrayOutput) ToGetDescribeHostUpdateRecordDeployRecordListArrayOutput() GetDescribeHostUpdateRecordDeployRecordListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDeployRecordListArrayOutput) ToGetDescribeHostUpdateRecordDeployRecordListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDeployRecordListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDeployRecordListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostUpdateRecordDeployRecordListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostUpdateRecordDeployRecordList {
+		return vs[0].([]GetDescribeHostUpdateRecordDeployRecordList)[vs[1].(int)]
+	}).(GetDescribeHostUpdateRecordDeployRecordListOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailList struct {
+	// List of deployment resources details.
+	Lists []GetDescribeHostUpdateRecordDetailRecordDetailListList `pulumi:"lists"`
+	// Deploy resource type.
+	ResourceType string `pulumi:"resourceType"`
+	// The total number of deployment resources.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetDescribeHostUpdateRecordDetailRecordDetailListInput is an input type that accepts GetDescribeHostUpdateRecordDetailRecordDetailListArgs and GetDescribeHostUpdateRecordDetailRecordDetailListOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDetailRecordDetailListInput` via:
+//
+//	GetDescribeHostUpdateRecordDetailRecordDetailListArgs{...}
+type GetDescribeHostUpdateRecordDetailRecordDetailListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListOutput
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListOutputWithContext(context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListOutput
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListArgs struct {
+	// List of deployment resources details.
+	Lists GetDescribeHostUpdateRecordDetailRecordDetailListListArrayInput `pulumi:"lists"`
+	// Deploy resource type.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// The total number of deployment resources.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListArgs) ToGetDescribeHostUpdateRecordDetailRecordDetailListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListOutput {
+	return i.ToGetDescribeHostUpdateRecordDetailRecordDetailListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListArgs) ToGetDescribeHostUpdateRecordDetailRecordDetailListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDetailRecordDetailListOutput)
+}
+
+// GetDescribeHostUpdateRecordDetailRecordDetailListArrayInput is an input type that accepts GetDescribeHostUpdateRecordDetailRecordDetailListArray and GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDetailRecordDetailListArrayInput` via:
+//
+//	GetDescribeHostUpdateRecordDetailRecordDetailListArray{ GetDescribeHostUpdateRecordDetailRecordDetailListArgs{...} }
+type GetDescribeHostUpdateRecordDetailRecordDetailListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutputWithContext(context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListArray []GetDescribeHostUpdateRecordDetailRecordDetailListInput
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDetailRecordDetailList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListArray) ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput {
+	return i.ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListArray) ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListOutput {
+	return o
+}
+
+// List of deployment resources details.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListOutput) Lists() GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailList) []GetDescribeHostUpdateRecordDetailRecordDetailListList {
+		return v.Lists
+	}).(GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput)
+}
+
+// Deploy resource type.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// The total number of deployment resources.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailList) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDetailRecordDetailList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostUpdateRecordDetailRecordDetailListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostUpdateRecordDetailRecordDetailList {
+		return vs[0].([]GetDescribeHostUpdateRecordDetailRecordDetailList)[vs[1].(int)]
+	}).(GetDescribeHostUpdateRecordDetailRecordDetailListOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListList struct {
+	// BUCKET name (COS dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket string `pulumi:"bucket"`
+	// New certificate ID.
+	CertId string `pulumi:"certId"`
+	// Deployment time.
+	CreateTime string `pulumi:"createTime"`
+	// List of deployment domainNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Domains []string `pulumi:"domains"`
+	// Environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	EnvId string `pulumi:"envId"`
+	// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ErrorMsg string `pulumi:"errorMsg"`
+	// Detailed record ID.
+	Id int `pulumi:"id"`
+	// Deployment instance IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	InstanceId string `pulumi:"instanceId"`
+	// Deployment example nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	InstanceName string `pulumi:"instanceName"`
+	// Deploy listener ID (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerId string `pulumi:"listenerId"`
+	// Deploy listener name (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerName string `pulumi:"listenerName"`
+	// Naming Space (TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Namespace string `pulumi:"namespace"`
+	// Old certificate ID.
+	OldCertId string `pulumi:"oldCertId"`
+	// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Port int `pulumi:"port"`
+	// protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Protocol string `pulumi:"protocol"`
+	// DeploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region string `pulumi:"region"`
+	// Deploy resource type.
+	ResourceType string `pulumi:"resourceType"`
+	// Secret Name (TKE for TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SecretName string `pulumi:"secretName"`
+	// Whether to turn on SNI (CLB dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SniSwitch int `pulumi:"sniSwitch"`
+	// Deployment state.
+	Status int `pulumi:"status"`
+	// TCB deployment typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	TCBType string `pulumi:"tCBType"`
+	// Last update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetDescribeHostUpdateRecordDetailRecordDetailListListInput is an input type that accepts GetDescribeHostUpdateRecordDetailRecordDetailListListArgs and GetDescribeHostUpdateRecordDetailRecordDetailListListOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDetailRecordDetailListListInput` via:
+//
+//	GetDescribeHostUpdateRecordDetailRecordDetailListListArgs{...}
+type GetDescribeHostUpdateRecordDetailRecordDetailListListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListOutput
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutputWithContext(context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListOutput
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListListArgs struct {
+	// BUCKET name (COS dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// New certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Deployment time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// List of deployment domainNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Domains pulumi.StringArrayInput `pulumi:"domains"`
+	// Environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	EnvId pulumi.StringInput `pulumi:"envId"`
+	// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ErrorMsg pulumi.StringInput `pulumi:"errorMsg"`
+	// Detailed record ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Deployment instance IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Deployment example nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Deploy listener ID (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Deploy listener name (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// Naming Space (TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Old certificate ID.
+	OldCertId pulumi.StringInput `pulumi:"oldCertId"`
+	// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Port pulumi.IntInput `pulumi:"port"`
+	// protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// DeploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Deploy resource type.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Secret Name (TKE for TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SecretName pulumi.StringInput `pulumi:"secretName"`
+	// Whether to turn on SNI (CLB dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	SniSwitch pulumi.IntInput `pulumi:"sniSwitch"`
+	// Deployment state.
+	Status pulumi.IntInput `pulumi:"status"`
+	// TCB deployment typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	TCBType pulumi.StringInput `pulumi:"tCBType"`
+	// Last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListListArgs) ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListOutput {
+	return i.ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListListArgs) ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDetailRecordDetailListListOutput)
+}
+
+// GetDescribeHostUpdateRecordDetailRecordDetailListListArrayInput is an input type that accepts GetDescribeHostUpdateRecordDetailRecordDetailListListArray and GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostUpdateRecordDetailRecordDetailListListArrayInput` via:
+//
+//	GetDescribeHostUpdateRecordDetailRecordDetailListListArray{ GetDescribeHostUpdateRecordDetailRecordDetailListListArgs{...} }
+type GetDescribeHostUpdateRecordDetailRecordDetailListListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput
+	ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutputWithContext(context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListListArray []GetDescribeHostUpdateRecordDetailRecordDetailListListInput
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDetailRecordDetailListList)(nil)).Elem()
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListListArray) ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput {
+	return i.ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostUpdateRecordDetailRecordDetailListListArray) ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListListOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListOutput {
+	return o
+}
+
+// BUCKET name (COS dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// New certificate ID.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Deployment time.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// List of deployment domainNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) []string { return v.Domains }).(pulumi.StringArrayOutput)
+}
+
+// Environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) EnvId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.EnvId }).(pulumi.StringOutput)
+}
+
+// Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ErrorMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.ErrorMsg }).(pulumi.StringOutput)
+}
+
+// Detailed record ID.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Deployment instance IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Deployment example nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Deploy listener ID (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Deploy listener name (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// Naming Space (TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Old certificate ID.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) OldCertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.OldCertId }).(pulumi.StringOutput)
+}
+
+// portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// DeploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Deploy resource type.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Secret Name (TKE for TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) SecretName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.SecretName }).(pulumi.StringOutput)
+}
+
+// Whether to turn on SNI (CLB dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) SniSwitch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) int { return v.SniSwitch }).(pulumi.IntOutput)
+}
+
+// Deployment state.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// TCB deployment typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) TCBType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.TCBType }).(pulumi.StringOutput)
+}
+
+// Last update time.
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostUpdateRecordDetailRecordDetailListList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostUpdateRecordDetailRecordDetailListList)(nil)).Elem()
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput() GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput) ToGetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutputWithContext(ctx context.Context) GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostUpdateRecordDetailRecordDetailListListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostUpdateRecordDetailRecordDetailListList {
+		return vs[0].([]GetDescribeHostUpdateRecordDetailRecordDetailListList)[vs[1].(int)]
+	}).(GetDescribeHostUpdateRecordDetailRecordDetailListListOutput)
+}
+
+type GetDescribeHostVodInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostVodInstanceListFilterInput is an input type that accepts GetDescribeHostVodInstanceListFilterArgs and GetDescribeHostVodInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostVodInstanceListFilterInput` via:
+//
+//	GetDescribeHostVodInstanceListFilterArgs{...}
+type GetDescribeHostVodInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostVodInstanceListFilterOutput() GetDescribeHostVodInstanceListFilterOutput
+	ToGetDescribeHostVodInstanceListFilterOutputWithContext(context.Context) GetDescribeHostVodInstanceListFilterOutput
+}
+
+type GetDescribeHostVodInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostVodInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostVodInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostVodInstanceListFilterArgs) ToGetDescribeHostVodInstanceListFilterOutput() GetDescribeHostVodInstanceListFilterOutput {
+	return i.ToGetDescribeHostVodInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostVodInstanceListFilterArgs) ToGetDescribeHostVodInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostVodInstanceListFilterOutput)
+}
+
+// GetDescribeHostVodInstanceListFilterArrayInput is an input type that accepts GetDescribeHostVodInstanceListFilterArray and GetDescribeHostVodInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostVodInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostVodInstanceListFilterArray{ GetDescribeHostVodInstanceListFilterArgs{...} }
+type GetDescribeHostVodInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostVodInstanceListFilterArrayOutput() GetDescribeHostVodInstanceListFilterArrayOutput
+	ToGetDescribeHostVodInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostVodInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostVodInstanceListFilterArray []GetDescribeHostVodInstanceListFilterInput
+
+func (GetDescribeHostVodInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostVodInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostVodInstanceListFilterArray) ToGetDescribeHostVodInstanceListFilterArrayOutput() GetDescribeHostVodInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostVodInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostVodInstanceListFilterArray) ToGetDescribeHostVodInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostVodInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostVodInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostVodInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostVodInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostVodInstanceListFilterOutput) ToGetDescribeHostVodInstanceListFilterOutput() GetDescribeHostVodInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListFilterOutput) ToGetDescribeHostVodInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostVodInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostVodInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostVodInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostVodInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostVodInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostVodInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostVodInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostVodInstanceListFilterArrayOutput) ToGetDescribeHostVodInstanceListFilterArrayOutput() GetDescribeHostVodInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListFilterArrayOutput) ToGetDescribeHostVodInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostVodInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostVodInstanceListFilter {
+		return vs[0].([]GetDescribeHostVodInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostVodInstanceListFilterOutput)
+}
+
+type GetDescribeHostVodInstanceListInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+}
+
+// GetDescribeHostVodInstanceListInstanceListInput is an input type that accepts GetDescribeHostVodInstanceListInstanceListArgs and GetDescribeHostVodInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostVodInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostVodInstanceListInstanceListArgs{...}
+type GetDescribeHostVodInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostVodInstanceListInstanceListOutput() GetDescribeHostVodInstanceListInstanceListOutput
+	ToGetDescribeHostVodInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostVodInstanceListInstanceListOutput
+}
+
+type GetDescribeHostVodInstanceListInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+}
+
+func (GetDescribeHostVodInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostVodInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostVodInstanceListInstanceListArgs) ToGetDescribeHostVodInstanceListInstanceListOutput() GetDescribeHostVodInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostVodInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostVodInstanceListInstanceListArgs) ToGetDescribeHostVodInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostVodInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostVodInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostVodInstanceListInstanceListArray and GetDescribeHostVodInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostVodInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostVodInstanceListInstanceListArray{ GetDescribeHostVodInstanceListInstanceListArgs{...} }
+type GetDescribeHostVodInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostVodInstanceListInstanceListArrayOutput() GetDescribeHostVodInstanceListInstanceListArrayOutput
+	ToGetDescribeHostVodInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostVodInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostVodInstanceListInstanceListArray []GetDescribeHostVodInstanceListInstanceListInput
+
+func (GetDescribeHostVodInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostVodInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostVodInstanceListInstanceListArray) ToGetDescribeHostVodInstanceListInstanceListArrayOutput() GetDescribeHostVodInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostVodInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostVodInstanceListInstanceListArray) ToGetDescribeHostVodInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostVodInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostVodInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostVodInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostVodInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostVodInstanceListInstanceListOutput) ToGetDescribeHostVodInstanceListInstanceListOutput() GetDescribeHostVodInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListInstanceListOutput) ToGetDescribeHostVodInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetDescribeHostVodInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostVodInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostVodInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostVodInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostVodInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostVodInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostVodInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostVodInstanceListInstanceListArrayOutput) ToGetDescribeHostVodInstanceListInstanceListArrayOutput() GetDescribeHostVodInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListInstanceListArrayOutput) ToGetDescribeHostVodInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostVodInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostVodInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostVodInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostVodInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostVodInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostVodInstanceListInstanceListOutput)
+}
+
+type GetDescribeHostWafInstanceListFilter struct {
+	// Filter parameter key.
+	FilterKey string `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue string `pulumi:"filterValue"`
+}
+
+// GetDescribeHostWafInstanceListFilterInput is an input type that accepts GetDescribeHostWafInstanceListFilterArgs and GetDescribeHostWafInstanceListFilterOutput values.
+// You can construct a concrete instance of `GetDescribeHostWafInstanceListFilterInput` via:
+//
+//	GetDescribeHostWafInstanceListFilterArgs{...}
+type GetDescribeHostWafInstanceListFilterInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostWafInstanceListFilterOutput() GetDescribeHostWafInstanceListFilterOutput
+	ToGetDescribeHostWafInstanceListFilterOutputWithContext(context.Context) GetDescribeHostWafInstanceListFilterOutput
+}
+
+type GetDescribeHostWafInstanceListFilterArgs struct {
+	// Filter parameter key.
+	FilterKey pulumi.StringInput `pulumi:"filterKey"`
+	// Filter parameter value.
+	FilterValue pulumi.StringInput `pulumi:"filterValue"`
+}
+
+func (GetDescribeHostWafInstanceListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostWafInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostWafInstanceListFilterArgs) ToGetDescribeHostWafInstanceListFilterOutput() GetDescribeHostWafInstanceListFilterOutput {
+	return i.ToGetDescribeHostWafInstanceListFilterOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostWafInstanceListFilterArgs) ToGetDescribeHostWafInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostWafInstanceListFilterOutput)
+}
+
+// GetDescribeHostWafInstanceListFilterArrayInput is an input type that accepts GetDescribeHostWafInstanceListFilterArray and GetDescribeHostWafInstanceListFilterArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostWafInstanceListFilterArrayInput` via:
+//
+//	GetDescribeHostWafInstanceListFilterArray{ GetDescribeHostWafInstanceListFilterArgs{...} }
+type GetDescribeHostWafInstanceListFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostWafInstanceListFilterArrayOutput() GetDescribeHostWafInstanceListFilterArrayOutput
+	ToGetDescribeHostWafInstanceListFilterArrayOutputWithContext(context.Context) GetDescribeHostWafInstanceListFilterArrayOutput
+}
+
+type GetDescribeHostWafInstanceListFilterArray []GetDescribeHostWafInstanceListFilterInput
+
+func (GetDescribeHostWafInstanceListFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostWafInstanceListFilter)(nil)).Elem()
+}
+
+func (i GetDescribeHostWafInstanceListFilterArray) ToGetDescribeHostWafInstanceListFilterArrayOutput() GetDescribeHostWafInstanceListFilterArrayOutput {
+	return i.ToGetDescribeHostWafInstanceListFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostWafInstanceListFilterArray) ToGetDescribeHostWafInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostWafInstanceListFilterArrayOutput)
+}
+
+type GetDescribeHostWafInstanceListFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostWafInstanceListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostWafInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostWafInstanceListFilterOutput) ToGetDescribeHostWafInstanceListFilterOutput() GetDescribeHostWafInstanceListFilterOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListFilterOutput) ToGetDescribeHostWafInstanceListFilterOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListFilterOutput {
+	return o
+}
+
+// Filter parameter key.
+func (o GetDescribeHostWafInstanceListFilterOutput) FilterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListFilter) string { return v.FilterKey }).(pulumi.StringOutput)
+}
+
+// Filter parameter value.
+func (o GetDescribeHostWafInstanceListFilterOutput) FilterValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListFilter) string { return v.FilterValue }).(pulumi.StringOutput)
+}
+
+type GetDescribeHostWafInstanceListFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostWafInstanceListFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostWafInstanceListFilter)(nil)).Elem()
+}
+
+func (o GetDescribeHostWafInstanceListFilterArrayOutput) ToGetDescribeHostWafInstanceListFilterArrayOutput() GetDescribeHostWafInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListFilterArrayOutput) ToGetDescribeHostWafInstanceListFilterArrayOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListFilterArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListFilterArrayOutput) Index(i pulumi.IntInput) GetDescribeHostWafInstanceListFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostWafInstanceListFilter {
+		return vs[0].([]GetDescribeHostWafInstanceListFilter)[vs[1].(int)]
+	}).(GetDescribeHostWafInstanceListFilterOutput)
+}
+
+type GetDescribeHostWafInstanceListInstanceList struct {
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId string `pulumi:"certId"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	Status int `pulumi:"status"`
+}
+
+// GetDescribeHostWafInstanceListInstanceListInput is an input type that accepts GetDescribeHostWafInstanceListInstanceListArgs and GetDescribeHostWafInstanceListInstanceListOutput values.
+// You can construct a concrete instance of `GetDescribeHostWafInstanceListInstanceListInput` via:
+//
+//	GetDescribeHostWafInstanceListInstanceListArgs{...}
+type GetDescribeHostWafInstanceListInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostWafInstanceListInstanceListOutput() GetDescribeHostWafInstanceListInstanceListOutput
+	ToGetDescribeHostWafInstanceListInstanceListOutputWithContext(context.Context) GetDescribeHostWafInstanceListInstanceListOutput
+}
+
+type GetDescribeHostWafInstanceListInstanceListArgs struct {
+	// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetDescribeHostWafInstanceListInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostWafInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostWafInstanceListInstanceListArgs) ToGetDescribeHostWafInstanceListInstanceListOutput() GetDescribeHostWafInstanceListInstanceListOutput {
+	return i.ToGetDescribeHostWafInstanceListInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostWafInstanceListInstanceListArgs) ToGetDescribeHostWafInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostWafInstanceListInstanceListOutput)
+}
+
+// GetDescribeHostWafInstanceListInstanceListArrayInput is an input type that accepts GetDescribeHostWafInstanceListInstanceListArray and GetDescribeHostWafInstanceListInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeHostWafInstanceListInstanceListArrayInput` via:
+//
+//	GetDescribeHostWafInstanceListInstanceListArray{ GetDescribeHostWafInstanceListInstanceListArgs{...} }
+type GetDescribeHostWafInstanceListInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeHostWafInstanceListInstanceListArrayOutput() GetDescribeHostWafInstanceListInstanceListArrayOutput
+	ToGetDescribeHostWafInstanceListInstanceListArrayOutputWithContext(context.Context) GetDescribeHostWafInstanceListInstanceListArrayOutput
+}
+
+type GetDescribeHostWafInstanceListInstanceListArray []GetDescribeHostWafInstanceListInstanceListInput
+
+func (GetDescribeHostWafInstanceListInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostWafInstanceListInstanceList)(nil)).Elem()
+}
+
+func (i GetDescribeHostWafInstanceListInstanceListArray) ToGetDescribeHostWafInstanceListInstanceListArrayOutput() GetDescribeHostWafInstanceListInstanceListArrayOutput {
+	return i.ToGetDescribeHostWafInstanceListInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeHostWafInstanceListInstanceListArray) ToGetDescribeHostWafInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeHostWafInstanceListInstanceListArrayOutput)
+}
+
+type GetDescribeHostWafInstanceListInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostWafInstanceListInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeHostWafInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostWafInstanceListInstanceListOutput) ToGetDescribeHostWafInstanceListInstanceListOutput() GetDescribeHostWafInstanceListInstanceListOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListInstanceListOutput) ToGetDescribeHostWafInstanceListInstanceListOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListInstanceListOutput {
+	return o
+}
+
+// Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeHostWafInstanceListInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// domain name.
+func (o GetDescribeHostWafInstanceListInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+func (o GetDescribeHostWafInstanceListInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetDescribeHostWafInstanceListInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeHostWafInstanceListInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeHostWafInstanceListInstanceList)(nil)).Elem()
+}
+
+func (o GetDescribeHostWafInstanceListInstanceListArrayOutput) ToGetDescribeHostWafInstanceListInstanceListArrayOutput() GetDescribeHostWafInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListInstanceListArrayOutput) ToGetDescribeHostWafInstanceListInstanceListArrayOutputWithContext(ctx context.Context) GetDescribeHostWafInstanceListInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDescribeHostWafInstanceListInstanceListArrayOutput) Index(i pulumi.IntInput) GetDescribeHostWafInstanceListInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeHostWafInstanceListInstanceList {
+		return vs[0].([]GetDescribeHostWafInstanceListInstanceList)[vs[1].(int)]
+	}).(GetDescribeHostWafInstanceListInstanceListOutput)
+}
+
+type GetDescribeManagerDetailCompanyInfo struct {
+	// Detailed address where the company is located.
+	CompanyAddress string `pulumi:"companyAddress"`
+	// The city where the company is.
+	CompanyCity string `pulumi:"companyCity"`
+	// Company country.
+	CompanyCountry string `pulumi:"companyCountry"`
+	// Company ID.
+	CompanyId int `pulumi:"companyId"`
+	// Company Name.
+	CompanyName string `pulumi:"companyName"`
+	// company phone.
+	CompanyPhone string `pulumi:"companyPhone"`
+	// Province where the company is located.
+	CompanyProvince string `pulumi:"companyProvince"`
+	// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdNumber string `pulumi:"idNumber"`
+	// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdType string `pulumi:"idType"`
+}
+
+// GetDescribeManagerDetailCompanyInfoInput is an input type that accepts GetDescribeManagerDetailCompanyInfoArgs and GetDescribeManagerDetailCompanyInfoOutput values.
+// You can construct a concrete instance of `GetDescribeManagerDetailCompanyInfoInput` via:
+//
+//	GetDescribeManagerDetailCompanyInfoArgs{...}
+type GetDescribeManagerDetailCompanyInfoInput interface {
+	pulumi.Input
+
+	ToGetDescribeManagerDetailCompanyInfoOutput() GetDescribeManagerDetailCompanyInfoOutput
+	ToGetDescribeManagerDetailCompanyInfoOutputWithContext(context.Context) GetDescribeManagerDetailCompanyInfoOutput
+}
+
+type GetDescribeManagerDetailCompanyInfoArgs struct {
+	// Detailed address where the company is located.
+	CompanyAddress pulumi.StringInput `pulumi:"companyAddress"`
+	// The city where the company is.
+	CompanyCity pulumi.StringInput `pulumi:"companyCity"`
+	// Company country.
+	CompanyCountry pulumi.StringInput `pulumi:"companyCountry"`
+	// Company ID.
+	CompanyId pulumi.IntInput `pulumi:"companyId"`
+	// Company Name.
+	CompanyName pulumi.StringInput `pulumi:"companyName"`
+	// company phone.
+	CompanyPhone pulumi.StringInput `pulumi:"companyPhone"`
+	// Province where the company is located.
+	CompanyProvince pulumi.StringInput `pulumi:"companyProvince"`
+	// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdNumber pulumi.StringInput `pulumi:"idNumber"`
+	// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IdType pulumi.StringInput `pulumi:"idType"`
+}
+
+func (GetDescribeManagerDetailCompanyInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeManagerDetailCompanyInfo)(nil)).Elem()
+}
+
+func (i GetDescribeManagerDetailCompanyInfoArgs) ToGetDescribeManagerDetailCompanyInfoOutput() GetDescribeManagerDetailCompanyInfoOutput {
+	return i.ToGetDescribeManagerDetailCompanyInfoOutputWithContext(context.Background())
+}
+
+func (i GetDescribeManagerDetailCompanyInfoArgs) ToGetDescribeManagerDetailCompanyInfoOutputWithContext(ctx context.Context) GetDescribeManagerDetailCompanyInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeManagerDetailCompanyInfoOutput)
+}
+
+// GetDescribeManagerDetailCompanyInfoArrayInput is an input type that accepts GetDescribeManagerDetailCompanyInfoArray and GetDescribeManagerDetailCompanyInfoArrayOutput values.
+// You can construct a concrete instance of `GetDescribeManagerDetailCompanyInfoArrayInput` via:
+//
+//	GetDescribeManagerDetailCompanyInfoArray{ GetDescribeManagerDetailCompanyInfoArgs{...} }
+type GetDescribeManagerDetailCompanyInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeManagerDetailCompanyInfoArrayOutput() GetDescribeManagerDetailCompanyInfoArrayOutput
+	ToGetDescribeManagerDetailCompanyInfoArrayOutputWithContext(context.Context) GetDescribeManagerDetailCompanyInfoArrayOutput
+}
+
+type GetDescribeManagerDetailCompanyInfoArray []GetDescribeManagerDetailCompanyInfoInput
+
+func (GetDescribeManagerDetailCompanyInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeManagerDetailCompanyInfo)(nil)).Elem()
+}
+
+func (i GetDescribeManagerDetailCompanyInfoArray) ToGetDescribeManagerDetailCompanyInfoArrayOutput() GetDescribeManagerDetailCompanyInfoArrayOutput {
+	return i.ToGetDescribeManagerDetailCompanyInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeManagerDetailCompanyInfoArray) ToGetDescribeManagerDetailCompanyInfoArrayOutputWithContext(ctx context.Context) GetDescribeManagerDetailCompanyInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeManagerDetailCompanyInfoArrayOutput)
+}
+
+type GetDescribeManagerDetailCompanyInfoOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeManagerDetailCompanyInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeManagerDetailCompanyInfo)(nil)).Elem()
+}
+
+func (o GetDescribeManagerDetailCompanyInfoOutput) ToGetDescribeManagerDetailCompanyInfoOutput() GetDescribeManagerDetailCompanyInfoOutput {
+	return o
+}
+
+func (o GetDescribeManagerDetailCompanyInfoOutput) ToGetDescribeManagerDetailCompanyInfoOutputWithContext(ctx context.Context) GetDescribeManagerDetailCompanyInfoOutput {
+	return o
+}
+
+// Detailed address where the company is located.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyAddress }).(pulumi.StringOutput)
+}
+
+// The city where the company is.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyCity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyCity }).(pulumi.StringOutput)
+}
+
+// Company country.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyCountry() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyCountry }).(pulumi.StringOutput)
+}
+
+// Company ID.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) int { return v.CompanyId }).(pulumi.IntOutput)
+}
+
+// Company Name.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyName }).(pulumi.StringOutput)
+}
+
+// company phone.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyPhone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyPhone }).(pulumi.StringOutput)
+}
+
+// Province where the company is located.
+func (o GetDescribeManagerDetailCompanyInfoOutput) CompanyProvince() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.CompanyProvince }).(pulumi.StringOutput)
+}
+
+// ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagerDetailCompanyInfoOutput) IdNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.IdNumber }).(pulumi.StringOutput)
+}
+
+// typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagerDetailCompanyInfoOutput) IdType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagerDetailCompanyInfo) string { return v.IdType }).(pulumi.StringOutput)
+}
+
+type GetDescribeManagerDetailCompanyInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeManagerDetailCompanyInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeManagerDetailCompanyInfo)(nil)).Elem()
+}
+
+func (o GetDescribeManagerDetailCompanyInfoArrayOutput) ToGetDescribeManagerDetailCompanyInfoArrayOutput() GetDescribeManagerDetailCompanyInfoArrayOutput {
+	return o
+}
+
+func (o GetDescribeManagerDetailCompanyInfoArrayOutput) ToGetDescribeManagerDetailCompanyInfoArrayOutputWithContext(ctx context.Context) GetDescribeManagerDetailCompanyInfoArrayOutput {
+	return o
+}
+
+func (o GetDescribeManagerDetailCompanyInfoArrayOutput) Index(i pulumi.IntInput) GetDescribeManagerDetailCompanyInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeManagerDetailCompanyInfo {
+		return vs[0].([]GetDescribeManagerDetailCompanyInfo)[vs[1].(int)]
+	}).(GetDescribeManagerDetailCompanyInfoOutput)
+}
+
+type GetDescribeManagersManager struct {
+	// Number of administrative certificates.
+	CertCount int `pulumi:"certCount"`
+	// Creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Number of administrators.
+	DomainCount int `pulumi:"domainCount"`
+	// Examine the validity expiration timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ExpireTime string `pulumi:"expireTime"`
+	// Administrator department.
+	ManagerDepartment string `pulumi:"managerDepartment"`
+	// Manager name.
+	ManagerFirstName string `pulumi:"managerFirstName"`
+	// Manager ID.
+	ManagerId int `pulumi:"managerId"`
+	// Manager name.
+	ManagerLastName string `pulumi:"managerLastName"`
+	// Vague query manager email (will be abandoned), please use Searchkey.
+	ManagerMail string `pulumi:"managerMail"`
+	// Manager phone call.
+	ManagerPhone string `pulumi:"managerPhone"`
+	// Manager position.
+	ManagerPosition string `pulumi:"managerPosition"`
+	// Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
+	Status string `pulumi:"status"`
+	// The last time the review timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubmitAuditTime string `pulumi:"submitAuditTime"`
+	// Examination timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyTime string `pulumi:"verifyTime"`
+}
+
+// GetDescribeManagersManagerInput is an input type that accepts GetDescribeManagersManagerArgs and GetDescribeManagersManagerOutput values.
+// You can construct a concrete instance of `GetDescribeManagersManagerInput` via:
+//
+//	GetDescribeManagersManagerArgs{...}
+type GetDescribeManagersManagerInput interface {
+	pulumi.Input
+
+	ToGetDescribeManagersManagerOutput() GetDescribeManagersManagerOutput
+	ToGetDescribeManagersManagerOutputWithContext(context.Context) GetDescribeManagersManagerOutput
+}
+
+type GetDescribeManagersManagerArgs struct {
+	// Number of administrative certificates.
+	CertCount pulumi.IntInput `pulumi:"certCount"`
+	// Creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Number of administrators.
+	DomainCount pulumi.IntInput `pulumi:"domainCount"`
+	// Examine the validity expiration timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Administrator department.
+	ManagerDepartment pulumi.StringInput `pulumi:"managerDepartment"`
+	// Manager name.
+	ManagerFirstName pulumi.StringInput `pulumi:"managerFirstName"`
+	// Manager ID.
+	ManagerId pulumi.IntInput `pulumi:"managerId"`
+	// Manager name.
+	ManagerLastName pulumi.StringInput `pulumi:"managerLastName"`
+	// Vague query manager email (will be abandoned), please use Searchkey.
+	ManagerMail pulumi.StringInput `pulumi:"managerMail"`
+	// Manager phone call.
+	ManagerPhone pulumi.StringInput `pulumi:"managerPhone"`
+	// Manager position.
+	ManagerPosition pulumi.StringInput `pulumi:"managerPosition"`
+	// Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
+	Status pulumi.StringInput `pulumi:"status"`
+	// The last time the review timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	SubmitAuditTime pulumi.StringInput `pulumi:"submitAuditTime"`
+	// Examination timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	VerifyTime pulumi.StringInput `pulumi:"verifyTime"`
+}
+
+func (GetDescribeManagersManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeManagersManager)(nil)).Elem()
+}
+
+func (i GetDescribeManagersManagerArgs) ToGetDescribeManagersManagerOutput() GetDescribeManagersManagerOutput {
+	return i.ToGetDescribeManagersManagerOutputWithContext(context.Background())
+}
+
+func (i GetDescribeManagersManagerArgs) ToGetDescribeManagersManagerOutputWithContext(ctx context.Context) GetDescribeManagersManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeManagersManagerOutput)
+}
+
+// GetDescribeManagersManagerArrayInput is an input type that accepts GetDescribeManagersManagerArray and GetDescribeManagersManagerArrayOutput values.
+// You can construct a concrete instance of `GetDescribeManagersManagerArrayInput` via:
+//
+//	GetDescribeManagersManagerArray{ GetDescribeManagersManagerArgs{...} }
+type GetDescribeManagersManagerArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeManagersManagerArrayOutput() GetDescribeManagersManagerArrayOutput
+	ToGetDescribeManagersManagerArrayOutputWithContext(context.Context) GetDescribeManagersManagerArrayOutput
+}
+
+type GetDescribeManagersManagerArray []GetDescribeManagersManagerInput
+
+func (GetDescribeManagersManagerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeManagersManager)(nil)).Elem()
+}
+
+func (i GetDescribeManagersManagerArray) ToGetDescribeManagersManagerArrayOutput() GetDescribeManagersManagerArrayOutput {
+	return i.ToGetDescribeManagersManagerArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeManagersManagerArray) ToGetDescribeManagersManagerArrayOutputWithContext(ctx context.Context) GetDescribeManagersManagerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeManagersManagerArrayOutput)
+}
+
+type GetDescribeManagersManagerOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeManagersManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeManagersManager)(nil)).Elem()
+}
+
+func (o GetDescribeManagersManagerOutput) ToGetDescribeManagersManagerOutput() GetDescribeManagersManagerOutput {
+	return o
+}
+
+func (o GetDescribeManagersManagerOutput) ToGetDescribeManagersManagerOutputWithContext(ctx context.Context) GetDescribeManagersManagerOutput {
+	return o
+}
+
+// Number of administrative certificates.
+func (o GetDescribeManagersManagerOutput) CertCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) int { return v.CertCount }).(pulumi.IntOutput)
+}
+
+// Creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagersManagerOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Number of administrators.
+func (o GetDescribeManagersManagerOutput) DomainCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) int { return v.DomainCount }).(pulumi.IntOutput)
+}
+
+// Examine the validity expiration timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagersManagerOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Administrator department.
+func (o GetDescribeManagersManagerOutput) ManagerDepartment() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerDepartment }).(pulumi.StringOutput)
+}
+
+// Manager name.
+func (o GetDescribeManagersManagerOutput) ManagerFirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerFirstName }).(pulumi.StringOutput)
+}
+
+// Manager ID.
+func (o GetDescribeManagersManagerOutput) ManagerId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) int { return v.ManagerId }).(pulumi.IntOutput)
+}
+
+// Manager name.
+func (o GetDescribeManagersManagerOutput) ManagerLastName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerLastName }).(pulumi.StringOutput)
+}
+
+// Vague query manager email (will be abandoned), please use Searchkey.
+func (o GetDescribeManagersManagerOutput) ManagerMail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerMail }).(pulumi.StringOutput)
+}
+
+// Manager phone call.
+func (o GetDescribeManagersManagerOutput) ManagerPhone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerPhone }).(pulumi.StringOutput)
+}
+
+// Manager position.
+func (o GetDescribeManagersManagerOutput) ManagerPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.ManagerPosition }).(pulumi.StringOutput)
+}
+
+// Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
+func (o GetDescribeManagersManagerOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// The last time the review timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagersManagerOutput) SubmitAuditTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.SubmitAuditTime }).(pulumi.StringOutput)
+}
+
+// Examination timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetDescribeManagersManagerOutput) VerifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeManagersManager) string { return v.VerifyTime }).(pulumi.StringOutput)
+}
+
+type GetDescribeManagersManagerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeManagersManagerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeManagersManager)(nil)).Elem()
+}
+
+func (o GetDescribeManagersManagerArrayOutput) ToGetDescribeManagersManagerArrayOutput() GetDescribeManagersManagerArrayOutput {
+	return o
+}
+
+func (o GetDescribeManagersManagerArrayOutput) ToGetDescribeManagersManagerArrayOutputWithContext(ctx context.Context) GetDescribeManagersManagerArrayOutput {
+	return o
+}
+
+func (o GetDescribeManagersManagerArrayOutput) Index(i pulumi.IntInput) GetDescribeManagersManagerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeManagersManager {
+		return vs[0].([]GetDescribeManagersManager)[vs[1].(int)]
+	}).(GetDescribeManagersManagerOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FreeCertificateDvAuthInput)(nil)).Elem(), FreeCertificateDvAuthArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FreeCertificateDvAuthArrayInput)(nil)).Elem(), FreeCertificateDvAuthArray{})
@@ -1178,18 +7532,194 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateDvAuthArrayInput)(nil)).Elem(), PayCertificateDvAuthArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationInput)(nil)).Elem(), PayCertificateInformationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationPtrInput)(nil)).Elem(), PayCertificateInformationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegionInput)(nil)).Elem(), UpdateCertificateInstanceOperationResourceTypesRegionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegionArrayInput)(nil)).Elem(), UpdateCertificateInstanceOperationResourceTypesRegionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateDvAuthInput)(nil)).Elem(), GetCertificatesCertificateDvAuthArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateDvAuthArrayInput)(nil)).Elem(), GetCertificatesCertificateDvAuthArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultInput)(nil)).Elem(), GetDescribeCertificateResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultArrayInput)(nil)).Elem(), GetDescribeCertificateResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultCertificateExtraInput)(nil)).Elem(), GetDescribeCertificateResultCertificateExtraArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultCertificateExtraArrayInput)(nil)).Elem(), GetDescribeCertificateResultCertificateExtraArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailInput)(nil)).Elem(), GetDescribeCertificateResultDvAuthDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailArrayInput)(nil)).Elem(), GetDescribeCertificateResultDvAuthDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailDvAuthInput)(nil)).Elem(), GetDescribeCertificateResultDvAuthDetailDvAuthArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvAuthDetailDvAuthArrayInput)(nil)).Elem(), GetDescribeCertificateResultDvAuthDetailDvAuthArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvRevokeAuthDetailInput)(nil)).Elem(), GetDescribeCertificateResultDvRevokeAuthDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultDvRevokeAuthDetailArrayInput)(nil)).Elem(), GetDescribeCertificateResultDvRevokeAuthDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultSubmittedDataInput)(nil)).Elem(), GetDescribeCertificateResultSubmittedDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCertificateResultSubmittedDataArrayInput)(nil)).Elem(), GetDescribeCertificateResultSubmittedDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCompaniesCompanyInput)(nil)).Elem(), GetDescribeCompaniesCompanyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeCompaniesCompanyArrayInput)(nil)).Elem(), GetDescribeCompaniesCompanyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListFilterInput)(nil)).Elem(), GetDescribeHostApiGatewayInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostApiGatewayInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostApiGatewayInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostApiGatewayInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostApiGatewayInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCdnInstanceListFilterInput)(nil)).Elem(), GetDescribeHostCdnInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCdnInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostCdnInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCdnInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostCdnInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCdnInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostCdnInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListFilterInput)(nil)).Elem(), GetDescribeHostClbInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerCertificateInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayInput)(nil)).Elem(), GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCosInstanceListFilterInput)(nil)).Elem(), GetDescribeHostCosInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCosInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostCosInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCosInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostCosInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostCosInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostCosInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDdosInstanceListFilterInput)(nil)).Elem(), GetDescribeHostDdosInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDdosInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostDdosInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDdosInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostDdosInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDdosInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostDdosInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDeployRecordDeployRecordListInput)(nil)).Elem(), GetDescribeHostDeployRecordDeployRecordListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDeployRecordDeployRecordListArrayInput)(nil)).Elem(), GetDescribeHostDeployRecordDeployRecordListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDeployRecordDetailDeployRecordDetailListInput)(nil)).Elem(), GetDescribeHostDeployRecordDetailDeployRecordDetailListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayInput)(nil)).Elem(), GetDescribeHostDeployRecordDetailDeployRecordDetailListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLighthouseInstanceListFilterInput)(nil)).Elem(), GetDescribeHostLighthouseInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLighthouseInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostLighthouseInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLighthouseInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostLighthouseInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLighthouseInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostLighthouseInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLiveInstanceListFilterInput)(nil)).Elem(), GetDescribeHostLiveInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLiveInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostLiveInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLiveInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostLiveInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostLiveInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostLiveInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTeoInstanceListFilterInput)(nil)).Elem(), GetDescribeHostTeoInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTeoInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostTeoInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTeoInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostTeoInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTeoInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostTeoInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListFilterInput)(nil)).Elem(), GetDescribeHostTkeInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostTkeInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayInput)(nil)).Elem(), GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDeployRecordListInput)(nil)).Elem(), GetDescribeHostUpdateRecordDeployRecordListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDeployRecordListArrayInput)(nil)).Elem(), GetDescribeHostUpdateRecordDeployRecordListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListInput)(nil)).Elem(), GetDescribeHostUpdateRecordDetailRecordDetailListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListArrayInput)(nil)).Elem(), GetDescribeHostUpdateRecordDetailRecordDetailListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListListInput)(nil)).Elem(), GetDescribeHostUpdateRecordDetailRecordDetailListListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostUpdateRecordDetailRecordDetailListListArrayInput)(nil)).Elem(), GetDescribeHostUpdateRecordDetailRecordDetailListListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostVodInstanceListFilterInput)(nil)).Elem(), GetDescribeHostVodInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostVodInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostVodInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostVodInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostVodInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostVodInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostVodInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostWafInstanceListFilterInput)(nil)).Elem(), GetDescribeHostWafInstanceListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostWafInstanceListFilterArrayInput)(nil)).Elem(), GetDescribeHostWafInstanceListFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostWafInstanceListInstanceListInput)(nil)).Elem(), GetDescribeHostWafInstanceListInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeHostWafInstanceListInstanceListArrayInput)(nil)).Elem(), GetDescribeHostWafInstanceListInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeManagerDetailCompanyInfoInput)(nil)).Elem(), GetDescribeManagerDetailCompanyInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeManagerDetailCompanyInfoArrayInput)(nil)).Elem(), GetDescribeManagerDetailCompanyInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeManagersManagerInput)(nil)).Elem(), GetDescribeManagersManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeManagersManagerArrayInput)(nil)).Elem(), GetDescribeManagersManagerArray{})
 	pulumi.RegisterOutputType(FreeCertificateDvAuthOutput{})
 	pulumi.RegisterOutputType(FreeCertificateDvAuthArrayOutput{})
 	pulumi.RegisterOutputType(PayCertificateDvAuthOutput{})
 	pulumi.RegisterOutputType(PayCertificateDvAuthArrayOutput{})
 	pulumi.RegisterOutputType(PayCertificateInformationOutput{})
 	pulumi.RegisterOutputType(PayCertificateInformationPtrOutput{})
+	pulumi.RegisterOutputType(UpdateCertificateInstanceOperationResourceTypesRegionOutput{})
+	pulumi.RegisterOutputType(UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateDvAuthOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateDvAuthArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultCertificateExtraOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultCertificateExtraArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvAuthDetailOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvAuthDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvAuthDetailDvAuthOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvAuthDetailDvAuthArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvRevokeAuthDetailOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultDvRevokeAuthDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultSubmittedDataOutput{})
+	pulumi.RegisterOutputType(GetDescribeCertificateResultSubmittedDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeCompaniesCompanyOutput{})
+	pulumi.RegisterOutputType(GetDescribeCompaniesCompanyArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostApiGatewayInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostApiGatewayInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostApiGatewayInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostApiGatewayInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCdnInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCdnInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCdnInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCdnInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerCertificateOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerRuleOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCosInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCosInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCosInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostCosInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDdosInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDdosInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDdosInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDdosInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDeployRecordDeployRecordListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDeployRecordDeployRecordListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDeployRecordDetailDeployRecordDetailListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostDeployRecordDetailDeployRecordDetailListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLighthouseInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLighthouseInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLighthouseInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLighthouseInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLiveInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLiveInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLiveInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostLiveInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTeoInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTeoInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTeoInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTeoInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDeployRecordListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDeployRecordListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDetailRecordDetailListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDetailRecordDetailListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDetailRecordDetailListListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostUpdateRecordDetailRecordDetailListListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostVodInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostVodInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostVodInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostVodInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostWafInstanceListFilterOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostWafInstanceListFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostWafInstanceListInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDescribeHostWafInstanceListInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeManagerDetailCompanyInfoOutput{})
+	pulumi.RegisterOutputType(GetDescribeManagerDetailCompanyInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeManagersManagerOutput{})
+	pulumi.RegisterOutputType(GetDescribeManagersManagerArrayOutput{})
 }

@@ -11,7 +11,11 @@ from .. import _utilities
 __all__ = [
     'ZoneAccountVpcSet',
     'ZoneTagSet',
+    'ZoneVpcAttachmentAccountVpcSet',
+    'ZoneVpcAttachmentVpcSet',
     'ZoneVpcSet',
+    'GetRecordsFilterResult',
+    'GetRecordsRecordSetResult',
 ]
 
 @pulumi.output_type
@@ -133,6 +137,109 @@ class ZoneTagSet(dict):
 
 
 @pulumi.output_type
+class ZoneVpcAttachmentAccountVpcSet(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ZoneVpcAttachmentAccountVpcSet. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ZoneVpcAttachmentAccountVpcSet.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ZoneVpcAttachmentAccountVpcSet.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 region: str,
+                 uin: str,
+                 uniq_vpc_id: str):
+        """
+        :param str region: Vpc region.
+        :param str uin: Vpc owner uin. To grant role authorization to this account.
+        :param str uniq_vpc_id: Uniq Vpc Id.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Vpc region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def uin(self) -> str:
+        """
+        Vpc owner uin. To grant role authorization to this account.
+        """
+        return pulumi.get(self, "uin")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> str:
+        """
+        Uniq Vpc Id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class ZoneVpcAttachmentVpcSet(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "uniqVpcId":
+            suggest = "uniq_vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ZoneVpcAttachmentVpcSet. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ZoneVpcAttachmentVpcSet.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ZoneVpcAttachmentVpcSet.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 region: str,
+                 uniq_vpc_id: str):
+        """
+        :param str region: Vpc region.
+        :param str uniq_vpc_id: Uniq Vpc Id.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Vpc region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> str:
+        """
+        Uniq Vpc Id.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
 class ZoneVpcSet(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -176,5 +283,184 @@ class ZoneVpcSet(dict):
         VPC ID.
         """
         return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class GetRecordsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Parameter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetRecordsRecordSetResult(dict):
+    def __init__(__self__, *,
+                 created_on: str,
+                 enabled: int,
+                 extra: str,
+                 mx: int,
+                 record_id: str,
+                 record_type: str,
+                 record_value: str,
+                 status: str,
+                 sub_domain: str,
+                 ttl: int,
+                 updated_on: str,
+                 weight: int,
+                 zone_id: str):
+        """
+        :param str created_on: Record creation time.
+        :param int enabled: Enabled. 0 meaning paused, 1 meaning senabled.
+        :param str extra: Additional information.
+        :param int mx: MX priority: required if the record type is MX. Value range: 5,10,15,20,30,40,50.
+        :param str record_id: Record sid.
+        :param str record_type: Record type, optional record type are: A, AAAA, CNAME, MX, TXT, PTR.
+        :param str record_value: Record value.
+        :param str status: Record status.
+        :param str sub_domain: Subdomain name.
+        :param int ttl: Record cache time, the smaller the value, the faster it takes effect. The value is 1-86400s. The default is 600.
+        :param str updated_on: Record update time.
+        :param int weight: Record weight, value is 1-100.
+        :param str zone_id: Private zone id: zone-xxxxxx.
+        """
+        pulumi.set(__self__, "created_on", created_on)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "extra", extra)
+        pulumi.set(__self__, "mx", mx)
+        pulumi.set(__self__, "record_id", record_id)
+        pulumi.set(__self__, "record_type", record_type)
+        pulumi.set(__self__, "record_value", record_value)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "sub_domain", sub_domain)
+        pulumi.set(__self__, "ttl", ttl)
+        pulumi.set(__self__, "updated_on", updated_on)
+        pulumi.set(__self__, "weight", weight)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="createdOn")
+    def created_on(self) -> str:
+        """
+        Record creation time.
+        """
+        return pulumi.get(self, "created_on")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> int:
+        """
+        Enabled. 0 meaning paused, 1 meaning senabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def extra(self) -> str:
+        """
+        Additional information.
+        """
+        return pulumi.get(self, "extra")
+
+    @property
+    @pulumi.getter
+    def mx(self) -> int:
+        """
+        MX priority: required if the record type is MX. Value range: 5,10,15,20,30,40,50.
+        """
+        return pulumi.get(self, "mx")
+
+    @property
+    @pulumi.getter(name="recordId")
+    def record_id(self) -> str:
+        """
+        Record sid.
+        """
+        return pulumi.get(self, "record_id")
+
+    @property
+    @pulumi.getter(name="recordType")
+    def record_type(self) -> str:
+        """
+        Record type, optional record type are: A, AAAA, CNAME, MX, TXT, PTR.
+        """
+        return pulumi.get(self, "record_type")
+
+    @property
+    @pulumi.getter(name="recordValue")
+    def record_value(self) -> str:
+        """
+        Record value.
+        """
+        return pulumi.get(self, "record_value")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Record status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subDomain")
+    def sub_domain(self) -> str:
+        """
+        Subdomain name.
+        """
+        return pulumi.get(self, "sub_domain")
+
+    @property
+    @pulumi.getter
+    def ttl(self) -> int:
+        """
+        Record cache time, the smaller the value, the faster it takes effect. The value is 1-86400s. The default is 600.
+        """
+        return pulumi.get(self, "ttl")
+
+    @property
+    @pulumi.getter(name="updatedOn")
+    def updated_on(self) -> str:
+        """
+        Record update time.
+        """
+        return pulumi.get(self, "updated_on")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Record weight, value is 1-100.
+        """
+        return pulumi.get(self, "weight")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        """
+        Private zone id: zone-xxxxxx.
+        """
+        return pulumi.get(self, "zone_id")
 
 

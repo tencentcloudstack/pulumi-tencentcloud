@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetRollbackTime(ctx, &sqlserver.GetRollbackTimeArgs{
-// 			Dbs: []string{
-// 				"keep_pubsub_db",
-// 			},
-// 			InstanceId: "mssql-qelbzgwf",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetRollbackTime(ctx, &sqlserver.GetRollbackTimeArgs{
+//				Dbs: []string{
+//					"keep_pubsub_db",
+//				},
+//				InstanceId: "mssql-qelbzgwf",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRollbackTime(ctx *pulumi.Context, args *GetRollbackTimeArgs, opts ...pulumi.InvokeOption) (*GetRollbackTimeResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

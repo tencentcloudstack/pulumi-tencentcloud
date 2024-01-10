@@ -19,93 +19,113 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
-// 			BlueprintId: pulumi.String("lhbp-f1lkcd41"),
-// 			BundleId:    pulumi.String("bundle2022_gen_01"),
-// 			Containers: lighthouse.InstanceContainerArray{
-// 				&lighthouse.InstanceContainerArgs{
-// 					Command:        pulumi.String("ls -l"),
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
-// 					ContainerName:  pulumi.String("nginx"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key"),
-// 							Value: pulumi.String("value"),
-// 						},
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							ContainerPort: pulumi.Int(80),
-// 							HostPort:      pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							ContainerPort: pulumi.Int(36000),
-// 							HostPort:      pulumi.Int(36000),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/data"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 				},
-// 				&lighthouse.InstanceContainerArgs{
-// 					Command:        pulumi.String("echo \"hello\""),
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
-// 					ContainerName:  pulumi.String("resty"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							ContainerPort: pulumi.Int(80),
-// 							HostPort:      pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("udp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 			InstanceName: pulumi.String("hello world"),
-// 			Period:       pulumi.Int(1),
-// 			RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 			Zone:         pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
+//				TemplateName: pulumi.String("empty-template"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
+//				BundleId:     pulumi.String("bundle2022_gen_01"),
+//				BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
+//				Period:       pulumi.Int(1),
+//				RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//				InstanceName: pulumi.String("hello world"),
+//				Zone:         pulumi.String("ap-guangzhou-3"),
+//				Containers: lighthouse.InstanceContainerArray{
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
+//						ContainerName:  pulumi.String("nginx"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key"),
+//								Value: pulumi.String("value"),
+//							},
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(36000),
+//								ContainerPort: pulumi.Int(36000),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/data"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("ls -l"),
+//					},
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
+//						ContainerName:  pulumi.String("resty"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("udp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("echo \"hello\""),
+//					},
+//				},
+//				FirewallTemplateId: firewallTemplate.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// lighthouse instance can be imported using the id, e.g.
+//
+// ```sh
+//
+//	$ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -120,6 +140,8 @@ type Instance struct {
 	Containers InstanceContainerArrayOutput `pulumi:"containers"`
 	// Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 	DryRun pulumi.BoolPtrOutput `pulumi:"dryRun"`
+	// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+	FirewallTemplateId pulumi.StringOutput `pulumi:"firewallTemplateId"`
 	// The display name of the Lighthouse instance.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
@@ -195,6 +217,8 @@ type instanceState struct {
 	Containers []InstanceContainer `pulumi:"containers"`
 	// Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 	DryRun *bool `pulumi:"dryRun"`
+	// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+	FirewallTemplateId *string `pulumi:"firewallTemplateId"`
 	// The display name of the Lighthouse instance.
 	InstanceName *string `pulumi:"instanceName"`
 	// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
@@ -226,6 +250,8 @@ type InstanceState struct {
 	Containers InstanceContainerArrayInput
 	// Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 	DryRun pulumi.BoolPtrInput
+	// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+	FirewallTemplateId pulumi.StringPtrInput
 	// The display name of the Lighthouse instance.
 	InstanceName pulumi.StringPtrInput
 	// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
@@ -261,6 +287,8 @@ type instanceArgs struct {
 	Containers []InstanceContainer `pulumi:"containers"`
 	// Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 	DryRun *bool `pulumi:"dryRun"`
+	// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+	FirewallTemplateId *string `pulumi:"firewallTemplateId"`
 	// The display name of the Lighthouse instance.
 	InstanceName string `pulumi:"instanceName"`
 	// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
@@ -293,6 +321,8 @@ type InstanceArgs struct {
 	Containers InstanceContainerArrayInput
 	// Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 	DryRun pulumi.BoolPtrInput
+	// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+	FirewallTemplateId pulumi.StringPtrInput
 	// The display name of the Lighthouse instance.
 	InstanceName pulumi.StringInput
 	// Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
@@ -339,7 +369,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -364,7 +394,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -423,6 +453,11 @@ func (o InstanceOutput) Containers() InstanceContainerArrayOutput {
 // Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
 func (o InstanceOutput) DryRun() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DryRun }).(pulumi.BoolPtrOutput)
+}
+
+// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+func (o InstanceOutput) FirewallTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.FirewallTemplateId }).(pulumi.StringOutput)
 }
 
 // The display name of the Lighthouse instance.

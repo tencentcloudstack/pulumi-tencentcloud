@@ -25,7 +25,8 @@ class ServiceArgs:
                  release_limit: Optional[pulumi.Input[int]] = None,
                  service_desc: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
-                 test_limit: Optional[pulumi.Input[int]] = None):
+                 test_limit: Optional[pulumi.Input[int]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Service resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
@@ -39,6 +40,7 @@ class ServiceArgs:
         :param pulumi.Input[str] service_desc: Custom service description.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
         """
         pulumi.set(__self__, "net_types", net_types)
         pulumi.set(__self__, "protocol", protocol)
@@ -62,6 +64,8 @@ class ServiceArgs:
             pulumi.set(__self__, "tags", tags)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
 
     @property
     @pulumi.getter(name="netTypes")
@@ -195,6 +199,18 @@ class ServiceArgs:
     def test_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "test_limit", value)
 
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
 
 @pulumi.input_type
 class _ServiceState:
@@ -217,6 +233,7 @@ class _ServiceState:
                  service_name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
                  usage_plan_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ServiceUsagePlanListArgs']]]] = None):
         """
         Input properties used for looking up and filtering Service resources.
@@ -238,6 +255,7 @@ class _ServiceState:
         :param pulumi.Input[str] service_name: Custom service name.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
         :param pulumi.Input[Sequence[pulumi.Input['ServiceUsagePlanListArgs']]] usage_plan_lists: A list of attach usage plans.
         """
         if api_lists is not None:
@@ -279,6 +297,8 @@ class _ServiceState:
             pulumi.set(__self__, "tags", tags)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
+        if uniq_vpc_id is not None:
+            pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
         if usage_plan_lists is not None:
             pulumi.set(__self__, "usage_plan_lists", usage_plan_lists)
 
@@ -499,6 +519,18 @@ class _ServiceState:
         pulumi.set(self, "test_limit", value)
 
     @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @uniq_vpc_id.setter
+    def uniq_vpc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "uniq_vpc_id", value)
+
+    @property
     @pulumi.getter(name="usagePlanLists")
     def usage_plan_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ServiceUsagePlanListArgs']]]]:
         """
@@ -527,9 +559,12 @@ class Service(pulumi.CustomResource):
                  service_name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Use this resource to create API gateway service.
+
+        > **NOTE:** After setting `uniq_vpc_id`, it cannot be modified.
 
         ## Example Usage
         ### Shared Service
@@ -538,21 +573,22 @@ class Service(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            ip_version="IPv4",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
+            protocol="http&https",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
-            pre_limit=500,
-            protocol="http&https",
-            release_limit=500,
-            service_desc="your nice service",
-            service_name="niceservice",
+            ip_version="IPv4",
+            uniq_vpc_id=vpc.id,
             tags={
-                "test-key1": "test-value1",
-                "test-key2": "test-value2",
+                "createdBy": "terraform",
             },
+            release_limit=500,
+            pre_limit=500,
             test_limit=500)
         ```
         ### Exclusive Service
@@ -561,21 +597,22 @@ class Service(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            instance_id="instance-rc6fcv4e",
-            ip_version="IPv4",
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
+            protocol="http&https",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
-            pre_limit=500,
-            protocol="http&https",
-            release_limit=500,
-            service_desc="your nice service",
-            service_name="service",
+            ip_version="IPv4",
+            uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+            instance_id="instance-rc6fcv4e",
             tags={
-                "test-key1": "test-value1",
+                "createdBy": "terraform",
             },
+            release_limit=500,
+            pre_limit=500,
             test_limit=500)
         ```
 
@@ -600,6 +637,7 @@ class Service(pulumi.CustomResource):
         :param pulumi.Input[str] service_name: Custom service name.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
         """
         ...
     @overload
@@ -610,6 +648,8 @@ class Service(pulumi.CustomResource):
         """
         Use this resource to create API gateway service.
 
+        > **NOTE:** After setting `uniq_vpc_id`, it cannot be modified.
+
         ## Example Usage
         ### Shared Service
 
@@ -617,21 +657,22 @@ class Service(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            ip_version="IPv4",
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
+            protocol="http&https",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
-            pre_limit=500,
-            protocol="http&https",
-            release_limit=500,
-            service_desc="your nice service",
-            service_name="niceservice",
+            ip_version="IPv4",
+            uniq_vpc_id=vpc.id,
             tags={
-                "test-key1": "test-value1",
-                "test-key2": "test-value2",
+                "createdBy": "terraform",
             },
+            release_limit=500,
+            pre_limit=500,
             test_limit=500)
         ```
         ### Exclusive Service
@@ -640,21 +681,22 @@ class Service(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            instance_id="instance-rc6fcv4e",
-            ip_version="IPv4",
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
+            protocol="http&https",
+            service_desc="desc.",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
-            pre_limit=500,
-            protocol="http&https",
-            release_limit=500,
-            service_desc="your nice service",
-            service_name="service",
+            ip_version="IPv4",
+            uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+            instance_id="instance-rc6fcv4e",
             tags={
-                "test-key1": "test-value1",
+                "createdBy": "terraform",
             },
+            release_limit=500,
+            pre_limit=500,
             test_limit=500)
         ```
 
@@ -692,6 +734,7 @@ class Service(pulumi.CustomResource):
                  service_name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
+                 uniq_vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -726,6 +769,7 @@ class Service(pulumi.CustomResource):
             __props__.__dict__["service_name"] = service_name
             __props__.__dict__["tags"] = tags
             __props__.__dict__["test_limit"] = test_limit
+            __props__.__dict__["uniq_vpc_id"] = uniq_vpc_id
             __props__.__dict__["api_lists"] = None
             __props__.__dict__["create_time"] = None
             __props__.__dict__["inner_http_port"] = None
@@ -762,6 +806,7 @@ class Service(pulumi.CustomResource):
             service_name: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             test_limit: Optional[pulumi.Input[int]] = None,
+            uniq_vpc_id: Optional[pulumi.Input[str]] = None,
             usage_plan_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServiceUsagePlanListArgs']]]]] = None) -> 'Service':
         """
         Get an existing Service resource's state with the given name, id, and optional extra
@@ -788,6 +833,7 @@ class Service(pulumi.CustomResource):
         :param pulumi.Input[str] service_name: Custom service name.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[str] uniq_vpc_id: VPC ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServiceUsagePlanListArgs']]]] usage_plan_lists: A list of attach usage plans.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -812,6 +858,7 @@ class Service(pulumi.CustomResource):
         __props__.__dict__["service_name"] = service_name
         __props__.__dict__["tags"] = tags
         __props__.__dict__["test_limit"] = test_limit
+        __props__.__dict__["uniq_vpc_id"] = uniq_vpc_id
         __props__.__dict__["usage_plan_lists"] = usage_plan_lists
         return Service(resource_name, opts=opts, __props__=__props__)
 
@@ -958,6 +1005,14 @@ class Service(pulumi.CustomResource):
         API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         """
         return pulumi.get(self, "test_limit")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
 
     @property
     @pulumi.getter(name="usagePlanLists")
