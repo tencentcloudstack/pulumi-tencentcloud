@@ -20,6 +20,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public Input<int>? EndTime { get; set; }
 
         /// <summary>
+        /// If passed verification `0` is no, `1` is yes. Default `0`.
+        /// </summary>
+        [Input("isValid")]
+        public Input<int>? IsValid { get; set; }
+
+        /// <summary>
         /// Notification Start Time Number of seconds at the start of a day.
         /// </summary>
         [Input("startTime")]
@@ -30,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         /// </summary>
         [Input("url", required: true)]
         public Input<string> Url { get; set; } = null!;
+
+        /// <summary>
+        /// Verification code.
+        /// </summary>
+        [Input("validationCode")]
+        public Input<string>? ValidationCode { get; set; }
 
         [Input("weekdays")]
         private InputList<int>? _weekdays;

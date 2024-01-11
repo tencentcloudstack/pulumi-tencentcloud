@@ -61,6 +61,10 @@ import (
 // 			EnhancedSecurityService: pulumi.Bool(false),
 // 			EnhancedMonitorService:  pulumi.Bool(false),
 // 			UserData:                pulumi.String("dGVzdA=="),
+// 			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+// 				HostName:      pulumi.String("host-name-test"),
+// 				HostNameStyle: pulumi.String("UNIQUE"),
+// 			},
 // 			InstanceTags: pulumi.AnyMap{
 // 				"tag": pulumi.Any("example"),
 // 			},
@@ -118,7 +122,7 @@ import (
 // AutoScaling Configuration can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+//  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
 // ```
 type ScalingConfig struct {
 	pulumi.CustomResourceState
@@ -137,6 +141,8 @@ type ScalingConfig struct {
 	EnhancedMonitorService pulumi.BoolPtrOutput `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrOutput `pulumi:"enhancedSecurityService"`
+	// Related settings of the cloud server hostname (HostName).
+	HostNameSettings ScalingConfigHostNameSettingsPtrOutput `pulumi:"hostNameSettings"`
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringOutput `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -151,7 +157,7 @@ type ScalingConfig struct {
 	InstanceTags pulumi.MapOutput `pulumi:"instanceTags"`
 	// Specified types of CVM instances.
 	InstanceTypes pulumi.StringArrayOutput `pulumi:"instanceTypes"`
-	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrOutput `pulumi:"internetChargeType"`
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut pulumi.IntPtrOutput `pulumi:"internetMaxBandwidthOut"`
@@ -234,6 +240,8 @@ type scalingConfigState struct {
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
+	// Related settings of the cloud server hostname (HostName).
+	HostNameSettings *ScalingConfigHostNameSettings `pulumi:"hostNameSettings"`
 	// An available image ID for a cvm instance.
 	ImageId *string `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -248,7 +256,7 @@ type scalingConfigState struct {
 	InstanceTags map[string]interface{} `pulumi:"instanceTags"`
 	// Specified types of CVM instances.
 	InstanceTypes []string `pulumi:"instanceTypes"`
-	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -293,6 +301,8 @@ type ScalingConfigState struct {
 	EnhancedMonitorService pulumi.BoolPtrInput
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrInput
+	// Related settings of the cloud server hostname (HostName).
+	HostNameSettings ScalingConfigHostNameSettingsPtrInput
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringPtrInput
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -307,7 +317,7 @@ type ScalingConfigState struct {
 	InstanceTags pulumi.MapInput
 	// Specified types of CVM instances.
 	InstanceTypes pulumi.StringArrayInput
-	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -354,6 +364,8 @@ type scalingConfigArgs struct {
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
+	// Related settings of the cloud server hostname (HostName).
+	HostNameSettings *ScalingConfigHostNameSettings `pulumi:"hostNameSettings"`
 	// An available image ID for a cvm instance.
 	ImageId string `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -368,7 +380,7 @@ type scalingConfigArgs struct {
 	InstanceTags map[string]interface{} `pulumi:"instanceTags"`
 	// Specified types of CVM instances.
 	InstanceTypes []string `pulumi:"instanceTypes"`
-	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
@@ -410,6 +422,8 @@ type ScalingConfigArgs struct {
 	EnhancedMonitorService pulumi.BoolPtrInput
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrInput
+	// Related settings of the cloud server hostname (HostName).
+	HostNameSettings ScalingConfigHostNameSettingsPtrInput
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringInput
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -424,7 +438,7 @@ type ScalingConfigArgs struct {
 	InstanceTags pulumi.MapInput
 	// Specified types of CVM instances.
 	InstanceTypes pulumi.StringArrayInput
-	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut pulumi.IntPtrInput
@@ -574,6 +588,11 @@ func (o ScalingConfigOutput) EnhancedSecurityService() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.BoolPtrOutput { return v.EnhancedSecurityService }).(pulumi.BoolPtrOutput)
 }
 
+// Related settings of the cloud server hostname (HostName).
+func (o ScalingConfigOutput) HostNameSettings() ScalingConfigHostNameSettingsPtrOutput {
+	return o.ApplyT(func(v *ScalingConfig) ScalingConfigHostNameSettingsPtrOutput { return v.HostNameSettings }).(ScalingConfigHostNameSettingsPtrOutput)
+}
+
 // An available image ID for a cvm instance.
 func (o ScalingConfigOutput) ImageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringOutput { return v.ImageId }).(pulumi.StringOutput)
@@ -609,7 +628,7 @@ func (o ScalingConfigOutput) InstanceTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringArrayOutput { return v.InstanceTypes }).(pulumi.StringArrayOutput)
 }
 
-// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 func (o ScalingConfigOutput) InternetChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.InternetChargeType }).(pulumi.StringPtrOutput)
 }

@@ -5,6 +5,108 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a tse cngwRouteRateLimit
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const cngwGateway = new tencentcloud.tse.CngwGateway("cngwGateway", {
+ *     description: "terraform test1",
+ *     enableCls: true,
+ *     engineRegion: "ap-guangzhou",
+ *     featureVersion: "STANDARD",
+ *     gatewayVersion: "2.5.1",
+ *     ingressClassName: "tse-nginx-ingress",
+ *     internetMaxBandwidthOut: 0,
+ *     tradeType: 0,
+ *     type: "kong",
+ *     nodeConfig: {
+ *         number: 2,
+ *         specification: "1c2g",
+ *     },
+ *     vpcConfig: {
+ *         subnetId: subnet.id,
+ *         vpcId: vpc.id,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const cngwService = new tencentcloud.tse.CngwService("cngwService", {
+ *     gatewayId: cngwGateway.id,
+ *     path: "/test",
+ *     protocol: "http",
+ *     retries: 5,
+ *     timeout: 60000,
+ *     upstreamType: "HostIP",
+ *     upstreamInfo: {
+ *         algorithm: "round-robin",
+ *         autoScalingCvmPort: 0,
+ *         host: "arunma.cn",
+ *         port: 8012,
+ *         slowStart: 0,
+ *     },
+ * });
+ * const cngwRoute = new tencentcloud.tse.CngwRoute("cngwRoute", {
+ *     destinationPorts: [],
+ *     forceHttps: false,
+ *     gatewayId: cngwGateway.id,
+ *     hosts: ["192.168.0.1:9090"],
+ *     httpsRedirectStatusCode: 426,
+ *     paths: ["/user"],
+ *     headers: [{
+ *         key: "req",
+ *         value: "terraform",
+ *     }],
+ *     preserveHost: false,
+ *     protocols: [
+ *         "http",
+ *         "https",
+ *     ],
+ *     routeName: "terraform-route",
+ *     serviceId: cngwService.serviceId,
+ *     stripPath: true,
+ * });
+ * const cngwRouteRateLimit = new tencentcloud.tse.CngwRouteRateLimit("cngwRouteRateLimit", {
+ *     gatewayId: cngwGateway.id,
+ *     routeId: cngwRoute.routeId,
+ *     limitDetail: {
+ *         enabled: true,
+ *         header: "req",
+ *         hideClientHeaders: true,
+ *         isDelay: true,
+ *         limitBy: "header",
+ *         lineUpTime: 10,
+ *         policy: "redis",
+ *         responseType: "default",
+ *         qpsThresholds: [{
+ *             max: 10,
+ *             unit: "minute",
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tse cngw_route_rate_limit can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit cngw_route_rate_limit gatewayId#routeId
+ * ```
+ */
 export class CngwRouteRateLimit extends pulumi.CustomResource {
     /**
      * Get an existing CngwRouteRateLimit resource's state with the given name, ID, and optional extra
@@ -45,10 +147,6 @@ export class CngwRouteRateLimit extends pulumi.CustomResource {
      * Route id, or route name.
      */
     public readonly routeId!: pulumi.Output<string>;
-    /**
-     * Tag description list.
-     */
-    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a CngwRouteRateLimit resource with the given unique name, arguments, and options.
@@ -66,7 +164,6 @@ export class CngwRouteRateLimit extends pulumi.CustomResource {
             resourceInputs["gatewayId"] = state ? state.gatewayId : undefined;
             resourceInputs["limitDetail"] = state ? state.limitDetail : undefined;
             resourceInputs["routeId"] = state ? state.routeId : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as CngwRouteRateLimitArgs | undefined;
             if ((!args || args.gatewayId === undefined) && !opts.urn) {
@@ -81,7 +178,6 @@ export class CngwRouteRateLimit extends pulumi.CustomResource {
             resourceInputs["gatewayId"] = args ? args.gatewayId : undefined;
             resourceInputs["limitDetail"] = args ? args.limitDetail : undefined;
             resourceInputs["routeId"] = args ? args.routeId : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CngwRouteRateLimit.__pulumiType, name, resourceInputs, opts);
@@ -104,10 +200,6 @@ export interface CngwRouteRateLimitState {
      * Route id, or route name.
      */
     routeId?: pulumi.Input<string>;
-    /**
-     * Tag description list.
-     */
-    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -126,8 +218,4 @@ export interface CngwRouteRateLimitArgs {
      * Route id, or route name.
      */
     routeId: pulumi.Input<string>;
-    /**
-     * Tag description list.
-     */
-    tags?: pulumi.Input<{[key: string]: any}>;
 }

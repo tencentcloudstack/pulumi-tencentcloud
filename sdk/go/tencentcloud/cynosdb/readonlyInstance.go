@@ -81,6 +81,10 @@ type ReadonlyInstance struct {
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize pulumi.IntOutput `pulumi:"instanceStorageSize"`
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
 // NewReadonlyInstance registers a new resource with the given unique name, arguments, and options.
@@ -139,6 +143,10 @@ type readonlyInstanceState struct {
 	InstanceStatus *string `pulumi:"instanceStatus"`
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize *int `pulumi:"instanceStorageSize"`
+	// ID of the subnet within this VPC.
+	SubnetId *string `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId *string `pulumi:"vpcId"`
 }
 
 type ReadonlyInstanceState struct {
@@ -162,6 +170,10 @@ type ReadonlyInstanceState struct {
 	InstanceStatus pulumi.StringPtrInput
 	// Storage size of the instance, unit in GB.
 	InstanceStorageSize pulumi.IntPtrInput
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringPtrInput
+	// ID of the VPC.
+	VpcId pulumi.StringPtrInput
 }
 
 func (ReadonlyInstanceState) ElementType() reflect.Type {
@@ -185,6 +197,10 @@ type readonlyInstanceArgs struct {
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
 	// Name of instance.
 	InstanceName string `pulumi:"instanceName"`
+	// ID of the subnet within this VPC.
+	SubnetId *string `pulumi:"subnetId"`
+	// ID of the VPC.
+	VpcId *string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a ReadonlyInstance resource.
@@ -205,6 +221,10 @@ type ReadonlyInstanceArgs struct {
 	InstanceMemorySize pulumi.IntPtrInput
 	// Name of instance.
 	InstanceName pulumi.StringInput
+	// ID of the subnet within this VPC.
+	SubnetId pulumi.StringPtrInput
+	// ID of the VPC.
+	VpcId pulumi.StringPtrInput
 }
 
 func (ReadonlyInstanceArgs) ElementType() reflect.Type {
@@ -342,6 +362,16 @@ func (o ReadonlyInstanceOutput) InstanceStatus() pulumi.StringOutput {
 // Storage size of the instance, unit in GB.
 func (o ReadonlyInstanceOutput) InstanceStorageSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.InstanceStorageSize }).(pulumi.IntOutput)
+}
+
+// ID of the subnet within this VPC.
+func (o ReadonlyInstanceOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// ID of the VPC.
+func (o ReadonlyInstanceOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
 type ReadonlyInstanceArrayOutput struct{ *pulumi.OutputState }

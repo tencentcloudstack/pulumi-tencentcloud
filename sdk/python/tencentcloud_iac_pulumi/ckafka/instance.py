@@ -18,6 +18,7 @@ class InstanceArgs:
                  instance_name: pulumi.Input[str],
                  zone_id: pulumi.Input[int],
                  band_width: Optional[pulumi.Input[int]] = None,
+                 charge_type: Optional[pulumi.Input[str]] = None,
                  config: Optional[pulumi.Input['InstanceConfigArgs']] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
@@ -36,6 +37,7 @@ class InstanceArgs:
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]] = None,
+                 upgrade_strategy: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
         """
@@ -43,6 +45,7 @@ class InstanceArgs:
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
         :param pulumi.Input['InstanceConfigArgs'] config: Instance configuration.
         :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
@@ -61,6 +64,9 @@ class InstanceArgs:
         :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
         :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[int] upgrade_strategy: POSTPAID_BY_HOUR scale-down mode
+               - 1: stable transformation;
+               - 2: High-speed transformer.
         :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
         """
@@ -68,6 +74,8 @@ class InstanceArgs:
         pulumi.set(__self__, "zone_id", zone_id)
         if band_width is not None:
             pulumi.set(__self__, "band_width", band_width)
+        if charge_type is not None:
+            pulumi.set(__self__, "charge_type", charge_type)
         if config is not None:
             pulumi.set(__self__, "config", config)
         if disk_size is not None:
@@ -110,6 +118,8 @@ class InstanceArgs:
             pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if upgrade_strategy is not None:
+            pulumi.set(__self__, "upgrade_strategy", upgrade_strategy)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zone_ids is not None:
@@ -150,6 +160,18 @@ class InstanceArgs:
     @band_width.setter
     def band_width(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "band_width", value)
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @charge_type.setter
+    def charge_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "charge_type", value)
 
     @property
     @pulumi.getter
@@ -368,6 +390,20 @@ class InstanceArgs:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter(name="upgradeStrategy")
+    def upgrade_strategy(self) -> Optional[pulumi.Input[int]]:
+        """
+        POSTPAID_BY_HOUR scale-down mode
+        - 1: stable transformation;
+        - 2: High-speed transformer.
+        """
+        return pulumi.get(self, "upgrade_strategy")
+
+    @upgrade_strategy.setter
+    def upgrade_strategy(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "upgrade_strategy", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -396,6 +432,7 @@ class InstanceArgs:
 class _InstanceState:
     def __init__(__self__, *,
                  band_width: Optional[pulumi.Input[int]] = None,
+                 charge_type: Optional[pulumi.Input[str]] = None,
                  config: Optional[pulumi.Input['InstanceConfigArgs']] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
@@ -415,6 +452,7 @@ class _InstanceState:
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]]] = None,
+                 upgrade_strategy: Optional[pulumi.Input[int]] = None,
                  vip: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  vport: Optional[pulumi.Input[str]] = None,
@@ -423,6 +461,7 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
         :param pulumi.Input['InstanceConfigArgs'] config: Instance configuration.
         :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
@@ -442,6 +481,9 @@ class _InstanceState:
         :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
         :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[int] upgrade_strategy: POSTPAID_BY_HOUR scale-down mode
+               - 1: stable transformation;
+               - 2: High-speed transformer.
         :param pulumi.Input[str] vip: Vip of instance.
         :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[str] vport: Type of instance.
@@ -450,6 +492,8 @@ class _InstanceState:
         """
         if band_width is not None:
             pulumi.set(__self__, "band_width", band_width)
+        if charge_type is not None:
+            pulumi.set(__self__, "charge_type", charge_type)
         if config is not None:
             pulumi.set(__self__, "config", config)
         if disk_size is not None:
@@ -494,6 +538,8 @@ class _InstanceState:
             pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if upgrade_strategy is not None:
+            pulumi.set(__self__, "upgrade_strategy", upgrade_strategy)
         if vip is not None:
             pulumi.set(__self__, "vip", vip)
         if vpc_id is not None:
@@ -516,6 +562,18 @@ class _InstanceState:
     @band_width.setter
     def band_width(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "band_width", value)
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @charge_type.setter
+    def charge_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "charge_type", value)
 
     @property
     @pulumi.getter
@@ -746,6 +804,20 @@ class _InstanceState:
         pulumi.set(self, "tags", value)
 
     @property
+    @pulumi.getter(name="upgradeStrategy")
+    def upgrade_strategy(self) -> Optional[pulumi.Input[int]]:
+        """
+        POSTPAID_BY_HOUR scale-down mode
+        - 1: stable transformation;
+        - 2: High-speed transformer.
+        """
+        return pulumi.get(self, "upgrade_strategy")
+
+    @upgrade_strategy.setter
+    def upgrade_strategy(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "upgrade_strategy", value)
+
+    @property
     @pulumi.getter
     def vip(self) -> Optional[pulumi.Input[str]]:
         """
@@ -812,6 +884,7 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  band_width: Optional[pulumi.Input[int]] = None,
+                 charge_type: Optional[pulumi.Input[str]] = None,
                  config: Optional[pulumi.Input[pulumi.InputType['InstanceConfigArgs']]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
@@ -831,14 +904,13 @@ class Instance(pulumi.CustomResource):
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
+                 upgrade_strategy: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None,
                  zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  __props__=None):
         """
         Use this resource to create ckafka instance.
-
-        > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
         ### Basic Instance
@@ -857,8 +929,8 @@ class Instance(pulumi.CustomResource):
             subnet_id = "subnet-ob6clqwk"
         gz = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
             product="ckafka")
-        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
-            instance_name="ckafka-instance-type-tf-test",
+        kafka_instance_prepaid = tencentcloud.ckafka.Instance("kafkaInstancePrepaid",
+            instance_name="ckafka-instance-prepaid",
             zone_id=gz.zones[0].id,
             period=1,
             vpc_id=vpc_id,
@@ -866,10 +938,32 @@ class Instance(pulumi.CustomResource):
             msg_retention_time=1300,
             renew_flag=0,
             kafka_version="2.4.1",
-            disk_size=1000,
+            disk_size=200,
             disk_type="CLOUD_BASIC",
+            band_width=20,
+            partition=400,
             specifications_type="standard",
             instance_type=2,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
+            ),
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
+        kafka_instance_postpaid = tencentcloud.ckafka.Instance("kafkaInstancePostpaid",
+            instance_name="ckafka-instance-postpaid",
+            zone_id=gz.zones[0].id,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            kafka_version="1.1.1",
+            disk_size=200,
+            band_width=20,
+            disk_type="CLOUD_BASIC",
+            partition=400,
+            charge_type="POSTPAID_BY_HOUR",
             config=tencentcloud.ckafka.InstanceConfigArgs(
                 auto_create_topic_enable=True,
                 default_num_partitions=3,
@@ -934,6 +1028,7 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
         :param pulumi.Input[pulumi.InputType['InstanceConfigArgs']] config: Instance configuration.
         :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
@@ -953,6 +1048,9 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
         :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[int] upgrade_strategy: POSTPAID_BY_HOUR scale-down mode
+               - 1: stable transformation;
+               - 2: High-speed transformer.
         :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
@@ -965,8 +1063,6 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Use this resource to create ckafka instance.
-
-        > **NOTE:** It only support create prepaid ckafka instance.
 
         ## Example Usage
         ### Basic Instance
@@ -985,8 +1081,8 @@ class Instance(pulumi.CustomResource):
             subnet_id = "subnet-ob6clqwk"
         gz = tencentcloud.Availability.get_zones_by_product(name="ap-guangzhou-3",
             product="ckafka")
-        kafka_instance = tencentcloud.ckafka.Instance("kafkaInstance",
-            instance_name="ckafka-instance-type-tf-test",
+        kafka_instance_prepaid = tencentcloud.ckafka.Instance("kafkaInstancePrepaid",
+            instance_name="ckafka-instance-prepaid",
             zone_id=gz.zones[0].id,
             period=1,
             vpc_id=vpc_id,
@@ -994,10 +1090,32 @@ class Instance(pulumi.CustomResource):
             msg_retention_time=1300,
             renew_flag=0,
             kafka_version="2.4.1",
-            disk_size=1000,
+            disk_size=200,
             disk_type="CLOUD_BASIC",
+            band_width=20,
+            partition=400,
             specifications_type="standard",
             instance_type=2,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
+            ),
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                enable=1,
+            ))
+        kafka_instance_postpaid = tencentcloud.ckafka.Instance("kafkaInstancePostpaid",
+            instance_name="ckafka-instance-postpaid",
+            zone_id=gz.zones[0].id,
+            vpc_id=vpc_id,
+            subnet_id=subnet_id,
+            msg_retention_time=1300,
+            kafka_version="1.1.1",
+            disk_size=200,
+            band_width=20,
+            disk_type="CLOUD_BASIC",
+            partition=400,
+            charge_type="POSTPAID_BY_HOUR",
             config=tencentcloud.ckafka.InstanceConfigArgs(
                 auto_create_topic_enable=True,
                 default_num_partitions=3,
@@ -1075,6 +1193,7 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  band_width: Optional[pulumi.Input[int]] = None,
+                 charge_type: Optional[pulumi.Input[str]] = None,
                  config: Optional[pulumi.Input[pulumi.InputType['InstanceConfigArgs']]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
@@ -1094,6 +1213,7 @@ class Instance(pulumi.CustomResource):
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
+                 upgrade_strategy: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None,
                  zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
@@ -1112,6 +1232,7 @@ class Instance(pulumi.CustomResource):
             __props__ = InstanceArgs.__new__(InstanceArgs)
 
             __props__.__dict__["band_width"] = band_width
+            __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["config"] = config
             __props__.__dict__["disk_size"] = disk_size
             __props__.__dict__["disk_type"] = disk_type
@@ -1139,6 +1260,7 @@ class Instance(pulumi.CustomResource):
                 warnings.warn("""It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""", DeprecationWarning)
                 pulumi.log.warn("""tags is deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.""")
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["upgrade_strategy"] = upgrade_strategy
             __props__.__dict__["vpc_id"] = vpc_id
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
@@ -1157,6 +1279,7 @@ class Instance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             band_width: Optional[pulumi.Input[int]] = None,
+            charge_type: Optional[pulumi.Input[str]] = None,
             config: Optional[pulumi.Input[pulumi.InputType['InstanceConfigArgs']]] = None,
             disk_size: Optional[pulumi.Input[int]] = None,
             disk_type: Optional[pulumi.Input[str]] = None,
@@ -1176,6 +1299,7 @@ class Instance(pulumi.CustomResource):
             subnet_id: Optional[pulumi.Input[str]] = None,
             tag_set: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]]] = None,
+            upgrade_strategy: Optional[pulumi.Input[int]] = None,
             vip: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             vport: Optional[pulumi.Input[str]] = None,
@@ -1189,6 +1313,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
         :param pulumi.Input[pulumi.InputType['InstanceConfigArgs']] config: Instance configuration.
         :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
@@ -1208,6 +1333,9 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] subnet_id: Subnet id, it will be basic network if not set.
         :param pulumi.Input[Mapping[str, Any]] tag_set: Tag set of instance.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
+        :param pulumi.Input[int] upgrade_strategy: POSTPAID_BY_HOUR scale-down mode
+               - 1: stable transformation;
+               - 2: High-speed transformer.
         :param pulumi.Input[str] vip: Vip of instance.
         :param pulumi.Input[str] vpc_id: Vpc id, it will be basic network if not set.
         :param pulumi.Input[str] vport: Type of instance.
@@ -1219,6 +1347,7 @@ class Instance(pulumi.CustomResource):
         __props__ = _InstanceState.__new__(_InstanceState)
 
         __props__.__dict__["band_width"] = band_width
+        __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["config"] = config
         __props__.__dict__["disk_size"] = disk_size
         __props__.__dict__["disk_type"] = disk_type
@@ -1238,6 +1367,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tag_set"] = tag_set
         __props__.__dict__["tags"] = tags
+        __props__.__dict__["upgrade_strategy"] = upgrade_strategy
         __props__.__dict__["vip"] = vip
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["vport"] = vport
@@ -1252,6 +1382,14 @@ class Instance(pulumi.CustomResource):
         Instance bandwidth in MBps.
         """
         return pulumi.get(self, "band_width")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        """
+        return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter
@@ -1404,6 +1542,16 @@ class Instance(pulumi.CustomResource):
         It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead. Tags of instance. Partition size, the professional version does not need tag.
         """
         return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="upgradeStrategy")
+    def upgrade_strategy(self) -> pulumi.Output[Optional[int]]:
+        """
+        POSTPAID_BY_HOUR scale-down mode
+        - 1: stable transformation;
+        - 2: High-speed transformer.
+        """
+        return pulumi.get(self, "upgrade_strategy")
 
     @property
     @pulumi.getter

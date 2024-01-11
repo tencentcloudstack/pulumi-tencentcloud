@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// ### Create normally
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
@@ -26,33 +28,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///     public MyStack()
     ///     {
     ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var uin = info.Apply(info =&gt; info.Uin);
+    ///         var myUin = info.Apply(info =&gt; info.OwnerUin);
+    ///         this.Uin = myUin;
     ///         var foo = new Tencentcloud.Cam.Role("foo", new Tencentcloud.Cam.RoleArgs
     ///         {
-    ///             Document = Output.Tuple(uin, uin).Apply(values =&gt;
+    ///             Document = myUin.Apply(myUin =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 var uin = values.Item1;
-    ///                 var uin1 = values.Item2;
-    ///                 return @$"{{
-    ///   ""version"": ""2.0"",
-    ///   ""statement"": [
-    ///     {{
-    ///       ""action"": [
-    ///         ""name/sts:AssumeRole""
-    ///       ],
-    ///       ""effect"": ""allow"",
-    ///       ""principal"": {{
-    ///         ""qcs"": [
-    ///           ""qcs::cam::uin/{uin}:uin/{uin1}""
-    ///         ]
-    ///       }}
-    ///     }}
-    ///   ]
-    /// }}
-    /// ";
-    ///             }),
-    ///             Description = "test",
+    ///                 { "statement", new[]
+    ///                     {
+    ///                         new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             { "action", "name/sts:AssumeRole" },
+    ///                             { "effect", "allow" },
+    ///                             { "principal", new Dictionary&lt;string, object?&gt;
+    ///                             {
+    ///                                 { "qcs", new[]
+    ///                                     {
+    ///                                         $"qcs::cam::uin/{myUin}:root",
+    ///                                     }
+    ///                                  },
+    ///                             } },
+    ///                         },
+    ///                     }
+    ///                  },
+    ///                 { "version", "2.0" },
+    ///             })),
     ///             ConsoleLogin = true,
+    ///             Description = "test",
+    ///             SessionDuration = 7200,
     ///             Tags = 
     ///             {
     ///                 { "test", "tf-cam-role" },
@@ -60,6 +63,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///         });
     ///     }
     /// 
+    ///     [Output("uin")]
+    ///     public Output&lt;string&gt; Uin { get; set; }
     /// }
     /// ```
     /// ### Create with SAML provider
@@ -150,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The maximum validity period of the temporary key for creating a role.
+        /// </summary>
+        [Output("sessionDuration")]
+        public Output<int?> SessionDuration { get; private set; } = null!;
+
+        /// <summary>
         /// A list of tags used to associate different resources.
         /// </summary>
         [Output("tags")]
@@ -235,6 +246,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// The maximum validity period of the temporary key for creating a role.
+        /// </summary>
+        [Input("sessionDuration")]
+        public Input<int>? SessionDuration { get; set; }
+
         [Input("tags")]
         private InputMap<object>? _tags;
 
@@ -286,6 +303,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The maximum validity period of the temporary key for creating a role.
+        /// </summary>
+        [Input("sessionDuration")]
+        public Input<int>? SessionDuration { get; set; }
 
         [Input("tags")]
         private InputMap<object>? _tags;

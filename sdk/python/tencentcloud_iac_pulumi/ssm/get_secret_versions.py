@@ -98,9 +98,20 @@ def get_secret_versions(result_output_file: Optional[str] = None,
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    foo = tencentcloud.Ssm.get_secret_versions(secret_name="test",
-        version_id="v1")
+    example_secret = tencentcloud.ssm.Secret("exampleSecret",
+        secret_name="tf-example",
+        description="desc.",
+        tags={
+            "createdBy": "terraform",
+        })
+    v1 = tencentcloud.ssm.SecretVersion("v1",
+        secret_name=example_secret.secret_name,
+        version_id="v1",
+        secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
+    example_secret_versions = tencentcloud.Ssm.get_secret_versions_output(secret_name=v1.secret_name,
+        version_id=v1.version_id)
     ```
 
 
@@ -141,9 +152,20 @@ def get_secret_versions_output(result_output_file: Optional[pulumi.Input[Optiona
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
+    import tencentcloud_iac_pulumi as tencentcloud
 
-    foo = tencentcloud.Ssm.get_secret_versions(secret_name="test",
-        version_id="v1")
+    example_secret = tencentcloud.ssm.Secret("exampleSecret",
+        secret_name="tf-example",
+        description="desc.",
+        tags={
+            "createdBy": "terraform",
+        })
+    v1 = tencentcloud.ssm.SecretVersion("v1",
+        secret_name=example_secret.secret_name,
+        version_id="v1",
+        secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
+    example_secret_versions = tencentcloud.Ssm.get_secret_versions_output(secret_name=v1.secret_name,
+        version_id=v1.version_id)
     ```
 
 

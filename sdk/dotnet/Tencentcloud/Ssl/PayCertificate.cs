@@ -17,7 +17,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// currently, it does not support re-issuing certificates, revoking certificates, and deleting certificates; the certificate remarks
     /// and belonging items can be updated. The Destroy operation will only cancel the certificate order, and will not delete the
     /// certificate and refund the fee. If you need a refund, you need to check the current certificate status in the console
-    /// as `Review Cancel`, and then you can click `Request a refund` to refund the fee.
+    /// as `Review Cancel`, and then you can click `Request a refund` to refund the fee. To update the information of a certificate,
+    /// we will automatically roll back your certificate if this certificate is already in the validation stage. This process may take
+    /// some time because the CA callback is time-consuming. Please be patient and follow the prompt message. Or, feel free to contact
+    /// Tencent Cloud Support.
     /// 
     /// ## Example Usage
     /// 
@@ -207,6 +210,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// </summary>
         [Input("domainNum", required: true)]
         public Input<int> DomainNum { get; set; } = null!;
+
+        [Input("dvAuths")]
+        private InputList<Inputs.PayCertificateDvAuthArgs>? _dvAuths;
+
+        /// <summary>
+        /// DV certification information.
+        /// </summary>
+        public InputList<Inputs.PayCertificateDvAuthArgs> DvAuths
+        {
+            get => _dvAuths ?? (_dvAuths = new InputList<Inputs.PayCertificateDvAuthArgs>());
+            set => _dvAuths = value;
+        }
 
         /// <summary>
         /// Certificate information.

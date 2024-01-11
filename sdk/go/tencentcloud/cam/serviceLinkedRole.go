@@ -26,7 +26,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cam.NewServiceLinkedRole(ctx, "serviceLinkedRole", &Cam.ServiceLinkedRoleArgs{
-// 			CustomSuffix: pulumi.String("x-1"),
+// 			CustomSuffix: pulumi.String("tf"),
 // 			Description:  pulumi.String("desc cam"),
 // 			QcsServiceNames: pulumi.StringArray{
 // 				pulumi.String("cvm.qcloud.com"),
@@ -46,8 +46,8 @@ import (
 type ServiceLinkedRole struct {
 	pulumi.CustomResourceState
 
-	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
-	CustomSuffix pulumi.StringPtrOutput `pulumi:"customSuffix"`
+	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
+	CustomSuffix pulumi.StringOutput `pulumi:"customSuffix"`
 	// role description.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Authorization service, the Tencent Cloud service principal with this role attached.
@@ -89,7 +89,7 @@ func GetServiceLinkedRole(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ServiceLinkedRole resources.
 type serviceLinkedRoleState struct {
-	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
 	CustomSuffix *string `pulumi:"customSuffix"`
 	// role description.
 	Description *string `pulumi:"description"`
@@ -100,7 +100,7 @@ type serviceLinkedRoleState struct {
 }
 
 type ServiceLinkedRoleState struct {
-	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
 	CustomSuffix pulumi.StringPtrInput
 	// role description.
 	Description pulumi.StringPtrInput
@@ -115,7 +115,7 @@ func (ServiceLinkedRoleState) ElementType() reflect.Type {
 }
 
 type serviceLinkedRoleArgs struct {
-	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
 	CustomSuffix *string `pulumi:"customSuffix"`
 	// role description.
 	Description *string `pulumi:"description"`
@@ -127,7 +127,7 @@ type serviceLinkedRoleArgs struct {
 
 // The set of arguments for constructing a ServiceLinkedRole resource.
 type ServiceLinkedRoleArgs struct {
-	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+	// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
 	CustomSuffix pulumi.StringPtrInput
 	// role description.
 	Description pulumi.StringPtrInput
@@ -224,9 +224,9 @@ func (o ServiceLinkedRoleOutput) ToServiceLinkedRoleOutputWithContext(ctx contex
 	return o
 }
 
-// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
-func (o ServiceLinkedRoleOutput) CustomSuffix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ServiceLinkedRole) pulumi.StringPtrOutput { return v.CustomSuffix }).(pulumi.StringPtrOutput)
+// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
+func (o ServiceLinkedRoleOutput) CustomSuffix() pulumi.StringOutput {
+	return o.ApplyT(func(v *ServiceLinkedRole) pulumi.StringOutput { return v.CustomSuffix }).(pulumi.StringOutput)
 }
 
 // role description.

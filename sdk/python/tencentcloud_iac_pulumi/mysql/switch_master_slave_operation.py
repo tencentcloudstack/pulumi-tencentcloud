@@ -211,14 +211,6 @@ class SwitchMasterSlaveOperation(pulumi.CustomResource):
             wait_switch=True)
         ```
 
-        ## Import
-
-        mysql switch_master_slave_operation can be imported using the id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation switch_master_slave_operation switch_master_slave_operation_id
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] dst_slave: target instance. Possible values: `first` - first standby; `second` - second standby. The default value is `first`, and only multi-AZ instances support setting it to `second`.
@@ -278,14 +270,6 @@ class SwitchMasterSlaveOperation(pulumi.CustomResource):
             dst_slave="second",
             force_switch=True,
             wait_switch=True)
-        ```
-
-        ## Import
-
-        mysql switch_master_slave_operation can be imported using the id, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation switch_master_slave_operation switch_master_slave_operation_id
         ```
 
         :param str resource_name: The name of the resource.

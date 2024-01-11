@@ -96,6 +96,10 @@ export class Job extends pulumi.CustomResource {
      */
     public /*out*/ readonly errorRate!: pulumi.Output<number>;
     /**
+     * Job Id.
+     */
+    public /*out*/ readonly jobId!: pulumi.Output<string>;
+    /**
      * Job owner.
      */
     public readonly jobOwner!: pulumi.Output<string>;
@@ -206,6 +210,7 @@ export class Job extends pulumi.CustomResource {
             resourceInputs["duration"] = state ? state.duration : undefined;
             resourceInputs["endTime"] = state ? state.endTime : undefined;
             resourceInputs["errorRate"] = state ? state.errorRate : undefined;
+            resourceInputs["jobId"] = state ? state.jobId : undefined;
             resourceInputs["jobOwner"] = state ? state.jobOwner : undefined;
             resourceInputs["loads"] = state ? state.loads : undefined;
             resourceInputs["maxRequestsPerSecond"] = state ? state.maxRequestsPerSecond : undefined;
@@ -252,6 +257,7 @@ export class Job extends pulumi.CustomResource {
             resourceInputs["duration"] = undefined /*out*/;
             resourceInputs["endTime"] = undefined /*out*/;
             resourceInputs["errorRate"] = undefined /*out*/;
+            resourceInputs["jobId"] = undefined /*out*/;
             resourceInputs["loads"] = undefined /*out*/;
             resourceInputs["maxRequestsPerSecond"] = undefined /*out*/;
             resourceInputs["maxVirtualUserCount"] = undefined /*out*/;
@@ -316,6 +322,10 @@ export interface JobState {
      * Percentage of error rate.
      */
     errorRate?: pulumi.Input<number>;
+    /**
+     * Job Id.
+     */
+    jobId?: pulumi.Input<string>;
     /**
      * Job owner.
      */

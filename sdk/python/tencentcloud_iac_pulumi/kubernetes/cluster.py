@@ -21,7 +21,6 @@ class ClusterArgs:
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
-                 cluster_as_enabled: Optional[pulumi.Input[bool]] = None,
                  cluster_audit: Optional[pulumi.Input['ClusterClusterAuditArgs']] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
                  cluster_deploy_type: Optional[pulumi.Input[str]] = None,
@@ -40,6 +39,7 @@ class ClusterArgs:
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  cluster_os: Optional[pulumi.Input[str]] = None,
                  cluster_os_type: Optional[pulumi.Input[str]] = None,
+                 cluster_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_version: Optional[pulumi.Input[str]] = None,
                  container_runtime: Optional[pulumi.Input[str]] = None,
                  deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -68,6 +68,7 @@ class ClusterArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  upgrade_instances_follow_cluster: Optional[pulumi.Input[bool]] = None,
+                 vpc_cni_type: Optional[pulumi.Input[str]] = None,
                  worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]]] = None):
         """
         The set of arguments for constructing a Cluster resource.
@@ -77,16 +78,15 @@ class ClusterArgs:
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
-        :param pulumi.Input[bool] cluster_as_enabled: This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         :param pulumi.Input['ClusterClusterAuditArgs'] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[str] cluster_deploy_type: Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input['ClusterClusterExtraArgsArgs'] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
@@ -96,6 +96,7 @@ class ClusterArgs:
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
+        :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
@@ -115,7 +116,7 @@ class ClusterArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterMasterConfigArgs']]] master_configs: Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] network_type: Cluster network type, GR or VPC-CNI. Default is GR.
+        :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
@@ -124,6 +125,7 @@ class ClusterArgs:
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the cluster.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
+        :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
         """
         pulumi.set(__self__, "vpc_id", vpc_id)
@@ -137,11 +139,6 @@ class ClusterArgs:
             pulumi.set(__self__, "base_pod_num", base_pod_num)
         if claim_expired_seconds is not None:
             pulumi.set(__self__, "claim_expired_seconds", claim_expired_seconds)
-        if cluster_as_enabled is not None:
-            warnings.warn("""This argument is deprecated because the TKE auto-scaling group was no longer available.""", DeprecationWarning)
-            pulumi.log.warn("""cluster_as_enabled is deprecated: This argument is deprecated because the TKE auto-scaling group was no longer available.""")
-        if cluster_as_enabled is not None:
-            pulumi.set(__self__, "cluster_as_enabled", cluster_as_enabled)
         if cluster_audit is not None:
             pulumi.set(__self__, "cluster_audit", cluster_audit)
         if cluster_cidr is not None:
@@ -178,6 +175,8 @@ class ClusterArgs:
             pulumi.set(__self__, "cluster_os", cluster_os)
         if cluster_os_type is not None:
             pulumi.set(__self__, "cluster_os_type", cluster_os_type)
+        if cluster_subnet_id is not None:
+            pulumi.set(__self__, "cluster_subnet_id", cluster_subnet_id)
         if cluster_version is not None:
             pulumi.set(__self__, "cluster_version", cluster_version)
         if container_runtime is not None:
@@ -237,6 +236,8 @@ class ClusterArgs:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if upgrade_instances_follow_cluster is not None:
             pulumi.set(__self__, "upgrade_instances_follow_cluster", upgrade_instances_follow_cluster)
+        if vpc_cni_type is not None:
+            pulumi.set(__self__, "vpc_cni_type", vpc_cni_type)
         if worker_configs is not None:
             pulumi.set(__self__, "worker_configs", worker_configs)
 
@@ -313,18 +314,6 @@ class ClusterArgs:
         pulumi.set(self, "claim_expired_seconds", value)
 
     @property
-    @pulumi.getter(name="clusterAsEnabled")
-    def cluster_as_enabled(self) -> Optional[pulumi.Input[bool]]:
-        """
-        This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
-        """
-        return pulumi.get(self, "cluster_as_enabled")
-
-    @cluster_as_enabled.setter
-    def cluster_as_enabled(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "cluster_as_enabled", value)
-
-    @property
     @pulumi.getter(name="clusterAudit")
     def cluster_audit(self) -> Optional[pulumi.Input['ClusterClusterAuditArgs']]:
         """
@@ -388,7 +377,7 @@ class ClusterArgs:
     @pulumi.getter(name="clusterInternet")
     def cluster_internet(self) -> Optional[pulumi.Input[bool]]:
         """
-        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_internet")
 
@@ -424,7 +413,7 @@ class ClusterArgs:
     @pulumi.getter(name="clusterIntranet")
     def cluster_intranet(self) -> Optional[pulumi.Input[bool]]:
         """
-        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_intranet")
 
@@ -539,6 +528,18 @@ class ClusterArgs:
     @cluster_os_type.setter
     def cluster_os_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cluster_os_type", value)
+
+    @property
+    @pulumi.getter(name="clusterSubnetId")
+    def cluster_subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        """
+        return pulumi.get(self, "cluster_subnet_id")
+
+    @cluster_subnet_id.setter
+    def cluster_subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_subnet_id", value)
 
     @property
     @pulumi.getter(name="clusterVersion")
@@ -772,7 +773,7 @@ class ClusterArgs:
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster network type, GR or VPC-CNI. Default is GR.
+        Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         """
         return pulumi.get(self, "network_type")
 
@@ -877,6 +878,18 @@ class ClusterArgs:
         pulumi.set(self, "upgrade_instances_follow_cluster", value)
 
     @property
+    @pulumi.getter(name="vpcCniType")
+    def vpc_cni_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        """
+        return pulumi.get(self, "vpc_cni_type")
+
+    @vpc_cni_type.setter
+    def vpc_cni_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_cni_type", value)
+
+    @property
     @pulumi.getter(name="workerConfigs")
     def worker_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]]]:
         """
@@ -919,6 +932,7 @@ class _ClusterState:
                  cluster_node_num: Optional[pulumi.Input[int]] = None,
                  cluster_os: Optional[pulumi.Input[str]] = None,
                  cluster_os_type: Optional[pulumi.Input[str]] = None,
+                 cluster_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_version: Optional[pulumi.Input[str]] = None,
                  container_runtime: Optional[pulumi.Input[str]] = None,
                  deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -954,6 +968,7 @@ class _ClusterState:
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  upgrade_instances_follow_cluster: Optional[pulumi.Input[bool]] = None,
                  user_name: Optional[pulumi.Input[str]] = None,
+                 vpc_cni_type: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]]] = None,
                  worker_instances_lists: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerInstancesListArgs']]]] = None):
@@ -965,17 +980,17 @@ class _ClusterState:
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
         :param pulumi.Input[str] certification_authority: The certificate used for access.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
-        :param pulumi.Input[bool] cluster_as_enabled: This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        :param pulumi.Input[bool] cluster_as_enabled: (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         :param pulumi.Input['ClusterClusterAuditArgs'] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[str] cluster_deploy_type: Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input[str] cluster_external_endpoint: External network address to access.
         :param pulumi.Input['ClusterClusterExtraArgsArgs'] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
@@ -986,6 +1001,7 @@ class _ClusterState:
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
+        :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
@@ -1008,7 +1024,7 @@ class _ClusterState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterMasterConfigArgs']]] master_configs: Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] network_type: Cluster network type, GR or VPC-CNI. Default is GR.
+        :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
@@ -1021,6 +1037,7 @@ class _ClusterState:
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
         :param pulumi.Input[str] user_name: User name of account.
+        :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerInstancesListArgs']]] worker_instances_lists: An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
@@ -1082,6 +1099,8 @@ class _ClusterState:
             pulumi.set(__self__, "cluster_os", cluster_os)
         if cluster_os_type is not None:
             pulumi.set(__self__, "cluster_os_type", cluster_os_type)
+        if cluster_subnet_id is not None:
+            pulumi.set(__self__, "cluster_subnet_id", cluster_subnet_id)
         if cluster_version is not None:
             pulumi.set(__self__, "cluster_version", cluster_version)
         if container_runtime is not None:
@@ -1155,6 +1174,8 @@ class _ClusterState:
             pulumi.set(__self__, "upgrade_instances_follow_cluster", upgrade_instances_follow_cluster)
         if user_name is not None:
             pulumi.set(__self__, "user_name", user_name)
+        if vpc_cni_type is not None:
+            pulumi.set(__self__, "vpc_cni_type", vpc_cni_type)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if worker_configs is not None:
@@ -1238,7 +1259,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterAsEnabled")
     def cluster_as_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         """
         return pulumi.get(self, "cluster_as_enabled")
 
@@ -1322,7 +1343,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterInternet")
     def cluster_internet(self) -> Optional[pulumi.Input[bool]]:
         """
-        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_internet")
 
@@ -1358,7 +1379,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterIntranet")
     def cluster_intranet(self) -> Optional[pulumi.Input[bool]]:
         """
-        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_intranet")
 
@@ -1485,6 +1506,18 @@ class _ClusterState:
     @cluster_os_type.setter
     def cluster_os_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cluster_os_type", value)
+
+    @property
+    @pulumi.getter(name="clusterSubnetId")
+    def cluster_subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        """
+        return pulumi.get(self, "cluster_subnet_id")
+
+    @cluster_subnet_id.setter
+    def cluster_subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_subnet_id", value)
 
     @property
     @pulumi.getter(name="clusterVersion")
@@ -1754,7 +1787,7 @@ class _ClusterState:
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster network type, GR or VPC-CNI. Default is GR.
+        Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         """
         return pulumi.get(self, "network_type")
 
@@ -1907,6 +1940,18 @@ class _ClusterState:
         pulumi.set(self, "user_name", value)
 
     @property
+    @pulumi.getter(name="vpcCniType")
+    def vpc_cni_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        """
+        return pulumi.get(self, "vpc_cni_type")
+
+    @vpc_cni_type.setter
+    def vpc_cni_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vpc_cni_type", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1953,7 +1998,6 @@ class Cluster(pulumi.CustomResource):
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
-                 cluster_as_enabled: Optional[pulumi.Input[bool]] = None,
                  cluster_audit: Optional[pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']]] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
                  cluster_deploy_type: Optional[pulumi.Input[str]] = None,
@@ -1972,6 +2016,7 @@ class Cluster(pulumi.CustomResource):
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  cluster_os: Optional[pulumi.Input[str]] = None,
                  cluster_os_type: Optional[pulumi.Input[str]] = None,
+                 cluster_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_version: Optional[pulumi.Input[str]] = None,
                  container_runtime: Optional[pulumi.Input[str]] = None,
                  deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -2000,6 +2045,7 @@ class Cluster(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  upgrade_instances_follow_cluster: Optional[pulumi.Input[bool]] = None,
+                 vpc_cni_type: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]]] = None,
                  __props__=None):
@@ -2110,6 +2156,206 @@ class Cluster(pulumi.CustomResource):
                 "test1": "test1",
                 "test2": "test2",
             })
+        ```
+        ### Create an empty cluster with a node pool
+
+        The cluster does not have any nodes, nodes will be added through node pool.
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster_np",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # without any worker config
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
+            max_size=6,
+            min_size=1,
+            vpc_id=first_vpc_id,
+            subnet_ids=[first_subnet_id],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=4,
+            enable_auto_scale=True,
+            multi_zone_subnet_policy="EQUALITY",
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=[sg_id],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
+        ```
+        ### Create a cluster with a node pool and open the network access with cluster endpoint
+
+        The cluster's internet and intranet access will be opened after nodes are added through node pool.
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_internet=False,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # without any worker config
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
+            max_size=6,
+            min_size=1,
+            vpc_id=first_vpc_id,
+            subnet_ids=[first_subnet_id],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=4,
+            enable_auto_scale=True,
+            multi_zone_subnet_policy="EQUALITY",
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=[sg_id],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
+        example_cluster_endpoint = tencentcloud.kubernetes.ClusterEndpoint("exampleClusterEndpoint",
+            cluster_id=example_cluster.id,
+            cluster_internet=True,
+            cluster_intranet=True,
+            cluster_internet_security_group=sg_id,
+            cluster_intranet_subnet_id=first_subnet_id,
+            opts=pulumi.ResourceOptions(depends_on=[example_node_pool]))
         ```
         ### Use Kubelet
 
@@ -2362,16 +2608,15 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
-        :param pulumi.Input[bool] cluster_as_enabled: This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         :param pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[str] cluster_deploy_type: Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
@@ -2381,6 +2626,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
+        :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
@@ -2400,7 +2646,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterMasterConfigArgs']]]] master_configs: Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] network_type: Cluster network type, GR or VPC-CNI. Default is GR.
+        :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
@@ -2409,6 +2655,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the cluster.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
+        :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
         """
@@ -2525,6 +2772,206 @@ class Cluster(pulumi.CustomResource):
                 "test1": "test1",
                 "test2": "test2",
             })
+        ```
+        ### Create an empty cluster with a node pool
+
+        The cluster does not have any nodes, nodes will be added through node pool.
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster_np",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # without any worker config
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
+            max_size=6,
+            min_size=1,
+            vpc_id=first_vpc_id,
+            subnet_ids=[first_subnet_id],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=4,
+            enable_auto_scale=True,
+            multi_zone_subnet_policy="EQUALITY",
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=[sg_id],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
+        ```
+        ### Create a cluster with a node pool and open the network access with cluster endpoint
+
+        The cluster's internet and intranet access will be opened after nodes are added through node pool.
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        default_instance_type = config.get("defaultInstanceType")
+        if default_instance_type is None:
+            default_instance_type = "SA2.2XLARGE16"
+        availability_zone_first = config.get("availabilityZoneFirst")
+        if availability_zone_first is None:
+            availability_zone_first = "ap-guangzhou-3"
+        availability_zone_second = config.get("availabilityZoneSecond")
+        if availability_zone_second is None:
+            availability_zone_second = "ap-guangzhou-4"
+        example_cluster_cidr = config.get("exampleClusterCidr")
+        if example_cluster_cidr is None:
+            example_cluster_cidr = "10.31.0.0/16"
+        vpc_one = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_first)
+        first_vpc_id = vpc_one.instance_lists[0].vpc_id
+        first_subnet_id = vpc_one.instance_lists[0].subnet_id
+        sg = tencentcloud.security.Group("sg")
+        sg_id = sg.id
+        vpc_two = tencentcloud.Vpc.get_subnets(is_default=True,
+            availability_zone=availability_zone_second)
+        sg_rule = tencentcloud.security.GroupLiteRule("sgRule",
+            security_group_id=sg.id,
+            ingresses=[
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ],
+            egresses=["ACCEPT#172.16.0.0/22#ALL#ALL"])
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+            vpc_id=first_vpc_id,
+            cluster_cidr=example_cluster_cidr,
+            cluster_max_pod_num=32,
+            cluster_name="tf_example_cluster",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_internet=False,
+            cluster_version="1.22.5",
+            cluster_deploy_type="MANAGED_CLUSTER")
+        # without any worker config
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
+            max_size=6,
+            min_size=1,
+            vpc_id=first_vpc_id,
+            subnet_ids=[first_subnet_id],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=4,
+            enable_auto_scale=True,
+            multi_zone_subnet_policy="EQUALITY",
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=default_instance_type,
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=[sg_id],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
+        example_cluster_endpoint = tencentcloud.kubernetes.ClusterEndpoint("exampleClusterEndpoint",
+            cluster_id=example_cluster.id,
+            cluster_internet=True,
+            cluster_intranet=True,
+            cluster_internet_security_group=sg_id,
+            cluster_intranet_subnet_id=first_subnet_id,
+            opts=pulumi.ResourceOptions(depends_on=[example_node_pool]))
         ```
         ### Use Kubelet
 
@@ -2790,7 +3237,6 @@ class Cluster(pulumi.CustomResource):
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
-                 cluster_as_enabled: Optional[pulumi.Input[bool]] = None,
                  cluster_audit: Optional[pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']]] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
                  cluster_deploy_type: Optional[pulumi.Input[str]] = None,
@@ -2809,6 +3255,7 @@ class Cluster(pulumi.CustomResource):
                  cluster_name: Optional[pulumi.Input[str]] = None,
                  cluster_os: Optional[pulumi.Input[str]] = None,
                  cluster_os_type: Optional[pulumi.Input[str]] = None,
+                 cluster_subnet_id: Optional[pulumi.Input[str]] = None,
                  cluster_version: Optional[pulumi.Input[str]] = None,
                  container_runtime: Optional[pulumi.Input[str]] = None,
                  deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -2837,6 +3284,7 @@ class Cluster(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  upgrade_instances_follow_cluster: Optional[pulumi.Input[bool]] = None,
+                 vpc_cni_type: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]]] = None,
                  __props__=None):
@@ -2858,10 +3306,6 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["auto_upgrade_cluster_level"] = auto_upgrade_cluster_level
             __props__.__dict__["base_pod_num"] = base_pod_num
             __props__.__dict__["claim_expired_seconds"] = claim_expired_seconds
-            if cluster_as_enabled is not None and not opts.urn:
-                warnings.warn("""This argument is deprecated because the TKE auto-scaling group was no longer available.""", DeprecationWarning)
-                pulumi.log.warn("""cluster_as_enabled is deprecated: This argument is deprecated because the TKE auto-scaling group was no longer available.""")
-            __props__.__dict__["cluster_as_enabled"] = cluster_as_enabled
             __props__.__dict__["cluster_audit"] = cluster_audit
             __props__.__dict__["cluster_cidr"] = cluster_cidr
             __props__.__dict__["cluster_deploy_type"] = cluster_deploy_type
@@ -2880,6 +3324,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["cluster_name"] = cluster_name
             __props__.__dict__["cluster_os"] = cluster_os
             __props__.__dict__["cluster_os_type"] = cluster_os_type
+            __props__.__dict__["cluster_subnet_id"] = cluster_subnet_id
             __props__.__dict__["cluster_version"] = cluster_version
             __props__.__dict__["container_runtime"] = container_runtime
             __props__.__dict__["deletion_protection"] = deletion_protection
@@ -2911,11 +3356,13 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["unschedulable"] = unschedulable
             __props__.__dict__["upgrade_instances_follow_cluster"] = upgrade_instances_follow_cluster
+            __props__.__dict__["vpc_cni_type"] = vpc_cni_type
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["worker_configs"] = worker_configs
             __props__.__dict__["certification_authority"] = None
+            __props__.__dict__["cluster_as_enabled"] = None
             __props__.__dict__["cluster_external_endpoint"] = None
             __props__.__dict__["cluster_node_num"] = None
             __props__.__dict__["domain"] = None
@@ -2963,6 +3410,7 @@ class Cluster(pulumi.CustomResource):
             cluster_node_num: Optional[pulumi.Input[int]] = None,
             cluster_os: Optional[pulumi.Input[str]] = None,
             cluster_os_type: Optional[pulumi.Input[str]] = None,
+            cluster_subnet_id: Optional[pulumi.Input[str]] = None,
             cluster_version: Optional[pulumi.Input[str]] = None,
             container_runtime: Optional[pulumi.Input[str]] = None,
             deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -2998,6 +3446,7 @@ class Cluster(pulumi.CustomResource):
             unschedulable: Optional[pulumi.Input[int]] = None,
             upgrade_instances_follow_cluster: Optional[pulumi.Input[bool]] = None,
             user_name: Optional[pulumi.Input[str]] = None,
+            vpc_cni_type: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]]] = None,
             worker_instances_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerInstancesListArgs']]]]] = None) -> 'Cluster':
@@ -3014,17 +3463,17 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
         :param pulumi.Input[str] certification_authority: The certificate used for access.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
-        :param pulumi.Input[bool] cluster_as_enabled: This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        :param pulumi.Input[bool] cluster_as_enabled: (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         :param pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[str] cluster_deploy_type: Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
         :param pulumi.Input[str] cluster_desc: Description of the cluster.
         :param pulumi.Input[str] cluster_external_endpoint: External network address to access.
         :param pulumi.Input[pulumi.InputType['ClusterClusterExtraArgsArgs']] cluster_extra_args: Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_internet: Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_internet_domain: Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_internet_security_group: Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        :param pulumi.Input[bool] cluster_intranet: Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         :param pulumi.Input[str] cluster_intranet_domain: Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
         :param pulumi.Input[str] cluster_intranet_subnet_id: Subnet id who can access this independent cluster, this field must and can only set  when `cluster_intranet` is true. `cluster_intranet_subnet_id` can not modify once be set.
         :param pulumi.Input[bool] cluster_ipvs: Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
@@ -3035,6 +3484,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
         :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
+        :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `_kubernetes.get_available_cluster_versions` to get the upgradable cluster version.
         :param pulumi.Input[str] container_runtime: Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher.Default is 'docker'.
         :param pulumi.Input[bool] deletion_protection: Indicates whether cluster deletion protection is enabled. Default is false.
@@ -3057,7 +3507,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] managed_cluster_internet_security_policies: this argument was deprecated, use `cluster_internet_security_group` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `cluster_deploy_type` is 'MANAGED_CLUSTER' and `cluster_internet` is true. `managed_cluster_internet_security_policies` can not delete or empty once be set.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterMasterConfigArgs']]]] master_configs: Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] network_type: Cluster network type, GR or VPC-CNI. Default is GR.
+        :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
@@ -3070,6 +3520,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
         :param pulumi.Input[str] user_name: User name of account.
+        :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerInstancesListArgs']]]] worker_instances_lists: An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
@@ -3105,6 +3556,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["cluster_node_num"] = cluster_node_num
         __props__.__dict__["cluster_os"] = cluster_os
         __props__.__dict__["cluster_os_type"] = cluster_os_type
+        __props__.__dict__["cluster_subnet_id"] = cluster_subnet_id
         __props__.__dict__["cluster_version"] = cluster_version
         __props__.__dict__["container_runtime"] = container_runtime
         __props__.__dict__["deletion_protection"] = deletion_protection
@@ -3140,6 +3592,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["unschedulable"] = unschedulable
         __props__.__dict__["upgrade_instances_follow_cluster"] = upgrade_instances_follow_cluster
         __props__.__dict__["user_name"] = user_name
+        __props__.__dict__["vpc_cni_type"] = vpc_cni_type
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["worker_configs"] = worker_configs
         __props__.__dict__["worker_instances_lists"] = worker_instances_lists
@@ -3187,7 +3640,7 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="claimExpiredSeconds")
-    def claim_expired_seconds(self) -> pulumi.Output[Optional[int]]:
+    def claim_expired_seconds(self) -> pulumi.Output[int]:
         """
         Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         """
@@ -3195,9 +3648,9 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clusterAsEnabled")
-    def cluster_as_enabled(self) -> pulumi.Output[Optional[bool]]:
+    def cluster_as_enabled(self) -> pulumi.Output[bool]:
         """
-        This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         """
         return pulumi.get(self, "cluster_as_enabled")
 
@@ -3253,7 +3706,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="clusterInternet")
     def cluster_internet(self) -> pulumi.Output[Optional[bool]]:
         """
-        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_internet")
 
@@ -3277,7 +3730,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="clusterIntranet")
     def cluster_intranet(self) -> pulumi.Output[Optional[bool]]:
         """
-        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
         return pulumi.get(self, "cluster_intranet")
 
@@ -3360,6 +3813,14 @@ class Cluster(pulumi.CustomResource):
         Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
         """
         return pulumi.get(self, "cluster_os_type")
+
+    @property
+    @pulumi.getter(name="clusterSubnetId")
+    def cluster_subnet_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        """
+        return pulumi.get(self, "cluster_subnet_id")
 
     @property
     @pulumi.getter(name="clusterVersion")
@@ -3541,7 +4002,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="networkType")
     def network_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Cluster network type, GR or VPC-CNI. Default is GR.
+        Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         """
         return pulumi.get(self, "network_type")
 
@@ -3640,6 +4101,14 @@ class Cluster(pulumi.CustomResource):
         User name of account.
         """
         return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="vpcCniType")
+    def vpc_cni_type(self) -> pulumi.Output[str]:
+        """
+        Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        """
+        return pulumi.get(self, "vpc_cni_type")
 
     @property
     @pulumi.getter(name="vpcId")

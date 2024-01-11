@@ -38,6 +38,7 @@ export * from "./securityGroupAttachment";
 export * from "./snatIp";
 export * from "./targetGroup";
 export * from "./targetGroupAttachment";
+export * from "./targetGroupAttachments";
 export * from "./targetGroupInstanceAttachment";
 
 // Import resources to register:
@@ -57,6 +58,7 @@ import { SecurityGroupAttachment } from "./securityGroupAttachment";
 import { SnatIp } from "./snatIp";
 import { TargetGroup } from "./targetGroup";
 import { TargetGroupAttachment } from "./targetGroupAttachment";
+import { TargetGroupAttachments } from "./targetGroupAttachments";
 import { TargetGroupInstanceAttachment } from "./targetGroupInstanceAttachment";
 
 const _module = {
@@ -95,6 +97,8 @@ const _module = {
                 return new TargetGroup(name, <any>undefined, { urn })
             case "tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment":
                 return new TargetGroupAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments":
+                return new TargetGroupAttachments(name, <any>undefined, { urn })
             case "tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment":
                 return new TargetGroupInstanceAttachment(name, <any>undefined, { urn })
             default:
@@ -118,4 +122,5 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Clb/securityGroupAttachme
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/snatIp", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupAttachments", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupInstanceAttachment", _module)

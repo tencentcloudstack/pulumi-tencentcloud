@@ -16,6 +16,7 @@ __all__ = [
     'FunctionEventInvokeConfigAsyncTriggerConfigArgs',
     'FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs',
     'FunctionImageConfigArgs',
+    'FunctionIntranetConfigArgs',
     'FunctionLayerArgs',
     'FunctionTriggerArgs',
     'FunctionTriggerInfoArgs',
@@ -366,14 +367,18 @@ class FunctionImageConfigArgs:
                  image_uri: pulumi.Input[str],
                  args: Optional[pulumi.Input[str]] = None,
                  command: Optional[pulumi.Input[str]] = None,
+                 container_image_accelerate: Optional[pulumi.Input[bool]] = None,
                  entry_point: Optional[pulumi.Input[str]] = None,
+                 image_port: Optional[pulumi.Input[int]] = None,
                  registry_id: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] image_type: The image type. personal or enterprise.
         :param pulumi.Input[str] image_uri: The uri of image.
         :param pulumi.Input[str] args: the parameters of command.
         :param pulumi.Input[str] command: The command of entrypoint.
+        :param pulumi.Input[bool] container_image_accelerate: Image accelerate switch.
         :param pulumi.Input[str] entry_point: The entrypoint of app.
+        :param pulumi.Input[int] image_port: Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
         :param pulumi.Input[str] registry_id: The registry id of TCR. When image type is enterprise, it must be set.
         """
         pulumi.set(__self__, "image_type", image_type)
@@ -382,8 +387,12 @@ class FunctionImageConfigArgs:
             pulumi.set(__self__, "args", args)
         if command is not None:
             pulumi.set(__self__, "command", command)
+        if container_image_accelerate is not None:
+            pulumi.set(__self__, "container_image_accelerate", container_image_accelerate)
         if entry_point is not None:
             pulumi.set(__self__, "entry_point", entry_point)
+        if image_port is not None:
+            pulumi.set(__self__, "image_port", image_port)
         if registry_id is not None:
             pulumi.set(__self__, "registry_id", registry_id)
 
@@ -436,6 +445,18 @@ class FunctionImageConfigArgs:
         pulumi.set(self, "command", value)
 
     @property
+    @pulumi.getter(name="containerImageAccelerate")
+    def container_image_accelerate(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Image accelerate switch.
+        """
+        return pulumi.get(self, "container_image_accelerate")
+
+    @container_image_accelerate.setter
+    def container_image_accelerate(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "container_image_accelerate", value)
+
+    @property
     @pulumi.getter(name="entryPoint")
     def entry_point(self) -> Optional[pulumi.Input[str]]:
         """
@@ -448,6 +469,18 @@ class FunctionImageConfigArgs:
         pulumi.set(self, "entry_point", value)
 
     @property
+    @pulumi.getter(name="imagePort")
+    def image_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+        """
+        return pulumi.get(self, "image_port")
+
+    @image_port.setter
+    def image_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "image_port", value)
+
+    @property
     @pulumi.getter(name="registryId")
     def registry_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -458,6 +491,40 @@ class FunctionImageConfigArgs:
     @registry_id.setter
     def registry_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "registry_id", value)
+
+
+@pulumi.input_type
+class FunctionIntranetConfigArgs:
+    def __init__(__self__, *,
+                 ip_fixed: pulumi.Input[str],
+                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] ip_fixed: Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        pulumi.set(__self__, "ip_fixed", ip_fixed)
+        if ip_addresses is not None:
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
+
+    @property
+    @pulumi.getter(name="ipFixed")
+    def ip_fixed(self) -> pulumi.Input[str]:
+        """
+        Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+        """
+        return pulumi.get(self, "ip_fixed")
+
+    @ip_fixed.setter
+    def ip_fixed(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip_fixed", value)
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "ip_addresses")
+
+    @ip_addresses.setter
+    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ip_addresses", value)
 
 
 @pulumi.input_type

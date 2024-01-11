@@ -6,8 +6,7 @@ import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a css play_domain_cert_attachment.
- * This resource is used for binding the play domain and specified certification together.
+ * Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together.
  *
  * ## Example Usage
  *

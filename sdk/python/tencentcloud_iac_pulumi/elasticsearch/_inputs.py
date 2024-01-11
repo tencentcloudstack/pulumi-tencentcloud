@@ -9,11 +9,69 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'DiagnoseDiagnoseJobMetaArgs',
     'InstanceEsAclArgs',
     'InstanceMultiZoneInfoArgs',
     'InstanceNodeInfoListArgs',
     'InstanceWebNodeTypeInfoArgs',
+    'LogstashOperationDurationArgs',
+    'LogstashPipelinePipelineArgs',
 ]
+
+@pulumi.input_type
+class DiagnoseDiagnoseJobMetaArgs:
+    def __init__(__self__, *,
+                 job_description: Optional[pulumi.Input[str]] = None,
+                 job_name: Optional[pulumi.Input[str]] = None,
+                 job_zh_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] job_description: Intelligent operation and maintenance diagnostic item description.
+        :param pulumi.Input[str] job_name: English name of diagnosis item for intelligent operation and maintenance.
+        :param pulumi.Input[str] job_zh_name: Chinese name of intelligent operation and maintenance diagnosis item.
+        """
+        if job_description is not None:
+            pulumi.set(__self__, "job_description", job_description)
+        if job_name is not None:
+            pulumi.set(__self__, "job_name", job_name)
+        if job_zh_name is not None:
+            pulumi.set(__self__, "job_zh_name", job_zh_name)
+
+    @property
+    @pulumi.getter(name="jobDescription")
+    def job_description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Intelligent operation and maintenance diagnostic item description.
+        """
+        return pulumi.get(self, "job_description")
+
+    @job_description.setter
+    def job_description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "job_description", value)
+
+    @property
+    @pulumi.getter(name="jobName")
+    def job_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        English name of diagnosis item for intelligent operation and maintenance.
+        """
+        return pulumi.get(self, "job_name")
+
+    @job_name.setter
+    def job_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "job_name", value)
+
+    @property
+    @pulumi.getter(name="jobZhName")
+    def job_zh_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Chinese name of intelligent operation and maintenance diagnosis item.
+        """
+        return pulumi.get(self, "job_zh_name")
+
+    @job_zh_name.setter
+    def job_zh_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "job_zh_name", value)
+
 
 @pulumi.input_type
 class InstanceEsAclArgs:
@@ -227,5 +285,214 @@ class InstanceWebNodeTypeInfoArgs:
     @node_type.setter
     def node_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "node_type", value)
+
+
+@pulumi.input_type
+class LogstashOperationDurationArgs:
+    def __init__(__self__, *,
+                 periods: pulumi.Input[Sequence[pulumi.Input[int]]],
+                 time_end: pulumi.Input[str],
+                 time_start: pulumi.Input[str],
+                 time_zone: pulumi.Input[str]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] periods: day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+        :param pulumi.Input[str] time_end: operation end time.
+        :param pulumi.Input[str] time_start: operation start time.
+        :param pulumi.Input[str] time_zone: time zone, for example: UTC+8.
+        """
+        pulumi.set(__self__, "periods", periods)
+        pulumi.set(__self__, "time_end", time_end)
+        pulumi.set(__self__, "time_start", time_start)
+        pulumi.set(__self__, "time_zone", time_zone)
+
+    @property
+    @pulumi.getter
+    def periods(self) -> pulumi.Input[Sequence[pulumi.Input[int]]]:
+        """
+        day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+        """
+        return pulumi.get(self, "periods")
+
+    @periods.setter
+    def periods(self, value: pulumi.Input[Sequence[pulumi.Input[int]]]):
+        pulumi.set(self, "periods", value)
+
+    @property
+    @pulumi.getter(name="timeEnd")
+    def time_end(self) -> pulumi.Input[str]:
+        """
+        operation end time.
+        """
+        return pulumi.get(self, "time_end")
+
+    @time_end.setter
+    def time_end(self, value: pulumi.Input[str]):
+        pulumi.set(self, "time_end", value)
+
+    @property
+    @pulumi.getter(name="timeStart")
+    def time_start(self) -> pulumi.Input[str]:
+        """
+        operation start time.
+        """
+        return pulumi.get(self, "time_start")
+
+    @time_start.setter
+    def time_start(self, value: pulumi.Input[str]):
+        pulumi.set(self, "time_start", value)
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> pulumi.Input[str]:
+        """
+        time zone, for example: UTC+8.
+        """
+        return pulumi.get(self, "time_zone")
+
+    @time_zone.setter
+    def time_zone(self, value: pulumi.Input[str]):
+        pulumi.set(self, "time_zone", value)
+
+
+@pulumi.input_type
+class LogstashPipelinePipelineArgs:
+    def __init__(__self__, *,
+                 batch_delay: pulumi.Input[int],
+                 batch_size: pulumi.Input[int],
+                 config: pulumi.Input[str],
+                 pipeline_desc: pulumi.Input[str],
+                 pipeline_id: pulumi.Input[str],
+                 queue_check_point_writes: pulumi.Input[int],
+                 queue_max_bytes: pulumi.Input[str],
+                 queue_type: pulumi.Input[str],
+                 workers: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] batch_delay: Pipeline batch processing delay.
+        :param pulumi.Input[int] batch_size: Pipe batch size.
+        :param pulumi.Input[str] config: Pipeline configuration content.
+        :param pulumi.Input[str] pipeline_desc: Pipeline description information.
+        :param pulumi.Input[str] pipeline_id: Pipeline id.
+        :param pulumi.Input[int] queue_check_point_writes: Number of pipeline buffer queue checkpoint writes.
+        :param pulumi.Input[str] queue_max_bytes: Pipeline buffer queue size.
+        :param pulumi.Input[str] queue_type: Pipeline buffer queue type.
+        :param pulumi.Input[int] workers: Number of Worker of pipe.
+        """
+        pulumi.set(__self__, "batch_delay", batch_delay)
+        pulumi.set(__self__, "batch_size", batch_size)
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "pipeline_desc", pipeline_desc)
+        pulumi.set(__self__, "pipeline_id", pipeline_id)
+        pulumi.set(__self__, "queue_check_point_writes", queue_check_point_writes)
+        pulumi.set(__self__, "queue_max_bytes", queue_max_bytes)
+        pulumi.set(__self__, "queue_type", queue_type)
+        pulumi.set(__self__, "workers", workers)
+
+    @property
+    @pulumi.getter(name="batchDelay")
+    def batch_delay(self) -> pulumi.Input[int]:
+        """
+        Pipeline batch processing delay.
+        """
+        return pulumi.get(self, "batch_delay")
+
+    @batch_delay.setter
+    def batch_delay(self, value: pulumi.Input[int]):
+        pulumi.set(self, "batch_delay", value)
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> pulumi.Input[int]:
+        """
+        Pipe batch size.
+        """
+        return pulumi.get(self, "batch_size")
+
+    @batch_size.setter
+    def batch_size(self, value: pulumi.Input[int]):
+        pulumi.set(self, "batch_size", value)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Pipeline configuration content.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter(name="pipelineDesc")
+    def pipeline_desc(self) -> pulumi.Input[str]:
+        """
+        Pipeline description information.
+        """
+        return pulumi.get(self, "pipeline_desc")
+
+    @pipeline_desc.setter
+    def pipeline_desc(self, value: pulumi.Input[str]):
+        pulumi.set(self, "pipeline_desc", value)
+
+    @property
+    @pulumi.getter(name="pipelineId")
+    def pipeline_id(self) -> pulumi.Input[str]:
+        """
+        Pipeline id.
+        """
+        return pulumi.get(self, "pipeline_id")
+
+    @pipeline_id.setter
+    def pipeline_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "pipeline_id", value)
+
+    @property
+    @pulumi.getter(name="queueCheckPointWrites")
+    def queue_check_point_writes(self) -> pulumi.Input[int]:
+        """
+        Number of pipeline buffer queue checkpoint writes.
+        """
+        return pulumi.get(self, "queue_check_point_writes")
+
+    @queue_check_point_writes.setter
+    def queue_check_point_writes(self, value: pulumi.Input[int]):
+        pulumi.set(self, "queue_check_point_writes", value)
+
+    @property
+    @pulumi.getter(name="queueMaxBytes")
+    def queue_max_bytes(self) -> pulumi.Input[str]:
+        """
+        Pipeline buffer queue size.
+        """
+        return pulumi.get(self, "queue_max_bytes")
+
+    @queue_max_bytes.setter
+    def queue_max_bytes(self, value: pulumi.Input[str]):
+        pulumi.set(self, "queue_max_bytes", value)
+
+    @property
+    @pulumi.getter(name="queueType")
+    def queue_type(self) -> pulumi.Input[str]:
+        """
+        Pipeline buffer queue type.
+        """
+        return pulumi.get(self, "queue_type")
+
+    @queue_type.setter
+    def queue_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "queue_type", value)
+
+    @property
+    @pulumi.getter
+    def workers(self) -> pulumi.Input[int]:
+        """
+        Number of Worker of pipe.
+        """
+        return pulumi.get(self, "workers")
+
+    @workers.setter
+    def workers(self, value: pulumi.Input[int]):
+        pulumi.set(self, "workers", value)
 
 

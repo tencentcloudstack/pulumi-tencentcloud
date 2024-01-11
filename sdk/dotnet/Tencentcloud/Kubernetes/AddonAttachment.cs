@@ -107,13 +107,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 "global.imagePullSecretsCrs[1].type=docker",
     ///                 userName.Apply(userName =&gt; $"global.imagePullSecretsCrs[1].dockerUsername={userName}"),
     ///                 token.Apply(token =&gt; $"global.imagePullSecretsCrs[1].dockerPassword={token}"),
-    ///                 tcrName.Apply(tcrName =&gt; $"global.imagePullSecretsCrs[1].dockerServer={tcrName}-tencentcloudcr.com"),
+    ///                 tcrName.Apply(tcrName =&gt; $"global.imagePullSecretsCrs[1].dockerServer={tcrName}.tencentcloudcr.com"),
     ///                 "global.cluster.region=gz",
     ///                 "global.cluster.longregion=ap-guangzhou",
     ///                 tcrName.Apply(tcrName =&gt; $"global.hosts[0].domain={tcrName}-vpc.tencentcloudcr.com"),
     ///                 endPoint.Apply(endPoint =&gt; $"global.hosts[0].ip={endPoint}"),
     ///                 "global.hosts[0].disabled=false",
-    ///                 tcrName.Apply(tcrName =&gt; $"global.hosts[1].domain={tcrName}-tencentcloudcr.com"),
+    ///                 tcrName.Apply(tcrName =&gt; $"global.hosts[1].domain={tcrName}.tencentcloudcr.com"),
     ///                 endPoint.Apply(endPoint =&gt; $"global.hosts[1].ip={endPoint}"),
     ///                 "global.hosts[1].disabled=false",
     ///             },
@@ -179,6 +179,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        /// </summary>
+        [Output("rawValues")]
+        public Output<string> RawValues { get; private set; } = null!;
+
+        /// <summary>
+        /// The type of raw Values. Required with `raw_values`.
+        /// </summary>
+        [Output("rawValuesType")]
+        public Output<string> RawValuesType { get; private set; } = null!;
 
         /// <summary>
         /// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
@@ -270,6 +282,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        /// </summary>
+        [Input("rawValues")]
+        public Input<string>? RawValues { get; set; }
+
+        /// <summary>
+        /// The type of raw Values. Required with `raw_values`.
+        /// </summary>
+        [Input("rawValuesType")]
+        public Input<string>? RawValuesType { get; set; }
+
+        /// <summary>
         /// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
         /// </summary>
         [Input("requestBody")]
@@ -311,6 +335,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Raw Values. Conflict with `request_body`. Required with `raw_values_type`.
+        /// </summary>
+        [Input("rawValues")]
+        public Input<string>? RawValues { get; set; }
+
+        /// <summary>
+        /// The type of raw Values. Required with `raw_values`.
+        /// </summary>
+        [Input("rawValuesType")]
+        public Input<string>? RawValuesType { get; set; }
 
         /// <summary>
         /// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.

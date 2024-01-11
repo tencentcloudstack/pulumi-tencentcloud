@@ -16,7 +16,9 @@ from .get_available_cluster_versions import *
 from .get_charts import *
 from .get_cluster_authentication_options import *
 from .get_cluster_common_names import *
+from .get_cluster_instances import *
 from .get_cluster_levels import *
+from .get_cluster_node_pools import *
 from .get_clusters import *
 from .node_pool import *
 from .scale_worker import *

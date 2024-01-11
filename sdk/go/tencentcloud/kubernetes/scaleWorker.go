@@ -15,6 +15,8 @@ import (
 //
 // > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extraArgs`), you need to submit a ticket for application.
 //
+// > **NOTE:** Import Node: Currently, only one node can be imported at a time.
+//
 // ## Example Usage
 //
 // ```go

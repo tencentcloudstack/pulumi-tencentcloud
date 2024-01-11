@@ -25,15 +25,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///     {
     ///         var zone = new Tencentcloud.Teo.Zone("zone", new Tencentcloud.Teo.ZoneArgs
     ///         {
-    ///             CnameSpeedUp = "enabled",
+    ///             AliasZoneName = "teo-test",
+    ///             Area = "overseas",
     ///             Paused = false,
-    ///             PlanType = "sta",
+    ///             PlanId = "edgeone-2kfv1h391n6w",
     ///             Tags = 
     ///             {
     ///                 { "createdBy", "terraform" },
     ///             },
-    ///             Type = "full",
-    ///             ZoneName = "toutiao2.com",
+    ///             Type = "partial",
+    ///             ZoneName = "tf-teo.com",
     ///         });
     ///     }
     /// 
@@ -52,46 +53,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public partial class Zone : Pulumi.CustomResource
     {
         /// <summary>
-        /// Valid values: `mainland`, `overseas`.
+        /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        /// </summary>
+        [Output("aliasZoneName")]
+        public Output<string?> AliasZoneName { get; private set; } = null!;
+
+        /// <summary>
+        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         /// </summary>
         [Output("area")]
         public Output<string> Area { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        /// </summary>
-        [Output("cnameSpeedUp")]
-        public Output<string> CnameSpeedUp { get; private set; } = null!;
-
-        /// <summary>
-        /// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        /// </summary>
-        [Output("cnameStatus")]
-        public Output<string> CnameStatus { get; private set; } = null!;
-
-        /// <summary>
-        /// Site creation date.
-        /// </summary>
-        [Output("createdOn")]
-        public Output<string> CreatedOn { get; private set; } = null!;
-
-        /// <summary>
-        /// Site modification date.
-        /// </summary>
-        [Output("modifiedOn")]
-        public Output<string> ModifiedOn { get; private set; } = null!;
-
-        /// <summary>
-        /// List of name servers assigned by Tencent Cloud.
+        /// NS list allocated by Tencent Cloud.
         /// </summary>
         [Output("nameServers")]
         public Output<ImmutableArray<string>> NameServers { get; private set; } = null!;
 
         /// <summary>
-        /// Name server used by the site.
+        /// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
-        [Output("originalNameServers")]
-        public Output<ImmutableArray<string>> OriginalNameServers { get; private set; } = null!;
+        [Output("ownershipVerifications")]
+        public Output<ImmutableArray<Outputs.ZoneOwnershipVerification>> OwnershipVerifications { get; private set; } = null!;
 
         /// <summary>
         /// Indicates whether the site is disabled.
@@ -100,19 +83,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<bool> Paused { get; private set; } = null!;
 
         /// <summary>
-        /// Plan type of the zone. See details in data source `zone_available_plans`.
+        /// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         /// </summary>
-        [Output("planType")]
-        public Output<string> PlanType { get; private set; } = null!;
+        [Output("planId")]
+        public Output<string> PlanId { get; private set; } = null!;
 
         /// <summary>
-        /// Billing resources of the zone.
-        /// </summary>
-        [Output("resources")]
-        public Output<ImmutableArray<Outputs.ZoneResource>> Resources { get; private set; } = null!;
-
-        /// <summary>
-        /// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        /// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -124,31 +101,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
-        /// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Output("vanityNameServers")]
-        public Output<Outputs.ZoneVanityNameServers?> VanityNameServers { get; private set; } = null!;
-
-        /// <summary>
-        /// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Output("vanityNameServersIps")]
-        public Output<ImmutableArray<Outputs.ZoneVanityNameServersIp>> VanityNameServersIps { get; private set; } = null!;
-
-        /// <summary>
-        /// Site ID.
-        /// </summary>
-        [Output("zoneId")]
-        public Output<string> ZoneId { get; private set; } = null!;
-
-        /// <summary>
-        /// Site name.
+        /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         /// </summary>
         [Output("zoneName")]
         public Output<string> ZoneName { get; private set; } = null!;
@@ -201,10 +160,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class ZoneArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+        /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
         /// </summary>
-        [Input("cnameSpeedUp")]
-        public Input<string>? CnameSpeedUp { get; set; }
+        [Input("aliasZoneName")]
+        public Input<string>? AliasZoneName { get; set; }
+
+        /// <summary>
+        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+        /// </summary>
+        [Input("area", required: true)]
+        public Input<string> Area { get; set; } = null!;
 
         /// <summary>
         /// Indicates whether the site is disabled.
@@ -213,10 +178,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<bool>? Paused { get; set; }
 
         /// <summary>
-        /// Plan type of the zone. See details in data source `zone_available_plans`.
+        /// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         /// </summary>
-        [Input("planType", required: true)]
-        public Input<string> PlanType { get; set; } = null!;
+        [Input("planId", required: true)]
+        public Input<string> PlanId { get; set; } = null!;
 
         [Input("tags")]
         private InputMap<object>? _tags;
@@ -231,19 +196,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
         /// </summary>
-        [Input("type")]
-        public Input<string>? Type { get; set; }
+        [Input("type", required: true)]
+        public Input<string> Type { get; set; } = null!;
 
         /// <summary>
-        /// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Input("vanityNameServers")]
-        public Input<Inputs.ZoneVanityNameServersArgs>? VanityNameServers { get; set; }
-
-        /// <summary>
-        /// Site name.
+        /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         /// </summary>
         [Input("zoneName", required: true)]
         public Input<string> ZoneName { get; set; } = null!;
@@ -256,40 +215,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class ZoneState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Valid values: `mainland`, `overseas`.
+        /// Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+        /// </summary>
+        [Input("aliasZoneName")]
+        public Input<string>? AliasZoneName { get; set; }
+
+        /// <summary>
+        /// When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
         /// </summary>
         [Input("area")]
         public Input<string>? Area { get; set; }
-
-        /// <summary>
-        /// Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-        /// </summary>
-        [Input("cnameSpeedUp")]
-        public Input<string>? CnameSpeedUp { get; set; }
-
-        /// <summary>
-        /// Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-        /// </summary>
-        [Input("cnameStatus")]
-        public Input<string>? CnameStatus { get; set; }
-
-        /// <summary>
-        /// Site creation date.
-        /// </summary>
-        [Input("createdOn")]
-        public Input<string>? CreatedOn { get; set; }
-
-        /// <summary>
-        /// Site modification date.
-        /// </summary>
-        [Input("modifiedOn")]
-        public Input<string>? ModifiedOn { get; set; }
 
         [Input("nameServers")]
         private InputList<string>? _nameServers;
 
         /// <summary>
-        /// List of name servers assigned by Tencent Cloud.
+        /// NS list allocated by Tencent Cloud.
         /// </summary>
         public InputList<string> NameServers
         {
@@ -297,16 +238,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
             set => _nameServers = value;
         }
 
-        [Input("originalNameServers")]
-        private InputList<string>? _originalNameServers;
+        [Input("ownershipVerifications")]
+        private InputList<Inputs.ZoneOwnershipVerificationGetArgs>? _ownershipVerifications;
 
         /// <summary>
-        /// Name server used by the site.
+        /// Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
-        public InputList<string> OriginalNameServers
+        public InputList<Inputs.ZoneOwnershipVerificationGetArgs> OwnershipVerifications
         {
-            get => _originalNameServers ?? (_originalNameServers = new InputList<string>());
-            set => _originalNameServers = value;
+            get => _ownershipVerifications ?? (_ownershipVerifications = new InputList<Inputs.ZoneOwnershipVerificationGetArgs>());
+            set => _ownershipVerifications = value;
         }
 
         /// <summary>
@@ -316,25 +257,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<bool>? Paused { get; set; }
 
         /// <summary>
-        /// Plan type of the zone. See details in data source `zone_available_plans`.
+        /// The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
         /// </summary>
-        [Input("planType")]
-        public Input<string>? PlanType { get; set; }
-
-        [Input("resources")]
-        private InputList<Inputs.ZoneResourceGetArgs>? _resources;
+        [Input("planId")]
+        public Input<string>? PlanId { get; set; }
 
         /// <summary>
-        /// Billing resources of the zone.
-        /// </summary>
-        public InputList<Inputs.ZoneResourceGetArgs> Resources
-        {
-            get => _resources ?? (_resources = new InputList<Inputs.ZoneResourceGetArgs>());
-            set => _resources = value;
-        }
-
-        /// <summary>
-        /// Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+        /// Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -352,37 +281,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+        /// Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        [Input("vanityNameServers")]
-        public Input<Inputs.ZoneVanityNameServersGetArgs>? VanityNameServers { get; set; }
-
-        [Input("vanityNameServersIps")]
-        private InputList<Inputs.ZoneVanityNameServersIpGetArgs>? _vanityNameServersIps;
-
-        /// <summary>
-        /// User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-        /// </summary>
-        public InputList<Inputs.ZoneVanityNameServersIpGetArgs> VanityNameServersIps
-        {
-            get => _vanityNameServersIps ?? (_vanityNameServersIps = new InputList<Inputs.ZoneVanityNameServersIpGetArgs>());
-            set => _vanityNameServersIps = value;
-        }
-
-        /// <summary>
-        /// Site ID.
-        /// </summary>
-        [Input("zoneId")]
-        public Input<string>? ZoneId { get; set; }
-
-        /// <summary>
-        /// Site name.
+        /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
         /// </summary>
         [Input("zoneName")]
         public Input<string>? ZoneName { get; set; }

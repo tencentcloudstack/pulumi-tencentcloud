@@ -59,15 +59,15 @@ import (
 type ApplicationProxyRule struct {
 	pulumi.CustomResourceState
 
-	// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+	// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 	ForwardClientIp pulumi.StringOutput `pulumi:"forwardClientIp"`
 	// Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
 	OriginPort pulumi.StringOutput `pulumi:"originPort"`
-	// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+	// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 	OriginType pulumi.StringOutput `pulumi:"originType"`
-	// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+	// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 	OriginValues pulumi.StringArrayOutput `pulumi:"originValues"`
-	// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+	// Valid values: `80` means port 80; `81-90` means port range 81-90.
 	Ports pulumi.StringArrayOutput `pulumi:"ports"`
 	// Protocol. Valid values: `TCP`, `UDP`.
 	Proto pulumi.StringOutput `pulumi:"proto"`
@@ -77,7 +77,7 @@ type ApplicationProxyRule struct {
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
 	// Specifies whether to enable session persistence. Default value is false.
 	SessionPersist pulumi.BoolOutput `pulumi:"sessionPersist"`
-	// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+	// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Site ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
@@ -134,15 +134,15 @@ func GetApplicationProxyRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ApplicationProxyRule resources.
 type applicationProxyRuleState struct {
-	// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+	// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 	ForwardClientIp *string `pulumi:"forwardClientIp"`
 	// Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
 	OriginPort *string `pulumi:"originPort"`
-	// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+	// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 	OriginType *string `pulumi:"originType"`
-	// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+	// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 	OriginValues []string `pulumi:"originValues"`
-	// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+	// Valid values: `80` means port 80; `81-90` means port range 81-90.
 	Ports []string `pulumi:"ports"`
 	// Protocol. Valid values: `TCP`, `UDP`.
 	Proto *string `pulumi:"proto"`
@@ -152,22 +152,22 @@ type applicationProxyRuleState struct {
 	RuleId *string `pulumi:"ruleId"`
 	// Specifies whether to enable session persistence. Default value is false.
 	SessionPersist *bool `pulumi:"sessionPersist"`
-	// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+	// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 	Status *string `pulumi:"status"`
 	// Site ID.
 	ZoneId *string `pulumi:"zoneId"`
 }
 
 type ApplicationProxyRuleState struct {
-	// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+	// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 	ForwardClientIp pulumi.StringPtrInput
 	// Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
 	OriginPort pulumi.StringPtrInput
-	// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+	// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 	OriginType pulumi.StringPtrInput
-	// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+	// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 	OriginValues pulumi.StringArrayInput
-	// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+	// Valid values: `80` means port 80; `81-90` means port range 81-90.
 	Ports pulumi.StringArrayInput
 	// Protocol. Valid values: `TCP`, `UDP`.
 	Proto pulumi.StringPtrInput
@@ -177,7 +177,7 @@ type ApplicationProxyRuleState struct {
 	RuleId pulumi.StringPtrInput
 	// Specifies whether to enable session persistence. Default value is false.
 	SessionPersist pulumi.BoolPtrInput
-	// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+	// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 	Status pulumi.StringPtrInput
 	// Site ID.
 	ZoneId pulumi.StringPtrInput
@@ -188,15 +188,15 @@ func (ApplicationProxyRuleState) ElementType() reflect.Type {
 }
 
 type applicationProxyRuleArgs struct {
-	// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+	// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 	ForwardClientIp *string `pulumi:"forwardClientIp"`
 	// Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
 	OriginPort string `pulumi:"originPort"`
-	// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+	// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 	OriginType string `pulumi:"originType"`
-	// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+	// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 	OriginValues []string `pulumi:"originValues"`
-	// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+	// Valid values: `80` means port 80; `81-90` means port range 81-90.
 	Ports []string `pulumi:"ports"`
 	// Protocol. Valid values: `TCP`, `UDP`.
 	Proto string `pulumi:"proto"`
@@ -204,7 +204,7 @@ type applicationProxyRuleArgs struct {
 	ProxyId string `pulumi:"proxyId"`
 	// Specifies whether to enable session persistence. Default value is false.
 	SessionPersist *bool `pulumi:"sessionPersist"`
-	// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+	// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 	Status *string `pulumi:"status"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
@@ -212,15 +212,15 @@ type applicationProxyRuleArgs struct {
 
 // The set of arguments for constructing a ApplicationProxyRule resource.
 type ApplicationProxyRuleArgs struct {
-	// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+	// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 	ForwardClientIp pulumi.StringPtrInput
 	// Origin port, supported formats: single port: 80; Port segment: 81-90, 81 to 90 ports.
 	OriginPort pulumi.StringInput
-	// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+	// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 	OriginType pulumi.StringInput
-	// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+	// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 	OriginValues pulumi.StringArrayInput
-	// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+	// Valid values: `80` means port 80; `81-90` means port range 81-90.
 	Ports pulumi.StringArrayInput
 	// Protocol. Valid values: `TCP`, `UDP`.
 	Proto pulumi.StringInput
@@ -228,7 +228,7 @@ type ApplicationProxyRuleArgs struct {
 	ProxyId pulumi.StringInput
 	// Specifies whether to enable session persistence. Default value is false.
 	SessionPersist pulumi.BoolPtrInput
-	// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+	// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 	Status pulumi.StringPtrInput
 	// Site ID.
 	ZoneId pulumi.StringInput
@@ -321,7 +321,7 @@ func (o ApplicationProxyRuleOutput) ToApplicationProxyRuleOutputWithContext(ctx 
 	return o
 }
 
-// Passes the client IP. Default value is OFF.When Proto is TCP, valid values:- `TOA`: Pass the client IP via TOA.- `PPV1`: Pass the client IP via Proxy Protocol V1.- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.When Proto=UDP, valid values:- `PPV2`: Pass the client IP via Proxy Protocol V2.- `OFF`: Do not pass the client IP.
+// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
 func (o ApplicationProxyRuleOutput) ForwardClientIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringOutput { return v.ForwardClientIp }).(pulumi.StringOutput)
 }
@@ -331,17 +331,17 @@ func (o ApplicationProxyRuleOutput) OriginPort() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringOutput { return v.OriginPort }).(pulumi.StringOutput)
 }
 
-// Origin server type.- `custom`: Specified origins.- `origins`: An origin group.
+// Origin server type. Valid values: `custom`: Specified origins; `origins`: An origin group.
 func (o ApplicationProxyRuleOutput) OriginType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringOutput { return v.OriginType }).(pulumi.StringOutput)
 }
 
-// Origin server information.When `OriginType` is custom, this field value indicates multiple origin servers in either of the following formats:- `IP`:Port- Domain name:Port.When `OriginType` is origins, it indicates the origin group ID.
+// Origin site information: When `OriginType` is `custom`, it indicates one or more origin sites, such as `['8.8.8.8', '9.9.9.9']` or `OriginValue=['test.com']`; When `OriginType` is `origins`, there is required to be one and only one element, representing the origin site group ID, such as `['origin-537f5b41-162a-11ed-abaa-525400c5da15']`.
 func (o ApplicationProxyRuleOutput) OriginValues() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringArrayOutput { return v.OriginValues }).(pulumi.StringArrayOutput)
 }
 
-// Valid values:- port number: `80` means port 80.- port range: `81-90` means port range 81-90.
+// Valid values: `80` means port 80; `81-90` means port range 81-90.
 func (o ApplicationProxyRuleOutput) Ports() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringArrayOutput { return v.Ports }).(pulumi.StringArrayOutput)
 }
@@ -366,7 +366,7 @@ func (o ApplicationProxyRuleOutput) SessionPersist() pulumi.BoolOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.BoolOutput { return v.SessionPersist }).(pulumi.BoolOutput)
 }
 
-// Status of this application proxy rule. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Disabling.- `fail`: Deployment/Disabling failed.
+// Status, the values are: `online`: enabled; `offline`: deactivated; `progress`: being deployed; `stopping`: being deactivated; `fail`: deployment failure/deactivation failure.
 func (o ApplicationProxyRuleOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationProxyRule) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

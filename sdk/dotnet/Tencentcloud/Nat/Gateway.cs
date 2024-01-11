@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// Provides a resource to create a NAT gateway.
     /// 
     /// ## Example Usage
-    /// ### Create a NAT gateway.
+    /// ### Create a traditional NAT gateway.
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -44,6 +44,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     ///                 eipExample1.PublicIp,
     ///                 eipExample2.PublicIp,
     ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "tf_tag_key", "tf_tag_value" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a standard NAT gateway.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///         var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2", new Tencentcloud.Eip.InstanceArgs
+    ///         {
+    ///         });
+    ///         var example = new Tencentcloud.Nat.Gateway("example", new Tencentcloud.Nat.GatewayArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AssignedEipSets = 
+    ///             {
+    ///                 eipExample1.PublicIp,
+    ///                 eipExample2.PublicIp,
+    ///             },
+    ///             NatProductVersion = 2,
     ///             Tags = 
     ///             {
     ///                 { "tf_tag_key", "tf_tag_value" },
@@ -94,6 +132,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// 1: traditional NAT, 2: standard NAT, default value is 1.
+        /// </summary>
+        [Output("natProductVersion")]
+        public Output<int> NatProductVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Subnet of NAT.
+        /// </summary>
+        [Output("subnetId")]
+        public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
         /// The available tags within this NAT gateway.
@@ -190,6 +240,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// 1: traditional NAT, 2: standard NAT, default value is 1.
+        /// </summary>
+        [Input("natProductVersion")]
+        public Input<int>? NatProductVersion { get; set; }
+
+        /// <summary>
+        /// Subnet of NAT.
+        /// </summary>
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
+
         [Input("tags")]
         private InputMap<object>? _tags;
 
@@ -256,6 +318,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// 1: traditional NAT, 2: standard NAT, default value is 1.
+        /// </summary>
+        [Input("natProductVersion")]
+        public Input<int>? NatProductVersion { get; set; }
+
+        /// <summary>
+        /// Subnet of NAT.
+        /// </summary>
+        [Input("subnetId")]
+        public Input<string>? SubnetId { get; set; }
 
         [Input("tags")]
         private InputMap<object>? _tags;

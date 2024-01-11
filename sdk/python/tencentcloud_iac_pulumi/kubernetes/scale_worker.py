@@ -383,6 +383,8 @@ class ScaleWorker(pulumi.CustomResource):
 
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
 
+        > **NOTE:** Import Node: Currently, only one node can be imported at a time.
+
         ## Example Usage
 
         ```python
@@ -493,6 +495,8 @@ class ScaleWorker(pulumi.CustomResource):
         Provide a resource to increase instance to cluster
 
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
+
+        > **NOTE:** Import Node: Currently, only one node can be imported at a time.
 
         ## Example Usage
 

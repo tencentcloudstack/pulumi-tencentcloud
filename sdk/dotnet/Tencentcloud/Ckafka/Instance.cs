@@ -13,8 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// <summary>
     /// Use this resource to create ckafka instance.
     /// 
-    /// &gt; **NOTE:** It only support create prepaid ckafka instance.
-    /// 
     /// ## Example Usage
     /// ### Basic Instance
     /// 
@@ -35,9 +33,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     ///             Name = "ap-guangzhou-3",
     ///             Product = "ckafka",
     ///         }));
-    ///         var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new Tencentcloud.Ckafka.InstanceArgs
+    ///         var kafkaInstancePrepaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePrepaid", new Tencentcloud.Ckafka.InstanceArgs
     ///         {
-    ///             InstanceName = "ckafka-instance-type-tf-test",
+    ///             InstanceName = "ckafka-instance-prepaid",
     ///             ZoneId = gz.Apply(gz =&gt; gz.Zones?[0]?.Id),
     ///             Period = 1,
     ///             VpcId = vpcId,
@@ -45,10 +43,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     ///             MsgRetentionTime = 1300,
     ///             RenewFlag = 0,
     ///             KafkaVersion = "2.4.1",
-    ///             DiskSize = 1000,
+    ///             DiskSize = 200,
     ///             DiskType = "CLOUD_BASIC",
+    ///             BandWidth = 20,
+    ///             Partition = 400,
     ///             SpecificationsType = "standard",
     ///             InstanceType = 2,
+    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///             {
+    ///                 AutoCreateTopicEnable = true,
+    ///                 DefaultNumPartitions = 3,
+    ///                 DefaultReplicationFactor = 3,
+    ///             },
+    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///             {
+    ///                 Enable = 1,
+    ///             },
+    ///         });
+    ///         var kafkaInstancePostpaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePostpaid", new Tencentcloud.Ckafka.InstanceArgs
+    ///         {
+    ///             InstanceName = "ckafka-instance-postpaid",
+    ///             ZoneId = gz.Apply(gz =&gt; gz.Zones?[0]?.Id),
+    ///             VpcId = vpcId,
+    ///             SubnetId = subnetId,
+    ///             MsgRetentionTime = 1300,
+    ///             KafkaVersion = "1.1.1",
+    ///             DiskSize = 200,
+    ///             BandWidth = 20,
+    ///             DiskType = "CLOUD_BASIC",
+    ///             Partition = 400,
+    ///             ChargeType = "POSTPAID_BY_HOUR",
     ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
     ///             {
     ///                 AutoCreateTopicEnable = true,
@@ -138,6 +162,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// </summary>
         [Output("bandWidth")]
         public Output<int> BandWidth { get; private set; } = null!;
+
+        /// <summary>
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        /// </summary>
+        [Output("chargeType")]
+        public Output<string?> ChargeType { get; private set; } = null!;
 
         /// <summary>
         /// Instance configuration.
@@ -254,6 +284,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<ImmutableArray<Outputs.InstanceTag>> Tags { get; private set; } = null!;
 
         /// <summary>
+        /// POSTPAID_BY_HOUR scale-down mode
+        /// - 1: stable transformation;
+        /// - 2: High-speed transformer.
+        /// </summary>
+        [Output("upgradeStrategy")]
+        public Output<int?> UpgradeStrategy { get; private set; } = null!;
+
+        /// <summary>
         /// Vip of instance.
         /// </summary>
         [Output("vip")]
@@ -335,6 +373,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// </summary>
         [Input("bandWidth")]
         public Input<int>? BandWidth { get; set; }
+
+        /// <summary>
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        /// </summary>
+        [Input("chargeType")]
+        public Input<string>? ChargeType { get; set; }
 
         /// <summary>
         /// Instance configuration.
@@ -464,6 +508,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
+        /// POSTPAID_BY_HOUR scale-down mode
+        /// - 1: stable transformation;
+        /// - 2: High-speed transformer.
+        /// </summary>
+        [Input("upgradeStrategy")]
+        public Input<int>? UpgradeStrategy { get; set; }
+
+        /// <summary>
         /// Vpc id, it will be basic network if not set.
         /// </summary>
         [Input("vpcId")]
@@ -499,6 +551,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// </summary>
         [Input("bandWidth")]
         public Input<int>? BandWidth { get; set; }
+
+        /// <summary>
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+        /// </summary>
+        [Input("chargeType")]
+        public Input<string>? ChargeType { get; set; }
 
         /// <summary>
         /// Instance configuration.
@@ -626,6 +684,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
             get => _tags ?? (_tags = new InputList<Inputs.InstanceTagGetArgs>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// POSTPAID_BY_HOUR scale-down mode
+        /// - 1: stable transformation;
+        /// - 2: High-speed transformer.
+        /// </summary>
+        [Input("upgradeStrategy")]
+        public Input<int>? UpgradeStrategy { get; set; }
 
         /// <summary>
         /// Vip of instance.

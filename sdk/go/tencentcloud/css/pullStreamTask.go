@@ -88,7 +88,7 @@ type PullStreamTask struct {
 	PushArgs pulumi.StringPtrOutput `pulumi:"pushArgs"`
 	// task run region.
 	Region pulumi.StringOutput `pulumi:"region"`
-	// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+	// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 	SourceType pulumi.StringOutput `pulumi:"sourceType"`
 	// Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
 	SourceUrls pulumi.StringArrayOutput `pulumi:"sourceUrls"`
@@ -106,7 +106,7 @@ type PullStreamTask struct {
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
 	// loop time for vod.
 	VodLoopTimes pulumi.IntOutput `pulumi:"vodLoopTimes"`
-	// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+	// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 	VodRefreshType pulumi.StringOutput `pulumi:"vodRefreshType"`
 	// watermark list, max 4 setting.
 	WatermarkLists PullStreamTaskWatermarkListArrayOutput `pulumi:"watermarkLists"`
@@ -195,7 +195,7 @@ type pullStreamTaskState struct {
 	PushArgs *string `pulumi:"pushArgs"`
 	// task run region.
 	Region *string `pulumi:"region"`
-	// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+	// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 	SourceType *string `pulumi:"sourceType"`
 	// Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
 	SourceUrls []string `pulumi:"sourceUrls"`
@@ -213,7 +213,7 @@ type pullStreamTaskState struct {
 	UpdateTime *string `pulumi:"updateTime"`
 	// loop time for vod.
 	VodLoopTimes *int `pulumi:"vodLoopTimes"`
-	// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+	// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 	VodRefreshType *string `pulumi:"vodRefreshType"`
 	// watermark list, max 4 setting.
 	WatermarkLists []PullStreamTaskWatermarkList `pulumi:"watermarkLists"`
@@ -252,7 +252,7 @@ type PullStreamTaskState struct {
 	PushArgs pulumi.StringPtrInput
 	// task run region.
 	Region pulumi.StringPtrInput
-	// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+	// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 	SourceType pulumi.StringPtrInput
 	// Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
 	SourceUrls pulumi.StringArrayInput
@@ -270,7 +270,7 @@ type PullStreamTaskState struct {
 	UpdateTime pulumi.StringPtrInput
 	// loop time for vod.
 	VodLoopTimes pulumi.IntPtrInput
-	// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+	// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 	VodRefreshType pulumi.StringPtrInput
 	// watermark list, max 4 setting.
 	WatermarkLists PullStreamTaskWatermarkListArrayInput
@@ -307,7 +307,7 @@ type pullStreamTaskArgs struct {
 	Operator *string `pulumi:"operator"`
 	// other pushing args.
 	PushArgs *string `pulumi:"pushArgs"`
-	// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+	// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 	SourceType string `pulumi:"sourceType"`
 	// Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
 	SourceUrls []string `pulumi:"sourceUrls"`
@@ -321,7 +321,7 @@ type pullStreamTaskArgs struct {
 	ToUrl *string `pulumi:"toUrl"`
 	// loop time for vod.
 	VodLoopTimes *int `pulumi:"vodLoopTimes"`
-	// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+	// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 	VodRefreshType *string `pulumi:"vodRefreshType"`
 	// watermark list, max 4 setting.
 	WatermarkLists []PullStreamTaskWatermarkList `pulumi:"watermarkLists"`
@@ -355,7 +355,7 @@ type PullStreamTaskArgs struct {
 	Operator pulumi.StringPtrInput
 	// other pushing args.
 	PushArgs pulumi.StringPtrInput
-	// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+	// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 	SourceType pulumi.StringInput
 	// Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
 	SourceUrls pulumi.StringArrayInput
@@ -369,7 +369,7 @@ type PullStreamTaskArgs struct {
 	ToUrl pulumi.StringPtrInput
 	// loop time for vod.
 	VodLoopTimes pulumi.IntPtrInput
-	// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+	// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 	VodRefreshType pulumi.StringPtrInput
 	// watermark list, max 4 setting.
 	WatermarkLists PullStreamTaskWatermarkListArrayInput
@@ -542,7 +542,7 @@ func (o PullStreamTaskOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *PullStreamTask) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+// `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
 func (o PullStreamTaskOutput) SourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *PullStreamTask) pulumi.StringOutput { return v.SourceType }).(pulumi.StringOutput)
 }
@@ -587,7 +587,7 @@ func (o PullStreamTaskOutput) VodLoopTimes() pulumi.IntOutput {
 	return o.ApplyT(func(v *PullStreamTask) pulumi.IntOutput { return v.VodLoopTimes }).(pulumi.IntOutput)
 }
 
-// vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+// vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
 func (o PullStreamTaskOutput) VodRefreshType() pulumi.StringOutput {
 	return o.ApplyT(func(v *PullStreamTask) pulumi.StringOutput { return v.VodRefreshType }).(pulumi.StringOutput)
 }

@@ -50,7 +50,10 @@ import * as utilities from "../utilities";
  *     mysqlId: exampleInstance.id,
  *     retentionPeriod: 7,
  *     backupModel: "physical",
- *     backupTime: "01:00-05:00",
+ *     backupTime: "22:00-02:00",
+ *     binlogPeriod: 32,
+ *     enableBinlogStandby: "off",
+ *     binlogStandbyDays: 31,
  * });
  * ```
  */
@@ -91,15 +94,23 @@ export class BackupPolicy extends pulumi.CustomResource {
      */
     public readonly backupTime!: pulumi.Output<string | undefined>;
     /**
-     * Retention period for binlog in days.
+     * Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
      */
-    public /*out*/ readonly binlogPeriod!: pulumi.Output<number>;
+    public readonly binlogPeriod!: pulumi.Output<number>;
+    /**
+     * The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+     */
+    public readonly binlogStandbyDays!: pulumi.Output<number>;
+    /**
+     * Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+     */
+    public readonly enableBinlogStandby!: pulumi.Output<string | undefined>;
     /**
      * Instance ID to which policies will be applied.
      */
     public readonly mysqlId!: pulumi.Output<string>;
     /**
-     * Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+     * The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
      */
     public readonly retentionPeriod!: pulumi.Output<number | undefined>;
 
@@ -119,6 +130,8 @@ export class BackupPolicy extends pulumi.CustomResource {
             resourceInputs["backupModel"] = state ? state.backupModel : undefined;
             resourceInputs["backupTime"] = state ? state.backupTime : undefined;
             resourceInputs["binlogPeriod"] = state ? state.binlogPeriod : undefined;
+            resourceInputs["binlogStandbyDays"] = state ? state.binlogStandbyDays : undefined;
+            resourceInputs["enableBinlogStandby"] = state ? state.enableBinlogStandby : undefined;
             resourceInputs["mysqlId"] = state ? state.mysqlId : undefined;
             resourceInputs["retentionPeriod"] = state ? state.retentionPeriod : undefined;
         } else {
@@ -128,9 +141,11 @@ export class BackupPolicy extends pulumi.CustomResource {
             }
             resourceInputs["backupModel"] = args ? args.backupModel : undefined;
             resourceInputs["backupTime"] = args ? args.backupTime : undefined;
+            resourceInputs["binlogPeriod"] = args ? args.binlogPeriod : undefined;
+            resourceInputs["binlogStandbyDays"] = args ? args.binlogStandbyDays : undefined;
+            resourceInputs["enableBinlogStandby"] = args ? args.enableBinlogStandby : undefined;
             resourceInputs["mysqlId"] = args ? args.mysqlId : undefined;
             resourceInputs["retentionPeriod"] = args ? args.retentionPeriod : undefined;
-            resourceInputs["binlogPeriod"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(BackupPolicy.__pulumiType, name, resourceInputs, opts);
@@ -150,15 +165,23 @@ export interface BackupPolicyState {
      */
     backupTime?: pulumi.Input<string>;
     /**
-     * Retention period for binlog in days.
+     * Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
      */
     binlogPeriod?: pulumi.Input<number>;
+    /**
+     * The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+     */
+    binlogStandbyDays?: pulumi.Input<number>;
+    /**
+     * Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+     */
+    enableBinlogStandby?: pulumi.Input<string>;
     /**
      * Instance ID to which policies will be applied.
      */
     mysqlId?: pulumi.Input<string>;
     /**
-     * Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+     * The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
      */
     retentionPeriod?: pulumi.Input<number>;
 }
@@ -176,11 +199,23 @@ export interface BackupPolicyArgs {
      */
     backupTime?: pulumi.Input<string>;
     /**
+     * Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+     */
+    binlogPeriod?: pulumi.Input<number>;
+    /**
+     * The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+     */
+    binlogStandbyDays?: pulumi.Input<number>;
+    /**
+     * Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+     */
+    enableBinlogStandby?: pulumi.Input<string>;
+    /**
      * Instance ID to which policies will be applied.
      */
     mysqlId: pulumi.Input<string>;
     /**
-     * Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+     * The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
      */
     retentionPeriod?: pulumi.Input<number>;
 }

@@ -13,7 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// <summary>
     /// Use this resource to attach API gateway usage plan to service.
     /// 
+    /// &gt; **NOTE:** If the `auth_type` parameter of API is not `SECRET`, it cannot be bound access key.
+    /// 
     /// ## Example Usage
+    /// ### Normal creation
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,18 +26,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
+    ///         var exampleUsagePlan = new Tencentcloud.ApiGateway.UsagePlan("exampleUsagePlan", new Tencentcloud.ApiGateway.UsagePlanArgs
     ///         {
-    ///             UsagePlanName = "my_plan",
-    ///             UsagePlanDesc = "nice plan",
+    ///             UsagePlanName = "tf_example",
+    ///             UsagePlanDesc = "desc.",
     ///             MaxRequestNum = 100,
     ///             MaxRequestNumPreSec = 10,
     ///         });
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
     ///         {
-    ///             ServiceName = "niceservice",
+    ///             ServiceName = "tf_example",
     ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "your nice service",
+    ///             ServiceDesc = "desc.",
     ///             NetTypes = 
     ///             {
     ///                 "INNER",
@@ -42,10 +45,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///             },
     ///             IpVersion = "IPv4",
     ///         });
-    ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
+    ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
     ///         {
-    ///             ServiceId = service.Id,
-    ///             ApiName = "hello_update",
+    ///             ServiceId = exampleService.Id,
+    ///             ApiName = "tf_example",
     ///             ApiDesc = "my hello api update",
     ///             AuthType = "SECRET",
     ///             Protocol = "HTTP",
@@ -59,8 +62,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///                     Name = "email",
     ///                     Position = "QUERY",
     ///                     Type = "string",
-    ///                     Desc = "your email please?",
-    ///                     DefaultValue = "tom@qq.com",
+    ///                     Desc = "desc.",
+    ///                     DefaultValue = "test@qq.com",
     ///                     Required = true,
     ///                 },
     ///             },
@@ -76,21 +79,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///             {
     ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
     ///                 {
-    ///                     Code = 10,
+    ///                     Code = 500,
     ///                     Msg = "system error",
     ///                     Desc = "system error code",
-    ///                     ConvertedCode = -10,
+    ///                     ConvertedCode = 5000,
     ///                     NeedConvert = true,
     ///                 },
     ///             },
     ///         });
-    ///         var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
+    ///         var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
     ///         {
-    ///             UsagePlanId = plan.Id,
-    ///             ServiceId = service.Id,
+    ///             UsagePlanId = exampleUsagePlan.Id,
+    ///             ServiceId = exampleService.Id,
     ///             Environment = "release",
     ///             BindType = "API",
-    ///             ApiId = api.Id,
+    ///             ApiId = exampleApi.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Bind the key to a usage plan
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleApiKey = new Tencentcloud.ApiGateway.ApiKey("exampleApiKey", new Tencentcloud.ApiGateway.ApiKeyArgs
+    ///         {
+    ///             SecretName = "tf_example",
+    ///             Status = "on",
+    ///         });
+    ///         var exampleUsagePlanAttachment = new Tencentcloud.ApiGateway.UsagePlanAttachment("exampleUsagePlanAttachment", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
+    ///         {
+    ///             UsagePlanId = tencentcloud_api_gateway_usage_plan.Example.Id,
+    ///             ServiceId = tencentcloud_api_gateway_service.Example.Id,
+    ///             Environment = "release",
+    ///             BindType = "API",
+    ///             ApiId = tencentcloud_api_gateway_api.Example.Id,
+    ///             AccessKeyIds = 
+    ///             {
+    ///                 exampleApiKey.Id,
+    ///             },
     ///         });
     ///     }
     /// 
@@ -108,6 +142,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     [TencentcloudResourceType("tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment")]
     public partial class UsagePlanAttachment : Pulumi.CustomResource
     {
+        /// <summary>
+        /// Array of key IDs to be bound.
+        /// </summary>
+        [Output("accessKeyIds")]
+        public Output<ImmutableArray<string>> AccessKeyIds { get; private set; } = null!;
+
         /// <summary>
         /// ID of the API. This parameter will be required when `bind_type` is `API`.
         /// </summary>
@@ -185,6 +225,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
 
     public sealed class UsagePlanAttachmentArgs : Pulumi.ResourceArgs
     {
+        [Input("accessKeyIds")]
+        private InputList<string>? _accessKeyIds;
+
+        /// <summary>
+        /// Array of key IDs to be bound.
+        /// </summary>
+        public InputList<string> AccessKeyIds
+        {
+            get => _accessKeyIds ?? (_accessKeyIds = new InputList<string>());
+            set => _accessKeyIds = value;
+        }
+
         /// <summary>
         /// ID of the API. This parameter will be required when `bind_type` is `API`.
         /// </summary>
@@ -222,6 +274,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
 
     public sealed class UsagePlanAttachmentState : Pulumi.ResourceArgs
     {
+        [Input("accessKeyIds")]
+        private InputList<string>? _accessKeyIds;
+
+        /// <summary>
+        /// Array of key IDs to be bound.
+        /// </summary>
+        public InputList<string> AccessKeyIds
+        {
+            get => _accessKeyIds ?? (_accessKeyIds = new InputList<string>());
+            set => _accessKeyIds = value;
+        }
+
         /// <summary>
         /// ID of the API. This parameter will be required when `bind_type` is `API`.
         /// </summary>

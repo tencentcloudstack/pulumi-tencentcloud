@@ -24,15 +24,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Ssm.Secret("foo", new Tencentcloud.Ssm.SecretArgs
+    ///         var example = new Tencentcloud.Ssm.Secret("example", new Tencentcloud.Ssm.SecretArgs
     ///         {
-    ///             Description = "user defined secret",
+    ///             Description = "desc.",
     ///             IsEnabled = true,
     ///             RecoveryWindowInDays = 0,
-    ///             SecretName = "test",
+    ///             SecretName = "tf-example",
     ///             Tags = 
     ///             {
-    ///                 { "test-tag", "test" },
+    ///                 { "createBy", "terraform" },
     ///             },
     ///         });
     ///     }
@@ -52,21 +52,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// {
     ///     public MyStack()
     ///     {
-    ///         var instance = Output.Create(Tencentcloud.Redis.GetInstances.InvokeAsync(new Tencentcloud.Redis.GetInstancesArgs
+    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
     ///         {
-    ///             Zone = "ap-guangzhou-6",
+    ///             TypeId = 8,
     ///         }));
-    ///         var secret = new Tencentcloud.Ssm.Secret("secret", new Tencentcloud.Ssm.SecretArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             SecretName = "for-redis-test",
-    ///             Description = "redis secret",
-    ///             IsEnabled = false,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[3]?.Zone),
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var exampleInstance = new Tencentcloud.Redis.Instance("exampleInstance", new Tencentcloud.Redis.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[3]?.Zone),
+    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[3]?.TypeId),
+    ///             Password = "Qwer@234",
+    ///             MemSize = zone.Apply(zone =&gt; zone.Lists?[3]?.MemSizes?[0]),
+    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[3]?.RedisShardNums?[0]),
+    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[3]?.RedisReplicasNums?[0]),
+    ///             Port = 6379,
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///         });
+    ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
+    ///         {
+    ///             SecretName = "tf-example",
+    ///             Description = "redis desc.",
+    ///             IsEnabled = true,
     ///             SecretType = 4,
-    ///             AdditionalConfig = instance.Apply(instance =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             AdditionalConfig = exampleInstance.Id.Apply(id =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///             {
     ///                 { "Region", "ap-guangzhou" },
     ///                 { "Privilege", "r" },
-    ///                 { "InstanceId", instance.InstanceLists?[0]?.RedisId },
+    ///                 { "InstanceId", id },
     ///                 { "ReadonlyPolicy", new[]
     ///                     {
     ///                         "master",
@@ -76,7 +98,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     ///             })),
     ///             Tags = 
     ///             {
-    ///                 { "test-tag", "test" },
+    ///                 { "createdBy", "terraform" },
     ///             },
     ///             RecoveryWindowInDays = 0,
     ///         });
@@ -133,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Output<string> SecretName { get; private set; } = null!;
 
         /// <summary>
-        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         /// </summary>
         [Output("secretType")]
         public Output<int> SecretType { get; private set; } = null!;
@@ -234,7 +256,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Input<string> SecretName { get; set; } = null!;
 
         /// <summary>
-        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         /// </summary>
         [Input("secretType")]
         public Input<int>? SecretType { get; set; }
@@ -295,7 +317,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Input<string>? SecretName { get; set; }
 
         /// <summary>
-        /// Type of secret. `0`: user-defined secret. `4`: redis secret.
+        /// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         /// </summary>
         [Input("secretType")]
         public Input<int>? SecretType { get; set; }

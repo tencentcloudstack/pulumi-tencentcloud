@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// <summary>
     /// Provide a resource to create a DnsPod record.
     /// 
+    /// &gt; **NOTE:** Versions before v1.81.43 (including v1.81.43) do not support modifying remark or modifying remark has bug.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -54,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
-        /// The D monitoring status of the record.
+        /// The monitoring status of the record.
         /// </summary>
         [Output("monitorStatus")]
         public Output<string> MonitorStatus { get; private set; } = null!;
@@ -76,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Output("recordType")]
         public Output<string> RecordType { get; private set; } = null!;
+
+        /// <summary>
+        /// The Remark of record.
+        /// </summary>
+        [Output("remark")]
+        public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
         /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
@@ -179,6 +187,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Input<string> RecordType { get; set; } = null!;
 
         /// <summary>
+        /// The Remark of record.
+        /// </summary>
+        [Input("remark")]
+        public Input<string>? Remark { get; set; }
+
+        /// <summary>
         /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         /// </summary>
         [Input("status")]
@@ -222,7 +236,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Input<string>? Domain { get; set; }
 
         /// <summary>
-        /// The D monitoring status of the record.
+        /// The monitoring status of the record.
         /// </summary>
         [Input("monitorStatus")]
         public Input<string>? MonitorStatus { get; set; }
@@ -244,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Input("recordType")]
         public Input<string>? RecordType { get; set; }
+
+        /// <summary>
+        /// The Remark of record.
+        /// </summary>
+        [Input("remark")]
+        public Input<string>? Remark { get; set; }
 
         /// <summary>
         /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.

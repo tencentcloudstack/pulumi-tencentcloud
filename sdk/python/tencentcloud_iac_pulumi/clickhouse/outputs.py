@@ -7,11 +7,387 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'AccountPermissionDatabasePrivilegeList',
+    'AccountPermissionDatabasePrivilegeListTablePrivilegeList',
+    'BackupStrategyDataBackupStrategy',
+    'BackupStrategyDataBackupStrategyBackUpTable',
+    'BackupStrategyMetaBackupStrategy',
     'InstanceCommonSpec',
     'InstanceDataSpec',
+    'KeyvalConfigItems',
+    'XmlConfigModifyConfContext',
+    'GetBackupJobDetailTableContentResult',
+    'GetBackupJobsBackUpJobResult',
+    'GetBackupTablesAvailableTableResult',
+    'GetSpecAttachCbsSpecResult',
+    'GetSpecCommonSpecResult',
+    'GetSpecCommonSpecDataDiskResult',
+    'GetSpecCommonSpecSystemDiskResult',
+    'GetSpecDataSpecResult',
+    'GetSpecDataSpecDataDiskResult',
+    'GetSpecDataSpecSystemDiskResult',
 ]
+
+@pulumi.output_type
+class AccountPermissionDatabasePrivilegeList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "databaseName":
+            suggest = "database_name"
+        elif key == "databasePrivileges":
+            suggest = "database_privileges"
+        elif key == "tablePrivilegeLists":
+            suggest = "table_privilege_lists"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AccountPermissionDatabasePrivilegeList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AccountPermissionDatabasePrivilegeList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AccountPermissionDatabasePrivilegeList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database_name: str,
+                 database_privileges: Optional[Sequence[str]] = None,
+                 table_privilege_lists: Optional[Sequence['outputs.AccountPermissionDatabasePrivilegeListTablePrivilegeList']] = None):
+        """
+        :param str database_name: Database name.
+        :param Sequence[str] database_privileges: Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+        :param Sequence['AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs'] table_privilege_lists: Table privilege list.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        if database_privileges is not None:
+            pulumi.set(__self__, "database_privileges", database_privileges)
+        if table_privilege_lists is not None:
+            pulumi.set(__self__, "table_privilege_lists", table_privilege_lists)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter(name="databasePrivileges")
+    def database_privileges(self) -> Optional[Sequence[str]]:
+        """
+        Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+        """
+        return pulumi.get(self, "database_privileges")
+
+    @property
+    @pulumi.getter(name="tablePrivilegeLists")
+    def table_privilege_lists(self) -> Optional[Sequence['outputs.AccountPermissionDatabasePrivilegeListTablePrivilegeList']]:
+        """
+        Table privilege list.
+        """
+        return pulumi.get(self, "table_privilege_lists")
+
+
+@pulumi.output_type
+class AccountPermissionDatabasePrivilegeListTablePrivilegeList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tableName":
+            suggest = "table_name"
+        elif key == "tablePrivileges":
+            suggest = "table_privileges"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AccountPermissionDatabasePrivilegeListTablePrivilegeList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AccountPermissionDatabasePrivilegeListTablePrivilegeList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AccountPermissionDatabasePrivilegeListTablePrivilegeList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 table_name: str,
+                 table_privileges: Sequence[str]):
+        """
+        :param str table_name: Table name.
+        :param Sequence[str] table_privileges: Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+        """
+        pulumi.set(__self__, "table_name", table_name)
+        pulumi.set(__self__, "table_privileges", table_privileges)
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> str:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table_name")
+
+    @property
+    @pulumi.getter(name="tablePrivileges")
+    def table_privileges(self) -> Sequence[str]:
+        """
+        Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+        """
+        return pulumi.get(self, "table_privileges")
+
+
+@pulumi.output_type
+class BackupStrategyDataBackupStrategy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "backUpTables":
+            suggest = "back_up_tables"
+        elif key == "executeHour":
+            suggest = "execute_hour"
+        elif key == "retainDays":
+            suggest = "retain_days"
+        elif key == "weekDays":
+            suggest = "week_days"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BackupStrategyDataBackupStrategy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BackupStrategyDataBackupStrategy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BackupStrategyDataBackupStrategy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 back_up_tables: Sequence['outputs.BackupStrategyDataBackupStrategyBackUpTable'],
+                 execute_hour: int,
+                 retain_days: int,
+                 week_days: str):
+        """
+        :param Sequence['BackupStrategyDataBackupStrategyBackUpTableArgs'] back_up_tables: Back up the list of tables.
+        :param int execute_hour: Execution hour.
+        :param int retain_days: Retention days.
+        :param str week_days: The day of the week is separated by commas. For example: 2 represents Tuesday.
+        """
+        pulumi.set(__self__, "back_up_tables", back_up_tables)
+        pulumi.set(__self__, "execute_hour", execute_hour)
+        pulumi.set(__self__, "retain_days", retain_days)
+        pulumi.set(__self__, "week_days", week_days)
+
+    @property
+    @pulumi.getter(name="backUpTables")
+    def back_up_tables(self) -> Sequence['outputs.BackupStrategyDataBackupStrategyBackUpTable']:
+        """
+        Back up the list of tables.
+        """
+        return pulumi.get(self, "back_up_tables")
+
+    @property
+    @pulumi.getter(name="executeHour")
+    def execute_hour(self) -> int:
+        """
+        Execution hour.
+        """
+        return pulumi.get(self, "execute_hour")
+
+    @property
+    @pulumi.getter(name="retainDays")
+    def retain_days(self) -> int:
+        """
+        Retention days.
+        """
+        return pulumi.get(self, "retain_days")
+
+    @property
+    @pulumi.getter(name="weekDays")
+    def week_days(self) -> str:
+        """
+        The day of the week is separated by commas. For example: 2 represents Tuesday.
+        """
+        return pulumi.get(self, "week_days")
+
+
+@pulumi.output_type
+class BackupStrategyDataBackupStrategyBackUpTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "totalBytes":
+            suggest = "total_bytes"
+        elif key == "vCluster":
+            suggest = "v_cluster"
+        elif key == "zooPath":
+            suggest = "zoo_path"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BackupStrategyDataBackupStrategyBackUpTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BackupStrategyDataBackupStrategyBackUpTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BackupStrategyDataBackupStrategyBackUpTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database: str,
+                 table: str,
+                 total_bytes: int,
+                 ips: Optional[str] = None,
+                 rip: Optional[str] = None,
+                 v_cluster: Optional[str] = None,
+                 zoo_path: Optional[str] = None):
+        """
+        :param str database: Database.
+        :param str table: Table.
+        :param int total_bytes: Back up the list of tables.
+        :param str ips: Table ip.
+        :param str rip: Ip address of cvm.
+        :param str v_cluster: Virtual clusters.
+        :param str zoo_path: ZK path.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "total_bytes", total_bytes)
+        if ips is not None:
+            pulumi.set(__self__, "ips", ips)
+        if rip is not None:
+            pulumi.set(__self__, "rip", rip)
+        if v_cluster is not None:
+            pulumi.set(__self__, "v_cluster", v_cluster)
+        if zoo_path is not None:
+            pulumi.set(__self__, "zoo_path", zoo_path)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def table(self) -> str:
+        """
+        Table.
+        """
+        return pulumi.get(self, "table")
+
+    @property
+    @pulumi.getter(name="totalBytes")
+    def total_bytes(self) -> int:
+        """
+        Back up the list of tables.
+        """
+        return pulumi.get(self, "total_bytes")
+
+    @property
+    @pulumi.getter
+    def ips(self) -> Optional[str]:
+        """
+        Table ip.
+        """
+        return pulumi.get(self, "ips")
+
+    @property
+    @pulumi.getter
+    def rip(self) -> Optional[str]:
+        """
+        Ip address of cvm.
+        """
+        return pulumi.get(self, "rip")
+
+    @property
+    @pulumi.getter(name="vCluster")
+    def v_cluster(self) -> Optional[str]:
+        """
+        Virtual clusters.
+        """
+        return pulumi.get(self, "v_cluster")
+
+    @property
+    @pulumi.getter(name="zooPath")
+    def zoo_path(self) -> Optional[str]:
+        """
+        ZK path.
+        """
+        return pulumi.get(self, "zoo_path")
+
+
+@pulumi.output_type
+class BackupStrategyMetaBackupStrategy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "executeHour":
+            suggest = "execute_hour"
+        elif key == "retainDays":
+            suggest = "retain_days"
+        elif key == "weekDays":
+            suggest = "week_days"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BackupStrategyMetaBackupStrategy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BackupStrategyMetaBackupStrategy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BackupStrategyMetaBackupStrategy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 execute_hour: Optional[int] = None,
+                 retain_days: Optional[int] = None,
+                 week_days: Optional[str] = None):
+        """
+        :param int execute_hour: Execution hour.
+        :param int retain_days: Retention days.
+        :param str week_days: The day of the week is separated by commas. For example: 2 represents Tuesday.
+        """
+        if execute_hour is not None:
+            pulumi.set(__self__, "execute_hour", execute_hour)
+        if retain_days is not None:
+            pulumi.set(__self__, "retain_days", retain_days)
+        if week_days is not None:
+            pulumi.set(__self__, "week_days", week_days)
+
+    @property
+    @pulumi.getter(name="executeHour")
+    def execute_hour(self) -> Optional[int]:
+        """
+        Execution hour.
+        """
+        return pulumi.get(self, "execute_hour")
+
+    @property
+    @pulumi.getter(name="retainDays")
+    def retain_days(self) -> Optional[int]:
+        """
+        Retention days.
+        """
+        return pulumi.get(self, "retain_days")
+
+    @property
+    @pulumi.getter(name="weekDays")
+    def week_days(self) -> Optional[str]:
+        """
+        The day of the week is separated by commas. For example: 2 represents Tuesday.
+        """
+        return pulumi.get(self, "week_days")
+
 
 @pulumi.output_type
 class InstanceCommonSpec(dict):
@@ -129,5 +505,933 @@ class InstanceDataSpec(dict):
         Spec name.
         """
         return pulumi.get(self, "spec_name")
+
+
+@pulumi.output_type
+class KeyvalConfigItems(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "confKey":
+            suggest = "conf_key"
+        elif key == "confValue":
+            suggest = "conf_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in KeyvalConfigItems. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        KeyvalConfigItems.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        KeyvalConfigItems.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 conf_key: str,
+                 conf_value: str):
+        """
+        :param str conf_key: Instance config key.
+        :param str conf_value: Instance config value.
+        """
+        pulumi.set(__self__, "conf_key", conf_key)
+        pulumi.set(__self__, "conf_value", conf_value)
+
+    @property
+    @pulumi.getter(name="confKey")
+    def conf_key(self) -> str:
+        """
+        Instance config key.
+        """
+        return pulumi.get(self, "conf_key")
+
+    @property
+    @pulumi.getter(name="confValue")
+    def conf_value(self) -> str:
+        """
+        Instance config value.
+        """
+        return pulumi.get(self, "conf_value")
+
+
+@pulumi.output_type
+class XmlConfigModifyConfContext(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "fileName":
+            suggest = "file_name"
+        elif key == "newConfValue":
+            suggest = "new_conf_value"
+        elif key == "filePath":
+            suggest = "file_path"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in XmlConfigModifyConfContext. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        XmlConfigModifyConfContext.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        XmlConfigModifyConfContext.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 file_name: str,
+                 new_conf_value: str,
+                 file_path: Optional[str] = None):
+        """
+        :param str file_name: Configuration file name.
+        :param str new_conf_value: New content of configuration file, base64 encoded.
+        :param str file_path: Path to save configuration file.
+        """
+        pulumi.set(__self__, "file_name", file_name)
+        pulumi.set(__self__, "new_conf_value", new_conf_value)
+        if file_path is not None:
+            pulumi.set(__self__, "file_path", file_path)
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Configuration file name.
+        """
+        return pulumi.get(self, "file_name")
+
+    @property
+    @pulumi.getter(name="newConfValue")
+    def new_conf_value(self) -> str:
+        """
+        New content of configuration file, base64 encoded.
+        """
+        return pulumi.get(self, "new_conf_value")
+
+    @property
+    @pulumi.getter(name="filePath")
+    def file_path(self) -> Optional[str]:
+        """
+        Path to save configuration file.
+        """
+        return pulumi.get(self, "file_path")
+
+
+@pulumi.output_type
+class GetBackupJobDetailTableContentResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 ips: str,
+                 rip: str,
+                 table: str,
+                 total_bytes: int,
+                 v_cluster: str,
+                 zoo_path: str):
+        """
+        :param str database: Database.
+        :param str ips: Ips.
+        :param str rip: Ip address of cvm.
+        :param str table: Table.
+        :param int total_bytes: Total bytes.
+        :param str v_cluster: Virtual cluster.
+        :param str zoo_path: ZK path.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "ips", ips)
+        pulumi.set(__self__, "rip", rip)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "total_bytes", total_bytes)
+        pulumi.set(__self__, "v_cluster", v_cluster)
+        pulumi.set(__self__, "zoo_path", zoo_path)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def ips(self) -> str:
+        """
+        Ips.
+        """
+        return pulumi.get(self, "ips")
+
+    @property
+    @pulumi.getter
+    def rip(self) -> str:
+        """
+        Ip address of cvm.
+        """
+        return pulumi.get(self, "rip")
+
+    @property
+    @pulumi.getter
+    def table(self) -> str:
+        """
+        Table.
+        """
+        return pulumi.get(self, "table")
+
+    @property
+    @pulumi.getter(name="totalBytes")
+    def total_bytes(self) -> int:
+        """
+        Total bytes.
+        """
+        return pulumi.get(self, "total_bytes")
+
+    @property
+    @pulumi.getter(name="vCluster")
+    def v_cluster(self) -> str:
+        """
+        Virtual cluster.
+        """
+        return pulumi.get(self, "v_cluster")
+
+    @property
+    @pulumi.getter(name="zooPath")
+    def zoo_path(self) -> str:
+        """
+        ZK path.
+        """
+        return pulumi.get(self, "zoo_path")
+
+
+@pulumi.output_type
+class GetBackupJobsBackUpJobResult(dict):
+    def __init__(__self__, *,
+                 back_up_size: int,
+                 back_up_time: str,
+                 back_up_type: str,
+                 expire_time: str,
+                 job_id: int,
+                 job_status: str,
+                 snapshot: str):
+        """
+        :param int back_up_size: Back up size.
+        :param str back_up_time: Back up create time.
+        :param str back_up_type: Back up type.
+        :param str expire_time: Back up expire time.
+        :param int job_id: Back up job id.
+        :param str job_status: Job status.
+        :param str snapshot: Back up job name.
+        """
+        pulumi.set(__self__, "back_up_size", back_up_size)
+        pulumi.set(__self__, "back_up_time", back_up_time)
+        pulumi.set(__self__, "back_up_type", back_up_type)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "job_id", job_id)
+        pulumi.set(__self__, "job_status", job_status)
+        pulumi.set(__self__, "snapshot", snapshot)
+
+    @property
+    @pulumi.getter(name="backUpSize")
+    def back_up_size(self) -> int:
+        """
+        Back up size.
+        """
+        return pulumi.get(self, "back_up_size")
+
+    @property
+    @pulumi.getter(name="backUpTime")
+    def back_up_time(self) -> str:
+        """
+        Back up create time.
+        """
+        return pulumi.get(self, "back_up_time")
+
+    @property
+    @pulumi.getter(name="backUpType")
+    def back_up_type(self) -> str:
+        """
+        Back up type.
+        """
+        return pulumi.get(self, "back_up_type")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Back up expire time.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> int:
+        """
+        Back up job id.
+        """
+        return pulumi.get(self, "job_id")
+
+    @property
+    @pulumi.getter(name="jobStatus")
+    def job_status(self) -> str:
+        """
+        Job status.
+        """
+        return pulumi.get(self, "job_status")
+
+    @property
+    @pulumi.getter
+    def snapshot(self) -> str:
+        """
+        Back up job name.
+        """
+        return pulumi.get(self, "snapshot")
+
+
+@pulumi.output_type
+class GetBackupTablesAvailableTableResult(dict):
+    def __init__(__self__, *,
+                 database: str,
+                 ips: str,
+                 rip: str,
+                 table: str,
+                 total_bytes: int,
+                 v_cluster: str,
+                 zoo_path: str):
+        """
+        :param str database: Database.
+        :param str ips: Table ips.
+        :param str rip: Ip address of cvm.
+        :param str table: Table.
+        :param int total_bytes: Table total bytes.
+        :param str v_cluster: Virtual cluster.
+        :param str zoo_path: Zk path.
+        """
+        pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "ips", ips)
+        pulumi.set(__self__, "rip", rip)
+        pulumi.set(__self__, "table", table)
+        pulumi.set(__self__, "total_bytes", total_bytes)
+        pulumi.set(__self__, "v_cluster", v_cluster)
+        pulumi.set(__self__, "zoo_path", zoo_path)
+
+    @property
+    @pulumi.getter
+    def database(self) -> str:
+        """
+        Database.
+        """
+        return pulumi.get(self, "database")
+
+    @property
+    @pulumi.getter
+    def ips(self) -> str:
+        """
+        Table ips.
+        """
+        return pulumi.get(self, "ips")
+
+    @property
+    @pulumi.getter
+    def rip(self) -> str:
+        """
+        Ip address of cvm.
+        """
+        return pulumi.get(self, "rip")
+
+    @property
+    @pulumi.getter
+    def table(self) -> str:
+        """
+        Table.
+        """
+        return pulumi.get(self, "table")
+
+    @property
+    @pulumi.getter(name="totalBytes")
+    def total_bytes(self) -> int:
+        """
+        Table total bytes.
+        """
+        return pulumi.get(self, "total_bytes")
+
+    @property
+    @pulumi.getter(name="vCluster")
+    def v_cluster(self) -> str:
+        """
+        Virtual cluster.
+        """
+        return pulumi.get(self, "v_cluster")
+
+    @property
+    @pulumi.getter(name="zooPath")
+    def zoo_path(self) -> str:
+        """
+        Zk path.
+        """
+        return pulumi.get(self, "zoo_path")
+
+
+@pulumi.output_type
+class GetSpecAttachCbsSpecResult(dict):
+    def __init__(__self__, *,
+                 disk_count: int,
+                 disk_desc: str,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int):
+        """
+        :param int disk_count: Number of disks.
+        :param str disk_desc: Disk type description.
+        :param str disk_type: Disk type.
+        :param int max_disk_size: Maximum disk size, unit G.
+        :param int min_disk_size: Minimum disk size, unit G.
+        """
+        pulumi.set(__self__, "disk_count", disk_count)
+        pulumi.set(__self__, "disk_desc", disk_desc)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+
+    @property
+    @pulumi.getter(name="diskCount")
+    def disk_count(self) -> int:
+        """
+        Number of disks.
+        """
+        return pulumi.get(self, "disk_count")
+
+    @property
+    @pulumi.getter(name="diskDesc")
+    def disk_desc(self) -> str:
+        """
+        Disk type description.
+        """
+        return pulumi.get(self, "disk_desc")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum disk size, unit G.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum disk size, unit G.
+        """
+        return pulumi.get(self, "min_disk_size")
+
+
+@pulumi.output_type
+class GetSpecCommonSpecResult(dict):
+    def __init__(__self__, *,
+                 available: bool,
+                 compute_spec_desc: str,
+                 cpu: int,
+                 data_disks: Sequence['outputs.GetSpecCommonSpecDataDiskResult'],
+                 display_name: str,
+                 instance_quota: int,
+                 max_node_size: int,
+                 mem: int,
+                 name: str,
+                 system_disks: Sequence['outputs.GetSpecCommonSpecSystemDiskResult'],
+                 type: str):
+        """
+        :param bool available: Whether it is available, false means sold out.
+        :param str compute_spec_desc: Specification description information.
+        :param int cpu: Number of cpu cores.
+        :param Sequence['GetSpecCommonSpecDataDiskArgs'] data_disks: Data disk description information.
+        :param str display_name: Specification name.
+        :param int instance_quota: Inventory.
+        :param int max_node_size: Maximum number of nodes limit.
+        :param int mem: Memory size, unit G.
+        :param str name: Specification name.
+        :param Sequence['GetSpecCommonSpecSystemDiskArgs'] system_disks: System disk description information.
+        :param str type: Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+        """
+        pulumi.set(__self__, "available", available)
+        pulumi.set(__self__, "compute_spec_desc", compute_spec_desc)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "instance_quota", instance_quota)
+        pulumi.set(__self__, "max_node_size", max_node_size)
+        pulumi.set(__self__, "mem", mem)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "system_disks", system_disks)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def available(self) -> bool:
+        """
+        Whether it is available, false means sold out.
+        """
+        return pulumi.get(self, "available")
+
+    @property
+    @pulumi.getter(name="computeSpecDesc")
+    def compute_spec_desc(self) -> str:
+        """
+        Specification description information.
+        """
+        return pulumi.get(self, "compute_spec_desc")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of cpu cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetSpecCommonSpecDataDiskResult']:
+        """
+        Data disk description information.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Specification name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter(name="instanceQuota")
+    def instance_quota(self) -> int:
+        """
+        Inventory.
+        """
+        return pulumi.get(self, "instance_quota")
+
+    @property
+    @pulumi.getter(name="maxNodeSize")
+    def max_node_size(self) -> int:
+        """
+        Maximum number of nodes limit.
+        """
+        return pulumi.get(self, "max_node_size")
+
+    @property
+    @pulumi.getter
+    def mem(self) -> int:
+        """
+        Memory size, unit G.
+        """
+        return pulumi.get(self, "mem")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Specification name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="systemDisks")
+    def system_disks(self) -> Sequence['outputs.GetSpecCommonSpecSystemDiskResult']:
+        """
+        System disk description information.
+        """
+        return pulumi.get(self, "system_disks")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetSpecCommonSpecDataDiskResult(dict):
+    def __init__(__self__, *,
+                 disk_count: int,
+                 disk_desc: str,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int):
+        """
+        :param int disk_count: Number of disks.
+        :param str disk_desc: Disk type description.
+        :param str disk_type: Disk type.
+        :param int max_disk_size: Maximum disk size, unit G.
+        :param int min_disk_size: Minimum disk size, unit G.
+        """
+        pulumi.set(__self__, "disk_count", disk_count)
+        pulumi.set(__self__, "disk_desc", disk_desc)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+
+    @property
+    @pulumi.getter(name="diskCount")
+    def disk_count(self) -> int:
+        """
+        Number of disks.
+        """
+        return pulumi.get(self, "disk_count")
+
+    @property
+    @pulumi.getter(name="diskDesc")
+    def disk_desc(self) -> str:
+        """
+        Disk type description.
+        """
+        return pulumi.get(self, "disk_desc")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum disk size, unit G.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum disk size, unit G.
+        """
+        return pulumi.get(self, "min_disk_size")
+
+
+@pulumi.output_type
+class GetSpecCommonSpecSystemDiskResult(dict):
+    def __init__(__self__, *,
+                 disk_count: int,
+                 disk_desc: str,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int):
+        """
+        :param int disk_count: Number of disks.
+        :param str disk_desc: Disk type description.
+        :param str disk_type: Disk type.
+        :param int max_disk_size: Maximum disk size, unit G.
+        :param int min_disk_size: Minimum disk size, unit G.
+        """
+        pulumi.set(__self__, "disk_count", disk_count)
+        pulumi.set(__self__, "disk_desc", disk_desc)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+
+    @property
+    @pulumi.getter(name="diskCount")
+    def disk_count(self) -> int:
+        """
+        Number of disks.
+        """
+        return pulumi.get(self, "disk_count")
+
+    @property
+    @pulumi.getter(name="diskDesc")
+    def disk_desc(self) -> str:
+        """
+        Disk type description.
+        """
+        return pulumi.get(self, "disk_desc")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum disk size, unit G.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum disk size, unit G.
+        """
+        return pulumi.get(self, "min_disk_size")
+
+
+@pulumi.output_type
+class GetSpecDataSpecResult(dict):
+    def __init__(__self__, *,
+                 available: bool,
+                 compute_spec_desc: str,
+                 cpu: int,
+                 data_disks: Sequence['outputs.GetSpecDataSpecDataDiskResult'],
+                 display_name: str,
+                 instance_quota: int,
+                 max_node_size: int,
+                 mem: int,
+                 name: str,
+                 system_disks: Sequence['outputs.GetSpecDataSpecSystemDiskResult'],
+                 type: str):
+        """
+        :param bool available: Whether it is available, false means sold out.
+        :param str compute_spec_desc: Specification description information.
+        :param int cpu: Number of cpu cores.
+        :param Sequence['GetSpecDataSpecDataDiskArgs'] data_disks: Data disk description information.
+        :param str display_name: Specification name.
+        :param int instance_quota: Inventory.
+        :param int max_node_size: Maximum number of nodes limit.
+        :param int mem: Memory size, unit G.
+        :param str name: Specification name.
+        :param Sequence['GetSpecDataSpecSystemDiskArgs'] system_disks: System disk description information.
+        :param str type: Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+        """
+        pulumi.set(__self__, "available", available)
+        pulumi.set(__self__, "compute_spec_desc", compute_spec_desc)
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "instance_quota", instance_quota)
+        pulumi.set(__self__, "max_node_size", max_node_size)
+        pulumi.set(__self__, "mem", mem)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "system_disks", system_disks)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def available(self) -> bool:
+        """
+        Whether it is available, false means sold out.
+        """
+        return pulumi.get(self, "available")
+
+    @property
+    @pulumi.getter(name="computeSpecDesc")
+    def compute_spec_desc(self) -> str:
+        """
+        Specification description information.
+        """
+        return pulumi.get(self, "compute_spec_desc")
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Number of cpu cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetSpecDataSpecDataDiskResult']:
+        """
+        Data disk description information.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> str:
+        """
+        Specification name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @property
+    @pulumi.getter(name="instanceQuota")
+    def instance_quota(self) -> int:
+        """
+        Inventory.
+        """
+        return pulumi.get(self, "instance_quota")
+
+    @property
+    @pulumi.getter(name="maxNodeSize")
+    def max_node_size(self) -> int:
+        """
+        Maximum number of nodes limit.
+        """
+        return pulumi.get(self, "max_node_size")
+
+    @property
+    @pulumi.getter
+    def mem(self) -> int:
+        """
+        Memory size, unit G.
+        """
+        return pulumi.get(self, "mem")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Specification name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="systemDisks")
+    def system_disks(self) -> Sequence['outputs.GetSpecDataSpecSystemDiskResult']:
+        """
+        System disk description information.
+        """
+        return pulumi.get(self, "system_disks")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetSpecDataSpecDataDiskResult(dict):
+    def __init__(__self__, *,
+                 disk_count: int,
+                 disk_desc: str,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int):
+        """
+        :param int disk_count: Number of disks.
+        :param str disk_desc: Disk type description.
+        :param str disk_type: Disk type.
+        :param int max_disk_size: Maximum disk size, unit G.
+        :param int min_disk_size: Minimum disk size, unit G.
+        """
+        pulumi.set(__self__, "disk_count", disk_count)
+        pulumi.set(__self__, "disk_desc", disk_desc)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+
+    @property
+    @pulumi.getter(name="diskCount")
+    def disk_count(self) -> int:
+        """
+        Number of disks.
+        """
+        return pulumi.get(self, "disk_count")
+
+    @property
+    @pulumi.getter(name="diskDesc")
+    def disk_desc(self) -> str:
+        """
+        Disk type description.
+        """
+        return pulumi.get(self, "disk_desc")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum disk size, unit G.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum disk size, unit G.
+        """
+        return pulumi.get(self, "min_disk_size")
+
+
+@pulumi.output_type
+class GetSpecDataSpecSystemDiskResult(dict):
+    def __init__(__self__, *,
+                 disk_count: int,
+                 disk_desc: str,
+                 disk_type: str,
+                 max_disk_size: int,
+                 min_disk_size: int):
+        """
+        :param int disk_count: Number of disks.
+        :param str disk_desc: Disk type description.
+        :param str disk_type: Disk type.
+        :param int max_disk_size: Maximum disk size, unit G.
+        :param int min_disk_size: Minimum disk size, unit G.
+        """
+        pulumi.set(__self__, "disk_count", disk_count)
+        pulumi.set(__self__, "disk_desc", disk_desc)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "max_disk_size", max_disk_size)
+        pulumi.set(__self__, "min_disk_size", min_disk_size)
+
+    @property
+    @pulumi.getter(name="diskCount")
+    def disk_count(self) -> int:
+        """
+        Number of disks.
+        """
+        return pulumi.get(self, "disk_count")
+
+    @property
+    @pulumi.getter(name="diskDesc")
+    def disk_desc(self) -> str:
+        """
+        Disk type description.
+        """
+        return pulumi.get(self, "disk_desc")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="maxDiskSize")
+    def max_disk_size(self) -> int:
+        """
+        Maximum disk size, unit G.
+        """
+        return pulumi.get(self, "max_disk_size")
+
+    @property
+    @pulumi.getter(name="minDiskSize")
+    def min_disk_size(self) -> int:
+        """
+        Minimum disk size, unit G.
+        """
+        return pulumi.get(self, "min_disk_size")
 
 

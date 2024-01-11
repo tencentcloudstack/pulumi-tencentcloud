@@ -36,12 +36,20 @@ class GetL7RulesV2Result:
         pulumi.set(__self__, "ip", ip)
         if limit and not isinstance(limit, int):
             raise TypeError("Expected argument 'limit' to be a int")
+        if limit is not None:
+            warnings.warn("""It has been deprecated from version 1.81.21.""", DeprecationWarning)
+            pulumi.log.warn("""limit is deprecated: It has been deprecated from version 1.81.21.""")
+
         pulumi.set(__self__, "limit", limit)
         if lists and not isinstance(lists, list):
             raise TypeError("Expected argument 'lists' to be a list")
         pulumi.set(__self__, "lists", lists)
         if offset and not isinstance(offset, int):
             raise TypeError("Expected argument 'offset' to be a int")
+        if offset is not None:
+            warnings.warn("""It has been deprecated from version 1.81.21.""", DeprecationWarning)
+            pulumi.log.warn("""offset is deprecated: It has been deprecated from version 1.81.21.""")
+
         pulumi.set(__self__, "offset", offset)
         if protocol and not isinstance(protocol, str):
             raise TypeError("Expected argument 'protocol' to be a str")
@@ -146,16 +154,16 @@ def get_l7_rules_v2(business: Optional[str] = None,
     import pulumi_tencentcloud as tencentcloud
 
     test = tencentcloud.Dayu.get_l7_rules_v2(business="bgpip",
-        limit=10,
-        offset=0)
+        domain="qq.com",
+        protocol="https")
     ```
 
 
     :param str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
     :param str domain: Domain of resource.
     :param str ip: Ip of the resource.
-    :param int limit: The number of pages, default is `10`.
-    :param int offset: The page start offset, default is `0`.
+    :param int limit: It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+    :param int offset: It has been deprecated from version 1.81.21. The page start offset, default is `0`.
     :param str protocol: Protocol of resource, value range [`http`, `https`].
     :param str result_output_file: Used to save results.
     """
@@ -206,16 +214,16 @@ def get_l7_rules_v2_output(business: Optional[pulumi.Input[str]] = None,
     import pulumi_tencentcloud as tencentcloud
 
     test = tencentcloud.Dayu.get_l7_rules_v2(business="bgpip",
-        limit=10,
-        offset=0)
+        domain="qq.com",
+        protocol="https")
     ```
 
 
     :param str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
     :param str domain: Domain of resource.
     :param str ip: Ip of the resource.
-    :param int limit: The number of pages, default is `10`.
-    :param int offset: The page start offset, default is `0`.
+    :param int limit: It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+    :param int offset: It has been deprecated from version 1.81.21. The page start offset, default is `0`.
     :param str protocol: Protocol of resource, value range [`http`, `https`].
     :param str result_output_file: Used to save results.
     """

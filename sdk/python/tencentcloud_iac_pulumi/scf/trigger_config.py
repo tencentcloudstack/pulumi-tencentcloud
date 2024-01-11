@@ -13,45 +13,42 @@ __all__ = ['TriggerConfigArgs', 'TriggerConfig']
 @pulumi.input_type
 class TriggerConfigArgs:
     def __init__(__self__, *,
-                 enable: pulumi.Input[str],
                  function_name: pulumi.Input[str],
                  trigger_name: pulumi.Input[str],
                  type: pulumi.Input[str],
+                 custom_argument: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enable: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  qualifier: Optional[pulumi.Input[str]] = None,
                  trigger_desc: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a TriggerConfig resource.
-        :param pulumi.Input[str] enable: Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
         :param pulumi.Input[str] function_name: Function name.
-        :param pulumi.Input[str] trigger_name: Trigger name.
-        :param pulumi.Input[str] type: Trigger Type.
+        :param pulumi.Input[str] trigger_name: Trigger Name.
+        :param pulumi.Input[str] type: Trigger type.
+        :param pulumi.Input[str] custom_argument: User Additional Information.
+        :param pulumi.Input[str] description: Trigger description.
+        :param pulumi.Input[str] enable: Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         :param pulumi.Input[str] namespace: Function namespace.
         :param pulumi.Input[str] qualifier: Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
-        :param pulumi.Input[str] trigger_desc: To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc parameter.
         """
-        pulumi.set(__self__, "enable", enable)
         pulumi.set(__self__, "function_name", function_name)
         pulumi.set(__self__, "trigger_name", trigger_name)
         pulumi.set(__self__, "type", type)
+        if custom_argument is not None:
+            pulumi.set(__self__, "custom_argument", custom_argument)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
         if namespace is not None:
             pulumi.set(__self__, "namespace", namespace)
         if qualifier is not None:
             pulumi.set(__self__, "qualifier", qualifier)
         if trigger_desc is not None:
             pulumi.set(__self__, "trigger_desc", trigger_desc)
-
-    @property
-    @pulumi.getter
-    def enable(self) -> pulumi.Input[str]:
-        """
-        Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
-        """
-        return pulumi.get(self, "enable")
-
-    @enable.setter
-    def enable(self, value: pulumi.Input[str]):
-        pulumi.set(self, "enable", value)
 
     @property
     @pulumi.getter(name="functionName")
@@ -69,7 +66,7 @@ class TriggerConfigArgs:
     @pulumi.getter(name="triggerName")
     def trigger_name(self) -> pulumi.Input[str]:
         """
-        Trigger name.
+        Trigger Name.
         """
         return pulumi.get(self, "trigger_name")
 
@@ -81,13 +78,49 @@ class TriggerConfigArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
         """
-        Trigger Type.
+        Trigger type.
         """
         return pulumi.get(self, "type")
 
     @type.setter
     def type(self, value: pulumi.Input[str]):
         pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="customArgument")
+    def custom_argument(self) -> Optional[pulumi.Input[str]]:
+        """
+        User Additional Information.
+        """
+        return pulumi.get(self, "custom_argument")
+
+    @custom_argument.setter
+    def custom_argument(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_argument", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Trigger description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[str]]:
+        """
+        Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "enable", value)
 
     @property
     @pulumi.getter
@@ -117,7 +150,7 @@ class TriggerConfigArgs:
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> Optional[pulumi.Input[str]]:
         """
-        To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        TriggerDesc parameter.
         """
         return pulumi.get(self, "trigger_desc")
 
@@ -129,6 +162,8 @@ class TriggerConfigArgs:
 @pulumi.input_type
 class _TriggerConfigState:
     def __init__(__self__, *,
+                 custom_argument: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  enable: Optional[pulumi.Input[str]] = None,
                  function_name: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
@@ -138,14 +173,20 @@ class _TriggerConfigState:
                  type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering TriggerConfig resources.
-        :param pulumi.Input[str] enable: Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        :param pulumi.Input[str] custom_argument: User Additional Information.
+        :param pulumi.Input[str] description: Trigger description.
+        :param pulumi.Input[str] enable: Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         :param pulumi.Input[str] function_name: Function name.
         :param pulumi.Input[str] namespace: Function namespace.
         :param pulumi.Input[str] qualifier: Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
-        :param pulumi.Input[str] trigger_desc: To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
-        :param pulumi.Input[str] trigger_name: Trigger name.
-        :param pulumi.Input[str] type: Trigger Type.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc parameter.
+        :param pulumi.Input[str] trigger_name: Trigger Name.
+        :param pulumi.Input[str] type: Trigger type.
         """
+        if custom_argument is not None:
+            pulumi.set(__self__, "custom_argument", custom_argument)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if enable is not None:
             pulumi.set(__self__, "enable", enable)
         if function_name is not None:
@@ -162,10 +203,34 @@ class _TriggerConfigState:
             pulumi.set(__self__, "type", type)
 
     @property
+    @pulumi.getter(name="customArgument")
+    def custom_argument(self) -> Optional[pulumi.Input[str]]:
+        """
+        User Additional Information.
+        """
+        return pulumi.get(self, "custom_argument")
+
+    @custom_argument.setter
+    def custom_argument(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_argument", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Trigger description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
     @pulumi.getter
     def enable(self) -> Optional[pulumi.Input[str]]:
         """
-        Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         """
         return pulumi.get(self, "enable")
 
@@ -213,7 +278,7 @@ class _TriggerConfigState:
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> Optional[pulumi.Input[str]]:
         """
-        To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        TriggerDesc parameter.
         """
         return pulumi.get(self, "trigger_desc")
 
@@ -225,7 +290,7 @@ class _TriggerConfigState:
     @pulumi.getter(name="triggerName")
     def trigger_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Trigger name.
+        Trigger Name.
         """
         return pulumi.get(self, "trigger_name")
 
@@ -237,7 +302,7 @@ class _TriggerConfigState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Trigger Type.
+        Trigger type.
         """
         return pulumi.get(self, "type")
 
@@ -251,6 +316,8 @@ class TriggerConfig(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_argument: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  enable: Optional[pulumi.Input[str]] = None,
                  function_name: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
@@ -269,10 +336,13 @@ class TriggerConfig(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         trigger_config = tencentcloud.scf.TriggerConfig("triggerConfig",
+            custom_argument="Information",
+            description="func",
             enable="OPEN",
             function_name="keep-1676351130",
             namespace="default",
             qualifier="$DEFAULT",
+            trigger_desc="* 1 2 * * * *",
             trigger_name="SCF-timer-1685540160",
             type="timer")
         ```
@@ -287,13 +357,15 @@ class TriggerConfig(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] enable: Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        :param pulumi.Input[str] custom_argument: User Additional Information.
+        :param pulumi.Input[str] description: Trigger description.
+        :param pulumi.Input[str] enable: Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         :param pulumi.Input[str] function_name: Function name.
         :param pulumi.Input[str] namespace: Function namespace.
         :param pulumi.Input[str] qualifier: Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
-        :param pulumi.Input[str] trigger_desc: To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
-        :param pulumi.Input[str] trigger_name: Trigger name.
-        :param pulumi.Input[str] type: Trigger Type.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc parameter.
+        :param pulumi.Input[str] trigger_name: Trigger Name.
+        :param pulumi.Input[str] type: Trigger type.
         """
         ...
     @overload
@@ -311,10 +383,13 @@ class TriggerConfig(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         trigger_config = tencentcloud.scf.TriggerConfig("triggerConfig",
+            custom_argument="Information",
+            description="func",
             enable="OPEN",
             function_name="keep-1676351130",
             namespace="default",
             qualifier="$DEFAULT",
+            trigger_desc="* 1 2 * * * *",
             trigger_name="SCF-timer-1685540160",
             type="timer")
         ```
@@ -342,6 +417,8 @@ class TriggerConfig(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_argument: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  enable: Optional[pulumi.Input[str]] = None,
                  function_name: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
@@ -363,8 +440,8 @@ class TriggerConfig(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = TriggerConfigArgs.__new__(TriggerConfigArgs)
 
-            if enable is None and not opts.urn:
-                raise TypeError("Missing required property 'enable'")
+            __props__.__dict__["custom_argument"] = custom_argument
+            __props__.__dict__["description"] = description
             __props__.__dict__["enable"] = enable
             if function_name is None and not opts.urn:
                 raise TypeError("Missing required property 'function_name'")
@@ -388,6 +465,8 @@ class TriggerConfig(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            custom_argument: Optional[pulumi.Input[str]] = None,
+            description: Optional[pulumi.Input[str]] = None,
             enable: Optional[pulumi.Input[str]] = None,
             function_name: Optional[pulumi.Input[str]] = None,
             namespace: Optional[pulumi.Input[str]] = None,
@@ -402,18 +481,22 @@ class TriggerConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] enable: Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        :param pulumi.Input[str] custom_argument: User Additional Information.
+        :param pulumi.Input[str] description: Trigger description.
+        :param pulumi.Input[str] enable: Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         :param pulumi.Input[str] function_name: Function name.
         :param pulumi.Input[str] namespace: Function namespace.
         :param pulumi.Input[str] qualifier: Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
-        :param pulumi.Input[str] trigger_desc: To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
-        :param pulumi.Input[str] trigger_name: Trigger name.
-        :param pulumi.Input[str] type: Trigger Type.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc parameter.
+        :param pulumi.Input[str] trigger_name: Trigger Name.
+        :param pulumi.Input[str] type: Trigger type.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _TriggerConfigState.__new__(_TriggerConfigState)
 
+        __props__.__dict__["custom_argument"] = custom_argument
+        __props__.__dict__["description"] = description
         __props__.__dict__["enable"] = enable
         __props__.__dict__["function_name"] = function_name
         __props__.__dict__["namespace"] = namespace
@@ -424,10 +507,26 @@ class TriggerConfig(pulumi.CustomResource):
         return TriggerConfig(resource_name, opts=opts, __props__=__props__)
 
     @property
-    @pulumi.getter
-    def enable(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="customArgument")
+    def custom_argument(self) -> pulumi.Output[Optional[str]]:
         """
-        Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        User Additional Information.
+        """
+        return pulumi.get(self, "custom_argument")
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Output[Optional[str]]:
+        """
+        Trigger description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> pulumi.Output[Optional[str]]:
+        """
+        Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         """
         return pulumi.get(self, "enable")
 
@@ -459,7 +558,7 @@ class TriggerConfig(pulumi.CustomResource):
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> pulumi.Output[str]:
         """
-        To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        TriggerDesc parameter.
         """
         return pulumi.get(self, "trigger_desc")
 
@@ -467,7 +566,7 @@ class TriggerConfig(pulumi.CustomResource):
     @pulumi.getter(name="triggerName")
     def trigger_name(self) -> pulumi.Output[str]:
         """
-        Trigger name.
+        Trigger Name.
         """
         return pulumi.get(self, "trigger_name")
 
@@ -475,7 +574,7 @@ class TriggerConfig(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        Trigger Type.
+        Trigger type.
         """
         return pulumi.get(self, "type")
 

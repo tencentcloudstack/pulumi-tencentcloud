@@ -14,11 +14,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Kms.getKeys({
+ * const example = pulumi.output(tencentcloud.Kms.getKeys({
  *     keyState: 0,
  *     keyUsage: "ALL",
  *     origin: "TENCENT_KMS",
- *     searchKeyAlias: "test",
+ *     searchKeyAlias: "tf_example",
  * }));
  * ```
  */

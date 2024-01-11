@@ -13,7 +13,10 @@ import (
 
 // Provide a resource to create a SSM secret version.
 //
+// > **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
+//
 // ## Example Usage
+// ### Text type credential information plaintext
 //
 // ```go
 // package main
@@ -25,21 +28,45 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
-// 			SecretName:           pulumi.String("test"),
-// 			Description:          pulumi.String("test secret"),
+// 		example, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
+// 			SecretName:           pulumi.String("tf-example"),
+// 			Description:          pulumi.String("desc."),
 // 			RecoveryWindowInDays: pulumi.Int(0),
 // 			IsEnabled:            pulumi.Bool(true),
 // 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("test"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
 // 		_, err = Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
-// 			SecretName:   foo.SecretName,
+// 			SecretName:   example.SecretName,
 // 			VersionId:    pulumi.String("v1"),
+// 			SecretString: pulumi.String("this is secret string"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Binary credential information, encoded using base64
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ssm.NewSecretVersion(ctx, "v2", &Ssm.SecretVersionArgs{
+// 			SecretName:   pulumi.Any(tencentcloud_ssm_secret.Example.Secret_name),
+// 			VersionId:    pulumi.String("v2"),
 // 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
 // 		})
 // 		if err != nil {

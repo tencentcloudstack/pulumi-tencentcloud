@@ -5520,6 +5520,6166 @@ func (o ScenarioTestScriptArrayOutput) Index(i pulumi.IntInput) ScenarioTestScri
 	}).(ScenarioTestScriptOutput)
 }
 
+type TmpKeyGenerateCredential struct {
+	// Temporary secret ID.
+	TmpSecretId *string `pulumi:"tmpSecretId"`
+	// Temporary secret key.
+	TmpSecretKey *string `pulumi:"tmpSecretKey"`
+	// Temporary token.
+	Token *string `pulumi:"token"`
+}
+
+// TmpKeyGenerateCredentialInput is an input type that accepts TmpKeyGenerateCredentialArgs and TmpKeyGenerateCredentialOutput values.
+// You can construct a concrete instance of `TmpKeyGenerateCredentialInput` via:
+//
+//          TmpKeyGenerateCredentialArgs{...}
+type TmpKeyGenerateCredentialInput interface {
+	pulumi.Input
+
+	ToTmpKeyGenerateCredentialOutput() TmpKeyGenerateCredentialOutput
+	ToTmpKeyGenerateCredentialOutputWithContext(context.Context) TmpKeyGenerateCredentialOutput
+}
+
+type TmpKeyGenerateCredentialArgs struct {
+	// Temporary secret ID.
+	TmpSecretId pulumi.StringPtrInput `pulumi:"tmpSecretId"`
+	// Temporary secret key.
+	TmpSecretKey pulumi.StringPtrInput `pulumi:"tmpSecretKey"`
+	// Temporary token.
+	Token pulumi.StringPtrInput `pulumi:"token"`
+}
+
+func (TmpKeyGenerateCredentialArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpKeyGenerateCredential)(nil)).Elem()
+}
+
+func (i TmpKeyGenerateCredentialArgs) ToTmpKeyGenerateCredentialOutput() TmpKeyGenerateCredentialOutput {
+	return i.ToTmpKeyGenerateCredentialOutputWithContext(context.Background())
+}
+
+func (i TmpKeyGenerateCredentialArgs) ToTmpKeyGenerateCredentialOutputWithContext(ctx context.Context) TmpKeyGenerateCredentialOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpKeyGenerateCredentialOutput)
+}
+
+// TmpKeyGenerateCredentialArrayInput is an input type that accepts TmpKeyGenerateCredentialArray and TmpKeyGenerateCredentialArrayOutput values.
+// You can construct a concrete instance of `TmpKeyGenerateCredentialArrayInput` via:
+//
+//          TmpKeyGenerateCredentialArray{ TmpKeyGenerateCredentialArgs{...} }
+type TmpKeyGenerateCredentialArrayInput interface {
+	pulumi.Input
+
+	ToTmpKeyGenerateCredentialArrayOutput() TmpKeyGenerateCredentialArrayOutput
+	ToTmpKeyGenerateCredentialArrayOutputWithContext(context.Context) TmpKeyGenerateCredentialArrayOutput
+}
+
+type TmpKeyGenerateCredentialArray []TmpKeyGenerateCredentialInput
+
+func (TmpKeyGenerateCredentialArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpKeyGenerateCredential)(nil)).Elem()
+}
+
+func (i TmpKeyGenerateCredentialArray) ToTmpKeyGenerateCredentialArrayOutput() TmpKeyGenerateCredentialArrayOutput {
+	return i.ToTmpKeyGenerateCredentialArrayOutputWithContext(context.Background())
+}
+
+func (i TmpKeyGenerateCredentialArray) ToTmpKeyGenerateCredentialArrayOutputWithContext(ctx context.Context) TmpKeyGenerateCredentialArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpKeyGenerateCredentialArrayOutput)
+}
+
+type TmpKeyGenerateCredentialOutput struct{ *pulumi.OutputState }
+
+func (TmpKeyGenerateCredentialOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpKeyGenerateCredential)(nil)).Elem()
+}
+
+func (o TmpKeyGenerateCredentialOutput) ToTmpKeyGenerateCredentialOutput() TmpKeyGenerateCredentialOutput {
+	return o
+}
+
+func (o TmpKeyGenerateCredentialOutput) ToTmpKeyGenerateCredentialOutputWithContext(ctx context.Context) TmpKeyGenerateCredentialOutput {
+	return o
+}
+
+// Temporary secret ID.
+func (o TmpKeyGenerateCredentialOutput) TmpSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpKeyGenerateCredential) *string { return v.TmpSecretId }).(pulumi.StringPtrOutput)
+}
+
+// Temporary secret key.
+func (o TmpKeyGenerateCredentialOutput) TmpSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpKeyGenerateCredential) *string { return v.TmpSecretKey }).(pulumi.StringPtrOutput)
+}
+
+// Temporary token.
+func (o TmpKeyGenerateCredentialOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpKeyGenerateCredential) *string { return v.Token }).(pulumi.StringPtrOutput)
+}
+
+type TmpKeyGenerateCredentialArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpKeyGenerateCredentialArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpKeyGenerateCredential)(nil)).Elem()
+}
+
+func (o TmpKeyGenerateCredentialArrayOutput) ToTmpKeyGenerateCredentialArrayOutput() TmpKeyGenerateCredentialArrayOutput {
+	return o
+}
+
+func (o TmpKeyGenerateCredentialArrayOutput) ToTmpKeyGenerateCredentialArrayOutputWithContext(ctx context.Context) TmpKeyGenerateCredentialArrayOutput {
+	return o
+}
+
+func (o TmpKeyGenerateCredentialArrayOutput) Index(i pulumi.IntInput) TmpKeyGenerateCredentialOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpKeyGenerateCredential {
+		return vs[0].([]TmpKeyGenerateCredential)[vs[1].(int)]
+	}).(TmpKeyGenerateCredentialOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSet struct {
+	// Jobs related to the scenario.
+	Jobs []GetScenarioWithJobsScenarioWithJobsSetJob `pulumi:"jobs"`
+	// The returned scenario.
+	Scenarios []GetScenarioWithJobsScenarioWithJobsSetScenario `pulumi:"scenarios"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetArgs and GetScenarioWithJobsScenarioWithJobsSetOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetOutput() GetScenarioWithJobsScenarioWithJobsSetOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetArgs struct {
+	// Jobs related to the scenario.
+	Jobs GetScenarioWithJobsScenarioWithJobsSetJobArrayInput `pulumi:"jobs"`
+	// The returned scenario.
+	Scenarios GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput `pulumi:"scenarios"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSet)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetArgs) ToGetScenarioWithJobsScenarioWithJobsSetOutput() GetScenarioWithJobsScenarioWithJobsSetOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetArgs) ToGetScenarioWithJobsScenarioWithJobsSetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetArray and GetScenarioWithJobsScenarioWithJobsSetArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetArray{ GetScenarioWithJobsScenarioWithJobsSetArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetArray []GetScenarioWithJobsScenarioWithJobsSetInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSet)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetArray) ToGetScenarioWithJobsScenarioWithJobsSetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetArray) ToGetScenarioWithJobsScenarioWithJobsSetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSet)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetOutput) ToGetScenarioWithJobsScenarioWithJobsSetOutput() GetScenarioWithJobsScenarioWithJobsSetOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetOutput) ToGetScenarioWithJobsScenarioWithJobsSetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetOutput {
+	return o
+}
+
+// Jobs related to the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetOutput) Jobs() GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSet) []GetScenarioWithJobsScenarioWithJobsSetJob {
+		return v.Jobs
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput)
+}
+
+// The returned scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetOutput) Scenarios() GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSet) []GetScenarioWithJobsScenarioWithJobsSetScenario {
+		return v.Scenarios
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSet)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSet {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSet)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJob struct {
+	// The reason for aborting the job.
+	AbortReason int `pulumi:"abortReason"`
+	// Deprecated.
+	Configs []string `pulumi:"configs"`
+	// The creation time of the scenario.
+	CreatedAt string `pulumi:"createdAt"`
+	// The cron job ID.
+	CronId string `pulumi:"cronId"`
+	// The test data sets for the load test.
+	Datasets []GetScenarioWithJobsScenarioWithJobsSetJobDataset `pulumi:"datasets"`
+	// Whether to run the job in the debug mode. The default value is false.
+	Debug bool `pulumi:"debug"`
+	// The configuration for parsing domain names.
+	DomainNameConfigs []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig `pulumi:"domainNameConfigs"`
+	// Job running duration.
+	Duration int `pulumi:"duration"`
+	// The job ending time.
+	EndTime string `pulumi:"endTime"`
+	// Error rate.
+	ErrorRate float64 `pulumi:"errorRate"`
+	// Deprecated.
+	Extensions []string `pulumi:"extensions"`
+	// Job ID.
+	JobId string `pulumi:"jobId"`
+	// Job owner.
+	JobOwner string `pulumi:"jobOwner"`
+	// The load source information.
+	LoadSourceInfos []GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo `pulumi:"loadSourceInfos"`
+	// Deprecated.
+	LoadSources []GetScenarioWithJobsScenarioWithJobsSetJobLoadSource `pulumi:"loadSources"`
+	// Scenario is load test configuration.
+	Loads []GetScenarioWithJobsScenarioWithJobsSetJobLoad `pulumi:"loads"`
+	// The maximum RPS.
+	MaxRequestsPerSecond int `pulumi:"maxRequestsPerSecond"`
+	// The maximum VU of the job.
+	MaxVirtualUserCount int `pulumi:"maxVirtualUserCount"`
+	// The message describing the job running status.
+	Message string `pulumi:"message"`
+	// The rate of receiving bytes.
+	NetworkReceiveRate float64 `pulumi:"networkReceiveRate"`
+	// The rate of sending bytes.
+	NetworkSendRate float64 `pulumi:"networkSendRate"`
+	// The note of the job.
+	Note string `pulumi:"note"`
+	// The notification hooks.
+	NotificationHooks []GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook `pulumi:"notificationHooks"`
+	// Plugins.
+	Plugins []GetScenarioWithJobsScenarioWithJobsSetJobPlugin `pulumi:"plugins"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// The protocol file.
+	Protocols []GetScenarioWithJobsScenarioWithJobsSetJobProtocol `pulumi:"protocols"`
+	// The files in the request.
+	RequestFiles []GetScenarioWithJobsScenarioWithJobsSetJobRequestFile `pulumi:"requestFiles"`
+	// The total reqeust count.
+	RequestTotal float64 `pulumi:"requestTotal"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSecond float64 `pulumi:"requestsPerSecond"`
+	// The average response time.
+	ResponseTimeAverage float64 `pulumi:"responseTimeAverage"`
+	// The maximum response time.
+	ResponseTimeMax float64 `pulumi:"responseTimeMax"`
+	// The minimum response time.
+	ResponseTimeMin float64 `pulumi:"responseTimeMin"`
+	// The 90 percentile of the response time.
+	ResponseTimeP90 float64 `pulumi:"responseTimeP90"`
+	// The 95 percentile of the response time.
+	ResponseTimeP95 float64 `pulumi:"responseTimeP95"`
+	// The 99 percentile of the response time.
+	ResponseTimeP99 float64 `pulumi:"responseTimeP99"`
+	// Scenario ID.
+	ScenarioId string `pulumi:"scenarioId"`
+	// Scenario name.
+	ScenarioName string `pulumi:"scenarioName"`
+	// Deprecated.
+	Scripts []string `pulumi:"scripts"`
+	// The job starting time.
+	StartTime string `pulumi:"startTime"`
+	// Scenario status.
+	Status int `pulumi:"status"`
+	// The script of the load test.
+	TestScripts []GetScenarioWithJobsScenarioWithJobsSetJobTestScript `pulumi:"testScripts"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobArgs and GetScenarioWithJobsScenarioWithJobsSetJobOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobOutput() GetScenarioWithJobsScenarioWithJobsSetJobOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobArgs struct {
+	// The reason for aborting the job.
+	AbortReason pulumi.IntInput `pulumi:"abortReason"`
+	// Deprecated.
+	Configs pulumi.StringArrayInput `pulumi:"configs"`
+	// The creation time of the scenario.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// The cron job ID.
+	CronId pulumi.StringInput `pulumi:"cronId"`
+	// The test data sets for the load test.
+	Datasets GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput `pulumi:"datasets"`
+	// Whether to run the job in the debug mode. The default value is false.
+	Debug pulumi.BoolInput `pulumi:"debug"`
+	// The configuration for parsing domain names.
+	DomainNameConfigs GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput `pulumi:"domainNameConfigs"`
+	// Job running duration.
+	Duration pulumi.IntInput `pulumi:"duration"`
+	// The job ending time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Error rate.
+	ErrorRate pulumi.Float64Input `pulumi:"errorRate"`
+	// Deprecated.
+	Extensions pulumi.StringArrayInput `pulumi:"extensions"`
+	// Job ID.
+	JobId pulumi.StringInput `pulumi:"jobId"`
+	// Job owner.
+	JobOwner pulumi.StringInput `pulumi:"jobOwner"`
+	// The load source information.
+	LoadSourceInfos GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput `pulumi:"loadSourceInfos"`
+	// Deprecated.
+	LoadSources GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput `pulumi:"loadSources"`
+	// Scenario is load test configuration.
+	Loads GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput `pulumi:"loads"`
+	// The maximum RPS.
+	MaxRequestsPerSecond pulumi.IntInput `pulumi:"maxRequestsPerSecond"`
+	// The maximum VU of the job.
+	MaxVirtualUserCount pulumi.IntInput `pulumi:"maxVirtualUserCount"`
+	// The message describing the job running status.
+	Message pulumi.StringInput `pulumi:"message"`
+	// The rate of receiving bytes.
+	NetworkReceiveRate pulumi.Float64Input `pulumi:"networkReceiveRate"`
+	// The rate of sending bytes.
+	NetworkSendRate pulumi.Float64Input `pulumi:"networkSendRate"`
+	// The note of the job.
+	Note pulumi.StringInput `pulumi:"note"`
+	// The notification hooks.
+	NotificationHooks GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput `pulumi:"notificationHooks"`
+	// Plugins.
+	Plugins GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput `pulumi:"plugins"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// The protocol file.
+	Protocols GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput `pulumi:"protocols"`
+	// The files in the request.
+	RequestFiles GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput `pulumi:"requestFiles"`
+	// The total reqeust count.
+	RequestTotal pulumi.Float64Input `pulumi:"requestTotal"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSecond pulumi.Float64Input `pulumi:"requestsPerSecond"`
+	// The average response time.
+	ResponseTimeAverage pulumi.Float64Input `pulumi:"responseTimeAverage"`
+	// The maximum response time.
+	ResponseTimeMax pulumi.Float64Input `pulumi:"responseTimeMax"`
+	// The minimum response time.
+	ResponseTimeMin pulumi.Float64Input `pulumi:"responseTimeMin"`
+	// The 90 percentile of the response time.
+	ResponseTimeP90 pulumi.Float64Input `pulumi:"responseTimeP90"`
+	// The 95 percentile of the response time.
+	ResponseTimeP95 pulumi.Float64Input `pulumi:"responseTimeP95"`
+	// The 99 percentile of the response time.
+	ResponseTimeP99 pulumi.Float64Input `pulumi:"responseTimeP99"`
+	// Scenario ID.
+	ScenarioId pulumi.StringInput `pulumi:"scenarioId"`
+	// Scenario name.
+	ScenarioName pulumi.StringInput `pulumi:"scenarioName"`
+	// Deprecated.
+	Scripts pulumi.StringArrayInput `pulumi:"scripts"`
+	// The job starting time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+	// Scenario status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// The script of the load test.
+	TestScripts GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput `pulumi:"testScripts"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJob)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobOutput() GetScenarioWithJobsScenarioWithJobsSetJobOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobArray and GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobArray{ GetScenarioWithJobsScenarioWithJobsSetJobArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobArray []GetScenarioWithJobsScenarioWithJobsSetJobInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJob)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobArray) ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobArray) ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJob)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobOutput() GetScenarioWithJobsScenarioWithJobsSetJobOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobOutput {
+	return o
+}
+
+// The reason for aborting the job.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) AbortReason() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) int { return v.AbortReason }).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Configs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []string { return v.Configs }).(pulumi.StringArrayOutput)
+}
+
+// The creation time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// The cron job ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) CronId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.CronId }).(pulumi.StringOutput)
+}
+
+// The test data sets for the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Datasets() GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobDataset {
+		return v.Datasets
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput)
+}
+
+// Whether to run the job in the debug mode. The default value is false.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Debug() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) bool { return v.Debug }).(pulumi.BoolOutput)
+}
+
+// The configuration for parsing domain names.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) DomainNameConfigs() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig {
+		return v.DomainNameConfigs
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput)
+}
+
+// Job running duration.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Duration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) int { return v.Duration }).(pulumi.IntOutput)
+}
+
+// The job ending time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Error rate.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ErrorRate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ErrorRate }).(pulumi.Float64Output)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Extensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []string { return v.Extensions }).(pulumi.StringArrayOutput)
+}
+
+// Job ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) JobId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.JobId }).(pulumi.StringOutput)
+}
+
+// Job owner.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) JobOwner() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.JobOwner }).(pulumi.StringOutput)
+}
+
+// The load source information.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) LoadSourceInfos() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo {
+		return v.LoadSourceInfos
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) LoadSources() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobLoadSource {
+		return v.LoadSources
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput)
+}
+
+// Scenario is load test configuration.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Loads() GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobLoad {
+		return v.Loads
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput)
+}
+
+// The maximum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) MaxRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) int { return v.MaxRequestsPerSecond }).(pulumi.IntOutput)
+}
+
+// The maximum VU of the job.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) MaxVirtualUserCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) int { return v.MaxVirtualUserCount }).(pulumi.IntOutput)
+}
+
+// The message describing the job running status.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.Message }).(pulumi.StringOutput)
+}
+
+// The rate of receiving bytes.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) NetworkReceiveRate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.NetworkReceiveRate }).(pulumi.Float64Output)
+}
+
+// The rate of sending bytes.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) NetworkSendRate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.NetworkSendRate }).(pulumi.Float64Output)
+}
+
+// The note of the job.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Note() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.Note }).(pulumi.StringOutput)
+}
+
+// The notification hooks.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) NotificationHooks() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook {
+		return v.NotificationHooks
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput)
+}
+
+// Plugins.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Plugins() GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobPlugin {
+		return v.Plugins
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput)
+}
+
+// Project ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Project name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// The protocol file.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Protocols() GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobProtocol {
+		return v.Protocols
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput)
+}
+
+// The files in the request.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) RequestFiles() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobRequestFile {
+		return v.RequestFiles
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput)
+}
+
+// The total reqeust count.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) RequestTotal() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.RequestTotal }).(pulumi.Float64Output)
+}
+
+// The configuration of the RPS mode load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) RequestsPerSecond() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.RequestsPerSecond }).(pulumi.Float64Output)
+}
+
+// The average response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeAverage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeAverage }).(pulumi.Float64Output)
+}
+
+// The maximum response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeMax() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeMax }).(pulumi.Float64Output)
+}
+
+// The minimum response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeMin() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeMin }).(pulumi.Float64Output)
+}
+
+// The 90 percentile of the response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeP90() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeP90 }).(pulumi.Float64Output)
+}
+
+// The 95 percentile of the response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeP95() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeP95 }).(pulumi.Float64Output)
+}
+
+// The 99 percentile of the response time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ResponseTimeP99() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) float64 { return v.ResponseTimeP99 }).(pulumi.Float64Output)
+}
+
+// Scenario ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ScenarioId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.ScenarioId }).(pulumi.StringOutput)
+}
+
+// Scenario name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) ScenarioName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.ScenarioName }).(pulumi.StringOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Scripts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []string { return v.Scripts }).(pulumi.StringArrayOutput)
+}
+
+// The job starting time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+// Scenario status.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// The script of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) TestScripts() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) []GetScenarioWithJobsScenarioWithJobsSetJobTestScript {
+		return v.TestScripts
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJob) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJob)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJob {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJob)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDataset struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// The header lines of the file.
+	HeadLines []string `pulumi:"headLines"`
+	// The parameter name list.
+	HeaderColumns []string `pulumi:"headerColumns"`
+	// Whether the first line contains the parameter names.
+	HeaderInFile bool `pulumi:"headerInFile"`
+	// The line count of the file.
+	LineCount int `pulumi:"lineCount"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Whether to split the test data.
+	Split bool `pulumi:"split"`
+	// The tail lines of the file.
+	TailLines []string `pulumi:"tailLines"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs and GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// The header lines of the file.
+	HeadLines pulumi.StringArrayInput `pulumi:"headLines"`
+	// The parameter name list.
+	HeaderColumns pulumi.StringArrayInput `pulumi:"headerColumns"`
+	// Whether the first line contains the parameter names.
+	HeaderInFile pulumi.BoolInput `pulumi:"headerInFile"`
+	// The line count of the file.
+	LineCount pulumi.IntInput `pulumi:"lineCount"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Whether to split the test data.
+	Split pulumi.BoolInput `pulumi:"split"`
+	// The tail lines of the file.
+	TailLines pulumi.StringArrayInput `pulumi:"tailLines"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDataset)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray and GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray []GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDataset)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDataset)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// The header lines of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) HeadLines() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) []string { return v.HeadLines }).(pulumi.StringArrayOutput)
+}
+
+// The parameter name list.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) HeaderColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) []string { return v.HeaderColumns }).(pulumi.StringArrayOutput)
+}
+
+// Whether the first line contains the parameter names.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) HeaderInFile() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) bool { return v.HeaderInFile }).(pulumi.BoolOutput)
+}
+
+// The line count of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) LineCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) int { return v.LineCount }).(pulumi.IntOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Whether to split the test data.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) Split() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) bool { return v.Split }).(pulumi.BoolOutput)
+}
+
+// The tail lines of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) TailLines() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) []string { return v.TailLines }).(pulumi.StringArrayOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDataset) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDataset)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobDataset {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobDataset)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig struct {
+	// The DNS configuration.
+	DnsConfigs []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig `pulumi:"dnsConfigs"`
+	// The configuration for host aliases.
+	HostAliases []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias `pulumi:"hostAliases"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs struct {
+	// The DNS configuration.
+	DnsConfigs GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput `pulumi:"dnsConfigs"`
+	// The configuration for host aliases.
+	HostAliases GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput `pulumi:"hostAliases"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput {
+	return o
+}
+
+// The DNS configuration.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput) DnsConfigs() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig) []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig {
+		return v.DnsConfigs
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput)
+}
+
+// The configuration for host aliases.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput) HostAliases() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig) []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias {
+		return v.HostAliases
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig struct {
+	// DNS IP list.
+	Nameservers []string `pulumi:"nameservers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs struct {
+	// DNS IP list.
+	Nameservers pulumi.StringArrayInput `pulumi:"nameservers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput {
+	return o
+}
+
+// DNS IP list.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput) Nameservers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig) []string {
+		return v.Nameservers
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias struct {
+	// Host names.
+	HostNames []string `pulumi:"hostNames"`
+	// IP.
+	Ip string `pulumi:"ip"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs struct {
+	// Host names.
+	HostNames pulumi.StringArrayInput `pulumi:"hostNames"`
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray []GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput {
+	return o
+}
+
+// Host names.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput) HostNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias) []string {
+		return v.HostNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// IP.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoad struct {
+	// The geographical distribution of the load source.
+	GeoRegionsLoadDistributions []GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution `pulumi:"geoRegionsLoadDistributions"`
+	// Scenario is load specification.
+	LoadSpecs []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec `pulumi:"loadSpecs"`
+	// The distribution of the load source.
+	VpcLoadDistributions []GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution `pulumi:"vpcLoadDistributions"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs struct {
+	// The geographical distribution of the load source.
+	GeoRegionsLoadDistributions GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput `pulumi:"geoRegionsLoadDistributions"`
+	// Scenario is load specification.
+	LoadSpecs GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput `pulumi:"loadSpecs"`
+	// The distribution of the load source.
+	VpcLoadDistributions GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput `pulumi:"vpcLoadDistributions"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoad)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoad)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoad)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput {
+	return o
+}
+
+// The geographical distribution of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) GeoRegionsLoadDistributions() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoad) []GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution {
+		return v.GeoRegionsLoadDistributions
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput)
+}
+
+// Scenario is load specification.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) LoadSpecs() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoad) []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec {
+		return v.LoadSpecs
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput)
+}
+
+// The distribution of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput) VpcLoadDistributions() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoad) []GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution {
+		return v.VpcLoadDistributions
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoad)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoad {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoad)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution struct {
+	// Percentage.
+	Percentage int `pulumi:"percentage"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs struct {
+	// Percentage.
+	Percentage pulumi.IntInput `pulumi:"percentage"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput {
+	return o
+}
+
+// Percentage.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) Percentage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution) int {
+		return v.Percentage
+	}).(pulumi.IntOutput)
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution) string {
+		return v.Region
+	}).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec struct {
+	// The configuration for the concurrency mode.
+	Concurrencies []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency `pulumi:"concurrencies"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSeconds []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond `pulumi:"requestsPerSeconds"`
+	// The script origin.
+	ScriptOrigins []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin `pulumi:"scriptOrigins"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs struct {
+	// The configuration for the concurrency mode.
+	Concurrencies GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput `pulumi:"concurrencies"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSeconds GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput `pulumi:"requestsPerSeconds"`
+	// The script origin.
+	ScriptOrigins GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput `pulumi:"scriptOrigins"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput {
+	return o
+}
+
+// The configuration for the concurrency mode.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) Concurrencies() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency {
+		return v.Concurrencies
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput)
+}
+
+// The configuration of the RPS mode load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) RequestsPerSeconds() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond {
+		return v.RequestsPerSeconds
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput)
+}
+
+// The script origin.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput) ScriptOrigins() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin {
+		return v.ScriptOrigins
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency struct {
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds int `pulumi:"gracefulStopSeconds"`
+	// The iteration count of the load test.
+	IterationCount int `pulumi:"iterationCount"`
+	// The maximum RPS.
+	MaxRequestsPerSecond int `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources int `pulumi:"resources"`
+	// The configuration for the multi-stage load test.
+	Stages []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage `pulumi:"stages"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs struct {
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds pulumi.IntInput `pulumi:"gracefulStopSeconds"`
+	// The iteration count of the load test.
+	IterationCount pulumi.IntInput `pulumi:"iterationCount"`
+	// The maximum RPS.
+	MaxRequestsPerSecond pulumi.IntInput `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources pulumi.IntInput `pulumi:"resources"`
+	// The configuration for the multi-stage load test.
+	Stages GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput `pulumi:"stages"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput {
+	return o
+}
+
+// The waiting period for a graceful shutdown.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) GracefulStopSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency) int {
+		return v.GracefulStopSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The iteration count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) IterationCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency) int { return v.IterationCount }).(pulumi.IntOutput)
+}
+
+// The maximum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) MaxRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency) int {
+		return v.MaxRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The recource count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) Resources() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency) int { return v.Resources }).(pulumi.IntOutput)
+}
+
+// The configuration for the multi-stage load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput) Stages() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency) []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage {
+		return v.Stages
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// Deprecated.
+	TargetVirtualUsers int `pulumi:"targetVirtualUsers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// Deprecated.
+	TargetVirtualUsers pulumi.IntInput `pulumi:"targetVirtualUsers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput) TargetVirtualUsers() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage) int {
+		return v.TargetVirtualUsers
+	}).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds int `pulumi:"gracefulStopSeconds"`
+	// The maximum RPS.
+	MaxRequestsPerSecond int `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources int `pulumi:"resources"`
+	// The starting minimum RPS.
+	StartRequestsPerSecond int `pulumi:"startRequestsPerSecond"`
+	// The target RPS.
+	TargetRequestsPerSecond int `pulumi:"targetRequestsPerSecond"`
+	// Deprecated.
+	TargetVirtualUsers int `pulumi:"targetVirtualUsers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds pulumi.IntInput `pulumi:"gracefulStopSeconds"`
+	// The maximum RPS.
+	MaxRequestsPerSecond pulumi.IntInput `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources pulumi.IntInput `pulumi:"resources"`
+	// The starting minimum RPS.
+	StartRequestsPerSecond pulumi.IntInput `pulumi:"startRequestsPerSecond"`
+	// The target RPS.
+	TargetRequestsPerSecond pulumi.IntInput `pulumi:"targetRequestsPerSecond"`
+	// Deprecated.
+	TargetVirtualUsers pulumi.IntInput `pulumi:"targetVirtualUsers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The waiting period for a graceful shutdown.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) GracefulStopSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.GracefulStopSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The maximum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) MaxRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.MaxRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The recource count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) Resources() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int { return v.Resources }).(pulumi.IntOutput)
+}
+
+// The starting minimum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) StartRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.StartRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The target RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) TargetRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.TargetRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput) TargetVirtualUsers() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond) int {
+		return v.TargetVirtualUsers
+	}).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// The load test machine number.
+	MachineNumber int `pulumi:"machineNumber"`
+	// The load test machine specification.
+	MachineSpecification string `pulumi:"machineSpecification"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// The load test machine number.
+	MachineNumber pulumi.IntInput `pulumi:"machineNumber"`
+	// The load test machine specification.
+	MachineSpecification pulumi.StringInput `pulumi:"machineSpecification"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The load test machine number.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) MachineNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin) int { return v.MachineNumber }).(pulumi.IntOutput)
+}
+
+// The load test machine specification.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput) MachineSpecification() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin) string {
+		return v.MachineSpecification
+	}).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSource struct {
+	// IP.
+	Ip string `pulumi:"ip"`
+	// The pod name of the load source.
+	PodName string `pulumi:"podName"`
+	// Region.
+	Region string `pulumi:"region"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs struct {
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// The pod name of the load source.
+	PodName pulumi.StringInput `pulumi:"podName"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSource)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadSource)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSource)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput {
+	return o
+}
+
+// IP.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSource) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// The pod name of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) PodName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSource) string { return v.PodName }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSource) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadSource)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadSource {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadSource)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo struct {
+	// IP.
+	Ip string `pulumi:"ip"`
+	// The pod name of the load source.
+	PodName string `pulumi:"podName"`
+	// Region.
+	Region string `pulumi:"region"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs struct {
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// The pod name of the load source.
+	PodName pulumi.StringInput `pulumi:"podName"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput {
+	return o
+}
+
+// IP.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// The pod name of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) PodName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo) string { return v.PodName }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution struct {
+	// Region.
+	Region string `pulumi:"region"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+	// The subnet ID list.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// The VPC ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs struct {
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// The subnet ID list.
+	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
+	// The VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray []GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput {
+	return o
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// The subnet ID list.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
+}
+
+// The VPC ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook struct {
+	// The notification hook.
+	Events []string `pulumi:"events"`
+	// The callback URL.
+	Url string `pulumi:"url"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs and GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs struct {
+	// The notification hook.
+	Events pulumi.StringArrayInput `pulumi:"events"`
+	// The callback URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray and GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray []GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput {
+	return o
+}
+
+// The notification hook.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput) Events() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook) []string { return v.Events }).(pulumi.StringArrayOutput)
+}
+
+// The callback URL.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobPlugin struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobPluginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs and GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobPluginInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobPlugin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobPluginArray and GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobPluginArray{ GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginArray []GetScenarioWithJobsScenarioWithJobsSetJobPluginInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobPluginArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobPlugin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobPluginArray) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobPluginArray) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobPlugin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobPlugin) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobPlugin) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobPlugin) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobPlugin) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobPlugin) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobPlugin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobPlugin {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobPlugin)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocol struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs and GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobProtocol)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray and GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray []GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobProtocol)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobProtocol)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobProtocol) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobProtocol) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobProtocol) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobProtocol) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobProtocol) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobProtocol)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobProtocol {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobProtocol)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFile struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs and GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobRequestFile)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray and GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray []GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobRequestFile)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobRequestFile)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobRequestFile) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobRequestFile) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobRequestFile) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobRequestFile) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobRequestFile) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobRequestFile)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobRequestFile {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobRequestFile)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScript struct {
+	// The base64 encoded content.
+	EncodedContent string `pulumi:"encodedContent"`
+	// The base64 encoded HAR.
+	EncodedHttpArchive string `pulumi:"encodedHttpArchive"`
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// The weight of the script, ranging from 1 to 100.
+	LoadWeight int `pulumi:"loadWeight"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs and GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs struct {
+	// The base64 encoded content.
+	EncodedContent pulumi.StringInput `pulumi:"encodedContent"`
+	// The base64 encoded HAR.
+	EncodedHttpArchive pulumi.StringInput `pulumi:"encodedHttpArchive"`
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// The weight of the script, ranging from 1 to 100.
+	LoadWeight pulumi.IntInput `pulumi:"loadWeight"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobTestScript)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray and GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray []GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobTestScript)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobTestScript)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput {
+	return o
+}
+
+// The base64 encoded content.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) EncodedContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.EncodedContent }).(pulumi.StringOutput)
+}
+
+// The base64 encoded HAR.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) EncodedHttpArchive() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.EncodedHttpArchive }).(pulumi.StringOutput)
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// The weight of the script, ranging from 1 to 100.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) LoadWeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) int { return v.LoadWeight }).(pulumi.IntOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetJobTestScript) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetJobTestScript)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetJobTestScript {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetJobTestScript)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenario struct {
+	// AppId.
+	AppId int `pulumi:"appId"`
+	// Deprecated.
+	Configs []string `pulumi:"configs"`
+	// The creation time of the scenario.
+	CreatedAt string `pulumi:"createdAt"`
+	// The cron job ID.
+	CronId string `pulumi:"cronId"`
+	// The test data sets for the load test.
+	Datasets []GetScenarioWithJobsScenarioWithJobsSetScenarioDataset `pulumi:"datasets"`
+	// Scenario description.
+	Description string `pulumi:"description"`
+	// The configuration for parsing domain names.
+	DomainNameConfigs []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig `pulumi:"domainNameConfigs"`
+	// Deprecated.
+	EncodedScripts string `pulumi:"encodedScripts"`
+	// Deprecated.
+	Extensions []string `pulumi:"extensions"`
+	// Scenario is load test configuration.
+	Loads []GetScenarioWithJobsScenarioWithJobsSetScenarioLoad `pulumi:"loads"`
+	// File name.
+	Name string `pulumi:"name"`
+	// The notification hooks.
+	NotificationHooks []GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook `pulumi:"notificationHooks"`
+	// The job owner.
+	Owner string `pulumi:"owner"`
+	// Plugins.
+	Plugins []GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin `pulumi:"plugins"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// The protocol file.
+	Protocols []GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol `pulumi:"protocols"`
+	// The files in the request.
+	RequestFiles []GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile `pulumi:"requestFiles"`
+	// Scenario ID.
+	ScenarioId string `pulumi:"scenarioId"`
+	// The ID of the SLA policy.
+	SlaId string `pulumi:"slaId"`
+	// The SLA policy.
+	SlaPolicies []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy `pulumi:"slaPolicies"`
+	// Scenario status.
+	Status int `pulumi:"status"`
+	// SubAccountUin.
+	SubAccountUin string `pulumi:"subAccountUin"`
+	// The script of the load test.
+	TestScripts []GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript `pulumi:"testScripts"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// Uin.
+	Uin string `pulumi:"uin"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioArgs struct {
+	// AppId.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Deprecated.
+	Configs pulumi.StringArrayInput `pulumi:"configs"`
+	// The creation time of the scenario.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// The cron job ID.
+	CronId pulumi.StringInput `pulumi:"cronId"`
+	// The test data sets for the load test.
+	Datasets GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput `pulumi:"datasets"`
+	// Scenario description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// The configuration for parsing domain names.
+	DomainNameConfigs GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput `pulumi:"domainNameConfigs"`
+	// Deprecated.
+	EncodedScripts pulumi.StringInput `pulumi:"encodedScripts"`
+	// Deprecated.
+	Extensions pulumi.StringArrayInput `pulumi:"extensions"`
+	// Scenario is load test configuration.
+	Loads GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput `pulumi:"loads"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The notification hooks.
+	NotificationHooks GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput `pulumi:"notificationHooks"`
+	// The job owner.
+	Owner pulumi.StringInput `pulumi:"owner"`
+	// Plugins.
+	Plugins GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput `pulumi:"plugins"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// The protocol file.
+	Protocols GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput `pulumi:"protocols"`
+	// The files in the request.
+	RequestFiles GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput `pulumi:"requestFiles"`
+	// Scenario ID.
+	ScenarioId pulumi.StringInput `pulumi:"scenarioId"`
+	// The ID of the SLA policy.
+	SlaId pulumi.StringInput `pulumi:"slaId"`
+	// The SLA policy.
+	SlaPolicies GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput `pulumi:"slaPolicies"`
+	// Scenario status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// SubAccountUin.
+	SubAccountUin pulumi.StringInput `pulumi:"subAccountUin"`
+	// The script of the load test.
+	TestScripts GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput `pulumi:"testScripts"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Uin.
+	Uin pulumi.StringInput `pulumi:"uin"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenario)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioArray and GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioArray []GetScenarioWithJobsScenarioWithJobsSetScenarioInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenario)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenario)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioOutput {
+	return o
+}
+
+// AppId.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Configs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []string { return v.Configs }).(pulumi.StringArrayOutput)
+}
+
+// The creation time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// The cron job ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) CronId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.CronId }).(pulumi.StringOutput)
+}
+
+// The test data sets for the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Datasets() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioDataset {
+		return v.Datasets
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput)
+}
+
+// Scenario description.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The configuration for parsing domain names.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) DomainNameConfigs() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig {
+		return v.DomainNameConfigs
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) EncodedScripts() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.EncodedScripts }).(pulumi.StringOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Extensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []string { return v.Extensions }).(pulumi.StringArrayOutput)
+}
+
+// Scenario is load test configuration.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Loads() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoad {
+		return v.Loads
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The notification hooks.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) NotificationHooks() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook {
+		return v.NotificationHooks
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput)
+}
+
+// The job owner.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Owner() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.Owner }).(pulumi.StringOutput)
+}
+
+// Plugins.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Plugins() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin {
+		return v.Plugins
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput)
+}
+
+// Project ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Project name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// The protocol file.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Protocols() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol {
+		return v.Protocols
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput)
+}
+
+// The files in the request.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) RequestFiles() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile {
+		return v.RequestFiles
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput)
+}
+
+// Scenario ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) ScenarioId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.ScenarioId }).(pulumi.StringOutput)
+}
+
+// The ID of the SLA policy.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) SlaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.SlaId }).(pulumi.StringOutput)
+}
+
+// The SLA policy.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) SlaPolicies() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy {
+		return v.SlaPolicies
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput)
+}
+
+// Scenario status.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// SubAccountUin.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) SubAccountUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.SubAccountUin }).(pulumi.StringOutput)
+}
+
+// The script of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) TestScripts() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) []GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript {
+		return v.TestScripts
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Uin.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) Uin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.Uin }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenario) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenario)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenario {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenario)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDataset struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// The header lines of the file.
+	HeadLines []string `pulumi:"headLines"`
+	// The parameter name list.
+	HeaderColumns []string `pulumi:"headerColumns"`
+	// Whether the first line contains the parameter names.
+	HeaderInFile bool `pulumi:"headerInFile"`
+	// The line count of the file.
+	LineCount int `pulumi:"lineCount"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Whether to split the test data.
+	Split bool `pulumi:"split"`
+	// The tail lines of the file.
+	TailLines []string `pulumi:"tailLines"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// The header lines of the file.
+	HeadLines pulumi.StringArrayInput `pulumi:"headLines"`
+	// The parameter name list.
+	HeaderColumns pulumi.StringArrayInput `pulumi:"headerColumns"`
+	// Whether the first line contains the parameter names.
+	HeaderInFile pulumi.BoolInput `pulumi:"headerInFile"`
+	// The line count of the file.
+	LineCount pulumi.IntInput `pulumi:"lineCount"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Whether to split the test data.
+	Split pulumi.BoolInput `pulumi:"split"`
+	// The tail lines of the file.
+	TailLines pulumi.StringArrayInput `pulumi:"tailLines"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDataset)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray []GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDataset)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDataset)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// The header lines of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) HeadLines() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) []string { return v.HeadLines }).(pulumi.StringArrayOutput)
+}
+
+// The parameter name list.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) HeaderColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) []string { return v.HeaderColumns }).(pulumi.StringArrayOutput)
+}
+
+// Whether the first line contains the parameter names.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) HeaderInFile() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) bool { return v.HeaderInFile }).(pulumi.BoolOutput)
+}
+
+// The line count of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) LineCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) int { return v.LineCount }).(pulumi.IntOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Whether to split the test data.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) Split() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) bool { return v.Split }).(pulumi.BoolOutput)
+}
+
+// The tail lines of the file.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) TailLines() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) []string { return v.TailLines }).(pulumi.StringArrayOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDataset) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDataset)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioDataset {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioDataset)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig struct {
+	// The DNS configuration.
+	DnsConfigs []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig `pulumi:"dnsConfigs"`
+	// The configuration for host aliases.
+	HostAliases []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias `pulumi:"hostAliases"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs struct {
+	// The DNS configuration.
+	DnsConfigs GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput `pulumi:"dnsConfigs"`
+	// The configuration for host aliases.
+	HostAliases GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput `pulumi:"hostAliases"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput {
+	return o
+}
+
+// The DNS configuration.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput) DnsConfigs() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig) []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig {
+		return v.DnsConfigs
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput)
+}
+
+// The configuration for host aliases.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput) HostAliases() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig) []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias {
+		return v.HostAliases
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig struct {
+	// DNS IP list.
+	Nameservers []string `pulumi:"nameservers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs struct {
+	// DNS IP list.
+	Nameservers pulumi.StringArrayInput `pulumi:"nameservers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput {
+	return o
+}
+
+// DNS IP list.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput) Nameservers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig) []string {
+		return v.Nameservers
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias struct {
+	// Host names.
+	HostNames []string `pulumi:"hostNames"`
+	// IP.
+	Ip string `pulumi:"ip"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs struct {
+	// Host names.
+	HostNames pulumi.StringArrayInput `pulumi:"hostNames"`
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray []GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput {
+	return o
+}
+
+// Host names.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput) HostNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias) []string {
+		return v.HostNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// IP.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoad struct {
+	// The geographical distribution of the load source.
+	GeoRegionsLoadDistributions []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution `pulumi:"geoRegionsLoadDistributions"`
+	// Scenario is load specification.
+	LoadSpecs []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec `pulumi:"loadSpecs"`
+	// The distribution of the load source.
+	VpcLoadDistributions []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution `pulumi:"vpcLoadDistributions"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs struct {
+	// The geographical distribution of the load source.
+	GeoRegionsLoadDistributions GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput `pulumi:"geoRegionsLoadDistributions"`
+	// Scenario is load specification.
+	LoadSpecs GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput `pulumi:"loadSpecs"`
+	// The distribution of the load source.
+	VpcLoadDistributions GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput `pulumi:"vpcLoadDistributions"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoad)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoad)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoad)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput {
+	return o
+}
+
+// The geographical distribution of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) GeoRegionsLoadDistributions() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoad) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution {
+		return v.GeoRegionsLoadDistributions
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput)
+}
+
+// Scenario is load specification.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) LoadSpecs() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoad) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec {
+		return v.LoadSpecs
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput)
+}
+
+// The distribution of the load source.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput) VpcLoadDistributions() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoad) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution {
+		return v.VpcLoadDistributions
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoad)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoad {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoad)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution struct {
+	// Percentage.
+	Percentage int `pulumi:"percentage"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs struct {
+	// Percentage.
+	Percentage pulumi.IntInput `pulumi:"percentage"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput {
+	return o
+}
+
+// Percentage.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) Percentage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution) int {
+		return v.Percentage
+	}).(pulumi.IntOutput)
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution) string {
+		return v.Region
+	}).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution) int {
+		return v.RegionId
+	}).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribution)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec struct {
+	// The configuration for the concurrency mode.
+	Concurrencies []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency `pulumi:"concurrencies"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSeconds []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond `pulumi:"requestsPerSeconds"`
+	// The script origin.
+	ScriptOrigins []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin `pulumi:"scriptOrigins"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs struct {
+	// The configuration for the concurrency mode.
+	Concurrencies GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput `pulumi:"concurrencies"`
+	// The configuration of the RPS mode load test.
+	RequestsPerSeconds GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput `pulumi:"requestsPerSeconds"`
+	// The script origin.
+	ScriptOrigins GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput `pulumi:"scriptOrigins"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput {
+	return o
+}
+
+// The configuration for the concurrency mode.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) Concurrencies() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency {
+		return v.Concurrencies
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput)
+}
+
+// The configuration of the RPS mode load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) RequestsPerSeconds() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond {
+		return v.RequestsPerSeconds
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput)
+}
+
+// The script origin.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput) ScriptOrigins() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin {
+		return v.ScriptOrigins
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency struct {
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds int `pulumi:"gracefulStopSeconds"`
+	// The iteration count of the load test.
+	IterationCount int `pulumi:"iterationCount"`
+	// The maximum RPS.
+	MaxRequestsPerSecond int `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources int `pulumi:"resources"`
+	// The configuration for the multi-stage load test.
+	Stages []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage `pulumi:"stages"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs struct {
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds pulumi.IntInput `pulumi:"gracefulStopSeconds"`
+	// The iteration count of the load test.
+	IterationCount pulumi.IntInput `pulumi:"iterationCount"`
+	// The maximum RPS.
+	MaxRequestsPerSecond pulumi.IntInput `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources pulumi.IntInput `pulumi:"resources"`
+	// The configuration for the multi-stage load test.
+	Stages GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput `pulumi:"stages"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput {
+	return o
+}
+
+// The waiting period for a graceful shutdown.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) GracefulStopSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency) int {
+		return v.GracefulStopSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The iteration count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) IterationCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency) int {
+		return v.IterationCount
+	}).(pulumi.IntOutput)
+}
+
+// The maximum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) MaxRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency) int {
+		return v.MaxRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The recource count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) Resources() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency) int { return v.Resources }).(pulumi.IntOutput)
+}
+
+// The configuration for the multi-stage load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput) Stages() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency) []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage {
+		return v.Stages
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// Deprecated.
+	TargetVirtualUsers int `pulumi:"targetVirtualUsers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// Deprecated.
+	TargetVirtualUsers pulumi.IntInput `pulumi:"targetVirtualUsers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput) TargetVirtualUsers() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage) int {
+		return v.TargetVirtualUsers
+	}).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds int `pulumi:"gracefulStopSeconds"`
+	// The maximum RPS.
+	MaxRequestsPerSecond int `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources int `pulumi:"resources"`
+	// The starting minimum RPS.
+	StartRequestsPerSecond int `pulumi:"startRequestsPerSecond"`
+	// The target RPS.
+	TargetRequestsPerSecond int `pulumi:"targetRequestsPerSecond"`
+	// Deprecated.
+	TargetVirtualUsers int `pulumi:"targetVirtualUsers"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// The waiting period for a graceful shutdown.
+	GracefulStopSeconds pulumi.IntInput `pulumi:"gracefulStopSeconds"`
+	// The maximum RPS.
+	MaxRequestsPerSecond pulumi.IntInput `pulumi:"maxRequestsPerSecond"`
+	// The recource count of the load test.
+	Resources pulumi.IntInput `pulumi:"resources"`
+	// The starting minimum RPS.
+	StartRequestsPerSecond pulumi.IntInput `pulumi:"startRequestsPerSecond"`
+	// The target RPS.
+	TargetRequestsPerSecond pulumi.IntInput `pulumi:"targetRequestsPerSecond"`
+	// Deprecated.
+	TargetVirtualUsers pulumi.IntInput `pulumi:"targetVirtualUsers"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The waiting period for a graceful shutdown.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) GracefulStopSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.GracefulStopSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The maximum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) MaxRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.MaxRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The recource count of the load test.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) Resources() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.Resources
+	}).(pulumi.IntOutput)
+}
+
+// The starting minimum RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) StartRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.StartRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// The target RPS.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) TargetRequestsPerSecond() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.TargetRequestsPerSecond
+	}).(pulumi.IntOutput)
+}
+
+// Deprecated.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput) TargetVirtualUsers() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond) int {
+		return v.TargetVirtualUsers
+	}).(pulumi.IntOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin struct {
+	// The load test execution time.
+	DurationSeconds int `pulumi:"durationSeconds"`
+	// The load test machine number.
+	MachineNumber int `pulumi:"machineNumber"`
+	// The load test machine specification.
+	MachineSpecification string `pulumi:"machineSpecification"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs struct {
+	// The load test execution time.
+	DurationSeconds pulumi.IntInput `pulumi:"durationSeconds"`
+	// The load test machine number.
+	MachineNumber pulumi.IntInput `pulumi:"machineNumber"`
+	// The load test machine specification.
+	MachineSpecification pulumi.StringInput `pulumi:"machineSpecification"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput {
+	return o
+}
+
+// The load test execution time.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) DurationSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin) int {
+		return v.DurationSeconds
+	}).(pulumi.IntOutput)
+}
+
+// The load test machine number.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) MachineNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin) int {
+		return v.MachineNumber
+	}).(pulumi.IntOutput)
+}
+
+// The load test machine specification.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput) MachineSpecification() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin) string {
+		return v.MachineSpecification
+	}).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution struct {
+	// Region.
+	Region string `pulumi:"region"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+	// The subnet ID list.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// The VPC ID.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs struct {
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// The subnet ID list.
+	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
+	// The VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray []GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput {
+	return o
+}
+
+// Region.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// The subnet ID list.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution) []string {
+		return v.SubnetIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// The VPC ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook struct {
+	// The notification hook.
+	Events []string `pulumi:"events"`
+	// The callback URL.
+	Url string `pulumi:"url"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs struct {
+	// The notification hook.
+	Events pulumi.StringArrayInput `pulumi:"events"`
+	// The callback URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray and GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray []GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput {
+	return o
+}
+
+// The notification hook.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput) Events() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook) []string { return v.Events }).(pulumi.StringArrayOutput)
+}
+
+// The callback URL.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray and GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray []GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray and GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray []GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile struct {
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs struct {
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray and GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray []GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput {
+	return o
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy struct {
+	// The alert channel.
+	AlertChannels []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel `pulumi:"alertChannels"`
+	// The SLA rules.
+	SlaRules []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule `pulumi:"slaRules"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs struct {
+	// The alert channel.
+	AlertChannels GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput `pulumi:"alertChannels"`
+	// The SLA rules.
+	SlaRules GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput `pulumi:"slaRules"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput {
+	return o
+}
+
+// The alert channel.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput) AlertChannels() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy) []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel {
+		return v.AlertChannels
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput)
+}
+
+// The SLA rules.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput) SlaRules() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy) []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule {
+		return v.SlaRules
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel struct {
+	// AMP consumer ID.
+	AmpConsumerId string `pulumi:"ampConsumerId"`
+	// The notice ID bound with this alert channel.
+	NoticeId string `pulumi:"noticeId"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs struct {
+	// AMP consumer ID.
+	AmpConsumerId pulumi.StringInput `pulumi:"ampConsumerId"`
+	// The notice ID bound with this alert channel.
+	NoticeId pulumi.StringInput `pulumi:"noticeId"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput {
+	return o
+}
+
+// AMP consumer ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput) AmpConsumerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel) string {
+		return v.AmpConsumerId
+	}).(pulumi.StringOutput)
+}
+
+// The notice ID bound with this alert channel.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput) NoticeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel) string { return v.NoticeId }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule struct {
+	// Whether to abort the load test job.
+	AbortFlag bool `pulumi:"abortFlag"`
+	// The aggregation method of the metrics.
+	Aggregation string `pulumi:"aggregation"`
+	// The operator for checking the condition.
+	Condition string `pulumi:"condition"`
+	// The duration for checking the condition.
+	For string `pulumi:"for"`
+	// The label filter.
+	LabelFilters []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter `pulumi:"labelFilters"`
+	// The load test metrics.
+	Metric string `pulumi:"metric"`
+	// The threshold in the condition.
+	Value float64 `pulumi:"value"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs struct {
+	// Whether to abort the load test job.
+	AbortFlag pulumi.BoolInput `pulumi:"abortFlag"`
+	// The aggregation method of the metrics.
+	Aggregation pulumi.StringInput `pulumi:"aggregation"`
+	// The operator for checking the condition.
+	Condition pulumi.StringInput `pulumi:"condition"`
+	// The duration for checking the condition.
+	For pulumi.StringInput `pulumi:"for"`
+	// The label filter.
+	LabelFilters GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput `pulumi:"labelFilters"`
+	// The load test metrics.
+	Metric pulumi.StringInput `pulumi:"metric"`
+	// The threshold in the condition.
+	Value pulumi.Float64Input `pulumi:"value"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput {
+	return o
+}
+
+// Whether to abort the load test job.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) AbortFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) bool { return v.AbortFlag }).(pulumi.BoolOutput)
+}
+
+// The aggregation method of the metrics.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) Aggregation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) string { return v.Aggregation }).(pulumi.StringOutput)
+}
+
+// The operator for checking the condition.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) Condition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) string { return v.Condition }).(pulumi.StringOutput)
+}
+
+// The duration for checking the condition.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) For() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) string { return v.For }).(pulumi.StringOutput)
+}
+
+// The label filter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) LabelFilters() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter {
+		return v.LabelFilters
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput)
+}
+
+// The load test metrics.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) Metric() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) string { return v.Metric }).(pulumi.StringOutput)
+}
+
+// The threshold in the condition.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput) Value() pulumi.Float64Output {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule) float64 { return v.Value }).(pulumi.Float64Output)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter struct {
+	// Label name.
+	LabelName string `pulumi:"labelName"`
+	// Label value.
+	LabelValue string `pulumi:"labelValue"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs struct {
+	// Label name.
+	LabelName pulumi.StringInput `pulumi:"labelName"`
+	// Label value.
+	LabelValue pulumi.StringInput `pulumi:"labelValue"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray []GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput {
+	return o
+}
+
+// Label name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput) LabelName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter) string {
+		return v.LabelName
+	}).(pulumi.StringOutput)
+}
+
+// Label value.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput) LabelValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter) string {
+		return v.LabelValue
+	}).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript struct {
+	// The base64 encoded content.
+	EncodedContent string `pulumi:"encodedContent"`
+	// The base64 encoded HAR.
+	EncodedHttpArchive string `pulumi:"encodedHttpArchive"`
+	// File ID.
+	FileId string `pulumi:"fileId"`
+	// The weight of the script, ranging from 1 to 100.
+	LoadWeight int `pulumi:"loadWeight"`
+	// File name.
+	Name string `pulumi:"name"`
+	// File size.
+	Size int `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type string `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...}
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs struct {
+	// The base64 encoded content.
+	EncodedContent pulumi.StringInput `pulumi:"encodedContent"`
+	// The base64 encoded HAR.
+	EncodedHttpArchive pulumi.StringInput `pulumi:"encodedHttpArchive"`
+	// File ID.
+	FileId pulumi.StringInput `pulumi:"fileId"`
+	// The weight of the script, ranging from 1 to 100.
+	LoadWeight pulumi.IntInput `pulumi:"loadWeight"`
+	// File name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// File size.
+	Size pulumi.IntInput `pulumi:"size"`
+	// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The updating time of the scenario.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+}
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput)
+}
+
+// GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray and GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput values.
+// You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput` via:
+//
+//          GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...} }
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput interface {
+	pulumi.Input
+
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput
+	ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutputWithContext(context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray []GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript)(nil)).Elem()
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput {
+	return i.ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutputWithContext(context.Background())
+}
+
+func (i GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput {
+	return o
+}
+
+// The base64 encoded content.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) EncodedContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.EncodedContent }).(pulumi.StringOutput)
+}
+
+// The base64 encoded HAR.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) EncodedHttpArchive() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.EncodedHttpArchive }).(pulumi.StringOutput)
+}
+
+// File ID.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) FileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.FileId }).(pulumi.StringOutput)
+}
+
+// The weight of the script, ranging from 1 to 100.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) LoadWeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) int { return v.LoadWeight }).(pulumi.IntOutput)
+}
+
+// File name.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// File size.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The updating time of the scenario.
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput struct{ *pulumi.OutputState }
+
+func (GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript)(nil)).Elem()
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput() GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput) ToGetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutputWithContext(ctx context.Context) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput {
+	return o
+}
+
+func (o GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput) Index(i pulumi.IntInput) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript {
+		return vs[0].([]GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript)[vs[1].(int)]
+	}).(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FileFileInfoInput)(nil)).Elem(), FileFileInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FileFileInfoArrayInput)(nil)).Elem(), FileFileInfoArray{})
@@ -5597,6 +11757,94 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ScenarioSlaPolicySlaRuleLabelFilterArrayInput)(nil)).Elem(), ScenarioSlaPolicySlaRuleLabelFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScenarioTestScriptInput)(nil)).Elem(), ScenarioTestScriptArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScenarioTestScriptArrayInput)(nil)).Elem(), ScenarioTestScriptArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpKeyGenerateCredentialInput)(nil)).Elem(), TmpKeyGenerateCredentialArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpKeyGenerateCredentialArrayInput)(nil)).Elem(), TmpKeyGenerateCredentialArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobPluginInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobPluginArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput)(nil)).Elem(), GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray{})
 	pulumi.RegisterOutputType(FileFileInfoOutput{})
 	pulumi.RegisterOutputType(FileFileInfoArrayOutput{})
 	pulumi.RegisterOutputType(JobDatasetOutput{})
@@ -5673,4 +11921,92 @@ func init() {
 	pulumi.RegisterOutputType(ScenarioSlaPolicySlaRuleLabelFilterArrayOutput{})
 	pulumi.RegisterOutputType(ScenarioTestScriptOutput{})
 	pulumi.RegisterOutputType(ScenarioTestScriptArrayOutput{})
+	pulumi.RegisterOutputType(TmpKeyGenerateCredentialOutput{})
+	pulumi.RegisterOutputType(TmpKeyGenerateCredentialArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput{})
+	pulumi.RegisterOutputType(GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput{})
 }

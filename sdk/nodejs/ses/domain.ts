@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
@@ -55,6 +56,10 @@ export class Domain extends pulumi.CustomResource {
     }
 
     /**
+     * DNS configuration details.
+     */
+    public /*out*/ readonly attributes!: pulumi.Output<outputs.Ses.DomainAttribute[]>;
+    /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */
     public readonly emailIdentity!: pulumi.Output<string>;
@@ -72,6 +77,7 @@ export class Domain extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DomainState | undefined;
+            resourceInputs["attributes"] = state ? state.attributes : undefined;
             resourceInputs["emailIdentity"] = state ? state.emailIdentity : undefined;
         } else {
             const args = argsOrState as DomainArgs | undefined;
@@ -79,6 +85,7 @@ export class Domain extends pulumi.CustomResource {
                 throw new Error("Missing required property 'emailIdentity'");
             }
             resourceInputs["emailIdentity"] = args ? args.emailIdentity : undefined;
+            resourceInputs["attributes"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Domain.__pulumiType, name, resourceInputs, opts);
@@ -89,6 +96,10 @@ export class Domain extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Domain resources.
  */
 export interface DomainState {
+    /**
+     * DNS configuration details.
+     */
+    attributes?: pulumi.Input<pulumi.Input<inputs.Ses.DomainAttribute>[]>;
     /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */

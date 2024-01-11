@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class OriginGroupOriginRecordPrivateParameterGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+        /// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;

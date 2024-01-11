@@ -120,6 +120,19 @@ def get_taw_instance(area_ids: Optional[Sequence[int]] = None,
     """
     Use this data source to query detailed information of rum tawInstance
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    taw_instance = tencentcloud.Rum.get_taw_instance(area_ids=[1],
+        charge_statuses=[1],
+        charge_types=[1],
+        instance_ids=["rum-pasZKEI3RLgakj"],
+        instance_statuses=[2])
+    ```
+
 
     :param Sequence[int] area_ids: Region ID.
     :param Sequence[int] charge_statuses: Billing status.
@@ -164,6 +177,19 @@ def get_taw_instance_output(area_ids: Optional[pulumi.Input[Optional[Sequence[in
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTawInstanceResult]:
     """
     Use this data source to query detailed information of rum tawInstance
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    taw_instance = tencentcloud.Rum.get_taw_instance(area_ids=[1],
+        charge_statuses=[1],
+        charge_types=[1],
+        instance_ids=["rum-pasZKEI3RLgakj"],
+        instance_statuses=[2])
+    ```
 
 
     :param Sequence[int] area_ids: Region ID.

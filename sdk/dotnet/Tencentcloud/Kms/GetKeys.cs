@@ -27,12 +27,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
+        ///         var example = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
         ///         {
         ///             KeyState = 0,
         ///             KeyUsage = "ALL",
         ///             Origin = "TENCENT_KMS",
-        ///             SearchKeyAlias = "test",
+        ///             SearchKeyAlias = "tf_example",
         ///         }));
         ///     }
         /// 
@@ -59,12 +59,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
+        ///         var example = Output.Create(Tencentcloud.Kms.GetKeys.InvokeAsync(new Tencentcloud.Kms.GetKeysArgs
         ///         {
         ///             KeyState = 0,
         ///             KeyUsage = "ALL",
         ///             Origin = "TENCENT_KMS",
-        ///             SearchKeyAlias = "test",
+        ///             SearchKeyAlias = "tf_example",
         ///         }));
         ///     }
         /// 

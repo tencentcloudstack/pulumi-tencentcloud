@@ -19,10 +19,13 @@ class RebootInstanceArgs:
         """
         The set of arguments for constructing a RebootInstance resource.
         :param pulumi.Input[str] instance_id: Instance ID.
-        :param pulumi.Input[bool] force_reboot: This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        :param pulumi.Input[bool] force_reboot: It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         :param pulumi.Input[str] stop_type: Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
         """
         pulumi.set(__self__, "instance_id", instance_id)
+        if force_reboot is not None:
+            warnings.warn("""It has been deprecated from version 1.81.21. Please use `stop_type` instead.""", DeprecationWarning)
+            pulumi.log.warn("""force_reboot is deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.""")
         if force_reboot is not None:
             pulumi.set(__self__, "force_reboot", force_reboot)
         if stop_type is not None:
@@ -44,7 +47,7 @@ class RebootInstanceArgs:
     @pulumi.getter(name="forceReboot")
     def force_reboot(self) -> Optional[pulumi.Input[bool]]:
         """
-        This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         """
         return pulumi.get(self, "force_reboot")
 
@@ -73,10 +76,13 @@ class _RebootInstanceState:
                  stop_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering RebootInstance resources.
-        :param pulumi.Input[bool] force_reboot: This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        :param pulumi.Input[bool] force_reboot: It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         :param pulumi.Input[str] instance_id: Instance ID.
         :param pulumi.Input[str] stop_type: Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
         """
+        if force_reboot is not None:
+            warnings.warn("""It has been deprecated from version 1.81.21. Please use `stop_type` instead.""", DeprecationWarning)
+            pulumi.log.warn("""force_reboot is deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.""")
         if force_reboot is not None:
             pulumi.set(__self__, "force_reboot", force_reboot)
         if instance_id is not None:
@@ -88,7 +94,7 @@ class _RebootInstanceState:
     @pulumi.getter(name="forceReboot")
     def force_reboot(self) -> Optional[pulumi.Input[bool]]:
         """
-        This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         """
         return pulumi.get(self, "force_reboot")
 
@@ -140,13 +146,13 @@ class RebootInstance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         reboot_instance = tencentcloud.cvm.RebootInstance("rebootInstance",
-            force_reboot=False,
-            instance_id="ins-xxxxx")
+            instance_id="ins-f9jr4bd2",
+            stop_type="SOFT_FIRST")
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] force_reboot: This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        :param pulumi.Input[bool] force_reboot: It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         :param pulumi.Input[str] instance_id: Instance ID.
         :param pulumi.Input[str] stop_type: Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
         """
@@ -166,8 +172,8 @@ class RebootInstance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         reboot_instance = tencentcloud.cvm.RebootInstance("rebootInstance",
-            force_reboot=False,
-            instance_id="ins-xxxxx")
+            instance_id="ins-f9jr4bd2",
+            stop_type="SOFT_FIRST")
         ```
 
         :param str resource_name: The name of the resource.
@@ -202,6 +208,9 @@ class RebootInstance(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = RebootInstanceArgs.__new__(RebootInstanceArgs)
 
+            if force_reboot is not None and not opts.urn:
+                warnings.warn("""It has been deprecated from version 1.81.21. Please use `stop_type` instead.""", DeprecationWarning)
+                pulumi.log.warn("""force_reboot is deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.""")
             __props__.__dict__["force_reboot"] = force_reboot
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
@@ -227,7 +236,7 @@ class RebootInstance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] force_reboot: This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        :param pulumi.Input[bool] force_reboot: It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         :param pulumi.Input[str] instance_id: Instance ID.
         :param pulumi.Input[str] stop_type: Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
         """
@@ -244,7 +253,7 @@ class RebootInstance(pulumi.CustomResource):
     @pulumi.getter(name="forceReboot")
     def force_reboot(self) -> pulumi.Output[Optional[bool]]:
         """
-        This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+        It has been deprecated from version 1.81.21. Please use `stop_type` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
         """
         return pulumi.get(self, "force_reboot")
 

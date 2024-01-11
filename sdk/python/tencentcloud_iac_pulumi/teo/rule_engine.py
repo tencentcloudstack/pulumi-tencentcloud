@@ -22,10 +22,10 @@ class RuleEngineArgs:
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a RuleEngine resource.
-        :param pulumi.Input[str] rule_name: Rule name.
+        :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
         :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleArgs']]] rules: Rule items list.
-        :param pulumi.Input[str] status: Status of the rule, valid value can be `enable` or `disable`.
-        :param pulumi.Input[str] zone_id: Site ID.
+        :param pulumi.Input[str] status: Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+        :param pulumi.Input[str] zone_id: ID of the site.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
         """
         pulumi.set(__self__, "rule_name", rule_name)
@@ -39,7 +39,7 @@ class RuleEngineArgs:
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> pulumi.Input[str]:
         """
-        Rule name.
+        The rule name (1 to 255 characters).
         """
         return pulumi.get(self, "rule_name")
 
@@ -63,7 +63,7 @@ class RuleEngineArgs:
     @pulumi.getter
     def status(self) -> pulumi.Input[str]:
         """
-        Status of the rule, valid value can be `enable` or `disable`.
+        Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         """
         return pulumi.get(self, "status")
 
@@ -75,7 +75,7 @@ class RuleEngineArgs:
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> pulumi.Input[str]:
         """
-        Site ID.
+        ID of the site.
         """
         return pulumi.get(self, "zone_id")
 
@@ -108,11 +108,11 @@ class _RuleEngineState:
         """
         Input properties used for looking up and filtering RuleEngine resources.
         :param pulumi.Input[str] rule_id: Rule ID.
-        :param pulumi.Input[str] rule_name: Rule name.
+        :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
         :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleArgs']]] rules: Rule items list.
-        :param pulumi.Input[str] status: Status of the rule, valid value can be `enable` or `disable`.
+        :param pulumi.Input[str] status: Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
-        :param pulumi.Input[str] zone_id: Site ID.
+        :param pulumi.Input[str] zone_id: ID of the site.
         """
         if rule_id is not None:
             pulumi.set(__self__, "rule_id", rule_id)
@@ -143,7 +143,7 @@ class _RuleEngineState:
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Rule name.
+        The rule name (1 to 255 characters).
         """
         return pulumi.get(self, "rule_name")
 
@@ -167,7 +167,7 @@ class _RuleEngineState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of the rule, valid value can be `enable` or `disable`.
+        Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         """
         return pulumi.get(self, "status")
 
@@ -191,7 +191,7 @@ class _RuleEngineState:
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Site ID.
+        ID of the site.
         """
         return pulumi.get(self, "zone_id")
 
@@ -333,11 +333,11 @@ class RuleEngine(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] rule_name: Rule name.
+        :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RuleEngineRuleArgs']]]] rules: Rule items list.
-        :param pulumi.Input[str] status: Status of the rule, valid value can be `enable` or `disable`.
+        :param pulumi.Input[str] status: Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
-        :param pulumi.Input[str] zone_id: Site ID.
+        :param pulumi.Input[str] zone_id: ID of the site.
         """
         ...
     @overload
@@ -537,11 +537,11 @@ class RuleEngine(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] rule_id: Rule ID.
-        :param pulumi.Input[str] rule_name: Rule name.
+        :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RuleEngineRuleArgs']]]] rules: Rule items list.
-        :param pulumi.Input[str] status: Status of the rule, valid value can be `enable` or `disable`.
+        :param pulumi.Input[str] status: Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
-        :param pulumi.Input[str] zone_id: Site ID.
+        :param pulumi.Input[str] zone_id: ID of the site.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -567,7 +567,7 @@ class RuleEngine(pulumi.CustomResource):
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> pulumi.Output[str]:
         """
-        Rule name.
+        The rule name (1 to 255 characters).
         """
         return pulumi.get(self, "rule_name")
 
@@ -583,7 +583,7 @@ class RuleEngine(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Status of the rule, valid value can be `enable` or `disable`.
+        Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         """
         return pulumi.get(self, "status")
 
@@ -599,7 +599,7 @@ class RuleEngine(pulumi.CustomResource):
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> pulumi.Output[str]:
         """
-        Site ID.
+        ID of the site.
         """
         return pulumi.get(self, "zone_id")
 

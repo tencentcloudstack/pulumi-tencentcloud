@@ -21,6 +21,7 @@ class BasicInstanceArgs:
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 collation: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  maintenance_start_time: Optional[pulumi.Input[str]] = None,
                  maintenance_time_span: Optional[pulumi.Input[int]] = None,
@@ -43,6 +44,7 @@ class BasicInstanceArgs:
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] collation: System character set sorting rule, default: Chinese_PRC_CI_AS.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
@@ -68,6 +70,8 @@ class BasicInstanceArgs:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if collation is not None:
+            pulumi.set(__self__, "collation", collation)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if maintenance_start_time is not None:
@@ -188,6 +192,18 @@ class BasicInstanceArgs:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter
+    def collation(self) -> Optional[pulumi.Input[str]]:
+        """
+        System character set sorting rule, default: Chinese_PRC_CI_AS.
+        """
+        return pulumi.get(self, "collation")
+
+    @collation.setter
+    def collation(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "collation", value)
 
     @property
     @pulumi.getter(name="engineVersion")
@@ -341,6 +357,7 @@ class _BasicInstanceState:
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 collation: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
@@ -367,6 +384,7 @@ class _BasicInstanceState:
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] collation: System character set sorting rule, default: Chinese_PRC_CI_AS.
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] create_time: Create time of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -396,6 +414,8 @@ class _BasicInstanceState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if collation is not None:
+            pulumi.set(__self__, "collation", collation)
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
         if create_time is not None:
@@ -484,6 +504,18 @@ class _BasicInstanceState:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter
+    def collation(self) -> Optional[pulumi.Input[str]]:
+        """
+        System character set sorting rule, default: Chinese_PRC_CI_AS.
+        """
+        return pulumi.get(self, "collation")
+
+    @collation.setter
+    def collation(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "collation", value)
 
     @property
     @pulumi.getter
@@ -735,6 +767,7 @@ class BasicInstance(pulumi.CustomResource):
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 collation: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
@@ -807,6 +840,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] collation: System character set sorting rule, default: Chinese_PRC_CI_AS.
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         :param pulumi.Input[str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
@@ -898,6 +932,7 @@ class BasicInstance(pulumi.CustomResource):
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 collation: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
@@ -932,6 +967,7 @@ class BasicInstance(pulumi.CustomResource):
             __props__.__dict__["auto_voucher"] = auto_voucher
             __props__.__dict__["availability_zone"] = availability_zone
             __props__.__dict__["charge_type"] = charge_type
+            __props__.__dict__["collation"] = collation
             if cpu is None and not opts.urn:
                 raise TypeError("Missing required property 'cpu'")
             __props__.__dict__["cpu"] = cpu
@@ -974,6 +1010,7 @@ class BasicInstance(pulumi.CustomResource):
             auto_voucher: Optional[pulumi.Input[int]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
+            collation: Optional[pulumi.Input[str]] = None,
             cpu: Optional[pulumi.Input[int]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             engine_version: Optional[pulumi.Input[str]] = None,
@@ -1005,6 +1042,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
+        :param pulumi.Input[str] collation: System character set sorting rule, default: Chinese_PRC_CI_AS.
         :param pulumi.Input[int] cpu: The CPU number of the SQL Server basic instance.
         :param pulumi.Input[str] create_time: Create time of the SQL Server basic instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -1034,6 +1072,7 @@ class BasicInstance(pulumi.CustomResource):
         __props__.__dict__["auto_voucher"] = auto_voucher
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["charge_type"] = charge_type
+        __props__.__dict__["collation"] = collation
         __props__.__dict__["cpu"] = cpu
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["engine_version"] = engine_version
@@ -1087,6 +1126,14 @@ class BasicInstance(pulumi.CustomResource):
         Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
         """
         return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter
+    def collation(self) -> pulumi.Output[Optional[str]]:
+        """
+        System character set sorting rule, default: Chinese_PRC_CI_AS.
+        """
+        return pulumi.get(self, "collation")
 
     @property
     @pulumi.getter

@@ -360,6 +360,10 @@ type AlarmPolicy struct {
 	Enable pulumi.IntPtrOutput `pulumi:"enable"`
 	// A list of event trigger condition.
 	EventConditions AlarmPolicyEventConditionArrayOutput `pulumi:"eventConditions"`
+	// Global filters.
+	Filter AlarmPolicyFilterPtrOutput `pulumi:"filter"`
+	// Aggregate dimension list, specify which dimension keys to use for group by.
+	GroupBies pulumi.StringArrayOutput `pulumi:"groupBies"`
 	// The type of monitor.
 	MonitorType pulumi.StringOutput `pulumi:"monitorType"`
 	// The type of alarm.
@@ -429,6 +433,10 @@ type alarmPolicyState struct {
 	Enable *int `pulumi:"enable"`
 	// A list of event trigger condition.
 	EventConditions []AlarmPolicyEventCondition `pulumi:"eventConditions"`
+	// Global filters.
+	Filter *AlarmPolicyFilter `pulumi:"filter"`
+	// Aggregate dimension list, specify which dimension keys to use for group by.
+	GroupBies []string `pulumi:"groupBies"`
 	// The type of monitor.
 	MonitorType *string `pulumi:"monitorType"`
 	// The type of alarm.
@@ -460,6 +468,10 @@ type AlarmPolicyState struct {
 	Enable pulumi.IntPtrInput
 	// A list of event trigger condition.
 	EventConditions AlarmPolicyEventConditionArrayInput
+	// Global filters.
+	Filter AlarmPolicyFilterPtrInput
+	// Aggregate dimension list, specify which dimension keys to use for group by.
+	GroupBies pulumi.StringArrayInput
 	// The type of monitor.
 	MonitorType pulumi.StringPtrInput
 	// The type of alarm.
@@ -493,6 +505,10 @@ type alarmPolicyArgs struct {
 	Enable *int `pulumi:"enable"`
 	// A list of event trigger condition.
 	EventConditions []AlarmPolicyEventCondition `pulumi:"eventConditions"`
+	// Global filters.
+	Filter *AlarmPolicyFilter `pulumi:"filter"`
+	// Aggregate dimension list, specify which dimension keys to use for group by.
+	GroupBies []string `pulumi:"groupBies"`
 	// The type of monitor.
 	MonitorType string `pulumi:"monitorType"`
 	// The type of alarm.
@@ -521,6 +537,10 @@ type AlarmPolicyArgs struct {
 	Enable pulumi.IntPtrInput
 	// A list of event trigger condition.
 	EventConditions AlarmPolicyEventConditionArrayInput
+	// Global filters.
+	Filter AlarmPolicyFilterPtrInput
+	// Aggregate dimension list, specify which dimension keys to use for group by.
+	GroupBies pulumi.StringArrayInput
 	// The type of monitor.
 	MonitorType pulumi.StringInput
 	// The type of alarm.
@@ -649,6 +669,16 @@ func (o AlarmPolicyOutput) Enable() pulumi.IntPtrOutput {
 // A list of event trigger condition.
 func (o AlarmPolicyOutput) EventConditions() AlarmPolicyEventConditionArrayOutput {
 	return o.ApplyT(func(v *AlarmPolicy) AlarmPolicyEventConditionArrayOutput { return v.EventConditions }).(AlarmPolicyEventConditionArrayOutput)
+}
+
+// Global filters.
+func (o AlarmPolicyOutput) Filter() AlarmPolicyFilterPtrOutput {
+	return o.ApplyT(func(v *AlarmPolicy) AlarmPolicyFilterPtrOutput { return v.Filter }).(AlarmPolicyFilterPtrOutput)
+}
+
+// Aggregate dimension list, specify which dimension keys to use for group by.
+func (o AlarmPolicyOutput) GroupBies() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AlarmPolicy) pulumi.StringArrayOutput { return v.GroupBies }).(pulumi.StringArrayOutput)
 }
 
 // The type of monitor.

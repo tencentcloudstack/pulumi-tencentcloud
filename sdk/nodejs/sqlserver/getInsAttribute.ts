@@ -84,6 +84,10 @@ export interface GetInsAttributeResult {
     readonly regularBackupStrategy: string;
     readonly resultOutputFile?: string;
     /**
+     * SSL encryption.
+     */
+    readonly sslConfigs: outputs.Sqlserver.GetInsAttributeSslConfig[];
+    /**
      * TDE Transparent Data Encryption Configuration.
      */
     readonly tdeConfigs: outputs.Sqlserver.GetInsAttributeTdeConfig[];

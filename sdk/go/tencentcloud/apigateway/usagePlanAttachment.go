@@ -13,7 +13,10 @@ import (
 
 // Use this resource to attach API gateway usage plan to service.
 //
+// > **NOTE:** If the `authType` parameter of API is not `SECRET`, it cannot be bound access key.
+//
 // ## Example Usage
+// ### Normal creation
 //
 // ```go
 // package main
@@ -26,19 +29,19 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-// 			UsagePlanName:       pulumi.String("my_plan"),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
+// 		exampleUsagePlan, err := ApiGateway.NewUsagePlan(ctx, "exampleUsagePlan", &ApiGateway.UsagePlanArgs{
+// 			UsagePlanName:       pulumi.String("tf_example"),
+// 			UsagePlanDesc:       pulumi.String("desc."),
 // 			MaxRequestNum:       pulumi.Int(100),
 // 			MaxRequestNumPreSec: pulumi.Int(10),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("niceservice"),
+// 		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("tf_example"),
 // 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
+// 			ServiceDesc: pulumi.String("desc."),
 // 			NetTypes: pulumi.StringArray{
 // 				pulumi.String("INNER"),
 // 				pulumi.String("OUTER"),
@@ -48,9 +51,9 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-// 			ServiceId:           service.ID(),
-// 			ApiName:             pulumi.String("hello_update"),
+// 		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
+// 			ServiceId:           exampleService.ID(),
+// 			ApiName:             pulumi.String("tf_example"),
 // 			ApiDesc:             pulumi.String("my hello api update"),
 // 			AuthType:            pulumi.String("SECRET"),
 // 			Protocol:            pulumi.String("HTTP"),
@@ -62,8 +65,8 @@ import (
 // 					Name:         pulumi.String("email"),
 // 					Position:     pulumi.String("QUERY"),
 // 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("your email please?"),
-// 					DefaultValue: pulumi.String("tom@qq.com"),
+// 					Desc:         pulumi.String("desc."),
+// 					DefaultValue: pulumi.String("test@qq.com"),
 // 					Required:     pulumi.Bool(true),
 // 				},
 // 			},
@@ -77,10 +80,10 @@ import (
 // 			ResponseFailExample:    pulumi.String("<note>fail</note>"),
 // 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
 // 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(10),
+// 					Code:          pulumi.Int(500),
 // 					Msg:           pulumi.String("system error"),
 // 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: -10,
+// 					ConvertedCode: pulumi.Int(5000),
 // 					NeedConvert:   pulumi.Bool(true),
 // 				},
 // 			},
@@ -88,12 +91,48 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "attachService", &ApiGateway.UsagePlanAttachmentArgs{
-// 			UsagePlanId: plan.ID(),
-// 			ServiceId:   service.ID(),
+// 		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
+// 			UsagePlanId: exampleUsagePlan.ID(),
+// 			ServiceId:   exampleService.ID(),
 // 			Environment: pulumi.String("release"),
 // 			BindType:    pulumi.String("API"),
-// 			ApiId:       api.ID(),
+// 			ApiId:       exampleApi.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Bind the key to a usage plan
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleApiKey, err := ApiGateway.NewApiKey(ctx, "exampleApiKey", &ApiGateway.ApiKeyArgs{
+// 			SecretName: pulumi.String("tf_example"),
+// 			Status:     pulumi.String("on"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
+// 			UsagePlanId: pulumi.Any(tencentcloud_api_gateway_usage_plan.Example.Id),
+// 			ServiceId:   pulumi.Any(tencentcloud_api_gateway_service.Example.Id),
+// 			Environment: pulumi.String("release"),
+// 			BindType:    pulumi.String("API"),
+// 			ApiId:       pulumi.Any(tencentcloud_api_gateway_api.Example.Id),
+// 			AccessKeyIds: pulumi.StringArray{
+// 				exampleApiKey.ID(),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -113,6 +152,8 @@ import (
 type UsagePlanAttachment struct {
 	pulumi.CustomResourceState
 
+	// Array of key IDs to be bound.
+	AccessKeyIds pulumi.StringArrayOutput `pulumi:"accessKeyIds"`
 	// ID of the API. This parameter will be required when `bindType` is `API`.
 	ApiId pulumi.StringPtrOutput `pulumi:"apiId"`
 	// Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
@@ -164,6 +205,8 @@ func GetUsagePlanAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering UsagePlanAttachment resources.
 type usagePlanAttachmentState struct {
+	// Array of key IDs to be bound.
+	AccessKeyIds []string `pulumi:"accessKeyIds"`
 	// ID of the API. This parameter will be required when `bindType` is `API`.
 	ApiId *string `pulumi:"apiId"`
 	// Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
@@ -177,6 +220,8 @@ type usagePlanAttachmentState struct {
 }
 
 type UsagePlanAttachmentState struct {
+	// Array of key IDs to be bound.
+	AccessKeyIds pulumi.StringArrayInput
 	// ID of the API. This parameter will be required when `bindType` is `API`.
 	ApiId pulumi.StringPtrInput
 	// Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
@@ -194,6 +239,8 @@ func (UsagePlanAttachmentState) ElementType() reflect.Type {
 }
 
 type usagePlanAttachmentArgs struct {
+	// Array of key IDs to be bound.
+	AccessKeyIds []string `pulumi:"accessKeyIds"`
 	// ID of the API. This parameter will be required when `bindType` is `API`.
 	ApiId *string `pulumi:"apiId"`
 	// Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
@@ -208,6 +255,8 @@ type usagePlanAttachmentArgs struct {
 
 // The set of arguments for constructing a UsagePlanAttachment resource.
 type UsagePlanAttachmentArgs struct {
+	// Array of key IDs to be bound.
+	AccessKeyIds pulumi.StringArrayInput
 	// ID of the API. This parameter will be required when `bindType` is `API`.
 	ApiId pulumi.StringPtrInput
 	// Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
@@ -305,6 +354,11 @@ func (o UsagePlanAttachmentOutput) ToUsagePlanAttachmentOutput() UsagePlanAttach
 
 func (o UsagePlanAttachmentOutput) ToUsagePlanAttachmentOutputWithContext(ctx context.Context) UsagePlanAttachmentOutput {
 	return o
+}
+
+// Array of key IDs to be bound.
+func (o UsagePlanAttachmentOutput) AccessKeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *UsagePlanAttachment) pulumi.StringArrayOutput { return v.AccessKeyIds }).(pulumi.StringArrayOutput)
 }
 
 // ID of the API. This parameter will be required when `bindType` is `API`.

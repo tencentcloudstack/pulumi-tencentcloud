@@ -322,7 +322,7 @@ type Bucket struct {
 	// The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
 	Acl pulumi.StringPtrOutput `pulumi:"acl"`
 	// ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
-	AclBody pulumi.StringPtrOutput `pulumi:"aclBody"`
+	AclBody pulumi.StringOutput `pulumi:"aclBody"`
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringOutput `pulumi:"bucket"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
@@ -692,8 +692,8 @@ func (o BucketOutput) Acl() pulumi.StringPtrOutput {
 }
 
 // ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
-func (o BucketOutput) AclBody() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.AclBody }).(pulumi.StringPtrOutput)
+func (o BucketOutput) AclBody() pulumi.StringOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.AclBody }).(pulumi.StringOutput)
 }
 
 // The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.

@@ -37,6 +37,7 @@ from .get_basic_instances import *
 from .get_cross_region_zone import *
 from .get_db_charsets import *
 from .get_dbs import *
+from .get_desc_ha_log import *
 from .get_ins_attribute import *
 from .get_instance_param_records import *
 from .get_instances import *
@@ -52,6 +53,7 @@ from .get_upload_incremental_info import *
 from .get_zone_config import *
 from .incre_backup_migration import *
 from .instance import *
+from .instance_ssl import *
 from .instance_tde import *
 from .migration import *
 from .publish_subscribe import *

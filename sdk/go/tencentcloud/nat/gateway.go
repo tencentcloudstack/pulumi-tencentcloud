@@ -14,7 +14,7 @@ import (
 // Provides a resource to create a NAT gateway.
 //
 // ## Example Usage
-// ### Create a NAT gateway.
+// ### Create a traditional NAT gateway.
 //
 // ```go
 // package main
@@ -61,6 +61,52 @@ import (
 // 	})
 // }
 // ```
+// ### Create a standard NAT gateway.
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
+// 			VpcId: vpc.ID(),
+// 			AssignedEipSets: pulumi.StringArray{
+// 				eipExample1.PublicIp,
+// 				eipExample2.PublicIp,
+// 			},
+// 			NatProductVersion: pulumi.Int(2),
+// 			Tags: pulumi.AnyMap{
+// 				"tf_tag_key": pulumi.Any("tf_tag_value"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
@@ -82,6 +128,10 @@ type Gateway struct {
 	MaxConcurrent pulumi.IntPtrOutput `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// 1: traditional NAT, 2: standard NAT, default value is 1.
+	NatProductVersion pulumi.IntOutput `pulumi:"natProductVersion"`
+	// Subnet of NAT.
+	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// The available tags within this NAT gateway.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// ID of the vpc.
@@ -136,6 +186,10 @@ type gatewayState struct {
 	MaxConcurrent *int `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name *string `pulumi:"name"`
+	// 1: traditional NAT, 2: standard NAT, default value is 1.
+	NatProductVersion *int `pulumi:"natProductVersion"`
+	// Subnet of NAT.
+	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this NAT gateway.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the vpc.
@@ -155,6 +209,10 @@ type GatewayState struct {
 	MaxConcurrent pulumi.IntPtrInput
 	// Name of the NAT gateway.
 	Name pulumi.StringPtrInput
+	// 1: traditional NAT, 2: standard NAT, default value is 1.
+	NatProductVersion pulumi.IntPtrInput
+	// Subnet of NAT.
+	SubnetId pulumi.StringPtrInput
 	// The available tags within this NAT gateway.
 	Tags pulumi.MapInput
 	// ID of the vpc.
@@ -176,6 +234,10 @@ type gatewayArgs struct {
 	MaxConcurrent *int `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name *string `pulumi:"name"`
+	// 1: traditional NAT, 2: standard NAT, default value is 1.
+	NatProductVersion *int `pulumi:"natProductVersion"`
+	// Subnet of NAT.
+	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this NAT gateway.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// ID of the vpc.
@@ -194,6 +256,10 @@ type GatewayArgs struct {
 	MaxConcurrent pulumi.IntPtrInput
 	// Name of the NAT gateway.
 	Name pulumi.StringPtrInput
+	// 1: traditional NAT, 2: standard NAT, default value is 1.
+	NatProductVersion pulumi.IntPtrInput
+	// Subnet of NAT.
+	SubnetId pulumi.StringPtrInput
 	// The available tags within this NAT gateway.
 	Tags pulumi.MapInput
 	// ID of the vpc.
@@ -312,6 +378,16 @@ func (o GatewayOutput) MaxConcurrent() pulumi.IntPtrOutput {
 // Name of the NAT gateway.
 func (o GatewayOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// 1: traditional NAT, 2: standard NAT, default value is 1.
+func (o GatewayOutput) NatProductVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.IntOutput { return v.NatProductVersion }).(pulumi.IntOutput)
+}
+
+// Subnet of NAT.
+func (o GatewayOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
 // The available tags within this NAT gateway.

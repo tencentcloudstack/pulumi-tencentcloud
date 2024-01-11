@@ -22,10 +22,10 @@ class OriginGroupArgs:
                  zone_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a OriginGroup resource.
-        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         :param pulumi.Input[str] origin_group_name: OriginGroup Name.
         :param pulumi.Input[Sequence[pulumi.Input['OriginGroupOriginRecordArgs']]] origin_records: Origin site records.
-        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         pulumi.set(__self__, "configuration_type", configuration_type)
@@ -38,7 +38,7 @@ class OriginGroupArgs:
     @pulumi.getter(name="configurationType")
     def configuration_type(self) -> pulumi.Input[str]:
         """
-        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         """
         return pulumi.get(self, "configuration_type")
 
@@ -74,7 +74,7 @@ class OriginGroupArgs:
     @pulumi.getter(name="originType")
     def origin_type(self) -> pulumi.Input[str]:
         """
-        Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         """
         return pulumi.get(self, "origin_type")
 
@@ -107,11 +107,11 @@ class _OriginGroupState:
                  zone_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering OriginGroup resources.
-        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         :param pulumi.Input[str] origin_group_id: OriginGroup ID.
         :param pulumi.Input[str] origin_group_name: OriginGroup Name.
         :param pulumi.Input[Sequence[pulumi.Input['OriginGroupOriginRecordArgs']]] origin_records: Origin site records.
-        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         :param pulumi.Input[str] update_time: Last modification date.
         :param pulumi.Input[str] zone_id: Site ID.
         """
@@ -134,7 +134,7 @@ class _OriginGroupState:
     @pulumi.getter(name="configurationType")
     def configuration_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         """
         return pulumi.get(self, "configuration_type")
 
@@ -182,7 +182,7 @@ class _OriginGroupState:
     @pulumi.getter(name="originType")
     def origin_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         """
         return pulumi.get(self, "origin_type")
 
@@ -229,6 +229,46 @@ class OriginGroup(pulumi.CustomResource):
         """
         Provides a resource to create a teo origin_group
 
+        ## Example Usage
+        ### Self origin group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        origin_group = tencentcloud.teo.OriginGroup("originGroup",
+            configuration_type="weight",
+            origin_group_name="test-group",
+            origin_records=[tencentcloud.teo.OriginGroupOriginRecordArgs(
+                areas=[],
+                port=8080,
+                private=False,
+                record="150.109.8.1",
+                weight=100,
+            )],
+            origin_type="self",
+            zone_id="zone-297z8rf93cfw")
+        ```
+        ### Cos origin group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        origin_group = tencentcloud.teo.OriginGroup("originGroup",
+            configuration_type="weight",
+            origin_group_name="test",
+            origin_records=[tencentcloud.teo.OriginGroupOriginRecordArgs(
+                areas=[],
+                port=0,
+                private=True,
+                record="test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
+                weight=100,
+            )],
+            origin_type="cos",
+            zone_id="zone-2o3h21ed8bpu")
+        ```
+
         ## Import
 
         teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
@@ -241,10 +281,10 @@ class OriginGroup(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         :param pulumi.Input[str] origin_group_name: OriginGroup Name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['OriginGroupOriginRecordArgs']]]] origin_records: Origin site records.
-        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         ...
@@ -255,6 +295,46 @@ class OriginGroup(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a teo origin_group
+
+        ## Example Usage
+        ### Self origin group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        origin_group = tencentcloud.teo.OriginGroup("originGroup",
+            configuration_type="weight",
+            origin_group_name="test-group",
+            origin_records=[tencentcloud.teo.OriginGroupOriginRecordArgs(
+                areas=[],
+                port=8080,
+                private=False,
+                record="150.109.8.1",
+                weight=100,
+            )],
+            origin_type="self",
+            zone_id="zone-297z8rf93cfw")
+        ```
+        ### Cos origin group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        origin_group = tencentcloud.teo.OriginGroup("originGroup",
+            configuration_type="weight",
+            origin_group_name="test",
+            origin_records=[tencentcloud.teo.OriginGroupOriginRecordArgs(
+                areas=[],
+                port=0,
+                private=True,
+                record="test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
+                weight=100,
+            )],
+            origin_type="cos",
+            zone_id="zone-2o3h21ed8bpu")
+        ```
 
         ## Import
 
@@ -341,11 +421,11 @@ class OriginGroup(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        :param pulumi.Input[str] configuration_type: Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         :param pulumi.Input[str] origin_group_id: OriginGroup ID.
         :param pulumi.Input[str] origin_group_name: OriginGroup Name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['OriginGroupOriginRecordArgs']]]] origin_records: Origin site records.
-        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        :param pulumi.Input[str] origin_type: Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         :param pulumi.Input[str] update_time: Last modification date.
         :param pulumi.Input[str] zone_id: Site ID.
         """
@@ -366,7 +446,7 @@ class OriginGroup(pulumi.CustomResource):
     @pulumi.getter(name="configurationType")
     def configuration_type(self) -> pulumi.Output[str]:
         """
-        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         """
         return pulumi.get(self, "configuration_type")
 
@@ -398,7 +478,7 @@ class OriginGroup(pulumi.CustomResource):
     @pulumi.getter(name="originType")
     def origin_type(self) -> pulumi.Output[str]:
         """
-        Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         """
         return pulumi.get(self, "origin_type")
 

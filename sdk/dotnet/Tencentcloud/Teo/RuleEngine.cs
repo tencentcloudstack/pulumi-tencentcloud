@@ -238,7 +238,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> RuleId { get; private set; } = null!;
 
         /// <summary>
-        /// Rule name.
+        /// The rule name (1 to 255 characters).
         /// </summary>
         [Output("ruleName")]
         public Output<string> RuleName { get; private set; } = null!;
@@ -250,7 +250,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableArray<Outputs.RuleEngineRule>> Rules { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the rule, valid value can be `enable` or `disable`.
+        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -262,7 +262,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Site ID.
+        /// ID of the site.
         /// </summary>
         [Output("zoneId")]
         public Output<string> ZoneId { get; private set; } = null!;
@@ -315,7 +315,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class RuleEngineArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Rule name.
+        /// The rule name (1 to 255 characters).
         /// </summary>
         [Input("ruleName", required: true)]
         public Input<string> RuleName { get; set; } = null!;
@@ -333,7 +333,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Status of the rule, valid value can be `enable` or `disable`.
+        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         /// </summary>
         [Input("status", required: true)]
         public Input<string> Status { get; set; } = null!;
@@ -351,7 +351,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site ID.
+        /// ID of the site.
         /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
@@ -370,7 +370,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? RuleId { get; set; }
 
         /// <summary>
-        /// Rule name.
+        /// The rule name (1 to 255 characters).
         /// </summary>
         [Input("ruleName")]
         public Input<string>? RuleName { get; set; }
@@ -388,7 +388,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Status of the rule, valid value can be `enable` or `disable`.
+        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -406,7 +406,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site ID.
+        /// ID of the site.
         /// </summary>
         [Input("zoneId")]
         public Input<string>? ZoneId { get; set; }

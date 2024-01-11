@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// Provides a resource to create a dts sync_config
     /// 
     /// ## Example Usage
+    /// ### Sync mysql database to cynosdb through cdb access type
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -128,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     ///             {
     ///                 Region = "ap-guangzhou",
     ///                 InstanceId = "cdb-fitq5t9h",
-    ///                 User = "keep_dts",
+    ///                 User = "your_user_name",
     ///                 Password = "*",
     ///                 DbName = "tf_ci_test",
     ///                 VpcId = local.Vpc_id,
@@ -143,6 +144,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     ///                 DbName = "tf_ci_test_new",
     ///                 VpcId = local.Vpc_id,
     ///                 SubnetId = local.Subnet_id,
+    ///             },
+    ///             AutoRetryTimeRangeMinutes = 0,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var vpcIdSh = "vpc-evtcyb3g";
+    ///         var subnetIdSh = "subnet-1t83cxkp";
+    ///         var srcMysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
+    ///         {
+    ///             InstanceName = "your_user_name_mysql_src",
+    ///         }));
+    ///         var srcIp = srcMysql.Apply(srcMysql =&gt; srcMysql.InstanceLists?[0]?.IntranetIp);
+    ///         var srcPort = srcMysql.Apply(srcMysql =&gt; srcMysql.InstanceLists?[0]?.IntranetPort);
+    ///         var ccns = Output.Create(Tencentcloud.Ccn.GetInstances.InvokeAsync(new Tencentcloud.Ccn.GetInstancesArgs
+    ///         {
+    ///             Name = "keep-ccn-dts-sh",
+    ///         }));
+    ///         var ccnId = ccns.Apply(ccns =&gt; ccns.InstanceLists?[0]?.CcnId);
+    ///         var dstMysql = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync(new Tencentcloud.Mysql.GetInstanceArgs
+    ///         {
+    ///             InstanceName = "your_user_name_mysql_src",
+    ///         }));
+    ///         var dstMysqlId = dstMysql.Apply(dstMysql =&gt; dstMysql.InstanceLists?[0]?.MysqlId);
+    ///         var config = new Config();
+    ///         var srcAzSh = config.Get("srcAzSh") ?? "ap-shanghai";
+    ///         var dstAzGz = config.Get("dstAzGz") ?? "ap-guangzhou";
+    ///         var syncJobs = Output.Create(Tencentcloud.Dts.GetSyncJobs.InvokeAsync(new Tencentcloud.Dts.GetSyncJobsArgs
+    ///         {
+    ///             JobName = "keep_sync_config_ccn_2_cdb",
+    ///         }));
+    ///         var syncConfig = new Tencentcloud.Dts.SyncConfig("syncConfig", new Tencentcloud.Dts.SyncConfigArgs
+    ///         {
+    ///             JobId = syncJobs.Apply(syncJobs =&gt; syncJobs.Lists?[0]?.JobId),
+    ///             SrcAccessType = "ccn",
+    ///             DstAccessType = "cdb",
+    ///             JobMode = "liteMode",
+    ///             RunMode = "Immediate",
+    ///             Objects = new Tencentcloud.Dts.Inputs.SyncConfigObjectsArgs
+    ///             {
+    ///                 Mode = "Partial",
+    ///                 Databases = 
+    ///                 {
+    ///                     new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseArgs
+    ///                     {
+    ///                         DbName = "tf_ci_test",
+    ///                         NewDbName = "tf_ci_test_new",
+    ///                         DbMode = "Partial",
+    ///                         TableMode = "All",
+    ///                         Tables = 
+    ///                         {
+    ///                             new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseTableArgs
+    ///                             {
+    ///                                 TableName = "test",
+    ///                                 NewTableName = "test_new",
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             SrcInfo = new Tencentcloud.Dts.Inputs.SyncConfigSrcInfoArgs
+    ///             {
+    ///                 Region = srcAzSh,
+    ///                 User = "your_user_name",
+    ///                 Password = "your_pass_word",
+    ///                 Ip = srcIp,
+    ///                 Port = srcPort,
+    ///                 VpcId = vpcIdSh,
+    ///                 SubnetId = subnetIdSh,
+    ///                 CcnId = ccnId,
+    ///                 DatabaseNetEnv = "TencentVPC",
+    ///             },
+    ///             DstInfo = new Tencentcloud.Dts.Inputs.SyncConfigDstInfoArgs
+    ///             {
+    ///                 Region = dstAzGz,
+    ///                 InstanceId = dstMysqlId,
+    ///                 User = "your_user_name",
+    ///                 Password = "your_pass_word",
     ///             },
     ///             AutoRetryTimeRangeMinutes = 0,
     ///         });
@@ -202,7 +293,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// Sync job name.
         /// </summary>
         [Output("jobName")]
-        public Output<string?> JobName { get; private set; } = null!;
+        public Output<string> JobName { get; private set; } = null!;
 
         /// <summary>
         /// Synchronize database table object information.

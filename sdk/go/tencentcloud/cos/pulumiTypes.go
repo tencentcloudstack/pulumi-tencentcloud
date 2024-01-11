@@ -3627,6 +3627,8 @@ func (o BucketInventorySchedulePtrOutput) Frequency() pulumi.StringPtrOutput {
 }
 
 type BucketLifecycleRule struct {
+	// Set the maximum time a multipart upload is allowed to remain running.
+	AbortIncompleteMultipartUpload *BucketLifecycleRuleAbortIncompleteMultipartUpload `pulumi:"abortIncompleteMultipartUpload"`
 	// Specifies a period in the object's expire (documented below).
 	Expiration *BucketLifecycleRuleExpiration `pulumi:"expiration"`
 	// Object key prefix identifying one or more objects to which the rule applies.
@@ -3653,6 +3655,8 @@ type BucketLifecycleRuleInput interface {
 }
 
 type BucketLifecycleRuleArgs struct {
+	// Set the maximum time a multipart upload is allowed to remain running.
+	AbortIncompleteMultipartUpload BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput `pulumi:"abortIncompleteMultipartUpload"`
 	// Specifies a period in the object's expire (documented below).
 	Expiration BucketLifecycleRuleExpirationPtrInput `pulumi:"expiration"`
 	// Object key prefix identifying one or more objects to which the rule applies.
@@ -3718,6 +3722,13 @@ func (o BucketLifecycleRuleOutput) ToBucketLifecycleRuleOutputWithContext(ctx co
 	return o
 }
 
+// Set the maximum time a multipart upload is allowed to remain running.
+func (o BucketLifecycleRuleOutput) AbortIncompleteMultipartUpload() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) *BucketLifecycleRuleAbortIncompleteMultipartUpload {
+		return v.AbortIncompleteMultipartUpload
+	}).(BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput)
+}
+
 // Specifies a period in the object's expire (documented below).
 func (o BucketLifecycleRuleOutput) Expiration() BucketLifecycleRuleExpirationPtrOutput {
 	return o.ApplyT(func(v BucketLifecycleRule) *BucketLifecycleRuleExpiration { return v.Expiration }).(BucketLifecycleRuleExpirationPtrOutput)
@@ -3766,6 +3777,143 @@ func (o BucketLifecycleRuleArrayOutput) Index(i pulumi.IntInput) BucketLifecycle
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketLifecycleRule {
 		return vs[0].([]BucketLifecycleRule)[vs[1].(int)]
 	}).(BucketLifecycleRuleOutput)
+}
+
+type BucketLifecycleRuleAbortIncompleteMultipartUpload struct {
+	// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+	DaysAfterInitiation int `pulumi:"daysAfterInitiation"`
+}
+
+// BucketLifecycleRuleAbortIncompleteMultipartUploadInput is an input type that accepts BucketLifecycleRuleAbortIncompleteMultipartUploadArgs and BucketLifecycleRuleAbortIncompleteMultipartUploadOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleAbortIncompleteMultipartUploadInput` via:
+//
+//          BucketLifecycleRuleAbortIncompleteMultipartUploadArgs{...}
+type BucketLifecycleRuleAbortIncompleteMultipartUploadInput interface {
+	pulumi.Input
+
+	ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadOutput
+	ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadOutput
+}
+
+type BucketLifecycleRuleAbortIncompleteMultipartUploadArgs struct {
+	// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+	DaysAfterInitiation pulumi.IntInput `pulumi:"daysAfterInitiation"`
+}
+
+func (BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (i BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return i.ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(context.Background())
+}
+
+func (i BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleAbortIncompleteMultipartUploadOutput)
+}
+
+func (i BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return i.ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(context.Background())
+}
+
+func (i BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleAbortIncompleteMultipartUploadOutput).ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(ctx)
+}
+
+// BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput is an input type that accepts BucketLifecycleRuleAbortIncompleteMultipartUploadArgs, BucketLifecycleRuleAbortIncompleteMultipartUploadPtr and BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput` via:
+//
+//          BucketLifecycleRuleAbortIncompleteMultipartUploadArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput interface {
+	pulumi.Input
+
+	ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput
+	ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput
+}
+
+type bucketLifecycleRuleAbortIncompleteMultipartUploadPtrType BucketLifecycleRuleAbortIncompleteMultipartUploadArgs
+
+func BucketLifecycleRuleAbortIncompleteMultipartUploadPtr(v *BucketLifecycleRuleAbortIncompleteMultipartUploadArgs) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput {
+	return (*bucketLifecycleRuleAbortIncompleteMultipartUploadPtrType)(v)
+}
+
+func (*bucketLifecycleRuleAbortIncompleteMultipartUploadPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (i *bucketLifecycleRuleAbortIncompleteMultipartUploadPtrType) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return i.ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketLifecycleRuleAbortIncompleteMultipartUploadPtrType) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput)
+}
+
+type BucketLifecycleRuleAbortIncompleteMultipartUploadOutput struct{ *pulumi.OutputState }
+
+func (BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return o
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return o
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return o.ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(context.Background())
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketLifecycleRuleAbortIncompleteMultipartUpload) *BucketLifecycleRuleAbortIncompleteMultipartUpload {
+		return &v
+	}).(BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput)
+}
+
+// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadOutput) DaysAfterInitiation() pulumi.IntOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleAbortIncompleteMultipartUpload) int { return v.DaysAfterInitiation }).(pulumi.IntOutput)
+}
+
+type BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput() BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return o
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput) ToBucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput {
+	return o
+}
+
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput) Elem() BucketLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleAbortIncompleteMultipartUpload) BucketLifecycleRuleAbortIncompleteMultipartUpload {
+		if v != nil {
+			return *v
+		}
+		var ret BucketLifecycleRuleAbortIncompleteMultipartUpload
+		return ret
+	}).(BucketLifecycleRuleAbortIncompleteMultipartUploadOutput)
+}
+
+// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+func (o BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput) DaysAfterInitiation() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleAbortIncompleteMultipartUpload) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.DaysAfterInitiation
+	}).(pulumi.IntPtrOutput)
 }
 
 type BucketLifecycleRuleExpiration struct {
@@ -6619,6 +6767,8 @@ func (o GetBucketsBucketListCorsRuleArrayOutput) Index(i pulumi.IntInput) GetBuc
 }
 
 type GetBucketsBucketListLifecycleRule struct {
+	// Set the maximum time a multipart upload is allowed to remain running.
+	AbortIncompleteMultipartUploads []GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload `pulumi:"abortIncompleteMultipartUploads"`
 	// Specifies a period in the object's expire.
 	Expirations []GetBucketsBucketListLifecycleRuleExpiration `pulumi:"expirations"`
 	// Object key prefix identifying one or more objects to which the rule applies.
@@ -6643,6 +6793,8 @@ type GetBucketsBucketListLifecycleRuleInput interface {
 }
 
 type GetBucketsBucketListLifecycleRuleArgs struct {
+	// Set the maximum time a multipart upload is allowed to remain running.
+	AbortIncompleteMultipartUploads GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayInput `pulumi:"abortIncompleteMultipartUploads"`
 	// Specifies a period in the object's expire.
 	Expirations GetBucketsBucketListLifecycleRuleExpirationArrayInput `pulumi:"expirations"`
 	// Object key prefix identifying one or more objects to which the rule applies.
@@ -6706,6 +6858,13 @@ func (o GetBucketsBucketListLifecycleRuleOutput) ToGetBucketsBucketListLifecycle
 	return o
 }
 
+// Set the maximum time a multipart upload is allowed to remain running.
+func (o GetBucketsBucketListLifecycleRuleOutput) AbortIncompleteMultipartUploads() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload {
+		return v.AbortIncompleteMultipartUploads
+	}).(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput)
+}
+
 // Specifies a period in the object's expire.
 func (o GetBucketsBucketListLifecycleRuleOutput) Expirations() GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
 	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleExpiration {
@@ -6757,6 +6916,105 @@ func (o GetBucketsBucketListLifecycleRuleArrayOutput) Index(i pulumi.IntInput) G
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRule {
 		return vs[0].([]GetBucketsBucketListLifecycleRule)[vs[1].(int)]
 	}).(GetBucketsBucketListLifecycleRuleOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload struct {
+	// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+	DaysAfterInitiation int `pulumi:"daysAfterInitiation"`
+}
+
+// GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadInput is an input type that accepts GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs and GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs{...}
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput
+	ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput
+}
+
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs struct {
+	// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+	DaysAfterInitiation pulumi.IntInput `pulumi:"daysAfterInitiation"`
+}
+
+func (GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray and GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray{ GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs{...} }
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput
+	ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray []GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadInput
+
+func (GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return o
+}
+
+// Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput) DaysAfterInitiation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload) int {
+		return v.DaysAfterInitiation
+	}).(pulumi.IntOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput() GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput) ToGetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload {
+		return vs[0].([]GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUpload)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput)
 }
 
 type GetBucketsBucketListLifecycleRuleExpiration struct {
@@ -7582,6 +7840,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventorySchedulePtrInput)(nil)).Elem(), BucketInventoryScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleInput)(nil)).Elem(), BucketLifecycleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleArrayInput)(nil)).Elem(), BucketLifecycleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleAbortIncompleteMultipartUploadInput)(nil)).Elem(), BucketLifecycleRuleAbortIncompleteMultipartUploadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleAbortIncompleteMultipartUploadPtrInput)(nil)).Elem(), BucketLifecycleRuleAbortIncompleteMultipartUploadArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationPtrInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentExpirationArgs{})
@@ -7628,6 +7888,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListCorsRuleArrayInput)(nil)).Elem(), GetBucketsBucketListCorsRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpirationInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleExpirationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpirationArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleExpirationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{})
@@ -7686,6 +7948,8 @@ func init() {
 	pulumi.RegisterOutputType(BucketInventorySchedulePtrOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleAbortIncompleteMultipartUploadOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleAbortIncompleteMultipartUploadPtrOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationPtrOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentExpirationOutput{})
@@ -7732,6 +7996,8 @@ func init() {
 	pulumi.RegisterOutputType(GetBucketsBucketListCorsRuleArrayOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleAbortIncompleteMultipartUploadArrayOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleExpirationOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleExpirationArrayOutput{})
 	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput{})

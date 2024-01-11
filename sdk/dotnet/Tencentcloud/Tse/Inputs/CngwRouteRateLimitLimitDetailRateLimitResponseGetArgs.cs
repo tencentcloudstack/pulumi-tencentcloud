@@ -13,17 +13,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 
     public sealed class CngwRouteRateLimitLimitDetailRateLimitResponseGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// custom response body, maybe bull.
+        /// </summary>
         [Input("body")]
         public Input<string>? Body { get; set; }
 
         [Input("headers")]
         private InputList<Inputs.CngwRouteRateLimitLimitDetailRateLimitResponseHeaderGetArgs>? _headers;
+
+        /// <summary>
+        /// headrs.
+        /// </summary>
         public InputList<Inputs.CngwRouteRateLimitLimitDetailRateLimitResponseHeaderGetArgs> Headers
         {
             get => _headers ?? (_headers = new InputList<Inputs.CngwRouteRateLimitLimitDetailRateLimitResponseHeaderGetArgs>());
             set => _headers = value;
         }
 
+        /// <summary>
+        /// http status code.
+        /// </summary>
         [Input("httpStatus")]
         public Input<int>? HttpStatus { get; set; }
 

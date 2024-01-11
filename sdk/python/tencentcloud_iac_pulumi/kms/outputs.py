@@ -9,8 +9,196 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint',
+    'GetDescribeKeysKeyListResult',
     'GetKeysKeyListResult',
+    'GetListAlgorithmsAsymmetricAlgorithmResult',
+    'GetListAlgorithmsAsymmetricSignVerifyAlgorithmResult',
+    'GetListAlgorithmsSymmetricAlgorithmResult',
+    'GetListKeysKeyResult',
+    'GetWhiteBoxDeviceFingerprintsListResult',
+    'GetWhiteBoxKeyDetailsKeyInfoResult',
 ]
+
+@pulumi.output_type
+class OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint(dict):
+    def __init__(__self__, *,
+                 identity: str,
+                 description: Optional[str] = None):
+        """
+        :param str identity: identity.
+        :param str description: Description.
+        """
+        pulumi.set(__self__, "identity", identity)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+
+    @property
+    @pulumi.getter
+    def identity(self) -> str:
+        """
+        identity.
+        """
+        return pulumi.get(self, "identity")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+
+@pulumi.output_type
+class GetDescribeKeysKeyListResult(dict):
+    def __init__(__self__, *,
+                 alias: str,
+                 create_time: int,
+                 creator_uin: int,
+                 deletion_date: int,
+                 description: str,
+                 key_id: str,
+                 key_rotation_enabled: bool,
+                 key_state: str,
+                 key_usage: str,
+                 next_rotate_time: int,
+                 origin: str,
+                 owner: str,
+                 valid_to: int):
+        """
+        :param str alias: Name of CMK.
+        :param int create_time: Create time of CMK.
+        :param int creator_uin: Uin of CMK Creator.
+        :param int deletion_date: Delete time of CMK.
+        :param str description: Description of CMK.
+        :param str key_id: ID of CMK.
+        :param bool key_rotation_enabled: Specify whether to enable key rotation.
+        :param str key_state: State of CMK.
+        :param str key_usage: Usage of CMK.
+        :param int next_rotate_time: Next rotate time of CMK when key_rotation_enabled is true.
+        :param str origin: Origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user.
+        :param str owner: Creator of CMK.
+        :param int valid_to: Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "creator_uin", creator_uin)
+        pulumi.set(__self__, "deletion_date", deletion_date)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "key_rotation_enabled", key_rotation_enabled)
+        pulumi.set(__self__, "key_state", key_state)
+        pulumi.set(__self__, "key_usage", key_usage)
+        pulumi.set(__self__, "next_rotate_time", next_rotate_time)
+        pulumi.set(__self__, "origin", origin)
+        pulumi.set(__self__, "owner", owner)
+        pulumi.set(__self__, "valid_to", valid_to)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        Name of CMK.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        """
+        Create time of CMK.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="creatorUin")
+    def creator_uin(self) -> int:
+        """
+        Uin of CMK Creator.
+        """
+        return pulumi.get(self, "creator_uin")
+
+    @property
+    @pulumi.getter(name="deletionDate")
+    def deletion_date(self) -> int:
+        """
+        Delete time of CMK.
+        """
+        return pulumi.get(self, "deletion_date")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of CMK.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> str:
+        """
+        ID of CMK.
+        """
+        return pulumi.get(self, "key_id")
+
+    @property
+    @pulumi.getter(name="keyRotationEnabled")
+    def key_rotation_enabled(self) -> bool:
+        """
+        Specify whether to enable key rotation.
+        """
+        return pulumi.get(self, "key_rotation_enabled")
+
+    @property
+    @pulumi.getter(name="keyState")
+    def key_state(self) -> str:
+        """
+        State of CMK.
+        """
+        return pulumi.get(self, "key_state")
+
+    @property
+    @pulumi.getter(name="keyUsage")
+    def key_usage(self) -> str:
+        """
+        Usage of CMK.
+        """
+        return pulumi.get(self, "key_usage")
+
+    @property
+    @pulumi.getter(name="nextRotateTime")
+    def next_rotate_time(self) -> int:
+        """
+        Next rotate time of CMK when key_rotation_enabled is true.
+        """
+        return pulumi.get(self, "next_rotate_time")
+
+    @property
+    @pulumi.getter
+    def origin(self) -> str:
+        """
+        Origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user.
+        """
+        return pulumi.get(self, "origin")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> str:
+        """
+        Creator of CMK.
+        """
+        return pulumi.get(self, "owner")
+
+    @property
+    @pulumi.getter(name="validTo")
+    def valid_to(self) -> int:
+        """
+        Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+        """
+        return pulumi.get(self, "valid_to")
+
 
 @pulumi.output_type
 class GetKeysKeyListResult(dict):
@@ -160,5 +348,278 @@ class GetKeysKeyListResult(dict):
         Valid when origin is `EXTERNAL`, it means the effective date of the key material.
         """
         return pulumi.get(self, "valid_to")
+
+
+@pulumi.output_type
+class GetListAlgorithmsAsymmetricAlgorithmResult(dict):
+    def __init__(__self__, *,
+                 algorithm: str,
+                 key_usage: str):
+        """
+        :param str algorithm: Algorithm.
+        :param str key_usage: Key usage.
+        """
+        pulumi.set(__self__, "algorithm", algorithm)
+        pulumi.set(__self__, "key_usage", key_usage)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        """
+        Algorithm.
+        """
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter(name="keyUsage")
+    def key_usage(self) -> str:
+        """
+        Key usage.
+        """
+        return pulumi.get(self, "key_usage")
+
+
+@pulumi.output_type
+class GetListAlgorithmsAsymmetricSignVerifyAlgorithmResult(dict):
+    def __init__(__self__, *,
+                 algorithm: str,
+                 key_usage: str):
+        """
+        :param str algorithm: Algorithm.
+        :param str key_usage: Key usage.
+        """
+        pulumi.set(__self__, "algorithm", algorithm)
+        pulumi.set(__self__, "key_usage", key_usage)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        """
+        Algorithm.
+        """
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter(name="keyUsage")
+    def key_usage(self) -> str:
+        """
+        Key usage.
+        """
+        return pulumi.get(self, "key_usage")
+
+
+@pulumi.output_type
+class GetListAlgorithmsSymmetricAlgorithmResult(dict):
+    def __init__(__self__, *,
+                 algorithm: str,
+                 key_usage: str):
+        """
+        :param str algorithm: Algorithm.
+        :param str key_usage: Key usage.
+        """
+        pulumi.set(__self__, "algorithm", algorithm)
+        pulumi.set(__self__, "key_usage", key_usage)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        """
+        Algorithm.
+        """
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter(name="keyUsage")
+    def key_usage(self) -> str:
+        """
+        Key usage.
+        """
+        return pulumi.get(self, "key_usage")
+
+
+@pulumi.output_type
+class GetListKeysKeyResult(dict):
+    def __init__(__self__, *,
+                 key_id: str):
+        """
+        :param str key_id: ID of CMK.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> str:
+        """
+        ID of CMK.
+        """
+        return pulumi.get(self, "key_id")
+
+
+@pulumi.output_type
+class GetWhiteBoxDeviceFingerprintsListResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 identity: str):
+        """
+        :param str description: Description.
+        :param str identity: identity.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "identity", identity)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def identity(self) -> str:
+        """
+        identity.
+        """
+        return pulumi.get(self, "identity")
+
+
+@pulumi.output_type
+class GetWhiteBoxKeyDetailsKeyInfoResult(dict):
+    def __init__(__self__, *,
+                 algorithm: str,
+                 alias: str,
+                 create_time: int,
+                 creator_uin: int,
+                 decrypt_key: str,
+                 description: str,
+                 device_fingerprint_bind: bool,
+                 encrypt_key: str,
+                 key_id: str,
+                 owner_uin: int,
+                 resource_id: str,
+                 status: str):
+        """
+        :param str algorithm: The type of algorithm used by the key.
+        :param str alias: As an alias for a key that is easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. It cannot be repeated.
+        :param int create_time: Key creation time, Unix timestamp.
+        :param int creator_uin: Creator.
+        :param str decrypt_key: White box decryption key, base64 encoded.
+        :param str description: Description of the key.
+        :param bool device_fingerprint_bind: Is there a device fingerprint bound to the current key?.
+        :param str encrypt_key: White box encryption key, base64 encoded.
+        :param str key_id: Globally unique identifier for the white box key.
+        :param int owner_uin: Creator.
+        :param str resource_id: Resource ID, format: creatorUin/$creatorUin/$keyId.
+        :param str status: The status of the white box key, the value is: Enabled | Disabled.
+        """
+        pulumi.set(__self__, "algorithm", algorithm)
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "creator_uin", creator_uin)
+        pulumi.set(__self__, "decrypt_key", decrypt_key)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "device_fingerprint_bind", device_fingerprint_bind)
+        pulumi.set(__self__, "encrypt_key", encrypt_key)
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        """
+        The type of algorithm used by the key.
+        """
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        As an alias for a key that is easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. It cannot be repeated.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        """
+        Key creation time, Unix timestamp.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="creatorUin")
+    def creator_uin(self) -> int:
+        """
+        Creator.
+        """
+        return pulumi.get(self, "creator_uin")
+
+    @property
+    @pulumi.getter(name="decryptKey")
+    def decrypt_key(self) -> str:
+        """
+        White box decryption key, base64 encoded.
+        """
+        return pulumi.get(self, "decrypt_key")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of the key.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="deviceFingerprintBind")
+    def device_fingerprint_bind(self) -> bool:
+        """
+        Is there a device fingerprint bound to the current key?.
+        """
+        return pulumi.get(self, "device_fingerprint_bind")
+
+    @property
+    @pulumi.getter(name="encryptKey")
+    def encrypt_key(self) -> str:
+        """
+        White box encryption key, base64 encoded.
+        """
+        return pulumi.get(self, "encrypt_key")
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> str:
+        """
+        Globally unique identifier for the white box key.
+        """
+        return pulumi.get(self, "key_id")
+
+    @property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> int:
+        """
+        Creator.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Resource ID, format: creatorUin/$creatorUin/$keyId.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        The status of the white box key, the value is: Enabled | Disabled.
+        """
+        return pulumi.get(self, "status")
 
 

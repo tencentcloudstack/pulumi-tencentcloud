@@ -8,7 +8,7 @@ import * as utilities from "../utilities";
  * Provides a resource to create a NAT gateway.
  *
  * ## Example Usage
- * ### Create a NAT gateway.
+ * ### Create a traditional NAT gateway.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -25,6 +25,27 @@ import * as utilities from "../utilities";
  *         eipExample1.publicIp,
  *         eipExample2.publicIp,
  *     ],
+ *     tags: {
+ *         tf_tag_key: "tf_tag_value",
+ *     },
+ * });
+ * ```
+ * ### Create a standard NAT gateway.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
+ * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+ * const example = new tencentcloud.nat.Gateway("example", {
+ *     vpcId: vpc.id,
+ *     assignedEipSets: [
+ *         eipExample1.publicIp,
+ *         eipExample2.publicIp,
+ *     ],
+ *     natProductVersion: 2,
  *     tags: {
  *         tf_tag_key: "tf_tag_value",
  *     },
@@ -88,6 +109,14 @@ export class Gateway extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * 1: traditional NAT, 2: standard NAT, default value is 1.
+     */
+    public readonly natProductVersion!: pulumi.Output<number>;
+    /**
+     * Subnet of NAT.
+     */
+    public readonly subnetId!: pulumi.Output<string>;
+    /**
      * The available tags within this NAT gateway.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
@@ -118,6 +147,8 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["createdTime"] = state ? state.createdTime : undefined;
             resourceInputs["maxConcurrent"] = state ? state.maxConcurrent : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["natProductVersion"] = state ? state.natProductVersion : undefined;
+            resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["zone"] = state ? state.zone : undefined;
@@ -133,6 +164,8 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["bandwidth"] = args ? args.bandwidth : undefined;
             resourceInputs["maxConcurrent"] = args ? args.maxConcurrent : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["natProductVersion"] = args ? args.natProductVersion : undefined;
+            resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
@@ -168,6 +201,14 @@ export interface GatewayState {
      */
     name?: pulumi.Input<string>;
     /**
+     * 1: traditional NAT, 2: standard NAT, default value is 1.
+     */
+    natProductVersion?: pulumi.Input<number>;
+    /**
+     * Subnet of NAT.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
      * The available tags within this NAT gateway.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
@@ -201,6 +242,14 @@ export interface GatewayArgs {
      * Name of the NAT gateway.
      */
     name?: pulumi.Input<string>;
+    /**
+     * 1: traditional NAT, 2: standard NAT, default value is 1.
+     */
+    natProductVersion?: pulumi.Input<number>;
+    /**
+     * Subnet of NAT.
+     */
+    subnetId?: pulumi.Input<string>;
     /**
      * The available tags within this NAT gateway.
      */

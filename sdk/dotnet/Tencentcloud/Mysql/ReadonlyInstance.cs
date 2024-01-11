@@ -218,6 +218,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
+        /// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        /// </summary>
+        [Output("slaveDeployMode")]
+        public Output<int?> SlaveDeployMode { get; private set; } = null!;
+
+        /// <summary>
         /// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
         /// </summary>
         [Output("status")]
@@ -252,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Output("waitSwitch")]
+        public Output<int?> WaitSwitch { get; private set; } = null!;
 
         /// <summary>
         /// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
@@ -409,6 +421,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
 
         /// <summary>
+        /// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        /// </summary>
+        [Input("slaveDeployMode")]
+        public Input<int>? SlaveDeployMode { get; set; }
+
+        /// <summary>
         /// Private network ID. If `vpc_id` is set, this value is required.
         /// </summary>
         [Input("subnetId")]
@@ -437,6 +455,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         /// <summary>
         /// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
@@ -566,6 +590,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
 
         /// <summary>
+        /// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        /// </summary>
+        [Input("slaveDeployMode")]
+        public Input<int>? SlaveDeployMode { get; set; }
+
+        /// <summary>
         /// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
         /// </summary>
         [Input("status")]
@@ -606,6 +636,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        /// </summary>
+        [Input("waitSwitch")]
+        public Input<int>? WaitSwitch { get; set; }
 
         /// <summary>
         /// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.

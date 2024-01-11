@@ -33,6 +33,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DisisolateDbInstanceOperation{}
 	case "tencentcloud:Postgresql/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Postgresql/instanceHaConfig:InstanceHaConfig":
+		r = &InstanceHaConfig{}
 	case "tencentcloud:Postgresql/isolateDbInstanceOperation:IsolateDbInstanceOperation":
 		r = &IsolateDbInstanceOperation{}
 	case "tencentcloud:Postgresql/modifyAccountRemarkOperation:ModifyAccountRemarkOperation":
@@ -96,6 +98,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/instanceHaConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

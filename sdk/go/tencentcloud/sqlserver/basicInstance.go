@@ -107,6 +107,8 @@ type BasicInstance struct {
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrOutput `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
@@ -199,6 +201,8 @@ type basicInstanceState struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType *string `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation *string `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu *int `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
@@ -250,6 +254,8 @@ type BasicInstanceState struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrInput
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrInput
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntPtrInput
 	// Create time of the SQL Server basic instance.
@@ -305,6 +311,8 @@ type basicInstanceArgs struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType *string `pulumi:"chargeType"`
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation *string `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu int `pulumi:"cpu"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -349,6 +357,8 @@ type BasicInstanceArgs struct {
 	AvailabilityZone pulumi.StringPtrInput
 	// Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 	ChargeType pulumi.StringPtrInput
+	// System character set sorting rule, default: Chinese_PRC_CI_AS.
+	Collation pulumi.StringPtrInput
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntInput
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -488,6 +498,11 @@ func (o BasicInstanceOutput) AvailabilityZone() pulumi.StringOutput {
 // Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
 func (o BasicInstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
+}
+
+// System character set sorting rule, default: Chinese_PRC_CI_AS.
+func (o BasicInstanceOutput) Collation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.StringPtrOutput { return v.Collation }).(pulumi.StringPtrOutput)
 }
 
 // The CPU number of the SQL Server basic instance.

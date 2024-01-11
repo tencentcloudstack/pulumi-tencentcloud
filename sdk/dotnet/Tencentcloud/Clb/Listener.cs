@@ -221,6 +221,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
+    /// ### Port Range Listener
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "tf-listener-test",
+    ///         });
+    ///         var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new Tencentcloud.Clb.ListenerArgs
+    ///         {
+    ///             ClbId = clbBasic.Id,
+    ///             Port = 1,
+    ///             EndPort = 6,
+    ///             Protocol = "TCP",
+    ///             ListenerName = "listener_basic",
+    ///             SessionExpireTime = 30,
+    ///             Scheduler = "WRR",
+    ///             TargetType = "NODE",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -256,6 +286,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("clbId")]
         public Output<string> ClbId { get; private set; } = null!;
+
+        /// <summary>
+        /// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Output("endPort")]
+        public Output<int> EndPort { get; private set; } = null!;
 
         /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
@@ -348,6 +384,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> HealthCheckUnhealthNum { get; private set; } = null!;
 
         /// <summary>
+        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// </summary>
+        [Output("healthSourceIpType")]
+        public Output<int> HealthSourceIpType { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// </summary>
+        [Output("keepaliveEnable")]
+        public Output<int> KeepaliveEnable { get; private set; } = null!;
+
+        /// <summary>
         /// ID of this CLB listener.
         /// </summary>
         [Output("listenerId")]
@@ -382,6 +430,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("sessionExpireTime")]
         public Output<int?> SessionExpireTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// </summary>
+        [Output("sessionType")]
+        public Output<string> SessionType { get; private set; } = null!;
 
         /// <summary>
         /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
@@ -467,6 +521,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ClbId { get; set; } = null!;
 
         /// <summary>
+        /// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("endPort")]
+        public Input<int>? EndPort { get; set; }
+
+        /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         /// </summary>
         [Input("healthCheckContextType")]
@@ -557,6 +617,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckUnhealthNum { get; set; }
 
         /// <summary>
+        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// </summary>
+        [Input("healthSourceIpType")]
+        public Input<int>? HealthSourceIpType { get; set; }
+
+        /// <summary>
+        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// </summary>
+        [Input("keepaliveEnable")]
+        public Input<int>? KeepaliveEnable { get; set; }
+
+        /// <summary>
         /// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         /// </summary>
         [Input("listenerName", required: true)]
@@ -585,6 +657,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
+
+        /// <summary>
+        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// </summary>
+        [Input("sessionType")]
+        public Input<string>? SessionType { get; set; }
 
         /// <summary>
         /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
@@ -630,6 +708,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? ClbId { get; set; }
 
         /// <summary>
+        /// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("endPort")]
+        public Input<int>? EndPort { get; set; }
+
+        /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         /// </summary>
         [Input("healthCheckContextType")]
@@ -720,6 +804,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckUnhealthNum { get; set; }
 
         /// <summary>
+        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// </summary>
+        [Input("healthSourceIpType")]
+        public Input<int>? HealthSourceIpType { get; set; }
+
+        /// <summary>
+        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// </summary>
+        [Input("keepaliveEnable")]
+        public Input<int>? KeepaliveEnable { get; set; }
+
+        /// <summary>
         /// ID of this CLB listener.
         /// </summary>
         [Input("listenerId")]
@@ -754,6 +850,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
+
+        /// <summary>
+        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// </summary>
+        [Input("sessionType")]
+        public Input<string>? SessionType { get; set; }
 
         /// <summary>
         /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.

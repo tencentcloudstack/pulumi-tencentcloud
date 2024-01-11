@@ -12,6 +12,7 @@ from .disk import *
 from .disk_attachment import *
 from .disk_backup import *
 from .firewall_rule import *
+from .firewall_template import *
 from .get_all_scene import *
 from .get_bundle import *
 from .get_disk_config import *

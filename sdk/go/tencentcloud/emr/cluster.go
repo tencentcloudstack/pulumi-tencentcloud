@@ -84,14 +84,17 @@ import (
 // 			return err
 // 		}
 // 		_, err = Emr.NewCluster(ctx, "emrCluster", &Emr.ClusterArgs{
-// 			ProductId:       pulumi.Int(4),
-// 			DisplayStrategy: pulumi.String("clusterList"),
+// 			ProductId: pulumi.Int(38),
 // 			VpcSettings: pulumi.AnyMap{
 // 				"vpc_id":    emrVpc.ID(),
 // 				"subnet_id": emrSubnet.ID(),
 // 			},
 // 			Softwares: pulumi.StringArray{
-// 				pulumi.String("zookeeper-3.6.1"),
+// 				pulumi.String("hdfs-2.8.5"),
+// 				pulumi.String("knox-1.6.1"),
+// 				pulumi.String("openldap-2.4.44"),
+// 				pulumi.String("yarn-2.8.5"),
+// 				pulumi.String("zookeeper-3.6.3"),
 // 			},
 // 			SupportHa:    pulumi.Int(0),
 // 			InstanceName: pulumi.String("emr-cluster-test"),
@@ -123,9 +126,9 @@ import (
 // 			TimeSpan: pulumi.Int(3600),
 // 			TimeUnit: pulumi.String("s"),
 // 			PayMode:  pulumi.Int(0),
-// 			Placement: pulumi.AnyMap{
-// 				"zone":       pulumi.String(availabilityZone),
-// 				"project_id": pulumi.Any(0),
+// 			PlacementInfo: &emr.ClusterPlacementInfoArgs{
+// 				Zone:      pulumi.String(availabilityZone),
+// 				ProjectId: pulumi.Int(0),
 // 			},
 // 			SgId: emrSg.ID(),
 // 		})
@@ -139,8 +142,10 @@ import (
 type Cluster struct {
 	pulumi.CustomResourceState
 
-	// Display strategy of EMR instance.
-	DisplayStrategy pulumi.StringOutput `pulumi:"displayStrategy"`
+	// It will be deprecated in later versions. Display strategy of EMR instance.
+	//
+	// Deprecated: It will be deprecated in later versions.
+	DisplayStrategy pulumi.StringPtrOutput `pulumi:"displayStrategy"`
 	// Access the external file system.
 	ExtendFsField pulumi.StringPtrOutput `pulumi:"extendFsField"`
 	// Created EMR instance id.
@@ -156,8 +161,12 @@ type Cluster struct {
 	NeedMasterWan pulumi.StringPtrOutput `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
 	PayMode pulumi.IntOutput `pulumi:"payMode"`
-	// The location of the instance.
+	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+	//
+	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 	Placement pulumi.MapOutput `pulumi:"placement"`
+	// The location of the instance.
+	PlacementInfo ClusterPlacementInfoOutput `pulumi:"placementInfo"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
 	// - 20: indicates EMR-V2.5.0
@@ -184,9 +193,9 @@ type Cluster struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-	TimeSpan pulumi.IntOutput `pulumi:"timeSpan"`
+	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
 	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
-	TimeUnit pulumi.StringOutput `pulumi:"timeUnit"`
+	TimeUnit pulumi.StringPtrOutput `pulumi:"timeUnit"`
 	// The private net config of EMR instance.
 	VpcSettings pulumi.MapOutput `pulumi:"vpcSettings"`
 }
@@ -198,20 +207,11 @@ func NewCluster(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.DisplayStrategy == nil {
-		return nil, errors.New("invalid value for required argument 'DisplayStrategy'")
-	}
 	if args.InstanceName == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceName'")
 	}
-	if args.LoginSettings == nil {
-		return nil, errors.New("invalid value for required argument 'LoginSettings'")
-	}
 	if args.PayMode == nil {
 		return nil, errors.New("invalid value for required argument 'PayMode'")
-	}
-	if args.Placement == nil {
-		return nil, errors.New("invalid value for required argument 'Placement'")
 	}
 	if args.ProductId == nil {
 		return nil, errors.New("invalid value for required argument 'ProductId'")
@@ -221,12 +221,6 @@ func NewCluster(ctx *pulumi.Context,
 	}
 	if args.SupportHa == nil {
 		return nil, errors.New("invalid value for required argument 'SupportHa'")
-	}
-	if args.TimeSpan == nil {
-		return nil, errors.New("invalid value for required argument 'TimeSpan'")
-	}
-	if args.TimeUnit == nil {
-		return nil, errors.New("invalid value for required argument 'TimeUnit'")
 	}
 	if args.VpcSettings == nil {
 		return nil, errors.New("invalid value for required argument 'VpcSettings'")
@@ -254,7 +248,9 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
-	// Display strategy of EMR instance.
+	// It will be deprecated in later versions. Display strategy of EMR instance.
+	//
+	// Deprecated: It will be deprecated in later versions.
 	DisplayStrategy *string `pulumi:"displayStrategy"`
 	// Access the external file system.
 	ExtendFsField *string `pulumi:"extendFsField"`
@@ -271,8 +267,12 @@ type clusterState struct {
 	NeedMasterWan *string `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
 	PayMode *int `pulumi:"payMode"`
-	// The location of the instance.
+	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+	//
+	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 	Placement map[string]interface{} `pulumi:"placement"`
+	// The location of the instance.
+	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
 	// - 20: indicates EMR-V2.5.0
@@ -307,7 +307,9 @@ type clusterState struct {
 }
 
 type ClusterState struct {
-	// Display strategy of EMR instance.
+	// It will be deprecated in later versions. Display strategy of EMR instance.
+	//
+	// Deprecated: It will be deprecated in later versions.
 	DisplayStrategy pulumi.StringPtrInput
 	// Access the external file system.
 	ExtendFsField pulumi.StringPtrInput
@@ -324,8 +326,12 @@ type ClusterState struct {
 	NeedMasterWan pulumi.StringPtrInput
 	// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
 	PayMode pulumi.IntPtrInput
-	// The location of the instance.
+	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+	//
+	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 	Placement pulumi.MapInput
+	// The location of the instance.
+	PlacementInfo ClusterPlacementInfoPtrInput
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
 	// - 20: indicates EMR-V2.5.0
@@ -364,8 +370,10 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
-	// Display strategy of EMR instance.
-	DisplayStrategy string `pulumi:"displayStrategy"`
+	// It will be deprecated in later versions. Display strategy of EMR instance.
+	//
+	// Deprecated: It will be deprecated in later versions.
+	DisplayStrategy *string `pulumi:"displayStrategy"`
 	// Access the external file system.
 	ExtendFsField *string `pulumi:"extendFsField"`
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -379,8 +387,12 @@ type clusterArgs struct {
 	NeedMasterWan *string `pulumi:"needMasterWan"`
 	// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
 	PayMode int `pulumi:"payMode"`
-	// The location of the instance.
+	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+	//
+	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 	Placement map[string]interface{} `pulumi:"placement"`
+	// The location of the instance.
+	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
 	// - 20: indicates EMR-V2.5.0
@@ -407,17 +419,19 @@ type clusterArgs struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-	TimeSpan int `pulumi:"timeSpan"`
+	TimeSpan *int `pulumi:"timeSpan"`
 	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
-	TimeUnit string `pulumi:"timeUnit"`
+	TimeUnit *string `pulumi:"timeUnit"`
 	// The private net config of EMR instance.
 	VpcSettings map[string]interface{} `pulumi:"vpcSettings"`
 }
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
-	// Display strategy of EMR instance.
-	DisplayStrategy pulumi.StringInput
+	// It will be deprecated in later versions. Display strategy of EMR instance.
+	//
+	// Deprecated: It will be deprecated in later versions.
+	DisplayStrategy pulumi.StringPtrInput
 	// Access the external file system.
 	ExtendFsField pulumi.StringPtrInput
 	// Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -431,8 +445,12 @@ type ClusterArgs struct {
 	NeedMasterWan pulumi.StringPtrInput
 	// The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
 	PayMode pulumi.IntInput
-	// The location of the instance.
+	// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+	//
+	// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 	Placement pulumi.MapInput
+	// The location of the instance.
+	PlacementInfo ClusterPlacementInfoPtrInput
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
 	// - 20: indicates EMR-V2.5.0
@@ -459,9 +477,9 @@ type ClusterArgs struct {
 	Tags pulumi.MapInput
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-	TimeSpan pulumi.IntInput
+	TimeSpan pulumi.IntPtrInput
 	// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
-	TimeUnit pulumi.StringInput
+	TimeUnit pulumi.StringPtrInput
 	// The private net config of EMR instance.
 	VpcSettings pulumi.MapInput
 }
@@ -553,9 +571,11 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
-// Display strategy of EMR instance.
-func (o ClusterOutput) DisplayStrategy() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.DisplayStrategy }).(pulumi.StringOutput)
+// It will be deprecated in later versions. Display strategy of EMR instance.
+//
+// Deprecated: It will be deprecated in later versions.
+func (o ClusterOutput) DisplayStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.DisplayStrategy }).(pulumi.StringPtrOutput)
 }
 
 // Access the external file system.
@@ -591,9 +611,16 @@ func (o ClusterOutput) PayMode() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.PayMode }).(pulumi.IntOutput)
 }
 
-// The location of the instance.
+// It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
+//
+// Deprecated: It will be deprecated in later versions. Use `placement_info` instead.
 func (o ClusterOutput) Placement() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.Placement }).(pulumi.MapOutput)
+}
+
+// The location of the instance.
+func (o ClusterOutput) PlacementInfo() ClusterPlacementInfoOutput {
+	return o.ApplyT(func(v *Cluster) ClusterPlacementInfoOutput { return v.PlacementInfo }).(ClusterPlacementInfoOutput)
 }
 
 // Product ID. Different products ID represents different EMR product versions. Value range:
@@ -640,13 +667,13 @@ func (o ClusterOutput) Tags() pulumi.MapOutput {
 
 // The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 // When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-func (o ClusterOutput) TimeSpan() pulumi.IntOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.TimeSpan }).(pulumi.IntOutput)
+func (o ClusterOutput) TimeSpan() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.TimeSpan }).(pulumi.IntPtrOutput)
 }
 
 // The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
-func (o ClusterOutput) TimeUnit() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.TimeUnit }).(pulumi.StringOutput)
+func (o ClusterOutput) TimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.TimeUnit }).(pulumi.StringPtrOutput)
 }
 
 // The private net config of EMR instance.

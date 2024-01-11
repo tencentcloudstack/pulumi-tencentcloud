@@ -22,6 +22,8 @@ class AlarmPolicyArgs:
                  conditon_template_id: Optional[pulumi.Input[int]] = None,
                  enable: Optional[pulumi.Input[int]] = None,
                  event_conditions: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyEventConditionArgs']]]] = None,
+                 filter: Optional[pulumi.Input['AlarmPolicyFilterArgs']] = None,
+                 group_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  notice_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  policy_tags: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyPolicyTagArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -36,6 +38,8 @@ class AlarmPolicyArgs:
         :param pulumi.Input[int] conditon_template_id: ID of trigger condition template.
         :param pulumi.Input[int] enable: Whether to enable, default is `1`.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyEventConditionArgs']]] event_conditions: A list of event trigger condition.
+        :param pulumi.Input['AlarmPolicyFilterArgs'] filter: Global filters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notice_ids: List of notification rule IDs.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyPolicyTagArgs']]] policy_tags: Policy tag to bind object.
         :param pulumi.Input[int] project_id: Project ID. For products with different projects, a value other than -1 must be passed in.
@@ -53,6 +57,10 @@ class AlarmPolicyArgs:
             pulumi.set(__self__, "enable", enable)
         if event_conditions is not None:
             pulumi.set(__self__, "event_conditions", event_conditions)
+        if filter is not None:
+            pulumi.set(__self__, "filter", filter)
+        if group_bies is not None:
+            pulumi.set(__self__, "group_bies", group_bies)
         if notice_ids is not None:
             pulumi.set(__self__, "notice_ids", notice_ids)
         if policy_tags is not None:
@@ -149,6 +157,30 @@ class AlarmPolicyArgs:
         pulumi.set(self, "event_conditions", value)
 
     @property
+    @pulumi.getter
+    def filter(self) -> Optional[pulumi.Input['AlarmPolicyFilterArgs']]:
+        """
+        Global filters.
+        """
+        return pulumi.get(self, "filter")
+
+    @filter.setter
+    def filter(self, value: Optional[pulumi.Input['AlarmPolicyFilterArgs']]):
+        pulumi.set(self, "filter", value)
+
+    @property
+    @pulumi.getter(name="groupBies")
+    def group_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Aggregate dimension list, specify which dimension keys to use for group by.
+        """
+        return pulumi.get(self, "group_bies")
+
+    @group_bies.setter
+    def group_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "group_bies", value)
+
+    @property
     @pulumi.getter(name="noticeIds")
     def notice_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -217,6 +249,8 @@ class _AlarmPolicyState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  enable: Optional[pulumi.Input[int]] = None,
                  event_conditions: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyEventConditionArgs']]]] = None,
+                 filter: Optional[pulumi.Input['AlarmPolicyFilterArgs']] = None,
+                 group_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  monitor_type: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  notice_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -233,6 +267,8 @@ class _AlarmPolicyState:
         :param pulumi.Input[str] create_time: The alarm policy create time.
         :param pulumi.Input[int] enable: Whether to enable, default is `1`.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyEventConditionArgs']]] event_conditions: A list of event trigger condition.
+        :param pulumi.Input['AlarmPolicyFilterArgs'] filter: Global filters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[str] monitor_type: The type of monitor.
         :param pulumi.Input[str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notice_ids: List of notification rule IDs.
@@ -253,6 +289,10 @@ class _AlarmPolicyState:
             pulumi.set(__self__, "enable", enable)
         if event_conditions is not None:
             pulumi.set(__self__, "event_conditions", event_conditions)
+        if filter is not None:
+            pulumi.set(__self__, "filter", filter)
+        if group_bies is not None:
+            pulumi.set(__self__, "group_bies", group_bies)
         if monitor_type is not None:
             pulumi.set(__self__, "monitor_type", monitor_type)
         if namespace is not None:
@@ -331,6 +371,30 @@ class _AlarmPolicyState:
     @event_conditions.setter
     def event_conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyEventConditionArgs']]]]):
         pulumi.set(self, "event_conditions", value)
+
+    @property
+    @pulumi.getter
+    def filter(self) -> Optional[pulumi.Input['AlarmPolicyFilterArgs']]:
+        """
+        Global filters.
+        """
+        return pulumi.get(self, "filter")
+
+    @filter.setter
+    def filter(self, value: Optional[pulumi.Input['AlarmPolicyFilterArgs']]):
+        pulumi.set(self, "filter", value)
+
+    @property
+    @pulumi.getter(name="groupBies")
+    def group_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Aggregate dimension list, specify which dimension keys to use for group by.
+        """
+        return pulumi.get(self, "group_bies")
+
+    @group_bies.setter
+    def group_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "group_bies", value)
 
     @property
     @pulumi.getter(name="monitorType")
@@ -450,6 +514,8 @@ class AlarmPolicy(pulumi.CustomResource):
                  conditon_template_id: Optional[pulumi.Input[int]] = None,
                  enable: Optional[pulumi.Input[int]] = None,
                  event_conditions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyEventConditionArgs']]]]] = None,
+                 filter: Optional[pulumi.Input[pulumi.InputType['AlarmPolicyFilterArgs']]] = None,
+                 group_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  monitor_type: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  notice_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -712,6 +778,8 @@ class AlarmPolicy(pulumi.CustomResource):
         :param pulumi.Input[int] conditon_template_id: ID of trigger condition template.
         :param pulumi.Input[int] enable: Whether to enable, default is `1`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyEventConditionArgs']]]] event_conditions: A list of event trigger condition.
+        :param pulumi.Input[pulumi.InputType['AlarmPolicyFilterArgs']] filter: Global filters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[str] monitor_type: The type of monitor.
         :param pulumi.Input[str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notice_ids: List of notification rule IDs.
@@ -993,6 +1061,8 @@ class AlarmPolicy(pulumi.CustomResource):
                  conditon_template_id: Optional[pulumi.Input[int]] = None,
                  enable: Optional[pulumi.Input[int]] = None,
                  event_conditions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyEventConditionArgs']]]]] = None,
+                 filter: Optional[pulumi.Input[pulumi.InputType['AlarmPolicyFilterArgs']]] = None,
+                 group_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  monitor_type: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  notice_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -1019,6 +1089,8 @@ class AlarmPolicy(pulumi.CustomResource):
             __props__.__dict__["conditon_template_id"] = conditon_template_id
             __props__.__dict__["enable"] = enable
             __props__.__dict__["event_conditions"] = event_conditions
+            __props__.__dict__["filter"] = filter
+            __props__.__dict__["group_bies"] = group_bies
             if monitor_type is None and not opts.urn:
                 raise TypeError("Missing required property 'monitor_type'")
             __props__.__dict__["monitor_type"] = monitor_type
@@ -1050,6 +1122,8 @@ class AlarmPolicy(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             enable: Optional[pulumi.Input[int]] = None,
             event_conditions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyEventConditionArgs']]]]] = None,
+            filter: Optional[pulumi.Input[pulumi.InputType['AlarmPolicyFilterArgs']]] = None,
+            group_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             monitor_type: Optional[pulumi.Input[str]] = None,
             namespace: Optional[pulumi.Input[str]] = None,
             notice_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -1071,6 +1145,8 @@ class AlarmPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: The alarm policy create time.
         :param pulumi.Input[int] enable: Whether to enable, default is `1`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyEventConditionArgs']]]] event_conditions: A list of event trigger condition.
+        :param pulumi.Input[pulumi.InputType['AlarmPolicyFilterArgs']] filter: Global filters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[str] monitor_type: The type of monitor.
         :param pulumi.Input[str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notice_ids: List of notification rule IDs.
@@ -1090,6 +1166,8 @@ class AlarmPolicy(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["enable"] = enable
         __props__.__dict__["event_conditions"] = event_conditions
+        __props__.__dict__["filter"] = filter
+        __props__.__dict__["group_bies"] = group_bies
         __props__.__dict__["monitor_type"] = monitor_type
         __props__.__dict__["namespace"] = namespace
         __props__.__dict__["notice_ids"] = notice_ids
@@ -1140,6 +1218,22 @@ class AlarmPolicy(pulumi.CustomResource):
         A list of event trigger condition.
         """
         return pulumi.get(self, "event_conditions")
+
+    @property
+    @pulumi.getter
+    def filter(self) -> pulumi.Output[Optional['outputs.AlarmPolicyFilter']]:
+        """
+        Global filters.
+        """
+        return pulumi.get(self, "filter")
+
+    @property
+    @pulumi.getter(name="groupBies")
+    def group_bies(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Aggregate dimension list, specify which dimension keys to use for group by.
+        """
+        return pulumi.get(self, "group_bies")
 
     @property
     @pulumi.getter(name="monitorType")

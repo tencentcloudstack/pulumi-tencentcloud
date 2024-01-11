@@ -10,6 +10,110 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
 {
+    /// <summary>
+    /// Provides a resource to create a tse cngw_route
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
+    ///         {
+    ///             Description = "terraform test1",
+    ///             EnableCls = true,
+    ///             EngineRegion = "ap-guangzhou",
+    ///             FeatureVersion = "STANDARD",
+    ///             GatewayVersion = "2.5.1",
+    ///             IngressClassName = "tse-nginx-ingress",
+    ///             InternetMaxBandwidthOut = 0,
+    ///             TradeType = 0,
+    ///             Type = "kong",
+    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///             {
+    ///                 Number = 2,
+    ///                 Specification = "1c2g",
+    ///             },
+    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///             {
+    ///                 SubnetId = subnet.Id,
+    ///                 VpcId = vpc.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new Tencentcloud.Tse.CngwServiceArgs
+    ///         {
+    ///             GatewayId = cngwGateway.Id,
+    ///             Path = "/test",
+    ///             Protocol = "http",
+    ///             Retries = 5,
+    ///             Timeout = 60000,
+    ///             UpstreamType = "HostIP",
+    ///             UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
+    ///             {
+    ///                 Algorithm = "round-robin",
+    ///                 AutoScalingCvmPort = 0,
+    ///                 Host = "arunma.cn",
+    ///                 Port = 8012,
+    ///                 SlowStart = 0,
+    ///             },
+    ///         });
+    ///         var cngwRoute = new Tencentcloud.Tse.CngwRoute("cngwRoute", new Tencentcloud.Tse.CngwRouteArgs
+    ///         {
+    ///             DestinationPorts = {},
+    ///             GatewayId = cngwGateway.Id,
+    ///             Hosts = 
+    ///             {
+    ///                 "192.168.0.1:9090",
+    ///             },
+    ///             HttpsRedirectStatusCode = 426,
+    ///             Paths = 
+    ///             {
+    ///                 "/user",
+    ///             },
+    ///             Headers = 
+    ///             {
+    ///                 new Tencentcloud.Tse.Inputs.CngwRouteHeaderArgs
+    ///                 {
+    ///                     Key = "req",
+    ///                     Value = "terraform",
+    ///                 },
+    ///             },
+    ///             PreserveHost = false,
+    ///             Protocols = 
+    ///             {
+    ///                 "http",
+    ///                 "https",
+    ///             },
+    ///             RouteName = "terraform-route",
+    ///             ServiceId = cngwService.ServiceId,
+    ///             StripPath = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwRoute:CngwRoute")]
     public partial class CngwRoute : Pulumi.CustomResource
     {
@@ -20,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public Output<ImmutableArray<int>> DestinationPorts { get; private set; } = null!;
 
         /// <summary>
-        /// whether to enable forced HTTPS, no longer use.
+        /// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         /// </summary>
         [Output("forceHttps")]
         public Output<bool?> ForceHttps { get; private set; } = null!;
@@ -50,8 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public Output<int?> HttpsRedirectStatusCode { get; private set; } = null!;
 
         /// <summary>
-        /// route methods. Reference
-        /// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        /// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         /// </summary>
         [Output("methods")]
         public Output<ImmutableArray<string>> Methods { get; private set; } = null!;
@@ -97,12 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Output("stripPath")]
         public Output<bool?> StripPath { get; private set; } = null!;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        [Output("tags")]
-        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -164,7 +261,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
 
         /// <summary>
-        /// whether to enable forced HTTPS, no longer use.
+        /// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         /// </summary>
         [Input("forceHttps")]
         public Input<bool>? ForceHttps { get; set; }
@@ -209,8 +306,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         private InputList<string>? _methods;
 
         /// <summary>
-        /// route methods. Reference
-        /// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        /// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         /// </summary>
         public InputList<string> Methods
         {
@@ -266,18 +362,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
 
-        [Input("tags")]
-        private InputMap<object>? _tags;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        public InputMap<object> Tags
-        {
-            get => _tags ?? (_tags = new InputMap<object>());
-            set => _tags = value;
-        }
-
         public CngwRouteArgs()
         {
         }
@@ -298,7 +382,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
 
         /// <summary>
-        /// whether to enable forced HTTPS, no longer use.
+        /// This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
         /// </summary>
         [Input("forceHttps")]
         public Input<bool>? ForceHttps { get; set; }
@@ -343,8 +427,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         private InputList<string>? _methods;
 
         /// <summary>
-        /// route methods. Reference
-        /// value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+        /// route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
         /// </summary>
         public InputList<string> Methods
         {
@@ -405,18 +488,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Input("stripPath")]
         public Input<bool>? StripPath { get; set; }
-
-        [Input("tags")]
-        private InputMap<object>? _tags;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        public InputMap<object> Tags
-        {
-            get => _tags ?? (_tags = new InputMap<object>());
-            set => _tags = value;
-        }
 
         public CngwRouteState()
         {

@@ -112,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Output<string?> ChargeType { get; private set; } = null!;
 
         /// <summary>
+        /// System character set sorting rule, default: Chinese_PRC_CI_AS.
+        /// </summary>
+        [Output("collation")]
+        public Output<string?> Collation { get; private set; } = null!;
+
+        /// <summary>
         /// The CPU number of the SQL Server basic instance.
         /// </summary>
         [Output("cpu")]
@@ -303,6 +309,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// System character set sorting rule, default: Chinese_PRC_CI_AS.
+        /// </summary>
+        [Input("collation")]
+        public Input<string>? Collation { get; set; }
+
+        /// <summary>
         /// The CPU number of the SQL Server basic instance.
         /// </summary>
         [Input("cpu", required: true)]
@@ -452,6 +464,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// System character set sorting rule, default: Chinese_PRC_CI_AS.
+        /// </summary>
+        [Input("collation")]
+        public Input<string>? Collation { get; set; }
 
         /// <summary>
         /// The CPU number of the SQL Server basic instance.

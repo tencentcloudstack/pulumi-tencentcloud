@@ -10,6 +10,7 @@ from .audit_log_file import *
 from .backup_download_restriction import *
 from .backup_encryption_status import *
 from .backup_policy import *
+from .database import *
 from .db_import_job_operation import *
 from .deploy_group import *
 from .dr_instance_to_mater import *

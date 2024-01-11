@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// }
     /// ```
-    /// ### CCN IPEC VPN gateway
+    /// ### CCN IPSEC VPN gateway
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -54,7 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     ///             {
     ///                 { "test", "test" },
     ///             },
-    ///             Type = "CCN",
+    ///             Type = "IPSEC",
     ///             Zone = "ap-guangzhou-3",
     ///         });
     ///     }
@@ -263,7 +263,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Gateway(string name, GatewayArgs args, CustomResourceOptions? options = null)
+        public Gateway(string name, GatewayArgs? args = null, CustomResourceOptions? options = null)
             : base("tencentcloud:Vpn/gateway:Gateway", name, args ?? new GatewayArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -371,8 +371,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// <summary>
         /// Zone of the VPN gateway.
         /// </summary>
-        [Input("zone", required: true)]
-        public Input<string> Zone { get; set; } = null!;
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
 
         public GatewayArgs()
         {

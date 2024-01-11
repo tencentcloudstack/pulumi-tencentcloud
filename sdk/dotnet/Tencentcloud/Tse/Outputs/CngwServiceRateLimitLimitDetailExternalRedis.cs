@@ -14,9 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwServiceRateLimitLimitDetailExternalRedis
     {
+        /// <summary>
+        /// redis ip, maybe null.
+        /// </summary>
         public readonly string RedisHost;
+        /// <summary>
+        /// redis password, maybe null.
+        /// </summary>
         public readonly string RedisPassword;
+        /// <summary>
+        /// redis port, maybe null.
+        /// </summary>
         public readonly int RedisPort;
+        /// <summary>
+        /// redis timeout, unit: `ms`, maybe null.
+        /// </summary>
         public readonly int RedisTimeout;
 
         [OutputConstructor]

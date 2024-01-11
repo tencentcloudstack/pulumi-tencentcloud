@@ -8,28 +8,31 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to create API gateway service.
  *
+ * > **NOTE:** After setting `uniqVpcId`, it cannot be modified.
+ *
  * ## Example Usage
  * ### Shared Service
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const service = new tencentcloud.ApiGateway.Service("service", {
- *     ipVersion: "IPv4",
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const example = new tencentcloud.apigateway.Service("example", {
+ *     serviceName: "tf-example",
+ *     protocol: "http&https",
+ *     serviceDesc: "desc.",
  *     netTypes: [
  *         "INNER",
  *         "OUTER",
  *     ],
- *     preLimit: 500,
- *     protocol: "http&https",
- *     releaseLimit: 500,
- *     serviceDesc: "your nice service",
- *     serviceName: "niceservice",
+ *     ipVersion: "IPv4",
+ *     uniqVpcId: vpc.id,
  *     tags: {
- *         "test-key1": "test-value1",
- *         "test-key2": "test-value2",
+ *         createdBy: "terraform",
  *     },
+ *     releaseLimit: 500,
+ *     preLimit: 500,
  *     testLimit: 500,
  * });
  * ```
@@ -37,23 +40,24 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const service = new tencentcloud.ApiGateway.Service("service", {
- *     instanceId: "instance-rc6fcv4e",
- *     ipVersion: "IPv4",
+ * const example = new tencentcloud.apigateway.Service("example", {
+ *     serviceName: "tf-example",
+ *     protocol: "http&https",
+ *     serviceDesc: "desc.",
  *     netTypes: [
  *         "INNER",
  *         "OUTER",
  *     ],
- *     preLimit: 500,
- *     protocol: "http&https",
- *     releaseLimit: 500,
- *     serviceDesc: "your nice service",
- *     serviceName: "service",
+ *     ipVersion: "IPv4",
+ *     uniqVpcId: tencentcloud_vpc.vpc.id,
+ *     instanceId: "instance-rc6fcv4e",
  *     tags: {
- *         "test-key1": "test-value1",
+ *         createdBy: "terraform",
  *     },
+ *     releaseLimit: 500,
+ *     preLimit: 500,
  *     testLimit: 500,
  * });
  * ```
@@ -169,6 +173,10 @@ export class Service extends pulumi.CustomResource {
      */
     public readonly testLimit!: pulumi.Output<number>;
     /**
+     * VPC ID.
+     */
+    public readonly uniqVpcId!: pulumi.Output<string | undefined>;
+    /**
      * A list of attach usage plans.
      */
     public /*out*/ readonly usagePlanLists!: pulumi.Output<outputs.ApiGateway.ServiceUsagePlanList[]>;
@@ -204,6 +212,7 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["serviceName"] = state ? state.serviceName : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["testLimit"] = state ? state.testLimit : undefined;
+            resourceInputs["uniqVpcId"] = state ? state.uniqVpcId : undefined;
             resourceInputs["usagePlanLists"] = state ? state.usagePlanLists : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
@@ -227,6 +236,7 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["serviceName"] = args ? args.serviceName : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["testLimit"] = args ? args.testLimit : undefined;
+            resourceInputs["uniqVpcId"] = args ? args.uniqVpcId : undefined;
             resourceInputs["apiLists"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["innerHttpPort"] = undefined /*out*/;
@@ -320,6 +330,10 @@ export interface ServiceState {
      */
     testLimit?: pulumi.Input<number>;
     /**
+     * VPC ID.
+     */
+    uniqVpcId?: pulumi.Input<string>;
+    /**
      * A list of attach usage plans.
      */
     usagePlanLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceUsagePlanList>[]>;
@@ -375,4 +389,8 @@ export interface ServiceArgs {
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     testLimit?: pulumi.Input<number>;
+    /**
+     * VPC ID.
+     */
+    uniqVpcId?: pulumi.Input<string>;
 }

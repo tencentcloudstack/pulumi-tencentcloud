@@ -10,19 +10,111 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'CustomHeaderHeader',
     'HttpRuleRealserver',
     'Layer4ListenerRealserverBindSet',
+    'GetAccessRegionsAccessRegionSetResult',
+    'GetAccessRegionsAccessRegionSetSupportFeatureResult',
+    'GetAccessRegionsByDestRegionAccessRegionSetResult',
     'GetCertificatesCertificateResult',
+    'GetCountryAreaMappingCountryAreaMappingListResult',
+    'GetCustomHeaderHeaderResult',
+    'GetDestRegionsDestRegionSetResult',
+    'GetDestRegionsDestRegionSetSupportFeatureResult',
+    'GetDomainErrorPageInfosErrorPageSetResult',
+    'GetDomainErrorPageInfosErrorPageSetSetHeaderResult',
     'GetDomainErrorPagesErrorPageInfoListResult',
+    'GetGroupAndStatisticsProxyGroupSetResult',
+    'GetGroupAndStatisticsProxyGroupSetProxySetResult',
+    'GetGroupAndStatisticsProxyGroupSetProxySetListenerListResult',
     'GetHttpDomainsDomainResult',
     'GetHttpRulesRuleResult',
     'GetHttpRulesRuleRealserverResult',
     'GetLayer4ListenersListenerResult',
     'GetLayer7ListenersListenerResult',
+    'GetListenerRealServersBindRealServerSetResult',
+    'GetListenerRealServersRealServerSetResult',
+    'GetListenerStatisticsStatisticsDataResult',
+    'GetListenerStatisticsStatisticsDataMetricDataResult',
     'GetProxiesProxyResult',
+    'GetProxiesStatusInstanceStatusSetResult',
+    'GetProxyAndStatisticsListenersProxySetResult',
+    'GetProxyAndStatisticsListenersProxySetListenerListResult',
+    'GetProxyDetailProxyDetailResult',
+    'GetProxyDetailProxyDetailAccessRegionInfoResult',
+    'GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureResult',
+    'GetProxyDetailProxyDetailIpListResult',
+    'GetProxyDetailProxyDetailRealServerRegionInfoResult',
+    'GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureResult',
+    'GetProxyDetailProxyDetailTagSetResult',
+    'GetProxyGroupStatisticsStatisticsDataResult',
+    'GetProxyGroupStatisticsStatisticsDataMetricDataResult',
+    'GetProxyGroupsFilterResult',
+    'GetProxyGroupsProxyGroupListResult',
+    'GetProxyGroupsProxyGroupListRealServerRegionInfoResult',
+    'GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureResult',
+    'GetProxyGroupsProxyGroupListTagSetResult',
+    'GetProxyGroupsTagSetResult',
+    'GetProxyStatisticsStatisticsDataResult',
+    'GetProxyStatisticsStatisticsDataMetricDataResult',
+    'GetRealServersStatusRealServerStatusSetResult',
     'GetRealserversRealserverResult',
+    'GetRegionAndPriceBandwidthUnitPriceResult',
+    'GetRegionAndPriceDestRegionSetResult',
+    'GetRegionAndPriceDestRegionSetSupportFeatureResult',
+    'GetResourcesByTagResourceSetResult',
+    'GetRuleRealServersBindRealServerSetResult',
+    'GetRuleRealServersRealServerSetResult',
     'GetSecurityRulesRuleResult',
 ]
+
+@pulumi.output_type
+class CustomHeaderHeader(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "headerName":
+            suggest = "header_name"
+        elif key == "headerValue":
+            suggest = "header_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomHeaderHeader. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomHeaderHeader.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomHeaderHeader.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 header_name: str,
+                 header_value: str):
+        """
+        :param str header_name: Header name.
+        :param str header_value: Header value.
+        """
+        pulumi.set(__self__, "header_name", header_name)
+        pulumi.set(__self__, "header_value", header_value)
+
+    @property
+    @pulumi.getter(name="headerName")
+    def header_name(self) -> str:
+        """
+        Header name.
+        """
+        return pulumi.get(self, "header_name")
+
+    @property
+    @pulumi.getter(name="headerValue")
+    def header_value(self) -> str:
+        """
+        Header value.
+        """
+        return pulumi.get(self, "header_value")
+
 
 @pulumi.output_type
 class HttpRuleRealserver(dict):
@@ -129,6 +221,203 @@ class Layer4ListenerRealserverBindSet(dict):
 
 
 @pulumi.output_type
+class GetAccessRegionsAccessRegionSetResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetAccessRegionsAccessRegionSetSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Name of the region to which the computer room belongs.
+        :param str region_id: Region id.
+        :param str region_name: English or Chinese name of the region.
+        :param Sequence['GetAccessRegionsAccessRegionSetSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Name of the region to which the computer room belongs.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        English or Chinese name of the region.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetAccessRegionsAccessRegionSetSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetAccessRegionsAccessRegionSetSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_ EIP represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_ EIP represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetAccessRegionsByDestRegionAccessRegionSetResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_lists: Sequence[int],
+                 concurrent_lists: Sequence[int],
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str):
+        """
+        :param Sequence[int] bandwidth_lists: Optional bandwidth value array.
+        :param Sequence[int] concurrent_lists: Optional concurrency value array.
+        :param int feature_bitmap: The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.
+        :param str idc_type: The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: Region id.
+        :param str region_name: Chinese or English name of the region.
+        """
+        pulumi.set(__self__, "bandwidth_lists", bandwidth_lists)
+        pulumi.set(__self__, "concurrent_lists", concurrent_lists)
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+
+    @property
+    @pulumi.getter(name="bandwidthLists")
+    def bandwidth_lists(self) -> Sequence[int]:
+        """
+        Optional bandwidth value array.
+        """
+        return pulumi.get(self, "bandwidth_lists")
+
+    @property
+    @pulumi.getter(name="concurrentLists")
+    def concurrent_lists(self) -> Sequence[int]:
+        """
+        Optional concurrency value array.
+        """
+        return pulumi.get(self, "concurrent_lists")
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Chinese or English name of the region.
+        """
+        return pulumi.get(self, "region_name")
+
+
+@pulumi.output_type
 class GetCertificatesCertificateResult(dict):
     def __init__(__self__, *,
                  begin_time: str,
@@ -224,6 +513,356 @@ class GetCertificatesCertificateResult(dict):
 
 
 @pulumi.output_type
+class GetCountryAreaMappingCountryAreaMappingListResult(dict):
+    def __init__(__self__, *,
+                 continent_inner_code: str,
+                 continent_name: str,
+                 geographical_zone_inner_code: str,
+                 geographical_zone_name: str,
+                 nation_country_inner_code: str,
+                 nation_country_name: str,
+                 remark: str):
+        """
+        :param str continent_inner_code: Continental Code.
+        :param str continent_name: The name of the continent.
+        :param str geographical_zone_inner_code: Region code.
+        :param str geographical_zone_name: Region name.
+        :param str nation_country_inner_code: Country code.
+        :param str nation_country_name: Country name.
+        :param str remark: Annotation InformationNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "continent_inner_code", continent_inner_code)
+        pulumi.set(__self__, "continent_name", continent_name)
+        pulumi.set(__self__, "geographical_zone_inner_code", geographical_zone_inner_code)
+        pulumi.set(__self__, "geographical_zone_name", geographical_zone_name)
+        pulumi.set(__self__, "nation_country_inner_code", nation_country_inner_code)
+        pulumi.set(__self__, "nation_country_name", nation_country_name)
+        pulumi.set(__self__, "remark", remark)
+
+    @property
+    @pulumi.getter(name="continentInnerCode")
+    def continent_inner_code(self) -> str:
+        """
+        Continental Code.
+        """
+        return pulumi.get(self, "continent_inner_code")
+
+    @property
+    @pulumi.getter(name="continentName")
+    def continent_name(self) -> str:
+        """
+        The name of the continent.
+        """
+        return pulumi.get(self, "continent_name")
+
+    @property
+    @pulumi.getter(name="geographicalZoneInnerCode")
+    def geographical_zone_inner_code(self) -> str:
+        """
+        Region code.
+        """
+        return pulumi.get(self, "geographical_zone_inner_code")
+
+    @property
+    @pulumi.getter(name="geographicalZoneName")
+    def geographical_zone_name(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "geographical_zone_name")
+
+    @property
+    @pulumi.getter(name="nationCountryInnerCode")
+    def nation_country_inner_code(self) -> str:
+        """
+        Country code.
+        """
+        return pulumi.get(self, "nation_country_inner_code")
+
+    @property
+    @pulumi.getter(name="nationCountryName")
+    def nation_country_name(self) -> str:
+        """
+        Country name.
+        """
+        return pulumi.get(self, "nation_country_name")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Annotation InformationNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "remark")
+
+
+@pulumi.output_type
+class GetCustomHeaderHeaderResult(dict):
+    def __init__(__self__, *,
+                 header_name: str,
+                 header_value: str):
+        """
+        :param str header_name: Header Name.
+        :param str header_value: Header Value.
+        """
+        pulumi.set(__self__, "header_name", header_name)
+        pulumi.set(__self__, "header_value", header_value)
+
+    @property
+    @pulumi.getter(name="headerName")
+    def header_name(self) -> str:
+        """
+        Header Name.
+        """
+        return pulumi.get(self, "header_name")
+
+    @property
+    @pulumi.getter(name="headerValue")
+    def header_value(self) -> str:
+        """
+        Header Value.
+        """
+        return pulumi.get(self, "header_value")
+
+
+@pulumi.output_type
+class GetDestRegionsDestRegionSetResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetDestRegionsDestRegionSetSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: region ID.
+        :param str region_name: region name.
+        :param Sequence['GetDestRegionsDestRegionSetSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        region name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetDestRegionsDestRegionSetSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetDestRegionsDestRegionSetSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetDomainErrorPageInfosErrorPageSetResult(dict):
+    def __init__(__self__, *,
+                 body: str,
+                 clear_headers: Sequence[str],
+                 domain: str,
+                 error_nos: Sequence[int],
+                 error_page_id: str,
+                 listener_id: str,
+                 new_error_no: int,
+                 set_headers: Sequence['outputs.GetDomainErrorPageInfosErrorPageSetSetHeaderResult'],
+                 status: int):
+        """
+        :param str body: Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence[str] clear_headers: Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param str domain: domain name.
+        :param Sequence[int] error_nos: Original error code.
+        :param str error_page_id: Configuration ID for error customization response.
+        :param str listener_id: Listener ID.
+        :param int new_error_no: New error codeNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetDomainErrorPageInfosErrorPageSetSetHeaderArgs'] set_headers: Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int status: Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "body", body)
+        pulumi.set(__self__, "clear_headers", clear_headers)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "error_nos", error_nos)
+        pulumi.set(__self__, "error_page_id", error_page_id)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "new_error_no", new_error_no)
+        pulumi.set(__self__, "set_headers", set_headers)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def body(self) -> str:
+        """
+        Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "body")
+
+    @property
+    @pulumi.getter(name="clearHeaders")
+    def clear_headers(self) -> Sequence[str]:
+        """
+        Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "clear_headers")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="errorNos")
+    def error_nos(self) -> Sequence[int]:
+        """
+        Original error code.
+        """
+        return pulumi.get(self, "error_nos")
+
+    @property
+    @pulumi.getter(name="errorPageId")
+    def error_page_id(self) -> str:
+        """
+        Configuration ID for error customization response.
+        """
+        return pulumi.get(self, "error_page_id")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Listener ID.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="newErrorNo")
+    def new_error_no(self) -> int:
+        """
+        New error codeNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "new_error_no")
+
+    @property
+    @pulumi.getter(name="setHeaders")
+    def set_headers(self) -> Sequence['outputs.GetDomainErrorPageInfosErrorPageSetSetHeaderResult']:
+        """
+        Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "set_headers")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDomainErrorPageInfosErrorPageSetSetHeaderResult(dict):
+    def __init__(__self__, *,
+                 header_name: str,
+                 header_value: str):
+        """
+        :param str header_name: HTTP header name.
+        :param str header_value: HTTP header value.
+        """
+        pulumi.set(__self__, "header_name", header_name)
+        pulumi.set(__self__, "header_value", header_value)
+
+    @property
+    @pulumi.getter(name="headerName")
+    def header_name(self) -> str:
+        """
+        HTTP header name.
+        """
+        return pulumi.get(self, "header_name")
+
+    @property
+    @pulumi.getter(name="headerValue")
+    def header_value(self) -> str:
+        """
+        HTTP header value.
+        """
+        return pulumi.get(self, "header_value")
+
+
+@pulumi.output_type
 class GetDomainErrorPagesErrorPageInfoListResult(dict):
     def __init__(__self__, *,
                  body: str,
@@ -316,6 +955,137 @@ class GetDomainErrorPagesErrorPageInfoListResult(dict):
         Response headers to be set.
         """
         return pulumi.get(self, "set_headers")
+
+
+@pulumi.output_type
+class GetGroupAndStatisticsProxyGroupSetResult(dict):
+    def __init__(__self__, *,
+                 group_id: str,
+                 group_name: str,
+                 proxy_sets: Sequence['outputs.GetGroupAndStatisticsProxyGroupSetProxySetResult']):
+        """
+        :param str group_id: Channel Group ID.
+        :param str group_name: Channel Group name.
+        :param Sequence['GetGroupAndStatisticsProxyGroupSetProxySetArgs'] proxy_sets: Channel list in the proxy group.
+        """
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "proxy_sets", proxy_sets)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Channel Group ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Channel Group name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="proxySets")
+    def proxy_sets(self) -> Sequence['outputs.GetGroupAndStatisticsProxyGroupSetProxySetResult']:
+        """
+        Channel list in the proxy group.
+        """
+        return pulumi.get(self, "proxy_sets")
+
+
+@pulumi.output_type
+class GetGroupAndStatisticsProxyGroupSetProxySetResult(dict):
+    def __init__(__self__, *,
+                 listener_lists: Sequence['outputs.GetGroupAndStatisticsProxyGroupSetProxySetListenerListResult'],
+                 proxy_id: str,
+                 proxy_name: str):
+        """
+        :param Sequence['GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs'] listener_lists: listener list.
+        :param str proxy_id: Channel Id.
+        :param str proxy_name: Channel name.
+        """
+        pulumi.set(__self__, "listener_lists", listener_lists)
+        pulumi.set(__self__, "proxy_id", proxy_id)
+        pulumi.set(__self__, "proxy_name", proxy_name)
+
+    @property
+    @pulumi.getter(name="listenerLists")
+    def listener_lists(self) -> Sequence['outputs.GetGroupAndStatisticsProxyGroupSetProxySetListenerListResult']:
+        """
+        listener list.
+        """
+        return pulumi.get(self, "listener_lists")
+
+    @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        Channel Id.
+        """
+        return pulumi.get(self, "proxy_id")
+
+    @property
+    @pulumi.getter(name="proxyName")
+    def proxy_name(self) -> str:
+        """
+        Channel name.
+        """
+        return pulumi.get(self, "proxy_name")
+
+
+@pulumi.output_type
+class GetGroupAndStatisticsProxyGroupSetProxySetListenerListResult(dict):
+    def __init__(__self__, *,
+                 listener_id: str,
+                 listener_name: str,
+                 port: int,
+                 protocol: str):
+        """
+        :param str listener_id: listener Id.
+        :param str listener_name: listener name.
+        :param int port: listened port.
+        :param str protocol: Listener protocol type.
+        """
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        listener Id.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        listener name.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        listened port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Listener protocol type.
+        """
+        return pulumi.get(self, "protocol")
 
 
 @pulumi.output_type
@@ -992,6 +1762,210 @@ class GetLayer7ListenersListenerResult(dict):
 
 
 @pulumi.output_type
+class GetListenerRealServersBindRealServerSetResult(dict):
+    def __init__(__self__, *,
+                 down_ip_lists: Sequence[str],
+                 real_server_failover_role: str,
+                 real_server_ip: str,
+                 real_server_id: str,
+                 real_server_port: int,
+                 real_server_status: int,
+                 real_server_weight: int):
+        """
+        :param Sequence[str] down_ip_lists: When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+        :param str real_server_failover_role: The primary and secondary roles of the real server, &#39;master&#39; represents primary, &#39;slave&#39; represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+        :param str real_server_ip: Real Server IP.
+        :param str real_server_id: Real Server Id.
+        :param int real_server_port: The port number of the real serverNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int real_server_status: real server health check status, where:0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int real_server_weight: The weight of this real server.
+        """
+        pulumi.set(__self__, "down_ip_lists", down_ip_lists)
+        pulumi.set(__self__, "real_server_failover_role", real_server_failover_role)
+        pulumi.set(__self__, "real_server_ip", real_server_ip)
+        pulumi.set(__self__, "real_server_id", real_server_id)
+        pulumi.set(__self__, "real_server_port", real_server_port)
+        pulumi.set(__self__, "real_server_status", real_server_status)
+        pulumi.set(__self__, "real_server_weight", real_server_weight)
+
+    @property
+    @pulumi.getter(name="downIPLists")
+    def down_ip_lists(self) -> Sequence[str]:
+        """
+        When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+        """
+        return pulumi.get(self, "down_ip_lists")
+
+    @property
+    @pulumi.getter(name="realServerFailoverRole")
+    def real_server_failover_role(self) -> str:
+        """
+        The primary and secondary roles of the real server, &#39;master&#39; represents primary, &#39;slave&#39; represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+        """
+        return pulumi.get(self, "real_server_failover_role")
+
+    @property
+    @pulumi.getter(name="realServerIP")
+    def real_server_ip(self) -> str:
+        """
+        Real Server IP.
+        """
+        return pulumi.get(self, "real_server_ip")
+
+    @property
+    @pulumi.getter(name="realServerId")
+    def real_server_id(self) -> str:
+        """
+        Real Server Id.
+        """
+        return pulumi.get(self, "real_server_id")
+
+    @property
+    @pulumi.getter(name="realServerPort")
+    def real_server_port(self) -> int:
+        """
+        The port number of the real serverNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "real_server_port")
+
+    @property
+    @pulumi.getter(name="realServerStatus")
+    def real_server_status(self) -> int:
+        """
+        real server health check status, where:0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "real_server_status")
+
+    @property
+    @pulumi.getter(name="realServerWeight")
+    def real_server_weight(self) -> int:
+        """
+        The weight of this real server.
+        """
+        return pulumi.get(self, "real_server_weight")
+
+
+@pulumi.output_type
+class GetListenerRealServersRealServerSetResult(dict):
+    def __init__(__self__, *,
+                 in_ban_blacklist: int,
+                 project_id: int,
+                 real_server_ip: str,
+                 real_server_id: str,
+                 real_server_name: str):
+        """
+        :param int in_ban_blacklist: Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+        :param int project_id: Project Id.
+        :param str real_server_ip: Real Server IP.
+        :param str real_server_id: Real Server Id.
+        :param str real_server_name: Real Server Name.
+        """
+        pulumi.set(__self__, "in_ban_blacklist", in_ban_blacklist)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "real_server_ip", real_server_ip)
+        pulumi.set(__self__, "real_server_id", real_server_id)
+        pulumi.set(__self__, "real_server_name", real_server_name)
+
+    @property
+    @pulumi.getter(name="inBanBlacklist")
+    def in_ban_blacklist(self) -> int:
+        """
+        Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+        """
+        return pulumi.get(self, "in_ban_blacklist")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project Id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="realServerIP")
+    def real_server_ip(self) -> str:
+        """
+        Real Server IP.
+        """
+        return pulumi.get(self, "real_server_ip")
+
+    @property
+    @pulumi.getter(name="realServerId")
+    def real_server_id(self) -> str:
+        """
+        Real Server Id.
+        """
+        return pulumi.get(self, "real_server_id")
+
+    @property
+    @pulumi.getter(name="realServerName")
+    def real_server_name(self) -> str:
+        """
+        Real Server Name.
+        """
+        return pulumi.get(self, "real_server_name")
+
+
+@pulumi.output_type
+class GetListenerStatisticsStatisticsDataResult(dict):
+    def __init__(__self__, *,
+                 metric_datas: Sequence['outputs.GetListenerStatisticsStatisticsDataMetricDataResult'],
+                 metric_name: str):
+        """
+        :param Sequence['GetListenerStatisticsStatisticsDataMetricDataArgs'] metric_datas: Metric Data.
+        :param str metric_name: Metric Name.
+        """
+        pulumi.set(__self__, "metric_datas", metric_datas)
+        pulumi.set(__self__, "metric_name", metric_name)
+
+    @property
+    @pulumi.getter(name="metricDatas")
+    def metric_datas(self) -> Sequence['outputs.GetListenerStatisticsStatisticsDataMetricDataResult']:
+        """
+        Metric Data.
+        """
+        return pulumi.get(self, "metric_datas")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric Name.
+        """
+        return pulumi.get(self, "metric_name")
+
+
+@pulumi.output_type
+class GetListenerStatisticsStatisticsDataMetricDataResult(dict):
+    def __init__(__self__, *,
+                 data: float,
+                 time: int):
+        """
+        :param float data: Statistical data valueNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int time: Time.
+        """
+        pulumi.set(__self__, "data", data)
+        pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter
+    def data(self) -> float:
+        """
+        Statistical data valueNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "data")
+
+    @property
+    @pulumi.getter
+    def time(self) -> int:
+        """
+        Time.
+        """
+        return pulumi.get(self, "time")
+
+
+@pulumi.output_type
 class GetProxiesProxyResult(dict):
     def __init__(__self__, *,
                  access_region: str,
@@ -1186,6 +2160,1306 @@ class GetProxiesProxyResult(dict):
 
 
 @pulumi.output_type
+class GetProxiesStatusInstanceStatusSetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 status: str):
+        """
+        :param str instance_id: proxy instance ID.
+        :param str status: proxy status.Among them:
+               - RUNNING indicates running;
+               - CREATING indicates being created;
+               - DESTROYING indicates being destroyed;
+               - OPENING indicates being opened;
+               - CLOSING indicates being closed;
+               - Closed indicates that it has been closed;
+               - ADJUSTING represents a configuration change in progress;
+               - ISOLATING indicates being isolated;
+               - ISOLATED indicates that it has been isolated;
+               - MOVING indicates that migration is in progress.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        proxy instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        proxy status.Among them:
+        - RUNNING indicates running;
+        - CREATING indicates being created;
+        - DESTROYING indicates being destroyed;
+        - OPENING indicates being opened;
+        - CLOSING indicates being closed;
+        - Closed indicates that it has been closed;
+        - ADJUSTING represents a configuration change in progress;
+        - ISOLATING indicates being isolated;
+        - ISOLATED indicates that it has been isolated;
+        - MOVING indicates that migration is in progress.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetProxyAndStatisticsListenersProxySetResult(dict):
+    def __init__(__self__, *,
+                 listener_lists: Sequence['outputs.GetProxyAndStatisticsListenersProxySetListenerListResult'],
+                 proxy_id: str,
+                 proxy_name: str):
+        """
+        :param Sequence['GetProxyAndStatisticsListenersProxySetListenerListArgs'] listener_lists: Listener List.
+        :param str proxy_id: Proxy Id.
+        :param str proxy_name: Proxy Name.
+        """
+        pulumi.set(__self__, "listener_lists", listener_lists)
+        pulumi.set(__self__, "proxy_id", proxy_id)
+        pulumi.set(__self__, "proxy_name", proxy_name)
+
+    @property
+    @pulumi.getter(name="listenerLists")
+    def listener_lists(self) -> Sequence['outputs.GetProxyAndStatisticsListenersProxySetListenerListResult']:
+        """
+        Listener List.
+        """
+        return pulumi.get(self, "listener_lists")
+
+    @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        Proxy Id.
+        """
+        return pulumi.get(self, "proxy_id")
+
+    @property
+    @pulumi.getter(name="proxyName")
+    def proxy_name(self) -> str:
+        """
+        Proxy Name.
+        """
+        return pulumi.get(self, "proxy_name")
+
+
+@pulumi.output_type
+class GetProxyAndStatisticsListenersProxySetListenerListResult(dict):
+    def __init__(__self__, *,
+                 listener_id: str,
+                 listener_name: str,
+                 port: int,
+                 protocol: str):
+        """
+        :param str listener_id: Listener Id.
+        :param str listener_name: Listener Name.
+        :param int port: listerned port.
+        :param str protocol: Listener protocol type.
+        """
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Listener Id.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Listener Name.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        listerned port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Listener protocol type.
+        """
+        return pulumi.get(self, "protocol")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailResult(dict):
+    def __init__(__self__, *,
+                 access_region: str,
+                 access_region_infos: Sequence['outputs.GetProxyDetailProxyDetailAccessRegionInfoResult'],
+                 ban_status: str,
+                 bandwidth: int,
+                 billing_type: int,
+                 client_ip_methods: Sequence[int],
+                 concurrent: int,
+                 create_time: int,
+                 domain: str,
+                 feature_bitmap: int,
+                 forward_ip: str,
+                 group_id: str,
+                 http3_supported: int,
+                 in_ban_blacklist: int,
+                 instance_id: str,
+                 ip: str,
+                 ip_address_version: str,
+                 ip_lists: Sequence['outputs.GetProxyDetailProxyDetailIpListResult'],
+                 modify_config_time: int,
+                 network_type: str,
+                 package_type: str,
+                 policy_id: str,
+                 project_id: int,
+                 proxy_id: str,
+                 proxy_name: str,
+                 proxy_type: int,
+                 real_server_region: str,
+                 real_server_region_infos: Sequence['outputs.GetProxyDetailProxyDetailRealServerRegionInfoResult'],
+                 related_global_domains: Sequence[str],
+                 scalarable: int,
+                 status: str,
+                 support_protocols: Sequence[str],
+                 support_security: int,
+                 tag_sets: Sequence['outputs.GetProxyDetailProxyDetailTagSetResult'],
+                 version: str):
+        """
+        :param str access_region: Access Region.
+        :param Sequence['GetProxyDetailProxyDetailAccessRegionInfoArgs'] access_region_infos: Detailed information about the access region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str ban_status: Blocking and Unblocking Status: BANNED indicates that the ban has been lifted, RECOVER indicates that the ban has been lifted or not, BANNING indicates that the ban is in progress, RECOVERING indicates that the ban is being lifted, BAN_FAILED indicates that the ban has failed, RECOVER_FAILED indicates that the unblocking has failed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int bandwidth: Band width.
+        :param int billing_type: Billing type: 0 represents bandwidth based billing, and 1 represents traffic based billing.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence[int] client_ip_methods: The method of obtaining client IP through proxys, where 0 represents TOA and 1 represents Proxy ProtocolNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int concurrent: Concurrent, in 10000 pieces/second.
+        :param int create_time: The creation time, using a Unix timestamp, represents the number of seconds that have passed since January 1, 1970 (midnight UTC/GMT).
+        :param str domain: Domain.
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str forward_ip: proxy forwarding IP.
+        :param str group_id: proxy group ID, which exists when a proxy belongs to a certain proxy group.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int http3_supported: Identification that supports the Http3 protocol, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int in_ban_blacklist: Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str instance_id: (Old parameter, please use ProxyId) Proxy instance ID.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str ip: IP.
+        :param str ip_address_version: IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetProxyDetailProxyDetailIpListArgs'] ip_lists: IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int modify_config_time: Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param str network_type: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        :param str package_type: proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str policy_id: Security policy ID, which exists when a security policy is set.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int project_id: Project Id.
+        :param str proxy_id: Proxy Id.
+        :param str proxy_name: Proxy Name.
+        :param int proxy_type: proxy type, 100 represents THUNDER proxy, 103 represents Microsoft cooperation proxyNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param str real_server_region: Real Server Region.
+        :param Sequence['GetProxyDetailProxyDetailRealServerRegionInfoArgs'] real_server_region_infos: Detailed information of the real server region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence[str] related_global_domains: List of domain names associated with resolutionNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int scalarable: 1. This proxy can be scaled and expanded; 0, this proxy cannot be scaled or expanded.
+        :param str status: proxy status. Among them:RUNNING indicates running;CREATING indicates being created;DESTROYING indicates being destroyed;OPENING indicates being opened;CLOSING indicates being closed;Closed indicates that it has been closed;ADJUSTING represents a configuration change in progress;ISOLATING indicates being isolated;ISOLATED indicates that it has been isolated;CLONING indicates copying;RECOVERING indicates that the proxy is being maintained;MOVING indicates that migration is in progress.
+        :param Sequence[str] support_protocols: Supported protocol types.
+        :param int support_security: Does it support security group configurationNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetProxyDetailProxyDetailTagSetArgs'] tag_sets: tag list, when there are no labels, this field is an empty list.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str version: Version 1.0, 2.0, 3.0.
+        """
+        pulumi.set(__self__, "access_region", access_region)
+        pulumi.set(__self__, "access_region_infos", access_region_infos)
+        pulumi.set(__self__, "ban_status", ban_status)
+        pulumi.set(__self__, "bandwidth", bandwidth)
+        pulumi.set(__self__, "billing_type", billing_type)
+        pulumi.set(__self__, "client_ip_methods", client_ip_methods)
+        pulumi.set(__self__, "concurrent", concurrent)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "forward_ip", forward_ip)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "http3_supported", http3_supported)
+        pulumi.set(__self__, "in_ban_blacklist", in_ban_blacklist)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "ip_address_version", ip_address_version)
+        pulumi.set(__self__, "ip_lists", ip_lists)
+        pulumi.set(__self__, "modify_config_time", modify_config_time)
+        pulumi.set(__self__, "network_type", network_type)
+        pulumi.set(__self__, "package_type", package_type)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "proxy_id", proxy_id)
+        pulumi.set(__self__, "proxy_name", proxy_name)
+        pulumi.set(__self__, "proxy_type", proxy_type)
+        pulumi.set(__self__, "real_server_region", real_server_region)
+        pulumi.set(__self__, "real_server_region_infos", real_server_region_infos)
+        pulumi.set(__self__, "related_global_domains", related_global_domains)
+        pulumi.set(__self__, "scalarable", scalarable)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "support_protocols", support_protocols)
+        pulumi.set(__self__, "support_security", support_security)
+        pulumi.set(__self__, "tag_sets", tag_sets)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="accessRegion")
+    def access_region(self) -> str:
+        """
+        Access Region.
+        """
+        return pulumi.get(self, "access_region")
+
+    @property
+    @pulumi.getter(name="accessRegionInfos")
+    def access_region_infos(self) -> Sequence['outputs.GetProxyDetailProxyDetailAccessRegionInfoResult']:
+        """
+        Detailed information about the access region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "access_region_infos")
+
+    @property
+    @pulumi.getter(name="banStatus")
+    def ban_status(self) -> str:
+        """
+        Blocking and Unblocking Status: BANNED indicates that the ban has been lifted, RECOVER indicates that the ban has been lifted or not, BANNING indicates that the ban is in progress, RECOVERING indicates that the ban is being lifted, BAN_FAILED indicates that the ban has failed, RECOVER_FAILED indicates that the unblocking has failed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "ban_status")
+
+    @property
+    @pulumi.getter
+    def bandwidth(self) -> int:
+        """
+        Band width.
+        """
+        return pulumi.get(self, "bandwidth")
+
+    @property
+    @pulumi.getter(name="billingType")
+    def billing_type(self) -> int:
+        """
+        Billing type: 0 represents bandwidth based billing, and 1 represents traffic based billing.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "billing_type")
+
+    @property
+    @pulumi.getter(name="clientIpMethods")
+    def client_ip_methods(self) -> Sequence[int]:
+        """
+        The method of obtaining client IP through proxys, where 0 represents TOA and 1 represents Proxy ProtocolNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "client_ip_methods")
+
+    @property
+    @pulumi.getter
+    def concurrent(self) -> int:
+        """
+        Concurrent, in 10000 pieces/second.
+        """
+        return pulumi.get(self, "concurrent")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        """
+        The creation time, using a Unix timestamp, represents the number of seconds that have passed since January 1, 1970 (midnight UTC/GMT).
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="forwardIp")
+    def forward_ip(self) -> str:
+        """
+        proxy forwarding IP.
+        """
+        return pulumi.get(self, "forward_ip")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        proxy group ID, which exists when a proxy belongs to a certain proxy group.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="http3Supported")
+    def http3_supported(self) -> int:
+        """
+        Identification that supports the Http3 protocol, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "http3_supported")
+
+    @property
+    @pulumi.getter(name="inBanBlacklist")
+    def in_ban_blacklist(self) -> int:
+        """
+        Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "in_ban_blacklist")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        (Old parameter, please use ProxyId) Proxy instance ID.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="ipAddressVersion")
+    def ip_address_version(self) -> str:
+        """
+        IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "ip_address_version")
+
+    @property
+    @pulumi.getter(name="ipLists")
+    def ip_lists(self) -> Sequence['outputs.GetProxyDetailProxyDetailIpListResult']:
+        """
+        IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "ip_lists")
+
+    @property
+    @pulumi.getter(name="modifyConfigTime")
+    def modify_config_time(self) -> int:
+        """
+        Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "modify_config_time")
+
+    @property
+    @pulumi.getter(name="networkType")
+    def network_type(self) -> str:
+        """
+        A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_type")
+
+    @property
+    @pulumi.getter(name="packageType")
+    def package_type(self) -> str:
+        """
+        proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_type")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Security policy ID, which exists when a security policy is set.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project Id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        Proxy Id.
+        """
+        return pulumi.get(self, "proxy_id")
+
+    @property
+    @pulumi.getter(name="proxyName")
+    def proxy_name(self) -> str:
+        """
+        Proxy Name.
+        """
+        return pulumi.get(self, "proxy_name")
+
+    @property
+    @pulumi.getter(name="proxyType")
+    def proxy_type(self) -> int:
+        """
+        proxy type, 100 represents THUNDER proxy, 103 represents Microsoft cooperation proxyNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "proxy_type")
+
+    @property
+    @pulumi.getter(name="realServerRegion")
+    def real_server_region(self) -> str:
+        """
+        Real Server Region.
+        """
+        return pulumi.get(self, "real_server_region")
+
+    @property
+    @pulumi.getter(name="realServerRegionInfos")
+    def real_server_region_infos(self) -> Sequence['outputs.GetProxyDetailProxyDetailRealServerRegionInfoResult']:
+        """
+        Detailed information of the real server region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "real_server_region_infos")
+
+    @property
+    @pulumi.getter(name="relatedGlobalDomains")
+    def related_global_domains(self) -> Sequence[str]:
+        """
+        List of domain names associated with resolutionNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "related_global_domains")
+
+    @property
+    @pulumi.getter
+    def scalarable(self) -> int:
+        """
+        1. This proxy can be scaled and expanded; 0, this proxy cannot be scaled or expanded.
+        """
+        return pulumi.get(self, "scalarable")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        proxy status. Among them:RUNNING indicates running;CREATING indicates being created;DESTROYING indicates being destroyed;OPENING indicates being opened;CLOSING indicates being closed;Closed indicates that it has been closed;ADJUSTING represents a configuration change in progress;ISOLATING indicates being isolated;ISOLATED indicates that it has been isolated;CLONING indicates copying;RECOVERING indicates that the proxy is being maintained;MOVING indicates that migration is in progress.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="supportProtocols")
+    def support_protocols(self) -> Sequence[str]:
+        """
+        Supported protocol types.
+        """
+        return pulumi.get(self, "support_protocols")
+
+    @property
+    @pulumi.getter(name="supportSecurity")
+    def support_security(self) -> int:
+        """
+        Does it support security group configurationNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_security")
+
+    @property
+    @pulumi.getter(name="tagSets")
+    def tag_sets(self) -> Sequence['outputs.GetProxyDetailProxyDetailTagSetResult']:
+        """
+        tag list, when there are no labels, this field is an empty list.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "tag_sets")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Version 1.0, 2.0, 3.0.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailAccessRegionInfoResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: Region Id.
+        :param str region_name: Region Name.
+        :param Sequence['GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region Id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region Name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailIpListResult(dict):
+    def __init__(__self__, *,
+                 bandwidth: int,
+                 ip: str,
+                 provider: str):
+        """
+        :param int bandwidth: Band width.
+        :param str ip: IP.
+        :param str provider: Supplier, BGP represents default, CMCC represents China Mobile, CUCC represents China Unicom, and CTCC represents China Telecom.
+        """
+        pulumi.set(__self__, "bandwidth", bandwidth)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "provider", provider)
+
+    @property
+    @pulumi.getter
+    def bandwidth(self) -> int:
+        """
+        Band width.
+        """
+        return pulumi.get(self, "bandwidth")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def provider(self) -> str:
+        """
+        Supplier, BGP represents default, CMCC represents China Mobile, CUCC represents China Unicom, and CTCC represents China Telecom.
+        """
+        return pulumi.get(self, "provider")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailRealServerRegionInfoResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: Region Id.
+        :param str region_name: Region Name.
+        :param Sequence['GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region Id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region Name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetProxyDetailProxyDetailTagSetResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag Key.
+        :param str tag_value: Tag Value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag Key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag Value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetProxyGroupStatisticsStatisticsDataResult(dict):
+    def __init__(__self__, *,
+                 metric_datas: Sequence['outputs.GetProxyGroupStatisticsStatisticsDataMetricDataResult'],
+                 metric_name: str):
+        """
+        :param Sequence['GetProxyGroupStatisticsStatisticsDataMetricDataArgs'] metric_datas: Metric Data.
+        :param str metric_name: Metric Name.
+        """
+        pulumi.set(__self__, "metric_datas", metric_datas)
+        pulumi.set(__self__, "metric_name", metric_name)
+
+    @property
+    @pulumi.getter(name="metricDatas")
+    def metric_datas(self) -> Sequence['outputs.GetProxyGroupStatisticsStatisticsDataMetricDataResult']:
+        """
+        Metric Data.
+        """
+        return pulumi.get(self, "metric_datas")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric Name.
+        """
+        return pulumi.get(self, "metric_name")
+
+
+@pulumi.output_type
+class GetProxyGroupStatisticsStatisticsDataMetricDataResult(dict):
+    def __init__(__self__, *,
+                 data: float,
+                 time: int):
+        """
+        :param float data: DataNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int time: Time.
+        """
+        pulumi.set(__self__, "data", data)
+        pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter
+    def data(self) -> float:
+        """
+        DataNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "data")
+
+    @property
+    @pulumi.getter
+    def time(self) -> int:
+        """
+        Time.
+        """
+        return pulumi.get(self, "time")
+
+
+@pulumi.output_type
+class GetProxyGroupsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Filter conditions.
+        :param Sequence[str] values: filtering value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Filter conditions.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filtering value.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetProxyGroupsProxyGroupListResult(dict):
+    def __init__(__self__, *,
+                 create_time: int,
+                 domain: str,
+                 feature_bitmap: int,
+                 group_id: str,
+                 group_name: str,
+                 http3_supported: int,
+                 project_id: int,
+                 proxy_type: int,
+                 real_server_region_infos: Sequence['outputs.GetProxyGroupsProxyGroupListRealServerRegionInfoResult'],
+                 status: str,
+                 tag_sets: Sequence['outputs.GetProxyGroupsProxyGroupListTagSetResult'],
+                 version: str):
+        """
+        :param int create_time: Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param str domain: proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str group_id: proxy group Id.
+        :param str group_name: proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int http3_supported: Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int project_id: Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
+        :param int proxy_type: Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param Sequence['GetProxyGroupsProxyGroupListRealServerRegionInfoArgs'] real_server_region_infos: Real Server Region Info.
+        :param str status: proxy group status.Among them,&#39;RUNNING&#39; indicates running;&#39;CREATING&#39; indicates being created;&#39;DESTROYING&#39; indicates being destroyed;&#39;MOVING&#39; indicates that the proxy is being migrated;&#39;CHANGING&#39; indicates partial deployment.
+        :param Sequence['GetProxyGroupsProxyGroupListTagSetArgs'] tag_sets: Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
+        :param str version: proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "http3_supported", http3_supported)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "proxy_type", proxy_type)
+        pulumi.set(__self__, "real_server_region_infos", real_server_region_infos)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tag_sets", tag_sets)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        """
+        Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        proxy group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="http3Supported")
+    def http3_supported(self) -> int:
+        """
+        Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "http3_supported")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="proxyType")
+    def proxy_type(self) -> int:
+        """
+        Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "proxy_type")
+
+    @property
+    @pulumi.getter(name="realServerRegionInfos")
+    def real_server_region_infos(self) -> Sequence['outputs.GetProxyGroupsProxyGroupListRealServerRegionInfoResult']:
+        """
+        Real Server Region Info.
+        """
+        return pulumi.get(self, "real_server_region_infos")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        proxy group status.Among them,&#39;RUNNING&#39; indicates running;&#39;CREATING&#39; indicates being created;&#39;DESTROYING&#39; indicates being destroyed;&#39;MOVING&#39; indicates that the proxy is being migrated;&#39;CHANGING&#39; indicates partial deployment.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="tagSets")
+    def tag_sets(self) -> Sequence['outputs.GetProxyGroupsProxyGroupListTagSetResult']:
+        """
+        Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
+        """
+        return pulumi.get(self, "tag_sets")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetProxyGroupsProxyGroupListRealServerRegionInfoResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: The type of computer room, where &#39;dc&#39; represents the DataCenter data center and &#39;ec&#39; represents the EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: Region Id.
+        :param str region_name: Region Name.
+        :param Sequence['GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        The type of computer room, where &#39;dc&#39; represents the DataCenter data center and &#39;ec&#39; represents the EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region Id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region Name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with &#39;normal&#39; indicating support for regular BGP, &#39;cn2&#39; indicating premium BGP, &#39;triple&#39; indicating three networks, and &#39;secure_EIP&#39; represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with &#39;normal&#39; indicating support for regular BGP, &#39;cn2&#39; indicating premium BGP, &#39;triple&#39; indicating three networks, and &#39;secure_EIP&#39; represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetProxyGroupsProxyGroupListTagSetResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag Key.
+        :param str tag_value: Tag Value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag Key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag Value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetProxyGroupsTagSetResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag Key.
+        :param str tag_value: Tag Value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag Key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag Value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetProxyStatisticsStatisticsDataResult(dict):
+    def __init__(__self__, *,
+                 metric_datas: Sequence['outputs.GetProxyStatisticsStatisticsDataMetricDataResult'],
+                 metric_name: str):
+        """
+        :param Sequence['GetProxyStatisticsStatisticsDataMetricDataArgs'] metric_datas: Metric Data.
+        :param str metric_name: Metric Name.
+        """
+        pulumi.set(__self__, "metric_datas", metric_datas)
+        pulumi.set(__self__, "metric_name", metric_name)
+
+    @property
+    @pulumi.getter(name="metricDatas")
+    def metric_datas(self) -> Sequence['outputs.GetProxyStatisticsStatisticsDataMetricDataResult']:
+        """
+        Metric Data.
+        """
+        return pulumi.get(self, "metric_datas")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric Name.
+        """
+        return pulumi.get(self, "metric_name")
+
+
+@pulumi.output_type
+class GetProxyStatisticsStatisticsDataMetricDataResult(dict):
+    def __init__(__self__, *,
+                 data: float,
+                 time: int):
+        """
+        :param float data: DataNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int time: Time.
+        """
+        pulumi.set(__self__, "data", data)
+        pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter
+    def data(self) -> float:
+        """
+        DataNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "data")
+
+    @property
+    @pulumi.getter
+    def time(self) -> int:
+        """
+        Time.
+        """
+        return pulumi.get(self, "time")
+
+
+@pulumi.output_type
+class GetRealServersStatusRealServerStatusSetResult(dict):
+    def __init__(__self__, *,
+                 bind_status: int,
+                 group_id: str,
+                 proxy_id: str,
+                 real_server_id: str):
+        """
+        :param int bind_status: Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.
+        :param str group_id: Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str proxy_id: Bind the proxy ID of this real server, which is an empty string when not bound.
+        :param str real_server_id: Real Server Id.
+        """
+        pulumi.set(__self__, "bind_status", bind_status)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "proxy_id", proxy_id)
+        pulumi.set(__self__, "real_server_id", real_server_id)
+
+    @property
+    @pulumi.getter(name="bindStatus")
+    def bind_status(self) -> int:
+        """
+        Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.
+        """
+        return pulumi.get(self, "bind_status")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="proxyId")
+    def proxy_id(self) -> str:
+        """
+        Bind the proxy ID of this real server, which is an empty string when not bound.
+        """
+        return pulumi.get(self, "proxy_id")
+
+    @property
+    @pulumi.getter(name="realServerId")
+    def real_server_id(self) -> str:
+        """
+        Real Server Id.
+        """
+        return pulumi.get(self, "real_server_id")
+
+
+@pulumi.output_type
 class GetRealserversRealserverResult(dict):
     def __init__(__self__, *,
                  domain: str,
@@ -1256,6 +3530,323 @@ class GetRealserversRealserverResult(dict):
         Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
         """
         return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetRegionAndPriceBandwidthUnitPriceResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_ranges: Sequence[int],
+                 bandwidth_unit_price: float,
+                 discount_bandwidth_unit_price: float):
+        """
+        :param Sequence[int] bandwidth_ranges: Band width Range.
+        :param float bandwidth_unit_price: Band width Unit Price, Unit:yuan/Mbps/day.
+        :param float discount_bandwidth_unit_price: Bandwidth discount price, unit:yuan/Mbps/day.
+        """
+        pulumi.set(__self__, "bandwidth_ranges", bandwidth_ranges)
+        pulumi.set(__self__, "bandwidth_unit_price", bandwidth_unit_price)
+        pulumi.set(__self__, "discount_bandwidth_unit_price", discount_bandwidth_unit_price)
+
+    @property
+    @pulumi.getter(name="bandwidthRanges")
+    def bandwidth_ranges(self) -> Sequence[int]:
+        """
+        Band width Range.
+        """
+        return pulumi.get(self, "bandwidth_ranges")
+
+    @property
+    @pulumi.getter(name="bandwidthUnitPrice")
+    def bandwidth_unit_price(self) -> float:
+        """
+        Band width Unit Price, Unit:yuan/Mbps/day.
+        """
+        return pulumi.get(self, "bandwidth_unit_price")
+
+    @property
+    @pulumi.getter(name="discountBandwidthUnitPrice")
+    def discount_bandwidth_unit_price(self) -> float:
+        """
+        Bandwidth discount price, unit:yuan/Mbps/day.
+        """
+        return pulumi.get(self, "discount_bandwidth_unit_price")
+
+
+@pulumi.output_type
+class GetRegionAndPriceDestRegionSetResult(dict):
+    def __init__(__self__, *,
+                 feature_bitmap: int,
+                 idc_type: str,
+                 region_area: str,
+                 region_area_name: str,
+                 region_id: str,
+                 region_name: str,
+                 support_features: Sequence['outputs.GetRegionAndPriceDestRegionSetSupportFeatureResult']):
+        """
+        :param int feature_bitmap: Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str idc_type: Type of computer room, dc represents DataCenter data center, ec represents EdgeComputing edge node.
+        :param str region_area: Region of the computer room.
+        :param str region_area_name: Region name of the computer room.
+        :param str region_id: Region Id.
+        :param str region_name: Region Name.
+        :param Sequence['GetRegionAndPriceDestRegionSetSupportFeatureArgs'] support_features: Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "feature_bitmap", feature_bitmap)
+        pulumi.set(__self__, "idc_type", idc_type)
+        pulumi.set(__self__, "region_area", region_area)
+        pulumi.set(__self__, "region_area_name", region_area_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "support_features", support_features)
+
+    @property
+    @pulumi.getter(name="featureBitmap")
+    def feature_bitmap(self) -> int:
+        """
+        Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "feature_bitmap")
+
+    @property
+    @pulumi.getter(name="idcType")
+    def idc_type(self) -> str:
+        """
+        Type of computer room, dc represents DataCenter data center, ec represents EdgeComputing edge node.
+        """
+        return pulumi.get(self, "idc_type")
+
+    @property
+    @pulumi.getter(name="regionArea")
+    def region_area(self) -> str:
+        """
+        Region of the computer room.
+        """
+        return pulumi.get(self, "region_area")
+
+    @property
+    @pulumi.getter(name="regionAreaName")
+    def region_area_name(self) -> str:
+        """
+        Region name of the computer room.
+        """
+        return pulumi.get(self, "region_area_name")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> str:
+        """
+        Region Id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region Name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="supportFeatures")
+    def support_features(self) -> Sequence['outputs.GetRegionAndPriceDestRegionSetSupportFeatureResult']:
+        """
+        Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "support_features")
+
+
+@pulumi.output_type
+class GetRegionAndPriceDestRegionSetSupportFeatureResult(dict):
+    def __init__(__self__, *,
+                 network_types: Sequence[str]):
+        """
+        :param Sequence[str] network_types: A list of network types supported by the access area, with `normal` indicating support for regular BGP, `cn2` indicating premium BGP, `triple` indicating three networks, and `secure_eip` represents a custom secure EIP.
+        """
+        pulumi.set(__self__, "network_types", network_types)
+
+    @property
+    @pulumi.getter(name="networkTypes")
+    def network_types(self) -> Sequence[str]:
+        """
+        A list of network types supported by the access area, with `normal` indicating support for regular BGP, `cn2` indicating premium BGP, `triple` indicating three networks, and `secure_eip` represents a custom secure EIP.
+        """
+        return pulumi.get(self, "network_types")
+
+
+@pulumi.output_type
+class GetResourcesByTagResourceSetResult(dict):
+    def __init__(__self__, *,
+                 resource_id: str,
+                 resource_type: str):
+        """
+        :param str resource_id: Resource Id.
+        :param str resource_type: Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
+        """
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Resource Id.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
+        """
+        return pulumi.get(self, "resource_type")
+
+
+@pulumi.output_type
+class GetRuleRealServersBindRealServerSetResult(dict):
+    def __init__(__self__, *,
+                 down_ip_lists: Sequence[str],
+                 real_server_failover_role: str,
+                 real_server_id: str,
+                 real_server_ip: str,
+                 real_server_port: int,
+                 real_server_status: int,
+                 real_server_weight: int):
+        """
+        :param Sequence[str] down_ip_lists: When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+        :param str real_server_failover_role: The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+        :param str real_server_id: Real Server Id.
+        :param str real_server_ip: Real Server IP or domain.
+        :param int real_server_port: Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int real_server_status: RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int real_server_weight: Real Server Weight.
+        """
+        pulumi.set(__self__, "down_ip_lists", down_ip_lists)
+        pulumi.set(__self__, "real_server_failover_role", real_server_failover_role)
+        pulumi.set(__self__, "real_server_id", real_server_id)
+        pulumi.set(__self__, "real_server_ip", real_server_ip)
+        pulumi.set(__self__, "real_server_port", real_server_port)
+        pulumi.set(__self__, "real_server_status", real_server_status)
+        pulumi.set(__self__, "real_server_weight", real_server_weight)
+
+    @property
+    @pulumi.getter(name="downIpLists")
+    def down_ip_lists(self) -> Sequence[str]:
+        """
+        When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+        """
+        return pulumi.get(self, "down_ip_lists")
+
+    @property
+    @pulumi.getter(name="realServerFailoverRole")
+    def real_server_failover_role(self) -> str:
+        """
+        The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+        """
+        return pulumi.get(self, "real_server_failover_role")
+
+    @property
+    @pulumi.getter(name="realServerId")
+    def real_server_id(self) -> str:
+        """
+        Real Server Id.
+        """
+        return pulumi.get(self, "real_server_id")
+
+    @property
+    @pulumi.getter(name="realServerIp")
+    def real_server_ip(self) -> str:
+        """
+        Real Server IP or domain.
+        """
+        return pulumi.get(self, "real_server_ip")
+
+    @property
+    @pulumi.getter(name="realServerPort")
+    def real_server_port(self) -> int:
+        """
+        Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "real_server_port")
+
+    @property
+    @pulumi.getter(name="realServerStatus")
+    def real_server_status(self) -> int:
+        """
+        RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "real_server_status")
+
+    @property
+    @pulumi.getter(name="realServerWeight")
+    def real_server_weight(self) -> int:
+        """
+        Real Server Weight.
+        """
+        return pulumi.get(self, "real_server_weight")
+
+
+@pulumi.output_type
+class GetRuleRealServersRealServerSetResult(dict):
+    def __init__(__self__, *,
+                 in_ban_blacklist: int,
+                 project_id: int,
+                 real_server_id: str,
+                 real_server_ip: str,
+                 real_server_name: str):
+        """
+        :param int in_ban_blacklist: Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+        :param int project_id: Project Id.
+        :param str real_server_id: Real Server Id.
+        :param str real_server_ip: Real Server IP or domain.
+        :param str real_server_name: Real Server Name.
+        """
+        pulumi.set(__self__, "in_ban_blacklist", in_ban_blacklist)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "real_server_id", real_server_id)
+        pulumi.set(__self__, "real_server_ip", real_server_ip)
+        pulumi.set(__self__, "real_server_name", real_server_name)
+
+    @property
+    @pulumi.getter(name="inBanBlacklist")
+    def in_ban_blacklist(self) -> int:
+        """
+        Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+        """
+        return pulumi.get(self, "in_ban_blacklist")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project Id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="realServerId")
+    def real_server_id(self) -> str:
+        """
+        Real Server Id.
+        """
+        return pulumi.get(self, "real_server_id")
+
+    @property
+    @pulumi.getter(name="realServerIp")
+    def real_server_ip(self) -> str:
+        """
+        Real Server IP or domain.
+        """
+        return pulumi.get(self, "real_server_ip")
+
+    @property
+    @pulumi.getter(name="realServerName")
+    def real_server_name(self) -> str:
+        """
+        Real Server Name.
+        """
+        return pulumi.get(self, "real_server_name")
 
 
 @pulumi.output_type

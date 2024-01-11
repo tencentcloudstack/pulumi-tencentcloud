@@ -49,7 +49,7 @@ export class FlowLog extends pulumi.CustomResource {
     }
 
     /**
-     * Specify flow log storage id.
+     * Specify flow log storage id, just set cls topic id.
      */
     public readonly cloudLogId!: pulumi.Output<string | undefined>;
     /**
@@ -153,7 +153,7 @@ export class FlowLog extends pulumi.CustomResource {
  */
 export interface FlowLogState {
     /**
-     * Specify flow log storage id.
+     * Specify flow log storage id, just set cls topic id.
      */
     cloudLogId?: pulumi.Input<string>;
     /**
@@ -203,7 +203,7 @@ export interface FlowLogState {
  */
 export interface FlowLogArgs {
     /**
-     * Specify flow log storage id.
+     * Specify flow log storage id, just set cls topic id.
      */
     cloudLogId?: pulumi.Input<string>;
     /**

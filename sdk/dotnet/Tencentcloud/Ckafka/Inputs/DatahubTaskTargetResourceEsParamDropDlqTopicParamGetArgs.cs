@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public Input<int>? StartTime { get; set; }
 
         /// <summary>
-        /// TopicId.
+        /// Topic TopicId.
         /// </summary>
         [Input("topicId")]
         public Input<string>? TopicId { get; set; }

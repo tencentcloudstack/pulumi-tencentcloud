@@ -29,7 +29,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public partial class FlowLog : Pulumi.CustomResource
     {
         /// <summary>
-        /// Specify flow log storage id.
+        /// Specify flow log storage id, just set cls topic id.
         /// </summary>
         [Output("cloudLogId")]
         public Output<string?> CloudLogId { get; private set; } = null!;
@@ -142,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public sealed class FlowLogArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specify flow log storage id.
+        /// Specify flow log storage id, just set cls topic id.
         /// </summary>
         [Input("cloudLogId")]
         public Input<string>? CloudLogId { get; set; }
@@ -221,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public sealed class FlowLogState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specify flow log storage id.
+        /// Specify flow log storage id, just set cls topic id.
         /// </summary>
         [Input("cloudLogId")]
         public Input<string>? CloudLogId { get; set; }

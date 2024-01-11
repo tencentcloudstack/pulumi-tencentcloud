@@ -109,6 +109,7 @@ class _JobState:
                  duration: Optional[pulumi.Input[int]] = None,
                  end_time: Optional[pulumi.Input[str]] = None,
                  error_rate: Optional[pulumi.Input[float]] = None,
+                 job_id: Optional[pulumi.Input[str]] = None,
                  job_owner: Optional[pulumi.Input[str]] = None,
                  loads: Optional[pulumi.Input[Sequence[pulumi.Input['JobLoadArgs']]]] = None,
                  max_requests_per_second: Optional[pulumi.Input[int]] = None,
@@ -142,6 +143,7 @@ class _JobState:
         :param pulumi.Input[int] duration: Job duration.
         :param pulumi.Input[str] end_time: End time of the job.
         :param pulumi.Input[float] error_rate: Percentage of error rate.
+        :param pulumi.Input[str] job_id: Job Id.
         :param pulumi.Input[str] job_owner: Job owner.
         :param pulumi.Input[Sequence[pulumi.Input['JobLoadArgs']]] loads: Pressure configuration of job.
         :param pulumi.Input[int] max_requests_per_second: Maximum requests per second.
@@ -183,6 +185,8 @@ class _JobState:
             pulumi.set(__self__, "end_time", end_time)
         if error_rate is not None:
             pulumi.set(__self__, "error_rate", error_rate)
+        if job_id is not None:
+            pulumi.set(__self__, "job_id", job_id)
         if job_owner is not None:
             pulumi.set(__self__, "job_owner", job_owner)
         if loads is not None:
@@ -335,6 +339,18 @@ class _JobState:
     @error_rate.setter
     def error_rate(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "error_rate", value)
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Job Id.
+        """
+        return pulumi.get(self, "job_id")
+
+    @job_id.setter
+    def job_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "job_id", value)
 
     @property
     @pulumi.getter(name="jobOwner")
@@ -727,6 +743,7 @@ class Job(pulumi.CustomResource):
             __props__.__dict__["duration"] = None
             __props__.__dict__["end_time"] = None
             __props__.__dict__["error_rate"] = None
+            __props__.__dict__["job_id"] = None
             __props__.__dict__["loads"] = None
             __props__.__dict__["max_requests_per_second"] = None
             __props__.__dict__["max_virtual_user_count"] = None
@@ -764,6 +781,7 @@ class Job(pulumi.CustomResource):
             duration: Optional[pulumi.Input[int]] = None,
             end_time: Optional[pulumi.Input[str]] = None,
             error_rate: Optional[pulumi.Input[float]] = None,
+            job_id: Optional[pulumi.Input[str]] = None,
             job_owner: Optional[pulumi.Input[str]] = None,
             loads: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['JobLoadArgs']]]]] = None,
             max_requests_per_second: Optional[pulumi.Input[int]] = None,
@@ -802,6 +820,7 @@ class Job(pulumi.CustomResource):
         :param pulumi.Input[int] duration: Job duration.
         :param pulumi.Input[str] end_time: End time of the job.
         :param pulumi.Input[float] error_rate: Percentage of error rate.
+        :param pulumi.Input[str] job_id: Job Id.
         :param pulumi.Input[str] job_owner: Job owner.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['JobLoadArgs']]]] loads: Pressure configuration of job.
         :param pulumi.Input[int] max_requests_per_second: Maximum requests per second.
@@ -838,6 +857,7 @@ class Job(pulumi.CustomResource):
         __props__.__dict__["duration"] = duration
         __props__.__dict__["end_time"] = end_time
         __props__.__dict__["error_rate"] = error_rate
+        __props__.__dict__["job_id"] = job_id
         __props__.__dict__["job_owner"] = job_owner
         __props__.__dict__["loads"] = loads
         __props__.__dict__["max_requests_per_second"] = max_requests_per_second
@@ -933,6 +953,14 @@ class Job(pulumi.CustomResource):
         Percentage of error rate.
         """
         return pulumi.get(self, "error_rate")
+
+    @property
+    @pulumi.getter(name="jobId")
+    def job_id(self) -> pulumi.Output[str]:
+        """
+        Job Id.
+        """
+        return pulumi.get(self, "job_id")
 
     @property
     @pulumi.getter(name="jobOwner")

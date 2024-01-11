@@ -171,15 +171,14 @@ class Plugin(pulumi.CustomResource):
         import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plugin = tencentcloud.api_gateway.Plugin("plugin",
-            plugin_name="terraform-plugin-test",
+        example = tencentcloud.api_gateway.Plugin("example",
+            plugin_name="tf-example",
             plugin_type="IPControl",
             plugin_data=json.dumps({
                 "type": "white_list",
-                "blocks": \"\"\"1.1.1.1
-        2.2.2.2\"\"\",
+                "blocks": "1.1.1.1",
             }),
-            description="terraform test")
+            description="desc.")
         ```
 
         ## Import
@@ -213,15 +212,14 @@ class Plugin(pulumi.CustomResource):
         import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plugin = tencentcloud.api_gateway.Plugin("plugin",
-            plugin_name="terraform-plugin-test",
+        example = tencentcloud.api_gateway.Plugin("example",
+            plugin_name="tf-example",
             plugin_type="IPControl",
             plugin_data=json.dumps({
                 "type": "white_list",
-                "blocks": \"\"\"1.1.1.1
-        2.2.2.2\"\"\",
+                "blocks": "1.1.1.1",
             }),
-            description="terraform test")
+            description="desc.")
         ```
 
         ## Import

@@ -18,6 +18,8 @@ class GatewayArgs:
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 nat_product_version: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
@@ -27,6 +29,8 @@ class GatewayArgs:
         :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
+        :param pulumi.Input[int] nat_product_version: 1: traditional NAT, 2: standard NAT, default value is 1.
+        :param pulumi.Input[str] subnet_id: Subnet of NAT.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
         """
@@ -38,6 +42,10 @@ class GatewayArgs:
             pulumi.set(__self__, "max_concurrent", max_concurrent)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if nat_product_version is not None:
+            pulumi.set(__self__, "nat_product_version", nat_product_version)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if zone is not None:
@@ -104,6 +112,30 @@ class GatewayArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="natProductVersion")
+    def nat_product_version(self) -> Optional[pulumi.Input[int]]:
+        """
+        1: traditional NAT, 2: standard NAT, default value is 1.
+        """
+        return pulumi.get(self, "nat_product_version")
+
+    @nat_product_version.setter
+    def nat_product_version(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "nat_product_version", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Subnet of NAT.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -136,6 +168,8 @@ class _GatewayState:
                  created_time: Optional[pulumi.Input[str]] = None,
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 nat_product_version: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
@@ -146,6 +180,8 @@ class _GatewayState:
         :param pulumi.Input[str] created_time: Create time of the NAT gateway.
         :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
+        :param pulumi.Input[int] nat_product_version: 1: traditional NAT, 2: standard NAT, default value is 1.
+        :param pulumi.Input[str] subnet_id: Subnet of NAT.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
         :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
@@ -160,6 +196,10 @@ class _GatewayState:
             pulumi.set(__self__, "max_concurrent", max_concurrent)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if nat_product_version is not None:
+            pulumi.set(__self__, "nat_product_version", nat_product_version)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
@@ -228,6 +268,30 @@ class _GatewayState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="natProductVersion")
+    def nat_product_version(self) -> Optional[pulumi.Input[int]]:
+        """
+        1: traditional NAT, 2: standard NAT, default value is 1.
+        """
+        return pulumi.get(self, "nat_product_version")
+
+    @nat_product_version.setter
+    def nat_product_version(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "nat_product_version", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Subnet of NAT.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -273,6 +337,8 @@ class Gateway(pulumi.CustomResource):
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 nat_product_version: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
@@ -281,7 +347,7 @@ class Gateway(pulumi.CustomResource):
         Provides a resource to create a NAT gateway.
 
         ## Example Usage
-        ### Create a NAT gateway.
+        ### Create a traditional NAT gateway.
 
         ```python
         import pulumi
@@ -302,6 +368,26 @@ class Gateway(pulumi.CustomResource):
                 "tf_tag_key": "tf_tag_value",
             })
         ```
+        ### Create a standard NAT gateway.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        example = tencentcloud.nat.Gateway("example",
+            vpc_id=vpc.id,
+            assigned_eip_sets=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ],
+            nat_product_version=2,
+            tags={
+                "tf_tag_key": "tf_tag_value",
+            })
+        ```
 
         ## Import
 
@@ -317,6 +403,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
         :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
+        :param pulumi.Input[int] nat_product_version: 1: traditional NAT, 2: standard NAT, default value is 1.
+        :param pulumi.Input[str] subnet_id: Subnet of NAT.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
         :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
@@ -331,7 +419,7 @@ class Gateway(pulumi.CustomResource):
         Provides a resource to create a NAT gateway.
 
         ## Example Usage
-        ### Create a NAT gateway.
+        ### Create a traditional NAT gateway.
 
         ```python
         import pulumi
@@ -348,6 +436,26 @@ class Gateway(pulumi.CustomResource):
                 eip_example1.public_ip,
                 eip_example2.public_ip,
             ],
+            tags={
+                "tf_tag_key": "tf_tag_value",
+            })
+        ```
+        ### Create a standard NAT gateway.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        eip_example1 = tencentcloud.eip.Instance("eipExample1")
+        eip_example2 = tencentcloud.eip.Instance("eipExample2")
+        example = tencentcloud.nat.Gateway("example",
+            vpc_id=vpc.id,
+            assigned_eip_sets=[
+                eip_example1.public_ip,
+                eip_example2.public_ip,
+            ],
+            nat_product_version=2,
             tags={
                 "tf_tag_key": "tf_tag_value",
             })
@@ -380,6 +488,8 @@ class Gateway(pulumi.CustomResource):
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  max_concurrent: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 nat_product_version: Optional[pulumi.Input[int]] = None,
+                 subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
@@ -403,6 +513,8 @@ class Gateway(pulumi.CustomResource):
             __props__.__dict__["bandwidth"] = bandwidth
             __props__.__dict__["max_concurrent"] = max_concurrent
             __props__.__dict__["name"] = name
+            __props__.__dict__["nat_product_version"] = nat_product_version
+            __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
@@ -424,6 +536,8 @@ class Gateway(pulumi.CustomResource):
             created_time: Optional[pulumi.Input[str]] = None,
             max_concurrent: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            nat_product_version: Optional[pulumi.Input[int]] = None,
+            subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'Gateway':
@@ -439,6 +553,8 @@ class Gateway(pulumi.CustomResource):
         :param pulumi.Input[str] created_time: Create time of the NAT gateway.
         :param pulumi.Input[int] max_concurrent: The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
         :param pulumi.Input[str] name: Name of the NAT gateway.
+        :param pulumi.Input[int] nat_product_version: 1: traditional NAT, 2: standard NAT, default value is 1.
+        :param pulumi.Input[str] subnet_id: Subnet of NAT.
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this NAT gateway.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
         :param pulumi.Input[str] zone: The availability zone, such as `ap-guangzhou-3`.
@@ -452,6 +568,8 @@ class Gateway(pulumi.CustomResource):
         __props__.__dict__["created_time"] = created_time
         __props__.__dict__["max_concurrent"] = max_concurrent
         __props__.__dict__["name"] = name
+        __props__.__dict__["nat_product_version"] = nat_product_version
+        __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zone"] = zone
@@ -496,6 +614,22 @@ class Gateway(pulumi.CustomResource):
         Name of the NAT gateway.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="natProductVersion")
+    def nat_product_version(self) -> pulumi.Output[int]:
+        """
+        1: traditional NAT, 2: standard NAT, default value is 1.
+        """
+        return pulumi.get(self, "nat_product_version")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Output[str]:
+        """
+        Subnet of NAT.
+        """
+        return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter

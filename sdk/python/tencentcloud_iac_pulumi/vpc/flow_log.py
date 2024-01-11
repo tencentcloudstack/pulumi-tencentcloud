@@ -32,7 +32,7 @@ class FlowLogArgs:
         :param pulumi.Input[str] resource_id: Specify resource unique Id of `resource_type` configured.
         :param pulumi.Input[str] resource_type: Specify resource type. NOTE: Only support `NETWORKINTERFACE` for now. Values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, `CCN`, `NAT`, `DCG`.
         :param pulumi.Input[str] traffic_type: Specify log traffic type, values: `ACCEPT`, `REJECT`, `ALL`.
-        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id.
+        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id, just set cls topic id.
         :param pulumi.Input[str] cloud_log_region: Specify flow log storage region, default using current.
         :param pulumi.Input[str] flow_log_description: Specify flow Log description.
         :param pulumi.Input['FlowLogFlowLogStorageArgs'] flow_log_storage: Specify consumer detail, required while `storage_type` is `ckafka`.
@@ -111,7 +111,7 @@ class FlowLogArgs:
     @pulumi.getter(name="cloudLogId")
     def cloud_log_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify flow log storage id.
+        Specify flow log storage id, just set cls topic id.
         """
         return pulumi.get(self, "cloud_log_id")
 
@@ -208,7 +208,7 @@ class _FlowLogState:
                  vpc_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering FlowLog resources.
-        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id.
+        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id, just set cls topic id.
         :param pulumi.Input[str] cloud_log_region: Specify flow log storage region, default using current.
         :param pulumi.Input[str] flow_log_description: Specify flow Log description.
         :param pulumi.Input[str] flow_log_name: Specify flow log name.
@@ -247,7 +247,7 @@ class _FlowLogState:
     @pulumi.getter(name="cloudLogId")
     def cloud_log_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify flow log storage id.
+        Specify flow log storage id, just set cls topic id.
         """
         return pulumi.get(self, "cloud_log_id")
 
@@ -410,7 +410,7 @@ class FlowLog(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id.
+        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id, just set cls topic id.
         :param pulumi.Input[str] cloud_log_region: Specify flow log storage region, default using current.
         :param pulumi.Input[str] flow_log_description: Specify flow Log description.
         :param pulumi.Input[str] flow_log_name: Specify flow log name.
@@ -530,7 +530,7 @@ class FlowLog(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id.
+        :param pulumi.Input[str] cloud_log_id: Specify flow log storage id, just set cls topic id.
         :param pulumi.Input[str] cloud_log_region: Specify flow log storage region, default using current.
         :param pulumi.Input[str] flow_log_description: Specify flow Log description.
         :param pulumi.Input[str] flow_log_name: Specify flow log name.
@@ -563,7 +563,7 @@ class FlowLog(pulumi.CustomResource):
     @pulumi.getter(name="cloudLogId")
     def cloud_log_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Specify flow log storage id.
+        Specify flow log storage id, just set cls topic id.
         """
         return pulumi.get(self, "cloud_log_id")
 

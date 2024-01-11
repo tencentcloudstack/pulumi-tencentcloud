@@ -14,6 +14,7 @@ import (
 // Provides a resource to create a dts syncConfig
 //
 // ## Example Usage
+// ### Sync mysql database to cynosdb through cdb access type
 //
 // ```go
 // package main
@@ -121,7 +122,7 @@ import (
 // 			SrcInfo: &dts.SyncConfigSrcInfoArgs{
 // 				Region:     pulumi.String("ap-guangzhou"),
 // 				InstanceId: pulumi.String("cdb-fitq5t9h"),
-// 				User:       pulumi.String("keep_dts"),
+// 				User:       pulumi.String("your_user_name"),
 // 				Password:   pulumi.String("*"),
 // 				DbName:     pulumi.String("tf_ci_test"),
 // 				VpcId:      pulumi.Any(local.Vpc_id),
@@ -135,6 +136,112 @@ import (
 // 				DbName:     pulumi.String("tf_ci_test_new"),
 // 				VpcId:      pulumi.Any(local.Vpc_id),
 // 				SubnetId:   pulumi.Any(local.Subnet_id),
+// 			},
+// 			AutoRetryTimeRangeMinutes: pulumi.Int(0),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		vpcIdSh := "vpc-evtcyb3g"
+// 		subnetIdSh := "subnet-1t83cxkp"
+// 		srcMysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+// 			InstanceName: pulumi.StringRef("your_user_name_mysql_src"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		srcIp := srcMysql.InstanceLists[0].IntranetIp
+// 		srcPort := srcMysql.InstanceLists[0].IntranetPort
+// 		ccns, err := Ccn.GetInstances(ctx, &ccn.GetInstancesArgs{
+// 			Name: pulumi.StringRef("keep-ccn-dts-sh"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ccnId := ccns.InstanceLists[0].CcnId
+// 		dstMysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+// 			InstanceName: pulumi.StringRef("your_user_name_mysql_src"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		dstMysqlId := dstMysql.InstanceLists[0].MysqlId
+// 		cfg := config.New(ctx, "")
+// 		srcAzSh := "ap-shanghai"
+// 		if param := cfg.Get("srcAzSh"); param != "" {
+// 			srcAzSh = param
+// 		}
+// 		dstAzGz := "ap-guangzhou"
+// 		if param := cfg.Get("dstAzGz"); param != "" {
+// 			dstAzGz = param
+// 		}
+// 		syncJobs, err := Dts.GetSyncJobs(ctx, &dts.GetSyncJobsArgs{
+// 			JobName: pulumi.StringRef("keep_sync_config_ccn_2_cdb"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Dts.NewSyncConfig(ctx, "syncConfig", &Dts.SyncConfigArgs{
+// 			JobId:         pulumi.String(syncJobs.Lists[0].JobId),
+// 			SrcAccessType: pulumi.String("ccn"),
+// 			DstAccessType: pulumi.String("cdb"),
+// 			JobMode:       pulumi.String("liteMode"),
+// 			RunMode:       pulumi.String("Immediate"),
+// 			Objects: &dts.SyncConfigObjectsArgs{
+// 				Mode: pulumi.String("Partial"),
+// 				Databases: dts.SyncConfigObjectsDatabaseArray{
+// 					&dts.SyncConfigObjectsDatabaseArgs{
+// 						DbName:    pulumi.String("tf_ci_test"),
+// 						NewDbName: pulumi.String("tf_ci_test_new"),
+// 						DbMode:    pulumi.String("Partial"),
+// 						TableMode: pulumi.String("All"),
+// 						Tables: dts.SyncConfigObjectsDatabaseTableArray{
+// 							&dts.SyncConfigObjectsDatabaseTableArgs{
+// 								TableName:    pulumi.String("test"),
+// 								NewTableName: pulumi.String("test_new"),
+// 							},
+// 						},
+// 					},
+// 				},
+// 			},
+// 			SrcInfo: &dts.SyncConfigSrcInfoArgs{
+// 				Region:         pulumi.String(srcAzSh),
+// 				User:           pulumi.String("your_user_name"),
+// 				Password:       pulumi.String("your_pass_word"),
+// 				Ip:             pulumi.String(srcIp),
+// 				Port:           pulumi.Int(srcPort),
+// 				VpcId:          pulumi.String(vpcIdSh),
+// 				SubnetId:       pulumi.String(subnetIdSh),
+// 				CcnId:          pulumi.String(ccnId),
+// 				DatabaseNetEnv: pulumi.String("TencentVPC"),
+// 			},
+// 			DstInfo: &dts.SyncConfigDstInfoArgs{
+// 				Region:     pulumi.String(dstAzGz),
+// 				InstanceId: pulumi.String(dstMysqlId),
+// 				User:       pulumi.String("your_user_name"),
+// 				Password:   pulumi.String("your_pass_word"),
 // 			},
 // 			AutoRetryTimeRangeMinutes: pulumi.Int(0),
 // 		})
@@ -169,7 +276,7 @@ type SyncConfig struct {
 	// The enumeration values are liteMode and fullMode, corresponding to lite mode or normal mode respectively.
 	JobMode pulumi.StringPtrOutput `pulumi:"jobMode"`
 	// Sync job name.
-	JobName pulumi.StringPtrOutput `pulumi:"jobName"`
+	JobName pulumi.StringOutput `pulumi:"jobName"`
 	// Synchronize database table object information.
 	Objects SyncConfigObjectsOutput `pulumi:"objects"`
 	// Sync Task Options.
@@ -454,8 +561,8 @@ func (o SyncConfigOutput) JobMode() pulumi.StringPtrOutput {
 }
 
 // Sync job name.
-func (o SyncConfigOutput) JobName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SyncConfig) pulumi.StringPtrOutput { return v.JobName }).(pulumi.StringPtrOutput)
+func (o SyncConfigOutput) JobName() pulumi.StringOutput {
+	return o.ApplyT(func(v *SyncConfig) pulumi.StringOutput { return v.JobName }).(pulumi.StringOutput)
 }
 
 // Synchronize database table object information.

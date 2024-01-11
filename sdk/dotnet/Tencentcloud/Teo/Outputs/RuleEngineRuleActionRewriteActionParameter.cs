@@ -19,11 +19,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string Action;
         /// <summary>
-        /// Parameter Name.
+        /// Target HEADER name.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Parameter Values.
+        /// Parameter Value.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

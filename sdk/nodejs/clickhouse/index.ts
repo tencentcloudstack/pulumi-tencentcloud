@@ -5,20 +5,65 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./account";
+export * from "./accountPermission";
+export * from "./backup";
+export * from "./backupStrategy";
+export * from "./deleteBackupData";
+export * from "./getBackupJobDetail";
+export * from "./getBackupJobs";
+export * from "./getBackupTables";
+export * from "./getInstanceShards";
+export * from "./getSpec";
 export * from "./instance";
+export * from "./keyvalConfig";
+export * from "./recoverBackupJob";
+export * from "./xmlConfig";
 
 // Import resources to register:
+import { Account } from "./account";
+import { AccountPermission } from "./accountPermission";
+import { Backup } from "./backup";
+import { BackupStrategy } from "./backupStrategy";
+import { DeleteBackupData } from "./deleteBackupData";
 import { Instance } from "./instance";
+import { KeyvalConfig } from "./keyvalConfig";
+import { RecoverBackupJob } from "./recoverBackupJob";
+import { XmlConfig } from "./xmlConfig";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Clickhouse/account:Account":
+                return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/accountPermission:AccountPermission":
+                return new AccountPermission(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/backup:Backup":
+                return new Backup(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/backupStrategy:BackupStrategy":
+                return new BackupStrategy(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData":
+                return new DeleteBackupData(name, <any>undefined, { urn })
             case "tencentcloud:Clickhouse/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig":
+                return new KeyvalConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob":
+                return new RecoverBackupJob(name, <any>undefined, { urn })
+            case "tencentcloud:Clickhouse/xmlConfig:XmlConfig":
+                return new XmlConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/accountPermission", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/backup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/backupStrategy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/deleteBackupData", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/keyvalConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/recoverBackupJob", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clickhouse/xmlConfig", _module)

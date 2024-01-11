@@ -13,7 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// <summary>
     /// Provide a resource to create a SSM secret version.
     /// 
+    /// &gt; **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
+    /// 
     /// ## Example Usage
+    /// ### Text type credential information plaintext
     /// 
     /// ```csharp
     /// using Pulumi;
@@ -23,21 +26,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// {
     ///     public MyStack()
     ///     {
-    ///         var foo = new Tencentcloud.Ssm.Secret("foo", new Tencentcloud.Ssm.SecretArgs
+    ///         var example = new Tencentcloud.Ssm.Secret("example", new Tencentcloud.Ssm.SecretArgs
     ///         {
-    ///             SecretName = "test",
-    ///             Description = "test secret",
+    ///             SecretName = "tf-example",
+    ///             Description = "desc.",
     ///             RecoveryWindowInDays = 0,
     ///             IsEnabled = true,
     ///             Tags = 
     ///             {
-    ///                 { "test-tag", "test" },
+    ///                 { "createdBy", "terraform" },
     ///             },
     ///         });
     ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
     ///         {
-    ///             SecretName = foo.SecretName,
+    ///             SecretName = example.SecretName,
     ///             VersionId = "v1",
+    ///             SecretString = "this is secret string",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Binary credential information, encoded using base64
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var v2 = new Tencentcloud.Ssm.SecretVersion("v2", new Tencentcloud.Ssm.SecretVersionArgs
+    ///         {
+    ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+    ///             VersionId = "v2",
     ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
     ///         });
     ///     }

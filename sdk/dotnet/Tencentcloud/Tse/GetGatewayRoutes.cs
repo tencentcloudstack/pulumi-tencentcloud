@@ -12,9 +12,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
 {
     public static class GetGatewayRoutes
     {
+        /// <summary>
+        /// Use this data source to query detailed information of tse gateway_routes
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var gatewayRoutes = Output.Create(Tencentcloud.Tse.GetGatewayRoutes.InvokeAsync(new Tencentcloud.Tse.GetGatewayRoutesArgs
+        ///         {
+        ///             GatewayId = "gateway-ddbb709b",
+        ///             RouteName = "keep-routes",
+        ///             ServiceName = "test",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetGatewayRoutesResult> InvokeAsync(GetGatewayRoutesArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to query detailed information of tse gateway_routes
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var gatewayRoutes = Output.Create(Tencentcloud.Tse.GetGatewayRoutes.InvokeAsync(new Tencentcloud.Tse.GetGatewayRoutesArgs
+        ///         {
+        ///             GatewayId = "gateway-ddbb709b",
+        ///             RouteName = "keep-routes",
+        ///             ServiceName = "test",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
     }
@@ -22,15 +78,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
 
     public sealed class GetGatewayRoutesArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// gateway ID.
+        /// </summary>
         [Input("gatewayId", required: true)]
         public string GatewayId { get; set; } = null!;
 
+        /// <summary>
+        /// Used to save results.
+        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
+        /// <summary>
+        /// route name.
+        /// </summary>
         [Input("routeName")]
         public string? RouteName { get; set; }
 
+        /// <summary>
+        /// service name.
+        /// </summary>
         [Input("serviceName")]
         public string? ServiceName { get; set; }
 
@@ -41,15 +109,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
 
     public sealed class GetGatewayRoutesInvokeArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// gateway ID.
+        /// </summary>
         [Input("gatewayId", required: true)]
         public Input<string> GatewayId { get; set; } = null!;
 
+        /// <summary>
+        /// Used to save results.
+        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
+        /// <summary>
+        /// route name.
+        /// </summary>
         [Input("routeName")]
         public Input<string>? RouteName { get; set; }
 
+        /// <summary>
+        /// service name.
+        /// </summary>
         [Input("serviceName")]
         public Input<string>? ServiceName { get; set; }
 
@@ -68,8 +148,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
+        /// <summary>
+        /// result.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetGatewayRoutesResultResult> Results;
         public readonly string? RouteName;
+        /// <summary>
+        /// service name.
+        /// </summary>
         public readonly string? ServiceName;
 
         [OutputConstructor]

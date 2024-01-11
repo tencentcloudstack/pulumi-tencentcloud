@@ -16,15 +16,19 @@ class ProviderArgs:
     def __init__(__self__, *,
                  assume_role: Optional[pulumi.Input['ProviderAssumeRoleArgs']] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  secret_id: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None,
-                 security_token: Optional[pulumi.Input[str]] = None):
+                 security_token: Optional[pulumi.Input[str]] = None,
+                 shared_credentials_dir: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input['ProviderAssumeRoleArgs'] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
+        :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+               variable. If not set, the default profile created with `tccli configure` will be used.
         :param pulumi.Input[str] protocol: The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
         :param pulumi.Input[str] region: This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
                environment variables. The default input value is ap-guangzhou.
@@ -35,11 +39,15 @@ class ProviderArgs:
         :param pulumi.Input[str] security_token: TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
                environment variable. Notice: for supported products, please refer to: [temporary key supported
                products](https://intl.cloud.tencent.com/document/product/598/10588).
+        :param pulumi.Input[str] shared_credentials_dir: The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+               environment variable. If not set this defaults to ~/.tccli.
         """
         if assume_role is not None:
             pulumi.set(__self__, "assume_role", assume_role)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
+        if profile is not None:
+            pulumi.set(__self__, "profile", profile)
         if protocol is not None:
             pulumi.set(__self__, "protocol", protocol)
         if region is None:
@@ -58,6 +66,8 @@ class ProviderArgs:
             security_token = _utilities.get_env('TENCENTCLOUD_SECURITY_TOKEN')
         if security_token is not None:
             pulumi.set(__self__, "security_token", security_token)
+        if shared_credentials_dir is not None:
+            pulumi.set(__self__, "shared_credentials_dir", shared_credentials_dir)
 
     @property
     @pulumi.getter(name="assumeRole")
@@ -82,6 +92,19 @@ class ProviderArgs:
     @domain.setter
     def domain(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter
+    def profile(self) -> Optional[pulumi.Input[str]]:
+        """
+        The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        variable. If not set, the default profile created with `tccli configure` will be used.
+        """
+        return pulumi.get(self, "profile")
+
+    @profile.setter
+    def profile(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "profile", value)
 
     @property
     @pulumi.getter
@@ -148,6 +171,19 @@ class ProviderArgs:
     def security_token(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "security_token", value)
 
+    @property
+    @pulumi.getter(name="sharedCredentialsDir")
+    def shared_credentials_dir(self) -> Optional[pulumi.Input[str]]:
+        """
+        The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        environment variable. If not set this defaults to ~/.tccli.
+        """
+        return pulumi.get(self, "shared_credentials_dir")
+
+    @shared_credentials_dir.setter
+    def shared_credentials_dir(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "shared_credentials_dir", value)
+
 
 class Provider(pulumi.ProviderResource):
     @overload
@@ -156,11 +192,13 @@ class Provider(pulumi.ProviderResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  secret_id: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None,
                  security_token: Optional[pulumi.Input[str]] = None,
+                 shared_credentials_dir: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         The provider type for the tencentcloud package. By default, resources use package-wide configuration
@@ -172,6 +210,8 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
+        :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+               variable. If not set, the default profile created with `tccli configure` will be used.
         :param pulumi.Input[str] protocol: The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
         :param pulumi.Input[str] region: This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
                environment variables. The default input value is ap-guangzhou.
@@ -182,6 +222,8 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[str] security_token: TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
                environment variable. Notice: for supported products, please refer to: [temporary key supported
                products](https://intl.cloud.tencent.com/document/product/598/10588).
+        :param pulumi.Input[str] shared_credentials_dir: The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+               environment variable. If not set this defaults to ~/.tccli.
         """
         ...
     @overload
@@ -212,11 +254,13 @@ class Provider(pulumi.ProviderResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  secret_id: Optional[pulumi.Input[str]] = None,
                  secret_key: Optional[pulumi.Input[str]] = None,
                  security_token: Optional[pulumi.Input[str]] = None,
+                 shared_credentials_dir: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -233,6 +277,7 @@ class Provider(pulumi.ProviderResource):
 
             __props__.__dict__["assume_role"] = pulumi.Output.from_input(assume_role).apply(pulumi.runtime.to_json) if assume_role is not None else None
             __props__.__dict__["domain"] = domain
+            __props__.__dict__["profile"] = profile
             __props__.__dict__["protocol"] = protocol
             if region is None:
                 region = _utilities.get_env('TENCENTCLOUD_REGION')
@@ -246,6 +291,7 @@ class Provider(pulumi.ProviderResource):
             if security_token is None:
                 security_token = _utilities.get_env('TENCENTCLOUD_SECURITY_TOKEN')
             __props__.__dict__["security_token"] = security_token
+            __props__.__dict__["shared_credentials_dir"] = shared_credentials_dir
         super(Provider, __self__).__init__(
             'tencentcloud',
             resource_name,
@@ -259,6 +305,15 @@ class Provider(pulumi.ProviderResource):
         The root domain of the API request, Default is `tencentcloudapi.com`.
         """
         return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def profile(self) -> pulumi.Output[Optional[str]]:
+        """
+        The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        variable. If not set, the default profile created with `tccli configure` will be used.
+        """
+        return pulumi.get(self, "profile")
 
     @property
     @pulumi.getter
@@ -304,4 +359,13 @@ class Provider(pulumi.ProviderResource):
         products](https://intl.cloud.tencent.com/document/product/598/10588).
         """
         return pulumi.get(self, "security_token")
+
+    @property
+    @pulumi.getter(name="sharedCredentialsDir")
+    def shared_credentials_dir(self) -> pulumi.Output[Optional[str]]:
+        """
+        The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        environment variable. If not set this defaults to ~/.tccli.
+        """
+        return pulumi.get(self, "shared_credentials_dir")
 

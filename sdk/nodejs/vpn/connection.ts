@@ -200,13 +200,13 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly preShareKey!: pulumi.Output<string>;
     /**
-     * Route type of the VPN connection.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
      */
-    public /*out*/ readonly routeType!: pulumi.Output<string>;
+    public readonly routeType!: pulumi.Output<string>;
     /**
-     * Security group policy of the VPN connection.
+     * SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
      */
-    public readonly securityGroupPolicies!: pulumi.Output<outputs.Vpn.ConnectionSecurityGroupPolicy[]>;
+    public readonly securityGroupPolicies!: pulumi.Output<outputs.Vpn.ConnectionSecurityGroupPolicy[] | undefined>;
     /**
      * State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
      */
@@ -286,9 +286,6 @@ export class Connection extends pulumi.CustomResource {
             if ((!args || args.preShareKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'preShareKey'");
             }
-            if ((!args || args.securityGroupPolicies === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'securityGroupPolicies'");
-            }
             if ((!args || args.vpnGatewayId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpnGatewayId'");
             }
@@ -318,6 +315,7 @@ export class Connection extends pulumi.CustomResource {
             resourceInputs["ipsecSaLifetimeTraffic"] = args ? args.ipsecSaLifetimeTraffic : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["preShareKey"] = args ? args.preShareKey : undefined;
+            resourceInputs["routeType"] = args ? args.routeType : undefined;
             resourceInputs["securityGroupPolicies"] = args ? args.securityGroupPolicies : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
@@ -326,7 +324,6 @@ export class Connection extends pulumi.CustomResource {
             resourceInputs["encryptProto"] = undefined /*out*/;
             resourceInputs["isCcnType"] = undefined /*out*/;
             resourceInputs["netStatus"] = undefined /*out*/;
-            resourceInputs["routeType"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
             resourceInputs["vpnProto"] = undefined /*out*/;
         }
@@ -460,11 +457,11 @@ export interface ConnectionState {
      */
     preShareKey?: pulumi.Input<string>;
     /**
-     * Route type of the VPN connection.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
      */
     routeType?: pulumi.Input<string>;
     /**
-     * Security group policy of the VPN connection.
+     * SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
      */
     securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[]>;
     /**
@@ -598,9 +595,13 @@ export interface ConnectionArgs {
      */
     preShareKey: pulumi.Input<string>;
     /**
-     * Security group policy of the VPN connection.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
      */
-    securityGroupPolicies: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[]>;
+    routeType?: pulumi.Input<string>;
+    /**
+     * SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
+     */
+    securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[]>;
     /**
      * A list of tags used to associate different resources.
      */

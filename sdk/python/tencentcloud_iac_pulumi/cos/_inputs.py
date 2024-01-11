@@ -31,6 +31,7 @@ __all__ = [
     'BucketInventoryOptionalFieldsArgs',
     'BucketInventoryScheduleArgs',
     'BucketLifecycleRuleArgs',
+    'BucketLifecycleRuleAbortIncompleteMultipartUploadArgs',
     'BucketLifecycleRuleExpirationArgs',
     'BucketLifecycleRuleNonCurrentExpirationArgs',
     'BucketLifecycleRuleNonCurrentTransitionArgs',
@@ -1255,6 +1256,7 @@ class BucketInventoryScheduleArgs:
 class BucketLifecycleRuleArgs:
     def __init__(__self__, *,
                  filter_prefix: pulumi.Input[str],
+                 abort_incomplete_multipart_upload: Optional[pulumi.Input['BucketLifecycleRuleAbortIncompleteMultipartUploadArgs']] = None,
                  expiration: Optional[pulumi.Input['BucketLifecycleRuleExpirationArgs']] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  non_current_expiration: Optional[pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs']] = None,
@@ -1262,6 +1264,7 @@ class BucketLifecycleRuleArgs:
                  transitions: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]]] = None):
         """
         :param pulumi.Input[str] filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
+        :param pulumi.Input['BucketLifecycleRuleAbortIncompleteMultipartUploadArgs'] abort_incomplete_multipart_upload: Set the maximum time a multipart upload is allowed to remain running.
         :param pulumi.Input['BucketLifecycleRuleExpirationArgs'] expiration: Specifies a period in the object's expire (documented below).
         :param pulumi.Input[str] id: A unique identifier for the rule. It can be up to 255 characters.
         :param pulumi.Input['BucketLifecycleRuleNonCurrentExpirationArgs'] non_current_expiration: Specifies when non current object versions shall expire.
@@ -1269,6 +1272,8 @@ class BucketLifecycleRuleArgs:
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]] transitions: Specifies a period in the object's transitions (documented below).
         """
         pulumi.set(__self__, "filter_prefix", filter_prefix)
+        if abort_incomplete_multipart_upload is not None:
+            pulumi.set(__self__, "abort_incomplete_multipart_upload", abort_incomplete_multipart_upload)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
         if id is not None:
@@ -1291,6 +1296,18 @@ class BucketLifecycleRuleArgs:
     @filter_prefix.setter
     def filter_prefix(self, value: pulumi.Input[str]):
         pulumi.set(self, "filter_prefix", value)
+
+    @property
+    @pulumi.getter(name="abortIncompleteMultipartUpload")
+    def abort_incomplete_multipart_upload(self) -> Optional[pulumi.Input['BucketLifecycleRuleAbortIncompleteMultipartUploadArgs']]:
+        """
+        Set the maximum time a multipart upload is allowed to remain running.
+        """
+        return pulumi.get(self, "abort_incomplete_multipart_upload")
+
+    @abort_incomplete_multipart_upload.setter
+    def abort_incomplete_multipart_upload(self, value: Optional[pulumi.Input['BucketLifecycleRuleAbortIncompleteMultipartUploadArgs']]):
+        pulumi.set(self, "abort_incomplete_multipart_upload", value)
 
     @property
     @pulumi.getter
@@ -1351,6 +1368,28 @@ class BucketLifecycleRuleArgs:
     @transitions.setter
     def transitions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleTransitionArgs']]]]):
         pulumi.set(self, "transitions", value)
+
+
+@pulumi.input_type
+class BucketLifecycleRuleAbortIncompleteMultipartUploadArgs:
+    def __init__(__self__, *,
+                 days_after_initiation: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] days_after_initiation: Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        pulumi.set(__self__, "days_after_initiation", days_after_initiation)
+
+    @property
+    @pulumi.getter(name="daysAfterInitiation")
+    def days_after_initiation(self) -> pulumi.Input[int]:
+        """
+        Specifies the number of days after the multipart upload starts that the upload must be completed. The maximum value is 3650.
+        """
+        return pulumi.get(self, "days_after_initiation")
+
+    @days_after_initiation.setter
+    def days_after_initiation(self, value: pulumi.Input[int]):
+        pulumi.set(self, "days_after_initiation", value)
 
 
 @pulumi.input_type

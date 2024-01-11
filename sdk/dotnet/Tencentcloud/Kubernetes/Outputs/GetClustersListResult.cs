@@ -151,6 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string UserName;
         /// <summary>
+        /// Distinguish between shared network card multi-IP mode and independent network card mode.
+        /// </summary>
+        public readonly string VpcCniType;
+        /// <summary>
         /// Vpc ID of the cluster.
         /// </summary>
         public readonly string VpcId;
@@ -229,6 +233,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string userName,
 
+            string vpcCniType,
+
             string vpcId,
 
             ImmutableArray<Outputs.GetClustersListWorkerInstancesListResult> workerInstancesLists)
@@ -267,6 +273,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             ServiceCidr = serviceCidr;
             Tags = tags;
             UserName = userName;
+            VpcCniType = vpcCniType;
             VpcId = vpcId;
             WorkerInstancesLists = workerInstancesLists;
         }

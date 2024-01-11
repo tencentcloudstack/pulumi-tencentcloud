@@ -6,10 +6,12 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./table";
+export * from "./tableAssociation";
 export * from "./tableEntry";
 
 // Import resources to register:
 import { Table } from "./table";
+import { TableAssociation } from "./tableAssociation";
 import { TableEntry } from "./tableEntry";
 
 const _module = {
@@ -18,6 +20,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Route/table:Table":
                 return new Table(name, <any>undefined, { urn })
+            case "tencentcloud:Route/tableAssociation:TableAssociation":
+                return new TableAssociation(name, <any>undefined, { urn })
             case "tencentcloud:Route/tableEntry:TableEntry":
                 return new TableEntry(name, <any>undefined, { urn })
             default:
@@ -26,4 +30,5 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Route/table", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Route/tableAssociation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Route/tableEntry", _module)

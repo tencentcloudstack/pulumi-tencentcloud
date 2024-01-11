@@ -22,16 +22,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ssm.GetSecretVersions.InvokeAsync(new Tencentcloud.Ssm.GetSecretVersionsArgs
+        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
         ///         {
-        ///             SecretName = "test",
+        ///             SecretName = "tf-example",
+        ///             Description = "desc.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
+        ///         {
+        ///             SecretName = exampleSecret.SecretName,
         ///             VersionId = "v1",
-        ///         }));
+        ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+        ///         });
+        ///         var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new Tencentcloud.Ssm.GetSecretVersionsInvokeArgs
+        ///         {
+        ///             SecretName = v1.SecretName,
+        ///             VersionId = v1.VersionId,
+        ///         });
         ///     }
         /// 
         /// }
@@ -52,16 +68,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ssm.GetSecretVersions.InvokeAsync(new Tencentcloud.Ssm.GetSecretVersionsArgs
+        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
         ///         {
-        ///             SecretName = "test",
+        ///             SecretName = "tf-example",
+        ///             Description = "desc.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var v1 = new Tencentcloud.Ssm.SecretVersion("v1", new Tencentcloud.Ssm.SecretVersionArgs
+        ///         {
+        ///             SecretName = exampleSecret.SecretName,
         ///             VersionId = "v1",
-        ///         }));
+        ///             SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+        ///         });
+        ///         var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new Tencentcloud.Ssm.GetSecretVersionsInvokeArgs
+        ///         {
+        ///             SecretName = v1.SecretName,
+        ///             VersionId = v1.VersionId,
+        ///         });
         ///     }
         /// 
         /// }

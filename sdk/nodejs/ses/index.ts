@@ -5,30 +5,61 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./batchSendEmail";
+export * from "./blackListDelete";
 export * from "./domain";
 export * from "./emailAddress";
+export * from "./getBlackEmailAddress";
+export * from "./getEmailIdentities";
+export * from "./getReceivers";
+export * from "./getSendEmailStatus";
+export * from "./getSendTasks";
+export * from "./getStatisticsReport";
+export * from "./receiver";
+export * from "./sendEmail";
 export * from "./template";
+export * from "./verifyDomain";
 
 // Import resources to register:
+import { BatchSendEmail } from "./batchSendEmail";
+import { BlackListDelete } from "./blackListDelete";
 import { Domain } from "./domain";
 import { EmailAddress } from "./emailAddress";
+import { Receiver } from "./receiver";
+import { SendEmail } from "./sendEmail";
 import { Template } from "./template";
+import { VerifyDomain } from "./verifyDomain";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Ses/batchSendEmail:BatchSendEmail":
+                return new BatchSendEmail(name, <any>undefined, { urn })
+            case "tencentcloud:Ses/blackListDelete:BlackListDelete":
+                return new BlackListDelete(name, <any>undefined, { urn })
             case "tencentcloud:Ses/domain:Domain":
                 return new Domain(name, <any>undefined, { urn })
             case "tencentcloud:Ses/emailAddress:EmailAddress":
                 return new EmailAddress(name, <any>undefined, { urn })
+            case "tencentcloud:Ses/receiver:Receiver":
+                return new Receiver(name, <any>undefined, { urn })
+            case "tencentcloud:Ses/sendEmail:SendEmail":
+                return new SendEmail(name, <any>undefined, { urn })
             case "tencentcloud:Ses/template:Template":
                 return new Template(name, <any>undefined, { urn })
+            case "tencentcloud:Ses/verifyDomain:VerifyDomain":
+                return new VerifyDomain(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Ses/batchSendEmail", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ses/blackListDelete", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ses/domain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ses/emailAddress", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ses/receiver", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ses/sendEmail", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ses/template", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ses/verifyDomain", _module)

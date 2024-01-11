@@ -10,6 +10,110 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
 {
+    /// <summary>
+    /// Provides a resource to create a tse cngw_service_rate_limit
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             AvailabilityZone = availabilityZone,
+    ///             CidrBlock = "10.0.1.0/24",
+    ///         });
+    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
+    ///         {
+    ///             Description = "terraform test1",
+    ///             EnableCls = true,
+    ///             EngineRegion = "ap-guangzhou",
+    ///             FeatureVersion = "STANDARD",
+    ///             GatewayVersion = "2.5.1",
+    ///             IngressClassName = "tse-nginx-ingress",
+    ///             InternetMaxBandwidthOut = 0,
+    ///             TradeType = 0,
+    ///             Type = "kong",
+    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///             {
+    ///                 Number = 2,
+    ///                 Specification = "1c2g",
+    ///             },
+    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///             {
+    ///                 SubnetId = subnet.Id,
+    ///                 VpcId = vpc.Id,
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var cngwService = new Tencentcloud.Tse.CngwService("cngwService", new Tencentcloud.Tse.CngwServiceArgs
+    ///         {
+    ///             GatewayId = cngwGateway.Id,
+    ///             Path = "/test",
+    ///             Protocol = "http",
+    ///             Retries = 5,
+    ///             Timeout = 60000,
+    ///             UpstreamType = "HostIP",
+    ///             UpstreamInfo = new Tencentcloud.Tse.Inputs.CngwServiceUpstreamInfoArgs
+    ///             {
+    ///                 Algorithm = "round-robin",
+    ///                 AutoScalingCvmPort = 0,
+    ///                 Host = "arunma.cn",
+    ///                 Port = 8012,
+    ///                 SlowStart = 0,
+    ///             },
+    ///         });
+    ///         var cngwServiceRateLimit = new Tencentcloud.Tse.CngwServiceRateLimit("cngwServiceRateLimit", new Tencentcloud.Tse.CngwServiceRateLimitArgs
+    ///         {
+    ///             GatewayId = cngwGateway.Id,
+    ///             LimitDetail = new Tencentcloud.Tse.Inputs.CngwServiceRateLimitLimitDetailArgs
+    ///             {
+    ///                 Enabled = true,
+    ///                 Header = "req",
+    ///                 HideClientHeaders = true,
+    ///                 IsDelay = true,
+    ///                 LimitBy = "header",
+    ///                 LineUpTime = 15,
+    ///                 Policy = "redis",
+    ///                 ResponseType = "default",
+    ///                 QpsThresholds = 
+    ///                 {
+    ///                     new Tencentcloud.Tse.Inputs.CngwServiceRateLimitLimitDetailQpsThresholdArgs
+    ///                     {
+    ///                         Max = 100,
+    ///                         Unit = "hour",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tse cngw_service_rate_limit can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit cngw_service_rate_limit gatewayId#name
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit")]
     public partial class CngwServiceRateLimit : Pulumi.CustomResource
     {
@@ -30,12 +134,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        [Output("tags")]
-        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -102,18 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        [Input("tags")]
-        private InputMap<object>? _tags;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        public InputMap<object> Tags
-        {
-            get => _tags ?? (_tags = new InputMap<object>());
-            set => _tags = value;
-        }
-
         public CngwServiceRateLimitArgs()
         {
         }
@@ -138,18 +224,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        [Input("tags")]
-        private InputMap<object>? _tags;
-
-        /// <summary>
-        /// Tag description list.
-        /// </summary>
-        public InputMap<object> Tags
-        {
-            get => _tags ?? (_tags = new InputMap<object>());
-            set => _tags = value;
-        }
 
         public CngwServiceRateLimitState()
         {

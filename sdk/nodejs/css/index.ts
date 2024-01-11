@@ -6,26 +6,70 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./authenticateDomainOwnerOperation";
+export * from "./backupStream";
+export * from "./callbackRuleAttachment";
+export * from "./callbackTemplate";
 export * from "./domain";
+export * from "./domainReferer";
+export * from "./enableOptimalSwitching";
+export * from "./getBackupStream";
+export * from "./getDeliverLogDownList";
 export * from "./getDomains";
+export * from "./getMonitorReport";
+export * from "./getPadTemplates";
+export * from "./getPullStreamTaskStatus";
+export * from "./getStreamMonitorList";
+export * from "./getTimeShiftRecordDetail";
+export * from "./getTimeShiftStreamList";
+export * from "./getWatermarks";
+export * from "./getXp2pDetailInfoList";
 export * from "./liveTranscodeRuleAttachment";
 export * from "./liveTranscodeTemplate";
+export * from "./padRuleAttachment";
+export * from "./padTemplate";
 export * from "./playAuthKeyConfig";
 export * from "./playDomainCertAttachment";
 export * from "./pullStreamTask";
+export * from "./pullStreamTaskRestart";
 export * from "./pushAuthKeyConfig";
+export * from "./recordRuleAttachment";
+export * from "./recordTemplate";
+export * from "./snapshotRuleAttachment";
+export * from "./snapshotTemplate";
+export * from "./startStreamMonitor";
+export * from "./streamMonitor";
+export * from "./timeshiftRuleAttachment";
+export * from "./timeshiftTemplate";
 export * from "./watermark";
+export * from "./watermarkRuleAttachment";
 
 // Import resources to register:
 import { AuthenticateDomainOwnerOperation } from "./authenticateDomainOwnerOperation";
+import { BackupStream } from "./backupStream";
+import { CallbackRuleAttachment } from "./callbackRuleAttachment";
+import { CallbackTemplate } from "./callbackTemplate";
 import { Domain } from "./domain";
+import { DomainReferer } from "./domainReferer";
+import { EnableOptimalSwitching } from "./enableOptimalSwitching";
 import { LiveTranscodeRuleAttachment } from "./liveTranscodeRuleAttachment";
 import { LiveTranscodeTemplate } from "./liveTranscodeTemplate";
+import { PadRuleAttachment } from "./padRuleAttachment";
+import { PadTemplate } from "./padTemplate";
 import { PlayAuthKeyConfig } from "./playAuthKeyConfig";
 import { PlayDomainCertAttachment } from "./playDomainCertAttachment";
 import { PullStreamTask } from "./pullStreamTask";
+import { PullStreamTaskRestart } from "./pullStreamTaskRestart";
 import { PushAuthKeyConfig } from "./pushAuthKeyConfig";
+import { RecordRuleAttachment } from "./recordRuleAttachment";
+import { RecordTemplate } from "./recordTemplate";
+import { SnapshotRuleAttachment } from "./snapshotRuleAttachment";
+import { SnapshotTemplate } from "./snapshotTemplate";
+import { StartStreamMonitor } from "./startStreamMonitor";
+import { StreamMonitor } from "./streamMonitor";
+import { TimeshiftRuleAttachment } from "./timeshiftRuleAttachment";
+import { TimeshiftTemplate } from "./timeshiftTemplate";
 import { Watermark } from "./watermark";
+import { WatermarkRuleAttachment } from "./watermarkRuleAttachment";
 
 const _module = {
     version: utilities.getVersion(),
@@ -33,33 +77,84 @@ const _module = {
         switch (type) {
             case "tencentcloud:Css/authenticateDomainOwnerOperation:AuthenticateDomainOwnerOperation":
                 return new AuthenticateDomainOwnerOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Css/backupStream:BackupStream":
+                return new BackupStream(name, <any>undefined, { urn })
+            case "tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment":
+                return new CallbackRuleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Css/callbackTemplate:CallbackTemplate":
+                return new CallbackTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Css/domain:Domain":
                 return new Domain(name, <any>undefined, { urn })
+            case "tencentcloud:Css/domainReferer:DomainReferer":
+                return new DomainReferer(name, <any>undefined, { urn })
+            case "tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching":
+                return new EnableOptimalSwitching(name, <any>undefined, { urn })
             case "tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment":
                 return new LiveTranscodeRuleAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate":
                 return new LiveTranscodeTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Css/padRuleAttachment:PadRuleAttachment":
+                return new PadRuleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Css/padTemplate:PadTemplate":
+                return new PadTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig":
                 return new PlayAuthKeyConfig(name, <any>undefined, { urn })
             case "tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment":
                 return new PlayDomainCertAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Css/pullStreamTask:PullStreamTask":
                 return new PullStreamTask(name, <any>undefined, { urn })
+            case "tencentcloud:Css/pullStreamTaskRestart:PullStreamTaskRestart":
+                return new PullStreamTaskRestart(name, <any>undefined, { urn })
             case "tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig":
                 return new PushAuthKeyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment":
+                return new RecordRuleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Css/recordTemplate:RecordTemplate":
+                return new RecordTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment":
+                return new SnapshotRuleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Css/snapshotTemplate:SnapshotTemplate":
+                return new SnapshotTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Css/startStreamMonitor:StartStreamMonitor":
+                return new StartStreamMonitor(name, <any>undefined, { urn })
+            case "tencentcloud:Css/streamMonitor:StreamMonitor":
+                return new StreamMonitor(name, <any>undefined, { urn })
+            case "tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment":
+                return new TimeshiftRuleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate":
+                return new TimeshiftTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Css/watermark:Watermark":
                 return new Watermark(name, <any>undefined, { urn })
+            case "tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment":
+                return new WatermarkRuleAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/authenticateDomainOwnerOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/backupStream", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/callbackRuleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/callbackTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/domain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/domainReferer", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/enableOptimalSwitching", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/liveTranscodeRuleAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/liveTranscodeTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/padRuleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/padTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/playAuthKeyConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/playDomainCertAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/pullStreamTask", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/pullStreamTaskRestart", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/pushAuthKeyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/recordRuleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/recordTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/snapshotRuleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/snapshotTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/startStreamMonitor", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/streamMonitor", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/timeshiftRuleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/timeshiftTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/watermark", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/watermarkRuleAttachment", _module)

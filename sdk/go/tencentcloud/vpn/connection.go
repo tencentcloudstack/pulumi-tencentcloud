@@ -135,9 +135,9 @@ type Connection struct {
 	NetStatus pulumi.StringOutput `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringOutput `pulumi:"preShareKey"`
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType pulumi.StringOutput `pulumi:"routeType"`
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayOutput `pulumi:"securityGroupPolicies"`
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State pulumi.StringOutput `pulumi:"state"`
@@ -163,9 +163,6 @@ func NewConnection(ctx *pulumi.Context,
 	}
 	if args.PreShareKey == nil {
 		return nil, errors.New("invalid value for required argument 'PreShareKey'")
-	}
-	if args.SecurityGroupPolicies == nil {
-		return nil, errors.New("invalid value for required argument 'SecurityGroupPolicies'")
 	}
 	if args.VpnGatewayId == nil {
 		return nil, errors.New("invalid value for required argument 'VpnGatewayId'")
@@ -253,9 +250,9 @@ type connectionState struct {
 	NetStatus *string `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey *string `pulumi:"preShareKey"`
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType *string `pulumi:"routeType"`
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State *string `pulumi:"state"`
@@ -330,9 +327,9 @@ type ConnectionState struct {
 	NetStatus pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringPtrInput
-	// Route type of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 	RouteType pulumi.StringPtrInput
-	// Security group policy of the VPN connection.
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
 	// State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
 	State pulumi.StringPtrInput
@@ -403,7 +400,9 @@ type connectionArgs struct {
 	Name *string `pulumi:"name"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey string `pulumi:"preShareKey"`
-	// Security group policy of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	RouteType *string `pulumi:"routeType"`
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -467,7 +466,9 @@ type ConnectionArgs struct {
 	Name pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringInput
-	// Security group policy of the VPN connection.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	RouteType pulumi.StringPtrInput
+	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
@@ -714,12 +715,12 @@ func (o ConnectionOutput) PreShareKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.PreShareKey }).(pulumi.StringOutput)
 }
 
-// Route type of the VPN connection.
+// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
 func (o ConnectionOutput) RouteType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.RouteType }).(pulumi.StringOutput)
 }
 
-// Security group policy of the VPN connection.
+// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 func (o ConnectionOutput) SecurityGroupPolicies() ConnectionSecurityGroupPolicyArrayOutput {
 	return o.ApplyT(func(v *Connection) ConnectionSecurityGroupPolicyArrayOutput { return v.SecurityGroupPolicies }).(ConnectionSecurityGroupPolicyArrayOutput)
 }

@@ -69,8 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///         });
     ///         var emrCluster = new Tencentcloud.Emr.Cluster("emrCluster", new Tencentcloud.Emr.ClusterArgs
     ///         {
-    ///             ProductId = 4,
-    ///             DisplayStrategy = "clusterList",
+    ///             ProductId = 38,
     ///             VpcSettings = 
     ///             {
     ///                 { "vpc_id", emrVpc.Id },
@@ -78,7 +77,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///             },
     ///             Softwares = 
     ///             {
-    ///                 "zookeeper-3.6.1",
+    ///                 "hdfs-2.8.5",
+    ///                 "knox-1.6.1",
+    ///                 "openldap-2.4.44",
+    ///                 "yarn-2.8.5",
+    ///                 "zookeeper-3.6.3",
     ///             },
     ///             SupportHa = 0,
     ///             InstanceName = "emr-cluster-test",
@@ -114,10 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     ///             TimeSpan = 3600,
     ///             TimeUnit = "s",
     ///             PayMode = 0,
-    ///             Placement = 
+    ///             PlacementInfo = new Tencentcloud.Emr.Inputs.ClusterPlacementInfoArgs
     ///             {
-    ///                 { "zone", availabilityZone },
-    ///                 { "project_id", 0 },
+    ///                 Zone = availabilityZone,
+    ///                 ProjectId = 0,
     ///             },
     ///             SgId = emrSg.Id,
     ///         });
@@ -130,10 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public partial class Cluster : Pulumi.CustomResource
     {
         /// <summary>
-        /// Display strategy of EMR instance.
+        /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Output("displayStrategy")]
-        public Output<string> DisplayStrategy { get; private set; } = null!;
+        public Output<string?> DisplayStrategy { get; private set; } = null!;
 
         /// <summary>
         /// Access the external file system.
@@ -157,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// Instance login settings.
         /// </summary>
         [Output("loginSettings")]
-        public Output<ImmutableDictionary<string, object>> LoginSettings { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, object>?> LoginSettings { get; private set; } = null!;
 
         /// <summary>
         /// Whether to enable the cluster Master node public network. Value range:
@@ -175,10 +178,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<int> PayMode { get; private set; } = null!;
 
         /// <summary>
-        /// The location of the instance.
+        /// It will be deprecated in later versions. Use `placement_info` instead. The location of the instance.
         /// </summary>
         [Output("placement")]
         public Output<ImmutableDictionary<string, object>> Placement { get; private set; } = null!;
+
+        /// <summary>
+        /// The location of the instance.
+        /// </summary>
+        [Output("placementInfo")]
+        public Output<Outputs.ClusterPlacementInfo> PlacementInfo { get; private set; } = null!;
 
         /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:
@@ -233,13 +242,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         /// </summary>
         [Output("timeSpan")]
-        public Output<int> TimeSpan { get; private set; } = null!;
+        public Output<int?> TimeSpan { get; private set; } = null!;
 
         /// <summary>
         /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         /// </summary>
         [Output("timeUnit")]
-        public Output<string> TimeUnit { get; private set; } = null!;
+        public Output<string?> TimeUnit { get; private set; } = null!;
 
         /// <summary>
         /// The private net config of EMR instance.
@@ -295,10 +304,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public sealed class ClusterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Display strategy of EMR instance.
+        /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
-        [Input("displayStrategy", required: true)]
-        public Input<string> DisplayStrategy { get; set; } = null!;
+        [Input("displayStrategy")]
+        public Input<string>? DisplayStrategy { get; set; }
 
         /// <summary>
         /// Access the external file system.
@@ -312,7 +321,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
 
-        [Input("loginSettings", required: true)]
+        [Input("loginSettings")]
         private InputMap<object>? _loginSettings;
 
         /// <summary>
@@ -339,17 +348,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("payMode", required: true)]
         public Input<int> PayMode { get; set; } = null!;
 
-        [Input("placement", required: true)]
+        [Input("placement")]
         private InputMap<object>? _placement;
 
         /// <summary>
-        /// The location of the instance.
+        /// It will be deprecated in later versions. Use `placement_info` instead. The location of the instance.
         /// </summary>
+        [Obsolete(@"It will be deprecated in later versions. Use `placement_info` instead.")]
         public InputMap<object> Placement
         {
             get => _placement ?? (_placement = new InputMap<object>());
             set => _placement = value;
         }
+
+        /// <summary>
+        /// The location of the instance.
+        /// </summary>
+        [Input("placementInfo")]
+        public Input<Inputs.ClusterPlacementInfoArgs>? PlacementInfo { get; set; }
 
         /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:
@@ -415,14 +431,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
         /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         /// </summary>
-        [Input("timeSpan", required: true)]
-        public Input<int> TimeSpan { get; set; } = null!;
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
         /// The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         /// </summary>
-        [Input("timeUnit", required: true)]
-        public Input<string> TimeUnit { get; set; } = null!;
+        [Input("timeUnit")]
+        public Input<string>? TimeUnit { get; set; }
 
         [Input("vpcSettings", required: true)]
         private InputMap<object>? _vpcSettings;
@@ -444,7 +460,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public sealed class ClusterState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Display strategy of EMR instance.
+        /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Input("displayStrategy")]
         public Input<string>? DisplayStrategy { get; set; }
@@ -498,13 +514,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         private InputMap<object>? _placement;
 
         /// <summary>
-        /// The location of the instance.
+        /// It will be deprecated in later versions. Use `placement_info` instead. The location of the instance.
         /// </summary>
+        [Obsolete(@"It will be deprecated in later versions. Use `placement_info` instead.")]
         public InputMap<object> Placement
         {
             get => _placement ?? (_placement = new InputMap<object>());
             set => _placement = value;
         }
+
+        /// <summary>
+        /// The location of the instance.
+        /// </summary>
+        [Input("placementInfo")]
+        public Input<Inputs.ClusterPlacementInfoGetArgs>? PlacementInfo { get; set; }
 
         /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:

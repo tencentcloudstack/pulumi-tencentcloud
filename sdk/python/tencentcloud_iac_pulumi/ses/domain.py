@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['DomainArgs', 'Domain']
 
@@ -36,13 +38,29 @@ class DomainArgs:
 @pulumi.input_type
 class _DomainState:
     def __init__(__self__, *,
+                 attributes: Optional[pulumi.Input[Sequence[pulumi.Input['DomainAttributeArgs']]]] = None,
                  email_identity: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Domain resources.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainAttributeArgs']]] attributes: DNS configuration details.
         :param pulumi.Input[str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         """
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
         if email_identity is not None:
             pulumi.set(__self__, "email_identity", email_identity)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainAttributeArgs']]]]:
+        """
+        DNS configuration details.
+        """
+        return pulumi.get(self, "attributes")
+
+    @attributes.setter
+    def attributes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainAttributeArgs']]]]):
+        pulumi.set(self, "attributes", value)
 
     @property
     @pulumi.getter(name="emailIdentity")
@@ -147,6 +165,7 @@ class Domain(pulumi.CustomResource):
             if email_identity is None and not opts.urn:
                 raise TypeError("Missing required property 'email_identity'")
             __props__.__dict__["email_identity"] = email_identity
+            __props__.__dict__["attributes"] = None
         super(Domain, __self__).__init__(
             'tencentcloud:Ses/domain:Domain',
             resource_name,
@@ -157,6 +176,7 @@ class Domain(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            attributes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainAttributeArgs']]]]] = None,
             email_identity: Optional[pulumi.Input[str]] = None) -> 'Domain':
         """
         Get an existing Domain resource's state with the given name, id, and optional extra
@@ -165,14 +185,24 @@ class Domain(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainAttributeArgs']]]] attributes: DNS configuration details.
         :param pulumi.Input[str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _DomainState.__new__(_DomainState)
 
+        __props__.__dict__["attributes"] = attributes
         __props__.__dict__["email_identity"] = email_identity
         return Domain(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> pulumi.Output[Sequence['outputs.DomainAttribute']]:
+        """
+        DNS configuration details.
+        """
+        return pulumi.get(self, "attributes")
 
     @property
     @pulumi.getter(name="emailIdentity")

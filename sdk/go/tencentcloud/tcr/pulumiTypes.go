@@ -1063,7 +1063,7 @@ func (o NamespaceCveWhitelistItemArrayOutput) Index(i pulumi.IntInput) Namespace
 }
 
 type ServiceAccountPermission struct {
-	// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+	// Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
 	Actions []string `pulumi:"actions"`
 	// resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
 	Resource string `pulumi:"resource"`
@@ -1081,7 +1081,7 @@ type ServiceAccountPermissionInput interface {
 }
 
 type ServiceAccountPermissionArgs struct {
-	// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+	// Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
 	Actions pulumi.StringArrayInput `pulumi:"actions"`
 	// resource path, currently only supports Namespace. Note: This field may return null, indicating that no valid value can be obtained.
 	Resource pulumi.StringInput `pulumi:"resource"`
@@ -1138,7 +1138,7 @@ func (o ServiceAccountPermissionOutput) ToServiceAccountPermissionOutputWithCont
 	return o
 }
 
-// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+// Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
 func (o ServiceAccountPermissionOutput) Actions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ServiceAccountPermission) []string { return v.Actions }).(pulumi.StringArrayOutput)
 }

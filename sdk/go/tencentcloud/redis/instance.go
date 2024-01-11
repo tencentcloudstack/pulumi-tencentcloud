@@ -283,9 +283,9 @@ type Instance struct {
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrOutput `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrOutput `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntOutput `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayOutput `pulumi:"replicaZoneIds"`
@@ -307,6 +307,8 @@ type Instance struct {
 	TypeId pulumi.IntPtrOutput `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -379,9 +381,9 @@ type instanceState struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
@@ -403,6 +405,8 @@ type instanceState struct {
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 type InstanceState struct {
@@ -440,9 +444,9 @@ type InstanceState struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrInput
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
@@ -464,6 +468,8 @@ type InstanceState struct {
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -501,9 +507,9 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle *int `pulumi:"recycle"`
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum *int `pulumi:"redisReplicasNum"`
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
@@ -523,6 +529,8 @@ type instanceArgs struct {
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId *string `pulumi:"vpcId"`
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -557,9 +565,9 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
 	Recycle pulumi.IntPtrInput
-	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+	// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 	RedisReplicasNum pulumi.IntPtrInput
-	// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+	// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
 	ReplicaZoneIds pulumi.IntArrayInput
@@ -579,6 +587,8 @@ type InstanceArgs struct {
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 	VpcId pulumi.StringPtrInput
+	// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -753,12 +763,12 @@ func (o InstanceOutput) Recycle() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Recycle }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`.
+// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
 func (o InstanceOutput) RedisReplicasNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.RedisReplicasNum }).(pulumi.IntPtrOutput)
 }
 
-// The number of instance shard, default is 1. This is not required for standalone and master slave versions.
+// The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
 func (o InstanceOutput) RedisShardNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RedisShardNum }).(pulumi.IntOutput)
 }
@@ -808,6 +818,11 @@ func (o InstanceOutput) TypeId() pulumi.IntPtrOutput {
 // ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
 func (o InstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
+func (o InstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

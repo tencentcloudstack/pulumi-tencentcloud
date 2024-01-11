@@ -411,6 +411,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Output<ImmutableArray<Outputs.AlarmPolicyEventCondition>> EventConditions { get; private set; } = null!;
 
         /// <summary>
+        /// Global filters.
+        /// </summary>
+        [Output("filter")]
+        public Output<Outputs.AlarmPolicyFilter?> Filter { get; private set; } = null!;
+
+        /// <summary>
+        /// Aggregate dimension list, specify which dimension keys to use for group by.
+        /// </summary>
+        [Output("groupBies")]
+        public Output<ImmutableArray<string>> GroupBies { get; private set; } = null!;
+
+        /// <summary>
         /// The type of monitor.
         /// </summary>
         [Output("monitorType")]
@@ -542,6 +554,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
 
         /// <summary>
+        /// Global filters.
+        /// </summary>
+        [Input("filter")]
+        public Input<Inputs.AlarmPolicyFilterArgs>? Filter { get; set; }
+
+        [Input("groupBies")]
+        private InputList<string>? _groupBies;
+
+        /// <summary>
+        /// Aggregate dimension list, specify which dimension keys to use for group by.
+        /// </summary>
+        public InputList<string> GroupBies
+        {
+            get => _groupBies ?? (_groupBies = new InputList<string>());
+            set => _groupBies = value;
+        }
+
+        /// <summary>
         /// The type of monitor.
         /// </summary>
         [Input("monitorType", required: true)]
@@ -648,6 +678,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         {
             get => _eventConditions ?? (_eventConditions = new InputList<Inputs.AlarmPolicyEventConditionGetArgs>());
             set => _eventConditions = value;
+        }
+
+        /// <summary>
+        /// Global filters.
+        /// </summary>
+        [Input("filter")]
+        public Input<Inputs.AlarmPolicyFilterGetArgs>? Filter { get; set; }
+
+        [Input("groupBies")]
+        private InputList<string>? _groupBies;
+
+        /// <summary>
+        /// Aggregate dimension list, specify which dimension keys to use for group by.
+        /// </summary>
+        public InputList<string> GroupBies
+        {
+            get => _groupBies ?? (_groupBies = new InputList<string>());
+            set => _groupBies = value;
         }
 
         /// <summary>

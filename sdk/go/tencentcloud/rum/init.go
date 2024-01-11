@@ -21,10 +21,16 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig":
+		r = &InstanceStatusConfig{}
 	case "tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment":
 		r = &OfflineLogConfigAttachment{}
 	case "tencentcloud:Rum/project:Project":
 		r = &Project{}
+	case "tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig":
+		r = &ProjectStatusConfig{}
+	case "tencentcloud:Rum/releaseFile:ReleaseFile":
+		r = &ReleaseFile{}
 	case "tencentcloud:Rum/tawInstance:TawInstance":
 		r = &TawInstance{}
 	case "tencentcloud:Rum/whitelist:Whitelist":
@@ -44,12 +50,27 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Rum/instanceStatusConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Rum/offlineLogConfigAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Rum/project",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Rum/projectStatusConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Rum/releaseFile",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

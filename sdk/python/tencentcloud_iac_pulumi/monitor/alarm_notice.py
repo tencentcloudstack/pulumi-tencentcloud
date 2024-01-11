@@ -319,12 +319,13 @@ class AlarmNotice(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.monitor.AlarmNotice("foo",
+        example = tencentcloud.monitor.AlarmNotice("example",
             notice_language="zh-CN",
             notice_type="ALL",
             url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
-                end_time=0,
-                start_time=1,
+                end_time=86399,
+                is_valid=0,
+                start_time=0,
                 url="https://www.mytest.com/validate",
                 weekdays=[
                     1,
@@ -337,21 +338,24 @@ class AlarmNotice(pulumi.CustomResource):
                 ],
             )],
             user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
-                end_time=1,
+                end_time=86399,
                 group_ids=[],
                 need_phone_arrive_notice=1,
                 notice_ways=[
-                    "SMS",
                     "EMAIL",
+                    "SMS",
                 ],
                 phone_call_type="CIRCLE",
-                phone_circle_interval=50,
+                phone_circle_interval=180,
                 phone_circle_times=2,
-                phone_inner_interval=60,
-                phone_orders=[10001],
+                phone_inner_interval=180,
+                phone_orders=[],
                 receiver_type="USER",
                 start_time=0,
-                user_ids=[10001],
+                user_ids=[
+                    11082189,
+                    11082190,
+                ],
                 weekdays=[
                     1,
                     2,
@@ -396,12 +400,13 @@ class AlarmNotice(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.monitor.AlarmNotice("foo",
+        example = tencentcloud.monitor.AlarmNotice("example",
             notice_language="zh-CN",
             notice_type="ALL",
             url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
-                end_time=0,
-                start_time=1,
+                end_time=86399,
+                is_valid=0,
+                start_time=0,
                 url="https://www.mytest.com/validate",
                 weekdays=[
                     1,
@@ -414,21 +419,24 @@ class AlarmNotice(pulumi.CustomResource):
                 ],
             )],
             user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
-                end_time=1,
+                end_time=86399,
                 group_ids=[],
                 need_phone_arrive_notice=1,
                 notice_ways=[
-                    "SMS",
                     "EMAIL",
+                    "SMS",
                 ],
                 phone_call_type="CIRCLE",
-                phone_circle_interval=50,
+                phone_circle_interval=180,
                 phone_circle_times=2,
-                phone_inner_interval=60,
-                phone_orders=[10001],
+                phone_inner_interval=180,
+                phone_orders=[],
                 receiver_type="USER",
                 start_time=0,
-                user_ids=[10001],
+                user_ids=[
+                    11082189,
+                    11082190,
+                ],
                 weekdays=[
                     1,
                     2,

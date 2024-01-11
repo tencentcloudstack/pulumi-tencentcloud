@@ -11,6 +11,16 @@ from .. import _utilities
 __all__ = [
     'PlayDomainCertAttachmentDomainInfoArgs',
     'PullStreamTaskWatermarkListArgs',
+    'RecordTemplateAacParamArgs',
+    'RecordTemplateFlvParamArgs',
+    'RecordTemplateFlvSpecialParamArgs',
+    'RecordTemplateHlsParamArgs',
+    'RecordTemplateHlsSpecialParamArgs',
+    'RecordTemplateMp3ParamArgs',
+    'RecordTemplateMp4ParamArgs',
+    'StreamMonitorInputListArgs',
+    'StreamMonitorNotifyPolicyArgs',
+    'StreamMonitorOutputInfoArgs',
 ]
 
 @pulumi.input_type
@@ -145,5 +155,754 @@ class PullStreamTaskWatermarkListArgs:
     @y_position.setter
     def y_position(self, value: pulumi.Input[int]):
         pulumi.set(self, "y_position", value)
+
+
+@pulumi.input_type
+class RecordTemplateAacParamArgs:
+    def __init__(__self__, *,
+                 class_id: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[int]] = None,
+                 procedure: Optional[pulumi.Input[str]] = None,
+                 record_interval: Optional[pulumi.Input[int]] = None,
+                 storage_mode: Optional[pulumi.Input[str]] = None,
+                 storage_time: Optional[pulumi.Input[int]] = None,
+                 vod_file_name: Optional[pulumi.Input[str]] = None,
+                 vod_sub_app_id: Optional[pulumi.Input[int]] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "class_id")
+
+    @class_id.setter
+    def class_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "class_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "procedure", value)
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "record_interval")
+
+    @record_interval.setter
+    def record_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "record_interval", value)
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "storage_mode")
+
+    @storage_mode.setter
+    def storage_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_mode", value)
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "storage_time")
+
+    @storage_time.setter
+    def storage_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_time", value)
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vod_file_name")
+
+    @vod_file_name.setter
+    def vod_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vod_file_name", value)
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+    @vod_sub_app_id.setter
+    def vod_sub_app_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vod_sub_app_id", value)
+
+
+@pulumi.input_type
+class RecordTemplateFlvParamArgs:
+    def __init__(__self__, *,
+                 class_id: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[int]] = None,
+                 procedure: Optional[pulumi.Input[str]] = None,
+                 record_interval: Optional[pulumi.Input[int]] = None,
+                 storage_mode: Optional[pulumi.Input[str]] = None,
+                 storage_time: Optional[pulumi.Input[int]] = None,
+                 vod_file_name: Optional[pulumi.Input[str]] = None,
+                 vod_sub_app_id: Optional[pulumi.Input[int]] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "class_id")
+
+    @class_id.setter
+    def class_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "class_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "procedure", value)
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "record_interval")
+
+    @record_interval.setter
+    def record_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "record_interval", value)
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "storage_mode")
+
+    @storage_mode.setter
+    def storage_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_mode", value)
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "storage_time")
+
+    @storage_time.setter
+    def storage_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_time", value)
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vod_file_name")
+
+    @vod_file_name.setter
+    def vod_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vod_file_name", value)
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+    @vod_sub_app_id.setter
+    def vod_sub_app_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vod_sub_app_id", value)
+
+
+@pulumi.input_type
+class RecordTemplateFlvSpecialParamArgs:
+    def __init__(__self__, *,
+                 upload_in_recording: Optional[pulumi.Input[bool]] = None):
+        if upload_in_recording is not None:
+            pulumi.set(__self__, "upload_in_recording", upload_in_recording)
+
+    @property
+    @pulumi.getter(name="uploadInRecording")
+    def upload_in_recording(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "upload_in_recording")
+
+    @upload_in_recording.setter
+    def upload_in_recording(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "upload_in_recording", value)
+
+
+@pulumi.input_type
+class RecordTemplateHlsParamArgs:
+    def __init__(__self__, *,
+                 class_id: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[int]] = None,
+                 procedure: Optional[pulumi.Input[str]] = None,
+                 record_interval: Optional[pulumi.Input[int]] = None,
+                 storage_mode: Optional[pulumi.Input[str]] = None,
+                 storage_time: Optional[pulumi.Input[int]] = None,
+                 vod_file_name: Optional[pulumi.Input[str]] = None,
+                 vod_sub_app_id: Optional[pulumi.Input[int]] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "class_id")
+
+    @class_id.setter
+    def class_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "class_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "procedure", value)
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "record_interval")
+
+    @record_interval.setter
+    def record_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "record_interval", value)
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "storage_mode")
+
+    @storage_mode.setter
+    def storage_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_mode", value)
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "storage_time")
+
+    @storage_time.setter
+    def storage_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_time", value)
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vod_file_name")
+
+    @vod_file_name.setter
+    def vod_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vod_file_name", value)
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+    @vod_sub_app_id.setter
+    def vod_sub_app_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vod_sub_app_id", value)
+
+
+@pulumi.input_type
+class RecordTemplateHlsSpecialParamArgs:
+    def __init__(__self__, *,
+                 flow_continue_duration: Optional[pulumi.Input[int]] = None):
+        if flow_continue_duration is not None:
+            pulumi.set(__self__, "flow_continue_duration", flow_continue_duration)
+
+    @property
+    @pulumi.getter(name="flowContinueDuration")
+    def flow_continue_duration(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "flow_continue_duration")
+
+    @flow_continue_duration.setter
+    def flow_continue_duration(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "flow_continue_duration", value)
+
+
+@pulumi.input_type
+class RecordTemplateMp3ParamArgs:
+    def __init__(__self__, *,
+                 class_id: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[int]] = None,
+                 procedure: Optional[pulumi.Input[str]] = None,
+                 record_interval: Optional[pulumi.Input[int]] = None,
+                 storage_mode: Optional[pulumi.Input[str]] = None,
+                 storage_time: Optional[pulumi.Input[int]] = None,
+                 vod_file_name: Optional[pulumi.Input[str]] = None,
+                 vod_sub_app_id: Optional[pulumi.Input[int]] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "class_id")
+
+    @class_id.setter
+    def class_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "class_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "procedure", value)
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "record_interval")
+
+    @record_interval.setter
+    def record_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "record_interval", value)
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "storage_mode")
+
+    @storage_mode.setter
+    def storage_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_mode", value)
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "storage_time")
+
+    @storage_time.setter
+    def storage_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_time", value)
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vod_file_name")
+
+    @vod_file_name.setter
+    def vod_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vod_file_name", value)
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+    @vod_sub_app_id.setter
+    def vod_sub_app_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vod_sub_app_id", value)
+
+
+@pulumi.input_type
+class RecordTemplateMp4ParamArgs:
+    def __init__(__self__, *,
+                 class_id: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[int]] = None,
+                 procedure: Optional[pulumi.Input[str]] = None,
+                 record_interval: Optional[pulumi.Input[int]] = None,
+                 storage_mode: Optional[pulumi.Input[str]] = None,
+                 storage_time: Optional[pulumi.Input[int]] = None,
+                 vod_file_name: Optional[pulumi.Input[str]] = None,
+                 vod_sub_app_id: Optional[pulumi.Input[int]] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "class_id")
+
+    @class_id.setter
+    def class_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "class_id", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "procedure")
+
+    @procedure.setter
+    def procedure(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "procedure", value)
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "record_interval")
+
+    @record_interval.setter
+    def record_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "record_interval", value)
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "storage_mode")
+
+    @storage_mode.setter
+    def storage_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_mode", value)
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "storage_time")
+
+    @storage_time.setter
+    def storage_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "storage_time", value)
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "vod_file_name")
+
+    @vod_file_name.setter
+    def vod_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vod_file_name", value)
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+    @vod_sub_app_id.setter
+    def vod_sub_app_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vod_sub_app_id", value)
+
+
+@pulumi.input_type
+class StreamMonitorInputListArgs:
+    def __init__(__self__, *,
+                 input_stream_name: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 input_app: Optional[pulumi.Input[str]] = None,
+                 input_domain: Optional[pulumi.Input[str]] = None,
+                 input_url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] input_stream_name: Wait monitor input stream name.limit 256 bytes.
+        :param pulumi.Input[str] description: Description content.limit 256 bytes.
+        :param pulumi.Input[str] input_app: Wait monitor input push path.limit 32 bytes.
+        :param pulumi.Input[str] input_domain: Wait monitor input push domain.limit 128 bytes.
+        :param pulumi.Input[str] input_url: Wait monitor input stream push url.
+        """
+        pulumi.set(__self__, "input_stream_name", input_stream_name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if input_app is not None:
+            pulumi.set(__self__, "input_app", input_app)
+        if input_domain is not None:
+            pulumi.set(__self__, "input_domain", input_domain)
+        if input_url is not None:
+            pulumi.set(__self__, "input_url", input_url)
+
+    @property
+    @pulumi.getter(name="inputStreamName")
+    def input_stream_name(self) -> pulumi.Input[str]:
+        """
+        Wait monitor input stream name.limit 256 bytes.
+        """
+        return pulumi.get(self, "input_stream_name")
+
+    @input_stream_name.setter
+    def input_stream_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "input_stream_name", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Description content.limit 256 bytes.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="inputApp")
+    def input_app(self) -> Optional[pulumi.Input[str]]:
+        """
+        Wait monitor input push path.limit 32 bytes.
+        """
+        return pulumi.get(self, "input_app")
+
+    @input_app.setter
+    def input_app(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_app", value)
+
+    @property
+    @pulumi.getter(name="inputDomain")
+    def input_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Wait monitor input push domain.limit 128 bytes.
+        """
+        return pulumi.get(self, "input_domain")
+
+    @input_domain.setter
+    def input_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_domain", value)
+
+    @property
+    @pulumi.getter(name="inputUrl")
+    def input_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Wait monitor input stream push url.
+        """
+        return pulumi.get(self, "input_url")
+
+    @input_url.setter
+    def input_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_url", value)
+
+
+@pulumi.input_type
+class StreamMonitorNotifyPolicyArgs:
+    def __init__(__self__, *,
+                 callback_url: Optional[pulumi.Input[str]] = None,
+                 notify_policy_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] callback_url: Callback url.limit [0,512].only http or https.
+        :param pulumi.Input[int] notify_policy_type: Notify policy type.0: not notify.1: use global policy.
+        """
+        if callback_url is not None:
+            pulumi.set(__self__, "callback_url", callback_url)
+        if notify_policy_type is not None:
+            pulumi.set(__self__, "notify_policy_type", notify_policy_type)
+
+    @property
+    @pulumi.getter(name="callbackUrl")
+    def callback_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Callback url.limit [0,512].only http or https.
+        """
+        return pulumi.get(self, "callback_url")
+
+    @callback_url.setter
+    def callback_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "callback_url", value)
+
+    @property
+    @pulumi.getter(name="notifyPolicyType")
+    def notify_policy_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Notify policy type.0: not notify.1: use global policy.
+        """
+        return pulumi.get(self, "notify_policy_type")
+
+    @notify_policy_type.setter
+    def notify_policy_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "notify_policy_type", value)
+
+
+@pulumi.input_type
+class StreamMonitorOutputInfoArgs:
+    def __init__(__self__, *,
+                 output_stream_height: pulumi.Input[int],
+                 output_stream_width: pulumi.Input[int],
+                 output_app: Optional[pulumi.Input[str]] = None,
+                 output_domain: Optional[pulumi.Input[str]] = None,
+                 output_stream_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] output_stream_height: Monitor task output height, limit[1, 1080].
+        :param pulumi.Input[int] output_stream_width: Output stream width, limit[1, 1920].
+        :param pulumi.Input[str] output_app: Monitor task play path.limit 32 bytes.
+        :param pulumi.Input[str] output_domain: Monitor task output play domain.limit 128 bytes.
+        :param pulumi.Input[str] output_stream_name: Monitor task output stream name.limit 256 bytes.
+        """
+        pulumi.set(__self__, "output_stream_height", output_stream_height)
+        pulumi.set(__self__, "output_stream_width", output_stream_width)
+        if output_app is not None:
+            pulumi.set(__self__, "output_app", output_app)
+        if output_domain is not None:
+            pulumi.set(__self__, "output_domain", output_domain)
+        if output_stream_name is not None:
+            pulumi.set(__self__, "output_stream_name", output_stream_name)
+
+    @property
+    @pulumi.getter(name="outputStreamHeight")
+    def output_stream_height(self) -> pulumi.Input[int]:
+        """
+        Monitor task output height, limit[1, 1080].
+        """
+        return pulumi.get(self, "output_stream_height")
+
+    @output_stream_height.setter
+    def output_stream_height(self, value: pulumi.Input[int]):
+        pulumi.set(self, "output_stream_height", value)
+
+    @property
+    @pulumi.getter(name="outputStreamWidth")
+    def output_stream_width(self) -> pulumi.Input[int]:
+        """
+        Output stream width, limit[1, 1920].
+        """
+        return pulumi.get(self, "output_stream_width")
+
+    @output_stream_width.setter
+    def output_stream_width(self, value: pulumi.Input[int]):
+        pulumi.set(self, "output_stream_width", value)
+
+    @property
+    @pulumi.getter(name="outputApp")
+    def output_app(self) -> Optional[pulumi.Input[str]]:
+        """
+        Monitor task play path.limit 32 bytes.
+        """
+        return pulumi.get(self, "output_app")
+
+    @output_app.setter
+    def output_app(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_app", value)
+
+    @property
+    @pulumi.getter(name="outputDomain")
+    def output_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Monitor task output play domain.limit 128 bytes.
+        """
+        return pulumi.get(self, "output_domain")
+
+    @output_domain.setter
+    def output_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_domain", value)
+
+    @property
+    @pulumi.getter(name="outputStreamName")
+    def output_stream_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Monitor task output stream name.limit 256 bytes.
+        """
+        return pulumi.get(self, "output_stream_name")
+
+    @output_stream_name.setter
+    def output_stream_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_stream_name", value)
 
 

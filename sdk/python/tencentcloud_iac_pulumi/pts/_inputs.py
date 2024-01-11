@@ -47,6 +47,7 @@ __all__ = [
     'ScenarioSlaPolicySlaRuleArgs',
     'ScenarioSlaPolicySlaRuleLabelFilterArgs',
     'ScenarioTestScriptArgs',
+    'TmpKeyGenerateCredentialArgs',
 ]
 
 @pulumi.input_type
@@ -2481,5 +2482,60 @@ class ScenarioTestScriptArgs:
     @updated_at.setter
     def updated_at(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "updated_at", value)
+
+
+@pulumi.input_type
+class TmpKeyGenerateCredentialArgs:
+    def __init__(__self__, *,
+                 tmp_secret_id: Optional[pulumi.Input[str]] = None,
+                 tmp_secret_key: Optional[pulumi.Input[str]] = None,
+                 token: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] tmp_secret_id: Temporary secret ID.
+        :param pulumi.Input[str] tmp_secret_key: Temporary secret key.
+        :param pulumi.Input[str] token: Temporary token.
+        """
+        if tmp_secret_id is not None:
+            pulumi.set(__self__, "tmp_secret_id", tmp_secret_id)
+        if tmp_secret_key is not None:
+            pulumi.set(__self__, "tmp_secret_key", tmp_secret_key)
+        if token is not None:
+            pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter(name="tmpSecretId")
+    def tmp_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Temporary secret ID.
+        """
+        return pulumi.get(self, "tmp_secret_id")
+
+    @tmp_secret_id.setter
+    def tmp_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tmp_secret_id", value)
+
+    @property
+    @pulumi.getter(name="tmpSecretKey")
+    def tmp_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Temporary secret key.
+        """
+        return pulumi.get(self, "tmp_secret_key")
+
+    @tmp_secret_key.setter
+    def tmp_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tmp_secret_key", value)
+
+    @property
+    @pulumi.getter
+    def token(self) -> Optional[pulumi.Input[str]]:
+        """
+        Temporary token.
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "token", value)
 
 

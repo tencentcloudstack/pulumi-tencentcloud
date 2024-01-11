@@ -6,9 +6,14 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .get_products import *
+from .get_rotation_detail import *
+from .get_rotation_history import *
 from .get_secret_versions import *
 from .get_secrets import *
+from .get_service_status import *
+from .get_ssh_key_pair_value import *
 from .product_secret import *
+from .rotate_product_secret import *
 from .secret import *
 from .secret_version import *
 from .ssh_key_pair_secret import *

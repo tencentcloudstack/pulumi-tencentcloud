@@ -62,6 +62,9 @@ class GetGatewayRoutesResult:
     @property
     @pulumi.getter
     def results(self) -> Sequence['outputs.GetGatewayRoutesResultResult']:
+        """
+        result.
+        """
         return pulumi.get(self, "results")
 
     @property
@@ -72,6 +75,9 @@ class GetGatewayRoutesResult:
     @property
     @pulumi.getter(name="serviceName")
     def service_name(self) -> Optional[str]:
+        """
+        service name.
+        """
         return pulumi.get(self, "service_name")
 
 
@@ -95,7 +101,24 @@ def get_gateway_routes(gateway_id: Optional[str] = None,
                        service_name: Optional[str] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetGatewayRoutesResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to query detailed information of tse gateway_routes
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    gateway_routes = tencentcloud.Tse.get_gateway_routes(gateway_id="gateway-ddbb709b",
+        route_name="keep-routes",
+        service_name="test")
+    ```
+
+
+    :param str gateway_id: gateway ID.
+    :param str result_output_file: Used to save results.
+    :param str route_name: route name.
+    :param str service_name: service name.
     """
     __args__ = dict()
     __args__['gatewayId'] = gateway_id
@@ -126,6 +149,23 @@ def get_gateway_routes_output(gateway_id: Optional[pulumi.Input[str]] = None,
                               service_name: Optional[pulumi.Input[Optional[str]]] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetGatewayRoutesResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to query detailed information of tse gateway_routes
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    gateway_routes = tencentcloud.Tse.get_gateway_routes(gateway_id="gateway-ddbb709b",
+        route_name="keep-routes",
+        service_name="test")
+    ```
+
+
+    :param str gateway_id: gateway ID.
+    :param str result_output_file: Used to save results.
+    :param str route_name: route name.
+    :param str service_name: service name.
     """
     ...

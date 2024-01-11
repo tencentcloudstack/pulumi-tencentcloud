@@ -22,16 +22,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
         ///         {
-        ///             OrderType = 1,
-        ///             SecretName = "test",
+        ///             SecretName = "tf_example",
+        ///             Description = "desc.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var exampleSecrets = exampleSecret.SecretName.Apply(secretName =&gt; Tencentcloud.Ssm.GetSecrets.Invoke(new Tencentcloud.Ssm.GetSecretsInvokeArgs
+        ///         {
+        ///             SecretName = secretName,
         ///             State = 1,
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### OR you can filter by tags
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         {
+        ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+        ///             State = 1,
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
         ///         }));
         ///     }
         /// 
@@ -53,16 +87,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// ```csharp
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
         ///         {
-        ///             OrderType = 1,
-        ///             SecretName = "test",
+        ///             SecretName = "tf_example",
+        ///             Description = "desc.",
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
+        ///         });
+        ///         var exampleSecrets = exampleSecret.SecretName.Apply(secretName =&gt; Tencentcloud.Ssm.GetSecrets.Invoke(new Tencentcloud.Ssm.GetSecretsInvokeArgs
+        ///         {
+        ///             SecretName = secretName,
         ///             State = 1,
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% example %}}
+        /// ### OR you can filter by tags
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         {
+        ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+        ///             State = 1,
+        ///             Tags = 
+        ///             {
+        ///                 { "createdBy", "terraform" },
+        ///             },
         ///         }));
         ///     }
         /// 
@@ -85,6 +153,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public int? OrderType { get; set; }
 
         /// <summary>
+        /// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+        /// </summary>
+        [Input("productName")]
+        public string? ProductName { get; set; }
+
+        /// <summary>
         /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
@@ -95,6 +169,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("secretName")]
         public string? SecretName { get; set; }
+
+        /// <summary>
+        /// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+        /// </summary>
+        [Input("secretType")]
+        public int? SecretType { get; set; }
 
         /// <summary>
         /// Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
@@ -128,6 +208,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Input<int>? OrderType { get; set; }
 
         /// <summary>
+        /// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+        /// </summary>
+        [Input("productName")]
+        public Input<string>? ProductName { get; set; }
+
+        /// <summary>
         /// Used to save results.
         /// </summary>
         [Input("resultOutputFile")]
@@ -138,6 +224,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("secretName")]
         public Input<string>? SecretName { get; set; }
+
+        /// <summary>
+        /// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+        /// </summary>
+        [Input("secretType")]
+        public Input<int>? SecretType { get; set; }
 
         /// <summary>
         /// Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
@@ -171,6 +263,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         public readonly string Id;
         public readonly int? OrderType;
+        /// <summary>
+        /// Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.
+        /// </summary>
+        public readonly string? ProductName;
         public readonly string? ResultOutputFile;
         /// <summary>
         /// A list of SSM secrets.
@@ -180,6 +276,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// Name of secret.
         /// </summary>
         public readonly string? SecretName;
+        /// <summary>
+        /// 0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.
+        /// </summary>
+        public readonly int? SecretType;
         public readonly int? State;
         public readonly ImmutableDictionary<string, object>? Tags;
 
@@ -189,11 +289,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
 
             int? orderType,
 
+            string? productName,
+
             string? resultOutputFile,
 
             ImmutableArray<Outputs.GetSecretsSecretListResult> secretLists,
 
             string? secretName,
+
+            int? secretType,
 
             int? state,
 
@@ -201,9 +305,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         {
             Id = id;
             OrderType = orderType;
+            ProductName = productName;
             ResultOutputFile = resultOutputFile;
             SecretLists = secretLists;
             SecretName = secretName;
+            SecretType = secretType;
             State = state;
             Tags = tags;
         }

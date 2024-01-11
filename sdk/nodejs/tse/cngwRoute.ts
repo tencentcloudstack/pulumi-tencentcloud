@@ -5,6 +5,81 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a tse cngwRoute
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const cngwGateway = new tencentcloud.tse.CngwGateway("cngwGateway", {
+ *     description: "terraform test1",
+ *     enableCls: true,
+ *     engineRegion: "ap-guangzhou",
+ *     featureVersion: "STANDARD",
+ *     gatewayVersion: "2.5.1",
+ *     ingressClassName: "tse-nginx-ingress",
+ *     internetMaxBandwidthOut: 0,
+ *     tradeType: 0,
+ *     type: "kong",
+ *     nodeConfig: {
+ *         number: 2,
+ *         specification: "1c2g",
+ *     },
+ *     vpcConfig: {
+ *         subnetId: subnet.id,
+ *         vpcId: vpc.id,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const cngwService = new tencentcloud.tse.CngwService("cngwService", {
+ *     gatewayId: cngwGateway.id,
+ *     path: "/test",
+ *     protocol: "http",
+ *     retries: 5,
+ *     timeout: 60000,
+ *     upstreamType: "HostIP",
+ *     upstreamInfo: {
+ *         algorithm: "round-robin",
+ *         autoScalingCvmPort: 0,
+ *         host: "arunma.cn",
+ *         port: 8012,
+ *         slowStart: 0,
+ *     },
+ * });
+ * const cngwRoute = new tencentcloud.tse.CngwRoute("cngwRoute", {
+ *     destinationPorts: [],
+ *     gatewayId: cngwGateway.id,
+ *     hosts: ["192.168.0.1:9090"],
+ *     httpsRedirectStatusCode: 426,
+ *     paths: ["/user"],
+ *     headers: [{
+ *         key: "req",
+ *         value: "terraform",
+ *     }],
+ *     preserveHost: false,
+ *     protocols: [
+ *         "http",
+ *         "https",
+ *     ],
+ *     routeName: "terraform-route",
+ *     serviceId: cngwService.serviceId,
+ *     stripPath: true,
+ * });
+ * ```
+ */
 export class CngwRoute extends pulumi.CustomResource {
     /**
      * Get an existing CngwRoute resource's state with the given name, ID, and optional extra
@@ -38,7 +113,9 @@ export class CngwRoute extends pulumi.CustomResource {
      */
     public readonly destinationPorts!: pulumi.Output<number[] | undefined>;
     /**
-     * whether to enable forced HTTPS, no longer use.
+     * This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+     *
+     * @deprecated This field has been deprecated and will be deleted in subsequent versions.
      */
     public readonly forceHttps!: pulumi.Output<boolean | undefined>;
     /**
@@ -58,8 +135,7 @@ export class CngwRoute extends pulumi.CustomResource {
      */
     public readonly httpsRedirectStatusCode!: pulumi.Output<number | undefined>;
     /**
-     * route methods. Reference
-     * value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+     * route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
      */
     public readonly methods!: pulumi.Output<string[] | undefined>;
     /**
@@ -90,10 +166,6 @@ export class CngwRoute extends pulumi.CustomResource {
      * whether to strip path when forwarding to the backend.
      */
     public readonly stripPath!: pulumi.Output<boolean | undefined>;
-    /**
-     * Tag description list.
-     */
-    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a CngwRoute resource with the given unique name, arguments, and options.
@@ -122,7 +194,6 @@ export class CngwRoute extends pulumi.CustomResource {
             resourceInputs["routeName"] = state ? state.routeName : undefined;
             resourceInputs["serviceId"] = state ? state.serviceId : undefined;
             resourceInputs["stripPath"] = state ? state.stripPath : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as CngwRouteArgs | undefined;
             if ((!args || args.gatewayId === undefined) && !opts.urn) {
@@ -144,7 +215,6 @@ export class CngwRoute extends pulumi.CustomResource {
             resourceInputs["routeName"] = args ? args.routeName : undefined;
             resourceInputs["serviceId"] = args ? args.serviceId : undefined;
             resourceInputs["stripPath"] = args ? args.stripPath : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["routeId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -161,7 +231,9 @@ export interface CngwRouteState {
      */
     destinationPorts?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * whether to enable forced HTTPS, no longer use.
+     * This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+     *
+     * @deprecated This field has been deprecated and will be deleted in subsequent versions.
      */
     forceHttps?: pulumi.Input<boolean>;
     /**
@@ -181,8 +253,7 @@ export interface CngwRouteState {
      */
     httpsRedirectStatusCode?: pulumi.Input<number>;
     /**
-     * route methods. Reference
-     * value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+     * route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
      */
     methods?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -213,10 +284,6 @@ export interface CngwRouteState {
      * whether to strip path when forwarding to the backend.
      */
     stripPath?: pulumi.Input<boolean>;
-    /**
-     * Tag description list.
-     */
-    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -228,7 +295,9 @@ export interface CngwRouteArgs {
      */
     destinationPorts?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * whether to enable forced HTTPS, no longer use.
+     * This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
+     *
+     * @deprecated This field has been deprecated and will be deleted in subsequent versions.
      */
     forceHttps?: pulumi.Input<boolean>;
     /**
@@ -248,8 +317,7 @@ export interface CngwRouteArgs {
      */
     httpsRedirectStatusCode?: pulumi.Input<number>;
     /**
-     * route methods. Reference
-     * value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
+     * route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
      */
     methods?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -276,8 +344,4 @@ export interface CngwRouteArgs {
      * whether to strip path when forwarding to the backend.
      */
     stripPath?: pulumi.Input<boolean>;
-    /**
-     * Tag description list.
-     */
-    tags?: pulumi.Input<{[key: string]: any}>;
 }

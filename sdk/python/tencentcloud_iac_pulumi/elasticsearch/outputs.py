@@ -10,14 +10,114 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'DiagnoseDiagnoseJobMeta',
     'InstanceEsAcl',
     'InstanceMultiZoneInfo',
     'InstanceNodeInfoList',
     'InstanceWebNodeTypeInfo',
+    'LogstashOperationDuration',
+    'LogstashPipelinePipeline',
+    'GetDescribeIndexListIndexMetaFieldResult',
+    'GetDescribeIndexListIndexMetaFieldBackingIndexResult',
+    'GetDescribeIndexListIndexMetaFieldIndexOptionsFieldResult',
+    'GetDescribeIndexListIndexMetaFieldIndexPolicyFieldResult',
+    'GetDescribeIndexListIndexMetaFieldIndexSettingsFieldResult',
+    'GetDiagnoseDiagnoseResultResult',
+    'GetDiagnoseDiagnoseResultJobParamResult',
+    'GetDiagnoseDiagnoseResultJobResultResult',
+    'GetDiagnoseDiagnoseResultJobResultLogDetailResult',
+    'GetDiagnoseDiagnoseResultJobResultMetricDetailResult',
+    'GetDiagnoseDiagnoseResultJobResultMetricDetailMetricResult',
+    'GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionResult',
+    'GetDiagnoseDiagnoseResultJobResultSettingDetailResult',
+    'GetInstanceLogsInstanceLogListResult',
+    'GetInstanceOperationsOperationResult',
+    'GetInstanceOperationsOperationDetailResult',
+    'GetInstanceOperationsOperationDetailNewInfoResult',
+    'GetInstanceOperationsOperationDetailOldInfoResult',
+    'GetInstanceOperationsOperationTaskResult',
+    'GetInstanceOperationsOperationTaskProcessInfoResult',
+    'GetInstanceOperationsOperationTaskSubTaskResult',
+    'GetInstancePluginListPluginListResult',
     'GetInstancesInstanceListResult',
     'GetInstancesInstanceListMultiZoneInfoResult',
     'GetInstancesInstanceListNodeInfoListResult',
+    'GetLogstashInstanceLogsInstanceLogListResult',
+    'GetLogstashInstanceOperationsOperationResult',
+    'GetLogstashInstanceOperationsOperationDetailResult',
+    'GetLogstashInstanceOperationsOperationDetailNewInfoResult',
+    'GetLogstashInstanceOperationsOperationDetailOldInfoResult',
+    'GetLogstashInstanceOperationsOperationTaskResult',
+    'GetLogstashInstanceOperationsOperationTaskProcessInfoResult',
+    'GetLogstashInstanceOperationsOperationTaskSubTaskResult',
+    'GetViewsClusterViewResult',
+    'GetViewsKibanasViewResult',
+    'GetViewsNodesViewResult',
 ]
+
+@pulumi.output_type
+class DiagnoseDiagnoseJobMeta(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "jobDescription":
+            suggest = "job_description"
+        elif key == "jobName":
+            suggest = "job_name"
+        elif key == "jobZhName":
+            suggest = "job_zh_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DiagnoseDiagnoseJobMeta. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DiagnoseDiagnoseJobMeta.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DiagnoseDiagnoseJobMeta.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 job_description: Optional[str] = None,
+                 job_name: Optional[str] = None,
+                 job_zh_name: Optional[str] = None):
+        """
+        :param str job_description: Intelligent operation and maintenance diagnostic item description.
+        :param str job_name: English name of diagnosis item for intelligent operation and maintenance.
+        :param str job_zh_name: Chinese name of intelligent operation and maintenance diagnosis item.
+        """
+        if job_description is not None:
+            pulumi.set(__self__, "job_description", job_description)
+        if job_name is not None:
+            pulumi.set(__self__, "job_name", job_name)
+        if job_zh_name is not None:
+            pulumi.set(__self__, "job_zh_name", job_zh_name)
+
+    @property
+    @pulumi.getter(name="jobDescription")
+    def job_description(self) -> Optional[str]:
+        """
+        Intelligent operation and maintenance diagnostic item description.
+        """
+        return pulumi.get(self, "job_description")
+
+    @property
+    @pulumi.getter(name="jobName")
+    def job_name(self) -> Optional[str]:
+        """
+        English name of diagnosis item for intelligent operation and maintenance.
+        """
+        return pulumi.get(self, "job_name")
+
+    @property
+    @pulumi.getter(name="jobZhName")
+    def job_zh_name(self) -> Optional[str]:
+        """
+        Chinese name of intelligent operation and maintenance diagnosis item.
+        """
+        return pulumi.get(self, "job_zh_name")
+
 
 @pulumi.output_type
 class InstanceEsAcl(dict):
@@ -263,6 +363,1616 @@ class InstanceWebNodeTypeInfo(dict):
         Visual node specifications.
         """
         return pulumi.get(self, "node_type")
+
+
+@pulumi.output_type
+class LogstashOperationDuration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "timeEnd":
+            suggest = "time_end"
+        elif key == "timeStart":
+            suggest = "time_start"
+        elif key == "timeZone":
+            suggest = "time_zone"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LogstashOperationDuration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LogstashOperationDuration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LogstashOperationDuration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 periods: Sequence[int],
+                 time_end: str,
+                 time_start: str,
+                 time_zone: str):
+        """
+        :param Sequence[int] periods: day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+        :param str time_end: operation end time.
+        :param str time_start: operation start time.
+        :param str time_zone: time zone, for example: UTC+8.
+        """
+        pulumi.set(__self__, "periods", periods)
+        pulumi.set(__self__, "time_end", time_end)
+        pulumi.set(__self__, "time_start", time_start)
+        pulumi.set(__self__, "time_zone", time_zone)
+
+    @property
+    @pulumi.getter
+    def periods(self) -> Sequence[int]:
+        """
+        day of week, from Monday to Sunday, value range: [0, 6]notes: may return null when missing.
+        """
+        return pulumi.get(self, "periods")
+
+    @property
+    @pulumi.getter(name="timeEnd")
+    def time_end(self) -> str:
+        """
+        operation end time.
+        """
+        return pulumi.get(self, "time_end")
+
+    @property
+    @pulumi.getter(name="timeStart")
+    def time_start(self) -> str:
+        """
+        operation start time.
+        """
+        return pulumi.get(self, "time_start")
+
+    @property
+    @pulumi.getter(name="timeZone")
+    def time_zone(self) -> str:
+        """
+        time zone, for example: UTC+8.
+        """
+        return pulumi.get(self, "time_zone")
+
+
+@pulumi.output_type
+class LogstashPipelinePipeline(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "batchDelay":
+            suggest = "batch_delay"
+        elif key == "batchSize":
+            suggest = "batch_size"
+        elif key == "pipelineDesc":
+            suggest = "pipeline_desc"
+        elif key == "pipelineId":
+            suggest = "pipeline_id"
+        elif key == "queueCheckPointWrites":
+            suggest = "queue_check_point_writes"
+        elif key == "queueMaxBytes":
+            suggest = "queue_max_bytes"
+        elif key == "queueType":
+            suggest = "queue_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LogstashPipelinePipeline. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LogstashPipelinePipeline.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LogstashPipelinePipeline.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 batch_delay: int,
+                 batch_size: int,
+                 config: str,
+                 pipeline_desc: str,
+                 pipeline_id: str,
+                 queue_check_point_writes: int,
+                 queue_max_bytes: str,
+                 queue_type: str,
+                 workers: int):
+        """
+        :param int batch_delay: Pipeline batch processing delay.
+        :param int batch_size: Pipe batch size.
+        :param str config: Pipeline configuration content.
+        :param str pipeline_desc: Pipeline description information.
+        :param str pipeline_id: Pipeline id.
+        :param int queue_check_point_writes: Number of pipeline buffer queue checkpoint writes.
+        :param str queue_max_bytes: Pipeline buffer queue size.
+        :param str queue_type: Pipeline buffer queue type.
+        :param int workers: Number of Worker of pipe.
+        """
+        pulumi.set(__self__, "batch_delay", batch_delay)
+        pulumi.set(__self__, "batch_size", batch_size)
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "pipeline_desc", pipeline_desc)
+        pulumi.set(__self__, "pipeline_id", pipeline_id)
+        pulumi.set(__self__, "queue_check_point_writes", queue_check_point_writes)
+        pulumi.set(__self__, "queue_max_bytes", queue_max_bytes)
+        pulumi.set(__self__, "queue_type", queue_type)
+        pulumi.set(__self__, "workers", workers)
+
+    @property
+    @pulumi.getter(name="batchDelay")
+    def batch_delay(self) -> int:
+        """
+        Pipeline batch processing delay.
+        """
+        return pulumi.get(self, "batch_delay")
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> int:
+        """
+        Pipe batch size.
+        """
+        return pulumi.get(self, "batch_size")
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Pipeline configuration content.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter(name="pipelineDesc")
+    def pipeline_desc(self) -> str:
+        """
+        Pipeline description information.
+        """
+        return pulumi.get(self, "pipeline_desc")
+
+    @property
+    @pulumi.getter(name="pipelineId")
+    def pipeline_id(self) -> str:
+        """
+        Pipeline id.
+        """
+        return pulumi.get(self, "pipeline_id")
+
+    @property
+    @pulumi.getter(name="queueCheckPointWrites")
+    def queue_check_point_writes(self) -> int:
+        """
+        Number of pipeline buffer queue checkpoint writes.
+        """
+        return pulumi.get(self, "queue_check_point_writes")
+
+    @property
+    @pulumi.getter(name="queueMaxBytes")
+    def queue_max_bytes(self) -> str:
+        """
+        Pipeline buffer queue size.
+        """
+        return pulumi.get(self, "queue_max_bytes")
+
+    @property
+    @pulumi.getter(name="queueType")
+    def queue_type(self) -> str:
+        """
+        Pipeline buffer queue type.
+        """
+        return pulumi.get(self, "queue_type")
+
+    @property
+    @pulumi.getter
+    def workers(self) -> int:
+        """
+        Number of Worker of pipe.
+        """
+        return pulumi.get(self, "workers")
+
+
+@pulumi.output_type
+class GetDescribeIndexListIndexMetaFieldResult(dict):
+    def __init__(__self__, *,
+                 app_id: int,
+                 backing_indices: Sequence['outputs.GetDescribeIndexListIndexMetaFieldBackingIndexResult'],
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_version: str,
+                 index_create_time: str,
+                 index_docs: int,
+                 index_meta_json: str,
+                 index_name: str,
+                 index_options_fields: Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexOptionsFieldResult'],
+                 index_policy_fields: Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexPolicyFieldResult'],
+                 index_settings_fields: Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexSettingsFieldResult'],
+                 index_status: str,
+                 index_storage: int,
+                 index_type: str):
+        """
+        :param int app_id: App id.
+        :param Sequence['GetDescribeIndexListIndexMetaFieldBackingIndexArgs'] backing_indices: Backing indices.
+        :param str cluster_id: Cluster id.
+        :param str cluster_name: Cluster name.
+        :param str cluster_version: Cluster version.
+        :param str index_create_time: Index create time.
+        :param int index_docs: Number of indexed documents.
+        :param str index_meta_json: Index meta json.
+        :param str index_name: Index name. If you fill in the blanks, get all indexes.
+        :param Sequence['GetDescribeIndexListIndexMetaFieldIndexOptionsFieldArgs'] index_options_fields: Index options field.
+        :param Sequence['GetDescribeIndexListIndexMetaFieldIndexPolicyFieldArgs'] index_policy_fields: Index lifecycle field.
+        :param Sequence['GetDescribeIndexListIndexMetaFieldIndexSettingsFieldArgs'] index_settings_fields: Index settings field.
+        :param str index_status: Index status.
+        :param int index_storage: Index storage.
+        :param str index_type: Index type. `auto`: Autonomous index; `normal`: General index.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "backing_indices", backing_indices)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_version", cluster_version)
+        pulumi.set(__self__, "index_create_time", index_create_time)
+        pulumi.set(__self__, "index_docs", index_docs)
+        pulumi.set(__self__, "index_meta_json", index_meta_json)
+        pulumi.set(__self__, "index_name", index_name)
+        pulumi.set(__self__, "index_options_fields", index_options_fields)
+        pulumi.set(__self__, "index_policy_fields", index_policy_fields)
+        pulumi.set(__self__, "index_settings_fields", index_settings_fields)
+        pulumi.set(__self__, "index_status", index_status)
+        pulumi.set(__self__, "index_storage", index_storage)
+        pulumi.set(__self__, "index_type", index_type)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> int:
+        """
+        App id.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="backingIndices")
+    def backing_indices(self) -> Sequence['outputs.GetDescribeIndexListIndexMetaFieldBackingIndexResult']:
+        """
+        Backing indices.
+        """
+        return pulumi.get(self, "backing_indices")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterVersion")
+    def cluster_version(self) -> str:
+        """
+        Cluster version.
+        """
+        return pulumi.get(self, "cluster_version")
+
+    @property
+    @pulumi.getter(name="indexCreateTime")
+    def index_create_time(self) -> str:
+        """
+        Index create time.
+        """
+        return pulumi.get(self, "index_create_time")
+
+    @property
+    @pulumi.getter(name="indexDocs")
+    def index_docs(self) -> int:
+        """
+        Number of indexed documents.
+        """
+        return pulumi.get(self, "index_docs")
+
+    @property
+    @pulumi.getter(name="indexMetaJson")
+    def index_meta_json(self) -> str:
+        """
+        Index meta json.
+        """
+        return pulumi.get(self, "index_meta_json")
+
+    @property
+    @pulumi.getter(name="indexName")
+    def index_name(self) -> str:
+        """
+        Index name. If you fill in the blanks, get all indexes.
+        """
+        return pulumi.get(self, "index_name")
+
+    @property
+    @pulumi.getter(name="indexOptionsFields")
+    def index_options_fields(self) -> Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexOptionsFieldResult']:
+        """
+        Index options field.
+        """
+        return pulumi.get(self, "index_options_fields")
+
+    @property
+    @pulumi.getter(name="indexPolicyFields")
+    def index_policy_fields(self) -> Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexPolicyFieldResult']:
+        """
+        Index lifecycle field.
+        """
+        return pulumi.get(self, "index_policy_fields")
+
+    @property
+    @pulumi.getter(name="indexSettingsFields")
+    def index_settings_fields(self) -> Sequence['outputs.GetDescribeIndexListIndexMetaFieldIndexSettingsFieldResult']:
+        """
+        Index settings field.
+        """
+        return pulumi.get(self, "index_settings_fields")
+
+    @property
+    @pulumi.getter(name="indexStatus")
+    def index_status(self) -> str:
+        """
+        Index status.
+        """
+        return pulumi.get(self, "index_status")
+
+    @property
+    @pulumi.getter(name="indexStorage")
+    def index_storage(self) -> int:
+        """
+        Index storage.
+        """
+        return pulumi.get(self, "index_storage")
+
+    @property
+    @pulumi.getter(name="indexType")
+    def index_type(self) -> str:
+        """
+        Index type. `auto`: Autonomous index; `normal`: General index.
+        """
+        return pulumi.get(self, "index_type")
+
+
+@pulumi.output_type
+class GetDescribeIndexListIndexMetaFieldBackingIndexResult(dict):
+    def __init__(__self__, *,
+                 index_create_time: str,
+                 index_name: str,
+                 index_phrase: str,
+                 index_status: str,
+                 index_storage: int):
+        """
+        :param str index_create_time: Index create time.
+        :param str index_name: Index name. If you fill in the blanks, get all indexes.
+        :param str index_phrase: Index phrase.
+        :param str index_status: Index status.
+        :param int index_storage: Index storage.
+        """
+        pulumi.set(__self__, "index_create_time", index_create_time)
+        pulumi.set(__self__, "index_name", index_name)
+        pulumi.set(__self__, "index_phrase", index_phrase)
+        pulumi.set(__self__, "index_status", index_status)
+        pulumi.set(__self__, "index_storage", index_storage)
+
+    @property
+    @pulumi.getter(name="indexCreateTime")
+    def index_create_time(self) -> str:
+        """
+        Index create time.
+        """
+        return pulumi.get(self, "index_create_time")
+
+    @property
+    @pulumi.getter(name="indexName")
+    def index_name(self) -> str:
+        """
+        Index name. If you fill in the blanks, get all indexes.
+        """
+        return pulumi.get(self, "index_name")
+
+    @property
+    @pulumi.getter(name="indexPhrase")
+    def index_phrase(self) -> str:
+        """
+        Index phrase.
+        """
+        return pulumi.get(self, "index_phrase")
+
+    @property
+    @pulumi.getter(name="indexStatus")
+    def index_status(self) -> str:
+        """
+        Index status.
+        """
+        return pulumi.get(self, "index_status")
+
+    @property
+    @pulumi.getter(name="indexStorage")
+    def index_storage(self) -> int:
+        """
+        Index storage.
+        """
+        return pulumi.get(self, "index_storage")
+
+
+@pulumi.output_type
+class GetDescribeIndexListIndexMetaFieldIndexOptionsFieldResult(dict):
+    def __init__(__self__, *,
+                 expire_max_age: str,
+                 expire_max_size: str,
+                 rollover_dynamic: str,
+                 rollover_max_age: str,
+                 shard_num_dynamic: str,
+                 timestamp_field: str,
+                 write_mode: str):
+        """
+        :param str expire_max_age: Expire max age.
+        :param str expire_max_size: Expire max size.
+        :param str rollover_dynamic: Whether to turn on dynamic scrolling.
+        :param str rollover_max_age: Rollover max age.
+        :param str shard_num_dynamic: Whether to enable dynamic slicing.
+        :param str timestamp_field: Time partition field.
+        :param str write_mode: Write mode.
+        """
+        pulumi.set(__self__, "expire_max_age", expire_max_age)
+        pulumi.set(__self__, "expire_max_size", expire_max_size)
+        pulumi.set(__self__, "rollover_dynamic", rollover_dynamic)
+        pulumi.set(__self__, "rollover_max_age", rollover_max_age)
+        pulumi.set(__self__, "shard_num_dynamic", shard_num_dynamic)
+        pulumi.set(__self__, "timestamp_field", timestamp_field)
+        pulumi.set(__self__, "write_mode", write_mode)
+
+    @property
+    @pulumi.getter(name="expireMaxAge")
+    def expire_max_age(self) -> str:
+        """
+        Expire max age.
+        """
+        return pulumi.get(self, "expire_max_age")
+
+    @property
+    @pulumi.getter(name="expireMaxSize")
+    def expire_max_size(self) -> str:
+        """
+        Expire max size.
+        """
+        return pulumi.get(self, "expire_max_size")
+
+    @property
+    @pulumi.getter(name="rolloverDynamic")
+    def rollover_dynamic(self) -> str:
+        """
+        Whether to turn on dynamic scrolling.
+        """
+        return pulumi.get(self, "rollover_dynamic")
+
+    @property
+    @pulumi.getter(name="rolloverMaxAge")
+    def rollover_max_age(self) -> str:
+        """
+        Rollover max age.
+        """
+        return pulumi.get(self, "rollover_max_age")
+
+    @property
+    @pulumi.getter(name="shardNumDynamic")
+    def shard_num_dynamic(self) -> str:
+        """
+        Whether to enable dynamic slicing.
+        """
+        return pulumi.get(self, "shard_num_dynamic")
+
+    @property
+    @pulumi.getter(name="timestampField")
+    def timestamp_field(self) -> str:
+        """
+        Time partition field.
+        """
+        return pulumi.get(self, "timestamp_field")
+
+    @property
+    @pulumi.getter(name="writeMode")
+    def write_mode(self) -> str:
+        """
+        Write mode.
+        """
+        return pulumi.get(self, "write_mode")
+
+
+@pulumi.output_type
+class GetDescribeIndexListIndexMetaFieldIndexPolicyFieldResult(dict):
+    def __init__(__self__, *,
+                 cold_action: str,
+                 cold_enable: str,
+                 cold_min_age: str,
+                 frozen_enable: str,
+                 frozen_min_age: str,
+                 warm_enable: str,
+                 warm_min_age: str):
+        """
+        :param str cold_action: Cold action.
+        :param str cold_enable: Whether to enable the cold phase.
+        :param str cold_min_age: Cold phase transition time.
+        :param str frozen_enable: Start frozen phase.
+        :param str frozen_min_age: Frozen phase transition time.
+        :param str warm_enable: Whether to enable warm.
+        :param str warm_min_age: Warm phase transition time.
+        """
+        pulumi.set(__self__, "cold_action", cold_action)
+        pulumi.set(__self__, "cold_enable", cold_enable)
+        pulumi.set(__self__, "cold_min_age", cold_min_age)
+        pulumi.set(__self__, "frozen_enable", frozen_enable)
+        pulumi.set(__self__, "frozen_min_age", frozen_min_age)
+        pulumi.set(__self__, "warm_enable", warm_enable)
+        pulumi.set(__self__, "warm_min_age", warm_min_age)
+
+    @property
+    @pulumi.getter(name="coldAction")
+    def cold_action(self) -> str:
+        """
+        Cold action.
+        """
+        return pulumi.get(self, "cold_action")
+
+    @property
+    @pulumi.getter(name="coldEnable")
+    def cold_enable(self) -> str:
+        """
+        Whether to enable the cold phase.
+        """
+        return pulumi.get(self, "cold_enable")
+
+    @property
+    @pulumi.getter(name="coldMinAge")
+    def cold_min_age(self) -> str:
+        """
+        Cold phase transition time.
+        """
+        return pulumi.get(self, "cold_min_age")
+
+    @property
+    @pulumi.getter(name="frozenEnable")
+    def frozen_enable(self) -> str:
+        """
+        Start frozen phase.
+        """
+        return pulumi.get(self, "frozen_enable")
+
+    @property
+    @pulumi.getter(name="frozenMinAge")
+    def frozen_min_age(self) -> str:
+        """
+        Frozen phase transition time.
+        """
+        return pulumi.get(self, "frozen_min_age")
+
+    @property
+    @pulumi.getter(name="warmEnable")
+    def warm_enable(self) -> str:
+        """
+        Whether to enable warm.
+        """
+        return pulumi.get(self, "warm_enable")
+
+    @property
+    @pulumi.getter(name="warmMinAge")
+    def warm_min_age(self) -> str:
+        """
+        Warm phase transition time.
+        """
+        return pulumi.get(self, "warm_min_age")
+
+
+@pulumi.output_type
+class GetDescribeIndexListIndexMetaFieldIndexSettingsFieldResult(dict):
+    def __init__(__self__, *,
+                 number_of_replicas: str,
+                 number_of_shards: str,
+                 refresh_interval: str):
+        """
+        :param str number_of_replicas: Number of index copy fragments.
+        :param str number_of_shards: Number of index main fragments.
+        :param str refresh_interval: Index refresh frequency.
+        """
+        pulumi.set(__self__, "number_of_replicas", number_of_replicas)
+        pulumi.set(__self__, "number_of_shards", number_of_shards)
+        pulumi.set(__self__, "refresh_interval", refresh_interval)
+
+    @property
+    @pulumi.getter(name="numberOfReplicas")
+    def number_of_replicas(self) -> str:
+        """
+        Number of index copy fragments.
+        """
+        return pulumi.get(self, "number_of_replicas")
+
+    @property
+    @pulumi.getter(name="numberOfShards")
+    def number_of_shards(self) -> str:
+        """
+        Number of index main fragments.
+        """
+        return pulumi.get(self, "number_of_shards")
+
+    @property
+    @pulumi.getter(name="refreshInterval")
+    def refresh_interval(self) -> str:
+        """
+        Index refresh frequency.
+        """
+        return pulumi.get(self, "refresh_interval")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultResult(dict):
+    def __init__(__self__, *,
+                 completed: bool,
+                 create_time: str,
+                 instance_id: str,
+                 job_params: Sequence['outputs.GetDiagnoseDiagnoseResultJobParamResult'],
+                 job_results: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultResult'],
+                 job_type: int,
+                 request_id: str,
+                 score: int):
+        """
+        :param bool completed: Whether the diagnosis is complete or not.
+        :param str create_time: Create time.
+        :param str instance_id: Instance id.
+        :param Sequence['GetDiagnoseDiagnoseResultJobParamArgs'] job_params: Diagnostic parameters such as diagnostic time, diagnostic index, etc.
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultArgs'] job_results: Diagnostic item result list.
+        :param int job_type: Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.
+        :param str request_id: Request id.
+        :param int score: Total diagnostic score.
+        """
+        pulumi.set(__self__, "completed", completed)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "job_params", job_params)
+        pulumi.set(__self__, "job_results", job_results)
+        pulumi.set(__self__, "job_type", job_type)
+        pulumi.set(__self__, "request_id", request_id)
+        pulumi.set(__self__, "score", score)
+
+    @property
+    @pulumi.getter
+    def completed(self) -> bool:
+        """
+        Whether the diagnosis is complete or not.
+        """
+        return pulumi.get(self, "completed")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="jobParams")
+    def job_params(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobParamResult']:
+        """
+        Diagnostic parameters such as diagnostic time, diagnostic index, etc.
+        """
+        return pulumi.get(self, "job_params")
+
+    @property
+    @pulumi.getter(name="jobResults")
+    def job_results(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultResult']:
+        """
+        Diagnostic item result list.
+        """
+        return pulumi.get(self, "job_results")
+
+    @property
+    @pulumi.getter(name="jobType")
+    def job_type(self) -> int:
+        """
+        Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.
+        """
+        return pulumi.get(self, "job_type")
+
+    @property
+    @pulumi.getter(name="requestId")
+    def request_id(self) -> str:
+        """
+        Request id.
+        """
+        return pulumi.get(self, "request_id")
+
+    @property
+    @pulumi.getter
+    def score(self) -> int:
+        """
+        Total diagnostic score.
+        """
+        return pulumi.get(self, "score")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobParamResult(dict):
+    def __init__(__self__, *,
+                 indices: str,
+                 interval: int,
+                 jobs: Sequence[str]):
+        """
+        :param str indices: Diagnostic indices.
+        :param int interval: Historical diagnosis time.
+        :param Sequence[str] jobs: Diagnostic item list.
+        """
+        pulumi.set(__self__, "indices", indices)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "jobs", jobs)
+
+    @property
+    @pulumi.getter
+    def indices(self) -> str:
+        """
+        Diagnostic indices.
+        """
+        return pulumi.get(self, "indices")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> int:
+        """
+        Historical diagnosis time.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def jobs(self) -> Sequence[str]:
+        """
+        Diagnostic item list.
+        """
+        return pulumi.get(self, "jobs")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultResult(dict):
+    def __init__(__self__, *,
+                 advise: str,
+                 detail: str,
+                 job_name: str,
+                 log_details: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultLogDetailResult'],
+                 metric_details: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailResult'],
+                 score: int,
+                 setting_details: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultSettingDetailResult'],
+                 status: int,
+                 summary: str):
+        """
+        :param str advise: Configuration processing recommendations.
+        :param str detail: Diagnosis details.
+        :param str job_name: Diagnostic item name.
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultLogDetailArgs'] log_details: Diagnostic log details.
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultMetricDetailArgs'] metric_details: Details of diagnostic metrics.
+        :param int score: Total diagnostic score.
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultSettingDetailArgs'] setting_details: Diagnostic configuration detail.
+        :param int status: Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.
+        :param str summary: Diagnostic summary.
+        """
+        pulumi.set(__self__, "advise", advise)
+        pulumi.set(__self__, "detail", detail)
+        pulumi.set(__self__, "job_name", job_name)
+        pulumi.set(__self__, "log_details", log_details)
+        pulumi.set(__self__, "metric_details", metric_details)
+        pulumi.set(__self__, "score", score)
+        pulumi.set(__self__, "setting_details", setting_details)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "summary", summary)
+
+    @property
+    @pulumi.getter
+    def advise(self) -> str:
+        """
+        Configuration processing recommendations.
+        """
+        return pulumi.get(self, "advise")
+
+    @property
+    @pulumi.getter
+    def detail(self) -> str:
+        """
+        Diagnosis details.
+        """
+        return pulumi.get(self, "detail")
+
+    @property
+    @pulumi.getter(name="jobName")
+    def job_name(self) -> str:
+        """
+        Diagnostic item name.
+        """
+        return pulumi.get(self, "job_name")
+
+    @property
+    @pulumi.getter(name="logDetails")
+    def log_details(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultLogDetailResult']:
+        """
+        Diagnostic log details.
+        """
+        return pulumi.get(self, "log_details")
+
+    @property
+    @pulumi.getter(name="metricDetails")
+    def metric_details(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailResult']:
+        """
+        Details of diagnostic metrics.
+        """
+        return pulumi.get(self, "metric_details")
+
+    @property
+    @pulumi.getter
+    def score(self) -> int:
+        """
+        Total diagnostic score.
+        """
+        return pulumi.get(self, "score")
+
+    @property
+    @pulumi.getter(name="settingDetails")
+    def setting_details(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultSettingDetailResult']:
+        """
+        Diagnostic configuration detail.
+        """
+        return pulumi.get(self, "setting_details")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def summary(self) -> str:
+        """
+        Diagnostic summary.
+        """
+        return pulumi.get(self, "summary")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultLogDetailResult(dict):
+    def __init__(__self__, *,
+                 advise: str,
+                 count: int,
+                 key: str):
+        """
+        :param str advise: Configuration processing recommendations.
+        :param int count: Number of occurrences of log exception names.
+        :param str key: Key.
+        """
+        pulumi.set(__self__, "advise", advise)
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "key", key)
+
+    @property
+    @pulumi.getter
+    def advise(self) -> str:
+        """
+        Configuration processing recommendations.
+        """
+        return pulumi.get(self, "advise")
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        Number of occurrences of log exception names.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultMetricDetailResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 metrics: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailMetricResult']):
+        """
+        :param str key: Key.
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultMetricDetailMetricArgs'] metrics: Metric detail value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "metrics", metrics)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def metrics(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailMetricResult']:
+        """
+        Metric detail value.
+        """
+        return pulumi.get(self, "metrics")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultMetricDetailMetricResult(dict):
+    def __init__(__self__, *,
+                 dimensions: Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionResult'],
+                 value: float):
+        """
+        :param Sequence['GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionArgs'] dimensions: Index dimension family.
+        :param float value: Value.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence['outputs.GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionResult']:
+        """
+        Index dimension family.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultMetricDetailMetricDimensionResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetDiagnoseDiagnoseResultJobResultSettingDetailResult(dict):
+    def __init__(__self__, *,
+                 advise: str,
+                 key: str,
+                 value: str):
+        """
+        :param str advise: Configuration processing recommendations.
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "advise", advise)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def advise(self) -> str:
+        """
+        Configuration processing recommendations.
+        """
+        return pulumi.get(self, "advise")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetInstanceLogsInstanceLogListResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 level: str,
+                 message: str,
+                 node_id: str,
+                 time: str):
+        """
+        :param str ip: Cluster node ip.
+        :param str level: Log level.
+        :param str message: Log message.
+        :param str node_id: Cluster node id.
+        :param str time: Log time.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Cluster node ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Log level.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        Log message.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Cluster node id.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        """
+        Log time.
+        """
+        return pulumi.get(self, "time")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationResult(dict):
+    def __init__(__self__, *,
+                 details: Sequence['outputs.GetInstanceOperationsOperationDetailResult'],
+                 id: int,
+                 progress: float,
+                 result: str,
+                 start_time: str,
+                 sub_account_uin: str,
+                 tasks: Sequence['outputs.GetInstanceOperationsOperationTaskResult'],
+                 type: str):
+        """
+        :param Sequence['GetInstanceOperationsOperationDetailArgs'] details: Operation details.
+        :param int id: Id.
+        :param float progress: Task progress.
+        :param str result: Subtask result.
+        :param str start_time: Start time, e.g. 2019-03-07 16:30:39.
+        :param str sub_account_uin: Operator uin.
+        :param Sequence['GetInstanceOperationsOperationTaskArgs'] tasks: Task information.
+        :param str type: Type.
+        """
+        pulumi.set(__self__, "details", details)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "result", result)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "sub_account_uin", sub_account_uin)
+        pulumi.set(__self__, "tasks", tasks)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def details(self) -> Sequence['outputs.GetInstanceOperationsOperationDetailResult']:
+        """
+        Operation details.
+        """
+        return pulumi.get(self, "details")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Id.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> float:
+        """
+        Task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter
+    def result(self) -> str:
+        """
+        Subtask result.
+        """
+        return pulumi.get(self, "result")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time, e.g. 2019-03-07 16:30:39.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="subAccountUin")
+    def sub_account_uin(self) -> str:
+        """
+        Operator uin.
+        """
+        return pulumi.get(self, "sub_account_uin")
+
+    @property
+    @pulumi.getter
+    def tasks(self) -> Sequence['outputs.GetInstanceOperationsOperationTaskResult']:
+        """
+        Task information.
+        """
+        return pulumi.get(self, "tasks")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationDetailResult(dict):
+    def __init__(__self__, *,
+                 new_infos: Sequence['outputs.GetInstanceOperationsOperationDetailNewInfoResult'],
+                 old_infos: Sequence['outputs.GetInstanceOperationsOperationDetailOldInfoResult']):
+        """
+        :param Sequence['GetInstanceOperationsOperationDetailNewInfoArgs'] new_infos: Configuration information after instance update.
+        :param Sequence['GetInstanceOperationsOperationDetailOldInfoArgs'] old_infos: Instance original configuration information.
+        """
+        pulumi.set(__self__, "new_infos", new_infos)
+        pulumi.set(__self__, "old_infos", old_infos)
+
+    @property
+    @pulumi.getter(name="newInfos")
+    def new_infos(self) -> Sequence['outputs.GetInstanceOperationsOperationDetailNewInfoResult']:
+        """
+        Configuration information after instance update.
+        """
+        return pulumi.get(self, "new_infos")
+
+    @property
+    @pulumi.getter(name="oldInfos")
+    def old_infos(self) -> Sequence['outputs.GetInstanceOperationsOperationDetailOldInfoResult']:
+        """
+        Instance original configuration information.
+        """
+        return pulumi.get(self, "old_infos")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationDetailNewInfoResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationDetailOldInfoResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationTaskResult(dict):
+    def __init__(__self__, *,
+                 elapsed_time: int,
+                 finish_time: str,
+                 name: str,
+                 process_infos: Sequence['outputs.GetInstanceOperationsOperationTaskProcessInfoResult'],
+                 progress: float,
+                 sub_tasks: Sequence['outputs.GetInstanceOperationsOperationTaskSubTaskResult']):
+        """
+        :param int elapsed_time: Elapsed time.
+        :param str finish_time: Subtask end time.
+        :param str name: Subtask name.
+        :param Sequence['GetInstanceOperationsOperationTaskProcessInfoArgs'] process_infos: Progress info.
+        :param float progress: Task progress.
+        :param Sequence['GetInstanceOperationsOperationTaskSubTaskArgs'] sub_tasks: Subtask.
+        """
+        pulumi.set(__self__, "elapsed_time", elapsed_time)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "process_infos", process_infos)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "sub_tasks", sub_tasks)
+
+    @property
+    @pulumi.getter(name="elapsedTime")
+    def elapsed_time(self) -> int:
+        """
+        Elapsed time.
+        """
+        return pulumi.get(self, "elapsed_time")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Subtask end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Subtask name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="processInfos")
+    def process_infos(self) -> Sequence['outputs.GetInstanceOperationsOperationTaskProcessInfoResult']:
+        """
+        Progress info.
+        """
+        return pulumi.get(self, "process_infos")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> float:
+        """
+        Task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter(name="subTasks")
+    def sub_tasks(self) -> Sequence['outputs.GetInstanceOperationsOperationTaskSubTaskResult']:
+        """
+        Subtask.
+        """
+        return pulumi.get(self, "sub_tasks")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationTaskProcessInfoResult(dict):
+    def __init__(__self__, *,
+                 completed: int,
+                 remain: int,
+                 task_type: int,
+                 total: int):
+        """
+        :param int completed: Completed quantity.
+        :param int remain: Remaining quantity.
+        :param int task_type: Task type. 60: restart task 70: fragment migration task 80: node modification task.
+        :param int total: Total quantity.
+        """
+        pulumi.set(__self__, "completed", completed)
+        pulumi.set(__self__, "remain", remain)
+        pulumi.set(__self__, "task_type", task_type)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter
+    def completed(self) -> int:
+        """
+        Completed quantity.
+        """
+        return pulumi.get(self, "completed")
+
+    @property
+    @pulumi.getter
+    def remain(self) -> int:
+        """
+        Remaining quantity.
+        """
+        return pulumi.get(self, "remain")
+
+    @property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> int:
+        """
+        Task type. 60: restart task 70: fragment migration task 80: node modification task.
+        """
+        return pulumi.get(self, "task_type")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total quantity.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetInstanceOperationsOperationTaskSubTaskResult(dict):
+    def __init__(__self__, *,
+                 err_msg: str,
+                 failed_indices: Sequence[str],
+                 finish_time: str,
+                 level: int,
+                 name: str,
+                 result: bool,
+                 status: int,
+                 type: str):
+        """
+        :param str err_msg: Subtask error message.
+        :param Sequence[str] failed_indices: The index name of the failed upgrade check.
+        :param str finish_time: Subtask end time.
+        :param int level: Subtask level, 1: warning; 2: failed.
+        :param str name: Subtask name.
+        :param bool result: Subtask result.
+        :param int status: Subtask status, 1: success; 0: processing; -1: failure.
+        :param str type: Type.
+        """
+        pulumi.set(__self__, "err_msg", err_msg)
+        pulumi.set(__self__, "failed_indices", failed_indices)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "result", result)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="errMsg")
+    def err_msg(self) -> str:
+        """
+        Subtask error message.
+        """
+        return pulumi.get(self, "err_msg")
+
+    @property
+    @pulumi.getter(name="failedIndices")
+    def failed_indices(self) -> Sequence[str]:
+        """
+        The index name of the failed upgrade check.
+        """
+        return pulumi.get(self, "failed_indices")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Subtask end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def level(self) -> int:
+        """
+        Subtask level, 1: warning; 2: failed.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Subtask name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def result(self) -> bool:
+        """
+        Subtask result.
+        """
+        return pulumi.get(self, "result")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Subtask status, 1: success; 0: processing; -1: failure.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetInstancePluginListPluginListResult(dict):
+    def __init__(__self__, *,
+                 plugin_desc: str,
+                 plugin_name: str,
+                 plugin_type: int,
+                 plugin_update_time: str,
+                 plugin_version: str,
+                 removable: bool,
+                 status: int):
+        """
+        :param str plugin_desc: Plugin description.
+        :param str plugin_name: Plugin name.
+        :param int plugin_type: Plugin type. Valid values: `0`: System plugin.
+        :param str plugin_update_time: Plugin update time.
+        :param str plugin_version: Plugin version.
+        :param bool removable: Whether the plug-in can be uninstalled.
+        :param int status: Plugin status. Valid values:
+               - `-2` has been uninstalled
+               - `-1` has been installed in
+               - `0` installation.
+        """
+        pulumi.set(__self__, "plugin_desc", plugin_desc)
+        pulumi.set(__self__, "plugin_name", plugin_name)
+        pulumi.set(__self__, "plugin_type", plugin_type)
+        pulumi.set(__self__, "plugin_update_time", plugin_update_time)
+        pulumi.set(__self__, "plugin_version", plugin_version)
+        pulumi.set(__self__, "removable", removable)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="pluginDesc")
+    def plugin_desc(self) -> str:
+        """
+        Plugin description.
+        """
+        return pulumi.get(self, "plugin_desc")
+
+    @property
+    @pulumi.getter(name="pluginName")
+    def plugin_name(self) -> str:
+        """
+        Plugin name.
+        """
+        return pulumi.get(self, "plugin_name")
+
+    @property
+    @pulumi.getter(name="pluginType")
+    def plugin_type(self) -> int:
+        """
+        Plugin type. Valid values: `0`: System plugin.
+        """
+        return pulumi.get(self, "plugin_type")
+
+    @property
+    @pulumi.getter(name="pluginUpdateTime")
+    def plugin_update_time(self) -> str:
+        """
+        Plugin update time.
+        """
+        return pulumi.get(self, "plugin_update_time")
+
+    @property
+    @pulumi.getter(name="pluginVersion")
+    def plugin_version(self) -> str:
+        """
+        Plugin version.
+        """
+        return pulumi.get(self, "plugin_version")
+
+    @property
+    @pulumi.getter
+    def removable(self) -> bool:
+        """
+        Whether the plug-in can be uninstalled.
+        """
+        return pulumi.get(self, "removable")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Plugin status. Valid values:
+        - `-2` has been uninstalled
+        - `-1` has been installed in
+        - `0` installation.
+        """
+        return pulumi.get(self, "status")
 
 
 @pulumi.output_type
@@ -570,5 +2280,1028 @@ class GetInstancesInstanceListNodeInfoListResult(dict):
         Node type.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetLogstashInstanceLogsInstanceLogListResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 level: str,
+                 message: str,
+                 node_id: str,
+                 time: str):
+        """
+        :param str ip: Cluster node ip.
+        :param str level: Log level.
+        :param str message: Log content.
+        :param str node_id: Cluster node id.
+        :param str time: Log time.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "message", message)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Cluster node ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Log level.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def message(self) -> str:
+        """
+        Log content.
+        """
+        return pulumi.get(self, "message")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Cluster node id.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        """
+        Log time.
+        """
+        return pulumi.get(self, "time")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationResult(dict):
+    def __init__(__self__, *,
+                 details: Sequence['outputs.GetLogstashInstanceOperationsOperationDetailResult'],
+                 id: int,
+                 progress: float,
+                 result: str,
+                 start_time: str,
+                 sub_account_uin: str,
+                 tasks: Sequence['outputs.GetLogstashInstanceOperationsOperationTaskResult'],
+                 type: str):
+        """
+        :param Sequence['GetLogstashInstanceOperationsOperationDetailArgs'] details: Operation details.
+        :param int id: Id.
+        :param float progress: Task progress.
+        :param str result: Subtask result.
+        :param str start_time: Start time, e.g. 2019-03-07 16:30:39.
+        :param str sub_account_uin: Operator uin.
+        :param Sequence['GetLogstashInstanceOperationsOperationTaskArgs'] tasks: Task information.
+        :param str type: Type.
+        """
+        pulumi.set(__self__, "details", details)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "result", result)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "sub_account_uin", sub_account_uin)
+        pulumi.set(__self__, "tasks", tasks)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def details(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationDetailResult']:
+        """
+        Operation details.
+        """
+        return pulumi.get(self, "details")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Id.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> float:
+        """
+        Task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter
+    def result(self) -> str:
+        """
+        Subtask result.
+        """
+        return pulumi.get(self, "result")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        """
+        Start time, e.g. 2019-03-07 16:30:39.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="subAccountUin")
+    def sub_account_uin(self) -> str:
+        """
+        Operator uin.
+        """
+        return pulumi.get(self, "sub_account_uin")
+
+    @property
+    @pulumi.getter
+    def tasks(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationTaskResult']:
+        """
+        Task information.
+        """
+        return pulumi.get(self, "tasks")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationDetailResult(dict):
+    def __init__(__self__, *,
+                 new_infos: Sequence['outputs.GetLogstashInstanceOperationsOperationDetailNewInfoResult'],
+                 old_infos: Sequence['outputs.GetLogstashInstanceOperationsOperationDetailOldInfoResult']):
+        """
+        :param Sequence['GetLogstashInstanceOperationsOperationDetailNewInfoArgs'] new_infos: Configuration information after instance update.
+        :param Sequence['GetLogstashInstanceOperationsOperationDetailOldInfoArgs'] old_infos: Instance original configuration information.
+        """
+        pulumi.set(__self__, "new_infos", new_infos)
+        pulumi.set(__self__, "old_infos", old_infos)
+
+    @property
+    @pulumi.getter(name="newInfos")
+    def new_infos(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationDetailNewInfoResult']:
+        """
+        Configuration information after instance update.
+        """
+        return pulumi.get(self, "new_infos")
+
+    @property
+    @pulumi.getter(name="oldInfos")
+    def old_infos(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationDetailOldInfoResult']:
+        """
+        Instance original configuration information.
+        """
+        return pulumi.get(self, "old_infos")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationDetailNewInfoResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationDetailOldInfoResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationTaskResult(dict):
+    def __init__(__self__, *,
+                 elapsed_time: int,
+                 finish_time: str,
+                 name: str,
+                 process_infos: Sequence['outputs.GetLogstashInstanceOperationsOperationTaskProcessInfoResult'],
+                 progress: float,
+                 sub_tasks: Sequence['outputs.GetLogstashInstanceOperationsOperationTaskSubTaskResult']):
+        """
+        :param int elapsed_time: Elapsed time.
+        :param str finish_time: Subtask end time.
+        :param str name: Subtask name.
+        :param Sequence['GetLogstashInstanceOperationsOperationTaskProcessInfoArgs'] process_infos: Progress info.
+        :param float progress: Task progress.
+        :param Sequence['GetLogstashInstanceOperationsOperationTaskSubTaskArgs'] sub_tasks: Subtask.
+        """
+        pulumi.set(__self__, "elapsed_time", elapsed_time)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "process_infos", process_infos)
+        pulumi.set(__self__, "progress", progress)
+        pulumi.set(__self__, "sub_tasks", sub_tasks)
+
+    @property
+    @pulumi.getter(name="elapsedTime")
+    def elapsed_time(self) -> int:
+        """
+        Elapsed time.
+        """
+        return pulumi.get(self, "elapsed_time")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Subtask end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Subtask name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="processInfos")
+    def process_infos(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationTaskProcessInfoResult']:
+        """
+        Progress info.
+        """
+        return pulumi.get(self, "process_infos")
+
+    @property
+    @pulumi.getter
+    def progress(self) -> float:
+        """
+        Task progress.
+        """
+        return pulumi.get(self, "progress")
+
+    @property
+    @pulumi.getter(name="subTasks")
+    def sub_tasks(self) -> Sequence['outputs.GetLogstashInstanceOperationsOperationTaskSubTaskResult']:
+        """
+        Subtask.
+        """
+        return pulumi.get(self, "sub_tasks")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationTaskProcessInfoResult(dict):
+    def __init__(__self__, *,
+                 completed: int,
+                 remain: int,
+                 task_type: int,
+                 total: int):
+        """
+        :param int completed: Completed quantity.
+        :param int remain: Remaining quantity.
+        :param int task_type: Task type. 60: restart task 70: fragment migration task 80: node modification task.
+        :param int total: Total quantity.
+        """
+        pulumi.set(__self__, "completed", completed)
+        pulumi.set(__self__, "remain", remain)
+        pulumi.set(__self__, "task_type", task_type)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter
+    def completed(self) -> int:
+        """
+        Completed quantity.
+        """
+        return pulumi.get(self, "completed")
+
+    @property
+    @pulumi.getter
+    def remain(self) -> int:
+        """
+        Remaining quantity.
+        """
+        return pulumi.get(self, "remain")
+
+    @property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> int:
+        """
+        Task type. 60: restart task 70: fragment migration task 80: node modification task.
+        """
+        return pulumi.get(self, "task_type")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total quantity.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetLogstashInstanceOperationsOperationTaskSubTaskResult(dict):
+    def __init__(__self__, *,
+                 err_msg: str,
+                 failed_indices: Sequence[str],
+                 finish_time: str,
+                 level: int,
+                 name: str,
+                 result: bool,
+                 status: int,
+                 type: str):
+        """
+        :param str err_msg: Subtask error message.
+        :param Sequence[str] failed_indices: The index name of the failed upgrade check.
+        :param str finish_time: Subtask end time.
+        :param int level: Subtask level, 1: warning; 2: failed.
+        :param str name: Subtask name.
+        :param bool result: Subtask result.
+        :param int status: Subtask status, 1: success; 0: processing; -1: failure.
+        :param str type: Type.
+        """
+        pulumi.set(__self__, "err_msg", err_msg)
+        pulumi.set(__self__, "failed_indices", failed_indices)
+        pulumi.set(__self__, "finish_time", finish_time)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "result", result)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="errMsg")
+    def err_msg(self) -> str:
+        """
+        Subtask error message.
+        """
+        return pulumi.get(self, "err_msg")
+
+    @property
+    @pulumi.getter(name="failedIndices")
+    def failed_indices(self) -> Sequence[str]:
+        """
+        The index name of the failed upgrade check.
+        """
+        return pulumi.get(self, "failed_indices")
+
+    @property
+    @pulumi.getter(name="finishTime")
+    def finish_time(self) -> str:
+        """
+        Subtask end time.
+        """
+        return pulumi.get(self, "finish_time")
+
+    @property
+    @pulumi.getter
+    def level(self) -> int:
+        """
+        Subtask level, 1: warning; 2: failed.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Subtask name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def result(self) -> bool:
+        """
+        Subtask result.
+        """
+        return pulumi.get(self, "result")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Subtask status, 1: success; 0: processing; -1: failure.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetViewsClusterViewResult(dict):
+    def __init__(__self__, *,
+                 avg_cpu_usage: float,
+                 avg_disk_usage: float,
+                 avg_mem_usage: float,
+                 break_: float,
+                 data_node_num: int,
+                 disk_used_in_bytes: int,
+                 doc_num: int,
+                 health: float,
+                 index_num: int,
+                 initializing_shard_num: int,
+                 node_num: int,
+                 primary_shard_num: int,
+                 relocating_shard_num: int,
+                 searchable_snapshot_cos_app_id: str,
+                 searchable_snapshot_cos_bucket: str,
+                 shard_num: int,
+                 target_node_types: Sequence[str],
+                 total_cos_storage: int,
+                 total_disk_size: int,
+                 total_node_num: int,
+                 unassigned_shard_num: int,
+                 visible: float):
+        """
+        :param float avg_cpu_usage: Average cpu utilization.
+        :param float avg_disk_usage: Average disk utilization.
+        :param float avg_mem_usage: Average memory utilization.
+        :param float break_: Whether or not to break.
+        :param int data_node_num: Number of data nodes.
+        :param int disk_used_in_bytes: Bytes used on disk.
+        :param int doc_num: Number of documents.
+        :param float health: Cluster health status.
+        :param int index_num: Index number.
+        :param int initializing_shard_num: Initializing shard number.
+        :param int node_num: Number of online nodes.
+        :param int primary_shard_num: Primary shard number.
+        :param int relocating_shard_num: Relocating shard number.
+        :param str searchable_snapshot_cos_app_id: Enterprise cluster can search the appid to which snapshot cos belongs.
+        :param str searchable_snapshot_cos_bucket: Enterprise cluster searchable bucket name stored in snapshot cos.
+        :param int shard_num: Number of node fragments.
+        :param Sequence[str] target_node_types: Client request node.
+        :param int total_cos_storage: Storage capacity of COS Enterprise Edition (in GB).
+        :param int total_disk_size: Total storage size of cluster.
+        :param int total_node_num: Total number of nodes.
+        :param int unassigned_shard_num: Unassigned shard number.
+        :param float visible: Whether the node is visible.
+        """
+        pulumi.set(__self__, "avg_cpu_usage", avg_cpu_usage)
+        pulumi.set(__self__, "avg_disk_usage", avg_disk_usage)
+        pulumi.set(__self__, "avg_mem_usage", avg_mem_usage)
+        pulumi.set(__self__, "break_", break_)
+        pulumi.set(__self__, "data_node_num", data_node_num)
+        pulumi.set(__self__, "disk_used_in_bytes", disk_used_in_bytes)
+        pulumi.set(__self__, "doc_num", doc_num)
+        pulumi.set(__self__, "health", health)
+        pulumi.set(__self__, "index_num", index_num)
+        pulumi.set(__self__, "initializing_shard_num", initializing_shard_num)
+        pulumi.set(__self__, "node_num", node_num)
+        pulumi.set(__self__, "primary_shard_num", primary_shard_num)
+        pulumi.set(__self__, "relocating_shard_num", relocating_shard_num)
+        pulumi.set(__self__, "searchable_snapshot_cos_app_id", searchable_snapshot_cos_app_id)
+        pulumi.set(__self__, "searchable_snapshot_cos_bucket", searchable_snapshot_cos_bucket)
+        pulumi.set(__self__, "shard_num", shard_num)
+        pulumi.set(__self__, "target_node_types", target_node_types)
+        pulumi.set(__self__, "total_cos_storage", total_cos_storage)
+        pulumi.set(__self__, "total_disk_size", total_disk_size)
+        pulumi.set(__self__, "total_node_num", total_node_num)
+        pulumi.set(__self__, "unassigned_shard_num", unassigned_shard_num)
+        pulumi.set(__self__, "visible", visible)
+
+    @property
+    @pulumi.getter(name="avgCpuUsage")
+    def avg_cpu_usage(self) -> float:
+        """
+        Average cpu utilization.
+        """
+        return pulumi.get(self, "avg_cpu_usage")
+
+    @property
+    @pulumi.getter(name="avgDiskUsage")
+    def avg_disk_usage(self) -> float:
+        """
+        Average disk utilization.
+        """
+        return pulumi.get(self, "avg_disk_usage")
+
+    @property
+    @pulumi.getter(name="avgMemUsage")
+    def avg_mem_usage(self) -> float:
+        """
+        Average memory utilization.
+        """
+        return pulumi.get(self, "avg_mem_usage")
+
+    @property
+    @pulumi.getter(name="break")
+    def break_(self) -> float:
+        """
+        Whether or not to break.
+        """
+        return pulumi.get(self, "break_")
+
+    @property
+    @pulumi.getter(name="dataNodeNum")
+    def data_node_num(self) -> int:
+        """
+        Number of data nodes.
+        """
+        return pulumi.get(self, "data_node_num")
+
+    @property
+    @pulumi.getter(name="diskUsedInBytes")
+    def disk_used_in_bytes(self) -> int:
+        """
+        Bytes used on disk.
+        """
+        return pulumi.get(self, "disk_used_in_bytes")
+
+    @property
+    @pulumi.getter(name="docNum")
+    def doc_num(self) -> int:
+        """
+        Number of documents.
+        """
+        return pulumi.get(self, "doc_num")
+
+    @property
+    @pulumi.getter
+    def health(self) -> float:
+        """
+        Cluster health status.
+        """
+        return pulumi.get(self, "health")
+
+    @property
+    @pulumi.getter(name="indexNum")
+    def index_num(self) -> int:
+        """
+        Index number.
+        """
+        return pulumi.get(self, "index_num")
+
+    @property
+    @pulumi.getter(name="initializingShardNum")
+    def initializing_shard_num(self) -> int:
+        """
+        Initializing shard number.
+        """
+        return pulumi.get(self, "initializing_shard_num")
+
+    @property
+    @pulumi.getter(name="nodeNum")
+    def node_num(self) -> int:
+        """
+        Number of online nodes.
+        """
+        return pulumi.get(self, "node_num")
+
+    @property
+    @pulumi.getter(name="primaryShardNum")
+    def primary_shard_num(self) -> int:
+        """
+        Primary shard number.
+        """
+        return pulumi.get(self, "primary_shard_num")
+
+    @property
+    @pulumi.getter(name="relocatingShardNum")
+    def relocating_shard_num(self) -> int:
+        """
+        Relocating shard number.
+        """
+        return pulumi.get(self, "relocating_shard_num")
+
+    @property
+    @pulumi.getter(name="searchableSnapshotCosAppId")
+    def searchable_snapshot_cos_app_id(self) -> str:
+        """
+        Enterprise cluster can search the appid to which snapshot cos belongs.
+        """
+        return pulumi.get(self, "searchable_snapshot_cos_app_id")
+
+    @property
+    @pulumi.getter(name="searchableSnapshotCosBucket")
+    def searchable_snapshot_cos_bucket(self) -> str:
+        """
+        Enterprise cluster searchable bucket name stored in snapshot cos.
+        """
+        return pulumi.get(self, "searchable_snapshot_cos_bucket")
+
+    @property
+    @pulumi.getter(name="shardNum")
+    def shard_num(self) -> int:
+        """
+        Number of node fragments.
+        """
+        return pulumi.get(self, "shard_num")
+
+    @property
+    @pulumi.getter(name="targetNodeTypes")
+    def target_node_types(self) -> Sequence[str]:
+        """
+        Client request node.
+        """
+        return pulumi.get(self, "target_node_types")
+
+    @property
+    @pulumi.getter(name="totalCosStorage")
+    def total_cos_storage(self) -> int:
+        """
+        Storage capacity of COS Enterprise Edition (in GB).
+        """
+        return pulumi.get(self, "total_cos_storage")
+
+    @property
+    @pulumi.getter(name="totalDiskSize")
+    def total_disk_size(self) -> int:
+        """
+        Total storage size of cluster.
+        """
+        return pulumi.get(self, "total_disk_size")
+
+    @property
+    @pulumi.getter(name="totalNodeNum")
+    def total_node_num(self) -> int:
+        """
+        Total number of nodes.
+        """
+        return pulumi.get(self, "total_node_num")
+
+    @property
+    @pulumi.getter(name="unassignedShardNum")
+    def unassigned_shard_num(self) -> int:
+        """
+        Unassigned shard number.
+        """
+        return pulumi.get(self, "unassigned_shard_num")
+
+    @property
+    @pulumi.getter
+    def visible(self) -> float:
+        """
+        Whether the node is visible.
+        """
+        return pulumi.get(self, "visible")
+
+
+@pulumi.output_type
+class GetViewsKibanasViewResult(dict):
+    def __init__(__self__, *,
+                 cpu_num: int,
+                 cpu_usage: float,
+                 disk_size: int,
+                 disk_usage: float,
+                 ip: str,
+                 mem_size: int,
+                 mem_usage: float,
+                 node_id: str,
+                 zone: str):
+        """
+        :param int cpu_num: CPU number.
+        :param float cpu_usage: CPU usage.
+        :param int disk_size: Total disk size of node.
+        :param float disk_usage: Disk usage.
+        :param str ip: Kibana node ip.
+        :param int mem_size: Node memory size (in GB).
+        :param float mem_usage: Memory usage.
+        :param str node_id: Node id.
+        :param str zone: Zone.
+        """
+        pulumi.set(__self__, "cpu_num", cpu_num)
+        pulumi.set(__self__, "cpu_usage", cpu_usage)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_usage", disk_usage)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "mem_size", mem_size)
+        pulumi.set(__self__, "mem_usage", mem_usage)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="cpuNum")
+    def cpu_num(self) -> int:
+        """
+        CPU number.
+        """
+        return pulumi.get(self, "cpu_num")
+
+    @property
+    @pulumi.getter(name="cpuUsage")
+    def cpu_usage(self) -> float:
+        """
+        CPU usage.
+        """
+        return pulumi.get(self, "cpu_usage")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Total disk size of node.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskUsage")
+    def disk_usage(self) -> float:
+        """
+        Disk usage.
+        """
+        return pulumi.get(self, "disk_usage")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Kibana node ip.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="memSize")
+    def mem_size(self) -> int:
+        """
+        Node memory size (in GB).
+        """
+        return pulumi.get(self, "mem_size")
+
+    @property
+    @pulumi.getter(name="memUsage")
+    def mem_usage(self) -> float:
+        """
+        Memory usage.
+        """
+        return pulumi.get(self, "mem_usage")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node id.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetViewsNodesViewResult(dict):
+    def __init__(__self__, *,
+                 break_: float,
+                 cpu_num: int,
+                 cpu_usage: float,
+                 disk_ids: Sequence[str],
+                 disk_size: int,
+                 disk_usage: float,
+                 hidden: bool,
+                 is_coordination_node: bool,
+                 jvm_mem_usage: float,
+                 mem_size: int,
+                 mem_usage: float,
+                 node_http_ip: str,
+                 node_id: str,
+                 node_ip: str,
+                 node_role: str,
+                 shard_num: int,
+                 visible: float,
+                 zone: str):
+        """
+        :param float break_: Whether or not to break.
+        :param int cpu_num: CPU number.
+        :param float cpu_usage: CPU usage.
+        :param Sequence[str] disk_ids: List of disk ID on the node.
+        :param int disk_size: Total disk size of node.
+        :param float disk_usage: Disk usage.
+        :param bool hidden: Whether it is a hidden availability zone.
+        :param bool is_coordination_node: Whether to act as a coordinator node or not.
+        :param float jvm_mem_usage: JVM memory usage.
+        :param int mem_size: Node memory size (in GB).
+        :param float mem_usage: Memory usage.
+        :param str node_http_ip: Node HTTP IP.
+        :param str node_id: Node id.
+        :param str node_ip: Node ip.
+        :param str node_role: Node role.
+        :param int shard_num: Number of node fragments.
+        :param float visible: Whether the node is visible.
+        :param str zone: Zone.
+        """
+        pulumi.set(__self__, "break_", break_)
+        pulumi.set(__self__, "cpu_num", cpu_num)
+        pulumi.set(__self__, "cpu_usage", cpu_usage)
+        pulumi.set(__self__, "disk_ids", disk_ids)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_usage", disk_usage)
+        pulumi.set(__self__, "hidden", hidden)
+        pulumi.set(__self__, "is_coordination_node", is_coordination_node)
+        pulumi.set(__self__, "jvm_mem_usage", jvm_mem_usage)
+        pulumi.set(__self__, "mem_size", mem_size)
+        pulumi.set(__self__, "mem_usage", mem_usage)
+        pulumi.set(__self__, "node_http_ip", node_http_ip)
+        pulumi.set(__self__, "node_id", node_id)
+        pulumi.set(__self__, "node_ip", node_ip)
+        pulumi.set(__self__, "node_role", node_role)
+        pulumi.set(__self__, "shard_num", shard_num)
+        pulumi.set(__self__, "visible", visible)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="break")
+    def break_(self) -> float:
+        """
+        Whether or not to break.
+        """
+        return pulumi.get(self, "break_")
+
+    @property
+    @pulumi.getter(name="cpuNum")
+    def cpu_num(self) -> int:
+        """
+        CPU number.
+        """
+        return pulumi.get(self, "cpu_num")
+
+    @property
+    @pulumi.getter(name="cpuUsage")
+    def cpu_usage(self) -> float:
+        """
+        CPU usage.
+        """
+        return pulumi.get(self, "cpu_usage")
+
+    @property
+    @pulumi.getter(name="diskIds")
+    def disk_ids(self) -> Sequence[str]:
+        """
+        List of disk ID on the node.
+        """
+        return pulumi.get(self, "disk_ids")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Total disk size of node.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskUsage")
+    def disk_usage(self) -> float:
+        """
+        Disk usage.
+        """
+        return pulumi.get(self, "disk_usage")
+
+    @property
+    @pulumi.getter
+    def hidden(self) -> bool:
+        """
+        Whether it is a hidden availability zone.
+        """
+        return pulumi.get(self, "hidden")
+
+    @property
+    @pulumi.getter(name="isCoordinationNode")
+    def is_coordination_node(self) -> bool:
+        """
+        Whether to act as a coordinator node or not.
+        """
+        return pulumi.get(self, "is_coordination_node")
+
+    @property
+    @pulumi.getter(name="jvmMemUsage")
+    def jvm_mem_usage(self) -> float:
+        """
+        JVM memory usage.
+        """
+        return pulumi.get(self, "jvm_mem_usage")
+
+    @property
+    @pulumi.getter(name="memSize")
+    def mem_size(self) -> int:
+        """
+        Node memory size (in GB).
+        """
+        return pulumi.get(self, "mem_size")
+
+    @property
+    @pulumi.getter(name="memUsage")
+    def mem_usage(self) -> float:
+        """
+        Memory usage.
+        """
+        return pulumi.get(self, "mem_usage")
+
+    @property
+    @pulumi.getter(name="nodeHttpIp")
+    def node_http_ip(self) -> str:
+        """
+        Node HTTP IP.
+        """
+        return pulumi.get(self, "node_http_ip")
+
+    @property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> str:
+        """
+        Node id.
+        """
+        return pulumi.get(self, "node_id")
+
+    @property
+    @pulumi.getter(name="nodeIp")
+    def node_ip(self) -> str:
+        """
+        Node ip.
+        """
+        return pulumi.get(self, "node_ip")
+
+    @property
+    @pulumi.getter(name="nodeRole")
+    def node_role(self) -> str:
+        """
+        Node role.
+        """
+        return pulumi.get(self, "node_role")
+
+    @property
+    @pulumi.getter(name="shardNum")
+    def shard_num(self) -> int:
+        """
+        Number of node fragments.
+        """
+        return pulumi.get(self, "shard_num")
+
+    @property
+    @pulumi.getter
+    def visible(self) -> float:
+        """
+        Whether the node is visible.
+        """
+        return pulumi.get(self, "visible")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
 
 

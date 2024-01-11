@@ -188,15 +188,15 @@ type RuleEngine struct {
 
 	// Rule ID.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
-	// Rule name.
+	// The rule name (1 to 255 characters).
 	RuleName pulumi.StringOutput `pulumi:"ruleName"`
 	// Rule items list.
 	Rules RuleEngineRuleArrayOutput `pulumi:"rules"`
-	// Status of the rule, valid value can be `enable` or `disable`.
+	// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// rule tag list.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
-	// Site ID.
+	// ID of the site.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 }
 
@@ -244,30 +244,30 @@ func GetRuleEngine(ctx *pulumi.Context,
 type ruleEngineState struct {
 	// Rule ID.
 	RuleId *string `pulumi:"ruleId"`
-	// Rule name.
+	// The rule name (1 to 255 characters).
 	RuleName *string `pulumi:"ruleName"`
 	// Rule items list.
 	Rules []RuleEngineRule `pulumi:"rules"`
-	// Status of the rule, valid value can be `enable` or `disable`.
+	// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 	Status *string `pulumi:"status"`
 	// rule tag list.
 	Tags []string `pulumi:"tags"`
-	// Site ID.
+	// ID of the site.
 	ZoneId *string `pulumi:"zoneId"`
 }
 
 type RuleEngineState struct {
 	// Rule ID.
 	RuleId pulumi.StringPtrInput
-	// Rule name.
+	// The rule name (1 to 255 characters).
 	RuleName pulumi.StringPtrInput
 	// Rule items list.
 	Rules RuleEngineRuleArrayInput
-	// Status of the rule, valid value can be `enable` or `disable`.
+	// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 	Status pulumi.StringPtrInput
 	// rule tag list.
 	Tags pulumi.StringArrayInput
-	// Site ID.
+	// ID of the site.
 	ZoneId pulumi.StringPtrInput
 }
 
@@ -276,29 +276,29 @@ func (RuleEngineState) ElementType() reflect.Type {
 }
 
 type ruleEngineArgs struct {
-	// Rule name.
+	// The rule name (1 to 255 characters).
 	RuleName string `pulumi:"ruleName"`
 	// Rule items list.
 	Rules []RuleEngineRule `pulumi:"rules"`
-	// Status of the rule, valid value can be `enable` or `disable`.
+	// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 	Status string `pulumi:"status"`
 	// rule tag list.
 	Tags []string `pulumi:"tags"`
-	// Site ID.
+	// ID of the site.
 	ZoneId string `pulumi:"zoneId"`
 }
 
 // The set of arguments for constructing a RuleEngine resource.
 type RuleEngineArgs struct {
-	// Rule name.
+	// The rule name (1 to 255 characters).
 	RuleName pulumi.StringInput
 	// Rule items list.
 	Rules RuleEngineRuleArrayInput
-	// Status of the rule, valid value can be `enable` or `disable`.
+	// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 	Status pulumi.StringInput
 	// rule tag list.
 	Tags pulumi.StringArrayInput
-	// Site ID.
+	// ID of the site.
 	ZoneId pulumi.StringInput
 }
 
@@ -394,7 +394,7 @@ func (o RuleEngineOutput) RuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
 }
 
-// Rule name.
+// The rule name (1 to 255 characters).
 func (o RuleEngineOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringOutput { return v.RuleName }).(pulumi.StringOutput)
 }
@@ -404,7 +404,7 @@ func (o RuleEngineOutput) Rules() RuleEngineRuleArrayOutput {
 	return o.ApplyT(func(v *RuleEngine) RuleEngineRuleArrayOutput { return v.Rules }).(RuleEngineRuleArrayOutput)
 }
 
-// Status of the rule, valid value can be `enable` or `disable`.
+// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
 func (o RuleEngineOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
@@ -414,7 +414,7 @@ func (o RuleEngineOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
-// Site ID.
+// ID of the site.
 func (o RuleEngineOutput) ZoneId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringOutput { return v.ZoneId }).(pulumi.StringOutput)
 }

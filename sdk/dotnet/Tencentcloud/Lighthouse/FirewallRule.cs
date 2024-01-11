@@ -11,7 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
 {
     /// <summary>
-    /// Provides a resource to create a lighthouse firewall_rule
+    /// Provides a resource to create a lighthouse firewall rule
+    /// 
+    /// &gt; **NOTE:**  Use an empty template to clean up the default rules before using this resource manage firewall rules.
     /// 
     /// ## Example Usage
     /// 

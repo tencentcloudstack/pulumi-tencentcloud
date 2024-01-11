@@ -100,6 +100,8 @@ type Attachment struct {
 	InstanceRegion pulumi.StringOutput `pulumi:"instanceRegion"`
 	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
+	// Route id list.
+	RouteIds pulumi.StringArrayOutput `pulumi:"routeIds"`
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringOutput `pulumi:"state"`
 }
@@ -162,6 +164,8 @@ type attachmentState struct {
 	InstanceRegion *string `pulumi:"instanceRegion"`
 	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType *string `pulumi:"instanceType"`
+	// Route id list.
+	RouteIds []string `pulumi:"routeIds"`
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State *string `pulumi:"state"`
 }
@@ -183,6 +187,8 @@ type AttachmentState struct {
 	InstanceRegion pulumi.StringPtrInput
 	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringPtrInput
+	// Route id list.
+	RouteIds pulumi.StringArrayInput
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringPtrInput
 }
@@ -347,6 +353,11 @@ func (o AttachmentOutput) InstanceRegion() pulumi.StringOutput {
 // Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 func (o AttachmentOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Route id list.
+func (o AttachmentOutput) RouteIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Attachment) pulumi.StringArrayOutput { return v.RouteIds }).(pulumi.StringArrayOutput)
 }
 
 // States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.

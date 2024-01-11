@@ -820,8 +820,12 @@ type FunctionImageConfig struct {
 	Args *string `pulumi:"args"`
 	// The command of entrypoint.
 	Command *string `pulumi:"command"`
+	// Image accelerate switch.
+	ContainerImageAccelerate *bool `pulumi:"containerImageAccelerate"`
 	// The entrypoint of app.
 	EntryPoint *string `pulumi:"entryPoint"`
+	// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+	ImagePort *int `pulumi:"imagePort"`
 	// The image type. personal or enterprise.
 	ImageType string `pulumi:"imageType"`
 	// The uri of image.
@@ -846,8 +850,12 @@ type FunctionImageConfigArgs struct {
 	Args pulumi.StringPtrInput `pulumi:"args"`
 	// The command of entrypoint.
 	Command pulumi.StringPtrInput `pulumi:"command"`
+	// Image accelerate switch.
+	ContainerImageAccelerate pulumi.BoolPtrInput `pulumi:"containerImageAccelerate"`
 	// The entrypoint of app.
 	EntryPoint pulumi.StringPtrInput `pulumi:"entryPoint"`
+	// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+	ImagePort pulumi.IntPtrInput `pulumi:"imagePort"`
 	// The image type. personal or enterprise.
 	ImageType pulumi.StringInput `pulumi:"imageType"`
 	// The uri of image.
@@ -917,9 +925,19 @@ func (o FunctionImageConfigOutput) Command() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.Command }).(pulumi.StringPtrOutput)
 }
 
+// Image accelerate switch.
+func (o FunctionImageConfigOutput) ContainerImageAccelerate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v FunctionImageConfig) *bool { return v.ContainerImageAccelerate }).(pulumi.BoolPtrOutput)
+}
+
 // The entrypoint of app.
 func (o FunctionImageConfigOutput) EntryPoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.EntryPoint }).(pulumi.StringPtrOutput)
+}
+
+// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+func (o FunctionImageConfigOutput) ImagePort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionImageConfig) *int { return v.ImagePort }).(pulumi.IntPtrOutput)
 }
 
 // The image type. personal or enterprise.
@@ -955,6 +973,158 @@ func (o FunctionImageConfigArrayOutput) Index(i pulumi.IntInput) FunctionImageCo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionImageConfig {
 		return vs[0].([]FunctionImageConfig)[vs[1].(int)]
 	}).(FunctionImageConfigOutput)
+}
+
+type FunctionIntranetConfig struct {
+	IpAddresses []string `pulumi:"ipAddresses"`
+	// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+	IpFixed string `pulumi:"ipFixed"`
+}
+
+// FunctionIntranetConfigInput is an input type that accepts FunctionIntranetConfigArgs and FunctionIntranetConfigOutput values.
+// You can construct a concrete instance of `FunctionIntranetConfigInput` via:
+//
+//          FunctionIntranetConfigArgs{...}
+type FunctionIntranetConfigInput interface {
+	pulumi.Input
+
+	ToFunctionIntranetConfigOutput() FunctionIntranetConfigOutput
+	ToFunctionIntranetConfigOutputWithContext(context.Context) FunctionIntranetConfigOutput
+}
+
+type FunctionIntranetConfigArgs struct {
+	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
+	// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+	IpFixed pulumi.StringInput `pulumi:"ipFixed"`
+}
+
+func (FunctionIntranetConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionIntranetConfig)(nil)).Elem()
+}
+
+func (i FunctionIntranetConfigArgs) ToFunctionIntranetConfigOutput() FunctionIntranetConfigOutput {
+	return i.ToFunctionIntranetConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionIntranetConfigArgs) ToFunctionIntranetConfigOutputWithContext(ctx context.Context) FunctionIntranetConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionIntranetConfigOutput)
+}
+
+func (i FunctionIntranetConfigArgs) ToFunctionIntranetConfigPtrOutput() FunctionIntranetConfigPtrOutput {
+	return i.ToFunctionIntranetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionIntranetConfigArgs) ToFunctionIntranetConfigPtrOutputWithContext(ctx context.Context) FunctionIntranetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionIntranetConfigOutput).ToFunctionIntranetConfigPtrOutputWithContext(ctx)
+}
+
+// FunctionIntranetConfigPtrInput is an input type that accepts FunctionIntranetConfigArgs, FunctionIntranetConfigPtr and FunctionIntranetConfigPtrOutput values.
+// You can construct a concrete instance of `FunctionIntranetConfigPtrInput` via:
+//
+//          FunctionIntranetConfigArgs{...}
+//
+//  or:
+//
+//          nil
+type FunctionIntranetConfigPtrInput interface {
+	pulumi.Input
+
+	ToFunctionIntranetConfigPtrOutput() FunctionIntranetConfigPtrOutput
+	ToFunctionIntranetConfigPtrOutputWithContext(context.Context) FunctionIntranetConfigPtrOutput
+}
+
+type functionIntranetConfigPtrType FunctionIntranetConfigArgs
+
+func FunctionIntranetConfigPtr(v *FunctionIntranetConfigArgs) FunctionIntranetConfigPtrInput {
+	return (*functionIntranetConfigPtrType)(v)
+}
+
+func (*functionIntranetConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionIntranetConfig)(nil)).Elem()
+}
+
+func (i *functionIntranetConfigPtrType) ToFunctionIntranetConfigPtrOutput() FunctionIntranetConfigPtrOutput {
+	return i.ToFunctionIntranetConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *functionIntranetConfigPtrType) ToFunctionIntranetConfigPtrOutputWithContext(ctx context.Context) FunctionIntranetConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionIntranetConfigPtrOutput)
+}
+
+type FunctionIntranetConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionIntranetConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionIntranetConfig)(nil)).Elem()
+}
+
+func (o FunctionIntranetConfigOutput) ToFunctionIntranetConfigOutput() FunctionIntranetConfigOutput {
+	return o
+}
+
+func (o FunctionIntranetConfigOutput) ToFunctionIntranetConfigOutputWithContext(ctx context.Context) FunctionIntranetConfigOutput {
+	return o
+}
+
+func (o FunctionIntranetConfigOutput) ToFunctionIntranetConfigPtrOutput() FunctionIntranetConfigPtrOutput {
+	return o.ToFunctionIntranetConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionIntranetConfigOutput) ToFunctionIntranetConfigPtrOutputWithContext(ctx context.Context) FunctionIntranetConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionIntranetConfig) *FunctionIntranetConfig {
+		return &v
+	}).(FunctionIntranetConfigPtrOutput)
+}
+
+func (o FunctionIntranetConfigOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v FunctionIntranetConfig) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+func (o FunctionIntranetConfigOutput) IpFixed() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionIntranetConfig) string { return v.IpFixed }).(pulumi.StringOutput)
+}
+
+type FunctionIntranetConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionIntranetConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionIntranetConfig)(nil)).Elem()
+}
+
+func (o FunctionIntranetConfigPtrOutput) ToFunctionIntranetConfigPtrOutput() FunctionIntranetConfigPtrOutput {
+	return o
+}
+
+func (o FunctionIntranetConfigPtrOutput) ToFunctionIntranetConfigPtrOutputWithContext(ctx context.Context) FunctionIntranetConfigPtrOutput {
+	return o
+}
+
+func (o FunctionIntranetConfigPtrOutput) Elem() FunctionIntranetConfigOutput {
+	return o.ApplyT(func(v *FunctionIntranetConfig) FunctionIntranetConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionIntranetConfig
+		return ret
+	}).(FunctionIntranetConfigOutput)
+}
+
+func (o FunctionIntranetConfigPtrOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *FunctionIntranetConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.IpAddresses
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+func (o FunctionIntranetConfigPtrOutput) IpFixed() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionIntranetConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.IpFixed
+	}).(pulumi.StringPtrOutput)
 }
 
 type FunctionLayer struct {
@@ -3286,6 +3456,8 @@ func (o GetFunctionVersionsVersionArrayOutput) Index(i pulumi.IntInput) GetFunct
 }
 
 type GetFunctionsFunction struct {
+	// Whether asynchronous attribute is enabled.
+	AsyncRunEnable string `pulumi:"asyncRunEnable"`
 	// CLS logset ID of the SCF function.
 	ClsLogsetId string `pulumi:"clsLogsetId"`
 	// CLS topic ID of the SCF function.
@@ -3300,6 +3472,8 @@ type GetFunctionsFunction struct {
 	CreateTime string `pulumi:"createTime"`
 	// Description of the SCF function to be queried.
 	Description string `pulumi:"description"`
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache bool `pulumi:"dnsCache"`
 	// Whether EIP is a fixed IP.
 	EipFixed bool `pulumi:"eipFixed"`
 	// EIP list of the SCF function.
@@ -3316,8 +3490,12 @@ type GetFunctionsFunction struct {
 	Handler string `pulumi:"handler"`
 	// Host of the SCF function.
 	Host string `pulumi:"host"`
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
+	ImageConfigs []GetFunctionsFunctionImageConfig `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency bool `pulumi:"installDependency"`
+	// Intranet access configuration.
+	IntranetConfigs []GetFunctionsFunctionIntranetConfig `pulumi:"intranetConfigs"`
 	// Whether to enable L5.
 	L5Enable bool `pulumi:"l5Enable"`
 	// Memory size of the SCF function runtime, unit is M.
@@ -3362,6 +3540,8 @@ type GetFunctionsFunctionInput interface {
 }
 
 type GetFunctionsFunctionArgs struct {
+	// Whether asynchronous attribute is enabled.
+	AsyncRunEnable pulumi.StringInput `pulumi:"asyncRunEnable"`
 	// CLS logset ID of the SCF function.
 	ClsLogsetId pulumi.StringInput `pulumi:"clsLogsetId"`
 	// CLS topic ID of the SCF function.
@@ -3376,6 +3556,8 @@ type GetFunctionsFunctionArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Description of the SCF function to be queried.
 	Description pulumi.StringInput `pulumi:"description"`
+	// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+	DnsCache pulumi.BoolInput `pulumi:"dnsCache"`
 	// Whether EIP is a fixed IP.
 	EipFixed pulumi.BoolInput `pulumi:"eipFixed"`
 	// EIP list of the SCF function.
@@ -3392,8 +3574,12 @@ type GetFunctionsFunctionArgs struct {
 	Handler pulumi.StringInput `pulumi:"handler"`
 	// Host of the SCF function.
 	Host pulumi.StringInput `pulumi:"host"`
+	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
+	ImageConfigs GetFunctionsFunctionImageConfigArrayInput `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency pulumi.BoolInput `pulumi:"installDependency"`
+	// Intranet access configuration.
+	IntranetConfigs GetFunctionsFunctionIntranetConfigArrayInput `pulumi:"intranetConfigs"`
 	// Whether to enable L5.
 	L5Enable pulumi.BoolInput `pulumi:"l5Enable"`
 	// Memory size of the SCF function runtime, unit is M.
@@ -3477,6 +3663,11 @@ func (o GetFunctionsFunctionOutput) ToGetFunctionsFunctionOutputWithContext(ctx 
 	return o
 }
 
+// Whether asynchronous attribute is enabled.
+func (o GetFunctionsFunctionOutput) AsyncRunEnable() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.AsyncRunEnable }).(pulumi.StringOutput)
+}
+
 // CLS logset ID of the SCF function.
 func (o GetFunctionsFunctionOutput) ClsLogsetId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetFunctionsFunction) string { return v.ClsLogsetId }).(pulumi.StringOutput)
@@ -3510,6 +3701,11 @@ func (o GetFunctionsFunctionOutput) CreateTime() pulumi.StringOutput {
 // Description of the SCF function to be queried.
 func (o GetFunctionsFunctionOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+func (o GetFunctionsFunctionOutput) DnsCache() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.DnsCache }).(pulumi.BoolOutput)
 }
 
 // Whether EIP is a fixed IP.
@@ -3552,9 +3748,19 @@ func (o GetFunctionsFunctionOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Host }).(pulumi.StringOutput)
 }
 
+// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
+func (o GetFunctionsFunctionOutput) ImageConfigs() GetFunctionsFunctionImageConfigArrayOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) []GetFunctionsFunctionImageConfig { return v.ImageConfigs }).(GetFunctionsFunctionImageConfigArrayOutput)
+}
+
 // Whether to automatically install dependencies.
 func (o GetFunctionsFunctionOutput) InstallDependency() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.InstallDependency }).(pulumi.BoolOutput)
+}
+
+// Intranet access configuration.
+func (o GetFunctionsFunctionOutput) IntranetConfigs() GetFunctionsFunctionIntranetConfigArrayOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) []GetFunctionsFunctionIntranetConfig { return v.IntranetConfigs }).(GetFunctionsFunctionIntranetConfigArrayOutput)
 }
 
 // Whether to enable L5.
@@ -3650,6 +3856,272 @@ func (o GetFunctionsFunctionArrayOutput) Index(i pulumi.IntInput) GetFunctionsFu
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionsFunction {
 		return vs[0].([]GetFunctionsFunction)[vs[1].(int)]
 	}).(GetFunctionsFunctionOutput)
+}
+
+type GetFunctionsFunctionImageConfig struct {
+	// the parameters of command.
+	Args string `pulumi:"args"`
+	// The command of entrypoint.
+	Command string `pulumi:"command"`
+	// Image accelerate switch.
+	ContainerImageAccelerate bool `pulumi:"containerImageAccelerate"`
+	// The entrypoint of app.
+	EntryPoint string `pulumi:"entryPoint"`
+	// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+	ImagePort int `pulumi:"imagePort"`
+	// The image type. personal or enterprise.
+	ImageType string `pulumi:"imageType"`
+	// The uri of image.
+	ImageUri string `pulumi:"imageUri"`
+	// The registry id of TCR. When image type is enterprise, it must be set.
+	RegistryId string `pulumi:"registryId"`
+}
+
+// GetFunctionsFunctionImageConfigInput is an input type that accepts GetFunctionsFunctionImageConfigArgs and GetFunctionsFunctionImageConfigOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionImageConfigInput` via:
+//
+//          GetFunctionsFunctionImageConfigArgs{...}
+type GetFunctionsFunctionImageConfigInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionImageConfigOutput() GetFunctionsFunctionImageConfigOutput
+	ToGetFunctionsFunctionImageConfigOutputWithContext(context.Context) GetFunctionsFunctionImageConfigOutput
+}
+
+type GetFunctionsFunctionImageConfigArgs struct {
+	// the parameters of command.
+	Args pulumi.StringInput `pulumi:"args"`
+	// The command of entrypoint.
+	Command pulumi.StringInput `pulumi:"command"`
+	// Image accelerate switch.
+	ContainerImageAccelerate pulumi.BoolInput `pulumi:"containerImageAccelerate"`
+	// The entrypoint of app.
+	EntryPoint pulumi.StringInput `pulumi:"entryPoint"`
+	// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+	ImagePort pulumi.IntInput `pulumi:"imagePort"`
+	// The image type. personal or enterprise.
+	ImageType pulumi.StringInput `pulumi:"imageType"`
+	// The uri of image.
+	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// The registry id of TCR. When image type is enterprise, it must be set.
+	RegistryId pulumi.StringInput `pulumi:"registryId"`
+}
+
+func (GetFunctionsFunctionImageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionImageConfig)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionImageConfigArgs) ToGetFunctionsFunctionImageConfigOutput() GetFunctionsFunctionImageConfigOutput {
+	return i.ToGetFunctionsFunctionImageConfigOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionImageConfigArgs) ToGetFunctionsFunctionImageConfigOutputWithContext(ctx context.Context) GetFunctionsFunctionImageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionImageConfigOutput)
+}
+
+// GetFunctionsFunctionImageConfigArrayInput is an input type that accepts GetFunctionsFunctionImageConfigArray and GetFunctionsFunctionImageConfigArrayOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionImageConfigArrayInput` via:
+//
+//          GetFunctionsFunctionImageConfigArray{ GetFunctionsFunctionImageConfigArgs{...} }
+type GetFunctionsFunctionImageConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionImageConfigArrayOutput() GetFunctionsFunctionImageConfigArrayOutput
+	ToGetFunctionsFunctionImageConfigArrayOutputWithContext(context.Context) GetFunctionsFunctionImageConfigArrayOutput
+}
+
+type GetFunctionsFunctionImageConfigArray []GetFunctionsFunctionImageConfigInput
+
+func (GetFunctionsFunctionImageConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionImageConfig)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionImageConfigArray) ToGetFunctionsFunctionImageConfigArrayOutput() GetFunctionsFunctionImageConfigArrayOutput {
+	return i.ToGetFunctionsFunctionImageConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionImageConfigArray) ToGetFunctionsFunctionImageConfigArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionImageConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionImageConfigArrayOutput)
+}
+
+type GetFunctionsFunctionImageConfigOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionImageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionImageConfig)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionImageConfigOutput) ToGetFunctionsFunctionImageConfigOutput() GetFunctionsFunctionImageConfigOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionImageConfigOutput) ToGetFunctionsFunctionImageConfigOutputWithContext(ctx context.Context) GetFunctionsFunctionImageConfigOutput {
+	return o
+}
+
+// the parameters of command.
+func (o GetFunctionsFunctionImageConfigOutput) Args() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.Args }).(pulumi.StringOutput)
+}
+
+// The command of entrypoint.
+func (o GetFunctionsFunctionImageConfigOutput) Command() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.Command }).(pulumi.StringOutput)
+}
+
+// Image accelerate switch.
+func (o GetFunctionsFunctionImageConfigOutput) ContainerImageAccelerate() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) bool { return v.ContainerImageAccelerate }).(pulumi.BoolOutput)
+}
+
+// The entrypoint of app.
+func (o GetFunctionsFunctionImageConfigOutput) EntryPoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.EntryPoint }).(pulumi.StringOutput)
+}
+
+// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+func (o GetFunctionsFunctionImageConfigOutput) ImagePort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) int { return v.ImagePort }).(pulumi.IntOutput)
+}
+
+// The image type. personal or enterprise.
+func (o GetFunctionsFunctionImageConfigOutput) ImageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.ImageType }).(pulumi.StringOutput)
+}
+
+// The uri of image.
+func (o GetFunctionsFunctionImageConfigOutput) ImageUri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.ImageUri }).(pulumi.StringOutput)
+}
+
+// The registry id of TCR. When image type is enterprise, it must be set.
+func (o GetFunctionsFunctionImageConfigOutput) RegistryId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionImageConfig) string { return v.RegistryId }).(pulumi.StringOutput)
+}
+
+type GetFunctionsFunctionImageConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionImageConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionImageConfig)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionImageConfigArrayOutput) ToGetFunctionsFunctionImageConfigArrayOutput() GetFunctionsFunctionImageConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionImageConfigArrayOutput) ToGetFunctionsFunctionImageConfigArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionImageConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionImageConfigArrayOutput) Index(i pulumi.IntInput) GetFunctionsFunctionImageConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionsFunctionImageConfig {
+		return vs[0].([]GetFunctionsFunctionImageConfig)[vs[1].(int)]
+	}).(GetFunctionsFunctionImageConfigOutput)
+}
+
+type GetFunctionsFunctionIntranetConfig struct {
+	// If fixed intranet IP is enabled, this field returns the IP list used.
+	IpAddresses []string `pulumi:"ipAddresses"`
+	// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+	IpFixed string `pulumi:"ipFixed"`
+}
+
+// GetFunctionsFunctionIntranetConfigInput is an input type that accepts GetFunctionsFunctionIntranetConfigArgs and GetFunctionsFunctionIntranetConfigOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionIntranetConfigInput` via:
+//
+//          GetFunctionsFunctionIntranetConfigArgs{...}
+type GetFunctionsFunctionIntranetConfigInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionIntranetConfigOutput() GetFunctionsFunctionIntranetConfigOutput
+	ToGetFunctionsFunctionIntranetConfigOutputWithContext(context.Context) GetFunctionsFunctionIntranetConfigOutput
+}
+
+type GetFunctionsFunctionIntranetConfigArgs struct {
+	// If fixed intranet IP is enabled, this field returns the IP list used.
+	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
+	// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+	IpFixed pulumi.StringInput `pulumi:"ipFixed"`
+}
+
+func (GetFunctionsFunctionIntranetConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionIntranetConfig)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionIntranetConfigArgs) ToGetFunctionsFunctionIntranetConfigOutput() GetFunctionsFunctionIntranetConfigOutput {
+	return i.ToGetFunctionsFunctionIntranetConfigOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionIntranetConfigArgs) ToGetFunctionsFunctionIntranetConfigOutputWithContext(ctx context.Context) GetFunctionsFunctionIntranetConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionIntranetConfigOutput)
+}
+
+// GetFunctionsFunctionIntranetConfigArrayInput is an input type that accepts GetFunctionsFunctionIntranetConfigArray and GetFunctionsFunctionIntranetConfigArrayOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionIntranetConfigArrayInput` via:
+//
+//          GetFunctionsFunctionIntranetConfigArray{ GetFunctionsFunctionIntranetConfigArgs{...} }
+type GetFunctionsFunctionIntranetConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionIntranetConfigArrayOutput() GetFunctionsFunctionIntranetConfigArrayOutput
+	ToGetFunctionsFunctionIntranetConfigArrayOutputWithContext(context.Context) GetFunctionsFunctionIntranetConfigArrayOutput
+}
+
+type GetFunctionsFunctionIntranetConfigArray []GetFunctionsFunctionIntranetConfigInput
+
+func (GetFunctionsFunctionIntranetConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionIntranetConfig)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionIntranetConfigArray) ToGetFunctionsFunctionIntranetConfigArrayOutput() GetFunctionsFunctionIntranetConfigArrayOutput {
+	return i.ToGetFunctionsFunctionIntranetConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionIntranetConfigArray) ToGetFunctionsFunctionIntranetConfigArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionIntranetConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionIntranetConfigArrayOutput)
+}
+
+type GetFunctionsFunctionIntranetConfigOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionIntranetConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionIntranetConfig)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionIntranetConfigOutput) ToGetFunctionsFunctionIntranetConfigOutput() GetFunctionsFunctionIntranetConfigOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionIntranetConfigOutput) ToGetFunctionsFunctionIntranetConfigOutputWithContext(ctx context.Context) GetFunctionsFunctionIntranetConfigOutput {
+	return o
+}
+
+// If fixed intranet IP is enabled, this field returns the IP list used.
+func (o GetFunctionsFunctionIntranetConfigOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionIntranetConfig) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
+func (o GetFunctionsFunctionIntranetConfigOutput) IpFixed() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionIntranetConfig) string { return v.IpFixed }).(pulumi.StringOutput)
+}
+
+type GetFunctionsFunctionIntranetConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionIntranetConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionIntranetConfig)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionIntranetConfigArrayOutput) ToGetFunctionsFunctionIntranetConfigArrayOutput() GetFunctionsFunctionIntranetConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionIntranetConfigArrayOutput) ToGetFunctionsFunctionIntranetConfigArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionIntranetConfigArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionIntranetConfigArrayOutput) Index(i pulumi.IntInput) GetFunctionsFunctionIntranetConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionsFunctionIntranetConfig {
+		return vs[0].([]GetFunctionsFunctionIntranetConfig)[vs[1].(int)]
+	}).(GetFunctionsFunctionIntranetConfigOutput)
 }
 
 type GetFunctionsFunctionTriggerInfo struct {
@@ -4929,6 +5401,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigInput)(nil)).Elem(), FunctionImageConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigArrayInput)(nil)).Elem(), FunctionImageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionIntranetConfigInput)(nil)).Elem(), FunctionIntranetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionIntranetConfigPtrInput)(nil)).Elem(), FunctionIntranetConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionLayerInput)(nil)).Elem(), FunctionLayerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionLayerArrayInput)(nil)).Elem(), FunctionLayerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTriggerInput)(nil)).Elem(), FunctionTriggerArgs{})
@@ -4965,6 +5439,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionVersionsVersionArrayInput)(nil)).Elem(), GetFunctionVersionsVersionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionInput)(nil)).Elem(), GetFunctionsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionArrayInput)(nil)).Elem(), GetFunctionsFunctionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionImageConfigInput)(nil)).Elem(), GetFunctionsFunctionImageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionImageConfigArrayInput)(nil)).Elem(), GetFunctionsFunctionImageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionIntranetConfigInput)(nil)).Elem(), GetFunctionsFunctionIntranetConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionIntranetConfigArrayInput)(nil)).Elem(), GetFunctionsFunctionIntranetConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoArrayInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLayerVersionsLayerVersionInput)(nil)).Elem(), GetLayerVersionsLayerVersionArgs{})
@@ -4995,6 +5473,8 @@ func init() {
 	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigArrayOutput{})
+	pulumi.RegisterOutputType(FunctionIntranetConfigOutput{})
+	pulumi.RegisterOutputType(FunctionIntranetConfigPtrOutput{})
 	pulumi.RegisterOutputType(FunctionLayerOutput{})
 	pulumi.RegisterOutputType(FunctionLayerArrayOutput{})
 	pulumi.RegisterOutputType(FunctionTriggerOutput{})
@@ -5031,6 +5511,10 @@ func init() {
 	pulumi.RegisterOutputType(GetFunctionVersionsVersionArrayOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionImageConfigOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionImageConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionIntranetConfigOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionIntranetConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoOutput{})
 	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetLayerVersionsLayerVersionOutput{})

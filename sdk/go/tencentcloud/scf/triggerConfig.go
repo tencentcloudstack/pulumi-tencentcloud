@@ -28,12 +28,15 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Scf.NewTriggerConfig(ctx, "triggerConfig", &Scf.TriggerConfigArgs{
-// 			Enable:       pulumi.String("OPEN"),
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 			Qualifier:    pulumi.String(fmt.Sprintf("%v%v", "$", "DEFAULT")),
-// 			TriggerName:  pulumi.String("SCF-timer-1685540160"),
-// 			Type:         pulumi.String("timer"),
+// 			CustomArgument: pulumi.String("Information"),
+// 			Description:    pulumi.String("func"),
+// 			Enable:         pulumi.String("OPEN"),
+// 			FunctionName:   pulumi.String("keep-1676351130"),
+// 			Namespace:      pulumi.String("default"),
+// 			Qualifier:      pulumi.String(fmt.Sprintf("%v%v", "$", "DEFAULT")),
+// 			TriggerDesc:    pulumi.String("* 1 2 * * * *"),
+// 			TriggerName:    pulumi.String("SCF-timer-1685540160"),
+// 			Type:           pulumi.String("timer"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -53,19 +56,23 @@ import (
 type TriggerConfig struct {
 	pulumi.CustomResourceState
 
-	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
-	Enable pulumi.StringOutput `pulumi:"enable"`
+	// User Additional Information.
+	CustomArgument pulumi.StringPtrOutput `pulumi:"customArgument"`
+	// Trigger description.
+	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+	Enable pulumi.StringPtrOutput `pulumi:"enable"`
 	// Function name.
 	FunctionName pulumi.StringOutput `pulumi:"functionName"`
 	// Function namespace.
 	Namespace pulumi.StringPtrOutput `pulumi:"namespace"`
 	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier pulumi.StringPtrOutput `pulumi:"qualifier"`
-	// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// TriggerDesc parameter.
 	TriggerDesc pulumi.StringOutput `pulumi:"triggerDesc"`
-	// Trigger name.
+	// Trigger Name.
 	TriggerName pulumi.StringOutput `pulumi:"triggerName"`
-	// Trigger Type.
+	// Trigger type.
 	Type pulumi.StringOutput `pulumi:"type"`
 }
 
@@ -76,9 +83,6 @@ func NewTriggerConfig(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Enable == nil {
-		return nil, errors.New("invalid value for required argument 'Enable'")
-	}
 	if args.FunctionName == nil {
 		return nil, errors.New("invalid value for required argument 'FunctionName'")
 	}
@@ -111,7 +115,11 @@ func GetTriggerConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TriggerConfig resources.
 type triggerConfigState struct {
-	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+	// User Additional Information.
+	CustomArgument *string `pulumi:"customArgument"`
+	// Trigger description.
+	Description *string `pulumi:"description"`
+	// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
 	Enable *string `pulumi:"enable"`
 	// Function name.
 	FunctionName *string `pulumi:"functionName"`
@@ -119,16 +127,20 @@ type triggerConfigState struct {
 	Namespace *string `pulumi:"namespace"`
 	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier *string `pulumi:"qualifier"`
-	// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// TriggerDesc parameter.
 	TriggerDesc *string `pulumi:"triggerDesc"`
-	// Trigger name.
+	// Trigger Name.
 	TriggerName *string `pulumi:"triggerName"`
-	// Trigger Type.
+	// Trigger type.
 	Type *string `pulumi:"type"`
 }
 
 type TriggerConfigState struct {
-	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+	// User Additional Information.
+	CustomArgument pulumi.StringPtrInput
+	// Trigger description.
+	Description pulumi.StringPtrInput
+	// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
 	Enable pulumi.StringPtrInput
 	// Function name.
 	FunctionName pulumi.StringPtrInput
@@ -136,11 +148,11 @@ type TriggerConfigState struct {
 	Namespace pulumi.StringPtrInput
 	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier pulumi.StringPtrInput
-	// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// TriggerDesc parameter.
 	TriggerDesc pulumi.StringPtrInput
-	// Trigger name.
+	// Trigger Name.
 	TriggerName pulumi.StringPtrInput
-	// Trigger Type.
+	// Trigger type.
 	Type pulumi.StringPtrInput
 }
 
@@ -149,37 +161,45 @@ func (TriggerConfigState) ElementType() reflect.Type {
 }
 
 type triggerConfigArgs struct {
-	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
-	Enable string `pulumi:"enable"`
+	// User Additional Information.
+	CustomArgument *string `pulumi:"customArgument"`
+	// Trigger description.
+	Description *string `pulumi:"description"`
+	// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+	Enable *string `pulumi:"enable"`
 	// Function name.
 	FunctionName string `pulumi:"functionName"`
 	// Function namespace.
 	Namespace *string `pulumi:"namespace"`
 	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier *string `pulumi:"qualifier"`
-	// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// TriggerDesc parameter.
 	TriggerDesc *string `pulumi:"triggerDesc"`
-	// Trigger name.
+	// Trigger Name.
 	TriggerName string `pulumi:"triggerName"`
-	// Trigger Type.
+	// Trigger type.
 	Type string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a TriggerConfig resource.
 type TriggerConfigArgs struct {
-	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
-	Enable pulumi.StringInput
+	// User Additional Information.
+	CustomArgument pulumi.StringPtrInput
+	// Trigger description.
+	Description pulumi.StringPtrInput
+	// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+	Enable pulumi.StringPtrInput
 	// Function name.
 	FunctionName pulumi.StringInput
 	// Function namespace.
 	Namespace pulumi.StringPtrInput
 	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier pulumi.StringPtrInput
-	// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// TriggerDesc parameter.
 	TriggerDesc pulumi.StringPtrInput
-	// Trigger name.
+	// Trigger Name.
 	TriggerName pulumi.StringInput
-	// Trigger Type.
+	// Trigger type.
 	Type pulumi.StringInput
 }
 
@@ -270,9 +290,19 @@ func (o TriggerConfigOutput) ToTriggerConfigOutputWithContext(ctx context.Contex
 	return o
 }
 
-// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
-func (o TriggerConfigOutput) Enable() pulumi.StringOutput {
-	return o.ApplyT(func(v *TriggerConfig) pulumi.StringOutput { return v.Enable }).(pulumi.StringOutput)
+// User Additional Information.
+func (o TriggerConfigOutput) CustomArgument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerConfig) pulumi.StringPtrOutput { return v.CustomArgument }).(pulumi.StringPtrOutput)
+}
+
+// Trigger description.
+func (o TriggerConfigOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerConfig) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+func (o TriggerConfigOutput) Enable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerConfig) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
 }
 
 // Function name.
@@ -290,17 +320,17 @@ func (o TriggerConfigOutput) Qualifier() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TriggerConfig) pulumi.StringPtrOutput { return v.Qualifier }).(pulumi.StringPtrOutput)
 }
 
-// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+// TriggerDesc parameter.
 func (o TriggerConfigOutput) TriggerDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v *TriggerConfig) pulumi.StringOutput { return v.TriggerDesc }).(pulumi.StringOutput)
 }
 
-// Trigger name.
+// Trigger Name.
 func (o TriggerConfigOutput) TriggerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *TriggerConfig) pulumi.StringOutput { return v.TriggerName }).(pulumi.StringOutput)
 }
 
-// Trigger Type.
+// Trigger type.
 func (o TriggerConfigOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *TriggerConfig) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

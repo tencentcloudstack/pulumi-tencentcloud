@@ -14,18 +14,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwRouteRateLimitLimitDetail
     {
+        /// <summary>
+        /// status of service rate limit.
+        /// </summary>
         public readonly bool Enabled;
+        /// <summary>
+        /// external redis information, maybe null.
+        /// </summary>
         public readonly Outputs.CngwRouteRateLimitLimitDetailExternalRedis? ExternalRedis;
+        /// <summary>
+        /// request headers that require rate limit.
+        /// </summary>
         public readonly string? Header;
+        /// <summary>
+        /// whether to hide the headers of client.
+        /// </summary>
         public readonly bool HideClientHeaders;
+        /// <summary>
+        /// whether to enable request queuing.
+        /// </summary>
         public readonly bool IsDelay;
+        /// <summary>
+        /// basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+        /// </summary>
         public readonly string LimitBy;
+        /// <summary>
+        /// queue time.
+        /// </summary>
         public readonly int? LineUpTime;
+        /// <summary>
+        /// request paths that require rate limit.
+        /// </summary>
         public readonly string? Path;
+        /// <summary>
+        /// counter policy.Reference value:`local`,`redis`,`external_redis`.
+        /// </summary>
         public readonly string? Policy;
+        /// <summary>
+        /// qps threshold.
+        /// </summary>
         public readonly ImmutableArray<Outputs.CngwRouteRateLimitLimitDetailQpsThreshold> QpsThresholds;
+        /// <summary>
+        /// response configuration, the response strategy is text, maybe null.
+        /// </summary>
         public readonly Outputs.CngwRouteRateLimitLimitDetailRateLimitResponse? RateLimitResponse;
+        /// <summary>
+        /// request forwarding address, maybe null.
+        /// </summary>
         public readonly string? RateLimitResponseUrl;
+        /// <summary>
+        /// response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+        /// </summary>
         public readonly string ResponseType;
 
         [OutputConstructor]

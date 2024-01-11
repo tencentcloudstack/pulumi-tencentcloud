@@ -67,6 +67,8 @@ type Job struct {
 	EndTime pulumi.StringOutput `pulumi:"endTime"`
 	// Percentage of error rate.
 	ErrorRate pulumi.Float64Output `pulumi:"errorRate"`
+	// Job Id.
+	JobId pulumi.StringOutput `pulumi:"jobId"`
 	// Job owner.
 	JobOwner pulumi.StringOutput `pulumi:"jobOwner"`
 	// Pressure configuration of job.
@@ -170,6 +172,8 @@ type jobState struct {
 	EndTime *string `pulumi:"endTime"`
 	// Percentage of error rate.
 	ErrorRate *float64 `pulumi:"errorRate"`
+	// Job Id.
+	JobId *string `pulumi:"jobId"`
 	// Job owner.
 	JobOwner *string `pulumi:"jobOwner"`
 	// Pressure configuration of job.
@@ -235,6 +239,8 @@ type JobState struct {
 	EndTime pulumi.StringPtrInput
 	// Percentage of error rate.
 	ErrorRate pulumi.Float64PtrInput
+	// Job Id.
+	JobId pulumi.StringPtrInput
 	// Job owner.
 	JobOwner pulumi.StringPtrInput
 	// Pressure configuration of job.
@@ -442,6 +448,11 @@ func (o JobOutput) EndTime() pulumi.StringOutput {
 // Percentage of error rate.
 func (o JobOutput) ErrorRate() pulumi.Float64Output {
 	return o.ApplyT(func(v *Job) pulumi.Float64Output { return v.ErrorRate }).(pulumi.Float64Output)
+}
+
+// Job Id.
+func (o JobOutput) JobId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Job) pulumi.StringOutput { return v.JobId }).(pulumi.StringOutput)
 }
 
 // Job owner.

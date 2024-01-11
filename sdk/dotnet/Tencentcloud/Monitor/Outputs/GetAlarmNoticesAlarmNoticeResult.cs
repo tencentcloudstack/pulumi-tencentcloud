@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
     public sealed class GetAlarmNoticesAlarmNoticeResult
     {
         /// <summary>
+        /// AMP consumer ID.
+        /// </summary>
+        public readonly string AmpConsumerId;
+        /// <summary>
         /// A maximum of one alarm notification can be pushed to the CLS service.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetAlarmNoticesAlarmNoticeClsNoticeResult> ClsNotices;
@@ -61,6 +65,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
 
         [OutputConstructor]
         private GetAlarmNoticesAlarmNoticeResult(
+            string ampConsumerId,
+
             ImmutableArray<Outputs.GetAlarmNoticesAlarmNoticeClsNoticeResult> clsNotices,
 
             string id,
@@ -83,6 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
 
             ImmutableArray<Outputs.GetAlarmNoticesAlarmNoticeUserNoticeResult> userNotices)
         {
+            AmpConsumerId = ampConsumerId;
             ClsNotices = clsNotices;
             Id = id;
             IsPreset = isPreset;

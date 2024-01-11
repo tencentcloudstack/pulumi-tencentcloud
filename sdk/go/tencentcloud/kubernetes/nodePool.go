@@ -84,7 +84,7 @@ import (
 // 				InstanceType:   pulumi.String(defaultInstanceType),
 // 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
 // 				SystemDiskSize: pulumi.Int(50),
-// 				SecurityGroupIds: pulumi.StringArray{
+// 				OrderlySecurityGroupIds: pulumi.StringArray{
 // 					pulumi.String("sg-24vswocp"),
 // 				},
 // 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
@@ -160,8 +160,10 @@ import (
 // 				InstanceType:   pulumi.Any(_var.Default_instance_type),
 // 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
 // 				SystemDiskSize: pulumi.Int(50),
-// 				SecurityGroupIds: pulumi.StringArray{
+// 				OrderlySecurityGroupIds: pulumi.StringArray{
 // 					pulumi.String("sg-24vswocp"),
+// 					pulumi.String("sg-3qntci2v"),
+// 					pulumi.String("sg-7y1t2wax"),
 // 				},
 // 				InstanceChargeType: pulumi.String("SPOTPAID"),
 // 				SpotInstanceType:   pulumi.String("one-time"),
@@ -206,7 +208,9 @@ type NodePool struct {
 	DefaultCooldown pulumi.IntOutput `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrOutput `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolOutput `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntOutput `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrOutput `pulumi:"enableAutoScale"`
@@ -315,7 +319,9 @@ type nodePoolState struct {
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance *bool `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale *bool `pulumi:"enableAutoScale"`
@@ -380,7 +386,9 @@ type NodePoolState struct {
 	DefaultCooldown pulumi.IntPtrInput
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrInput
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolPtrInput
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntPtrInput
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrInput
@@ -445,7 +453,9 @@ type nodePoolArgs struct {
 	DefaultCooldown *int `pulumi:"defaultCooldown"`
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance *bool `pulumi:"deleteKeepInstance"`
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity *int `pulumi:"desiredCapacity"`
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale *bool `pulumi:"enableAutoScale"`
@@ -499,7 +509,9 @@ type NodePoolArgs struct {
 	DefaultCooldown pulumi.IntPtrInput
 	// Indicate to keep the CVM instance when delete the node pool. Default is `true`.
 	DeleteKeepInstance pulumi.BoolPtrInput
-	// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+	// Indicates whether the node pool deletion protection is enabled.
+	DeletionProtection pulumi.BoolPtrInput
+	// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 	DesiredCapacity pulumi.IntPtrInput
 	// Indicate whether to enable auto scaling or not.
 	EnableAutoScale pulumi.BoolPtrInput
@@ -660,7 +672,12 @@ func (o NodePoolOutput) DeleteKeepInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.BoolPtrOutput { return v.DeleteKeepInstance }).(pulumi.BoolPtrOutput)
 }
 
-// Desired capacity ot the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
+// Indicates whether the node pool deletion protection is enabled.
+func (o NodePoolOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.BoolOutput { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
 func (o NodePoolOutput) DesiredCapacity() pulumi.IntOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.IntOutput { return v.DesiredCapacity }).(pulumi.IntOutput)
 }

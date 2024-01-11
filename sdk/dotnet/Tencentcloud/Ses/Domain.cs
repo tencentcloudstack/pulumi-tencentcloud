@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     public partial class Domain : Pulumi.CustomResource
     {
         /// <summary>
+        /// DNS configuration details.
+        /// </summary>
+        [Output("attributes")]
+        public Output<ImmutableArray<Outputs.DomainAttribute>> Attributes { get; private set; } = null!;
+
+        /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         /// </summary>
         [Output("emailIdentity")]
@@ -109,6 +115,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
 
     public sealed class DomainState : Pulumi.ResourceArgs
     {
+        [Input("attributes")]
+        private InputList<Inputs.DomainAttributeGetArgs>? _attributes;
+
+        /// <summary>
+        /// DNS configuration details.
+        /// </summary>
+        public InputList<Inputs.DomainAttributeGetArgs> Attributes
+        {
+            get => _attributes ?? (_attributes = new InputList<Inputs.DomainAttributeGetArgs>());
+            set => _attributes = value;
+        }
+
         /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         /// </summary>

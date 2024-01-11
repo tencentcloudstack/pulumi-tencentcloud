@@ -10,6 +10,7 @@ export * from "./auditLogFile";
 export * from "./backupDownloadRestriction";
 export * from "./backupEncryptionStatus";
 export * from "./backupPolicy";
+export * from "./database";
 export * from "./dbImportJobOperation";
 export * from "./deployGroup";
 export * from "./drInstanceToMater";
@@ -75,6 +76,7 @@ import { AuditLogFile } from "./auditLogFile";
 import { BackupDownloadRestriction } from "./backupDownloadRestriction";
 import { BackupEncryptionStatus } from "./backupEncryptionStatus";
 import { BackupPolicy } from "./backupPolicy";
+import { Database } from "./database";
 import { DbImportJobOperation } from "./dbImportJobOperation";
 import { DeployGroup } from "./deployGroup";
 import { DrInstanceToMater } from "./drInstanceToMater";
@@ -120,6 +122,8 @@ const _module = {
                 return new BackupEncryptionStatus(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
                 return new BackupPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/database:Database":
+                return new Database(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation":
                 return new DbImportJobOperation(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/deployGroup:DeployGroup":
@@ -190,6 +194,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/auditLogFile", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupDownloadRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupEncryptionStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/database", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/dbImportJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/deployGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/drInstanceToMater", _module)

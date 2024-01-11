@@ -23,11 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
     ///         {
-    ///             ServiceName = "ck",
+    ///             ServiceName = "tf-example",
     ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "your nice service",
     ///             NetTypes = 
     ///             {
     ///                 "INNER",
@@ -37,9 +36,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///         });
     ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
     ///         {
-    ///             ServiceId = service.Id,
-    ///             ApiName = "hello",
-    ///             ApiDesc = "my hello api",
+    ///             ServiceId = example.Id,
+    ///             ApiName = "tf-example",
+    ///             ApiDesc = "desc.",
     ///             AuthType = "NONE",
     ///             Protocol = "HTTP",
     ///             EnableCors = true,
@@ -69,13 +68,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///             {
     ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
     ///                 {
-    ///                     Code = 100,
+    ///                     Code = 500,
     ///                     Msg = "system error",
     ///                     Desc = "system error code",
-    ///                     ConvertedCode = -100,
+    ///                     ConvertedCode = 5000,
     ///                     NeedConvert = true,
     ///                 },
     ///             },
+    ///             ReleaseLimit = 500,
+    ///             PreLimit = 500,
+    ///             TestLimit = 500,
     ///         });
     ///     }
     /// 
@@ -85,6 +87,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     [TencentcloudResourceType("tencentcloud:ApiGateway/api:Api")]
     public partial class Api : Pulumi.CustomResource
     {
+        /// <summary>
+        /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        /// </summary>
+        [Output("apiBusinessType")]
+        public Output<string> ApiBusinessType { get; private set; } = null!;
+
         /// <summary>
         /// Custom API description.
         /// </summary>
@@ -98,10 +106,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string> ApiName { get; private set; } = null!;
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        /// API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        /// </summary>
+        [Output("apiType")]
+        public Output<string?> ApiType { get; private set; } = null!;
+
+        /// <summary>
+        /// The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        /// </summary>
+        [Output("authRelationApiId")]
+        public Output<string> AuthRelationApiId { get; private set; } = null!;
+
+        /// <summary>
+        /// API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         /// </summary>
         [Output("authType")]
         public Output<string?> AuthType { get; private set; } = null!;
+
+        /// <summary>
+        /// Constant parameter.
+        /// </summary>
+        [Output("constantParameters")]
+        public Output<ImmutableArray<Outputs.ApiConstantParameter>> ConstantParameters { get; private set; } = null!;
 
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -110,10 +136,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
+        /// EIAM application ID.
+        /// </summary>
+        [Output("eiamAppId")]
+        public Output<string?> EiamAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// EIAM application type.
+        /// </summary>
+        [Output("eiamAppType")]
+        public Output<string?> EiamAppType { get; private set; } = null!;
+
+        /// <summary>
+        /// The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        /// </summary>
+        [Output("eiamAuthType")]
+        public Output<string?> EiamAuthType { get; private set; } = null!;
+
+        /// <summary>
         /// Whether to enable CORS. Default value: `true`.
         /// </summary>
         [Output("enableCors")]
         public Output<bool?> EnableCors { get; private set; } = null!;
+
+        /// <summary>
+        /// Event bus ID.
+        /// </summary>
+        [Output("eventBusId")]
+        public Output<string?> EventBusId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable Base64 encoding will only take effect when the backend is scf.
+        /// </summary>
+        [Output("isBase64Encoded")]
+        public Output<bool> IsBase64Encoded { get; private set; } = null!;
+
+        /// <summary>
+        /// Charge after starting debugging. (Cloud Market Reserved Fields).
+        /// </summary>
+        [Output("isDebugAfterCharge")]
+        public Output<bool> IsDebugAfterCharge { get; private set; } = null!;
+
+        /// <summary>
+        /// Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        /// </summary>
+        [Output("isDeleteResponseErrorCodes")]
+        public Output<bool> IsDeleteResponseErrorCodes { get; private set; } = null!;
+
+        /// <summary>
+        /// API bound microservice list.
+        /// </summary>
+        [Output("microServices")]
+        public Output<ImmutableArray<Outputs.ApiMicroService>> MicroServices { get; private set; } = null!;
+
+        /// <summary>
+        /// OAuth configuration. Effective when AuthType is OAUTH.
+        /// </summary>
+        [Output("oauthConfig")]
+        public Output<Outputs.ApiOauthConfig?> OauthConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// Owner of resources.
+        /// </summary>
+        [Output("owner")]
+        public Output<string?> Owner { get; private set; } = null!;
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -161,19 +247,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// Response failure sample of custom response configuration.
         /// </summary>
         [Output("responseFailExample")]
-        public Output<string?> ResponseFailExample { get; private set; } = null!;
+        public Output<string> ResponseFailExample { get; private set; } = null!;
 
         /// <summary>
         /// Successful response sample of custom response configuration.
         /// </summary>
         [Output("responseSuccessExample")]
-        public Output<string?> ResponseSuccessExample { get; private set; } = null!;
+        public Output<string> ResponseSuccessExample { get; private set; } = null!;
 
         /// <summary>
         /// Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
         /// </summary>
         [Output("responseType")]
         public Output<string> ResponseType { get; private set; } = null!;
+
+        /// <summary>
+        /// API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Output("serviceConfigCosConfig")]
+        public Output<Outputs.ApiServiceConfigCosConfig?> ServiceConfigCosConfig { get; private set; } = null!;
 
         /// <summary>
         /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
@@ -194,7 +286,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string?> ServiceConfigPath { get; private set; } = null!;
 
         /// <summary>
-        /// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        /// Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         /// </summary>
         [Output("serviceConfigProduct")]
         public Output<string?> ServiceConfigProduct { get; private set; } = null!;
@@ -218,19 +310,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string?> ServiceConfigScfFunctionQualifier { get; private set; } = null!;
 
         /// <summary>
+        /// Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        /// </summary>
+        [Output("serviceConfigScfFunctionType")]
+        public Output<string?> ServiceConfigScfFunctionType { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable response integration. Effective when the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigScfIsIntegratedResponse")]
+        public Output<bool?> ServiceConfigScfIsIntegratedResponse { get; private set; } = null!;
+
+        /// <summary>
         /// API backend service timeout period in seconds. Default value: `5`.
         /// </summary>
         [Output("serviceConfigTimeout")]
         public Output<int?> ServiceConfigTimeout { get; private set; } = null!;
 
         /// <summary>
-        /// API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        /// The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         /// </summary>
         [Output("serviceConfigType")]
         public Output<string?> ServiceConfigType { get; private set; } = null!;
 
         /// <summary>
-        /// API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        /// Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Output("serviceConfigUpstreamId")]
+        public Output<string?> ServiceConfigUpstreamId { get; private set; } = null!;
+
+        /// <summary>
+        /// The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         /// </summary>
         [Output("serviceConfigUrl")]
         public Output<string?> ServiceConfigUrl { get; private set; } = null!;
@@ -242,10 +352,106 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<string?> ServiceConfigVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+        /// Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketCleanupFunctionName")]
+        public Output<string?> ServiceConfigWebsocketCleanupFunctionName { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketCleanupFunctionNamespace")]
+        public Output<string?> ServiceConfigWebsocketCleanupFunctionNamespace { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketCleanupFunctionQualifier")]
+        public Output<string?> ServiceConfigWebsocketCleanupFunctionQualifier { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketRegisterFunctionName")]
+        public Output<string?> ServiceConfigWebsocketRegisterFunctionName { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketRegisterFunctionNamespace")]
+        public Output<string?> ServiceConfigWebsocketRegisterFunctionNamespace { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketRegisterFunctionQualifier")]
+        public Output<string?> ServiceConfigWebsocketRegisterFunctionQualifier { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketTransportFunctionName")]
+        public Output<string?> ServiceConfigWebsocketTransportFunctionName { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketTransportFunctionNamespace")]
+        public Output<string?> ServiceConfigWebsocketTransportFunctionNamespace { get; private set; } = null!;
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Output("serviceConfigWebsocketTransportFunctionQualifier")]
+        public Output<string?> ServiceConfigWebsocketTransportFunctionQualifier { get; private set; } = null!;
+
+        /// <summary>
+        /// The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Output("serviceId")]
         public Output<string> ServiceId { get; private set; } = null!;
+
+        /// <summary>
+        /// The backend service parameters of the API.
+        /// </summary>
+        [Output("serviceParameters")]
+        public Output<ImmutableArray<Outputs.ApiServiceParameter>> ServiceParameters { get; private set; } = null!;
+
+        /// <summary>
+        /// Health check configuration for microservices.
+        /// </summary>
+        [Output("serviceTsfHealthCheckConf")]
+        public Output<Outputs.ApiServiceTsfHealthCheckConf?> ServiceTsfHealthCheckConf { get; private set; } = null!;
+
+        /// <summary>
+        /// Load balancing configuration for microservices.
+        /// </summary>
+        [Output("serviceTsfLoadBalanceConf")]
+        public Output<Outputs.ApiServiceTsfLoadBalanceConf?> ServiceTsfLoadBalanceConf { get; private set; } = null!;
+
+        /// <summary>
+        /// Tsf serverless namespace ID. (In internal testing).
+        /// </summary>
+        [Output("targetNamespaceId")]
+        public Output<string?> TargetNamespaceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Target type backend resource information. (Internal testing stage).
+        /// </summary>
+        [Output("targetServices")]
+        public Output<ImmutableArray<Outputs.ApiTargetService>> TargetServices { get; private set; } = null!;
+
+        /// <summary>
+        /// Target health check configuration. (Internal testing stage).
+        /// </summary>
+        [Output("targetServicesHealthCheckConf")]
+        public Output<Outputs.ApiTargetServicesHealthCheckConf?> TargetServicesHealthCheckConf { get; private set; } = null!;
+
+        /// <summary>
+        /// Target type load balancing configuration. (Internal testing stage).
+        /// </summary>
+        [Output("targetServicesLoadBalanceConf")]
+        public Output<int?> TargetServicesLoadBalanceConf { get; private set; } = null!;
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -254,10 +460,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Output<int> TestLimit { get; private set; } = null!;
 
         /// <summary>
+        /// The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        /// </summary>
+        [Output("tokenTimeout")]
+        public Output<int?> TokenTimeout { get; private set; } = null!;
+
+        /// <summary>
         /// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         /// </summary>
         [Output("updateTime")]
         public Output<string> UpdateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// User type.
+        /// </summary>
+        [Output("userType")]
+        public Output<string?> UserType { get; private set; } = null!;
 
 
         /// <summary>
@@ -307,6 +525,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     public sealed class ApiArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        /// </summary>
+        [Input("apiBusinessType")]
+        public Input<string>? ApiBusinessType { get; set; }
+
+        /// <summary>
         /// Custom API description.
         /// </summary>
         [Input("apiDesc")]
@@ -319,16 +543,106 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string> ApiName { get; set; } = null!;
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        /// API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        /// </summary>
+        [Input("apiType")]
+        public Input<string>? ApiType { get; set; }
+
+        /// <summary>
+        /// The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        /// </summary>
+        [Input("authRelationApiId")]
+        public Input<string>? AuthRelationApiId { get; set; }
+
+        /// <summary>
+        /// API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         /// </summary>
         [Input("authType")]
         public Input<string>? AuthType { get; set; }
+
+        [Input("constantParameters")]
+        private InputList<Inputs.ApiConstantParameterArgs>? _constantParameters;
+
+        /// <summary>
+        /// Constant parameter.
+        /// </summary>
+        public InputList<Inputs.ApiConstantParameterArgs> ConstantParameters
+        {
+            get => _constantParameters ?? (_constantParameters = new InputList<Inputs.ApiConstantParameterArgs>());
+            set => _constantParameters = value;
+        }
+
+        /// <summary>
+        /// EIAM application ID.
+        /// </summary>
+        [Input("eiamAppId")]
+        public Input<string>? EiamAppId { get; set; }
+
+        /// <summary>
+        /// EIAM application type.
+        /// </summary>
+        [Input("eiamAppType")]
+        public Input<string>? EiamAppType { get; set; }
+
+        /// <summary>
+        /// The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        /// </summary>
+        [Input("eiamAuthType")]
+        public Input<string>? EiamAuthType { get; set; }
 
         /// <summary>
         /// Whether to enable CORS. Default value: `true`.
         /// </summary>
         [Input("enableCors")]
         public Input<bool>? EnableCors { get; set; }
+
+        /// <summary>
+        /// Event bus ID.
+        /// </summary>
+        [Input("eventBusId")]
+        public Input<string>? EventBusId { get; set; }
+
+        /// <summary>
+        /// Whether to enable Base64 encoding will only take effect when the backend is scf.
+        /// </summary>
+        [Input("isBase64Encoded")]
+        public Input<bool>? IsBase64Encoded { get; set; }
+
+        /// <summary>
+        /// Charge after starting debugging. (Cloud Market Reserved Fields).
+        /// </summary>
+        [Input("isDebugAfterCharge")]
+        public Input<bool>? IsDebugAfterCharge { get; set; }
+
+        /// <summary>
+        /// Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        /// </summary>
+        [Input("isDeleteResponseErrorCodes")]
+        public Input<bool>? IsDeleteResponseErrorCodes { get; set; }
+
+        [Input("microServices")]
+        private InputList<Inputs.ApiMicroServiceArgs>? _microServices;
+
+        /// <summary>
+        /// API bound microservice list.
+        /// </summary>
+        public InputList<Inputs.ApiMicroServiceArgs> MicroServices
+        {
+            get => _microServices ?? (_microServices = new InputList<Inputs.ApiMicroServiceArgs>());
+            set => _microServices = value;
+        }
+
+        /// <summary>
+        /// OAuth configuration. Effective when AuthType is OAUTH.
+        /// </summary>
+        [Input("oauthConfig")]
+        public Input<Inputs.ApiOauthConfigArgs>? OauthConfig { get; set; }
+
+        /// <summary>
+        /// Owner of resources.
+        /// </summary>
+        [Input("owner")]
+        public Input<string>? Owner { get; set; }
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -403,6 +717,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ResponseType { get; set; }
 
         /// <summary>
+        /// API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Input("serviceConfigCosConfig")]
+        public Input<Inputs.ApiServiceConfigCosConfigArgs>? ServiceConfigCosConfig { get; set; }
+
+        /// <summary>
         /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         /// </summary>
         [Input("serviceConfigMethod")]
@@ -421,7 +741,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigPath { get; set; }
 
         /// <summary>
-        /// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        /// Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         /// </summary>
         [Input("serviceConfigProduct")]
         public Input<string>? ServiceConfigProduct { get; set; }
@@ -445,19 +765,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigScfFunctionQualifier { get; set; }
 
         /// <summary>
+        /// Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        /// </summary>
+        [Input("serviceConfigScfFunctionType")]
+        public Input<string>? ServiceConfigScfFunctionType { get; set; }
+
+        /// <summary>
+        /// Whether to enable response integration. Effective when the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigScfIsIntegratedResponse")]
+        public Input<bool>? ServiceConfigScfIsIntegratedResponse { get; set; }
+
+        /// <summary>
         /// API backend service timeout period in seconds. Default value: `5`.
         /// </summary>
         [Input("serviceConfigTimeout")]
         public Input<int>? ServiceConfigTimeout { get; set; }
 
         /// <summary>
-        /// API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        /// The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         /// </summary>
         [Input("serviceConfigType")]
         public Input<string>? ServiceConfigType { get; set; }
 
         /// <summary>
-        /// API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        /// Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Input("serviceConfigUpstreamId")]
+        public Input<string>? ServiceConfigUpstreamId { get; set; }
+
+        /// <summary>
+        /// The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         /// </summary>
         [Input("serviceConfigUrl")]
         public Input<string>? ServiceConfigUrl { get; set; }
@@ -469,16 +807,136 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigVpcId { get; set; }
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+        /// Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionName")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionName")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionName")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Input("serviceId", required: true)]
         public Input<string> ServiceId { get; set; } = null!;
+
+        [Input("serviceParameters")]
+        private InputList<Inputs.ApiServiceParameterArgs>? _serviceParameters;
+
+        /// <summary>
+        /// The backend service parameters of the API.
+        /// </summary>
+        public InputList<Inputs.ApiServiceParameterArgs> ServiceParameters
+        {
+            get => _serviceParameters ?? (_serviceParameters = new InputList<Inputs.ApiServiceParameterArgs>());
+            set => _serviceParameters = value;
+        }
+
+        /// <summary>
+        /// Health check configuration for microservices.
+        /// </summary>
+        [Input("serviceTsfHealthCheckConf")]
+        public Input<Inputs.ApiServiceTsfHealthCheckConfArgs>? ServiceTsfHealthCheckConf { get; set; }
+
+        /// <summary>
+        /// Load balancing configuration for microservices.
+        /// </summary>
+        [Input("serviceTsfLoadBalanceConf")]
+        public Input<Inputs.ApiServiceTsfLoadBalanceConfArgs>? ServiceTsfLoadBalanceConf { get; set; }
+
+        /// <summary>
+        /// Tsf serverless namespace ID. (In internal testing).
+        /// </summary>
+        [Input("targetNamespaceId")]
+        public Input<string>? TargetNamespaceId { get; set; }
+
+        [Input("targetServices")]
+        private InputList<Inputs.ApiTargetServiceArgs>? _targetServices;
+
+        /// <summary>
+        /// Target type backend resource information. (Internal testing stage).
+        /// </summary>
+        public InputList<Inputs.ApiTargetServiceArgs> TargetServices
+        {
+            get => _targetServices ?? (_targetServices = new InputList<Inputs.ApiTargetServiceArgs>());
+            set => _targetServices = value;
+        }
+
+        /// <summary>
+        /// Target health check configuration. (Internal testing stage).
+        /// </summary>
+        [Input("targetServicesHealthCheckConf")]
+        public Input<Inputs.ApiTargetServicesHealthCheckConfArgs>? TargetServicesHealthCheckConf { get; set; }
+
+        /// <summary>
+        /// Target type load balancing configuration. (Internal testing stage).
+        /// </summary>
+        [Input("targetServicesLoadBalanceConf")]
+        public Input<int>? TargetServicesLoadBalanceConf { get; set; }
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         /// </summary>
         [Input("testLimit")]
         public Input<int>? TestLimit { get; set; }
+
+        /// <summary>
+        /// The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        /// </summary>
+        [Input("tokenTimeout")]
+        public Input<int>? TokenTimeout { get; set; }
+
+        /// <summary>
+        /// User type.
+        /// </summary>
+        [Input("userType")]
+        public Input<string>? UserType { get; set; }
 
         public ApiArgs()
         {
@@ -487,6 +945,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
 
     public sealed class ApiState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        /// </summary>
+        [Input("apiBusinessType")]
+        public Input<string>? ApiBusinessType { get; set; }
+
         /// <summary>
         /// Custom API description.
         /// </summary>
@@ -500,10 +964,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ApiName { get; set; }
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        /// API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        /// </summary>
+        [Input("apiType")]
+        public Input<string>? ApiType { get; set; }
+
+        /// <summary>
+        /// The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        /// </summary>
+        [Input("authRelationApiId")]
+        public Input<string>? AuthRelationApiId { get; set; }
+
+        /// <summary>
+        /// API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         /// </summary>
         [Input("authType")]
         public Input<string>? AuthType { get; set; }
+
+        [Input("constantParameters")]
+        private InputList<Inputs.ApiConstantParameterGetArgs>? _constantParameters;
+
+        /// <summary>
+        /// Constant parameter.
+        /// </summary>
+        public InputList<Inputs.ApiConstantParameterGetArgs> ConstantParameters
+        {
+            get => _constantParameters ?? (_constantParameters = new InputList<Inputs.ApiConstantParameterGetArgs>());
+            set => _constantParameters = value;
+        }
 
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -512,10 +1000,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
+        /// EIAM application ID.
+        /// </summary>
+        [Input("eiamAppId")]
+        public Input<string>? EiamAppId { get; set; }
+
+        /// <summary>
+        /// EIAM application type.
+        /// </summary>
+        [Input("eiamAppType")]
+        public Input<string>? EiamAppType { get; set; }
+
+        /// <summary>
+        /// The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        /// </summary>
+        [Input("eiamAuthType")]
+        public Input<string>? EiamAuthType { get; set; }
+
+        /// <summary>
         /// Whether to enable CORS. Default value: `true`.
         /// </summary>
         [Input("enableCors")]
         public Input<bool>? EnableCors { get; set; }
+
+        /// <summary>
+        /// Event bus ID.
+        /// </summary>
+        [Input("eventBusId")]
+        public Input<string>? EventBusId { get; set; }
+
+        /// <summary>
+        /// Whether to enable Base64 encoding will only take effect when the backend is scf.
+        /// </summary>
+        [Input("isBase64Encoded")]
+        public Input<bool>? IsBase64Encoded { get; set; }
+
+        /// <summary>
+        /// Charge after starting debugging. (Cloud Market Reserved Fields).
+        /// </summary>
+        [Input("isDebugAfterCharge")]
+        public Input<bool>? IsDebugAfterCharge { get; set; }
+
+        /// <summary>
+        /// Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        /// </summary>
+        [Input("isDeleteResponseErrorCodes")]
+        public Input<bool>? IsDeleteResponseErrorCodes { get; set; }
+
+        [Input("microServices")]
+        private InputList<Inputs.ApiMicroServiceGetArgs>? _microServices;
+
+        /// <summary>
+        /// API bound microservice list.
+        /// </summary>
+        public InputList<Inputs.ApiMicroServiceGetArgs> MicroServices
+        {
+            get => _microServices ?? (_microServices = new InputList<Inputs.ApiMicroServiceGetArgs>());
+            set => _microServices = value;
+        }
+
+        /// <summary>
+        /// OAuth configuration. Effective when AuthType is OAUTH.
+        /// </summary>
+        [Input("oauthConfig")]
+        public Input<Inputs.ApiOauthConfigGetArgs>? OauthConfig { get; set; }
+
+        /// <summary>
+        /// Owner of resources.
+        /// </summary>
+        [Input("owner")]
+        public Input<string>? Owner { get; set; }
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -590,6 +1144,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ResponseType { get; set; }
 
         /// <summary>
+        /// API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Input("serviceConfigCosConfig")]
+        public Input<Inputs.ApiServiceConfigCosConfigGetArgs>? ServiceConfigCosConfig { get; set; }
+
+        /// <summary>
         /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         /// </summary>
         [Input("serviceConfigMethod")]
@@ -608,7 +1168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigPath { get; set; }
 
         /// <summary>
-        /// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        /// Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         /// </summary>
         [Input("serviceConfigProduct")]
         public Input<string>? ServiceConfigProduct { get; set; }
@@ -632,19 +1192,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigScfFunctionQualifier { get; set; }
 
         /// <summary>
+        /// Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        /// </summary>
+        [Input("serviceConfigScfFunctionType")]
+        public Input<string>? ServiceConfigScfFunctionType { get; set; }
+
+        /// <summary>
+        /// Whether to enable response integration. Effective when the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigScfIsIntegratedResponse")]
+        public Input<bool>? ServiceConfigScfIsIntegratedResponse { get; set; }
+
+        /// <summary>
         /// API backend service timeout period in seconds. Default value: `5`.
         /// </summary>
         [Input("serviceConfigTimeout")]
         public Input<int>? ServiceConfigTimeout { get; set; }
 
         /// <summary>
-        /// API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        /// The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         /// </summary>
         [Input("serviceConfigType")]
         public Input<string>? ServiceConfigType { get; set; }
 
         /// <summary>
-        /// API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        /// Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        [Input("serviceConfigUpstreamId")]
+        public Input<string>? ServiceConfigUpstreamId { get; set; }
+
+        /// <summary>
+        /// The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         /// </summary>
         [Input("serviceConfigUrl")]
         public Input<string>? ServiceConfigUrl { get; set; }
@@ -656,10 +1234,118 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<string>? ServiceConfigVpcId { get; set; }
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+        /// Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionName")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketCleanupFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketCleanupFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionName")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketRegisterFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketRegisterFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionName")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionName { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionNamespace")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionNamespace { get; set; }
+
+        /// <summary>
+        /// Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        /// </summary>
+        [Input("serviceConfigWebsocketTransportFunctionQualifier")]
+        public Input<string>? ServiceConfigWebsocketTransportFunctionQualifier { get; set; }
+
+        /// <summary>
+        /// The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
+
+        [Input("serviceParameters")]
+        private InputList<Inputs.ApiServiceParameterGetArgs>? _serviceParameters;
+
+        /// <summary>
+        /// The backend service parameters of the API.
+        /// </summary>
+        public InputList<Inputs.ApiServiceParameterGetArgs> ServiceParameters
+        {
+            get => _serviceParameters ?? (_serviceParameters = new InputList<Inputs.ApiServiceParameterGetArgs>());
+            set => _serviceParameters = value;
+        }
+
+        /// <summary>
+        /// Health check configuration for microservices.
+        /// </summary>
+        [Input("serviceTsfHealthCheckConf")]
+        public Input<Inputs.ApiServiceTsfHealthCheckConfGetArgs>? ServiceTsfHealthCheckConf { get; set; }
+
+        /// <summary>
+        /// Load balancing configuration for microservices.
+        /// </summary>
+        [Input("serviceTsfLoadBalanceConf")]
+        public Input<Inputs.ApiServiceTsfLoadBalanceConfGetArgs>? ServiceTsfLoadBalanceConf { get; set; }
+
+        /// <summary>
+        /// Tsf serverless namespace ID. (In internal testing).
+        /// </summary>
+        [Input("targetNamespaceId")]
+        public Input<string>? TargetNamespaceId { get; set; }
+
+        [Input("targetServices")]
+        private InputList<Inputs.ApiTargetServiceGetArgs>? _targetServices;
+
+        /// <summary>
+        /// Target type backend resource information. (Internal testing stage).
+        /// </summary>
+        public InputList<Inputs.ApiTargetServiceGetArgs> TargetServices
+        {
+            get => _targetServices ?? (_targetServices = new InputList<Inputs.ApiTargetServiceGetArgs>());
+            set => _targetServices = value;
+        }
+
+        /// <summary>
+        /// Target health check configuration. (Internal testing stage).
+        /// </summary>
+        [Input("targetServicesHealthCheckConf")]
+        public Input<Inputs.ApiTargetServicesHealthCheckConfGetArgs>? TargetServicesHealthCheckConf { get; set; }
+
+        /// <summary>
+        /// Target type load balancing configuration. (Internal testing stage).
+        /// </summary>
+        [Input("targetServicesLoadBalanceConf")]
+        public Input<int>? TargetServicesLoadBalanceConf { get; set; }
 
         /// <summary>
         /// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -668,10 +1354,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public Input<int>? TestLimit { get; set; }
 
         /// <summary>
+        /// The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        /// </summary>
+        [Input("tokenTimeout")]
+        public Input<int>? TokenTimeout { get; set; }
+
+        /// <summary>
         /// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         /// </summary>
         [Input("updateTime")]
         public Input<string>? UpdateTime { get; set; }
+
+        /// <summary>
+        /// User type.
+        /// </summary>
+        [Input("userType")]
+        public Input<string>? UserType { get; set; }
 
         public ApiState()
         {

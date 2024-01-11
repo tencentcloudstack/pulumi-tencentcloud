@@ -12,7 +12,10 @@ import * as utilities from "../utilities";
  * currently, it does not support re-issuing certificates, revoking certificates, and deleting certificates; the certificate remarks
  * and belonging items can be updated. The Destroy operation will only cancel the certificate order, and will not delete the
  * certificate and refund the fee. If you need a refund, you need to check the current certificate status in the console
- * as `Review Cancel`, and then you can click `Request a refund` to refund the fee.
+ * as `Review Cancel`, and then you can click `Request a refund` to refund the fee. To update the information of a certificate,
+ * we will automatically roll back your certificate if this certificate is already in the validation stage. This process may take
+ * some time because the CA callback is time-consuming. Please be patient and follow the prompt message. Or, feel free to contact
+ * Tencent Cloud Support.
  *
  * ## Example Usage
  *
@@ -107,7 +110,7 @@ export class PayCertificate extends pulumi.CustomResource {
     /**
      * DV certification information.
      */
-    public /*out*/ readonly dvAuths!: pulumi.Output<outputs.Ssl.PayCertificateDvAuth[]>;
+    public readonly dvAuths!: pulumi.Output<outputs.Ssl.PayCertificateDvAuth[]>;
     /**
      * Certificate information.
      */
@@ -171,12 +174,12 @@ export class PayCertificate extends pulumi.CustomResource {
             resourceInputs["alias"] = args ? args.alias : undefined;
             resourceInputs["confirmLetter"] = args ? args.confirmLetter : undefined;
             resourceInputs["domainNum"] = args ? args.domainNum : undefined;
+            resourceInputs["dvAuths"] = args ? args.dvAuths : undefined;
             resourceInputs["information"] = args ? args.information : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["timeSpan"] = args ? args.timeSpan : undefined;
             resourceInputs["certificateId"] = undefined /*out*/;
-            resourceInputs["dvAuths"] = undefined /*out*/;
             resourceInputs["orderId"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -251,6 +254,10 @@ export interface PayCertificateArgs {
      * Number of domain names included in the certificate.
      */
     domainNum: pulumi.Input<number>;
+    /**
+     * DV certification information.
+     */
+    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.PayCertificateDvAuth>[]>;
     /**
      * Certificate information.
      */

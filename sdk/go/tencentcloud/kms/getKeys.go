@@ -29,7 +29,7 @@ import (
 // 			KeyState:       pulumi.IntRef(0),
 // 			KeyUsage:       pulumi.StringRef("ALL"),
 // 			Origin:         pulumi.StringRef("TENCENT_KMS"),
-// 			SearchKeyAlias: pulumi.StringRef("test"),
+// 			SearchKeyAlias: pulumi.StringRef("tf_example"),
 // 		}, nil)
 // 		if err != nil {
 // 			return err

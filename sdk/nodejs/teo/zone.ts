@@ -15,24 +15,15 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const zone = new tencentcloud.Teo.Zone("zone", {
- *     //  vanity_name_servers {
- *     //    switch = ""
- *     //    servers = ""
- *     //
- *     //  }
- *     cnameSpeedUp: "enabled",
+ *     aliasZoneName: "teo-test",
+ *     area: "overseas",
  *     paused: false,
- *     planType: "sta",
- *     //  tags {
- *     //    tag_key = ""
- *     //    tag_value = ""
- *     //
- *     //  }
+ *     planId: "edgeone-2kfv1h391n6w",
  *     tags: {
  *         createdBy: "terraform",
  *     },
- *     type: "full",
- *     zoneName: "toutiao2.com",
+ *     type: "partial",
+ *     zoneName: "tf-teo.com",
  * });
  * ```
  *
@@ -73,47 +64,31 @@ export class Zone extends pulumi.CustomResource {
     }
 
     /**
-     * Valid values: `mainland`, `overseas`.
+     * Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
      */
-    public /*out*/ readonly area!: pulumi.Output<string>;
+    public readonly aliasZoneName!: pulumi.Output<string | undefined>;
     /**
-     * Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
      */
-    public readonly cnameSpeedUp!: pulumi.Output<string>;
+    public readonly area!: pulumi.Output<string>;
     /**
-     * Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-     */
-    public /*out*/ readonly cnameStatus!: pulumi.Output<string>;
-    /**
-     * Site creation date.
-     */
-    public /*out*/ readonly createdOn!: pulumi.Output<string>;
-    /**
-     * Site modification date.
-     */
-    public /*out*/ readonly modifiedOn!: pulumi.Output<string>;
-    /**
-     * List of name servers assigned by Tencent Cloud.
+     * NS list allocated by Tencent Cloud.
      */
     public /*out*/ readonly nameServers!: pulumi.Output<string[]>;
     /**
-     * Name server used by the site.
+     * Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    public /*out*/ readonly originalNameServers!: pulumi.Output<string[]>;
+    public /*out*/ readonly ownershipVerifications!: pulumi.Output<outputs.Teo.ZoneOwnershipVerification[]>;
     /**
      * Indicates whether the site is disabled.
      */
     public readonly paused!: pulumi.Output<boolean>;
     /**
-     * Plan type of the zone. See details in data source `zoneAvailablePlans`.
+     * The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
      */
-    public readonly planType!: pulumi.Output<string>;
+    public readonly planId!: pulumi.Output<string>;
     /**
-     * Billing resources of the zone.
-     */
-    public /*out*/ readonly resources!: pulumi.Output<outputs.Teo.ZoneResource[]>;
-    /**
-     * Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+     * Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
@@ -121,23 +96,11 @@ export class Zone extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
      */
     public readonly type!: pulumi.Output<string>;
     /**
-     * User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-     */
-    public readonly vanityNameServers!: pulumi.Output<outputs.Teo.ZoneVanityNameServers | undefined>;
-    /**
-     * User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-     */
-    public /*out*/ readonly vanityNameServersIps!: pulumi.Output<outputs.Teo.ZoneVanityNameServersIp[]>;
-    /**
-     * Site ID.
-     */
-    public /*out*/ readonly zoneId!: pulumi.Output<string>;
-    /**
-     * Site name.
+     * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */
     public readonly zoneName!: pulumi.Output<string>;
 
@@ -154,48 +117,40 @@ export class Zone extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ZoneState | undefined;
+            resourceInputs["aliasZoneName"] = state ? state.aliasZoneName : undefined;
             resourceInputs["area"] = state ? state.area : undefined;
-            resourceInputs["cnameSpeedUp"] = state ? state.cnameSpeedUp : undefined;
-            resourceInputs["cnameStatus"] = state ? state.cnameStatus : undefined;
-            resourceInputs["createdOn"] = state ? state.createdOn : undefined;
-            resourceInputs["modifiedOn"] = state ? state.modifiedOn : undefined;
             resourceInputs["nameServers"] = state ? state.nameServers : undefined;
-            resourceInputs["originalNameServers"] = state ? state.originalNameServers : undefined;
+            resourceInputs["ownershipVerifications"] = state ? state.ownershipVerifications : undefined;
             resourceInputs["paused"] = state ? state.paused : undefined;
-            resourceInputs["planType"] = state ? state.planType : undefined;
-            resourceInputs["resources"] = state ? state.resources : undefined;
+            resourceInputs["planId"] = state ? state.planId : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["type"] = state ? state.type : undefined;
-            resourceInputs["vanityNameServers"] = state ? state.vanityNameServers : undefined;
-            resourceInputs["vanityNameServersIps"] = state ? state.vanityNameServersIps : undefined;
-            resourceInputs["zoneId"] = state ? state.zoneId : undefined;
             resourceInputs["zoneName"] = state ? state.zoneName : undefined;
         } else {
             const args = argsOrState as ZoneArgs | undefined;
-            if ((!args || args.planType === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'planType'");
+            if ((!args || args.area === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'area'");
+            }
+            if ((!args || args.planId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'planId'");
+            }
+            if ((!args || args.type === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'type'");
             }
             if ((!args || args.zoneName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zoneName'");
             }
-            resourceInputs["cnameSpeedUp"] = args ? args.cnameSpeedUp : undefined;
+            resourceInputs["aliasZoneName"] = args ? args.aliasZoneName : undefined;
+            resourceInputs["area"] = args ? args.area : undefined;
             resourceInputs["paused"] = args ? args.paused : undefined;
-            resourceInputs["planType"] = args ? args.planType : undefined;
+            resourceInputs["planId"] = args ? args.planId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
-            resourceInputs["vanityNameServers"] = args ? args.vanityNameServers : undefined;
             resourceInputs["zoneName"] = args ? args.zoneName : undefined;
-            resourceInputs["area"] = undefined /*out*/;
-            resourceInputs["cnameStatus"] = undefined /*out*/;
-            resourceInputs["createdOn"] = undefined /*out*/;
-            resourceInputs["modifiedOn"] = undefined /*out*/;
             resourceInputs["nameServers"] = undefined /*out*/;
-            resourceInputs["originalNameServers"] = undefined /*out*/;
-            resourceInputs["resources"] = undefined /*out*/;
+            resourceInputs["ownershipVerifications"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
-            resourceInputs["vanityNameServersIps"] = undefined /*out*/;
-            resourceInputs["zoneId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Zone.__pulumiType, name, resourceInputs, opts);
@@ -207,47 +162,31 @@ export class Zone extends pulumi.CustomResource {
  */
 export interface ZoneState {
     /**
-     * Valid values: `mainland`, `overseas`.
+     * Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
+     */
+    aliasZoneName?: pulumi.Input<string>;
+    /**
+     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
      */
     area?: pulumi.Input<string>;
     /**
-     * Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
-     */
-    cnameSpeedUp?: pulumi.Input<string>;
-    /**
-     * Ownership verification status of the site when it accesses via CNAME.- `finished`: The site is verified.- `pending`: The site is waiting for verification.
-     */
-    cnameStatus?: pulumi.Input<string>;
-    /**
-     * Site creation date.
-     */
-    createdOn?: pulumi.Input<string>;
-    /**
-     * Site modification date.
-     */
-    modifiedOn?: pulumi.Input<string>;
-    /**
-     * List of name servers assigned by Tencent Cloud.
+     * NS list allocated by Tencent Cloud.
      */
     nameServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Name server used by the site.
+     * Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    originalNameServers?: pulumi.Input<pulumi.Input<string>[]>;
+    ownershipVerifications?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneOwnershipVerification>[]>;
     /**
      * Indicates whether the site is disabled.
      */
     paused?: pulumi.Input<boolean>;
     /**
-     * Plan type of the zone. See details in data source `zoneAvailablePlans`.
+     * The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
      */
-    planType?: pulumi.Input<string>;
+    planId?: pulumi.Input<string>;
     /**
-     * Billing resources of the zone.
-     */
-    resources?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneResource>[]>;
-    /**
-     * Site status. Valid values:- `active`: NS is switched.- `pending`: NS is not switched.- `moved`: NS is moved.- `deactivated`: this site is blocked.
+     * Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
      */
     status?: pulumi.Input<string>;
     /**
@@ -255,23 +194,11 @@ export interface ZoneState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
      */
     type?: pulumi.Input<string>;
     /**
-     * User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-     */
-    vanityNameServers?: pulumi.Input<inputs.Teo.ZoneVanityNameServers>;
-    /**
-     * User-defined name server IP information. Note: This field may return null, indicating that no valid value can be obtained.
-     */
-    vanityNameServersIps?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneVanityNameServersIp>[]>;
-    /**
-     * Site ID.
-     */
-    zoneId?: pulumi.Input<string>;
-    /**
-     * Site name.
+     * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */
     zoneName?: pulumi.Input<string>;
 }
@@ -281,31 +208,31 @@ export interface ZoneState {
  */
 export interface ZoneArgs {
     /**
-     * Specifies whether CNAME acceleration is enabled. Valid values: `enabled`, `disabled`.
+     * Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
      */
-    cnameSpeedUp?: pulumi.Input<string>;
+    aliasZoneName?: pulumi.Input<string>;
+    /**
+     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+     */
+    area: pulumi.Input<string>;
     /**
      * Indicates whether the site is disabled.
      */
     paused?: pulumi.Input<boolean>;
     /**
-     * Plan type of the zone. See details in data source `zoneAvailablePlans`.
+     * The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
      */
-    planType: pulumi.Input<string>;
+    planId: pulumi.Input<string>;
     /**
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Specifies how the site is connected to EdgeOne.- `full`: The site is connected via NS.- `partial`: The site is connected via CNAME.
+     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
      */
-    type?: pulumi.Input<string>;
+    type: pulumi.Input<string>;
     /**
-     * User-defined name server information. Note: This field may return null, indicating that no valid value can be obtained.
-     */
-    vanityNameServers?: pulumi.Input<inputs.Teo.ZoneVanityNameServers>;
-    /**
-     * Site name.
+     * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */
     zoneName: pulumi.Input<string>;
 }

@@ -97,7 +97,7 @@ import (
 type BandwidthLimit struct {
 	pulumi.CustomResourceState
 
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntOutput `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId pulumi.StringOutput `pulumi:"ccnId"`
@@ -143,7 +143,7 @@ func GetBandwidthLimit(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BandwidthLimit resources.
 type bandwidthLimitState struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit *int `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId *string `pulumi:"ccnId"`
@@ -154,7 +154,7 @@ type bandwidthLimitState struct {
 }
 
 type BandwidthLimitState struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntPtrInput
 	// ID of the CCN.
 	CcnId pulumi.StringPtrInput
@@ -169,7 +169,7 @@ func (BandwidthLimitState) ElementType() reflect.Type {
 }
 
 type bandwidthLimitArgs struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit *int `pulumi:"bandwidthLimit"`
 	// ID of the CCN.
 	CcnId string `pulumi:"ccnId"`
@@ -181,7 +181,7 @@ type bandwidthLimitArgs struct {
 
 // The set of arguments for constructing a BandwidthLimit resource.
 type BandwidthLimitArgs struct {
-	// Limitation of bandwidth.
+	// Limitation of bandwidth. Default is `0`.
 	BandwidthLimit pulumi.IntPtrInput
 	// ID of the CCN.
 	CcnId pulumi.StringInput
@@ -278,7 +278,7 @@ func (o BandwidthLimitOutput) ToBandwidthLimitOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Limitation of bandwidth.
+// Limitation of bandwidth. Default is `0`.
 func (o BandwidthLimitOutput) BandwidthLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v *BandwidthLimit) pulumi.IntOutput { return v.BandwidthLimit }).(pulumi.IntOutput)
 }

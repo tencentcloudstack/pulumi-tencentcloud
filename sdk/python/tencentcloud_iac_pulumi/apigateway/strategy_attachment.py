@@ -185,7 +185,7 @@ class StrategyAttachment(pulumi.CustomResource):
             strategy_data="9.9.9.9")
         api = tencentcloud.api_gateway.Api("api",
             service_id=service_service.id,
-            api_name="hello_update",
+            api_name="tf_example",
             api_desc="my hello api update",
             auth_type="SECRET",
             protocol="HTTP",
@@ -272,7 +272,7 @@ class StrategyAttachment(pulumi.CustomResource):
             strategy_data="9.9.9.9")
         api = tencentcloud.api_gateway.Api("api",
             service_id=service_service.id,
-            api_name="hello_update",
+            api_name="tf_example",
             api_desc="my hello api update",
             auth_type="SECRET",
             protocol="HTTP",

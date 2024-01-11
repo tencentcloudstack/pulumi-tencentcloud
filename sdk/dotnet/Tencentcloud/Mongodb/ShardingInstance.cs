@@ -164,7 +164,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        /// ID of the security group.
         /// </summary>
         [Output("securityGroups")]
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
@@ -374,7 +374,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        /// ID of the security group.
         /// </summary>
         public InputList<string> SecurityGroups
         {
@@ -541,7 +541,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        /// ID of the security group.
         /// </summary>
         public InputList<string> SecurityGroups
         {

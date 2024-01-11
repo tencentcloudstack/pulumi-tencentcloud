@@ -7,18 +7,205 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'MfaFlagActionFlag',
+    'MfaFlagLoginFlag',
+    'PolicyVersionPolicyVersion',
+    'TagRoleAttachmentTag',
     'GetGroupMembershipsMembershipListResult',
     'GetGroupPolicyAttachmentsGroupPolicyAttachmentListResult',
+    'GetGroupUserAccountGroupInfoResult',
     'GetGroupsGroupListResult',
+    'GetListAttachedUserPolicyPolicyListResult',
+    'GetListAttachedUserPolicyPolicyListGroupResult',
+    'GetListEntitiesForPolicyListResult',
     'GetPoliciesPolicyListResult',
+    'GetPolicyGrantingServiceAccessListResult',
+    'GetPolicyGrantingServiceAccessListActionResult',
+    'GetPolicyGrantingServiceAccessListPolicyResult',
+    'GetPolicyGrantingServiceAccessListServiceResult',
     'GetRolePolicyAttachmentsRolePolicyAttachmentListResult',
     'GetRolesRoleListResult',
     'GetSamlProvidersProviderListResult',
+    'GetSecretLastUsedTimeSecretIdLastUsedRowResult',
     'GetUserPolicyAttachmentsUserPolicyAttachmentListResult',
     'GetUsersUserListResult',
 ]
+
+@pulumi.output_type
+class MfaFlagActionFlag(dict):
+    def __init__(__self__, *,
+                 phone: Optional[int] = None,
+                 stoken: Optional[int] = None,
+                 wechat: Optional[int] = None):
+        """
+        :param int phone: Phone.
+        :param int stoken: Soft token.
+        :param int wechat: Wechat.
+        """
+        if phone is not None:
+            pulumi.set(__self__, "phone", phone)
+        if stoken is not None:
+            pulumi.set(__self__, "stoken", stoken)
+        if wechat is not None:
+            pulumi.set(__self__, "wechat", wechat)
+
+    @property
+    @pulumi.getter
+    def phone(self) -> Optional[int]:
+        """
+        Phone.
+        """
+        return pulumi.get(self, "phone")
+
+    @property
+    @pulumi.getter
+    def stoken(self) -> Optional[int]:
+        """
+        Soft token.
+        """
+        return pulumi.get(self, "stoken")
+
+    @property
+    @pulumi.getter
+    def wechat(self) -> Optional[int]:
+        """
+        Wechat.
+        """
+        return pulumi.get(self, "wechat")
+
+
+@pulumi.output_type
+class MfaFlagLoginFlag(dict):
+    def __init__(__self__, *,
+                 phone: Optional[int] = None,
+                 stoken: Optional[int] = None,
+                 wechat: Optional[int] = None):
+        """
+        :param int phone: Phone.
+        :param int stoken: Soft token.
+        :param int wechat: Wechat.
+        """
+        if phone is not None:
+            pulumi.set(__self__, "phone", phone)
+        if stoken is not None:
+            pulumi.set(__self__, "stoken", stoken)
+        if wechat is not None:
+            pulumi.set(__self__, "wechat", wechat)
+
+    @property
+    @pulumi.getter
+    def phone(self) -> Optional[int]:
+        """
+        Phone.
+        """
+        return pulumi.get(self, "phone")
+
+    @property
+    @pulumi.getter
+    def stoken(self) -> Optional[int]:
+        """
+        Soft token.
+        """
+        return pulumi.get(self, "stoken")
+
+    @property
+    @pulumi.getter
+    def wechat(self) -> Optional[int]:
+        """
+        Wechat.
+        """
+        return pulumi.get(self, "wechat")
+
+
+@pulumi.output_type
+class PolicyVersionPolicyVersion(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "createDate":
+            suggest = "create_date"
+        elif key == "isDefaultVersion":
+            suggest = "is_default_version"
+        elif key == "versionId":
+            suggest = "version_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in PolicyVersionPolicyVersion. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        PolicyVersionPolicyVersion.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        PolicyVersionPolicyVersion.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 create_date: Optional[str] = None,
+                 document: Optional[str] = None,
+                 is_default_version: Optional[int] = None,
+                 version_id: Optional[int] = None):
+        if create_date is not None:
+            pulumi.set(__self__, "create_date", create_date)
+        if document is not None:
+            pulumi.set(__self__, "document", document)
+        if is_default_version is not None:
+            pulumi.set(__self__, "is_default_version", is_default_version)
+        if version_id is not None:
+            pulumi.set(__self__, "version_id", version_id)
+
+    @property
+    @pulumi.getter(name="createDate")
+    def create_date(self) -> Optional[str]:
+        return pulumi.get(self, "create_date")
+
+    @property
+    @pulumi.getter
+    def document(self) -> Optional[str]:
+        return pulumi.get(self, "document")
+
+    @property
+    @pulumi.getter(name="isDefaultVersion")
+    def is_default_version(self) -> Optional[int]:
+        return pulumi.get(self, "is_default_version")
+
+    @property
+    @pulumi.getter(name="versionId")
+    def version_id(self) -> Optional[int]:
+        return pulumi.get(self, "version_id")
+
+
+@pulumi.output_type
+class TagRoleAttachmentTag(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Label.
+        :param str value: Label.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Label.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Label.
+        """
+        return pulumi.get(self, "value")
+
 
 @pulumi.output_type
 class GetGroupMembershipsMembershipListResult(dict):
@@ -134,6 +321,57 @@ class GetGroupPolicyAttachmentsGroupPolicyAttachmentListResult(dict):
 
 
 @pulumi.output_type
+class GetGroupUserAccountGroupInfoResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 group_id: int,
+                 group_name: str,
+                 remark: str):
+        """
+        :param str create_time: Create time.
+        :param int group_id: User group ID.
+        :param str group_name: User group name.
+        :param str remark: Remark.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "remark", remark)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        User group ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        User group name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remark.
+        """
+        return pulumi.get(self, "remark")
+
+
+@pulumi.output_type
 class GetGroupsGroupListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
@@ -182,6 +420,155 @@ class GetGroupsGroupListResult(dict):
         Description of the cam group to be queried.
         """
         return pulumi.get(self, "remark")
+
+
+@pulumi.output_type
+class GetListAttachedUserPolicyPolicyListResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 create_mode: str,
+                 deactived: int,
+                 deactived_details: Sequence[str],
+                 description: str,
+                 groups: Sequence['outputs.GetListAttachedUserPolicyPolicyListGroupResult'],
+                 policy_id: str,
+                 policy_name: str,
+                 strategy_type: str):
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "create_mode", create_mode)
+        pulumi.set(__self__, "deactived", deactived)
+        pulumi.set(__self__, "deactived_details", deactived_details)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "groups", groups)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "policy_name", policy_name)
+        pulumi.set(__self__, "strategy_type", strategy_type)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="createMode")
+    def create_mode(self) -> str:
+        return pulumi.get(self, "create_mode")
+
+    @property
+    @pulumi.getter
+    def deactived(self) -> int:
+        return pulumi.get(self, "deactived")
+
+    @property
+    @pulumi.getter(name="deactivedDetails")
+    def deactived_details(self) -> Sequence[str]:
+        return pulumi.get(self, "deactived_details")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def groups(self) -> Sequence['outputs.GetListAttachedUserPolicyPolicyListGroupResult']:
+        return pulumi.get(self, "groups")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> str:
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="strategyType")
+    def strategy_type(self) -> str:
+        return pulumi.get(self, "strategy_type")
+
+
+@pulumi.output_type
+class GetListAttachedUserPolicyPolicyListGroupResult(dict):
+    def __init__(__self__, *,
+                 group_id: int,
+                 group_name: str):
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        return pulumi.get(self, "group_name")
+
+
+@pulumi.output_type
+class GetListEntitiesForPolicyListResult(dict):
+    def __init__(__self__, *,
+                 attachment_time: str,
+                 id: str,
+                 name: str,
+                 related_type: int,
+                 uin: int):
+        """
+        :param str attachment_time: Policy association timeNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param str id: Entity ID.
+        :param str name: Entity NameNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int related_type: Association type. 1. User association; 2 User Group Association.
+        :param int uin: Entity UinNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "attachment_time", attachment_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "related_type", related_type)
+        pulumi.set(__self__, "uin", uin)
+
+    @property
+    @pulumi.getter(name="attachmentTime")
+    def attachment_time(self) -> str:
+        """
+        Policy association timeNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "attachment_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Entity ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Entity NameNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="relatedType")
+    def related_type(self) -> int:
+        """
+        Association type. 1. User association; 2 User Group Association.
+        """
+        return pulumi.get(self, "related_type")
+
+    @property
+    @pulumi.getter
+    def uin(self) -> int:
+        """
+        Entity UinNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "uin")
 
 
 @pulumi.output_type
@@ -277,6 +664,155 @@ class GetPoliciesPolicyListResult(dict):
         Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetPolicyGrantingServiceAccessListResult(dict):
+    def __init__(__self__, *,
+                 actions: Sequence['outputs.GetPolicyGrantingServiceAccessListActionResult'],
+                 policies: Sequence['outputs.GetPolicyGrantingServiceAccessListPolicyResult'],
+                 services: Sequence['outputs.GetPolicyGrantingServiceAccessListServiceResult']):
+        """
+        :param Sequence['GetPolicyGrantingServiceAccessListActionArgs'] actions: Action list.
+        :param Sequence['GetPolicyGrantingServiceAccessListPolicyArgs'] policies: Policy list.
+        :param Sequence['GetPolicyGrantingServiceAccessListServiceArgs'] services: Service info.
+        """
+        pulumi.set(__self__, "actions", actions)
+        pulumi.set(__self__, "policies", policies)
+        pulumi.set(__self__, "services", services)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Sequence['outputs.GetPolicyGrantingServiceAccessListActionResult']:
+        """
+        Action list.
+        """
+        return pulumi.get(self, "actions")
+
+    @property
+    @pulumi.getter
+    def policies(self) -> Sequence['outputs.GetPolicyGrantingServiceAccessListPolicyResult']:
+        """
+        Policy list.
+        """
+        return pulumi.get(self, "policies")
+
+    @property
+    @pulumi.getter
+    def services(self) -> Sequence['outputs.GetPolicyGrantingServiceAccessListServiceResult']:
+        """
+        Service info.
+        """
+        return pulumi.get(self, "services")
+
+
+@pulumi.output_type
+class GetPolicyGrantingServiceAccessListActionResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 name: str):
+        """
+        :param str description: Action description.
+        :param str name: Action name.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Action description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Action name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetPolicyGrantingServiceAccessListPolicyResult(dict):
+    def __init__(__self__, *,
+                 policy_description: str,
+                 policy_id: str,
+                 policy_name: str,
+                 policy_type: str):
+        """
+        :param str policy_description: Policy description.
+        :param str policy_id: Policy Id.
+        :param str policy_name: Policy name.
+        :param str policy_type: Polic type.
+        """
+        pulumi.set(__self__, "policy_description", policy_description)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "policy_name", policy_name)
+        pulumi.set(__self__, "policy_type", policy_type)
+
+    @property
+    @pulumi.getter(name="policyDescription")
+    def policy_description(self) -> str:
+        """
+        Policy description.
+        """
+        return pulumi.get(self, "policy_description")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Policy Id.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> str:
+        """
+        Policy name.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="policyType")
+    def policy_type(self) -> str:
+        """
+        Polic type.
+        """
+        return pulumi.get(self, "policy_type")
+
+
+@pulumi.output_type
+class GetPolicyGrantingServiceAccessListServiceResult(dict):
+    def __init__(__self__, *,
+                 service_name: str,
+                 service_type: str):
+        """
+        :param str service_name: Service name.
+        :param str service_type: Service type, this field needs to be passed when viewing the details of the service authorization interface.
+        """
+        pulumi.set(__self__, "service_name", service_name)
+        pulumi.set(__self__, "service_type", service_type)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> str:
+        """
+        Service name.
+        """
+        return pulumi.get(self, "service_name")
+
+    @property
+    @pulumi.getter(name="serviceType")
+    def service_type(self) -> str:
+        """
+        Service type, this field needs to be passed when viewing the details of the service authorization interface.
+        """
+        return pulumi.get(self, "service_type")
 
 
 @pulumi.output_type
@@ -485,6 +1021,46 @@ class GetSamlProvidersProviderListResult(dict):
         Name of the CAM SAML provider to be queried.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSecretLastUsedTimeSecretIdLastUsedRowResult(dict):
+    def __init__(__self__, *,
+                 last_secret_used_date: int,
+                 last_used_date: str,
+                 secret_id: str):
+        """
+        :param int last_secret_used_date: Last used timestamp.
+        :param str last_used_date: Last used date (with 1 day delay).
+        :param str secret_id: Secret Id.
+        """
+        pulumi.set(__self__, "last_secret_used_date", last_secret_used_date)
+        pulumi.set(__self__, "last_used_date", last_used_date)
+        pulumi.set(__self__, "secret_id", secret_id)
+
+    @property
+    @pulumi.getter(name="lastSecretUsedDate")
+    def last_secret_used_date(self) -> int:
+        """
+        Last used timestamp.
+        """
+        return pulumi.get(self, "last_secret_used_date")
+
+    @property
+    @pulumi.getter(name="lastUsedDate")
+    def last_used_date(self) -> str:
+        """
+        Last used date (with 1 day delay).
+        """
+        return pulumi.get(self, "last_used_date")
+
+    @property
+    @pulumi.getter(name="secretId")
+    def secret_id(self) -> str:
+        """
+        Secret Id.
+        """
+        return pulumi.get(self, "secret_id")
 
 
 @pulumi.output_type

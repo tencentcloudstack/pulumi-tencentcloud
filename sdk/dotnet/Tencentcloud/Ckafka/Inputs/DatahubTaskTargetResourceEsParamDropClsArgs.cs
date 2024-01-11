@@ -14,13 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
     public sealed class DatahubTaskTargetResourceEsParamDropClsArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// cls log set.
+        /// cls LogSet id.
         /// </summary>
         [Input("dropClsLogSet")]
         public Input<string>? DropClsLogSet { get; set; }
 
         /// <summary>
-        /// Delivery account of cls.
+        /// account.
         /// </summary>
         [Input("dropClsOwneruin")]
         public Input<string>? DropClsOwneruin { get; set; }
@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public Input<string>? DropClsRegion { get; set; }
 
         /// <summary>
-        /// topic of cls.
+        /// cls topic.
         /// </summary>
         [Input("dropClsTopicId")]
         public Input<string>? DropClsTopicId { get; set; }

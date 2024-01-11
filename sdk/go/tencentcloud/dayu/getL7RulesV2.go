@@ -27,8 +27,8 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Dayu.GetL7RulesV2(ctx, &dayu.GetL7RulesV2Args{
 // 			Business: "bgpip",
-// 			Limit:    pulumi.IntRef(10),
-// 			Offset:   pulumi.IntRef(0),
+// 			Domain:   pulumi.StringRef("qq.com"),
+// 			Protocol: pulumi.StringRef("https"),
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -55,9 +55,13 @@ type GetL7RulesV2Args struct {
 	Domain *string `pulumi:"domain"`
 	// Ip of the resource.
 	Ip *string `pulumi:"ip"`
-	// The number of pages, default is `10`.
+	// It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21.
 	Limit *int `pulumi:"limit"`
-	// The page start offset, default is `0`.
+	// It has been deprecated from version 1.81.21. The page start offset, default is `0`.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21.
 	Offset *int `pulumi:"offset"`
 	// Protocol of resource, value range [`http`, `https`].
 	Protocol *string `pulumi:"protocol"`
@@ -73,11 +77,13 @@ type GetL7RulesV2Result struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
 	// Ip of the resource.
-	Ip    *string `pulumi:"ip"`
-	Limit *int    `pulumi:"limit"`
+	Ip *string `pulumi:"ip"`
+	// Deprecated: It has been deprecated from version 1.81.21.
+	Limit *int `pulumi:"limit"`
 	// A list of layer 4 rules. Each element contains the following attributes:
-	Lists  []GetL7RulesV2List `pulumi:"lists"`
-	Offset *int               `pulumi:"offset"`
+	Lists []GetL7RulesV2List `pulumi:"lists"`
+	// Deprecated: It has been deprecated from version 1.81.21.
+	Offset *int `pulumi:"offset"`
 	// Protocol of resource, value range [`http`, `https`].
 	Protocol         *string `pulumi:"protocol"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
@@ -104,9 +110,13 @@ type GetL7RulesV2OutputArgs struct {
 	Domain pulumi.StringPtrInput `pulumi:"domain"`
 	// Ip of the resource.
 	Ip pulumi.StringPtrInput `pulumi:"ip"`
-	// The number of pages, default is `10`.
+	// It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21.
 	Limit pulumi.IntPtrInput `pulumi:"limit"`
-	// The page start offset, default is `0`.
+	// It has been deprecated from version 1.81.21. The page start offset, default is `0`.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21.
 	Offset pulumi.IntPtrInput `pulumi:"offset"`
 	// Protocol of resource, value range [`http`, `https`].
 	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
@@ -152,6 +162,7 @@ func (o GetL7RulesV2ResultOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetL7RulesV2Result) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
+// Deprecated: It has been deprecated from version 1.81.21.
 func (o GetL7RulesV2ResultOutput) Limit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetL7RulesV2Result) *int { return v.Limit }).(pulumi.IntPtrOutput)
 }
@@ -161,6 +172,7 @@ func (o GetL7RulesV2ResultOutput) Lists() GetL7RulesV2ListArrayOutput {
 	return o.ApplyT(func(v GetL7RulesV2Result) []GetL7RulesV2List { return v.Lists }).(GetL7RulesV2ListArrayOutput)
 }
 
+// Deprecated: It has been deprecated from version 1.81.21.
 func (o GetL7RulesV2ResultOutput) Offset() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetL7RulesV2Result) *int { return v.Offset }).(pulumi.IntPtrOutput)
 }

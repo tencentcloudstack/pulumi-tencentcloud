@@ -52,6 +52,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             set => _domain.Set(value);
         }
 
+        private static readonly __Value<string?> _profile = new __Value<string?>(() => __config.Get("profile"));
+        /// <summary>
+        /// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+        /// variable. If not set, the default profile created with `tccli configure` will be used.
+        /// </summary>
+        public static string? Profile
+        {
+            get => _profile.Get();
+            set => _profile.Set(value);
+        }
+
         private static readonly __Value<string?> _protocol = new __Value<string?>(() => __config.Get("protocol"));
         /// <summary>
         /// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
@@ -105,6 +116,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         {
             get => _securityToken.Get();
             set => _securityToken.Set(value);
+        }
+
+        private static readonly __Value<string?> _sharedCredentialsDir = new __Value<string?>(() => __config.Get("sharedCredentialsDir"));
+        /// <summary>
+        /// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+        /// environment variable. If not set this defaults to ~/.tccli.
+        /// </summary>
+        public static string? SharedCredentialsDir
+        {
+            get => _sharedCredentialsDir.Get();
+            set => _sharedCredentialsDir.Set(value);
         }
 
         public static class Types

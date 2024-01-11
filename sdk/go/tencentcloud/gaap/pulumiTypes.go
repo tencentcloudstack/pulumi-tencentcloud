@@ -10,6 +10,112 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type CustomHeaderHeader struct {
+	// Header name.
+	HeaderName string `pulumi:"headerName"`
+	// Header value.
+	HeaderValue string `pulumi:"headerValue"`
+}
+
+// CustomHeaderHeaderInput is an input type that accepts CustomHeaderHeaderArgs and CustomHeaderHeaderOutput values.
+// You can construct a concrete instance of `CustomHeaderHeaderInput` via:
+//
+//          CustomHeaderHeaderArgs{...}
+type CustomHeaderHeaderInput interface {
+	pulumi.Input
+
+	ToCustomHeaderHeaderOutput() CustomHeaderHeaderOutput
+	ToCustomHeaderHeaderOutputWithContext(context.Context) CustomHeaderHeaderOutput
+}
+
+type CustomHeaderHeaderArgs struct {
+	// Header name.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// Header value.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+}
+
+func (CustomHeaderHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomHeaderHeader)(nil)).Elem()
+}
+
+func (i CustomHeaderHeaderArgs) ToCustomHeaderHeaderOutput() CustomHeaderHeaderOutput {
+	return i.ToCustomHeaderHeaderOutputWithContext(context.Background())
+}
+
+func (i CustomHeaderHeaderArgs) ToCustomHeaderHeaderOutputWithContext(ctx context.Context) CustomHeaderHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomHeaderHeaderOutput)
+}
+
+// CustomHeaderHeaderArrayInput is an input type that accepts CustomHeaderHeaderArray and CustomHeaderHeaderArrayOutput values.
+// You can construct a concrete instance of `CustomHeaderHeaderArrayInput` via:
+//
+//          CustomHeaderHeaderArray{ CustomHeaderHeaderArgs{...} }
+type CustomHeaderHeaderArrayInput interface {
+	pulumi.Input
+
+	ToCustomHeaderHeaderArrayOutput() CustomHeaderHeaderArrayOutput
+	ToCustomHeaderHeaderArrayOutputWithContext(context.Context) CustomHeaderHeaderArrayOutput
+}
+
+type CustomHeaderHeaderArray []CustomHeaderHeaderInput
+
+func (CustomHeaderHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomHeaderHeader)(nil)).Elem()
+}
+
+func (i CustomHeaderHeaderArray) ToCustomHeaderHeaderArrayOutput() CustomHeaderHeaderArrayOutput {
+	return i.ToCustomHeaderHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i CustomHeaderHeaderArray) ToCustomHeaderHeaderArrayOutputWithContext(ctx context.Context) CustomHeaderHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomHeaderHeaderArrayOutput)
+}
+
+type CustomHeaderHeaderOutput struct{ *pulumi.OutputState }
+
+func (CustomHeaderHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomHeaderHeader)(nil)).Elem()
+}
+
+func (o CustomHeaderHeaderOutput) ToCustomHeaderHeaderOutput() CustomHeaderHeaderOutput {
+	return o
+}
+
+func (o CustomHeaderHeaderOutput) ToCustomHeaderHeaderOutputWithContext(ctx context.Context) CustomHeaderHeaderOutput {
+	return o
+}
+
+// Header name.
+func (o CustomHeaderHeaderOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomHeaderHeader) string { return v.HeaderName }).(pulumi.StringOutput)
+}
+
+// Header value.
+func (o CustomHeaderHeaderOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomHeaderHeader) string { return v.HeaderValue }).(pulumi.StringOutput)
+}
+
+type CustomHeaderHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomHeaderHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomHeaderHeader)(nil)).Elem()
+}
+
+func (o CustomHeaderHeaderArrayOutput) ToCustomHeaderHeaderArrayOutput() CustomHeaderHeaderArrayOutput {
+	return o
+}
+
+func (o CustomHeaderHeaderArrayOutput) ToCustomHeaderHeaderArrayOutputWithContext(ctx context.Context) CustomHeaderHeaderArrayOutput {
+	return o
+}
+
+func (o CustomHeaderHeaderArrayOutput) Index(i pulumi.IntInput) CustomHeaderHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomHeaderHeader {
+		return vs[0].([]CustomHeaderHeader)[vs[1].(int)]
+	}).(CustomHeaderHeaderOutput)
+}
+
 type HttpRuleRealserver struct {
 	// ID of the GAAP realserver.
 	Id string `pulumi:"id"`
@@ -258,6 +364,416 @@ func (o Layer4ListenerRealserverBindSetArrayOutput) Index(i pulumi.IntInput) Lay
 	}).(Layer4ListenerRealserverBindSetOutput)
 }
 
+type GetAccessRegionsAccessRegionSet struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Name of the region to which the computer room belongs.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region id.
+	RegionId string `pulumi:"regionId"`
+	// English or Chinese name of the region.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetAccessRegionsAccessRegionSetSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetAccessRegionsAccessRegionSetInput is an input type that accepts GetAccessRegionsAccessRegionSetArgs and GetAccessRegionsAccessRegionSetOutput values.
+// You can construct a concrete instance of `GetAccessRegionsAccessRegionSetInput` via:
+//
+//          GetAccessRegionsAccessRegionSetArgs{...}
+type GetAccessRegionsAccessRegionSetInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsAccessRegionSetOutput() GetAccessRegionsAccessRegionSetOutput
+	ToGetAccessRegionsAccessRegionSetOutputWithContext(context.Context) GetAccessRegionsAccessRegionSetOutput
+}
+
+type GetAccessRegionsAccessRegionSetArgs struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Name of the region to which the computer room belongs.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// English or Chinese name of the region.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetAccessRegionsAccessRegionSetSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetAccessRegionsAccessRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsAccessRegionSet)(nil)).Elem()
+}
+
+func (i GetAccessRegionsAccessRegionSetArgs) ToGetAccessRegionsAccessRegionSetOutput() GetAccessRegionsAccessRegionSetOutput {
+	return i.ToGetAccessRegionsAccessRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsAccessRegionSetArgs) ToGetAccessRegionsAccessRegionSetOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsAccessRegionSetOutput)
+}
+
+// GetAccessRegionsAccessRegionSetArrayInput is an input type that accepts GetAccessRegionsAccessRegionSetArray and GetAccessRegionsAccessRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetAccessRegionsAccessRegionSetArrayInput` via:
+//
+//          GetAccessRegionsAccessRegionSetArray{ GetAccessRegionsAccessRegionSetArgs{...} }
+type GetAccessRegionsAccessRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsAccessRegionSetArrayOutput() GetAccessRegionsAccessRegionSetArrayOutput
+	ToGetAccessRegionsAccessRegionSetArrayOutputWithContext(context.Context) GetAccessRegionsAccessRegionSetArrayOutput
+}
+
+type GetAccessRegionsAccessRegionSetArray []GetAccessRegionsAccessRegionSetInput
+
+func (GetAccessRegionsAccessRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsAccessRegionSet)(nil)).Elem()
+}
+
+func (i GetAccessRegionsAccessRegionSetArray) ToGetAccessRegionsAccessRegionSetArrayOutput() GetAccessRegionsAccessRegionSetArrayOutput {
+	return i.ToGetAccessRegionsAccessRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsAccessRegionSetArray) ToGetAccessRegionsAccessRegionSetArrayOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsAccessRegionSetArrayOutput)
+}
+
+type GetAccessRegionsAccessRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsAccessRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsAccessRegionSet)(nil)).Elem()
+}
+
+func (o GetAccessRegionsAccessRegionSetOutput) ToGetAccessRegionsAccessRegionSetOutput() GetAccessRegionsAccessRegionSetOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetOutput) ToGetAccessRegionsAccessRegionSetOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetAccessRegionsAccessRegionSetOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+func (o GetAccessRegionsAccessRegionSetOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetAccessRegionsAccessRegionSetOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Name of the region to which the computer room belongs.
+func (o GetAccessRegionsAccessRegionSetOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region id.
+func (o GetAccessRegionsAccessRegionSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// English or Chinese name of the region.
+func (o GetAccessRegionsAccessRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetAccessRegionsAccessRegionSetOutput) SupportFeatures() GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSet) []GetAccessRegionsAccessRegionSetSupportFeature {
+		return v.SupportFeatures
+	}).(GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput)
+}
+
+type GetAccessRegionsAccessRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsAccessRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsAccessRegionSet)(nil)).Elem()
+}
+
+func (o GetAccessRegionsAccessRegionSetArrayOutput) ToGetAccessRegionsAccessRegionSetArrayOutput() GetAccessRegionsAccessRegionSetArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetArrayOutput) ToGetAccessRegionsAccessRegionSetArrayOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetArrayOutput) Index(i pulumi.IntInput) GetAccessRegionsAccessRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessRegionsAccessRegionSet {
+		return vs[0].([]GetAccessRegionsAccessRegionSet)[vs[1].(int)]
+	}).(GetAccessRegionsAccessRegionSetOutput)
+}
+
+type GetAccessRegionsAccessRegionSetSupportFeature struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_ EIP represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetAccessRegionsAccessRegionSetSupportFeatureInput is an input type that accepts GetAccessRegionsAccessRegionSetSupportFeatureArgs and GetAccessRegionsAccessRegionSetSupportFeatureOutput values.
+// You can construct a concrete instance of `GetAccessRegionsAccessRegionSetSupportFeatureInput` via:
+//
+//          GetAccessRegionsAccessRegionSetSupportFeatureArgs{...}
+type GetAccessRegionsAccessRegionSetSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsAccessRegionSetSupportFeatureOutput() GetAccessRegionsAccessRegionSetSupportFeatureOutput
+	ToGetAccessRegionsAccessRegionSetSupportFeatureOutputWithContext(context.Context) GetAccessRegionsAccessRegionSetSupportFeatureOutput
+}
+
+type GetAccessRegionsAccessRegionSetSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_ EIP represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetAccessRegionsAccessRegionSetSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsAccessRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetAccessRegionsAccessRegionSetSupportFeatureArgs) ToGetAccessRegionsAccessRegionSetSupportFeatureOutput() GetAccessRegionsAccessRegionSetSupportFeatureOutput {
+	return i.ToGetAccessRegionsAccessRegionSetSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsAccessRegionSetSupportFeatureArgs) ToGetAccessRegionsAccessRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsAccessRegionSetSupportFeatureOutput)
+}
+
+// GetAccessRegionsAccessRegionSetSupportFeatureArrayInput is an input type that accepts GetAccessRegionsAccessRegionSetSupportFeatureArray and GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetAccessRegionsAccessRegionSetSupportFeatureArrayInput` via:
+//
+//          GetAccessRegionsAccessRegionSetSupportFeatureArray{ GetAccessRegionsAccessRegionSetSupportFeatureArgs{...} }
+type GetAccessRegionsAccessRegionSetSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutput() GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput
+	ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutputWithContext(context.Context) GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput
+}
+
+type GetAccessRegionsAccessRegionSetSupportFeatureArray []GetAccessRegionsAccessRegionSetSupportFeatureInput
+
+func (GetAccessRegionsAccessRegionSetSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsAccessRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetAccessRegionsAccessRegionSetSupportFeatureArray) ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutput() GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput {
+	return i.ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsAccessRegionSetSupportFeatureArray) ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput)
+}
+
+type GetAccessRegionsAccessRegionSetSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsAccessRegionSetSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsAccessRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetAccessRegionsAccessRegionSetSupportFeatureOutput) ToGetAccessRegionsAccessRegionSetSupportFeatureOutput() GetAccessRegionsAccessRegionSetSupportFeatureOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetSupportFeatureOutput) ToGetAccessRegionsAccessRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_ EIP represents a custom secure EIP.
+func (o GetAccessRegionsAccessRegionSetSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccessRegionsAccessRegionSetSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsAccessRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput) ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutput() GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput) ToGetAccessRegionsAccessRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetAccessRegionsAccessRegionSetSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessRegionsAccessRegionSetSupportFeature {
+		return vs[0].([]GetAccessRegionsAccessRegionSetSupportFeature)[vs[1].(int)]
+	}).(GetAccessRegionsAccessRegionSetSupportFeatureOutput)
+}
+
+type GetAccessRegionsByDestRegionAccessRegionSet struct {
+	// Optional bandwidth value array.
+	BandwidthLists []int `pulumi:"bandwidthLists"`
+	// Optional concurrency value array.
+	ConcurrentLists []int `pulumi:"concurrentLists"`
+	// The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region id.
+	RegionId string `pulumi:"regionId"`
+	// Chinese or English name of the region.
+	RegionName string `pulumi:"regionName"`
+}
+
+// GetAccessRegionsByDestRegionAccessRegionSetInput is an input type that accepts GetAccessRegionsByDestRegionAccessRegionSetArgs and GetAccessRegionsByDestRegionAccessRegionSetOutput values.
+// You can construct a concrete instance of `GetAccessRegionsByDestRegionAccessRegionSetInput` via:
+//
+//          GetAccessRegionsByDestRegionAccessRegionSetArgs{...}
+type GetAccessRegionsByDestRegionAccessRegionSetInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsByDestRegionAccessRegionSetOutput() GetAccessRegionsByDestRegionAccessRegionSetOutput
+	ToGetAccessRegionsByDestRegionAccessRegionSetOutputWithContext(context.Context) GetAccessRegionsByDestRegionAccessRegionSetOutput
+}
+
+type GetAccessRegionsByDestRegionAccessRegionSetArgs struct {
+	// Optional bandwidth value array.
+	BandwidthLists pulumi.IntArrayInput `pulumi:"bandwidthLists"`
+	// Optional concurrency value array.
+	ConcurrentLists pulumi.IntArrayInput `pulumi:"concurrentLists"`
+	// The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Chinese or English name of the region.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+}
+
+func (GetAccessRegionsByDestRegionAccessRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsByDestRegionAccessRegionSet)(nil)).Elem()
+}
+
+func (i GetAccessRegionsByDestRegionAccessRegionSetArgs) ToGetAccessRegionsByDestRegionAccessRegionSetOutput() GetAccessRegionsByDestRegionAccessRegionSetOutput {
+	return i.ToGetAccessRegionsByDestRegionAccessRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsByDestRegionAccessRegionSetArgs) ToGetAccessRegionsByDestRegionAccessRegionSetOutputWithContext(ctx context.Context) GetAccessRegionsByDestRegionAccessRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsByDestRegionAccessRegionSetOutput)
+}
+
+// GetAccessRegionsByDestRegionAccessRegionSetArrayInput is an input type that accepts GetAccessRegionsByDestRegionAccessRegionSetArray and GetAccessRegionsByDestRegionAccessRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetAccessRegionsByDestRegionAccessRegionSetArrayInput` via:
+//
+//          GetAccessRegionsByDestRegionAccessRegionSetArray{ GetAccessRegionsByDestRegionAccessRegionSetArgs{...} }
+type GetAccessRegionsByDestRegionAccessRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutput() GetAccessRegionsByDestRegionAccessRegionSetArrayOutput
+	ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutputWithContext(context.Context) GetAccessRegionsByDestRegionAccessRegionSetArrayOutput
+}
+
+type GetAccessRegionsByDestRegionAccessRegionSetArray []GetAccessRegionsByDestRegionAccessRegionSetInput
+
+func (GetAccessRegionsByDestRegionAccessRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsByDestRegionAccessRegionSet)(nil)).Elem()
+}
+
+func (i GetAccessRegionsByDestRegionAccessRegionSetArray) ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutput() GetAccessRegionsByDestRegionAccessRegionSetArrayOutput {
+	return i.ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccessRegionsByDestRegionAccessRegionSetArray) ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutputWithContext(ctx context.Context) GetAccessRegionsByDestRegionAccessRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRegionsByDestRegionAccessRegionSetArrayOutput)
+}
+
+type GetAccessRegionsByDestRegionAccessRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsByDestRegionAccessRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRegionsByDestRegionAccessRegionSet)(nil)).Elem()
+}
+
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) ToGetAccessRegionsByDestRegionAccessRegionSetOutput() GetAccessRegionsByDestRegionAccessRegionSetOutput {
+	return o
+}
+
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) ToGetAccessRegionsByDestRegionAccessRegionSetOutputWithContext(ctx context.Context) GetAccessRegionsByDestRegionAccessRegionSetOutput {
+	return o
+}
+
+// Optional bandwidth value array.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) BandwidthLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) []int { return v.BandwidthLists }).(pulumi.IntArrayOutput)
+}
+
+// Optional concurrency value array.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) ConcurrentLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) []int { return v.ConcurrentLists }).(pulumi.IntArrayOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center, ec represents the feature bitmap, and each bit represents a feature, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained. Edge nodes.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region id.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Chinese or English name of the region.
+func (o GetAccessRegionsByDestRegionAccessRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRegionsByDestRegionAccessRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+type GetAccessRegionsByDestRegionAccessRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccessRegionsByDestRegionAccessRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRegionsByDestRegionAccessRegionSet)(nil)).Elem()
+}
+
+func (o GetAccessRegionsByDestRegionAccessRegionSetArrayOutput) ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutput() GetAccessRegionsByDestRegionAccessRegionSetArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsByDestRegionAccessRegionSetArrayOutput) ToGetAccessRegionsByDestRegionAccessRegionSetArrayOutputWithContext(ctx context.Context) GetAccessRegionsByDestRegionAccessRegionSetArrayOutput {
+	return o
+}
+
+func (o GetAccessRegionsByDestRegionAccessRegionSetArrayOutput) Index(i pulumi.IntInput) GetAccessRegionsByDestRegionAccessRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessRegionsByDestRegionAccessRegionSet {
+		return vs[0].([]GetAccessRegionsByDestRegionAccessRegionSet)[vs[1].(int)]
+	}).(GetAccessRegionsByDestRegionAccessRegionSetOutput)
+}
+
 type GetCertificatesCertificate struct {
 	// Beginning time of the certificate.
 	BeginTime string `pulumi:"beginTime"`
@@ -418,6 +934,790 @@ func (o GetCertificatesCertificateArrayOutput) Index(i pulumi.IntInput) GetCerti
 	}).(GetCertificatesCertificateOutput)
 }
 
+type GetCountryAreaMappingCountryAreaMappingList struct {
+	// Continental Code.
+	ContinentInnerCode string `pulumi:"continentInnerCode"`
+	// The name of the continent.
+	ContinentName string `pulumi:"continentName"`
+	// Region code.
+	GeographicalZoneInnerCode string `pulumi:"geographicalZoneInnerCode"`
+	// Region name.
+	GeographicalZoneName string `pulumi:"geographicalZoneName"`
+	// Country code.
+	NationCountryInnerCode string `pulumi:"nationCountryInnerCode"`
+	// Country name.
+	NationCountryName string `pulumi:"nationCountryName"`
+	// Annotation InformationNote: This field may return null, indicating that a valid value cannot be obtained.
+	Remark string `pulumi:"remark"`
+}
+
+// GetCountryAreaMappingCountryAreaMappingListInput is an input type that accepts GetCountryAreaMappingCountryAreaMappingListArgs and GetCountryAreaMappingCountryAreaMappingListOutput values.
+// You can construct a concrete instance of `GetCountryAreaMappingCountryAreaMappingListInput` via:
+//
+//          GetCountryAreaMappingCountryAreaMappingListArgs{...}
+type GetCountryAreaMappingCountryAreaMappingListInput interface {
+	pulumi.Input
+
+	ToGetCountryAreaMappingCountryAreaMappingListOutput() GetCountryAreaMappingCountryAreaMappingListOutput
+	ToGetCountryAreaMappingCountryAreaMappingListOutputWithContext(context.Context) GetCountryAreaMappingCountryAreaMappingListOutput
+}
+
+type GetCountryAreaMappingCountryAreaMappingListArgs struct {
+	// Continental Code.
+	ContinentInnerCode pulumi.StringInput `pulumi:"continentInnerCode"`
+	// The name of the continent.
+	ContinentName pulumi.StringInput `pulumi:"continentName"`
+	// Region code.
+	GeographicalZoneInnerCode pulumi.StringInput `pulumi:"geographicalZoneInnerCode"`
+	// Region name.
+	GeographicalZoneName pulumi.StringInput `pulumi:"geographicalZoneName"`
+	// Country code.
+	NationCountryInnerCode pulumi.StringInput `pulumi:"nationCountryInnerCode"`
+	// Country name.
+	NationCountryName pulumi.StringInput `pulumi:"nationCountryName"`
+	// Annotation InformationNote: This field may return null, indicating that a valid value cannot be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+}
+
+func (GetCountryAreaMappingCountryAreaMappingListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCountryAreaMappingCountryAreaMappingList)(nil)).Elem()
+}
+
+func (i GetCountryAreaMappingCountryAreaMappingListArgs) ToGetCountryAreaMappingCountryAreaMappingListOutput() GetCountryAreaMappingCountryAreaMappingListOutput {
+	return i.ToGetCountryAreaMappingCountryAreaMappingListOutputWithContext(context.Background())
+}
+
+func (i GetCountryAreaMappingCountryAreaMappingListArgs) ToGetCountryAreaMappingCountryAreaMappingListOutputWithContext(ctx context.Context) GetCountryAreaMappingCountryAreaMappingListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCountryAreaMappingCountryAreaMappingListOutput)
+}
+
+// GetCountryAreaMappingCountryAreaMappingListArrayInput is an input type that accepts GetCountryAreaMappingCountryAreaMappingListArray and GetCountryAreaMappingCountryAreaMappingListArrayOutput values.
+// You can construct a concrete instance of `GetCountryAreaMappingCountryAreaMappingListArrayInput` via:
+//
+//          GetCountryAreaMappingCountryAreaMappingListArray{ GetCountryAreaMappingCountryAreaMappingListArgs{...} }
+type GetCountryAreaMappingCountryAreaMappingListArrayInput interface {
+	pulumi.Input
+
+	ToGetCountryAreaMappingCountryAreaMappingListArrayOutput() GetCountryAreaMappingCountryAreaMappingListArrayOutput
+	ToGetCountryAreaMappingCountryAreaMappingListArrayOutputWithContext(context.Context) GetCountryAreaMappingCountryAreaMappingListArrayOutput
+}
+
+type GetCountryAreaMappingCountryAreaMappingListArray []GetCountryAreaMappingCountryAreaMappingListInput
+
+func (GetCountryAreaMappingCountryAreaMappingListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCountryAreaMappingCountryAreaMappingList)(nil)).Elem()
+}
+
+func (i GetCountryAreaMappingCountryAreaMappingListArray) ToGetCountryAreaMappingCountryAreaMappingListArrayOutput() GetCountryAreaMappingCountryAreaMappingListArrayOutput {
+	return i.ToGetCountryAreaMappingCountryAreaMappingListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCountryAreaMappingCountryAreaMappingListArray) ToGetCountryAreaMappingCountryAreaMappingListArrayOutputWithContext(ctx context.Context) GetCountryAreaMappingCountryAreaMappingListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCountryAreaMappingCountryAreaMappingListArrayOutput)
+}
+
+type GetCountryAreaMappingCountryAreaMappingListOutput struct{ *pulumi.OutputState }
+
+func (GetCountryAreaMappingCountryAreaMappingListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCountryAreaMappingCountryAreaMappingList)(nil)).Elem()
+}
+
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) ToGetCountryAreaMappingCountryAreaMappingListOutput() GetCountryAreaMappingCountryAreaMappingListOutput {
+	return o
+}
+
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) ToGetCountryAreaMappingCountryAreaMappingListOutputWithContext(ctx context.Context) GetCountryAreaMappingCountryAreaMappingListOutput {
+	return o
+}
+
+// Continental Code.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) ContinentInnerCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.ContinentInnerCode }).(pulumi.StringOutput)
+}
+
+// The name of the continent.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) ContinentName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.ContinentName }).(pulumi.StringOutput)
+}
+
+// Region code.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) GeographicalZoneInnerCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.GeographicalZoneInnerCode }).(pulumi.StringOutput)
+}
+
+// Region name.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) GeographicalZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.GeographicalZoneName }).(pulumi.StringOutput)
+}
+
+// Country code.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) NationCountryInnerCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.NationCountryInnerCode }).(pulumi.StringOutput)
+}
+
+// Country name.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) NationCountryName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.NationCountryName }).(pulumi.StringOutput)
+}
+
+// Annotation InformationNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetCountryAreaMappingCountryAreaMappingListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCountryAreaMappingCountryAreaMappingList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+type GetCountryAreaMappingCountryAreaMappingListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCountryAreaMappingCountryAreaMappingListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCountryAreaMappingCountryAreaMappingList)(nil)).Elem()
+}
+
+func (o GetCountryAreaMappingCountryAreaMappingListArrayOutput) ToGetCountryAreaMappingCountryAreaMappingListArrayOutput() GetCountryAreaMappingCountryAreaMappingListArrayOutput {
+	return o
+}
+
+func (o GetCountryAreaMappingCountryAreaMappingListArrayOutput) ToGetCountryAreaMappingCountryAreaMappingListArrayOutputWithContext(ctx context.Context) GetCountryAreaMappingCountryAreaMappingListArrayOutput {
+	return o
+}
+
+func (o GetCountryAreaMappingCountryAreaMappingListArrayOutput) Index(i pulumi.IntInput) GetCountryAreaMappingCountryAreaMappingListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCountryAreaMappingCountryAreaMappingList {
+		return vs[0].([]GetCountryAreaMappingCountryAreaMappingList)[vs[1].(int)]
+	}).(GetCountryAreaMappingCountryAreaMappingListOutput)
+}
+
+type GetCustomHeaderHeader struct {
+	// Header Name.
+	HeaderName string `pulumi:"headerName"`
+	// Header Value.
+	HeaderValue string `pulumi:"headerValue"`
+}
+
+// GetCustomHeaderHeaderInput is an input type that accepts GetCustomHeaderHeaderArgs and GetCustomHeaderHeaderOutput values.
+// You can construct a concrete instance of `GetCustomHeaderHeaderInput` via:
+//
+//          GetCustomHeaderHeaderArgs{...}
+type GetCustomHeaderHeaderInput interface {
+	pulumi.Input
+
+	ToGetCustomHeaderHeaderOutput() GetCustomHeaderHeaderOutput
+	ToGetCustomHeaderHeaderOutputWithContext(context.Context) GetCustomHeaderHeaderOutput
+}
+
+type GetCustomHeaderHeaderArgs struct {
+	// Header Name.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// Header Value.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+}
+
+func (GetCustomHeaderHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomHeaderHeader)(nil)).Elem()
+}
+
+func (i GetCustomHeaderHeaderArgs) ToGetCustomHeaderHeaderOutput() GetCustomHeaderHeaderOutput {
+	return i.ToGetCustomHeaderHeaderOutputWithContext(context.Background())
+}
+
+func (i GetCustomHeaderHeaderArgs) ToGetCustomHeaderHeaderOutputWithContext(ctx context.Context) GetCustomHeaderHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomHeaderHeaderOutput)
+}
+
+// GetCustomHeaderHeaderArrayInput is an input type that accepts GetCustomHeaderHeaderArray and GetCustomHeaderHeaderArrayOutput values.
+// You can construct a concrete instance of `GetCustomHeaderHeaderArrayInput` via:
+//
+//          GetCustomHeaderHeaderArray{ GetCustomHeaderHeaderArgs{...} }
+type GetCustomHeaderHeaderArrayInput interface {
+	pulumi.Input
+
+	ToGetCustomHeaderHeaderArrayOutput() GetCustomHeaderHeaderArrayOutput
+	ToGetCustomHeaderHeaderArrayOutputWithContext(context.Context) GetCustomHeaderHeaderArrayOutput
+}
+
+type GetCustomHeaderHeaderArray []GetCustomHeaderHeaderInput
+
+func (GetCustomHeaderHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomHeaderHeader)(nil)).Elem()
+}
+
+func (i GetCustomHeaderHeaderArray) ToGetCustomHeaderHeaderArrayOutput() GetCustomHeaderHeaderArrayOutput {
+	return i.ToGetCustomHeaderHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i GetCustomHeaderHeaderArray) ToGetCustomHeaderHeaderArrayOutputWithContext(ctx context.Context) GetCustomHeaderHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomHeaderHeaderArrayOutput)
+}
+
+type GetCustomHeaderHeaderOutput struct{ *pulumi.OutputState }
+
+func (GetCustomHeaderHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomHeaderHeader)(nil)).Elem()
+}
+
+func (o GetCustomHeaderHeaderOutput) ToGetCustomHeaderHeaderOutput() GetCustomHeaderHeaderOutput {
+	return o
+}
+
+func (o GetCustomHeaderHeaderOutput) ToGetCustomHeaderHeaderOutputWithContext(ctx context.Context) GetCustomHeaderHeaderOutput {
+	return o
+}
+
+// Header Name.
+func (o GetCustomHeaderHeaderOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomHeaderHeader) string { return v.HeaderName }).(pulumi.StringOutput)
+}
+
+// Header Value.
+func (o GetCustomHeaderHeaderOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomHeaderHeader) string { return v.HeaderValue }).(pulumi.StringOutput)
+}
+
+type GetCustomHeaderHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCustomHeaderHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomHeaderHeader)(nil)).Elem()
+}
+
+func (o GetCustomHeaderHeaderArrayOutput) ToGetCustomHeaderHeaderArrayOutput() GetCustomHeaderHeaderArrayOutput {
+	return o
+}
+
+func (o GetCustomHeaderHeaderArrayOutput) ToGetCustomHeaderHeaderArrayOutputWithContext(ctx context.Context) GetCustomHeaderHeaderArrayOutput {
+	return o
+}
+
+func (o GetCustomHeaderHeaderArrayOutput) Index(i pulumi.IntInput) GetCustomHeaderHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCustomHeaderHeader {
+		return vs[0].([]GetCustomHeaderHeader)[vs[1].(int)]
+	}).(GetCustomHeaderHeaderOutput)
+}
+
+type GetDestRegionsDestRegionSet struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// region ID.
+	RegionId string `pulumi:"regionId"`
+	// region name.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetDestRegionsDestRegionSetSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetDestRegionsDestRegionSetInput is an input type that accepts GetDestRegionsDestRegionSetArgs and GetDestRegionsDestRegionSetOutput values.
+// You can construct a concrete instance of `GetDestRegionsDestRegionSetInput` via:
+//
+//          GetDestRegionsDestRegionSetArgs{...}
+type GetDestRegionsDestRegionSetInput interface {
+	pulumi.Input
+
+	ToGetDestRegionsDestRegionSetOutput() GetDestRegionsDestRegionSetOutput
+	ToGetDestRegionsDestRegionSetOutputWithContext(context.Context) GetDestRegionsDestRegionSetOutput
+}
+
+type GetDestRegionsDestRegionSetArgs struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// region ID.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// region name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetDestRegionsDestRegionSetSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetDestRegionsDestRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDestRegionsDestRegionSet)(nil)).Elem()
+}
+
+func (i GetDestRegionsDestRegionSetArgs) ToGetDestRegionsDestRegionSetOutput() GetDestRegionsDestRegionSetOutput {
+	return i.ToGetDestRegionsDestRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetDestRegionsDestRegionSetArgs) ToGetDestRegionsDestRegionSetOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDestRegionsDestRegionSetOutput)
+}
+
+// GetDestRegionsDestRegionSetArrayInput is an input type that accepts GetDestRegionsDestRegionSetArray and GetDestRegionsDestRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetDestRegionsDestRegionSetArrayInput` via:
+//
+//          GetDestRegionsDestRegionSetArray{ GetDestRegionsDestRegionSetArgs{...} }
+type GetDestRegionsDestRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDestRegionsDestRegionSetArrayOutput() GetDestRegionsDestRegionSetArrayOutput
+	ToGetDestRegionsDestRegionSetArrayOutputWithContext(context.Context) GetDestRegionsDestRegionSetArrayOutput
+}
+
+type GetDestRegionsDestRegionSetArray []GetDestRegionsDestRegionSetInput
+
+func (GetDestRegionsDestRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDestRegionsDestRegionSet)(nil)).Elem()
+}
+
+func (i GetDestRegionsDestRegionSetArray) ToGetDestRegionsDestRegionSetArrayOutput() GetDestRegionsDestRegionSetArrayOutput {
+	return i.ToGetDestRegionsDestRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDestRegionsDestRegionSetArray) ToGetDestRegionsDestRegionSetArrayOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDestRegionsDestRegionSetArrayOutput)
+}
+
+type GetDestRegionsDestRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetDestRegionsDestRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDestRegionsDestRegionSet)(nil)).Elem()
+}
+
+func (o GetDestRegionsDestRegionSetOutput) ToGetDestRegionsDestRegionSetOutput() GetDestRegionsDestRegionSetOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetOutput) ToGetDestRegionsDestRegionSetOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDestRegionsDestRegionSetOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+func (o GetDestRegionsDestRegionSetOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetDestRegionsDestRegionSetOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetDestRegionsDestRegionSetOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// region ID.
+func (o GetDestRegionsDestRegionSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// region name.
+func (o GetDestRegionsDestRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDestRegionsDestRegionSetOutput) SupportFeatures() GetDestRegionsDestRegionSetSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSet) []GetDestRegionsDestRegionSetSupportFeature {
+		return v.SupportFeatures
+	}).(GetDestRegionsDestRegionSetSupportFeatureArrayOutput)
+}
+
+type GetDestRegionsDestRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDestRegionsDestRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDestRegionsDestRegionSet)(nil)).Elem()
+}
+
+func (o GetDestRegionsDestRegionSetArrayOutput) ToGetDestRegionsDestRegionSetArrayOutput() GetDestRegionsDestRegionSetArrayOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetArrayOutput) ToGetDestRegionsDestRegionSetArrayOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetArrayOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetArrayOutput) Index(i pulumi.IntInput) GetDestRegionsDestRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDestRegionsDestRegionSet {
+		return vs[0].([]GetDestRegionsDestRegionSet)[vs[1].(int)]
+	}).(GetDestRegionsDestRegionSetOutput)
+}
+
+type GetDestRegionsDestRegionSetSupportFeature struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetDestRegionsDestRegionSetSupportFeatureInput is an input type that accepts GetDestRegionsDestRegionSetSupportFeatureArgs and GetDestRegionsDestRegionSetSupportFeatureOutput values.
+// You can construct a concrete instance of `GetDestRegionsDestRegionSetSupportFeatureInput` via:
+//
+//          GetDestRegionsDestRegionSetSupportFeatureArgs{...}
+type GetDestRegionsDestRegionSetSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetDestRegionsDestRegionSetSupportFeatureOutput() GetDestRegionsDestRegionSetSupportFeatureOutput
+	ToGetDestRegionsDestRegionSetSupportFeatureOutputWithContext(context.Context) GetDestRegionsDestRegionSetSupportFeatureOutput
+}
+
+type GetDestRegionsDestRegionSetSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetDestRegionsDestRegionSetSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDestRegionsDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetDestRegionsDestRegionSetSupportFeatureArgs) ToGetDestRegionsDestRegionSetSupportFeatureOutput() GetDestRegionsDestRegionSetSupportFeatureOutput {
+	return i.ToGetDestRegionsDestRegionSetSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetDestRegionsDestRegionSetSupportFeatureArgs) ToGetDestRegionsDestRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDestRegionsDestRegionSetSupportFeatureOutput)
+}
+
+// GetDestRegionsDestRegionSetSupportFeatureArrayInput is an input type that accepts GetDestRegionsDestRegionSetSupportFeatureArray and GetDestRegionsDestRegionSetSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetDestRegionsDestRegionSetSupportFeatureArrayInput` via:
+//
+//          GetDestRegionsDestRegionSetSupportFeatureArray{ GetDestRegionsDestRegionSetSupportFeatureArgs{...} }
+type GetDestRegionsDestRegionSetSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetDestRegionsDestRegionSetSupportFeatureArrayOutput() GetDestRegionsDestRegionSetSupportFeatureArrayOutput
+	ToGetDestRegionsDestRegionSetSupportFeatureArrayOutputWithContext(context.Context) GetDestRegionsDestRegionSetSupportFeatureArrayOutput
+}
+
+type GetDestRegionsDestRegionSetSupportFeatureArray []GetDestRegionsDestRegionSetSupportFeatureInput
+
+func (GetDestRegionsDestRegionSetSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDestRegionsDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetDestRegionsDestRegionSetSupportFeatureArray) ToGetDestRegionsDestRegionSetSupportFeatureArrayOutput() GetDestRegionsDestRegionSetSupportFeatureArrayOutput {
+	return i.ToGetDestRegionsDestRegionSetSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetDestRegionsDestRegionSetSupportFeatureArray) ToGetDestRegionsDestRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDestRegionsDestRegionSetSupportFeatureArrayOutput)
+}
+
+type GetDestRegionsDestRegionSetSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetDestRegionsDestRegionSetSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDestRegionsDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetDestRegionsDestRegionSetSupportFeatureOutput) ToGetDestRegionsDestRegionSetSupportFeatureOutput() GetDestRegionsDestRegionSetSupportFeatureOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetSupportFeatureOutput) ToGetDestRegionsDestRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+func (o GetDestRegionsDestRegionSetSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDestRegionsDestRegionSetSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetDestRegionsDestRegionSetSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDestRegionsDestRegionSetSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDestRegionsDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetDestRegionsDestRegionSetSupportFeatureArrayOutput) ToGetDestRegionsDestRegionSetSupportFeatureArrayOutput() GetDestRegionsDestRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetSupportFeatureArrayOutput) ToGetDestRegionsDestRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetDestRegionsDestRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetDestRegionsDestRegionSetSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetDestRegionsDestRegionSetSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDestRegionsDestRegionSetSupportFeature {
+		return vs[0].([]GetDestRegionsDestRegionSetSupportFeature)[vs[1].(int)]
+	}).(GetDestRegionsDestRegionSetSupportFeatureOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSet struct {
+	// Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.
+	Body string `pulumi:"body"`
+	// Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.
+	ClearHeaders []string `pulumi:"clearHeaders"`
+	// domain name.
+	Domain string `pulumi:"domain"`
+	// Original error code.
+	ErrorNos []int `pulumi:"errorNos"`
+	// Configuration ID for error customization response.
+	ErrorPageId string `pulumi:"errorPageId"`
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// New error codeNote: This field may return null, indicating that a valid value cannot be obtained.
+	NewErrorNo int `pulumi:"newErrorNo"`
+	// Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.
+	SetHeaders []GetDomainErrorPageInfosErrorPageSetSetHeader `pulumi:"setHeaders"`
+	// Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.
+	Status int `pulumi:"status"`
+}
+
+// GetDomainErrorPageInfosErrorPageSetInput is an input type that accepts GetDomainErrorPageInfosErrorPageSetArgs and GetDomainErrorPageInfosErrorPageSetOutput values.
+// You can construct a concrete instance of `GetDomainErrorPageInfosErrorPageSetInput` via:
+//
+//          GetDomainErrorPageInfosErrorPageSetArgs{...}
+type GetDomainErrorPageInfosErrorPageSetInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPageInfosErrorPageSetOutput() GetDomainErrorPageInfosErrorPageSetOutput
+	ToGetDomainErrorPageInfosErrorPageSetOutputWithContext(context.Context) GetDomainErrorPageInfosErrorPageSetOutput
+}
+
+type GetDomainErrorPageInfosErrorPageSetArgs struct {
+	// Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.
+	Body pulumi.StringInput `pulumi:"body"`
+	// Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.
+	ClearHeaders pulumi.StringArrayInput `pulumi:"clearHeaders"`
+	// domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Original error code.
+	ErrorNos pulumi.IntArrayInput `pulumi:"errorNos"`
+	// Configuration ID for error customization response.
+	ErrorPageId pulumi.StringInput `pulumi:"errorPageId"`
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// New error codeNote: This field may return null, indicating that a valid value cannot be obtained.
+	NewErrorNo pulumi.IntInput `pulumi:"newErrorNo"`
+	// Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.
+	SetHeaders GetDomainErrorPageInfosErrorPageSetSetHeaderArrayInput `pulumi:"setHeaders"`
+	// Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetDomainErrorPageInfosErrorPageSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSet)(nil)).Elem()
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetArgs) ToGetDomainErrorPageInfosErrorPageSetOutput() GetDomainErrorPageInfosErrorPageSetOutput {
+	return i.ToGetDomainErrorPageInfosErrorPageSetOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetArgs) ToGetDomainErrorPageInfosErrorPageSetOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPageInfosErrorPageSetOutput)
+}
+
+// GetDomainErrorPageInfosErrorPageSetArrayInput is an input type that accepts GetDomainErrorPageInfosErrorPageSetArray and GetDomainErrorPageInfosErrorPageSetArrayOutput values.
+// You can construct a concrete instance of `GetDomainErrorPageInfosErrorPageSetArrayInput` via:
+//
+//          GetDomainErrorPageInfosErrorPageSetArray{ GetDomainErrorPageInfosErrorPageSetArgs{...} }
+type GetDomainErrorPageInfosErrorPageSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPageInfosErrorPageSetArrayOutput() GetDomainErrorPageInfosErrorPageSetArrayOutput
+	ToGetDomainErrorPageInfosErrorPageSetArrayOutputWithContext(context.Context) GetDomainErrorPageInfosErrorPageSetArrayOutput
+}
+
+type GetDomainErrorPageInfosErrorPageSetArray []GetDomainErrorPageInfosErrorPageSetInput
+
+func (GetDomainErrorPageInfosErrorPageSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPageInfosErrorPageSet)(nil)).Elem()
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetArray) ToGetDomainErrorPageInfosErrorPageSetArrayOutput() GetDomainErrorPageInfosErrorPageSetArrayOutput {
+	return i.ToGetDomainErrorPageInfosErrorPageSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetArray) ToGetDomainErrorPageInfosErrorPageSetArrayOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPageInfosErrorPageSetArrayOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSetOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPageInfosErrorPageSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSet)(nil)).Elem()
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ToGetDomainErrorPageInfosErrorPageSetOutput() GetDomainErrorPageInfosErrorPageSetOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ToGetDomainErrorPageInfosErrorPageSetOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetOutput {
+	return o
+}
+
+// Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) Body() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) string { return v.Body }).(pulumi.StringOutput)
+}
+
+// Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ClearHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) []string { return v.ClearHeaders }).(pulumi.StringArrayOutput)
+}
+
+// domain name.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Original error code.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ErrorNos() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) []int { return v.ErrorNos }).(pulumi.IntArrayOutput)
+}
+
+// Configuration ID for error customization response.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ErrorPageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) string { return v.ErrorPageId }).(pulumi.StringOutput)
+}
+
+// Listener ID.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// New error codeNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) NewErrorNo() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) int { return v.NewErrorNo }).(pulumi.IntOutput)
+}
+
+// Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) SetHeaders() GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) []GetDomainErrorPageInfosErrorPageSetSetHeader {
+		return v.SetHeaders
+	}).(GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput)
+}
+
+// Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetDomainErrorPageInfosErrorPageSetOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSet) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPageInfosErrorPageSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPageInfosErrorPageSet)(nil)).Elem()
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetArrayOutput) ToGetDomainErrorPageInfosErrorPageSetArrayOutput() GetDomainErrorPageInfosErrorPageSetArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetArrayOutput) ToGetDomainErrorPageInfosErrorPageSetArrayOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetArrayOutput) Index(i pulumi.IntInput) GetDomainErrorPageInfosErrorPageSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainErrorPageInfosErrorPageSet {
+		return vs[0].([]GetDomainErrorPageInfosErrorPageSet)[vs[1].(int)]
+	}).(GetDomainErrorPageInfosErrorPageSetOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSetSetHeader struct {
+	// HTTP header name.
+	HeaderName string `pulumi:"headerName"`
+	// HTTP header value.
+	HeaderValue string `pulumi:"headerValue"`
+}
+
+// GetDomainErrorPageInfosErrorPageSetSetHeaderInput is an input type that accepts GetDomainErrorPageInfosErrorPageSetSetHeaderArgs and GetDomainErrorPageInfosErrorPageSetSetHeaderOutput values.
+// You can construct a concrete instance of `GetDomainErrorPageInfosErrorPageSetSetHeaderInput` via:
+//
+//          GetDomainErrorPageInfosErrorPageSetSetHeaderArgs{...}
+type GetDomainErrorPageInfosErrorPageSetSetHeaderInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderOutput
+	ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutputWithContext(context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderOutput
+}
+
+type GetDomainErrorPageInfosErrorPageSetSetHeaderArgs struct {
+	// HTTP header name.
+	HeaderName pulumi.StringInput `pulumi:"headerName"`
+	// HTTP header value.
+	HeaderValue pulumi.StringInput `pulumi:"headerValue"`
+}
+
+func (GetDomainErrorPageInfosErrorPageSetSetHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetSetHeader)(nil)).Elem()
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetSetHeaderArgs) ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderOutput {
+	return i.ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetSetHeaderArgs) ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPageInfosErrorPageSetSetHeaderOutput)
+}
+
+// GetDomainErrorPageInfosErrorPageSetSetHeaderArrayInput is an input type that accepts GetDomainErrorPageInfosErrorPageSetSetHeaderArray and GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput values.
+// You can construct a concrete instance of `GetDomainErrorPageInfosErrorPageSetSetHeaderArrayInput` via:
+//
+//          GetDomainErrorPageInfosErrorPageSetSetHeaderArray{ GetDomainErrorPageInfosErrorPageSetSetHeaderArgs{...} }
+type GetDomainErrorPageInfosErrorPageSetSetHeaderArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput
+	ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutputWithContext(context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput
+}
+
+type GetDomainErrorPageInfosErrorPageSetSetHeaderArray []GetDomainErrorPageInfosErrorPageSetSetHeaderInput
+
+func (GetDomainErrorPageInfosErrorPageSetSetHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPageInfosErrorPageSetSetHeader)(nil)).Elem()
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetSetHeaderArray) ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput {
+	return i.ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPageInfosErrorPageSetSetHeaderArray) ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSetSetHeaderOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPageInfosErrorPageSetSetHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetSetHeader)(nil)).Elem()
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderOutput) ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderOutput) ToGetDomainErrorPageInfosErrorPageSetSetHeaderOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderOutput {
+	return o
+}
+
+// HTTP header name.
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderOutput) HeaderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSetSetHeader) string { return v.HeaderName }).(pulumi.StringOutput)
+}
+
+// HTTP header value.
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderOutput) HeaderValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPageInfosErrorPageSetSetHeader) string { return v.HeaderValue }).(pulumi.StringOutput)
+}
+
+type GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPageInfosErrorPageSetSetHeader)(nil)).Elem()
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput) ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput() GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput) ToGetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutputWithContext(ctx context.Context) GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput) Index(i pulumi.IntInput) GetDomainErrorPageInfosErrorPageSetSetHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainErrorPageInfosErrorPageSetSetHeader {
+		return vs[0].([]GetDomainErrorPageInfosErrorPageSetSetHeader)[vs[1].(int)]
+	}).(GetDomainErrorPageInfosErrorPageSetSetHeaderOutput)
+}
+
 type GetDomainErrorPagesErrorPageInfoList struct {
 	// New response body.
 	Body string `pulumi:"body"`
@@ -576,6 +1876,364 @@ func (o GetDomainErrorPagesErrorPageInfoListArrayOutput) Index(i pulumi.IntInput
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainErrorPagesErrorPageInfoList {
 		return vs[0].([]GetDomainErrorPagesErrorPageInfoList)[vs[1].(int)]
 	}).(GetDomainErrorPagesErrorPageInfoListOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSet struct {
+	// Channel Group ID.
+	GroupId string `pulumi:"groupId"`
+	// Channel Group name.
+	GroupName string `pulumi:"groupName"`
+	// Channel list in the proxy group.
+	ProxySets []GetGroupAndStatisticsProxyGroupSetProxySet `pulumi:"proxySets"`
+}
+
+// GetGroupAndStatisticsProxyGroupSetInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetArgs and GetGroupAndStatisticsProxyGroupSetOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetArgs{...}
+type GetGroupAndStatisticsProxyGroupSetInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetOutput() GetGroupAndStatisticsProxyGroupSetOutput
+	ToGetGroupAndStatisticsProxyGroupSetOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetArgs struct {
+	// Channel Group ID.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Channel Group name.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Channel list in the proxy group.
+	ProxySets GetGroupAndStatisticsProxyGroupSetProxySetArrayInput `pulumi:"proxySets"`
+}
+
+func (GetGroupAndStatisticsProxyGroupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSet)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetArgs) ToGetGroupAndStatisticsProxyGroupSetOutput() GetGroupAndStatisticsProxyGroupSetOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetArgs) ToGetGroupAndStatisticsProxyGroupSetOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetOutput)
+}
+
+// GetGroupAndStatisticsProxyGroupSetArrayInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetArray and GetGroupAndStatisticsProxyGroupSetArrayOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetArrayInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetArray{ GetGroupAndStatisticsProxyGroupSetArgs{...} }
+type GetGroupAndStatisticsProxyGroupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetArrayOutput() GetGroupAndStatisticsProxyGroupSetArrayOutput
+	ToGetGroupAndStatisticsProxyGroupSetArrayOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetArrayOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetArray []GetGroupAndStatisticsProxyGroupSetInput
+
+func (GetGroupAndStatisticsProxyGroupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSet)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetArray) ToGetGroupAndStatisticsProxyGroupSetArrayOutput() GetGroupAndStatisticsProxyGroupSetArrayOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetArray) ToGetGroupAndStatisticsProxyGroupSetArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetArrayOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSet)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetOutput) ToGetGroupAndStatisticsProxyGroupSetOutput() GetGroupAndStatisticsProxyGroupSetOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetOutput) ToGetGroupAndStatisticsProxyGroupSetOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetOutput {
+	return o
+}
+
+// Channel Group ID.
+func (o GetGroupAndStatisticsProxyGroupSetOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSet) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Channel Group name.
+func (o GetGroupAndStatisticsProxyGroupSetOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSet) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Channel list in the proxy group.
+func (o GetGroupAndStatisticsProxyGroupSetOutput) ProxySets() GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSet) []GetGroupAndStatisticsProxyGroupSetProxySet {
+		return v.ProxySets
+	}).(GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSet)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetArrayOutput) ToGetGroupAndStatisticsProxyGroupSetArrayOutput() GetGroupAndStatisticsProxyGroupSetArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetArrayOutput) ToGetGroupAndStatisticsProxyGroupSetArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetArrayOutput) Index(i pulumi.IntInput) GetGroupAndStatisticsProxyGroupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupAndStatisticsProxyGroupSet {
+		return vs[0].([]GetGroupAndStatisticsProxyGroupSet)[vs[1].(int)]
+	}).(GetGroupAndStatisticsProxyGroupSetOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySet struct {
+	// listener list.
+	ListenerLists []GetGroupAndStatisticsProxyGroupSetProxySetListenerList `pulumi:"listenerLists"`
+	// Channel Id.
+	ProxyId string `pulumi:"proxyId"`
+	// Channel name.
+	ProxyName string `pulumi:"proxyName"`
+}
+
+// GetGroupAndStatisticsProxyGroupSetProxySetInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetProxySetArgs and GetGroupAndStatisticsProxyGroupSetProxySetOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetProxySetInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetProxySetArgs{...}
+type GetGroupAndStatisticsProxyGroupSetProxySetInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetProxySetOutput() GetGroupAndStatisticsProxyGroupSetProxySetOutput
+	ToGetGroupAndStatisticsProxyGroupSetProxySetOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetProxySetOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetArgs struct {
+	// listener list.
+	ListenerLists GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayInput `pulumi:"listenerLists"`
+	// Channel Id.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
+	// Channel name.
+	ProxyName pulumi.StringInput `pulumi:"proxyName"`
+}
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySet)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetArgs) ToGetGroupAndStatisticsProxyGroupSetProxySetOutput() GetGroupAndStatisticsProxyGroupSetProxySetOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetProxySetOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetArgs) ToGetGroupAndStatisticsProxyGroupSetProxySetOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetProxySetOutput)
+}
+
+// GetGroupAndStatisticsProxyGroupSetProxySetArrayInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetProxySetArray and GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetProxySetArrayInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetProxySetArray{ GetGroupAndStatisticsProxyGroupSetProxySetArgs{...} }
+type GetGroupAndStatisticsProxyGroupSetProxySetArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput
+	ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetArray []GetGroupAndStatisticsProxyGroupSetProxySetInput
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSetProxySet)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetArray) ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetArray) ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySet)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetOutput() GetGroupAndStatisticsProxyGroupSetProxySetOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetOutput {
+	return o
+}
+
+// listener list.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetOutput) ListenerLists() GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySet) []GetGroupAndStatisticsProxyGroupSetProxySetListenerList {
+		return v.ListenerLists
+	}).(GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput)
+}
+
+// Channel Id.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySet) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
+// Channel name.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetOutput) ProxyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySet) string { return v.ProxyName }).(pulumi.StringOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSetProxySet)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput) Index(i pulumi.IntInput) GetGroupAndStatisticsProxyGroupSetProxySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupAndStatisticsProxyGroupSetProxySet {
+		return vs[0].([]GetGroupAndStatisticsProxyGroupSetProxySet)[vs[1].(int)]
+	}).(GetGroupAndStatisticsProxyGroupSetProxySetOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerList struct {
+	// listener Id.
+	ListenerId string `pulumi:"listenerId"`
+	// listener name.
+	ListenerName string `pulumi:"listenerName"`
+	// listened port.
+	Port int `pulumi:"port"`
+	// Listener protocol type.
+	Protocol string `pulumi:"protocol"`
+}
+
+// GetGroupAndStatisticsProxyGroupSetProxySetListenerListInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs and GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetProxySetListenerListInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs{...}
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput
+	ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs struct {
+	// listener Id.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// listener name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// listened port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Listener protocol type.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetListenerList)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput)
+}
+
+// GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayInput is an input type that accepts GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray and GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput values.
+// You can construct a concrete instance of `GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayInput` via:
+//
+//          GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray{ GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs{...} }
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput
+	ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutputWithContext(context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray []GetGroupAndStatisticsProxyGroupSetProxySetListenerListInput
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSetProxySetListenerList)(nil)).Elem()
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput {
+	return i.ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetListenerList)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput {
+	return o
+}
+
+// listener Id.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySetListenerList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// listener name.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySetListenerList) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// listened port.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySetListenerList) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Listener protocol type.
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupAndStatisticsProxyGroupSetProxySetListenerList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupAndStatisticsProxyGroupSetProxySetListenerList)(nil)).Elem()
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput() GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput) ToGetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutputWithContext(ctx context.Context) GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput {
+	return o
+}
+
+func (o GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput) Index(i pulumi.IntInput) GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupAndStatisticsProxyGroupSetProxySetListenerList {
+		return vs[0].([]GetGroupAndStatisticsProxyGroupSetProxySetListenerList)[vs[1].(int)]
+	}).(GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput)
 }
 
 type GetHttpDomainsDomain struct {
@@ -1558,6 +3216,504 @@ func (o GetLayer7ListenersListenerArrayOutput) Index(i pulumi.IntInput) GetLayer
 	}).(GetLayer7ListenersListenerOutput)
 }
 
+type GetListenerRealServersBindRealServerSet struct {
+	// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+	DownIPLists []string `pulumi:"downIPLists"`
+	// The primary and secondary roles of the real server, &#39;master&#39; represents primary, &#39;slave&#39; represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+	RealServerFailoverRole string `pulumi:"realServerFailoverRole"`
+	// Real Server IP.
+	RealServerIP string `pulumi:"realServerIP"`
+	// Real Server Id.
+	RealServerId string `pulumi:"realServerId"`
+	// The port number of the real serverNote: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerPort int `pulumi:"realServerPort"`
+	// real server health check status, where:0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerStatus int `pulumi:"realServerStatus"`
+	// The weight of this real server.
+	RealServerWeight int `pulumi:"realServerWeight"`
+}
+
+// GetListenerRealServersBindRealServerSetInput is an input type that accepts GetListenerRealServersBindRealServerSetArgs and GetListenerRealServersBindRealServerSetOutput values.
+// You can construct a concrete instance of `GetListenerRealServersBindRealServerSetInput` via:
+//
+//          GetListenerRealServersBindRealServerSetArgs{...}
+type GetListenerRealServersBindRealServerSetInput interface {
+	pulumi.Input
+
+	ToGetListenerRealServersBindRealServerSetOutput() GetListenerRealServersBindRealServerSetOutput
+	ToGetListenerRealServersBindRealServerSetOutputWithContext(context.Context) GetListenerRealServersBindRealServerSetOutput
+}
+
+type GetListenerRealServersBindRealServerSetArgs struct {
+	// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+	DownIPLists pulumi.StringArrayInput `pulumi:"downIPLists"`
+	// The primary and secondary roles of the real server, &#39;master&#39; represents primary, &#39;slave&#39; represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+	RealServerFailoverRole pulumi.StringInput `pulumi:"realServerFailoverRole"`
+	// Real Server IP.
+	RealServerIP pulumi.StringInput `pulumi:"realServerIP"`
+	// Real Server Id.
+	RealServerId pulumi.StringInput `pulumi:"realServerId"`
+	// The port number of the real serverNote: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerPort pulumi.IntInput `pulumi:"realServerPort"`
+	// real server health check status, where:0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerStatus pulumi.IntInput `pulumi:"realServerStatus"`
+	// The weight of this real server.
+	RealServerWeight pulumi.IntInput `pulumi:"realServerWeight"`
+}
+
+func (GetListenerRealServersBindRealServerSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (i GetListenerRealServersBindRealServerSetArgs) ToGetListenerRealServersBindRealServerSetOutput() GetListenerRealServersBindRealServerSetOutput {
+	return i.ToGetListenerRealServersBindRealServerSetOutputWithContext(context.Background())
+}
+
+func (i GetListenerRealServersBindRealServerSetArgs) ToGetListenerRealServersBindRealServerSetOutputWithContext(ctx context.Context) GetListenerRealServersBindRealServerSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerRealServersBindRealServerSetOutput)
+}
+
+// GetListenerRealServersBindRealServerSetArrayInput is an input type that accepts GetListenerRealServersBindRealServerSetArray and GetListenerRealServersBindRealServerSetArrayOutput values.
+// You can construct a concrete instance of `GetListenerRealServersBindRealServerSetArrayInput` via:
+//
+//          GetListenerRealServersBindRealServerSetArray{ GetListenerRealServersBindRealServerSetArgs{...} }
+type GetListenerRealServersBindRealServerSetArrayInput interface {
+	pulumi.Input
+
+	ToGetListenerRealServersBindRealServerSetArrayOutput() GetListenerRealServersBindRealServerSetArrayOutput
+	ToGetListenerRealServersBindRealServerSetArrayOutputWithContext(context.Context) GetListenerRealServersBindRealServerSetArrayOutput
+}
+
+type GetListenerRealServersBindRealServerSetArray []GetListenerRealServersBindRealServerSetInput
+
+func (GetListenerRealServersBindRealServerSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (i GetListenerRealServersBindRealServerSetArray) ToGetListenerRealServersBindRealServerSetArrayOutput() GetListenerRealServersBindRealServerSetArrayOutput {
+	return i.ToGetListenerRealServersBindRealServerSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenerRealServersBindRealServerSetArray) ToGetListenerRealServersBindRealServerSetArrayOutputWithContext(ctx context.Context) GetListenerRealServersBindRealServerSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerRealServersBindRealServerSetArrayOutput)
+}
+
+type GetListenerRealServersBindRealServerSetOutput struct{ *pulumi.OutputState }
+
+func (GetListenerRealServersBindRealServerSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (o GetListenerRealServersBindRealServerSetOutput) ToGetListenerRealServersBindRealServerSetOutput() GetListenerRealServersBindRealServerSetOutput {
+	return o
+}
+
+func (o GetListenerRealServersBindRealServerSetOutput) ToGetListenerRealServersBindRealServerSetOutputWithContext(ctx context.Context) GetListenerRealServersBindRealServerSetOutput {
+	return o
+}
+
+// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+func (o GetListenerRealServersBindRealServerSetOutput) DownIPLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) []string { return v.DownIPLists }).(pulumi.StringArrayOutput)
+}
+
+// The primary and secondary roles of the real server, &#39;master&#39; represents primary, &#39;slave&#39; represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerFailoverRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) string { return v.RealServerFailoverRole }).(pulumi.StringOutput)
+}
+
+// Real Server IP.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerIP() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) string { return v.RealServerIP }).(pulumi.StringOutput)
+}
+
+// Real Server Id.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) string { return v.RealServerId }).(pulumi.StringOutput)
+}
+
+// The port number of the real serverNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) int { return v.RealServerPort }).(pulumi.IntOutput)
+}
+
+// real server health check status, where:0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) int { return v.RealServerStatus }).(pulumi.IntOutput)
+}
+
+// The weight of this real server.
+func (o GetListenerRealServersBindRealServerSetOutput) RealServerWeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerRealServersBindRealServerSet) int { return v.RealServerWeight }).(pulumi.IntOutput)
+}
+
+type GetListenerRealServersBindRealServerSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenerRealServersBindRealServerSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (o GetListenerRealServersBindRealServerSetArrayOutput) ToGetListenerRealServersBindRealServerSetArrayOutput() GetListenerRealServersBindRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetListenerRealServersBindRealServerSetArrayOutput) ToGetListenerRealServersBindRealServerSetArrayOutputWithContext(ctx context.Context) GetListenerRealServersBindRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetListenerRealServersBindRealServerSetArrayOutput) Index(i pulumi.IntInput) GetListenerRealServersBindRealServerSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenerRealServersBindRealServerSet {
+		return vs[0].([]GetListenerRealServersBindRealServerSet)[vs[1].(int)]
+	}).(GetListenerRealServersBindRealServerSetOutput)
+}
+
+type GetListenerRealServersRealServerSet struct {
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+	InBanBlacklist int `pulumi:"inBanBlacklist"`
+	// Project Id.
+	ProjectId int `pulumi:"projectId"`
+	// Real Server IP.
+	RealServerIP string `pulumi:"realServerIP"`
+	// Real Server Id.
+	RealServerId string `pulumi:"realServerId"`
+	// Real Server Name.
+	RealServerName string `pulumi:"realServerName"`
+}
+
+// GetListenerRealServersRealServerSetInput is an input type that accepts GetListenerRealServersRealServerSetArgs and GetListenerRealServersRealServerSetOutput values.
+// You can construct a concrete instance of `GetListenerRealServersRealServerSetInput` via:
+//
+//          GetListenerRealServersRealServerSetArgs{...}
+type GetListenerRealServersRealServerSetInput interface {
+	pulumi.Input
+
+	ToGetListenerRealServersRealServerSetOutput() GetListenerRealServersRealServerSetOutput
+	ToGetListenerRealServersRealServerSetOutputWithContext(context.Context) GetListenerRealServersRealServerSetOutput
+}
+
+type GetListenerRealServersRealServerSetArgs struct {
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+	InBanBlacklist pulumi.IntInput `pulumi:"inBanBlacklist"`
+	// Project Id.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Real Server IP.
+	RealServerIP pulumi.StringInput `pulumi:"realServerIP"`
+	// Real Server Id.
+	RealServerId pulumi.StringInput `pulumi:"realServerId"`
+	// Real Server Name.
+	RealServerName pulumi.StringInput `pulumi:"realServerName"`
+}
+
+func (GetListenerRealServersRealServerSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerRealServersRealServerSet)(nil)).Elem()
+}
+
+func (i GetListenerRealServersRealServerSetArgs) ToGetListenerRealServersRealServerSetOutput() GetListenerRealServersRealServerSetOutput {
+	return i.ToGetListenerRealServersRealServerSetOutputWithContext(context.Background())
+}
+
+func (i GetListenerRealServersRealServerSetArgs) ToGetListenerRealServersRealServerSetOutputWithContext(ctx context.Context) GetListenerRealServersRealServerSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerRealServersRealServerSetOutput)
+}
+
+// GetListenerRealServersRealServerSetArrayInput is an input type that accepts GetListenerRealServersRealServerSetArray and GetListenerRealServersRealServerSetArrayOutput values.
+// You can construct a concrete instance of `GetListenerRealServersRealServerSetArrayInput` via:
+//
+//          GetListenerRealServersRealServerSetArray{ GetListenerRealServersRealServerSetArgs{...} }
+type GetListenerRealServersRealServerSetArrayInput interface {
+	pulumi.Input
+
+	ToGetListenerRealServersRealServerSetArrayOutput() GetListenerRealServersRealServerSetArrayOutput
+	ToGetListenerRealServersRealServerSetArrayOutputWithContext(context.Context) GetListenerRealServersRealServerSetArrayOutput
+}
+
+type GetListenerRealServersRealServerSetArray []GetListenerRealServersRealServerSetInput
+
+func (GetListenerRealServersRealServerSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerRealServersRealServerSet)(nil)).Elem()
+}
+
+func (i GetListenerRealServersRealServerSetArray) ToGetListenerRealServersRealServerSetArrayOutput() GetListenerRealServersRealServerSetArrayOutput {
+	return i.ToGetListenerRealServersRealServerSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenerRealServersRealServerSetArray) ToGetListenerRealServersRealServerSetArrayOutputWithContext(ctx context.Context) GetListenerRealServersRealServerSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerRealServersRealServerSetArrayOutput)
+}
+
+type GetListenerRealServersRealServerSetOutput struct{ *pulumi.OutputState }
+
+func (GetListenerRealServersRealServerSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerRealServersRealServerSet)(nil)).Elem()
+}
+
+func (o GetListenerRealServersRealServerSetOutput) ToGetListenerRealServersRealServerSetOutput() GetListenerRealServersRealServerSetOutput {
+	return o
+}
+
+func (o GetListenerRealServersRealServerSetOutput) ToGetListenerRealServersRealServerSetOutputWithContext(ctx context.Context) GetListenerRealServersRealServerSetOutput {
+	return o
+}
+
+// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+func (o GetListenerRealServersRealServerSetOutput) InBanBlacklist() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerRealServersRealServerSet) int { return v.InBanBlacklist }).(pulumi.IntOutput)
+}
+
+// Project Id.
+func (o GetListenerRealServersRealServerSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerRealServersRealServerSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Real Server IP.
+func (o GetListenerRealServersRealServerSetOutput) RealServerIP() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersRealServerSet) string { return v.RealServerIP }).(pulumi.StringOutput)
+}
+
+// Real Server Id.
+func (o GetListenerRealServersRealServerSetOutput) RealServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersRealServerSet) string { return v.RealServerId }).(pulumi.StringOutput)
+}
+
+// Real Server Name.
+func (o GetListenerRealServersRealServerSetOutput) RealServerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerRealServersRealServerSet) string { return v.RealServerName }).(pulumi.StringOutput)
+}
+
+type GetListenerRealServersRealServerSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenerRealServersRealServerSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerRealServersRealServerSet)(nil)).Elem()
+}
+
+func (o GetListenerRealServersRealServerSetArrayOutput) ToGetListenerRealServersRealServerSetArrayOutput() GetListenerRealServersRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetListenerRealServersRealServerSetArrayOutput) ToGetListenerRealServersRealServerSetArrayOutputWithContext(ctx context.Context) GetListenerRealServersRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetListenerRealServersRealServerSetArrayOutput) Index(i pulumi.IntInput) GetListenerRealServersRealServerSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenerRealServersRealServerSet {
+		return vs[0].([]GetListenerRealServersRealServerSet)[vs[1].(int)]
+	}).(GetListenerRealServersRealServerSetOutput)
+}
+
+type GetListenerStatisticsStatisticsData struct {
+	// Metric Data.
+	MetricDatas []GetListenerStatisticsStatisticsDataMetricData `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName string `pulumi:"metricName"`
+}
+
+// GetListenerStatisticsStatisticsDataInput is an input type that accepts GetListenerStatisticsStatisticsDataArgs and GetListenerStatisticsStatisticsDataOutput values.
+// You can construct a concrete instance of `GetListenerStatisticsStatisticsDataInput` via:
+//
+//          GetListenerStatisticsStatisticsDataArgs{...}
+type GetListenerStatisticsStatisticsDataInput interface {
+	pulumi.Input
+
+	ToGetListenerStatisticsStatisticsDataOutput() GetListenerStatisticsStatisticsDataOutput
+	ToGetListenerStatisticsStatisticsDataOutputWithContext(context.Context) GetListenerStatisticsStatisticsDataOutput
+}
+
+type GetListenerStatisticsStatisticsDataArgs struct {
+	// Metric Data.
+	MetricDatas GetListenerStatisticsStatisticsDataMetricDataArrayInput `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName pulumi.StringInput `pulumi:"metricName"`
+}
+
+func (GetListenerStatisticsStatisticsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetListenerStatisticsStatisticsDataArgs) ToGetListenerStatisticsStatisticsDataOutput() GetListenerStatisticsStatisticsDataOutput {
+	return i.ToGetListenerStatisticsStatisticsDataOutputWithContext(context.Background())
+}
+
+func (i GetListenerStatisticsStatisticsDataArgs) ToGetListenerStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerStatisticsStatisticsDataOutput)
+}
+
+// GetListenerStatisticsStatisticsDataArrayInput is an input type that accepts GetListenerStatisticsStatisticsDataArray and GetListenerStatisticsStatisticsDataArrayOutput values.
+// You can construct a concrete instance of `GetListenerStatisticsStatisticsDataArrayInput` via:
+//
+//          GetListenerStatisticsStatisticsDataArray{ GetListenerStatisticsStatisticsDataArgs{...} }
+type GetListenerStatisticsStatisticsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetListenerStatisticsStatisticsDataArrayOutput() GetListenerStatisticsStatisticsDataArrayOutput
+	ToGetListenerStatisticsStatisticsDataArrayOutputWithContext(context.Context) GetListenerStatisticsStatisticsDataArrayOutput
+}
+
+type GetListenerStatisticsStatisticsDataArray []GetListenerStatisticsStatisticsDataInput
+
+func (GetListenerStatisticsStatisticsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetListenerStatisticsStatisticsDataArray) ToGetListenerStatisticsStatisticsDataArrayOutput() GetListenerStatisticsStatisticsDataArrayOutput {
+	return i.ToGetListenerStatisticsStatisticsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenerStatisticsStatisticsDataArray) ToGetListenerStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerStatisticsStatisticsDataArrayOutput)
+}
+
+type GetListenerStatisticsStatisticsDataOutput struct{ *pulumi.OutputState }
+
+func (GetListenerStatisticsStatisticsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetListenerStatisticsStatisticsDataOutput) ToGetListenerStatisticsStatisticsDataOutput() GetListenerStatisticsStatisticsDataOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataOutput) ToGetListenerStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataOutput {
+	return o
+}
+
+// Metric Data.
+func (o GetListenerStatisticsStatisticsDataOutput) MetricDatas() GetListenerStatisticsStatisticsDataMetricDataArrayOutput {
+	return o.ApplyT(func(v GetListenerStatisticsStatisticsData) []GetListenerStatisticsStatisticsDataMetricData {
+		return v.MetricDatas
+	}).(GetListenerStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+// Metric Name.
+func (o GetListenerStatisticsStatisticsDataOutput) MetricName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListenerStatisticsStatisticsData) string { return v.MetricName }).(pulumi.StringOutput)
+}
+
+type GetListenerStatisticsStatisticsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenerStatisticsStatisticsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetListenerStatisticsStatisticsDataArrayOutput) ToGetListenerStatisticsStatisticsDataArrayOutput() GetListenerStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataArrayOutput) ToGetListenerStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataArrayOutput) Index(i pulumi.IntInput) GetListenerStatisticsStatisticsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenerStatisticsStatisticsData {
+		return vs[0].([]GetListenerStatisticsStatisticsData)[vs[1].(int)]
+	}).(GetListenerStatisticsStatisticsDataOutput)
+}
+
+type GetListenerStatisticsStatisticsDataMetricData struct {
+	// Statistical data valueNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data float64 `pulumi:"data"`
+	// Time.
+	Time int `pulumi:"time"`
+}
+
+// GetListenerStatisticsStatisticsDataMetricDataInput is an input type that accepts GetListenerStatisticsStatisticsDataMetricDataArgs and GetListenerStatisticsStatisticsDataMetricDataOutput values.
+// You can construct a concrete instance of `GetListenerStatisticsStatisticsDataMetricDataInput` via:
+//
+//          GetListenerStatisticsStatisticsDataMetricDataArgs{...}
+type GetListenerStatisticsStatisticsDataMetricDataInput interface {
+	pulumi.Input
+
+	ToGetListenerStatisticsStatisticsDataMetricDataOutput() GetListenerStatisticsStatisticsDataMetricDataOutput
+	ToGetListenerStatisticsStatisticsDataMetricDataOutputWithContext(context.Context) GetListenerStatisticsStatisticsDataMetricDataOutput
+}
+
+type GetListenerStatisticsStatisticsDataMetricDataArgs struct {
+	// Statistical data valueNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data pulumi.Float64Input `pulumi:"data"`
+	// Time.
+	Time pulumi.IntInput `pulumi:"time"`
+}
+
+func (GetListenerStatisticsStatisticsDataMetricDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetListenerStatisticsStatisticsDataMetricDataArgs) ToGetListenerStatisticsStatisticsDataMetricDataOutput() GetListenerStatisticsStatisticsDataMetricDataOutput {
+	return i.ToGetListenerStatisticsStatisticsDataMetricDataOutputWithContext(context.Background())
+}
+
+func (i GetListenerStatisticsStatisticsDataMetricDataArgs) ToGetListenerStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerStatisticsStatisticsDataMetricDataOutput)
+}
+
+// GetListenerStatisticsStatisticsDataMetricDataArrayInput is an input type that accepts GetListenerStatisticsStatisticsDataMetricDataArray and GetListenerStatisticsStatisticsDataMetricDataArrayOutput values.
+// You can construct a concrete instance of `GetListenerStatisticsStatisticsDataMetricDataArrayInput` via:
+//
+//          GetListenerStatisticsStatisticsDataMetricDataArray{ GetListenerStatisticsStatisticsDataMetricDataArgs{...} }
+type GetListenerStatisticsStatisticsDataMetricDataArrayInput interface {
+	pulumi.Input
+
+	ToGetListenerStatisticsStatisticsDataMetricDataArrayOutput() GetListenerStatisticsStatisticsDataMetricDataArrayOutput
+	ToGetListenerStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Context) GetListenerStatisticsStatisticsDataMetricDataArrayOutput
+}
+
+type GetListenerStatisticsStatisticsDataMetricDataArray []GetListenerStatisticsStatisticsDataMetricDataInput
+
+func (GetListenerStatisticsStatisticsDataMetricDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetListenerStatisticsStatisticsDataMetricDataArray) ToGetListenerStatisticsStatisticsDataMetricDataArrayOutput() GetListenerStatisticsStatisticsDataMetricDataArrayOutput {
+	return i.ToGetListenerStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetListenerStatisticsStatisticsDataMetricDataArray) ToGetListenerStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataMetricDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListenerStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+type GetListenerStatisticsStatisticsDataMetricDataOutput struct{ *pulumi.OutputState }
+
+func (GetListenerStatisticsStatisticsDataMetricDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListenerStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetListenerStatisticsStatisticsDataMetricDataOutput) ToGetListenerStatisticsStatisticsDataMetricDataOutput() GetListenerStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataMetricDataOutput) ToGetListenerStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+// Statistical data valueNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetListenerStatisticsStatisticsDataMetricDataOutput) Data() pulumi.Float64Output {
+	return o.ApplyT(func(v GetListenerStatisticsStatisticsDataMetricData) float64 { return v.Data }).(pulumi.Float64Output)
+}
+
+// Time.
+func (o GetListenerStatisticsStatisticsDataMetricDataOutput) Time() pulumi.IntOutput {
+	return o.ApplyT(func(v GetListenerStatisticsStatisticsDataMetricData) int { return v.Time }).(pulumi.IntOutput)
+}
+
+type GetListenerStatisticsStatisticsDataMetricDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListenerStatisticsStatisticsDataMetricDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListenerStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetListenerStatisticsStatisticsDataMetricDataArrayOutput) ToGetListenerStatisticsStatisticsDataMetricDataArrayOutput() GetListenerStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataMetricDataArrayOutput) ToGetListenerStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetListenerStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetListenerStatisticsStatisticsDataMetricDataArrayOutput) Index(i pulumi.IntInput) GetListenerStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListenerStatisticsStatisticsDataMetricData {
+		return vs[0].([]GetListenerStatisticsStatisticsDataMetricData)[vs[1].(int)]
+	}).(GetListenerStatisticsStatisticsDataMetricDataOutput)
+}
+
 type GetProxiesProxy struct {
 	// Access region of the GAAP proxy to be queried. Conflict with `ids`.
 	AccessRegion string `pulumi:"accessRegion"`
@@ -1799,6 +3955,2829 @@ func (o GetProxiesProxyArrayOutput) Index(i pulumi.IntInput) GetProxiesProxyOutp
 	}).(GetProxiesProxyOutput)
 }
 
+type GetProxiesStatusInstanceStatusSet struct {
+	// proxy instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// proxy status.Among them:
+	// - RUNNING indicates running;
+	// - CREATING indicates being created;
+	// - DESTROYING indicates being destroyed;
+	// - OPENING indicates being opened;
+	// - CLOSING indicates being closed;
+	// - Closed indicates that it has been closed;
+	// - ADJUSTING represents a configuration change in progress;
+	// - ISOLATING indicates being isolated;
+	// - ISOLATED indicates that it has been isolated;
+	// - MOVING indicates that migration is in progress.
+	Status string `pulumi:"status"`
+}
+
+// GetProxiesStatusInstanceStatusSetInput is an input type that accepts GetProxiesStatusInstanceStatusSetArgs and GetProxiesStatusInstanceStatusSetOutput values.
+// You can construct a concrete instance of `GetProxiesStatusInstanceStatusSetInput` via:
+//
+//          GetProxiesStatusInstanceStatusSetArgs{...}
+type GetProxiesStatusInstanceStatusSetInput interface {
+	pulumi.Input
+
+	ToGetProxiesStatusInstanceStatusSetOutput() GetProxiesStatusInstanceStatusSetOutput
+	ToGetProxiesStatusInstanceStatusSetOutputWithContext(context.Context) GetProxiesStatusInstanceStatusSetOutput
+}
+
+type GetProxiesStatusInstanceStatusSetArgs struct {
+	// proxy instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// proxy status.Among them:
+	// - RUNNING indicates running;
+	// - CREATING indicates being created;
+	// - DESTROYING indicates being destroyed;
+	// - OPENING indicates being opened;
+	// - CLOSING indicates being closed;
+	// - Closed indicates that it has been closed;
+	// - ADJUSTING represents a configuration change in progress;
+	// - ISOLATING indicates being isolated;
+	// - ISOLATED indicates that it has been isolated;
+	// - MOVING indicates that migration is in progress.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetProxiesStatusInstanceStatusSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxiesStatusInstanceStatusSet)(nil)).Elem()
+}
+
+func (i GetProxiesStatusInstanceStatusSetArgs) ToGetProxiesStatusInstanceStatusSetOutput() GetProxiesStatusInstanceStatusSetOutput {
+	return i.ToGetProxiesStatusInstanceStatusSetOutputWithContext(context.Background())
+}
+
+func (i GetProxiesStatusInstanceStatusSetArgs) ToGetProxiesStatusInstanceStatusSetOutputWithContext(ctx context.Context) GetProxiesStatusInstanceStatusSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxiesStatusInstanceStatusSetOutput)
+}
+
+// GetProxiesStatusInstanceStatusSetArrayInput is an input type that accepts GetProxiesStatusInstanceStatusSetArray and GetProxiesStatusInstanceStatusSetArrayOutput values.
+// You can construct a concrete instance of `GetProxiesStatusInstanceStatusSetArrayInput` via:
+//
+//          GetProxiesStatusInstanceStatusSetArray{ GetProxiesStatusInstanceStatusSetArgs{...} }
+type GetProxiesStatusInstanceStatusSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProxiesStatusInstanceStatusSetArrayOutput() GetProxiesStatusInstanceStatusSetArrayOutput
+	ToGetProxiesStatusInstanceStatusSetArrayOutputWithContext(context.Context) GetProxiesStatusInstanceStatusSetArrayOutput
+}
+
+type GetProxiesStatusInstanceStatusSetArray []GetProxiesStatusInstanceStatusSetInput
+
+func (GetProxiesStatusInstanceStatusSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxiesStatusInstanceStatusSet)(nil)).Elem()
+}
+
+func (i GetProxiesStatusInstanceStatusSetArray) ToGetProxiesStatusInstanceStatusSetArrayOutput() GetProxiesStatusInstanceStatusSetArrayOutput {
+	return i.ToGetProxiesStatusInstanceStatusSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxiesStatusInstanceStatusSetArray) ToGetProxiesStatusInstanceStatusSetArrayOutputWithContext(ctx context.Context) GetProxiesStatusInstanceStatusSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxiesStatusInstanceStatusSetArrayOutput)
+}
+
+type GetProxiesStatusInstanceStatusSetOutput struct{ *pulumi.OutputState }
+
+func (GetProxiesStatusInstanceStatusSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxiesStatusInstanceStatusSet)(nil)).Elem()
+}
+
+func (o GetProxiesStatusInstanceStatusSetOutput) ToGetProxiesStatusInstanceStatusSetOutput() GetProxiesStatusInstanceStatusSetOutput {
+	return o
+}
+
+func (o GetProxiesStatusInstanceStatusSetOutput) ToGetProxiesStatusInstanceStatusSetOutputWithContext(ctx context.Context) GetProxiesStatusInstanceStatusSetOutput {
+	return o
+}
+
+// proxy instance ID.
+func (o GetProxiesStatusInstanceStatusSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesStatusInstanceStatusSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// proxy status.Among them:
+// - RUNNING indicates running;
+// - CREATING indicates being created;
+// - DESTROYING indicates being destroyed;
+// - OPENING indicates being opened;
+// - CLOSING indicates being closed;
+// - Closed indicates that it has been closed;
+// - ADJUSTING represents a configuration change in progress;
+// - ISOLATING indicates being isolated;
+// - ISOLATED indicates that it has been isolated;
+// - MOVING indicates that migration is in progress.
+func (o GetProxiesStatusInstanceStatusSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesStatusInstanceStatusSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetProxiesStatusInstanceStatusSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxiesStatusInstanceStatusSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxiesStatusInstanceStatusSet)(nil)).Elem()
+}
+
+func (o GetProxiesStatusInstanceStatusSetArrayOutput) ToGetProxiesStatusInstanceStatusSetArrayOutput() GetProxiesStatusInstanceStatusSetArrayOutput {
+	return o
+}
+
+func (o GetProxiesStatusInstanceStatusSetArrayOutput) ToGetProxiesStatusInstanceStatusSetArrayOutputWithContext(ctx context.Context) GetProxiesStatusInstanceStatusSetArrayOutput {
+	return o
+}
+
+func (o GetProxiesStatusInstanceStatusSetArrayOutput) Index(i pulumi.IntInput) GetProxiesStatusInstanceStatusSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxiesStatusInstanceStatusSet {
+		return vs[0].([]GetProxiesStatusInstanceStatusSet)[vs[1].(int)]
+	}).(GetProxiesStatusInstanceStatusSetOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySet struct {
+	// Listener List.
+	ListenerLists []GetProxyAndStatisticsListenersProxySetListenerList `pulumi:"listenerLists"`
+	// Proxy Id.
+	ProxyId string `pulumi:"proxyId"`
+	// Proxy Name.
+	ProxyName string `pulumi:"proxyName"`
+}
+
+// GetProxyAndStatisticsListenersProxySetInput is an input type that accepts GetProxyAndStatisticsListenersProxySetArgs and GetProxyAndStatisticsListenersProxySetOutput values.
+// You can construct a concrete instance of `GetProxyAndStatisticsListenersProxySetInput` via:
+//
+//          GetProxyAndStatisticsListenersProxySetArgs{...}
+type GetProxyAndStatisticsListenersProxySetInput interface {
+	pulumi.Input
+
+	ToGetProxyAndStatisticsListenersProxySetOutput() GetProxyAndStatisticsListenersProxySetOutput
+	ToGetProxyAndStatisticsListenersProxySetOutputWithContext(context.Context) GetProxyAndStatisticsListenersProxySetOutput
+}
+
+type GetProxyAndStatisticsListenersProxySetArgs struct {
+	// Listener List.
+	ListenerLists GetProxyAndStatisticsListenersProxySetListenerListArrayInput `pulumi:"listenerLists"`
+	// Proxy Id.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
+	// Proxy Name.
+	ProxyName pulumi.StringInput `pulumi:"proxyName"`
+}
+
+func (GetProxyAndStatisticsListenersProxySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyAndStatisticsListenersProxySet)(nil)).Elem()
+}
+
+func (i GetProxyAndStatisticsListenersProxySetArgs) ToGetProxyAndStatisticsListenersProxySetOutput() GetProxyAndStatisticsListenersProxySetOutput {
+	return i.ToGetProxyAndStatisticsListenersProxySetOutputWithContext(context.Background())
+}
+
+func (i GetProxyAndStatisticsListenersProxySetArgs) ToGetProxyAndStatisticsListenersProxySetOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyAndStatisticsListenersProxySetOutput)
+}
+
+// GetProxyAndStatisticsListenersProxySetArrayInput is an input type that accepts GetProxyAndStatisticsListenersProxySetArray and GetProxyAndStatisticsListenersProxySetArrayOutput values.
+// You can construct a concrete instance of `GetProxyAndStatisticsListenersProxySetArrayInput` via:
+//
+//          GetProxyAndStatisticsListenersProxySetArray{ GetProxyAndStatisticsListenersProxySetArgs{...} }
+type GetProxyAndStatisticsListenersProxySetArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyAndStatisticsListenersProxySetArrayOutput() GetProxyAndStatisticsListenersProxySetArrayOutput
+	ToGetProxyAndStatisticsListenersProxySetArrayOutputWithContext(context.Context) GetProxyAndStatisticsListenersProxySetArrayOutput
+}
+
+type GetProxyAndStatisticsListenersProxySetArray []GetProxyAndStatisticsListenersProxySetInput
+
+func (GetProxyAndStatisticsListenersProxySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyAndStatisticsListenersProxySet)(nil)).Elem()
+}
+
+func (i GetProxyAndStatisticsListenersProxySetArray) ToGetProxyAndStatisticsListenersProxySetArrayOutput() GetProxyAndStatisticsListenersProxySetArrayOutput {
+	return i.ToGetProxyAndStatisticsListenersProxySetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyAndStatisticsListenersProxySetArray) ToGetProxyAndStatisticsListenersProxySetArrayOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyAndStatisticsListenersProxySetArrayOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySetOutput struct{ *pulumi.OutputState }
+
+func (GetProxyAndStatisticsListenersProxySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyAndStatisticsListenersProxySet)(nil)).Elem()
+}
+
+func (o GetProxyAndStatisticsListenersProxySetOutput) ToGetProxyAndStatisticsListenersProxySetOutput() GetProxyAndStatisticsListenersProxySetOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetOutput) ToGetProxyAndStatisticsListenersProxySetOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetOutput {
+	return o
+}
+
+// Listener List.
+func (o GetProxyAndStatisticsListenersProxySetOutput) ListenerLists() GetProxyAndStatisticsListenersProxySetListenerListArrayOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySet) []GetProxyAndStatisticsListenersProxySetListenerList {
+		return v.ListenerLists
+	}).(GetProxyAndStatisticsListenersProxySetListenerListArrayOutput)
+}
+
+// Proxy Id.
+func (o GetProxyAndStatisticsListenersProxySetOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySet) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
+// Proxy Name.
+func (o GetProxyAndStatisticsListenersProxySetOutput) ProxyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySet) string { return v.ProxyName }).(pulumi.StringOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyAndStatisticsListenersProxySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyAndStatisticsListenersProxySet)(nil)).Elem()
+}
+
+func (o GetProxyAndStatisticsListenersProxySetArrayOutput) ToGetProxyAndStatisticsListenersProxySetArrayOutput() GetProxyAndStatisticsListenersProxySetArrayOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetArrayOutput) ToGetProxyAndStatisticsListenersProxySetArrayOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetArrayOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetArrayOutput) Index(i pulumi.IntInput) GetProxyAndStatisticsListenersProxySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyAndStatisticsListenersProxySet {
+		return vs[0].([]GetProxyAndStatisticsListenersProxySet)[vs[1].(int)]
+	}).(GetProxyAndStatisticsListenersProxySetOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySetListenerList struct {
+	// Listener Id.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener Name.
+	ListenerName string `pulumi:"listenerName"`
+	// listerned port.
+	Port int `pulumi:"port"`
+	// Listener protocol type.
+	Protocol string `pulumi:"protocol"`
+}
+
+// GetProxyAndStatisticsListenersProxySetListenerListInput is an input type that accepts GetProxyAndStatisticsListenersProxySetListenerListArgs and GetProxyAndStatisticsListenersProxySetListenerListOutput values.
+// You can construct a concrete instance of `GetProxyAndStatisticsListenersProxySetListenerListInput` via:
+//
+//          GetProxyAndStatisticsListenersProxySetListenerListArgs{...}
+type GetProxyAndStatisticsListenersProxySetListenerListInput interface {
+	pulumi.Input
+
+	ToGetProxyAndStatisticsListenersProxySetListenerListOutput() GetProxyAndStatisticsListenersProxySetListenerListOutput
+	ToGetProxyAndStatisticsListenersProxySetListenerListOutputWithContext(context.Context) GetProxyAndStatisticsListenersProxySetListenerListOutput
+}
+
+type GetProxyAndStatisticsListenersProxySetListenerListArgs struct {
+	// Listener Id.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener Name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// listerned port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Listener protocol type.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (GetProxyAndStatisticsListenersProxySetListenerListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetListenerList)(nil)).Elem()
+}
+
+func (i GetProxyAndStatisticsListenersProxySetListenerListArgs) ToGetProxyAndStatisticsListenersProxySetListenerListOutput() GetProxyAndStatisticsListenersProxySetListenerListOutput {
+	return i.ToGetProxyAndStatisticsListenersProxySetListenerListOutputWithContext(context.Background())
+}
+
+func (i GetProxyAndStatisticsListenersProxySetListenerListArgs) ToGetProxyAndStatisticsListenersProxySetListenerListOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetListenerListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyAndStatisticsListenersProxySetListenerListOutput)
+}
+
+// GetProxyAndStatisticsListenersProxySetListenerListArrayInput is an input type that accepts GetProxyAndStatisticsListenersProxySetListenerListArray and GetProxyAndStatisticsListenersProxySetListenerListArrayOutput values.
+// You can construct a concrete instance of `GetProxyAndStatisticsListenersProxySetListenerListArrayInput` via:
+//
+//          GetProxyAndStatisticsListenersProxySetListenerListArray{ GetProxyAndStatisticsListenersProxySetListenerListArgs{...} }
+type GetProxyAndStatisticsListenersProxySetListenerListArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutput() GetProxyAndStatisticsListenersProxySetListenerListArrayOutput
+	ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutputWithContext(context.Context) GetProxyAndStatisticsListenersProxySetListenerListArrayOutput
+}
+
+type GetProxyAndStatisticsListenersProxySetListenerListArray []GetProxyAndStatisticsListenersProxySetListenerListInput
+
+func (GetProxyAndStatisticsListenersProxySetListenerListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyAndStatisticsListenersProxySetListenerList)(nil)).Elem()
+}
+
+func (i GetProxyAndStatisticsListenersProxySetListenerListArray) ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutput() GetProxyAndStatisticsListenersProxySetListenerListArrayOutput {
+	return i.ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyAndStatisticsListenersProxySetListenerListArray) ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetListenerListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyAndStatisticsListenersProxySetListenerListArrayOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySetListenerListOutput struct{ *pulumi.OutputState }
+
+func (GetProxyAndStatisticsListenersProxySetListenerListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetListenerList)(nil)).Elem()
+}
+
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) ToGetProxyAndStatisticsListenersProxySetListenerListOutput() GetProxyAndStatisticsListenersProxySetListenerListOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) ToGetProxyAndStatisticsListenersProxySetListenerListOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetListenerListOutput {
+	return o
+}
+
+// Listener Id.
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySetListenerList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Listener Name.
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySetListenerList) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// listerned port.
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySetListenerList) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Listener protocol type.
+func (o GetProxyAndStatisticsListenersProxySetListenerListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyAndStatisticsListenersProxySetListenerList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type GetProxyAndStatisticsListenersProxySetListenerListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyAndStatisticsListenersProxySetListenerListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyAndStatisticsListenersProxySetListenerList)(nil)).Elem()
+}
+
+func (o GetProxyAndStatisticsListenersProxySetListenerListArrayOutput) ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutput() GetProxyAndStatisticsListenersProxySetListenerListArrayOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetListenerListArrayOutput) ToGetProxyAndStatisticsListenersProxySetListenerListArrayOutputWithContext(ctx context.Context) GetProxyAndStatisticsListenersProxySetListenerListArrayOutput {
+	return o
+}
+
+func (o GetProxyAndStatisticsListenersProxySetListenerListArrayOutput) Index(i pulumi.IntInput) GetProxyAndStatisticsListenersProxySetListenerListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyAndStatisticsListenersProxySetListenerList {
+		return vs[0].([]GetProxyAndStatisticsListenersProxySetListenerList)[vs[1].(int)]
+	}).(GetProxyAndStatisticsListenersProxySetListenerListOutput)
+}
+
+type GetProxyDetailProxyDetail struct {
+	// Access Region.
+	AccessRegion string `pulumi:"accessRegion"`
+	// Detailed information about the access region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+	AccessRegionInfos []GetProxyDetailProxyDetailAccessRegionInfo `pulumi:"accessRegionInfos"`
+	// Blocking and Unblocking Status: BANNED indicates that the ban has been lifted, RECOVER indicates that the ban has been lifted or not, BANNING indicates that the ban is in progress, RECOVERING indicates that the ban is being lifted, BAN_FAILED indicates that the ban has failed, RECOVER_FAILED indicates that the unblocking has failed.Note: This field may return null, indicating that a valid value cannot be obtained.
+	BanStatus string `pulumi:"banStatus"`
+	// Band width.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Billing type: 0 represents bandwidth based billing, and 1 represents traffic based billing.Note: This field may return null, indicating that a valid value cannot be obtained.
+	BillingType int `pulumi:"billingType"`
+	// The method of obtaining client IP through proxys, where 0 represents TOA and 1 represents Proxy ProtocolNote: This field may return null, indicating that a valid value cannot be obtained.
+	ClientIpMethods []int `pulumi:"clientIpMethods"`
+	// Concurrent, in 10000 pieces/second.
+	Concurrent int `pulumi:"concurrent"`
+	// The creation time, using a Unix timestamp, represents the number of seconds that have passed since January 1, 1970 (midnight UTC/GMT).
+	CreateTime int `pulumi:"createTime"`
+	// Domain.
+	Domain string `pulumi:"domain"`
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// proxy forwarding IP.
+	ForwardIp string `pulumi:"forwardIp"`
+	// proxy group ID, which exists when a proxy belongs to a certain proxy group.Note: This field may return null, indicating that a valid value cannot be obtained.
+	GroupId string `pulumi:"groupId"`
+	// Identification that supports the Http3 protocol, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+	Http3Supported int `pulumi:"http3Supported"`
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.Note: This field may return null, indicating that a valid value cannot be obtained.
+	InBanBlacklist int `pulumi:"inBanBlacklist"`
+	// (Old parameter, please use ProxyId) Proxy instance ID.Note: This field may return null, indicating that a valid value cannot be obtained.
+	InstanceId string `pulumi:"instanceId"`
+	// IP.
+	Ip string `pulumi:"ip"`
+	// IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
+	IpAddressVersion string `pulumi:"ipAddressVersion"`
+	// IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+	IpLists []GetProxyDetailProxyDetailIpList `pulumi:"ipLists"`
+	// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
+	ModifyConfigTime int `pulumi:"modifyConfigTime"`
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkType string `pulumi:"networkType"`
+	// proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
+	PackageType string `pulumi:"packageType"`
+	// Security policy ID, which exists when a security policy is set.Note: This field may return null, indicating that a valid value cannot be obtained.
+	PolicyId string `pulumi:"policyId"`
+	// Project Id.
+	ProjectId int `pulumi:"projectId"`
+	// Proxy Id.
+	ProxyId string `pulumi:"proxyId"`
+	// Proxy Name.
+	ProxyName string `pulumi:"proxyName"`
+	// proxy type, 100 represents THUNDER proxy, 103 represents Microsoft cooperation proxyNote: This field may return null, indicating that a valid value cannot be obtained.
+	ProxyType int `pulumi:"proxyType"`
+	// Real Server Region.
+	RealServerRegion string `pulumi:"realServerRegion"`
+	// Detailed information of the real server region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerRegionInfos []GetProxyDetailProxyDetailRealServerRegionInfo `pulumi:"realServerRegionInfos"`
+	// List of domain names associated with resolutionNote: This field may return null, indicating that a valid value cannot be obtained.
+	RelatedGlobalDomains []string `pulumi:"relatedGlobalDomains"`
+	// 1. This proxy can be scaled and expanded; 0, this proxy cannot be scaled or expanded.
+	Scalarable int `pulumi:"scalarable"`
+	// proxy status. Among them:RUNNING indicates running;CREATING indicates being created;DESTROYING indicates being destroyed;OPENING indicates being opened;CLOSING indicates being closed;Closed indicates that it has been closed;ADJUSTING represents a configuration change in progress;ISOLATING indicates being isolated;ISOLATED indicates that it has been isolated;CLONING indicates copying;RECOVERING indicates that the proxy is being maintained;MOVING indicates that migration is in progress.
+	Status string `pulumi:"status"`
+	// Supported protocol types.
+	SupportProtocols []string `pulumi:"supportProtocols"`
+	// Does it support security group configurationNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportSecurity int `pulumi:"supportSecurity"`
+	// tag list, when there are no labels, this field is an empty list.Note: This field may return null, indicating that a valid value cannot be obtained.
+	TagSets []GetProxyDetailProxyDetailTagSet `pulumi:"tagSets"`
+	// Version 1.0, 2.0, 3.0.
+	Version string `pulumi:"version"`
+}
+
+// GetProxyDetailProxyDetailInput is an input type that accepts GetProxyDetailProxyDetailArgs and GetProxyDetailProxyDetailOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailInput` via:
+//
+//          GetProxyDetailProxyDetailArgs{...}
+type GetProxyDetailProxyDetailInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailOutput() GetProxyDetailProxyDetailOutput
+	ToGetProxyDetailProxyDetailOutputWithContext(context.Context) GetProxyDetailProxyDetailOutput
+}
+
+type GetProxyDetailProxyDetailArgs struct {
+	// Access Region.
+	AccessRegion pulumi.StringInput `pulumi:"accessRegion"`
+	// Detailed information about the access region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+	AccessRegionInfos GetProxyDetailProxyDetailAccessRegionInfoArrayInput `pulumi:"accessRegionInfos"`
+	// Blocking and Unblocking Status: BANNED indicates that the ban has been lifted, RECOVER indicates that the ban has been lifted or not, BANNING indicates that the ban is in progress, RECOVERING indicates that the ban is being lifted, BAN_FAILED indicates that the ban has failed, RECOVER_FAILED indicates that the unblocking has failed.Note: This field may return null, indicating that a valid value cannot be obtained.
+	BanStatus pulumi.StringInput `pulumi:"banStatus"`
+	// Band width.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Billing type: 0 represents bandwidth based billing, and 1 represents traffic based billing.Note: This field may return null, indicating that a valid value cannot be obtained.
+	BillingType pulumi.IntInput `pulumi:"billingType"`
+	// The method of obtaining client IP through proxys, where 0 represents TOA and 1 represents Proxy ProtocolNote: This field may return null, indicating that a valid value cannot be obtained.
+	ClientIpMethods pulumi.IntArrayInput `pulumi:"clientIpMethods"`
+	// Concurrent, in 10000 pieces/second.
+	Concurrent pulumi.IntInput `pulumi:"concurrent"`
+	// The creation time, using a Unix timestamp, represents the number of seconds that have passed since January 1, 1970 (midnight UTC/GMT).
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// proxy forwarding IP.
+	ForwardIp pulumi.StringInput `pulumi:"forwardIp"`
+	// proxy group ID, which exists when a proxy belongs to a certain proxy group.Note: This field may return null, indicating that a valid value cannot be obtained.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Identification that supports the Http3 protocol, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+	Http3Supported pulumi.IntInput `pulumi:"http3Supported"`
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.Note: This field may return null, indicating that a valid value cannot be obtained.
+	InBanBlacklist pulumi.IntInput `pulumi:"inBanBlacklist"`
+	// (Old parameter, please use ProxyId) Proxy instance ID.Note: This field may return null, indicating that a valid value cannot be obtained.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
+	IpAddressVersion pulumi.StringInput `pulumi:"ipAddressVersion"`
+	// IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+	IpLists GetProxyDetailProxyDetailIpListArrayInput `pulumi:"ipLists"`
+	// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
+	ModifyConfigTime pulumi.IntInput `pulumi:"modifyConfigTime"`
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkType pulumi.StringInput `pulumi:"networkType"`
+	// proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
+	PackageType pulumi.StringInput `pulumi:"packageType"`
+	// Security policy ID, which exists when a security policy is set.Note: This field may return null, indicating that a valid value cannot be obtained.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// Project Id.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Proxy Id.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
+	// Proxy Name.
+	ProxyName pulumi.StringInput `pulumi:"proxyName"`
+	// proxy type, 100 represents THUNDER proxy, 103 represents Microsoft cooperation proxyNote: This field may return null, indicating that a valid value cannot be obtained.
+	ProxyType pulumi.IntInput `pulumi:"proxyType"`
+	// Real Server Region.
+	RealServerRegion pulumi.StringInput `pulumi:"realServerRegion"`
+	// Detailed information of the real server region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerRegionInfos GetProxyDetailProxyDetailRealServerRegionInfoArrayInput `pulumi:"realServerRegionInfos"`
+	// List of domain names associated with resolutionNote: This field may return null, indicating that a valid value cannot be obtained.
+	RelatedGlobalDomains pulumi.StringArrayInput `pulumi:"relatedGlobalDomains"`
+	// 1. This proxy can be scaled and expanded; 0, this proxy cannot be scaled or expanded.
+	Scalarable pulumi.IntInput `pulumi:"scalarable"`
+	// proxy status. Among them:RUNNING indicates running;CREATING indicates being created;DESTROYING indicates being destroyed;OPENING indicates being opened;CLOSING indicates being closed;Closed indicates that it has been closed;ADJUSTING represents a configuration change in progress;ISOLATING indicates being isolated;ISOLATED indicates that it has been isolated;CLONING indicates copying;RECOVERING indicates that the proxy is being maintained;MOVING indicates that migration is in progress.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Supported protocol types.
+	SupportProtocols pulumi.StringArrayInput `pulumi:"supportProtocols"`
+	// Does it support security group configurationNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportSecurity pulumi.IntInput `pulumi:"supportSecurity"`
+	// tag list, when there are no labels, this field is an empty list.Note: This field may return null, indicating that a valid value cannot be obtained.
+	TagSets GetProxyDetailProxyDetailTagSetArrayInput `pulumi:"tagSets"`
+	// Version 1.0, 2.0, 3.0.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetProxyDetailProxyDetailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetail)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailArgs) ToGetProxyDetailProxyDetailOutput() GetProxyDetailProxyDetailOutput {
+	return i.ToGetProxyDetailProxyDetailOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailArgs) ToGetProxyDetailProxyDetailOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailOutput)
+}
+
+// GetProxyDetailProxyDetailArrayInput is an input type that accepts GetProxyDetailProxyDetailArray and GetProxyDetailProxyDetailArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailArrayInput` via:
+//
+//          GetProxyDetailProxyDetailArray{ GetProxyDetailProxyDetailArgs{...} }
+type GetProxyDetailProxyDetailArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailArrayOutput() GetProxyDetailProxyDetailArrayOutput
+	ToGetProxyDetailProxyDetailArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailArrayOutput
+}
+
+type GetProxyDetailProxyDetailArray []GetProxyDetailProxyDetailInput
+
+func (GetProxyDetailProxyDetailArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetail)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailArray) ToGetProxyDetailProxyDetailArrayOutput() GetProxyDetailProxyDetailArrayOutput {
+	return i.ToGetProxyDetailProxyDetailArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailArray) ToGetProxyDetailProxyDetailArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailArrayOutput)
+}
+
+type GetProxyDetailProxyDetailOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetail)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailOutput) ToGetProxyDetailProxyDetailOutput() GetProxyDetailProxyDetailOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailOutput) ToGetProxyDetailProxyDetailOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailOutput {
+	return o
+}
+
+// Access Region.
+func (o GetProxyDetailProxyDetailOutput) AccessRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.AccessRegion }).(pulumi.StringOutput)
+}
+
+// Detailed information about the access region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) AccessRegionInfos() GetProxyDetailProxyDetailAccessRegionInfoArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []GetProxyDetailProxyDetailAccessRegionInfo {
+		return v.AccessRegionInfos
+	}).(GetProxyDetailProxyDetailAccessRegionInfoArrayOutput)
+}
+
+// Blocking and Unblocking Status: BANNED indicates that the ban has been lifted, RECOVER indicates that the ban has been lifted or not, BANNING indicates that the ban is in progress, RECOVERING indicates that the ban is being lifted, BAN_FAILED indicates that the ban has failed, RECOVER_FAILED indicates that the unblocking has failed.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) BanStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.BanStatus }).(pulumi.StringOutput)
+}
+
+// Band width.
+func (o GetProxyDetailProxyDetailOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Billing type: 0 represents bandwidth based billing, and 1 represents traffic based billing.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) BillingType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.BillingType }).(pulumi.IntOutput)
+}
+
+// The method of obtaining client IP through proxys, where 0 represents TOA and 1 represents Proxy ProtocolNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) ClientIpMethods() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []int { return v.ClientIpMethods }).(pulumi.IntArrayOutput)
+}
+
+// Concurrent, in 10000 pieces/second.
+func (o GetProxyDetailProxyDetailOutput) Concurrent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.Concurrent }).(pulumi.IntOutput)
+}
+
+// The creation time, using a Unix timestamp, represents the number of seconds that have passed since January 1, 1970 (midnight UTC/GMT).
+func (o GetProxyDetailProxyDetailOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// Domain.
+func (o GetProxyDetailProxyDetailOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// proxy forwarding IP.
+func (o GetProxyDetailProxyDetailOutput) ForwardIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.ForwardIp }).(pulumi.StringOutput)
+}
+
+// proxy group ID, which exists when a proxy belongs to a certain proxy group.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Identification that supports the Http3 protocol, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) Http3Supported() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.Http3Supported }).(pulumi.IntOutput)
+}
+
+// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) InBanBlacklist() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.InBanBlacklist }).(pulumi.IntOutput)
+}
+
+// (Old parameter, please use ProxyId) Proxy instance ID.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// IP.
+func (o GetProxyDetailProxyDetailOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) IpAddressVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.IpAddressVersion }).(pulumi.StringOutput)
+}
+
+// IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) IpLists() GetProxyDetailProxyDetailIpListArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []GetProxyDetailProxyDetailIpList { return v.IpLists }).(GetProxyDetailProxyDetailIpListArrayOutput)
+}
+
+// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) ModifyConfigTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.ModifyConfigTime }).(pulumi.IntOutput)
+}
+
+// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+func (o GetProxyDetailProxyDetailOutput) NetworkType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.NetworkType }).(pulumi.StringOutput)
+}
+
+// proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) PackageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.PackageType }).(pulumi.StringOutput)
+}
+
+// Security policy ID, which exists when a security policy is set.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.PolicyId }).(pulumi.StringOutput)
+}
+
+// Project Id.
+func (o GetProxyDetailProxyDetailOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Proxy Id.
+func (o GetProxyDetailProxyDetailOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
+// Proxy Name.
+func (o GetProxyDetailProxyDetailOutput) ProxyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.ProxyName }).(pulumi.StringOutput)
+}
+
+// proxy type, 100 represents THUNDER proxy, 103 represents Microsoft cooperation proxyNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) ProxyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.ProxyType }).(pulumi.IntOutput)
+}
+
+// Real Server Region.
+func (o GetProxyDetailProxyDetailOutput) RealServerRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.RealServerRegion }).(pulumi.StringOutput)
+}
+
+// Detailed information of the real server region, including the region ID and domain name.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) RealServerRegionInfos() GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []GetProxyDetailProxyDetailRealServerRegionInfo {
+		return v.RealServerRegionInfos
+	}).(GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput)
+}
+
+// List of domain names associated with resolutionNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) RelatedGlobalDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []string { return v.RelatedGlobalDomains }).(pulumi.StringArrayOutput)
+}
+
+// 1. This proxy can be scaled and expanded; 0, this proxy cannot be scaled or expanded.
+func (o GetProxyDetailProxyDetailOutput) Scalarable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.Scalarable }).(pulumi.IntOutput)
+}
+
+// proxy status. Among them:RUNNING indicates running;CREATING indicates being created;DESTROYING indicates being destroyed;OPENING indicates being opened;CLOSING indicates being closed;Closed indicates that it has been closed;ADJUSTING represents a configuration change in progress;ISOLATING indicates being isolated;ISOLATED indicates that it has been isolated;CLONING indicates copying;RECOVERING indicates that the proxy is being maintained;MOVING indicates that migration is in progress.
+func (o GetProxyDetailProxyDetailOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Supported protocol types.
+func (o GetProxyDetailProxyDetailOutput) SupportProtocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []string { return v.SupportProtocols }).(pulumi.StringArrayOutput)
+}
+
+// Does it support security group configurationNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) SupportSecurity() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.SupportSecurity }).(pulumi.IntOutput)
+}
+
+// tag list, when there are no labels, this field is an empty list.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailOutput) TagSets() GetProxyDetailProxyDetailTagSetArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) []GetProxyDetailProxyDetailTagSet { return v.TagSets }).(GetProxyDetailProxyDetailTagSetArrayOutput)
+}
+
+// Version 1.0, 2.0, 3.0.
+func (o GetProxyDetailProxyDetailOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetProxyDetailProxyDetailArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetail)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailArrayOutput) ToGetProxyDetailProxyDetailArrayOutput() GetProxyDetailProxyDetailArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailArrayOutput) ToGetProxyDetailProxyDetailArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetail {
+		return vs[0].([]GetProxyDetailProxyDetail)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfo struct {
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId string `pulumi:"regionId"`
+	// Region Name.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetProxyDetailProxyDetailAccessRegionInfoSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetProxyDetailProxyDetailAccessRegionInfoInput is an input type that accepts GetProxyDetailProxyDetailAccessRegionInfoArgs and GetProxyDetailProxyDetailAccessRegionInfoOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailAccessRegionInfoInput` via:
+//
+//          GetProxyDetailProxyDetailAccessRegionInfoArgs{...}
+type GetProxyDetailProxyDetailAccessRegionInfoInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailAccessRegionInfoOutput() GetProxyDetailProxyDetailAccessRegionInfoOutput
+	ToGetProxyDetailProxyDetailAccessRegionInfoOutputWithContext(context.Context) GetProxyDetailProxyDetailAccessRegionInfoOutput
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoArgs struct {
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Region Name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetProxyDetailProxyDetailAccessRegionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoArgs) ToGetProxyDetailProxyDetailAccessRegionInfoOutput() GetProxyDetailProxyDetailAccessRegionInfoOutput {
+	return i.ToGetProxyDetailProxyDetailAccessRegionInfoOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoArgs) ToGetProxyDetailProxyDetailAccessRegionInfoOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailAccessRegionInfoOutput)
+}
+
+// GetProxyDetailProxyDetailAccessRegionInfoArrayInput is an input type that accepts GetProxyDetailProxyDetailAccessRegionInfoArray and GetProxyDetailProxyDetailAccessRegionInfoArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailAccessRegionInfoArrayInput` via:
+//
+//          GetProxyDetailProxyDetailAccessRegionInfoArray{ GetProxyDetailProxyDetailAccessRegionInfoArgs{...} }
+type GetProxyDetailProxyDetailAccessRegionInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoArrayOutput
+	ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailAccessRegionInfoArrayOutput
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoArray []GetProxyDetailProxyDetailAccessRegionInfoInput
+
+func (GetProxyDetailProxyDetailAccessRegionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailAccessRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoArray) ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoArrayOutput {
+	return i.ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoArray) ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailAccessRegionInfoArrayOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailAccessRegionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) ToGetProxyDetailProxyDetailAccessRegionInfoOutput() GetProxyDetailProxyDetailAccessRegionInfoOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) ToGetProxyDetailProxyDetailAccessRegionInfoOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region Id.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Region Name.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailAccessRegionInfoOutput) SupportFeatures() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfo) []GetProxyDetailProxyDetailAccessRegionInfoSupportFeature {
+		return v.SupportFeatures
+	}).(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailAccessRegionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailAccessRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoArrayOutput) ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoArrayOutput) ToGetProxyDetailProxyDetailAccessRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailAccessRegionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailAccessRegionInfo {
+		return vs[0].([]GetProxyDetailProxyDetailAccessRegionInfo)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailAccessRegionInfoOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeature struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureInput is an input type that accepts GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs and GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureInput` via:
+//
+//          GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs{...}
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput
+	ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutputWithContext(context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput {
+	return i.ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput)
+}
+
+// GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayInput is an input type that accepts GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray and GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayInput` via:
+//
+//          GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray{ GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs{...} }
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput
+	ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray []GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureInput
+
+func (GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailAccessRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput {
+	return i.ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailAccessRegionInfoSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailAccessRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput) ToGetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailAccessRegionInfoSupportFeature {
+		return vs[0].([]GetProxyDetailProxyDetailAccessRegionInfoSupportFeature)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput)
+}
+
+type GetProxyDetailProxyDetailIpList struct {
+	// Band width.
+	Bandwidth int `pulumi:"bandwidth"`
+	// IP.
+	Ip string `pulumi:"ip"`
+	// Supplier, BGP represents default, CMCC represents China Mobile, CUCC represents China Unicom, and CTCC represents China Telecom.
+	Provider string `pulumi:"provider"`
+}
+
+// GetProxyDetailProxyDetailIpListInput is an input type that accepts GetProxyDetailProxyDetailIpListArgs and GetProxyDetailProxyDetailIpListOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailIpListInput` via:
+//
+//          GetProxyDetailProxyDetailIpListArgs{...}
+type GetProxyDetailProxyDetailIpListInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailIpListOutput() GetProxyDetailProxyDetailIpListOutput
+	ToGetProxyDetailProxyDetailIpListOutputWithContext(context.Context) GetProxyDetailProxyDetailIpListOutput
+}
+
+type GetProxyDetailProxyDetailIpListArgs struct {
+	// Band width.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Supplier, BGP represents default, CMCC represents China Mobile, CUCC represents China Unicom, and CTCC represents China Telecom.
+	Provider pulumi.StringInput `pulumi:"provider"`
+}
+
+func (GetProxyDetailProxyDetailIpListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailIpList)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailIpListArgs) ToGetProxyDetailProxyDetailIpListOutput() GetProxyDetailProxyDetailIpListOutput {
+	return i.ToGetProxyDetailProxyDetailIpListOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailIpListArgs) ToGetProxyDetailProxyDetailIpListOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailIpListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailIpListOutput)
+}
+
+// GetProxyDetailProxyDetailIpListArrayInput is an input type that accepts GetProxyDetailProxyDetailIpListArray and GetProxyDetailProxyDetailIpListArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailIpListArrayInput` via:
+//
+//          GetProxyDetailProxyDetailIpListArray{ GetProxyDetailProxyDetailIpListArgs{...} }
+type GetProxyDetailProxyDetailIpListArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailIpListArrayOutput() GetProxyDetailProxyDetailIpListArrayOutput
+	ToGetProxyDetailProxyDetailIpListArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailIpListArrayOutput
+}
+
+type GetProxyDetailProxyDetailIpListArray []GetProxyDetailProxyDetailIpListInput
+
+func (GetProxyDetailProxyDetailIpListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailIpList)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailIpListArray) ToGetProxyDetailProxyDetailIpListArrayOutput() GetProxyDetailProxyDetailIpListArrayOutput {
+	return i.ToGetProxyDetailProxyDetailIpListArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailIpListArray) ToGetProxyDetailProxyDetailIpListArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailIpListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailIpListArrayOutput)
+}
+
+type GetProxyDetailProxyDetailIpListOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailIpListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailIpList)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailIpListOutput) ToGetProxyDetailProxyDetailIpListOutput() GetProxyDetailProxyDetailIpListOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailIpListOutput) ToGetProxyDetailProxyDetailIpListOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailIpListOutput {
+	return o
+}
+
+// Band width.
+func (o GetProxyDetailProxyDetailIpListOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailIpList) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// IP.
+func (o GetProxyDetailProxyDetailIpListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailIpList) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Supplier, BGP represents default, CMCC represents China Mobile, CUCC represents China Unicom, and CTCC represents China Telecom.
+func (o GetProxyDetailProxyDetailIpListOutput) Provider() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailIpList) string { return v.Provider }).(pulumi.StringOutput)
+}
+
+type GetProxyDetailProxyDetailIpListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailIpListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailIpList)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailIpListArrayOutput) ToGetProxyDetailProxyDetailIpListArrayOutput() GetProxyDetailProxyDetailIpListArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailIpListArrayOutput) ToGetProxyDetailProxyDetailIpListArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailIpListArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailIpListArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailIpListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailIpList {
+		return vs[0].([]GetProxyDetailProxyDetailIpList)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailIpListOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfo struct {
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId string `pulumi:"regionId"`
+	// Region Name.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetProxyDetailProxyDetailRealServerRegionInfoInput is an input type that accepts GetProxyDetailProxyDetailRealServerRegionInfoArgs and GetProxyDetailProxyDetailRealServerRegionInfoOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailRealServerRegionInfoInput` via:
+//
+//          GetProxyDetailProxyDetailRealServerRegionInfoArgs{...}
+type GetProxyDetailProxyDetailRealServerRegionInfoInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailRealServerRegionInfoOutput() GetProxyDetailProxyDetailRealServerRegionInfoOutput
+	ToGetProxyDetailProxyDetailRealServerRegionInfoOutputWithContext(context.Context) GetProxyDetailProxyDetailRealServerRegionInfoOutput
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoArgs struct {
+	// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Region Name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoArgs) ToGetProxyDetailProxyDetailRealServerRegionInfoOutput() GetProxyDetailProxyDetailRealServerRegionInfoOutput {
+	return i.ToGetProxyDetailProxyDetailRealServerRegionInfoOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoArgs) ToGetProxyDetailProxyDetailRealServerRegionInfoOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailRealServerRegionInfoOutput)
+}
+
+// GetProxyDetailProxyDetailRealServerRegionInfoArrayInput is an input type that accepts GetProxyDetailProxyDetailRealServerRegionInfoArray and GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailRealServerRegionInfoArrayInput` via:
+//
+//          GetProxyDetailProxyDetailRealServerRegionInfoArray{ GetProxyDetailProxyDetailRealServerRegionInfoArgs{...} }
+type GetProxyDetailProxyDetailRealServerRegionInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput
+	ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoArray []GetProxyDetailProxyDetailRealServerRegionInfoInput
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailRealServerRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoArray) ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput {
+	return i.ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoArray) ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoOutput() GetProxyDetailProxyDetailRealServerRegionInfoOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0 indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where dc represents the DataCenter data center and ec represents the EdgeComputing edge node.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region Id.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Region Name.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoOutput) SupportFeatures() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfo) []GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature {
+		return v.SupportFeatures
+	}).(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailRealServerRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailRealServerRegionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailRealServerRegionInfo {
+		return vs[0].([]GetProxyDetailProxyDetailRealServerRegionInfo)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailRealServerRegionInfoOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureInput is an input type that accepts GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs and GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureInput` via:
+//
+//          GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs{...}
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput
+	ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutputWithContext(context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput {
+	return i.ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput)
+}
+
+// GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayInput is an input type that accepts GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray and GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayInput` via:
+//
+//          GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray{ GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs{...} }
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput
+	ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray []GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureInput
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput {
+	return i.ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput() GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput) ToGetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature {
+		return vs[0].([]GetProxyDetailProxyDetailRealServerRegionInfoSupportFeature)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput)
+}
+
+type GetProxyDetailProxyDetailTagSet struct {
+	// Tag Key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetProxyDetailProxyDetailTagSetInput is an input type that accepts GetProxyDetailProxyDetailTagSetArgs and GetProxyDetailProxyDetailTagSetOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailTagSetInput` via:
+//
+//          GetProxyDetailProxyDetailTagSetArgs{...}
+type GetProxyDetailProxyDetailTagSetInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailTagSetOutput() GetProxyDetailProxyDetailTagSetOutput
+	ToGetProxyDetailProxyDetailTagSetOutputWithContext(context.Context) GetProxyDetailProxyDetailTagSetOutput
+}
+
+type GetProxyDetailProxyDetailTagSetArgs struct {
+	// Tag Key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetProxyDetailProxyDetailTagSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailTagSet)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailTagSetArgs) ToGetProxyDetailProxyDetailTagSetOutput() GetProxyDetailProxyDetailTagSetOutput {
+	return i.ToGetProxyDetailProxyDetailTagSetOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailTagSetArgs) ToGetProxyDetailProxyDetailTagSetOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailTagSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailTagSetOutput)
+}
+
+// GetProxyDetailProxyDetailTagSetArrayInput is an input type that accepts GetProxyDetailProxyDetailTagSetArray and GetProxyDetailProxyDetailTagSetArrayOutput values.
+// You can construct a concrete instance of `GetProxyDetailProxyDetailTagSetArrayInput` via:
+//
+//          GetProxyDetailProxyDetailTagSetArray{ GetProxyDetailProxyDetailTagSetArgs{...} }
+type GetProxyDetailProxyDetailTagSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyDetailProxyDetailTagSetArrayOutput() GetProxyDetailProxyDetailTagSetArrayOutput
+	ToGetProxyDetailProxyDetailTagSetArrayOutputWithContext(context.Context) GetProxyDetailProxyDetailTagSetArrayOutput
+}
+
+type GetProxyDetailProxyDetailTagSetArray []GetProxyDetailProxyDetailTagSetInput
+
+func (GetProxyDetailProxyDetailTagSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailTagSet)(nil)).Elem()
+}
+
+func (i GetProxyDetailProxyDetailTagSetArray) ToGetProxyDetailProxyDetailTagSetArrayOutput() GetProxyDetailProxyDetailTagSetArrayOutput {
+	return i.ToGetProxyDetailProxyDetailTagSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyDetailProxyDetailTagSetArray) ToGetProxyDetailProxyDetailTagSetArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailTagSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyDetailProxyDetailTagSetArrayOutput)
+}
+
+type GetProxyDetailProxyDetailTagSetOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailTagSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyDetailProxyDetailTagSet)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailTagSetOutput) ToGetProxyDetailProxyDetailTagSetOutput() GetProxyDetailProxyDetailTagSetOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailTagSetOutput) ToGetProxyDetailProxyDetailTagSetOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailTagSetOutput {
+	return o
+}
+
+// Tag Key.
+func (o GetProxyDetailProxyDetailTagSetOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailTagSet) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag Value.
+func (o GetProxyDetailProxyDetailTagSetOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetailTagSet) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetProxyDetailProxyDetailTagSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyDetailProxyDetailTagSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyDetailProxyDetailTagSet)(nil)).Elem()
+}
+
+func (o GetProxyDetailProxyDetailTagSetArrayOutput) ToGetProxyDetailProxyDetailTagSetArrayOutput() GetProxyDetailProxyDetailTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailTagSetArrayOutput) ToGetProxyDetailProxyDetailTagSetArrayOutputWithContext(ctx context.Context) GetProxyDetailProxyDetailTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyDetailProxyDetailTagSetArrayOutput) Index(i pulumi.IntInput) GetProxyDetailProxyDetailTagSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyDetailProxyDetailTagSet {
+		return vs[0].([]GetProxyDetailProxyDetailTagSet)[vs[1].(int)]
+	}).(GetProxyDetailProxyDetailTagSetOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsData struct {
+	// Metric Data.
+	MetricDatas []GetProxyGroupStatisticsStatisticsDataMetricData `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName string `pulumi:"metricName"`
+}
+
+// GetProxyGroupStatisticsStatisticsDataInput is an input type that accepts GetProxyGroupStatisticsStatisticsDataArgs and GetProxyGroupStatisticsStatisticsDataOutput values.
+// You can construct a concrete instance of `GetProxyGroupStatisticsStatisticsDataInput` via:
+//
+//          GetProxyGroupStatisticsStatisticsDataArgs{...}
+type GetProxyGroupStatisticsStatisticsDataInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupStatisticsStatisticsDataOutput() GetProxyGroupStatisticsStatisticsDataOutput
+	ToGetProxyGroupStatisticsStatisticsDataOutputWithContext(context.Context) GetProxyGroupStatisticsStatisticsDataOutput
+}
+
+type GetProxyGroupStatisticsStatisticsDataArgs struct {
+	// Metric Data.
+	MetricDatas GetProxyGroupStatisticsStatisticsDataMetricDataArrayInput `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName pulumi.StringInput `pulumi:"metricName"`
+}
+
+func (GetProxyGroupStatisticsStatisticsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataArgs) ToGetProxyGroupStatisticsStatisticsDataOutput() GetProxyGroupStatisticsStatisticsDataOutput {
+	return i.ToGetProxyGroupStatisticsStatisticsDataOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataArgs) ToGetProxyGroupStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupStatisticsStatisticsDataOutput)
+}
+
+// GetProxyGroupStatisticsStatisticsDataArrayInput is an input type that accepts GetProxyGroupStatisticsStatisticsDataArray and GetProxyGroupStatisticsStatisticsDataArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupStatisticsStatisticsDataArrayInput` via:
+//
+//          GetProxyGroupStatisticsStatisticsDataArray{ GetProxyGroupStatisticsStatisticsDataArgs{...} }
+type GetProxyGroupStatisticsStatisticsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupStatisticsStatisticsDataArrayOutput() GetProxyGroupStatisticsStatisticsDataArrayOutput
+	ToGetProxyGroupStatisticsStatisticsDataArrayOutputWithContext(context.Context) GetProxyGroupStatisticsStatisticsDataArrayOutput
+}
+
+type GetProxyGroupStatisticsStatisticsDataArray []GetProxyGroupStatisticsStatisticsDataInput
+
+func (GetProxyGroupStatisticsStatisticsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataArray) ToGetProxyGroupStatisticsStatisticsDataArrayOutput() GetProxyGroupStatisticsStatisticsDataArrayOutput {
+	return i.ToGetProxyGroupStatisticsStatisticsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataArray) ToGetProxyGroupStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupStatisticsStatisticsDataArrayOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsDataOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupStatisticsStatisticsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataOutput) ToGetProxyGroupStatisticsStatisticsDataOutput() GetProxyGroupStatisticsStatisticsDataOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataOutput) ToGetProxyGroupStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataOutput {
+	return o
+}
+
+// Metric Data.
+func (o GetProxyGroupStatisticsStatisticsDataOutput) MetricDatas() GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupStatisticsStatisticsData) []GetProxyGroupStatisticsStatisticsDataMetricData {
+		return v.MetricDatas
+	}).(GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+// Metric Name.
+func (o GetProxyGroupStatisticsStatisticsDataOutput) MetricName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupStatisticsStatisticsData) string { return v.MetricName }).(pulumi.StringOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupStatisticsStatisticsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataArrayOutput) ToGetProxyGroupStatisticsStatisticsDataArrayOutput() GetProxyGroupStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataArrayOutput) ToGetProxyGroupStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataArrayOutput) Index(i pulumi.IntInput) GetProxyGroupStatisticsStatisticsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupStatisticsStatisticsData {
+		return vs[0].([]GetProxyGroupStatisticsStatisticsData)[vs[1].(int)]
+	}).(GetProxyGroupStatisticsStatisticsDataOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsDataMetricData struct {
+	// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data float64 `pulumi:"data"`
+	// Time.
+	Time int `pulumi:"time"`
+}
+
+// GetProxyGroupStatisticsStatisticsDataMetricDataInput is an input type that accepts GetProxyGroupStatisticsStatisticsDataMetricDataArgs and GetProxyGroupStatisticsStatisticsDataMetricDataOutput values.
+// You can construct a concrete instance of `GetProxyGroupStatisticsStatisticsDataMetricDataInput` via:
+//
+//          GetProxyGroupStatisticsStatisticsDataMetricDataArgs{...}
+type GetProxyGroupStatisticsStatisticsDataMetricDataInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupStatisticsStatisticsDataMetricDataOutput() GetProxyGroupStatisticsStatisticsDataMetricDataOutput
+	ToGetProxyGroupStatisticsStatisticsDataMetricDataOutputWithContext(context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataOutput
+}
+
+type GetProxyGroupStatisticsStatisticsDataMetricDataArgs struct {
+	// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data pulumi.Float64Input `pulumi:"data"`
+	// Time.
+	Time pulumi.IntInput `pulumi:"time"`
+}
+
+func (GetProxyGroupStatisticsStatisticsDataMetricDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataMetricDataArgs) ToGetProxyGroupStatisticsStatisticsDataMetricDataOutput() GetProxyGroupStatisticsStatisticsDataMetricDataOutput {
+	return i.ToGetProxyGroupStatisticsStatisticsDataMetricDataOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataMetricDataArgs) ToGetProxyGroupStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupStatisticsStatisticsDataMetricDataOutput)
+}
+
+// GetProxyGroupStatisticsStatisticsDataMetricDataArrayInput is an input type that accepts GetProxyGroupStatisticsStatisticsDataMetricDataArray and GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupStatisticsStatisticsDataMetricDataArrayInput` via:
+//
+//          GetProxyGroupStatisticsStatisticsDataMetricDataArray{ GetProxyGroupStatisticsStatisticsDataMetricDataArgs{...} }
+type GetProxyGroupStatisticsStatisticsDataMetricDataArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput() GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput
+	ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput
+}
+
+type GetProxyGroupStatisticsStatisticsDataMetricDataArray []GetProxyGroupStatisticsStatisticsDataMetricDataInput
+
+func (GetProxyGroupStatisticsStatisticsDataMetricDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataMetricDataArray) ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput() GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput {
+	return i.ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupStatisticsStatisticsDataMetricDataArray) ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsDataMetricDataOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupStatisticsStatisticsDataMetricDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataOutput) ToGetProxyGroupStatisticsStatisticsDataMetricDataOutput() GetProxyGroupStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataOutput) ToGetProxyGroupStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataOutput) Data() pulumi.Float64Output {
+	return o.ApplyT(func(v GetProxyGroupStatisticsStatisticsDataMetricData) float64 { return v.Data }).(pulumi.Float64Output)
+}
+
+// Time.
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataOutput) Time() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupStatisticsStatisticsDataMetricData) int { return v.Time }).(pulumi.IntOutput)
+}
+
+type GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput) ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput() GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput) ToGetProxyGroupStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput) Index(i pulumi.IntInput) GetProxyGroupStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupStatisticsStatisticsDataMetricData {
+		return vs[0].([]GetProxyGroupStatisticsStatisticsDataMetricData)[vs[1].(int)]
+	}).(GetProxyGroupStatisticsStatisticsDataMetricDataOutput)
+}
+
+type GetProxyGroupsFilter struct {
+	// Filter conditions.
+	Name string `pulumi:"name"`
+	// filtering value.
+	Values []string `pulumi:"values"`
+}
+
+// GetProxyGroupsFilterInput is an input type that accepts GetProxyGroupsFilterArgs and GetProxyGroupsFilterOutput values.
+// You can construct a concrete instance of `GetProxyGroupsFilterInput` via:
+//
+//          GetProxyGroupsFilterArgs{...}
+type GetProxyGroupsFilterInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsFilterOutput() GetProxyGroupsFilterOutput
+	ToGetProxyGroupsFilterOutputWithContext(context.Context) GetProxyGroupsFilterOutput
+}
+
+type GetProxyGroupsFilterArgs struct {
+	// Filter conditions.
+	Name pulumi.StringInput `pulumi:"name"`
+	// filtering value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetProxyGroupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsFilter)(nil)).Elem()
+}
+
+func (i GetProxyGroupsFilterArgs) ToGetProxyGroupsFilterOutput() GetProxyGroupsFilterOutput {
+	return i.ToGetProxyGroupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsFilterArgs) ToGetProxyGroupsFilterOutputWithContext(ctx context.Context) GetProxyGroupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsFilterOutput)
+}
+
+// GetProxyGroupsFilterArrayInput is an input type that accepts GetProxyGroupsFilterArray and GetProxyGroupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsFilterArrayInput` via:
+//
+//          GetProxyGroupsFilterArray{ GetProxyGroupsFilterArgs{...} }
+type GetProxyGroupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsFilterArrayOutput() GetProxyGroupsFilterArrayOutput
+	ToGetProxyGroupsFilterArrayOutputWithContext(context.Context) GetProxyGroupsFilterArrayOutput
+}
+
+type GetProxyGroupsFilterArray []GetProxyGroupsFilterInput
+
+func (GetProxyGroupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsFilter)(nil)).Elem()
+}
+
+func (i GetProxyGroupsFilterArray) ToGetProxyGroupsFilterArrayOutput() GetProxyGroupsFilterArrayOutput {
+	return i.ToGetProxyGroupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsFilterArray) ToGetProxyGroupsFilterArrayOutputWithContext(ctx context.Context) GetProxyGroupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsFilterArrayOutput)
+}
+
+type GetProxyGroupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsFilter)(nil)).Elem()
+}
+
+func (o GetProxyGroupsFilterOutput) ToGetProxyGroupsFilterOutput() GetProxyGroupsFilterOutput {
+	return o
+}
+
+func (o GetProxyGroupsFilterOutput) ToGetProxyGroupsFilterOutputWithContext(ctx context.Context) GetProxyGroupsFilterOutput {
+	return o
+}
+
+// Filter conditions.
+func (o GetProxyGroupsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// filtering value.
+func (o GetProxyGroupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetProxyGroupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsFilter)(nil)).Elem()
+}
+
+func (o GetProxyGroupsFilterArrayOutput) ToGetProxyGroupsFilterArrayOutput() GetProxyGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsFilterArrayOutput) ToGetProxyGroupsFilterArrayOutputWithContext(ctx context.Context) GetProxyGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsFilterArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsFilter {
+		return vs[0].([]GetProxyGroupsFilter)[vs[1].(int)]
+	}).(GetProxyGroupsFilterOutput)
+}
+
+type GetProxyGroupsProxyGroupList struct {
+	// Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.
+	CreateTime int `pulumi:"createTime"`
+	// proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.
+	Domain string `pulumi:"domain"`
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// proxy group Id.
+	GroupId string `pulumi:"groupId"`
+	// proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.
+	GroupName string `pulumi:"groupName"`
+	// Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+	Http3Supported int `pulumi:"http3Supported"`
+	// Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
+	ProjectId int `pulumi:"projectId"`
+	// Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.
+	ProxyType int `pulumi:"proxyType"`
+	// Real Server Region Info.
+	RealServerRegionInfos []GetProxyGroupsProxyGroupListRealServerRegionInfo `pulumi:"realServerRegionInfos"`
+	// proxy group status.Among them,&#39;RUNNING&#39; indicates running;&#39;CREATING&#39; indicates being created;&#39;DESTROYING&#39; indicates being destroyed;&#39;MOVING&#39; indicates that the proxy is being migrated;&#39;CHANGING&#39; indicates partial deployment.
+	Status string `pulumi:"status"`
+	// Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
+	TagSets []GetProxyGroupsProxyGroupListTagSet `pulumi:"tagSets"`
+	// proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.
+	Version string `pulumi:"version"`
+}
+
+// GetProxyGroupsProxyGroupListInput is an input type that accepts GetProxyGroupsProxyGroupListArgs and GetProxyGroupsProxyGroupListOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListInput` via:
+//
+//          GetProxyGroupsProxyGroupListArgs{...}
+type GetProxyGroupsProxyGroupListInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListOutput() GetProxyGroupsProxyGroupListOutput
+	ToGetProxyGroupsProxyGroupListOutputWithContext(context.Context) GetProxyGroupsProxyGroupListOutput
+}
+
+type GetProxyGroupsProxyGroupListArgs struct {
+	// Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// proxy group Id.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+	Http3Supported pulumi.IntInput `pulumi:"http3Supported"`
+	// Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.
+	ProxyType pulumi.IntInput `pulumi:"proxyType"`
+	// Real Server Region Info.
+	RealServerRegionInfos GetProxyGroupsProxyGroupListRealServerRegionInfoArrayInput `pulumi:"realServerRegionInfos"`
+	// proxy group status.Among them,&#39;RUNNING&#39; indicates running;&#39;CREATING&#39; indicates being created;&#39;DESTROYING&#39; indicates being destroyed;&#39;MOVING&#39; indicates that the proxy is being migrated;&#39;CHANGING&#39; indicates partial deployment.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
+	TagSets GetProxyGroupsProxyGroupListTagSetArrayInput `pulumi:"tagSets"`
+	// proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetProxyGroupsProxyGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupList)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListArgs) ToGetProxyGroupsProxyGroupListOutput() GetProxyGroupsProxyGroupListOutput {
+	return i.ToGetProxyGroupsProxyGroupListOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListArgs) ToGetProxyGroupsProxyGroupListOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListOutput)
+}
+
+// GetProxyGroupsProxyGroupListArrayInput is an input type that accepts GetProxyGroupsProxyGroupListArray and GetProxyGroupsProxyGroupListArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListArrayInput` via:
+//
+//          GetProxyGroupsProxyGroupListArray{ GetProxyGroupsProxyGroupListArgs{...} }
+type GetProxyGroupsProxyGroupListArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListArrayOutput() GetProxyGroupsProxyGroupListArrayOutput
+	ToGetProxyGroupsProxyGroupListArrayOutputWithContext(context.Context) GetProxyGroupsProxyGroupListArrayOutput
+}
+
+type GetProxyGroupsProxyGroupListArray []GetProxyGroupsProxyGroupListInput
+
+func (GetProxyGroupsProxyGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupList)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListArray) ToGetProxyGroupsProxyGroupListArrayOutput() GetProxyGroupsProxyGroupListArrayOutput {
+	return i.ToGetProxyGroupsProxyGroupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListArray) ToGetProxyGroupsProxyGroupListArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupList)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListOutput) ToGetProxyGroupsProxyGroupListOutput() GetProxyGroupsProxyGroupListOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListOutput) ToGetProxyGroupsProxyGroupListOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListOutput {
+	return o
+}
+
+// Create TimeNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// proxy group domain nameNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// proxy group Id.
+func (o GetProxyGroupsProxyGroupListOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// proxy Group NameNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Supports the identification of Http3 features, where:0 indicates shutdown;1 indicates enabled.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) Http3Supported() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) int { return v.Http3Supported }).(pulumi.IntOutput)
+}
+
+// Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
+func (o GetProxyGroupsProxyGroupListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Does the proxy group include Microsoft proxysNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) ProxyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) int { return v.ProxyType }).(pulumi.IntOutput)
+}
+
+// Real Server Region Info.
+func (o GetProxyGroupsProxyGroupListOutput) RealServerRegionInfos() GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) []GetProxyGroupsProxyGroupListRealServerRegionInfo {
+		return v.RealServerRegionInfos
+	}).(GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput)
+}
+
+// proxy group status.Among them,&#39;RUNNING&#39; indicates running;&#39;CREATING&#39; indicates being created;&#39;DESTROYING&#39; indicates being destroyed;&#39;MOVING&#39; indicates that the proxy is being migrated;&#39;CHANGING&#39; indicates partial deployment.
+func (o GetProxyGroupsProxyGroupListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
+func (o GetProxyGroupsProxyGroupListOutput) TagSets() GetProxyGroupsProxyGroupListTagSetArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) []GetProxyGroupsProxyGroupListTagSet { return v.TagSets }).(GetProxyGroupsProxyGroupListTagSetArrayOutput)
+}
+
+// proxy Group VersionNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupList) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetProxyGroupsProxyGroupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupList)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListArrayOutput) ToGetProxyGroupsProxyGroupListArrayOutput() GetProxyGroupsProxyGroupListArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListArrayOutput) ToGetProxyGroupsProxyGroupListArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsProxyGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsProxyGroupList {
+		return vs[0].([]GetProxyGroupsProxyGroupList)[vs[1].(int)]
+	}).(GetProxyGroupsProxyGroupListOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfo struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// The type of computer room, where &#39;dc&#39; represents the DataCenter data center and &#39;ec&#39; represents the EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId string `pulumi:"regionId"`
+	// Region Name.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetProxyGroupsProxyGroupListRealServerRegionInfoInput is an input type that accepts GetProxyGroupsProxyGroupListRealServerRegionInfoArgs and GetProxyGroupsProxyGroupListRealServerRegionInfoOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListRealServerRegionInfoInput` via:
+//
+//          GetProxyGroupsProxyGroupListRealServerRegionInfoArgs{...}
+type GetProxyGroupsProxyGroupListRealServerRegionInfoInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoOutput
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutputWithContext(context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoOutput
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoArgs struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// The type of computer room, where &#39;dc&#39; represents the DataCenter data center and &#39;ec&#39; represents the EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Region Name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoArgs) ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoOutput {
+	return i.ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoArgs) ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListRealServerRegionInfoOutput)
+}
+
+// GetProxyGroupsProxyGroupListRealServerRegionInfoArrayInput is an input type that accepts GetProxyGroupsProxyGroupListRealServerRegionInfoArray and GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListRealServerRegionInfoArrayInput` via:
+//
+//          GetProxyGroupsProxyGroupListRealServerRegionInfoArray{ GetProxyGroupsProxyGroupListRealServerRegionInfoArgs{...} }
+type GetProxyGroupsProxyGroupListRealServerRegionInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutputWithContext(context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoArray []GetProxyGroupsProxyGroupListRealServerRegionInfoInput
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListRealServerRegionInfo)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoArray) ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput {
+	return i.ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoArray) ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// The type of computer room, where &#39;dc&#39; represents the DataCenter data center and &#39;ec&#39; represents the EdgeComputing edge node.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region Id.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Region Name.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoOutput) SupportFeatures() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfo) []GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature {
+		return v.SupportFeatures
+	}).(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListRealServerRegionInfo)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsProxyGroupListRealServerRegionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsProxyGroupListRealServerRegionInfo {
+		return vs[0].([]GetProxyGroupsProxyGroupListRealServerRegionInfo)[vs[1].(int)]
+	}).(GetProxyGroupsProxyGroupListRealServerRegionInfoOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature struct {
+	// A list of network types supported by the access area, with &#39;normal&#39; indicating support for regular BGP, &#39;cn2&#39; indicating premium BGP, &#39;triple&#39; indicating three networks, and &#39;secure_EIP&#39; represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureInput is an input type that accepts GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs and GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureInput` via:
+//
+//          GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs{...}
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutputWithContext(context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with &#39;normal&#39; indicating support for regular BGP, &#39;cn2&#39; indicating premium BGP, &#39;triple&#39; indicating three networks, and &#39;secure_EIP&#39; represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput {
+	return i.ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput)
+}
+
+// GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayInput is an input type that accepts GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray and GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayInput` via:
+//
+//          GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray{ GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs{...} }
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput
+	ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutputWithContext(context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray []GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureInput
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput {
+	return i.ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with &#39;normal&#39; indicating support for regular BGP, &#39;cn2&#39; indicating premium BGP, &#39;triple&#39; indicating three networks, and &#39;secure_EIP&#39; represents a custom secure EIP.
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput() GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput) ToGetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature {
+		return vs[0].([]GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeature)[vs[1].(int)]
+	}).(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput)
+}
+
+type GetProxyGroupsProxyGroupListTagSet struct {
+	// Tag Key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetProxyGroupsProxyGroupListTagSetInput is an input type that accepts GetProxyGroupsProxyGroupListTagSetArgs and GetProxyGroupsProxyGroupListTagSetOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListTagSetInput` via:
+//
+//          GetProxyGroupsProxyGroupListTagSetArgs{...}
+type GetProxyGroupsProxyGroupListTagSetInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListTagSetOutput() GetProxyGroupsProxyGroupListTagSetOutput
+	ToGetProxyGroupsProxyGroupListTagSetOutputWithContext(context.Context) GetProxyGroupsProxyGroupListTagSetOutput
+}
+
+type GetProxyGroupsProxyGroupListTagSetArgs struct {
+	// Tag Key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetProxyGroupsProxyGroupListTagSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListTagSet)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListTagSetArgs) ToGetProxyGroupsProxyGroupListTagSetOutput() GetProxyGroupsProxyGroupListTagSetOutput {
+	return i.ToGetProxyGroupsProxyGroupListTagSetOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListTagSetArgs) ToGetProxyGroupsProxyGroupListTagSetOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListTagSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListTagSetOutput)
+}
+
+// GetProxyGroupsProxyGroupListTagSetArrayInput is an input type that accepts GetProxyGroupsProxyGroupListTagSetArray and GetProxyGroupsProxyGroupListTagSetArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsProxyGroupListTagSetArrayInput` via:
+//
+//          GetProxyGroupsProxyGroupListTagSetArray{ GetProxyGroupsProxyGroupListTagSetArgs{...} }
+type GetProxyGroupsProxyGroupListTagSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsProxyGroupListTagSetArrayOutput() GetProxyGroupsProxyGroupListTagSetArrayOutput
+	ToGetProxyGroupsProxyGroupListTagSetArrayOutputWithContext(context.Context) GetProxyGroupsProxyGroupListTagSetArrayOutput
+}
+
+type GetProxyGroupsProxyGroupListTagSetArray []GetProxyGroupsProxyGroupListTagSetInput
+
+func (GetProxyGroupsProxyGroupListTagSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListTagSet)(nil)).Elem()
+}
+
+func (i GetProxyGroupsProxyGroupListTagSetArray) ToGetProxyGroupsProxyGroupListTagSetArrayOutput() GetProxyGroupsProxyGroupListTagSetArrayOutput {
+	return i.ToGetProxyGroupsProxyGroupListTagSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsProxyGroupListTagSetArray) ToGetProxyGroupsProxyGroupListTagSetArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListTagSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsProxyGroupListTagSetArrayOutput)
+}
+
+type GetProxyGroupsProxyGroupListTagSetOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListTagSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsProxyGroupListTagSet)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListTagSetOutput) ToGetProxyGroupsProxyGroupListTagSetOutput() GetProxyGroupsProxyGroupListTagSetOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListTagSetOutput) ToGetProxyGroupsProxyGroupListTagSetOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListTagSetOutput {
+	return o
+}
+
+// Tag Key.
+func (o GetProxyGroupsProxyGroupListTagSetOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListTagSet) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag Value.
+func (o GetProxyGroupsProxyGroupListTagSetOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsProxyGroupListTagSet) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetProxyGroupsProxyGroupListTagSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsProxyGroupListTagSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsProxyGroupListTagSet)(nil)).Elem()
+}
+
+func (o GetProxyGroupsProxyGroupListTagSetArrayOutput) ToGetProxyGroupsProxyGroupListTagSetArrayOutput() GetProxyGroupsProxyGroupListTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListTagSetArrayOutput) ToGetProxyGroupsProxyGroupListTagSetArrayOutputWithContext(ctx context.Context) GetProxyGroupsProxyGroupListTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsProxyGroupListTagSetArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsProxyGroupListTagSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsProxyGroupListTagSet {
+		return vs[0].([]GetProxyGroupsProxyGroupListTagSet)[vs[1].(int)]
+	}).(GetProxyGroupsProxyGroupListTagSetOutput)
+}
+
+type GetProxyGroupsTagSet struct {
+	// Tag Key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetProxyGroupsTagSetInput is an input type that accepts GetProxyGroupsTagSetArgs and GetProxyGroupsTagSetOutput values.
+// You can construct a concrete instance of `GetProxyGroupsTagSetInput` via:
+//
+//          GetProxyGroupsTagSetArgs{...}
+type GetProxyGroupsTagSetInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsTagSetOutput() GetProxyGroupsTagSetOutput
+	ToGetProxyGroupsTagSetOutputWithContext(context.Context) GetProxyGroupsTagSetOutput
+}
+
+type GetProxyGroupsTagSetArgs struct {
+	// Tag Key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag Value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetProxyGroupsTagSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsTagSet)(nil)).Elem()
+}
+
+func (i GetProxyGroupsTagSetArgs) ToGetProxyGroupsTagSetOutput() GetProxyGroupsTagSetOutput {
+	return i.ToGetProxyGroupsTagSetOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsTagSetArgs) ToGetProxyGroupsTagSetOutputWithContext(ctx context.Context) GetProxyGroupsTagSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsTagSetOutput)
+}
+
+// GetProxyGroupsTagSetArrayInput is an input type that accepts GetProxyGroupsTagSetArray and GetProxyGroupsTagSetArrayOutput values.
+// You can construct a concrete instance of `GetProxyGroupsTagSetArrayInput` via:
+//
+//          GetProxyGroupsTagSetArray{ GetProxyGroupsTagSetArgs{...} }
+type GetProxyGroupsTagSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyGroupsTagSetArrayOutput() GetProxyGroupsTagSetArrayOutput
+	ToGetProxyGroupsTagSetArrayOutputWithContext(context.Context) GetProxyGroupsTagSetArrayOutput
+}
+
+type GetProxyGroupsTagSetArray []GetProxyGroupsTagSetInput
+
+func (GetProxyGroupsTagSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsTagSet)(nil)).Elem()
+}
+
+func (i GetProxyGroupsTagSetArray) ToGetProxyGroupsTagSetArrayOutput() GetProxyGroupsTagSetArrayOutput {
+	return i.ToGetProxyGroupsTagSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyGroupsTagSetArray) ToGetProxyGroupsTagSetArrayOutputWithContext(ctx context.Context) GetProxyGroupsTagSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyGroupsTagSetArrayOutput)
+}
+
+type GetProxyGroupsTagSetOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsTagSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyGroupsTagSet)(nil)).Elem()
+}
+
+func (o GetProxyGroupsTagSetOutput) ToGetProxyGroupsTagSetOutput() GetProxyGroupsTagSetOutput {
+	return o
+}
+
+func (o GetProxyGroupsTagSetOutput) ToGetProxyGroupsTagSetOutputWithContext(ctx context.Context) GetProxyGroupsTagSetOutput {
+	return o
+}
+
+// Tag Key.
+func (o GetProxyGroupsTagSetOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsTagSet) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag Value.
+func (o GetProxyGroupsTagSetOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyGroupsTagSet) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetProxyGroupsTagSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyGroupsTagSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyGroupsTagSet)(nil)).Elem()
+}
+
+func (o GetProxyGroupsTagSetArrayOutput) ToGetProxyGroupsTagSetArrayOutput() GetProxyGroupsTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsTagSetArrayOutput) ToGetProxyGroupsTagSetArrayOutputWithContext(ctx context.Context) GetProxyGroupsTagSetArrayOutput {
+	return o
+}
+
+func (o GetProxyGroupsTagSetArrayOutput) Index(i pulumi.IntInput) GetProxyGroupsTagSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyGroupsTagSet {
+		return vs[0].([]GetProxyGroupsTagSet)[vs[1].(int)]
+	}).(GetProxyGroupsTagSetOutput)
+}
+
+type GetProxyStatisticsStatisticsData struct {
+	// Metric Data.
+	MetricDatas []GetProxyStatisticsStatisticsDataMetricData `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName string `pulumi:"metricName"`
+}
+
+// GetProxyStatisticsStatisticsDataInput is an input type that accepts GetProxyStatisticsStatisticsDataArgs and GetProxyStatisticsStatisticsDataOutput values.
+// You can construct a concrete instance of `GetProxyStatisticsStatisticsDataInput` via:
+//
+//          GetProxyStatisticsStatisticsDataArgs{...}
+type GetProxyStatisticsStatisticsDataInput interface {
+	pulumi.Input
+
+	ToGetProxyStatisticsStatisticsDataOutput() GetProxyStatisticsStatisticsDataOutput
+	ToGetProxyStatisticsStatisticsDataOutputWithContext(context.Context) GetProxyStatisticsStatisticsDataOutput
+}
+
+type GetProxyStatisticsStatisticsDataArgs struct {
+	// Metric Data.
+	MetricDatas GetProxyStatisticsStatisticsDataMetricDataArrayInput `pulumi:"metricDatas"`
+	// Metric Name.
+	MetricName pulumi.StringInput `pulumi:"metricName"`
+}
+
+func (GetProxyStatisticsStatisticsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetProxyStatisticsStatisticsDataArgs) ToGetProxyStatisticsStatisticsDataOutput() GetProxyStatisticsStatisticsDataOutput {
+	return i.ToGetProxyStatisticsStatisticsDataOutputWithContext(context.Background())
+}
+
+func (i GetProxyStatisticsStatisticsDataArgs) ToGetProxyStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyStatisticsStatisticsDataOutput)
+}
+
+// GetProxyStatisticsStatisticsDataArrayInput is an input type that accepts GetProxyStatisticsStatisticsDataArray and GetProxyStatisticsStatisticsDataArrayOutput values.
+// You can construct a concrete instance of `GetProxyStatisticsStatisticsDataArrayInput` via:
+//
+//          GetProxyStatisticsStatisticsDataArray{ GetProxyStatisticsStatisticsDataArgs{...} }
+type GetProxyStatisticsStatisticsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyStatisticsStatisticsDataArrayOutput() GetProxyStatisticsStatisticsDataArrayOutput
+	ToGetProxyStatisticsStatisticsDataArrayOutputWithContext(context.Context) GetProxyStatisticsStatisticsDataArrayOutput
+}
+
+type GetProxyStatisticsStatisticsDataArray []GetProxyStatisticsStatisticsDataInput
+
+func (GetProxyStatisticsStatisticsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (i GetProxyStatisticsStatisticsDataArray) ToGetProxyStatisticsStatisticsDataArrayOutput() GetProxyStatisticsStatisticsDataArrayOutput {
+	return i.ToGetProxyStatisticsStatisticsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyStatisticsStatisticsDataArray) ToGetProxyStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyStatisticsStatisticsDataArrayOutput)
+}
+
+type GetProxyStatisticsStatisticsDataOutput struct{ *pulumi.OutputState }
+
+func (GetProxyStatisticsStatisticsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetProxyStatisticsStatisticsDataOutput) ToGetProxyStatisticsStatisticsDataOutput() GetProxyStatisticsStatisticsDataOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataOutput) ToGetProxyStatisticsStatisticsDataOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataOutput {
+	return o
+}
+
+// Metric Data.
+func (o GetProxyStatisticsStatisticsDataOutput) MetricDatas() GetProxyStatisticsStatisticsDataMetricDataArrayOutput {
+	return o.ApplyT(func(v GetProxyStatisticsStatisticsData) []GetProxyStatisticsStatisticsDataMetricData {
+		return v.MetricDatas
+	}).(GetProxyStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+// Metric Name.
+func (o GetProxyStatisticsStatisticsDataOutput) MetricName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyStatisticsStatisticsData) string { return v.MetricName }).(pulumi.StringOutput)
+}
+
+type GetProxyStatisticsStatisticsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyStatisticsStatisticsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyStatisticsStatisticsData)(nil)).Elem()
+}
+
+func (o GetProxyStatisticsStatisticsDataArrayOutput) ToGetProxyStatisticsStatisticsDataArrayOutput() GetProxyStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataArrayOutput) ToGetProxyStatisticsStatisticsDataArrayOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataArrayOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataArrayOutput) Index(i pulumi.IntInput) GetProxyStatisticsStatisticsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyStatisticsStatisticsData {
+		return vs[0].([]GetProxyStatisticsStatisticsData)[vs[1].(int)]
+	}).(GetProxyStatisticsStatisticsDataOutput)
+}
+
+type GetProxyStatisticsStatisticsDataMetricData struct {
+	// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data float64 `pulumi:"data"`
+	// Time.
+	Time int `pulumi:"time"`
+}
+
+// GetProxyStatisticsStatisticsDataMetricDataInput is an input type that accepts GetProxyStatisticsStatisticsDataMetricDataArgs and GetProxyStatisticsStatisticsDataMetricDataOutput values.
+// You can construct a concrete instance of `GetProxyStatisticsStatisticsDataMetricDataInput` via:
+//
+//          GetProxyStatisticsStatisticsDataMetricDataArgs{...}
+type GetProxyStatisticsStatisticsDataMetricDataInput interface {
+	pulumi.Input
+
+	ToGetProxyStatisticsStatisticsDataMetricDataOutput() GetProxyStatisticsStatisticsDataMetricDataOutput
+	ToGetProxyStatisticsStatisticsDataMetricDataOutputWithContext(context.Context) GetProxyStatisticsStatisticsDataMetricDataOutput
+}
+
+type GetProxyStatisticsStatisticsDataMetricDataArgs struct {
+	// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+	Data pulumi.Float64Input `pulumi:"data"`
+	// Time.
+	Time pulumi.IntInput `pulumi:"time"`
+}
+
+func (GetProxyStatisticsStatisticsDataMetricDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetProxyStatisticsStatisticsDataMetricDataArgs) ToGetProxyStatisticsStatisticsDataMetricDataOutput() GetProxyStatisticsStatisticsDataMetricDataOutput {
+	return i.ToGetProxyStatisticsStatisticsDataMetricDataOutputWithContext(context.Background())
+}
+
+func (i GetProxyStatisticsStatisticsDataMetricDataArgs) ToGetProxyStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyStatisticsStatisticsDataMetricDataOutput)
+}
+
+// GetProxyStatisticsStatisticsDataMetricDataArrayInput is an input type that accepts GetProxyStatisticsStatisticsDataMetricDataArray and GetProxyStatisticsStatisticsDataMetricDataArrayOutput values.
+// You can construct a concrete instance of `GetProxyStatisticsStatisticsDataMetricDataArrayInput` via:
+//
+//          GetProxyStatisticsStatisticsDataMetricDataArray{ GetProxyStatisticsStatisticsDataMetricDataArgs{...} }
+type GetProxyStatisticsStatisticsDataMetricDataArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyStatisticsStatisticsDataMetricDataArrayOutput() GetProxyStatisticsStatisticsDataMetricDataArrayOutput
+	ToGetProxyStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Context) GetProxyStatisticsStatisticsDataMetricDataArrayOutput
+}
+
+type GetProxyStatisticsStatisticsDataMetricDataArray []GetProxyStatisticsStatisticsDataMetricDataInput
+
+func (GetProxyStatisticsStatisticsDataMetricDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (i GetProxyStatisticsStatisticsDataMetricDataArray) ToGetProxyStatisticsStatisticsDataMetricDataArrayOutput() GetProxyStatisticsStatisticsDataMetricDataArrayOutput {
+	return i.ToGetProxyStatisticsStatisticsDataMetricDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyStatisticsStatisticsDataMetricDataArray) ToGetProxyStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataMetricDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyStatisticsStatisticsDataMetricDataArrayOutput)
+}
+
+type GetProxyStatisticsStatisticsDataMetricDataOutput struct{ *pulumi.OutputState }
+
+func (GetProxyStatisticsStatisticsDataMetricDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetProxyStatisticsStatisticsDataMetricDataOutput) ToGetProxyStatisticsStatisticsDataMetricDataOutput() GetProxyStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataMetricDataOutput) ToGetProxyStatisticsStatisticsDataMetricDataOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataMetricDataOutput {
+	return o
+}
+
+// DataNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetProxyStatisticsStatisticsDataMetricDataOutput) Data() pulumi.Float64Output {
+	return o.ApplyT(func(v GetProxyStatisticsStatisticsDataMetricData) float64 { return v.Data }).(pulumi.Float64Output)
+}
+
+// Time.
+func (o GetProxyStatisticsStatisticsDataMetricDataOutput) Time() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyStatisticsStatisticsDataMetricData) int { return v.Time }).(pulumi.IntOutput)
+}
+
+type GetProxyStatisticsStatisticsDataMetricDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyStatisticsStatisticsDataMetricDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyStatisticsStatisticsDataMetricData)(nil)).Elem()
+}
+
+func (o GetProxyStatisticsStatisticsDataMetricDataArrayOutput) ToGetProxyStatisticsStatisticsDataMetricDataArrayOutput() GetProxyStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataMetricDataArrayOutput) ToGetProxyStatisticsStatisticsDataMetricDataArrayOutputWithContext(ctx context.Context) GetProxyStatisticsStatisticsDataMetricDataArrayOutput {
+	return o
+}
+
+func (o GetProxyStatisticsStatisticsDataMetricDataArrayOutput) Index(i pulumi.IntInput) GetProxyStatisticsStatisticsDataMetricDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyStatisticsStatisticsDataMetricData {
+		return vs[0].([]GetProxyStatisticsStatisticsDataMetricData)[vs[1].(int)]
+	}).(GetProxyStatisticsStatisticsDataMetricDataOutput)
+}
+
+type GetRealServersStatusRealServerStatusSet struct {
+	// Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.
+	BindStatus int `pulumi:"bindStatus"`
+	// Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.
+	GroupId string `pulumi:"groupId"`
+	// Bind the proxy ID of this real server, which is an empty string when not bound.
+	ProxyId string `pulumi:"proxyId"`
+	// Real Server Id.
+	RealServerId string `pulumi:"realServerId"`
+}
+
+// GetRealServersStatusRealServerStatusSetInput is an input type that accepts GetRealServersStatusRealServerStatusSetArgs and GetRealServersStatusRealServerStatusSetOutput values.
+// You can construct a concrete instance of `GetRealServersStatusRealServerStatusSetInput` via:
+//
+//          GetRealServersStatusRealServerStatusSetArgs{...}
+type GetRealServersStatusRealServerStatusSetInput interface {
+	pulumi.Input
+
+	ToGetRealServersStatusRealServerStatusSetOutput() GetRealServersStatusRealServerStatusSetOutput
+	ToGetRealServersStatusRealServerStatusSetOutputWithContext(context.Context) GetRealServersStatusRealServerStatusSetOutput
+}
+
+type GetRealServersStatusRealServerStatusSetArgs struct {
+	// Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.
+	BindStatus pulumi.IntInput `pulumi:"bindStatus"`
+	// Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Bind the proxy ID of this real server, which is an empty string when not bound.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
+	// Real Server Id.
+	RealServerId pulumi.StringInput `pulumi:"realServerId"`
+}
+
+func (GetRealServersStatusRealServerStatusSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRealServersStatusRealServerStatusSet)(nil)).Elem()
+}
+
+func (i GetRealServersStatusRealServerStatusSetArgs) ToGetRealServersStatusRealServerStatusSetOutput() GetRealServersStatusRealServerStatusSetOutput {
+	return i.ToGetRealServersStatusRealServerStatusSetOutputWithContext(context.Background())
+}
+
+func (i GetRealServersStatusRealServerStatusSetArgs) ToGetRealServersStatusRealServerStatusSetOutputWithContext(ctx context.Context) GetRealServersStatusRealServerStatusSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRealServersStatusRealServerStatusSetOutput)
+}
+
+// GetRealServersStatusRealServerStatusSetArrayInput is an input type that accepts GetRealServersStatusRealServerStatusSetArray and GetRealServersStatusRealServerStatusSetArrayOutput values.
+// You can construct a concrete instance of `GetRealServersStatusRealServerStatusSetArrayInput` via:
+//
+//          GetRealServersStatusRealServerStatusSetArray{ GetRealServersStatusRealServerStatusSetArgs{...} }
+type GetRealServersStatusRealServerStatusSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRealServersStatusRealServerStatusSetArrayOutput() GetRealServersStatusRealServerStatusSetArrayOutput
+	ToGetRealServersStatusRealServerStatusSetArrayOutputWithContext(context.Context) GetRealServersStatusRealServerStatusSetArrayOutput
+}
+
+type GetRealServersStatusRealServerStatusSetArray []GetRealServersStatusRealServerStatusSetInput
+
+func (GetRealServersStatusRealServerStatusSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRealServersStatusRealServerStatusSet)(nil)).Elem()
+}
+
+func (i GetRealServersStatusRealServerStatusSetArray) ToGetRealServersStatusRealServerStatusSetArrayOutput() GetRealServersStatusRealServerStatusSetArrayOutput {
+	return i.ToGetRealServersStatusRealServerStatusSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRealServersStatusRealServerStatusSetArray) ToGetRealServersStatusRealServerStatusSetArrayOutputWithContext(ctx context.Context) GetRealServersStatusRealServerStatusSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRealServersStatusRealServerStatusSetArrayOutput)
+}
+
+type GetRealServersStatusRealServerStatusSetOutput struct{ *pulumi.OutputState }
+
+func (GetRealServersStatusRealServerStatusSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRealServersStatusRealServerStatusSet)(nil)).Elem()
+}
+
+func (o GetRealServersStatusRealServerStatusSetOutput) ToGetRealServersStatusRealServerStatusSetOutput() GetRealServersStatusRealServerStatusSetOutput {
+	return o
+}
+
+func (o GetRealServersStatusRealServerStatusSetOutput) ToGetRealServersStatusRealServerStatusSetOutputWithContext(ctx context.Context) GetRealServersStatusRealServerStatusSetOutput {
+	return o
+}
+
+// Bind Status, 0 indicates unbound, 1 indicates bound by rules or listeners.
+func (o GetRealServersStatusRealServerStatusSetOutput) BindStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRealServersStatusRealServerStatusSet) int { return v.BindStatus }).(pulumi.IntOutput)
+}
+
+// Bind the group ID of this real server, which is an empty string when not bound.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetRealServersStatusRealServerStatusSetOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealServersStatusRealServerStatusSet) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Bind the proxy ID of this real server, which is an empty string when not bound.
+func (o GetRealServersStatusRealServerStatusSetOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealServersStatusRealServerStatusSet) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
+// Real Server Id.
+func (o GetRealServersStatusRealServerStatusSetOutput) RealServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealServersStatusRealServerStatusSet) string { return v.RealServerId }).(pulumi.StringOutput)
+}
+
+type GetRealServersStatusRealServerStatusSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRealServersStatusRealServerStatusSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRealServersStatusRealServerStatusSet)(nil)).Elem()
+}
+
+func (o GetRealServersStatusRealServerStatusSetArrayOutput) ToGetRealServersStatusRealServerStatusSetArrayOutput() GetRealServersStatusRealServerStatusSetArrayOutput {
+	return o
+}
+
+func (o GetRealServersStatusRealServerStatusSetArrayOutput) ToGetRealServersStatusRealServerStatusSetArrayOutputWithContext(ctx context.Context) GetRealServersStatusRealServerStatusSetArrayOutput {
+	return o
+}
+
+func (o GetRealServersStatusRealServerStatusSetArrayOutput) Index(i pulumi.IntInput) GetRealServersStatusRealServerStatusSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRealServersStatusRealServerStatusSet {
+		return vs[0].([]GetRealServersStatusRealServerStatusSet)[vs[1].(int)]
+	}).(GetRealServersStatusRealServerStatusSetOutput)
+}
+
 type GetRealserversRealserver struct {
 	// Domain of the GAAP realserver to be queried, conflict with `ip`.
 	Domain string `pulumi:"domain"`
@@ -1939,6 +6918,761 @@ func (o GetRealserversRealserverArrayOutput) Index(i pulumi.IntInput) GetRealser
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRealserversRealserver {
 		return vs[0].([]GetRealserversRealserver)[vs[1].(int)]
 	}).(GetRealserversRealserverOutput)
+}
+
+type GetRegionAndPriceBandwidthUnitPrice struct {
+	// Band width Range.
+	BandwidthRanges []int `pulumi:"bandwidthRanges"`
+	// Band width Unit Price, Unit:yuan/Mbps/day.
+	BandwidthUnitPrice float64 `pulumi:"bandwidthUnitPrice"`
+	// Bandwidth discount price, unit:yuan/Mbps/day.
+	DiscountBandwidthUnitPrice float64 `pulumi:"discountBandwidthUnitPrice"`
+}
+
+// GetRegionAndPriceBandwidthUnitPriceInput is an input type that accepts GetRegionAndPriceBandwidthUnitPriceArgs and GetRegionAndPriceBandwidthUnitPriceOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceBandwidthUnitPriceInput` via:
+//
+//          GetRegionAndPriceBandwidthUnitPriceArgs{...}
+type GetRegionAndPriceBandwidthUnitPriceInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceBandwidthUnitPriceOutput() GetRegionAndPriceBandwidthUnitPriceOutput
+	ToGetRegionAndPriceBandwidthUnitPriceOutputWithContext(context.Context) GetRegionAndPriceBandwidthUnitPriceOutput
+}
+
+type GetRegionAndPriceBandwidthUnitPriceArgs struct {
+	// Band width Range.
+	BandwidthRanges pulumi.IntArrayInput `pulumi:"bandwidthRanges"`
+	// Band width Unit Price, Unit:yuan/Mbps/day.
+	BandwidthUnitPrice pulumi.Float64Input `pulumi:"bandwidthUnitPrice"`
+	// Bandwidth discount price, unit:yuan/Mbps/day.
+	DiscountBandwidthUnitPrice pulumi.Float64Input `pulumi:"discountBandwidthUnitPrice"`
+}
+
+func (GetRegionAndPriceBandwidthUnitPriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceBandwidthUnitPrice)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceBandwidthUnitPriceArgs) ToGetRegionAndPriceBandwidthUnitPriceOutput() GetRegionAndPriceBandwidthUnitPriceOutput {
+	return i.ToGetRegionAndPriceBandwidthUnitPriceOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceBandwidthUnitPriceArgs) ToGetRegionAndPriceBandwidthUnitPriceOutputWithContext(ctx context.Context) GetRegionAndPriceBandwidthUnitPriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceBandwidthUnitPriceOutput)
+}
+
+// GetRegionAndPriceBandwidthUnitPriceArrayInput is an input type that accepts GetRegionAndPriceBandwidthUnitPriceArray and GetRegionAndPriceBandwidthUnitPriceArrayOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceBandwidthUnitPriceArrayInput` via:
+//
+//          GetRegionAndPriceBandwidthUnitPriceArray{ GetRegionAndPriceBandwidthUnitPriceArgs{...} }
+type GetRegionAndPriceBandwidthUnitPriceArrayInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceBandwidthUnitPriceArrayOutput() GetRegionAndPriceBandwidthUnitPriceArrayOutput
+	ToGetRegionAndPriceBandwidthUnitPriceArrayOutputWithContext(context.Context) GetRegionAndPriceBandwidthUnitPriceArrayOutput
+}
+
+type GetRegionAndPriceBandwidthUnitPriceArray []GetRegionAndPriceBandwidthUnitPriceInput
+
+func (GetRegionAndPriceBandwidthUnitPriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceBandwidthUnitPrice)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceBandwidthUnitPriceArray) ToGetRegionAndPriceBandwidthUnitPriceArrayOutput() GetRegionAndPriceBandwidthUnitPriceArrayOutput {
+	return i.ToGetRegionAndPriceBandwidthUnitPriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceBandwidthUnitPriceArray) ToGetRegionAndPriceBandwidthUnitPriceArrayOutputWithContext(ctx context.Context) GetRegionAndPriceBandwidthUnitPriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceBandwidthUnitPriceArrayOutput)
+}
+
+type GetRegionAndPriceBandwidthUnitPriceOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceBandwidthUnitPriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceBandwidthUnitPrice)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceBandwidthUnitPriceOutput) ToGetRegionAndPriceBandwidthUnitPriceOutput() GetRegionAndPriceBandwidthUnitPriceOutput {
+	return o
+}
+
+func (o GetRegionAndPriceBandwidthUnitPriceOutput) ToGetRegionAndPriceBandwidthUnitPriceOutputWithContext(ctx context.Context) GetRegionAndPriceBandwidthUnitPriceOutput {
+	return o
+}
+
+// Band width Range.
+func (o GetRegionAndPriceBandwidthUnitPriceOutput) BandwidthRanges() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetRegionAndPriceBandwidthUnitPrice) []int { return v.BandwidthRanges }).(pulumi.IntArrayOutput)
+}
+
+// Band width Unit Price, Unit:yuan/Mbps/day.
+func (o GetRegionAndPriceBandwidthUnitPriceOutput) BandwidthUnitPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetRegionAndPriceBandwidthUnitPrice) float64 { return v.BandwidthUnitPrice }).(pulumi.Float64Output)
+}
+
+// Bandwidth discount price, unit:yuan/Mbps/day.
+func (o GetRegionAndPriceBandwidthUnitPriceOutput) DiscountBandwidthUnitPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetRegionAndPriceBandwidthUnitPrice) float64 { return v.DiscountBandwidthUnitPrice }).(pulumi.Float64Output)
+}
+
+type GetRegionAndPriceBandwidthUnitPriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceBandwidthUnitPriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceBandwidthUnitPrice)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceBandwidthUnitPriceArrayOutput) ToGetRegionAndPriceBandwidthUnitPriceArrayOutput() GetRegionAndPriceBandwidthUnitPriceArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceBandwidthUnitPriceArrayOutput) ToGetRegionAndPriceBandwidthUnitPriceArrayOutputWithContext(ctx context.Context) GetRegionAndPriceBandwidthUnitPriceArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceBandwidthUnitPriceArrayOutput) Index(i pulumi.IntInput) GetRegionAndPriceBandwidthUnitPriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionAndPriceBandwidthUnitPrice {
+		return vs[0].([]GetRegionAndPriceBandwidthUnitPrice)[vs[1].(int)]
+	}).(GetRegionAndPriceBandwidthUnitPriceOutput)
+}
+
+type GetRegionAndPriceDestRegionSet struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap int `pulumi:"featureBitmap"`
+	// Type of computer room, dc represents DataCenter data center, ec represents EdgeComputing edge node.
+	IdcType string `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea string `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName string `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId string `pulumi:"regionId"`
+	// Region Name.
+	RegionName string `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures []GetRegionAndPriceDestRegionSetSupportFeature `pulumi:"supportFeatures"`
+}
+
+// GetRegionAndPriceDestRegionSetInput is an input type that accepts GetRegionAndPriceDestRegionSetArgs and GetRegionAndPriceDestRegionSetOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceDestRegionSetInput` via:
+//
+//          GetRegionAndPriceDestRegionSetArgs{...}
+type GetRegionAndPriceDestRegionSetInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceDestRegionSetOutput() GetRegionAndPriceDestRegionSetOutput
+	ToGetRegionAndPriceDestRegionSetOutputWithContext(context.Context) GetRegionAndPriceDestRegionSetOutput
+}
+
+type GetRegionAndPriceDestRegionSetArgs struct {
+	// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+	FeatureBitmap pulumi.IntInput `pulumi:"featureBitmap"`
+	// Type of computer room, dc represents DataCenter data center, ec represents EdgeComputing edge node.
+	IdcType pulumi.StringInput `pulumi:"idcType"`
+	// Region of the computer room.
+	RegionArea pulumi.StringInput `pulumi:"regionArea"`
+	// Region name of the computer room.
+	RegionAreaName pulumi.StringInput `pulumi:"regionAreaName"`
+	// Region Id.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Region Name.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+	SupportFeatures GetRegionAndPriceDestRegionSetSupportFeatureArrayInput `pulumi:"supportFeatures"`
+}
+
+func (GetRegionAndPriceDestRegionSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceDestRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceDestRegionSetArgs) ToGetRegionAndPriceDestRegionSetOutput() GetRegionAndPriceDestRegionSetOutput {
+	return i.ToGetRegionAndPriceDestRegionSetOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceDestRegionSetArgs) ToGetRegionAndPriceDestRegionSetOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceDestRegionSetOutput)
+}
+
+// GetRegionAndPriceDestRegionSetArrayInput is an input type that accepts GetRegionAndPriceDestRegionSetArray and GetRegionAndPriceDestRegionSetArrayOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceDestRegionSetArrayInput` via:
+//
+//          GetRegionAndPriceDestRegionSetArray{ GetRegionAndPriceDestRegionSetArgs{...} }
+type GetRegionAndPriceDestRegionSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceDestRegionSetArrayOutput() GetRegionAndPriceDestRegionSetArrayOutput
+	ToGetRegionAndPriceDestRegionSetArrayOutputWithContext(context.Context) GetRegionAndPriceDestRegionSetArrayOutput
+}
+
+type GetRegionAndPriceDestRegionSetArray []GetRegionAndPriceDestRegionSetInput
+
+func (GetRegionAndPriceDestRegionSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceDestRegionSet)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceDestRegionSetArray) ToGetRegionAndPriceDestRegionSetArrayOutput() GetRegionAndPriceDestRegionSetArrayOutput {
+	return i.ToGetRegionAndPriceDestRegionSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceDestRegionSetArray) ToGetRegionAndPriceDestRegionSetArrayOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceDestRegionSetArrayOutput)
+}
+
+type GetRegionAndPriceDestRegionSetOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceDestRegionSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceDestRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceDestRegionSetOutput) ToGetRegionAndPriceDestRegionSetOutput() GetRegionAndPriceDestRegionSetOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetOutput) ToGetRegionAndPriceDestRegionSetOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetOutput {
+	return o
+}
+
+// Property bitmap, where each bit represents a property, where:0, indicates that the feature is not supported;1, indicates support for this feature.The meaning of the feature bitmap is as follows (from right to left):The first bit supports 4-layer acceleration;The second bit supports 7-layer acceleration;The third bit supports Http3 access;The fourth bit supports IPv6;The fifth bit supports high-quality BGP access;The 6th bit supports three network access;The 7th bit supports QoS acceleration in the access segment.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetRegionAndPriceDestRegionSetOutput) FeatureBitmap() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) int { return v.FeatureBitmap }).(pulumi.IntOutput)
+}
+
+// Type of computer room, dc represents DataCenter data center, ec represents EdgeComputing edge node.
+func (o GetRegionAndPriceDestRegionSetOutput) IdcType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) string { return v.IdcType }).(pulumi.StringOutput)
+}
+
+// Region of the computer room.
+func (o GetRegionAndPriceDestRegionSetOutput) RegionArea() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) string { return v.RegionArea }).(pulumi.StringOutput)
+}
+
+// Region name of the computer room.
+func (o GetRegionAndPriceDestRegionSetOutput) RegionAreaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) string { return v.RegionAreaName }).(pulumi.StringOutput)
+}
+
+// Region Id.
+func (o GetRegionAndPriceDestRegionSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Region Name.
+func (o GetRegionAndPriceDestRegionSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Ability to access regional supportNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetRegionAndPriceDestRegionSetOutput) SupportFeatures() GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSet) []GetRegionAndPriceDestRegionSetSupportFeature {
+		return v.SupportFeatures
+	}).(GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput)
+}
+
+type GetRegionAndPriceDestRegionSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceDestRegionSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceDestRegionSet)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceDestRegionSetArrayOutput) ToGetRegionAndPriceDestRegionSetArrayOutput() GetRegionAndPriceDestRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetArrayOutput) ToGetRegionAndPriceDestRegionSetArrayOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetArrayOutput) Index(i pulumi.IntInput) GetRegionAndPriceDestRegionSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionAndPriceDestRegionSet {
+		return vs[0].([]GetRegionAndPriceDestRegionSet)[vs[1].(int)]
+	}).(GetRegionAndPriceDestRegionSetOutput)
+}
+
+type GetRegionAndPriceDestRegionSetSupportFeature struct {
+	// A list of network types supported by the access area, with `normal` indicating support for regular BGP, `cn2` indicating premium BGP, `triple` indicating three networks, and `secureEip` represents a custom secure EIP.
+	NetworkTypes []string `pulumi:"networkTypes"`
+}
+
+// GetRegionAndPriceDestRegionSetSupportFeatureInput is an input type that accepts GetRegionAndPriceDestRegionSetSupportFeatureArgs and GetRegionAndPriceDestRegionSetSupportFeatureOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceDestRegionSetSupportFeatureInput` via:
+//
+//          GetRegionAndPriceDestRegionSetSupportFeatureArgs{...}
+type GetRegionAndPriceDestRegionSetSupportFeatureInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceDestRegionSetSupportFeatureOutput() GetRegionAndPriceDestRegionSetSupportFeatureOutput
+	ToGetRegionAndPriceDestRegionSetSupportFeatureOutputWithContext(context.Context) GetRegionAndPriceDestRegionSetSupportFeatureOutput
+}
+
+type GetRegionAndPriceDestRegionSetSupportFeatureArgs struct {
+	// A list of network types supported by the access area, with `normal` indicating support for regular BGP, `cn2` indicating premium BGP, `triple` indicating three networks, and `secureEip` represents a custom secure EIP.
+	NetworkTypes pulumi.StringArrayInput `pulumi:"networkTypes"`
+}
+
+func (GetRegionAndPriceDestRegionSetSupportFeatureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceDestRegionSetSupportFeatureArgs) ToGetRegionAndPriceDestRegionSetSupportFeatureOutput() GetRegionAndPriceDestRegionSetSupportFeatureOutput {
+	return i.ToGetRegionAndPriceDestRegionSetSupportFeatureOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceDestRegionSetSupportFeatureArgs) ToGetRegionAndPriceDestRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetSupportFeatureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceDestRegionSetSupportFeatureOutput)
+}
+
+// GetRegionAndPriceDestRegionSetSupportFeatureArrayInput is an input type that accepts GetRegionAndPriceDestRegionSetSupportFeatureArray and GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput values.
+// You can construct a concrete instance of `GetRegionAndPriceDestRegionSetSupportFeatureArrayInput` via:
+//
+//          GetRegionAndPriceDestRegionSetSupportFeatureArray{ GetRegionAndPriceDestRegionSetSupportFeatureArgs{...} }
+type GetRegionAndPriceDestRegionSetSupportFeatureArrayInput interface {
+	pulumi.Input
+
+	ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutput() GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput
+	ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutputWithContext(context.Context) GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput
+}
+
+type GetRegionAndPriceDestRegionSetSupportFeatureArray []GetRegionAndPriceDestRegionSetSupportFeatureInput
+
+func (GetRegionAndPriceDestRegionSetSupportFeatureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (i GetRegionAndPriceDestRegionSetSupportFeatureArray) ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutput() GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput {
+	return i.ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutputWithContext(context.Background())
+}
+
+func (i GetRegionAndPriceDestRegionSetSupportFeatureArray) ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput)
+}
+
+type GetRegionAndPriceDestRegionSetSupportFeatureOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceDestRegionSetSupportFeatureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionAndPriceDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceDestRegionSetSupportFeatureOutput) ToGetRegionAndPriceDestRegionSetSupportFeatureOutput() GetRegionAndPriceDestRegionSetSupportFeatureOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetSupportFeatureOutput) ToGetRegionAndPriceDestRegionSetSupportFeatureOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetSupportFeatureOutput {
+	return o
+}
+
+// A list of network types supported by the access area, with `normal` indicating support for regular BGP, `cn2` indicating premium BGP, `triple` indicating three networks, and `secureEip` represents a custom secure EIP.
+func (o GetRegionAndPriceDestRegionSetSupportFeatureOutput) NetworkTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRegionAndPriceDestRegionSetSupportFeature) []string { return v.NetworkTypes }).(pulumi.StringArrayOutput)
+}
+
+type GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionAndPriceDestRegionSetSupportFeature)(nil)).Elem()
+}
+
+func (o GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput) ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutput() GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput) ToGetRegionAndPriceDestRegionSetSupportFeatureArrayOutputWithContext(ctx context.Context) GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput {
+	return o
+}
+
+func (o GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput) Index(i pulumi.IntInput) GetRegionAndPriceDestRegionSetSupportFeatureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionAndPriceDestRegionSetSupportFeature {
+		return vs[0].([]GetRegionAndPriceDestRegionSetSupportFeature)[vs[1].(int)]
+	}).(GetRegionAndPriceDestRegionSetSupportFeatureOutput)
+}
+
+type GetResourcesByTagResourceSet struct {
+	// Resource Id.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
+	ResourceType string `pulumi:"resourceType"`
+}
+
+// GetResourcesByTagResourceSetInput is an input type that accepts GetResourcesByTagResourceSetArgs and GetResourcesByTagResourceSetOutput values.
+// You can construct a concrete instance of `GetResourcesByTagResourceSetInput` via:
+//
+//          GetResourcesByTagResourceSetArgs{...}
+type GetResourcesByTagResourceSetInput interface {
+	pulumi.Input
+
+	ToGetResourcesByTagResourceSetOutput() GetResourcesByTagResourceSetOutput
+	ToGetResourcesByTagResourceSetOutputWithContext(context.Context) GetResourcesByTagResourceSetOutput
+}
+
+type GetResourcesByTagResourceSetArgs struct {
+	// Resource Id.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+}
+
+func (GetResourcesByTagResourceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesByTagResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesByTagResourceSetArgs) ToGetResourcesByTagResourceSetOutput() GetResourcesByTagResourceSetOutput {
+	return i.ToGetResourcesByTagResourceSetOutputWithContext(context.Background())
+}
+
+func (i GetResourcesByTagResourceSetArgs) ToGetResourcesByTagResourceSetOutputWithContext(ctx context.Context) GetResourcesByTagResourceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesByTagResourceSetOutput)
+}
+
+// GetResourcesByTagResourceSetArrayInput is an input type that accepts GetResourcesByTagResourceSetArray and GetResourcesByTagResourceSetArrayOutput values.
+// You can construct a concrete instance of `GetResourcesByTagResourceSetArrayInput` via:
+//
+//          GetResourcesByTagResourceSetArray{ GetResourcesByTagResourceSetArgs{...} }
+type GetResourcesByTagResourceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetResourcesByTagResourceSetArrayOutput() GetResourcesByTagResourceSetArrayOutput
+	ToGetResourcesByTagResourceSetArrayOutputWithContext(context.Context) GetResourcesByTagResourceSetArrayOutput
+}
+
+type GetResourcesByTagResourceSetArray []GetResourcesByTagResourceSetInput
+
+func (GetResourcesByTagResourceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesByTagResourceSet)(nil)).Elem()
+}
+
+func (i GetResourcesByTagResourceSetArray) ToGetResourcesByTagResourceSetArrayOutput() GetResourcesByTagResourceSetArrayOutput {
+	return i.ToGetResourcesByTagResourceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourcesByTagResourceSetArray) ToGetResourcesByTagResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesByTagResourceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourcesByTagResourceSetArrayOutput)
+}
+
+type GetResourcesByTagResourceSetOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesByTagResourceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourcesByTagResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesByTagResourceSetOutput) ToGetResourcesByTagResourceSetOutput() GetResourcesByTagResourceSetOutput {
+	return o
+}
+
+func (o GetResourcesByTagResourceSetOutput) ToGetResourcesByTagResourceSetOutputWithContext(ctx context.Context) GetResourcesByTagResourceSetOutput {
+	return o
+}
+
+// Resource Id.
+func (o GetResourcesByTagResourceSetOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesByTagResourceSet) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
+func (o GetResourcesByTagResourceSetOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourcesByTagResourceSet) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+type GetResourcesByTagResourceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourcesByTagResourceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourcesByTagResourceSet)(nil)).Elem()
+}
+
+func (o GetResourcesByTagResourceSetArrayOutput) ToGetResourcesByTagResourceSetArrayOutput() GetResourcesByTagResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesByTagResourceSetArrayOutput) ToGetResourcesByTagResourceSetArrayOutputWithContext(ctx context.Context) GetResourcesByTagResourceSetArrayOutput {
+	return o
+}
+
+func (o GetResourcesByTagResourceSetArrayOutput) Index(i pulumi.IntInput) GetResourcesByTagResourceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourcesByTagResourceSet {
+		return vs[0].([]GetResourcesByTagResourceSet)[vs[1].(int)]
+	}).(GetResourcesByTagResourceSetOutput)
+}
+
+type GetRuleRealServersBindRealServerSet struct {
+	// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+	DownIpLists []string `pulumi:"downIpLists"`
+	// The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+	RealServerFailoverRole string `pulumi:"realServerFailoverRole"`
+	// Real Server Id.
+	RealServerId string `pulumi:"realServerId"`
+	// Real Server IP or domain.
+	RealServerIp string `pulumi:"realServerIp"`
+	// Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerPort int `pulumi:"realServerPort"`
+	// RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerStatus int `pulumi:"realServerStatus"`
+	// Real Server Weight.
+	RealServerWeight int `pulumi:"realServerWeight"`
+}
+
+// GetRuleRealServersBindRealServerSetInput is an input type that accepts GetRuleRealServersBindRealServerSetArgs and GetRuleRealServersBindRealServerSetOutput values.
+// You can construct a concrete instance of `GetRuleRealServersBindRealServerSetInput` via:
+//
+//          GetRuleRealServersBindRealServerSetArgs{...}
+type GetRuleRealServersBindRealServerSetInput interface {
+	pulumi.Input
+
+	ToGetRuleRealServersBindRealServerSetOutput() GetRuleRealServersBindRealServerSetOutput
+	ToGetRuleRealServersBindRealServerSetOutputWithContext(context.Context) GetRuleRealServersBindRealServerSetOutput
+}
+
+type GetRuleRealServersBindRealServerSetArgs struct {
+	// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+	DownIpLists pulumi.StringArrayInput `pulumi:"downIpLists"`
+	// The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+	RealServerFailoverRole pulumi.StringInput `pulumi:"realServerFailoverRole"`
+	// Real Server Id.
+	RealServerId pulumi.StringInput `pulumi:"realServerId"`
+	// Real Server IP or domain.
+	RealServerIp pulumi.StringInput `pulumi:"realServerIp"`
+	// Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerPort pulumi.IntInput `pulumi:"realServerPort"`
+	// RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+	RealServerStatus pulumi.IntInput `pulumi:"realServerStatus"`
+	// Real Server Weight.
+	RealServerWeight pulumi.IntInput `pulumi:"realServerWeight"`
+}
+
+func (GetRuleRealServersBindRealServerSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (i GetRuleRealServersBindRealServerSetArgs) ToGetRuleRealServersBindRealServerSetOutput() GetRuleRealServersBindRealServerSetOutput {
+	return i.ToGetRuleRealServersBindRealServerSetOutputWithContext(context.Background())
+}
+
+func (i GetRuleRealServersBindRealServerSetArgs) ToGetRuleRealServersBindRealServerSetOutputWithContext(ctx context.Context) GetRuleRealServersBindRealServerSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleRealServersBindRealServerSetOutput)
+}
+
+// GetRuleRealServersBindRealServerSetArrayInput is an input type that accepts GetRuleRealServersBindRealServerSetArray and GetRuleRealServersBindRealServerSetArrayOutput values.
+// You can construct a concrete instance of `GetRuleRealServersBindRealServerSetArrayInput` via:
+//
+//          GetRuleRealServersBindRealServerSetArray{ GetRuleRealServersBindRealServerSetArgs{...} }
+type GetRuleRealServersBindRealServerSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRuleRealServersBindRealServerSetArrayOutput() GetRuleRealServersBindRealServerSetArrayOutput
+	ToGetRuleRealServersBindRealServerSetArrayOutputWithContext(context.Context) GetRuleRealServersBindRealServerSetArrayOutput
+}
+
+type GetRuleRealServersBindRealServerSetArray []GetRuleRealServersBindRealServerSetInput
+
+func (GetRuleRealServersBindRealServerSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (i GetRuleRealServersBindRealServerSetArray) ToGetRuleRealServersBindRealServerSetArrayOutput() GetRuleRealServersBindRealServerSetArrayOutput {
+	return i.ToGetRuleRealServersBindRealServerSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRuleRealServersBindRealServerSetArray) ToGetRuleRealServersBindRealServerSetArrayOutputWithContext(ctx context.Context) GetRuleRealServersBindRealServerSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleRealServersBindRealServerSetArrayOutput)
+}
+
+type GetRuleRealServersBindRealServerSetOutput struct{ *pulumi.OutputState }
+
+func (GetRuleRealServersBindRealServerSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (o GetRuleRealServersBindRealServerSetOutput) ToGetRuleRealServersBindRealServerSetOutput() GetRuleRealServersBindRealServerSetOutput {
+	return o
+}
+
+func (o GetRuleRealServersBindRealServerSetOutput) ToGetRuleRealServersBindRealServerSetOutputWithContext(ctx context.Context) GetRuleRealServersBindRealServerSetOutput {
+	return o
+}
+
+// When the real server is a domain name, the domain name is resolved to one or more IPs, and this field represents the list of abnormal IPs. When the status is abnormal, but the field is empty, it indicates that the domain name resolution is abnormal.
+func (o GetRuleRealServersBindRealServerSetOutput) DownIpLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) []string { return v.DownIpLists }).(pulumi.StringArrayOutput)
+}
+
+// The primary and secondary roles of the real server:master represents primary, slave represents secondary, and this parameter must be in the active and standby mode of the real server when the listener is turned on.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerFailoverRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) string { return v.RealServerFailoverRole }).(pulumi.StringOutput)
+}
+
+// Real Server Id.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) string { return v.RealServerId }).(pulumi.StringOutput)
+}
+
+// Real Server IP or domain.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) string { return v.RealServerIp }).(pulumi.StringOutput)
+}
+
+// Real Server PortNote: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) int { return v.RealServerPort }).(pulumi.IntOutput)
+}
+
+// RealServerStatus: 0 indicates normal;1 indicates an exception.When the health check status is not enabled, it is always normal.Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) int { return v.RealServerStatus }).(pulumi.IntOutput)
+}
+
+// Real Server Weight.
+func (o GetRuleRealServersBindRealServerSetOutput) RealServerWeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleRealServersBindRealServerSet) int { return v.RealServerWeight }).(pulumi.IntOutput)
+}
+
+type GetRuleRealServersBindRealServerSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRuleRealServersBindRealServerSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleRealServersBindRealServerSet)(nil)).Elem()
+}
+
+func (o GetRuleRealServersBindRealServerSetArrayOutput) ToGetRuleRealServersBindRealServerSetArrayOutput() GetRuleRealServersBindRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetRuleRealServersBindRealServerSetArrayOutput) ToGetRuleRealServersBindRealServerSetArrayOutputWithContext(ctx context.Context) GetRuleRealServersBindRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetRuleRealServersBindRealServerSetArrayOutput) Index(i pulumi.IntInput) GetRuleRealServersBindRealServerSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRuleRealServersBindRealServerSet {
+		return vs[0].([]GetRuleRealServersBindRealServerSet)[vs[1].(int)]
+	}).(GetRuleRealServersBindRealServerSetOutput)
+}
+
+type GetRuleRealServersRealServerSet struct {
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+	InBanBlacklist int `pulumi:"inBanBlacklist"`
+	// Project Id.
+	ProjectId int `pulumi:"projectId"`
+	// Real Server Id.
+	RealServerId string `pulumi:"realServerId"`
+	// Real Server IP or domain.
+	RealServerIp string `pulumi:"realServerIp"`
+	// Real Server Name.
+	RealServerName string `pulumi:"realServerName"`
+}
+
+// GetRuleRealServersRealServerSetInput is an input type that accepts GetRuleRealServersRealServerSetArgs and GetRuleRealServersRealServerSetOutput values.
+// You can construct a concrete instance of `GetRuleRealServersRealServerSetInput` via:
+//
+//          GetRuleRealServersRealServerSetArgs{...}
+type GetRuleRealServersRealServerSetInput interface {
+	pulumi.Input
+
+	ToGetRuleRealServersRealServerSetOutput() GetRuleRealServersRealServerSetOutput
+	ToGetRuleRealServersRealServerSetOutputWithContext(context.Context) GetRuleRealServersRealServerSetOutput
+}
+
+type GetRuleRealServersRealServerSetArgs struct {
+	// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+	InBanBlacklist pulumi.IntInput `pulumi:"inBanBlacklist"`
+	// Project Id.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Real Server Id.
+	RealServerId pulumi.StringInput `pulumi:"realServerId"`
+	// Real Server IP or domain.
+	RealServerIp pulumi.StringInput `pulumi:"realServerIp"`
+	// Real Server Name.
+	RealServerName pulumi.StringInput `pulumi:"realServerName"`
+}
+
+func (GetRuleRealServersRealServerSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleRealServersRealServerSet)(nil)).Elem()
+}
+
+func (i GetRuleRealServersRealServerSetArgs) ToGetRuleRealServersRealServerSetOutput() GetRuleRealServersRealServerSetOutput {
+	return i.ToGetRuleRealServersRealServerSetOutputWithContext(context.Background())
+}
+
+func (i GetRuleRealServersRealServerSetArgs) ToGetRuleRealServersRealServerSetOutputWithContext(ctx context.Context) GetRuleRealServersRealServerSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleRealServersRealServerSetOutput)
+}
+
+// GetRuleRealServersRealServerSetArrayInput is an input type that accepts GetRuleRealServersRealServerSetArray and GetRuleRealServersRealServerSetArrayOutput values.
+// You can construct a concrete instance of `GetRuleRealServersRealServerSetArrayInput` via:
+//
+//          GetRuleRealServersRealServerSetArray{ GetRuleRealServersRealServerSetArgs{...} }
+type GetRuleRealServersRealServerSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRuleRealServersRealServerSetArrayOutput() GetRuleRealServersRealServerSetArrayOutput
+	ToGetRuleRealServersRealServerSetArrayOutputWithContext(context.Context) GetRuleRealServersRealServerSetArrayOutput
+}
+
+type GetRuleRealServersRealServerSetArray []GetRuleRealServersRealServerSetInput
+
+func (GetRuleRealServersRealServerSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleRealServersRealServerSet)(nil)).Elem()
+}
+
+func (i GetRuleRealServersRealServerSetArray) ToGetRuleRealServersRealServerSetArrayOutput() GetRuleRealServersRealServerSetArrayOutput {
+	return i.ToGetRuleRealServersRealServerSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRuleRealServersRealServerSetArray) ToGetRuleRealServersRealServerSetArrayOutputWithContext(ctx context.Context) GetRuleRealServersRealServerSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleRealServersRealServerSetArrayOutput)
+}
+
+type GetRuleRealServersRealServerSetOutput struct{ *pulumi.OutputState }
+
+func (GetRuleRealServersRealServerSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleRealServersRealServerSet)(nil)).Elem()
+}
+
+func (o GetRuleRealServersRealServerSetOutput) ToGetRuleRealServersRealServerSetOutput() GetRuleRealServersRealServerSetOutput {
+	return o
+}
+
+func (o GetRuleRealServersRealServerSetOutput) ToGetRuleRealServersRealServerSetOutputWithContext(ctx context.Context) GetRuleRealServersRealServerSetOutput {
+	return o
+}
+
+// Is it on the banned blacklist? 0 indicates not on the blacklist, and 1 indicates on the blacklist.
+func (o GetRuleRealServersRealServerSetOutput) InBanBlacklist() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleRealServersRealServerSet) int { return v.InBanBlacklist }).(pulumi.IntOutput)
+}
+
+// Project Id.
+func (o GetRuleRealServersRealServerSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleRealServersRealServerSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Real Server Id.
+func (o GetRuleRealServersRealServerSetOutput) RealServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersRealServerSet) string { return v.RealServerId }).(pulumi.StringOutput)
+}
+
+// Real Server IP or domain.
+func (o GetRuleRealServersRealServerSetOutput) RealServerIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersRealServerSet) string { return v.RealServerIp }).(pulumi.StringOutput)
+}
+
+// Real Server Name.
+func (o GetRuleRealServersRealServerSetOutput) RealServerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleRealServersRealServerSet) string { return v.RealServerName }).(pulumi.StringOutput)
+}
+
+type GetRuleRealServersRealServerSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRuleRealServersRealServerSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleRealServersRealServerSet)(nil)).Elem()
+}
+
+func (o GetRuleRealServersRealServerSetArrayOutput) ToGetRuleRealServersRealServerSetArrayOutput() GetRuleRealServersRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetRuleRealServersRealServerSetArrayOutput) ToGetRuleRealServersRealServerSetArrayOutputWithContext(ctx context.Context) GetRuleRealServersRealServerSetArrayOutput {
+	return o
+}
+
+func (o GetRuleRealServersRealServerSetArrayOutput) Index(i pulumi.IntInput) GetRuleRealServersRealServerSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRuleRealServersRealServerSet {
+		return vs[0].([]GetRuleRealServersRealServerSet)[vs[1].(int)]
+	}).(GetRuleRealServersRealServerSetOutput)
 }
 
 type GetSecurityRulesRule struct {
@@ -2084,14 +7818,40 @@ func (o GetSecurityRulesRuleArrayOutput) Index(i pulumi.IntInput) GetSecurityRul
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomHeaderHeaderInput)(nil)).Elem(), CustomHeaderHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomHeaderHeaderArrayInput)(nil)).Elem(), CustomHeaderHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HttpRuleRealserverInput)(nil)).Elem(), HttpRuleRealserverArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HttpRuleRealserverArrayInput)(nil)).Elem(), HttpRuleRealserverArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenerRealserverBindSetInput)(nil)).Elem(), Layer4ListenerRealserverBindSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenerRealserverBindSetArrayInput)(nil)).Elem(), Layer4ListenerRealserverBindSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsAccessRegionSetInput)(nil)).Elem(), GetAccessRegionsAccessRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsAccessRegionSetArrayInput)(nil)).Elem(), GetAccessRegionsAccessRegionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsAccessRegionSetSupportFeatureInput)(nil)).Elem(), GetAccessRegionsAccessRegionSetSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsAccessRegionSetSupportFeatureArrayInput)(nil)).Elem(), GetAccessRegionsAccessRegionSetSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsByDestRegionAccessRegionSetInput)(nil)).Elem(), GetAccessRegionsByDestRegionAccessRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRegionsByDestRegionAccessRegionSetArrayInput)(nil)).Elem(), GetAccessRegionsByDestRegionAccessRegionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCountryAreaMappingCountryAreaMappingListInput)(nil)).Elem(), GetCountryAreaMappingCountryAreaMappingListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCountryAreaMappingCountryAreaMappingListArrayInput)(nil)).Elem(), GetCountryAreaMappingCountryAreaMappingListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomHeaderHeaderInput)(nil)).Elem(), GetCustomHeaderHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomHeaderHeaderArrayInput)(nil)).Elem(), GetCustomHeaderHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDestRegionsDestRegionSetInput)(nil)).Elem(), GetDestRegionsDestRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDestRegionsDestRegionSetArrayInput)(nil)).Elem(), GetDestRegionsDestRegionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDestRegionsDestRegionSetSupportFeatureInput)(nil)).Elem(), GetDestRegionsDestRegionSetSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDestRegionsDestRegionSetSupportFeatureArrayInput)(nil)).Elem(), GetDestRegionsDestRegionSetSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetInput)(nil)).Elem(), GetDomainErrorPageInfosErrorPageSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetArrayInput)(nil)).Elem(), GetDomainErrorPageInfosErrorPageSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetSetHeaderInput)(nil)).Elem(), GetDomainErrorPageInfosErrorPageSetSetHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPageInfosErrorPageSetSetHeaderArrayInput)(nil)).Elem(), GetDomainErrorPageInfosErrorPageSetSetHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoListInput)(nil)).Elem(), GetDomainErrorPagesErrorPageInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoListArrayInput)(nil)).Elem(), GetDomainErrorPagesErrorPageInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetArrayInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetProxySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetArrayInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetProxySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetListenerListInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetProxySetListenerListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayInput)(nil)).Elem(), GetGroupAndStatisticsProxyGroupSetProxySetListenerListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpDomainsDomainInput)(nil)).Elem(), GetHttpDomainsDomainArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpDomainsDomainArrayInput)(nil)).Elem(), GetHttpDomainsDomainArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpRulesRuleInput)(nil)).Elem(), GetHttpRulesRuleArgs{})
@@ -2102,20 +7862,108 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer4ListenersListenerArrayInput)(nil)).Elem(), GetLayer4ListenersListenerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer7ListenersListenerInput)(nil)).Elem(), GetLayer7ListenersListenerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer7ListenersListenerArrayInput)(nil)).Elem(), GetLayer7ListenersListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRealServersBindRealServerSetInput)(nil)).Elem(), GetListenerRealServersBindRealServerSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRealServersBindRealServerSetArrayInput)(nil)).Elem(), GetListenerRealServersBindRealServerSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRealServersRealServerSetInput)(nil)).Elem(), GetListenerRealServersRealServerSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRealServersRealServerSetArrayInput)(nil)).Elem(), GetListenerRealServersRealServerSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerStatisticsStatisticsDataInput)(nil)).Elem(), GetListenerStatisticsStatisticsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerStatisticsStatisticsDataArrayInput)(nil)).Elem(), GetListenerStatisticsStatisticsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerStatisticsStatisticsDataMetricDataInput)(nil)).Elem(), GetListenerStatisticsStatisticsDataMetricDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerStatisticsStatisticsDataMetricDataArrayInput)(nil)).Elem(), GetListenerStatisticsStatisticsDataMetricDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesProxyInput)(nil)).Elem(), GetProxiesProxyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesProxyArrayInput)(nil)).Elem(), GetProxiesProxyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesStatusInstanceStatusSetInput)(nil)).Elem(), GetProxiesStatusInstanceStatusSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesStatusInstanceStatusSetArrayInput)(nil)).Elem(), GetProxiesStatusInstanceStatusSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetInput)(nil)).Elem(), GetProxyAndStatisticsListenersProxySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetArrayInput)(nil)).Elem(), GetProxyAndStatisticsListenersProxySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetListenerListInput)(nil)).Elem(), GetProxyAndStatisticsListenersProxySetListenerListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyAndStatisticsListenersProxySetListenerListArrayInput)(nil)).Elem(), GetProxyAndStatisticsListenersProxySetListenerListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailInput)(nil)).Elem(), GetProxyDetailProxyDetailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoInput)(nil)).Elem(), GetProxyDetailProxyDetailAccessRegionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailAccessRegionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureInput)(nil)).Elem(), GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailIpListInput)(nil)).Elem(), GetProxyDetailProxyDetailIpListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailIpListArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailIpListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoInput)(nil)).Elem(), GetProxyDetailProxyDetailRealServerRegionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailRealServerRegionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureInput)(nil)).Elem(), GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailTagSetInput)(nil)).Elem(), GetProxyDetailProxyDetailTagSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyDetailProxyDetailTagSetArrayInput)(nil)).Elem(), GetProxyDetailProxyDetailTagSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataInput)(nil)).Elem(), GetProxyGroupStatisticsStatisticsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataArrayInput)(nil)).Elem(), GetProxyGroupStatisticsStatisticsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataMetricDataInput)(nil)).Elem(), GetProxyGroupStatisticsStatisticsDataMetricDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupStatisticsStatisticsDataMetricDataArrayInput)(nil)).Elem(), GetProxyGroupStatisticsStatisticsDataMetricDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsFilterInput)(nil)).Elem(), GetProxyGroupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsFilterArrayInput)(nil)).Elem(), GetProxyGroupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListInput)(nil)).Elem(), GetProxyGroupsProxyGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListArrayInput)(nil)).Elem(), GetProxyGroupsProxyGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoInput)(nil)).Elem(), GetProxyGroupsProxyGroupListRealServerRegionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoArrayInput)(nil)).Elem(), GetProxyGroupsProxyGroupListRealServerRegionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureInput)(nil)).Elem(), GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayInput)(nil)).Elem(), GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListTagSetInput)(nil)).Elem(), GetProxyGroupsProxyGroupListTagSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsProxyGroupListTagSetArrayInput)(nil)).Elem(), GetProxyGroupsProxyGroupListTagSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsTagSetInput)(nil)).Elem(), GetProxyGroupsTagSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyGroupsTagSetArrayInput)(nil)).Elem(), GetProxyGroupsTagSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyStatisticsStatisticsDataInput)(nil)).Elem(), GetProxyStatisticsStatisticsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyStatisticsStatisticsDataArrayInput)(nil)).Elem(), GetProxyStatisticsStatisticsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyStatisticsStatisticsDataMetricDataInput)(nil)).Elem(), GetProxyStatisticsStatisticsDataMetricDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyStatisticsStatisticsDataMetricDataArrayInput)(nil)).Elem(), GetProxyStatisticsStatisticsDataMetricDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRealServersStatusRealServerStatusSetInput)(nil)).Elem(), GetRealServersStatusRealServerStatusSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRealServersStatusRealServerStatusSetArrayInput)(nil)).Elem(), GetRealServersStatusRealServerStatusSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRealserversRealserverInput)(nil)).Elem(), GetRealserversRealserverArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRealserversRealserverArrayInput)(nil)).Elem(), GetRealserversRealserverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceBandwidthUnitPriceInput)(nil)).Elem(), GetRegionAndPriceBandwidthUnitPriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceBandwidthUnitPriceArrayInput)(nil)).Elem(), GetRegionAndPriceBandwidthUnitPriceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceDestRegionSetInput)(nil)).Elem(), GetRegionAndPriceDestRegionSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceDestRegionSetArrayInput)(nil)).Elem(), GetRegionAndPriceDestRegionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceDestRegionSetSupportFeatureInput)(nil)).Elem(), GetRegionAndPriceDestRegionSetSupportFeatureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionAndPriceDestRegionSetSupportFeatureArrayInput)(nil)).Elem(), GetRegionAndPriceDestRegionSetSupportFeatureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesByTagResourceSetInput)(nil)).Elem(), GetResourcesByTagResourceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourcesByTagResourceSetArrayInput)(nil)).Elem(), GetResourcesByTagResourceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleRealServersBindRealServerSetInput)(nil)).Elem(), GetRuleRealServersBindRealServerSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleRealServersBindRealServerSetArrayInput)(nil)).Elem(), GetRuleRealServersBindRealServerSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleRealServersRealServerSetInput)(nil)).Elem(), GetRuleRealServersRealServerSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleRealServersRealServerSetArrayInput)(nil)).Elem(), GetRuleRealServersRealServerSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityRulesRuleInput)(nil)).Elem(), GetSecurityRulesRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityRulesRuleArrayInput)(nil)).Elem(), GetSecurityRulesRuleArray{})
+	pulumi.RegisterOutputType(CustomHeaderHeaderOutput{})
+	pulumi.RegisterOutputType(CustomHeaderHeaderArrayOutput{})
 	pulumi.RegisterOutputType(HttpRuleRealserverOutput{})
 	pulumi.RegisterOutputType(HttpRuleRealserverArrayOutput{})
 	pulumi.RegisterOutputType(Layer4ListenerRealserverBindSetOutput{})
 	pulumi.RegisterOutputType(Layer4ListenerRealserverBindSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsAccessRegionSetOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsAccessRegionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsAccessRegionSetSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsAccessRegionSetSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsByDestRegionAccessRegionSetOutput{})
+	pulumi.RegisterOutputType(GetAccessRegionsByDestRegionAccessRegionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetCountryAreaMappingCountryAreaMappingListOutput{})
+	pulumi.RegisterOutputType(GetCountryAreaMappingCountryAreaMappingListArrayOutput{})
+	pulumi.RegisterOutputType(GetCustomHeaderHeaderOutput{})
+	pulumi.RegisterOutputType(GetCustomHeaderHeaderArrayOutput{})
+	pulumi.RegisterOutputType(GetDestRegionsDestRegionSetOutput{})
+	pulumi.RegisterOutputType(GetDestRegionsDestRegionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDestRegionsDestRegionSetSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetDestRegionsDestRegionSetSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPageInfosErrorPageSetOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPageInfosErrorPageSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPageInfosErrorPageSetSetHeaderOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPageInfosErrorPageSetSetHeaderArrayOutput{})
 	pulumi.RegisterOutputType(GetDomainErrorPagesErrorPageInfoListOutput{})
 	pulumi.RegisterOutputType(GetDomainErrorPagesErrorPageInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetProxySetOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetProxySetArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetProxySetListenerListOutput{})
+	pulumi.RegisterOutputType(GetGroupAndStatisticsProxyGroupSetProxySetListenerListArrayOutput{})
 	pulumi.RegisterOutputType(GetHttpDomainsDomainOutput{})
 	pulumi.RegisterOutputType(GetHttpDomainsDomainArrayOutput{})
 	pulumi.RegisterOutputType(GetHttpRulesRuleOutput{})
@@ -2126,10 +7974,72 @@ func init() {
 	pulumi.RegisterOutputType(GetLayer4ListenersListenerArrayOutput{})
 	pulumi.RegisterOutputType(GetLayer7ListenersListenerOutput{})
 	pulumi.RegisterOutputType(GetLayer7ListenersListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetListenerRealServersBindRealServerSetOutput{})
+	pulumi.RegisterOutputType(GetListenerRealServersBindRealServerSetArrayOutput{})
+	pulumi.RegisterOutputType(GetListenerRealServersRealServerSetOutput{})
+	pulumi.RegisterOutputType(GetListenerRealServersRealServerSetArrayOutput{})
+	pulumi.RegisterOutputType(GetListenerStatisticsStatisticsDataOutput{})
+	pulumi.RegisterOutputType(GetListenerStatisticsStatisticsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetListenerStatisticsStatisticsDataMetricDataOutput{})
+	pulumi.RegisterOutputType(GetListenerStatisticsStatisticsDataMetricDataArrayOutput{})
 	pulumi.RegisterOutputType(GetProxiesProxyOutput{})
 	pulumi.RegisterOutputType(GetProxiesProxyArrayOutput{})
+	pulumi.RegisterOutputType(GetProxiesStatusInstanceStatusSetOutput{})
+	pulumi.RegisterOutputType(GetProxiesStatusInstanceStatusSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyAndStatisticsListenersProxySetOutput{})
+	pulumi.RegisterOutputType(GetProxyAndStatisticsListenersProxySetArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyAndStatisticsListenersProxySetListenerListOutput{})
+	pulumi.RegisterOutputType(GetProxyAndStatisticsListenersProxySetListenerListArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailAccessRegionInfoOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailAccessRegionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailAccessRegionInfoSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailIpListOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailIpListArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailRealServerRegionInfoOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailRealServerRegionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailRealServerRegionInfoSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailTagSetOutput{})
+	pulumi.RegisterOutputType(GetProxyDetailProxyDetailTagSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupStatisticsStatisticsDataOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupStatisticsStatisticsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupStatisticsStatisticsDataMetricDataOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupStatisticsStatisticsDataMetricDataArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsFilterOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListRealServerRegionInfoOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListRealServerRegionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListRealServerRegionInfoSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListTagSetOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsProxyGroupListTagSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsTagSetOutput{})
+	pulumi.RegisterOutputType(GetProxyGroupsTagSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyStatisticsStatisticsDataOutput{})
+	pulumi.RegisterOutputType(GetProxyStatisticsStatisticsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyStatisticsStatisticsDataMetricDataOutput{})
+	pulumi.RegisterOutputType(GetProxyStatisticsStatisticsDataMetricDataArrayOutput{})
+	pulumi.RegisterOutputType(GetRealServersStatusRealServerStatusSetOutput{})
+	pulumi.RegisterOutputType(GetRealServersStatusRealServerStatusSetArrayOutput{})
 	pulumi.RegisterOutputType(GetRealserversRealserverOutput{})
 	pulumi.RegisterOutputType(GetRealserversRealserverArrayOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceBandwidthUnitPriceOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceBandwidthUnitPriceArrayOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceDestRegionSetOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceDestRegionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceDestRegionSetSupportFeatureOutput{})
+	pulumi.RegisterOutputType(GetRegionAndPriceDestRegionSetSupportFeatureArrayOutput{})
+	pulumi.RegisterOutputType(GetResourcesByTagResourceSetOutput{})
+	pulumi.RegisterOutputType(GetResourcesByTagResourceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRuleRealServersBindRealServerSetOutput{})
+	pulumi.RegisterOutputType(GetRuleRealServersBindRealServerSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRuleRealServersRealServerSetOutput{})
+	pulumi.RegisterOutputType(GetRuleRealServersRealServerSetArrayOutput{})
 	pulumi.RegisterOutputType(GetSecurityRulesRuleOutput{})
 	pulumi.RegisterOutputType(GetSecurityRulesRuleArrayOutput{})
 }

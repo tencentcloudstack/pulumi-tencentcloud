@@ -99,14 +99,6 @@ import (
 // 	})
 // }
 // ```
-//
-// ## Import
-//
-// mysql switch_master_slave_operation can be imported using the id, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation switch_master_slave_operation switch_master_slave_operation_id
-// ```
 type SwitchMasterSlaveOperation struct {
 	pulumi.CustomResourceState
 

@@ -19,6 +19,7 @@ class ListenerArgs:
                  certificate_ca_id: Optional[pulumi.Input[str]] = None,
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
+                 end_port: Optional[pulumi.Input[int]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -34,9 +35,12 @@ class ListenerArgs:
                  health_check_time_out: Optional[pulumi.Input[int]] = None,
                  health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
+                 health_source_ip_type: Optional[pulumi.Input[int]] = None,
+                 keepalive_enable: Optional[pulumi.Input[int]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
+                 session_type: Optional[pulumi.Input[str]] = None,
                  sni_switch: Optional[pulumi.Input[bool]] = None,
                  target_type: Optional[pulumi.Input[str]] = None):
         """
@@ -47,6 +51,7 @@ class ListenerArgs:
         :param pulumi.Input[str] certificate_ca_id: ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
+        :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -62,9 +67,12 @@ class ListenerArgs:
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
         :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
         :param pulumi.Input[int] port: Port of the CLB listener.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[str] session_type: Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
         :param pulumi.Input[str] target_type: Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
@@ -77,6 +85,8 @@ class ListenerArgs:
             pulumi.set(__self__, "certificate_id", certificate_id)
         if certificate_ssl_mode is not None:
             pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
+        if end_port is not None:
+            pulumi.set(__self__, "end_port", end_port)
         if health_check_context_type is not None:
             pulumi.set(__self__, "health_check_context_type", health_check_context_type)
         if health_check_health_num is not None:
@@ -107,12 +117,18 @@ class ListenerArgs:
             pulumi.set(__self__, "health_check_type", health_check_type)
         if health_check_unhealth_num is not None:
             pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
+        if health_source_ip_type is not None:
+            pulumi.set(__self__, "health_source_ip_type", health_source_ip_type)
+        if keepalive_enable is not None:
+            pulumi.set(__self__, "keepalive_enable", keepalive_enable)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if scheduler is not None:
             pulumi.set(__self__, "scheduler", scheduler)
         if session_expire_time is not None:
             pulumi.set(__self__, "session_expire_time", session_expire_time)
+        if session_type is not None:
+            pulumi.set(__self__, "session_type", session_type)
         if sni_switch is not None:
             pulumi.set(__self__, "sni_switch", sni_switch)
         if target_type is not None:
@@ -191,6 +207,18 @@ class ListenerArgs:
         pulumi.set(self, "certificate_ssl_mode", value)
 
     @property
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "end_port")
+
+    @end_port.setter
+    def end_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "end_port", value)
+
+    @property
     @pulumi.getter(name="healthCheckContextType")
     def health_check_context_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -371,6 +399,30 @@ class ListenerArgs:
         pulumi.set(self, "health_check_unhealth_num", value)
 
     @property
+    @pulumi.getter(name="healthSourceIpType")
+    def health_source_ip_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        """
+        return pulumi.get(self, "health_source_ip_type")
+
+    @health_source_ip_type.setter
+    def health_source_ip_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "health_source_ip_type", value)
+
+    @property
+    @pulumi.getter(name="keepaliveEnable")
+    def keepalive_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        """
+        return pulumi.get(self, "keepalive_enable")
+
+    @keepalive_enable.setter
+    def keepalive_enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "keepalive_enable", value)
+
+    @property
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
@@ -407,6 +459,18 @@ class ListenerArgs:
         pulumi.set(self, "session_expire_time", value)
 
     @property
+    @pulumi.getter(name="sessionType")
+    def session_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        """
+        return pulumi.get(self, "session_type")
+
+    @session_type.setter
+    def session_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "session_type", value)
+
+    @property
     @pulumi.getter(name="sniSwitch")
     def sni_switch(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -438,6 +502,7 @@ class _ListenerState:
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
+                 end_port: Optional[pulumi.Input[int]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -453,12 +518,15 @@ class _ListenerState:
                  health_check_time_out: Optional[pulumi.Input[int]] = None,
                  health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
+                 health_source_ip_type: Optional[pulumi.Input[int]] = None,
+                 keepalive_enable: Optional[pulumi.Input[int]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
                  listener_name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
+                 session_type: Optional[pulumi.Input[str]] = None,
                  sni_switch: Optional[pulumi.Input[bool]] = None,
                  target_type: Optional[pulumi.Input[str]] = None):
         """
@@ -467,6 +535,7 @@ class _ListenerState:
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
+        :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -482,12 +551,15 @@ class _ListenerState:
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
         :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
         :param pulumi.Input[str] listener_id: ID of this CLB listener.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
         :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[str] session_type: Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
         :param pulumi.Input[str] target_type: Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
@@ -499,6 +571,8 @@ class _ListenerState:
             pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
         if clb_id is not None:
             pulumi.set(__self__, "clb_id", clb_id)
+        if end_port is not None:
+            pulumi.set(__self__, "end_port", end_port)
         if health_check_context_type is not None:
             pulumi.set(__self__, "health_check_context_type", health_check_context_type)
         if health_check_health_num is not None:
@@ -529,6 +603,10 @@ class _ListenerState:
             pulumi.set(__self__, "health_check_type", health_check_type)
         if health_check_unhealth_num is not None:
             pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
+        if health_source_ip_type is not None:
+            pulumi.set(__self__, "health_source_ip_type", health_source_ip_type)
+        if keepalive_enable is not None:
+            pulumi.set(__self__, "keepalive_enable", keepalive_enable)
         if listener_id is not None:
             pulumi.set(__self__, "listener_id", listener_id)
         if listener_name is not None:
@@ -541,6 +619,8 @@ class _ListenerState:
             pulumi.set(__self__, "scheduler", scheduler)
         if session_expire_time is not None:
             pulumi.set(__self__, "session_expire_time", session_expire_time)
+        if session_type is not None:
+            pulumi.set(__self__, "session_type", session_type)
         if sni_switch is not None:
             pulumi.set(__self__, "sni_switch", sni_switch)
         if target_type is not None:
@@ -595,6 +675,18 @@ class _ListenerState:
         pulumi.set(self, "clb_id", value)
 
     @property
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "end_port")
+
+    @end_port.setter
+    def end_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "end_port", value)
+
+    @property
     @pulumi.getter(name="healthCheckContextType")
     def health_check_context_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -773,6 +865,30 @@ class _ListenerState:
     @health_check_unhealth_num.setter
     def health_check_unhealth_num(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "health_check_unhealth_num", value)
+
+    @property
+    @pulumi.getter(name="healthSourceIpType")
+    def health_source_ip_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        """
+        return pulumi.get(self, "health_source_ip_type")
+
+    @health_source_ip_type.setter
+    def health_source_ip_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "health_source_ip_type", value)
+
+    @property
+    @pulumi.getter(name="keepaliveEnable")
+    def keepalive_enable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        """
+        return pulumi.get(self, "keepalive_enable")
+
+    @keepalive_enable.setter
+    def keepalive_enable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "keepalive_enable", value)
 
     @property
     @pulumi.getter(name="listenerId")
@@ -847,6 +963,18 @@ class _ListenerState:
         pulumi.set(self, "session_expire_time", value)
 
     @property
+    @pulumi.getter(name="sessionType")
+    def session_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        """
+        return pulumi.get(self, "session_type")
+
+    @session_type.setter
+    def session_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "session_type", value)
+
+    @property
     @pulumi.getter(name="sniSwitch")
     def sni_switch(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -880,6 +1008,7 @@ class Listener(pulumi.CustomResource):
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
+                 end_port: Optional[pulumi.Input[int]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -895,11 +1024,14 @@ class Listener(pulumi.CustomResource):
                  health_check_time_out: Optional[pulumi.Input[int]] = None,
                  health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
+                 health_source_ip_type: Optional[pulumi.Input[int]] = None,
+                 keepalive_enable: Optional[pulumi.Input[int]] = None,
                  listener_name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
+                 session_type: Optional[pulumi.Input[str]] = None,
                  sni_switch: Optional[pulumi.Input[bool]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1051,6 +1183,25 @@ class Listener(pulumi.CustomResource):
             scheduler="WRR",
             target_type="TARGETGROUP")
         ```
+        ### Port Range Listener
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        clb_basic = tencentcloud.clb.Instance("clbBasic",
+            network_type="OPEN",
+            clb_name="tf-listener-test")
+        listener_basic = tencentcloud.clb.Listener("listenerBasic",
+            clb_id=clb_basic.id,
+            port=1,
+            end_port=6,
+            protocol="TCP",
+            listener_name="listener_basic",
+            session_expire_time=30,
+            scheduler="WRR",
+            target_type="NODE")
+        ```
 
         ## Import
 
@@ -1066,6 +1217,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
+        :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -1081,11 +1233,14 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
         :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
         :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[str] session_type: Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
         :param pulumi.Input[str] target_type: Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
@@ -1243,6 +1398,25 @@ class Listener(pulumi.CustomResource):
             scheduler="WRR",
             target_type="TARGETGROUP")
         ```
+        ### Port Range Listener
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        clb_basic = tencentcloud.clb.Instance("clbBasic",
+            network_type="OPEN",
+            clb_name="tf-listener-test")
+        listener_basic = tencentcloud.clb.Listener("listenerBasic",
+            clb_id=clb_basic.id,
+            port=1,
+            end_port=6,
+            protocol="TCP",
+            listener_name="listener_basic",
+            session_expire_time=30,
+            scheduler="WRR",
+            target_type="NODE")
+        ```
 
         ## Import
 
@@ -1271,6 +1445,7 @@ class Listener(pulumi.CustomResource):
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
+                 end_port: Optional[pulumi.Input[int]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1286,11 +1461,14 @@ class Listener(pulumi.CustomResource):
                  health_check_time_out: Optional[pulumi.Input[int]] = None,
                  health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
+                 health_source_ip_type: Optional[pulumi.Input[int]] = None,
+                 keepalive_enable: Optional[pulumi.Input[int]] = None,
                  listener_name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
+                 session_type: Optional[pulumi.Input[str]] = None,
                  sni_switch: Optional[pulumi.Input[bool]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1313,6 +1491,7 @@ class Listener(pulumi.CustomResource):
             if clb_id is None and not opts.urn:
                 raise TypeError("Missing required property 'clb_id'")
             __props__.__dict__["clb_id"] = clb_id
+            __props__.__dict__["end_port"] = end_port
             __props__.__dict__["health_check_context_type"] = health_check_context_type
             __props__.__dict__["health_check_health_num"] = health_check_health_num
             __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1328,6 +1507,8 @@ class Listener(pulumi.CustomResource):
             __props__.__dict__["health_check_time_out"] = health_check_time_out
             __props__.__dict__["health_check_type"] = health_check_type
             __props__.__dict__["health_check_unhealth_num"] = health_check_unhealth_num
+            __props__.__dict__["health_source_ip_type"] = health_source_ip_type
+            __props__.__dict__["keepalive_enable"] = keepalive_enable
             if listener_name is None and not opts.urn:
                 raise TypeError("Missing required property 'listener_name'")
             __props__.__dict__["listener_name"] = listener_name
@@ -1337,6 +1518,7 @@ class Listener(pulumi.CustomResource):
             __props__.__dict__["protocol"] = protocol
             __props__.__dict__["scheduler"] = scheduler
             __props__.__dict__["session_expire_time"] = session_expire_time
+            __props__.__dict__["session_type"] = session_type
             __props__.__dict__["sni_switch"] = sni_switch
             __props__.__dict__["target_type"] = target_type
             __props__.__dict__["listener_id"] = None
@@ -1354,6 +1536,7 @@ class Listener(pulumi.CustomResource):
             certificate_id: Optional[pulumi.Input[str]] = None,
             certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
             clb_id: Optional[pulumi.Input[str]] = None,
+            end_port: Optional[pulumi.Input[int]] = None,
             health_check_context_type: Optional[pulumi.Input[str]] = None,
             health_check_health_num: Optional[pulumi.Input[int]] = None,
             health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1369,12 +1552,15 @@ class Listener(pulumi.CustomResource):
             health_check_time_out: Optional[pulumi.Input[int]] = None,
             health_check_type: Optional[pulumi.Input[str]] = None,
             health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
+            health_source_ip_type: Optional[pulumi.Input[int]] = None,
+            keepalive_enable: Optional[pulumi.Input[int]] = None,
             listener_id: Optional[pulumi.Input[str]] = None,
             listener_name: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
             scheduler: Optional[pulumi.Input[str]] = None,
             session_expire_time: Optional[pulumi.Input[int]] = None,
+            session_type: Optional[pulumi.Input[str]] = None,
             sni_switch: Optional[pulumi.Input[bool]] = None,
             target_type: Optional[pulumi.Input[str]] = None) -> 'Listener':
         """
@@ -1388,6 +1574,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
+        :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -1403,12 +1590,15 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
         :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
         :param pulumi.Input[str] listener_id: ID of this CLB listener.
         :param pulumi.Input[str] listener_name: Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[int] port: Port of the CLB listener.
         :param pulumi.Input[str] protocol: Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+        :param pulumi.Input[str] session_type: Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
         :param pulumi.Input[bool] sni_switch: Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
         :param pulumi.Input[str] target_type: Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         """
@@ -1420,6 +1610,7 @@ class Listener(pulumi.CustomResource):
         __props__.__dict__["certificate_id"] = certificate_id
         __props__.__dict__["certificate_ssl_mode"] = certificate_ssl_mode
         __props__.__dict__["clb_id"] = clb_id
+        __props__.__dict__["end_port"] = end_port
         __props__.__dict__["health_check_context_type"] = health_check_context_type
         __props__.__dict__["health_check_health_num"] = health_check_health_num
         __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1435,12 +1626,15 @@ class Listener(pulumi.CustomResource):
         __props__.__dict__["health_check_time_out"] = health_check_time_out
         __props__.__dict__["health_check_type"] = health_check_type
         __props__.__dict__["health_check_unhealth_num"] = health_check_unhealth_num
+        __props__.__dict__["health_source_ip_type"] = health_source_ip_type
+        __props__.__dict__["keepalive_enable"] = keepalive_enable
         __props__.__dict__["listener_id"] = listener_id
         __props__.__dict__["listener_name"] = listener_name
         __props__.__dict__["port"] = port
         __props__.__dict__["protocol"] = protocol
         __props__.__dict__["scheduler"] = scheduler
         __props__.__dict__["session_expire_time"] = session_expire_time
+        __props__.__dict__["session_type"] = session_type
         __props__.__dict__["sni_switch"] = sni_switch
         __props__.__dict__["target_type"] = target_type
         return Listener(resource_name, opts=opts, __props__=__props__)
@@ -1476,6 +1670,14 @@ class Listener(pulumi.CustomResource):
         ID of the CLB.
         """
         return pulumi.get(self, "clb_id")
+
+    @property
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> pulumi.Output[int]:
+        """
+        This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        """
+        return pulumi.get(self, "end_port")
 
     @property
     @pulumi.getter(name="healthCheckContextType")
@@ -1598,6 +1800,22 @@ class Listener(pulumi.CustomResource):
         return pulumi.get(self, "health_check_unhealth_num")
 
     @property
+    @pulumi.getter(name="healthSourceIpType")
+    def health_source_ip_type(self) -> pulumi.Output[int]:
+        """
+        Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        """
+        return pulumi.get(self, "health_source_ip_type")
+
+    @property
+    @pulumi.getter(name="keepaliveEnable")
+    def keepalive_enable(self) -> pulumi.Output[int]:
+        """
+        Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        """
+        return pulumi.get(self, "keepalive_enable")
+
+    @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> pulumi.Output[str]:
         """
@@ -1644,6 +1862,14 @@ class Listener(pulumi.CustomResource):
         Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         """
         return pulumi.get(self, "session_expire_time")
+
+    @property
+    @pulumi.getter(name="sessionType")
+    def session_type(self) -> pulumi.Output[str]:
+        """
+        Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        """
+        return pulumi.get(self, "session_type")
 
     @property
     @pulumi.getter(name="sniSwitch")

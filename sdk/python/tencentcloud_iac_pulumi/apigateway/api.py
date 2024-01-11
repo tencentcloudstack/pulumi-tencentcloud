@@ -18,9 +18,23 @@ class ApiArgs:
                  api_name: pulumi.Input[str],
                  request_config_path: pulumi.Input[str],
                  service_id: pulumi.Input[str],
+                 api_business_type: Optional[pulumi.Input[str]] = None,
                  api_desc: Optional[pulumi.Input[str]] = None,
+                 api_type: Optional[pulumi.Input[str]] = None,
+                 auth_relation_api_id: Optional[pulumi.Input[str]] = None,
                  auth_type: Optional[pulumi.Input[str]] = None,
+                 constant_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]] = None,
+                 eiam_app_id: Optional[pulumi.Input[str]] = None,
+                 eiam_app_type: Optional[pulumi.Input[str]] = None,
+                 eiam_auth_type: Optional[pulumi.Input[str]] = None,
                  enable_cors: Optional[pulumi.Input[bool]] = None,
+                 event_bus_id: Optional[pulumi.Input[str]] = None,
+                 is_base64_encoded: Optional[pulumi.Input[bool]] = None,
+                 is_debug_after_charge: Optional[pulumi.Input[bool]] = None,
+                 is_delete_response_error_codes: Optional[pulumi.Input[bool]] = None,
+                 micro_services: Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]] = None,
+                 oauth_config: Optional[pulumi.Input['ApiOauthConfigArgs']] = None,
+                 owner: Optional[pulumi.Input[str]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
@@ -30,6 +44,7 @@ class ApiArgs:
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
+                 service_config_cos_config: Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']] = None,
                  service_config_method: Optional[pulumi.Input[str]] = None,
                  service_config_mock_return_message: Optional[pulumi.Input[str]] = None,
                  service_config_path: Optional[pulumi.Input[str]] = None,
@@ -37,19 +52,54 @@ class ApiArgs:
                  service_config_scf_function_name: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_namespace: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_function_type: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_is_integrated_response: Optional[pulumi.Input[bool]] = None,
                  service_config_timeout: Optional[pulumi.Input[int]] = None,
                  service_config_type: Optional[pulumi.Input[str]] = None,
+                 service_config_upstream_id: Optional[pulumi.Input[str]] = None,
                  service_config_url: Optional[pulumi.Input[str]] = None,
                  service_config_vpc_id: Optional[pulumi.Input[str]] = None,
-                 test_limit: Optional[pulumi.Input[int]] = None):
+                 service_config_websocket_cleanup_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]] = None,
+                 service_tsf_health_check_conf: Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']] = None,
+                 service_tsf_load_balance_conf: Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']] = None,
+                 target_namespace_id: Optional[pulumi.Input[str]] = None,
+                 target_services: Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]] = None,
+                 target_services_health_check_conf: Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']] = None,
+                 target_services_load_balance_conf: Optional[pulumi.Input[int]] = None,
+                 test_limit: Optional[pulumi.Input[int]] = None,
+                 token_timeout: Optional[pulumi.Input[int]] = None,
+                 user_type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Api resource.
         :param pulumi.Input[str] api_name: Custom API name.
         :param pulumi.Input[str] request_config_path: Request frontend path configuration. Like `/user/getinfo`.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[str] service_id: The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[str] api_business_type: When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
         :param pulumi.Input[str] api_desc: Custom API description.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        :param pulumi.Input[str] api_type: API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        :param pulumi.Input[str] auth_relation_api_id: The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        :param pulumi.Input[str] auth_type: API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]] constant_parameters: Constant parameter.
+        :param pulumi.Input[str] eiam_app_id: EIAM application ID.
+        :param pulumi.Input[str] eiam_app_type: EIAM application type.
+        :param pulumi.Input[str] eiam_auth_type: The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
+        :param pulumi.Input[str] event_bus_id: Event bus ID.
+        :param pulumi.Input[bool] is_base64_encoded: Whether to enable Base64 encoding will only take effect when the backend is scf.
+        :param pulumi.Input[bool] is_debug_after_charge: Charge after starting debugging. (Cloud Market Reserved Fields).
+        :param pulumi.Input[bool] is_delete_response_error_codes: Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]] micro_services: API bound microservice list.
+        :param pulumi.Input['ApiOauthConfigArgs'] oauth_config: OAuth configuration. Effective when AuthType is OAUTH.
+        :param pulumi.Input[str] owner: Owner of resources.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -59,28 +109,78 @@ class ApiArgs:
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
+        :param pulumi.Input['ApiServiceConfigCosConfigArgs'] service_config_cos_config: API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
         :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
         :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
-        :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        :param pulumi.Input[str] service_config_product: Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_qualifier: SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+        :param pulumi.Input[str] service_config_scf_function_type: Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        :param pulumi.Input[bool] service_config_scf_is_integrated_response: Whether to enable response integration. Effective when the backend type is SCF.
         :param pulumi.Input[int] service_config_timeout: API backend service timeout period in seconds. Default value: `5`.
-        :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
-        :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        :param pulumi.Input[str] service_config_type: The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
+        :param pulumi.Input[str] service_config_upstream_id: Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] service_config_url: The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_name: Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_namespace: Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_qualifier: Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_name: Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_namespace: Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_name: Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_namespace: Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]] service_parameters: The backend service parameters of the API.
+        :param pulumi.Input['ApiServiceTsfHealthCheckConfArgs'] service_tsf_health_check_conf: Health check configuration for microservices.
+        :param pulumi.Input['ApiServiceTsfLoadBalanceConfArgs'] service_tsf_load_balance_conf: Load balancing configuration for microservices.
+        :param pulumi.Input[str] target_namespace_id: Tsf serverless namespace ID. (In internal testing).
+        :param pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]] target_services: Target type backend resource information. (Internal testing stage).
+        :param pulumi.Input['ApiTargetServicesHealthCheckConfArgs'] target_services_health_check_conf: Target health check configuration. (Internal testing stage).
+        :param pulumi.Input[int] target_services_load_balance_conf: Target type load balancing configuration. (Internal testing stage).
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[int] token_timeout: The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        :param pulumi.Input[str] user_type: User type.
         """
         pulumi.set(__self__, "api_name", api_name)
         pulumi.set(__self__, "request_config_path", request_config_path)
         pulumi.set(__self__, "service_id", service_id)
+        if api_business_type is not None:
+            pulumi.set(__self__, "api_business_type", api_business_type)
         if api_desc is not None:
             pulumi.set(__self__, "api_desc", api_desc)
+        if api_type is not None:
+            pulumi.set(__self__, "api_type", api_type)
+        if auth_relation_api_id is not None:
+            pulumi.set(__self__, "auth_relation_api_id", auth_relation_api_id)
         if auth_type is not None:
             pulumi.set(__self__, "auth_type", auth_type)
+        if constant_parameters is not None:
+            pulumi.set(__self__, "constant_parameters", constant_parameters)
+        if eiam_app_id is not None:
+            pulumi.set(__self__, "eiam_app_id", eiam_app_id)
+        if eiam_app_type is not None:
+            pulumi.set(__self__, "eiam_app_type", eiam_app_type)
+        if eiam_auth_type is not None:
+            pulumi.set(__self__, "eiam_auth_type", eiam_auth_type)
         if enable_cors is not None:
             pulumi.set(__self__, "enable_cors", enable_cors)
+        if event_bus_id is not None:
+            pulumi.set(__self__, "event_bus_id", event_bus_id)
+        if is_base64_encoded is not None:
+            pulumi.set(__self__, "is_base64_encoded", is_base64_encoded)
+        if is_debug_after_charge is not None:
+            pulumi.set(__self__, "is_debug_after_charge", is_debug_after_charge)
+        if is_delete_response_error_codes is not None:
+            pulumi.set(__self__, "is_delete_response_error_codes", is_delete_response_error_codes)
+        if micro_services is not None:
+            pulumi.set(__self__, "micro_services", micro_services)
+        if oauth_config is not None:
+            pulumi.set(__self__, "oauth_config", oauth_config)
+        if owner is not None:
+            pulumi.set(__self__, "owner", owner)
         if pre_limit is not None:
             pulumi.set(__self__, "pre_limit", pre_limit)
         if protocol is not None:
@@ -99,6 +199,8 @@ class ApiArgs:
             pulumi.set(__self__, "response_success_example", response_success_example)
         if response_type is not None:
             pulumi.set(__self__, "response_type", response_type)
+        if service_config_cos_config is not None:
+            pulumi.set(__self__, "service_config_cos_config", service_config_cos_config)
         if service_config_method is not None:
             pulumi.set(__self__, "service_config_method", service_config_method)
         if service_config_mock_return_message is not None:
@@ -113,16 +215,58 @@ class ApiArgs:
             pulumi.set(__self__, "service_config_scf_function_namespace", service_config_scf_function_namespace)
         if service_config_scf_function_qualifier is not None:
             pulumi.set(__self__, "service_config_scf_function_qualifier", service_config_scf_function_qualifier)
+        if service_config_scf_function_type is not None:
+            pulumi.set(__self__, "service_config_scf_function_type", service_config_scf_function_type)
+        if service_config_scf_is_integrated_response is not None:
+            pulumi.set(__self__, "service_config_scf_is_integrated_response", service_config_scf_is_integrated_response)
         if service_config_timeout is not None:
             pulumi.set(__self__, "service_config_timeout", service_config_timeout)
         if service_config_type is not None:
             pulumi.set(__self__, "service_config_type", service_config_type)
+        if service_config_upstream_id is not None:
+            pulumi.set(__self__, "service_config_upstream_id", service_config_upstream_id)
         if service_config_url is not None:
             pulumi.set(__self__, "service_config_url", service_config_url)
         if service_config_vpc_id is not None:
             pulumi.set(__self__, "service_config_vpc_id", service_config_vpc_id)
+        if service_config_websocket_cleanup_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_name", service_config_websocket_cleanup_function_name)
+        if service_config_websocket_cleanup_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_namespace", service_config_websocket_cleanup_function_namespace)
+        if service_config_websocket_cleanup_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_qualifier", service_config_websocket_cleanup_function_qualifier)
+        if service_config_websocket_register_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_name", service_config_websocket_register_function_name)
+        if service_config_websocket_register_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_namespace", service_config_websocket_register_function_namespace)
+        if service_config_websocket_register_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_qualifier", service_config_websocket_register_function_qualifier)
+        if service_config_websocket_transport_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_name", service_config_websocket_transport_function_name)
+        if service_config_websocket_transport_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_namespace", service_config_websocket_transport_function_namespace)
+        if service_config_websocket_transport_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_qualifier", service_config_websocket_transport_function_qualifier)
+        if service_parameters is not None:
+            pulumi.set(__self__, "service_parameters", service_parameters)
+        if service_tsf_health_check_conf is not None:
+            pulumi.set(__self__, "service_tsf_health_check_conf", service_tsf_health_check_conf)
+        if service_tsf_load_balance_conf is not None:
+            pulumi.set(__self__, "service_tsf_load_balance_conf", service_tsf_load_balance_conf)
+        if target_namespace_id is not None:
+            pulumi.set(__self__, "target_namespace_id", target_namespace_id)
+        if target_services is not None:
+            pulumi.set(__self__, "target_services", target_services)
+        if target_services_health_check_conf is not None:
+            pulumi.set(__self__, "target_services_health_check_conf", target_services_health_check_conf)
+        if target_services_load_balance_conf is not None:
+            pulumi.set(__self__, "target_services_load_balance_conf", target_services_load_balance_conf)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
+        if token_timeout is not None:
+            pulumi.set(__self__, "token_timeout", token_timeout)
+        if user_type is not None:
+            pulumi.set(__self__, "user_type", user_type)
 
     @property
     @pulumi.getter(name="apiName")
@@ -152,13 +296,25 @@ class ApiArgs:
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Input[str]:
         """
-        Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
     def service_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="apiBusinessType")
+    def api_business_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        """
+        return pulumi.get(self, "api_business_type")
+
+    @api_business_type.setter
+    def api_business_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_business_type", value)
 
     @property
     @pulumi.getter(name="apiDesc")
@@ -173,16 +329,88 @@ class ApiArgs:
         pulumi.set(self, "api_desc", value)
 
     @property
+    @pulumi.getter(name="apiType")
+    def api_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        """
+        return pulumi.get(self, "api_type")
+
+    @api_type.setter
+    def api_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_type", value)
+
+    @property
+    @pulumi.getter(name="authRelationApiId")
+    def auth_relation_api_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        """
+        return pulumi.get(self, "auth_relation_api_id")
+
+    @auth_relation_api_id.setter
+    def auth_relation_api_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auth_relation_api_id", value)
+
+    @property
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         """
         return pulumi.get(self, "auth_type")
 
     @auth_type.setter
     def auth_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "auth_type", value)
+
+    @property
+    @pulumi.getter(name="constantParameters")
+    def constant_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]]:
+        """
+        Constant parameter.
+        """
+        return pulumi.get(self, "constant_parameters")
+
+    @constant_parameters.setter
+    def constant_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]]):
+        pulumi.set(self, "constant_parameters", value)
+
+    @property
+    @pulumi.getter(name="eiamAppId")
+    def eiam_app_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        EIAM application ID.
+        """
+        return pulumi.get(self, "eiam_app_id")
+
+    @eiam_app_id.setter
+    def eiam_app_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_app_id", value)
+
+    @property
+    @pulumi.getter(name="eiamAppType")
+    def eiam_app_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        EIAM application type.
+        """
+        return pulumi.get(self, "eiam_app_type")
+
+    @eiam_app_type.setter
+    def eiam_app_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_app_type", value)
+
+    @property
+    @pulumi.getter(name="eiamAuthType")
+    def eiam_auth_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        """
+        return pulumi.get(self, "eiam_auth_type")
+
+    @eiam_auth_type.setter
+    def eiam_auth_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_auth_type", value)
 
     @property
     @pulumi.getter(name="enableCors")
@@ -195,6 +423,90 @@ class ApiArgs:
     @enable_cors.setter
     def enable_cors(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_cors", value)
+
+    @property
+    @pulumi.getter(name="eventBusId")
+    def event_bus_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Event bus ID.
+        """
+        return pulumi.get(self, "event_bus_id")
+
+    @event_bus_id.setter
+    def event_bus_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "event_bus_id", value)
+
+    @property
+    @pulumi.getter(name="isBase64Encoded")
+    def is_base64_encoded(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable Base64 encoding will only take effect when the backend is scf.
+        """
+        return pulumi.get(self, "is_base64_encoded")
+
+    @is_base64_encoded.setter
+    def is_base64_encoded(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_base64_encoded", value)
+
+    @property
+    @pulumi.getter(name="isDebugAfterCharge")
+    def is_debug_after_charge(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Charge after starting debugging. (Cloud Market Reserved Fields).
+        """
+        return pulumi.get(self, "is_debug_after_charge")
+
+    @is_debug_after_charge.setter
+    def is_debug_after_charge(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_debug_after_charge", value)
+
+    @property
+    @pulumi.getter(name="isDeleteResponseErrorCodes")
+    def is_delete_response_error_codes(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        """
+        return pulumi.get(self, "is_delete_response_error_codes")
+
+    @is_delete_response_error_codes.setter
+    def is_delete_response_error_codes(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_delete_response_error_codes", value)
+
+    @property
+    @pulumi.getter(name="microServices")
+    def micro_services(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]]:
+        """
+        API bound microservice list.
+        """
+        return pulumi.get(self, "micro_services")
+
+    @micro_services.setter
+    def micro_services(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]]):
+        pulumi.set(self, "micro_services", value)
+
+    @property
+    @pulumi.getter(name="oauthConfig")
+    def oauth_config(self) -> Optional[pulumi.Input['ApiOauthConfigArgs']]:
+        """
+        OAuth configuration. Effective when AuthType is OAUTH.
+        """
+        return pulumi.get(self, "oauth_config")
+
+    @oauth_config.setter
+    def oauth_config(self, value: Optional[pulumi.Input['ApiOauthConfigArgs']]):
+        pulumi.set(self, "oauth_config", value)
+
+    @property
+    @pulumi.getter
+    def owner(self) -> Optional[pulumi.Input[str]]:
+        """
+        Owner of resources.
+        """
+        return pulumi.get(self, "owner")
+
+    @owner.setter
+    def owner(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "owner", value)
 
     @property
     @pulumi.getter(name="preLimit")
@@ -305,6 +617,18 @@ class ApiArgs:
         pulumi.set(self, "response_type", value)
 
     @property
+    @pulumi.getter(name="serviceConfigCosConfig")
+    def service_config_cos_config(self) -> Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']]:
+        """
+        API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_cos_config")
+
+    @service_config_cos_config.setter
+    def service_config_cos_config(self, value: Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']]):
+        pulumi.set(self, "service_config_cos_config", value)
+
+    @property
     @pulumi.getter(name="serviceConfigMethod")
     def service_config_method(self) -> Optional[pulumi.Input[str]]:
         """
@@ -344,7 +668,7 @@ class ApiArgs:
     @pulumi.getter(name="serviceConfigProduct")
     def service_config_product(self) -> Optional[pulumi.Input[str]]:
         """
-        Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         """
         return pulumi.get(self, "service_config_product")
 
@@ -389,6 +713,30 @@ class ApiArgs:
         pulumi.set(self, "service_config_scf_function_qualifier", value)
 
     @property
+    @pulumi.getter(name="serviceConfigScfFunctionType")
+    def service_config_scf_function_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        """
+        return pulumi.get(self, "service_config_scf_function_type")
+
+    @service_config_scf_function_type.setter
+    def service_config_scf_function_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_scf_function_type", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigScfIsIntegratedResponse")
+    def service_config_scf_is_integrated_response(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable response integration. Effective when the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_scf_is_integrated_response")
+
+    @service_config_scf_is_integrated_response.setter
+    def service_config_scf_is_integrated_response(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "service_config_scf_is_integrated_response", value)
+
+    @property
     @pulumi.getter(name="serviceConfigTimeout")
     def service_config_timeout(self) -> Optional[pulumi.Input[int]]:
         """
@@ -404,7 +752,7 @@ class ApiArgs:
     @pulumi.getter(name="serviceConfigType")
     def service_config_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         """
         return pulumi.get(self, "service_config_type")
 
@@ -413,10 +761,22 @@ class ApiArgs:
         pulumi.set(self, "service_config_type", value)
 
     @property
+    @pulumi.getter(name="serviceConfigUpstreamId")
+    def service_config_upstream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_upstream_id")
+
+    @service_config_upstream_id.setter
+    def service_config_upstream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_upstream_id", value)
+
+    @property
     @pulumi.getter(name="serviceConfigUrl")
     def service_config_url(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         """
         return pulumi.get(self, "service_config_url")
 
@@ -437,6 +797,198 @@ class ApiArgs:
         pulumi.set(self, "service_config_vpc_id", value)
 
     @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionName")
+    def service_config_websocket_cleanup_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_name")
+
+    @service_config_websocket_cleanup_function_name.setter
+    def service_config_websocket_cleanup_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionNamespace")
+    def service_config_websocket_cleanup_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_namespace")
+
+    @service_config_websocket_cleanup_function_namespace.setter
+    def service_config_websocket_cleanup_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionQualifier")
+    def service_config_websocket_cleanup_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_qualifier")
+
+    @service_config_websocket_cleanup_function_qualifier.setter
+    def service_config_websocket_cleanup_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_qualifier", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionName")
+    def service_config_websocket_register_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_name")
+
+    @service_config_websocket_register_function_name.setter
+    def service_config_websocket_register_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionNamespace")
+    def service_config_websocket_register_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_namespace")
+
+    @service_config_websocket_register_function_namespace.setter
+    def service_config_websocket_register_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionQualifier")
+    def service_config_websocket_register_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_qualifier")
+
+    @service_config_websocket_register_function_qualifier.setter
+    def service_config_websocket_register_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_qualifier", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionName")
+    def service_config_websocket_transport_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_name")
+
+    @service_config_websocket_transport_function_name.setter
+    def service_config_websocket_transport_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionNamespace")
+    def service_config_websocket_transport_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_namespace")
+
+    @service_config_websocket_transport_function_namespace.setter
+    def service_config_websocket_transport_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionQualifier")
+    def service_config_websocket_transport_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_qualifier")
+
+    @service_config_websocket_transport_function_qualifier.setter
+    def service_config_websocket_transport_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_qualifier", value)
+
+    @property
+    @pulumi.getter(name="serviceParameters")
+    def service_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]]:
+        """
+        The backend service parameters of the API.
+        """
+        return pulumi.get(self, "service_parameters")
+
+    @service_parameters.setter
+    def service_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]]):
+        pulumi.set(self, "service_parameters", value)
+
+    @property
+    @pulumi.getter(name="serviceTsfHealthCheckConf")
+    def service_tsf_health_check_conf(self) -> Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']]:
+        """
+        Health check configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_health_check_conf")
+
+    @service_tsf_health_check_conf.setter
+    def service_tsf_health_check_conf(self, value: Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']]):
+        pulumi.set(self, "service_tsf_health_check_conf", value)
+
+    @property
+    @pulumi.getter(name="serviceTsfLoadBalanceConf")
+    def service_tsf_load_balance_conf(self) -> Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']]:
+        """
+        Load balancing configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_load_balance_conf")
+
+    @service_tsf_load_balance_conf.setter
+    def service_tsf_load_balance_conf(self, value: Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']]):
+        pulumi.set(self, "service_tsf_load_balance_conf", value)
+
+    @property
+    @pulumi.getter(name="targetNamespaceId")
+    def target_namespace_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Tsf serverless namespace ID. (In internal testing).
+        """
+        return pulumi.get(self, "target_namespace_id")
+
+    @target_namespace_id.setter
+    def target_namespace_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_namespace_id", value)
+
+    @property
+    @pulumi.getter(name="targetServices")
+    def target_services(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]]:
+        """
+        Target type backend resource information. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services")
+
+    @target_services.setter
+    def target_services(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]]):
+        pulumi.set(self, "target_services", value)
+
+    @property
+    @pulumi.getter(name="targetServicesHealthCheckConf")
+    def target_services_health_check_conf(self) -> Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']]:
+        """
+        Target health check configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_health_check_conf")
+
+    @target_services_health_check_conf.setter
+    def target_services_health_check_conf(self, value: Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']]):
+        pulumi.set(self, "target_services_health_check_conf", value)
+
+    @property
+    @pulumi.getter(name="targetServicesLoadBalanceConf")
+    def target_services_load_balance_conf(self) -> Optional[pulumi.Input[int]]:
+        """
+        Target type load balancing configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_load_balance_conf")
+
+    @target_services_load_balance_conf.setter
+    def target_services_load_balance_conf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "target_services_load_balance_conf", value)
+
+    @property
     @pulumi.getter(name="testLimit")
     def test_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -448,15 +1000,53 @@ class ApiArgs:
     def test_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "test_limit", value)
 
+    @property
+    @pulumi.getter(name="tokenTimeout")
+    def token_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        """
+        return pulumi.get(self, "token_timeout")
+
+    @token_timeout.setter
+    def token_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "token_timeout", value)
+
+    @property
+    @pulumi.getter(name="userType")
+    def user_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        User type.
+        """
+        return pulumi.get(self, "user_type")
+
+    @user_type.setter
+    def user_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_type", value)
+
 
 @pulumi.input_type
 class _ApiState:
     def __init__(__self__, *,
+                 api_business_type: Optional[pulumi.Input[str]] = None,
                  api_desc: Optional[pulumi.Input[str]] = None,
                  api_name: Optional[pulumi.Input[str]] = None,
+                 api_type: Optional[pulumi.Input[str]] = None,
+                 auth_relation_api_id: Optional[pulumi.Input[str]] = None,
                  auth_type: Optional[pulumi.Input[str]] = None,
+                 constant_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
+                 eiam_app_id: Optional[pulumi.Input[str]] = None,
+                 eiam_app_type: Optional[pulumi.Input[str]] = None,
+                 eiam_auth_type: Optional[pulumi.Input[str]] = None,
                  enable_cors: Optional[pulumi.Input[bool]] = None,
+                 event_bus_id: Optional[pulumi.Input[str]] = None,
+                 is_base64_encoded: Optional[pulumi.Input[bool]] = None,
+                 is_debug_after_charge: Optional[pulumi.Input[bool]] = None,
+                 is_delete_response_error_codes: Optional[pulumi.Input[bool]] = None,
+                 micro_services: Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]] = None,
+                 oauth_config: Optional[pulumi.Input['ApiOauthConfigArgs']] = None,
+                 owner: Optional[pulumi.Input[str]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
@@ -467,6 +1057,7 @@ class _ApiState:
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
+                 service_config_cos_config: Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']] = None,
                  service_config_method: Optional[pulumi.Input[str]] = None,
                  service_config_mock_return_message: Optional[pulumi.Input[str]] = None,
                  service_config_path: Optional[pulumi.Input[str]] = None,
@@ -474,20 +1065,55 @@ class _ApiState:
                  service_config_scf_function_name: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_namespace: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_function_type: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_is_integrated_response: Optional[pulumi.Input[bool]] = None,
                  service_config_timeout: Optional[pulumi.Input[int]] = None,
                  service_config_type: Optional[pulumi.Input[str]] = None,
+                 service_config_upstream_id: Optional[pulumi.Input[str]] = None,
                  service_config_url: Optional[pulumi.Input[str]] = None,
                  service_config_vpc_id: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_qualifier: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
+                 service_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]] = None,
+                 service_tsf_health_check_conf: Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']] = None,
+                 service_tsf_load_balance_conf: Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']] = None,
+                 target_namespace_id: Optional[pulumi.Input[str]] = None,
+                 target_services: Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]] = None,
+                 target_services_health_check_conf: Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']] = None,
+                 target_services_load_balance_conf: Optional[pulumi.Input[int]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
-                 update_time: Optional[pulumi.Input[str]] = None):
+                 token_timeout: Optional[pulumi.Input[int]] = None,
+                 update_time: Optional[pulumi.Input[str]] = None,
+                 user_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Api resources.
+        :param pulumi.Input[str] api_business_type: When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        :param pulumi.Input[str] api_type: API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        :param pulumi.Input[str] auth_relation_api_id: The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        :param pulumi.Input[str] auth_type: API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]] constant_parameters: Constant parameter.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] eiam_app_id: EIAM application ID.
+        :param pulumi.Input[str] eiam_app_type: EIAM application type.
+        :param pulumi.Input[str] eiam_auth_type: The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
+        :param pulumi.Input[str] event_bus_id: Event bus ID.
+        :param pulumi.Input[bool] is_base64_encoded: Whether to enable Base64 encoding will only take effect when the backend is scf.
+        :param pulumi.Input[bool] is_debug_after_charge: Charge after starting debugging. (Cloud Market Reserved Fields).
+        :param pulumi.Input[bool] is_delete_response_error_codes: Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]] micro_services: API bound microservice list.
+        :param pulumi.Input['ApiOauthConfigArgs'] oauth_config: OAuth configuration. Effective when AuthType is OAUTH.
+        :param pulumi.Input[str] owner: Owner of resources.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -498,31 +1124,81 @@ class _ApiState:
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
+        :param pulumi.Input['ApiServiceConfigCosConfigArgs'] service_config_cos_config: API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
         :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
         :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
-        :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        :param pulumi.Input[str] service_config_product: Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_qualifier: SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+        :param pulumi.Input[str] service_config_scf_function_type: Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        :param pulumi.Input[bool] service_config_scf_is_integrated_response: Whether to enable response integration. Effective when the backend type is SCF.
         :param pulumi.Input[int] service_config_timeout: API backend service timeout period in seconds. Default value: `5`.
-        :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
-        :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        :param pulumi.Input[str] service_config_type: The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
+        :param pulumi.Input[str] service_config_upstream_id: Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] service_config_url: The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_name: Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_namespace: Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_qualifier: Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_name: Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_namespace: Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_name: Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_namespace: Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_id: The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]] service_parameters: The backend service parameters of the API.
+        :param pulumi.Input['ApiServiceTsfHealthCheckConfArgs'] service_tsf_health_check_conf: Health check configuration for microservices.
+        :param pulumi.Input['ApiServiceTsfLoadBalanceConfArgs'] service_tsf_load_balance_conf: Load balancing configuration for microservices.
+        :param pulumi.Input[str] target_namespace_id: Tsf serverless namespace ID. (In internal testing).
+        :param pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]] target_services: Target type backend resource information. (Internal testing stage).
+        :param pulumi.Input['ApiTargetServicesHealthCheckConfArgs'] target_services_health_check_conf: Target health check configuration. (Internal testing stage).
+        :param pulumi.Input[int] target_services_load_balance_conf: Target type load balancing configuration. (Internal testing stage).
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[int] token_timeout: The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
         :param pulumi.Input[str] update_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] user_type: User type.
         """
+        if api_business_type is not None:
+            pulumi.set(__self__, "api_business_type", api_business_type)
         if api_desc is not None:
             pulumi.set(__self__, "api_desc", api_desc)
         if api_name is not None:
             pulumi.set(__self__, "api_name", api_name)
+        if api_type is not None:
+            pulumi.set(__self__, "api_type", api_type)
+        if auth_relation_api_id is not None:
+            pulumi.set(__self__, "auth_relation_api_id", auth_relation_api_id)
         if auth_type is not None:
             pulumi.set(__self__, "auth_type", auth_type)
+        if constant_parameters is not None:
+            pulumi.set(__self__, "constant_parameters", constant_parameters)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
+        if eiam_app_id is not None:
+            pulumi.set(__self__, "eiam_app_id", eiam_app_id)
+        if eiam_app_type is not None:
+            pulumi.set(__self__, "eiam_app_type", eiam_app_type)
+        if eiam_auth_type is not None:
+            pulumi.set(__self__, "eiam_auth_type", eiam_auth_type)
         if enable_cors is not None:
             pulumi.set(__self__, "enable_cors", enable_cors)
+        if event_bus_id is not None:
+            pulumi.set(__self__, "event_bus_id", event_bus_id)
+        if is_base64_encoded is not None:
+            pulumi.set(__self__, "is_base64_encoded", is_base64_encoded)
+        if is_debug_after_charge is not None:
+            pulumi.set(__self__, "is_debug_after_charge", is_debug_after_charge)
+        if is_delete_response_error_codes is not None:
+            pulumi.set(__self__, "is_delete_response_error_codes", is_delete_response_error_codes)
+        if micro_services is not None:
+            pulumi.set(__self__, "micro_services", micro_services)
+        if oauth_config is not None:
+            pulumi.set(__self__, "oauth_config", oauth_config)
+        if owner is not None:
+            pulumi.set(__self__, "owner", owner)
         if pre_limit is not None:
             pulumi.set(__self__, "pre_limit", pre_limit)
         if protocol is not None:
@@ -543,6 +1219,8 @@ class _ApiState:
             pulumi.set(__self__, "response_success_example", response_success_example)
         if response_type is not None:
             pulumi.set(__self__, "response_type", response_type)
+        if service_config_cos_config is not None:
+            pulumi.set(__self__, "service_config_cos_config", service_config_cos_config)
         if service_config_method is not None:
             pulumi.set(__self__, "service_config_method", service_config_method)
         if service_config_mock_return_message is not None:
@@ -557,20 +1235,74 @@ class _ApiState:
             pulumi.set(__self__, "service_config_scf_function_namespace", service_config_scf_function_namespace)
         if service_config_scf_function_qualifier is not None:
             pulumi.set(__self__, "service_config_scf_function_qualifier", service_config_scf_function_qualifier)
+        if service_config_scf_function_type is not None:
+            pulumi.set(__self__, "service_config_scf_function_type", service_config_scf_function_type)
+        if service_config_scf_is_integrated_response is not None:
+            pulumi.set(__self__, "service_config_scf_is_integrated_response", service_config_scf_is_integrated_response)
         if service_config_timeout is not None:
             pulumi.set(__self__, "service_config_timeout", service_config_timeout)
         if service_config_type is not None:
             pulumi.set(__self__, "service_config_type", service_config_type)
+        if service_config_upstream_id is not None:
+            pulumi.set(__self__, "service_config_upstream_id", service_config_upstream_id)
         if service_config_url is not None:
             pulumi.set(__self__, "service_config_url", service_config_url)
         if service_config_vpc_id is not None:
             pulumi.set(__self__, "service_config_vpc_id", service_config_vpc_id)
+        if service_config_websocket_cleanup_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_name", service_config_websocket_cleanup_function_name)
+        if service_config_websocket_cleanup_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_namespace", service_config_websocket_cleanup_function_namespace)
+        if service_config_websocket_cleanup_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_cleanup_function_qualifier", service_config_websocket_cleanup_function_qualifier)
+        if service_config_websocket_register_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_name", service_config_websocket_register_function_name)
+        if service_config_websocket_register_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_namespace", service_config_websocket_register_function_namespace)
+        if service_config_websocket_register_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_register_function_qualifier", service_config_websocket_register_function_qualifier)
+        if service_config_websocket_transport_function_name is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_name", service_config_websocket_transport_function_name)
+        if service_config_websocket_transport_function_namespace is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_namespace", service_config_websocket_transport_function_namespace)
+        if service_config_websocket_transport_function_qualifier is not None:
+            pulumi.set(__self__, "service_config_websocket_transport_function_qualifier", service_config_websocket_transport_function_qualifier)
         if service_id is not None:
             pulumi.set(__self__, "service_id", service_id)
+        if service_parameters is not None:
+            pulumi.set(__self__, "service_parameters", service_parameters)
+        if service_tsf_health_check_conf is not None:
+            pulumi.set(__self__, "service_tsf_health_check_conf", service_tsf_health_check_conf)
+        if service_tsf_load_balance_conf is not None:
+            pulumi.set(__self__, "service_tsf_load_balance_conf", service_tsf_load_balance_conf)
+        if target_namespace_id is not None:
+            pulumi.set(__self__, "target_namespace_id", target_namespace_id)
+        if target_services is not None:
+            pulumi.set(__self__, "target_services", target_services)
+        if target_services_health_check_conf is not None:
+            pulumi.set(__self__, "target_services_health_check_conf", target_services_health_check_conf)
+        if target_services_load_balance_conf is not None:
+            pulumi.set(__self__, "target_services_load_balance_conf", target_services_load_balance_conf)
         if test_limit is not None:
             pulumi.set(__self__, "test_limit", test_limit)
+        if token_timeout is not None:
+            pulumi.set(__self__, "token_timeout", token_timeout)
         if update_time is not None:
             pulumi.set(__self__, "update_time", update_time)
+        if user_type is not None:
+            pulumi.set(__self__, "user_type", user_type)
+
+    @property
+    @pulumi.getter(name="apiBusinessType")
+    def api_business_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        """
+        return pulumi.get(self, "api_business_type")
+
+    @api_business_type.setter
+    def api_business_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_business_type", value)
 
     @property
     @pulumi.getter(name="apiDesc")
@@ -597,16 +1329,52 @@ class _ApiState:
         pulumi.set(self, "api_name", value)
 
     @property
+    @pulumi.getter(name="apiType")
+    def api_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        """
+        return pulumi.get(self, "api_type")
+
+    @api_type.setter
+    def api_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_type", value)
+
+    @property
+    @pulumi.getter(name="authRelationApiId")
+    def auth_relation_api_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        """
+        return pulumi.get(self, "auth_relation_api_id")
+
+    @auth_relation_api_id.setter
+    def auth_relation_api_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auth_relation_api_id", value)
+
+    @property
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         """
         return pulumi.get(self, "auth_type")
 
     @auth_type.setter
     def auth_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "auth_type", value)
+
+    @property
+    @pulumi.getter(name="constantParameters")
+    def constant_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]]:
+        """
+        Constant parameter.
+        """
+        return pulumi.get(self, "constant_parameters")
+
+    @constant_parameters.setter
+    def constant_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiConstantParameterArgs']]]]):
+        pulumi.set(self, "constant_parameters", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -621,6 +1389,42 @@ class _ApiState:
         pulumi.set(self, "create_time", value)
 
     @property
+    @pulumi.getter(name="eiamAppId")
+    def eiam_app_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        EIAM application ID.
+        """
+        return pulumi.get(self, "eiam_app_id")
+
+    @eiam_app_id.setter
+    def eiam_app_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_app_id", value)
+
+    @property
+    @pulumi.getter(name="eiamAppType")
+    def eiam_app_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        EIAM application type.
+        """
+        return pulumi.get(self, "eiam_app_type")
+
+    @eiam_app_type.setter
+    def eiam_app_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_app_type", value)
+
+    @property
+    @pulumi.getter(name="eiamAuthType")
+    def eiam_auth_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        """
+        return pulumi.get(self, "eiam_auth_type")
+
+    @eiam_auth_type.setter
+    def eiam_auth_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eiam_auth_type", value)
+
+    @property
     @pulumi.getter(name="enableCors")
     def enable_cors(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -631,6 +1435,90 @@ class _ApiState:
     @enable_cors.setter
     def enable_cors(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_cors", value)
+
+    @property
+    @pulumi.getter(name="eventBusId")
+    def event_bus_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Event bus ID.
+        """
+        return pulumi.get(self, "event_bus_id")
+
+    @event_bus_id.setter
+    def event_bus_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "event_bus_id", value)
+
+    @property
+    @pulumi.getter(name="isBase64Encoded")
+    def is_base64_encoded(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable Base64 encoding will only take effect when the backend is scf.
+        """
+        return pulumi.get(self, "is_base64_encoded")
+
+    @is_base64_encoded.setter
+    def is_base64_encoded(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_base64_encoded", value)
+
+    @property
+    @pulumi.getter(name="isDebugAfterCharge")
+    def is_debug_after_charge(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Charge after starting debugging. (Cloud Market Reserved Fields).
+        """
+        return pulumi.get(self, "is_debug_after_charge")
+
+    @is_debug_after_charge.setter
+    def is_debug_after_charge(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_debug_after_charge", value)
+
+    @property
+    @pulumi.getter(name="isDeleteResponseErrorCodes")
+    def is_delete_response_error_codes(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        """
+        return pulumi.get(self, "is_delete_response_error_codes")
+
+    @is_delete_response_error_codes.setter
+    def is_delete_response_error_codes(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_delete_response_error_codes", value)
+
+    @property
+    @pulumi.getter(name="microServices")
+    def micro_services(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]]:
+        """
+        API bound microservice list.
+        """
+        return pulumi.get(self, "micro_services")
+
+    @micro_services.setter
+    def micro_services(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiMicroServiceArgs']]]]):
+        pulumi.set(self, "micro_services", value)
+
+    @property
+    @pulumi.getter(name="oauthConfig")
+    def oauth_config(self) -> Optional[pulumi.Input['ApiOauthConfigArgs']]:
+        """
+        OAuth configuration. Effective when AuthType is OAUTH.
+        """
+        return pulumi.get(self, "oauth_config")
+
+    @oauth_config.setter
+    def oauth_config(self, value: Optional[pulumi.Input['ApiOauthConfigArgs']]):
+        pulumi.set(self, "oauth_config", value)
+
+    @property
+    @pulumi.getter
+    def owner(self) -> Optional[pulumi.Input[str]]:
+        """
+        Owner of resources.
+        """
+        return pulumi.get(self, "owner")
+
+    @owner.setter
+    def owner(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "owner", value)
 
     @property
     @pulumi.getter(name="preLimit")
@@ -753,6 +1641,18 @@ class _ApiState:
         pulumi.set(self, "response_type", value)
 
     @property
+    @pulumi.getter(name="serviceConfigCosConfig")
+    def service_config_cos_config(self) -> Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']]:
+        """
+        API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_cos_config")
+
+    @service_config_cos_config.setter
+    def service_config_cos_config(self, value: Optional[pulumi.Input['ApiServiceConfigCosConfigArgs']]):
+        pulumi.set(self, "service_config_cos_config", value)
+
+    @property
     @pulumi.getter(name="serviceConfigMethod")
     def service_config_method(self) -> Optional[pulumi.Input[str]]:
         """
@@ -792,7 +1692,7 @@ class _ApiState:
     @pulumi.getter(name="serviceConfigProduct")
     def service_config_product(self) -> Optional[pulumi.Input[str]]:
         """
-        Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         """
         return pulumi.get(self, "service_config_product")
 
@@ -837,6 +1737,30 @@ class _ApiState:
         pulumi.set(self, "service_config_scf_function_qualifier", value)
 
     @property
+    @pulumi.getter(name="serviceConfigScfFunctionType")
+    def service_config_scf_function_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        """
+        return pulumi.get(self, "service_config_scf_function_type")
+
+    @service_config_scf_function_type.setter
+    def service_config_scf_function_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_scf_function_type", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigScfIsIntegratedResponse")
+    def service_config_scf_is_integrated_response(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable response integration. Effective when the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_scf_is_integrated_response")
+
+    @service_config_scf_is_integrated_response.setter
+    def service_config_scf_is_integrated_response(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "service_config_scf_is_integrated_response", value)
+
+    @property
     @pulumi.getter(name="serviceConfigTimeout")
     def service_config_timeout(self) -> Optional[pulumi.Input[int]]:
         """
@@ -852,7 +1776,7 @@ class _ApiState:
     @pulumi.getter(name="serviceConfigType")
     def service_config_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         """
         return pulumi.get(self, "service_config_type")
 
@@ -861,10 +1785,22 @@ class _ApiState:
         pulumi.set(self, "service_config_type", value)
 
     @property
+    @pulumi.getter(name="serviceConfigUpstreamId")
+    def service_config_upstream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_upstream_id")
+
+    @service_config_upstream_id.setter
+    def service_config_upstream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_upstream_id", value)
+
+    @property
     @pulumi.getter(name="serviceConfigUrl")
     def service_config_url(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         """
         return pulumi.get(self, "service_config_url")
 
@@ -885,16 +1821,208 @@ class _ApiState:
         pulumi.set(self, "service_config_vpc_id", value)
 
     @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionName")
+    def service_config_websocket_cleanup_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_name")
+
+    @service_config_websocket_cleanup_function_name.setter
+    def service_config_websocket_cleanup_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionNamespace")
+    def service_config_websocket_cleanup_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_namespace")
+
+    @service_config_websocket_cleanup_function_namespace.setter
+    def service_config_websocket_cleanup_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionQualifier")
+    def service_config_websocket_cleanup_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_qualifier")
+
+    @service_config_websocket_cleanup_function_qualifier.setter
+    def service_config_websocket_cleanup_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_cleanup_function_qualifier", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionName")
+    def service_config_websocket_register_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_name")
+
+    @service_config_websocket_register_function_name.setter
+    def service_config_websocket_register_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionNamespace")
+    def service_config_websocket_register_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_namespace")
+
+    @service_config_websocket_register_function_namespace.setter
+    def service_config_websocket_register_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionQualifier")
+    def service_config_websocket_register_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_qualifier")
+
+    @service_config_websocket_register_function_qualifier.setter
+    def service_config_websocket_register_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_register_function_qualifier", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionName")
+    def service_config_websocket_transport_function_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_name")
+
+    @service_config_websocket_transport_function_name.setter
+    def service_config_websocket_transport_function_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_name", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionNamespace")
+    def service_config_websocket_transport_function_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_namespace")
+
+    @service_config_websocket_transport_function_namespace.setter
+    def service_config_websocket_transport_function_namespace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_namespace", value)
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionQualifier")
+    def service_config_websocket_transport_function_qualifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_qualifier")
+
+    @service_config_websocket_transport_function_qualifier.setter
+    def service_config_websocket_transport_function_qualifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_config_websocket_transport_function_qualifier", value)
+
+    @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
     def service_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="serviceParameters")
+    def service_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]]:
+        """
+        The backend service parameters of the API.
+        """
+        return pulumi.get(self, "service_parameters")
+
+    @service_parameters.setter
+    def service_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiServiceParameterArgs']]]]):
+        pulumi.set(self, "service_parameters", value)
+
+    @property
+    @pulumi.getter(name="serviceTsfHealthCheckConf")
+    def service_tsf_health_check_conf(self) -> Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']]:
+        """
+        Health check configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_health_check_conf")
+
+    @service_tsf_health_check_conf.setter
+    def service_tsf_health_check_conf(self, value: Optional[pulumi.Input['ApiServiceTsfHealthCheckConfArgs']]):
+        pulumi.set(self, "service_tsf_health_check_conf", value)
+
+    @property
+    @pulumi.getter(name="serviceTsfLoadBalanceConf")
+    def service_tsf_load_balance_conf(self) -> Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']]:
+        """
+        Load balancing configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_load_balance_conf")
+
+    @service_tsf_load_balance_conf.setter
+    def service_tsf_load_balance_conf(self, value: Optional[pulumi.Input['ApiServiceTsfLoadBalanceConfArgs']]):
+        pulumi.set(self, "service_tsf_load_balance_conf", value)
+
+    @property
+    @pulumi.getter(name="targetNamespaceId")
+    def target_namespace_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Tsf serverless namespace ID. (In internal testing).
+        """
+        return pulumi.get(self, "target_namespace_id")
+
+    @target_namespace_id.setter
+    def target_namespace_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_namespace_id", value)
+
+    @property
+    @pulumi.getter(name="targetServices")
+    def target_services(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]]:
+        """
+        Target type backend resource information. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services")
+
+    @target_services.setter
+    def target_services(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiTargetServiceArgs']]]]):
+        pulumi.set(self, "target_services", value)
+
+    @property
+    @pulumi.getter(name="targetServicesHealthCheckConf")
+    def target_services_health_check_conf(self) -> Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']]:
+        """
+        Target health check configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_health_check_conf")
+
+    @target_services_health_check_conf.setter
+    def target_services_health_check_conf(self, value: Optional[pulumi.Input['ApiTargetServicesHealthCheckConfArgs']]):
+        pulumi.set(self, "target_services_health_check_conf", value)
+
+    @property
+    @pulumi.getter(name="targetServicesLoadBalanceConf")
+    def target_services_load_balance_conf(self) -> Optional[pulumi.Input[int]]:
+        """
+        Target type load balancing configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_load_balance_conf")
+
+    @target_services_load_balance_conf.setter
+    def target_services_load_balance_conf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "target_services_load_balance_conf", value)
 
     @property
     @pulumi.getter(name="testLimit")
@@ -909,6 +2037,18 @@ class _ApiState:
         pulumi.set(self, "test_limit", value)
 
     @property
+    @pulumi.getter(name="tokenTimeout")
+    def token_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        """
+        return pulumi.get(self, "token_timeout")
+
+    @token_timeout.setter
+    def token_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "token_timeout", value)
+
+    @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> Optional[pulumi.Input[str]]:
         """
@@ -920,16 +2060,42 @@ class _ApiState:
     def update_time(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "update_time", value)
 
+    @property
+    @pulumi.getter(name="userType")
+    def user_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        User type.
+        """
+        return pulumi.get(self, "user_type")
+
+    @user_type.setter
+    def user_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_type", value)
+
 
 class Api(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 api_business_type: Optional[pulumi.Input[str]] = None,
                  api_desc: Optional[pulumi.Input[str]] = None,
                  api_name: Optional[pulumi.Input[str]] = None,
+                 api_type: Optional[pulumi.Input[str]] = None,
+                 auth_relation_api_id: Optional[pulumi.Input[str]] = None,
                  auth_type: Optional[pulumi.Input[str]] = None,
+                 constant_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiConstantParameterArgs']]]]] = None,
+                 eiam_app_id: Optional[pulumi.Input[str]] = None,
+                 eiam_app_type: Optional[pulumi.Input[str]] = None,
+                 eiam_auth_type: Optional[pulumi.Input[str]] = None,
                  enable_cors: Optional[pulumi.Input[bool]] = None,
+                 event_bus_id: Optional[pulumi.Input[str]] = None,
+                 is_base64_encoded: Optional[pulumi.Input[bool]] = None,
+                 is_debug_after_charge: Optional[pulumi.Input[bool]] = None,
+                 is_delete_response_error_codes: Optional[pulumi.Input[bool]] = None,
+                 micro_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiMicroServiceArgs']]]]] = None,
+                 oauth_config: Optional[pulumi.Input[pulumi.InputType['ApiOauthConfigArgs']]] = None,
+                 owner: Optional[pulumi.Input[str]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
@@ -940,6 +2106,7 @@ class Api(pulumi.CustomResource):
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
+                 service_config_cos_config: Optional[pulumi.Input[pulumi.InputType['ApiServiceConfigCosConfigArgs']]] = None,
                  service_config_method: Optional[pulumi.Input[str]] = None,
                  service_config_mock_return_message: Optional[pulumi.Input[str]] = None,
                  service_config_path: Optional[pulumi.Input[str]] = None,
@@ -947,12 +2114,33 @@ class Api(pulumi.CustomResource):
                  service_config_scf_function_name: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_namespace: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_function_type: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_is_integrated_response: Optional[pulumi.Input[bool]] = None,
                  service_config_timeout: Optional[pulumi.Input[int]] = None,
                  service_config_type: Optional[pulumi.Input[str]] = None,
+                 service_config_upstream_id: Optional[pulumi.Input[str]] = None,
                  service_config_url: Optional[pulumi.Input[str]] = None,
                  service_config_vpc_id: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_qualifier: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
+                 service_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiServiceParameterArgs']]]]] = None,
+                 service_tsf_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfHealthCheckConfArgs']]] = None,
+                 service_tsf_load_balance_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfLoadBalanceConfArgs']]] = None,
+                 target_namespace_id: Optional[pulumi.Input[str]] = None,
+                 target_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiTargetServiceArgs']]]]] = None,
+                 target_services_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiTargetServicesHealthCheckConfArgs']]] = None,
+                 target_services_load_balance_conf: Optional[pulumi.Input[int]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
+                 token_timeout: Optional[pulumi.Input[int]] = None,
+                 user_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Use this resource to create API of API gateway.
@@ -963,19 +2151,18 @@ class Api(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            service_name="ck",
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
             protocol="http&https",
-            service_desc="your nice service",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
             ip_version="IPv4")
         api = tencentcloud.api_gateway.Api("api",
-            service_id=service.id,
-            api_name="hello",
-            api_desc="my hello api",
+            service_id=example.id,
+            api_name="tf-example",
+            api_desc="desc.",
             auth_type="NONE",
             protocol="HTTP",
             enable_cors=True,
@@ -998,20 +2185,37 @@ class Api(pulumi.CustomResource):
             response_success_example="success",
             response_fail_example="fail",
             response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
-                code=100,
+                code=500,
                 msg="system error",
                 desc="system error code",
-                converted_code=-100,
+                converted_code=5000,
                 need_convert=True,
-            )])
+            )],
+            release_limit=500,
+            pre_limit=500,
+            test_limit=500)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] api_business_type: When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        :param pulumi.Input[str] api_type: API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        :param pulumi.Input[str] auth_relation_api_id: The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        :param pulumi.Input[str] auth_type: API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiConstantParameterArgs']]]] constant_parameters: Constant parameter.
+        :param pulumi.Input[str] eiam_app_id: EIAM application ID.
+        :param pulumi.Input[str] eiam_app_type: EIAM application type.
+        :param pulumi.Input[str] eiam_auth_type: The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
+        :param pulumi.Input[str] event_bus_id: Event bus ID.
+        :param pulumi.Input[bool] is_base64_encoded: Whether to enable Base64 encoding will only take effect when the backend is scf.
+        :param pulumi.Input[bool] is_debug_after_charge: Charge after starting debugging. (Cloud Market Reserved Fields).
+        :param pulumi.Input[bool] is_delete_response_error_codes: Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiMicroServiceArgs']]]] micro_services: API bound microservice list.
+        :param pulumi.Input[pulumi.InputType['ApiOauthConfigArgs']] oauth_config: OAuth configuration. Effective when AuthType is OAUTH.
+        :param pulumi.Input[str] owner: Owner of resources.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -1022,19 +2226,41 @@ class Api(pulumi.CustomResource):
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
+        :param pulumi.Input[pulumi.InputType['ApiServiceConfigCosConfigArgs']] service_config_cos_config: API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
         :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
         :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
-        :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        :param pulumi.Input[str] service_config_product: Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_qualifier: SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+        :param pulumi.Input[str] service_config_scf_function_type: Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        :param pulumi.Input[bool] service_config_scf_is_integrated_response: Whether to enable response integration. Effective when the backend type is SCF.
         :param pulumi.Input[int] service_config_timeout: API backend service timeout period in seconds. Default value: `5`.
-        :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
-        :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        :param pulumi.Input[str] service_config_type: The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
+        :param pulumi.Input[str] service_config_upstream_id: Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] service_config_url: The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_name: Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_namespace: Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_qualifier: Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_name: Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_namespace: Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_name: Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_namespace: Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_id: The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiServiceParameterArgs']]]] service_parameters: The backend service parameters of the API.
+        :param pulumi.Input[pulumi.InputType['ApiServiceTsfHealthCheckConfArgs']] service_tsf_health_check_conf: Health check configuration for microservices.
+        :param pulumi.Input[pulumi.InputType['ApiServiceTsfLoadBalanceConfArgs']] service_tsf_load_balance_conf: Load balancing configuration for microservices.
+        :param pulumi.Input[str] target_namespace_id: Tsf serverless namespace ID. (In internal testing).
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiTargetServiceArgs']]]] target_services: Target type backend resource information. (Internal testing stage).
+        :param pulumi.Input[pulumi.InputType['ApiTargetServicesHealthCheckConfArgs']] target_services_health_check_conf: Target health check configuration. (Internal testing stage).
+        :param pulumi.Input[int] target_services_load_balance_conf: Target type load balancing configuration. (Internal testing stage).
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[int] token_timeout: The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        :param pulumi.Input[str] user_type: User type.
         """
         ...
     @overload
@@ -1051,19 +2277,18 @@ class Api(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        service = tencentcloud.api_gateway.Service("service",
-            service_name="ck",
+        example = tencentcloud.api_gateway.Service("example",
+            service_name="tf-example",
             protocol="http&https",
-            service_desc="your nice service",
             net_types=[
                 "INNER",
                 "OUTER",
             ],
             ip_version="IPv4")
         api = tencentcloud.api_gateway.Api("api",
-            service_id=service.id,
-            api_name="hello",
-            api_desc="my hello api",
+            service_id=example.id,
+            api_name="tf-example",
+            api_desc="desc.",
             auth_type="NONE",
             protocol="HTTP",
             enable_cors=True,
@@ -1086,12 +2311,15 @@ class Api(pulumi.CustomResource):
             response_success_example="success",
             response_fail_example="fail",
             response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
-                code=100,
+                code=500,
                 msg="system error",
                 desc="system error code",
-                converted_code=-100,
+                converted_code=5000,
                 need_convert=True,
-            )])
+            )],
+            release_limit=500,
+            pre_limit=500,
+            test_limit=500)
         ```
 
         :param str resource_name: The name of the resource.
@@ -1109,10 +2337,24 @@ class Api(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 api_business_type: Optional[pulumi.Input[str]] = None,
                  api_desc: Optional[pulumi.Input[str]] = None,
                  api_name: Optional[pulumi.Input[str]] = None,
+                 api_type: Optional[pulumi.Input[str]] = None,
+                 auth_relation_api_id: Optional[pulumi.Input[str]] = None,
                  auth_type: Optional[pulumi.Input[str]] = None,
+                 constant_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiConstantParameterArgs']]]]] = None,
+                 eiam_app_id: Optional[pulumi.Input[str]] = None,
+                 eiam_app_type: Optional[pulumi.Input[str]] = None,
+                 eiam_auth_type: Optional[pulumi.Input[str]] = None,
                  enable_cors: Optional[pulumi.Input[bool]] = None,
+                 event_bus_id: Optional[pulumi.Input[str]] = None,
+                 is_base64_encoded: Optional[pulumi.Input[bool]] = None,
+                 is_debug_after_charge: Optional[pulumi.Input[bool]] = None,
+                 is_delete_response_error_codes: Optional[pulumi.Input[bool]] = None,
+                 micro_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiMicroServiceArgs']]]]] = None,
+                 oauth_config: Optional[pulumi.Input[pulumi.InputType['ApiOauthConfigArgs']]] = None,
+                 owner: Optional[pulumi.Input[str]] = None,
                  pre_limit: Optional[pulumi.Input[int]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
@@ -1123,6 +2365,7 @@ class Api(pulumi.CustomResource):
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
+                 service_config_cos_config: Optional[pulumi.Input[pulumi.InputType['ApiServiceConfigCosConfigArgs']]] = None,
                  service_config_method: Optional[pulumi.Input[str]] = None,
                  service_config_mock_return_message: Optional[pulumi.Input[str]] = None,
                  service_config_path: Optional[pulumi.Input[str]] = None,
@@ -1130,12 +2373,33 @@ class Api(pulumi.CustomResource):
                  service_config_scf_function_name: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_namespace: Optional[pulumi.Input[str]] = None,
                  service_config_scf_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_function_type: Optional[pulumi.Input[str]] = None,
+                 service_config_scf_is_integrated_response: Optional[pulumi.Input[bool]] = None,
                  service_config_timeout: Optional[pulumi.Input[int]] = None,
                  service_config_type: Optional[pulumi.Input[str]] = None,
+                 service_config_upstream_id: Optional[pulumi.Input[str]] = None,
                  service_config_url: Optional[pulumi.Input[str]] = None,
                  service_config_vpc_id: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_cleanup_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_register_function_qualifier: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_name: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_namespace: Optional[pulumi.Input[str]] = None,
+                 service_config_websocket_transport_function_qualifier: Optional[pulumi.Input[str]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
+                 service_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiServiceParameterArgs']]]]] = None,
+                 service_tsf_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfHealthCheckConfArgs']]] = None,
+                 service_tsf_load_balance_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfLoadBalanceConfArgs']]] = None,
+                 target_namespace_id: Optional[pulumi.Input[str]] = None,
+                 target_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiTargetServiceArgs']]]]] = None,
+                 target_services_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiTargetServicesHealthCheckConfArgs']]] = None,
+                 target_services_load_balance_conf: Optional[pulumi.Input[int]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None,
+                 token_timeout: Optional[pulumi.Input[int]] = None,
+                 user_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -1150,12 +2414,26 @@ class Api(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ApiArgs.__new__(ApiArgs)
 
+            __props__.__dict__["api_business_type"] = api_business_type
             __props__.__dict__["api_desc"] = api_desc
             if api_name is None and not opts.urn:
                 raise TypeError("Missing required property 'api_name'")
             __props__.__dict__["api_name"] = api_name
+            __props__.__dict__["api_type"] = api_type
+            __props__.__dict__["auth_relation_api_id"] = auth_relation_api_id
             __props__.__dict__["auth_type"] = auth_type
+            __props__.__dict__["constant_parameters"] = constant_parameters
+            __props__.__dict__["eiam_app_id"] = eiam_app_id
+            __props__.__dict__["eiam_app_type"] = eiam_app_type
+            __props__.__dict__["eiam_auth_type"] = eiam_auth_type
             __props__.__dict__["enable_cors"] = enable_cors
+            __props__.__dict__["event_bus_id"] = event_bus_id
+            __props__.__dict__["is_base64_encoded"] = is_base64_encoded
+            __props__.__dict__["is_debug_after_charge"] = is_debug_after_charge
+            __props__.__dict__["is_delete_response_error_codes"] = is_delete_response_error_codes
+            __props__.__dict__["micro_services"] = micro_services
+            __props__.__dict__["oauth_config"] = oauth_config
+            __props__.__dict__["owner"] = owner
             __props__.__dict__["pre_limit"] = pre_limit
             __props__.__dict__["protocol"] = protocol
             __props__.__dict__["release_limit"] = release_limit
@@ -1168,6 +2446,7 @@ class Api(pulumi.CustomResource):
             __props__.__dict__["response_fail_example"] = response_fail_example
             __props__.__dict__["response_success_example"] = response_success_example
             __props__.__dict__["response_type"] = response_type
+            __props__.__dict__["service_config_cos_config"] = service_config_cos_config
             __props__.__dict__["service_config_method"] = service_config_method
             __props__.__dict__["service_config_mock_return_message"] = service_config_mock_return_message
             __props__.__dict__["service_config_path"] = service_config_path
@@ -1175,14 +2454,35 @@ class Api(pulumi.CustomResource):
             __props__.__dict__["service_config_scf_function_name"] = service_config_scf_function_name
             __props__.__dict__["service_config_scf_function_namespace"] = service_config_scf_function_namespace
             __props__.__dict__["service_config_scf_function_qualifier"] = service_config_scf_function_qualifier
+            __props__.__dict__["service_config_scf_function_type"] = service_config_scf_function_type
+            __props__.__dict__["service_config_scf_is_integrated_response"] = service_config_scf_is_integrated_response
             __props__.__dict__["service_config_timeout"] = service_config_timeout
             __props__.__dict__["service_config_type"] = service_config_type
+            __props__.__dict__["service_config_upstream_id"] = service_config_upstream_id
             __props__.__dict__["service_config_url"] = service_config_url
             __props__.__dict__["service_config_vpc_id"] = service_config_vpc_id
+            __props__.__dict__["service_config_websocket_cleanup_function_name"] = service_config_websocket_cleanup_function_name
+            __props__.__dict__["service_config_websocket_cleanup_function_namespace"] = service_config_websocket_cleanup_function_namespace
+            __props__.__dict__["service_config_websocket_cleanup_function_qualifier"] = service_config_websocket_cleanup_function_qualifier
+            __props__.__dict__["service_config_websocket_register_function_name"] = service_config_websocket_register_function_name
+            __props__.__dict__["service_config_websocket_register_function_namespace"] = service_config_websocket_register_function_namespace
+            __props__.__dict__["service_config_websocket_register_function_qualifier"] = service_config_websocket_register_function_qualifier
+            __props__.__dict__["service_config_websocket_transport_function_name"] = service_config_websocket_transport_function_name
+            __props__.__dict__["service_config_websocket_transport_function_namespace"] = service_config_websocket_transport_function_namespace
+            __props__.__dict__["service_config_websocket_transport_function_qualifier"] = service_config_websocket_transport_function_qualifier
             if service_id is None and not opts.urn:
                 raise TypeError("Missing required property 'service_id'")
             __props__.__dict__["service_id"] = service_id
+            __props__.__dict__["service_parameters"] = service_parameters
+            __props__.__dict__["service_tsf_health_check_conf"] = service_tsf_health_check_conf
+            __props__.__dict__["service_tsf_load_balance_conf"] = service_tsf_load_balance_conf
+            __props__.__dict__["target_namespace_id"] = target_namespace_id
+            __props__.__dict__["target_services"] = target_services
+            __props__.__dict__["target_services_health_check_conf"] = target_services_health_check_conf
+            __props__.__dict__["target_services_load_balance_conf"] = target_services_load_balance_conf
             __props__.__dict__["test_limit"] = test_limit
+            __props__.__dict__["token_timeout"] = token_timeout
+            __props__.__dict__["user_type"] = user_type
             __props__.__dict__["create_time"] = None
             __props__.__dict__["update_time"] = None
         super(Api, __self__).__init__(
@@ -1195,11 +2495,25 @@ class Api(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            api_business_type: Optional[pulumi.Input[str]] = None,
             api_desc: Optional[pulumi.Input[str]] = None,
             api_name: Optional[pulumi.Input[str]] = None,
+            api_type: Optional[pulumi.Input[str]] = None,
+            auth_relation_api_id: Optional[pulumi.Input[str]] = None,
             auth_type: Optional[pulumi.Input[str]] = None,
+            constant_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiConstantParameterArgs']]]]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
+            eiam_app_id: Optional[pulumi.Input[str]] = None,
+            eiam_app_type: Optional[pulumi.Input[str]] = None,
+            eiam_auth_type: Optional[pulumi.Input[str]] = None,
             enable_cors: Optional[pulumi.Input[bool]] = None,
+            event_bus_id: Optional[pulumi.Input[str]] = None,
+            is_base64_encoded: Optional[pulumi.Input[bool]] = None,
+            is_debug_after_charge: Optional[pulumi.Input[bool]] = None,
+            is_delete_response_error_codes: Optional[pulumi.Input[bool]] = None,
+            micro_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiMicroServiceArgs']]]]] = None,
+            oauth_config: Optional[pulumi.Input[pulumi.InputType['ApiOauthConfigArgs']]] = None,
+            owner: Optional[pulumi.Input[str]] = None,
             pre_limit: Optional[pulumi.Input[int]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
             release_limit: Optional[pulumi.Input[int]] = None,
@@ -1210,6 +2524,7 @@ class Api(pulumi.CustomResource):
             response_fail_example: Optional[pulumi.Input[str]] = None,
             response_success_example: Optional[pulumi.Input[str]] = None,
             response_type: Optional[pulumi.Input[str]] = None,
+            service_config_cos_config: Optional[pulumi.Input[pulumi.InputType['ApiServiceConfigCosConfigArgs']]] = None,
             service_config_method: Optional[pulumi.Input[str]] = None,
             service_config_mock_return_message: Optional[pulumi.Input[str]] = None,
             service_config_path: Optional[pulumi.Input[str]] = None,
@@ -1217,13 +2532,34 @@ class Api(pulumi.CustomResource):
             service_config_scf_function_name: Optional[pulumi.Input[str]] = None,
             service_config_scf_function_namespace: Optional[pulumi.Input[str]] = None,
             service_config_scf_function_qualifier: Optional[pulumi.Input[str]] = None,
+            service_config_scf_function_type: Optional[pulumi.Input[str]] = None,
+            service_config_scf_is_integrated_response: Optional[pulumi.Input[bool]] = None,
             service_config_timeout: Optional[pulumi.Input[int]] = None,
             service_config_type: Optional[pulumi.Input[str]] = None,
+            service_config_upstream_id: Optional[pulumi.Input[str]] = None,
             service_config_url: Optional[pulumi.Input[str]] = None,
             service_config_vpc_id: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_cleanup_function_name: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_cleanup_function_namespace: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_cleanup_function_qualifier: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_register_function_name: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_register_function_namespace: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_register_function_qualifier: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_transport_function_name: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_transport_function_namespace: Optional[pulumi.Input[str]] = None,
+            service_config_websocket_transport_function_qualifier: Optional[pulumi.Input[str]] = None,
             service_id: Optional[pulumi.Input[str]] = None,
+            service_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiServiceParameterArgs']]]]] = None,
+            service_tsf_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfHealthCheckConfArgs']]] = None,
+            service_tsf_load_balance_conf: Optional[pulumi.Input[pulumi.InputType['ApiServiceTsfLoadBalanceConfArgs']]] = None,
+            target_namespace_id: Optional[pulumi.Input[str]] = None,
+            target_services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiTargetServiceArgs']]]]] = None,
+            target_services_health_check_conf: Optional[pulumi.Input[pulumi.InputType['ApiTargetServicesHealthCheckConfArgs']]] = None,
+            target_services_load_balance_conf: Optional[pulumi.Input[int]] = None,
             test_limit: Optional[pulumi.Input[int]] = None,
-            update_time: Optional[pulumi.Input[str]] = None) -> 'Api':
+            token_timeout: Optional[pulumi.Input[int]] = None,
+            update_time: Optional[pulumi.Input[str]] = None,
+            user_type: Optional[pulumi.Input[str]] = None) -> 'Api':
         """
         Get an existing Api resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -1231,11 +2567,25 @@ class Api(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] api_business_type: When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        :param pulumi.Input[str] api_type: API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        :param pulumi.Input[str] auth_relation_api_id: The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        :param pulumi.Input[str] auth_type: API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiConstantParameterArgs']]]] constant_parameters: Constant parameter.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] eiam_app_id: EIAM application ID.
+        :param pulumi.Input[str] eiam_app_type: EIAM application type.
+        :param pulumi.Input[str] eiam_auth_type: The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
+        :param pulumi.Input[str] event_bus_id: Event bus ID.
+        :param pulumi.Input[bool] is_base64_encoded: Whether to enable Base64 encoding will only take effect when the backend is scf.
+        :param pulumi.Input[bool] is_debug_after_charge: Charge after starting debugging. (Cloud Market Reserved Fields).
+        :param pulumi.Input[bool] is_delete_response_error_codes: Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiMicroServiceArgs']]]] micro_services: API bound microservice list.
+        :param pulumi.Input[pulumi.InputType['ApiOauthConfigArgs']] oauth_config: OAuth configuration. Effective when AuthType is OAUTH.
+        :param pulumi.Input[str] owner: Owner of resources.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -1246,30 +2596,66 @@ class Api(pulumi.CustomResource):
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
+        :param pulumi.Input[pulumi.InputType['ApiServiceConfigCosConfigArgs']] service_config_cos_config: API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
         :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
         :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
-        :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        :param pulumi.Input[str] service_config_product: Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_qualifier: SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+        :param pulumi.Input[str] service_config_scf_function_type: Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        :param pulumi.Input[bool] service_config_scf_is_integrated_response: Whether to enable response integration. Effective when the backend type is SCF.
         :param pulumi.Input[int] service_config_timeout: API backend service timeout period in seconds. Default value: `5`.
-        :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
-        :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        :param pulumi.Input[str] service_config_type: The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
+        :param pulumi.Input[str] service_config_upstream_id: Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param pulumi.Input[str] service_config_url: The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_name: Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_namespace: Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_cleanup_function_qualifier: Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_name: Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_namespace: Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_register_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_name: Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_namespace: Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_config_websocket_transport_function_qualifier: Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        :param pulumi.Input[str] service_id: The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiServiceParameterArgs']]]] service_parameters: The backend service parameters of the API.
+        :param pulumi.Input[pulumi.InputType['ApiServiceTsfHealthCheckConfArgs']] service_tsf_health_check_conf: Health check configuration for microservices.
+        :param pulumi.Input[pulumi.InputType['ApiServiceTsfLoadBalanceConfArgs']] service_tsf_load_balance_conf: Load balancing configuration for microservices.
+        :param pulumi.Input[str] target_namespace_id: Tsf serverless namespace ID. (In internal testing).
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiTargetServiceArgs']]]] target_services: Target type backend resource information. (Internal testing stage).
+        :param pulumi.Input[pulumi.InputType['ApiTargetServicesHealthCheckConfArgs']] target_services_health_check_conf: Target health check configuration. (Internal testing stage).
+        :param pulumi.Input[int] target_services_load_balance_conf: Target type load balancing configuration. (Internal testing stage).
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
+        :param pulumi.Input[int] token_timeout: The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
         :param pulumi.Input[str] update_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param pulumi.Input[str] user_type: User type.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ApiState.__new__(_ApiState)
 
+        __props__.__dict__["api_business_type"] = api_business_type
         __props__.__dict__["api_desc"] = api_desc
         __props__.__dict__["api_name"] = api_name
+        __props__.__dict__["api_type"] = api_type
+        __props__.__dict__["auth_relation_api_id"] = auth_relation_api_id
         __props__.__dict__["auth_type"] = auth_type
+        __props__.__dict__["constant_parameters"] = constant_parameters
         __props__.__dict__["create_time"] = create_time
+        __props__.__dict__["eiam_app_id"] = eiam_app_id
+        __props__.__dict__["eiam_app_type"] = eiam_app_type
+        __props__.__dict__["eiam_auth_type"] = eiam_auth_type
         __props__.__dict__["enable_cors"] = enable_cors
+        __props__.__dict__["event_bus_id"] = event_bus_id
+        __props__.__dict__["is_base64_encoded"] = is_base64_encoded
+        __props__.__dict__["is_debug_after_charge"] = is_debug_after_charge
+        __props__.__dict__["is_delete_response_error_codes"] = is_delete_response_error_codes
+        __props__.__dict__["micro_services"] = micro_services
+        __props__.__dict__["oauth_config"] = oauth_config
+        __props__.__dict__["owner"] = owner
         __props__.__dict__["pre_limit"] = pre_limit
         __props__.__dict__["protocol"] = protocol
         __props__.__dict__["release_limit"] = release_limit
@@ -1280,6 +2666,7 @@ class Api(pulumi.CustomResource):
         __props__.__dict__["response_fail_example"] = response_fail_example
         __props__.__dict__["response_success_example"] = response_success_example
         __props__.__dict__["response_type"] = response_type
+        __props__.__dict__["service_config_cos_config"] = service_config_cos_config
         __props__.__dict__["service_config_method"] = service_config_method
         __props__.__dict__["service_config_mock_return_message"] = service_config_mock_return_message
         __props__.__dict__["service_config_path"] = service_config_path
@@ -1287,14 +2674,43 @@ class Api(pulumi.CustomResource):
         __props__.__dict__["service_config_scf_function_name"] = service_config_scf_function_name
         __props__.__dict__["service_config_scf_function_namespace"] = service_config_scf_function_namespace
         __props__.__dict__["service_config_scf_function_qualifier"] = service_config_scf_function_qualifier
+        __props__.__dict__["service_config_scf_function_type"] = service_config_scf_function_type
+        __props__.__dict__["service_config_scf_is_integrated_response"] = service_config_scf_is_integrated_response
         __props__.__dict__["service_config_timeout"] = service_config_timeout
         __props__.__dict__["service_config_type"] = service_config_type
+        __props__.__dict__["service_config_upstream_id"] = service_config_upstream_id
         __props__.__dict__["service_config_url"] = service_config_url
         __props__.__dict__["service_config_vpc_id"] = service_config_vpc_id
+        __props__.__dict__["service_config_websocket_cleanup_function_name"] = service_config_websocket_cleanup_function_name
+        __props__.__dict__["service_config_websocket_cleanup_function_namespace"] = service_config_websocket_cleanup_function_namespace
+        __props__.__dict__["service_config_websocket_cleanup_function_qualifier"] = service_config_websocket_cleanup_function_qualifier
+        __props__.__dict__["service_config_websocket_register_function_name"] = service_config_websocket_register_function_name
+        __props__.__dict__["service_config_websocket_register_function_namespace"] = service_config_websocket_register_function_namespace
+        __props__.__dict__["service_config_websocket_register_function_qualifier"] = service_config_websocket_register_function_qualifier
+        __props__.__dict__["service_config_websocket_transport_function_name"] = service_config_websocket_transport_function_name
+        __props__.__dict__["service_config_websocket_transport_function_namespace"] = service_config_websocket_transport_function_namespace
+        __props__.__dict__["service_config_websocket_transport_function_qualifier"] = service_config_websocket_transport_function_qualifier
         __props__.__dict__["service_id"] = service_id
+        __props__.__dict__["service_parameters"] = service_parameters
+        __props__.__dict__["service_tsf_health_check_conf"] = service_tsf_health_check_conf
+        __props__.__dict__["service_tsf_load_balance_conf"] = service_tsf_load_balance_conf
+        __props__.__dict__["target_namespace_id"] = target_namespace_id
+        __props__.__dict__["target_services"] = target_services
+        __props__.__dict__["target_services_health_check_conf"] = target_services_health_check_conf
+        __props__.__dict__["target_services_load_balance_conf"] = target_services_load_balance_conf
         __props__.__dict__["test_limit"] = test_limit
+        __props__.__dict__["token_timeout"] = token_timeout
         __props__.__dict__["update_time"] = update_time
+        __props__.__dict__["user_type"] = user_type
         return Api(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="apiBusinessType")
+    def api_business_type(self) -> pulumi.Output[str]:
+        """
+        When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+        """
+        return pulumi.get(self, "api_business_type")
 
     @property
     @pulumi.getter(name="apiDesc")
@@ -1313,12 +2729,36 @@ class Api(pulumi.CustomResource):
         return pulumi.get(self, "api_name")
 
     @property
+    @pulumi.getter(name="apiType")
+    def api_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+        """
+        return pulumi.get(self, "api_type")
+
+    @property
+    @pulumi.getter(name="authRelationApiId")
+    def auth_relation_api_id(self) -> pulumi.Output[str]:
+        """
+        The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+        """
+        return pulumi.get(self, "auth_relation_api_id")
+
+    @property
     @pulumi.getter(name="authType")
     def auth_type(self) -> pulumi.Output[Optional[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+        API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
         """
         return pulumi.get(self, "auth_type")
+
+    @property
+    @pulumi.getter(name="constantParameters")
+    def constant_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.ApiConstantParameter']]]:
+        """
+        Constant parameter.
+        """
+        return pulumi.get(self, "constant_parameters")
 
     @property
     @pulumi.getter(name="createTime")
@@ -1329,12 +2769,92 @@ class Api(pulumi.CustomResource):
         return pulumi.get(self, "create_time")
 
     @property
+    @pulumi.getter(name="eiamAppId")
+    def eiam_app_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        EIAM application ID.
+        """
+        return pulumi.get(self, "eiam_app_id")
+
+    @property
+    @pulumi.getter(name="eiamAppType")
+    def eiam_app_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        EIAM application type.
+        """
+        return pulumi.get(self, "eiam_app_type")
+
+    @property
+    @pulumi.getter(name="eiamAuthType")
+    def eiam_auth_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+        """
+        return pulumi.get(self, "eiam_auth_type")
+
+    @property
     @pulumi.getter(name="enableCors")
     def enable_cors(self) -> pulumi.Output[Optional[bool]]:
         """
         Whether to enable CORS. Default value: `true`.
         """
         return pulumi.get(self, "enable_cors")
+
+    @property
+    @pulumi.getter(name="eventBusId")
+    def event_bus_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Event bus ID.
+        """
+        return pulumi.get(self, "event_bus_id")
+
+    @property
+    @pulumi.getter(name="isBase64Encoded")
+    def is_base64_encoded(self) -> pulumi.Output[bool]:
+        """
+        Whether to enable Base64 encoding will only take effect when the backend is scf.
+        """
+        return pulumi.get(self, "is_base64_encoded")
+
+    @property
+    @pulumi.getter(name="isDebugAfterCharge")
+    def is_debug_after_charge(self) -> pulumi.Output[bool]:
+        """
+        Charge after starting debugging. (Cloud Market Reserved Fields).
+        """
+        return pulumi.get(self, "is_debug_after_charge")
+
+    @property
+    @pulumi.getter(name="isDeleteResponseErrorCodes")
+    def is_delete_response_error_codes(self) -> pulumi.Output[bool]:
+        """
+        Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+        """
+        return pulumi.get(self, "is_delete_response_error_codes")
+
+    @property
+    @pulumi.getter(name="microServices")
+    def micro_services(self) -> pulumi.Output[Optional[Sequence['outputs.ApiMicroService']]]:
+        """
+        API bound microservice list.
+        """
+        return pulumi.get(self, "micro_services")
+
+    @property
+    @pulumi.getter(name="oauthConfig")
+    def oauth_config(self) -> pulumi.Output[Optional['outputs.ApiOauthConfig']]:
+        """
+        OAuth configuration. Effective when AuthType is OAUTH.
+        """
+        return pulumi.get(self, "oauth_config")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> pulumi.Output[Optional[str]]:
+        """
+        Owner of resources.
+        """
+        return pulumi.get(self, "owner")
 
     @property
     @pulumi.getter(name="preLimit")
@@ -1394,7 +2914,7 @@ class Api(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="responseFailExample")
-    def response_fail_example(self) -> pulumi.Output[Optional[str]]:
+    def response_fail_example(self) -> pulumi.Output[str]:
         """
         Response failure sample of custom response configuration.
         """
@@ -1402,7 +2922,7 @@ class Api(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="responseSuccessExample")
-    def response_success_example(self) -> pulumi.Output[Optional[str]]:
+    def response_success_example(self) -> pulumi.Output[str]:
         """
         Successful response sample of custom response configuration.
         """
@@ -1415,6 +2935,14 @@ class Api(pulumi.CustomResource):
         Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
         """
         return pulumi.get(self, "response_type")
+
+    @property
+    @pulumi.getter(name="serviceConfigCosConfig")
+    def service_config_cos_config(self) -> pulumi.Output[Optional['outputs.ApiServiceConfigCosConfig']]:
+        """
+        API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_cos_config")
 
     @property
     @pulumi.getter(name="serviceConfigMethod")
@@ -1444,7 +2972,7 @@ class Api(pulumi.CustomResource):
     @pulumi.getter(name="serviceConfigProduct")
     def service_config_product(self) -> pulumi.Output[Optional[str]]:
         """
-        Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
         """
         return pulumi.get(self, "service_config_product")
 
@@ -1473,6 +3001,22 @@ class Api(pulumi.CustomResource):
         return pulumi.get(self, "service_config_scf_function_qualifier")
 
     @property
+    @pulumi.getter(name="serviceConfigScfFunctionType")
+    def service_config_scf_function_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+        """
+        return pulumi.get(self, "service_config_scf_function_type")
+
+    @property
+    @pulumi.getter(name="serviceConfigScfIsIntegratedResponse")
+    def service_config_scf_is_integrated_response(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to enable response integration. Effective when the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_scf_is_integrated_response")
+
+    @property
     @pulumi.getter(name="serviceConfigTimeout")
     def service_config_timeout(self) -> pulumi.Output[Optional[int]]:
         """
@@ -1484,15 +3028,23 @@ class Api(pulumi.CustomResource):
     @pulumi.getter(name="serviceConfigType")
     def service_config_type(self) -> pulumi.Output[Optional[str]]:
         """
-        API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+        The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
         """
         return pulumi.get(self, "service_config_type")
+
+    @property
+    @pulumi.getter(name="serviceConfigUpstreamId")
+    def service_config_upstream_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "service_config_upstream_id")
 
     @property
     @pulumi.getter(name="serviceConfigUrl")
     def service_config_url(self) -> pulumi.Output[Optional[str]]:
         """
-        API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
         """
         return pulumi.get(self, "service_config_url")
 
@@ -1505,12 +3057,140 @@ class Api(pulumi.CustomResource):
         return pulumi.get(self, "service_config_vpc_id")
 
     @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionName")
+    def service_config_websocket_cleanup_function_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_name")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionNamespace")
+    def service_config_websocket_cleanup_function_namespace(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_namespace")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketCleanupFunctionQualifier")
+    def service_config_websocket_cleanup_function_qualifier(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_cleanup_function_qualifier")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionName")
+    def service_config_websocket_register_function_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_name")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionNamespace")
+    def service_config_websocket_register_function_namespace(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_namespace")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketRegisterFunctionQualifier")
+    def service_config_websocket_register_function_qualifier(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_register_function_qualifier")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionName")
+    def service_config_websocket_transport_function_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_name")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionNamespace")
+    def service_config_websocket_transport_function_namespace(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_namespace")
+
+    @property
+    @pulumi.getter(name="serviceConfigWebsocketTransportFunctionQualifier")
+    def service_config_websocket_transport_function_qualifier(self) -> pulumi.Output[Optional[str]]:
+        """
+        Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+        """
+        return pulumi.get(self, "service_config_websocket_transport_function_qualifier")
+
+    @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[str]:
         """
-        Which service this API belongs. Refer to resource `ApiGateway.Service`.
+        The unique ID of the service where the API is located. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="serviceParameters")
+    def service_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.ApiServiceParameter']]]:
+        """
+        The backend service parameters of the API.
+        """
+        return pulumi.get(self, "service_parameters")
+
+    @property
+    @pulumi.getter(name="serviceTsfHealthCheckConf")
+    def service_tsf_health_check_conf(self) -> pulumi.Output[Optional['outputs.ApiServiceTsfHealthCheckConf']]:
+        """
+        Health check configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_health_check_conf")
+
+    @property
+    @pulumi.getter(name="serviceTsfLoadBalanceConf")
+    def service_tsf_load_balance_conf(self) -> pulumi.Output[Optional['outputs.ApiServiceTsfLoadBalanceConf']]:
+        """
+        Load balancing configuration for microservices.
+        """
+        return pulumi.get(self, "service_tsf_load_balance_conf")
+
+    @property
+    @pulumi.getter(name="targetNamespaceId")
+    def target_namespace_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Tsf serverless namespace ID. (In internal testing).
+        """
+        return pulumi.get(self, "target_namespace_id")
+
+    @property
+    @pulumi.getter(name="targetServices")
+    def target_services(self) -> pulumi.Output[Optional[Sequence['outputs.ApiTargetService']]]:
+        """
+        Target type backend resource information. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services")
+
+    @property
+    @pulumi.getter(name="targetServicesHealthCheckConf")
+    def target_services_health_check_conf(self) -> pulumi.Output[Optional['outputs.ApiTargetServicesHealthCheckConf']]:
+        """
+        Target health check configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_health_check_conf")
+
+    @property
+    @pulumi.getter(name="targetServicesLoadBalanceConf")
+    def target_services_load_balance_conf(self) -> pulumi.Output[Optional[int]]:
+        """
+        Target type load balancing configuration. (Internal testing stage).
+        """
+        return pulumi.get(self, "target_services_load_balance_conf")
 
     @property
     @pulumi.getter(name="testLimit")
@@ -1521,10 +3201,26 @@ class Api(pulumi.CustomResource):
         return pulumi.get(self, "test_limit")
 
     @property
+    @pulumi.getter(name="tokenTimeout")
+    def token_timeout(self) -> pulumi.Output[Optional[int]]:
+        """
+        The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+        """
+        return pulumi.get(self, "token_timeout")
+
+    @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> pulumi.Output[str]:
         """
         Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         """
         return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="userType")
+    def user_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        User type.
+        """
+        return pulumi.get(self, "user_type")
 

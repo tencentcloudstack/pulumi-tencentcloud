@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class OriginGroupOriginRecord
     {
         /// <summary>
-        /// Indicating origin site&amp;#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+        /// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
         /// </summary>
         public readonly ImmutableArray<string> Areas;
         /// <summary>
@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         public readonly string Record;
         public readonly string? RecordId;
         /// <summary>
-        /// Indicating origin site&amp;#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+        /// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
         /// </summary>
         public readonly int? Weight;
 

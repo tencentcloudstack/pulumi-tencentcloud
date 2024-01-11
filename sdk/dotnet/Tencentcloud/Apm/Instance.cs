@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// <summary>
     /// Provides a resource to create a apm instance
     /// 
+    /// &gt; **NOTE:** To use the field `pay_mode`, you need to contact official customer service to join the whitelist.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -60,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        /// </summary>
+        [Output("payMode")]
+        public Output<int?> PayMode { get; private set; } = null!;
 
         /// <summary>
         /// Quota Of Instance Reporting.
@@ -139,6 +147,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        /// </summary>
+        [Input("payMode")]
+        public Input<int>? PayMode { get; set; }
+
+        /// <summary>
         /// Quota Of Instance Reporting.
         /// </summary>
         [Input("spanDailyCounters")]
@@ -180,6 +194,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        /// </summary>
+        [Input("payMode")]
+        public Input<int>? PayMode { get; set; }
 
         /// <summary>
         /// Quota Of Instance Reporting.

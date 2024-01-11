@@ -57,6 +57,8 @@ type DomainInstance struct {
 	IsMark pulumi.StringOutput `pulumi:"isMark"`
 	// The remark of Domain.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns pulumi.StringOutput `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
 }
@@ -104,6 +106,8 @@ type domainInstanceState struct {
 	IsMark *string `pulumi:"isMark"`
 	// The remark of Domain.
 	Remark *string `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns *string `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status *string `pulumi:"status"`
 }
@@ -119,6 +123,8 @@ type DomainInstanceState struct {
 	IsMark pulumi.StringPtrInput
 	// The remark of Domain.
 	Remark pulumi.StringPtrInput
+	// Is secondary DNS enabled.
+	SlaveDns pulumi.StringPtrInput
 	// The status of Domain.
 	Status pulumi.StringPtrInput
 }
@@ -264,6 +270,11 @@ func (o DomainInstanceOutput) IsMark() pulumi.StringOutput {
 // The remark of Domain.
 func (o DomainInstanceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Is secondary DNS enabled.
+func (o DomainInstanceOutput) SlaveDns() pulumi.StringOutput {
+	return o.ApplyT(func(v *DomainInstance) pulumi.StringOutput { return v.SlaveDns }).(pulumi.StringOutput)
 }
 
 // The status of Domain.

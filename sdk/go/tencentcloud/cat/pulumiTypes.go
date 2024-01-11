@@ -185,6 +185,8 @@ type GetNodeNodeDefine struct {
 	NetService string `pulumi:"netService"`
 	// Node status: 1=running, 2=offline.
 	NodeDefineStatus int `pulumi:"nodeDefineStatus"`
+	// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+	TaskTypes []int `pulumi:"taskTypes"`
 	// Node Type;1 = IDC,2 = LastMile,3 = Mobile.
 	Type int `pulumi:"type"`
 }
@@ -219,6 +221,8 @@ type GetNodeNodeDefineArgs struct {
 	NetService pulumi.StringInput `pulumi:"netService"`
 	// Node status: 1=running, 2=offline.
 	NodeDefineStatus pulumi.IntInput `pulumi:"nodeDefineStatus"`
+	// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+	TaskTypes pulumi.IntArrayInput `pulumi:"taskTypes"`
 	// Node Type;1 = IDC,2 = LastMile,3 = Mobile.
 	Type pulumi.IntInput `pulumi:"type"`
 }
@@ -317,6 +321,11 @@ func (o GetNodeNodeDefineOutput) NetService() pulumi.StringOutput {
 // Node status: 1=running, 2=offline.
 func (o GetNodeNodeDefineOutput) NodeDefineStatus() pulumi.IntOutput {
 	return o.ApplyT(func(v GetNodeNodeDefine) int { return v.NodeDefineStatus }).(pulumi.IntOutput)
+}
+
+// The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+func (o GetNodeNodeDefineOutput) TaskTypes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetNodeNodeDefine) []int { return v.TaskTypes }).(pulumi.IntArrayOutput)
 }
 
 // Node Type;1 = IDC,2 = LastMile,3 = Mobile.

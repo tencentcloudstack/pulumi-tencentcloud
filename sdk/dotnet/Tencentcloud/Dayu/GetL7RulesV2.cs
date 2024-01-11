@@ -30,8 +30,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         ///         var test = Output.Create(Tencentcloud.Dayu.GetL7RulesV2.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesV2Args
         ///         {
         ///             Business = "bgpip",
-        ///             Limit = 10,
-        ///             Offset = 0,
+        ///             Domain = "qq.com",
+        ///             Protocol = "https",
         ///         }));
         ///     }
         /// 
@@ -61,8 +61,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         ///         var test = Output.Create(Tencentcloud.Dayu.GetL7RulesV2.InvokeAsync(new Tencentcloud.Dayu.GetL7RulesV2Args
         ///         {
         ///             Business = "bgpip",
-        ///             Limit = 10,
-        ///             Offset = 0,
+        ///             Domain = "qq.com",
+        ///             Protocol = "https",
         ///         }));
         ///     }
         /// 
@@ -97,13 +97,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public string? Ip { get; set; }
 
         /// <summary>
-        /// The number of pages, default is `10`.
+        /// It has been deprecated from version 1.81.21. The number of pages, default is `10`.
         /// </summary>
         [Input("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// The page start offset, default is `0`.
+        /// It has been deprecated from version 1.81.21. The page start offset, default is `0`.
         /// </summary>
         [Input("offset")]
         public int? Offset { get; set; }
@@ -146,13 +146,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public Input<string>? Ip { get; set; }
 
         /// <summary>
-        /// The number of pages, default is `10`.
+        /// It has been deprecated from version 1.81.21. The number of pages, default is `10`.
         /// </summary>
         [Input("limit")]
         public Input<int>? Limit { get; set; }
 
         /// <summary>
-        /// The page start offset, default is `0`.
+        /// It has been deprecated from version 1.81.21. The page start offset, default is `0`.
         /// </summary>
         [Input("offset")]
         public Input<int>? Offset { get; set; }

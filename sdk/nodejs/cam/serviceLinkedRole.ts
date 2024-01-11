@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const serviceLinkedRole = new tencentcloud.Cam.ServiceLinkedRole("service_linked_role", {
- *     customSuffix: "x-1",
+ *     customSuffix: "tf",
  *     description: "desc cam",
  *     qcsServiceNames: [
  *         "cvm.qcloud.com",
@@ -55,9 +55,9 @@ export class ServiceLinkedRole extends pulumi.CustomResource {
     }
 
     /**
-     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
      */
-    public readonly customSuffix!: pulumi.Output<string | undefined>;
+    public readonly customSuffix!: pulumi.Output<string>;
     /**
      * role description.
      */
@@ -108,7 +108,7 @@ export class ServiceLinkedRole extends pulumi.CustomResource {
  */
 export interface ServiceLinkedRoleState {
     /**
-     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
      */
     customSuffix?: pulumi.Input<string>;
     /**
@@ -130,7 +130,7 @@ export interface ServiceLinkedRoleState {
  */
 export interface ServiceLinkedRoleArgs {
     /**
-     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+     * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
      */
     customSuffix?: pulumi.Input<string>;
     /**

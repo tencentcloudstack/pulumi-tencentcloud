@@ -22,6 +22,7 @@ class NodePoolArgs:
                  vpc_id: pulumi.Input[str],
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  delete_keep_instance: Optional[pulumi.Input[bool]] = None,
+                 deletion_protection: Optional[pulumi.Input[bool]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  enable_auto_scale: Optional[pulumi.Input[bool]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -49,7 +50,8 @@ class NodePoolArgs:
         :param pulumi.Input[str] vpc_id: ID of VPC network.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
         :param pulumi.Input[bool] delete_keep_instance: Indicate to keep the CVM instance when delete the node pool. Default is `true`.
-        :param pulumi.Input[int] desired_capacity: Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        :param pulumi.Input[bool] deletion_protection: Indicates whether the node pool deletion protection is enabled.
+        :param pulumi.Input[int] desired_capacity: Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         :param pulumi.Input[bool] enable_auto_scale: Indicate whether to enable auto scaling or not.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
@@ -77,6 +79,8 @@ class NodePoolArgs:
             pulumi.set(__self__, "default_cooldown", default_cooldown)
         if delete_keep_instance is not None:
             pulumi.set(__self__, "delete_keep_instance", delete_keep_instance)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if desired_capacity is not None:
             pulumi.set(__self__, "desired_capacity", desired_capacity)
         if enable_auto_scale is not None:
@@ -199,10 +203,22 @@ class NodePoolArgs:
         pulumi.set(self, "delete_keep_instance", value)
 
     @property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the node pool deletion protection is enabled.
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @deletion_protection.setter
+    def deletion_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "deletion_protection", value)
+
+    @property
     @pulumi.getter(name="desiredCapacity")
     def desired_capacity(self) -> Optional[pulumi.Input[int]]:
         """
-        Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         """
         return pulumi.get(self, "desired_capacity")
 
@@ -424,6 +440,7 @@ class _NodePoolState:
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  delete_keep_instance: Optional[pulumi.Input[bool]] = None,
+                 deletion_protection: Optional[pulumi.Input[bool]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  enable_auto_scale: Optional[pulumi.Input[bool]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -457,7 +474,8 @@ class _NodePoolState:
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
         :param pulumi.Input[bool] delete_keep_instance: Indicate to keep the CVM instance when delete the node pool. Default is `true`.
-        :param pulumi.Input[int] desired_capacity: Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        :param pulumi.Input[bool] deletion_protection: Indicates whether the node pool deletion protection is enabled.
+        :param pulumi.Input[int] desired_capacity: Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         :param pulumi.Input[bool] enable_auto_scale: Indicate whether to enable auto scaling or not.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
         :param pulumi.Input[str] launch_config_id: The launch config ID.
@@ -495,6 +513,8 @@ class _NodePoolState:
             pulumi.set(__self__, "default_cooldown", default_cooldown)
         if delete_keep_instance is not None:
             pulumi.set(__self__, "delete_keep_instance", delete_keep_instance)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if desired_capacity is not None:
             pulumi.set(__self__, "desired_capacity", desired_capacity)
         if enable_auto_scale is not None:
@@ -619,10 +639,22 @@ class _NodePoolState:
         pulumi.set(self, "delete_keep_instance", value)
 
     @property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the node pool deletion protection is enabled.
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @deletion_protection.setter
+    def deletion_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "deletion_protection", value)
+
+    @property
     @pulumi.getter(name="desiredCapacity")
     def desired_capacity(self) -> Optional[pulumi.Input[int]]:
         """
-        Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         """
         return pulumi.get(self, "desired_capacity")
 
@@ -928,6 +960,7 @@ class NodePool(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  delete_keep_instance: Optional[pulumi.Input[bool]] = None,
+                 deletion_protection: Optional[pulumi.Input[bool]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  enable_auto_scale: Optional[pulumi.Input[bool]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1003,7 +1036,7 @@ class NodePool(pulumi.CustomResource):
                 instance_type=default_instance_type,
                 system_disk_type="CLOUD_PREMIUM",
                 system_disk_size=50,
-                security_group_ids=["sg-24vswocp"],
+                orderly_security_group_ids=["sg-24vswocp"],
                 data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
                     disk_type="CLOUD_PREMIUM",
                     disk_size=50,
@@ -1057,7 +1090,11 @@ class NodePool(pulumi.CustomResource):
                 instance_type=var["default_instance_type"],
                 system_disk_type="CLOUD_PREMIUM",
                 system_disk_size=50,
-                security_group_ids=["sg-24vswocp"],
+                orderly_security_group_ids=[
+                    "sg-24vswocp",
+                    "sg-3qntci2v",
+                    "sg-7y1t2wax",
+                ],
                 instance_charge_type="SPOTPAID",
                 spot_instance_type="one-time",
                 spot_max_price="1000",
@@ -1084,7 +1121,8 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
         :param pulumi.Input[bool] delete_keep_instance: Indicate to keep the CVM instance when delete the node pool. Default is `true`.
-        :param pulumi.Input[int] desired_capacity: Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        :param pulumi.Input[bool] deletion_protection: Indicates whether the node pool deletion protection is enabled.
+        :param pulumi.Input[int] desired_capacity: Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         :param pulumi.Input[bool] enable_auto_scale: Indicate whether to enable auto scaling or not.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
         :param pulumi.Input[int] max_size: Maximum number of node.
@@ -1165,7 +1203,7 @@ class NodePool(pulumi.CustomResource):
                 instance_type=default_instance_type,
                 system_disk_type="CLOUD_PREMIUM",
                 system_disk_size=50,
-                security_group_ids=["sg-24vswocp"],
+                orderly_security_group_ids=["sg-24vswocp"],
                 data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
                     disk_type="CLOUD_PREMIUM",
                     disk_size=50,
@@ -1219,7 +1257,11 @@ class NodePool(pulumi.CustomResource):
                 instance_type=var["default_instance_type"],
                 system_disk_type="CLOUD_PREMIUM",
                 system_disk_size=50,
-                security_group_ids=["sg-24vswocp"],
+                orderly_security_group_ids=[
+                    "sg-24vswocp",
+                    "sg-3qntci2v",
+                    "sg-7y1t2wax",
+                ],
                 instance_charge_type="SPOTPAID",
                 spot_instance_type="one-time",
                 spot_max_price="1000",
@@ -1259,6 +1301,7 @@ class NodePool(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  delete_keep_instance: Optional[pulumi.Input[bool]] = None,
+                 deletion_protection: Optional[pulumi.Input[bool]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  enable_auto_scale: Optional[pulumi.Input[bool]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1302,6 +1345,7 @@ class NodePool(pulumi.CustomResource):
             __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["default_cooldown"] = default_cooldown
             __props__.__dict__["delete_keep_instance"] = delete_keep_instance
+            __props__.__dict__["deletion_protection"] = deletion_protection
             __props__.__dict__["desired_capacity"] = desired_capacity
             __props__.__dict__["enable_auto_scale"] = enable_auto_scale
             __props__.__dict__["labels"] = labels
@@ -1351,6 +1395,7 @@ class NodePool(pulumi.CustomResource):
             cluster_id: Optional[pulumi.Input[str]] = None,
             default_cooldown: Optional[pulumi.Input[int]] = None,
             delete_keep_instance: Optional[pulumi.Input[bool]] = None,
+            deletion_protection: Optional[pulumi.Input[bool]] = None,
             desired_capacity: Optional[pulumi.Input[int]] = None,
             enable_auto_scale: Optional[pulumi.Input[bool]] = None,
             labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1389,7 +1434,8 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
         :param pulumi.Input[bool] delete_keep_instance: Indicate to keep the CVM instance when delete the node pool. Default is `true`.
-        :param pulumi.Input[int] desired_capacity: Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        :param pulumi.Input[bool] deletion_protection: Indicates whether the node pool deletion protection is enabled.
+        :param pulumi.Input[int] desired_capacity: Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         :param pulumi.Input[bool] enable_auto_scale: Indicate whether to enable auto scaling or not.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
         :param pulumi.Input[str] launch_config_id: The launch config ID.
@@ -1425,6 +1471,7 @@ class NodePool(pulumi.CustomResource):
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["default_cooldown"] = default_cooldown
         __props__.__dict__["delete_keep_instance"] = delete_keep_instance
+        __props__.__dict__["deletion_protection"] = deletion_protection
         __props__.__dict__["desired_capacity"] = desired_capacity
         __props__.__dict__["enable_auto_scale"] = enable_auto_scale
         __props__.__dict__["labels"] = labels
@@ -1501,10 +1548,18 @@ class NodePool(pulumi.CustomResource):
         return pulumi.get(self, "delete_keep_instance")
 
     @property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Output[bool]:
+        """
+        Indicates whether the node pool deletion protection is enabled.
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @property
     @pulumi.getter(name="desiredCapacity")
     def desired_capacity(self) -> pulumi.Output[int]:
         """
-        Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         """
         return pulumi.get(self, "desired_capacity")
 

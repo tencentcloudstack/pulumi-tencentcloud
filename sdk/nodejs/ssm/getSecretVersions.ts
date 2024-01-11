@@ -12,12 +12,25 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Ssm.getSecretVersions({
- *     secretName: "test",
+ * const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+ *     secretName: "tf-example",
+ *     description: "desc.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const v1 = new tencentcloud.ssm.SecretVersion("v1", {
+ *     secretName: exampleSecret.secretName,
  *     versionId: "v1",
- * }));
+ *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
+ * });
+ * const exampleSecretVersions = tencentcloud.Ssm.getSecretVersionsOutput({
+ *     secretName: v1.secretName,
+ *     versionId: v1.versionId,
+ * });
  * ```
  */
 export function getSecretVersions(args: GetSecretVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecretVersionsResult> {

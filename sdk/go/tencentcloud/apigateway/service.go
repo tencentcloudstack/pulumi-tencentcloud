@@ -13,6 +13,8 @@ import (
 
 // Use this resource to create API gateway service.
 //
+// > **NOTE:** After setting `uniqVpcId`, it cannot be modified.
+//
 // ## Example Usage
 // ### Shared Service
 //
@@ -22,26 +24,33 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			IpVersion: pulumi.String("IPv4"),
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewService(ctx, "example", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("tf-example"),
+// 			Protocol:    pulumi.String("http&https"),
+// 			ServiceDesc: pulumi.String("desc."),
 // 			NetTypes: pulumi.StringArray{
 // 				pulumi.String("INNER"),
 // 				pulumi.String("OUTER"),
 // 			},
-// 			PreLimit:     pulumi.Int(500),
-// 			Protocol:     pulumi.String("http&https"),
-// 			ReleaseLimit: pulumi.Int(500),
-// 			ServiceDesc:  pulumi.String("your nice service"),
-// 			ServiceName:  pulumi.String("niceservice"),
+// 			IpVersion: pulumi.String("IPv4"),
+// 			UniqVpcId: vpc.ID(),
 // 			Tags: pulumi.AnyMap{
-// 				"test-key1": pulumi.Any("test-value1"),
-// 				"test-key2": pulumi.Any("test-value2"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
-// 			TestLimit: pulumi.Int(500),
+// 			ReleaseLimit: pulumi.Int(500),
+// 			PreLimit:     pulumi.Int(500),
+// 			TestLimit:    pulumi.Int(500),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -62,22 +71,23 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			InstanceId: pulumi.String("instance-rc6fcv4e"),
-// 			IpVersion:  pulumi.String("IPv4"),
+// 		_, err := ApiGateway.NewService(ctx, "example", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("tf-example"),
+// 			Protocol:    pulumi.String("http&https"),
+// 			ServiceDesc: pulumi.String("desc."),
 // 			NetTypes: pulumi.StringArray{
 // 				pulumi.String("INNER"),
 // 				pulumi.String("OUTER"),
 // 			},
-// 			PreLimit:     pulumi.Int(500),
-// 			Protocol:     pulumi.String("http&https"),
-// 			ReleaseLimit: pulumi.Int(500),
-// 			ServiceDesc:  pulumi.String("your nice service"),
-// 			ServiceName:  pulumi.String("service"),
+// 			IpVersion:  pulumi.String("IPv4"),
+// 			UniqVpcId:  pulumi.Any(tencentcloud_vpc.Vpc.Id),
+// 			InstanceId: pulumi.String("instance-rc6fcv4e"),
 // 			Tags: pulumi.AnyMap{
-// 				"test-key1": pulumi.Any("test-value1"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
-// 			TestLimit: pulumi.Int(500),
+// 			ReleaseLimit: pulumi.Int(500),
+// 			PreLimit:     pulumi.Int(500),
+// 			TestLimit:    pulumi.Int(500),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -135,6 +145,8 @@ type Service struct {
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntOutput `pulumi:"testLimit"`
+	// VPC ID.
+	UniqVpcId pulumi.StringPtrOutput `pulumi:"uniqVpcId"`
 	// A list of attach usage plans.
 	UsagePlanLists ServiceUsagePlanListArrayOutput `pulumi:"usagePlanLists"`
 }
@@ -216,6 +228,8 @@ type serviceState struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit *int `pulumi:"testLimit"`
+	// VPC ID.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
 	// A list of attach usage plans.
 	UsagePlanLists []ServiceUsagePlanList `pulumi:"usagePlanLists"`
 }
@@ -259,6 +273,8 @@ type ServiceState struct {
 	Tags pulumi.MapInput
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntPtrInput
+	// VPC ID.
+	UniqVpcId pulumi.StringPtrInput
 	// A list of attach usage plans.
 	UsagePlanLists ServiceUsagePlanListArrayInput
 }
@@ -292,6 +308,8 @@ type serviceArgs struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit *int `pulumi:"testLimit"`
+	// VPC ID.
+	UniqVpcId *string `pulumi:"uniqVpcId"`
 }
 
 // The set of arguments for constructing a Service resource.
@@ -320,6 +338,8 @@ type ServiceArgs struct {
 	Tags pulumi.MapInput
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	TestLimit pulumi.IntPtrInput
+	// VPC ID.
+	UniqVpcId pulumi.StringPtrInput
 }
 
 func (ServiceArgs) ElementType() reflect.Type {
@@ -499,6 +519,11 @@ func (o ServiceOutput) Tags() pulumi.MapOutput {
 // API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 func (o ServiceOutput) TestLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v *Service) pulumi.IntOutput { return v.TestLimit }).(pulumi.IntOutput)
+}
+
+// VPC ID.
+func (o ServiceOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.UniqVpcId }).(pulumi.StringPtrOutput)
 }
 
 // A list of attach usage plans.

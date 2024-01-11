@@ -102,6 +102,10 @@ export class BasicInstance extends pulumi.CustomResource {
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
+     * System character set sorting rule, default: Chinese_PRC_CI_AS.
+     */
+    public readonly collation!: pulumi.Output<string | undefined>;
+    /**
      * The CPU number of the SQL Server basic instance.
      */
     public readonly cpu!: pulumi.Output<number>;
@@ -199,6 +203,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["autoVoucher"] = state ? state.autoVoucher : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
+            resourceInputs["collation"] = state ? state.collation : undefined;
             resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["engineVersion"] = state ? state.engineVersion : undefined;
@@ -237,6 +242,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
+            resourceInputs["collation"] = args ? args.collation : undefined;
             resourceInputs["cpu"] = args ? args.cpu : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
             resourceInputs["machineType"] = args ? args.machineType : undefined;
@@ -283,6 +289,10 @@ export interface BasicInstanceState {
      * Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * System character set sorting rule, default: Chinese_PRC_CI_AS.
+     */
+    collation?: pulumi.Input<string>;
     /**
      * The CPU number of the SQL Server basic instance.
      */
@@ -385,6 +395,10 @@ export interface BasicInstanceArgs {
      * Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * System character set sorting rule, default: Chinese_PRC_CI_AS.
+     */
+    collation?: pulumi.Input<string>;
     /**
      * The CPU number of the SQL Server basic instance.
      */

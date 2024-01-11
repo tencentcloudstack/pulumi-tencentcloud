@@ -256,13 +256,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string> PreShareKey { get; private set; } = null!;
 
         /// <summary>
-        /// Route type of the VPN connection.
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
         /// </summary>
         [Output("routeType")]
         public Output<string> RouteType { get; private set; } = null!;
 
         /// <summary>
-        /// Security group policy of the VPN connection.
+        /// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         /// </summary>
         [Output("securityGroupPolicies")]
         public Output<ImmutableArray<Outputs.ConnectionSecurityGroupPolicy>> SecurityGroupPolicies { get; private set; } = null!;
@@ -500,11 +500,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         [Input("preShareKey", required: true)]
         public Input<string> PreShareKey { get; set; } = null!;
 
-        [Input("securityGroupPolicies", required: true)]
+        /// <summary>
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        /// </summary>
+        [Input("routeType")]
+        public Input<string>? RouteType { get; set; }
+
+        [Input("securityGroupPolicies")]
         private InputList<Inputs.ConnectionSecurityGroupPolicyArgs>? _securityGroupPolicies;
 
         /// <summary>
-        /// Security group policy of the VPN connection.
+        /// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         /// </summary>
         public InputList<Inputs.ConnectionSecurityGroupPolicyArgs> SecurityGroupPolicies
         {
@@ -724,7 +730,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? PreShareKey { get; set; }
 
         /// <summary>
-        /// Route type of the VPN connection.
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
         /// </summary>
         [Input("routeType")]
         public Input<string>? RouteType { get; set; }
@@ -733,7 +739,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         private InputList<Inputs.ConnectionSecurityGroupPolicyGetArgs>? _securityGroupPolicies;
 
         /// <summary>
-        /// Security group policy of the VPN connection.
+        /// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         /// </summary>
         public InputList<Inputs.ConnectionSecurityGroupPolicyGetArgs> SecurityGroupPolicies
         {

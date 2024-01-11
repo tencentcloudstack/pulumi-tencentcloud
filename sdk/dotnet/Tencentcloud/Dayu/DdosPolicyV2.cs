@@ -123,6 +123,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     ///                 },
     ///             },
     ///             ResourceId = "bgpip-000004xf",
+    ///             WaterPrintConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigArgs
+    ///                 {
+    ///                     Listeners = 
+    ///                     {
+    ///                         new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigListenerArgs
+    ///                         {
+    ///                             ForwardProtocol = "TCP",
+    ///                             FrontendPort = 90,
+    ///                             FrontendPortEnd = 90,
+    ///                         },
+    ///                     },
+    ///                     Offset = 1,
+    ///                     OpenStatus = 1,
+    ///                     Verify = "checkall",
+    ///                 },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -203,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// </summary>
         [Output("resourceId")]
         public Output<string> ResourceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Water print config.
+        /// </summary>
+        [Output("waterPrintConfigs")]
+        public Output<ImmutableArray<Outputs.DdosPolicyV2WaterPrintConfig>> WaterPrintConfigs { get; private set; } = null!;
 
 
         /// <summary>
@@ -359,6 +383,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         [Input("resourceId", required: true)]
         public Input<string> ResourceId { get; set; } = null!;
 
+        [Input("waterPrintConfigs")]
+        private InputList<Inputs.DdosPolicyV2WaterPrintConfigArgs>? _waterPrintConfigs;
+
+        /// <summary>
+        /// Water print config.
+        /// </summary>
+        public InputList<Inputs.DdosPolicyV2WaterPrintConfigArgs> WaterPrintConfigs
+        {
+            get => _waterPrintConfigs ?? (_waterPrintConfigs = new InputList<Inputs.DdosPolicyV2WaterPrintConfigArgs>());
+            set => _waterPrintConfigs = value;
+        }
+
         public DdosPolicyV2Args()
         {
         }
@@ -473,6 +509,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// </summary>
         [Input("resourceId")]
         public Input<string>? ResourceId { get; set; }
+
+        [Input("waterPrintConfigs")]
+        private InputList<Inputs.DdosPolicyV2WaterPrintConfigGetArgs>? _waterPrintConfigs;
+
+        /// <summary>
+        /// Water print config.
+        /// </summary>
+        public InputList<Inputs.DdosPolicyV2WaterPrintConfigGetArgs> WaterPrintConfigs
+        {
+            get => _waterPrintConfigs ?? (_waterPrintConfigs = new InputList<Inputs.DdosPolicyV2WaterPrintConfigGetArgs>());
+            set => _waterPrintConfigs = value;
+        }
 
         public DdosPolicyV2State()
         {

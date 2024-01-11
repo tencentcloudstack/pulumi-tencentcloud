@@ -98,7 +98,7 @@ type ShardingInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity pulumi.IntOutput `pulumi:"shardQuantity"`
@@ -210,7 +210,7 @@ type shardingInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity *int `pulumi:"shardQuantity"`
@@ -269,7 +269,7 @@ type ShardingInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
 	ShardQuantity pulumi.IntPtrInput
@@ -330,7 +330,7 @@ type shardingInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
 	ShardQuantity int `pulumi:"shardQuantity"`
@@ -382,7 +382,7 @@ type ShardingInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
 	ShardQuantity pulumi.IntInput
@@ -572,7 +572,7 @@ func (o ShardingInstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+// ID of the security group.
 func (o ShardingInstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }

@@ -46,6 +46,8 @@ import (
 type Domain struct {
 	pulumi.CustomResourceState
 
+	// DNS configuration details.
+	Attributes DomainAttributeArrayOutput `pulumi:"attributes"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringOutput `pulumi:"emailIdentity"`
 }
@@ -83,11 +85,15 @@ func GetDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Domain resources.
 type domainState struct {
+	// DNS configuration details.
+	Attributes []DomainAttribute `pulumi:"attributes"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity *string `pulumi:"emailIdentity"`
 }
 
 type DomainState struct {
+	// DNS configuration details.
+	Attributes DomainAttributeArrayInput
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringPtrInput
 }
@@ -192,6 +198,11 @@ func (o DomainOutput) ToDomainOutput() DomainOutput {
 
 func (o DomainOutput) ToDomainOutputWithContext(ctx context.Context) DomainOutput {
 	return o
+}
+
+// DNS configuration details.
+func (o DomainOutput) Attributes() DomainAttributeArrayOutput {
+	return o.ApplyT(func(v *Domain) DomainAttributeArrayOutput { return v.Attributes }).(DomainAttributeArrayOutput)
 }
 
 // Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.

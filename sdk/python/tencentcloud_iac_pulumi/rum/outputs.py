@@ -11,6 +11,8 @@ from . import outputs
 
 __all__ = [
     'GetProjectProjectSetResult',
+    'GetScoresScoreSetResult',
+    'GetTawAreaAreaSetResult',
     'GetTawInstanceInstanceSetResult',
     'GetTawInstanceInstanceSetTagResult',
     'GetWhitelistWhitelistSetResult',
@@ -197,6 +199,221 @@ class GetProjectProjectSetResult(dict):
         Project URL.
         """
         return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetScoresScoreSetResult(dict):
+    def __init__(__self__, *,
+                 api_duration: str,
+                 api_fail: str,
+                 api_num: str,
+                 create_time: str,
+                 page_duration: str,
+                 page_error: str,
+                 page_pv: str,
+                 page_uv: str,
+                 project_id: int,
+                 record_num: int,
+                 score: str,
+                 static_duration: str,
+                 static_fail: str,
+                 static_num: str):
+        """
+        :param str api_duration: The mean duration of api request.
+        :param str api_fail: The number of failed api.
+        :param str api_num: The number of all request api.
+        :param str create_time: Project record created time.
+        :param str page_duration: The duration of page load.
+        :param str page_error: The number of exception which happened on page.
+        :param str page_pv: Pv.
+        :param str page_uv: User view.
+        :param int project_id: Project ID.
+        :param int record_num: The number of record.
+        :param str score: The score of project.
+        :param str static_duration: Duration.
+        :param str static_fail: The number of failed request static resource.
+        :param str static_num: The number of static resource on page.
+        """
+        pulumi.set(__self__, "api_duration", api_duration)
+        pulumi.set(__self__, "api_fail", api_fail)
+        pulumi.set(__self__, "api_num", api_num)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "page_duration", page_duration)
+        pulumi.set(__self__, "page_error", page_error)
+        pulumi.set(__self__, "page_pv", page_pv)
+        pulumi.set(__self__, "page_uv", page_uv)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "record_num", record_num)
+        pulumi.set(__self__, "score", score)
+        pulumi.set(__self__, "static_duration", static_duration)
+        pulumi.set(__self__, "static_fail", static_fail)
+        pulumi.set(__self__, "static_num", static_num)
+
+    @property
+    @pulumi.getter(name="apiDuration")
+    def api_duration(self) -> str:
+        """
+        The mean duration of api request.
+        """
+        return pulumi.get(self, "api_duration")
+
+    @property
+    @pulumi.getter(name="apiFail")
+    def api_fail(self) -> str:
+        """
+        The number of failed api.
+        """
+        return pulumi.get(self, "api_fail")
+
+    @property
+    @pulumi.getter(name="apiNum")
+    def api_num(self) -> str:
+        """
+        The number of all request api.
+        """
+        return pulumi.get(self, "api_num")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Project record created time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="pageDuration")
+    def page_duration(self) -> str:
+        """
+        The duration of page load.
+        """
+        return pulumi.get(self, "page_duration")
+
+    @property
+    @pulumi.getter(name="pageError")
+    def page_error(self) -> str:
+        """
+        The number of exception which happened on page.
+        """
+        return pulumi.get(self, "page_error")
+
+    @property
+    @pulumi.getter(name="pagePv")
+    def page_pv(self) -> str:
+        """
+        Pv.
+        """
+        return pulumi.get(self, "page_pv")
+
+    @property
+    @pulumi.getter(name="pageUv")
+    def page_uv(self) -> str:
+        """
+        User view.
+        """
+        return pulumi.get(self, "page_uv")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="recordNum")
+    def record_num(self) -> int:
+        """
+        The number of record.
+        """
+        return pulumi.get(self, "record_num")
+
+    @property
+    @pulumi.getter
+    def score(self) -> str:
+        """
+        The score of project.
+        """
+        return pulumi.get(self, "score")
+
+    @property
+    @pulumi.getter(name="staticDuration")
+    def static_duration(self) -> str:
+        """
+        Duration.
+        """
+        return pulumi.get(self, "static_duration")
+
+    @property
+    @pulumi.getter(name="staticFail")
+    def static_fail(self) -> str:
+        """
+        The number of failed request static resource.
+        """
+        return pulumi.get(self, "static_fail")
+
+    @property
+    @pulumi.getter(name="staticNum")
+    def static_num(self) -> str:
+        """
+        The number of static resource on page.
+        """
+        return pulumi.get(self, "static_num")
+
+
+@pulumi.output_type
+class GetTawAreaAreaSetResult(dict):
+    def __init__(__self__, *,
+                 area_abbr: str,
+                 area_id: int,
+                 area_key: str,
+                 area_name: str,
+                 area_region_code: str,
+                 area_region_id: str,
+                 area_status: int):
+        pulumi.set(__self__, "area_abbr", area_abbr)
+        pulumi.set(__self__, "area_id", area_id)
+        pulumi.set(__self__, "area_key", area_key)
+        pulumi.set(__self__, "area_name", area_name)
+        pulumi.set(__self__, "area_region_code", area_region_code)
+        pulumi.set(__self__, "area_region_id", area_region_id)
+        pulumi.set(__self__, "area_status", area_status)
+
+    @property
+    @pulumi.getter(name="areaAbbr")
+    def area_abbr(self) -> str:
+        return pulumi.get(self, "area_abbr")
+
+    @property
+    @pulumi.getter(name="areaId")
+    def area_id(self) -> int:
+        return pulumi.get(self, "area_id")
+
+    @property
+    @pulumi.getter(name="areaKey")
+    def area_key(self) -> str:
+        return pulumi.get(self, "area_key")
+
+    @property
+    @pulumi.getter(name="areaName")
+    def area_name(self) -> str:
+        return pulumi.get(self, "area_name")
+
+    @property
+    @pulumi.getter(name="areaRegionCode")
+    def area_region_code(self) -> str:
+        return pulumi.get(self, "area_region_code")
+
+    @property
+    @pulumi.getter(name="areaRegionId")
+    def area_region_id(self) -> str:
+        return pulumi.get(self, "area_region_id")
+
+    @property
+    @pulumi.getter(name="areaStatus")
+    def area_status(self) -> int:
+        return pulumi.get(self, "area_status")
 
 
 @pulumi.output_type

@@ -18,6 +18,7 @@ __all__ = [
     'AlarmPolicyConditionsRuleFilter',
     'AlarmPolicyEventCondition',
     'AlarmPolicyEventConditionFilter',
+    'AlarmPolicyFilter',
     'AlarmPolicyPolicyTag',
     'AlarmPolicyTriggerTask',
     'BindingReceiverReceivers',
@@ -47,13 +48,66 @@ __all__ = [
     'TmpTkeTemplateTemplateRawJob',
     'TmpTkeTemplateTemplateRecordRule',
     'TmpTkeTemplateTemplateServiceMonitor',
+    'GetAlarmAllNamespacesCommonNamespaceResult',
+    'GetAlarmAllNamespacesCommonNamespaceDimensionResult',
+    'GetAlarmAllNamespacesCommonNamespaceDimensionOperatorResult',
+    'GetAlarmAllNamespacesCustomNamespacesNewsResult',
+    'GetAlarmAllNamespacesQceNamespacesNewsResult',
+    'GetAlarmBasicAlarmsAlarmResult',
+    'GetAlarmBasicAlarmsAlarmInstanceGroupResult',
+    'GetAlarmBasicMetricMetricSetResult',
+    'GetAlarmBasicMetricMetricSetDimensionResult',
+    'GetAlarmBasicMetricMetricSetMeaningResult',
+    'GetAlarmBasicMetricMetricSetPeriodResult',
+    'GetAlarmConditionsTemplateTemplateGroupListResult',
+    'GetAlarmConditionsTemplateTemplateGroupListConditionResult',
+    'GetAlarmConditionsTemplateTemplateGroupListEventConditionResult',
+    'GetAlarmConditionsTemplateTemplateGroupListPolicyGroupResult',
+    'GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoResult',
+    'GetAlarmHistoryHistoryResult',
+    'GetAlarmHistoryHistoryInstanceGroupResult',
+    'GetAlarmHistoryHistoryMetricsInfoResult',
+    'GetAlarmHistoryNamespaceResult',
+    'GetAlarmMetricMetricResult',
+    'GetAlarmMetricMetricMetricConfigResult',
+    'GetAlarmMetricMetricOperatorResult',
+    'GetAlarmMonitorTypeMonitorTypeInfoResult',
+    'GetAlarmNoticeCallbacksUrlNoticeResult',
     'GetAlarmNoticesAlarmNoticeResult',
     'GetAlarmNoticesAlarmNoticeClsNoticeResult',
     'GetAlarmNoticesAlarmNoticeUrlNoticeResult',
     'GetAlarmNoticesAlarmNoticeUserNoticeResult',
+    'GetAlarmPolicyPolicyResult',
+    'GetAlarmPolicyPolicyConditionResult',
+    'GetAlarmPolicyPolicyConditionRuleResult',
+    'GetAlarmPolicyPolicyConditionRuleFilterResult',
+    'GetAlarmPolicyPolicyConditionRuleHierarchicalValueResult',
+    'GetAlarmPolicyPolicyConditionsTempResult',
+    'GetAlarmPolicyPolicyConditionsTempConditionResult',
+    'GetAlarmPolicyPolicyConditionsTempConditionRuleResult',
+    'GetAlarmPolicyPolicyConditionsTempConditionRuleFilterResult',
+    'GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueResult',
+    'GetAlarmPolicyPolicyConditionsTempEventConditionResult',
+    'GetAlarmPolicyPolicyConditionsTempEventConditionRuleResult',
+    'GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterResult',
+    'GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueResult',
+    'GetAlarmPolicyPolicyEventConditionResult',
+    'GetAlarmPolicyPolicyEventConditionRuleResult',
+    'GetAlarmPolicyPolicyEventConditionRuleFilterResult',
+    'GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueResult',
+    'GetAlarmPolicyPolicyNoticeResult',
+    'GetAlarmPolicyPolicyNoticeClsNoticeResult',
+    'GetAlarmPolicyPolicyNoticeTagResult',
+    'GetAlarmPolicyPolicyNoticeUrlNoticeResult',
+    'GetAlarmPolicyPolicyNoticeUserNoticeResult',
+    'GetAlarmPolicyPolicyTagResult',
+    'GetAlarmPolicyPolicyTagInstanceResult',
+    'GetAlarmPolicyPolicyTriggerTaskResult',
+    'GetAlarmPolicyTriggerTaskResult',
     'GetBindingObjectsListResult',
     'GetDataDimensionResult',
     'GetDataListResult',
+    'GetGrafanaPluginOverviewsPluginSetResult',
     'GetPolicyConditionsListResult',
     'GetPolicyConditionsListEventMetricResult',
     'GetPolicyConditionsListMetricResult',
@@ -67,6 +121,12 @@ __all__ = [
     'GetProductEventListDimensionResult',
     'GetProductEventListGroupInfoResult',
     'GetProductNamespaceListResult',
+    'GetStatisticDataConditionResult',
+    'GetStatisticDataDataResult',
+    'GetStatisticDataDataPointResult',
+    'GetStatisticDataDataPointDimensionResult',
+    'GetStatisticDataDataPointValueResult',
+    'GetTmpRegionsRegionSetResult',
 ]
 
 @pulumi.output_type
@@ -147,8 +207,12 @@ class AlarmNoticeUrlNotice(dict):
         suggest = None
         if key == "endTime":
             suggest = "end_time"
+        elif key == "isValid":
+            suggest = "is_valid"
         elif key == "startTime":
             suggest = "start_time"
+        elif key == "validationCode":
+            suggest = "validation_code"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in AlarmNoticeUrlNotice. Access the value via the '{suggest}' property getter instead.")
@@ -164,19 +228,27 @@ class AlarmNoticeUrlNotice(dict):
     def __init__(__self__, *,
                  url: str,
                  end_time: Optional[int] = None,
+                 is_valid: Optional[int] = None,
                  start_time: Optional[int] = None,
+                 validation_code: Optional[str] = None,
                  weekdays: Optional[Sequence[int]] = None):
         """
         :param str url: Callback URL (limited to 256 characters).
         :param int end_time: Notification End Time Seconds at the start of a day.
+        :param int is_valid: If passed verification `0` is no, `1` is yes. Default `0`.
         :param int start_time: Notification Start Time Number of seconds at the start of a day.
+        :param str validation_code: Verification code.
         :param Sequence[int] weekdays: Notification period 1-7 indicates Monday to Sunday.
         """
         pulumi.set(__self__, "url", url)
         if end_time is not None:
             pulumi.set(__self__, "end_time", end_time)
+        if is_valid is not None:
+            pulumi.set(__self__, "is_valid", is_valid)
         if start_time is not None:
             pulumi.set(__self__, "start_time", start_time)
+        if validation_code is not None:
+            pulumi.set(__self__, "validation_code", validation_code)
         if weekdays is not None:
             pulumi.set(__self__, "weekdays", weekdays)
 
@@ -197,12 +269,28 @@ class AlarmNoticeUrlNotice(dict):
         return pulumi.get(self, "end_time")
 
     @property
+    @pulumi.getter(name="isValid")
+    def is_valid(self) -> Optional[int]:
+        """
+        If passed verification `0` is no, `1` is yes. Default `0`.
+        """
+        return pulumi.get(self, "is_valid")
+
+    @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[int]:
         """
         Notification Start Time Number of seconds at the start of a day.
         """
         return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="validationCode")
+    def validation_code(self) -> Optional[str]:
+        """
+        Verification code.
+        """
+        return pulumi.get(self, "validation_code")
 
     @property
     @pulumi.getter
@@ -847,6 +935,36 @@ class AlarmPolicyEventConditionFilter(dict):
         Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class AlarmPolicyFilter(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 dimensions: Optional[str] = None):
+        """
+        :param str type: Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        :param str dimensions: JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
+        pulumi.set(__self__, "type", type)
+        if dimensions is not None:
+            pulumi.set(__self__, "dimensions", dimensions)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Optional[str]:
+        """
+        JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
+        return pulumi.get(self, "dimensions")
 
 
 @pulumi.output_type
@@ -3017,8 +3135,2285 @@ class TmpTkeTemplateTemplateServiceMonitor(dict):
 
 
 @pulumi.output_type
+class GetAlarmAllNamespacesCommonNamespaceResult(dict):
+    def __init__(__self__, *,
+                 dimensions: Sequence['outputs.GetAlarmAllNamespacesCommonNamespaceDimensionResult'],
+                 id: str,
+                 monitor_type: str,
+                 name: str):
+        """
+        :param Sequence['GetAlarmAllNamespacesCommonNamespaceDimensionArgs'] dimensions: Dimension Information.
+        :param str id: Namespace labeling.
+        :param str monitor_type: Monitoring type.
+        :param str name: Namespace name.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "monitor_type", monitor_type)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence['outputs.GetAlarmAllNamespacesCommonNamespaceDimensionResult']:
+        """
+        Dimension Information.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Namespace labeling.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="monitorType")
+    def monitor_type(self) -> str:
+        """
+        Monitoring type.
+        """
+        return pulumi.get(self, "monitor_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetAlarmAllNamespacesCommonNamespaceDimensionResult(dict):
+    def __init__(__self__, *,
+                 can_filter_history: bool,
+                 can_filter_policy: bool,
+                 can_group_by: bool,
+                 is_multiple: bool,
+                 is_mutable: bool,
+                 is_required: bool,
+                 is_visible: bool,
+                 key: str,
+                 must_group_by: bool,
+                 name: str,
+                 operators: Sequence['outputs.GetAlarmAllNamespacesCommonNamespaceDimensionOperatorResult'],
+                 show_value_replace: str):
+        """
+        :param bool can_filter_history: Can it be used to filter alarm history.
+        :param bool can_filter_policy: Can it be used to filter the policy list.
+        :param bool can_group_by: Can it be used as an aggregation dimension.
+        :param bool is_multiple: Do you support multiple selections.
+        :param bool is_mutable: Can I modify it after creation.
+        :param bool is_required: Required or not.
+        :param bool is_visible: Whether to display to users.
+        :param str key: Dimension key identifier, backend English name.
+        :param bool must_group_by: Must it be used as an aggregation dimension.
+        :param str name: Namespace name.
+        :param Sequence['GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs'] operators: List of supported operators.
+        :param str show_value_replace: Key to replace in front-end translation.
+        """
+        pulumi.set(__self__, "can_filter_history", can_filter_history)
+        pulumi.set(__self__, "can_filter_policy", can_filter_policy)
+        pulumi.set(__self__, "can_group_by", can_group_by)
+        pulumi.set(__self__, "is_multiple", is_multiple)
+        pulumi.set(__self__, "is_mutable", is_mutable)
+        pulumi.set(__self__, "is_required", is_required)
+        pulumi.set(__self__, "is_visible", is_visible)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "must_group_by", must_group_by)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "operators", operators)
+        pulumi.set(__self__, "show_value_replace", show_value_replace)
+
+    @property
+    @pulumi.getter(name="canFilterHistory")
+    def can_filter_history(self) -> bool:
+        """
+        Can it be used to filter alarm history.
+        """
+        return pulumi.get(self, "can_filter_history")
+
+    @property
+    @pulumi.getter(name="canFilterPolicy")
+    def can_filter_policy(self) -> bool:
+        """
+        Can it be used to filter the policy list.
+        """
+        return pulumi.get(self, "can_filter_policy")
+
+    @property
+    @pulumi.getter(name="canGroupBy")
+    def can_group_by(self) -> bool:
+        """
+        Can it be used as an aggregation dimension.
+        """
+        return pulumi.get(self, "can_group_by")
+
+    @property
+    @pulumi.getter(name="isMultiple")
+    def is_multiple(self) -> bool:
+        """
+        Do you support multiple selections.
+        """
+        return pulumi.get(self, "is_multiple")
+
+    @property
+    @pulumi.getter(name="isMutable")
+    def is_mutable(self) -> bool:
+        """
+        Can I modify it after creation.
+        """
+        return pulumi.get(self, "is_mutable")
+
+    @property
+    @pulumi.getter(name="isRequired")
+    def is_required(self) -> bool:
+        """
+        Required or not.
+        """
+        return pulumi.get(self, "is_required")
+
+    @property
+    @pulumi.getter(name="isVisible")
+    def is_visible(self) -> bool:
+        """
+        Whether to display to users.
+        """
+        return pulumi.get(self, "is_visible")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Dimension key identifier, backend English name.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter(name="mustGroupBy")
+    def must_group_by(self) -> bool:
+        """
+        Must it be used as an aggregation dimension.
+        """
+        return pulumi.get(self, "must_group_by")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def operators(self) -> Sequence['outputs.GetAlarmAllNamespacesCommonNamespaceDimensionOperatorResult']:
+        """
+        List of supported operators.
+        """
+        return pulumi.get(self, "operators")
+
+    @property
+    @pulumi.getter(name="showValueReplace")
+    def show_value_replace(self) -> str:
+        """
+        Key to replace in front-end translation.
+        """
+        return pulumi.get(self, "show_value_replace")
+
+
+@pulumi.output_type
+class GetAlarmAllNamespacesCommonNamespaceDimensionOperatorResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 name: str):
+        """
+        :param str id: Namespace labeling.
+        :param str name: Namespace name.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Namespace labeling.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetAlarmAllNamespacesCustomNamespacesNewsResult(dict):
+    def __init__(__self__, *,
+                 available_regions: Sequence[str],
+                 config: str,
+                 dashboard_id: str,
+                 id: str,
+                 name: str,
+                 product_name: str,
+                 sort_id: int,
+                 value: str):
+        """
+        :param Sequence[str] available_regions: List of supported regions.
+        :param str config: Configuration information.
+        :param str dashboard_id: Unique representation in dashboard.
+        :param str id: Namespace labeling.
+        :param str name: Namespace name.
+        :param str product_name: Product Name.
+        :param int sort_id: Sort Id.
+        :param str value: Namespace value.
+        """
+        pulumi.set(__self__, "available_regions", available_regions)
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "dashboard_id", dashboard_id)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "sort_id", sort_id)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="availableRegions")
+    def available_regions(self) -> Sequence[str]:
+        """
+        List of supported regions.
+        """
+        return pulumi.get(self, "available_regions")
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Configuration information.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter(name="dashboardId")
+    def dashboard_id(self) -> str:
+        """
+        Unique representation in dashboard.
+        """
+        return pulumi.get(self, "dashboard_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Namespace labeling.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        Product Name.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter(name="sortId")
+    def sort_id(self) -> int:
+        """
+        Sort Id.
+        """
+        return pulumi.get(self, "sort_id")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Namespace value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmAllNamespacesQceNamespacesNewsResult(dict):
+    def __init__(__self__, *,
+                 available_regions: Sequence[str],
+                 config: str,
+                 dashboard_id: str,
+                 id: str,
+                 name: str,
+                 product_name: str,
+                 sort_id: int,
+                 value: str):
+        """
+        :param Sequence[str] available_regions: List of supported regions.
+        :param str config: Configuration information.
+        :param str dashboard_id: Unique representation in dashboard.
+        :param str id: Namespace labeling.
+        :param str name: Namespace name.
+        :param str product_name: Product Name.
+        :param int sort_id: Sort Id.
+        :param str value: Namespace value.
+        """
+        pulumi.set(__self__, "available_regions", available_regions)
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "dashboard_id", dashboard_id)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "sort_id", sort_id)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="availableRegions")
+    def available_regions(self) -> Sequence[str]:
+        """
+        List of supported regions.
+        """
+        return pulumi.get(self, "available_regions")
+
+    @property
+    @pulumi.getter
+    def config(self) -> str:
+        """
+        Configuration information.
+        """
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter(name="dashboardId")
+    def dashboard_id(self) -> str:
+        """
+        Unique representation in dashboard.
+        """
+        return pulumi.get(self, "dashboard_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Namespace labeling.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Namespace name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        Product Name.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter(name="sortId")
+    def sort_id(self) -> int:
+        """
+        Sort Id.
+        """
+        return pulumi.get(self, "sort_id")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Namespace value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmBasicAlarmsAlarmResult(dict):
+    def __init__(__self__, *,
+                 alarm_status: str,
+                 alarm_type: int,
+                 content: str,
+                 dimensions: str,
+                 duration: int,
+                 first_occur_time: str,
+                 group_id: int,
+                 group_name: str,
+                 id: int,
+                 instance_groups: Sequence['outputs.GetAlarmBasicAlarmsAlarmInstanceGroupResult'],
+                 last_occur_time: str,
+                 metric_id: int,
+                 metric_name: str,
+                 notify_ways: Sequence[str],
+                 obj_id: str,
+                 obj_name: str,
+                 project_id: int,
+                 project_name: str,
+                 region: str,
+                 status: int,
+                 view_name: str,
+                 vpc: str):
+        """
+        :param str alarm_status: Filter based on alarm status.
+        :param int alarm_type: Alarm type, 0 represents indicator alarm, 2 represents product event alarm, and 3 represents platform event alarm.
+        :param str content: Alarm content.
+        :param str dimensions: Alarm object dimension information.
+        :param int duration: Duration in seconds.
+        :param str first_occur_time: Time of occurrence.
+        :param int group_id: Policy Group ID.
+        :param str group_name: Policy Group Name.
+        :param int id: The ID of this alarm.
+        :param Sequence['GetAlarmBasicAlarmsAlarmInstanceGroupArgs'] instance_groups: Instance Group Information.
+        :param str last_occur_time: End time.
+        :param int metric_id: Indicator ID.
+        :param str metric_name: Indicator Name.
+        :param Sequence[str] notify_ways: Notification method.
+        :param str obj_id: Alarm object ID.
+        :param str obj_name: Alarm Object.
+        :param int project_id: Project ID.
+        :param str project_name: Entry name.
+        :param str region: Region.
+        :param int status: Alarm status ID, 0 indicates not recovered; 1 indicates that it has been restored; 2,3,5 indicates insufficient data; 4 indicates it has expired.
+        :param str view_name: Policy Type.
+        :param str vpc: VPC, only CVM has.
+        """
+        pulumi.set(__self__, "alarm_status", alarm_status)
+        pulumi.set(__self__, "alarm_type", alarm_type)
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "first_occur_time", first_occur_time)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "instance_groups", instance_groups)
+        pulumi.set(__self__, "last_occur_time", last_occur_time)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "notify_ways", notify_ways)
+        pulumi.set(__self__, "obj_id", obj_id)
+        pulumi.set(__self__, "obj_name", obj_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "view_name", view_name)
+        pulumi.set(__self__, "vpc", vpc)
+
+    @property
+    @pulumi.getter(name="alarmStatus")
+    def alarm_status(self) -> str:
+        """
+        Filter based on alarm status.
+        """
+        return pulumi.get(self, "alarm_status")
+
+    @property
+    @pulumi.getter(name="alarmType")
+    def alarm_type(self) -> int:
+        """
+        Alarm type, 0 represents indicator alarm, 2 represents product event alarm, and 3 represents platform event alarm.
+        """
+        return pulumi.get(self, "alarm_type")
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Alarm content.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        Alarm object dimension information.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> int:
+        """
+        Duration in seconds.
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="firstOccurTime")
+    def first_occur_time(self) -> str:
+        """
+        Time of occurrence.
+        """
+        return pulumi.get(self, "first_occur_time")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        Policy Group ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Policy Group Name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        The ID of this alarm.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="instanceGroups")
+    def instance_groups(self) -> Sequence['outputs.GetAlarmBasicAlarmsAlarmInstanceGroupResult']:
+        """
+        Instance Group Information.
+        """
+        return pulumi.get(self, "instance_groups")
+
+    @property
+    @pulumi.getter(name="lastOccurTime")
+    def last_occur_time(self) -> str:
+        """
+        End time.
+        """
+        return pulumi.get(self, "last_occur_time")
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> int:
+        """
+        Indicator ID.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Indicator Name.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="notifyWays")
+    def notify_ways(self) -> Sequence[str]:
+        """
+        Notification method.
+        """
+        return pulumi.get(self, "notify_ways")
+
+    @property
+    @pulumi.getter(name="objId")
+    def obj_id(self) -> str:
+        """
+        Alarm object ID.
+        """
+        return pulumi.get(self, "obj_id")
+
+    @property
+    @pulumi.getter(name="objName")
+    def obj_name(self) -> str:
+        """
+        Alarm Object.
+        """
+        return pulumi.get(self, "obj_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> str:
+        """
+        Entry name.
+        """
+        return pulumi.get(self, "project_name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Alarm status ID, 0 indicates not recovered; 1 indicates that it has been restored; 2,3,5 indicates insufficient data; 4 indicates it has expired.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> str:
+        """
+        Policy Type.
+        """
+        return pulumi.get(self, "view_name")
+
+    @property
+    @pulumi.getter
+    def vpc(self) -> str:
+        """
+        VPC, only CVM has.
+        """
+        return pulumi.get(self, "vpc")
+
+
+@pulumi.output_type
+class GetAlarmBasicAlarmsAlarmInstanceGroupResult(dict):
+    def __init__(__self__, *,
+                 instance_group_id: int,
+                 instance_group_name: str):
+        """
+        :param int instance_group_id: Instance Group ID.
+        :param str instance_group_name: Instance Group Name.
+        """
+        pulumi.set(__self__, "instance_group_id", instance_group_id)
+        pulumi.set(__self__, "instance_group_name", instance_group_name)
+
+    @property
+    @pulumi.getter(name="instanceGroupId")
+    def instance_group_id(self) -> int:
+        """
+        Instance Group ID.
+        """
+        return pulumi.get(self, "instance_group_id")
+
+    @property
+    @pulumi.getter(name="instanceGroupName")
+    def instance_group_name(self) -> str:
+        """
+        Instance Group Name.
+        """
+        return pulumi.get(self, "instance_group_name")
+
+
+@pulumi.output_type
+class GetAlarmBasicMetricMetricSetResult(dict):
+    def __init__(__self__, *,
+                 dimensions: Sequence['outputs.GetAlarmBasicMetricMetricSetDimensionResult'],
+                 meanings: Sequence['outputs.GetAlarmBasicMetricMetricSetMeaningResult'],
+                 metric_c_name: str,
+                 metric_e_name: str,
+                 metric_name: str,
+                 namespace: str,
+                 periods: Sequence['outputs.GetAlarmBasicMetricMetricSetPeriodResult'],
+                 unit: str,
+                 unit_cname: str):
+        """
+        :param Sequence['GetAlarmBasicMetricMetricSetDimensionArgs'] dimensions: Optional parameters, filtered by dimension.
+        :param Sequence['GetAlarmBasicMetricMetricSetMeaningArgs'] meanings: Explanation of the meaning of statistical indicators.
+        :param str metric_c_name: Indicator Chinese Name.
+        :param str metric_e_name: Indicator English name.
+        :param str metric_name: Indicator names are different for each cloud product. To obtain indicator names, please go to the monitoring indicator documents of each product, such as the indicator names of cloud servers, which can be found in Cloud Server Monitoring Indicators.
+        :param str namespace: The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843 ).
+        :param Sequence['GetAlarmBasicMetricMetricSetPeriodArgs'] periods: Indicator method within the statistical cycle.
+        :param str unit: Units used for indicators.
+        :param str unit_cname: Units used for indicators.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "meanings", meanings)
+        pulumi.set(__self__, "metric_c_name", metric_c_name)
+        pulumi.set(__self__, "metric_e_name", metric_e_name)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "periods", periods)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "unit_cname", unit_cname)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence['outputs.GetAlarmBasicMetricMetricSetDimensionResult']:
+        """
+        Optional parameters, filtered by dimension.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def meanings(self) -> Sequence['outputs.GetAlarmBasicMetricMetricSetMeaningResult']:
+        """
+        Explanation of the meaning of statistical indicators.
+        """
+        return pulumi.get(self, "meanings")
+
+    @property
+    @pulumi.getter(name="metricCName")
+    def metric_c_name(self) -> str:
+        """
+        Indicator Chinese Name.
+        """
+        return pulumi.get(self, "metric_c_name")
+
+    @property
+    @pulumi.getter(name="metricEName")
+    def metric_e_name(self) -> str:
+        """
+        Indicator English name.
+        """
+        return pulumi.get(self, "metric_e_name")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Indicator names are different for each cloud product. To obtain indicator names, please go to the monitoring indicator documents of each product, such as the indicator names of cloud servers, which can be found in Cloud Server Monitoring Indicators.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843 ).
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter
+    def periods(self) -> Sequence['outputs.GetAlarmBasicMetricMetricSetPeriodResult']:
+        """
+        Indicator method within the statistical cycle.
+        """
+        return pulumi.get(self, "periods")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Units used for indicators.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter(name="unitCname")
+    def unit_cname(self) -> str:
+        """
+        Units used for indicators.
+        """
+        return pulumi.get(self, "unit_cname")
+
+
+@pulumi.output_type
+class GetAlarmBasicMetricMetricSetDimensionResult(dict):
+    def __init__(__self__, *,
+                 dimensions: Sequence[str]):
+        """
+        :param Sequence[str] dimensions: Optional parameters, filtered by dimension.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence[str]:
+        """
+        Optional parameters, filtered by dimension.
+        """
+        return pulumi.get(self, "dimensions")
+
+
+@pulumi.output_type
+class GetAlarmBasicMetricMetricSetMeaningResult(dict):
+    def __init__(__self__, *,
+                 en: str,
+                 zh: str):
+        """
+        :param str en: Explanation of indicators in English.
+        :param str zh: Chinese interpretation of indicators.
+        """
+        pulumi.set(__self__, "en", en)
+        pulumi.set(__self__, "zh", zh)
+
+    @property
+    @pulumi.getter
+    def en(self) -> str:
+        """
+        Explanation of indicators in English.
+        """
+        return pulumi.get(self, "en")
+
+    @property
+    @pulumi.getter
+    def zh(self) -> str:
+        """
+        Chinese interpretation of indicators.
+        """
+        return pulumi.get(self, "zh")
+
+
+@pulumi.output_type
+class GetAlarmBasicMetricMetricSetPeriodResult(dict):
+    def __init__(__self__, *,
+                 period: str,
+                 stat_types: Sequence[str]):
+        """
+        :param str period: Cycle.
+        :param Sequence[str] stat_types: Statistical methods.
+        """
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "stat_types", stat_types)
+
+    @property
+    @pulumi.getter
+    def period(self) -> str:
+        """
+        Cycle.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="statTypes")
+    def stat_types(self) -> Sequence[str]:
+        """
+        Statistical methods.
+        """
+        return pulumi.get(self, "stat_types")
+
+
+@pulumi.output_type
+class GetAlarmConditionsTemplateTemplateGroupListResult(dict):
+    def __init__(__self__, *,
+                 conditions: Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListConditionResult'],
+                 event_conditions: Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListEventConditionResult'],
+                 group_id: int,
+                 group_name: str,
+                 insert_time: int,
+                 is_union_rule: int,
+                 last_edit_uin: int,
+                 policy_groups: Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListPolicyGroupResult'],
+                 remark: str,
+                 update_time: int,
+                 view_name: str):
+        """
+        :param Sequence['GetAlarmConditionsTemplateTemplateGroupListConditionArgs'] conditions: Indicator alarm rules.
+        :param Sequence['GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs'] event_conditions: Event alarm rules.
+        :param int group_id: Filter queries based on trigger condition template ID.
+        :param str group_name: Filter queries based on trigger condition template names.
+        :param int insert_time: Creation time.
+        :param int is_union_rule: Is it a relationship rule with.
+        :param int last_edit_uin: Last modified by UIN.
+        :param Sequence['GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs'] policy_groups: Associate Alert Policy Group.
+        :param str remark: Remarks.
+        :param int update_time: Update time.
+        :param str view_name: View name, composed of DescribeAllNamespacesObtain. For cloud product monitoring, retrieve the QceNamespacesNew. N.ID parameter from the interface, such as cvm_ Device.
+        """
+        pulumi.set(__self__, "conditions", conditions)
+        pulumi.set(__self__, "event_conditions", event_conditions)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "insert_time", insert_time)
+        pulumi.set(__self__, "is_union_rule", is_union_rule)
+        pulumi.set(__self__, "last_edit_uin", last_edit_uin)
+        pulumi.set(__self__, "policy_groups", policy_groups)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "view_name", view_name)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListConditionResult']:
+        """
+        Indicator alarm rules.
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter(name="eventConditions")
+    def event_conditions(self) -> Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListEventConditionResult']:
+        """
+        Event alarm rules.
+        """
+        return pulumi.get(self, "event_conditions")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        Filter queries based on trigger condition template ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Filter queries based on trigger condition template names.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="insertTime")
+    def insert_time(self) -> int:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "insert_time")
+
+    @property
+    @pulumi.getter(name="isUnionRule")
+    def is_union_rule(self) -> int:
+        """
+        Is it a relationship rule with.
+        """
+        return pulumi.get(self, "is_union_rule")
+
+    @property
+    @pulumi.getter(name="lastEditUin")
+    def last_edit_uin(self) -> int:
+        """
+        Last modified by UIN.
+        """
+        return pulumi.get(self, "last_edit_uin")
+
+    @property
+    @pulumi.getter(name="policyGroups")
+    def policy_groups(self) -> Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListPolicyGroupResult']:
+        """
+        Associate Alert Policy Group.
+        """
+        return pulumi.get(self, "policy_groups")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remarks.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> int:
+        """
+        Update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> str:
+        """
+        View name, composed of DescribeAllNamespacesObtain. For cloud product monitoring, retrieve the QceNamespacesNew. N.ID parameter from the interface, such as cvm_ Device.
+        """
+        return pulumi.get(self, "view_name")
+
+
+@pulumi.output_type
+class GetAlarmConditionsTemplateTemplateGroupListConditionResult(dict):
+    def __init__(__self__, *,
+                 alarm_notify_period: int,
+                 alarm_notify_type: int,
+                 calc_type: str,
+                 calc_value: str,
+                 continue_time: str,
+                 is_advanced: int,
+                 is_open: int,
+                 metric_display_name: str,
+                 metric_id: int,
+                 period: int,
+                 product_id: str,
+                 rule_id: int,
+                 unit: str):
+        """
+        :param int alarm_notify_period: Alarm notification frequency.
+        :param int alarm_notify_type: Predefined repeated notification strategy (0- alarm only once, 1- exponential alarm, 2- connection alarm).
+        :param str calc_type: Detection method.
+        :param str calc_value: Detection value.
+        :param str continue_time: Duration in seconds.
+        :param int is_advanced: Whether it is an advanced indicator, 0: No; 1: Yes.
+        :param int is_open: Whether to activate advanced indicators, 0: No; 1: Yes.
+        :param str metric_display_name: Indicator display name (external).
+        :param int metric_id: Indicator ID.
+        :param int period: Cycle.
+        :param str product_id: Product ID.
+        :param int rule_id: Rule ID.
+        :param str unit: Indicator unit.
+        """
+        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
+        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
+        pulumi.set(__self__, "calc_type", calc_type)
+        pulumi.set(__self__, "calc_value", calc_value)
+        pulumi.set(__self__, "continue_time", continue_time)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "metric_display_name", metric_display_name)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "unit", unit)
+
+    @property
+    @pulumi.getter(name="alarmNotifyPeriod")
+    def alarm_notify_period(self) -> int:
+        """
+        Alarm notification frequency.
+        """
+        return pulumi.get(self, "alarm_notify_period")
+
+    @property
+    @pulumi.getter(name="alarmNotifyType")
+    def alarm_notify_type(self) -> int:
+        """
+        Predefined repeated notification strategy (0- alarm only once, 1- exponential alarm, 2- connection alarm).
+        """
+        return pulumi.get(self, "alarm_notify_type")
+
+    @property
+    @pulumi.getter(name="calcType")
+    def calc_type(self) -> str:
+        """
+        Detection method.
+        """
+        return pulumi.get(self, "calc_type")
+
+    @property
+    @pulumi.getter(name="calcValue")
+    def calc_value(self) -> str:
+        """
+        Detection value.
+        """
+        return pulumi.get(self, "calc_value")
+
+    @property
+    @pulumi.getter(name="continueTime")
+    def continue_time(self) -> str:
+        """
+        Duration in seconds.
+        """
+        return pulumi.get(self, "continue_time")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Whether it is an advanced indicator, 0: No; 1: Yes.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Whether to activate advanced indicators, 0: No; 1: Yes.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter(name="metricDisplayName")
+    def metric_display_name(self) -> str:
+        """
+        Indicator display name (external).
+        """
+        return pulumi.get(self, "metric_display_name")
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> int:
+        """
+        Indicator ID.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Cycle.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> str:
+        """
+        Product ID.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> int:
+        """
+        Rule ID.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Indicator unit.
+        """
+        return pulumi.get(self, "unit")
+
+
+@pulumi.output_type
+class GetAlarmConditionsTemplateTemplateGroupListEventConditionResult(dict):
+    def __init__(__self__, *,
+                 alarm_notify_period: str,
+                 alarm_notify_type: str,
+                 event_display_name: str,
+                 event_id: str,
+                 rule_id: str):
+        """
+        :param str alarm_notify_period: Alarm notification frequency.
+        :param str alarm_notify_type: Predefined repeated notification strategy (0- alarm only once, 1- exponential alarm, 2- connection alarm).
+        :param str event_display_name: Event Display Name (External).
+        :param str event_id: Event ID.
+        :param str rule_id: Rule ID.
+        """
+        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
+        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
+        pulumi.set(__self__, "event_display_name", event_display_name)
+        pulumi.set(__self__, "event_id", event_id)
+        pulumi.set(__self__, "rule_id", rule_id)
+
+    @property
+    @pulumi.getter(name="alarmNotifyPeriod")
+    def alarm_notify_period(self) -> str:
+        """
+        Alarm notification frequency.
+        """
+        return pulumi.get(self, "alarm_notify_period")
+
+    @property
+    @pulumi.getter(name="alarmNotifyType")
+    def alarm_notify_type(self) -> str:
+        """
+        Predefined repeated notification strategy (0- alarm only once, 1- exponential alarm, 2- connection alarm).
+        """
+        return pulumi.get(self, "alarm_notify_type")
+
+    @property
+    @pulumi.getter(name="eventDisplayName")
+    def event_display_name(self) -> str:
+        """
+        Event Display Name (External).
+        """
+        return pulumi.get(self, "event_display_name")
+
+    @property
+    @pulumi.getter(name="eventId")
+    def event_id(self) -> str:
+        """
+        Event ID.
+        """
+        return pulumi.get(self, "event_id")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        Rule ID.
+        """
+        return pulumi.get(self, "rule_id")
+
+
+@pulumi.output_type
+class GetAlarmConditionsTemplateTemplateGroupListPolicyGroupResult(dict):
+    def __init__(__self__, *,
+                 can_set_default: bool,
+                 enable: bool,
+                 group_id: int,
+                 group_name: str,
+                 insert_time: int,
+                 is_default: int,
+                 is_union_rule: int,
+                 last_edit_uin: int,
+                 no_shielded_instance_count: int,
+                 parent_group_id: int,
+                 project_id: int,
+                 receiver_infos: Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoResult'],
+                 remark: str,
+                 total_instance_count: int,
+                 update_time: int,
+                 view_name: str):
+        """
+        :param bool can_set_default: Can it be set as the default alarm strategy.
+        :param bool enable: Alarm Policy Enable Status.
+        :param int group_id: Filter queries based on trigger condition template ID.
+        :param str group_name: Filter queries based on trigger condition template names.
+        :param int insert_time: Creation time.
+        :param int is_default: Is it the default alarm policy.
+        :param int is_union_rule: Is it a relationship rule with.
+        :param int last_edit_uin: Last modified by UIN.
+        :param int no_shielded_instance_count: Number of unshielded instances.
+        :param int parent_group_id: Parent Policy Group ID.
+        :param int project_id: Project ID.
+        :param Sequence['GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs'] receiver_infos: Alarm receiving object information.
+        :param str remark: Remarks.
+        :param int total_instance_count: Total number of bound instances.
+        :param int update_time: Update time.
+        :param str view_name: View name, composed of DescribeAllNamespacesObtain. For cloud product monitoring, retrieve the QceNamespacesNew. N.ID parameter from the interface, such as cvm_ Device.
+        """
+        pulumi.set(__self__, "can_set_default", can_set_default)
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "insert_time", insert_time)
+        pulumi.set(__self__, "is_default", is_default)
+        pulumi.set(__self__, "is_union_rule", is_union_rule)
+        pulumi.set(__self__, "last_edit_uin", last_edit_uin)
+        pulumi.set(__self__, "no_shielded_instance_count", no_shielded_instance_count)
+        pulumi.set(__self__, "parent_group_id", parent_group_id)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "receiver_infos", receiver_infos)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "total_instance_count", total_instance_count)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "view_name", view_name)
+
+    @property
+    @pulumi.getter(name="canSetDefault")
+    def can_set_default(self) -> bool:
+        """
+        Can it be set as the default alarm strategy.
+        """
+        return pulumi.get(self, "can_set_default")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> bool:
+        """
+        Alarm Policy Enable Status.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        Filter queries based on trigger condition template ID.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Filter queries based on trigger condition template names.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="insertTime")
+    def insert_time(self) -> int:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "insert_time")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> int:
+        """
+        Is it the default alarm policy.
+        """
+        return pulumi.get(self, "is_default")
+
+    @property
+    @pulumi.getter(name="isUnionRule")
+    def is_union_rule(self) -> int:
+        """
+        Is it a relationship rule with.
+        """
+        return pulumi.get(self, "is_union_rule")
+
+    @property
+    @pulumi.getter(name="lastEditUin")
+    def last_edit_uin(self) -> int:
+        """
+        Last modified by UIN.
+        """
+        return pulumi.get(self, "last_edit_uin")
+
+    @property
+    @pulumi.getter(name="noShieldedInstanceCount")
+    def no_shielded_instance_count(self) -> int:
+        """
+        Number of unshielded instances.
+        """
+        return pulumi.get(self, "no_shielded_instance_count")
+
+    @property
+    @pulumi.getter(name="parentGroupId")
+    def parent_group_id(self) -> int:
+        """
+        Parent Policy Group ID.
+        """
+        return pulumi.get(self, "parent_group_id")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="receiverInfos")
+    def receiver_infos(self) -> Sequence['outputs.GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoResult']:
+        """
+        Alarm receiving object information.
+        """
+        return pulumi.get(self, "receiver_infos")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Remarks.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="totalInstanceCount")
+    def total_instance_count(self) -> int:
+        """
+        Total number of bound instances.
+        """
+        return pulumi.get(self, "total_instance_count")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> int:
+        """
+        Update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> str:
+        """
+        View name, composed of DescribeAllNamespacesObtain. For cloud product monitoring, retrieve the QceNamespacesNew. N.ID parameter from the interface, such as cvm_ Device.
+        """
+        return pulumi.get(self, "view_name")
+
+
+@pulumi.output_type
+class GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 need_send_notice: int,
+                 notify_ways: Sequence[str],
+                 person_interval: int,
+                 receiver_group_lists: Sequence[int],
+                 receiver_type: str,
+                 receiver_user_lists: Sequence[int],
+                 recover_notifies: Sequence[str],
+                 round_interval: int,
+                 round_number: int,
+                 send_fors: Sequence[str],
+                 start_time: int,
+                 uid_lists: Sequence[int]):
+        """
+        :param int end_time: Effective period end time.
+        :param int need_send_notice: Do you need to send a notification.
+        :param Sequence[str] notify_ways: Alarm reception channel.
+        :param int person_interval: Telephone alarm to personal interval (seconds).
+        :param Sequence[int] receiver_group_lists: Message receiving group list.
+        :param str receiver_type: Receiver type.
+        :param Sequence[int] receiver_user_lists: Recipient list. List of recipient IDs queried through the platform interface.
+        :param Sequence[str] recover_notifies: Alarm recovery notification method.
+        :param int round_interval: Telephone alarm interval per round (seconds).
+        :param int round_number: Number of phone alarm rounds.
+        :param Sequence[str] send_fors: Timing of telephone alarm notification. Optional OCCUR (notification during alarm), RECOVER (notification during recovery).
+        :param int start_time: Effective period start time.
+        :param Sequence[int] uid_lists: Telephone alarm receiver uid.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "need_send_notice", need_send_notice)
+        pulumi.set(__self__, "notify_ways", notify_ways)
+        pulumi.set(__self__, "person_interval", person_interval)
+        pulumi.set(__self__, "receiver_group_lists", receiver_group_lists)
+        pulumi.set(__self__, "receiver_type", receiver_type)
+        pulumi.set(__self__, "receiver_user_lists", receiver_user_lists)
+        pulumi.set(__self__, "recover_notifies", recover_notifies)
+        pulumi.set(__self__, "round_interval", round_interval)
+        pulumi.set(__self__, "round_number", round_number)
+        pulumi.set(__self__, "send_fors", send_fors)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "uid_lists", uid_lists)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        Effective period end time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="needSendNotice")
+    def need_send_notice(self) -> int:
+        """
+        Do you need to send a notification.
+        """
+        return pulumi.get(self, "need_send_notice")
+
+    @property
+    @pulumi.getter(name="notifyWays")
+    def notify_ways(self) -> Sequence[str]:
+        """
+        Alarm reception channel.
+        """
+        return pulumi.get(self, "notify_ways")
+
+    @property
+    @pulumi.getter(name="personInterval")
+    def person_interval(self) -> int:
+        """
+        Telephone alarm to personal interval (seconds).
+        """
+        return pulumi.get(self, "person_interval")
+
+    @property
+    @pulumi.getter(name="receiverGroupLists")
+    def receiver_group_lists(self) -> Sequence[int]:
+        """
+        Message receiving group list.
+        """
+        return pulumi.get(self, "receiver_group_lists")
+
+    @property
+    @pulumi.getter(name="receiverType")
+    def receiver_type(self) -> str:
+        """
+        Receiver type.
+        """
+        return pulumi.get(self, "receiver_type")
+
+    @property
+    @pulumi.getter(name="receiverUserLists")
+    def receiver_user_lists(self) -> Sequence[int]:
+        """
+        Recipient list. List of recipient IDs queried through the platform interface.
+        """
+        return pulumi.get(self, "receiver_user_lists")
+
+    @property
+    @pulumi.getter(name="recoverNotifies")
+    def recover_notifies(self) -> Sequence[str]:
+        """
+        Alarm recovery notification method.
+        """
+        return pulumi.get(self, "recover_notifies")
+
+    @property
+    @pulumi.getter(name="roundInterval")
+    def round_interval(self) -> int:
+        """
+        Telephone alarm interval per round (seconds).
+        """
+        return pulumi.get(self, "round_interval")
+
+    @property
+    @pulumi.getter(name="roundNumber")
+    def round_number(self) -> int:
+        """
+        Number of phone alarm rounds.
+        """
+        return pulumi.get(self, "round_number")
+
+    @property
+    @pulumi.getter(name="sendFors")
+    def send_fors(self) -> Sequence[str]:
+        """
+        Timing of telephone alarm notification. Optional OCCUR (notification during alarm), RECOVER (notification during recovery).
+        """
+        return pulumi.get(self, "send_fors")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        Effective period start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="uidLists")
+    def uid_lists(self) -> Sequence[int]:
+        """
+        Telephone alarm receiver uid.
+        """
+        return pulumi.get(self, "uid_lists")
+
+
+@pulumi.output_type
+class GetAlarmHistoryHistoryResult(dict):
+    def __init__(__self__, *,
+                 alarm_id: str,
+                 alarm_level: str,
+                 alarm_object: str,
+                 alarm_status: str,
+                 alarm_type: str,
+                 content: str,
+                 dimensions: str,
+                 event_id: int,
+                 first_occur_time: int,
+                 instance_groups: Sequence['outputs.GetAlarmHistoryHistoryInstanceGroupResult'],
+                 last_occur_time: int,
+                 metrics_infos: Sequence['outputs.GetAlarmHistoryHistoryMetricsInfoResult'],
+                 monitor_type: str,
+                 namespace: str,
+                 notice_ways: Sequence[str],
+                 origin_id: str,
+                 policy_exists: int,
+                 policy_id: str,
+                 policy_name: str,
+                 project_id: int,
+                 project_name: str,
+                 receiver_groups: Sequence[int],
+                 receiver_uids: Sequence[int],
+                 region: str,
+                 vpc: str):
+        """
+        :param str alarm_id: Alarm record ID.
+        :param str alarm_level: Alarm level.Note: this field may return null, indicating that no valid values can be obtained.
+        :param str alarm_object: Filter by alarm object. Fuzzy search with string is supported.
+        :param str alarm_status: Filter by alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data). If this parameter is left empty, all will be queried by default.
+        :param str alarm_type: Alarm type.
+        :param str content: Fuzzy search by alarm content.
+        :param str dimensions: Dimension information of an instance that triggered alarms.Note: this field may return null, indicating that no valid values can be obtained.
+        :param int event_id: Event ID.
+        :param int first_occur_time: Timestamp of the first occurrence.
+        :param Sequence['GetAlarmHistoryHistoryInstanceGroupArgs'] instance_groups: Instance group of alarm object.
+        :param int last_occur_time: Timestamp of the last occurrence.
+        :param Sequence['GetAlarmHistoryHistoryMetricsInfoArgs'] metrics_infos: Metric informationNote: this field may return null, indicating that no valid values can be obtained.
+        :param str monitor_type: Monitor type.
+        :param str namespace: Policy type.
+        :param Sequence[str] notice_ways: Alarm channel list. Valid values: SMS (SMS), EMAIL (email), CALL (phone), WECHAT (WeChat).
+        :param str origin_id: Alarm policy ID, which can be used when you call APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject) to bind/unbind instances or instance groups to/from an alarm policy.
+        :param int policy_exists: Whether the policy exists. Valid values: 0 (no), 1 (yes).
+        :param str policy_id: Alarm policy ID.
+        :param str policy_name: Fuzzy search by policy name.
+        :param int project_id: Project ID.
+        :param str project_name: Project name.
+        :param Sequence[int] receiver_groups: Search by recipient group.
+        :param Sequence[int] receiver_uids: Search by recipient.
+        :param str region: Region.
+        :param str vpc: VPC of alarm object for basic product alarm.
+        """
+        pulumi.set(__self__, "alarm_id", alarm_id)
+        pulumi.set(__self__, "alarm_level", alarm_level)
+        pulumi.set(__self__, "alarm_object", alarm_object)
+        pulumi.set(__self__, "alarm_status", alarm_status)
+        pulumi.set(__self__, "alarm_type", alarm_type)
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "event_id", event_id)
+        pulumi.set(__self__, "first_occur_time", first_occur_time)
+        pulumi.set(__self__, "instance_groups", instance_groups)
+        pulumi.set(__self__, "last_occur_time", last_occur_time)
+        pulumi.set(__self__, "metrics_infos", metrics_infos)
+        pulumi.set(__self__, "monitor_type", monitor_type)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "notice_ways", notice_ways)
+        pulumi.set(__self__, "origin_id", origin_id)
+        pulumi.set(__self__, "policy_exists", policy_exists)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "policy_name", policy_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "receiver_groups", receiver_groups)
+        pulumi.set(__self__, "receiver_uids", receiver_uids)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "vpc", vpc)
+
+    @property
+    @pulumi.getter(name="alarmId")
+    def alarm_id(self) -> str:
+        """
+        Alarm record ID.
+        """
+        return pulumi.get(self, "alarm_id")
+
+    @property
+    @pulumi.getter(name="alarmLevel")
+    def alarm_level(self) -> str:
+        """
+        Alarm level.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "alarm_level")
+
+    @property
+    @pulumi.getter(name="alarmObject")
+    def alarm_object(self) -> str:
+        """
+        Filter by alarm object. Fuzzy search with string is supported.
+        """
+        return pulumi.get(self, "alarm_object")
+
+    @property
+    @pulumi.getter(name="alarmStatus")
+    def alarm_status(self) -> str:
+        """
+        Filter by alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data). If this parameter is left empty, all will be queried by default.
+        """
+        return pulumi.get(self, "alarm_status")
+
+    @property
+    @pulumi.getter(name="alarmType")
+    def alarm_type(self) -> str:
+        """
+        Alarm type.
+        """
+        return pulumi.get(self, "alarm_type")
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Fuzzy search by alarm content.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        Dimension information of an instance that triggered alarms.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter(name="eventId")
+    def event_id(self) -> int:
+        """
+        Event ID.
+        """
+        return pulumi.get(self, "event_id")
+
+    @property
+    @pulumi.getter(name="firstOccurTime")
+    def first_occur_time(self) -> int:
+        """
+        Timestamp of the first occurrence.
+        """
+        return pulumi.get(self, "first_occur_time")
+
+    @property
+    @pulumi.getter(name="instanceGroups")
+    def instance_groups(self) -> Sequence['outputs.GetAlarmHistoryHistoryInstanceGroupResult']:
+        """
+        Instance group of alarm object.
+        """
+        return pulumi.get(self, "instance_groups")
+
+    @property
+    @pulumi.getter(name="lastOccurTime")
+    def last_occur_time(self) -> int:
+        """
+        Timestamp of the last occurrence.
+        """
+        return pulumi.get(self, "last_occur_time")
+
+    @property
+    @pulumi.getter(name="metricsInfos")
+    def metrics_infos(self) -> Sequence['outputs.GetAlarmHistoryHistoryMetricsInfoResult']:
+        """
+        Metric informationNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "metrics_infos")
+
+    @property
+    @pulumi.getter(name="monitorType")
+    def monitor_type(self) -> str:
+        """
+        Monitor type.
+        """
+        return pulumi.get(self, "monitor_type")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Policy type.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="noticeWays")
+    def notice_ways(self) -> Sequence[str]:
+        """
+        Alarm channel list. Valid values: SMS (SMS), EMAIL (email), CALL (phone), WECHAT (WeChat).
+        """
+        return pulumi.get(self, "notice_ways")
+
+    @property
+    @pulumi.getter(name="originId")
+    def origin_id(self) -> str:
+        """
+        Alarm policy ID, which can be used when you call APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject) to bind/unbind instances or instance groups to/from an alarm policy.
+        """
+        return pulumi.get(self, "origin_id")
+
+    @property
+    @pulumi.getter(name="policyExists")
+    def policy_exists(self) -> int:
+        """
+        Whether the policy exists. Valid values: 0 (no), 1 (yes).
+        """
+        return pulumi.get(self, "policy_exists")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Alarm policy ID.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> str:
+        """
+        Fuzzy search by policy name.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> str:
+        """
+        Project name.
+        """
+        return pulumi.get(self, "project_name")
+
+    @property
+    @pulumi.getter(name="receiverGroups")
+    def receiver_groups(self) -> Sequence[int]:
+        """
+        Search by recipient group.
+        """
+        return pulumi.get(self, "receiver_groups")
+
+    @property
+    @pulumi.getter(name="receiverUids")
+    def receiver_uids(self) -> Sequence[int]:
+        """
+        Search by recipient.
+        """
+        return pulumi.get(self, "receiver_uids")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def vpc(self) -> str:
+        """
+        VPC of alarm object for basic product alarm.
+        """
+        return pulumi.get(self, "vpc")
+
+
+@pulumi.output_type
+class GetAlarmHistoryHistoryInstanceGroupResult(dict):
+    def __init__(__self__, *,
+                 id: int,
+                 name: str):
+        """
+        :param int id: Instance group ID.
+        :param str name: Instance group name.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Instance group ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Instance group name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetAlarmHistoryHistoryMetricsInfoResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 metric_name: str,
+                 period: int,
+                 qce_namespace: str,
+                 value: str):
+        """
+        :param str description: Metric display name.
+        :param str metric_name: Metric name.
+        :param int period: Statistical period.
+        :param str qce_namespace: Namespace used to query data by Tencent Cloud service monitoring type.
+        :param str value: Value triggering alarm.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "qce_namespace", qce_namespace)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Metric display name.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric name.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Statistical period.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="qceNamespace")
+    def qce_namespace(self) -> str:
+        """
+        Namespace used to query data by Tencent Cloud service monitoring type.
+        """
+        return pulumi.get(self, "qce_namespace")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value triggering alarm.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmHistoryNamespaceResult(dict):
+    def __init__(__self__, *,
+                 monitor_type: str,
+                 namespace: str):
+        """
+        :param str monitor_type: Monitor type.
+        :param str namespace: Policy type.
+        """
+        pulumi.set(__self__, "monitor_type", monitor_type)
+        pulumi.set(__self__, "namespace", namespace)
+
+    @property
+    @pulumi.getter(name="monitorType")
+    def monitor_type(self) -> str:
+        """
+        Monitor type.
+        """
+        return pulumi.get(self, "monitor_type")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Policy type.
+        """
+        return pulumi.get(self, "namespace")
+
+
+@pulumi.output_type
+class GetAlarmMetricMetricResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 dimensions: Sequence[str],
+                 is_advanced: int,
+                 is_open: int,
+                 max: float,
+                 metric_configs: Sequence['outputs.GetAlarmMetricMetricMetricConfigResult'],
+                 metric_name: str,
+                 min: float,
+                 namespace: str,
+                 operators: Sequence['outputs.GetAlarmMetricMetricOperatorResult'],
+                 periods: Sequence[int],
+                 product_id: int,
+                 unit: str):
+        """
+        :param str description: Indicator display name.
+        :param Sequence[str] dimensions: Dimension List.
+        :param int is_advanced: Is it a high-level indicator. 1 Yes 0 No.
+        :param int is_open: Is the advanced indicator activated. 1 Yes 0 No.
+        :param float max: Maximum value.
+        :param Sequence['GetAlarmMetricMetricMetricConfigArgs'] metric_configs: Indicator configuration.
+        :param str metric_name: Indicator Name.
+        :param float min: Minimum value.
+        :param str namespace: Alarm policy type, obtained from DescribeAllNamespaces, such as cvm_device.
+        :param Sequence['GetAlarmMetricMetricOperatorArgs'] operators: Matching operator.
+        :param Sequence[int] periods: Indicator trigger.
+        :param int product_id: Integration Center Product ID.
+        :param str unit: Unit.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "metric_configs", metric_configs)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "min", min)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "operators", operators)
+        pulumi.set(__self__, "periods", periods)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "unit", unit)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Indicator display name.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence[str]:
+        """
+        Dimension List.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Is it a high-level indicator. 1 Yes 0 No.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Is the advanced indicator activated. 1 Yes 0 No.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter
+    def max(self) -> float:
+        """
+        Maximum value.
+        """
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter(name="metricConfigs")
+    def metric_configs(self) -> Sequence['outputs.GetAlarmMetricMetricMetricConfigResult']:
+        """
+        Indicator configuration.
+        """
+        return pulumi.get(self, "metric_configs")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Indicator Name.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter
+    def min(self) -> float:
+        """
+        Minimum value.
+        """
+        return pulumi.get(self, "min")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Alarm policy type, obtained from DescribeAllNamespaces, such as cvm_device.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter
+    def operators(self) -> Sequence['outputs.GetAlarmMetricMetricOperatorResult']:
+        """
+        Matching operator.
+        """
+        return pulumi.get(self, "operators")
+
+    @property
+    @pulumi.getter
+    def periods(self) -> Sequence[int]:
+        """
+        Indicator trigger.
+        """
+        return pulumi.get(self, "periods")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> int:
+        """
+        Integration Center Product ID.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit.
+        """
+        return pulumi.get(self, "unit")
+
+
+@pulumi.output_type
+class GetAlarmMetricMetricMetricConfigResult(dict):
+    def __init__(__self__, *,
+                 continue_periods: Sequence[int],
+                 operators: Sequence[str],
+                 periods: Sequence[int]):
+        """
+        :param Sequence[int] continue_periods: Number of allowed duration cycles for configuration.
+        :param Sequence[str] operators: Allowed Operators.
+        :param Sequence[int] periods: The data period allowed for configuration, in seconds.
+        """
+        pulumi.set(__self__, "continue_periods", continue_periods)
+        pulumi.set(__self__, "operators", operators)
+        pulumi.set(__self__, "periods", periods)
+
+    @property
+    @pulumi.getter(name="continuePeriods")
+    def continue_periods(self) -> Sequence[int]:
+        """
+        Number of allowed duration cycles for configuration.
+        """
+        return pulumi.get(self, "continue_periods")
+
+    @property
+    @pulumi.getter
+    def operators(self) -> Sequence[str]:
+        """
+        Allowed Operators.
+        """
+        return pulumi.get(self, "operators")
+
+    @property
+    @pulumi.getter
+    def periods(self) -> Sequence[int]:
+        """
+        The data period allowed for configuration, in seconds.
+        """
+        return pulumi.get(self, "periods")
+
+
+@pulumi.output_type
+class GetAlarmMetricMetricOperatorResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 name: str):
+        """
+        :param str id: Operator identification.
+        :param str name: Operator Display Name.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Operator identification.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Operator Display Name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetAlarmMonitorTypeMonitorTypeInfoResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 name: str,
+                 sort_id: int):
+        """
+        :param str id: Monitoring type ID.
+        :param str name: Monitoring type.
+        :param int sort_id: Sort order.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "sort_id", sort_id)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Monitoring type ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Monitoring type.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="sortId")
+    def sort_id(self) -> int:
+        """
+        Sort order.
+        """
+        return pulumi.get(self, "sort_id")
+
+
+@pulumi.output_type
+class GetAlarmNoticeCallbacksUrlNoticeResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 is_valid: int,
+                 start_time: int,
+                 url: str,
+                 validation_code: str,
+                 weekdays: Sequence[int]):
+        """
+        :param int end_time: The number of seconds from the end of the notification day.
+        :param int is_valid: Verified 0=No 1=Yes.
+        :param int start_time: The number of seconds starting from the day of notification start time.
+        :param str url: Callback URL (limited to 256 characters).
+        :param str validation_code: Verification code.
+        :param Sequence[int] weekdays: Notification period 1-7 represents Monday to Sunday.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "is_valid", is_valid)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "url", url)
+        pulumi.set(__self__, "validation_code", validation_code)
+        pulumi.set(__self__, "weekdays", weekdays)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        The number of seconds from the end of the notification day.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="isValid")
+    def is_valid(self) -> int:
+        """
+        Verified 0=No 1=Yes.
+        """
+        return pulumi.get(self, "is_valid")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        The number of seconds starting from the day of notification start time.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Callback URL (limited to 256 characters).
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="validationCode")
+    def validation_code(self) -> str:
+        """
+        Verification code.
+        """
+        return pulumi.get(self, "validation_code")
+
+    @property
+    @pulumi.getter
+    def weekdays(self) -> Sequence[int]:
+        """
+        Notification period 1-7 represents Monday to Sunday.
+        """
+        return pulumi.get(self, "weekdays")
+
+
+@pulumi.output_type
 class GetAlarmNoticesAlarmNoticeResult(dict):
     def __init__(__self__, *,
+                 amp_consumer_id: str,
                  cls_notices: Sequence['outputs.GetAlarmNoticesAlarmNoticeClsNoticeResult'],
                  id: str,
                  is_preset: int,
@@ -3031,6 +5426,7 @@ class GetAlarmNoticesAlarmNoticeResult(dict):
                  url_notices: Sequence['outputs.GetAlarmNoticesAlarmNoticeUrlNoticeResult'],
                  user_notices: Sequence['outputs.GetAlarmNoticesAlarmNoticeUserNoticeResult']):
         """
+        :param str amp_consumer_id: AMP consumer ID.
         :param Sequence['GetAlarmNoticesAlarmNoticeClsNoticeArgs'] cls_notices: A maximum of one alarm notification can be pushed to the CLS service.
         :param str id: Alarm notification template ID.
         :param int is_preset: Whether it is the system default notification template 0=No 1=Yes.
@@ -3043,6 +5439,7 @@ class GetAlarmNoticesAlarmNoticeResult(dict):
         :param Sequence['GetAlarmNoticesAlarmNoticeUrlNoticeArgs'] url_notices: The maximum number of callback notifications is 3.
         :param Sequence['GetAlarmNoticesAlarmNoticeUserNoticeArgs'] user_notices: Alarm notification template list.(At most five).
         """
+        pulumi.set(__self__, "amp_consumer_id", amp_consumer_id)
         pulumi.set(__self__, "cls_notices", cls_notices)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "is_preset", is_preset)
@@ -3054,6 +5451,14 @@ class GetAlarmNoticesAlarmNoticeResult(dict):
         pulumi.set(__self__, "updated_by", updated_by)
         pulumi.set(__self__, "url_notices", url_notices)
         pulumi.set(__self__, "user_notices", user_notices)
+
+    @property
+    @pulumi.getter(name="ampConsumerId")
+    def amp_consumer_id(self) -> str:
+        """
+        AMP consumer ID.
+        """
+        return pulumi.get(self, "amp_consumer_id")
 
     @property
     @pulumi.getter(name="clsNotices")
@@ -3397,6 +5802,2241 @@ class GetAlarmNoticesAlarmNoticeUserNoticeResult(dict):
 
 
 @pulumi.output_type
+class GetAlarmPolicyPolicyResult(dict):
+    def __init__(__self__, *,
+                 advanced_metric_number: int,
+                 can_set_default: int,
+                 condition_template_id: str,
+                 conditions: Sequence['outputs.GetAlarmPolicyPolicyConditionResult'],
+                 conditions_temps: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempResult'],
+                 enable: int,
+                 event_conditions: Sequence['outputs.GetAlarmPolicyPolicyEventConditionResult'],
+                 filter_dimensions_param: str,
+                 insert_time: int,
+                 instance_group_id: int,
+                 instance_group_name: str,
+                 instance_sum: int,
+                 is_bind_all: int,
+                 is_default: int,
+                 is_one_click: int,
+                 last_edit_uin: str,
+                 monitor_type: str,
+                 namespace: str,
+                 namespace_show_name: str,
+                 notice_ids: Sequence[str],
+                 notices: Sequence['outputs.GetAlarmPolicyPolicyNoticeResult'],
+                 one_click_status: int,
+                 origin_id: str,
+                 policy_id: str,
+                 policy_name: str,
+                 project_id: int,
+                 project_name: str,
+                 regions: Sequence[str],
+                 remark: str,
+                 rule_type: str,
+                 tag_instances: Sequence['outputs.GetAlarmPolicyPolicyTagInstanceResult'],
+                 tags: Sequence['outputs.GetAlarmPolicyPolicyTagResult'],
+                 trigger_tasks: Sequence['outputs.GetAlarmPolicyPolicyTriggerTaskResult'],
+                 update_time: int,
+                 use_sum: int):
+        """
+        :param int advanced_metric_number: The number of advanced metrics.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int can_set_default: Whether the default policy can be set. Valid values: 1 (yes), 0 (no)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str condition_template_id: Trigger condition template IDNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionArgs'] conditions: Metric trigger conditionNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempArgs'] conditions_temps: Template policy groupNote: this field may return null, indicating that no valid values can be obtained.
+        :param int enable: Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all.
+        :param Sequence['GetAlarmPolicyPolicyEventConditionArgs'] event_conditions: Event trigger conditioNote: this field may return null, indicating that no valid values can be obtained.
+        :param str filter_dimensions_param: Information on the filter dimension associated with a policy.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int insert_time: Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+        :param int instance_group_id: Instance group ID.
+        :param str instance_group_name: Instance group nameNote: this field may return null, indicating that no valid values can be obtained.
+        :param int instance_sum: Number of instancesNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_bind_all: Whether the policy is associated with all objectsNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_default: Whether it is the default policy. Valid values: 1 (yes), 0 (no)Note: this field may return null, indicating that no valid values can be obtained.
+        :param int is_one_click: Whether it is a quick alarm policy.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str last_edit_uin: Uin of the last modifying userNote: this field may return null, indicating that no valid values can be obtained.
+        :param str monitor_type: Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str namespace: Alarm policy typeNote: this field may return null, indicating that no valid values can be obtained.
+        :param str namespace_show_name: Namespace display nameNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] notice_ids: List of the notification template IDs, which can be obtained by querying the notification template list.It can be queried with the API [DescribeAlarmNotices](https://www.tencentcloud.com/document/product/248/39300).
+        :param Sequence['GetAlarmPolicyPolicyNoticeArgs'] notices: Notification rule listNote: this field may return null, indicating that no valid values can be obtained.
+        :param int one_click_status: Whether the quick alarm policy is enabled.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str origin_id: Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str policy_id: Alarm policy IDNote: this field may return null, indicating that no valid values can be obtained.
+        :param str policy_name: Fuzzy search by policy name.
+        :param int project_id: Project ID. Valid values: -1 (no project), 0 (default project)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str project_name: Project nameNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] regions: RegionNote: this field may return null, indicating that no valid values can be obtained.
+        :param str remark: RemarksNote: this field may return null, indicating that no valid values can be obtained.
+        :param str rule_type: Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyTagInstanceArgs'] tag_instances: TagNote: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyTagArgs'] tags: Policy tagNote: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyTriggerTaskArgs'] trigger_tasks: Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
+        :param int update_time: Update timeNote: this field may return null, indicating that no valid values can be obtained.
+        :param int use_sum: Number of instances bound to policy groupNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "advanced_metric_number", advanced_metric_number)
+        pulumi.set(__self__, "can_set_default", can_set_default)
+        pulumi.set(__self__, "condition_template_id", condition_template_id)
+        pulumi.set(__self__, "conditions", conditions)
+        pulumi.set(__self__, "conditions_temps", conditions_temps)
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "event_conditions", event_conditions)
+        pulumi.set(__self__, "filter_dimensions_param", filter_dimensions_param)
+        pulumi.set(__self__, "insert_time", insert_time)
+        pulumi.set(__self__, "instance_group_id", instance_group_id)
+        pulumi.set(__self__, "instance_group_name", instance_group_name)
+        pulumi.set(__self__, "instance_sum", instance_sum)
+        pulumi.set(__self__, "is_bind_all", is_bind_all)
+        pulumi.set(__self__, "is_default", is_default)
+        pulumi.set(__self__, "is_one_click", is_one_click)
+        pulumi.set(__self__, "last_edit_uin", last_edit_uin)
+        pulumi.set(__self__, "monitor_type", monitor_type)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "namespace_show_name", namespace_show_name)
+        pulumi.set(__self__, "notice_ids", notice_ids)
+        pulumi.set(__self__, "notices", notices)
+        pulumi.set(__self__, "one_click_status", one_click_status)
+        pulumi.set(__self__, "origin_id", origin_id)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "policy_name", policy_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "regions", regions)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "tag_instances", tag_instances)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "trigger_tasks", trigger_tasks)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "use_sum", use_sum)
+
+    @property
+    @pulumi.getter(name="advancedMetricNumber")
+    def advanced_metric_number(self) -> int:
+        """
+        The number of advanced metrics.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "advanced_metric_number")
+
+    @property
+    @pulumi.getter(name="canSetDefault")
+    def can_set_default(self) -> int:
+        """
+        Whether the default policy can be set. Valid values: 1 (yes), 0 (no)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "can_set_default")
+
+    @property
+    @pulumi.getter(name="conditionTemplateId")
+    def condition_template_id(self) -> str:
+        """
+        Trigger condition template IDNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "condition_template_id")
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionResult']:
+        """
+        Metric trigger conditionNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter(name="conditionsTemps")
+    def conditions_temps(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempResult']:
+        """
+        Template policy groupNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "conditions_temps")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> int:
+        """
+        Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="eventConditions")
+    def event_conditions(self) -> Sequence['outputs.GetAlarmPolicyPolicyEventConditionResult']:
+        """
+        Event trigger conditioNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "event_conditions")
+
+    @property
+    @pulumi.getter(name="filterDimensionsParam")
+    def filter_dimensions_param(self) -> str:
+        """
+        Information on the filter dimension associated with a policy.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "filter_dimensions_param")
+
+    @property
+    @pulumi.getter(name="insertTime")
+    def insert_time(self) -> int:
+        """
+        Creation timeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "insert_time")
+
+    @property
+    @pulumi.getter(name="instanceGroupId")
+    def instance_group_id(self) -> int:
+        """
+        Instance group ID.
+        """
+        return pulumi.get(self, "instance_group_id")
+
+    @property
+    @pulumi.getter(name="instanceGroupName")
+    def instance_group_name(self) -> str:
+        """
+        Instance group nameNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "instance_group_name")
+
+    @property
+    @pulumi.getter(name="instanceSum")
+    def instance_sum(self) -> int:
+        """
+        Number of instancesNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "instance_sum")
+
+    @property
+    @pulumi.getter(name="isBindAll")
+    def is_bind_all(self) -> int:
+        """
+        Whether the policy is associated with all objectsNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_bind_all")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> int:
+        """
+        Whether it is the default policy. Valid values: 1 (yes), 0 (no)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_default")
+
+    @property
+    @pulumi.getter(name="isOneClick")
+    def is_one_click(self) -> int:
+        """
+        Whether it is a quick alarm policy.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_one_click")
+
+    @property
+    @pulumi.getter(name="lastEditUin")
+    def last_edit_uin(self) -> str:
+        """
+        Uin of the last modifying userNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "last_edit_uin")
+
+    @property
+    @pulumi.getter(name="monitorType")
+    def monitor_type(self) -> str:
+        """
+        Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "monitor_type")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Alarm policy typeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="namespaceShowName")
+    def namespace_show_name(self) -> str:
+        """
+        Namespace display nameNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "namespace_show_name")
+
+    @property
+    @pulumi.getter(name="noticeIds")
+    def notice_ids(self) -> Sequence[str]:
+        """
+        List of the notification template IDs, which can be obtained by querying the notification template list.It can be queried with the API [DescribeAlarmNotices](https://www.tencentcloud.com/document/product/248/39300).
+        """
+        return pulumi.get(self, "notice_ids")
+
+    @property
+    @pulumi.getter
+    def notices(self) -> Sequence['outputs.GetAlarmPolicyPolicyNoticeResult']:
+        """
+        Notification rule listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notices")
+
+    @property
+    @pulumi.getter(name="oneClickStatus")
+    def one_click_status(self) -> int:
+        """
+        Whether the quick alarm policy is enabled.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "one_click_status")
+
+    @property
+    @pulumi.getter(name="originId")
+    def origin_id(self) -> str:
+        """
+        Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "origin_id")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Alarm policy IDNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> str:
+        """
+        Fuzzy search by policy name.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID. Valid values: -1 (no project), 0 (default project)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> str:
+        """
+        Project nameNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "project_name")
+
+    @property
+    @pulumi.getter
+    def regions(self) -> Sequence[str]:
+        """
+        RegionNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "regions")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        RemarksNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter(name="tagInstances")
+    def tag_instances(self) -> Sequence['outputs.GetAlarmPolicyPolicyTagInstanceResult']:
+        """
+        TagNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tag_instances")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetAlarmPolicyPolicyTagResult']:
+        """
+        Policy tagNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="triggerTasks")
+    def trigger_tasks(self) -> Sequence['outputs.GetAlarmPolicyPolicyTriggerTaskResult']:
+        """
+        Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
+        """
+        return pulumi.get(self, "trigger_tasks")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> int:
+        """
+        Update timeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter(name="useSum")
+    def use_sum(self) -> int:
+        """
+        Number of instances bound to policy groupNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "use_sum")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionResult(dict):
+    def __init__(__self__, *,
+                 complex_expression: str,
+                 is_union_rule: int,
+                 rules: Sequence['outputs.GetAlarmPolicyPolicyConditionRuleResult']):
+        """
+        :param str complex_expression: The judgment expression of composite alarm trigger conditions, which is valid when the value of IsUnionRule is 2. This parameter is used to determine that an alarm condition is met only when the expression values are True for multiple trigger conditions.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_union_rule: Judgment condition of an alarm trigger condition (0: Any; 1: All; 2: Composite). When the value is set to 2 (i.e., composite trigger conditions), this parameter should be used together with ComplexExpression.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionRuleArgs'] rules: Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "complex_expression", complex_expression)
+        pulumi.set(__self__, "is_union_rule", is_union_rule)
+        pulumi.set(__self__, "rules", rules)
+
+    @property
+    @pulumi.getter(name="complexExpression")
+    def complex_expression(self) -> str:
+        """
+        The judgment expression of composite alarm trigger conditions, which is valid when the value of IsUnionRule is 2. This parameter is used to determine that an alarm condition is met only when the expression values are True for multiple trigger conditions.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "complex_expression")
+
+    @property
+    @pulumi.getter(name="isUnionRule")
+    def is_union_rule(self) -> int:
+        """
+        Judgment condition of an alarm trigger condition (0: Any; 1: All; 2: Composite). When the value is set to 2 (i.e., composite trigger conditions), this parameter should be used together with ComplexExpression.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_union_rule")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionRuleResult']:
+        """
+        Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionRuleResult(dict):
+    def __init__(__self__, *,
+                 continue_period: int,
+                 description: str,
+                 filters: Sequence['outputs.GetAlarmPolicyPolicyConditionRuleFilterResult'],
+                 hierarchical_values: Sequence['outputs.GetAlarmPolicyPolicyConditionRuleHierarchicalValueResult'],
+                 is_advanced: int,
+                 is_open: int,
+                 is_power_notice: int,
+                 metric_name: str,
+                 notice_frequency: int,
+                 operator: str,
+                 period: int,
+                 product_id: str,
+                 rule_type: str,
+                 unit: str,
+                 value: str,
+                 value_max: float,
+                 value_min: float):
+        """
+        :param int continue_period: Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param str description: Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionRuleFilterArgs'] filters: Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs'] hierarchical_values: The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_advanced: Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_open: Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str metric_name: Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        :param int notice_frequency: Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str operator: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param int period: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        :param str product_id: Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str rule_type: Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param str value: Tag value.
+        :param float value_max: Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        :param float value_min: Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "continue_period", continue_period)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "hierarchical_values", hierarchical_values)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "is_power_notice", is_power_notice)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "notice_frequency", notice_frequency)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+        pulumi.set(__self__, "value_max", value_max)
+        pulumi.set(__self__, "value_min", value_min)
+
+    @property
+    @pulumi.getter(name="continuePeriod")
+    def continue_period(self) -> int:
+        """
+        Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "continue_period")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionRuleFilterResult']:
+        """
+        Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="hierarchicalValues")
+    def hierarchical_values(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionRuleHierarchicalValueResult']:
+        """
+        The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "hierarchical_values")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter(name="isPowerNotice")
+    def is_power_notice(self) -> int:
+        """
+        Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_power_notice")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="noticeFrequency")
+    def notice_frequency(self) -> int:
+        """
+        Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_frequency")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> str:
+        """
+        Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="valueMax")
+    def value_max(self) -> float:
+        """
+        Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_max")
+
+    @property
+    @pulumi.getter(name="valueMin")
+    def value_min(self) -> float:
+        """
+        Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_min")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionRuleFilterResult(dict):
+    def __init__(__self__, *,
+                 dimensions: str,
+                 type: str):
+        """
+        :param str dimensions: The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionRuleHierarchicalValueResult(dict):
+    def __init__(__self__, *,
+                 remind: str,
+                 serious: str,
+                 warn: str):
+        """
+        :param str remind: Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str serious: Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str warn: Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "remind", remind)
+        pulumi.set(__self__, "serious", serious)
+        pulumi.set(__self__, "warn", warn)
+
+    @property
+    @pulumi.getter
+    def remind(self) -> str:
+        """
+        Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remind")
+
+    @property
+    @pulumi.getter
+    def serious(self) -> str:
+        """
+        Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "serious")
+
+    @property
+    @pulumi.getter
+    def warn(self) -> str:
+        """
+        Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "warn")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempResult(dict):
+    def __init__(__self__, *,
+                 conditions: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionResult'],
+                 event_conditions: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionResult'],
+                 template_name: str):
+        """
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempConditionArgs'] conditions: Metric trigger conditionNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempEventConditionArgs'] event_conditions: Event trigger conditioNote: this field may return null, indicating that no valid values can be obtained.
+        :param str template_name: Template nameNote: u200dThis field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "conditions", conditions)
+        pulumi.set(__self__, "event_conditions", event_conditions)
+        pulumi.set(__self__, "template_name", template_name)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionResult']:
+        """
+        Metric trigger conditionNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter(name="eventConditions")
+    def event_conditions(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionResult']:
+        """
+        Event trigger conditioNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "event_conditions")
+
+    @property
+    @pulumi.getter(name="templateName")
+    def template_name(self) -> str:
+        """
+        Template nameNote: u200dThis field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "template_name")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempConditionResult(dict):
+    def __init__(__self__, *,
+                 complex_expression: str,
+                 is_union_rule: int,
+                 rules: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleResult']):
+        """
+        :param str complex_expression: The judgment expression of composite alarm trigger conditions, which is valid when the value of IsUnionRule is 2. This parameter is used to determine that an alarm condition is met only when the expression values are True for multiple trigger conditions.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_union_rule: Judgment condition of an alarm trigger condition (0: Any; 1: All; 2: Composite). When the value is set to 2 (i.e., composite trigger conditions), this parameter should be used together with ComplexExpression.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempConditionRuleArgs'] rules: Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "complex_expression", complex_expression)
+        pulumi.set(__self__, "is_union_rule", is_union_rule)
+        pulumi.set(__self__, "rules", rules)
+
+    @property
+    @pulumi.getter(name="complexExpression")
+    def complex_expression(self) -> str:
+        """
+        The judgment expression of composite alarm trigger conditions, which is valid when the value of IsUnionRule is 2. This parameter is used to determine that an alarm condition is met only when the expression values are True for multiple trigger conditions.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "complex_expression")
+
+    @property
+    @pulumi.getter(name="isUnionRule")
+    def is_union_rule(self) -> int:
+        """
+        Judgment condition of an alarm trigger condition (0: Any; 1: All; 2: Composite). When the value is set to 2 (i.e., composite trigger conditions), this parameter should be used together with ComplexExpression.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_union_rule")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleResult']:
+        """
+        Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempConditionRuleResult(dict):
+    def __init__(__self__, *,
+                 continue_period: int,
+                 description: str,
+                 filters: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleFilterResult'],
+                 hierarchical_values: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueResult'],
+                 is_advanced: int,
+                 is_open: int,
+                 is_power_notice: int,
+                 metric_name: str,
+                 notice_frequency: int,
+                 operator: str,
+                 period: int,
+                 product_id: str,
+                 rule_type: str,
+                 unit: str,
+                 value: str,
+                 value_max: float,
+                 value_min: float):
+        """
+        :param int continue_period: Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param str description: Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs'] filters: Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs'] hierarchical_values: The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_advanced: Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_open: Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str metric_name: Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        :param int notice_frequency: Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str operator: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param int period: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        :param str product_id: Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str rule_type: Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param str value: Tag value.
+        :param float value_max: Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        :param float value_min: Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "continue_period", continue_period)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "hierarchical_values", hierarchical_values)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "is_power_notice", is_power_notice)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "notice_frequency", notice_frequency)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+        pulumi.set(__self__, "value_max", value_max)
+        pulumi.set(__self__, "value_min", value_min)
+
+    @property
+    @pulumi.getter(name="continuePeriod")
+    def continue_period(self) -> int:
+        """
+        Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "continue_period")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleFilterResult']:
+        """
+        Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="hierarchicalValues")
+    def hierarchical_values(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueResult']:
+        """
+        The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "hierarchical_values")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter(name="isPowerNotice")
+    def is_power_notice(self) -> int:
+        """
+        Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_power_notice")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="noticeFrequency")
+    def notice_frequency(self) -> int:
+        """
+        Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_frequency")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> str:
+        """
+        Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="valueMax")
+    def value_max(self) -> float:
+        """
+        Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_max")
+
+    @property
+    @pulumi.getter(name="valueMin")
+    def value_min(self) -> float:
+        """
+        Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_min")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempConditionRuleFilterResult(dict):
+    def __init__(__self__, *,
+                 dimensions: str,
+                 type: str):
+        """
+        :param str dimensions: The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueResult(dict):
+    def __init__(__self__, *,
+                 remind: str,
+                 serious: str,
+                 warn: str):
+        """
+        :param str remind: Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str serious: Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str warn: Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "remind", remind)
+        pulumi.set(__self__, "serious", serious)
+        pulumi.set(__self__, "warn", warn)
+
+    @property
+    @pulumi.getter
+    def remind(self) -> str:
+        """
+        Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remind")
+
+    @property
+    @pulumi.getter
+    def serious(self) -> str:
+        """
+        Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "serious")
+
+    @property
+    @pulumi.getter
+    def warn(self) -> str:
+        """
+        Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "warn")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempEventConditionResult(dict):
+    def __init__(__self__, *,
+                 rules: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleResult']):
+        """
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs'] rules: Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "rules", rules)
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleResult']:
+        """
+        Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempEventConditionRuleResult(dict):
+    def __init__(__self__, *,
+                 continue_period: int,
+                 description: str,
+                 filters: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterResult'],
+                 hierarchical_values: Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueResult'],
+                 is_advanced: int,
+                 is_open: int,
+                 is_power_notice: int,
+                 metric_name: str,
+                 notice_frequency: int,
+                 operator: str,
+                 period: int,
+                 product_id: str,
+                 rule_type: str,
+                 unit: str,
+                 value: str,
+                 value_max: float,
+                 value_min: float):
+        """
+        :param int continue_period: Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param str description: Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs'] filters: Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs'] hierarchical_values: The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_advanced: Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_open: Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str metric_name: Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        :param int notice_frequency: Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str operator: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param int period: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        :param str product_id: Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str rule_type: Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param str value: Tag value.
+        :param float value_max: Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        :param float value_min: Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "continue_period", continue_period)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "hierarchical_values", hierarchical_values)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "is_power_notice", is_power_notice)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "notice_frequency", notice_frequency)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+        pulumi.set(__self__, "value_max", value_max)
+        pulumi.set(__self__, "value_min", value_min)
+
+    @property
+    @pulumi.getter(name="continuePeriod")
+    def continue_period(self) -> int:
+        """
+        Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "continue_period")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterResult']:
+        """
+        Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="hierarchicalValues")
+    def hierarchical_values(self) -> Sequence['outputs.GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueResult']:
+        """
+        The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "hierarchical_values")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter(name="isPowerNotice")
+    def is_power_notice(self) -> int:
+        """
+        Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_power_notice")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="noticeFrequency")
+    def notice_frequency(self) -> int:
+        """
+        Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_frequency")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> str:
+        """
+        Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="valueMax")
+    def value_max(self) -> float:
+        """
+        Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_max")
+
+    @property
+    @pulumi.getter(name="valueMin")
+    def value_min(self) -> float:
+        """
+        Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_min")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterResult(dict):
+    def __init__(__self__, *,
+                 dimensions: str,
+                 type: str):
+        """
+        :param str dimensions: The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueResult(dict):
+    def __init__(__self__, *,
+                 remind: str,
+                 serious: str,
+                 warn: str):
+        """
+        :param str remind: Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str serious: Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str warn: Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "remind", remind)
+        pulumi.set(__self__, "serious", serious)
+        pulumi.set(__self__, "warn", warn)
+
+    @property
+    @pulumi.getter
+    def remind(self) -> str:
+        """
+        Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remind")
+
+    @property
+    @pulumi.getter
+    def serious(self) -> str:
+        """
+        Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "serious")
+
+    @property
+    @pulumi.getter
+    def warn(self) -> str:
+        """
+        Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "warn")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyEventConditionResult(dict):
+    def __init__(__self__, *,
+                 rules: Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleResult']):
+        """
+        :param Sequence['GetAlarmPolicyPolicyEventConditionRuleArgs'] rules: Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "rules", rules)
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleResult']:
+        """
+        Alarm trigger condition lisNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyEventConditionRuleResult(dict):
+    def __init__(__self__, *,
+                 continue_period: int,
+                 description: str,
+                 filters: Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleFilterResult'],
+                 hierarchical_values: Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueResult'],
+                 is_advanced: int,
+                 is_open: int,
+                 is_power_notice: int,
+                 metric_name: str,
+                 notice_frequency: int,
+                 operator: str,
+                 period: int,
+                 product_id: str,
+                 rule_type: str,
+                 unit: str,
+                 value: str,
+                 value_max: float,
+                 value_min: float):
+        """
+        :param int continue_period: Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param str description: Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyEventConditionRuleFilterArgs'] filters: Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs'] hierarchical_values: The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        :param int is_advanced: Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_open: Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_power_notice: Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str metric_name: Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        :param int notice_frequency: Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str operator: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        :param int period: Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        :param str product_id: Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str rule_type: Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str unit: Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        :param str value: Tag value.
+        :param float value_max: Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        :param float value_min: Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "continue_period", continue_period)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "filters", filters)
+        pulumi.set(__self__, "hierarchical_values", hierarchical_values)
+        pulumi.set(__self__, "is_advanced", is_advanced)
+        pulumi.set(__self__, "is_open", is_open)
+        pulumi.set(__self__, "is_power_notice", is_power_notice)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "notice_frequency", notice_frequency)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "product_id", product_id)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "unit", unit)
+        pulumi.set(__self__, "value", value)
+        pulumi.set(__self__, "value_max", value_max)
+        pulumi.set(__self__, "value_min", value_min)
+
+    @property
+    @pulumi.getter(name="continuePeriod")
+    def continue_period(self) -> int:
+        """
+        Number of periods. 1: continue for one period; 2: continue for two periods; and so on. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "continue_period")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Metric display name, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def filters(self) -> Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleFilterResult']:
+        """
+        Filter condition for one single trigger ruleNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="hierarchicalValues")
+    def hierarchical_values(self) -> Sequence['outputs.GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueResult']:
+        """
+        The configuration of alarm level thresholdNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "hierarchical_values")
+
+    @property
+    @pulumi.getter(name="isAdvanced")
+    def is_advanced(self) -> int:
+        """
+        Whether it is an advanced metric. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_advanced")
+
+    @property
+    @pulumi.getter(name="isOpen")
+    def is_open(self) -> int:
+        """
+        Whether the advanced metric feature is enabled. 0: No; 1: Yes.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_open")
+
+    @property
+    @pulumi.getter(name="isPowerNotice")
+    def is_power_notice(self) -> int:
+        """
+        Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_power_notice")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        """
+        Metric name or event name. The supported metrics can be queried via DescribeAlarmMetrics and the supported events via DescribeAlarmEventsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="noticeFrequency")
+    def notice_frequency(self) -> int:
+        """
+        Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours), 43200 (alarm once every 12 hours), 86400 (alarm once every day)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_frequency")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.Operator	String	No	Operatorintelligent = intelligent detection without thresholdeq = equal toge = greater than or equal togt = greater thanle = less than or equal tolt = less thanne = not equal today_increase = day-on-day increaseday_decrease = day-on-day decreaseday_wave = day-on-day fluctuationweek_increase = week-on-week increaseweek_decrease = week-on-week decreaseweek_wave = week-on-week fluctuationcycle_increase = cyclical increasecycle_decrease = cyclical decreasecycle_wave = cyclical fluctuationre = regex matchThe valid values can be queried via DescribeAlarmMetrics.Note: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Statistical period in seconds. The valid values can be queried via DescribeAlarmMetricsNote: this field may return null, indicating that no valid value is obtained.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="productId")
+    def product_id(self) -> str:
+        """
+        Integration center product ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product_id")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def unit(self) -> str:
+        """
+        Unit, which is used in the output parameterNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unit")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="valueMax")
+    def value_max(self) -> float:
+        """
+        Maximum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_max")
+
+    @property
+    @pulumi.getter(name="valueMin")
+    def value_min(self) -> float:
+        """
+        Minimum valueNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value_min")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyEventConditionRuleFilterResult(dict):
+    def __init__(__self__, *,
+                 dimensions: str,
+                 type: str):
+        """
+        :param str dimensions: The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> str:
+        """
+        The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
+        """
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueResult(dict):
+    def __init__(__self__, *,
+                 remind: str,
+                 serious: str,
+                 warn: str):
+        """
+        :param str remind: Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str serious: Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        :param str warn: Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "remind", remind)
+        pulumi.set(__self__, "serious", serious)
+        pulumi.set(__self__, "warn", warn)
+
+    @property
+    @pulumi.getter
+    def remind(self) -> str:
+        """
+        Threshold for the Remind levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "remind")
+
+    @property
+    @pulumi.getter
+    def serious(self) -> str:
+        """
+        Threshold for the Serious levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "serious")
+
+    @property
+    @pulumi.getter
+    def warn(self) -> str:
+        """
+        Threshold for the Warn levelNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "warn")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyNoticeResult(dict):
+    def __init__(__self__, *,
+                 amp_consumer_id: str,
+                 cls_notices: Sequence['outputs.GetAlarmPolicyPolicyNoticeClsNoticeResult'],
+                 id: str,
+                 is_preset: int,
+                 name: str,
+                 notice_language: str,
+                 notice_type: str,
+                 policy_ids: Sequence[str],
+                 tags: Sequence['outputs.GetAlarmPolicyPolicyNoticeTagResult'],
+                 updated_at: str,
+                 updated_by: str,
+                 url_notices: Sequence['outputs.GetAlarmPolicyPolicyNoticeUrlNoticeResult'],
+                 user_notices: Sequence['outputs.GetAlarmPolicyPolicyNoticeUserNoticeResult']):
+        """
+        :param str amp_consumer_id: Backend AMP consumer ID.Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyNoticeClsNoticeArgs'] cls_notices: Channel to push alarm notifications to CLS.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str id: Alarm notification template IDNote: this field may return null, indicating that no valid values can be obtained.
+        :param int is_preset: Whether it is the system default notification template. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str name: Alarm notification template nameNote: this field may return null, indicating that no valid values can be obtained.
+        :param str notice_language: Notification language. Valid values: zh-CN (Chinese), en-US (English)Note: this field may return null, indicating that no valid values can be obtained.
+        :param str notice_type: Alarm notification type. Valid values: ALARM (for unresolved alarms), OK (for resolved alarms), ALL (for all alarms)Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] policy_ids: List of IDs of the alarm policies bound to alarm notification templateNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyNoticeTagArgs'] tags: Policy tagNote: This field may return null, indicating that no valid values can be obtained.
+        :param str updated_at: Last modified timeNote: this field may return null, indicating that no valid values can be obtained.
+        :param str updated_by: Last modified byNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyNoticeUrlNoticeArgs'] url_notices: Callback notification listNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetAlarmPolicyPolicyNoticeUserNoticeArgs'] user_notices: User notification listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "amp_consumer_id", amp_consumer_id)
+        pulumi.set(__self__, "cls_notices", cls_notices)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "is_preset", is_preset)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "notice_language", notice_language)
+        pulumi.set(__self__, "notice_type", notice_type)
+        pulumi.set(__self__, "policy_ids", policy_ids)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "updated_at", updated_at)
+        pulumi.set(__self__, "updated_by", updated_by)
+        pulumi.set(__self__, "url_notices", url_notices)
+        pulumi.set(__self__, "user_notices", user_notices)
+
+    @property
+    @pulumi.getter(name="ampConsumerId")
+    def amp_consumer_id(self) -> str:
+        """
+        Backend AMP consumer ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "amp_consumer_id")
+
+    @property
+    @pulumi.getter(name="clsNotices")
+    def cls_notices(self) -> Sequence['outputs.GetAlarmPolicyPolicyNoticeClsNoticeResult']:
+        """
+        Channel to push alarm notifications to CLS.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cls_notices")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Alarm notification template IDNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="isPreset")
+    def is_preset(self) -> int:
+        """
+        Whether it is the system default notification template. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_preset")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Alarm notification template nameNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="noticeLanguage")
+    def notice_language(self) -> str:
+        """
+        Notification language. Valid values: zh-CN (Chinese), en-US (English)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_language")
+
+    @property
+    @pulumi.getter(name="noticeType")
+    def notice_type(self) -> str:
+        """
+        Alarm notification type. Valid values: ALARM (for unresolved alarms), OK (for resolved alarms), ALL (for all alarms)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_type")
+
+    @property
+    @pulumi.getter(name="policyIds")
+    def policy_ids(self) -> Sequence[str]:
+        """
+        List of IDs of the alarm policies bound to alarm notification templateNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "policy_ids")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetAlarmPolicyPolicyNoticeTagResult']:
+        """
+        Policy tagNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        Last modified timeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "updated_at")
+
+    @property
+    @pulumi.getter(name="updatedBy")
+    def updated_by(self) -> str:
+        """
+        Last modified byNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "updated_by")
+
+    @property
+    @pulumi.getter(name="urlNotices")
+    def url_notices(self) -> Sequence['outputs.GetAlarmPolicyPolicyNoticeUrlNoticeResult']:
+        """
+        Callback notification listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "url_notices")
+
+    @property
+    @pulumi.getter(name="userNotices")
+    def user_notices(self) -> Sequence['outputs.GetAlarmPolicyPolicyNoticeUserNoticeResult']:
+        """
+        User notification listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "user_notices")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyNoticeClsNoticeResult(dict):
+    def __init__(__self__, *,
+                 enable: int,
+                 log_set_id: str,
+                 region: str,
+                 topic_id: str):
+        """
+        :param int enable: Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all.
+        :param str log_set_id: Logset ID.
+        :param str region: RegionNote: this field may return null, indicating that no valid values can be obtained.
+        :param str topic_id: Topic ID.
+        """
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "log_set_id", log_set_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> int:
+        """
+        Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="logSetId")
+    def log_set_id(self) -> str:
+        """
+        Logset ID.
+        """
+        return pulumi.get(self, "log_set_id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        RegionNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> str:
+        """
+        Topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyNoticeTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Tag key.
+        :param str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyNoticeUrlNoticeResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 is_valid: int,
+                 start_time: int,
+                 url: str,
+                 validation_code: str,
+                 weekdays: Sequence[int]):
+        """
+        :param int end_time: Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        :param int is_valid: Whether verification is passed. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param int start_time: Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        :param str url: Callback URL, which can contain up to 256 charactersNote: this field may return null, indicating that no valid values can be obtained.
+        :param str validation_code: Verification codeNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[int] weekdays: Notification cycle. The values 1-7 indicate Monday to Sunday.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "is_valid", is_valid)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "url", url)
+        pulumi.set(__self__, "validation_code", validation_code)
+        pulumi.set(__self__, "weekdays", weekdays)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="isValid")
+    def is_valid(self) -> int:
+        """
+        Whether verification is passed. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_valid")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Callback URL, which can contain up to 256 charactersNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="validationCode")
+    def validation_code(self) -> str:
+        """
+        Verification codeNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "validation_code")
+
+    @property
+    @pulumi.getter
+    def weekdays(self) -> Sequence[int]:
+        """
+        Notification cycle. The values 1-7 indicate Monday to Sunday.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "weekdays")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyNoticeUserNoticeResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 group_ids: Sequence[int],
+                 need_phone_arrive_notice: int,
+                 notice_ways: Sequence[str],
+                 on_call_form_ids: Sequence[str],
+                 phone_call_type: str,
+                 phone_circle_interval: int,
+                 phone_circle_times: int,
+                 phone_inner_interval: int,
+                 phone_orders: Sequence[int],
+                 receiver_type: str,
+                 start_time: int,
+                 user_ids: Sequence[int],
+                 weekdays: Sequence[int]):
+        """
+        :param int end_time: Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[int] group_ids: User group ID listNote: this field may return null, indicating that no valid values can be obtained.
+        :param int need_phone_arrive_notice: Whether receipt notification is required. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] notice_ways: Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat), RTX (WeCom)Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence[str] on_call_form_ids: List of schedule IDsNote: u200dThis field may return null, indicating that no valid values can be obtained.
+        :param str phone_call_type: Dial type. SYNC (simultaneous dial), CIRCLE (polled dial). Default value: CIRCLE.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int phone_circle_interval: Polling interval in seconds. Value range: 60-900Note: this field may return null, indicating that no valid values can be obtained.
+        :param int phone_circle_times: Number of phone pollings. Value range: 1-5Note: this field may return null, indicating that no valid values can be obtained.
+        :param int phone_inner_interval: Call interval in seconds within one polling. Value range: 60-900Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[int] phone_orders: Phone polling listNote: this field may return null, indicating that no valid values can be obtained.
+        :param str receiver_type: Recipient type. Valid values: USER (user), GROUP (user group)Note: this field may return null, indicating that no valid values can be obtained.
+        :param int start_time: Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[int] user_ids: User uid listNote: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence[int] weekdays: Notification cycle. The values 1-7 indicate Monday to Sunday.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "group_ids", group_ids)
+        pulumi.set(__self__, "need_phone_arrive_notice", need_phone_arrive_notice)
+        pulumi.set(__self__, "notice_ways", notice_ways)
+        pulumi.set(__self__, "on_call_form_ids", on_call_form_ids)
+        pulumi.set(__self__, "phone_call_type", phone_call_type)
+        pulumi.set(__self__, "phone_circle_interval", phone_circle_interval)
+        pulumi.set(__self__, "phone_circle_times", phone_circle_times)
+        pulumi.set(__self__, "phone_inner_interval", phone_inner_interval)
+        pulumi.set(__self__, "phone_orders", phone_orders)
+        pulumi.set(__self__, "receiver_type", receiver_type)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "user_ids", user_ids)
+        pulumi.set(__self__, "weekdays", weekdays)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="groupIds")
+    def group_ids(self) -> Sequence[int]:
+        """
+        User group ID listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "group_ids")
+
+    @property
+    @pulumi.getter(name="needPhoneArriveNotice")
+    def need_phone_arrive_notice(self) -> int:
+        """
+        Whether receipt notification is required. Valid values: 0 (no), 1 (yes)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "need_phone_arrive_notice")
+
+    @property
+    @pulumi.getter(name="noticeWays")
+    def notice_ways(self) -> Sequence[str]:
+        """
+        Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat), RTX (WeCom)Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "notice_ways")
+
+    @property
+    @pulumi.getter(name="onCallFormIds")
+    def on_call_form_ids(self) -> Sequence[str]:
+        """
+        List of schedule IDsNote: u200dThis field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "on_call_form_ids")
+
+    @property
+    @pulumi.getter(name="phoneCallType")
+    def phone_call_type(self) -> str:
+        """
+        Dial type. SYNC (simultaneous dial), CIRCLE (polled dial). Default value: CIRCLE.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "phone_call_type")
+
+    @property
+    @pulumi.getter(name="phoneCircleInterval")
+    def phone_circle_interval(self) -> int:
+        """
+        Polling interval in seconds. Value range: 60-900Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "phone_circle_interval")
+
+    @property
+    @pulumi.getter(name="phoneCircleTimes")
+    def phone_circle_times(self) -> int:
+        """
+        Number of phone pollings. Value range: 1-5Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "phone_circle_times")
+
+    @property
+    @pulumi.getter(name="phoneInnerInterval")
+    def phone_inner_interval(self) -> int:
+        """
+        Call interval in seconds within one polling. Value range: 60-900Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "phone_inner_interval")
+
+    @property
+    @pulumi.getter(name="phoneOrders")
+    def phone_orders(self) -> Sequence[int]:
+        """
+        Phone polling listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "phone_orders")
+
+    @property
+    @pulumi.getter(name="receiverType")
+    def receiver_type(self) -> str:
+        """
+        Recipient type. Valid values: USER (user), GROUP (user group)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "receiver_type")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0-86399Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="userIds")
+    def user_ids(self) -> Sequence[int]:
+        """
+        User uid listNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "user_ids")
+
+    @property
+    @pulumi.getter
+    def weekdays(self) -> Sequence[int]:
+        """
+        Notification cycle. The values 1-7 indicate Monday to Sunday.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "weekdays")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Tag key.
+        :param str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyTagInstanceResult(dict):
+    def __init__(__self__, *,
+                 binding_status: int,
+                 instance_sum: int,
+                 key: str,
+                 region_id: int,
+                 service_type: str,
+                 tag_status: int,
+                 value: str):
+        """
+        :param int binding_status: Binding status. 2: bound; 1: bindingNote: This field may return null, indicating that no valid values can be obtained.
+        :param int instance_sum: Number of instancesNote: This field may return null, indicating that no valid values can be obtained.
+        :param str key: Tag key.
+        :param int region_id: Region IDNote: This field may return null, indicating that no valid values can be obtained.
+        :param str service_type: Service type, for example, CVMNote: This field may return null, indicating that no valid values can be obtained.
+        :param int tag_status: Tag status. 2: existent; 1: nonexistentNote: This field may return null, indicating that no valid values can be obtained.
+        :param str value: Tag value.
+        """
+        pulumi.set(__self__, "binding_status", binding_status)
+        pulumi.set(__self__, "instance_sum", instance_sum)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "service_type", service_type)
+        pulumi.set(__self__, "tag_status", tag_status)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="bindingStatus")
+    def binding_status(self) -> int:
+        """
+        Binding status. 2: bound; 1: bindingNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "binding_status")
+
+    @property
+    @pulumi.getter(name="instanceSum")
+    def instance_sum(self) -> int:
+        """
+        Number of instancesNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "instance_sum")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region IDNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="serviceType")
+    def service_type(self) -> str:
+        """
+        Service type, for example, CVMNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "service_type")
+
+    @property
+    @pulumi.getter(name="tagStatus")
+    def tag_status(self) -> int:
+        """
+        Tag status. 2: existent; 1: nonexistentNote: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tag_status")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAlarmPolicyPolicyTriggerTaskResult(dict):
+    def __init__(__self__, *,
+                 task_config: str,
+                 type: str):
+        """
+        :param str task_config: Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "task_config", task_config)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="taskConfig")
+    def task_config(self) -> str:
+        """
+        Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "task_config")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetAlarmPolicyTriggerTaskResult(dict):
+    def __init__(__self__, *,
+                 task_config: str,
+                 type: str):
+        """
+        :param str task_config: Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+        :param str type: Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "task_config", task_config)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="taskConfig")
+    def task_config(self) -> str:
+        """
+        Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "task_config")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
 class GetBindingObjectsListResult(dict):
     def __init__(__self__, *,
                  dimensions_json: str,
@@ -3503,6 +8143,35 @@ class GetDataListResult(dict):
         Instance dimension value, eg: `ins-j0hk02zo` for cvm.
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetGrafanaPluginOverviewsPluginSetResult(dict):
+    def __init__(__self__, *,
+                 plugin_id: str,
+                 version: str):
+        """
+        :param str plugin_id: Grafana plugin ID.
+        :param str version: Grafana plugin version.
+        """
+        pulumi.set(__self__, "plugin_id", plugin_id)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="pluginId")
+    def plugin_id(self) -> str:
+        """
+        Grafana plugin ID.
+        """
+        return pulumi.get(self, "plugin_id")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        """
+        Grafana plugin version.
+        """
+        return pulumi.get(self, "version")
 
 
 @pulumi.output_type
@@ -4861,5 +9530,191 @@ class GetProductNamespaceListResult(dict):
         English name of this product.
         """
         return pulumi.get(self, "product_name")
+
+
+@pulumi.output_type
+class GetStatisticDataConditionResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetStatisticDataDataResult(dict):
+    def __init__(__self__, *,
+                 metric_name: str,
+                 points: Sequence['outputs.GetStatisticDataDataPointResult']):
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "points", points)
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter
+    def points(self) -> Sequence['outputs.GetStatisticDataDataPointResult']:
+        return pulumi.get(self, "points")
+
+
+@pulumi.output_type
+class GetStatisticDataDataPointResult(dict):
+    def __init__(__self__, *,
+                 dimensions: Sequence['outputs.GetStatisticDataDataPointDimensionResult'],
+                 values: Sequence['outputs.GetStatisticDataDataPointValueResult']):
+        pulumi.set(__self__, "dimensions", dimensions)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def dimensions(self) -> Sequence['outputs.GetStatisticDataDataPointDimensionResult']:
+        return pulumi.get(self, "dimensions")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence['outputs.GetStatisticDataDataPointValueResult']:
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetStatisticDataDataPointDimensionResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetStatisticDataDataPointValueResult(dict):
+    def __init__(__self__, *,
+                 timestamp: int,
+                 value: float):
+        pulumi.set(__self__, "timestamp", timestamp)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def timestamp(self) -> int:
+        return pulumi.get(self, "timestamp")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetTmpRegionsRegionSetResult(dict):
+    def __init__(__self__, *,
+                 area: str,
+                 region: str,
+                 region_id: int,
+                 region_name: str,
+                 region_pay_mode: int,
+                 region_short_name: str,
+                 region_state: int):
+        """
+        :param str area: Region area.
+        :param str region: Region.
+        :param int region_id: Region ID.
+        :param str region_name: Region name.
+        :param int region_pay_mode: Region pay mode.
+        :param str region_short_name: Region short name.
+        :param int region_state: Region status (0-unavailable; 1-available).
+        """
+        pulumi.set(__self__, "area", area)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "region_pay_mode", region_pay_mode)
+        pulumi.set(__self__, "region_short_name", region_short_name)
+        pulumi.set(__self__, "region_state", region_state)
+
+    @property
+    @pulumi.getter
+    def area(self) -> str:
+        """
+        Region area.
+        """
+        return pulumi.get(self, "area")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "region_name")
+
+    @property
+    @pulumi.getter(name="regionPayMode")
+    def region_pay_mode(self) -> int:
+        """
+        Region pay mode.
+        """
+        return pulumi.get(self, "region_pay_mode")
+
+    @property
+    @pulumi.getter(name="regionShortName")
+    def region_short_name(self) -> str:
+        """
+        Region short name.
+        """
+        return pulumi.get(self, "region_short_name")
+
+    @property
+    @pulumi.getter(name="regionState")
+    def region_state(self) -> int:
+        """
+        Region status (0-unavailable; 1-available).
+        """
+        return pulumi.get(self, "region_state")
 
 

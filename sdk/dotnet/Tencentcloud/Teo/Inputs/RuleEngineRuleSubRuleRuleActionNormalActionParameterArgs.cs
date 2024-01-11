@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Parameter Name.
+        /// Target HEADER name.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _values;
 
         /// <summary>
-        /// Parameter Values.
+        /// Parameter Value.
         /// </summary>
         public InputList<string> Values
         {

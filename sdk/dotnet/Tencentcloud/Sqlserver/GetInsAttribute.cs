@@ -149,6 +149,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public readonly string RegularBackupStrategy;
         public readonly string? ResultOutputFile;
         /// <summary>
+        /// SSL encryption.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInsAttributeSslConfigResult> SslConfigs;
+        /// <summary>
         /// TDE Transparent Data Encryption Configuration.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInsAttributeTdeConfigResult> TdeConfigs;
@@ -175,6 +179,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 
             string? resultOutputFile,
 
+            ImmutableArray<Outputs.GetInsAttributeSslConfigResult> sslConfigs,
+
             ImmutableArray<Outputs.GetInsAttributeTdeConfigResult> tdeConfigs)
         {
             BlockedThreshold = blockedThreshold;
@@ -187,6 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
             RegularBackupStartTime = regularBackupStartTime;
             RegularBackupStrategy = regularBackupStrategy;
             ResultOutputFile = resultOutputFile;
+            SslConfigs = sslConfigs;
             TdeConfigs = tdeConfigs;
         }
     }

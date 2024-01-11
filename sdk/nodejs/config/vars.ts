@@ -31,6 +31,18 @@ Object.defineProperty(exports, "domain", {
 });
 
 /**
+ * The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+ * variable. If not set, the default profile created with `tccli configure` will be used.
+ */
+export declare const profile: string | undefined;
+Object.defineProperty(exports, "profile", {
+    get() {
+        return __config.get("profile");
+    },
+    enumerable: true,
+});
+
+/**
  * The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
  */
 export declare const protocol: string | undefined;
@@ -86,6 +98,18 @@ export declare const securityToken: string | undefined;
 Object.defineProperty(exports, "securityToken", {
     get() {
         return __config.get("securityToken") ?? utilities.getEnv("TENCENTCLOUD_SECURITY_TOKEN");
+    },
+    enumerable: true,
+});
+
+/**
+ * The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+ * environment variable. If not set this defaults to ~/.tccli.
+ */
+export declare const sharedCredentialsDir: string | undefined;
+Object.defineProperty(exports, "sharedCredentialsDir", {
+    get() {
+        return __config.get("sharedCredentialsDir");
     },
     enumerable: true,
 });

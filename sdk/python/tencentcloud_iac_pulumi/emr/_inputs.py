@@ -9,12 +9,52 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ClusterPlacementInfoArgs',
     'ClusterResourceSpecArgs',
     'ClusterResourceSpecCommonResourceSpecArgs',
     'ClusterResourceSpecCoreResourceSpecArgs',
     'ClusterResourceSpecMasterResourceSpecArgs',
     'ClusterResourceSpecTaskResourceSpecArgs',
+    'GetAutoScaleRecordsFilterArgs',
 ]
+
+@pulumi.input_type
+class ClusterPlacementInfoArgs:
+    def __init__(__self__, *,
+                 zone: pulumi.Input[str],
+                 project_id: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] zone: Zone.
+        :param pulumi.Input[int] project_id: Project id.
+        """
+        pulumi.set(__self__, "zone", zone)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> pulumi.Input[str]:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: pulumi.Input[str]):
+        pulumi.set(self, "zone", value)
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Project id.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "project_id", value)
+
 
 @pulumi.input_type
 class ClusterResourceSpecArgs:
@@ -489,5 +529,42 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class GetAutoScaleRecordsFilterArgs:
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str value: Value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: str):
+        pulumi.set(self, "value", value)
 
 

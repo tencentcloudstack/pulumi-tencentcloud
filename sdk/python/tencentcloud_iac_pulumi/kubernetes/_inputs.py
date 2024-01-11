@@ -43,6 +43,8 @@ __all__ = [
     'ScaleWorkerWorkerInstancesListArgs',
     'ServerlessNodePoolServerlessNodeArgs',
     'ServerlessNodePoolTaintArgs',
+    'GetClusterInstancesFilterArgs',
+    'GetClusterNodePoolsFilterArgs',
 ]
 
 @pulumi.input_type
@@ -2585,6 +2587,7 @@ class NodePoolAutoScalingConfigArgs:
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 orderly_security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  public_ip_assigned: Optional[pulumi.Input[bool]] = None,
                  security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -2606,12 +2609,13 @@ class NodePoolAutoScalingConfigArgs:
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input[str] instance_name: Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] orderly_security_group_ids: Ordered security groups to which a CVM instance belongs.
         :param pulumi.Input[str] password: Password to access.
         :param pulumi.Input[bool] public_ip_assigned: Specify whether to assign an Internet IP address.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         :param pulumi.Input[str] spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[str] spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param pulumi.Input[int] system_disk_size: Volume of system disk in GB. Default is `50`.
@@ -2648,10 +2652,15 @@ class NodePoolAutoScalingConfigArgs:
             pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
         if key_ids is not None:
             pulumi.set(__self__, "key_ids", key_ids)
+        if orderly_security_group_ids is not None:
+            pulumi.set(__self__, "orderly_security_group_ids", orderly_security_group_ids)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if public_ip_assigned is not None:
             pulumi.set(__self__, "public_ip_assigned", public_ip_assigned)
+        if security_group_ids is not None:
+            warnings.warn("""The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""security_group_ids is deprecated: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.""")
         if security_group_ids is not None:
             pulumi.set(__self__, "security_group_ids", security_group_ids)
         if spot_instance_type is not None:
@@ -2823,7 +2832,7 @@ class NodePoolAutoScalingConfigArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -2856,6 +2865,18 @@ class NodePoolAutoScalingConfigArgs:
         pulumi.set(self, "key_ids", value)
 
     @property
+    @pulumi.getter(name="orderlySecurityGroupIds")
+    def orderly_security_group_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Ordered security groups to which a CVM instance belongs.
+        """
+        return pulumi.get(self, "orderly_security_group_ids")
+
+    @orderly_security_group_ids.setter
+    def orderly_security_group_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "orderly_security_group_ids", value)
+
+    @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
@@ -2883,7 +2904,7 @@ class NodePoolAutoScalingConfigArgs:
     @pulumi.getter(name="securityGroupIds")
     def security_group_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Security groups to which a CVM instance belongs.
+        The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         """
         return pulumi.get(self, "security_group_ids")
 
@@ -2952,7 +2973,7 @@ class NodePoolAutoScalingConfigDataDiskArgs:
         """
         :param pulumi.Input[bool] delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
-        :param pulumi.Input[str] disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param pulumi.Input[str] disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         :param pulumi.Input[bool] encrypt: Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
         :param pulumi.Input[str] snapshot_id: Data disk snapshot ID.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` > 460GB.
@@ -2998,7 +3019,7 @@ class NodePoolAutoScalingConfigDataDiskArgs:
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -3191,7 +3212,7 @@ class NodePoolNodeConfigDataDiskArgs:
         :param pulumi.Input[bool] auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
         :param pulumi.Input[str] disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
         :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
-        :param pulumi.Input[str] disk_type: Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param pulumi.Input[str] disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         :param pulumi.Input[str] file_system: File system, e.g. `ext3/ext4/xfs`.
         :param pulumi.Input[str] mount_target: Mount target.
         """
@@ -3248,7 +3269,7 @@ class NodePoolNodeConfigDataDiskArgs:
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -4357,5 +4378,79 @@ class ServerlessNodePoolTaintArgs:
     @value.setter
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class GetClusterInstancesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence[str] values: Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetClusterNodePoolsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence[str] values: Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

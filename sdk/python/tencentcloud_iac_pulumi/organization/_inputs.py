@@ -9,8 +9,120 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'InstanceOrgPermissionArgs',
+    'OrgIdentityIdentityPolicyArgs',
     'OrgMemberOrgPermissionArgs',
 ]
+
+@pulumi.input_type
+class InstanceOrgPermissionArgs:
+    def __init__(__self__, *,
+                 id: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] id: Permissions ID.
+        :param pulumi.Input[str] name: Permission name.
+        """
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[int]]:
+        """
+        Permissions ID.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Permission name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class OrgIdentityIdentityPolicyArgs:
+    def __init__(__self__, *,
+                 policy_document: Optional[pulumi.Input[str]] = None,
+                 policy_id: Optional[pulumi.Input[int]] = None,
+                 policy_name: Optional[pulumi.Input[str]] = None,
+                 policy_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] policy_document: Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+        :param pulumi.Input[int] policy_id: CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+        :param pulumi.Input[str] policy_name: CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+        :param pulumi.Input[int] policy_type: Policy type. Value 1-custom policy 2-preset policy; default value 2.
+        """
+        if policy_document is not None:
+            pulumi.set(__self__, "policy_document", policy_document)
+        if policy_id is not None:
+            pulumi.set(__self__, "policy_id", policy_id)
+        if policy_name is not None:
+            pulumi.set(__self__, "policy_name", policy_name)
+        if policy_type is not None:
+            pulumi.set(__self__, "policy_type", policy_type)
+
+    @property
+    @pulumi.getter(name="policyDocument")
+    def policy_document(self) -> Optional[pulumi.Input[str]]:
+        """
+        Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+        """
+        return pulumi.get(self, "policy_document")
+
+    @policy_document.setter
+    def policy_document(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "policy_document", value)
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @policy_id.setter
+    def policy_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_id", value)
+
+    @property
+    @pulumi.getter(name="policyName")
+    def policy_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+        """
+        return pulumi.get(self, "policy_name")
+
+    @policy_name.setter
+    def policy_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "policy_name", value)
+
+    @property
+    @pulumi.getter(name="policyType")
+    def policy_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Policy type. Value 1-custom policy 2-preset policy; default value 2.
+        """
+        return pulumi.get(self, "policy_type")
+
+    @policy_type.setter
+    def policy_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "policy_type", value)
+
 
 @pulumi.input_type
 class OrgMemberOrgPermissionArgs:

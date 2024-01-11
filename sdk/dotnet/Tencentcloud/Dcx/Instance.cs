@@ -60,6 +60,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// DCX instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcx/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
@@ -117,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Network region.
+        /// </summary>
+        [Output("networkRegion")]
+        public Output<string?> NetworkRegion { get; private set; } = null!;
 
         /// <summary>
         /// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
@@ -256,6 +270,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Network region.
+        /// </summary>
+        [Input("networkRegion")]
+        public Input<string>? NetworkRegion { get; set; }
+
+        /// <summary>
         /// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         /// </summary>
         [Input("networkType")]
@@ -357,6 +377,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Network region.
+        /// </summary>
+        [Input("networkRegion")]
+        public Input<string>? NetworkRegion { get; set; }
 
         /// <summary>
         /// Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.

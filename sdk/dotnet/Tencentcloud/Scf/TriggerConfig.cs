@@ -25,10 +25,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     ///     {
     ///         var triggerConfig = new Tencentcloud.Scf.TriggerConfig("triggerConfig", new Tencentcloud.Scf.TriggerConfigArgs
     ///         {
+    ///             CustomArgument = "Information",
+    ///             Description = "func",
     ///             Enable = "OPEN",
     ///             FunctionName = "keep-1676351130",
     ///             Namespace = "default",
     ///             Qualifier = "$DEFAULT",
+    ///             TriggerDesc = "* 1 2 * * * *",
     ///             TriggerName = "SCF-timer-1685540160",
     ///             Type = "timer",
     ///         });
@@ -49,10 +52,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     public partial class TriggerConfig : Pulumi.CustomResource
     {
         /// <summary>
-        /// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        /// User Additional Information.
+        /// </summary>
+        [Output("customArgument")]
+        public Output<string?> CustomArgument { get; private set; } = null!;
+
+        /// <summary>
+        /// Trigger description.
+        /// </summary>
+        [Output("description")]
+        public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         /// </summary>
         [Output("enable")]
-        public Output<string> Enable { get; private set; } = null!;
+        public Output<string?> Enable { get; private set; } = null!;
 
         /// <summary>
         /// Function name.
@@ -73,19 +88,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<string?> Qualifier { get; private set; } = null!;
 
         /// <summary>
-        /// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        /// TriggerDesc parameter.
         /// </summary>
         [Output("triggerDesc")]
         public Output<string> TriggerDesc { get; private set; } = null!;
 
         /// <summary>
-        /// Trigger name.
+        /// Trigger Name.
         /// </summary>
         [Output("triggerName")]
         public Output<string> TriggerName { get; private set; } = null!;
 
         /// <summary>
-        /// Trigger Type.
+        /// Trigger type.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -138,10 +153,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     public sealed class TriggerConfigArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        /// User Additional Information.
         /// </summary>
-        [Input("enable", required: true)]
-        public Input<string> Enable { get; set; } = null!;
+        [Input("customArgument")]
+        public Input<string>? CustomArgument { get; set; }
+
+        /// <summary>
+        /// Trigger description.
+        /// </summary>
+        [Input("description")]
+        public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
+        /// </summary>
+        [Input("enable")]
+        public Input<string>? Enable { get; set; }
 
         /// <summary>
         /// Function name.
@@ -162,19 +189,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Qualifier { get; set; }
 
         /// <summary>
-        /// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        /// TriggerDesc parameter.
         /// </summary>
         [Input("triggerDesc")]
         public Input<string>? TriggerDesc { get; set; }
 
         /// <summary>
-        /// Trigger name.
+        /// Trigger Name.
         /// </summary>
         [Input("triggerName", required: true)]
         public Input<string> TriggerName { get; set; } = null!;
 
         /// <summary>
-        /// Trigger Type.
+        /// Trigger type.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -187,7 +214,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     public sealed class TriggerConfigState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled).
+        /// User Additional Information.
+        /// </summary>
+        [Input("customArgument")]
+        public Input<string>? CustomArgument { get; set; }
+
+        /// <summary>
+        /// Trigger description.
+        /// </summary>
+        [Input("description")]
+        public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Status of trigger. Values: OPEN (enabled); CLOSE disabled).
         /// </summary>
         [Input("enable")]
         public Input<string>? Enable { get; set; }
@@ -211,19 +250,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Qualifier { get; set; }
 
         /// <summary>
-        /// To update a COS trigger, this field is required. It stores the data {event:cos:ObjectCreated:*} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+        /// TriggerDesc parameter.
         /// </summary>
         [Input("triggerDesc")]
         public Input<string>? TriggerDesc { get; set; }
 
         /// <summary>
-        /// Trigger name.
+        /// Trigger Name.
         /// </summary>
         [Input("triggerName")]
         public Input<string>? TriggerName { get; set; }
 
         /// <summary>
-        /// Trigger Type.
+        /// Trigger type.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

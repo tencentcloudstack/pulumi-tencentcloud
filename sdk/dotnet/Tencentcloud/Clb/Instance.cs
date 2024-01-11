@@ -40,6 +40,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// }
     /// ```
+    /// ### LCU-supported CLB
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             ClbName = "myclb",
+    ///             NetworkType = "INTERNAL",
+    ///             ProjectId = 0,
+    ///             SlaType = "clb.c3.medium",
+    ///             SubnetId = "subnet-o3a5nt20",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///             VpcId = "vpc-2hfyray3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// ### OPEN CLB
     /// 
     /// ```csharp
@@ -66,6 +93,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///             TargetRegionInfoRegion = "ap-guangzhou",
     ///             TargetRegionInfoVpcId = "vpc-da7ffa61",
     ///             VpcId = "vpc-da7ffa61",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### OPNE CLB with VipIsp
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         {
+    ///             NetworkType = "SINGLEISP_CMCC",
+    ///             ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
+    ///             BandwidthPackageName = "tf-example",
+    ///             InternetMaxBandwidth = 300,
+    ///             Egress = "center_egress1",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "my-open-clb",
+    ///             ProjectId = 0,
+    ///             VpcId = "vpc-4owdpnwr",
+    ///             VipIsp = "CMCC",
+    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///             BandwidthPackageId = example.Id,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "open" },
+    ///             },
     ///         });
     ///     }
     /// 
@@ -347,6 +414,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        /// </summary>
+        [Output("slaType")]
+        public Output<string> SlaType { get; private set; } = null!;
+
+        /// <summary>
         /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Output("slaveZoneId")]
@@ -544,6 +617,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
 
         /// <summary>
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        /// </summary>
+        [Input("slaType")]
+        public Input<string>? SlaType { get; set; }
+
+        /// <summary>
         /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Input("slaveZoneId")]
@@ -596,6 +675,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("targetRegionInfoVpcId")]
         public Input<string>? TargetRegionInfoVpcId { get; set; }
+
+        /// <summary>
+        /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+        /// </summary>
+        [Input("vipIsp")]
+        public Input<string>? VipIsp { get; set; }
 
         /// <summary>
         /// VPC ID of the CLB.
@@ -723,6 +808,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             get => _securityGroups ?? (_securityGroups = new InputList<string>());
             set => _securityGroups = value;
         }
+
+        /// <summary>
+        /// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        /// </summary>
+        [Input("slaType")]
+        public Input<string>? SlaType { get; set; }
 
         /// <summary>
         /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.

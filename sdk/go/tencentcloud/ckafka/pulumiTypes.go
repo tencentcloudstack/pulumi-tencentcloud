@@ -3626,13 +3626,13 @@ func (o DatahubTaskSourceResourceClickHouseParamPtrOutput) UserName() pulumi.Str
 }
 
 type DatahubTaskSourceResourceClickHouseParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -3650,13 +3650,13 @@ type DatahubTaskSourceResourceClickHouseParamDropClsInput interface {
 }
 
 type DatahubTaskSourceResourceClickHouseParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -3739,12 +3739,12 @@ func (o DatahubTaskSourceResourceClickHouseParamDropClsOutput) ToDatahubTaskSour
 	}).(DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -3754,7 +3754,7 @@ func (o DatahubTaskSourceResourceClickHouseParamDropClsOutput) DropClsRegion() p
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -3788,7 +3788,7 @@ func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) Elem() Datahub
 	}).(DatahubTaskSourceResourceClickHouseParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -3798,7 +3798,7 @@ func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) DropClsLogSet(
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -3818,7 +3818,7 @@ func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) DropClsRegion(
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -5313,13 +5313,13 @@ func (o DatahubTaskSourceResourceEsParamPtrOutput) UserName() pulumi.StringPtrOu
 }
 
 type DatahubTaskSourceResourceEsParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -5337,13 +5337,13 @@ type DatahubTaskSourceResourceEsParamDropClsInput interface {
 }
 
 type DatahubTaskSourceResourceEsParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -5426,12 +5426,12 @@ func (o DatahubTaskSourceResourceEsParamDropClsOutput) ToDatahubTaskSourceResour
 	}).(DatahubTaskSourceResourceEsParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceEsParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceEsParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -5441,7 +5441,7 @@ func (o DatahubTaskSourceResourceEsParamDropClsOutput) DropClsRegion() pulumi.St
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceEsParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -5475,7 +5475,7 @@ func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) Elem() DatahubTaskSour
 	}).(DatahubTaskSourceResourceEsParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropCls) *string {
 		if v == nil {
@@ -5485,7 +5485,7 @@ func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) DropClsLogSet() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropCls) *string {
 		if v == nil {
@@ -5505,7 +5505,7 @@ func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) DropClsRegion() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceEsParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropCls) *string {
 		if v == nil {
@@ -5764,33 +5764,33 @@ func (o DatahubTaskSourceResourceEsParamDropDlqPtrOutput) Type() pulumi.StringPt
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -5810,33 +5810,33 @@ type DatahubTaskSourceResourceEsParamDropDlqKafkaParamInput interface {
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -5924,7 +5924,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) CompressionType
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -5934,64 +5934,64 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) MsgMultiple() p
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) TableMappings() DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) []DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -6035,7 +6035,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) CompressionT
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -6055,7 +6055,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) MsgMultiple(
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -6065,7 +6065,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) OffsetType()
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -6075,7 +6075,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) PartitionNum
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -6085,7 +6085,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) QpsLimit() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -6095,7 +6095,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) Resource() p
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -6105,7 +6105,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) ResourceName
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -6115,7 +6115,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) SelfBuilt() 
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -6125,7 +6125,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) StartTime() 
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) TableMappings() DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) []DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping {
 		if v == nil {
@@ -6135,7 +6135,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) TableMapping
 	}).(DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -6145,7 +6145,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) Topic() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -6155,7 +6155,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) TopicId() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -6165,7 +6165,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) UseAutoCreat
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -6320,7 +6320,7 @@ type DatahubTaskSourceResourceEsParamDropDlqTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -6348,7 +6348,7 @@ type DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -6456,7 +6456,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqTopicParamOutput) StartTime() pul
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskSourceResourceEsParamDropDlqTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceEsParamDropDlqTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -6540,7 +6540,7 @@ func (o DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrOutput) StartTime() 
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceEsParamDropDlqTopicParam) *string {
 		if v == nil {
@@ -6795,33 +6795,33 @@ func (o DatahubTaskSourceResourceEventBusParamPtrOutput) Type() pulumi.StringPtr
 type DatahubTaskSourceResourceKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskSourceResourceKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -6841,33 +6841,33 @@ type DatahubTaskSourceResourceKafkaParamInput interface {
 type DatahubTaskSourceResourceKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskSourceResourceKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -6955,7 +6955,7 @@ func (o DatahubTaskSourceResourceKafkaParamOutput) CompressionType() pulumi.Stri
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskSourceResourceKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -6965,64 +6965,64 @@ func (o DatahubTaskSourceResourceKafkaParamOutput) MsgMultiple() pulumi.IntPtrOu
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskSourceResourceKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskSourceResourceKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskSourceResourceKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskSourceResourceKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskSourceResourceKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskSourceResourceKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskSourceResourceKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskSourceResourceKafkaParamOutput) TableMappings() DatahubTaskSourceResourceKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) []DatahubTaskSourceResourceKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskSourceResourceKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskSourceResourceKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskSourceResourceKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskSourceResourceKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskSourceResourceKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -7066,7 +7066,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) CompressionType() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *bool {
 		if v == nil {
@@ -7086,7 +7086,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) MsgMultiple() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *string {
 		if v == nil {
@@ -7096,7 +7096,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) OffsetType() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *int {
 		if v == nil {
@@ -7106,7 +7106,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) PartitionNum() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *int {
 		if v == nil {
@@ -7116,7 +7116,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *string {
 		if v == nil {
@@ -7126,7 +7126,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) Resource() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *string {
 		if v == nil {
@@ -7136,7 +7136,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) ResourceName() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *bool {
 		if v == nil {
@@ -7146,7 +7146,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtr
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *int {
 		if v == nil {
@@ -7156,7 +7156,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) StartTime() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) TableMappings() DatahubTaskSourceResourceKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) []DatahubTaskSourceResourceKafkaParamTableMapping {
 		if v == nil {
@@ -7166,7 +7166,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) TableMappings() DatahubTas
 	}).(DatahubTaskSourceResourceKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *string {
 		if v == nil {
@@ -7176,7 +7176,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) Topic() pulumi.StringPtrOu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *string {
 		if v == nil {
@@ -7186,7 +7186,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) TopicId() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *bool {
 		if v == nil {
@@ -7196,7 +7196,7 @@ func (o DatahubTaskSourceResourceKafkaParamPtrOutput) UseAutoCreateTopic() pulum
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskSourceResourceKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceKafkaParam) *bool {
 		if v == nil {
@@ -8596,11 +8596,11 @@ type DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping struct {
 	AllowNull *bool `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement *bool `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName *string `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize *string `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits *string `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue *string `pulumi:"defaultValue"`
@@ -8628,11 +8628,11 @@ type DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs struct {
 	AllowNull pulumi.BoolPtrInput `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement pulumi.BoolPtrInput `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize pulumi.StringPtrInput `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits pulumi.StringPtrInput `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue pulumi.StringPtrInput `pulumi:"defaultValue"`
@@ -8705,17 +8705,17 @@ func (o DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingOutput) AutoIn
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping) *bool { return v.AutoIncrement }).(pulumi.BoolPtrOutput)
 }
 
-// Corresponding mapping column name.
+// Column Name.
 func (o DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingOutput) ColumnName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
 }
 
-// current column size.
+// current ColumnSize.
 func (o DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingOutput) ColumnSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping) *string { return v.ColumnSize }).(pulumi.StringPtrOutput)
 }
 
-// current column precision.
+// current Column DecimalDigits.
 func (o DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingOutput) DecimalDigits() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping) *string { return v.DecimalDigits }).(pulumi.StringPtrOutput)
 }
@@ -8761,13 +8761,13 @@ func (o DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArrayOutput) I
 }
 
 type DatahubTaskSourceResourceMySqlParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -8785,13 +8785,13 @@ type DatahubTaskSourceResourceMySqlParamDropClsInput interface {
 }
 
 type DatahubTaskSourceResourceMySqlParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -8874,12 +8874,12 @@ func (o DatahubTaskSourceResourceMySqlParamDropClsOutput) ToDatahubTaskSourceRes
 	}).(DatahubTaskSourceResourceMySqlParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceMySqlParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceMySqlParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -8889,7 +8889,7 @@ func (o DatahubTaskSourceResourceMySqlParamDropClsOutput) DropClsRegion() pulumi
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceMySqlParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceMySqlParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -8923,7 +8923,7 @@ func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) Elem() DatahubTaskS
 	}).(DatahubTaskSourceResourceMySqlParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -8933,7 +8933,7 @@ func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) DropClsLogSet() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -8953,7 +8953,7 @@ func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) DropClsRegion() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskSourceResourceMySqlParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -9345,11 +9345,11 @@ type DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping struct {
 	AllowNull *bool `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement *bool `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName *string `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize *string `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits *string `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue *string `pulumi:"defaultValue"`
@@ -9377,11 +9377,11 @@ type DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs struct 
 	AllowNull pulumi.BoolPtrInput `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement pulumi.BoolPtrInput `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize pulumi.StringPtrInput `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits pulumi.StringPtrInput `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue pulumi.StringPtrInput `pulumi:"defaultValue"`
@@ -9454,17 +9454,17 @@ func (o DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingOutput) A
 	return o.ApplyT(func(v DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping) *bool { return v.AutoIncrement }).(pulumi.BoolPtrOutput)
 }
 
-// Corresponding mapping column name.
+// Column Name.
 func (o DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingOutput) ColumnName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
 }
 
-// current column size.
+// current ColumnSize.
 func (o DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingOutput) ColumnSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping) *string { return v.ColumnSize }).(pulumi.StringPtrOutput)
 }
 
-// current column precision.
+// current Column DecimalDigits.
 func (o DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingOutput) DecimalDigits() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping) *string {
 		return v.DecimalDigits
@@ -10142,7 +10142,7 @@ type DatahubTaskSourceResourceTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -10170,7 +10170,7 @@ type DatahubTaskSourceResourceTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -10278,7 +10278,7 @@ func (o DatahubTaskSourceResourceTopicParamOutput) StartTime() pulumi.IntPtrOutp
 	return o.ApplyT(func(v DatahubTaskSourceResourceTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskSourceResourceTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -10362,7 +10362,7 @@ func (o DatahubTaskSourceResourceTopicParamPtrOutput) StartTime() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskSourceResourceTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceTopicParam) *string {
 		if v == nil {
@@ -11231,13 +11231,13 @@ func (o DatahubTaskTargetResourceClickHouseParamPtrOutput) UserName() pulumi.Str
 }
 
 type DatahubTaskTargetResourceClickHouseParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -11255,13 +11255,13 @@ type DatahubTaskTargetResourceClickHouseParamDropClsInput interface {
 }
 
 type DatahubTaskTargetResourceClickHouseParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -11344,12 +11344,12 @@ func (o DatahubTaskTargetResourceClickHouseParamDropClsOutput) ToDatahubTaskTarg
 	}).(DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -11359,7 +11359,7 @@ func (o DatahubTaskTargetResourceClickHouseParamDropClsOutput) DropClsRegion() p
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -11393,7 +11393,7 @@ func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) Elem() Datahub
 	}).(DatahubTaskTargetResourceClickHouseParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -11403,7 +11403,7 @@ func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) DropClsLogSet(
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -11423,7 +11423,7 @@ func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) DropClsRegion(
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceClickHouseParamDropCls) *string {
 		if v == nil {
@@ -12918,13 +12918,13 @@ func (o DatahubTaskTargetResourceEsParamPtrOutput) UserName() pulumi.StringPtrOu
 }
 
 type DatahubTaskTargetResourceEsParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -12942,13 +12942,13 @@ type DatahubTaskTargetResourceEsParamDropClsInput interface {
 }
 
 type DatahubTaskTargetResourceEsParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -13031,12 +13031,12 @@ func (o DatahubTaskTargetResourceEsParamDropClsOutput) ToDatahubTaskTargetResour
 	}).(DatahubTaskTargetResourceEsParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceEsParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceEsParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -13046,7 +13046,7 @@ func (o DatahubTaskTargetResourceEsParamDropClsOutput) DropClsRegion() pulumi.St
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceEsParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -13080,7 +13080,7 @@ func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) Elem() DatahubTaskTarg
 	}).(DatahubTaskTargetResourceEsParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropCls) *string {
 		if v == nil {
@@ -13090,7 +13090,7 @@ func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) DropClsLogSet() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropCls) *string {
 		if v == nil {
@@ -13110,7 +13110,7 @@ func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) DropClsRegion() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceEsParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropCls) *string {
 		if v == nil {
@@ -13369,33 +13369,33 @@ func (o DatahubTaskTargetResourceEsParamDropDlqPtrOutput) Type() pulumi.StringPt
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -13415,33 +13415,33 @@ type DatahubTaskTargetResourceEsParamDropDlqKafkaParamInput interface {
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -13529,7 +13529,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) CompressionType
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -13539,64 +13539,64 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) MsgMultiple() p
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) TableMappings() DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) []DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -13640,7 +13640,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) CompressionT
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -13660,7 +13660,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) MsgMultiple(
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -13670,7 +13670,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) OffsetType()
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -13680,7 +13680,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) PartitionNum
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -13690,7 +13690,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) QpsLimit() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -13700,7 +13700,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) Resource() p
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -13710,7 +13710,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) ResourceName
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -13720,7 +13720,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) SelfBuilt() 
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *int {
 		if v == nil {
@@ -13730,7 +13730,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) StartTime() 
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) TableMappings() DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) []DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping {
 		if v == nil {
@@ -13740,7 +13740,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) TableMapping
 	}).(DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -13750,7 +13750,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) Topic() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *string {
 		if v == nil {
@@ -13760,7 +13760,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) TopicId() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -13770,7 +13770,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) UseAutoCreat
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqKafkaParam) *bool {
 		if v == nil {
@@ -13925,7 +13925,7 @@ type DatahubTaskTargetResourceEsParamDropDlqTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -13953,7 +13953,7 @@ type DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -14061,7 +14061,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqTopicParamOutput) StartTime() pul
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTargetResourceEsParamDropDlqTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceEsParamDropDlqTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -14145,7 +14145,7 @@ func (o DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrOutput) StartTime() 
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceEsParamDropDlqTopicParam) *string {
 		if v == nil {
@@ -14400,33 +14400,33 @@ func (o DatahubTaskTargetResourceEventBusParamPtrOutput) Type() pulumi.StringPtr
 type DatahubTaskTargetResourceKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskTargetResourceKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -14446,33 +14446,33 @@ type DatahubTaskTargetResourceKafkaParamInput interface {
 type DatahubTaskTargetResourceKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskTargetResourceKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -14560,7 +14560,7 @@ func (o DatahubTaskTargetResourceKafkaParamOutput) CompressionType() pulumi.Stri
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTargetResourceKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -14570,64 +14570,64 @@ func (o DatahubTaskTargetResourceKafkaParamOutput) MsgMultiple() pulumi.IntPtrOu
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTargetResourceKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTargetResourceKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTargetResourceKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTargetResourceKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTargetResourceKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTargetResourceKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTargetResourceKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTargetResourceKafkaParamOutput) TableMappings() DatahubTaskTargetResourceKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) []DatahubTaskTargetResourceKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskTargetResourceKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTargetResourceKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTargetResourceKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTargetResourceKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTargetResourceKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -14671,7 +14671,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) CompressionType() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *bool {
 		if v == nil {
@@ -14691,7 +14691,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) MsgMultiple() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *string {
 		if v == nil {
@@ -14701,7 +14701,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) OffsetType() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *int {
 		if v == nil {
@@ -14711,7 +14711,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) PartitionNum() pulumi.IntP
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *int {
 		if v == nil {
@@ -14721,7 +14721,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *string {
 		if v == nil {
@@ -14731,7 +14731,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) Resource() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *string {
 		if v == nil {
@@ -14741,7 +14741,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) ResourceName() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *bool {
 		if v == nil {
@@ -14751,7 +14751,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtr
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *int {
 		if v == nil {
@@ -14761,7 +14761,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) StartTime() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) TableMappings() DatahubTaskTargetResourceKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) []DatahubTaskTargetResourceKafkaParamTableMapping {
 		if v == nil {
@@ -14771,7 +14771,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) TableMappings() DatahubTas
 	}).(DatahubTaskTargetResourceKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *string {
 		if v == nil {
@@ -14781,7 +14781,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) Topic() pulumi.StringPtrOu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *string {
 		if v == nil {
@@ -14791,7 +14791,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) TopicId() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *bool {
 		if v == nil {
@@ -14801,7 +14801,7 @@ func (o DatahubTaskTargetResourceKafkaParamPtrOutput) UseAutoCreateTopic() pulum
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTargetResourceKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceKafkaParam) *bool {
 		if v == nil {
@@ -16201,11 +16201,11 @@ type DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping struct {
 	AllowNull *bool `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement *bool `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName *string `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize *string `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits *string `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue *string `pulumi:"defaultValue"`
@@ -16233,11 +16233,11 @@ type DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs struct {
 	AllowNull pulumi.BoolPtrInput `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement pulumi.BoolPtrInput `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize pulumi.StringPtrInput `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits pulumi.StringPtrInput `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue pulumi.StringPtrInput `pulumi:"defaultValue"`
@@ -16310,17 +16310,17 @@ func (o DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingOutput) AutoIn
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping) *bool { return v.AutoIncrement }).(pulumi.BoolPtrOutput)
 }
 
-// Corresponding mapping column name.
+// Column Name.
 func (o DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingOutput) ColumnName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
 }
 
-// current column size.
+// current ColumnSize.
 func (o DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingOutput) ColumnSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping) *string { return v.ColumnSize }).(pulumi.StringPtrOutput)
 }
 
-// current column precision.
+// current Column DecimalDigits.
 func (o DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingOutput) DecimalDigits() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping) *string { return v.DecimalDigits }).(pulumi.StringPtrOutput)
 }
@@ -16366,13 +16366,13 @@ func (o DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArrayOutput) I
 }
 
 type DatahubTaskTargetResourceMySqlParamDropCls struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet *string `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin *string `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion *string `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId *string `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls *bool `pulumi:"dropInvalidMessageToCls"`
@@ -16390,13 +16390,13 @@ type DatahubTaskTargetResourceMySqlParamDropClsInput interface {
 }
 
 type DatahubTaskTargetResourceMySqlParamDropClsArgs struct {
-	// cls log set.
+	// cls LogSet id.
 	DropClsLogSet pulumi.StringPtrInput `pulumi:"dropClsLogSet"`
-	// Delivery account of cls.
+	// account.
 	DropClsOwneruin pulumi.StringPtrInput `pulumi:"dropClsOwneruin"`
 	// The region where the cls is delivered.
 	DropClsRegion pulumi.StringPtrInput `pulumi:"dropClsRegion"`
-	// topic of cls.
+	// cls topic.
 	DropClsTopicId pulumi.StringPtrInput `pulumi:"dropClsTopicId"`
 	// Whether to deliver to cls.
 	DropInvalidMessageToCls pulumi.BoolPtrInput `pulumi:"dropInvalidMessageToCls"`
@@ -16479,12 +16479,12 @@ func (o DatahubTaskTargetResourceMySqlParamDropClsOutput) ToDatahubTaskTargetRes
 	}).(DatahubTaskTargetResourceMySqlParamDropClsPtrOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceMySqlParamDropClsOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDropCls) *string { return v.DropClsLogSet }).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceMySqlParamDropClsOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDropCls) *string { return v.DropClsOwneruin }).(pulumi.StringPtrOutput)
 }
@@ -16494,7 +16494,7 @@ func (o DatahubTaskTargetResourceMySqlParamDropClsOutput) DropClsRegion() pulumi
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDropCls) *string { return v.DropClsRegion }).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceMySqlParamDropClsOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceMySqlParamDropCls) *string { return v.DropClsTopicId }).(pulumi.StringPtrOutput)
 }
@@ -16528,7 +16528,7 @@ func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) Elem() DatahubTaskT
 	}).(DatahubTaskTargetResourceMySqlParamDropClsOutput)
 }
 
-// cls log set.
+// cls LogSet id.
 func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) DropClsLogSet() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -16538,7 +16538,7 @@ func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) DropClsLogSet() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// Delivery account of cls.
+// account.
 func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) DropClsOwneruin() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -16558,7 +16558,7 @@ func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) DropClsRegion() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// topic of cls.
+// cls topic.
 func (o DatahubTaskTargetResourceMySqlParamDropClsPtrOutput) DropClsTopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceMySqlParamDropCls) *string {
 		if v == nil {
@@ -16950,11 +16950,11 @@ type DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping struct {
 	AllowNull *bool `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement *bool `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName *string `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize *string `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits *string `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue *string `pulumi:"defaultValue"`
@@ -16982,11 +16982,11 @@ type DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs struct 
 	AllowNull pulumi.BoolPtrInput `pulumi:"allowNull"`
 	// Whether it is an auto-increment column.
 	AutoIncrement pulumi.BoolPtrInput `pulumi:"autoIncrement"`
-	// Corresponding mapping column name.
+	// Column Name.
 	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
-	// current column size.
+	// current ColumnSize.
 	ColumnSize pulumi.StringPtrInput `pulumi:"columnSize"`
-	// current column precision.
+	// current Column DecimalDigits.
 	DecimalDigits pulumi.StringPtrInput `pulumi:"decimalDigits"`
 	// Database table default parameters.
 	DefaultValue pulumi.StringPtrInput `pulumi:"defaultValue"`
@@ -17059,17 +17059,17 @@ func (o DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingOutput) A
 	return o.ApplyT(func(v DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping) *bool { return v.AutoIncrement }).(pulumi.BoolPtrOutput)
 }
 
-// Corresponding mapping column name.
+// Column Name.
 func (o DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingOutput) ColumnName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
 }
 
-// current column size.
+// current ColumnSize.
 func (o DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingOutput) ColumnSize() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping) *string { return v.ColumnSize }).(pulumi.StringPtrOutput)
 }
 
-// current column precision.
+// current Column DecimalDigits.
 func (o DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingOutput) DecimalDigits() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping) *string {
 		return v.DecimalDigits
@@ -17747,7 +17747,7 @@ type DatahubTaskTargetResourceTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -17775,7 +17775,7 @@ type DatahubTaskTargetResourceTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -17883,7 +17883,7 @@ func (o DatahubTaskTargetResourceTopicParamOutput) StartTime() pulumi.IntPtrOutp
 	return o.ApplyT(func(v DatahubTaskTargetResourceTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTargetResourceTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -17967,7 +17967,7 @@ func (o DatahubTaskTargetResourceTopicParamPtrOutput) StartTime() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTargetResourceTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceTopicParam) *string {
 		if v == nil {
@@ -18668,33 +18668,33 @@ func (o DatahubTaskTransformParamFailureParamPtrOutput) Type() pulumi.StringPtrO
 type DatahubTaskTransformParamFailureParamKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskTransformParamFailureParamKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -18714,33 +18714,33 @@ type DatahubTaskTransformParamFailureParamKafkaParamInput interface {
 type DatahubTaskTransformParamFailureParamKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -18828,7 +18828,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) CompressionType()
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -18838,64 +18838,64 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) MsgMultiple() pul
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) TableMappings() DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) []DatahubTaskTransformParamFailureParamKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTransformParamFailureParamKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -18939,7 +18939,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) CompressionTyp
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -18959,7 +18959,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) MsgMultiple() 
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -18969,7 +18969,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) OffsetType() p
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -18979,7 +18979,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) PartitionNum()
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -18989,7 +18989,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) QpsLimit() pul
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -18999,7 +18999,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) Resource() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -19009,7 +19009,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) ResourceName()
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -19019,7 +19019,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) SelfBuilt() pu
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -19029,7 +19029,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) StartTime() pu
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) TableMappings() DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) []DatahubTaskTransformParamFailureParamKafkaParamTableMapping {
 		if v == nil {
@@ -19039,7 +19039,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) TableMappings(
 	}).(DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -19049,7 +19049,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) Topic() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -19059,7 +19059,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) TopicId() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -19069,7 +19069,7 @@ func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) UseAutoCreateT
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTransformParamFailureParamKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -19224,7 +19224,7 @@ type DatahubTaskTransformParamFailureParamTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -19252,7 +19252,7 @@ type DatahubTaskTransformParamFailureParamTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -19360,7 +19360,7 @@ func (o DatahubTaskTransformParamFailureParamTopicParamOutput) StartTime() pulum
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTransformParamFailureParamTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformParamFailureParamTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -19444,7 +19444,7 @@ func (o DatahubTaskTransformParamFailureParamTopicParamPtrOutput) StartTime() pu
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTransformParamFailureParamTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformParamFailureParamTopicParam) *string {
 		if v == nil {
@@ -20387,33 +20387,33 @@ func (o DatahubTaskTransformsParamFailureParamPtrOutput) Type() pulumi.StringPtr
 type DatahubTaskTransformsParamFailureParamKafkaParam struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType *string `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration *bool `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple *int `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType *string `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit *int `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource string `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName *string `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt bool `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime *int `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings []DatahubTaskTransformsParamFailureParamKafkaParamTableMapping `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic *string `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId *string `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping *bool `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId *int `pulumi:"zoneId"`
@@ -20433,33 +20433,33 @@ type DatahubTaskTransformsParamFailureParamKafkaParamInput interface {
 type DatahubTaskTransformsParamFailureParamKafkaParamArgs struct {
 	// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
 	CompressionType pulumi.StringPtrInput `pulumi:"compressionType"`
-	// Enable the fault-tolerant instance and enable the dead-letter queue.
+	// enable dead letter queue.
 	EnableToleration pulumi.BoolPtrInput `pulumi:"enableToleration"`
 	// 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
 	MsgMultiple pulumi.IntPtrInput `pulumi:"msgMultiple"`
-	// Offset type, initial position earliest, latest position latest, time point position timestamp.
+	// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 	OffsetType pulumi.StringPtrInput `pulumi:"offsetType"`
-	// Partition num.
+	// the partition num of the topic.
 	PartitionNum pulumi.IntPtrInput `pulumi:"partitionNum"`
-	// Qps limit.
+	// Qps(query per seconds) limit.
 	QpsLimit pulumi.IntPtrInput `pulumi:"qpsLimit"`
-	// resource id.
+	// instance resource.
 	Resource pulumi.StringInput `pulumi:"resource"`
-	// resource id name.
+	// instance name.
 	ResourceName pulumi.StringPtrInput `pulumi:"resourceName"`
-	// Whether it is a self-built cluster.
+	// whether the cluster is built by yourself instead of cloud product.
 	SelfBuilt pulumi.BoolInput `pulumi:"selfBuilt"`
-	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+	// when Offset type timestamp is required.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+	// maps of table to topic, required when multi topic is selected.
 	TableMappings DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayInput `pulumi:"tableMappings"`
-	// Topic name, multiple separated by,.
+	// Topic name, use `,` when more than 1 topic.
 	Topic pulumi.StringPtrInput `pulumi:"topic"`
-	// Topic Id.
+	// Topic id.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
-	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+	// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
-	// Distribute to multiple topics switch, the default is false.
+	// whether to use multi table.
 	UseTableMapping pulumi.BoolPtrInput `pulumi:"useTableMapping"`
 	// Zone ID.
 	ZoneId pulumi.IntPtrInput `pulumi:"zoneId"`
@@ -20547,7 +20547,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) CompressionType(
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *string { return v.CompressionType }).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *bool { return v.EnableToleration }).(pulumi.BoolPtrOutput)
 }
@@ -20557,64 +20557,64 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) MsgMultiple() pu
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *int { return v.MsgMultiple }).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *string { return v.OffsetType }).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *int { return v.PartitionNum }).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *int { return v.QpsLimit }).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) Resource() pulumi.StringOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) string { return v.Resource }).(pulumi.StringOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *string { return v.ResourceName }).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) SelfBuilt() pulumi.BoolOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) bool { return v.SelfBuilt }).(pulumi.BoolOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) TableMappings() DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) []DatahubTaskTransformsParamFailureParamKafkaParamTableMapping {
 		return v.TableMappings
 	}).(DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *string { return v.Topic }).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *bool { return v.UseAutoCreateTopic }).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamKafkaParam) *bool { return v.UseTableMapping }).(pulumi.BoolPtrOutput)
 }
@@ -20658,7 +20658,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) CompressionTy
 	}).(pulumi.StringPtrOutput)
 }
 
-// Enable the fault-tolerant instance and enable the dead-letter queue.
+// enable dead letter queue.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) EnableToleration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -20678,7 +20678,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) MsgMultiple()
 	}).(pulumi.IntPtrOutput)
 }
 
-// Offset type, initial position earliest, latest position latest, time point position timestamp.
+// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) OffsetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -20688,7 +20688,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) OffsetType() 
 	}).(pulumi.StringPtrOutput)
 }
 
-// Partition num.
+// the partition num of the topic.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) PartitionNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -20698,7 +20698,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) PartitionNum(
 	}).(pulumi.IntPtrOutput)
 }
 
-// Qps limit.
+// Qps(query per seconds) limit.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) QpsLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -20708,7 +20708,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) QpsLimit() pu
 	}).(pulumi.IntPtrOutput)
 }
 
-// resource id.
+// instance resource.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) Resource() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -20718,7 +20718,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) Resource() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-// resource id name.
+// instance name.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) ResourceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -20728,7 +20728,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) ResourceName(
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether it is a self-built cluster.
+// whether the cluster is built by yourself instead of cloud product.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) SelfBuilt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -20738,7 +20738,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) SelfBuilt() p
 	}).(pulumi.BoolPtrOutput)
 }
 
-// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+// when Offset type timestamp is required.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) StartTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *int {
 		if v == nil {
@@ -20748,7 +20748,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) StartTime() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+// maps of table to topic, required when multi topic is selected.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) TableMappings() DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) []DatahubTaskTransformsParamFailureParamKafkaParamTableMapping {
 		if v == nil {
@@ -20758,7 +20758,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) TableMappings
 	}).(DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayOutput)
 }
 
-// Topic name, multiple separated by,.
+// Topic name, use `,` when more than 1 topic.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) Topic() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -20768,7 +20768,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) Topic() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-// Topic Id.
+// Topic id.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *string {
 		if v == nil {
@@ -20778,7 +20778,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) TopicId() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) UseAutoCreateTopic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -20788,7 +20788,7 @@ func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) UseAutoCreate
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Distribute to multiple topics switch, the default is false.
+// whether to use multi table.
 func (o DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput) UseTableMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamKafkaParam) *bool {
 		if v == nil {
@@ -20943,7 +20943,7 @@ type DatahubTaskTransformsParamFailureParamTopicParam struct {
 	Resource string `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime *int `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId *string `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic *bool `pulumi:"useAutoCreateTopic"`
@@ -20971,7 +20971,7 @@ type DatahubTaskTransformsParamFailureParamTopicParamArgs struct {
 	Resource pulumi.StringInput `pulumi:"resource"`
 	// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
 	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
-	// TopicId.
+	// Topic TopicId.
 	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
 	// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
 	UseAutoCreateTopic pulumi.BoolPtrInput `pulumi:"useAutoCreateTopic"`
@@ -21079,7 +21079,7 @@ func (o DatahubTaskTransformsParamFailureParamTopicParamOutput) StartTime() pulu
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamTopicParam) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTransformsParamFailureParamTopicParamOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTransformsParamFailureParamTopicParam) *string { return v.TopicId }).(pulumi.StringPtrOutput)
 }
@@ -21163,7 +21163,7 @@ func (o DatahubTaskTransformsParamFailureParamTopicParamPtrOutput) StartTime() p
 	}).(pulumi.IntPtrOutput)
 }
 
-// TopicId.
+// Topic TopicId.
 func (o DatahubTaskTransformsParamFailureParamTopicParamPtrOutput) TopicId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTransformsParamFailureParamTopicParam) *string {
 		if v == nil {
